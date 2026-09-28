@@ -94,17 +94,32 @@
     100%{opacity:0;transform:translateY(-28px) scale(1.3);}
   }
 
-  .play-all{display:block;margin:0 0 10px;padding:8px 18px;background:linear-gradient(90deg,#ff6b9d,#f472b6);color:#fff;border:none;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer}
-  .play-all.playing{background:#f59e0b}
+  .play-all{display:block;margin:0 0 10px;padding:6px 18px;background:#fff;color:#10b981;border:1.5px solid #10b981;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer}
+  .play-all.playing{background:#ecfdf5;color:#059669;border-color:#10b981}
   .sent-top{display:flex;justify-content:flex-start;margin-bottom:2px}
   .sent-play{
-    background:linear-gradient(135deg,#ff6b9d,#f472b6);color:#fff;border:none;
-    padding:5px 14px;border-radius:999px;font-size:12px;font-weight:700;
-    cursor:pointer;box-shadow:0 3px 8px rgba(244,114,182,.3);
-    transition:transform .15s;
+    background:#fff;color:#10b981;border:1.5px solid #10b981;
+    padding:4px 12px;border-radius:999px;font-size:12px;font-weight:700;
+    cursor:pointer;
+    transition:all .15s;
   }
   .sent-play:active{transform:scale(.95)}
   .sent-play:disabled{opacity:.6;cursor:default}
+  /* 播放中句子高亮 */
+  .sent-card.playing{background:#fef3f2;border-radius:10px;}
+  /* 声波动画 */
+  .sent-play.playing{background:#fff;color:#059669;border-color:#10b981;}
+  .sent-play.playing::after{
+    content:'▮▮';
+    letter-spacing:1px;
+    font-size:10px;
+    animation:wave .6s ease-in-out infinite alternate;
+  }
+  @keyframes wave{
+    0%{opacity:.4;transform:scaleY(1);}
+    100%{opacity:1;transform:scaleY(1.5);}
+  }
+
   .sent-text{font-size:18px;line-height:1.8;font-weight:500;color:#1f2937}
   .w{cursor:pointer;padding:1px 3px;border-radius:5px;border-bottom:2px dashed transparent;transition:.15s}
   .w:hover{background:#fef3c7;border-bottom-color:#f59e0b}
@@ -2386,7 +2401,7 @@ UNITS.forEach((u, ui)=>{
       const sc = document.createElement('div');
       sc.className = 'sent-card';
       var thisBase = unitBase + (_sentSeq%41)-20; _sentSeq++; if(thisBase<0) thisBase=0;
-      let html = '<div class="sent-top"><button class="sent-play" data-s="'+s.replace(/"/g,'&quot;')+'" data-base="'+thisBase+'" data-count="'+thisBase+'">▶</button><div class="dbg" style="font-size:11px;color:#10b981;margin-left:8px;line-height:1;display:flex;align-items:center">已播放'+thisBase+'次</div></div>';
+      let html = '<div class="sent-top"><button class="sent-play" data-s="'+s.replace(/"/g,'&quot;')+'" data-base="'+thisBase+'" data-count="'+thisBase+'">▶</button><div class="dbg" style="font-size:11px;color:#10b981;margin-left:8px;line-height:1;display:flex;align-items:center">播放'+thisBase+'次</div></div>';
       html += '<div class="sent-text">';
       s.split(/(\s+)/).forEach(tok=>{
         if(/^\s+$/.test(tok)){ html += tok; return; }
@@ -2501,7 +2516,7 @@ function preloadPane(pane){
     dbg.dataset.loaded = '1';
     var b = parseInt(btn.dataset.base)||0;
     gcGet(btn.dataset.s, function(v){
-      if(v!=null){ btn.dataset.count = b+v; dbg.textContent = '已播放'+(b+v)+'次'; dbg.style.color='#10b981'; }
+      if(v!=null){ btn.dataset.count = b+v; dbg.textContent = '播放'+(b+v)+'次'; dbg.style.color='#10b981'; }
     });
   });
 }
@@ -2514,13 +2529,14 @@ function playSentence(text, btn, orig, onEnd){
     var b0 = parseInt(btn.dataset.base)||0;
     var c0 = parseInt(btn.dataset.count)||b0;
     btn.dataset.count = c0+1;
-    dbg.textContent = '已播放'+(c0+1)+'次';
+    dbg.textContent = '播放'+(c0+1)+'次';
     dbg.style.color = '#10b981';
     showPlusOne(btn);
-    gcHit(text, function(v){ if(v!=null){ btn.dataset.count = b0+v; dbg.childNodes[0].textContent = '已播放'+(b0+v)+'次'; } });
+    gcHit(text, function(v){ if(v!=null){ btn.dataset.count = b0+v; dbg.childNodes[0].textContent = '播放'+(b0+v)+'次'; } });
     const audio = playOnce(AUDIO_MAP[text]);
-    audio.onplaying = ()=>{ resetBtn(btn, orig); };
-    if(onEnd) audio.onended = onEnd;
+    var card = btn.closest('.sent-card');
+    audio.onplaying = ()=>{ btn.classList.add('playing'); card.classList.add('playing'); resetBtn(btn, orig); };
+    audio.onended = ()=>{ btn.classList.remove('playing'); card.classList.remove('playing'); if(onEnd) onEnd(); };
     audio.play().catch(()=>{ if(onEnd) onEnd(); });
     resetBtn(btn, orig);
     return;
@@ -2543,12 +2559,14 @@ function playSentence(text, btn, orig, onEnd){
       var b1 = parseInt(btn.dataset.base)||0;
       var c1 = parseInt(btn.dataset.count)||b1;
       btn.dataset.count = c1+1;
-      dbg.textContent = '已播放'+(c1+1)+'次';
+      dbg.textContent = '播放'+(c1+1)+'次';
       dbg.style.color = '#10b981';
       showPlusOne(btn);
-      gcHit(text, function(v){ if(v!=null){ btn.dataset.count = b1+v; dbg.childNodes[0].textContent = '已播放'+(b1+v)+'次'; } });
+      gcHit(text, function(v){ if(v!=null){ btn.dataset.count = b1+v; dbg.childNodes[0].textContent = '播放'+(b1+v)+'次'; } });
+      var card2 = btn.closest('.sent-card');
+      btn.classList.add('playing'); card2.classList.add('playing');
       resetBtn(btn, orig);
-      if(onEnd) audio.onended = onEnd;
+      audio.onended = ()=>{ btn.classList.remove('playing'); card2.classList.remove('playing'); if(onEnd) onEnd(); };
     };
     audio.onerror = ()=>{
       const c = audio.error ? audio.error.code : 0;
