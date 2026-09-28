@@ -3,614 +3,381 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>望江升学快车</title>
+<title>多多好学英语课堂</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          brand: {
-            blue: "#1476FF",
-            lightBlue: "#EAF4FF",
-            softCyan: "#E4F7F7",
-            softOrange: "#FFF4E6",
-            softPink: "#FCEEFA",
-            softGreen: "#E8F8EF",
-            softPurple: "#EFEBFF",
-            softRed: "#FDECEA",
-            textMain: "#1F2937",
-            textSub: "#5B6673",
-            textMute: "#8A94A6",
-            line: "#EEF1F5",
-            bgPage: "#F6F8FB"
-          }
-        }
-      }
-    }
-  }
-</script>
 <style>
+  * { box-sizing: border-box; }
   body {
-    background: #F6F8FB;
+    background: #f0f4ff;
     font-family: "PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
     color: #1F2937;
+    transition: background .4s;
   }
-  .block-card {
-    border-radius: 18px;
-    background: #FFFFFF;
-    box-shadow: 0 10px 30px rgba(20,118,255,0.08);
-  }
+  body.g3 { background: linear-gradient(180deg,#ecfdf5 0%,#f0f4ff 100%); }
+  body.g4 { background: linear-gradient(180deg,#eff6ff 0%,#f0f4ff 100%); }
+  body.g5 { background: linear-gradient(180deg,#fffbeb 0%,#f0f4ff 100%); }
+  body.g6 { background: linear-gradient(180deg,#f5f3ff 0%,#f0f4ff 100%); }
+
   .top-banner {
-    background: linear-gradient(180deg,#1476FF 0%,#4E9BFF 100%);
-    border-radius: 0 0 24px 24px;
+    border-radius: 0 0 28px 28px;
+    padding: 28px 20px 50px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    transition: background .4s;
+  }
+  .top-banner.g3 { background: linear-gradient(135deg,#10b981,#34d399); }
+  .top-banner.g4 { background: linear-gradient(135deg,#1476ff,#4e9bff); }
+  .top-banner.g5 { background: linear-gradient(135deg,#f59e0b,#fbbf24); }
+  .top-banner.g6 { background: linear-gradient(135deg,#8b5cf6,#a78bfa); }
+  .top-banner h1 { font-size: 26px; font-weight: 900; }
+  .top-banner p { font-size: 13px; opacity: .9; margin-top: 6px; }
+  .blob { position: absolute; border-radius: 50%; background: rgba(255,255,255,.12); }
+
+  .card {
+    background: #fff; border-radius: 20px; padding: 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.06);
   }
   .section-title {
-    font-size: 16px;
-    font-weight: 800;
-    color: #1F2937;
-    margin-bottom: 12px;
-    display:flex;
-    align-items:center;
-    gap:8px;
+    font-size: 16px; font-weight: 800; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 8px;
   }
   .section-title::before {
-    content:"";
-    display:inline-block;
-    width:4px;
-    height:16px;
-    background:#1476FF;
-    border-radius:2px;
+    content: ""; width: 4px; height: 16px; border-radius: 2px;
   }
-  .sub-title {
-    font-size: 12px;
-    color: #8A94A6;
-    margin-top: -8px;
-    margin-bottom: 14px;
+  .g3 .section-title::before { background: #10b981; }
+  .g4 .section-title::before { background: #1476ff; }
+  .g5 .section-title::before { background: #f59e0b; }
+  .g6 .section-title::before { background: #8b5cf6; }
+  .sub-title { font-size: 12px; color: #9ca3af; margin: 0 0 14px 12px; }
+
+  .tab-wrap { display: flex; gap: 8px; margin-bottom: 16px; }
+  .tab-item {
+    flex: 1; text-align: center; padding: 9px 4px;
+    border-radius: 999px; font-size: 14px; cursor: pointer;
+    background: #f0f4fa; color: #5b6673; transition: all .25s;
+    font-weight: 600;
   }
+  .tab-item.active { color: #fff; transform: scale(1.03); }
+  .g3 .tab-item.active { background: #10b981; }
+  .g4 .tab-item.active { background: #1476ff; }
+  .g5 .tab-item.active { background: #f59e0b; }
+  .g6 .tab-item.active { background: #8b5cf6; }
+
+  .panel { display: none; }
+  .panel.active { display: block; animation: fadeUp .35s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   .grid-block {
-    border-radius: 16px;
-    padding: 14px 10px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    transition: transform .2s ease, box-shadow .2s ease;
-    position:relative;
-    overflow:hidden;
-    text-align:center;
+    border-radius: 16px; padding: 16px 8px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    transition: transform .15s; text-align: center;
   }
-  .grid-block:active {
-    transform: scale(.97);
+  .grid-block:active { transform: scale(.95); }
+  .icon-box {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; color: #fff;
+    box-shadow: 0 6px 14px rgba(0,0,0,.12);
   }
-  .grid-block .icon-box {
-    width:44px;
-    height:44px;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-    color:#fff;
-    box-shadow:0 6px 14px rgba(20,118,255,.12);
-  }
-  .grid-block .block-label {
-    font-size: 14px;
-    font-weight: 700;
-    color:#1F2937;
-  }
-  .grid-block .block-en {
-    font-size: 11px;
-    color:#8A94A6;
-    font-weight:500;
-  }
-  /* 专题入口：图标和文字居左 */
-  .special-block {
-    border-radius: 16px;
-    padding: 14px 12px;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    justify-content:flex-start;
-    gap:10px;
-    transition: transform .2s ease, box-shadow .2s ease;
-    position:relative;
-    overflow:hidden;
-    text-align:left;
-  }
-  .special-block:active {
-    transform: scale(.97);
-  }
-  .special-block .icon-box {
-    width:44px;
-    height:44px;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-    color:#fff;
-    box-shadow:0 6px 14px rgba(20,118,255,.12);
-  }
-  .special-block .block-label {
-    font-size: 14px;
-    font-weight: 700;
-    color:#1F2937;
-  }
-  .special-block .block-sub {
-    font-size: 11px;
-    color:#5B6673;
-    margin-top:-4px;
-  }
-  .recommend-card {
-    border-radius: 18px;
-    overflow:hidden;
-    position:relative;
-    color:#fff;
-    min-height:140px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    padding:16px;
-  }
-  .recommend-card .tag {
-    background:rgba(255,255,255,.25);
-    border-radius:999px;
-    font-size:11px;
-    padding:4px 10px;
-    width:fit-content;
-    backdrop-filter: blur(6px);
-  }
-  .recommend-card .big-title {
-    font-size:20px;
-    font-weight:900;
-    line-height:1.3;
-  }
-  .recommend-card .sub {
-    font-size:12px;
-    opacity:.92;
-  }
-  .recommend-card .more {
-    font-size:12px;
-    background:rgba(255,255,255,.28);
-    border-radius:999px;
-    padding:6px 12px;
-    width:fit-content;
-    backdrop-filter: blur(6px);
-  }
-  .link-card {
-    background:#fff;
-    border-radius:16px;
-    padding:14px;
-    box-shadow:0 4px 14px rgba(20,118,255,.06);
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  .link-card .thumb {
-    width:44px;
-    height:44px;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-    color:#fff;
-  }
-  .link-card .link-title {
-    font-size:14px;
-    font-weight:700;
-    color:#1F2937;
-  }
-  .link-card .link-sub {
-    font-size:12px;
-    color:#5B6673;
-  }
-  .arrow {
-    margin-left:auto;
-    color:#C7D0DD;
-    font-size:14px;
-  }
-  .bottom-slogan {
-    text-align:center;
-    color:#8A94A6;
-    font-size:12px;
-    padding:24px 0 18px;
-  }
-  /* 跑马灯整体滚动 */
+  .block-label { font-size: 13px; font-weight: 700; }
+  .block-en { font-size: 10px; color: #9ca3af; }
+
+  /* 跑马灯 */
   .marquee-block {
-    border-radius: 18px;
-    background: #FFFFFF;
-    padding: 14px 16px;
-    display:flex;
-    align-items:center;
-    box-shadow: 0 10px 30px rgba(20,118,255,.06);
-    overflow:hidden;
-    position:relative;
+    background: #fff; border-radius: 18px; padding: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    overflow: hidden; margin-bottom: 16px;
   }
   .marquee-track {
-    display:flex;
-    gap:12px;
-    white-space:nowrap;
-    animation: marqueeBlock 18s linear infinite;
+    display: flex; gap: 10px; white-space: nowrap;
+    animation: marquee 18s linear infinite;
   }
   .marquee-seg {
-    border-radius: 999px;
-    padding: 9px 14px;
-    font-size: 13px;
-    font-weight: 400;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
+    border-radius: 999px; padding: 8px 14px; font-size: 13px;
+    display: inline-flex; align-items: center; gap: 8px;
   }
-  .marquee-seg .logo-circle {
-    width:22px;
-    height:22px;
-    border-radius:50%;
-    background:#1476FF;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:11px;
-    font-weight:700;
-    flex-shrink:0;
+  .logo-circle {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: #1476ff; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
   }
-  .seg-1 { background:#EAF4FF; color:#1F2937; }
-  .seg-2 { background:#FFF4E6; color:#1F2937; }
-  .seg-3 { background:#E8F8EF; color:#1F2937; }
-  .seg-4 { background:#FCEEFA; color:#1F2937; }
-  .seg-5 { background:#EFEBFF; color:#1F2937; }
-  .seg-6 { background:#E4F7F7; color:#1F2937; }
-  @keyframes marqueeBlock {
+  .seg-1 { background: #eff6ff; }
+  .seg-2 { background: #fffbeb; }
+  .seg-3 { background: #ecfdf5; }
+  .seg-4 { background: #fce7f3; }
+  .seg-5 { background: #f5f3ff; }
+  .seg-6 { background: #ecfeff; }
+  @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
-  /* 标签切换 */
-  .tab-wrap {
-    display:flex;
-    gap:8px;
-    margin-bottom:14px;
+
+  .rc-card {
+    border-radius: 16px; padding: 14px; color: #fff;
+    min-height: 130px; display: flex; flex-direction: column;
+    justify-content: space-between; transition: transform .15s;
   }
-  .tab-item {
-    flex:1;
-    text-align:center;
-    padding:8px 4px;
-    border-radius:999px;
-    font-size:14px;
-    cursor:pointer;
-    transition:all .2s;
+  .rc-card:active { transform: scale(.97); }
+  .rc-tag {
+    background: rgba(255,255,255,.25); border-radius: 999px;
+    font-size: 11px; padding: 3px 10px; width: fit-content;
   }
-  .tab-item.active {
-    background:#1476FF;
-    color:#fff;
+  .rc-title { font-size: 17px; font-weight: 900; line-height: 1.3; }
+  .rc-sub { font-size: 11px; opacity: .9; margin-top: 4px; }
+  .rc-more {
+    font-size: 11px; background: rgba(255,255,255,.25);
+    border-radius: 999px; padding: 4px 10px; width: fit-content;
   }
-  .tab-item:not(.active) {
-    background:#F0F4FA;
-    color:#5B6673;
+
+  .link-card {
+    background: #f8fafc; border-radius: 14px; padding: 14px;
+    display: flex; align-items: center; gap: 12px;
   }
-  .tab-panel {
-    display:none;
+  .link-thumb {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: #fff; flex-shrink: 0;
   }
-  .tab-panel.active {
-    display:block;
+  .link-title { font-size: 14px; font-weight: 700; }
+  .link-sub { font-size: 12px; color: #6b7280; }
+  .arrow { margin-left: auto; color: #c7d0dd; }
+
+  .footer {
+    text-align: center; color: #9ca3af; font-size: 12px;
+    padding: 28px 0 20px;
   }
 </style>
 </head>
-<body>
-<div class="max-w-[480px] mx-auto">
-  <!-- 头部 -->
-  <div class="top-banner px-5 pt-6 pb-16 text-white relative overflow-hidden">
-    <div class="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-white/10 blur-2xl"></div>
-    <div class="absolute right-6 bottom-6 w-24 h-24 rounded-full bg-white/10 blur-xl"></div>
-    <h1 class="text-[24px] font-black mt-1 leading-tight">望江升学快车</h1>
-    <p class="text-[13px] opacity-90 mt-2">系统学习 · 在线检测 · 专题突破</p>
+<body class="g3">
+<div class="max-w-[480px] mx-auto pb-6">
+  <div class="top-banner g3" id="banner">
+    <div class="blob" style="width:140px;height:140px;right:-30px;top:-30px;"></div>
+    <div class="blob" style="width:80px;height:80px;right:40px;bottom:-20px;"></div>
+    <h1>多多好学英语课堂</h1>
+    <p>人教版PEP小学英语 · 句子点读</p>
   </div>
-  <div class="px-4 -mt-10 relative z-10">
-    <!-- 学段学习 -->
-    <div class="block-card p-4 mb-4">
-      <h2 class="section-title">小学英语点读</h2>
-      <p class="sub-title">人教版PEP · 全册真人发音 · 句子点读</p>
+
+  <div class="px-4 -mt-8 relative z-10 space-y-4">
+    <!-- 小学英语点读 -->
+    <div class="card">
+      <div class="section-title">小学英语点读</div>
+      <div class="sub-title">人教版PEP · 全册真人发音 · 句子点读</div>
       <div class="tab-wrap">
-        <div class="tab-item active" onclick="switchTab(0)">三年级</div>
-        <div class="tab-item" onclick="switchTab(1)">四年级</div>
-        <div class="tab-item" onclick="switchTab(2)">五年级</div>
-        <div class="tab-item" onclick="switchTab(3)">六年级</div>
+        <div class="tab-item active" data-g="3" onclick="switchTab(0,this)">三年级</div>
+        <div class="tab-item" data-g="4" onclick="switchTab(1,this)">四年级</div>
+        <div class="tab-item" data-g="5" onclick="switchTab(2,this)">五年级</div>
+        <div class="tab-item" data-g="6" onclick="switchTab(3,this)">六年级</div>
       </div>
-      <!-- 三年级 -->
-      <div class="tab-panel active" id="panel0">
+
+      <div class="panel active" id="panel0">
         <div class="grid grid-cols-4 gap-3">
-          <a href="read/31.html" class="grid-block" style="background:#FDECEA;">
-            <div class="icon-box" style="background:#EF4444;"><i class="fa fa-book"></i></div>
+          <a href="read/31.html" class="grid-block" style="background:#ecfdf5;">
+            <div class="icon-box" style="background:#10b981;"><i class="fa fa-book"></i></div>
             <div class="block-label">上册点读</div>
             <div class="block-en">Grade 3</div>
           </a>
-          <a href="read/32.html" class="grid-block" style="background:#EAF4FF;">
-            <div class="icon-box" style="background:#1476FF;"><i class="fa fa-book"></i></div>
+          <a href="read/32.html" class="grid-block" style="background:#d1fae5;">
+            <div class="icon-box" style="background:#059669;"><i class="fa fa-book"></i></div>
             <div class="block-label">下册点读</div>
             <div class="block-en">Grade 3</div>
           </a>
-          <a href="#" class="grid-block" style="background:#E4F7F7;">
-            <div class="icon-box" style="background:#06B6D4;"><i class="fa fa-comments"></i></div>
+          <a href="#" class="grid-block" style="background:#f0fdf4;">
+            <div class="icon-box" style="background:#34d399;"><i class="fa fa-list"></i></div>
             <div class="block-label">单词总表</div>
-            <div class="block-en">Grade 3</div>
+            <div class="block-en">Words</div>
           </a>
-          <a href="#" class="grid-block" style="background:#FFF4E6;">
-            <div class="icon-box" style="background:#F59E0B;"><i class="fa fa-flask"></i></div>
+          <a href="#" class="grid-block" style="background:#ecfdf5;">
+            <div class="icon-box" style="background:#6ee7b7;"><i class="fa fa-headphones"></i></div>
             <div class="block-label">听力</div>
-            <div class="block-en">Grade 3</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#E8F8EF;">
-            <div class="icon-box" style="background:#10B981;"><i class="fa fa-map"></i></div>
-            <div class="block-label">随机测试</div>
-            <div class="block-en">Grade 3</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#FCEEFA;">
-            <div class="icon-box" style="background:#EC4899;"><i class="fa fa-paint-brush"></i></div>
-            <div class="block-label">美术</div>
-            <div class="block-en">Art</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#EFEBFF;">
-            <div class="icon-box" style="background:#8B5CF6;"><i class="fa fa-music"></i></div>
-            <div class="block-label">音乐</div>
-            <div class="block-en">Music</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#EEF2FF;">
-            <div class="icon-box" style="background:#6366F1;"><i class="fa fa-futbol-o"></i></div>
-            <div class="block-label">体育</div>
-            <div class="block-en">PE</div>
+            <div class="block-en">Listen</div>
           </a>
         </div>
       </div>
-      <!-- 四年级 -->
-      <div class="tab-panel" id="panel1">
+
+      <div class="panel" id="panel1">
         <div class="grid grid-cols-4 gap-3">
-          <a href="read/41.html" class="grid-block" style="background:#FDECEA;">
-            <div class="icon-box" style="background:#EF4444;"><i class="fa fa-book"></i></div>
+          <a href="read/41.html" class="grid-block" style="background:#eff6ff;">
+            <div class="icon-box" style="background:#1476ff;"><i class="fa fa-book"></i></div>
             <div class="block-label">上册点读</div>
             <div class="block-en">Grade 4</div>
           </a>
-          <a href="read/42.html" class="grid-block" style="background:#EAF4FF;">
-            <div class="icon-box" style="background:#1476FF;"><i class="fa fa-book"></i></div>
+          <a href="read/42.html" class="grid-block" style="background:#dbeafe;">
+            <div class="icon-box" style="background:#2563eb;"><i class="fa fa-book"></i></div>
             <div class="block-label">下册点读</div>
             <div class="block-en">Grade 4</div>
           </a>
-          <a href="#" class="grid-block" style="background:#E4F7F7;">
-            <div class="icon-box" style="background:#06B6D4;"><i class="fa fa-comments"></i></div>
+          <a href="#" class="grid-block" style="background:#f0f7ff;">
+            <div class="icon-box" style="background:#60a5fa;"><i class="fa fa-list"></i></div>
             <div class="block-label">单词总表</div>
-            <div class="block-en">Grade 4</div>
+            <div class="block-en">Words</div>
           </a>
-          <a href="#" class="grid-block" style="background:#FFF4E6;">
-            <div class="icon-box" style="background:#F59E0B;"><i class="fa fa-flask"></i></div>
+          <a href="#" class="grid-block" style="background:#eff6ff;">
+            <div class="icon-box" style="background:#93c5fd;"><i class="fa fa-headphones"></i></div>
             <div class="block-label">听力</div>
-            <div class="block-en">Grade 4</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#E8F8EF;">
-            <div class="icon-box" style="background:#10B981;"><i class="fa fa-map"></i></div>
-            <div class="block-label">随机测试</div>
-            <div class="block-en">Grade 4</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#FCEEFA;">
-            <div class="icon-box" style="background:#EC4899;"><i class="fa fa-paint-brush"></i></div>
-            <div class="block-label">美术</div>
-            <div class="block-en">Art</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#EFEBFF;">
-            <div class="icon-box" style="background:#8B5CF6;"><i class="fa fa-music"></i></div>
-            <div class="block-label">音乐</div>
-            <div class="block-en">Music</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#EEF2FF;">
-            <div class="icon-box" style="background:#6366F1;"><i class="fa fa-futbol-o"></i></div>
-            <div class="block-label">体育</div>
-            <div class="block-en">PE</div>
+            <div class="block-en">Listen</div>
           </a>
         </div>
       </div>
-      <!-- 五年级 -->
-      <div class="tab-panel" id="panel2">
+
+      <div class="panel" id="panel2">
         <div class="grid grid-cols-4 gap-3">
-          <a href="read/51.html" class="grid-block" style="background:#FDECEA;">
-            <div class="icon-box" style="background:#EF4444;"><i class="fa fa-book"></i></div>
+          <a href="read/51.html" class="grid-block" style="background:#fffbeb;">
+            <div class="icon-box" style="background:#f59e0b;"><i class="fa fa-book"></i></div>
             <div class="block-label">上册点读</div>
             <div class="block-en">Grade 5</div>
           </a>
-          <a href="read/52.html" class="grid-block" style="background:#EAF4FF;">
-            <div class="icon-box" style="background:#1476FF;"><i class="fa fa-book"></i></div>
+          <a href="read/52.html" class="grid-block" style="background:#fef3c7;">
+            <div class="icon-box" style="background:#d97706;"><i class="fa fa-book"></i></div>
             <div class="block-label">下册点读</div>
             <div class="block-en">Grade 5</div>
           </a>
-          <a href="#" class="grid-block" style="background:#E4F7F7;">
-            <div class="icon-box" style="background:#06B6D4;"><i class="fa fa-comments"></i></div>
+          <a href="#" class="grid-block" style="background:#fffbeb;">
+            <div class="icon-box" style="background:#fbbf24;"><i class="fa fa-list"></i></div>
             <div class="block-label">单词总表</div>
-            <div class="block-en">Grade 5</div>
+            <div class="block-en">Words</div>
           </a>
-          <a href="#" class="grid-block" style="background:#FFF4E6;">
-            <div class="icon-box" style="background:#F59E0B;"><i class="fa fa-flask"></i></div>
+          <a href="#" class="grid-block" style="background:#fff7ed;">
+            <div class="icon-box" style="background:#fcd34d;"><i class="fa fa-headphones"></i></div>
             <div class="block-label">听力</div>
-            <div class="block-en">Grade 5</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#E8F8EF;">
-            <div class="icon-box" style="background:#10B981;"><i class="fa fa-map"></i></div>
-            <div class="block-label">随机测试</div>
-            <div class="block-en">Grade 5</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#FCEEFA;">
-            <div class="icon-box" style="background:#EC4899;"><i class="fa fa-paint-brush"></i></div>
-            <div class="block-label">美术</div>
-            <div class="block-en">Art</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#EFEBFF;">
-            <div class="icon-box" style="background:#8B5CF6;"><i class="fa fa-music"></i></div>
-            <div class="block-label">音乐</div>
-            <div class="block-en">Music</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#EEF2FF;">
-            <div class="icon-box" style="background:#6366F1;"><i class="fa fa-futbol-o"></i></div>
-            <div class="block-label">体育</div>
-            <div class="block-en">PE</div>
+            <div class="block-en">Listen</div>
           </a>
         </div>
       </div>
-      <!-- 六年级 -->
-      <div class="tab-panel" id="panel3">
+
+      <div class="panel" id="panel3">
         <div class="grid grid-cols-4 gap-3">
-          <a href="read/61.html" class="grid-block" style="background:#FDECEA;">
-            <div class="icon-box" style="background:#EF4444;"><i class="fa fa-book"></i></div>
+          <a href="read/61.html" class="grid-block" style="background:#f5f3ff;">
+            <div class="icon-box" style="background:#8b5cf6;"><i class="fa fa-book"></i></div>
             <div class="block-label">上册点读</div>
             <div class="block-en">Grade 6</div>
           </a>
-          <a href="read/62.html" class="grid-block" style="background:#EAF4FF;">
-            <div class="icon-box" style="background:#1476FF;"><i class="fa fa-book"></i></div>
+          <a href="read/62.html" class="grid-block" style="background:#ede9fe;">
+            <div class="icon-box" style="background:#7c3aed;"><i class="fa fa-book"></i></div>
             <div class="block-label">下册点读</div>
             <div class="block-en">Grade 6</div>
           </a>
-          <a href="#" class="grid-block" style="background:#E4F7F7;">
-            <div class="icon-box" style="background:#06B6D4;"><i class="fa fa-comments"></i></div>
+          <a href="#" class="grid-block" style="background:#f5f3ff;">
+            <div class="icon-box" style="background:#a78bfa;"><i class="fa fa-list"></i></div>
             <div class="block-label">单词总表</div>
-            <div class="block-en">Grade 6</div>
+            <div class="block-en">Words</div>
           </a>
-          <a href="#" class="grid-block" style="background:#FFF4E6;">
-            <div class="icon-box" style="background:#F59E0B;"><i class="fa fa-flask"></i></div>
+          <a href="#" class="grid-block" style="background:#faf5ff;">
+            <div class="icon-box" style="background:#c4b5fd;"><i class="fa fa-headphones"></i></div>
             <div class="block-label">听力</div>
-            <div class="block-en">Grade 6</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#E8F8EF;">
-            <div class="icon-box" style="background:#10B981;"><i class="fa fa-map"></i></div>
-            <div class="block-label">随机测试</div>
-            <div class="block-en">Grade 6</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#FCEEFA;">
-            <div class="icon-box" style="background:#EC4899;"><i class="fa fa-paint-brush"></i></div>
-            <div class="block-label">美术</div>
-            <div class="block-en">Art</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#EFEBFF;">
-            <div class="icon-box" style="background:#8B5CF6;"><i class="fa fa-music"></i></div>
-            <div class="block-label">音乐</div>
-            <div class="block-en">Music</div>
-          </a>
-          <a href="#" class="grid-block" style="background:#EEF2FF;">
-            <div class="icon-box" style="background:#6366F1;"><i class="fa fa-futbol-o"></i></div>
-            <div class="block-label">体育</div>
-            <div class="block-en">PE</div>
+            <div class="block-en">Listen</div>
           </a>
         </div>
       </div>
     </div>
-    <script>
-      const panels = document.querySelectorAll('.tab-panel');
-      const tabs = document.querySelectorAll('.tab-item');
-      function switchTab(index) {
-        panels.forEach(p => p.classList.remove('active'));
-        tabs.forEach(t => t.classList.remove('active'));
-        panels[index].classList.add('active');
-        tabs[index].classList.add('active');
-      }
-    </script>
+
     <!-- 跑马灯 -->
-    <div class="marquee-block mb-4">
+    <div class="marquee-block">
       <div class="marquee-track">
-        <a href="#" class="marquee-seg seg-1"><span class="logo-circle">望</span>望江托育</a>
-        <a href="#" class="marquee-seg seg-2"><span class="logo-circle">机</span>机构入口</a>
-        <a href="#" class="marquee-seg seg-3"><span class="logo-circle">照</span>贴心照护</a>
-        <a href="#" class="marquee-seg seg-4"><span class="logo-circle">伴</span>成长陪伴</a>
-        <a href="#" class="marquee-seg seg-5"><span class="logo-circle">早</span>早教启蒙</a>
-        <a href="#" class="marquee-seg seg-6"><span class="logo-circle">习</span>习惯培养</a>
-        <a href="#" class="marquee-seg seg-1"><span class="logo-circle">望</span>望江托育</a>
-        <a href="#" class="marquee-seg seg-2"><span class="logo-circle">机</span>机构入口</a>
-        <a href="#" class="marquee-seg seg-3"><span class="logo-circle">照</span>贴心照护</a>
-        <a href="#" class="marquee-seg seg-4"><span class="logo-circle">伴</span>成长陪伴</a>
-        <a href="#" class="marquee-seg seg-5"><span class="logo-circle">早</span>早教启蒙</a>
-        <a href="#" class="marquee-seg seg-6"><span class="logo-circle">习</span>习惯培养</a>
+        <span class="marquee-seg seg-1"><span class="logo-circle">望</span>望江托育</span>
+        <span class="marquee-seg seg-2"><span class="logo-circle">机</span>机构入口</span>
+        <span class="marquee-seg seg-3"><span class="logo-circle">照</span>贴心照护</span>
+        <span class="marquee-seg seg-4"><span class="logo-circle">伴</span>成长陪伴</span>
+        <span class="marquee-seg seg-5"><span class="logo-circle">早</span>早教启蒙</span>
+        <span class="marquee-seg seg-6"><span class="logo-circle">习</span>习惯培养</span>
+        <span class="marquee-seg seg-1"><span class="logo-circle">望</span>望江托育</span>
+        <span class="marquee-seg seg-2"><span class="logo-circle">机</span>机构入口</span>
+        <span class="marquee-seg seg-3"><span class="logo-circle">照</span>贴心照护</span>
+        <span class="marquee-seg seg-4"><span class="logo-circle">伴</span>成长陪伴</span>
+        <span class="marquee-seg seg-5"><span class="logo-circle">早</span>早教启蒙</span>
+        <span class="marquee-seg seg-6"><span class="logo-circle">习</span>习惯培养</span>
       </div>
     </div>
-    <!-- 专题 -->
-    <div class="block-card p-4 mb-4">
-      <h2 class="section-title">专题</h2>
-      <p class="sub-title">重点突破 · 经验学习 · 题库训练</p>
-      <div class="grid grid-cols-3 gap-3">
-        <a href="#" class="special-block" style="background:#EAF4FF;">
-          <div class="icon-box" style="background:#1476FF;"><i class="fa fa-pencil"></i></div>
-          <div class="block-label">单词一抄光</div>
-          <div class="block-sub">高频词循环记忆</div>
-        </a>
-        <a href="#" class="special-block" style="background:#FFF4E6;">
-          <div class="icon-box" style="background:#F59E0B;"><i class="fa fa-lightbulb-o"></i></div>
-          <div class="block-label">数学思维</div>
-          <div class="block-sub">逻辑推理与方法</div>
-        </a>
-        <a href="#" class="special-block" style="background:#FCEEFA;">
-          <div class="icon-box" style="background:#EC4899;"><i class="fa fa-users"></i></div>
-          <div class="block-label">优秀学生经验分享</div>
-          <div class="block-sub">学习方法与规划</div>
-        </a>
-        <a href="#" class="special-block" style="background:#E8F8EF;">
-          <div class="icon-box" style="background:#10B981;"><i class="fa fa-list-alt"></i></div>
-          <div class="block-label">题库</div>
-          <div class="block-sub">分题型强化训练</div>
-        </a>
-        <a href="#" class="special-block" style="background:#E4F7F7;">
-          <div class="icon-box" style="background:#06B6D4;"><i class="fa fa-file-text-o"></i></div>
-          <div class="block-label">新题型新考法</div>
-          <div class="block-sub">中考命题新方向</div>
-        </a>
-        <a href="#" class="special-block" style="background:#FDECEA;">
-          <div class="icon-box" style="background:#EF4444;"><i class="fa fa-trophy"></i></div>
-          <div class="block-label">巅峰体验</div>
-          <div class="block-sub">综合冲刺与挑战</div>
-        </a>
-      </div>
-    </div>
-    <!-- 为你推荐 -->
-    <div class="block-card p-4 mb-4">
-      <h2 class="section-title">为你推荐</h2>
-      <p class="sub-title">精选专题内容，提升复习效率</p>
+
+    <!-- 中学生同步学习 -->
+    <div class="card">
+      <div class="section-title">中学生同步学习</div>
+      <div class="sub-title">精选专题内容，提升复习效率</div>
       <div class="grid grid-cols-2 gap-3">
-        <a href="#" class="recommend-card" style="background:linear-gradient(135deg,#1476FF,#4E9BFF);">
-          <span class="tag">语文作文</span>
+        <a href="#" class="rc-card" style="background:linear-gradient(135deg,#1476ff,#4e9bff);">
+          <span class="rc-tag">语文作文</span>
           <div>
-            <div class="big-title">高分作文素材<br>天天读一点</div>
-            <div class="sub">标题 · 开头 · 金句积累</div>
+            <div class="rc-title">高分作文素材<br>天天读一点</div>
+            <div class="rc-sub">标题 · 开头 · 金句积累</div>
           </div>
-          <span class="more">去学习</span>
+          <span class="rc-more">去学习</span>
         </a>
-        <a href="#" class="recommend-card" style="background:linear-gradient(135deg,#F59E0B,#FFB84D);">
-          <span class="tag">数学专题</span>
+        <a href="#" class="rc-card" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);">
+          <span class="rc-tag">数学专题</span>
           <div>
-            <div class="big-title">几何辅助线<br>思维突破</div>
-            <div class="sub">模型归纳 · 典型例题</div>
+            <div class="rc-title">几何辅助线<br>思维突破</div>
+            <div class="rc-sub">模型归纳 · 典型例题</div>
           </div>
-          <span class="more">去学习</span>
+          <span class="rc-more">去学习</span>
         </a>
-        <a href="#" class="recommend-card" style="background:linear-gradient(135deg,#10B981,#34D399);">
-          <span class="tag">英语单词</span>
+        <a href="#" class="rc-card" style="background:linear-gradient(135deg,#10b981,#34d399);">
+          <span class="rc-tag">英语单词</span>
           <div>
-            <div class="big-title">中考高频词<br>快速过关</div>
-            <div class="sub">高频循环 · 听写训练</div>
+            <div class="rc-title">中考高频词<br>快速过关</div>
+            <div class="rc-sub">高频循环 · 听写训练</div>
           </div>
-          <span class="more">去学习</span>
+          <span class="rc-more">去学习</span>
         </a>
-        <a href="#" class="recommend-card" style="background:linear-gradient(135deg,#EC4899,#F472B6);">
-          <span class="tag">道法记忆</span>
+        <a href="#" class="rc-card" style="background:linear-gradient(135deg,#ec4899,#f472b6);">
+          <span class="rc-tag">道法记忆</span>
           <div>
-            <div class="big-title">核心考点<br>速记清单</div>
-            <div class="sub">关键词 · 答题模板</div>
+            <div class="rc-title">核心考点<br>速记清单</div>
+            <div class="rc-sub">关键词 · 答题模板</div>
           </div>
-          <span class="more">去学习</span>
+          <span class="rc-more">去学习</span>
         </a>
       </div>
     </div>
+
+    <!-- 语法专题 -->
+    <div class="card">
+      <div class="section-title">语法专题</div>
+      <div class="sub-title">重点突破 · 经验学习 · 题库训练</div>
+      <div class="grid grid-cols-3 gap-3">
+        <a href="#" class="grid-block" style="background:#eff6ff;">
+          <div class="icon-box" style="background:#1476ff;"><i class="fa fa-pencil"></i></div>
+          <div class="block-label">单词一抄光</div>
+          <div class="block-sub" style="font-size:11px;color:#6b7280;">高频词循环记忆</div>
+        </a>
+        <a href="#" class="grid-block" style="background:#fffbeb;">
+          <div class="icon-box" style="background:#f59e0b;"><i class="fa fa-lightbulb-o"></i></div>
+          <div class="block-label">数学思维</div>
+          <div class="block-sub" style="font-size:11px;color:#6b7280;">逻辑推理与方法</div>
+        </a>
+        <a href="#" class="grid-block" style="background:#fce7f3;">
+          <div class="icon-box" style="background:#ec4899;"><i class="fa fa-users"></i></div>
+          <div class="block-label">学生分享</div>
+          <div class="block-sub" style="font-size:11px;color:#6b7280;">学习方法与规划</div>
+        </a>
+        <a href="#" class="grid-block" style="background:#ecfdf5;">
+          <div class="icon-box" style="background:#10b981;"><i class="fa fa-list-alt"></i></div>
+          <div class="block-label">题库</div>
+          <div class="block-sub" style="font-size:11px;color:#6b7280;">分题型强化训练</div>
+        </a>
+        <a href="#" class="grid-block" style="background:#ecfeff;">
+          <div class="icon-box" style="background:#06b6d4;"><i class="fa fa-file-text-o"></i></div>
+          <div class="block-label">新题型</div>
+          <div class="block-sub" style="font-size:11px;color:#6b7280;">中考命题新方向</div>
+        </a>
+        <a href="#" class="grid-block" style="background:#fef2f2;">
+          <div class="icon-box" style="background:#ef4444;"><i class="fa fa-trophy"></i></div>
+          <div class="block-label">巅峰挑战</div>
+          <div class="block-sub" style="font-size:11px;color:#6b7280;">综合冲刺与挑战</div>
+        </a>
+      </div>
+    </div>
+
     <!-- 快捷入口 -->
-    <div class="block-card p-4 mb-4">
-      <h2 class="section-title">快捷入口</h2>
+    <div class="card">
+      <div class="section-title">快捷入口</div>
       <div class="space-y-3">
         <a href="#" class="link-card">
-          <div class="thumb" style="background:#1476FF;">
-            <i class="fa fa-calendar-check-o"></i>
-          </div>
+          <div class="link-thumb" style="background:#1476ff;"><i class="fa fa-calendar-check-o"></i></div>
           <div>
             <div class="link-title">每日学习计划</div>
             <div class="link-sub">按学段节奏安排学习任务</div>
@@ -618,9 +385,7 @@
           <span class="arrow"><i class="fa fa-angle-right"></i></span>
         </a>
         <a href="#" class="link-card">
-          <div class="thumb" style="background:#10B981;">
-            <i class="fa fa-check-square-o"></i>
-          </div>
+          <div class="link-thumb" style="background:#10b981;"><i class="fa fa-check-square-o"></i></div>
           <div>
             <div class="link-title">在线检测中心</div>
             <div class="link-sub">检测学习效果，生成错题记录</div>
@@ -628,8 +393,7 @@
           <span class="arrow"><i class="fa fa-angle-right"></i></span>
         </a>
         <a href="#" class="link-card">
-          <div class="thumb" style="background:#F59E0B;">
-            <i class="fa fa-star"></i></div>
+          <div class="link-thumb" style="background:#f59e0b;"><i class="fa fa-star"></i></div>
           <div>
             <div class="link-title">学霸经验圈</div>
             <div class="link-sub">优秀学生学习方法分享</div>
@@ -638,10 +402,23 @@
         </a>
       </div>
     </div>
-    <div class="bottom-slogan">
-      望江升学快车
-    </div>
+
+    <div class="footer">多多好学姜老师版权所有（支持定制 180 1926 7856）</div>
   </div>
 </div>
+
+<script>
+  var panels = document.querySelectorAll('.panel');
+  var tabs = document.querySelectorAll('.tab-item');
+  function switchTab(i, el) {
+    panels.forEach(function(p){ p.classList.remove('active'); });
+    tabs.forEach(function(t){ t.classList.remove('active'); });
+    panels[i].classList.add('active');
+    el.classList.add('active');
+    var g = el.dataset.g;
+    document.body.className = 'g' + g;
+    document.getElementById('banner').className = 'top-banner g' + g;
+  }
+</script>
 </body>
 </html>
