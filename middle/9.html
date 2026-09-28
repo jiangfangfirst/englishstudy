@@ -45,17 +45,28 @@
 <div class="row"><a href="kp/91_kp14.html" class="row-title" data-key="wj9_91_kp14" data-base="1220" data-color="#10b981"><span class="name">Key Point 14</span><span class="stats"></span></a><a href="test/91_kp14.html" class="row-check" style="background:#10b98115;color:#10b981;">检测</a></div>
 </div></main>
 <script>
- // 初始化stats
- document.querySelectorAll('.row-title').forEach(a => {
+ const UP_URL = "https://fitting-ostrich-312589.upstash.io";
+ const UP_TOKEN = "gQAAAAAABMUNAAIgcDFiZDU2MDM2YWJkYzg0YTgyOTRlOTUzMjM1MWY1ZGJhNg";
+ async function upGet(key) {
+   try {
+     const r = await fetch(UP_URL + "/get/" + key, { headers: { "Authorization": "Bearer " + UP_TOKEN } });
+     const d = await r.json();
+     return parseInt(d.result) || 0;
+   } catch(e) { return 0; }
+ }
+ async function upIncr(key) {
+   try {
+     await fetch(UP_URL + "/incr/" + key, { headers: { "Authorization": "Bearer " + UP_TOKEN } });
+   } catch(e) {}
+ }
+ document.querySelectorAll('.row-title').forEach(async a => {
    const k = a.dataset.key;
    const el = a.querySelector('.stats');
    const base = parseInt(a.dataset.base);
    const color = a.dataset.color;
-   const real = parseInt(localStorage.getItem(k) || '0');
+   const real = await upGet(k);
    el.innerHTML = '<b style="color:' + color + ';">' + (base + real) + '</b>人已经学习';
-   a.addEventListener('click', () => {
-     localStorage.setItem(k, (parseInt(localStorage.getItem(k)||'0')+1).toString());
-   });
+   a.addEventListener('click', () => upIncr(k));
  });
  function switchTab(el) {
    const bar = el.parentElement;
