@@ -1,0 +1,5088 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学 · 小学英语早晚读</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23f472b6'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff'%3E4%3C/text%3E%3C/svg%3E">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.6;min-height:100vh;
+    background:linear-gradient(-45deg,#ffdde1,#c2e9fb,#d4fc79,#fbc2eb,#a6c1ee,#f6d365);
+    background-size:400% 400%;
+    animation:gradientBG 12s ease infinite;
+    color:#1f2937;
+  }
+  @keyframes gradientBG{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:16px 14px 40px}
+
+  .hero{
+    background:rgba(255,255,255,.75);backdrop-filter:blur(12px);
+    border-radius:24px;padding:24px 20px;margin-bottom:18px;
+    box-shadow:0 8px 32px rgba(255,107,157,.15);
+    border:2px solid rgba(255,255,255,.8);
+  }
+  .hero h1{
+    font-size:24px;font-weight:900;
+    background:linear-gradient(90deg,#ff6b9d,#818cf8,#34d399,#fbbf24);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .hero .tip{margin-top:8px;font-size:13px;color:#6b7280}
+  .hero .badge-wrap{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .hero .badge{
+    display:inline-block;background:linear-gradient(90deg,#ff6b9d,#f472b6);
+    color:#fff;font-size:11px;font-weight:700;padding:5px 14px;
+    border-radius:999px;
+  }
+  .home-btn{display:inline-block;background:rgba(255,255,255,.85);color:#ff6b9d;font-size:13px;font-weight:700;padding:7px 16px;border-radius:999px;text-decoration:none;border:1.5px solid #ff6b9d}
+
+  .unit-card{
+    background:rgba(255,255,255,.85);backdrop-filter:blur(10px);
+    border-radius:20px;margin-bottom:14px;overflow:hidden;
+    box-shadow:0 6px 24px rgba(0,0,0,.08);
+    border:2px solid rgba(255,255,255,.9);
+  }
+  .unit-head{
+    padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;
+    color:#fff;font-weight:800;user-select:none;
+    transition:transform .2s;
+  }
+  .unit-head:active{transform:scale(.98)}
+  .unit-head .arrow{margin-left:auto;font-size:18px;transition:transform .3s}
+  .unit-card.open .unit-head .arrow{transform:rotate(180deg)}
+  .unit-head .unum{
+    background:rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;
+    font-size:12px;font-weight:700;
+  }
+  .unit-head .utitle{font-size:17px}
+  .unit-head .ucn{font-size:13px;font-weight:500;opacity:.9}
+
+  .unit-body{display:none;padding:14px 14px 18px}
+  .unit-card.open .unit-body{display:block;animation:fadeIn .3s}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .tab{
+    padding:7px 13px;border-radius:999px;font-size:12.5px;font-weight:600;
+    background:#f3f4f6;color:#6b7280;cursor:pointer;border:2px solid transparent;
+    transition:.2s;white-space:nowrap;
+  }
+  .tab.active{color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+
+  .pane{display:none}
+  .pane.active{display:block;animation:fadeIn .25s}
+
+  .sent-card{
+    background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:8px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);border:1px solid #f3f4f6;
+  }
+  .play-all{display:block;margin:0 0 10px;padding:8px 18px;background:linear-gradient(90deg,#ff6b9d,#f472b6);color:#fff;border:none;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer}
+  .play-all.playing{background:#f59e0b}
+  .sent-top{display:flex;justify-content:flex-start;margin-bottom:2px}
+  .sent-play{
+    background:linear-gradient(135deg,#ff6b9d,#f472b6);color:#fff;border:none;
+    padding:5px 14px;border-radius:999px;font-size:12px;font-weight:700;
+    cursor:pointer;box-shadow:0 3px 8px rgba(244,114,182,.3);
+    transition:transform .15s;
+  }
+  .sent-play:active{transform:scale(.95)}
+  .sent-play:disabled{opacity:.6;cursor:default}
+  .plus-one{
+    display:inline-block;font-size:12px;font-weight:800;color:#10b981;margin-left:4px;
+    animation:plusUp .8s ease-out forwards;
+  }
+  @keyframes plusUp{
+    0%{opacity:1;transform:translateY(0) scale(1);}
+    100%{opacity:0;transform:translateY(-28px) scale(1.3);}
+  }
+
+  .sent-text{font-size:18px;line-height:1.8;font-weight:500;color:#1f2937}
+  .w{cursor:pointer;padding:1px 3px;border-radius:5px;border-bottom:2px dashed transparent;transition:.15s}
+  .w:hover{background:#fef3c7;border-bottom-color:#f59e0b}
+  .w.active{background:#dbeafe;border-bottom-color:#3b82f6}
+  .pun{color:#9ca3af}
+
+  .word-pop{
+    margin-top:10px;background:linear-gradient(135deg,#fff7ed,#fef3c7);
+    border:1px solid #fed7aa;border-radius:12px;padding:10px 12px;
+    display:none;animation:fade .2s;
+  }
+  .word-pop.show{display:block}
+  .wp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .wp-word{font-size:18px;font-weight:800;color:#ea580c}
+  .wp-ph{font-size:13px;color:#92400e;font-family:ui-monospace,Menlo,monospace}
+  .wp-pos{margin-top:5px;font-size:13px;color:#374151}
+  .wp-pos b{color:#dc2626;font-style:italic;margin-right:6px}
+  .wp-src{margin-top:3px;font-size:11px;color:#9ca3af}
+
+  footer{margin-top:20px;text-align:center;color:#6b7280;font-size:12px;padding:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="badge-wrap">
+      <span class="badge">多多好学 · 小学英语早晚读</span>
+      <a class="home-btn" href="../index.html">返回主页</a>
+    </div>
+    <h1>四年级下册 · 句子点读</h1>
+  </div>
+
+  
+<style>
+
+.box-loading{padding:50px 20px;text-align:center;}
+.box-loading .bl-ring{
+  width:72px;height:72px;border-radius:50%;margin:0 auto 18px;
+  background:conic-gradient(#ff6b9d 0%,#f472b6 90deg,#fce7f3 0);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  animation:ringSpin 2s linear infinite;
+}
+.box-loading .bl-ring::before{
+  content:'';position:absolute;inset:6px;border-radius:50%;background:#fff;
+}
+.box-loading .bl-num{
+  position:relative;font-size:20px;font-weight:900;color:#ec4899;
+}
+.box-loading .bl-bar-wrap{
+  width:200px;height:3px;background:#f3f4f6;border-radius:999px;margin:0 auto;overflow:hidden;
+}
+.box-loading .bl-bar{
+  height:100%;width:30%;border-radius:999px;
+  background:linear-gradient(90deg,#ff6b9d,#a78bfa);
+  animation:barSlide 1.5s ease-in-out infinite;
+}
+@keyframes barSlide{
+  0%{transform:translateX(-100%);width:40%;}
+  100%{transform:translateX(250%);width:40%;}
+}
+@keyframes ringSpin{
+  0%{background:conic-gradient(#ff6b9d 0deg,#fce7f3 0deg);}
+  100%{background:conic-gradient(#ff6b9d 360deg,#fce7f3 360deg);}
+}
+.box-loading .bl-tip{font-size:12px;color:#9ca3af;margin-top:14px;}
+
+</style>
+
+<div id="box"><div class="box-loading">
+  <div class="bl-ring" id="blRing"><span class="bl-num" id="blNum">···</span></div>
+  <div class="bl-bar-wrap"><div class="bl-bar" id="blBar"></div></div>
+  <div class="bl-tip">正在加载真人发音资源，请稍候…</div>
+</div></div>
+
+  <footer>多多好学姜老师版权所有（支持定制 180 1926 7856）</footer>
+</div>
+
+<script>
+const DICT = {
+  "am": {
+    "ph": "/æm/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "是（be动词）"
+      }
+    ]
+  },
+  "pm": {
+    "ph": "/ˌpiː ˈem/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "下午"
+      }
+    ]
+  },
+  "tv": {
+    "ph": "/ˌtiː ˈviː/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "电视（television缩写）"
+      }
+    ]
+  },
+  "pe": {
+    "ph": "/ˌpiː ˈiː/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "体育（physical education）"
+      }
+    ]
+  },
+  "ok": {
+    "ph": "/ˌəʊˈkeɪ/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "好的；没问题"
+      }
+    ]
+  },
+  "mr": {
+    "ph": "/ˈmɪstə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "先生"
+      }
+    ]
+  },
+  "mrs": {
+    "ph": "/ˈmɪsɪz/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "夫人；太太"
+      }
+    ]
+  },
+  "ms": {
+    "ph": "/mɪz/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "女士"
+      }
+    ]
+  },
+  "rule": {
+    "ph": "/ruːl/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "规则；规章"
+      }
+    ]
+  },
+  "follow": {
+    "ph": "/ˈfɒləʊ/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "遵守；跟随"
+      }
+    ]
+  },
+  "learn": {
+    "ph": "/lɜːn/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "学习；学会"
+      }
+    ]
+  },
+  "toy": {
+    "ph": "/tɔɪ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "玩具"
+      }
+    ]
+  },
+  "take": {
+    "ph": "/teɪk/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "带；拿；取"
+      }
+    ]
+  },
+  "school": {
+    "ph": "/skuːl/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "学校"
+      }
+    ]
+  },
+  "classroom": {
+    "ph": "/ˈklɑːsruːm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "教室"
+      }
+    ]
+  },
+  "quiet": {
+    "ph": "/ˈkwaɪət/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "安静的"
+      }
+    ]
+  },
+  "listen": {
+    "ph": "/ˈlɪsn/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "听；倾听"
+      }
+    ]
+  },
+  "duty": {
+    "ph": "/ˈdjuːti/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "责任；义务；值日"
+      }
+    ]
+  },
+  "today": {
+    "ph": "/təˈdeɪ/",
+    "pos": [
+      {
+        "p": "n./adv.",
+        "m": "今天"
+      }
+    ]
+  },
+  "turn": {
+    "ph": "/tɜːn/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "转动；转向"
+      },
+      {
+        "p": "n.",
+        "m": "轮流"
+      }
+    ]
+  },
+  "fan": {
+    "ph": "/fæn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "风扇；迷"
+      }
+    ]
+  },
+  "light": {
+    "ph": "/laɪt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "灯；光"
+      },
+      {
+        "p": "adj.",
+        "m": "轻的"
+      }
+    ]
+  },
+  "window": {
+    "ph": "/ˈwɪndəʊ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "窗户"
+      }
+    ]
+  },
+  "door": {
+    "ph": "/dɔː(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "门"
+      }
+    ]
+  },
+  "clean": {
+    "ph": "/kliːn/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "打扫；擦干净"
+      },
+      {
+        "p": "adj.",
+        "m": "干净的"
+      }
+    ]
+  },
+  "board": {
+    "ph": "/bɔːd/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "黑板；木板"
+      }
+    ]
+  },
+  "floor": {
+    "ph": "/flɔː(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "地板；楼层"
+      }
+    ]
+  },
+  "draw": {
+    "ph": "/drɔː/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "画；拉"
+      }
+    ]
+  },
+  "farmer": {
+    "ph": "/ˈfɑːmə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "农民；农场主"
+      }
+    ]
+  },
+  "card": {
+    "ph": "/kɑːd/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "卡片；纸牌"
+      }
+    ]
+  },
+  "sign": {
+    "ph": "/saɪn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "标志；指示牌"
+      },
+      {
+        "p": "v.",
+        "m": "签名"
+      }
+    ]
+  },
+  "make": {
+    "ph": "/meɪk/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "制作；使"
+      }
+    ]
+  },
+  "should": {
+    "ph": "/ʃʊd/",
+    "pos": [
+      {
+        "p": "modal.",
+        "m": "应该"
+      }
+    ]
+  },
+  "shouldn't": {
+    "ph": "/ˈʃʊdnt/",
+    "pos": [
+      {
+        "p": "modal.",
+        "m": "不应该"
+      }
+    ]
+  },
+  "can't": {
+    "ph": "/kɑːnt/",
+    "pos": [
+      {
+        "p": "modal.",
+        "m": "不能"
+      }
+    ]
+  },
+  "must": {
+    "ph": "/mʌst/",
+    "pos": [
+      {
+        "p": "modal.",
+        "m": "必须"
+      }
+    ]
+  },
+  "mustn't": {
+    "ph": "/ˈmʌsnt/",
+    "pos": [
+      {
+        "p": "modal.",
+        "m": "禁止；不准"
+      }
+    ]
+  },
+  "please": {
+    "ph": "/pliːz/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "请"
+      }
+    ]
+  },
+  "don't": {
+    "ph": "/dəʊnt/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "不要（do not）"
+      }
+    ]
+  },
+  "run": {
+    "ph": "/rʌn/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "跑；奔跑"
+      }
+    ]
+  },
+  "shout": {
+    "ph": "/ʃaʊt/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "喊叫；呼喊"
+      }
+    ]
+  },
+  "push": {
+    "ph": "/pʊʃ/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "推"
+      }
+    ]
+  },
+  "fight": {
+    "ph": "/faɪt/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "打架；战斗"
+      },
+      {
+        "p": "n.",
+        "m": "打架"
+      }
+    ]
+  },
+  "eat": {
+    "ph": "/iːt/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "吃"
+      }
+    ]
+  },
+  "drink": {
+    "ph": "/drɪŋk/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "喝"
+      },
+      {
+        "p": "n.",
+        "m": "饮料"
+      }
+    ]
+  },
+  "mobile": {
+    "ph": "/ˈməʊbaɪl/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "移动的"
+      },
+      {
+        "p": "n.",
+        "m": "手机"
+      }
+    ]
+  },
+  "phone": {
+    "ph": "/fəʊn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "电话；手机"
+      }
+    ]
+  },
+  "family": {
+    "ph": "/ˈfæməli/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "家庭；家人"
+      }
+    ]
+  },
+  "home": {
+    "ph": "/həʊm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "家"
+      },
+      {
+        "p": "adv.",
+        "m": "在家；回家"
+      }
+    ]
+  },
+  "watch": {
+    "ph": "/wɒtʃ/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "观看"
+      },
+      {
+        "p": "n.",
+        "m": "手表"
+      }
+    ]
+  },
+  "mum": {
+    "ph": "/mʌm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "妈妈（英式）"
+      }
+    ]
+  },
+  "mom": {
+    "ph": "/mɒm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "妈妈（美式）"
+      }
+    ]
+  },
+  "dad": {
+    "ph": "/dæd/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "爸爸"
+      }
+    ]
+  },
+  "mess": {
+    "ph": "/mes/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "混乱；脏乱"
+      }
+    ]
+  },
+  "study": {
+    "ph": "/ˈstʌdi/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "学习"
+      },
+      {
+        "p": "n.",
+        "m": "书房；学习"
+      }
+    ]
+  },
+  "bedroom": {
+    "ph": "/ˈbedruːm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "卧室"
+      }
+    ]
+  },
+  "living": {
+    "ph": "/ˈlɪvɪŋ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "生活；起居室"
+      }
+    ]
+  },
+  "bathroom": {
+    "ph": "/ˈbɑːθruːm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "浴室；洗手间"
+      }
+    ]
+  },
+  "kitchen": {
+    "ph": "/ˈkɪtʃɪn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "厨房"
+      }
+    ]
+  },
+  "garden": {
+    "ph": "/ˈɡɑːdn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "花园"
+      }
+    ]
+  },
+  "tidy": {
+    "ph": "/ˈtaɪdi/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "整理"
+      },
+      {
+        "p": "adj.",
+        "m": "整洁的"
+      }
+    ]
+  },
+  "room": {
+    "ph": "/ruːm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "房间"
+      }
+    ]
+  },
+  "bed": {
+    "ph": "/bed/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "床"
+      }
+    ]
+  },
+  "bookshelf": {
+    "ph": "/ˈbʊkʃelf/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "书架"
+      }
+    ]
+  },
+  "wash": {
+    "ph": "/wɒʃ/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "洗；洗涤"
+      }
+    ]
+  },
+  "clothes": {
+    "ph": "/kləʊðz/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "衣服（复数）"
+      }
+    ]
+  },
+  "dish": {
+    "ph": "/dɪʃ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "盘子；菜肴"
+      }
+    ]
+  },
+  "summer": {
+    "ph": "/ˈsʌmə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "夏天"
+      }
+    ]
+  },
+  "dinner": {
+    "ph": "/ˈdɪnə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "晚餐；正餐"
+      }
+    ]
+  },
+  "walk": {
+    "ph": "/wɔːk/",
+    "pos": [
+      {
+        "p": "v./n.",
+        "m": "散步；走"
+      }
+    ]
+  },
+  "read": {
+    "ph": "/riːd/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "读；阅读"
+      }
+    ]
+  },
+  "story": {
+    "ph": "/ˈstɔːri/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "故事"
+      }
+    ]
+  },
+  "book": {
+    "ph": "/bʊk/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "书；书本"
+      }
+    ]
+  },
+  "sleep": {
+    "ph": "/sliːp/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "睡觉"
+      }
+    ]
+  },
+  "early": {
+    "ph": "/ˈɜːli/",
+    "pos": [
+      {
+        "p": "adv./adj.",
+        "m": "早地；早的"
+      }
+    ]
+  },
+  "late": {
+    "ph": "/leɪt/",
+    "pos": [
+      {
+        "p": "adj./adv.",
+        "m": "晚的；迟的"
+      }
+    ]
+  },
+  "computer": {
+    "ph": "/kəmˈpjuːtə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "电脑；计算机"
+      }
+    ]
+  },
+  "game": {
+    "ph": "/ɡeɪm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "游戏；比赛"
+      }
+    ]
+  },
+  "share": {
+    "ph": "/ʃeə(r)/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "分享；共用"
+      }
+    ]
+  },
+  "help": {
+    "ph": "/help/",
+    "pos": [
+      {
+        "p": "v./n.",
+        "m": "帮助"
+      }
+    ]
+  },
+  "housework": {
+    "ph": "/ˈhaʊswɜːk/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "家务劳动"
+      }
+    ]
+  },
+  "chore": {
+    "ph": "/tʃɔː(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "家务活；杂务"
+      }
+    ]
+  },
+  "time": {
+    "ph": "/taɪm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "时间"
+      }
+    ]
+  },
+  "clock": {
+    "ph": "/klɒk/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "时钟"
+      }
+    ]
+  },
+  "o'clock": {
+    "ph": "/əˈklɒk/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "……点钟"
+      }
+    ]
+  },
+  "breakfast": {
+    "ph": "/ˈbrekfəst/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "早餐"
+      }
+    ]
+  },
+  "lunch": {
+    "ph": "/lʌntʃ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "午餐"
+      }
+    ]
+  },
+  "supper": {
+    "ph": "/ˈsʌpə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "晚餐"
+      }
+    ]
+  },
+  "get": {
+    "ph": "/ɡet/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "得到；变得"
+      }
+    ]
+  },
+  "up": {
+    "ph": "/ʌp/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "向上；起来"
+      }
+    ]
+  },
+  "go": {
+    "ph": "/ɡəʊ/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "去；走"
+      }
+    ]
+  },
+  "to": {
+    "ph": "/tuː/",
+    "pos": [
+      {
+        "p": "prep.",
+        "m": "到；向"
+      }
+    ]
+  },
+  "over": {
+    "ph": "/ˈəʊvə(r)/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "结束；越过"
+      }
+    ]
+  },
+  "playground": {
+    "ph": "/ˈpleɪɡraʊnd/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "操场"
+      }
+    ]
+  },
+  "music": {
+    "ph": "/ˈmjuːzɪk/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "音乐"
+      }
+    ]
+  },
+  "class": {
+    "ph": "/klɑːs/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "课；班级"
+      }
+    ]
+  },
+  "english": {
+    "ph": "/ˈɪŋɡlɪʃ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "英语"
+      },
+      {
+        "p": "adj.",
+        "m": "英国的"
+      }
+    ]
+  },
+  "maths": {
+    "ph": "/mæθs/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "数学"
+      }
+    ]
+  },
+  "math": {
+    "ph": "/mæθ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "数学（美式）"
+      }
+    ]
+  },
+  "chinese": {
+    "ph": "/ˌtʃaɪˈniːz/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "语文；汉语"
+      },
+      {
+        "p": "adj.",
+        "m": "中国的"
+      }
+    ]
+  },
+  "art": {
+    "ph": "/ɑːt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "美术；艺术"
+      }
+    ]
+  },
+  "science": {
+    "ph": "/ˈsaɪəns/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "科学"
+      }
+    ]
+  },
+  "count": {
+    "ph": "/kaʊnt/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "数；计数"
+      }
+    ]
+  },
+  "write": {
+    "ph": "/raɪt/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "写"
+      }
+    ]
+  },
+  "hand": {
+    "ph": "/hænd/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "手"
+      }
+    ]
+  },
+  "round": {
+    "ph": "/raʊnd/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "围绕地"
+      },
+      {
+        "p": "adj.",
+        "m": "圆的"
+      }
+    ]
+  },
+  "hero": {
+    "ph": "/ˈhɪərəʊ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "英雄"
+      }
+    ]
+  },
+  "every": {
+    "ph": "/ˈevri/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "每个；每一"
+      }
+    ]
+  },
+  "morning": {
+    "ph": "/ˈmɔːnɪŋ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "早晨；上午"
+      }
+    ]
+  },
+  "afternoon": {
+    "ph": "/ˌɑːftəˈnuːn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "下午"
+      }
+    ]
+  },
+  "evening": {
+    "ph": "/ˈiːvnɪŋ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "晚上；傍晚"
+      }
+    ]
+  },
+  "night": {
+    "ph": "/naɪt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "夜晚"
+      }
+    ]
+  },
+  "hurry": {
+    "ph": "/ˈhʌri/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "赶快；匆忙"
+      }
+    ]
+  },
+  "ready": {
+    "ph": "/ˈredi/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "准备好的"
+      }
+    ]
+  },
+  "milk": {
+    "ph": "/mɪlk/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "牛奶"
+      }
+    ]
+  },
+  "bread": {
+    "ph": "/bred/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "面包"
+      }
+    ]
+  },
+  "egg": {
+    "ph": "/eɡ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "鸡蛋"
+      }
+    ]
+  },
+  "rice": {
+    "ph": "/raɪs/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "米饭；大米"
+      }
+    ]
+  },
+  "noodle": {
+    "ph": "/ˈnuːdl/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "面条"
+      }
+    ]
+  },
+  "chicken": {
+    "ph": "/ˈtʃɪkɪn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "鸡肉；小鸡"
+      }
+    ]
+  },
+  "fish": {
+    "ph": "/fɪʃ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "鱼；鱼肉"
+      },
+      {
+        "p": "v.",
+        "m": "钓鱼"
+      }
+    ]
+  },
+  "vegetable": {
+    "ph": "/ˈvedʒtəbl/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "蔬菜"
+      }
+    ]
+  },
+  "soup": {
+    "ph": "/suːp/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "汤"
+      }
+    ]
+  },
+  "fork": {
+    "ph": "/fɔːk/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "叉子"
+      }
+    ]
+  },
+  "knife": {
+    "ph": "/naɪf/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "刀"
+      }
+    ]
+  },
+  "spoon": {
+    "ph": "/spuːn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "勺子"
+      }
+    ]
+  },
+  "bowl": {
+    "ph": "/bəʊl/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "碗"
+      }
+    ]
+  },
+  "plate": {
+    "ph": "/pleɪt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "盘子"
+      }
+    ]
+  },
+  "cup": {
+    "ph": "/kʌp/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "杯子"
+      }
+    ]
+  },
+  "glass": {
+    "ph": "/ɡlɑːs/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "玻璃杯；玻璃"
+      }
+    ]
+  },
+  "water": {
+    "ph": "/ˈwɔːtə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "水"
+      },
+      {
+        "p": "v.",
+        "m": "浇水"
+      }
+    ]
+  },
+  "juice": {
+    "ph": "/dʒuːs/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "果汁"
+      }
+    ]
+  },
+  "tea": {
+    "ph": "/tiː/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "茶"
+      }
+    ]
+  },
+  "coffee": {
+    "ph": "/ˈkɒfi/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "咖啡"
+      }
+    ]
+  },
+  "shop": {
+    "ph": "/ʃɒp/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "商店"
+      },
+      {
+        "p": "v.",
+        "m": "购物"
+      }
+    ]
+  },
+  "shopping": {
+    "ph": "/ˈʃɒpɪŋ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "购物"
+      }
+    ]
+  },
+  "buy": {
+    "ph": "/baɪ/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "买"
+      }
+    ]
+  },
+  "sell": {
+    "ph": "/sel/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "卖；出售"
+      }
+    ]
+  },
+  "price": {
+    "ph": "/praɪs/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "价格"
+      }
+    ]
+  },
+  "cheap": {
+    "ph": "/tʃiːp/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "便宜的"
+      }
+    ]
+  },
+  "expensive": {
+    "ph": "/ɪkˈspensɪv/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "昂贵的"
+      }
+    ]
+  },
+  "trousers": {
+    "ph": "/ˈtraʊzəz/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "裤子（复数）"
+      }
+    ]
+  },
+  "pants": {
+    "ph": "/pænts/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "裤子（美式，复数）"
+      }
+    ]
+  },
+  "skirt": {
+    "ph": "/skɜːt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "短裙"
+      }
+    ]
+  },
+  "shirt": {
+    "ph": "/ʃɜːt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "衬衫"
+      }
+    ]
+  },
+  "T-shirt": {
+    "ph": "/ˈtiː ʃɜːt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "T恤衫"
+      }
+    ]
+  },
+  "sweater": {
+    "ph": "/ˈswetə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "毛衣"
+      }
+    ]
+  },
+  "coat": {
+    "ph": "/kəʊt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "外套；大衣"
+      }
+    ]
+  },
+  "jacket": {
+    "ph": "/ˈdʒækɪt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "夹克衫"
+      }
+    ]
+  },
+  "dress": {
+    "ph": "/dres/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "连衣裙"
+      },
+      {
+        "p": "v.",
+        "m": "穿衣服"
+      }
+    ]
+  },
+  "shorts": {
+    "ph": "/ʃɔːts/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "短裤（复数）"
+      }
+    ]
+  },
+  "shoe": {
+    "ph": "/ʃuː/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "鞋"
+      }
+    ]
+  },
+  "sock": {
+    "ph": "/sɒk/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "袜子"
+      }
+    ]
+  },
+  "hat": {
+    "ph": "/hæt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "帽子（有檐）"
+      }
+    ]
+  },
+  "cap": {
+    "ph": "/kæp/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "帽子（鸭舌帽）"
+      }
+    ]
+  },
+  "glove": {
+    "ph": "/ɡlʌv/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "手套"
+      }
+    ]
+  },
+  "scarf": {
+    "ph": "/skɑːf/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "围巾（复 scarves）"
+      }
+    ]
+  },
+  "sunglasses": {
+    "ph": "/ˈsʌnɡlɑːsɪz/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "太阳镜（复数）"
+      }
+    ]
+  },
+  "umbrella": {
+    "ph": "/ʌmˈbrelə/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "雨伞"
+      }
+    ]
+  },
+  "tie": {
+    "ph": "/taɪ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "领带"
+      },
+      {
+        "p": "v.",
+        "m": "系；绑"
+      }
+    ]
+  },
+  "belt": {
+    "ph": "/belt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "腰带"
+      }
+    ]
+  },
+  "bag": {
+    "ph": "/bæɡ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "包；袋子"
+      }
+    ]
+  },
+  "backpack": {
+    "ph": "/ˈbækpæk/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "双肩背包"
+      }
+    ]
+  },
+  "size": {
+    "ph": "/saɪz/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "尺码；大小"
+      }
+    ]
+  },
+  "small": {
+    "ph": "/smɔːl/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "小的"
+      }
+    ]
+  },
+  "big": {
+    "ph": "/bɪɡ/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "大的"
+      }
+    ]
+  },
+  "long": {
+    "ph": "/lɒŋ/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "长的"
+      }
+    ]
+  },
+  "short": {
+    "ph": "/ʃɔːt/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "短的；矮的"
+      }
+    ]
+  },
+  "new": {
+    "ph": "/njuː/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "新的"
+      }
+    ]
+  },
+  "old": {
+    "ph": "/əʊld/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "旧的；老的"
+      }
+    ]
+  },
+  "pretty": {
+    "ph": "/ˈprɪti/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "漂亮的"
+      }
+    ]
+  },
+  "nice": {
+    "ph": "/naɪs/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "好看的；好的"
+      }
+    ]
+  },
+  "beautiful": {
+    "ph": "/ˈbjuːtɪfl/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "美丽的"
+      }
+    ]
+  },
+  "cool": {
+    "ph": "/kuːl/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "酷的；凉爽的"
+      }
+    ]
+  },
+  "cute": {
+    "ph": "/kjuːt/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "可爱的"
+      }
+    ]
+  },
+  "try": {
+    "ph": "/traɪ/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "试；尝试"
+      }
+    ]
+  },
+  "pair": {
+    "ph": "/peə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "一双；一对"
+      }
+    ]
+  },
+  "yuan": {
+    "ph": "/juˈɑːn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "元（人民币）"
+      }
+    ]
+  },
+  "dollar": {
+    "ph": "/ˈdɒlə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "美元"
+      }
+    ]
+  },
+  "money": {
+    "ph": "/ˈmʌni/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "钱"
+      }
+    ]
+  },
+  "save": {
+    "ph": "/seɪv/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "节省；储蓄；救"
+      }
+    ]
+  },
+  "bike": {
+    "ph": "/baɪk/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "自行车"
+      }
+    ]
+  },
+  "girl": {
+    "ph": "/ɡɜːl/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "女孩"
+      }
+    ]
+  },
+  "boy": {
+    "ph": "/bɔɪ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "男孩"
+      }
+    ]
+  },
+  "red": {
+    "ph": "/red/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "红色的"
+      },
+      {
+        "p": "n.",
+        "m": "红色"
+      }
+    ]
+  },
+  "blue": {
+    "ph": "/bluː/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "蓝色的"
+      },
+      {
+        "p": "n.",
+        "m": "蓝色"
+      }
+    ]
+  },
+  "green": {
+    "ph": "/ɡriːn/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "绿色的"
+      },
+      {
+        "p": "n.",
+        "m": "绿色"
+      }
+    ]
+  },
+  "yellow": {
+    "ph": "/ˈjeləʊ/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "黄色的"
+      },
+      {
+        "p": "n.",
+        "m": "黄色"
+      }
+    ]
+  },
+  "black": {
+    "ph": "/blæk/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "黑色的"
+      },
+      {
+        "p": "n.",
+        "m": "黑色"
+      }
+    ]
+  },
+  "white": {
+    "ph": "/waɪt/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "白色的"
+      },
+      {
+        "p": "n.",
+        "m": "白色"
+      }
+    ]
+  },
+  "pink": {
+    "ph": "/pɪŋk/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "粉色的"
+      },
+      {
+        "p": "n.",
+        "m": "粉色"
+      }
+    ]
+  },
+  "purple": {
+    "ph": "/ˈpɜːpl/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "紫色的"
+      },
+      {
+        "p": "n.",
+        "m": "紫色"
+      }
+    ]
+  },
+  "orange": {
+    "ph": "/ˈɒrɪndʒ/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "橙色的"
+      },
+      {
+        "p": "n.",
+        "m": "橙色；橙子"
+      }
+    ]
+  },
+  "brown": {
+    "ph": "/braʊn/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "棕色的"
+      },
+      {
+        "p": "n.",
+        "m": "棕色"
+      }
+    ]
+  },
+  "farm": {
+    "ph": "/fɑːm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "农场"
+      }
+    ]
+  },
+  "animal": {
+    "ph": "/ˈænɪml/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "动物"
+      }
+    ]
+  },
+  "horse": {
+    "ph": "/hɔːs/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "马"
+      }
+    ]
+  },
+  "cow": {
+    "ph": "/kaʊ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "奶牛"
+      }
+    ]
+  },
+  "sheep": {
+    "ph": "/ʃiːp/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "绵羊（单复同形）"
+      }
+    ]
+  },
+  "goat": {
+    "ph": "/ɡəʊt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "山羊"
+      }
+    ]
+  },
+  "pig": {
+    "ph": "/pɪɡ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "猪"
+      }
+    ]
+  },
+  "duck": {
+    "ph": "/dʌk/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "鸭子"
+      }
+    ]
+  },
+  "hen": {
+    "ph": "/hen/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "母鸡"
+      }
+    ]
+  },
+  "rabbit": {
+    "ph": "/ˈræbɪt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "兔子"
+      }
+    ]
+  },
+  "donkey": {
+    "ph": "/ˈdɒŋki/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "驴"
+      }
+    ]
+  },
+  "potato": {
+    "ph": "/pəˈteɪtəʊ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "土豆（复 potatoes）"
+      }
+    ]
+  },
+  "tomato": {
+    "ph": "/təˈmɑːtəʊ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "西红柿（复 tomatoes）"
+      }
+    ]
+  },
+  "carrot": {
+    "ph": "/ˈkærət/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "胡萝卜"
+      }
+    ]
+  },
+  "onion": {
+    "ph": "/ˈʌnjən/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "洋葱"
+      }
+    ]
+  },
+  "cucumber": {
+    "ph": "/ˈkjuːkʌmbə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "黄瓜"
+      }
+    ]
+  },
+  "eggplant": {
+    "ph": "/ˈeɡplɑːnt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "茄子"
+      }
+    ]
+  },
+  "corn": {
+    "ph": "/kɔːn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "玉米"
+      }
+    ]
+  },
+  "bean": {
+    "ph": "/biːn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "豆子"
+      }
+    ]
+  },
+  "pea": {
+    "ph": "/piː/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "豌豆"
+      }
+    ]
+  },
+  "cabbage": {
+    "ph": "/ˈkæbɪdʒ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "卷心菜；白菜"
+      }
+    ]
+  },
+  "pumpkin": {
+    "ph": "/ˈpʌmpkɪn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "南瓜"
+      }
+    ]
+  },
+  "apple": {
+    "ph": "/ˈæpl/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "苹果"
+      }
+    ]
+  },
+  "banana": {
+    "ph": "/bəˈnɑːnə/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "香蕉"
+      }
+    ]
+  },
+  "pear": {
+    "ph": "/peə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "梨"
+      }
+    ]
+  },
+  "grape": {
+    "ph": "/ɡreɪp/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "葡萄"
+      }
+    ]
+  },
+  "peach": {
+    "ph": "/piːtʃ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "桃子"
+      }
+    ]
+  },
+  "watermelon": {
+    "ph": "/ˈwɔːtəmelən/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "西瓜"
+      }
+    ]
+  },
+  "strawberry": {
+    "ph": "/ˈstrɔːbəri/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "草莓"
+      }
+    ]
+  },
+  "these": {
+    "ph": "/ðiːz/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "这些"
+      }
+    ]
+  },
+  "those": {
+    "ph": "/ðəʊz/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "那些"
+      }
+    ]
+  },
+  "they": {
+    "ph": "/ðeɪ/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "他/她/它们"
+      }
+    ]
+  },
+  "them": {
+    "ph": "/ðəm/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "他/她/它们（宾格）"
+      }
+    ]
+  },
+  "what": {
+    "ph": "/wɒt/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "什么"
+      }
+    ]
+  },
+  "lot": {
+    "ph": "/lɒt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "许多"
+      }
+    ]
+  },
+  "fair": {
+    "ph": "/feə(r)/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "金色的（头发）；公平的"
+      }
+    ]
+  },
+  "hair": {
+    "ph": "/heə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "头发"
+      }
+    ]
+  },
+  "energy": {
+    "ph": "/ˈenədʒi/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "能量；精力"
+      }
+    ]
+  },
+  "fun": {
+    "ph": "/fʌn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "乐趣；有趣的事"
+      }
+    ]
+  },
+  "often": {
+    "ph": "/ˈɒfn/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "经常"
+      }
+    ]
+  },
+  "look": {
+    "ph": "/lʊk/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "看"
+      }
+    ]
+  },
+  "plant": {
+    "ph": "/plɑːnt/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "种植"
+      },
+      {
+        "p": "n.",
+        "m": "植物"
+      }
+    ]
+  },
+  "grow": {
+    "ph": "/ɡrəʊ/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "生长；种植"
+      }
+    ]
+  },
+  "seed": {
+    "ph": "/siːd/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "种子"
+      }
+    ]
+  },
+  "soil": {
+    "ph": "/sɔɪl/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "土壤"
+      }
+    ]
+  },
+  "sun": {
+    "ph": "/sʌn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "太阳"
+      }
+    ]
+  },
+  "rain": {
+    "ph": "/reɪn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "雨"
+      },
+      {
+        "p": "v.",
+        "m": "下雨"
+      }
+    ]
+  },
+  "harvest": {
+    "ph": "/ˈhɑːvɪst/",
+    "pos": [
+      {
+        "p": "n./v.",
+        "m": "收获"
+      }
+    ]
+  },
+  "field": {
+    "ph": "/fiːld/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "田地；田野"
+      }
+    ]
+  },
+  "barn": {
+    "ph": "/bɑːn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "谷仓；牲口棚"
+      }
+    ]
+  },
+  "tractor": {
+    "ph": "/ˈtræktə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "拖拉机"
+      }
+    ]
+  },
+  "basket": {
+    "ph": "/ˈbɑːskɪt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "篮子"
+      }
+    ]
+  },
+  "box": {
+    "ph": "/bɒks/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "盒子；箱子"
+      }
+    ]
+  },
+  "table": {
+    "ph": "/ˈteɪbl/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "桌子"
+      }
+    ]
+  },
+  "set": {
+    "ph": "/set/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "摆放；设置"
+      },
+      {
+        "p": "n.",
+        "m": "一套"
+      }
+    ]
+  },
+  "dear": {
+    "ph": "/dɪə(r)/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "亲爱的"
+      }
+    ]
+  },
+  "bear": {
+    "ph": "/beə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "熊"
+      }
+    ]
+  },
+  "hear": {
+    "ph": "/hɪə(r)/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "听见"
+      }
+    ]
+  },
+  "amazing": {
+    "ph": "/əˈmeɪzɪŋ/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "令人惊奇的"
+      }
+    ]
+  },
+  "around": {
+    "ph": "/əˈraʊnd/",
+    "pos": [
+      {
+        "p": "prep.",
+        "m": "在……周围"
+      }
+    ]
+  },
+  "know": {
+    "ph": "/nəʊ/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "知道；了解"
+      }
+    ]
+  },
+  "would": {
+    "ph": "/wʊd/",
+    "pos": [
+      {
+        "p": "modal.",
+        "m": "愿意；将要"
+      }
+    ]
+  },
+  "like": {
+    "ph": "/laɪk/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "喜欢"
+      },
+      {
+        "p": "prep.",
+        "m": "像"
+      }
+    ]
+  },
+  "love": {
+    "ph": "/lʌv/",
+    "pos": [
+      {
+        "p": "v./n.",
+        "m": "爱；喜爱"
+      }
+    ]
+  },
+  "need": {
+    "ph": "/niːd/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "需要"
+      }
+    ]
+  },
+  "want": {
+    "ph": "/wɒnt/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "想要"
+      }
+    ]
+  },
+  "have": {
+    "ph": "/hæv/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "有；吃；喝"
+      }
+    ]
+  },
+  "has": {
+    "ph": "/hæz/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "有（have的第三人称单数）"
+      }
+    ]
+  },
+  "do": {
+    "ph": "/duː/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "做"
+      }
+    ]
+  },
+  "does": {
+    "ph": "/dʌz/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "做（do的第三人称单数）"
+      }
+    ]
+  },
+  "can": {
+    "ph": "/kæn/",
+    "pos": [
+      {
+        "p": "modal.",
+        "m": "能；会"
+      }
+    ]
+  },
+  "could": {
+    "ph": "/kʊd/",
+    "pos": [
+      {
+        "p": "modal.",
+        "m": "能（can的过去式）"
+      }
+    ]
+  },
+  "will": {
+    "ph": "/wɪl/",
+    "pos": [
+      {
+        "p": "modal.",
+        "m": "将要"
+      }
+    ]
+  },
+  "is": {
+    "ph": "/ɪz/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "是（be动词）"
+      }
+    ]
+  },
+  "are": {
+    "ph": "/ɑː(r)/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "是（be动词）"
+      }
+    ]
+  },
+  "was": {
+    "ph": "/wɒz/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "是（is/am的过去式）"
+      }
+    ]
+  },
+  "were": {
+    "ph": "/wɜː(r)/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "是（are的过去式）"
+      }
+    ]
+  },
+  "be": {
+    "ph": "/biː/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "是；成为"
+      }
+    ]
+  },
+  "the": {
+    "ph": "/ðə/",
+    "pos": [
+      {
+        "p": "art.",
+        "m": "这；那"
+      }
+    ]
+  },
+  "a": {
+    "ph": "/ə/",
+    "pos": [
+      {
+        "p": "art.",
+        "m": "一个"
+      }
+    ]
+  },
+  "an": {
+    "ph": "/æn/",
+    "pos": [
+      {
+        "p": "art.",
+        "m": "一个（元音前）"
+      }
+    ]
+  },
+  "and": {
+    "ph": "/ænd/",
+    "pos": [
+      {
+        "p": "conj.",
+        "m": "和；并且"
+      }
+    ]
+  },
+  "or": {
+    "ph": "/ɔː(r)/",
+    "pos": [
+      {
+        "p": "conj.",
+        "m": "或者"
+      }
+    ]
+  },
+  "but": {
+    "ph": "/bʌt/",
+    "pos": [
+      {
+        "p": "conj.",
+        "m": "但是"
+      }
+    ]
+  },
+  "if": {
+    "ph": "/ɪf/",
+    "pos": [
+      {
+        "p": "conj.",
+        "m": "如果"
+      }
+    ]
+  },
+  "because": {
+    "ph": "/bɪˈkɒz/",
+    "pos": [
+      {
+        "p": "conj.",
+        "m": "因为"
+      }
+    ]
+  },
+  "so": {
+    "ph": "/səʊ/",
+    "pos": [
+      {
+        "p": "conj.",
+        "m": "所以"
+      },
+      {
+        "p": "adv.",
+        "m": "如此"
+      }
+    ]
+  },
+  "with": {
+    "ph": "/wɪð/",
+    "pos": [
+      {
+        "p": "prep.",
+        "m": "和……一起；用"
+      }
+    ]
+  },
+  "for": {
+    "ph": "/fɔː(r)/",
+    "pos": [
+      {
+        "p": "prep.",
+        "m": "为了；给"
+      }
+    ]
+  },
+  "from": {
+    "ph": "/frɒm/",
+    "pos": [
+      {
+        "p": "prep.",
+        "m": "从；来自"
+      }
+    ]
+  },
+  "in": {
+    "ph": "/ɪn/",
+    "pos": [
+      {
+        "p": "prep.",
+        "m": "在……里"
+      }
+    ]
+  },
+  "on": {
+    "ph": "/ɒn/",
+    "pos": [
+      {
+        "p": "prep.",
+        "m": "在……上"
+      }
+    ]
+  },
+  "at": {
+    "ph": "/æt/",
+    "pos": [
+      {
+        "p": "prep.",
+        "m": "在"
+      }
+    ]
+  },
+  "under": {
+    "ph": "/ˈʌndə(r)/",
+    "pos": [
+      {
+        "p": "prep.",
+        "m": "在……下面"
+      }
+    ]
+  },
+  "behind": {
+    "ph": "/bɪˈhaɪnd/",
+    "pos": [
+      {
+        "p": "prep.",
+        "m": "在……后面"
+      }
+    ]
+  },
+  "next": {
+    "ph": "/nekst/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "下一个的"
+      },
+      {
+        "p": "adv.",
+        "m": "接下来"
+      }
+    ]
+  },
+  "where": {
+    "ph": "/weə(r)/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "在哪里"
+      }
+    ]
+  },
+  "when": {
+    "ph": "/wen/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "什么时候"
+      }
+    ]
+  },
+  "who": {
+    "ph": "/huː/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "谁"
+      }
+    ]
+  },
+  "whose": {
+    "ph": "/huːz/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "谁的"
+      }
+    ]
+  },
+  "why": {
+    "ph": "/waɪ/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "为什么"
+      }
+    ]
+  },
+  "how": {
+    "ph": "/haʊ/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "怎样；如何"
+      }
+    ]
+  },
+  "which": {
+    "ph": "/wɪtʃ/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "哪一个"
+      }
+    ]
+  },
+  "yes": {
+    "ph": "/jes/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "是的"
+      }
+    ]
+  },
+  "no": {
+    "ph": "/nəʊ/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "不；没有"
+      }
+    ]
+  },
+  "not": {
+    "ph": "/nɒt/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "不"
+      }
+    ]
+  },
+  "very": {
+    "ph": "/ˈveri/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "非常"
+      }
+    ]
+  },
+  "too": {
+    "ph": "/tuː/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "也；太"
+      }
+    ]
+  },
+  "also": {
+    "ph": "/ˈɔːlsəʊ/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "也"
+      }
+    ]
+  },
+  "just": {
+    "ph": "/dʒʌst/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "只是；刚刚"
+      }
+    ]
+  },
+  "now": {
+    "ph": "/naʊ/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "现在"
+      }
+    ]
+  },
+  "then": {
+    "ph": "/ðen/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "然后；那时"
+      }
+    ]
+  },
+  "here": {
+    "ph": "/hɪə(r)/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "这里"
+      }
+    ]
+  },
+  "there": {
+    "ph": "/ðeə(r)/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "那里"
+      }
+    ]
+  },
+  "again": {
+    "ph": "/əˈɡen/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "再一次"
+      }
+    ]
+  },
+  "together": {
+    "ph": "/təˈɡeðə(r)/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "一起"
+      }
+    ]
+  },
+  "well": {
+    "ph": "/wel/",
+    "pos": [
+      {
+        "p": "adv.",
+        "m": "好地"
+      },
+      {
+        "p": "adj.",
+        "m": "健康的"
+      }
+    ]
+  },
+  "good": {
+    "ph": "/ɡʊd/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "好的"
+      }
+    ]
+  },
+  "great": {
+    "ph": "/ɡreɪt/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "伟大的；极好的"
+      }
+    ]
+  },
+  "happy": {
+    "ph": "/ˈhæpi/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "快乐的"
+      }
+    ]
+  },
+  "sad": {
+    "ph": "/sæd/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "伤心的"
+      }
+    ]
+  },
+  "tired": {
+    "ph": "/ˈtaɪəd/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "疲倦的"
+      }
+    ]
+  },
+  "busy": {
+    "ph": "/ˈbɪzi/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "忙碌的"
+      }
+    ]
+  },
+  "hungry": {
+    "ph": "/ˈhʌŋɡri/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "饥饿的"
+      }
+    ]
+  },
+  "thirsty": {
+    "ph": "/ˈθɜːsti/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "口渴的"
+      }
+    ]
+  },
+  "hot": {
+    "ph": "/hɒt/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "热的"
+      }
+    ]
+  },
+  "cold": {
+    "ph": "/kəʊld/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "冷的"
+      }
+    ]
+  },
+  "warm": {
+    "ph": "/wɔːm/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "温暖的"
+      }
+    ]
+  },
+  "sunny": {
+    "ph": "/ˈsʌni/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "晴朗的"
+      }
+    ]
+  },
+  "cloudy": {
+    "ph": "/ˈklaʊdi/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "多云的"
+      }
+    ]
+  },
+  "rainy": {
+    "ph": "/ˈreɪni/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "下雨的"
+      }
+    ]
+  },
+  "windy": {
+    "ph": "/ˈwɪndi/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "有风的"
+      }
+    ]
+  },
+  "snowy": {
+    "ph": "/ˈsnəʊi/",
+    "pos": [
+      {
+        "p": "adj.",
+        "m": "下雪的"
+      }
+    ]
+  },
+  "i": {
+    "ph": "/aɪ/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "我"
+      }
+    ]
+  },
+  "you": {
+    "ph": "/juː/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "你；你们"
+      }
+    ]
+  },
+  "he": {
+    "ph": "/hiː/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "他"
+      }
+    ]
+  },
+  "she": {
+    "ph": "/ʃiː/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "她"
+      }
+    ]
+  },
+  "it": {
+    "ph": "/ɪt/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "它"
+      }
+    ]
+  },
+  "we": {
+    "ph": "/wiː/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "我们"
+      }
+    ]
+  },
+  "my": {
+    "ph": "/maɪ/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "我的"
+      }
+    ]
+  },
+  "your": {
+    "ph": "/jɔː(r)/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "你的；你们的"
+      }
+    ]
+  },
+  "his": {
+    "ph": "/hɪz/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "他的"
+      }
+    ]
+  },
+  "her": {
+    "ph": "/hɜː(r)/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "她的"
+      }
+    ]
+  },
+  "its": {
+    "ph": "/ɪts/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "它的"
+      }
+    ]
+  },
+  "our": {
+    "ph": "/ˈaʊə(r)/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "我们的"
+      }
+    ]
+  },
+  "their": {
+    "ph": "/ðeə(r)/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "他/她/它们的"
+      }
+    ]
+  },
+  "me": {
+    "ph": "/miː/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "我（宾格）"
+      }
+    ]
+  },
+  "him": {
+    "ph": "/hɪm/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "他（宾格）"
+      }
+    ]
+  },
+  "us": {
+    "ph": "/ʌs/",
+    "pos": [
+      {
+        "p": "pron.",
+        "m": "我们（宾格）"
+      }
+    ]
+  },
+  "name": {
+    "ph": "/neɪm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "名字"
+      }
+    ]
+  },
+  "friend": {
+    "ph": "/frend/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "朋友"
+      }
+    ]
+  },
+  "teacher": {
+    "ph": "/ˈtiːtʃə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "老师"
+      }
+    ]
+  },
+  "student": {
+    "ph": "/ˈstjuːdnt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "学生"
+      }
+    ]
+  },
+  "pupil": {
+    "ph": "/ˈpjuːpl/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "小学生"
+      }
+    ]
+  },
+  "children": {
+    "ph": "/ˈtʃɪldrən/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "孩子们（child复数）"
+      }
+    ]
+  },
+  "child": {
+    "ph": "/tʃaɪld/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "孩子"
+      }
+    ]
+  },
+  "people": {
+    "ph": "/ˈpiːpl/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "人们"
+      }
+    ]
+  },
+  "man": {
+    "ph": "/mæn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "男人（复 men）"
+      }
+    ]
+  },
+  "woman": {
+    "ph": "/ˈwʊmən/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "女人（复 women）"
+      }
+    ]
+  },
+  "baby": {
+    "ph": "/ˈbeɪbi/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "婴儿"
+      }
+    ]
+  },
+  "sister": {
+    "ph": "/ˈsɪstə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "姐妹"
+      }
+    ]
+  },
+  "brother": {
+    "ph": "/ˈbrʌðə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "兄弟"
+      }
+    ]
+  },
+  "father": {
+    "ph": "/ˈfɑːðə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "父亲"
+      }
+    ]
+  },
+  "mother": {
+    "ph": "/ˈmʌðə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "母亲"
+      }
+    ]
+  },
+  "grandpa": {
+    "ph": "/ˈɡrænpɑː/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "爷爷；外公"
+      }
+    ]
+  },
+  "grandma": {
+    "ph": "/ˈɡrænmɑː/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "奶奶；外婆"
+      }
+    ]
+  },
+  "uncle": {
+    "ph": "/ˈʌŋkl/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "叔叔；舅舅"
+      }
+    ]
+  },
+  "aunt": {
+    "ph": "/ɑːnt/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "阿姨；姑姑"
+      }
+    ]
+  },
+  "cousin": {
+    "ph": "/ˈkʌzn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "堂/表兄弟姐妹"
+      }
+    ]
+  },
+  "let's": {
+    "ph": "/lets/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "让我们（let us）"
+      }
+    ]
+  },
+  "let": {
+    "ph": "/let/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "让"
+      }
+    ]
+  },
+  "hello": {
+    "ph": "/həˈləʊ/",
+    "pos": [
+      {
+        "p": "int.",
+        "m": "你好"
+      }
+    ]
+  },
+  "hi": {
+    "ph": "/haɪ/",
+    "pos": [
+      {
+        "p": "int.",
+        "m": "嗨"
+      }
+    ]
+  },
+  "bye": {
+    "ph": "/baɪ/",
+    "pos": [
+      {
+        "p": "int.",
+        "m": "再见"
+      }
+    ]
+  },
+  "sorry": {
+    "ph": "/ˈsɒri/",
+    "pos": [
+      {
+        "p": "int.",
+        "m": "对不起"
+      }
+    ]
+  },
+  "thanks": {
+    "ph": "/θæŋks/",
+    "pos": [
+      {
+        "p": "int.",
+        "m": "谢谢"
+      }
+    ]
+  },
+  "thank": {
+    "ph": "/θæŋk/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "感谢"
+      }
+    ]
+  },
+  "welcome": {
+    "ph": "/ˈwelkəm/",
+    "pos": [
+      {
+        "p": "int.",
+        "m": "欢迎"
+      }
+    ]
+  },
+  "excuse": {
+    "ph": "/ɪkˈskjuːz/",
+    "pos": [
+      {
+        "p": "v.",
+        "m": "原谅"
+      }
+    ]
+  },
+  "zip": {
+    "ph": "/zɪp/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "拉链；兹普（人名）"
+      }
+    ]
+  },
+  "zoom": {
+    "ph": "/zuːm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "祖姆（人名）"
+      }
+    ]
+  },
+  "john": {
+    "ph": "/dʒɒn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "约翰（人名）"
+      }
+    ]
+  },
+  "jack": {
+    "ph": "/dʒæk/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "杰克（人名）"
+      }
+    ]
+  },
+  "mike": {
+    "ph": "/maɪk/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "迈克（人名）"
+      }
+    ]
+  },
+  "amy": {
+    "ph": "/ˈeɪmi/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "埃米（人名）"
+      }
+    ]
+  },
+  "sam": {
+    "ph": "/sæm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "萨姆（人名）"
+      }
+    ]
+  },
+  "binbin": {
+    "ph": "/bɪn bɪn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "彬彬（人名）"
+      }
+    ]
+  },
+  "chen": {
+    "ph": "/tʃen/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "陈（姓）"
+      }
+    ]
+  },
+  "jie": {
+    "ph": "/dʒje/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "杰（名）"
+      }
+    ]
+  },
+  "wang": {
+    "ph": "/wæŋ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "王（姓）"
+      }
+    ]
+  },
+  "ford": {
+    "ph": "/fɔːd/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "福特（人名）"
+      }
+    ]
+  },
+  "lily": {
+    "ph": "/ˈlɪli/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "莉莉（人名）"
+      }
+    ]
+  },
+  "tim": {
+    "ph": "/tɪm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "蒂姆（人名）"
+      }
+    ]
+  },
+  "lucy": {
+    "ph": "/ˈluːsi/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "露西（人名）"
+      }
+    ]
+  },
+  "tom": {
+    "ph": "/tɒm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "汤姆（人名）"
+      }
+    ]
+  },
+  "jim": {
+    "ph": "/dʒɪm/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "吉姆（人名）"
+      }
+    ]
+  },
+  "anna": {
+    "ph": "/ˈænə/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "安娜（人名）"
+      }
+    ]
+  },
+  "emma": {
+    "ph": "/ˈemə/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "埃玛（人名）"
+      }
+    ]
+  },
+  "oliver": {
+    "ph": "/ˈɒlɪvə(r)/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "奥利弗（人名）"
+      }
+    ]
+  },
+  "sarah": {
+    "ph": "/ˈseərə/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "萨拉（人名）"
+      }
+    ]
+  },
+  "wu": {
+    "ph": "/wuː/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "吴（姓）"
+      }
+    ]
+  },
+  "yifan": {
+    "ph": "/iː fæn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "一凡（名）"
+      }
+    ]
+  },
+  "zhang": {
+    "ph": "/dʒɑːŋ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "张（姓）"
+      }
+    ]
+  },
+  "peng": {
+    "ph": "/pəŋ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "鹏（名）"
+      }
+    ]
+  },
+  "li": {
+    "ph": "/liː/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "李（姓）"
+      }
+    ]
+  },
+  "xiao": {
+    "ph": "/ʃaʊ/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "小（前缀）"
+      }
+    ]
+  },
+  "lin": {
+    "ph": "/lɪn/",
+    "pos": [
+      {
+        "p": "n.",
+        "m": "林（姓/名）"
+      }
+    ]
+  }
+};
+
+const UNITS = [
+  {
+    "unit": "Unit 1",
+    "title": "Class rules",
+    "cn": "课堂规则",
+    "parts": [
+      {
+        "part": "Listen and chant",
+        "sents": [
+          "We follow rules to help us learn.",
+          "Put your hand up and take your turn.",
+          "We listen, ask and answer.",
+          "This all makes learning fun.",
+          "We follow rules to help us learn.",
+          "Don't be late or eat in class.",
+          "We don't want a messy room.",
+          "Our classroom is for everyone."
+        ]
+      },
+      {
+        "part": "Let's talk A",
+        "sents": [
+          "Jack, you can't take toys to school.",
+          "Oh, sorry. Can I take this apple?",
+          "Yes, but don't eat it in class.",
+          "OK.",
+          "Hurry up! Don't be late for class!",
+          "I'm ready.",
+          "Let's go!"
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "These are our class rules.",
+          "Keep the classroom clean.",
+          "Don't eat in class.",
+          "Put your hand up to speak.",
+          "Don't be late.",
+          "Turn off the lights after school."
+        ]
+      },
+      {
+        "part": "Let's spell",
+        "sents": [
+          "I draw a farmer on a card.",
+          "The farmer is working hard.",
+          "His farm is like a big park.",
+          "I clean my desk. It's not hard."
+        ]
+      },
+      {
+        "part": "Let's talk B",
+        "sents": [
+          "Who's on duty today?",
+          "We are, Miss White.",
+          "I can clean the blackboard.",
+          "I can clean the floor.",
+          "I can put back the desks and chairs.",
+          "Wow! Our classroom is clean and tidy!"
+        ]
+      },
+      {
+        "part": "Listen and do",
+        "sents": [
+          "We turn off the fans.",
+          "We clean the desks.",
+          "We close the windows.",
+          "We sweep the floor.",
+          "We put back the chairs and close the doors.",
+          "Our job is done!",
+          "Now the classroom is clean!"
+        ]
+      },
+      {
+        "part": "Read and write",
+        "sents": [
+          "We have some class rules.",
+          "We put our hand up to speak.",
+          "We turn off the lights after school.",
+          "When we don't understand, we say, \"Excuse me?\"",
+          "We also have special jobs.",
+          "Some of us make wall newspapers.",
+          "Some of us keep our classroom clean and tidy.",
+          "Some hand out the workbooks.",
+          "Together, we make our classroom a good place for everyone."
+        ]
+      },
+      {
+        "part": "Project",
+        "sents": [
+          "Let's make a sign.",
+          "Good idea.",
+          "We can put them on the classroom wall.",
+          "OK.",
+          "Look at this sign.",
+          "What rule is it?",
+          "Keep the classroom clean.",
+          "Yes, you're right! We can put it on the wall."
+        ]
+      },
+      {
+        "part": "Reading time",
+        "sents": [
+          "Zip, look!",
+          "Shh! Don't talk in class.",
+          "It's a bee!",
+          "The bee is on the light!",
+          "Don't turn off the lights. It's too dark.",
+          "Sorry, sir!",
+          "Look! It's on my desk!",
+          "Don't be afraid. Just open the window.",
+          "OK. The bee is gone. Now, eyes on me, please!",
+          "Who can answer this question? Put your hand up.",
+          "Some class rules help us study better and some help us stay healthy.",
+          "Rules make school life better for everyone."
+        ]
+      }
+    ],
+    "color": "#ff6b9d",
+    "grad": [
+      "#ff6b9d",
+      "#ffa8c5"
+    ]
+  },
+  {
+    "unit": "Unit 2",
+    "title": "Family rules",
+    "cn": "家庭规则",
+    "parts": [
+      {
+        "part": "Listen and chant",
+        "sents": [
+          "Rules at home.",
+          "They keep us safe.",
+          "Don't run! Don't bounce the balls!",
+          "Listen to what Mum and Dad say.",
+          "Rules at home.",
+          "They make us happy.",
+          "Don't make a mess! Think of others!",
+          "Use nice words and speak kindly."
+        ]
+      },
+      {
+        "part": "Let's talk A",
+        "sents": [
+          "Mum, can I watch TV?",
+          "No. You have to do your homework first.",
+          "OK. I will do it now.",
+          "Matt, be careful! The floor is wet.",
+          "Don't run in the house. It's not safe.",
+          "Sorry."
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "Family rules.",
+          "Do my homework first.",
+          "Use kind words.",
+          "Tidy my room.",
+          "Wash my hands."
+        ]
+      },
+      {
+        "part": "Let's spell",
+        "sents": [
+          "In the summer, after dinner,",
+          "Father is reading a newspaper.",
+          "My poor thirsty brother,",
+          "Is running with some water."
+        ]
+      },
+      {
+        "part": "Let's talk B",
+        "sents": [
+          "John, where is Dad?",
+          "Shh. Don't be so loud.",
+          "Dad is sleeping in his bedroom. He's tired.",
+          "I'm sorry.",
+          "Where is Mum?",
+          "She's in the kitchen. Let's go and help her.",
+          "Be careful in the kitchen, Jack. Don't touch hot things.",
+          "OK."
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "Where is Amy? Is she in the study?",
+          "Yes, she's reading a book."
+        ]
+      },
+      {
+        "part": "Read and write",
+        "sents": [
+          "There are rules at school and at home.",
+          "I don't run in the classroom or in the living room.",
+          "This rule keeps me safe.",
+          "I have to keep my desk clean and tidy my bedroom.",
+          "This rule keeps me healthy.",
+          "I think of my friends and family.",
+          "I use kind words.",
+          "We work hard and follow the rules.",
+          "I feel good and others feel good too."
+        ]
+      },
+      {
+        "part": "Project",
+        "sents": [
+          "What family rules do you have?",
+          "Don't jump on the bed. Don't eat in bed.",
+          "Do you like them all?",
+          "Not really. For example, I agree with \"Don't eat in bed.\" But my brother doesn't.",
+          "You should talk about it with your family.",
+          "We agree to follow these family rules.",
+          "Use kind words.",
+          "Listen to each other."
+        ]
+      },
+      {
+        "part": "Reading time",
+        "sents": [
+          "No, Jack! Please don't make a mess!",
+          "Why not?",
+          "I'm having fun!",
+          "No, Jack! Please don't play football in the living room!",
+          "No, Jack! Please don't be so loud!",
+          "No, Jack! Please don't jump on the bed!",
+          "Why can't I have fun at home, Mum?",
+          "You can, but it has to be safe. You also have to think of others.",
+          "Let's go to the park tomorrow. You can jump and have fun there!",
+          "Yeah!",
+          "Family rules keep us safe and keep our home clean and tidy.",
+          "They make our family happy and help us work together."
+        ]
+      }
+    ],
+    "color": "#fbbf24",
+    "grad": [
+      "#fbbf24",
+      "#fde68a"
+    ]
+  },
+  {
+    "unit": "Unit 3",
+    "title": "Time for school",
+    "cn": "上学时间",
+    "parts": [
+      {
+        "part": "Listen and chant",
+        "sents": [
+          "Move your hands round and round.",
+          "Tell the time on the clock.",
+          "Seven o'clock. Time to get up!",
+          "Eight o'clock. Time for school!",
+          "Twelve o'clock. Time for lunch!",
+          "Tick, tock. Time moves fast!",
+          "Move your hands round and round.",
+          "Tell the time on the clock.",
+          "Five o'clock. Time to go home!",
+          "Six o'clock. Time to eat!",
+          "Nine o'clock. Time for bed!",
+          "Tick, tock. It's time to sleep."
+        ]
+      },
+      {
+        "part": "Let's talk A",
+        "sents": [
+          "Hi, Binbin. School is over. Let's go to the playground.",
+          "OK.",
+          "What time is it now?",
+          "Time to go home, kids.",
+          "What time is it?",
+          "It's 5 o'clock.",
+          "What time is it?",
+          "It's 6 o'clock. It's time for dinner.",
+          "Oh! Let's go."
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "What time is it?",
+          "It's 7:20. It's time for breakfast."
+        ]
+      },
+      {
+        "part": "Listen and do",
+        "sents": [
+          "It's time for breakfast. Let's drink some milk.",
+          "It's time for lunch. Let's have some chicken.",
+          "It's time for dinner. Let's eat some rice.",
+          "It's time for maths class. Let's count and write.",
+          "It's time for English class. Let's read and write."
+        ]
+      },
+      {
+        "part": "Let's spell",
+        "sents": [
+          "I'm Ford the hero. I get up early every morning.",
+          "I ride my horse to help others.",
+          "I work all over the world.",
+          "Ford! It's time to get up!"
+        ]
+      },
+      {
+        "part": "Let's talk B",
+        "sents": [
+          "It's seven o'clock. It's time to get up.",
+          "Breakfast is ready.",
+          "It's time to go to school. Bye, Mum.",
+          "Bye. Have a nice day!",
+          "It's 8:30. It's time for English class.",
+          "We're ready!"
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "It's 7:30. It's time to go to school."
+        ]
+      },
+      {
+        "part": "Read and write",
+        "sents": [
+          "It's 5:50. It's time to go home.",
+          "Oh no! I want to play more!",
+          "It's 6 o'clock. It's time for dinner.",
+          "Where is Mike?",
+          "Look at the clock! It's 9:20. Time for bed.",
+          "Just a minute.",
+          "Mike! It's 7:40. It's time to get up.",
+          "Hurry, Mike! It's 8:30. You're late for class."
+        ]
+      },
+      {
+        "part": "Project",
+        "sents": [
+          "It's 3:50.",
+          "Oh, it's time to do sports.",
+          "This is my weekend schedule. I...",
+          "At 3:50, it's time to do sports.",
+          "My friend often calls me at..."
+        ]
+      },
+      {
+        "part": "Reading time",
+        "sents": [
+          "Sam, time for bed.",
+          "Can I go to bed late tonight? Today is Friday.",
+          "OK, but not too late.",
+          "It's 10 o'clock now. Go to bed, Sam!",
+          "OK, Mum.",
+          "Hurry up, Sam! Your music class will begin soon.",
+          "OK, Mum.",
+          "Oh! I'm in the wrong class!",
+          "This is Sarah's class code.",
+          "Sarah, what time is it?",
+          "It's 9 o'clock.",
+          "Oh, it's time to go to bed.",
+          "What's that noise?",
+          "It's my watch alarm.",
+          "I see. What time is it now?",
+          "It's 8:20. Time for my music class.",
+          "Mum, it's 1 o'clock now. The film is at 2 o'clock. We should go soon.",
+          "Wow! You really are organized now.",
+          "A good schedule makes us organized.",
+          "We can plan our day and use our time well."
+        ]
+      }
+    ],
+    "color": "#34d399",
+    "grad": [
+      "#34d399",
+      "#6ee7b7"
+    ]
+  },
+  {
+    "unit": "Unit 4",
+    "title": "Going shopping",
+    "cn": "去购物",
+    "parts": [
+      {
+        "part": "Listen and chant",
+        "sents": [
+          "We like new clothes,",
+          "To wear in different places.",
+          "We like beautiful colours,",
+          "To wear on different days.",
+          "It's fun to choose new clothes.",
+          "Many clothes are nice.",
+          "I wonder, can I buy them?",
+          "Let's look at the price!"
+        ]
+      },
+      {
+        "part": "Let's talk A",
+        "sents": [
+          "Mum, my trousers are too short. Can I buy a new pair?",
+          "Sure. Let's go to the clothes shop.",
+          "Look, Mum! Those shorts are nice. Can I buy them?",
+          "You already have too many shorts. Let's buy trousers.",
+          "OK, Mum."
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "My skirt is too small. I need a new one.",
+          "The green one is nice."
+        ]
+      },
+      {
+        "part": "Let's spell",
+        "sents": [
+          "A girl buys a pretty skirt.",
+          "Soon she sees a bird—it's hurt.",
+          "First she thinks, then helps the bird.",
+          "Now the girl needs a new skirt!"
+        ]
+      },
+      {
+        "part": "Let's talk B",
+        "sents": [
+          "Can I help you?",
+          "Yes. I like this pink dress.",
+          "How much is it?",
+          "It's 180 yuan.",
+          "That's expensive.",
+          "Look! The blue skirt is nice too. It's 79 yuan.",
+          "Yes, it's nice!",
+          "I'm sorry, dear.",
+          "OK. Let's take it."
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "How do you like the sunglasses?",
+          "They're beautiful. How much are they?",
+          "They're 99 yuan."
+        ]
+      },
+      {
+        "part": "Read and write",
+        "sents": [
+          "Sunglasses: Sixty yuan now!",
+          "Shorts: Fifteen yuan each!",
+          "Many colours! Buy two, get one free!",
+          "Hats: Large (L) size only, ten yuan!",
+          "Here's your shopping list.",
+          "Sunglasses: Buy cheap and nice pair.",
+          "Shorts: Buy two pairs. Try them on first.",
+          "A hat: Find your size. You can choose any colour.",
+          "Don't buy any socks! You have a lot of socks!"
+        ]
+      },
+      {
+        "part": "Project",
+        "sents": [
+          "I like the shirt with the black tie. Can we buy set 2?",
+          "How much is it?",
+          "It's 60 yuan.",
+          "We only have 50 yuan each.",
+          "Ten students choose their school uniform.",
+          "Fifteen students choose..."
+        ]
+      },
+      {
+        "part": "Reading time",
+        "sents": [
+          "Dad, I love the red bike. Can I save up my money and buy it?",
+          "Yes. That's a great idea, Ben.",
+          "Mum, Dad! I can buy the red bike soon.",
+          "Oh no! The red bike is sold out!",
+          "Wow! It's the red bike!",
+          "You work hard and often help Mum and me.",
+          "This is our special gift for you.",
+          "Thank you so much, Dad!",
+          "I still have all this money. Please take it!",
+          "No. It's your money. Save it for a rainy day.",
+          "I will, Dad. Thanks.",
+          "Think about what you need and decide what to buy.",
+          "Write a list, check the prices and shop wisely."
+        ]
+      }
+    ],
+    "color": "#60a5fa",
+    "grad": [
+      "#60a5fa",
+      "#93c5fd"
+    ]
+  },
+  {
+    "unit": "Unit 5",
+    "title": "Farms and us",
+    "cn": "农场与我们",
+    "parts": [
+      {
+        "part": "Listen and chant",
+        "sents": [
+          "Farms give us potatoes.",
+          "Farms give us tomatoes.",
+          "Farms give us fruit and vegetables.",
+          "They are really great!",
+          "Farms have cows and chickens.",
+          "Farms give us eggs and meat.",
+          "Farms are really helpful.",
+          "We all need farms to eat!"
+        ]
+      },
+      {
+        "part": "Let's talk A",
+        "sents": [
+          "What animals do you have on the farm?",
+          "I have a lot of animals. Cows, horses, sheep, pigs and chickens.",
+          "How many cows do you have?",
+          "I have 20.",
+          "Cows are great. They give us fresh milk.",
+          "Yes. Farm animals give us many things."
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "I have a lot of animals.",
+          "There are sheep, cows..."
+        ]
+      },
+      {
+        "part": "Let's spell",
+        "sents": [
+          "A boy with fair hair,",
+          "Sat down upon his chair.",
+          "The chair is small.",
+          "The poor boy falls.",
+          "Look at his hat in the air!"
+        ]
+      },
+      {
+        "part": "Let's talk B",
+        "sents": [
+          "What are these?",
+          "They're tomatoes.",
+          "But they're yellow!",
+          "Yes. A lot of tomatoes are big and red, but these are small and yellow.",
+          "What are those?",
+          "They're boxes for bees. Bees are good for plants."
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "Look at the tomatoes. They're big and red.",
+          "A mouse!"
+        ]
+      },
+      {
+        "part": "Listen and chant",
+        "sents": [
+          "I like long vegetables:",
+          "Cucumbers, carrots and green beans.",
+          "I like round vegetables:",
+          "Potatoes, tomatoes and green peas.",
+          "I like flowers and honey,",
+          "And so do the bees.",
+          "But mice like rice,",
+          "And they eat anything they please!"
+        ]
+      },
+      {
+        "part": "Read and write",
+        "sents": [
+          "This is Mr Wang's farm. Let's have a look!",
+          "It's a busy day on the farm.",
+          "Mr Wang is putting the tomatoes in the boxes.",
+          "These are carrots.",
+          "Those are green beans and potatoes.",
+          "How fresh!",
+          "What are these?",
+          "They are cans for milk.",
+          "There are boxes of eggs too.",
+          "It is a big year for Mr Wang."
+        ]
+      },
+      {
+        "part": "Project",
+        "sents": [
+          "My family often eat rice, chicken and tomatoes for lunch.",
+          "These foods are all from farms.",
+          "We need farms.",
+          "Our food is from farms.",
+          "Cows and chickens live on farms.",
+          "They give us milk, eggs and meat."
+        ]
+      },
+      {
+        "part": "Reading time",
+        "sents": [
+          "You need energy to have fun and to study.",
+          "But where is this energy from?",
+          "Food like milk, eggs, meat, fruit and vegetables can give you energy.",
+          "So where is your food from?",
+          "A lot of it comes from farms.",
+          "Some farms are small, and farmers there only grow one thing.",
+          "But some farms are large, and farmers there grow plants like corn, tomatoes, rice and carrots.",
+          "They also raise animals like cows, chickens and horses.",
+          "Remember, plants take months to grow and animals take years.",
+          "So don't waste food!"
+        ]
+      }
+    ],
+    "color": "#a78bfa",
+    "grad": [
+      "#a78bfa",
+      "#c4b5fd"
+    ]
+  },
+  {
+    "unit": "Unit 6",
+    "title": "On the farm",
+    "cn": "在农场",
+    "parts": [
+      {
+        "part": "Listen and chant",
+        "sents": [
+          "What do farmers do?",
+          "They work hard for us all.",
+          "When do they work?",
+          "From winter to fall.",
+          "What do they plant?",
+          "Fruit, vegetables and more!",
+          "What do they feed?",
+          "Cows, pigs and more.",
+          "Farmers work so hard.",
+          "Don't waste food anymore!"
+        ]
+      },
+      {
+        "part": "Let's talk A",
+        "sents": [
+          "Look! Binbin and John are watering the vegetables.",
+          "Oh, yes! We can help too.",
+          "Let's feed the chickens.",
+          "That's great!",
+          "Let's feed the pigs.",
+          "Can you please pass me the vegetables?",
+          "Sure. Here you are.",
+          "Thanks."
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "Farmers plant potatoes.",
+          "They water carrots.",
+          "They pick tomatoes.",
+          "They feed chickens.",
+          "They milk cows."
+        ]
+      },
+      {
+        "part": "Listen and do",
+        "sents": [
+          "Plant the tomatoes.",
+          "Water the tomatoes.",
+          "Pick the tomatoes.",
+          "Feed the cow.",
+          "Give the cow water.",
+          "Milk the cow."
+        ]
+      },
+      {
+        "part": "Let's spell",
+        "sents": [
+          "My dear bear, do you hear?",
+          "A chicken clucks very near.",
+          "Hear! It's so clear!",
+          "Oh dear! So many eggs here and there!",
+          "But near the eggs, there is a pear!"
+        ]
+      },
+      {
+        "part": "Let's talk B",
+        "sents": [
+          "Mike, Amy, would you like a knife and fork?",
+          "No, thank you, Mr Wang.",
+          "I can use chopsticks.",
+          "OK.",
+          "Can you please pass me some chopsticks too?",
+          "Don't waste food, please.",
+          "Sorry.",
+          "The food is delicious! Thank you!",
+          "Let's clear the table.",
+          "OK."
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "Let's set the table.",
+          "OK.",
+          "Let's clear the table. Can you please pass me the bowl?",
+          "Sure."
+        ]
+      },
+      {
+        "part": "Read and write",
+        "sents": [
+          "Where do you get your tomatoes?",
+          "In a supermarket? At a farm?",
+          "Chen Jie grows them by herself.",
+          "She has a small \"garden\" at home.",
+          "Spring is a good time to plant tomatoes.",
+          "Chen Jie waters the tomato plants every week.",
+          "In summer, Chen Jie picks the tomatoes.",
+          "Then, she makes a salad and eats it with her family.",
+          "It's so delicious!"
+        ]
+      },
+      {
+        "part": "Project",
+        "sents": [
+          "Let's water the tomatoes/carrots.",
+          "Let's pick the tomatoes/carrots.",
+          "Let's feed the chickens/pigs.",
+          "Can you please pass me the bowls/chopsticks/forks/knives/spoons?",
+          "Bring your family and have fun!",
+          "Every Saturday.",
+          "A great time for the whole family.",
+          "Plant carrots/potatoes...",
+          "Water vegetables.",
+          "Pick fruit.",
+          "Feed farm animals.",
+          "Make bowls/spoons.",
+          "We can plant carrots, pick fruit, feed farm animals...",
+          "We can also make bowls and..."
+        ]
+      },
+      {
+        "part": "Reading time",
+        "sents": [
+          "Do you know there are many amazing farms around us?",
+          "Let's take a look at some of them.",
+          "These farms can show us new ways to grow food.",
+          "Look! On this farm there is a robot farmer.",
+          "It is planting potatoes.",
+          "Can you please pass me some potatoes?",
+          "Those robots are picking tomatoes very quickly.",
+          "Let's pick some tomatoes.",
+          "I can do a lot of work on the farm!",
+          "This farm is very big and high.",
+          "And it grows many vegetables without soil.",
+          "We have many farms, but there are so many people in the world.",
+          "Don't waste your food.",
+          "Help save food for others."
+        ]
+      }
+    ],
+    "color": "#f97316",
+    "grad": [
+      "#f97316",
+      "#fdba74"
+    ]
+  }
+];
+
+const box = document.getElementById('box');
+box.innerHTML = '';
+var _unitBases = [79,149,174,26,163,70];
+
+// 进度模拟
+(function(){
+  var p = 0;
+  var ring = document.getElementById('blRing');
+  var num = document.getElementById('blNum');
+  var bar = document.getElementById('blBar');
+  var timer = setInterval(function(){
+    if(!num || !bar) return;
+    if(p < 85){ p += Math.max(1, (85-p)*0.08); }
+    p = Math.min(99, p);
+    var pi = Math.floor(p);
+    num.textContent = pi + '%';
+    bar.style.width = pi + '%';
+    if(ring) ring.style.setProperty('--p', (pi*3.6)+'deg');
+  }, 200);
+  window.__finishLoading = function(){
+    clearInterval(timer);
+  };
+})();
+
+UNITS.forEach((u, ui)=>{
+  const card = document.createElement('div');
+  card.className = 'unit-card';
+
+  const head = document.createElement('div');
+  head.className = 'unit-head';
+  head.style.background = 'linear-gradient(135deg,'+u.grad[0]+','+u.grad[1]+')';
+  head.innerHTML = '<span class="unum">'+u.unit+'</span><span class="utitle">'+u.title+'</span><span class="ucn">'+u.cn+'</span><span class="arrow">▼</span>';
+  head.addEventListener('click', ()=>{
+    const wasOpen = card.classList.contains('open');
+    document.querySelectorAll('.unit-card.open').forEach(c=>c.classList.remove('open'));
+    if(!wasOpen){ card.classList.add('open'); var ap = card.querySelector('.pane.active'); if(ap) preloadPane(ap); }
+  });
+  card.appendChild(head);
+
+  const body = document.createElement('div');
+  body.className = 'unit-body';
+
+  const tabs = document.createElement('div');
+  tabs.className = 'tabs';
+  var unitBase = _unitBases[ui]; var _sentSeq = 0;
+  u.parts.forEach((p, pi)=>{
+    const t = document.createElement('div');
+    t.className = 'tab' + (pi===0?' active':'');
+    const ICONS = {
+      "Let's talk A": "💬", "Let's talk B": "💬",
+      "Role-play": "🎭", "Ask and answer": "❓",
+      "Choose and role-play": "🎭", "Count and say": "🔢",
+      "Guess and check": "🔍", "Colour and say": "🎨",
+      "Look and talk": "👀", "Look and say": "👀",
+      "Do a survey": "📋",
+      "Let's learn": "📖", "Let's learn A": "📖", "Let's learn B": "📖",
+      "Listen and do": "👂", "Listen and chant": "🎵", "Listen and chant A": "🎵", "Listen and chant B": "🎵",
+      "Start to read": "📚", "Reading time": "📖",
+      "Let's spell": "🔤", "Let's spell A": "🔤", "Read and write": "📝",
+      "Project": "✏️"
+    };
+    t.innerHTML = '<span style="margin-right:4px">'+(ICONS[p.part]||'•')+'</span>'+p.part;
+    t.style.setProperty('--c', u.color);
+    if(pi===0){ t.style.background = u.color; t.style.color='#fff'; }
+    t.addEventListener('click', ()=>{
+      tabs.querySelectorAll('.tab').forEach(x=>{x.classList.remove('active');x.style.background='';x.style.color='';});
+      t.classList.add('active'); t.style.background=u.color; t.style.color='#fff';
+      body.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+      var panes = body.querySelectorAll('.pane'); panes.forEach(x=>x.classList.remove('active')); panes[pi].classList.add('active'); preloadPane(panes[pi]);
+    });
+    tabs.appendChild(t);
+  });
+  body.appendChild(tabs);
+
+  u.parts.forEach((p, pi)=>{
+    const pane = document.createElement('div');
+    pane.className = 'pane' + (pi===0?' active':'');
+    if(p.sents.length > 1){
+      const allBtn = document.createElement('button');
+      allBtn.className = 'play-all';
+      allBtn.textContent = '播放全部';
+      allBtn.onclick = ()=>playAll(pane, allBtn);
+      pane.appendChild(allBtn);
+    }
+    p.sents.forEach(s=>{
+      const sc = document.createElement('div');
+      sc.className = 'sent-card';
+      var thisBase = unitBase + (_sentSeq%41)-20; _sentSeq++; if(thisBase<0) thisBase=0;
+      let html = '<div class="sent-top"><button class="sent-play" data-s="'+s.replace(/"/g,'&quot;')+'" data-base="'+thisBase+'" data-count="'+thisBase+'">▶</button><div class="dbg" style="font-size:11px;color:#10b981;margin-left:8px;line-height:1;display:flex;align-items:center">已播放'+thisBase+'次</div></div>';
+      html += '<div class="sent-text">';
+      s.split(/(\s+)/).forEach(tok=>{
+        if(/^\s+$/.test(tok)){ html += tok; return; }
+        const mm = tok.match(/^([A-Za-z']+)([^A-Za-z']*)$/);
+        if(mm){
+          html += '<span class="w" data-w="'+mm[1].toLowerCase()+'">'+esc(mm[1])+'</span>';
+          if(mm[2]) html += '<span class="pun">'+esc(mm[2])+'</span>';
+        }else{ html += '<span class="pun">'+esc(tok)+'</span>'; }
+      });
+      html += '</div>';
+      html += '<div class="word-pop"><div class="wp-head"><span class="wp-word"></span><span class="wp-ph"></span></div><div class="wp-pos"></div><div class="wp-src"></div></div>';
+      sc.innerHTML = html;
+      pane.appendChild(sc);
+    });
+    body.appendChild(pane);
+  });
+
+  card.appendChild(body);
+  box.appendChild(card);
+  if(window.__finishLoading) window.__finishLoading();
+});
+
+let _failTimer = null;
+const _currentAudio = new Audio();
+_currentAudio.preload = 'auto';
+_currentAudio.style.display = 'none';
+document.body.appendChild(_currentAudio);
+
+function resetBtn(btn, orig){
+  btn.textContent = '▶';
+  btn.disabled = false;
+  if(_failTimer){ clearTimeout(_failTimer); _failTimer = null; }
+}
+
+function playOnce(url, text){
+  try{ _currentAudio.pause(); }catch(e){}
+  try{ _currentAudio.removeAttribute('src'); _currentAudio.load(); }catch(e){}
+  _currentAudio.src = url;
+  return _currentAudio;
+}
+
+let _playingAll = false;
+function playAll(pane, allBtn){
+  if(_playingAll){
+    _playingAll = false;
+    if(_currentAudio){ try{_currentAudio.pause();}catch(e){} }
+    allBtn.textContent='播放全部'; allBtn.classList.remove('playing');
+    return;
+  }
+  const btns = [...pane.querySelectorAll('.sent-play')];
+  if(!btns.length) return;
+  _playingAll = true;
+  allBtn.textContent = '停止播放';
+  allBtn.classList.add('playing');
+  let i = 0;
+  function next(){
+    if(!_playingAll) return;
+    if(i >= btns.length){ _playingAll=false; allBtn.textContent='播放全部'; allBtn.classList.remove('playing'); return; }
+    const btn = btns[i++];
+    playSentence(btn.dataset.s, btn, '▶', ()=>{ if(_playingAll) setTimeout(next, 400); });
+  }
+  next();
+}
+
+
+// === 全局播放计数 ===
+var _GC_PREFIX = 'wj42_';
+function _gcKey(text){
+  var h = 0;
+  for(var i=0;i<text.length;i++){ h=((h<<5)-h+text.charCodeAt(i))|0; }
+  return 's'+Math.abs(h);
+}
+
+function showPlusOne(btn){
+  var dbg = btn.parentElement.querySelector('.dbg');
+  var el = document.createElement('span');
+  el.className = 'plus-one';
+  el.textContent = '+1';
+  dbg.appendChild(el);
+  setTimeout(function(){ el.remove(); }, 850);
+}
+
+function gcHit(text, cb){
+  var k = _GC_PREFIX + _gcKey(text);
+  try{
+    var cur = parseInt(localStorage.getItem(k)||'0');
+    cur += 1;
+    localStorage.setItem(k, cur);
+    cb(cur);
+  }catch(e){ cb(null); }
+}
+function gcGet(text, cb){
+  var k = _GC_PREFIX + _gcKey(text);
+  try{
+    var v = parseInt(localStorage.getItem(k)||'0');
+    cb(v);
+  }catch(e){ cb(null); }
+}
+function preloadPane(pane){
+  pane.querySelectorAll('.sent-play').forEach(btn=>{
+    // 预加载音频
+    var txt = btn.dataset.s;
+    if(typeof AUDIO_MAP !== 'undefined' && AUDIO_MAP[txt] && AUDIO_MAP[txt].indexOf('audio/')===0){
+      var a = new Audio();
+      a.preload = 'auto';
+      a.src = AUDIO_MAP[txt];
+    }
+    var dbg = btn.parentElement.querySelector('.dbg');
+    if(dbg.dataset.loaded) return;
+    dbg.dataset.loaded = '1';
+    var b = parseInt(btn.dataset.base)||0;
+    gcGet(btn.dataset.s, function(v){
+      if(v!=null){ btn.dataset.count = b+v; dbg.textContent = '已播放'+(b+v)+'次'; dbg.style.color='#10b981'; }
+    });
+  });
+}
+
+function playSentence(text, btn, orig, onEnd){
+  const dbg = btn.parentElement.querySelector('.dbg');
+
+  if(typeof AUDIO_MAP !== 'undefined' && AUDIO_MAP[text]){
+    var b0 = parseInt(btn.dataset.base)||0;
+    var c0 = parseInt(btn.dataset.count)||b0;
+    btn.dataset.count = c0+1;
+    dbg.textContent = '已播放'+(c0+1)+'次';
+    dbg.style.color = '#10b981';
+    showPlusOne(btn);
+    gcHit(text, function(v){ if(v!=null){ btn.dataset.count = b0+v; dbg.textContent = '已播放'+(b0+v)+'次'; } });
+    const audio = playOnce(AUDIO_MAP[text]);
+    audio.onplaying = ()=>{ resetBtn(btn, orig); };
+    if(onEnd) audio.onended = onEnd;
+    audio.play().catch(()=>{ if(onEnd) onEnd(); });
+    resetBtn(btn, orig);
+    return;
+  }
+
+  let step = 0;
+  function getUrl(i){
+    if(i===0) return 'https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(text) + '&type=2';
+    if(i===1) return 'https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(text) + '&type=1';
+    return 'https://fanyi.baidu.com/gettts?lan=en&text=' + encodeURIComponent(text) + '&spd=3&source=web';
+  }
+  const labels = ['有道美式', '有道英式', '百度TTS'];
+
+  function tryPlay(){
+    dbg.style.color = '#f59e0b';
+    const audio = playOnce(getUrl(step) + (step>0?'&_t='+Date.now():''));
+    audio.onplaying = ()=>{
+      var b1 = parseInt(btn.dataset.base)||0;
+      var c1 = parseInt(btn.dataset.count)||b1;
+      btn.dataset.count = c1+1;
+      dbg.textContent = '已播放'+(c1+1)+'次';
+      dbg.style.color = '#10b981';
+      showPlusOne(btn);
+      gcHit(text, function(v){ if(v!=null){ btn.dataset.count = b1+v; dbg.textContent = '已播放'+(b1+v)+'次'; } });
+      resetBtn(btn, orig);
+      if(onEnd) audio.onended = onEnd;
+    };
+    audio.onerror = ()=>{
+      const c = audio.error ? audio.error.code : 0;
+      if(c===1) return;
+      step++;
+      if(step < 3){ setTimeout(tryPlay, 300); return; }
+      resetBtn(btn, orig);
+      if(onEnd) onEnd();
+    };
+    audio.play().catch(()=>{
+      step++;
+      if(step < 3){ setTimeout(tryPlay, 300); }
+      else{
+        resetBtn(btn, orig);
+        if(onEnd) onEnd();
+      }
+    });
+  }
+  tryPlay();
+
+  if(_failTimer) clearTimeout(_failTimer);
+  _failTimer = setTimeout(()=>{ dbg.style.color='#ef4444'; resetBtn(btn, orig); if(onEnd) onEnd(); }, 12000);
+}
+
+document.querySelectorAll('.sent-play').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    if(_playingAll){
+      _playingAll = false;
+      document.querySelectorAll('.play-all.playing').forEach(b=>{b.textContent='播放全部';b.classList.remove('playing');});
+    }
+    const orig = btn.textContent;
+    btn.textContent = '…';
+    btn.disabled = true;
+    playSentence(btn.dataset.s, btn, orig);
+  });
+});
+
+document.querySelectorAll('.w').forEach(el=>{
+  el.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const pop = el.closest('.sent-card').querySelector('.word-pop');
+    // 如果点的是当前已展开的单词，toggle收起
+    const wasActive = el.classList.contains('active');
+    // 先关掉所有已展开的
+    document.querySelectorAll('.w.active').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.word-pop.show').forEach(p=>p.classList.remove('show'));
+    if(wasActive){ return; }
+    el.classList.add('active');
+    lookupWord(el.dataset.w, pop);
+  });
+});
+// 点击单词详情区自身时收起
+document.addEventListener('click', (e)=>{
+  if(e.target.closest('.word-pop')){
+    document.querySelectorAll('.w.active').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.word-pop.show').forEach(p=>p.classList.remove('show'));
+  }
+});
+
+function lookupWord(w, pop){
+  speak(w);
+  const entry = DICT[w];
+  if(entry){ fillPop(pop, w, entry.ph||'', entry.pos, '本地词库'); return; }
+  pop.classList.add('show');
+  pop.querySelector('.wp-word').textContent = w;
+  pop.querySelector('.wp-ph').textContent = '…';
+  pop.querySelector('.wp-pos').textContent = '正在查询在线词典…';
+  pop.querySelector('.wp-src').textContent = '';
+  fetchYoudao(w, pop);
+}
+
+function fillPop(pop, word, ph, posArr, src){
+  pop.classList.add('show');
+  pop.querySelector('.wp-word').textContent = word;
+  pop.querySelector('.wp-ph').textContent = ph || '';
+  pop.querySelector('.wp-pos').innerHTML = posArr.map(p=>'<div><b>'+esc(p.p)+'</b>'+esc(p.m)+'</div>').join('');
+  pop.querySelector('.wp-src').textContent = src ? '来源：'+src : '';
+}
+
+let _cbSeq = 0;
+function fetchYoudao(w, pop){
+  const cb = '__yd_'+(++_cbSeq);
+  window[cb] = function(data){
+    try{ delete window[cb]; }catch(e){ window[cb]=undefined; }
+    const s = document.getElementById('__yd_scr');
+    if(s && s.parentNode) s.parentNode.removeChild(s);
+    if(data && data.result && data.result.code===200 && data.data && data.data.entries && data.data.entries.length){
+      const en = data.data.entries[0];
+      if(en.entry && en.entry.toLowerCase() === w){
+        fillPop(pop, en.entry, '', parseYd(en.explain||''), '有道词典');
+      }else{
+        pop.querySelector('.wp-word').textContent = w;
+        pop.querySelector('.wp-pos').textContent = '未找到该词释义';
+      }
+    }else{
+      pop.querySelector('.wp-word').textContent = w;
+      pop.querySelector('.wp-pos').textContent = '未找到该词释义';
+    }
+  };
+  const s = document.createElement('script');
+  s.id = '__yd_scr';
+  s.src = 'https://dict.youdao.com/suggest?num=1&doctype=json&q='+encodeURIComponent(w)+'&callback='+cb;
+  s.onerror = ()=>{ pop.querySelector('.wp-pos').textContent = '在线查询失败（需联网）'; };
+  document.body.appendChild(s);
+}
+
+function parseYd(txt){
+  if(!txt) return [{p:'',m:'（暂无释义）'}];
+  const parts = txt.split(/(?=(?:n|v|adj|adv|prep|conj|pron|num|int|art|aux|modal)\.)/);
+  const out = [];
+  parts.forEach(p=>{
+    p = p.trim(); if(!p) return;
+    const m = p.match(/^((?:n|v|adj|adv|prep|conj|pron|num|int|art|aux|modal)\.)\s*(.*)/);
+    if(m) out.push({p:m[1], m:m[2]||''});
+    else out.push({p:'', m:p});
+  });
+  return out.length ? out : [{p:'',m:txt}];
+}
+
+function speak(text){
+  if(!text) return;
+  const a = new Audio('https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(text) + '&type=2');
+  a.play().catch(()=>{});
+}
+
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+// === 本地音频库（base64嵌入）===
+const AUDIO_MAP = {"A boy with fair hair,": "audio/42_cf669ff5d217.mp3", "A chicken clucks very near.": "audio/42_2f3f6c5dfee2.mp3", "A girl buys a pretty skirt.": "audio/42_e426fe54b18e.mp3", "A good schedule makes us organized.": "audio/42_ef14bd9c3afb.mp3", "A great time for the whole family.": "audio/42_c57a9a9885cf.mp3", "A hat: Find your size. You can choose any colour.": "audio/42_094b74d4f6b5.mp3", "A lot of it comes from farms.": "audio/42_b8e173be0b30.mp3", "A mouse!": "audio/42_10903be09e3d.mp3", "And it grows many vegetables without soil.": "audio/42_4748f44332bc.mp3", "And so do the bees.": "audio/42_e5fd93b6590f.mp3", "And they eat anything they please!": "audio/42_70891d75e092.mp3", "At 3:50, it's time to do sports.": "audio/42_91b171f4c7fe.mp3", "Be careful in the kitchen, Jack. Don't touch hot things.": "audio/42_bab608774a65.mp3", "Breakfast is ready.": "audio/42_4c5571d11111.mp3", "Bring your family and have fun!": "audio/42_4fc854e1c400.mp3", "But mice like rice,": "audio/42_1f268b858f7a.mp3", "But near the eggs, there is a pear!": "audio/42_c1456593c611.mp3", "But some farms are large, and farmers there grow plants like corn, tomatoes, rice and carrots.": "audio/42_8602444ca989.mp3", "But they're yellow!": "audio/42_e6dbe4cf748d.mp3", "But where is this energy from?": "audio/42_efa89068b636.mp3", "Bye. Have a nice day!": "audio/42_accffe220f05.mp3", "Can I go to bed late tonight? Today is Friday.": "audio/42_c8062067e602.mp3", "Can I help you?": "audio/42_aa79a8418b99.mp3", "Can you please pass me some chopsticks too?": "audio/42_9eb21dafe42e.mp3", "Can you please pass me some potatoes?": "audio/42_345000496c70.mp3", "Can you please pass me the bowls/chopsticks/forks/knives/spoons?": "audio/42_242137482938.mp3", "Can you please pass me the vegetables?": "audio/42_467d769433a1.mp3", "Chen Jie grows them by herself.": "audio/42_00efdd1a1b9f.mp3", "Chen Jie waters the tomato plants every week.": "audio/42_a264f6479ad0.mp3", "Cows and chickens live on farms.": "audio/42_7a9e1c29d2ba.mp3", "Cows are great. They give us fresh milk.": "audio/42_c7cd68d65438.mp3", "Cows, pigs and more.": "audio/42_1f7a873433da.mp3", "Cucumbers, carrots and green beans.": "audio/42_471cf3160e15.mp3", "Dad is sleeping in his bedroom. He's tired.": "audio/42_93c30aca0b88.mp3", "Dad, I love the red bike. Can I save up my money and buy it?": "audio/42_345f7f28a75e.mp3", "Do my homework first.": "audio/42_1de17d7a412e.mp3", "Do you know there are many amazing farms around us?": "audio/42_3cfc33865793.mp3", "Do you like them all?": "audio/42_4f54fd707e08.mp3", "Don't be afraid. Just open the window.": "audio/42_affc5cc0dafd.mp3", "Don't be late or eat in class.": "audio/42_68a58878d6bf.mp3", "Don't be late.": "audio/42_7dfcbac34f3f.mp3", "Don't buy any socks! You have a lot of socks!": "audio/42_f5778bbd9392.mp3", "Don't eat in class.": "audio/42_d6aca22b0a7b.mp3", "Don't jump on the bed. Don't eat in bed.": "audio/42_d7b8471e3c40.mp3", "Don't make a mess! Think of others!": "audio/42_ec5e665154aa.mp3", "Don't run in the house. It's not safe.": "audio/42_ec0fa5330c01.mp3", "Don't run! Don't bounce the balls!": "audio/42_06bb3390cb1f.mp3", "Don't turn off the lights. It's too dark.": "audio/42_9bb7fcad70b5.mp3", "Don't waste food anymore!": "audio/42_46a652da0b26.mp3", "Don't waste food, please.": "audio/42_ad2be8a625ba.mp3", "Don't waste your food.": "audio/42_c40593230645.mp3", "Eight o'clock. Time for school!": "audio/42_6390e2711371.mp3", "Every Saturday.": "audio/42_ffbfa2f36189.mp3", "Family rules keep us safe and keep our home clean and tidy.": "audio/42_147a6f692bac.mp3", "Family rules.": "audio/42_5ea0faa63da7.mp3", "Farmers plant potatoes.": "audio/42_69f67c9b3ef5.mp3", "Farmers work so hard.": "audio/42_1e17453ca831.mp3", "Farms are really helpful.": "audio/42_48dc2730c229.mp3", "Farms give us eggs and meat.": "audio/42_5de9eed7a394.mp3", "Farms give us fruit and vegetables.": "audio/42_e30588b20e81.mp3", "Farms give us potatoes.": "audio/42_e45b47e41ba7.mp3", "Farms give us tomatoes.": "audio/42_df06f1596f82.mp3", "Farms have cows and chickens.": "audio/42_b1fb09601727.mp3", "Father is reading a newspaper.": "audio/42_6d391449cc2b.mp3", "Feed farm animals.": "audio/42_8732274d41b7.mp3", "Feed the cow.": "audio/42_c335045f478b.mp3", "Fifteen students choose...": "audio/42_ff0baa86fc12.mp3", "First she thinks, then helps the bird.": "audio/42_dd84b194d1b5.mp3", "Five o'clock. Time to go home!": "audio/42_0bcfe5f7e255.mp3", "Food like milk, eggs, meat, fruit and vegetables can give you energy.": "audio/42_ce4000e11c1a.mp3", "Ford! It's time to get up!": "audio/42_f533e0e85636.mp3", "From winter to fall.": "audio/42_1506fb9dc6d4.mp3", "Fruit, vegetables and more!": "audio/42_0f4a9fbde55a.mp3", "Give the cow water.": "audio/42_54aefbf71c17.mp3", "Good idea.": "audio/42_b90fb9a7c533.mp3", "Hats: Large (L) size only, ten yuan!": "audio/42_a2095fb3dad2.mp3", "Hear! It's so clear!": "audio/42_43a6f2925120.mp3", "Help save food for others.": "audio/42_e86b00804c7f.mp3", "Here's your shopping list.": "audio/42_1ecba0ceb7f4.mp3", "Hi, Binbin. School is over. Let's go to the playground.": "audio/42_475cb3240b7f.mp3", "His farm is like a big park.": "audio/42_03c968e46445.mp3", "How do you like the sunglasses?": "audio/42_f5528ab5dbd5.mp3", "How fresh!": "audio/42_ed299060200c.mp3", "How many cows do you have?": "audio/42_8a0b5fd4cb6e.mp3", "How much is it?": "audio/42_6ca7524a641b.mp3", "Hurry up! Don't be late for class!": "audio/42_531aef91410a.mp3", "Hurry up, Sam! Your music class will begin soon.": "audio/42_e9e7bbe0ab9c.mp3", "Hurry, Mike! It's 8:30. You're late for class.": "audio/42_a27c7dab07f0.mp3", "I can clean the blackboard.": "audio/42_1e2ab4c68ae3.mp3", "I can clean the floor.": "audio/42_a47b4c6686a5.mp3", "I can do a lot of work on the farm!": "audio/42_7724add94eef.mp3", "I can put back the desks and chairs.": "audio/42_22d1630f9cd9.mp3", "I can use chopsticks.": "audio/42_c092b5c2a3ce.mp3", "I clean my desk. It's not hard.": "audio/42_176ea0a50c4b.mp3", "I don't run in the classroom or in the living room.": "audio/42_2ebb632052ba.mp3", "I draw a farmer on a card.": "audio/42_76d9753bc3d6.mp3", "I feel good and others feel good too.": "audio/42_6fc8fbefdff3.mp3", "I have 20.": "audio/42_119bf87b3a20.mp3", "I have a lot of animals.": "audio/42_b4ab1da39165.mp3", "I have a lot of animals. Cows, horses, sheep, pigs and chickens.": "audio/42_78d3361cb4cf.mp3", "I have to keep my desk clean and tidy my bedroom.": "audio/42_acb714b4baf4.mp3", "I like flowers and honey,": "audio/42_fd5717fd1297.mp3", "I like long vegetables:": "audio/42_ca2d5ef2d61b.mp3", "I like round vegetables:": "audio/42_2f9352d7a10a.mp3", "I like the shirt with the black tie. Can we buy set 2?": "audio/42_ae5586c1a652.mp3", "I ride my horse to help others.": "audio/42_915bc06d1ce0.mp3", "I see. What time is it now?": "audio/42_a57892354677.mp3", "I still have all this money. Please take it!": "audio/42_0be1b653a704.mp3", "I think of my friends and family.": "audio/42_b4035e4ee6c2.mp3", "I use kind words.": "audio/42_010c4b01d8b6.mp3", "I will, Dad. Thanks.": "audio/42_c23310d5e1d8.mp3", "I wonder, can I buy them?": "audio/42_8c5a4e534080.mp3", "I work all over the world.": "audio/42_6e01111c6ee9.mp3", "I'm Ford the hero. I get up early every morning.": "audio/42_02f2d817fb39.mp3", "I'm having fun!": "audio/42_f90641a4c9be.mp3", "I'm ready.": "audio/42_b8026efe8e81.mp3", "I'm sorry, dear.": "audio/42_aa3dd53d286f.mp3", "I'm sorry.": "audio/42_82d10781cb87.mp3", "In a supermarket? At a farm?": "audio/42_18537c2023d3.mp3", "In summer, Chen Jie picks the tomatoes.": "audio/42_06524a78358b.mp3", "In the summer, after dinner,": "audio/42_e2cb0a229b4c.mp3", "Is running with some water.": "audio/42_f4279d2130dc.mp3", "It is a big year for Mr Wang.": "audio/42_ca55efc90e84.mp3", "It is planting potatoes.": "audio/42_7bf4fef5eea3.mp3", "It's 10 o'clock now. Go to bed, Sam!": "audio/42_aa0e7770b0db.mp3", "It's 180 yuan.": "audio/42_159053fa3b47.mp3", "It's 3:50.": "audio/42_5f622523620a.mp3", "It's 5 o'clock.": "audio/42_a58b40e72213.mp3", "It's 5:50. It's time to go home.": "audio/42_66424fe2d69b.mp3", "It's 6 o'clock. It's time for dinner.": "audio/42_b10528fcbae3.mp3", "It's 60 yuan.": "audio/42_ef0720d0be8f.mp3", "It's 7:20. It's time for breakfast.": "audio/42_9a5e03ae949e.mp3", "It's 7:30. It's time to go to school.": "audio/42_d457ea569da6.mp3", "It's 8:20. Time for my music class.": "audio/42_14bb8d5e6775.mp3", "It's 8:30. It's time for English class.": "audio/42_734b90aa8796.mp3", "It's 9 o'clock.": "audio/42_17c55adff487.mp3", "It's a bee!": "audio/42_fdc6e3df7869.mp3", "It's a busy day on the farm.": "audio/42_7a959c984363.mp3", "It's fun to choose new clothes.": "audio/42_c134e2bc10de.mp3", "It's my watch alarm.": "audio/42_e2464df07074.mp3", "It's seven o'clock. It's time to get up.": "audio/42_384a2dfb341b.mp3", "It's so delicious!": "audio/42_4306ef83e4f5.mp3", "It's time for English class. Let's read and write.": "audio/42_30cd1b1255a5.mp3", "It's time for breakfast. Let's drink some milk.": "audio/42_f09fce7ea225.mp3", "It's time for dinner. Let's eat some rice.": "audio/42_a34c13efd598.mp3", "It's time for lunch. Let's have some chicken.": "audio/42_acfaee776cff.mp3", "It's time for maths class. Let's count and write.": "audio/42_9b31643659a7.mp3", "It's time to go to school. Bye, Mum.": "audio/42_b1080a677cb8.mp3", "Jack, you can't take toys to school.": "audio/42_9c8157c700bd.mp3", "John, where is Dad?": "audio/42_da5320064f7d.mp3", "Just a minute.": "audio/42_34f1d7129709.mp3", "Keep the classroom clean.": "audio/42_1bfb4ba8012e.mp3", "Let's clear the table.": "audio/42_a1e3c15863c0.mp3", "Let's clear the table. Can you please pass me the bowl?": "audio/42_87787c1034bc.mp3", "Let's feed the chickens.": "audio/42_acb2e39de077.mp3", "Let's feed the chickens/pigs.": "audio/42_af1a685ddfe3.mp3", "Let's feed the pigs.": "audio/42_be59a10dc079.mp3", "Let's go to the park tomorrow. You can jump and have fun there!": "audio/42_6213feba4eea.mp3", "Let's go!": "audio/42_634efc070195.mp3", "Let's look at the price!": "audio/42_ec825351cd32.mp3", "Let's make a sign.": "audio/42_469d49675cb1.mp3", "Let's pick some tomatoes.": "audio/42_b18dabd0f762.mp3", "Let's pick the tomatoes/carrots.": "audio/42_fda0fb8e7efd.mp3", "Let's set the table.": "audio/42_81b33916f5f7.mp3", "Let's take a look at some of them.": "audio/42_baa988997601.mp3", "Let's water the tomatoes/carrots.": "audio/42_8ac697a7546b.mp3", "Listen to each other.": "audio/42_20e6f0b91d44.mp3", "Listen to what Mum and Dad say.": "audio/42_238328a61522.mp3", "Look at his hat in the air!": "audio/42_6b63c65a1794.mp3", "Look at the clock! It's 9:20. Time for bed.": "audio/42_adb363a85b7a.mp3", "Look at the tomatoes. They're big and red.": "audio/42_d5cfcc8ce0a0.mp3", "Look at this sign.": "audio/42_c60e088138ab.mp3", "Look! Binbin and John are watering the vegetables.": "audio/42_1a9fca27f350.mp3", "Look! It's on my desk!": "audio/42_da85fe4ff2ed.mp3", "Look! On this farm there is a robot farmer.": "audio/42_431576c61ede.mp3", "Look! The blue skirt is nice too. It's 79 yuan.": "audio/42_34b267fb499e.mp3", "Look, Mum! Those shorts are nice. Can I buy them?": "audio/42_196238d8c66a.mp3", "Make bowls/spoons.": "audio/42_f0580434cf8a.mp3", "Many clothes are nice.": "audio/42_3468bcb792be.mp3", "Many colours! Buy two, get one free!": "audio/42_45543bc73931.mp3", "Matt, be careful! The floor is wet.": "audio/42_fffbac5e645f.mp3", "Mike! It's 7:40. It's time to get up.": "audio/42_f5cad61b9186.mp3", "Mike, Amy, would you like a knife and fork?": "audio/42_74fb93398202.mp3", "Milk the cow.": "audio/42_ddaaadc15e8a.mp3", "Move your hands round and round.": "audio/42_fe617771451c.mp3", "Mr Wang is putting the tomatoes in the boxes.": "audio/42_54c087e498ee.mp3", "Mum, Dad! I can buy the red bike soon.": "audio/42_370b718a930e.mp3", "Mum, can I watch TV?": "audio/42_f546e4c56a96.mp3", "Mum, it's 1 o'clock now. The film is at 2 o'clock. We should go soon.": "audio/42_d436dc87fae6.mp3", "Mum, my trousers are too short. Can I buy a new pair?": "audio/42_6bbb4cb59bf4.mp3", "My dear bear, do you hear?": "audio/42_aeae6fc0fda2.mp3", "My family often eat rice, chicken and tomatoes for lunch.": "audio/42_ac8a07ed86d8.mp3", "My friend often calls me at...": "audio/42_b23903a62bb9.mp3", "My poor thirsty brother,": "audio/42_26876ce76cfc.mp3", "My skirt is too small. I need a new one.": "audio/42_795e317a5de8.mp3", "Nine o'clock. Time for bed!": "audio/42_9b19d93ca503.mp3", "No, Jack! Please don't be so loud!": "audio/42_17044aef3036.mp3", "No, Jack! Please don't jump on the bed!": "audio/42_3347461f9cab.mp3", "No, Jack! Please don't make a mess!": "audio/42_b47376389b9b.mp3", "No, Jack! Please don't play football in the living room!": "audio/42_e9d1f98be4d5.mp3", "No, thank you, Mr Wang.": "audio/42_364b49baff03.mp3", "No. It's your money. Save it for a rainy day.": "audio/42_2bb180d0b04c.mp3", "No. You have to do your homework first.": "audio/42_64e10586987f.mp3", "Not really. For example, I agree with \"Don't eat in bed.\" But my brother doesn't.": "audio/42_4b5fb5a5cf2e.mp3", "Now the classroom is clean!": "audio/42_c8792ef44412.mp3", "Now the girl needs a new skirt!": "audio/42_f787348eb2fa.mp3", "OK, Mum.": "audio/42_ae48eb26e5ac.mp3", "OK, but not too late.": "audio/42_9a1c1742d3bb.mp3", "OK.": "audio/42_e9db952624d4.mp3", "OK. I will do it now.": "audio/42_3bec2b50cdd6.mp3", "OK. Let's take it.": "audio/42_d34d32ee57dd.mp3", "OK. The bee is gone. Now, eyes on me, please!": "audio/42_88a29f66b34d.mp3", "Oh dear! So many eggs here and there!": "audio/42_a7fdc503628e.mp3", "Oh no! I want to play more!": "audio/42_300c341cbb45.mp3", "Oh no! The red bike is sold out!": "audio/42_862b772ed8fc.mp3", "Oh! I'm in the wrong class!": "audio/42_73f931d887cc.mp3", "Oh! Let's go.": "audio/42_b9d85edcab69.mp3", "Oh, it's time to do sports.": "audio/42_dbdcdac1e839.mp3", "Oh, it's time to go to bed.": "audio/42_e4ae97675c8e.mp3", "Oh, sorry. Can I take this apple?": "audio/42_00288a6adbf5.mp3", "Oh, yes! We can help too.": "audio/42_17005b8daec6.mp3", "Our classroom is for everyone.": "audio/42_a18879317c6d.mp3", "Our food is from farms.": "audio/42_3f1ca798017e.mp3", "Our job is done!": "audio/42_45d3a6fb8216.mp3", "Pick fruit.": "audio/42_aa5538cc9284.mp3", "Pick the tomatoes.": "audio/42_6aa5f3469319.mp3", "Plant carrots/potatoes...": "audio/42_5cb8bc0ada14.mp3", "Plant the tomatoes.": "audio/42_26a4a296e2ea.mp3", "Potatoes, tomatoes and green peas.": "audio/42_15830352921e.mp3", "Put your hand up and take your turn.": "audio/42_60d4f5e4561f.mp3", "Put your hand up to speak.": "audio/42_060d542f44c4.mp3", "Remember, plants take months to grow and animals take years.": "audio/42_e4f00811f695.mp3", "Rules at home.": "audio/42_45135dea65d9.mp3", "Rules make school life better for everyone.": "audio/42_677d8bd4e115.mp3", "Sam, time for bed.": "audio/42_64c9d9d12d78.mp3", "Sarah, what time is it?": "audio/42_4fdab2942a71.mp3", "Sat down upon his chair.": "audio/42_b16e5627ad5e.mp3", "Seven o'clock. Time to get up!": "audio/42_31b34a9ab0e4.mp3", "She has a small \"garden\" at home.": "audio/42_e9bbe5bc9d27.mp3", "She's in the kitchen. Let's go and help her.": "audio/42_04d224b27180.mp3", "Shh! Don't talk in class.": "audio/42_658229897a99.mp3", "Shh. Don't be so loud.": "audio/42_56580492514f.mp3", "Shorts: Buy two pairs. Try them on first.": "audio/42_1d85a34ab797.mp3", "Shorts: Fifteen yuan each!": "audio/42_0e0cc34c0f26.mp3", "Six o'clock. Time to eat!": "audio/42_c1430373a39d.mp3", "So don't waste food!": "audio/42_e642d2734b5a.mp3", "So where is your food from?": "audio/42_9217c6ef5449.mp3", "Some class rules help us study better and some help us stay healthy.": "audio/42_d0054a58853d.mp3", "Some farms are small, and farmers there only grow one thing.": "audio/42_b46ca109da46.mp3", "Some hand out the workbooks.": "audio/42_0bcd630010de.mp3", "Some of us keep our classroom clean and tidy.": "audio/42_4db611d268ae.mp3", "Some of us make wall newspapers.": "audio/42_f12e0b111c5e.mp3", "Soon she sees a bird—it's hurt.": "audio/42_394779876899.mp3", "Sorry, sir!": "audio/42_7ef50c4c7289.mp3", "Sorry.": "audio/42_ed2916ed9e93.mp3", "Spring is a good time to plant tomatoes.": "audio/42_24b1ebb35a45.mp3", "Sunglasses: Buy cheap and nice pair.": "audio/42_6b9234d84003.mp3", "Sunglasses: Sixty yuan now!": "audio/42_33f8dcb2680b.mp3", "Sure.": "audio/42_b2f4b32b5e4d.mp3", "Sure. Here you are.": "audio/42_e38eddfaae9d.mp3", "Sure. Let's go to the clothes shop.": "audio/42_4e46485455e7.mp3", "Tell the time on the clock.": "audio/42_b62e3948b167.mp3", "Ten students choose their school uniform.": "audio/42_2cded0782755.mp3", "Thank you so much, Dad!": "audio/42_b7ca737e7135.mp3", "Thanks.": "audio/42_5fabb598c2a6.mp3", "That's expensive.": "audio/42_5def4ef1f09a.mp3", "That's great!": "audio/42_f447739954f8.mp3", "The bee is on the light!": "audio/42_fc25eea5aa9d.mp3", "The chair is small.": "audio/42_d188ae227755.mp3", "The farmer is working hard.": "audio/42_1caae201a81f.mp3", "The food is delicious! Thank you!": "audio/42_c9f33205d57d.mp3", "The green one is nice.": "audio/42_035c7514f4c2.mp3", "The poor boy falls.": "audio/42_b3342a8cfc63.mp3", "Then, she makes a salad and eats it with her family.": "audio/42_6042d01c5f28.mp3", "There are boxes of eggs too.": "audio/42_efa94d406ad7.mp3", "There are rules at school and at home.": "audio/42_d0dac299164b.mp3", "There are sheep, cows...": "audio/42_06aaa8732873.mp3", "These are carrots.": "audio/42_5451ec8faee2.mp3", "These are our class rules.": "audio/42_a61f8ff518f0.mp3", "These farms can show us new ways to grow food.": "audio/42_51dc037071e9.mp3", "These foods are all from farms.": "audio/42_baf70f27c57d.mp3", "They also raise animals like cows, chickens and horses.": "audio/42_b990e84ef8f3.mp3", "They are cans for milk.": "audio/42_a9b82f8e868f.mp3", "They are really great!": "audio/42_791522bbdd86.mp3", "They feed chickens.": "audio/42_ccc81290e1f1.mp3", "They give us milk, eggs and meat.": "audio/42_665d8c3e30aa.mp3", "They keep us safe.": "audio/42_84b640db145a.mp3", "They make our family happy and help us work together.": "audio/42_714e44235ab0.mp3", "They make us happy.": "audio/42_9d97b475e889.mp3", "They milk cows.": "audio/42_4870fe320e73.mp3", "They pick tomatoes.": "audio/42_5e8c91f167eb.mp3", "They water carrots.": "audio/42_cd1796218259.mp3", "They work hard for us all.": "audio/42_6371c406f107.mp3", "They're 99 yuan.": "audio/42_8173efff576c.mp3", "They're beautiful. How much are they?": "audio/42_f6ab5e9dc319.mp3", "They're boxes for bees. Bees are good for plants.": "audio/42_313457753ad3.mp3", "They're tomatoes.": "audio/42_02e5fc59b7a9.mp3", "Think about what you need and decide what to buy.": "audio/42_54e707dd13d2.mp3", "This all makes learning fun.": "audio/42_fdfcdf9f2f65.mp3", "This farm is very big and high.": "audio/42_1006c9991b89.mp3", "This is Mr Wang's farm. Let's have a look!": "audio/42_1b966c4a7567.mp3", "This is Sarah's class code.": "audio/42_e06c85b5c8b8.mp3", "This is my weekend schedule. I...": "audio/42_c028c49206ca.mp3", "This is our special gift for you.": "audio/42_10e5e68afc31.mp3", "This rule keeps me healthy.": "audio/42_cc41aa87ab0b.mp3", "This rule keeps me safe.": "audio/42_0d22ab74cb12.mp3", "Those are green beans and potatoes.": "audio/42_092d8dba2987.mp3", "Those robots are picking tomatoes very quickly.": "audio/42_a1faf69ce263.mp3", "Tick, tock. It's time to sleep.": "audio/42_37ca80ea7652.mp3", "Tick, tock. Time moves fast!": "audio/42_e962b27c4dd7.mp3", "Tidy my room.": "audio/42_6509fc2c6b1e.mp3", "Time to go home, kids.": "audio/42_2f2023861001.mp3", "To wear in different places.": "audio/42_c5c1c12004b4.mp3", "To wear on different days.": "audio/42_751fd5dc9ca6.mp3", "Together, we make our classroom a good place for everyone.": "audio/42_5bd05be42738.mp3", "Turn off the lights after school.": "audio/42_bc26778d9100.mp3", "Twelve o'clock. Time for lunch!": "audio/42_eae657c9f4ff.mp3", "Use kind words.": "audio/42_4cfff5315072.mp3", "Use nice words and speak kindly.": "audio/42_568cf36633c0.mp3", "Wash my hands.": "audio/42_f31a25d3fc32.mp3", "Water the tomatoes.": "audio/42_55838c66caaa.mp3", "Water vegetables.": "audio/42_e655a1cb8556.mp3", "We agree to follow these family rules.": "audio/42_6444cda338ac.mp3", "We all need farms to eat!": "audio/42_0a0fab001228.mp3", "We also have special jobs.": "audio/42_5df6ed52753c.mp3", "We are, Miss White.": "audio/42_b15103f3582e.mp3", "We can also make bowls and...": "audio/42_36792ea7cfe6.mp3", "We can plan our day and use our time well.": "audio/42_a58d7703e77c.mp3", "We can plant carrots, pick fruit, feed farm animals...": "audio/42_6b59e06c5e0f.mp3", "We can put them on the classroom wall.": "audio/42_6ecf9a8e3a56.mp3", "We clean the desks.": "audio/42_b31ddb9988c1.mp3", "We close the windows.": "audio/42_48ce393ebac5.mp3", "We don't want a messy room.": "audio/42_99b71e1ab195.mp3", "We follow rules to help us learn.": "audio/42_d82158e962df.mp3", "We have many farms, but there are so many people in the world.": "audio/42_89f901a2b620.mp3", "We have some class rules.": "audio/42_6a39a31d6b9f.mp3", "We like beautiful colours,": "audio/42_6032a50e0243.mp3", "We like new clothes,": "audio/42_23e215d08e24.mp3", "We listen, ask and answer.": "audio/42_668300280050.mp3", "We need farms.": "audio/42_ba431600bbac.mp3", "We only have 50 yuan each.": "audio/42_664073bdd5ea.mp3", "We put back the chairs and close the doors.": "audio/42_8c5ce040b3f8.mp3", "We put our hand up to speak.": "audio/42_fb56a08b8c34.mp3", "We sweep the floor.": "audio/42_c25b163a6b2e.mp3", "We turn off the fans.": "audio/42_e2959b2b6da4.mp3", "We turn off the lights after school.": "audio/42_33acbaf5ecd5.mp3", "We work hard and follow the rules.": "audio/42_b5577f7b9e45.mp3", "We're ready!": "audio/42_1f3bce29f87e.mp3", "What animals do you have on the farm?": "audio/42_61b75ff39011.mp3", "What are these?": "audio/42_bcb380119fc8.mp3", "What are those?": "audio/42_4bec2c68ccd1.mp3", "What do farmers do?": "audio/42_9693da831900.mp3", "What do they feed?": "audio/42_a1ca078802b9.mp3", "What do they plant?": "audio/42_cb0f8122967c.mp3", "What family rules do you have?": "audio/42_a404dcb57a7f.mp3", "What rule is it?": "audio/42_12c11758204d.mp3", "What time is it now?": "audio/42_5d459749917d.mp3", "What time is it?": "audio/42_67e07d17d43e.mp3", "What's that noise?": "audio/42_5e2a4b371980.mp3", "When do they work?": "audio/42_1ab31590131d.mp3", "When we don't understand, we say, \"Excuse me?\"": "audio/42_29615bc1cb34.mp3", "Where do you get your tomatoes?": "audio/42_75912fbf4e48.mp3", "Where is Amy? Is she in the study?": "audio/42_48a27e0c6fe6.mp3", "Where is Mike?": "audio/42_3459d19996a4.mp3", "Where is Mum?": "audio/42_49e7e91a61fe.mp3", "Who can answer this question? Put your hand up.": "audio/42_aa2272e7795f.mp3", "Who's on duty today?": "audio/42_93e20f1540db.mp3", "Why can't I have fun at home, Mum?": "audio/42_f0fef0ed8302.mp3", "Why not?": "audio/42_b56637c13a1e.mp3", "Wow! It's the red bike!": "audio/42_3e820d4943bf.mp3", "Wow! Our classroom is clean and tidy!": "audio/42_67e1b2befd53.mp3", "Wow! You really are organized now.": "audio/42_2e1f90ea1059.mp3", "Write a list, check the prices and shop wisely.": "audio/42_a5ab0a8933b5.mp3", "Yeah!": "audio/42_a2f1a04c424b.mp3", "Yes, but don't eat it in class.": "audio/42_0effef406bf6.mp3", "Yes, it's nice!": "audio/42_dea8af62e629.mp3", "Yes, she's reading a book.": "audio/42_2b647695489c.mp3", "Yes, you're right! We can put it on the wall.": "audio/42_9b50aebbdd98.mp3", "Yes. A lot of tomatoes are big and red, but these are small and yellow.": "audio/42_fa511762e1ca.mp3", "Yes. Farm animals give us many things.": "audio/42_f35e81098074.mp3", "Yes. I like this pink dress.": "audio/42_6f470fa0a701.mp3", "Yes. That's a great idea, Ben.": "audio/42_b9f3980bdd00.mp3", "You already have too many shorts. Let's buy trousers.": "audio/42_799a997c8dc7.mp3", "You can, but it has to be safe. You also have to think of others.": "audio/42_b2898a99ffa0.mp3", "You need energy to have fun and to study.": "audio/42_c40805dad4b8.mp3", "You should talk about it with your family.": "audio/42_c8a6a5bf9792.mp3", "You work hard and often help Mum and me.": "audio/42_ea161b643261.mp3", "Zip, look!": "audio/42_fc1ac77f0488.mp3"};
+</script>
+</body>
+</html>

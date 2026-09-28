@@ -1,0 +1,2823 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学 · 小学英语早晚读</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23f472b6'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff'%3E6%3C/text%3E%3C/svg%3E">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.6;min-height:100vh;
+    background:linear-gradient(-45deg,#ffdde1,#c2e9fb,#d4fc79,#fbc2eb,#a6c1ee,#f6d365);
+    background-size:400% 400%;
+    animation:gradientBG 12s ease infinite;
+    color:#1f2937;
+  }
+  @keyframes gradientBG{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:16px 14px 40px}
+
+  .hero{
+    background:rgba(255,255,255,.75);backdrop-filter:blur(12px);
+    border-radius:24px;padding:24px 20px;margin-bottom:18px;
+    box-shadow:0 8px 32px rgba(255,107,157,.15);
+    border:2px solid rgba(255,255,255,.8);
+  }
+  .hero h1{
+    font-size:24px;font-weight:900;
+    background:linear-gradient(90deg,#ff6b9d,#818cf8,#34d399,#fbbf24);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .hero .tip{margin-top:8px;font-size:13px;color:#6b7280}
+  .hero .badge-wrap{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .hero .badge{
+    display:inline-block;background:linear-gradient(90deg,#ff6b9d,#f472b6);
+    color:#fff;font-size:11px;font-weight:700;padding:5px 14px;
+    border-radius:999px;
+  }
+  .home-btn{display:inline-block;background:rgba(255,255,255,.85);color:#ff6b9d;font-size:13px;font-weight:700;padding:7px 16px;border-radius:999px;text-decoration:none;border:1.5px solid #ff6b9d}
+
+  .unit-card{
+    background:rgba(255,255,255,.85);backdrop-filter:blur(10px);
+    border-radius:20px;margin-bottom:14px;overflow:hidden;
+    box-shadow:0 6px 24px rgba(0,0,0,.08);
+    border:2px solid rgba(255,255,255,.9);
+  }
+  .unit-head{
+    padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;
+    color:#fff;font-weight:800;user-select:none;
+    transition:transform .2s;
+  }
+  .unit-head:active{transform:scale(.98)}
+  .unit-head .arrow{margin-left:auto;font-size:18px;transition:transform .3s}
+  .unit-card.open .unit-head .arrow{transform:rotate(180deg)}
+  .unit-head .unum{
+    background:rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;
+    font-size:12px;font-weight:700;
+  }
+  .unit-head .utitle{font-size:17px}
+  .unit-head .ucn{font-size:13px;font-weight:500;opacity:.9}
+
+  .unit-body{display:none;padding:14px 14px 18px}
+  .unit-card.open .unit-body{display:block;animation:fadeIn .3s}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .tab{
+    padding:7px 13px;border-radius:999px;font-size:12.5px;font-weight:600;
+    background:#f3f4f6;color:#6b7280;cursor:pointer;border:2px solid transparent;
+    transition:.2s;white-space:nowrap;
+  }
+  .tab.active{color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+
+  .pane{display:none}
+  .pane.active{display:block;animation:fadeIn .25s}
+
+  .sent-card{
+    background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:8px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);border:1px solid #f3f4f6;
+  }
+  .play-all{display:block;margin:0 0 10px;padding:8px 18px;background:linear-gradient(90deg,#ff6b9d,#f472b6);color:#fff;border:none;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer}
+  .play-all.playing{background:#f59e0b}
+  .sent-top{display:flex;justify-content:flex-start;margin-bottom:2px}
+  .sent-play{
+    background:linear-gradient(135deg,#ff6b9d,#f472b6);color:#fff;border:none;
+    padding:5px 14px;border-radius:999px;font-size:12px;font-weight:700;
+    cursor:pointer;box-shadow:0 3px 8px rgba(244,114,182,.3);
+    transition:transform .15s;
+  }
+  .sent-play:active{transform:scale(.95)}
+  .sent-play:disabled{opacity:.6;cursor:default}
+  .plus-one{
+    display:inline-block;font-size:12px;font-weight:800;color:#10b981;margin-left:4px;
+    animation:plusUp .8s ease-out forwards;
+  }
+  @keyframes plusUp{
+    0%{opacity:1;transform:translateY(0) scale(1);}
+    100%{opacity:0;transform:translateY(-28px) scale(1.3);}
+  }
+
+  .sent-text{font-size:18px;line-height:1.8;font-weight:500;color:#1f2937}
+  .w{cursor:pointer;padding:1px 3px;border-radius:5px;border-bottom:2px dashed transparent;transition:.15s}
+  .w:hover{background:#fef3c7;border-bottom-color:#f59e0b}
+  .w.active{background:#dbeafe;border-bottom-color:#3b82f6}
+  .pun{color:#9ca3af}
+
+  .word-pop{
+    margin-top:10px;background:linear-gradient(135deg,#fff7ed,#fef3c7);
+    border:1px solid #fed7aa;border-radius:12px;padding:10px 12px;
+    display:none;animation:fade .2s;
+  }
+  .word-pop.show{display:block}
+  .wp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .wp-word{font-size:18px;font-weight:800;color:#ea580c}
+  .wp-ph{font-size:13px;color:#92400e;font-family:ui-monospace,Menlo,monospace}
+  .wp-pos{margin-top:5px;font-size:13px;color:#374151}
+  .wp-pos b{color:#dc2626;font-style:italic;margin-right:6px}
+  .wp-src{margin-top:3px;font-size:11px;color:#9ca3af}
+
+  footer{margin-top:20px;text-align:center;color:#6b7280;font-size:12px;padding:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="badge-wrap">
+      <span class="badge">多多好学 · 小学英语早晚读</span>
+      <a class="home-btn" href="../index.html">返回主页</a>
+    </div>
+    <h1>六年级下册 · 句子点读</h1>
+  </div>
+
+  
+<style>
+
+.box-loading{padding:50px 20px;text-align:center;}
+.box-loading .bl-ring{
+  width:72px;height:72px;border-radius:50%;margin:0 auto 18px;
+  background:conic-gradient(#ff6b9d 0%,#f472b6 90deg,#fce7f3 0);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  animation:ringSpin 2s linear infinite;
+}
+.box-loading .bl-ring::before{
+  content:'';position:absolute;inset:6px;border-radius:50%;background:#fff;
+}
+.box-loading .bl-num{
+  position:relative;font-size:20px;font-weight:900;color:#ec4899;
+}
+.box-loading .bl-bar-wrap{
+  width:200px;height:3px;background:#f3f4f6;border-radius:999px;margin:0 auto;overflow:hidden;
+}
+.box-loading .bl-bar{
+  height:100%;width:30%;border-radius:999px;
+  background:linear-gradient(90deg,#ff6b9d,#a78bfa);
+  animation:barSlide 1.5s ease-in-out infinite;
+}
+@keyframes barSlide{
+  0%{transform:translateX(-100%);width:40%;}
+  100%{transform:translateX(250%);width:40%;}
+}
+@keyframes ringSpin{
+  0%{background:conic-gradient(#ff6b9d 0deg,#fce7f3 0deg);}
+  100%{background:conic-gradient(#ff6b9d 360deg,#fce7f3 360deg);}
+}
+.box-loading .bl-tip{font-size:12px;color:#9ca3af;margin-top:14px;}
+
+</style>
+
+<div id="box"><div class="box-loading">
+  <div class="bl-ring" id="blRing"><span class="bl-num" id="blNum">···</span></div>
+  <div class="bl-bar-wrap"><div class="bl-bar" id="blBar"></div></div>
+  <div class="bl-tip">正在加载真人发音资源，请稍候…</div>
+</div></div>
+
+  <footer>多多好学姜老师版权所有（支持定制 180 1926 7856）</footer>
+</div>
+
+<script>
+const DICT = {
+  "usa":{ph:"/ˌjuː es ˈeɪ/",pos:[{p:"n.",m:"美国（缩写）"}]},
+  "uk":{ph:"/ˌjuː ˈkeɪ/",pos:[{p:"n.",m:"英国（缩写）"}]},
+  "canada":{ph:"/ˈkænədə/",pos:[{p:"n.",m:"加拿大"}]},
+  "australia":{ph:"/ɒˈstreɪliə/",pos:[{p:"n.",m:"澳大利亚"}]},
+  "china":{ph:"/ˈtʃaɪnə/",pos:[{p:"n.",m:"中国"}]},
+  "shandong":{ph:"/ˈʃænˈdʊŋ/",pos:[{p:"n.",m:"山东"}]},
+  "am":{ph:"/æm/",pos:[{p:"v.",m:"是（be动词）"}]},
+  "pm":{ph:"/ˌpiː ˈem/",pos:[{p:"n.",m:"下午"}]},
+  // KP1 Happy Holiday
+  "vacation":{ph:"/vəˈkeɪʃn/",pos:[{p:"n.",m:"假期；度假（美式）"}]},
+  "camp":{ph:"/kæmp/",pos:[{p:"n.",m:"度假营；营地"},{p:"v.",m:"露营；宿营"}]},
+  "guide":{ph:"/ɡaɪd/",pos:[{p:"n.",m:"导游；指南"},{p:"v.",m:"给……领路；指导"}]},
+  "ancient":{ph:"/ˈeɪnʃənt/",pos:[{p:"adj.",m:"古代的；古老的"}]},
+  "landscape":{ph:"/ˈlændskeɪp/",pos:[{p:"n.",m:"风景；景色"}]},
+  "scenery":{ph:"/ˈsiːnəri/",pos:[{p:"n.",m:"风景；景色"}]},
+  "silk":{ph:"/sɪlk/",pos:[{p:"n.",m:"丝绸；（蚕）丝"}]},
+  "scarf":{ph:"/skɑːf/",pos:[{p:"n.",m:"围巾；披巾（复 scarves）"}]},
+  "comfortable":{ph:"/ˈkʌmftəbl/",pos:[{p:"adj.",m:"使人舒服的；舒适的"}]},
+  "bored":{ph:"/bɔːd/",pos:[{p:"adj.",m:"厌倦的；烦闷的（修饰人）"}]},
+  "boring":{ph:"/ˈbɔːrɪŋ/",pos:[{p:"adj.",m:"无聊的（修饰物）"}]},
+  "ready":{ph:"/ˈredi/",pos:[{p:"adj.",m:"准备好的；愿意的"}]},
+  "somewhere":{ph:"/ˈsʌmweə(r)/",pos:[{p:"adv.",m:"在某处；到某处"}]},
+  "anywhere":{ph:"/ˈeniweə(r)/",pos:[{p:"adv.",m:"在任何地方"}]},
+  "nothing":{ph:"/ˈnʌθɪŋ/",pos:[{p:"pron.",m:"没有任何东西；没有事"}]},
+  "fantastic":{ph:"/fænˈtæstɪk/",pos:[{p:"adj.",m:"极好的；吸引人的"}]},
+  "breath":{ph:"/breθ/",pos:[{p:"n.",m:"呼吸的空气；一口气"}]},
+  "remind":{ph:"/rɪˈmaɪnd/",pos:[{p:"v.",m:"提醒；使想起"}]},
+  "fight":{ph:"/faɪt/",pos:[{p:"v.",m:"战斗；打架（过去式 fought）"},{p:"n.",m:"战斗"}]},
+  "peace":{ph:"/piːs/",pos:[{p:"n.",m:"和平；太平"}]},
+  "probably":{ph:"/ˈprɒbəbli/",pos:[{p:"adv.",m:"很可能；大概"}]},
+
+  // KP2 Home Sweet Home
+  "home":{ph:"/həʊm/",pos:[{p:"n.",m:"家；住所"},{p:"adv.",m:"在家；回家"}]},
+  "house":{ph:"/haʊs/",pos:[{p:"n.",m:"房子；住宅"}]},
+  "garden":{ph:"/ˈɡɑːdn/",pos:[{p:"n.",m:"花园；园子"}]},
+  "bathroom":{ph:"/ˈbɑːθruːm/",pos:[{p:"n.",m:"浴室；洗手间"}]},
+  "familiar":{ph:"/fəˈmɪliə(r)/",pos:[{p:"adj.",m:"熟悉的"}]},
+  "feeling":{ph:"/ˈfiːlɪŋ/",pos:[{p:"n.",m:"感觉；情感"}]},
+  "sweet":{ph:"/swiːt/",pos:[{p:"adj.",m:"甜蜜的；可爱的；甜的"}]},
+  "tidy":{ph:"/ˈtaɪdi/",pos:[{p:"v.",m:"整理；收拾"},{p:"adj.",m:"整洁的"}]},
+  "fold":{ph:"/fəʊld/",pos:[{p:"v.",m:"折叠；对折"}]},
+  "sweep":{ph:"/swiːp/",pos:[{p:"v.",m:"扫；打扫（过去式 swept）"}]},
+  "rubbish":{ph:"/ˈrʌbɪʃ/",pos:[{p:"n.",m:"垃圾；废弃物"}]},
+  "borrow":{ph:"/ˈbɒrəʊ/",pos:[{p:"v.",m:"借入；借用"}]},
+  "lend":{ph:"/lend/",pos:[{p:"v.",m:"借出；把……借给（过去式 lent）"}]},
+  "pack":{ph:"/pæk/",pos:[{p:"v.",m:"打包；收拾行李"}]},
+  "share":{ph:"/ʃeə(r)/",pos:[{p:"v.",m:"分享；共用"}]},
+  "advice":{ph:"/ədˈvaɪs/",pos:[{p:"n.",m:"建议；意见（不可数）"}]},
+  "smell":{ph:"/smel/",pos:[{p:"n.",m:"气味"},{p:"v.",m:"闻起来"}]},
+  "dead":{ph:"/ded/",pos:[{p:"adj.",m:"死的；失去生命的"}]},
+  "percent":{ph:"/pəˈsent/",pos:[{p:"n.",m:"百分之……"}]},
+  "through":{ph:"/θruː/",pos:[{p:"prep.",m:"通过；穿过"}]},
+  "although":{ph:"/ɔːlˈðəʊ/",pos:[{p:"conj.",m:"虽然；尽管"}]},
+  "until":{ph:"/ənˈtɪl/",pos:[{p:"conj.",m:"直到……为止"}]},
+  "hardly":{ph:"/ˈhɑːdli/",pos:[{p:"adv.",m:"几乎不；几乎没有"}]},
+  "once":{ph:"/wʌns/",pos:[{p:"adv.",m:"一次；曾经"}]},
+
+  // KP3 Same or Different
+  "outgoing":{ph:"/ˌaʊtˈɡəʊɪŋ/",pos:[{p:"adj.",m:"外向的；友好的"}]},
+  "better":{ph:"/ˈbetə(r)/",pos:[{p:"adj./adv.",m:"更好的；更好地（good/well 比较级）"}]},
+  "loudly":{ph:"/ˈlaʊdli/",pos:[{p:"adv.",m:"大声地；响亮地"}]},
+  "quietly":{ph:"/ˈkwaɪətli/",pos:[{p:"adv.",m:"安静地；轻声地"}]},
+  "competition":{ph:"/ˌkɒmpəˈtɪʃn/",pos:[{p:"n.",m:"比赛；竞争"}]},
+  "which":{ph:"/wɪtʃ/",pos:[{p:"pron.",m:"哪一个；哪一些"}]},
+  "clearly":{ph:"/ˈklɪəli/",pos:[{p:"adv.",m:"清楚地；清晰地"}]},
+  "win":{ph:"/wɪn/",pos:[{p:"v.",m:"赢；获胜（过去式 won）"}]},
+  "though":{ph:"/ðəʊ/",pos:[{p:"conj.",m:"虽然；尽管"}]},
+  "care":{ph:"/keə(r)/",pos:[{p:"v.",m:"关心；在意"}]},
+  "serious":{ph:"/ˈsɪəriəs/",pos:[{p:"adj.",m:"严肃的；严重的"}]},
+  "mirror":{ph:"/ˈmɪrə(r)/",pos:[{p:"n.",m:"镜子"}]},
+  "necessary":{ph:"/ˈnesəsəri/",pos:[{p:"adj.",m:"必要的；必需的"}]},
+  "break":{ph:"/breɪk/",pos:[{p:"v.",m:"打破；弄坏（broke/broken）"}]},
+  "touch":{ph:"/tʌtʃ/",pos:[{p:"v.",m:"触摸；感动"}]},
+  "reach":{ph:"/riːtʃ/",pos:[{p:"v.",m:"到达；伸手够到"}]},
+  "heart":{ph:"/hɑːt/",pos:[{p:"n.",m:"心；内心"}]},
+  "character":{ph:"/ˈkærəktə(r)/",pos:[{p:"n.",m:"性格；品质"}]},
+  "appearance":{ph:"/əˈpɪərəns/",pos:[{p:"n.",m:"外貌；外观"}]},
+  "perform":{ph:"/pəˈfɔːm/",pos:[{p:"v.",m:"表演；执行"}]},
+  "similar":{ph:"/ˈsɪmələ(r)/",pos:[{p:"adj.",m:"相似的"}]},
+  "talented":{ph:"/ˈtæləntɪd/",pos:[{p:"adj.",m:"有天赋的；有才能的"}]},
+
+  // KP4 Amazing Plants and Animals
+  "bamboo":{ph:"/ˌbæmˈbuː/",pos:[{p:"n.",m:"竹子"}]},
+  "bee":{ph:"/biː/",pos:[{p:"n.",m:"蜜蜂"}]},
+  "blue whale":{ph:"/ˌbluː ˈweɪl/",pos:[{p:"n.",m:"蓝鲸"}]},
+  "cheetah":{ph:"/ˈtʃiːtə/",pos:[{p:"n.",m:"猎豹"}]},
+  "ginkgo":{ph:"/ˈɡɪŋkəʊ/",pos:[{p:"n.",m:"银杏"}]},
+  "redwood":{ph:"/ˈredwʊd/",pos:[{p:"n.",m:"红杉"}]},
+  "pollination":{ph:"/ˌpɒləˈneɪʃn/",pos:[{p:"n.",m:"传粉"}]},
+  "ocean":{ph:"/ˈəʊʃn/",pos:[{p:"n.",m:"海洋"}]},
+  "symbol":{ph:"/ˈsɪmbl/",pos:[{p:"n.",m:"象征"}]},
+  "protect":{ph:"/prəˈtekt/",pos:[{p:"v.",m:"保护"}]},
+  "environment":{ph:"/ɪnˈvaɪrənmənt/",pos:[{p:"n.",m:"环境"}]},
+  "destroy":{ph:"/dɪˈstrɔɪ/",pos:[{p:"v.",m:"破坏；毁坏"}]},
+  "danger":{ph:"/ˈdeɪndʒə(r)/",pos:[{p:"n.",m:"危险"}]},
+  "service":{ph:"/ˈsɜːvɪs/",pos:[{p:"n.",m:"服务"}]},
+  "popular":{ph:"/ˈpɒpjələ(r)/",pos:[{p:"adj.",m:"受欢迎的；流行的"}]},
+  "warm":{ph:"/wɔːm/",pos:[{p:"adj.",m:"温暖的"}]},
+
+  // KP5 What a Delicious Meal
+  "meal":{ph:"/miːl/",pos:[{p:"n.",m:"一餐；一顿饭"}]},
+  "delicious":{ph:"/dɪˈlɪʃəs/",pos:[{p:"adj.",m:"美味的；可口的"}]},
+  "instruction":{ph:"/ɪnˈstrʌkʃn/",pos:[{p:"n.",m:"说明；指示（常用复 instructions）"}]},
+  "mixture":{ph:"/ˈmɪkstʃə(r)/",pos:[{p:"n.",m:"混合物"}]},
+  "boil":{ph:"/bɔɪl/",pos:[{p:"v.",m:"煮沸；烧开"}]},
+  "pour":{ph:"/pɔː(r)/",pos:[{p:"v.",m:"倒；灌"}]},
+  "add":{ph:"/æd/",pos:[{p:"v.",m:"添加；增加"}]},
+  "bowl":{ph:"/bəʊl/",pos:[{p:"n.",m:"碗"}]},
+  "spoon":{ph:"/spuːn/",pos:[{p:"n.",m:"勺；调羹"}]},
+  "piece":{ph:"/piːs/",pos:[{p:"n.",m:"片；块；张"}]},
+  "finally":{ph:"/ˈfaɪnəli/",pos:[{p:"adv.",m:"最后；终于"}]},
+  "salty":{ph:"/ˈsɔːlti/",pos:[{p:"adj.",m:"咸的"}]},
+  "sour":{ph:"/ˈsaʊə(r)/",pos:[{p:"adj.",m:"酸的"}]},
+  "healthy":{ph:"/ˈhelθi/",pos:[{p:"adj.",m:"健康的"}]},
+  "university":{ph:"/ˌjuːnɪˈvɜːsəti/",pos:[{p:"n.",m:"大学"}]},
+  "experience":{ph:"/ɪkˈspɪəriəns/",pos:[{p:"n.",m:"经历（可数）；经验（不可数）"}]},
+  "creative":{ph:"/kriˈeɪtɪv/",pos:[{p:"adj.",m:"有创造力的；有创意的"}]},
+  "mess":{ph:"/mes/",pos:[{p:"n.",m:"混乱；杂乱"}]},
+
+  // KP6 Plan for Yourself
+  "resolution":{ph:"/ˌrezəˈluːʃn/",pos:[{p:"n.",m:"决心；决议"}]},
+  "relationship":{ph:"/rɪˈleɪʃnʃɪp/",pos:[{p:"n.",m:"关系；联系"}]},
+  "literature":{ph:"/ˈlɪtrətʃə(r)/",pos:[{p:"n.",m:"文学"}]},
+  "pilot":{ph:"/ˈpaɪlət/",pos:[{p:"n.",m:"飞行员"}]},
+  "engineer":{ph:"/ˌendʒɪˈnɪə(r)/",pos:[{p:"n.",m:"工程师"}]},
+  "designer":{ph:"/dɪˈzaɪnə(r)/",pos:[{p:"n.",m:"设计师"}]},
+  "violinist":{ph:"/ˌvaɪəˈlɪnɪst/",pos:[{p:"n.",m:"小提琴手"}]},
+  "pianist":{ph:"/ˈpiənɪst/",pos:[{p:"n.",m:"钢琴家"}]},
+  "scientist":{ph:"/ˈsaɪəntɪst/",pos:[{p:"n.",m:"科学家"}]},
+  "photographer":{ph:"/fəˈtɒɡrəfə(r)/",pos:[{p:"n.",m:"摄影师"}]},
+  "architect":{ph:"/ˈɑːkɪtekt/",pos:[{p:"n.",m:"建筑师"}]},
+  "lawyer":{ph:"/ˈlɔːjə(r)/",pos:[{p:"n.",m:"律师"}]},
+  "energetic":{ph:"/ˌenəˈdʒetɪk/",pos:[{p:"adj.",m:"精力充沛的"}]},
+  "confident":{ph:"/ˈkɒnfɪdənt/",pos:[{p:"adj.",m:"自信的"}]},
+  "patient":{ph:"/ˈpeɪʃnt/",pos:[{p:"adj.",m:"有耐心的"}]},
+  "purpose":{ph:"/ˈpɜːpəs/",pos:[{p:"n.",m:"目的；意图"}]},
+  "talent":{ph:"/ˈtælənt/",pos:[{p:"n.",m:"天赋；才能"}]},
+  "hero":{ph:"/ˈhɪərəʊ/",pos:[{p:"n.",m:"英雄；偶像"}]},
+  "dream":{ph:"/driːm/",pos:[{p:"n.",m:"梦想"},{p:"v.",m:"做梦"}]},
+
+  // KP7 When Tomorrow Comes
+  "pollution":{ph:"/pəˈluːʃn/",pos:[{p:"n.",m:"污染"}]},
+  "prediction":{ph:"/prɪˈdɪkʃn/",pos:[{p:"n.",m:"预测；预言"}]},
+  "future":{ph:"/ˈfjuːtʃə(r)/",pos:[{p:"n.",m:"将来；未来"}]},
+  "space":{ph:"/speɪs/",pos:[{p:"n.",m:"太空；空间"}]},
+  "human":{ph:"/ˈhjuːmən/",pos:[{p:"n.",m:"人；人类"},{p:"adj.",m:"人的"}]},
+  "robot":{ph:"/ˈrəʊbɒt/",pos:[{p:"n.",m:"机器人"}]},
+  "replace":{ph:"/rɪˈpleɪs/",pos:[{p:"v.",m:"取代；代替"}]},
+  "research":{ph:"/rɪˈsɜːtʃ/",pos:[{p:"n.",m:"研究；调查（不可数）"}]},
+  "cure":{ph:"/kjʊə(r)/",pos:[{p:"v.",m:"治愈；治疗"}]},
+  "accept":{ph:"/əkˈsept/",pos:[{p:"v.",m:"接受；认可"}]},
+  "mention":{ph:"/ˈmenʃn/",pos:[{p:"v.",m:"提到；说起"}]},
+  "quality":{ph:"/ˈkwɒləti/",pos:[{p:"n.",m:"质量；品质"}]},
+  "positive":{ph:"/ˈpɒzətɪv/",pos:[{p:"adj.",m:"积极的；正面的"}]},
+  "challenging":{ph:"/ˈtʃælɪndʒɪŋ/",pos:[{p:"adj.",m:"有挑战性的"}]},
+  "depend":{ph:"/dɪˈpend/",pos:[{p:"v.",m:"依靠；取决于"}]},
+
+  // KP8 Let's Communicate
+  "communicate":{ph:"/kəˈmjuːnɪkeɪt/",pos:[{p:"v.",m:"交流；沟通"}]},
+  "medium":{ph:"/ˈmiːdiəm/",pos:[{p:"n.",m:"媒介；手段（复 media）"}]},
+  "offer":{ph:"/ˈɒfə(r)/",pos:[{p:"v.",m:"主动提出；提供"}]},
+  "provide":{ph:"/prəˈvaɪd/",pos:[{p:"v.",m:"提供；供应"}]},
+  "trust":{ph:"/trʌst/",pos:[{p:"v.",m:"信任；信赖"}]},
+  "calm":{ph:"/kɑːm/",pos:[{p:"v.",m:"使平静"},{p:"adj.",m:"平静的"}]},
+  "continue":{ph:"/kənˈtɪnjuː/",pos:[{p:"v.",m:"继续"}]},
+  "argue":{ph:"/ˈɑːɡjuː/",pos:[{p:"v.",m:"争论；争吵"}]},
+  "impolite":{ph:"/ˌɪmpəˈlaɪt/",pos:[{p:"adj.",m:"不礼貌的"}]},
+  "chance":{ph:"/tʃɑːns/",pos:[{p:"n.",m:"机会；可能性"}]},
+  "importance":{ph:"/ɪmˈpɔːtns/",pos:[{p:"n.",m:"重要性"}]},
+  "point":{ph:"/pɔɪnt/",pos:[{p:"v.",m:"指；指向"},{p:"n.",m:"要点"}]},
+  "surely":{ph:"/ˈʃʊəli/",pos:[{p:"adv.",m:"当然；肯定"}]},
+  "carefully":{ph:"/ˈkeəfəli/",pos:[{p:"adv.",m:"仔细地；小心地"}]},
+  "cost":{ph:"/kɒst/",pos:[{p:"v.",m:"花费（金钱，主语是物）"}]},
+  "realize":{ph:"/ˈriːəlaɪz/",pos:[{p:"v.",m:"意识到；实现"}]},
+
+  // ===== 高中核心高频词 A =====
+  "abroad":{ph:"/əˈbrɔːd/",pos:[{p:"adv.",m:"到国外；在国外"}]},
+  "absent":{ph:"/ˈæbsənt/",pos:[{p:"adj.",m:"缺席的；不在的"}]},
+  "absolute":{ph:"/ˈæbsəluːt/",pos:[{p:"adj.",m:"绝对的；完全的"}]},
+  "absorb":{ph:"/əbˈzɔːb/",pos:[{p:"v.",m:"吸收；使全神贯注"}]},
+  "academic":{ph:"/ˌækəˈdemɪk/",pos:[{p:"adj.",m:"学术的；学院的"}]},
+  "access":{ph:"/ˈækses/",pos:[{p:"n.",m:"通道；进入权"},{p:"v.",m:"访问；存取"}]},
+  "accident":{ph:"/ˈæksɪdənt/",pos:[{p:"n.",m:"事故；意外"}]},
+  "account":{ph:"/əˈkaʊnt/",pos:[{p:"n.",m:"账户；描述；账目"}]},
+  "accurate":{ph:"/ˈækjərət/",pos:[{p:"adj.",m:"准确的；精确的"}]},
+  "accuse":{ph:"/əˈkjuːz/",pos:[{p:"v.",m:"控告；指责"}]},
+  "achieve":{ph:"/əˈtʃiːv/",pos:[{p:"v.",m:"实现；取得；达到"}]},
+  "achievement":{ph:"/əˈtʃiːvmənt/",pos:[{p:"n.",m:"成就；成绩"}]},
+  "action":{ph:"/ˈækʃn/",pos:[{p:"n.",m:"行动；行为"}]},
+  "active":{ph:"/ˈæktɪv/",pos:[{p:"adj.",m:"积极的；活跃的"}]},
+  "activity":{ph:"/ækˈtɪvəti/",pos:[{p:"n.",m:"活动"}]},
+  "actual":{ph:"/ˈæktʃuəl/",pos:[{p:"adj.",m:"实际的；真实的"}]},
+  "adapt":{ph:"/əˈdæpt/",pos:[{p:"v.",m:"适应；改编"}]},
+  "addition":{ph:"/əˈdɪʃn/",pos:[{p:"n.",m:"增加；加法"}]},
+  "admit":{ph:"/ədˈmɪt/",pos:[{p:"v.",m:"承认；准许进入"}]},
+  "adult":{ph:"/ˈædʌlt/",pos:[{p:"n.",m:"成年人"},{p:"adj.",m:"成年的"}]},
+  "advance":{ph:"/ədˈvɑːns/",pos:[{p:"v.",m:"前进；推进"},{p:"n.",m:"进展"}]},
+  "advantage":{ph:"/ədˈvɑːntɪdʒ/",pos:[{p:"n.",m:"优点；优势"}]},
+  "adventure":{ph:"/ədˈventʃə(r)/",pos:[{p:"n.",m:"冒险；奇遇"}]},
+  "advertise":{ph:"/ˈædvətaɪz/",pos:[{p:"v.",m:"做广告；宣传"}]},
+  "advise":{ph:"/ədˈvaɪz/",pos:[{p:"v.",m:"建议；劝告"}]},
+  "affair":{ph:"/əˈfeə(r)/",pos:[{p:"n.",m:"事务；事件"}]},
+  "affect":{ph:"/əˈfekt/",pos:[{p:"v.",m:"影响；感动"}]},
+  "afford":{ph:"/əˈfɔːd/",pos:[{p:"v.",m:"买得起；承担得起"}]},
+  "agreement":{ph:"/əˈɡriːmənt/",pos:[{p:"n.",m:"协议；同意"}]},
+  "agriculture":{ph:"/ˈæɡrɪkʌltʃə(r)/",pos:[{p:"n.",m:"农业"}]},
+  "aim":{ph:"/eɪm/",pos:[{p:"n.",m:"目标"},{p:"v.",m:"瞄准；旨在"}]},
+  "alarm":{ph:"/əˈlɑːm/",pos:[{p:"n.",m:"警报；闹钟"},{p:"v.",m:"使惊恐"}]},
+  "album":{ph:"/ˈælbəm/",pos:[{p:"n.",m:"相册；专辑"}]},
+  "alcohol":{ph:"/ˈælkəhɒl/",pos:[{p:"n.",m:"酒精；酒"}]},
+  "alive":{ph:"/əˈlaɪv/",pos:[{p:"adj.",m:"活着的；有活力的"}]},
+  "allow":{ph:"/əˈlaʊ/",pos:[{p:"v.",m:"允许；准许"}]},
+  "alone":{ph:"/əˈləʊn/",pos:[{p:"adj./adv.",m:"单独的（地）"}]},
+  "amount":{ph:"/əˈmaʊnt/",pos:[{p:"n.",m:"数量；数额"}]},
+  "anger":{ph:"/ˈæŋɡə(r)/",pos:[{p:"n.",m:"愤怒"}]},
+  "angle":{ph:"/ˈæŋɡl/",pos:[{p:"n.",m:"角；角度"}]},
+  "announce":{ph:"/əˈnaʊns/",pos:[{p:"v.",m:"宣布；宣告"}]},
+  "annoy":{ph:"/əˈnɔɪ/",pos:[{p:"v.",m:"使恼怒；打扰"}]},
+  "annual":{ph:"/ˈænjuəl/",pos:[{p:"adj.",m:"每年的；年度的"}]},
+  "anxious":{ph:"/ˈæŋkʃəs/",pos:[{p:"adj.",m:"焦虑的；渴望的"}]},
+  "anyhow":{ph:"/ˈenihaʊ/",pos:[{p:"adv.",m:"无论如何"}]},
+  "anyway":{ph:"/ˈeniweɪ/",pos:[{p:"adv.",m:"无论如何；反正"}]},
+  "apart":{ph:"/əˈpɑːt/",pos:[{p:"adv.",m:"分开地；相隔"}]},
+  "apartment":{ph:"/əˈpɑːtmənt/",pos:[{p:"n.",m:"公寓"}]},
+  "apologize":{ph:"/əˈpɒlədʒaɪz/",pos:[{p:"v.",m:"道歉"}]},
+  "appear":{ph:"/əˈpɪə(r)/",pos:[{p:"v.",m:"出现；显得"}]},
+  "application":{ph:"/ˌæplɪˈkeɪʃn/",pos:[{p:"n.",m:"申请；应用；应用程序"}]},
+  "apply":{ph:"/əˈplaɪ/",pos:[{p:"v.",m:"申请；应用"}]},
+  "appoint":{ph:"/əˈpɔɪnt/",pos:[{p:"v.",m:"任命；约定"}]},
+  "appreciate":{ph:"/əˈpriːʃieɪt/",pos:[{p:"v.",m:"感激；欣赏"}]},
+  "approach":{ph:"/əˈprəʊtʃ/",pos:[{p:"v.",m:"接近"},{p:"n.",m:"方法；途径"}]},
+  "appropriate":{ph:"/əˈprəʊpriət/",pos:[{p:"adj.",m:"适当的；合适的"}]},
+  "approve":{ph:"/əˈpruːv/",pos:[{p:"v.",m:"批准；赞成"}]},
+  "argument":{ph:"/ˈɑːɡjumənt/",pos:[{p:"n.",m:"争论；论点"}]},
+  "arise":{ph:"/əˈraɪz/",pos:[{p:"v.",m:"出现；升起"}]},
+  "army":{ph:"/ˈɑːmi/",pos:[{p:"n.",m:"军队"}]},
+  "arrange":{ph:"/əˈreɪndʒ/",pos:[{p:"v.",m:"安排；整理"}]},
+  "arrest":{ph:"/əˈrest/",pos:[{p:"v./n.",m:"逮捕；拘留"}]},
+  "article":{ph:"/ˈɑːtɪkl/",pos:[{p:"n.",m:"文章；物品；冠词"}]},
+  "ashamed":{ph:"/əˈʃeɪmd/",pos:[{p:"adj.",m:"羞愧的"}]},
+  "aspect":{ph:"/ˈæspekt/",pos:[{p:"n.",m:"方面；外观"}]},
+  "assess":{ph:"/əˈses/",pos:[{p:"v.",m:"评估；评价"}]},
+  "assign":{ph:"/əˈsaɪn/",pos:[{p:"v.",m:"分配；布置（作业）"}]},
+  "assist":{ph:"/əˈsɪst/",pos:[{p:"v.",m:"协助；帮助"}]},
+  "associate":{ph:"/əˈsəʊʃieɪt/",pos:[{p:"v.",m:"联系；交往"}]},
+  "assume":{ph:"/əˈsjuːm/",pos:[{p:"v.",m:"假定；承担"}]},
+  "assure":{ph:"/əˈʃʊə(r)/",pos:[{p:"v.",m:"保证；使确信"}]},
+  "athlete":{ph:"/ˈæθliːt/",pos:[{p:"n.",m:"运动员"}]},
+  "atmosphere":{ph:"/ˈætməsfɪə(r)/",pos:[{p:"n.",m:"大气；气氛"}]},
+  "attach":{ph:"/əˈtætʃ/",pos:[{p:"v.",m:"系上；附上"}]},
+  "attack":{ph:"/əˈtæk/",pos:[{p:"v./n.",m:"攻击；袭击"}]},
+  "attempt":{ph:"/əˈtempt/",pos:[{p:"v./n.",m:"尝试；试图"}]},
+  "attend":{ph:"/əˈtend/",pos:[{p:"v.",m:"出席；参加"}]},
+  "attract":{ph:"/əˈtrækt/",pos:[{p:"v.",m:"吸引"}]},
+  "audience":{ph:"/ˈɔːdiəns/",pos:[{p:"n.",m:"观众；听众"}]},
+  "average":{ph:"/ˈævərɪdʒ/",pos:[{p:"adj.",m:"平均的；普通的"},{p:"n.",m:"平均"}]},
+  "avoid":{ph:"/əˈvɔɪd/",pos:[{p:"v.",m:"避免；避开"}]},
+  "awake":{ph:"/əˈweɪk/",pos:[{p:"adj.",m:"醒着的"}]},
+  "award":{ph:"/əˈwɔːd/",pos:[{p:"n.",m:"奖；奖品"},{p:"v.",m:"授予"}]},
+  "aware":{ph:"/əˈweə(r)/",pos:[{p:"adj.",m:"意识到的"}]},
+  "awful":{ph:"/ˈɔːfl/",pos:[{p:"adj.",m:"糟糕的；可怕的"}]},
+
+  // ===== 高中核心高频词 B =====
+  "background":{ph:"/ˈbækɡraʊnd/",pos:[{p:"n.",m:"背景；经历"}]},
+  "balance":{ph:"/ˈbæləns/",pos:[{p:"n.",m:"平衡；余额"},{p:"v.",m:"使平衡"}]},
+  "ban":{ph:"/bæn/",pos:[{p:"v./n.",m:"禁止；禁令"}]},
+  "barely":{ph:"/ˈbeəli/",pos:[{p:"adv.",m:"几乎不"}]},
+  "barrier":{ph:"/ˈbæriə(r)/",pos:[{p:"n.",m:"障碍；屏障"}]},
+  "bargain":{ph:"/ˈbɑːɡən/",pos:[{p:"n.",m:"便宜货"},{p:"v.",m:"讨价还价"}]},
+  "base":{ph:"/beɪs/",pos:[{p:"n.",m:"基础；底部"},{p:"v.",m:"以……为基础"}]},
+  "basic":{ph:"/ˈbeɪsɪk/",pos:[{p:"adj.",m:"基本的；基础的"}]},
+  "battle":{ph:"/ˈbætl/",pos:[{p:"n.",m:"战斗；战役"}]},
+  "bear":{ph:"/beə(r)/",pos:[{p:"v.",m:"忍受；承担"},{p:"n.",m:"熊"}]},
+  "beauty":{ph:"/ˈbjuːti/",pos:[{p:"n.",m:"美；美人"}]},
+  "behave":{ph:"/bɪˈheɪv/",pos:[{p:"v.",m:"表现；举止"}]},
+  "behavior":{ph:"/bɪˈheɪvjə(r)/",pos:[{p:"n.",m:"行为；举止"}]},
+  "belief":{ph:"/bɪˈliːf/",pos:[{p:"n.",m:"信念；信任"}]},
+  "belong":{ph:"/bɪˈlɒŋ/",pos:[{p:"v.",m:"属于"}]},
+  "benefit":{ph:"/ˈbenɪfɪt/",pos:[{p:"n.",m:"益处"},{p:"v.",m:"有益于"}]},
+  "besides":{ph:"/bɪˈsaɪdz/",pos:[{p:"prep./adv.",m:"除……之外（还）"}]},
+  "beyond":{ph:"/bɪˈjɒnd/",pos:[{p:"prep.",m:"超出；在那边"}]},
+  "biology":{ph:"/baɪˈɒlədʒi/",pos:[{p:"n.",m:"生物学"}]},
+  "birth":{ph:"/bɜːθ/",pos:[{p:"n.",m:"出生；诞生"}]},
+  "bitter":{ph:"/ˈbɪtə(r)/",pos:[{p:"adj.",m:"苦的；痛苦的"}]},
+  "blame":{ph:"/bleɪm/",pos:[{p:"v./n.",m:"责备；责怪"}]},
+  "blank":{ph:"/blæŋk/",pos:[{p:"adj.",m:"空白的"},{p:"n.",m:"空白处"}]},
+  "blood":{ph:"/blʌd/",pos:[{p:"n.",m:"血；血液"}]},
+  "board":{ph:"/bɔːd/",pos:[{p:"n.",m:"板；董事会"},{p:"v.",m:"上（车船飞机）"}]},
+  "bomb":{ph:"/bɒm/",pos:[{p:"n.",m:"炸弹"},{p:"v.",m:"轰炸"}]},
+  "book":{ph:"/bʊk/",pos:[{p:"n.",m:"书"},{p:"v.",m:"预订"}]},
+  "born":{ph:"/bɔːn/",pos:[{p:"adj.",m:"出生的"}]},
+  "boss":{ph:"/bɒs/",pos:[{p:"n.",m:"老板"}]},
+  "bother":{ph:"/ˈbɒðə(r)/",pos:[{p:"v.",m:"打扰；麻烦"}]},
+  "bottom":{ph:"/ˈbɒtəm/",pos:[{p:"n.",m:"底部；末端"}]},
+  "brain":{ph:"/breɪn/",pos:[{p:"n.",m:"大脑；头脑"}]},
+  "branch":{ph:"/brɑːntʃ/",pos:[{p:"n.",m:"树枝；分支；分公司"}]},
+  "brave":{ph:"/breɪv/",pos:[{p:"adj.",m:"勇敢的"}]},
+  "brief":{ph:"/briːf/",pos:[{p:"adj.",m:"简短的"},{p:"n.",m:"摘要"}]},
+  "bright":{ph:"/braɪt/",pos:[{p:"adj.",m:"明亮的；聪明的"}]},
+  "brilliant":{ph:"/ˈbrɪliənt/",pos:[{p:"adj.",m:"杰出的；灿烂的"}]},
+  "broad":{ph:"/brɔːd/",pos:[{p:"adj.",m:"宽的；广泛的"}]},
+  "broadcast":{ph:"/ˈbrɔːdkɑːst/",pos:[{p:"v./n.",m:"广播；播放"}]},
+  "budget":{ph:"/ˈbʌdʒɪt/",pos:[{p:"n.",m:"预算"}]},
+  "burn":{ph:"/bɜːn/",pos:[{p:"v.",m:"燃烧；烧伤"}]},
+  "burst":{ph:"/bɜːst/",pos:[{p:"v.",m:"爆发；破裂"}]},
+  "bury":{ph:"/ˈberi/",pos:[{p:"v.",m:"埋葬；掩埋"}]},
+  "business":{ph:"/ˈbɪznəs/",pos:[{p:"n.",m:"商业；生意；事务"}]},
+  "button":{ph:"/ˈbʌtn/",pos:[{p:"n.",m:"按钮；纽扣"}]},
+
+  // ===== 高中核心高频词 C =====
+  "calm":{ph:"/kɑːm/",pos:[{p:"v.",m:"使平静"},{p:"adj.",m:"平静的"}]},
+  "campaign":{ph:"/kæmˈpeɪn/",pos:[{p:"n.",m:"运动；战役"}]},
+  "cancel":{ph:"/ˈkænsl/",pos:[{p:"v.",m:"取消；撤销"}]},
+  "cancer":{ph:"/ˈkænsə(r)/",pos:[{p:"n.",m:"癌症"}]},
+  "candidate":{ph:"/ˈkændɪdət/",pos:[{p:"n.",m:"候选人；应试者"}]},
+  "capable":{ph:"/ˈkeɪpəbl/",pos:[{p:"adj.",m:"有能力的"}]},
+  "capital":{ph:"/ˈkæpɪtl/",pos:[{p:"n.",m:"首都；资本；大写字母"}]},
+  "capture":{ph:"/ˈkæptʃə(r)/",pos:[{p:"v.",m:"捕获；拍摄"}]},
+  "carbon":{ph:"/ˈkɑːbən/",pos:[{p:"n.",m:"碳"}]},
+  "career":{ph:"/kəˈrɪə(r)/",pos:[{p:"n.",m:"职业；生涯"}]},
+  "careful":{ph:"/ˈkeəfl/",pos:[{p:"adj.",m:"小心的；仔细的"}]},
+  "casual":{ph:"/ˈkæʒuəl/",pos:[{p:"adj.",m:"随意的；非正式的"}]},
+  "catch":{ph:"/kætʃ/",pos:[{p:"v.",m:"抓住；赶上；感染"}]},
+  "cause":{ph:"/kɔːz/",pos:[{p:"n.",m:"原因"},{p:"v.",m:"引起"}]},
+  "celebrate":{ph:"/ˈselɪbreɪt/",pos:[{p:"v.",m:"庆祝"}]},
+  "centigrade":{ph:"/ˈsentɪɡreɪd/",pos:[{p:"adj.",m:"摄氏的"}]},
+  "central":{ph:"/ˈsentrəl/",pos:[{p:"adj.",m:"中心的；中央的"}]},
+  "century":{ph:"/ˈsentʃəri/",pos:[{p:"n.",m:"世纪；百年"}]},
+  "ceremony":{ph:"/ˈserəməni/",pos:[{p:"n.",m:"典礼；仪式"}]},
+  "certain":{ph:"/ˈsɜːtn/",pos:[{p:"adj.",m:"确定的；某些"}]},
+  "certificate":{ph:"/səˈtɪfɪkət/",pos:[{p:"n.",m:"证书；证明"}]},
+  "chain":{ph:"/tʃeɪn/",pos:[{p:"n.",m:"链条；连锁店"}]},
+  "challenge":{ph:"/ˈtʃælɪndʒ/",pos:[{p:"n.",m:"挑战"},{p:"v.",m:"向……挑战"}]},
+  "chance":{ph:"/tʃɑːns/",pos:[{p:"n.",m:"机会；可能性"}]},
+  "change":{ph:"/tʃeɪndʒ/",pos:[{p:"v./n.",m:"改变；零钱"}]},
+  "channel":{ph:"/ˈtʃænl/",pos:[{p:"n.",m:"频道；海峡；渠道"}]},
+  "chapter":{ph:"/ˈtʃæptə(r)/",pos:[{p:"n.",m:"章；回"}]},
+  "character":{ph:"/ˈkærəktə(r)/",pos:[{p:"n.",m:"性格；角色；字符"}]},
+  "charge":{ph:"/tʃɑːdʒ/",pos:[{p:"v.",m:"收费；指控；充电"},{p:"n.",m:"费用；负责"}]},
+  "chart":{ph:"/tʃɑːt/",pos:[{p:"n.",m:"图表"}]},
+  "chase":{ph:"/tʃeɪs/",pos:[{p:"v./n.",m:"追逐；追赶"}]},
+  "cheap":{ph:"/tʃiːp/",pos:[{p:"adj.",m:"便宜的"}]},
+  "check":{ph:"/tʃek/",pos:[{p:"v./n.",m:"检查；核对"}]},
+  "chemical":{ph:"/ˈkemɪkl/",pos:[{p:"adj.",m:"化学的"},{p:"n.",m:"化学品"}]},
+  "choice":{ph:"/tʃɔɪs/",pos:[{p:"n.",m:"选择"}]},
+  "choose":{ph:"/tʃuːz/",pos:[{p:"v.",m:"选择"}]},
+  "circle":{ph:"/ˈsɜːkl/",pos:[{p:"n.",m:"圆圈；圈子"},{p:"v.",m:"圈出"}]},
+  "citizen":{ph:"/ˈsɪtɪzn/",pos:[{p:"n.",m:"公民；市民"}]},
+  "civil":{ph:"/ˈsɪvl/",pos:[{p:"adj.",m:"公民的；民用的"}]},
+  "claim":{ph:"/kleɪm/",pos:[{p:"v./n.",m:"声称；索赔"}]},
+  "climate":{ph:"/ˈklaɪmət/",pos:[{p:"n.",m:"气候"}]},
+  "climb":{ph:"/klaɪm/",pos:[{p:"v.",m:"攀爬；爬"}]},
+  "climate":{ph:"/ˈklaɪmət/",pos:[{p:"n.",m:"气候"}]},
+  "clinic":{ph:"/ˈklɪnɪk/",pos:[{p:"n.",m:"诊所"}]},
+  "close":{ph:"/kləʊz/",pos:[{p:"v.",m:"关闭"},{p:"adj.",m:"近的；亲密的"}]},
+  "clothes":{ph:"/kləʊðz/",pos:[{p:"n.",m:"衣服"}]},
+  "cloud":{ph:"/klaʊd/",pos:[{p:"n.",m:"云"}]},
+  "coach":{ph:"/kəʊtʃ/",pos:[{p:"n.",m:"教练；长途汽车"}]},
+  "coast":{ph:"/kəʊst/",pos:[{p:"n.",m:"海岸"}]},
+  "code":{ph:"/kəʊd/",pos:[{p:"n.",m:"代码；密码；法典"}]},
+  "coin":{ph:"/kɔɪn/",pos:[{p:"n.",m:"硬币"}]},
+  "collar":{ph:"/ˈkɒlə(r)/",pos:[{p:"n.",m:"衣领"}]},
+  "collect":{ph:"/kəˈlekt/",pos:[{p:"v.",m:"收集；采集"}]},
+  "college":{ph:"/ˈkɒlɪdʒ/",pos:[{p:"n.",m:"学院；大学"}]},
+  "combine":{ph:"/kəmˈbaɪn/",pos:[{p:"v.",m:"结合；联合"}]},
+  "comfort":{ph:"/ˈkʌmfət/",pos:[{p:"n.",m:"舒适；安慰"},{p:"v.",m:"安慰"}]},
+  "command":{ph:"/kəˈmɑːnd/",pos:[{p:"v./n.",m:"命令；指挥"}]},
+  "comment":{ph:"/ˈkɒment/",pos:[{p:"n./v.",m:"评论；意见"}]},
+  "common":{ph:"/ˈkɒmən/",pos:[{p:"adj.",m:"普通的；共同的"}]},
+  "communicate":{ph:"/kəˈmjuːnɪkeɪt/",pos:[{p:"v.",m:"交流；沟通"}]},
+  "community":{ph:"/kəˈmjuːnəti/",pos:[{p:"n.",m:"社区；社会"}]},
+  "compare":{ph:"/kəmˈpeə(r)/",pos:[{p:"v.",m:"比较"}]},
+  "compete":{ph:"/kəmˈpiːt/",pos:[{p:"v.",m:"竞争；比赛"}]},
+  "complain":{ph:"/kəmˈpleɪn/",pos:[{p:"v.",m:"抱怨；投诉"}]},
+  "complete":{ph:"/kəmˈpliːt/",pos:[{p:"adj.",m:"完整的"},{p:"v.",m:"完成"}]},
+  "complex":{ph:"/ˈkɒmpleks/",pos:[{p:"adj.",m:"复杂的"}]},
+  "composition":{ph:"/ˌkɒmpəˈzɪʃn/",pos:[{p:"n.",m:"作文；构成"}]},
+  "concentrate":{ph:"/ˈkɒnsntreɪt/",pos:[{p:"v.",m:"集中（注意力）"}]},
+  "concept":{ph:"/ˈkɒnsept/",pos:[{p:"n.",m:"概念；观念"}]},
+  "concern":{ph:"/kənˈsɜːn/",pos:[{p:"n.",m:"关心；担忧"},{p:"v.",m:"涉及"}]},
+  "conclude":{ph:"/kənˈkluːd/",pos:[{p:"v.",m:"得出结论；结束"}]},
+  "condition":{ph:"/kənˈdɪʃn/",pos:[{p:"n.",m:"条件；状况"}]},
+  "conduct":{ph:"/kənˈdʌkt/",pos:[{p:"v.",m:"进行；指挥"},{p:"n.",m:"行为"}]},
+  "confident":{ph:"/ˈkɒnfɪdənt/",pos:[{p:"adj.",m:"自信的"}]},
+  "confirm":{ph:"/kənˈfɜːm/",pos:[{p:"v.",m:"确认；证实"}]},
+  "confuse":{ph:"/kənˈfjuːz/",pos:[{p:"v.",m:"使困惑；混淆"}]},
+  "connect":{ph:"/kəˈnekt/",pos:[{p:"v.",m:"连接；联系"}]},
+  "conscience":{ph:"/ˈkɒnʃəns/",pos:[{p:"n.",m:"良心"}]},
+  "consequence":{ph:"/ˈkɒnsɪkwəns/",pos:[{p:"n.",m:"结果；后果"}]},
+  "consider":{ph:"/kənˈsɪdə(r)/",pos:[{p:"v.",m:"考虑；认为"}]},
+  "consist":{ph:"/kənˈsɪst/",pos:[{p:"v.",m:"由……组成"}]},
+  "constant":{ph:"/ˈkɒnstənt/",pos:[{p:"adj.",m:"持续的；不变的"}]},
+  "construction":{ph:"/kənˈstrʌkʃn/",pos:[{p:"n.",m:"建设；建筑物"}]},
+  "contact":{ph:"/ˈkɒntækt/",pos:[{p:"v./n.",m:"联系；接触"}]},
+  "contain":{ph:"/kənˈteɪn/",pos:[{p:"v.",m:"包含；容纳"}]},
+  "content":{ph:"/kənˈtent/",pos:[{p:"n.",m:"内容；目录"},{p:"adj.",m:"满足的"}]},
+  "continent":{ph:"/ˈkɒntɪnənt/",pos:[{p:"n.",m:"大陆；洲"}]},
+  "continue":{ph:"/kənˈtɪnjuː/",pos:[{p:"v.",m:"继续"}]},
+  "contract":{ph:"/ˈkɒntrækt/",pos:[{p:"n.",m:"合同；契约"}]},
+  "contrast":{ph:"/ˈkɒntrɑːst/",pos:[{p:"n.",m:"对比；对照"}]},
+  "contribute":{ph:"/kənˈtrɪbjuːt/",pos:[{p:"v.",m:"贡献；捐献"}]},
+  "convenient":{ph:"/kənˈviːniənt/",pos:[{p:"adj.",m:"方便的"}]},
+  "convince":{ph:"/kənˈvɪns/",pos:[{p:"v.",m:"使信服；说服"}]},
+  "cook":{ph:"/kʊk/",pos:[{p:"v.",m:"烹饪"},{p:"n.",m:"厨师"}]},
+  "copy":{ph:"/ˈkɒpi/",pos:[{p:"n.",m:"副本；一本"},{p:"v.",m:"复制；抄写"}]},
+  "corner":{ph:"/ˈkɔːnə(r)/",pos:[{p:"n.",m:"角落；拐角"}]},
+  "correct":{ph:"/kəˈrekt/",pos:[{p:"adj.",m:"正确的"},{p:"v.",m:"改正"}]},
+  "cost":{ph:"/kɒst/",pos:[{p:"v.",m:"花费（金钱，主语是物）"},{p:"n.",m:"成本"}]},
+  "count":{ph:"/kaʊnt/",pos:[{p:"v.",m:"数；计数；重要"}]},
+  "country":{ph:"/ˈkʌntri/",pos:[{p:"n.",m:"国家；乡村"}]},
+  "courage":{ph:"/ˈkʌrɪdʒ/",pos:[{p:"n.",m:"勇气；胆量"}]},
+  "course":{ph:"/kɔːs/",pos:[{p:"n.",m:"课程；过程；一道菜"}]},
+  "court":{ph:"/kɔːt/",pos:[{p:"n.",m:"法院；球场"}]},
+  "cover":{ph:"/ˈkʌvə(r)/",pos:[{p:"v.",m:"覆盖；报道"},{p:"n.",m:"封面"}]},
+  "crash":{ph:"/kræʃ/",pos:[{p:"v./n.",m:"碰撞；坠毁"}]},
+  "crazy":{ph:"/ˈkreɪzi/",pos:[{p:"adj.",m:"疯狂的；着迷的"}]},
+  "create":{ph:"/kriˈeɪt/",pos:[{p:"v.",m:"创造；创作"}]},
+  "credit":{ph:"/ˈkredɪt/",pos:[{p:"n.",m:"信用；学分；赞扬"}]},
+  "crime":{ph:"/kraɪm/",pos:[{p:"n.",m:"犯罪；罪行"}]},
+  "crisis":{ph:"/ˈkraɪsɪs/",pos:[{p:"n.",m:"危机"}]},
+  "criterion":{ph:"/kraɪˈtɪəriən/",pos:[{p:"n.",m:"标准；准则"}]},
+  "critical":{ph:"/ˈkrɪtɪkl/",pos:[{p:"adj.",m:"批评的；关键的"}]},
+  "culture":{ph:"/ˈkʌltʃə(r)/",pos:[{p:"n.",m:"文化"}]},
+  "curious":{ph:"/ˈkjʊəriəs/",pos:[{p:"adj.",m:"好奇的"}]},
+  "current":{ph:"/ˈkʌrənt/",pos:[{p:"adj.",m:"当前的"},{p:"n.",m:"潮流；电流"}]},
+  "custom":{ph:"/ˈkʌstəm/",pos:[{p:"n.",m:"习俗；风俗"}]},
+  "customer":{ph:"/ˈkʌstəmə(r)/",pos:[{p:"n.",m:"顾客"}]},
+  "cut":{ph:"/kʌt/",pos:[{p:"v.",m:"切；割；剪"}]},
+  "daily":{ph:"/ˈdeɪli/",pos:[{p:"adj./adv.",m:"每日的（地）"}]},
+
+  // ===== D =====
+  "damage":{ph:"/ˈdæmɪdʒ/",pos:[{p:"n./v.",m:"损害；损失"}]},
+  "debate":{ph:"/dɪˈbeɪt/",pos:[{p:"n./v.",m:"辩论；争论"}]},
+  "decade":{ph:"/ˈdekeɪd/",pos:[{p:"n.",m:"十年"}]},
+  "decide":{ph:"/dɪˈsaɪd/",pos:[{p:"v.",m:"决定"}]},
+  "declare":{ph:"/dɪˈkleə(r)/",pos:[{p:"v.",m:"宣布；声明"}]},
+  "decline":{ph:"/dɪˈklaɪn/",pos:[{p:"v.",m:"下降；婉拒"},{p:"n.",m:"下降"}]},
+  "decorate":{ph:"/ˈdekəreɪt/",pos:[{p:"v.",m:"装饰"}]},
+  "defeat":{ph:"/dɪˈfiːt/",pos:[{p:"v./n.",m:"击败；失败"}]},
+  "defend":{ph:"/dɪˈfend/",pos:[{p:"v.",m:"保卫；辩护"}]},
+  "degree":{ph:"/dɪˈɡriː/",pos:[{p:"n.",m:"程度；学位；度数"}]},
+  "deliver":{ph:"/dɪˈlɪvə(r)/",pos:[{p:"v.",m:"递送；发表；接生"}]},
+  "demand":{ph:"/dɪˈmɑːnd/",pos:[{p:"v./n.",m:"要求；需求"}]},
+  "department":{ph:"/dɪˈpɑːtmənt/",pos:[{p:"n.",m:"部门；系"}]},
+  "depend":{ph:"/dɪˈpend/",pos:[{p:"v.",m:"依靠；取决于"}]},
+  "describe":{ph:"/dɪˈskraɪb/",pos:[{p:"v.",m:"描述"}]},
+  "desert":{ph:"/ˈdezət/",pos:[{p:"n.",m:"沙漠"}]},
+  "deserve":{ph:"/dɪˈzɜːv/",pos:[{p:"v.",m:"值得；应得"}]},
+  "design":{ph:"/dɪˈzaɪn/",pos:[{p:"v./n.",m:"设计"}]},
+  "desire":{ph:"/dɪˈzaɪə(r)/",pos:[{p:"n./v.",m:"渴望；愿望"}]},
+  "destroy":{ph:"/dɪˈstrɔɪ/",pos:[{p:"v.",m:"破坏；毁坏"}]},
+  "detail":{ph:"/ˈdiːteɪl/",pos:[{p:"n.",m:"细节"}]},
+  "develop":{ph:"/dɪˈveləp/",pos:[{p:"v.",m:"发展；开发；培养"}]},
+  "devote":{ph:"/dɪˈvəʊt/",pos:[{p:"v.",m:"致力于；奉献"}]},
+  "diagram":{ph:"/ˈdaɪəɡræm/",pos:[{p:"n.",m:"图表；示意图"}]},
+  "dialect":{ph:"/ˈdaɪəlekt/",pos:[{p:"n.",m:"方言"}]},
+  "difference":{ph:"/ˈdɪfrəns/",pos:[{p:"n.",m:"不同；差异"}]},
+  "difficult":{ph:"/ˈdɪfɪkəlt/",pos:[{p:"adj.",m:"困难的"}]},
+  "dig":{ph:"/dɪɡ/",pos:[{p:"v.",m:"挖；掘"}]},
+  "digital":{ph:"/ˈdɪdʒɪtl/",pos:[{p:"adj.",m:"数字的；数码的"}]},
+  "dinner":{ph:"/ˈdɪnə(r)/",pos:[{p:"n.",m:"晚餐；正餐"}]},
+  "direct":{ph:"/dəˈrekt/",pos:[{p:"adj.",m:"直接的"},{p:"v.",m:"指导；导演"}]},
+  "direction":{ph:"/dəˈrekʃn/",pos:[{p:"n.",m:"方向；指导"}]},
+  "disagree":{ph:"/ˌdɪsəˈɡriː/",pos:[{p:"v.",m:"不同意"}]},
+  "disappear":{ph:"/ˌdɪsəˈpɪə(r)/",pos:[{p:"v.",m:"消失"}]},
+  "disappoint":{ph:"/ˌdɪsəˈpɔɪnt/",pos:[{p:"v.",m:"使失望"}]},
+  "discover":{ph:"/dɪˈskʌvə(r)/",pos:[{p:"v.",m:"发现"}]},
+  "discrimination":{ph:"/dɪˌskrɪmɪˈneɪʃn/",pos:[{p:"n.",m:"歧视"}]},
+  "discuss":{ph:"/dɪˈskʌs/",pos:[{p:"v.",m:"讨论"}]},
+  "disease":{ph:"/dɪˈziːz/",pos:[{p:"n.",m:"疾病"}]},
+  "dish":{ph:"/dɪʃ/",pos:[{p:"n.",m:"盘子；菜肴"}]},
+  "dismiss":{ph:"/dɪsˈmɪs/",pos:[{p:"v.",m:"解雇；解散；不予考虑"}]},
+  "distance":{ph:"/ˈdɪstəns/",pos:[{p:"n.",m:"距离"}]},
+  "distinguish":{ph:"/dɪˈstɪŋɡwɪʃ/",pos:[{p:"v.",m:"区分；辨别"}]},
+  "distribute":{ph:"/dɪˈstrɪbjuːt/",pos:[{p:"v.",m:"分配；分发"}]},
+  "district":{ph:"/ˈdɪstrɪkt/",pos:[{p:"n.",m:"地区；行政区"}]},
+  "disturb":{ph:"/dɪˈstɜːb/",pos:[{p:"v.",m:"打扰；扰乱"}]},
+  "divide":{ph:"/dɪˈvaɪd/",pos:[{p:"v.",m:"划分；分开"}]},
+  "do":{ph:"/duː/",pos:[{p:"v.",m:"做；干"}]},
+  "doubt":{ph:"/daʊt/",pos:[{p:"n./v.",m:"怀疑"}]},
+  "download":{ph:"/ˌdaʊnˈləʊd/",pos:[{p:"v./n.",m:"下载"}]},
+  "draft":{ph:"/drɑːft/",pos:[{p:"n.",m:"草稿；草案"},{p:"v.",m:"起草"}]},
+  "drag":{ph:"/dræɡ/",pos:[{p:"v.",m:"拖；拉"}]},
+  "dramatic":{ph:"/drəˈmætɪk/",pos:[{p:"adj.",m:"戏剧性的；引人注目的"}]},
+  "draw":{ph:"/drɔː/",pos:[{p:"v.",m:"画；拉；吸引"}]},
+  "dream":{ph:"/driːm/",pos:[{p:"n.",m:"梦想"},{p:"v.",m:"做梦"}]},
+  "dress":{ph:"/dres/",pos:[{p:"n.",m:"连衣裙"},{p:"v.",m:"穿衣"}]},
+  "drink":{ph:"/drɪŋk/",pos:[{p:"v.",m:"喝"},{p:"n.",m:"饮料"}]},
+  "drive":{ph:"/draɪv/",pos:[{p:"v.",m:"驾驶；驱动"}]},
+  "drop":{ph:"/drɒp/",pos:[{p:"v.",m:"落下；放弃"},{p:"n.",m:"滴"}]},
+  "drug":{ph:"/drʌɡ/",pos:[{p:"n.",m:"药；毒品"}]},
+  "duty":{ph:"/ˈdjuːti/",pos:[{p:"n.",m:"责任；义务"}]},
+
+  // ===== E =====
+  "eager":{ph:"/ˈiːɡə(r)/",pos:[{p:"adj.",m:"渴望的"}]},
+  "earn":{ph:"/ɜːn/",pos:[{p:"v.",m:"挣得；赚得"}]},
+  "earth":{ph:"/ɜːθ/",pos:[{p:"n.",m:"地球；泥土"}]},
+  "eastern":{ph:"/ˈiːstən/",pos:[{p:"adj.",m:"东方的"}]},
+  "easy":{ph:"/ˈiːzi/",pos:[{p:"adj.",m:"容易的"}]},
+  "economy":{ph:"/ɪˈkɒnəmi/",pos:[{p:"n.",m:"经济"}]},
+  "edge":{ph:"/edʒ/",pos:[{p:"n.",m:"边缘；刀刃"}]},
+  "education":{ph:"/ˌedʒuˈkeɪʃn/",pos:[{p:"n.",m:"教育"}]},
+  "effect":{ph:"/ɪˈfekt/",pos:[{p:"n.",m:"效果；影响"}]},
+  "effort":{ph:"/ˈefət/",pos:[{p:"n.",m:"努力"}]},
+  "elder":{ph:"/ˈeldə(r)/",pos:[{p:"adj.",m:"年长的"}]},
+  "elect":{ph:"/ɪˈlekt/",pos:[{p:"v.",m:"选举"}]},
+  "electric":{ph:"/ɪˈlektrɪk/",pos:[{p:"adj.",m:"电的"}]},
+  "element":{ph:"/ˈelɪmənt/",pos:[{p:"n.",m:"元素；要素"}]},
+  "embarrass":{ph:"/ɪmˈbærəs/",pos:[{p:"v.",m:"使尴尬"}]},
+  "emotion":{ph:"/ɪˈməʊʃn/",pos:[{p:"n.",m:"情感；情绪"}]},
+  "emperor":{ph:"/ˈempərə(r)/",pos:[{p:"n.",m:"皇帝"}]},
+  "employ":{ph:"/ɪmˈplɔɪ/",pos:[{p:"v.",m:"雇用；使用"}]},
+  "empty":{ph:"/ˈempti/",pos:[{p:"adj.",m:"空的"}]},
+  "enable":{ph:"/ɪˈneɪbl/",pos:[{p:"v.",m:"使能够"}]},
+  "encourage":{ph:"/ɪnˈkʌrɪdʒ/",pos:[{p:"v.",m:"鼓励"}]},
+  "end":{ph:"/end/",pos:[{p:"n./v.",m:"结束；末端"}]},
+  "energy":{ph:"/ˈenədʒi/",pos:[{p:"n.",m:"能量；精力"}]},
+  "engage":{ph:"/ɪnˈɡeɪdʒ/",pos:[{p:"v.",m:"从事；吸引；订婚"}]},
+  "engine":{ph:"/ˈendʒɪn/",pos:[{p:"n.",m:"发动机；引擎"}]},
+  "enjoy":{ph:"/ɪnˈdʒɔɪ/",pos:[{p:"v.",m:"享受；喜欢"}]},
+  "enough":{ph:"/ɪˈnʌf/",pos:[{p:"adj./adv.",m:"足够的（地）"}]},
+  "enter":{ph:"/ˈentə(r)/",pos:[{p:"v.",m:"进入"}]},
+  "entertain":{ph:"/ˌentəˈteɪn/",pos:[{p:"v.",m:"娱乐；款待"}]},
+  "entire":{ph:"/ɪnˈtaɪə(r)/",pos:[{p:"adj.",m:"整个的"}]},
+  "environment":{ph:"/ɪnˈvaɪrənmənt/",pos:[{p:"n.",m:"环境"}]},
+  "equal":{ph:"/ˈiːkwəl/",pos:[{p:"adj.",m:"平等的；相等的"}]},
+  "equipment":{ph:"/ɪˈkwɪpmənt/",pos:[{p:"n.",m:"设备；装备（不可数）"}]},
+  "error":{ph:"/ˈerə(r)/",pos:[{p:"n.",m:"错误"}]},
+  "escape":{ph:"/ɪˈskeɪp/",pos:[{p:"v./n.",m:"逃跑；逃避"}]},
+  "especially":{ph:"/ɪˈspeʃəli/",pos:[{p:"adv.",m:"特别；尤其"}]},
+  "establish":{ph:"/ɪˈstæblɪʃ/",pos:[{p:"v.",m:"建立；创立"}]},
+  "estimate":{ph:"/ˈestɪmeɪt/",pos:[{p:"v./n.",m:"估计；评估"}]},
+  "evaluate":{ph:"/ɪˈvæljueɪt/",pos:[{p:"v.",m:"评价；评估"}]},
+  "even":{ph:"/ˈiːvn/",pos:[{p:"adv.",m:"甚至"},{p:"adj.",m:"平的"}]},
+  "event":{ph:"/ɪˈvent/",pos:[{p:"n.",m:"事件；赛事"}]},
+  "eventually":{ph:"/ɪˈventʃuəli/",pos:[{p:"adv.",m:"最终"}]},
+  "ever":{ph:"/ˈevə(r)/",pos:[{p:"adv.",m:"曾经"}]},
+  "everyday":{ph:"/ˈevrideɪ/",pos:[{p:"adj.",m:"每天的；日常的"}]},
+  "evidence":{ph:"/ˈevɪdəns/",pos:[{p:"n.",m:"证据"}]},
+  "exact":{ph:"/ɪɡˈzækt/",pos:[{p:"adj.",m:"确切的"}]},
+  "exam":{ph:"/ɪɡˈzæm/",pos:[{p:"n.",m:"考试"}]},
+  "example":{ph:"/ɪɡˈzɑːmpl/",pos:[{p:"n.",m:"例子"}]},
+  "excellent":{ph:"/ˈeksələnt/",pos:[{p:"adj.",m:"优秀的"}]},
+  "except":{ph:"/ɪkˈsept/",pos:[{p:"prep.",m:"除……之外"}]},
+  "exchange":{ph:"/ɪksˈtʃeɪndʒ/",pos:[{p:"v./n.",m:"交换；交流"}]},
+  "excite":{ph:"/ɪkˈsaɪt/",pos:[{p:"v.",m:"使兴奋"}]},
+  "excuse":{ph:"/ɪkˈskjuːz/",pos:[{p:"v.",m:"原谅"},{p:"n.",m:"借口"}]},
+  "exercise":{ph:"/ˈeksəsaɪz/",pos:[{p:"n.",m:"锻炼；练习"},{p:"v.",m:"锻炼"}]},
+  "exhibition":{ph:"/ˌeksɪˈbɪʃn/",pos:[{p:"n.",m:"展览"}]},
+  "exist":{ph:"/ɪɡˈzɪst/",pos:[{p:"v.",m:"存在"}]},
+  "expect":{ph:"/ɪkˈspekt/",pos:[{p:"v.",m:"期待；预料"}]},
+  "expense":{ph:"/ɪkˈspens/",pos:[{p:"n.",m:"花费；开支"}]},
+  "experience":{ph:"/ɪkˈspɪəriəns/",pos:[{p:"n.",m:"经历（可数）；经验（不可数）"}]},
+  "experiment":{ph:"/ɪkˈsperɪmənt/",pos:[{p:"n.",m:"实验"}]},
+  "explain":{ph:"/ɪkˈspleɪn/",pos:[{p:"v.",m:"解释"}]},
+  "explore":{ph:"/ɪkˈsplɔː(r)/",pos:[{p:"v.",m:"探索"}]},
+  "export":{ph:"/ɪkˈspɔːt/",pos:[{p:"v.",m:"出口"}]},
+  "expose":{ph:"/ɪkˈspəʊz/",pos:[{p:"v.",m:"暴露；揭露"}]},
+  "express":{ph:"/ɪkˈspres/",pos:[{p:"v.",m:"表达"},{p:"adj.",m:"快速的"}]},
+  "extra":{ph:"/ˈekstrə/",pos:[{p:"adj.",m:"额外的"}]},
+  "extraordinary":{ph:"/ɪkˈstrɔːdnri/",pos:[{p:"adj.",m:"非凡的"}]},
+  "extreme":{ph:"/ɪkˈstriːm/",pos:[{p:"adj.",m:"极端的"}]},
+
+  // ===== F =====
+  "factor":{ph:"/ˈfæktə(r)/",pos:[{p:"n.",m:"因素"}]},
+  "factory":{ph:"/ˈfæktri/",pos:[{p:"n.",m:"工厂"}]},
+  "fail":{ph:"/feɪl/",pos:[{p:"v.",m:"失败；未能"}]},
+  "faint":{ph:"/feɪnt/",pos:[{p:"adj.",m:"微弱的；晕倒的"}]},
+  "fair":{ph:"/feə(r)/",pos:[{p:"adj.",m:"公平的；白皙的"}]},
+  "faith":{ph:"/feɪθ/",pos:[{p:"n.",m:"信任；信仰"}]},
+  "fall":{ph:"/fɔːl/",pos:[{p:"v.",m:"落下；跌倒"},{p:"n.",m:"秋天；落下"}]},
+  "fame":{ph:"/feɪm/",pos:[{p:"n.",m:"名声"}]},
+  "familiar":{ph:"/fəˈmɪliə(r)/",pos:[{p:"adj.",m:"熟悉的"}]},
+  "family":{ph:"/ˈfæməli/",pos:[{p:"n.",m:"家庭"}]},
+  "famous":{ph:"/ˈfeɪməs/",pos:[{p:"adj.",m:"著名的"}]},
+  "fancy":{ph:"/ˈfænsi/",pos:[{p:"adj.",m:"花哨的；精致的"},{p:"n.",m:"幻想"}]},
+  "far":{ph:"/fɑː(r)/",pos:[{p:"adj./adv.",m:"远的（地）"}]},
+  "farm":{ph:"/fɑːm/",pos:[{p:"n.",m:"农场"}]},
+  "fashion":{ph:"/ˈfæʃn/",pos:[{p:"n.",m:"时尚"}]},
+  "fast":{ph:"/fɑːst/",pos:[{p:"adj./adv.",m:"快的（地）"}]},
+  "fault":{ph:"/fɔːlt/",pos:[{p:"n.",m:"过错；故障"}]},
+  "favor":{ph:"/ˈfeɪvə(r)/",pos:[{p:"n.",m:"好感；帮助"},{p:"v.",m:"偏爱"}]},
+  "favorite":{ph:"/ˈfeɪvərɪt/",pos:[{p:"adj.",m:"最喜爱的"},{p:"n.",m:"最喜欢的人/物"}]},
+  "fear":{ph:"/fɪə(r)/",pos:[{p:"n./v.",m:"害怕；恐惧"}]},
+  "feature":{ph:"/ˈfiːtʃə(r)/",pos:[{p:"n.",m:"特征；特色"}]},
+  "federal":{ph:"/ˈfedərəl/",pos:[{p:"adj.",m:"联邦的"}]},
+  "fee":{ph:"/fiː/",pos:[{p:"n.",m:"费用"}]},
+  "feed":{ph:"/fiːd/",pos:[{p:"v.",m:"喂养；饲养"}]},
+  "feel":{ph:"/fiːl/",pos:[{p:"v.",m:"感觉；摸"}]},
+  "fellow":{ph:"/ˈfeləʊ/",pos:[{p:"n.",m:"家伙；同伴"},{p:"adj.",m:"同类的"}]},
+  "female":{ph:"/ˈfiːmeɪl/",pos:[{p:"adj.",m:"女性的；雌性的"}]},
+  "fence":{ph:"/fens/",pos:[{p:"n.",m:"栅栏；围栏"}]},
+  "festival":{ph:"/ˈfestɪvl/",pos:[{p:"n.",m:"节日"}]},
+  "fever":{ph:"/ˈfiːvə(r)/",pos:[{p:"n.",m:"发烧"}]},
+  "field":{ph:"/fiːld/",pos:[{p:"n.",m:"田野；领域；场地"}]},
+  "fight":{ph:"/faɪt/",pos:[{p:"v.",m:"战斗；打架"},{p:"n.",m:"战斗"}]},
+  "figure":{ph:"/ˈfɪɡə(r)/",pos:[{p:"n.",m:"数字；人物；身材"},{p:"v.",m:"认为"}]},
+  "file":{ph:"/faɪl/",pos:[{p:"n.",m:"文件；档案"}]},
+  "fill":{ph:"/fɪl/",pos:[{p:"v.",m:"填满"}]},
+  "film":{ph:"/fɪlm/",pos:[{p:"n.",m:"电影；胶片"}]},
+  "final":{ph:"/ˈfaɪnl/",pos:[{p:"adj.",m:"最终的"}]},
+  "finance":{ph:"/ˈfaɪnæns/",pos:[{p:"n.",m:"财政；金融"}]},
+  "fine":{ph:"/faɪn/",pos:[{p:"adj.",m:"好的；细的；罚款"}]},
+  "finger":{ph:"/ˈfɪŋɡə(r)/",pos:[{p:"n.",m:"手指"}]},
+  "finish":{ph:"/ˈfɪnɪʃ/",pos:[{p:"v.",m:"完成"}]},
+  "fire":{ph:"/ˈfaɪə(r)/",pos:[{p:"n.",m:"火"},{p:"v.",m:"解雇；开火"}]},
+  "firm":{ph:"/fɜːm/",pos:[{p:"n.",m:"公司"},{p:"adj.",m:"坚固的"}]},
+  "first":{ph:"/fɜːst/",pos:[{p:"num./adv.",m:"第一；首先"}]},
+  "fish":{ph:"/fɪʃ/",pos:[{p:"n.",m:"鱼"},{p:"v.",m:"钓鱼"}]},
+  "fit":{ph:"/fɪt/",pos:[{p:"v.",m:"适合"},{p:"adj.",m:"健康的；合身的"}]},
+  "fix":{ph:"/fɪks/",pos:[{p:"v.",m:"修理；固定"}]},
+  "flag":{ph:"/flæɡ/",pos:[{p:"n.",m:"旗帜"}]},
+  "flame":{ph:"/fleɪm/",pos:[{p:"n.",m:"火焰"}]},
+  "flash":{ph:"/flæʃ/",pos:[{p:"n./v.",m:"闪光；闪现"}]},
+  "flat":{ph:"/flæt/",pos:[{p:"adj.",m:"平的"},{p:"n.",m:"公寓"}]},
+  "flight":{ph:"/flaɪt/",pos:[{p:"n.",m:"航班；飞行"}]},
+  "float":{ph:"/fləʊt/",pos:[{p:"v.",m:"漂浮"}]},
+  "flood":{ph:"/flʌd/",pos:[{p:"n.",m:"洪水"},{p:"v.",m:"淹没"}]},
+  "floor":{ph:"/flɔː(r)/",pos:[{p:"n.",m:"地板；楼层"}]},
+  "flow":{ph:"/fləʊ/",pos:[{p:"v./n.",m:"流动"}]},
+  "flower":{ph:"/ˈflaʊə(r)/",pos:[{p:"n.",m:"花"}]},
+  "flu":{ph:"/fluː/",pos:[{p:"n.",m:"流感"}]},
+  "focus":{ph:"/ˈfəʊkəs/",pos:[{p:"v./n.",m:"集中；焦点"}]},
+  "fog":{ph:"/fɒɡ/",pos:[{p:"n.",m:"雾"}]},
+  "fold":{ph:"/fəʊld/",pos:[{p:"v.",m:"折叠"}]},
+  "follow":{ph:"/ˈfɒləʊ/",pos:[{p:"v.",m:"跟随；遵循"}]},
+  "fool":{ph:"/fuːl/",pos:[{p:"n.",m:"傻瓜"},{p:"v.",m:"愚弄"}]},
+  "foot":{ph:"/fʊt/",pos:[{p:"n.",m:"脚；英尺"}]},
+  "forbid":{ph:"/fəˈbɪd/",pos:[{p:"v.",m:"禁止"}]},
+  "force":{ph:"/fɔːs/",pos:[{p:"n.",m:"力量；武力"},{p:"v.",m:"强迫"}]},
+  "forecast":{ph:"/ˈfɔːkɑːst/",pos:[{p:"n./v.",m:"预测；预报"}]},
+  "forest":{ph:"/ˈfɒrɪst/",pos:[{p:"n.",m:"森林"}]},
+  "forever":{ph:"/fərˈevə(r)/",pos:[{p:"adv.",m:"永远"}]},
+  "forget":{ph:"/fəˈɡet/",pos:[{p:"v.",m:"忘记"}]},
+  "forgive":{ph:"/fəˈɡɪv/",pos:[{p:"v.",m:"原谅"}]},
+  "form":{ph:"/fɔːm/",pos:[{p:"n.",m:"形式；表格"},{p:"v.",m:"形成"}]},
+  "formal":{ph:"/ˈfɔːml/",pos:[{p:"adj.",m:"正式的"}]},
+  "former":{ph:"/ˈfɔːmə(r)/",pos:[{p:"adj.",m:"以前的"}]},
+  "fortune":{ph:"/ˈfɔːtʃuːn/",pos:[{p:"n.",m:"财富；运气"}]},
+  "forward":{ph:"/ˈfɔːwəd/",pos:[{p:"adv.",m:"向前"}]},
+  "found":{ph:"/faʊnd/",pos:[{p:"v.",m:"创立；建立"}]},
+  "free":{ph:"/friː/",pos:[{p:"adj.",m:"自由的；免费的"}]},
+  "freeze":{ph:"/friːz/",pos:[{p:"v.",m:"结冰；冻结"}]},
+  "fresh":{ph:"/freʃ/",pos:[{p:"adj.",m:"新鲜的"}]},
+  "friend":{ph:"/frend/",pos:[{p:"n.",m:"朋友"}]},
+  "frighten":{ph:"/ˈfraɪtn/",pos:[{p:"v.",m:"使害怕"}]},
+  "front":{ph:"/frʌnt/",pos:[{p:"n./adj.",m:"前面（的）"}]},
+  "frost":{ph:"/frɒst/",pos:[{p:"n.",m:"霜；霜冻"}]},
+  "fuel":{ph:"/ˈfjuːəl/",pos:[{p:"n.",m:"燃料"}]},
+  "full":{ph:"/fʊl/",pos:[{p:"adj.",m:"满的"}]},
+  "fun":{ph:"/fʌn/",pos:[{p:"n.",m:"乐趣"},{p:"adj.",m:"有趣的"}]},
+  "function":{ph:"/ˈfʌŋkʃn/",pos:[{p:"n.",m:"功能；作用"},{p:"v.",m:"运转"}]},
+  "fund":{ph:"/fʌnd/",pos:[{p:"n.",m:"基金；资金"}]},
+  "funny":{ph:"/ˈfʌni/",pos:[{p:"adj.",m:"有趣的；滑稽的"}]},
+  "future":{ph:"/ˈfjuːtʃə(r)/",pos:[{p:"n.",m:"将来；未来"}]},
+
+  // ===== G =====
+  "gain":{ph:"/ɡeɪn/",pos:[{p:"v./n.",m:"获得；增加"}]},
+  "gap":{ph:"/ɡæp/",pos:[{p:"n.",m:"间隙；差距"}]},
+  "garage":{ph:"/ˈɡærɑːʒ/",pos:[{p:"n.",m:"车库"}]},
+  "garden":{ph:"/ˈɡɑːdn/",pos:[{p:"n.",m:"花园"}]},
+  "gather":{ph:"/ˈɡæðə(r)/",pos:[{p:"v.",m:"聚集；收集"}]},
+  "general":{ph:"/ˈdʒenrəl/",pos:[{p:"adj.",m:"一般的；总的"},{p:"n.",m:"将军"}]},
+  "generation":{ph:"/ˌdʒenəˈreɪʃn/",pos:[{p:"n.",m:"一代；产生"}]},
+  "generous":{ph:"/ˈdʒenərəs/",pos:[{p:"adj.",m:"慷慨的；大方的"}]},
+  "gentle":{ph:"/ˈdʒentl/",pos:[{p:"adj.",m:"温柔的；温和的"}]},
+  "gentleman":{ph:"/ˈdʒentlmən/",pos:[{p:"n.",m:"绅士"}]},
+  "geography":{ph:"/dʒiˈɒɡrəfi/",pos:[{p:"n.",m:"地理"}]},
+  "gift":{ph:"/ɡɪft/",pos:[{p:"n.",m:"礼物；天赋"}]},
+  "girl":{ph:"/ɡɜːl/",pos:[{p:"n.",m:"女孩"}]},
+  "give":{ph:"/ɡɪv/",pos:[{p:"v.",m:"给；给予"}]},
+  "glad":{ph:"/ɡlæd/",pos:[{p:"adj.",m:"高兴的"}]},
+  "global":{ph:"/ˈɡləʊbl/",pos:[{p:"adj.",m:"全球的"}]},
+  "glory":{ph:"/ˈɡlɔːri/",pos:[{p:"n.",m:"光荣；荣耀"}]},
+  "goal":{ph:"/ɡəʊl/",pos:[{p:"n.",m:"目标；进球"}]},
+  "gold":{ph:"/ɡəʊld/",pos:[{p:"n.",m:"金子"},{p:"adj.",m:"金色的"}]},
+  "good":{ph:"/ɡʊd/",pos:[{p:"adj.",m:"好的"}]},
+  "goods":{ph:"/ɡʊdz/",pos:[{p:"n.",m:"商品；货物"}]},
+  "govern":{ph:"/ˈɡʌvn/",pos:[{p:"v.",m:"统治；管理"}]},
+  "grade":{ph:"/ɡreɪd/",pos:[{p:"n.",m:"年级；成绩；等级"}]},
+  "gradual":{ph:"/ˈɡrædʒuəl/",pos:[{p:"adj.",m:"逐渐的"}]},
+  "graduate":{ph:"/ˈɡrædʒueɪt/",pos:[{p:"v.",m:"毕业"},{p:"n.",m:"毕业生"}]},
+  "grain":{ph:"/ɡreɪn/",pos:[{p:"n.",m:"谷物；颗粒"}]},
+  "grand":{ph:"/ɡrænd/",pos:[{p:"adj.",m:"宏伟的；盛大的"}]},
+  "grandfather":{ph:"/ˈɡrænfɑːðə(r)/",pos:[{p:"n.",m:"祖父"}]},
+  "grandmother":{ph:"/ˈɡrændmʌðə(r)/",pos:[{p:"n.",m:"祖母"}]},
+  "grant":{ph:"/ɡrɑːnt/",pos:[{p:"v.",m:"授予；同意"},{p:"n.",m:"拨款"}]},
+  "grateful":{ph:"/ˈɡreɪtfl/",pos:[{p:"adj.",m:"感激的"}]},
+  "gravity":{ph:"/ˈɡrævəti/",pos:[{p:"n.",m:"重力；严肃"}]},
+  "great":{ph:"/ɡreɪt/",pos:[{p:"adj.",m:"伟大的；极好的"}]},
+  "green":{ph:"/ɡriːn/",pos:[{p:"adj.",m:"绿色的；环保的"}]},
+  "greet":{ph:"/ɡriːt/",pos:[{p:"v.",m:"问候"}]},
+  "ground":{ph:"/ɡraʊnd/",pos:[{p:"n.",m:"地面"}]},
+  "group":{ph:"/ɡruːp/",pos:[{p:"n.",m:"组；群"}]},
+  "grow":{ph:"/ɡrəʊ/",pos:[{p:"v.",m:"生长；种植；成长"}]},
+  "growth":{ph:"/ɡrəʊθ/",pos:[{p:"n.",m:"增长；生长"}]},
+  "guard":{ph:"/ɡɑːd/",pos:[{p:"n.",m:"警卫"},{p:"v.",m:"保卫"}]},
+  "guess":{ph:"/ɡes/",pos:[{p:"v./n.",m:"猜测"}]},
+  "guest":{ph:"/ɡest/",pos:[{p:"n.",m:"客人"}]},
+  "guide":{ph:"/ɡaɪd/",pos:[{p:"n.",m:"导游"},{p:"v.",m:"指导"}]},
+  "guilty":{ph:"/ˈɡɪlti/",pos:[{p:"adj.",m:"有罪的；内疚的"}]},
+  "guitar":{ph:"/ɡɪˈtɑː(r)/",pos:[{p:"n.",m:"吉他"}]},
+  "gym":{ph:"/dʒɪm/",pos:[{p:"n.",m:"体育馆；健身房"}]},
+
+  // ===== H =====
+  "habit":{ph:"/ˈhæbɪt/",pos:[{p:"n.",m:"习惯"}]},
+  "hair":{ph:"/heə(r)/",pos:[{p:"n.",m:"头发"}]},
+  "half":{ph:"/hɑːf/",pos:[{p:"n./adj.",m:"一半（的）"}]},
+  "hall":{ph:"/hɔːl/",pos:[{p:"n.",m:"大厅；礼堂"}]},
+  "ham":{ph:"/hæm/",pos:[{p:"n.",m:"火腿"}]},
+  "hand":{ph:"/hænd/",pos:[{p:"n.",m:"手"},{p:"v.",m:"传递"}]},
+  "handle":{ph:"/ˈhændl/",pos:[{p:"n.",m:"把手"},{p:"v.",m:"处理"}]},
+  "hang":{ph:"/hæŋ/",pos:[{p:"v.",m:"悬挂；闲逛"}]},
+  "happen":{ph:"/ˈhæpən/",pos:[{p:"v.",m:"发生"}]},
+  "happiness":{ph:"/ˈhæpinəs/",pos:[{p:"n.",m:"幸福"}]},
+  "happy":{ph:"/ˈhæpi/",pos:[{p:"adj.",m:"高兴的；幸福的"}]},
+  "hard":{ph:"/hɑːd/",pos:[{p:"adj.",m:"硬的；困难的"},{p:"adv.",m:"努力地"}]},
+  "hardly":{ph:"/ˈhɑːdli/",pos:[{p:"adv.",m:"几乎不"}]},
+  "harm":{ph:"/hɑːm/",pos:[{p:"n./v.",m:"伤害"}]},
+  "harvest":{ph:"/ˈhɑːvɪst/",pos:[{p:"n./v.",m:"收获；收割"}]},
+  "hat":{ph:"/hæt/",pos:[{p:"n.",m:"帽子"}]},
+  "hate":{ph:"/heɪt/",pos:[{p:"v./n.",m:"憎恨"}]},
+  "have":{ph:"/hæv/",pos:[{p:"v.",m:"有；吃；喝"}]},
+  "head":{ph:"/hed/",pos:[{p:"n.",m:"头；领导"},{p:"v.",m:"朝……去"}]},
+  "health":{ph:"/helθ/",pos:[{p:"n.",m:"健康"}]},
+  "hear":{ph:"/hɪə(r)/",pos:[{p:"v.",m:"听见"}]},
+  "heart":{ph:"/hɑːt/",pos:[{p:"n.",m:"心；内心"}]},
+  "heat":{ph:"/hiːt/",pos:[{p:"n.",m:"热"},{p:"v.",m:"加热"}]},
+  "heaven":{ph:"/ˈhevn/",pos:[{p:"n.",m:"天堂"}]},
+  "heavy":{ph:"/ˈhevi/",pos:[{p:"adj.",m:"重的"}]},
+  "height":{ph:"/haɪt/",pos:[{p:"n.",m:"高度"}]},
+  "helicopter":{ph:"/ˈhelɪkɒptə(r)/",pos:[{p:"n.",m:"直升机"}]},
+  "help":{ph:"/help/",pos:[{p:"v./n.",m:"帮助"}]},
+  "her":{ph:"/hɜː(r)/",pos:[{p:"pron.",m:"她；她的"}]},
+  "hero":{ph:"/ˈhɪərəʊ/",pos:[{p:"n.",m:"英雄"}]},
+  "hide":{ph:"/haɪd/",pos:[{p:"v.",m:"隐藏"}]},
+  "high":{ph:"/haɪ/",pos:[{p:"adj./adv.",m:"高的（地）"}]},
+  "highway":{ph:"/ˈhaɪweɪ/",pos:[{p:"n.",m:"公路"}]},
+  "hill":{ph:"/hɪl/",pos:[{p:"n.",m:"小山"}]},
+  "history":{ph:"/ˈhɪstri/",pos:[{p:"n.",m:"历史"}]},
+  "hit":{ph:"/hɪt/",pos:[{p:"v.",m:"打；击；碰撞"},{p:"n.",m:"击中"}]},
+  "hobby":{ph:"/ˈhɒbi/",pos:[{p:"n.",m:"爱好"}]},
+  "hold":{ph:"/həʊld/",pos:[{p:"v.",m:"握住；举办；容纳"}]},
+  "hole":{ph:"/həʊl/",pos:[{p:"n.",m:"洞"}]},
+  "holiday":{ph:"/ˈhɒlədeɪ/",pos:[{p:"n.",m:"假期；节日"}]},
+  "home":{ph:"/həʊm/",pos:[{p:"n.",m:"家"},{p:"adv.",m:"在家"}]},
+  "honest":{ph:"/ˈɒnɪst/",pos:[{p:"adj.",m:"诚实的"}]},
+  "honey":{ph:"/ˈhʌni/",pos:[{p:"n.",m:"蜂蜜"}]},
+  "honor":{ph:"/ˈɒnə(r)/",pos:[{p:"n.",m:"荣誉"},{p:"v.",m:"尊敬"}]},
+  "hope":{ph:"/həʊp/",pos:[{p:"v./n.",m:"希望"}]},
+  "horizon":{ph:"/həˈraɪzn/",pos:[{p:"n.",m:"地平线；视野"}]},
+  "horse":{ph:"/hɔːs/",pos:[{p:"n.",m:"马"}]},
+  "hospital":{ph:"/ˈhɒspɪtl/",pos:[{p:"n.",m:"医院"}]},
+  "host":{ph:"/həʊst/",pos:[{p:"n.",m:"主人；主持人"},{p:"v.",m:"主办"}]},
+  "hot":{ph:"/hɒt/",pos:[{p:"adj.",m:"热的；辣的"}]},
+  "hotel":{ph:"/həʊˈtel/",pos:[{p:"n.",m:"酒店"}]},
+  "hour":{ph:"/ˈaʊə(r)/",pos:[{p:"n.",m:"小时"}]},
+  "house":{ph:"/haʊs/",pos:[{p:"n.",m:"房子"}]},
+  "housework":{ph:"/ˈhaʊswɜːk/",pos:[{p:"n.",m:"家务"}]},
+  "how":{ph:"/haʊ/",pos:[{p:"adv.",m:"怎样；如何"}]},
+  "however":{ph:"/haʊˈevə(r)/",pos:[{p:"adv.",m:"然而；无论如何"}]},
+  "huge":{ph:"/hjuːdʒ/",pos:[{p:"adj.",m:"巨大的"}]},
+  "human":{ph:"/ˈhjuːmən/",pos:[{p:"n.",m:"人；人类"},{p:"adj.",m:"人的"}]},
+  "humorous":{ph:"/ˈhjuːmərəs/",pos:[{p:"adj.",m:"幽默的"}]},
+  "hunger":{ph:"/ˈhʌŋɡə(r)/",pos:[{p:"n.",m:"饥饿"}]},
+  "hunt":{ph:"/hʌnt/",pos:[{p:"v./n.",m:"打猎；搜寻"}]},
+  "hurry":{ph:"/ˈhʌri/",pos:[{p:"v./n.",m:"匆忙"}]},
+  "hurt":{ph:"/hɜːt/",pos:[{p:"v.",m:"伤害；疼痛"}]},
+  "husband":{ph:"/ˈhʌzbənd/",pos:[{p:"n.",m:"丈夫"}]},
+
+  // ===== I =====
+  "ice":{ph:"/aɪs/",pos:[{p:"n.",m:"冰"}]},
+  "idea":{ph:"/aɪˈdɪə/",pos:[{p:"n.",m:"主意；想法"}]},
+  "ideal":{ph:"/aɪˈdiːəl/",pos:[{p:"adj.",m:"理想的"},{p:"n.",m:"理想"}]},
+  "identify":{ph:"/aɪˈdentɪfaɪ/",pos:[{p:"v.",m:"识别；认出"}]},
+  "ignore":{ph:"/ɪɡˈnɔː(r)/",pos:[{p:"v.",m:"忽视"}]},
+  "ill":{ph:"/ɪl/",pos:[{p:"adj.",m:"生病的"}]},
+  "illegal":{ph:"/ɪˈliːɡl/",pos:[{p:"adj.",m:"非法的"}]},
+  "illness":{ph:"/ˈɪlnəs/",pos:[{p:"n.",m:"疾病"}]},
+  "imagine":{ph:"/ɪˈmædʒɪn/",pos:[{p:"v.",m:"想象"}]},
+  "immediate":{ph:"/ɪˈmiːdiət/",pos:[{p:"adj.",m:"立即的"}]},
+  "import":{ph:"/ɪmˈpɔːt/",pos:[{p:"v.",m:"进口"},{p:"n.",m:"进口；重要性"}]},
+  "important":{ph:"/ɪmˈpɔːtnt/",pos:[{p:"adj.",m:"重要的"}]},
+  "impossible":{ph:"/ɪmˈpɒsəbl/",pos:[{p:"adj.",m:"不可能的"}]},
+  "improve":{ph:"/ɪmˈpruːv/",pos:[{p:"v.",m:"改进；提高"}]},
+  "in":{ph:"/ɪn/",pos:[{p:"prep.",m:"在……里"}]},
+  "inch":{ph:"/ɪntʃ/",pos:[{p:"n.",m:"英寸"}]},
+  "incident":{ph:"/ˈɪnsɪdənt/",pos:[{p:"n.",m:"事件"}]},
+  "include":{ph:"/ɪnˈkluːd/",pos:[{p:"v.",m:"包括"}]},
+  "income":{ph:"/ˈɪnkʌm/",pos:[{p:"n.",m:"收入"}]},
+  "increase":{ph:"/ɪnˈkriːs/",pos:[{p:"v./n.",m:"增加"}]},
+  "indeed":{ph:"/ɪnˈdiːd/",pos:[{p:"adv.",m:"的确"}]},
+  "independence":{ph:"/ˌɪndɪˈpendəns/",pos:[{p:"n.",m:"独立"}]},
+  "independent":{ph:"/ˌɪndɪˈpendənt/",pos:[{p:"adj.",m:"独立的"}]},
+  "indoor":{ph:"/ˈɪndɔː(r)/",pos:[{p:"adj.",m:"室内的"}]},
+  "industry":{ph:"/ˈɪndəstri/",pos:[{p:"n.",m:"工业；行业"}]},
+  "influence":{ph:"/ˈɪnfluəns/",pos:[{p:"n./v.",m:"影响"}]},
+  "inform":{ph:"/ɪnˈfɔːm/",pos:[{p:"v.",m:"通知；告知"}]},
+  "information":{ph:"/ˌɪnfəˈmeɪʃn/",pos:[{p:"n.",m:"信息（不可数）"}]},
+  "initial":{ph:"/ɪˈnɪʃl/",pos:[{p:"adj.",m:"最初的"},{p:"n.",m:"首字母"}]},
+  "injury":{ph:"/ˈɪndʒəri/",pos:[{p:"n.",m:"伤害；受伤"}]},
+  "innocent":{ph:"/ˈɪnəsnt/",pos:[{p:"adj.",m:"无辜的；天真的"}]},
+  "inspire":{ph:"/ɪnˈspaɪə(r)/",pos:[{p:"v.",m:"激励；启发"}]},
+  "install":{ph:"/ɪnˈstɔːl/",pos:[{p:"v.",m:"安装"}]},
+  "instance":{ph:"/ˈɪnstəns/",pos:[{p:"n.",m:"例子；实例"}]},
+  "instead":{ph:"/ɪnˈsted/",pos:[{p:"adv.",m:"代替；反而"}]},
+  "institute":{ph:"/ˈɪnstɪtjuːt/",pos:[{p:"n.",m:"学院；研究所"}]},
+  "institution":{ph:"/ˌɪnstɪˈtjuːʃn/",pos:[{p:"n.",m:"机构；制度"}]},
+  "instruct":{ph:"/ɪnˈstrʌkt/",pos:[{p:"v.",m:"指示；教导"}]},
+  "instrument":{ph:"/ˈɪnstrəmənt/",pos:[{p:"n.",m:"仪器；乐器"}]},
+  "insurance":{ph:"/ɪnˈʃʊərəns/",pos:[{p:"n.",m:"保险"}]},
+  "intend":{ph:"/ɪnˈtend/",pos:[{p:"v.",m:"打算"}]},
+  "interest":{ph:"/ˈɪntrəst/",pos:[{p:"n.",m:"兴趣；利息"},{p:"v.",m:"使感兴趣"}]},
+  "interesting":{ph:"/ˈɪntrəstɪŋ/",pos:[{p:"adj.",m:"有趣的"}]},
+  "international":{ph:"/ˌɪntəˈnæʃnəl/",pos:[{p:"adj.",m:"国际的"}]},
+  "internet":{ph:"/ˈɪntənet/",pos:[{p:"n.",m:"互联网"}]},
+  "interview":{ph:"/ˈɪntəvjuː/",pos:[{p:"n./v.",m:"面试；采访"}]},
+  "into":{ph:"/ˈɪntuː/",pos:[{p:"prep.",m:"进入"}]},
+  "introduce":{ph:"/ˌɪntrəˈdjuːs/",pos:[{p:"v.",m:"介绍"}]},
+  "invent":{ph:"/ɪnˈvent/",pos:[{p:"v.",m:"发明"}]},
+  "invite":{ph:"/ɪnˈvaɪt/",pos:[{p:"v.",m:"邀请"}]},
+  "involve":{ph:"/ɪnˈvɒlv/",pos:[{p:"v.",m:"涉及；参与"}]},
+  "iron":{ph:"/ˈaɪən/",pos:[{p:"n.",m:"铁；熨斗"}]},
+  "island":{ph:"/ˈaɪlənd/",pos:[{p:"n.",m:"岛"}]},
+  "issue":{ph:"/ˈɪʃuː/",pos:[{p:"n.",m:"问题；发行"},{p:"v.",m:"发行"}]},
+  "it":{ph:"/ɪt/",pos:[{p:"pron.",m:"它"}]},
+
+  // ===== J =====
+  "jacket":{ph:"/ˈdʒækɪt/",pos:[{p:"n.",m:"夹克"}]},
+  "job":{ph:"/dʒɒb/",pos:[{p:"n.",m:"工作"}]},
+  "join":{ph:"/dʒɔɪn/",pos:[{p:"v.",m:"加入；参加"}]},
+  "joke":{ph:"/dʒəʊk/",pos:[{p:"n.",m:"笑话"},{p:"v.",m:"开玩笑"}]},
+  "journalist":{ph:"/ˈdʒɜːnəlɪst/",pos:[{p:"n.",m:"记者"}]},
+  "journey":{ph:"/ˈdʒɜːni/",pos:[{p:"n.",m:"旅程"}]},
+  "joy":{ph:"/dʒɔɪ/",pos:[{p:"n.",m:"快乐"}]},
+  "judge":{ph:"/dʒʌdʒ/",pos:[{p:"n.",m:"法官；裁判"},{p:"v.",m:"判断"}]},
+  "juice":{ph:"/dʒuːs/",pos:[{p:"n.",m:"果汁"}]},
+  "jump":{ph:"/dʒʌmp/",pos:[{p:"v./n.",m:"跳"}]},
+  "junior":{ph:"/ˈdʒuːniə(r)/",pos:[{p:"adj.",m:"初级的；年少的"}]},
+  "just":{ph:"/dʒʌst/",pos:[{p:"adv.",m:"刚刚；仅仅"}]},
+  "justice":{ph:"/ˈdʒʌstɪs/",pos:[{p:"n.",m:"正义；司法"}]},
+
+  // ===== K =====
+  "keep":{ph:"/kiːp/",pos:[{p:"v.",m:"保持；保存"}]},
+  "key":{ph:"/kiː/",pos:[{p:"n.",m:"钥匙；关键"},{p:"adj.",m:"关键的"}]},
+  "kick":{ph:"/kɪk/",pos:[{p:"v./n.",m:"踢"}]},
+  "kid":{ph:"/kɪd/",pos:[{p:"n.",m:"小孩"},{p:"v.",m:"开玩笑"}]},
+  "kill":{ph:"/kɪl/",pos:[{p:"v.",m:"杀死"}]},
+  "kilo":{ph:"/ˈkiːləʊ/",pos:[{p:"n.",m:"千克"}]},
+  "kilometre":{ph:"/kɪˈlɒmɪtə(r)/",pos:[{p:"n.",m:"千米"}]},
+  "king":{ph:"/kɪŋ/",pos:[{p:"n.",m:"国王"}]},
+  "kiss":{ph:"/kɪs/",pos:[{p:"v./n.",m:"吻"}]},
+  "kitchen":{ph:"/ˈkɪtʃɪn/",pos:[{p:"n.",m:"厨房"}]},
+  "knee":{ph:"/niː/",pos:[{p:"n.",m:"膝盖"}]},
+  "knife":{ph:"/naɪf/",pos:[{p:"n.",m:"刀"}]},
+  "knock":{ph:"/nɒk/",pos:[{p:"v./n.",m:"敲；击"}]},
+  "know":{ph:"/nəʊ/",pos:[{p:"v.",m:"知道；认识"}]},
+  "knowledge":{ph:"/ˈnɒlɪdʒ/",pos:[{p:"n.",m:"知识"}]},
+
+  // ===== L =====
+  "lab":{ph:"/læb/",pos:[{p:"n.",m:"实验室"}]},
+  "lack":{ph:"/læk/",pos:[{p:"n./v.",m:"缺乏"}]},
+  "lady":{ph:"/ˈleɪdi/",pos:[{p:"n.",m:"女士"}]},
+  "lake":{ph:"/leɪk/",pos:[{p:"n.",m:"湖"}]},
+  "lamp":{ph:"/læmp/",pos:[{p:"n.",m:"灯"}]},
+  "land":{ph:"/lænd/",pos:[{p:"n.",m:"陆地；土地"},{p:"v.",m:"着陆"}]},
+  "language":{ph:"/ˈlæŋɡwɪdʒ/",pos:[{p:"n.",m:"语言"}]},
+  "large":{ph:"/lɑːdʒ/",pos:[{p:"adj.",m:"大的"}]},
+  "last":{ph:"/lɑːst/",pos:[{p:"adj.",m:"最后的；上一个的"},{p:"v.",m:"持续"}]},
+  "late":{ph:"/leɪt/",pos:[{p:"adj./adv.",m:"迟的（地）；晚的（地）"}]},
+  "laugh":{ph:"/lɑːf/",pos:[{p:"v./n.",m:"笑"}]},
+  "law":{ph:"/lɔː/",pos:[{p:"n.",m:"法律"}]},
+  "lawyer":{ph:"/ˈlɔːjə(r)/",pos:[{p:"n.",m:"律师"}]},
+  "lay":{ph:"/leɪ/",pos:[{p:"v.",m:"放置；下蛋"}]},
+  "lazy":{ph:"/ˈleɪzi/",pos:[{p:"adj.",m:"懒惰的"}]},
+  "lead":{ph:"/liːd/",pos:[{p:"v.",m:"带领；领导"},{p:"n.",m:"领先"}]},
+  "leader":{ph:"/ˈliːdə(r)/",pos:[{p:"n.",m:"领导者"}]},
+  "leaf":{ph:"/liːf/",pos:[{p:"n.",m:"叶子（复 leaves）"}]},
+  "learn":{ph:"/lɜːn/",pos:[{p:"v.",m:"学习"}]},
+  "least":{ph:"/liːst/",pos:[{p:"adj./adv.",m:"最少的（地）"}]},
+  "leave":{ph:"/liːv/",pos:[{p:"v.",m:"离开；留下"}]},
+  "left":{ph:"/left/",pos:[{p:"adj./n.",m:"左边（的）"}]},
+  "leg":{ph:"/leɡ/",pos:[{p:"n.",m:"腿"}]},
+  "legal":{ph:"/ˈliːɡl/",pos:[{p:"adj.",m:"合法的"}]},
+  "lemon":{ph:"/ˈlemən/",pos:[{p:"n.",m:"柠檬"}]},
+  "lend":{ph:"/lend/",pos:[{p:"v.",m:"借出"}]},
+  "length":{ph:"/leŋθ/",pos:[{p:"n.",m:"长度"}]},
+  "less":{ph:"/les/",pos:[{p:"adj./adv.",m:"较少的（地）"}]},
+  "lesson":{ph:"/ˈlesn/",pos:[{p:"n.",m:"课；教训"}]},
+  "let":{ph:"/let/",pos:[{p:"v.",m:"让"}]},
+  "letter":{ph:"/ˈletə(r)/",pos:[{p:"n.",m:"信；字母"}]},
+  "level":{ph:"/ˈlevl/",pos:[{p:"n.",m:"水平；等级"}]},
+  "library":{ph:"/ˈlaɪbrəri/",pos:[{p:"n.",m:"图书馆"}]},
+  "lie":{ph:"/laɪ/",pos:[{p:"v.",m:"躺；位于；说谎"},{p:"n.",m:"谎言"}]},
+  "life":{ph:"/laɪf/",pos:[{p:"n.",m:"生命；生活"}]},
+  "lift":{ph:"/lɪft/",pos:[{p:"v.",m:"举起"},{p:"n.",m:"电梯"}]},
+  "light":{ph:"/laɪt/",pos:[{p:"n.",m:"光；灯"},{p:"adj.",m:"轻的；浅色的"},{p:"v.",m:"点燃"}]},
+  "like":{ph:"/laɪk/",pos:[{p:"v.",m:"喜欢"},{p:"prep.",m:"像"}]},
+  "likely":{ph:"/ˈlaɪkli/",pos:[{p:"adj./adv.",m:"可能的（地）"}]},
+  "limit":{ph:"/ˈlɪmɪt/",pos:[{p:"n./v.",m:"限制"}]},
+  "line":{ph:"/laɪn/",pos:[{p:"n.",m:"线；排；台词"}]},
+  "link":{ph:"/lɪŋk/",pos:[{p:"n./v.",m:"连接；联系"}]},
+  "lion":{ph:"/ˈlaɪən/",pos:[{p:"n.",m:"狮子"}]},
+  "list":{ph:"/lɪst/",pos:[{p:"n.",m:"清单"},{p:"v.",m:"列出"}]},
+  "listen":{ph:"/ˈlɪsn/",pos:[{p:"v.",m:"听"}]},
+  "little":{ph:"/ˈlɪtl/",pos:[{p:"adj.",m:"小的；少的"}]},
+  "live":{ph:"/lɪv/",pos:[{p:"v.",m:"居住；生活"},{p:"adj.",m:"现场的"}]},
+  "lively":{ph:"/ˈlaɪvli/",pos:[{p:"adj.",m:"活泼的"}]},
+  "load":{ph:"/ləʊd/",pos:[{p:"n./v.",m:"装载；负荷"}]},
+  "loan":{ph:"/ləʊn/",pos:[{p:"n.",m:"贷款"}]},
+  "local":{ph:"/ˈləʊkl/",pos:[{p:"adj.",m:"当地的"}]},
+  "lock":{ph:"/lɒk/",pos:[{p:"n./v.",m:"锁"}]},
+  "lonely":{ph:"/ˈləʊnli/",pos:[{p:"adj.",m:"孤独的"}]},
+  "long":{ph:"/lɒŋ/",pos:[{p:"adj.",m:"长的"},{p:"v.",m:"渴望"}]},
+  "look":{ph:"/lʊk/",pos:[{p:"v./n.",m:"看；看起来"}]},
+  "loose":{ph:"/luːs/",pos:[{p:"adj.",m:"松的"}]},
+  "lose":{ph:"/luːz/",pos:[{p:"v.",m:"丢失；输"}]},
+  "loss":{ph:"/lɒs/",pos:[{p:"n.",m:"损失；丢失"}]},
+  "lot":{ph:"/lɒt/",pos:[{p:"n.",m:"许多"}]},
+  "loud":{ph:"/laʊd/",pos:[{p:"adj./adv.",m:"大声的（地）"}]},
+  "love":{ph:"/lʌv/",pos:[{p:"v./n.",m:"爱"}]},
+  "low":{ph:"/ləʊ/",pos:[{p:"adj./adv.",m:"低的（地）"}]},
+  "luck":{ph:"/lʌk/",pos:[{p:"n.",m:"运气"}]},
+  "lucky":{ph:"/ˈlʌki/",pos:[{p:"adj.",m:"幸运的"}]},
+  "lunch":{ph:"/lʌntʃ/",pos:[{p:"n.",m:"午餐"}]},
+  "lung":{ph:"/lʌŋ/",pos:[{p:"n.",m:"肺"}]},
+
+  // ===== M =====
+  "machine":{ph:"/məˈʃiːn/",pos:[{p:"n.",m:"机器"}]},
+  "mad":{ph:"/mæd/",pos:[{p:"adj.",m:"发疯的；生气的"}]},
+  "magazine":{ph:"/ˌmæɡəˈziːn/",pos:[{p:"n.",m:"杂志"}]},
+  "mail":{ph:"/meɪl/",pos:[{p:"n.",m:"邮件"},{p:"v.",m:"邮寄"}]},
+  "main":{ph:"/meɪn/",pos:[{p:"adj.",m:"主要的"}]},
+  "major":{ph:"/ˈmeɪdʒə(r)/",pos:[{p:"adj.",m:"主要的；较大的"},{p:"n.",m:"专业"}]},
+  "majority":{ph:"/məˈdʒɒrəti/",pos:[{p:"n.",m:"大多数"}]},
+  "make":{ph:"/meɪk/",pos:[{p:"v.",m:"制作；使"}]},
+  "male":{ph:"/meɪl/",pos:[{p:"adj.",m:"男性的；雄性的"}]},
+  "man":{ph:"/mæn/",pos:[{p:"n.",m:"男人；人"}]},
+  "manage":{ph:"/ˈmænɪdʒ/",pos:[{p:"v.",m:"管理；设法"}]},
+  "manager":{ph:"/ˈmænɪdʒə(r)/",pos:[{p:"n.",m:"经理"}]},
+  "many":{ph:"/ˈmeni/",pos:[{p:"adj./pron.",m:"许多"}]},
+  "map":{ph:"/mæp/",pos:[{p:"n.",m:"地图"}]},
+  "march":{ph:"/mɑːtʃ/",pos:[{p:"v./n.",m:"行进；游行"}]},
+  "mark":{ph:"/mɑːk/",pos:[{p:"n.",m:"记号；分数"},{p:"v.",m:"做标记"}]},
+  "market":{ph:"/ˈmɑːkɪt/",pos:[{p:"n.",m:"市场"}]},
+  "marry":{ph:"/ˈmæri/",pos:[{p:"v.",m:"结婚"}]},
+  "match":{ph:"/mætʃ/",pos:[{p:"n.",m:"比赛；火柴"},{p:"v.",m:"匹配"}]},
+  "material":{ph:"/məˈtɪəriəl/",pos:[{p:"n.",m:"材料；资料"}]},
+  "math":{ph:"/mæθ/",pos:[{p:"n.",m:"数学"}]},
+  "matter":{ph:"/ˈmætə(r)/",pos:[{p:"n.",m:"事情；物质"},{p:"v.",m:"要紧"}]},
+  "may":{ph:"/meɪ/",pos:[{p:"modal v.",m:"可能；可以"}]},
+  "maybe":{ph:"/ˈmeɪbi/",pos:[{p:"adv.",m:"也许"}]},
+  "me":{ph:"/miː/",pos:[{p:"pron.",m:"我（宾格）"}]},
+  "meal":{ph:"/miːl/",pos:[{p:"n.",m:"一餐"}]},
+  "mean":{ph:"/miːn/",pos:[{p:"v.",m:"意思是"},{p:"adj.",m:"吝啬的"}]},
+  "meaning":{ph:"/ˈmiːnɪŋ/",pos:[{p:"n.",m:"意思"}]},
+  "measure":{ph:"/ˈmeʒə(r)/",pos:[{p:"v.",m:"测量"},{p:"n.",m:"措施"}]},
+  "meat":{ph:"/miːt/",pos:[{p:"n.",m:"肉"}]},
+  "medical":{ph:"/ˈmedɪkl/",pos:[{p:"adj.",m:"医学的"}]},
+  "medicine":{ph:"/ˈmedsn/",pos:[{p:"n.",m:"药；医学"}]},
+  "meet":{ph:"/miːt/",pos:[{p:"v.",m:"遇见；会面"}]},
+  "meeting":{ph:"/ˈmiːtɪŋ/",pos:[{p:"n.",m:"会议"}]},
+  "member":{ph:"/ˈmembə(r)/",pos:[{p:"n.",m:"成员"}]},
+  "memory":{ph:"/ˈmeməri/",pos:[{p:"n.",m:"记忆；回忆"}]},
+  "mention":{ph:"/ˈmenʃn/",pos:[{p:"v./n.",m:"提到"}]},
+  "menu":{ph:"/ˈmenjuː/",pos:[{p:"n.",m:"菜单"}]},
+  "merchant":{ph:"/ˈmɜːtʃənt/",pos:[{p:"n.",m:"商人"}]},
+  "message":{ph:"/ˈmesɪdʒ/",pos:[{p:"n.",m:"信息；口信"}]},
+  "metal":{ph:"/ˈmetl/",pos:[{p:"n.",m:"金属"}]},
+  "method":{ph:"/ˈmeθəd/",pos:[{p:"n.",m:"方法"}]},
+  "middle":{ph:"/ˈmɪdl/",pos:[{p:"n./adj.",m:"中间（的）"}]},
+  "might":{ph:"/maɪt/",pos:[{p:"modal v.",m:"可能"},{p:"n.",m:"力量"}]},
+  "mild":{ph:"/maɪld/",pos:[{p:"adj.",m:"温和的；轻微的"}]},
+  "mile":{ph:"/maɪl/",pos:[{p:"n.",m:"英里"}]},
+  "milk":{ph:"/mɪlk/",pos:[{p:"n.",m:"牛奶"}]},
+  "mind":{ph:"/maɪnd/",pos:[{p:"n.",m:"头脑；思想"},{p:"v.",m:"介意"}]},
+  "mine":{ph:"/maɪn/",pos:[{p:"pron.",m:"我的"},{p:"n.",m:"矿"}]},
+  "minute":{ph:"/ˈmɪnɪt/",pos:[{p:"n.",m:"分钟"}]},
+  "mirror":{ph:"/ˈmɪrə(r)/",pos:[{p:"n.",m:"镜子"}]},
+  "miss":{ph:"/mɪs/",pos:[{p:"v.",m:"想念；错过"}]},
+  "mistake":{ph:"/mɪˈsteɪk/",pos:[{p:"n.",m:"错误"},{p:"v.",m:"弄错"}]},
+  "mix":{ph:"/mɪks/",pos:[{p:"v.",m:"混合"}]},
+  "mobile":{ph:"/ˈməʊbaɪl/",pos:[{p:"adj.",m:"移动的"},{p:"n.",m:"手机"}]},
+  "model":{ph:"/ˈmɒdl/",pos:[{p:"n.",m:"模型；模特"}]},
+  "modern":{ph:"/ˈmɒdn/",pos:[{p:"adj.",m:"现代的"}]},
+  "moment":{ph:"/ˈməʊmənt/",pos:[{p:"n.",m:"时刻"}]},
+  "money":{ph:"/ˈmʌni/",pos:[{p:"n.",m:"钱"}]},
+  "monitor":{ph:"/ˈmɒnɪtə(r)/",pos:[{p:"n.",m:"显示器；班长"},{p:"v.",m:"监控"}]},
+  "monkey":{ph:"/ˈmʌŋki/",pos:[{p:"n.",m:"猴子"}]},
+  "month":{ph:"/mʌnθ/",pos:[{p:"n.",m:"月"}]},
+  "moon":{ph:"/muːn/",pos:[{p:"n.",m:"月亮"}]},
+  "moral":{ph:"/ˈmɒrəl/",pos:[{p:"adj.",m:"道德的"},{p:"n.",m:"寓意"}]},
+  "more":{ph:"/mɔː(r)/",pos:[{p:"adj./adv.",m:"更多"}]},
+  "morning":{ph:"/ˈmɔːnɪŋ/",pos:[{p:"n.",m:"早晨"}]},
+  "most":{ph:"/məʊst/",pos:[{p:"adj./adv.",m:"最多；大多数"}]},
+  "mother":{ph:"/ˈmʌðə(r)/",pos:[{p:"n.",m:"母亲"}]},
+  "mountain":{ph:"/ˈmaʊntən/",pos:[{p:"n.",m:"山"}]},
+  "mouse":{ph:"/maʊs/",pos:[{p:"n.",m:"老鼠；鼠标"}]},
+  "mouth":{ph:"/maʊθ/",pos:[{p:"n.",m:"嘴"}]},
+  "move":{ph:"/muːv/",pos:[{p:"v.",m:"移动；搬家"}]},
+  "movie":{ph:"/ˈmuːvi/",pos:[{p:"n.",m:"电影"}]},
+  "much":{ph:"/mʌtʃ/",pos:[{p:"adj./adv.",m:"许多；非常"}]},
+  "museum":{ph:"/mjuˈziːəm/",pos:[{p:"n.",m:"博物馆"}]},
+  "music":{ph:"/ˈmjuːzɪk/",pos:[{p:"n.",m:"音乐"}]},
+  "must":{ph:"/mʌst/",pos:[{p:"modal v.",m:"必须"}]},
+  "my":{ph:"/maɪ/",pos:[{p:"pron.",m:"我的"}]},
+
+  // ===== N =====
+  "name":{ph:"/neɪm/",pos:[{p:"n.",m:"名字"},{p:"v.",m:"命名"}]},
+  "nation":{ph:"/ˈneɪʃn/",pos:[{p:"n.",m:"国家；民族"}]},
+  "national":{ph:"/ˈnæʃnəl/",pos:[{p:"adj.",m:"国家的；全国的"}]},
+  "nature":{ph:"/ˈneɪtʃə(r)/",pos:[{p:"n.",m:"自然；本性"}]},
+  "near":{ph:"/nɪə(r)/",pos:[{p:"prep./adj.",m:"近（的）"}]},
+  "nearly":{ph:"/ˈnɪəli/",pos:[{p:"adv.",m:"几乎"}]},
+  "neat":{ph:"/niːt/",pos:[{p:"adj.",m:"整洁的"}]},
+  "necessary":{ph:"/ˈnesəsəri/",pos:[{p:"adj.",m:"必要的"}]},
+  "neck":{ph:"/nek/",pos:[{p:"n.",m:"脖子"}]},
+  "need":{ph:"/niːd/",pos:[{p:"v./n.",m:"需要"}]},
+  "neighbour":{ph:"/ˈneɪbə(r)/",pos:[{p:"n.",m:"邻居"}]},
+  "neither":{ph:"/ˈnaɪðə(r)/",pos:[{p:"pron./adv.",m:"两者都不"}]},
+  "nervous":{ph:"/ˈnɜːvəs/",pos:[{p:"adj.",m:"紧张的"}]},
+  "net":{ph:"/net/",pos:[{p:"n.",m:"网"}]},
+  "never":{ph:"/ˈnevə(r)/",pos:[{p:"adv.",m:"从不"}]},
+  "new":{ph:"/njuː/",pos:[{p:"adj.",m:"新的"}]},
+  "news":{ph:"/njuːz/",pos:[{p:"n.",m:"新闻"}]},
+  "newspaper":{ph:"/ˈnjuːzpeɪpə(r)/",pos:[{p:"n.",m:"报纸"}]},
+  "next":{ph:"/nekst/",pos:[{p:"adj./adv.",m:"下一个（地）"}]},
+  "nice":{ph:"/naɪs/",pos:[{p:"adj.",m:"好的；漂亮的"}]},
+  "night":{ph:"/naɪt/",pos:[{p:"n.",m:"夜晚"}]},
+  "no":{ph:"/nəʊ/",pos:[{p:"adv./adj.",m:"不；没有"}]},
+  "nobody":{ph:"/ˈnəʊbədi/",pos:[{p:"pron.",m:"没有人"}]},
+  "nod":{ph:"/nɒd/",pos:[{p:"v./n.",m:"点头"}]},
+  "noise":{ph:"/nɔɪz/",pos:[{p:"n.",m:"噪音"}]},
+  "none":{ph:"/nʌn/",pos:[{p:"pron.",m:"没有一个"}]},
+  "noodle":{ph:"/ˈnuːdl/",pos:[{p:"n.",m:"面条（常用复）"}]},
+  "noon":{ph:"/nuːn/",pos:[{p:"n.",m:"中午"}]},
+  "nor":{ph:"/nɔː(r)/",pos:[{p:"conj.",m:"也不"}]},
+  "normal":{ph:"/ˈnɔːml/",pos:[{p:"adj.",m:"正常的"}]},
+  "north":{ph:"/nɔːθ/",pos:[{p:"n./adj.",m:"北方（的）"}]},
+  "nose":{ph:"/nəʊz/",pos:[{p:"n.",m:"鼻子"}]},
+  "not":{ph:"/nɒt/",pos:[{p:"adv.",m:"不"}]},
+  "note":{ph:"/nəʊt/",pos:[{p:"n.",m:"笔记；便条"},{p:"v.",m:"注意"}]},
+  "nothing":{ph:"/ˈnʌθɪŋ/",pos:[{p:"pron.",m:"没有东西"}]},
+  "notice":{ph:"/ˈnəʊtɪs/",pos:[{p:"v.",m:"注意到"},{p:"n.",m:"通知"}]},
+  "novel":{ph:"/ˈnɒvl/",pos:[{p:"n.",m:"小说"},{p:"adj.",m:"新奇的"}]},
+  "now":{ph:"/naʊ/",pos:[{p:"adv.",m:"现在"}]},
+  "number":{ph:"/ˈnʌmbə(r)/",pos:[{p:"n.",m:"数字；号码"}]},
+  "nurse":{ph:"/nɜːs/",pos:[{p:"n.",m:"护士"}]},
+  "nut":{ph:"/nʌt/",pos:[{p:"n.",m:"坚果"}]},
+
+  // ===== O =====
+  "ocean":{ph:"/ˈəʊʃn/",pos:[{p:"n.",m:"海洋"}]},
+  "o'clock":{ph:"/əˈklɒk/",pos:[{p:"adv.",m:"……点钟"}]},
+  "October":{ph:"/ɒkˈtəʊbə(r)/",pos:[{p:"n.",m:"十月"}]},
+  "of":{ph:"/ɒv/",pos:[{p:"prep.",m:"……的"}]},
+  "off":{ph:"/ɒf/",pos:[{p:"adv./prep.",m:"离开；关"}]},
+  "offer":{ph:"/ˈɒfə(r)/",pos:[{p:"v./n.",m:"提供；主动提出"}]},
+  "office":{ph:"/ˈɒfɪs/",pos:[{p:"n.",m:"办公室"}]},
+  "officer":{ph:"/ˈɒfɪsə(r)/",pos:[{p:"n.",m:"官员；军官"}]},
+  "often":{ph:"/ˈɒfn/",pos:[{p:"adv.",m:"经常"}]},
+  "oil":{ph:"/ɔɪl/",pos:[{p:"n.",m:"油；石油"}]},
+  "old":{ph:"/əʊld/",pos:[{p:"adj.",m:"老的；旧的"}]},
+  "Olympic":{ph:"/əˈlɪmpɪk/",pos:[{p:"adj.",m:"奥林匹克的"}]},
+  "on":{ph:"/ɒn/",pos:[{p:"prep./adv.",m:"在……上"}]},
+  "once":{ph:"/wʌns/",pos:[{p:"adv.",m:"一次；曾经"}]},
+  "one":{ph:"/wʌn/",pos:[{p:"num./pron.",m:"一；一个"}]},
+  "onion":{ph:"/ˈʌnjən/",pos:[{p:"n.",m:"洋葱"}]},
+  "only":{ph:"/ˈəʊnli/",pos:[{p:"adj./adv.",m:"仅仅（的）"}]},
+  "open":{ph:"/ˈəʊpən/",pos:[{p:"adj.",m:"开着的"},{p:"v.",m:"打开"}]},
+  "operate":{ph:"/ˈɒpəreɪt/",pos:[{p:"v.",m:"操作；做手术"}]},
+  "operation":{ph:"/ˌɒpəˈreɪʃn/",pos:[{p:"n.",m:"手术；操作"}]},
+  "opinion":{ph:"/əˈpɪnjən/",pos:[{p:"n.",m:"意见；看法"}]},
+  "opposite":{ph:"/ˈɒpəzɪt/",pos:[{p:"adj.",m:"相反的；对面的"}]},
+  "or":{ph:"/ɔː(r)/",pos:[{p:"conj.",m:"或者；否则"}]},
+  "orange":{ph:"/ˈɒrɪndʒ/",pos:[{p:"n.",m:"橙子；橙色"},{p:"adj.",m:"橙色的"}]},
+  "order":{ph:"/ˈɔːdə(r)/",pos:[{p:"n.",m:"命令；顺序；订单"},{p:"v.",m:"订购；命令"}]},
+  "ordinary":{ph:"/ˈɔːdnri/",pos:[{p:"adj.",m:"普通的"}]},
+  "organize":{ph:"/ˈɔːɡənaɪz/",pos:[{p:"v.",m:"组织"}]},
+  "other":{ph:"/ˈʌðə(r)/",pos:[{p:"adj./pron.",m:"其他的（人/物）"}]},
+  "our":{ph:"/ˈaʊə(r)/",pos:[{p:"pron.",m:"我们的"}]},
+  "out":{ph:"/aʊt/",pos:[{p:"adv.",m:"出外；向外"}]},
+  "outside":{ph:"/ˌaʊtˈsaɪd/",pos:[{p:"prep./adv./n.",m:"在外面"}]},
+  "over":{ph:"/ˈəʊvə(r)/",pos:[{p:"prep./adv.",m:"在……上方；超过；结束"}]},
+  "own":{ph:"/əʊn/",pos:[{p:"adj.",m:"自己的"},{p:"v.",m:"拥有"}]},
+  "owner":{ph:"/ˈəʊnə(r)/",pos:[{p:"n.",m:"主人"}]},
+
+  // ===== P =====
+  "pack":{ph:"/pæk/",pos:[{p:"v.",m:"打包"},{p:"n.",m:"包"}]},
+  "package":{ph:"/ˈpækɪdʒ/",pos:[{p:"n.",m:"包裹；包"}]},
+  "page":{ph:"/peɪdʒ/",pos:[{p:"n.",m:"页"}]},
+  "pain":{ph:"/peɪn/",pos:[{p:"n.",m:"疼痛；痛苦"}]},
+  "paint":{ph:"/peɪnt/",pos:[{p:"v.",m:"绘画；刷漆"},{p:"n.",m:"油漆"}]},
+  "pair":{ph:"/peə(r)/",pos:[{p:"n.",m:"一对；一双"}]},
+  "palace":{ph:"/ˈpæləs/",pos:[{p:"n.",m:"宫殿"}]},
+  "pale":{ph:"/peɪl/",pos:[{p:"adj.",m:"苍白的；淡的"}]},
+  "pan":{ph:"/pæn/",pos:[{p:"n.",m:"平底锅"}]},
+  "paper":{ph:"/ˈpeɪpə(r)/",pos:[{p:"n.",m:"纸；报纸；论文"}]},
+  "paragraph":{ph:"/ˈpærəɡrɑːf/",pos:[{p:"n.",m:"段落"}]},
+  "pardon":{ph:"/ˈpɑːdn/",pos:[{p:"n./v.",m:"原谅；请再说一遍"}]},
+  "parent":{ph:"/ˈpeərənt/",pos:[{p:"n.",m:"父亲；母亲"}]},
+  "park":{ph:"/pɑːk/",pos:[{p:"n.",m:"公园"},{p:"v.",m:"停车"}]},
+  "part":{ph:"/pɑːt/",pos:[{p:"n.",m:"部分；角色"},{p:"v.",m:"分开"}]},
+  "participate":{ph:"/pɑːˈtɪsɪpeɪt/",pos:[{p:"v.",m:"参加"}]},
+  "particular":{ph:"/pəˈtɪkjələ(r)/",pos:[{p:"adj.",m:"特别的；挑剔的"}]},
+  "partly":{ph:"/ˈpɑːtli/",pos:[{p:"adv.",m:"部分地"}]},
+  "party":{ph:"/ˈpɑːti/",pos:[{p:"n.",m:"聚会；政党"}]},
+  "pass":{ph:"/pɑːs/",pos:[{p:"v.",m:"通过；传递"}]},
+  "passage":{ph:"/ˈpæsɪdʒ/",pos:[{p:"n.",m:"段落；通道"}]},
+  "passenger":{ph:"/ˈpæsɪndʒə(r)/",pos:[{p:"n.",m:"乘客"}]},
+  "passport":{ph:"/ˈpɑːspɔːt/",pos:[{p:"n.",m:"护照"}]},
+  "past":{ph:"/pɑːst/",pos:[{p:"n./adj.",m:"过去（的）"},{p:"prep.",m:"经过"}]},
+  "path":{ph:"/pɑːθ/",pos:[{p:"n.",m:"小路；路径"}]},
+  "patient":{ph:"/ˈpeɪʃnt/",pos:[{p:"adj.",m:"有耐心的"},{p:"n.",m:"病人"}]},
+  "pattern":{ph:"/ˈpætn/",pos:[{p:"n.",m:"模式；图案"}]},
+  "pay":{ph:"/peɪ/",pos:[{p:"v.",m:"付款"},{p:"n.",m:"工资"}]},
+  "peace":{ph:"/piːs/",pos:[{p:"n.",m:"和平"}]},
+  "pear":{ph:"/peə(r)/",pos:[{p:"n.",m:"梨"}]},
+  "pen":{ph:"/pen/",pos:[{p:"n.",m:"钢笔"}]},
+  "pencil":{ph:"/ˈpensl/",pos:[{p:"n.",m:"铅笔"}]},
+  "people":{ph:"/ˈpiːpl/",pos:[{p:"n.",m:"人们；人民"}]},
+  "pepper":{ph:"/ˈpepə(r)/",pos:[{p:"n.",m:"胡椒"}]},
+  "per":{ph:"/pɜː(r)/",pos:[{p:"prep.",m:"每"}]},
+  "percent":{ph:"/pəˈsent/",pos:[{p:"n.",m:"百分之……"}]},
+  "perfect":{ph:"/ˈpɜːfɪkt/",pos:[{p:"adj.",m:"完美的"}]},
+  "perform":{ph:"/pəˈfɔːm/",pos:[{p:"v.",m:"表演；执行"}]},
+  "performance":{ph:"/pəˈfɔːməns/",pos:[{p:"n.",m:"表演；表现"}]},
+  "perhaps":{ph:"/pəˈhæps/",pos:[{p:"adv.",m:"也许"}]},
+  "period":{ph:"/ˈpɪəriəd/",pos:[{p:"n.",m:"时期；句号"}]},
+  "person":{ph:"/ˈpɜːsn/",pos:[{p:"n.",m:"人"}]},
+  "personal":{ph:"/ˈpɜːsənl/",pos:[{p:"adj.",m:"个人的"}]},
+  "persuade":{ph:"/pəˈsweɪd/",pos:[{p:"v.",m:"说服"}]},
+  "pet":{ph:"/pet/",pos:[{p:"n.",m:"宠物"}]},
+  "phone":{ph:"/fəʊn/",pos:[{p:"n.",m:"电话"}]},
+  "photo":{ph:"/ˈfəʊtəʊ/",pos:[{p:"n.",m:"照片"}]},
+  "physics":{ph:"/ˈfɪzɪks/",pos:[{p:"n.",m:"物理"}]},
+  "piano":{ph:"/piˈænəʊ/",pos:[{p:"n.",m:"钢琴"}]},
+  "pick":{ph:"/pɪk/",pos:[{p:"v.",m:"挑选；摘"}]},
+  "picnic":{ph:"/ˈpɪknɪk/",pos:[{p:"n.",m:"野餐"}]},
+  "picture":{ph:"/ˈpɪktʃə(r)/",pos:[{p:"n.",m:"图片；照片"}]},
+  "pie":{ph:"/paɪ/",pos:[{p:"n.",m:"馅饼"}]},
+  "piece":{ph:"/piːs/",pos:[{p:"n.",m:"片；块"}]},
+  "pig":{ph:"/pɪɡ/",pos:[{p:"n.",m:"猪"}]},
+  "pill":{ph:"/pɪl/",pos:[{p:"n.",m:"药丸"}]},
+  "pilot":{ph:"/ˈpaɪlət/",pos:[{p:"n.",m:"飞行员"}]},
+  "pin":{ph:"/pɪn/",pos:[{p:"n.",m:"大头针"},{p:"v.",m:"别住"}]},
+  "pink":{ph:"/pɪŋk/",pos:[{p:"adj.",m:"粉色的"}]},
+  "pioneer":{ph:"/ˌpaɪəˈnɪə(r)/",pos:[{p:"n.",m:"先锋"}]},
+  "pipe":{ph:"/paɪp/",pos:[{p:"n.",m:"管子；烟斗"}]},
+  "pity":{ph:"/ˈpɪti/",pos:[{p:"n.",m:"遗憾；同情"}]},
+  "place":{ph:"/pleɪs/",pos:[{p:"n.",m:"地方"},{p:"v.",m:"放置"}]},
+  "plan":{ph:"/plæn/",pos:[{p:"n./v.",m:"计划"}]},
+  "plane":{ph:"/pleɪn/",pos:[{p:"n.",m:"飞机"}]},
+  "planet":{ph:"/ˈplænɪt/",pos:[{p:"n.",m:"行星"}]},
+  "plant":{ph:"/plɑːnt/",pos:[{p:"n.",m:"植物"},{p:"v.",m:"种植"}]},
+  "plastic":{ph:"/ˈplæstɪk/",pos:[{p:"n.",m:"塑料"},{p:"adj.",m:"塑料的"}]},
+  "plate":{ph:"/pleɪt/",pos:[{p:"n.",m:"盘子"}]},
+  "play":{ph:"/pleɪ/",pos:[{p:"v.",m:"玩；演奏；播放"},{p:"n.",m:"戏剧"}]},
+  "pleasant":{ph:"/ˈpleznt/",pos:[{p:"adj.",m:"令人愉快的"}]},
+  "please":{ph:"/pliːz/",pos:[{p:"v.",m:"请；使高兴"}]},
+  "pleasure":{ph:"/ˈpleʒə(r)/",pos:[{p:"n.",m:"快乐；乐事"}]},
+  "plenty":{ph:"/ˈplenti/",pos:[{p:"n./pron.",m:"大量；充足"}]},
+  "pocket":{ph:"/ˈpɒkɪt/",pos:[{p:"n.",m:"口袋"}]},
+  "poem":{ph:"/ˈpəʊɪm/",pos:[{p:"n.",m:"诗"}]},
+  "poet":{ph:"/ˈpəʊɪt/",pos:[{p:"n.",m:"诗人"}]},
+  "point":{ph:"/pɔɪnt/",pos:[{p:"n.",m:"点；要点"},{p:"v.",m:"指"}]},
+  "poison":{ph:"/ˈpɔɪzn/",pos:[{p:"n.",m:"毒药"},{p:"v.",m:"毒害"}]},
+  "police":{ph:"/pəˈliːs/",pos:[{p:"n.",m:"警察；警方"}]},
+  "polite":{ph:"/pəˈlaɪt/",pos:[{p:"adj.",m:"有礼貌的"}]},
+  "political":{ph:"/pəˈlɪtɪkl/",pos:[{p:"adj.",m:"政治的"}]},
+  "pollute":{ph:"/pəˈluːt/",pos:[{p:"v.",m:"污染"}]},
+  "pollution":{ph:"/pəˈluːʃn/",pos:[{p:"n.",m:"污染"}]},
+  "pond":{ph:"/pɒnd/",pos:[{p:"n.",m:"池塘"}]},
+  "pool":{ph:"/puːl/",pos:[{p:"n.",m:"游泳池；池"}]},
+  "poor":{ph:"/pʊə(r)/",pos:[{p:"adj.",m:"穷的；差的"}]},
+  "popular":{ph:"/ˈpɒpjələ(r)/",pos:[{p:"adj.",m:"受欢迎的"}]},
+  "population":{ph:"/ˌpɒpjuˈleɪʃn/",pos:[{p:"n.",m:"人口"}]},
+  "pork":{ph:"/pɔːk/",pos:[{p:"n.",m:"猪肉"}]},
+  "port":{ph:"/pɔːt/",pos:[{p:"n.",m:"港口"}]},
+  "position":{ph:"/pəˈzɪʃn/",pos:[{p:"n.",m:"位置；职位"}]},
+  "possible":{ph:"/ˈpɒsəbl/",pos:[{p:"adj.",m:"可能的"}]},
+  "post":{ph:"/pəʊst/",pos:[{p:"n.",m:"邮政；帖子"},{p:"v.",m:"邮寄"}]},
+  "postcard":{ph:"/ˈpəʊstkɑːd/",pos:[{p:"n.",m:"明信片"}]},
+  "potato":{ph:"/pəˈteɪtəʊ/",pos:[{p:"n.",m:"土豆"}]},
+  "pound":{ph:"/paʊnd/",pos:[{p:"n.",m:"磅；英镑"}]},
+  "power":{ph:"/ˈpaʊə(r)/",pos:[{p:"n.",m:"力量；权力；电力"}]},
+  "powerful":{ph:"/ˈpaʊəfl/",pos:[{p:"adj.",m:"强大的"}]},
+  "practice":{ph:"/ˈpræktɪs/",pos:[{p:"n./v.",m:"练习；实践"}]},
+  "praise":{ph:"/preɪz/",pos:[{p:"v./n.",m:"赞扬"}]},
+  "pray":{ph:"/preɪ/",pos:[{p:"v.",m:"祈祷"}]},
+  "precious":{ph:"/ˈpreʃəs/",pos:[{p:"adj.",m:"珍贵的"}]},
+  "predict":{ph:"/prɪˈdɪkt/",pos:[{p:"v.",m:"预测"}]},
+  "prefer":{ph:"/prɪˈfɜː(r)/",pos:[{p:"v.",m:"更喜欢"}]},
+  "prepare":{ph:"/prɪˈpeə(r)/",pos:[{p:"v.",m:"准备"}]},
+  "present":{ph:"/ˈpreznt/",pos:[{p:"adj.",m:"现在的；出席的"},{p:"n.",m:"礼物"},{p:"v.",m:"呈现"}]},
+  "president":{ph:"/ˈprezɪdənt/",pos:[{p:"n.",m:"总统；校长"}]},
+  "press":{ph:"/pres/",pos:[{p:"v.",m:"按；压"},{p:"n.",m:"新闻界"}]},
+  "pretty":{ph:"/ˈprɪti/",pos:[{p:"adj.",m:"漂亮的"},{p:"adv.",m:"相当"}]},
+  "prevent":{ph:"/prɪˈvent/",pos:[{p:"v.",m:"阻止；预防"}]},
+  "price":{ph:"/praɪs/",pos:[{p:"n.",m:"价格"}]},
+  "pride":{ph:"/praɪd/",pos:[{p:"n.",m:"骄傲；自豪"}]},
+  "primary":{ph:"/ˈpraɪməri/",pos:[{p:"adj.",m:"初级的；主要的"}]},
+  "print":{ph:"/prɪnt/",pos:[{p:"v.",m:"打印；印刷"}]},
+  "private":{ph:"/ˈpraɪvət/",pos:[{p:"adj.",m:"私人的"}]},
+  "prize":{ph:"/praɪz/",pos:[{p:"n.",m:"奖品"}]},
+  "problem":{ph:"/ˈprɒbləm/",pos:[{p:"n.",m:"问题"}]},
+  "process":{ph:"/ˈprəʊses/",pos:[{p:"n.",m:"过程"},{p:"v.",m:"处理"}]},
+  "produce":{ph:"/prəˈdjuːs/",pos:[{p:"v.",m:"生产；制造"}]},
+  "product":{ph:"/ˈprɒdʌkt/",pos:[{p:"n.",m:"产品"}]},
+  "production":{ph:"/prəˈdʌkʃn/",pos:[{p:"n.",m:"生产"}]},
+  "professor":{ph:"/prəˈfesə(r)/",pos:[{p:"n.",m:"教授"}]},
+  "program":{ph:"/ˈprəʊɡræm/",pos:[{p:"n.",m:"节目；程序"}]},
+  "progress":{ph:"/ˈprəʊɡres/",pos:[{p:"n.",m:"进步"},{p:"v.",m:"进展"}]},
+  "project":{ph:"/ˈprɒdʒekt/",pos:[{p:"n.",m:"项目；工程"}]},
+  "promise":{ph:"/ˈprɒmɪs/",pos:[{p:"v./n.",m:"承诺"}]},
+  "pronounce":{ph:"/prəˈnaʊns/",pos:[{p:"v.",m:"发音"}]},
+  "proper":{ph:"/ˈprɒpə(r)/",pos:[{p:"adj.",m:"适当的"}]},
+  "protect":{ph:"/prəˈtekt/",pos:[{p:"v.",m:"保护"}]},
+  "proud":{ph:"/praʊd/",pos:[{p:"adj.",m:"骄傲的；自豪的"}]},
+  "prove":{ph:"/pruːv/",pos:[{p:"v.",m:"证明"}]},
+  "provide":{ph:"/prəˈvaɪd/",pos:[{p:"v.",m:"提供"}]},
+  "public":{ph:"/ˈpʌblɪk/",pos:[{p:"adj.",m:"公共的"},{p:"n.",m:"公众"}]},
+  "pull":{ph:"/pʊl/",pos:[{p:"v./n.",m:"拉"}]},
+  "punish":{ph:"/ˈpʌnɪʃ/",pos:[{p:"v.",m:"惩罚"}]},
+  "pupil":{ph:"/ˈpjuːpl/",pos:[{p:"n.",m:"小学生"}]},
+  "pure":{ph:"/pjʊə(r)/",pos:[{p:"adj.",m:"纯的"}]},
+  "purpose":{ph:"/ˈpɜːpəs/",pos:[{p:"n.",m:"目的"}]},
+  "push":{ph:"/pʊʃ/",pos:[{p:"v./n.",m:"推"}]},
+  "put":{ph:"/pʊt/",pos:[{p:"v.",m:"放；放置"}]},
+
+  // ===== Q =====
+  "quality":{ph:"/ˈkwɒləti/",pos:[{p:"n.",m:"质量；品质"}]},
+  "quantity":{ph:"/ˈkwɒntəti/",pos:[{p:"n.",m:"数量"}]},
+  "quarrel":{ph:"/ˈkwɒrəl/",pos:[{p:"v./n.",m:"争吵"}]},
+  "quarter":{ph:"/ˈkwɔːtə(r)/",pos:[{p:"n.",m:"四分之一；一刻钟"}]},
+  "queen":{ph:"/kwiːn/",pos:[{p:"n.",m:"女王；王后"}]},
+  "question":{ph:"/ˈkwestʃən/",pos:[{p:"n.",m:"问题"},{p:"v.",m:"质疑"}]},
+  "quick":{ph:"/kwɪk/",pos:[{p:"adj./adv.",m:"快的（地）"}]},
+  "quiet":{ph:"/ˈkwaɪət/",pos:[{p:"adj.",m:"安静的"}]},
+  "quite":{ph:"/kwaɪt/",pos:[{p:"adv.",m:"相当；十分"}]},
+
+  // ===== R =====
+  "radio":{ph:"/ˈreɪdiəʊ/",pos:[{p:"n.",m:"收音机；无线电"}]},
+  "railway":{ph:"/ˈreɪlweɪ/",pos:[{p:"n.",m:"铁路"}]},
+  "rain":{ph:"/reɪn/",pos:[{p:"n.",m:"雨"},{p:"v.",m:"下雨"}]},
+  "raise":{ph:"/reɪz/",pos:[{p:"v.",m:"举起；提高；筹集"}]},
+  "rapid":{ph:"/ˈræpɪd/",pos:[{p:"adj.",m:"迅速的"}]},
+  "rat":{ph:"/ræt/",pos:[{p:"n.",m:"老鼠"}]},
+  "rather":{ph:"/ˈrɑːðə(r)/",pos:[{p:"adv.",m:"相当；宁愿"}]},
+  "reach":{ph:"/riːtʃ/",pos:[{p:"v.",m:"到达；伸手够"}]},
+  "read":{ph:"/riːd/",pos:[{p:"v.",m:"读；阅读"}]},
+  "ready":{ph:"/ˈredi/",pos:[{p:"adj.",m:"准备好的"}]},
+  "real":{ph:"/ˈrɪəl/",pos:[{p:"adj.",m:"真实的"}]},
+  "reality":{ph:"/riˈæləti/",pos:[{p:"n.",m:"现实"}]},
+  "realize":{ph:"/ˈrɪəlaɪz/",pos:[{p:"v.",m:"意识到；实现"}]},
+  "really":{ph:"/ˈrɪəli/",pos:[{p:"adv.",m:"真正地；非常"}]},
+  "reason":{ph:"/ˈriːzn/",pos:[{p:"n.",m:"原因；理由"}]},
+  "receive":{ph:"/rɪˈsiːv/",pos:[{p:"v.",m:"收到"}]},
+  "recent":{ph:"/ˈriːsnt/",pos:[{p:"adj.",m:"最近的"}]},
+  "record":{ph:"/ˈrekɔːd/",pos:[{p:"n.",m:"记录；唱片"},{p:"v.",m:"记录"}]},
+  "red":{ph:"/red/",pos:[{p:"adj.",m:"红色的"}]},
+  "reduce":{ph:"/rɪˈdjuːs/",pos:[{p:"v.",m:"减少"}]},
+  "refer":{ph:"/rɪˈfɜː(r)/",pos:[{p:"v.",m:"提到；参考"}]},
+  "refuse":{ph:"/rɪˈfjuːz/",pos:[{p:"v.",m:"拒绝"}]},
+  "regard":{ph:"/rɪˈɡɑːd/",pos:[{p:"v.",m:"视为"},{p:"n.",m:"关心；问候"}]},
+  "region":{ph:"/ˈriːdʒən/",pos:[{p:"n.",m:"地区"}]},
+  "regret":{ph:"/rɪˈɡret/",pos:[{p:"v./n.",m:"后悔"}]},
+  "relation":{ph:"/rɪˈleɪʃn/",pos:[{p:"n.",m:"关系"}]},
+  "relax":{ph:"/rɪˈlæks/",pos:[{p:"v.",m:"放松"}]},
+  "remain":{ph:"/rɪˈmeɪn/",pos:[{p:"v.",m:"保持；剩下"}]},
+  "remember":{ph:"/rɪˈmembə(r)/",pos:[{p:"v.",m:"记得"}]},
+  "remind":{ph:"/rɪˈmaɪnd/",pos:[{p:"v.",m:"提醒"}]},
+  "remove":{ph:"/rɪˈmuːv/",pos:[{p:"v.",m:"移除；去掉"}]},
+  "rent":{ph:"/rent/",pos:[{p:"n./v.",m:"租金；租"}]},
+  "repair":{ph:"/rɪˈpeə(r)/",pos:[{p:"v./n.",m:"修理"}]},
+  "repeat":{ph:"/rɪˈpiːt/",pos:[{p:"v.",m:"重复"}]},
+  "reply":{ph:"/rɪˈplaɪ/",pos:[{p:"v./n.",m:"回答"}]},
+  "report":{ph:"/rɪˈpɔːt/",pos:[{p:"n./v.",m:"报告；报道"}]},
+  "require":{ph:"/rɪˈkwaɪə(r)/",pos:[{p:"v.",m:"需要；要求"}]},
+  "research":{ph:"/rɪˈsɜːtʃ/",pos:[{p:"n.",m:"研究"}]},
+  "respect":{ph:"/rɪˈspekt/",pos:[{p:"v./n.",m:"尊敬"}]},
+  "rest":{ph:"/rest/",pos:[{p:"n.",m:"休息；其余"},{p:"v.",m:"休息"}]},
+  "restaurant":{ph:"/ˈrestrɒnt/",pos:[{p:"n.",m:"餐馆"}]},
+  "result":{ph:"/rɪˈzʌlt/",pos:[{p:"n.",m:"结果"}]},
+  "retell":{ph:"/ˌriːˈtel/",pos:[{p:"v.",m:"复述"}]},
+  "return":{ph:"/rɪˈtɜːn/",pos:[{p:"v./n.",m:"返回；归还"}]},
+  "review":{ph:"/rɪˈvjuː/",pos:[{p:"v./n.",m:"复习；评论"}]},
+  "rice":{ph:"/raɪs/",pos:[{p:"n.",m:"米饭；稻"}]},
+  "rich":{ph:"/rɪtʃ/",pos:[{p:"adj.",m:"富有的；丰富的"}]},
+  "ride":{ph:"/raɪd/",pos:[{p:"v./n.",m:"骑；乘"}]},
+  "right":{ph:"/raɪt/",pos:[{p:"adj.",m:"正确的；右边的"},{p:"n.",m:"权利；右边"}]},
+  "ring":{ph:"/rɪŋ/",pos:[{p:"n.",m:"戒指；铃声"},{p:"v.",m:"响铃；打电话"}]},
+  "rise":{ph:"/raɪz/",pos:[{p:"v.",m:"上升；升起"}]},
+  "risk":{ph:"/rɪsk/",pos:[{p:"n./v.",m:"风险；冒险"}]},
+  "river":{ph:"/ˈrɪvə(r)/",pos:[{p:"n.",m:"河流"}]},
+  "road":{ph:"/rəʊd/",pos:[{p:"n.",m:"路"}]},
+  "rock":{ph:"/rɒk/",pos:[{p:"n.",m:"岩石；摇滚乐"}]},
+  "role":{ph:"/rəʊl/",pos:[{p:"n.",m:"角色；作用"}]},
+  "room":{ph:"/ruːm/",pos:[{p:"n.",m:"房间；空间"}]},
+  "round":{ph:"/raʊnd/",pos:[{p:"adj.",m:"圆的"},{p:"prep.",m:"围绕"}]},
+  "rule":{ph:"/ruːl/",pos:[{p:"n.",m:"规则"},{p:"v.",m:"统治"}]},
+  "ruler":{ph:"/ˈruːlə(r)/",pos:[{p:"n.",m:"尺子；统治者"}]},
+  "run":{ph:"/rʌn/",pos:[{p:"v.",m:"跑；经营"}]},
+  "rush":{ph:"/rʌʃ/",pos:[{p:"v./n.",m:"冲；匆忙"}]},
+
+  // ===== S =====
+  "sad":{ph:"/sæd/",pos:[{p:"adj.",m:"悲伤的"}]},
+  "safe":{ph:"/seɪf/",pos:[{p:"adj.",m:"安全的"}]},
+  "safety":{ph:"/ˈseɪfti/",pos:[{p:"n.",m:"安全"}]},
+  "sail":{ph:"/seɪl/",pos:[{p:"v.",m:"航行"},{p:"n.",m:"帆"}]},
+  "salad":{ph:"/ˈsæləd/",pos:[{p:"n.",m:"沙拉"}]},
+  "sale":{ph:"/seɪl/",pos:[{p:"n.",m:"出售；销售"}]},
+  "salt":{ph:"/sɔːlt/",pos:[{p:"n.",m:"盐"}]},
+  "same":{ph:"/seɪm/",pos:[{p:"adj.",m:"相同的"}]},
+  "sandwich":{ph:"/ˈsænwɪdʒ/",pos:[{p:"n.",m:"三明治"}]},
+  "satisfy":{ph:"/ˈsætɪsfaɪ/",pos:[{p:"v.",m:"使满意"}]},
+  "save":{ph:"/seɪv/",pos:[{p:"v.",m:"拯救；节省；保存"}]},
+  "say":{ph:"/seɪ/",pos:[{p:"v.",m:"说"}]},
+  "scene":{ph:"/siːn/",pos:[{p:"n.",m:"场景；景色"}]},
+  "school":{ph:"/skuːl/",pos:[{p:"n.",m:"学校"}]},
+  "science":{ph:"/ˈsaɪəns/",pos:[{p:"n.",m:"科学"}]},
+  "scientist":{ph:"/ˈsaɪəntɪst/",pos:[{p:"n.",m:"科学家"}]},
+  "score":{ph:"/skɔː(r)/",pos:[{p:"n.",m:"分数；二十"},{p:"v.",m:"得分"}]},
+  "screen":{ph:"/skriːn/",pos:[{p:"n.",m:"屏幕"}]},
+  "sea":{ph:"/siː/",pos:[{p:"n.",m:"海"}]},
+  "search":{ph:"/sɜːtʃ/",pos:[{p:"v./n.",m:"搜索"}]},
+  "season":{ph:"/ˈsiːzn/",pos:[{p:"n.",m:"季节"}]},
+  "seat":{ph:"/siːt/",pos:[{p:"n.",m:"座位"},{p:"v.",m:"使坐下"}]},
+  "second":{ph:"/ˈsekənd/",pos:[{p:"num.",m:"第二"},{p:"n.",m:"秒"}]},
+  "secret":{ph:"/ˈsiːkrət/",pos:[{p:"n.",m:"秘密"},{p:"adj.",m:"秘密的"}]},
+  "secretary":{ph:"/ˈsekrətri/",pos:[{p:"n.",m:"秘书"}]},
+  "see":{ph:"/siː/",pos:[{p:"v.",m:"看见"}]},
+  "seem":{ph:"/siːm/",pos:[{p:"v.",m:"似乎"}]},
+  "seldom":{ph:"/ˈseldəm/",pos:[{p:"adv.",m:"很少"}]},
+  "self":{ph:"/self/",pos:[{p:"n.",m:"自己"}]},
+  "sell":{ph:"/sel/",pos:[{p:"v.",m:"卖"}]},
+  "send":{ph:"/send/",pos:[{p:"v.",m:"送；派遣"}]},
+  "sense":{ph:"/sens/",pos:[{p:"n.",m:"感觉；意识"}]},
+  "sentence":{ph:"/ˈsentəns/",pos:[{p:"n.",m:"句子"}]},
+  "separate":{ph:"/ˈseprət/",pos:[{p:"adj.",m:"分开的"},{p:"v.",m:"分开"}]},
+  "series":{ph:"/ˈsɪəriːz/",pos:[{p:"n.",m:"系列"}]},
+  "serious":{ph:"/ˈsɪəriəs/",pos:[{p:"adj.",m:"严肃的；严重的"}]},
+  "servant":{ph:"/ˈsɜːvənt/",pos:[{p:"n.",m:"仆人"}]},
+  "serve":{ph:"/sɜːv/",pos:[{p:"v.",m:"服务；招待"}]},
+  "service":{ph:"/ˈsɜːvɪs/",pos:[{p:"n.",m:"服务"}]},
+  "set":{ph:"/set/",pos:[{p:"v.",m:"设置；放置"},{p:"n.",m:"一套"}]},
+  "settle":{ph:"/ˈsetl/",pos:[{p:"v.",m:"解决；定居"}]},
+  "seven":{ph:"/ˈsevn/",pos:[{p:"num.",m:"七"}]},
+  "several":{ph:"/ˈsevrəl/",pos:[{p:"adj./pron.",m:"几个"}]},
+  "shake":{ph:"/ʃeɪk/",pos:[{p:"v.",m:"摇动；握手"}]},
+  "shall":{ph:"/ʃæl/",pos:[{p:"modal v.",m:"将要；应该"}]},
+  "shallow":{ph:"/ˈʃæləʊ/",pos:[{p:"adj.",m:"浅的"}]},
+  "shame":{ph:"/ʃeɪm/",pos:[{p:"n.",m:"羞愧；遗憾"}]},
+  "shape":{ph:"/ʃeɪp/",pos:[{p:"n.",m:"形状"},{p:"v.",m:"塑造"}]},
+  "share":{ph:"/ʃeə(r)/",pos:[{p:"v.",m:"分享；共用"}]},
+  "sharp":{ph:"/ʃɑːp/",pos:[{p:"adj.",m:"锋利的；敏锐的"}]},
+  "she":{ph:"/ʃiː/",pos:[{p:"pron.",m:"她"}]},
+  "sheep":{ph:"/ʃiːp/",pos:[{p:"n.",m:"羊（复同形）"}]},
+  "sheet":{ph:"/ʃiːt/",pos:[{p:"n.",m:"床单；一张"}]},
+  "shine":{ph:"/ʃaɪn/",pos:[{p:"v.",m:"照耀；发光"}]},
+  "ship":{ph:"/ʃɪp/",pos:[{p:"n.",m:"船"},{p:"v.",m:"运送"}]},
+  "shirt":{ph:"/ʃɜːt/",pos:[{p:"n.",m:"衬衫"}]},
+  "shock":{ph:"/ʃɒk/",pos:[{p:"n./v.",m:"震惊"}]},
+  "shoe":{ph:"/ʃuː/",pos:[{p:"n.",m:"鞋"}]},
+  "shoot":{ph:"/ʃuːt/",pos:[{p:"v.",m:"射击；拍摄"}]},
+  "shop":{ph:"/ʃɒp/",pos:[{p:"n.",m:"商店"},{p:"v.",m:"购物"}]},
+  "short":{ph:"/ʃɔːt/",pos:[{p:"adj.",m:"短的；矮的"}]},
+  "should":{ph:"/ʃʊd/",pos:[{p:"modal v.",m:"应该"}]},
+  "shoulder":{ph:"/ˈʃəʊldə(r)/",pos:[{p:"n.",m:"肩膀"}]},
+  "shout":{ph:"/ʃaʊt/",pos:[{p:"v./n.",m:"喊叫"}]},
+  "show":{ph:"/ʃəʊ/",pos:[{p:"v.",m:"展示；表明"},{p:"n.",m:"演出"}]},
+  "shut":{ph:"/ʃʌt/",pos:[{p:"v.",m:"关闭"}]},
+  "shy":{ph:"/ʃaɪ/",pos:[{p:"adj.",m:"害羞的"}]},
+  "sick":{ph:"/sɪk/",pos:[{p:"adj.",m:"生病的"}]},
+  "side":{ph:"/saɪd/",pos:[{p:"n.",m:"边；侧面"}]},
+  "sight":{ph:"/saɪt/",pos:[{p:"n.",m:"视力；景象"}]},
+  "sign":{ph:"/saɪn/",pos:[{p:"n.",m:"标志；迹象"},{p:"v.",m:"签名"}]},
+  "signal":{ph:"/ˈsɪɡnəl/",pos:[{p:"n.",m:"信号"}]},
+  "silence":{ph:"/ˈsaɪləns/",pos:[{p:"n.",m:"沉默"}]},
+  "silent":{ph:"/ˈsaɪlənt/",pos:[{p:"adj.",m:"沉默的"}]},
+  "silk":{ph:"/sɪlk/",pos:[{p:"n.",m:"丝绸"}]},
+  "silly":{ph:"/ˈsɪli/",pos:[{p:"adj.",m:"愚蠢的"}]},
+  "silver":{ph:"/ˈsɪlvə(r)/",pos:[{p:"n.",m:"银"},{p:"adj.",m:"银色的"}]},
+  "similar":{ph:"/ˈsɪmələ(r)/",pos:[{p:"adj.",m:"相似的"}]},
+  "simple":{ph:"/ˈsɪmpl/",pos:[{p:"adj.",m:"简单的"}]},
+  "since":{ph:"/sɪns/",pos:[{p:"conj./prep.",m:"自从；因为"}]},
+  "sing":{ph:"/sɪŋ/",pos:[{p:"v.",m:"唱歌"}]},
+  "singer":{ph:"/ˈsɪŋə(r)/",pos:[{p:"n.",m:"歌手"}]},
+  "single":{ph:"/ˈsɪŋɡl/",pos:[{p:"adj.",m:"单一的"}]},
+  "sink":{ph:"/sɪŋk/",pos:[{p:"v.",m:"下沉"},{p:"n.",m:"水槽"}]},
+  "sir":{ph:"/sɜː(r)/",pos:[{p:"n.",m:"先生"}]},
+  "sister":{ph:"/ˈsɪstə(r)/",pos:[{p:"n.",m:"姐妹"}]},
+  "sit":{ph:"/sɪt/",pos:[{p:"v.",m:"坐"}]},
+  "situation":{ph:"/ˌsɪtʃuˈeɪʃn/",pos:[{p:"n.",m:"情况；形势"}]},
+  "six":{ph:"/sɪks/",pos:[{p:"num.",m:"六"}]},
+  "size":{ph:"/saɪz/",pos:[{p:"n.",m:"尺寸；大小"}]},
+  "skate":{ph:"/skeɪt/",pos:[{p:"v.",m:"滑冰"}]},
+  "skill":{ph:"/skɪl/",pos:[{p:"n.",m:"技能"}]},
+  "skin":{ph:"/skɪn/",pos:[{p:"n.",m:"皮肤"}]},
+  "skirt":{ph:"/skɜːt/",pos:[{p:"n.",m:"裙子"}]},
+  "sky":{ph:"/skaɪ/",pos:[{p:"n.",m:"天空"}]},
+  "sleep":{ph:"/sliːp/",pos:[{p:"v./n.",m:"睡觉"}]},
+  "slide":{ph:"/slaɪd/",pos:[{p:"v./n.",m:"滑动"}]},
+  "slight":{ph:"/slaɪt/",pos:[{p:"adj.",m:"轻微的"}]},
+  "slow":{ph:"/sləʊ/",pos:[{p:"adj./adv.",m:"慢的（地）"}]},
+  "small":{ph:"/smɔːl/",pos:[{p:"adj.",m:"小的"}]},
+  "smart":{ph:"/smɑːt/",pos:[{p:"adj.",m:"聪明的；时髦的"}]},
+  "smell":{ph:"/smel/",pos:[{p:"v.",m:"闻起来"},{p:"n.",m:"气味"}]},
+  "smile":{ph:"/smaɪl/",pos:[{p:"v./n.",m:"微笑"}]},
+  "smoke":{ph:"/sməʊk/",pos:[{p:"n.",m:"烟"},{p:"v.",m:"吸烟"}]},
+  "smooth":{ph:"/smuːð/",pos:[{p:"adj.",m:"光滑的；顺利的"}]},
+  "snake":{ph:"/sneɪk/",pos:[{p:"n.",m:"蛇"}]},
+  "snow":{ph:"/snəʊ/",pos:[{p:"n.",m:"雪"},{p:"v.",m:"下雪"}]},
+  "so":{ph:"/səʊ/",pos:[{p:"conj./adv.",m:"所以；如此"}]},
+  "soap":{ph:"/səʊp/",pos:[{p:"n.",m:"肥皂"}]},
+  "social":{ph:"/ˈsəʊʃl/",pos:[{p:"adj.",m:"社会的；社交的"}]},
+  "society":{ph:"/səˈsaɪəti/",pos:[{p:"n.",m:"社会"}]},
+  "sock":{ph:"/sɒk/",pos:[{p:"n.",m:"袜子"}]},
+  "soft":{ph:"/sɒft/",pos:[{p:"adj.",m:"柔软的"}]},
+  "soil":{ph:"/sɔɪl/",pos:[{p:"n.",m:"土壤"}]},
+  "soldier":{ph:"/ˈsəʊldʒə(r)/",pos:[{p:"n.",m:"士兵"}]},
+  "solid":{ph:"/ˈsɒlɪd/",pos:[{p:"adj.",m:"固体的；坚固的"}]},
+  "solution":{ph:"/səˈluːʃn/",pos:[{p:"n.",m:"解决办法"}]},
+  "solve":{ph:"/sɒlv/",pos:[{p:"v.",m:"解决"}]},
+  "some":{ph:"/sʌm/",pos:[{p:"adj./pron.",m:"一些"}]},
+  "somebody":{ph:"/ˈsʌmbədi/",pos:[{p:"pron.",m:"某人"}]},
+  "someone":{ph:"/ˈsʌmwʌn/",pos:[{p:"pron.",m:"某人"}]},
+  "something":{ph:"/ˈsʌmθɪŋ/",pos:[{p:"pron.",m:"某事"}]},
+  "sometimes":{ph:"/ˈsʌmtaɪmz/",pos:[{p:"adv.",m:"有时"}]},
+  "son":{ph:"/sʌn/",pos:[{p:"n.",m:"儿子"}]},
+  "song":{ph:"/sɒŋ/",pos:[{p:"n.",m:"歌曲"}]},
+  "soon":{ph:"/suːn/",pos:[{p:"adv.",m:"很快；不久"}]},
+  "sore":{ph:"/sɔː(r)/",pos:[{p:"adj.",m:"疼痛的"}]},
+  "sorry":{ph:"/ˈsɒri/",pos:[{p:"adj.",m:"抱歉的"}]},
+  "sort":{ph:"/sɔːt/",pos:[{p:"n.",m:"种类"},{p:"v.",m:"分类"}]},
+  "sound":{ph:"/saʊnd/",pos:[{p:"n.",m:"声音"},{p:"v.",m:"听起来"}]},
+  "soup":{ph:"/suːp/",pos:[{p:"n.",m:"汤"}]},
+  "south":{ph:"/saʊθ/",pos:[{p:"n./adj.",m:"南方（的）"}]},
+  "space":{ph:"/speɪs/",pos:[{p:"n.",m:"空间；太空"}]},
+  "spare":{ph:"/speə(r)/",pos:[{p:"adj.",m:"多余的；备用的"}]},
+  "speak":{ph:"/spiːk/",pos:[{p:"v.",m:"说话"}]},
+  "special":{ph:"/ˈspeʃl/",pos:[{p:"adj.",m:"特别的"}]},
+  "speech":{ph:"/spiːtʃ/",pos:[{p:"n.",m:"演讲；说话"}]},
+  "speed":{ph:"/spiːd/",pos:[{p:"n.",m:"速度"},{p:"v.",m:"加速"}]},
+  "spell":{ph:"/spel/",pos:[{p:"v.",m:"拼写"}]},
+  "spend":{ph:"/spend/",pos:[{p:"v.",m:"花费；度过"}]},
+  "spirit":{ph:"/ˈspɪrɪt/",pos:[{p:"n.",m:"精神；情绪"}]},
+  "spoken":{ph:"/ˈspəʊkən/",pos:[{p:"adj.",m:"口头的"}]},
+  "sport":{ph:"/spɔːt/",pos:[{p:"n.",m:"运动"}]},
+  "spread":{ph:"/spred/",pos:[{p:"v.",m:"传播；展开"}]},
+  "spring":{ph:"/sprɪŋ/",pos:[{p:"n.",m:"春天；泉水"}]},
+  "square":{ph:"/skweə(r)/",pos:[{p:"n.",m:"广场；正方形"},{p:"adj.",m:"平方的"}]},
+  "stamp":{ph:"/stæmp/",pos:[{p:"n.",m:"邮票；跺脚"}]},
+  "stand":{ph:"/stænd/",pos:[{p:"v.",m:"站立；忍受"}]},
+  "standard":{ph:"/ˈstændəd/",pos:[{p:"n.",m:"标准"},{p:"adj.",m:"标准的"}]},
+  "star":{ph:"/stɑː(r)/",pos:[{p:"n.",m:"星星；明星"}]},
+  "stare":{ph:"/steə(r)/",pos:[{p:"v.",m:"盯着看"}]},
+  "start":{ph:"/stɑːt/",pos:[{p:"v./n.",m:"开始"}]},
+  "state":{ph:"/steɪt/",pos:[{p:"n.",m:"状态；州"},{p:"v.",m:"陈述"}]},
+  "station":{ph:"/ˈsteɪʃn/",pos:[{p:"n.",m:"车站；站"}]},
+  "stay":{ph:"/steɪ/",pos:[{p:"v./n.",m:"停留；保持"}]},
+  "steal":{ph:"/stiːl/",pos:[{p:"v.",m:"偷"}]},
+  "steam":{ph:"/stiːm/",pos:[{p:"n.",m:"蒸汽"}]},
+  "steel":{ph:"/stiːl/",pos:[{p:"n.",m:"钢"}]},
+  "step":{ph:"/step/",pos:[{p:"n.",m:"步；步骤"},{p:"v.",m:"走"}]},
+  "stick":{ph:"/stɪk/",pos:[{p:"n.",m:"棍子"},{p:"v.",m:"粘贴"}]},
+  "still":{ph:"/stɪl/",pos:[{p:"adv.",m:"仍然；还"}]},
+  "stocking":{ph:"/ˈstɒkɪŋ/",pos:[{p:"n.",m:"长袜"}]},
+  "stomach":{ph:"/ˈstʌmək/",pos:[{p:"n.",m:"胃；肚子"}]},
+  "stone":{ph:"/stəʊn/",pos:[{p:"n.",m:"石头"}]},
+  "stop":{ph:"/stɒp/",pos:[{p:"v./n.",m:"停止；站"}]},
+  "store":{ph:"/stɔː(r)/",pos:[{p:"n.",m:"商店；储存"},{p:"v.",m:"储存"}]},
+  "storm":{ph:"/stɔːm/",pos:[{p:"n.",m:"暴风雨"}]},
+  "story":{ph:"/ˈstɔːri/",pos:[{p:"n.",m:"故事"}]},
+  "stove":{ph:"/stəʊv/",pos:[{p:"n.",m:"炉子"}]},
+  "straight":{ph:"/streɪt/",pos:[{p:"adj./adv.",m:"直的（地）"}]},
+  "strange":{ph:"/streɪndʒ/",pos:[{p:"adj.",m:"奇怪的；陌生的"}]},
+  "stranger":{ph:"/ˈstreɪndʒə(r)/",pos:[{p:"n.",m:"陌生人"}]},
+  "street":{ph:"/striːt/",pos:[{p:"n.",m:"街道"}]},
+  "strength":{ph:"/streŋθ/",pos:[{p:"n.",m:"力量；强项"}]},
+  "stress":{ph:"/stres/",pos:[{p:"n.",m:"压力"},{p:"v.",m:"强调"}]},
+  "strict":{ph:"/strɪkt/",pos:[{p:"adj.",m:"严格的"}]},
+  "strike":{ph:"/straɪk/",pos:[{p:"v.",m:"打；袭击；罢工"}]},
+  "strong":{ph:"/strɒŋ/",pos:[{p:"adj.",m:"强壮的；强烈的"}]},
+  "student":{ph:"/ˈstjuːdnt/",pos:[{p:"n.",m:"学生"}]},
+  "study":{ph:"/ˈstʌdi/",pos:[{p:"v./n.",m:"学习；研究"}]},
+  "stupid":{ph:"/ˈstjuːpɪd/",pos:[{p:"adj.",m:"愚蠢的"}]},
+  "subject":{ph:"/ˈsʌbdʒɪkt/",pos:[{p:"n.",m:"科目；主题；主语"}]},
+  "success":{ph:"/səkˈses/",pos:[{p:"n.",m:"成功"}]},
+  "successful":{ph:"/səkˈsesfl/",pos:[{p:"adj.",m:"成功的"}]},
+  "such":{ph:"/sʌtʃ/",pos:[{p:"adj./pron.",m:"这样的"}]},
+  "sudden":{ph:"/ˈsʌdn/",pos:[{p:"adj.",m:"突然的"}]},
+  "sugar":{ph:"/ˈʃʊɡə(r)/",pos:[{p:"n.",m:"糖"}]},
+  "suggest":{ph:"/səˈdʒest/",pos:[{p:"v.",m:"建议"}]},
+  "suit":{ph:"/suːt/",pos:[{p:"n.",m:"西装"},{p:"v.",m:"适合"}]},
+  "summer":{ph:"/ˈsʌmə(r)/",pos:[{p:"n.",m:"夏天"}]},
+  "sun":{ph:"/sʌn/",pos:[{p:"n.",m:"太阳"}]},
+  "supermarket":{ph:"/ˈsuːpəmɑːkɪt/",pos:[{p:"n.",m:"超市"}]},
+  "supper":{ph:"/ˈsʌpə(r)/",pos:[{p:"n.",m:"晚餐"}]},
+  "support":{ph:"/səˈpɔːt/",pos:[{p:"v./n.",m:"支持"}]},
+  "suppose":{ph:"/səˈpəʊz/",pos:[{p:"v.",m:"假设；认为"}]},
+  "sure":{ph:"/ʃʊə(r)/",pos:[{p:"adj./adv.",m:"确信的（地）"}]},
+  "surface":{ph:"/ˈsɜːfɪs/",pos:[{p:"n.",m:"表面"}]},
+  "surprise":{ph:"/səˈpraɪz/",pos:[{p:"n.",m:"惊讶"},{p:"v.",m:"使惊讶"}]},
+  "survey":{ph:"/ˈsɜːveɪ/",pos:[{p:"n.",m:"调查"}]},
+  "survive":{ph:"/səˈvaɪv/",pos:[{p:"v.",m:"幸存"}]},
+  "sweet":{ph:"/swiːt/",pos:[{p:"adj.",m:"甜的；可爱的"}]},
+  "swim":{ph:"/swɪm/",pos:[{p:"v.",m:"游泳"}]},
+  "symbol":{ph:"/ˈsɪmbl/",pos:[{p:"n.",m:"象征"}]},
+
+  // ===== T =====
+  "table":{ph:"/ˈteɪbl/",pos:[{p:"n.",m:"桌子；表格"}]},
+  "tail":{ph:"/teɪl/",pos:[{p:"n.",m:"尾巴"}]},
+  "take":{ph:"/teɪk/",pos:[{p:"v.",m:"拿；带走；花费"}]},
+  "talk":{ph:"/tɔːk/",pos:[{p:"v./n.",m:"谈话"}]},
+  "tall":{ph:"/tɔːl/",pos:[{p:"adj.",m:"高的"}]},
+  "tap":{ph:"/tæp/",pos:[{p:"v./n.",m:"轻拍；水龙头"}]},
+  "tape":{ph:"/teɪp/",pos:[{p:"n.",m:"胶带；磁带"}]},
+  "task":{ph:"/tɑːsk/",pos:[{p:"n.",m:"任务"}]},
+  "taste":{ph:"/teɪst/",pos:[{p:"v.",m:"尝起来"},{p:"n.",m:"味道"}]},
+  "taxi":{ph:"/ˈtæksi/",pos:[{p:"n.",m:"出租车"}]},
+  "tea":{ph:"/tiː/",pos:[{p:"n.",m:"茶"}]},
+  "teach":{ph:"/tiːtʃ/",pos:[{p:"v.",m:"教"}]},
+  "teacher":{ph:"/ˈtiːtʃə(r)/",pos:[{p:"n.",m:"老师"}]},
+  "team":{ph:"/tiːm/",pos:[{p:"n.",m:"队；组"}]},
+  "technology":{ph:"/tekˈnɒlədʒi/",pos:[{p:"n.",m:"技术"}]},
+  "telephone":{ph:"/ˈtelɪfəʊn/",pos:[{p:"n.",m:"电话"}]},
+  "television":{ph:"/ˈtelɪvɪʒn/",pos:[{p:"n.",m:"电视"}]},
+  "tell":{ph:"/tel/",pos:[{p:"v.",m:"告诉；分辨"}]},
+  "temperature":{ph:"/ˈtemprətʃə(r)/",pos:[{p:"n.",m:"温度；体温"}]},
+  "ten":{ph:"/ten/",pos:[{p:"num.",m:"十"}]},
+  "tennis":{ph:"/ˈtenɪs/",pos:[{p:"n.",m:"网球"}]},
+  "tent":{ph:"/tent/",pos:[{p:"n.",m:"帐篷"}]},
+  "term":{ph:"/tɜːm/",pos:[{p:"n.",m:"学期；术语"}]},
+  "terrible":{ph:"/ˈterəbl/",pos:[{p:"adj.",m:"可怕的；糟糕的"}]},
+  "test":{ph:"/test/",pos:[{p:"n./v.",m:"测试"}]},
+  "text":{ph:"/tekst/",pos:[{p:"n.",m:"文本；课文"}]},
+  "than":{ph:"/ðæn/",pos:[{p:"conj.",m:"比"}]},
+  "thank":{ph:"/θæŋk/",pos:[{p:"v./n.",m:"感谢"}]},
+  "that":{ph:"/ðæt/",pos:[{p:"pron./conj.",m:"那个"}]},
+  "the":{ph:"/ðə/",pos:[{p:"art.",m:"这；那"}]},
+  "theatre":{ph:"/ˈθɪətə(r)/",pos:[{p:"n.",m:"剧院"}]},
+  "their":{ph:"/ðeə(r)/",pos:[{p:"pron.",m:"他们的"}]},
+  "them":{ph:"/ðem/",pos:[{p:"pron.",m:"他们（宾格）"}]},
+  "themselves":{ph:"/ðəmˈselvz/",pos:[{p:"pron.",m:"他们自己"}]},
+  "then":{ph:"/ðen/",pos:[{p:"adv.",m:"然后；那时"}]},
+  "there":{ph:"/ðeə(r)/",pos:[{p:"adv.",m:"那里"}]},
+  "these":{ph:"/ðiːz/",pos:[{p:"pron.",m:"这些"}]},
+  "they":{ph:"/ðeɪ/",pos:[{p:"pron.",m:"他们"}]},
+  "thick":{ph:"/θɪk/",pos:[{p:"adj.",m:"厚的；浓的"}]},
+  "thin":{ph:"/θɪn/",pos:[{p:"adj.",m:"薄的；瘦的"}]},
+  "thing":{ph:"/θɪŋ/",pos:[{p:"n.",m:"东西；事情"}]},
+  "think":{ph:"/θɪŋk/",pos:[{p:"v.",m:"想；认为"}]},
+  "third":{ph:"/θɜːd/",pos:[{p:"num.",m:"第三"}]},
+  "thirsty":{ph:"/ˈθɜːsti/",pos:[{p:"adj.",m:"口渴的"}]},
+  "thirteen":{ph:"/ˌθɜːˈtiːn/",pos:[{p:"num.",m:"十三"}]},
+  "this":{ph:"/ðɪs/",pos:[{p:"pron.",m:"这个"}]},
+  "those":{ph:"/ðəʊz/",pos:[{p:"pron.",m:"那些"}]},
+  "though":{ph:"/ðəʊ/",pos:[{p:"conj.",m:"虽然"}]},
+  "thought":{ph:"/θɔːt/",pos:[{p:"n.",m:"想法；思想"}]},
+  "thousand":{ph:"/ˈθaʊznd/",pos:[{p:"num.",m:"千"}]},
+  "thread":{ph:"/θred/",pos:[{p:"n.",m:"线"}]},
+  "three":{ph:"/θriː/",pos:[{p:"num.",m:"三"}]},
+  "through":{ph:"/θruː/",pos:[{p:"prep.",m:"通过；穿过"}]},
+  "throw":{ph:"/θrəʊ/",pos:[{p:"v.",m:"扔"}]},
+  "thumb":{ph:"/θʌm/",pos:[{p:"n.",m:"拇指"}]},
+  "Thursday":{ph:"/ˈθɜːzdeɪ/",pos:[{p:"n.",m:"星期四"}]},
+  "ticket":{ph:"/ˈtɪkɪt/",pos:[{p:"n.",m:"票"}]},
+  "tidy":{ph:"/ˈtaɪdi/",pos:[{p:"adj.",m:"整洁的"},{p:"v.",m:"整理"}]},
+  "tie":{ph:"/taɪ/",pos:[{p:"v.",m:"系；捆"},{p:"n.",m:"领带；平局"}]},
+  "tiger":{ph:"/ˈtaɪɡə(r)/",pos:[{p:"n.",m:"老虎"}]},
+  "tight":{ph:"/taɪt/",pos:[{p:"adj.",m:"紧的"}]},
+  "till":{ph:"/tɪl/",pos:[{p:"prep./conj.",m:"直到"}]},
+  "time":{ph:"/taɪm/",pos:[{p:"n.",m:"时间；次数"}]},
+  "tired":{ph:"/ˈtaɪəd/",pos:[{p:"adj.",m:"疲倦的"}]},
+  "title":{ph:"/ˈtaɪtl/",pos:[{p:"n.",m:"标题；头衔"}]},
+  "to":{ph:"/tuː/",pos:[{p:"prep.",m:"到；向"}]},
+  "today":{ph:"/təˈdeɪ/",pos:[{p:"adv./n.",m:"今天"}]},
+  "toe":{ph:"/təʊ/",pos:[{p:"n.",m:"脚趾"}]},
+  "together":{ph:"/təˈɡeðə(r)/",pos:[{p:"adv.",m:"一起"}]},
+  "tomato":{ph:"/təˈmɑːtəʊ/",pos:[{p:"n.",m:"西红柿"}]},
+  "tomorrow":{ph:"/təˈmɒrəʊ/",pos:[{p:"adv./n.",m:"明天"}]},
+  "ton":{ph:"/tʌn/",pos:[{p:"n.",m:"吨"}]},
+  "tongue":{ph:"/tʌŋ/",pos:[{p:"n.",m:"舌头；语言"}]},
+  "tonight":{ph:"/təˈnaɪt/",pos:[{p:"adv./n.",m:"今晚"}]},
+  "too":{ph:"/tuː/",pos:[{p:"adv.",m:"也；太"}]},
+  "tool":{ph:"/tuːl/",pos:[{p:"n.",m:"工具"}]},
+  "tooth":{ph:"/tuːθ/",pos:[{p:"n.",m:"牙齿（复 teeth）"}]},
+  "top":{ph:"/tɒp/",pos:[{p:"n.",m:"顶部"},{p:"adj.",m:"最高的"}]},
+  "topic":{ph:"/ˈtɒpɪk/",pos:[{p:"n.",m:"话题"}]},
+  "total":{ph:"/ˈtəʊtl/",pos:[{p:"adj.",m:"总的"},{p:"n.",m:"总数"}]},
+  "touch":{ph:"/tʌtʃ/",pos:[{p:"v./n.",m:"触摸；感动"}]},
+  "tour":{ph:"/tʊə(r)/",pos:[{p:"n./v.",m:"旅行"}]},
+  "tourist":{ph:"/ˈtʊərɪst/",pos:[{p:"n.",m:"游客"}]},
+  "toward":{ph:"/təˈwɔːd/",pos:[{p:"prep.",m:"朝；向"}]},
+  "tower":{ph:"/ˈtaʊə(r)/",pos:[{p:"n.",m:"塔"}]},
+  "town":{ph:"/taʊn/",pos:[{p:"n.",m:"城镇"}]},
+  "toy":{ph:"/tɔɪ/",pos:[{p:"n.",m:"玩具"}]},
+  "trade":{ph:"/treɪd/",pos:[{p:"n./v.",m:"贸易；交易"}]},
+  "tradition":{ph:"/trəˈdɪʃn/",pos:[{p:"n.",m:"传统"}]},
+  "traffic":{ph:"/ˈtræfɪk/",pos:[{p:"n.",m:"交通"}]},
+  "train":{ph:"/treɪn/",pos:[{p:"n.",m:"火车"},{p:"v.",m:"训练"}]},
+  "training":{ph:"/ˈtreɪnɪŋ/",pos:[{p:"n.",m:"训练"}]},
+  "translate":{ph:"/trænzˈleɪt/",pos:[{p:"v.",m:"翻译"}]},
+  "travel":{ph:"/ˈtrævl/",pos:[{p:"v./n.",m:"旅行"}]},
+  "tree":{ph:"/triː/",pos:[{p:"n.",m:"树"}]},
+  "trip":{ph:"/trɪp/",pos:[{p:"n.",m:"旅行"}]},
+  "trouble":{ph:"/ˈtrʌbl/",pos:[{p:"n.",m:"麻烦"},{p:"v.",m:"使烦恼"}]},
+  "trousers":{ph:"/ˈtraʊzəz/",pos:[{p:"n.",m:"裤子"}]},
+  "truck":{ph:"/trʌk/",pos:[{p:"n.",m:"卡车"}]},
+  "true":{ph:"/truː/",pos:[{p:"adj.",m:"真实的"}]},
+  "trust":{ph:"/trʌst/",pos:[{p:"v./n.",m:"信任"}]},
+  "try":{ph:"/traɪ/",pos:[{p:"v./n.",m:"尝试；努力"}]},
+  "T-shirt":{ph:"/ˈtiːʃɜːt/",pos:[{p:"n.",m:"T恤"}]},
+  "Tuesday":{ph:"/ˈtjuːzdeɪ/",pos:[{p:"n.",m:"星期二"}]},
+  "turn":{ph:"/tɜːn/",pos:[{p:"v.",m:"转动；转弯"},{p:"n.",m:"轮流"}]},
+  "twelve":{ph:"/twelv/",pos:[{p:"num.",m:"十二"}]},
+  "twenty":{ph:"/ˈtwenti/",pos:[{p:"num.",m:"二十"}]},
+  "twice":{ph:"/twaɪs/",pos:[{p:"adv.",m:"两次"}]},
+  "two":{ph:"/tuː/",pos:[{p:"num.",m:"二"}]},
+  "type":{ph:"/taɪp/",pos:[{p:"n.",m:"类型"},{p:"v.",m:"打字"}]},
+  "ugly":{ph:"/ˈʌɡli/",pos:[{p:"adj.",m:"丑陋的"}]},
+  "umbrella":{ph:"/ʌmˈbrelə/",pos:[{p:"n.",m:"雨伞"}]},
+  "uncle":{ph:"/ˈʌŋkl/",pos:[{p:"n.",m:"叔叔；舅舅"}]},
+  "under":{ph:"/ˈʌndə(r)/",pos:[{p:"prep.",m:"在……下面"}]},
+  "understand":{ph:"/ˌʌndəˈstænd/",pos:[{p:"v.",m:"理解"}]},
+  "unit":{ph:"/ˈjuːnɪt/",pos:[{p:"n.",m:"单元；单位"}]},
+  "university":{ph:"/ˌjuːnɪˈvɜːsəti/",pos:[{p:"n.",m:"大学"}]},
+  "unless":{ph:"/ənˈles/",pos:[{p:"conj.",m:"除非"}]},
+  "until":{ph:"/ənˈtɪl/",pos:[{p:"conj./prep.",m:"直到"}]},
+  "use":{ph:"/juːz/",pos:[{p:"v.",m:"使用"},{p:"n.",m:"用途"}]},
+  "useful":{ph:"/ˈjuːsfl/",pos:[{p:"adj.",m:"有用的"}]},
+  "usual":{ph:"/ˈjuːʒuəl/",pos:[{p:"adj.",m:"通常的"}]},
+  "valuable":{ph:"/ˈvæljuəbl/",pos:[{p:"adj.",m:"有价值的"}]},
+  "value":{ph:"/ˈvæljuː/",pos:[{p:"n.",m:"价值"},{p:"v.",m:"重视"}]},
+  "victory":{ph:"/ˈvɪktəri/",pos:[{p:"n.",m:"胜利"}]},
+  "video":{ph:"/ˈvɪdiəʊ/",pos:[{p:"n.",m:"视频"}]},
+  "view":{ph:"/vjuː/",pos:[{p:"n.",m:"观点；景色"},{p:"v.",m:"观看"}]},
+  "village":{ph:"/ˈvɪlɪdʒ/",pos:[{p:"n.",m:"村庄"}]},
+  "visit":{ph:"/ˈvɪzɪt/",pos:[{p:"v./n.",m:"参观；拜访"}]},
+  "voice":{ph:"/vɔɪs/",pos:[{p:"n.",m:"声音"}]},
+  "wait":{ph:"/weɪt/",pos:[{p:"v.",m:"等待"}]},
+  "wake":{ph:"/weɪk/",pos:[{p:"v.",m:"醒来；唤醒"}]},
+  "walk":{ph:"/wɔːk/",pos:[{p:"v./n.",m:"走；散步"}]},
+  "wall":{ph:"/wɔːl/",pos:[{p:"n.",m:"墙"}]},
+  "want":{ph:"/wɒnt/",pos:[{p:"v.",m:"想要"}]},
+  "warm":{ph:"/wɔːm/",pos:[{p:"adj.",m:"温暖的"}]},
+  "wash":{ph:"/wɒʃ/",pos:[{p:"v.",m:"洗"}]},
+  "waste":{ph:"/weɪst/",pos:[{p:"v./n.",m:"浪费"}]},
+  "watch":{ph:"/wɒtʃ/",pos:[{p:"v.",m:"观看"},{p:"n.",m:"手表"}]},
+  "water":{ph:"/ˈwɔːtə(r)/",pos:[{p:"n.",m:"水"},{p:"v.",m:"浇水"}]},
+  "way":{ph:"/weɪ/",pos:[{p:"n.",m:"路；方法"}]},
+  "weak":{ph:"/wiːk/",pos:[{p:"adj.",m:"虚弱的"}]},
+  "wear":{ph:"/weə(r)/",pos:[{p:"v.",m:"穿；戴"}]},
+  "weather":{ph:"/ˈweðə(r)/",pos:[{p:"n.",m:"天气"}]},
+  "website":{ph:"/ˈwebsaɪt/",pos:[{p:"n.",m:"网站"}]},
+  "week":{ph:"/wiːk/",pos:[{p:"n.",m:"周"}]},
+  "weekend":{ph:"/ˌwiːkˈend/",pos:[{p:"n.",m:"周末"}]},
+  "welcome":{ph:"/ˈwelkəm/",pos:[{p:"v./adj.",m:"欢迎"}]},
+  "west":{ph:"/west/",pos:[{p:"n./adj.",m:"西方（的）"}]},
+  "wet":{ph:"/wet/",pos:[{p:"adj.",m:"湿的"}]},
+  "whether":{ph:"/ˈweðə(r)/",pos:[{p:"conj.",m:"是否"}]},
+  "while":{ph:"/waɪl/",pos:[{p:"conj.",m:"当……时候"}]},
+  "white":{ph:"/waɪt/",pos:[{p:"adj.",m:"白色的"}]},
+  "wide":{ph:"/waɪd/",pos:[{p:"adj.",m:"宽的"}]},
+  "wife":{ph:"/waɪf/",pos:[{p:"n.",m:"妻子"}]},
+  "wild":{ph:"/waɪld/",pos:[{p:"adj.",m:"野生的"}]},
+  "win":{ph:"/wɪn/",pos:[{p:"v.",m:"赢"}]},
+  "wind":{ph:"/wɪnd/",pos:[{p:"n.",m:"风"}]},
+  "window":{ph:"/ˈwɪndəʊ/",pos:[{p:"n.",m:"窗户"}]},
+  "wish":{ph:"/wɪʃ/",pos:[{p:"v./n.",m:"希望；愿望"}]},
+  "within":{ph:"/wɪˈðɪn/",pos:[{p:"prep.",m:"在……之内"}]},
+  "without":{ph:"/wɪˈðaʊt/",pos:[{p:"prep.",m:"没有"}]},
+  "woman":{ph:"/ˈwʊmən/",pos:[{p:"n.",m:"女人"}]},
+  "wonder":{ph:"/ˈwʌndə(r)/",pos:[{p:"v.",m:"想知道"},{p:"n.",m:"奇迹"}]},
+  "wonderful":{ph:"/ˈwʌndəfl/",pos:[{p:"adj.",m:"精彩的"}]},
+  "wood":{ph:"/wʊd/",pos:[{p:"n.",m:"木头"}]},
+  "word":{ph:"/wɜːd/",pos:[{p:"n.",m:"单词；话"}]},
+  "work":{ph:"/wɜːk/",pos:[{p:"v./n.",m:"工作"}]},
+  "world":{ph:"/wɜːld/",pos:[{p:"n.",m:"世界"}]},
+  "worry":{ph:"/ˈwʌri/",pos:[{p:"v./n.",m:"担心"}]},
+  "worth":{ph:"/wɜːθ/",pos:[{p:"adj.",m:"值得的"}]},
+  "write":{ph:"/raɪt/",pos:[{p:"v.",m:"写"}]},
+  "wrong":{ph:"/rɒŋ/",pos:[{p:"adj.",m:"错误的"}]},
+  "X-ray":{ph:"/ˈeksreɪ/",pos:[{p:"n.",m:"X光"}]},
+  "yard":{ph:"/jɑːd/",pos:[{p:"n.",m:"院子；码"}]},
+  "year":{ph:"/jɪə(r)/",pos:[{p:"n.",m:"年"}]},
+  "yellow":{ph:"/ˈjeləʊ/",pos:[{p:"adj.",m:"黄色的"}]},
+  "yesterday":{ph:"/ˈjestədeɪ/",pos:[{p:"adv./n.",m:"昨天"}]},
+  "yet":{ph:"/jet/",pos:[{p:"adv.",m:"还；尚"}]},
+  "young":{ph:"/jʌŋ/",pos:[{p:"adj.",m:"年轻的"}]},
+  "yourself":{ph:"/jɔːˈself/",pos:[{p:"pron.",m:"你自己"}]},
+  "youth":{ph:"/juːθ/",pos:[{p:"n.",m:"青春；青年"}]},
+  "zebra":{ph:"/ˈziːbrə/",pos:[{p:"n.",m:"斑马"}]},
+  "zero":{ph:"/ˈzɪərəʊ/",pos:[{p:"num./n.",m:"零"}]},
+  "zoo":{ph:"/zuː/",pos:[{p:"n.",m:"动物园"}]}
+};
+
+
+const UNITS = [
+  {
+    "unit": "Unit 1",
+    "title": "How tall are you?",
+    "cn": "你有多高？",
+    "color": "#ff6b9d",
+    "grad": [
+      "#ff6b9d",
+      "#ffa8c5"
+    ],
+    "parts": [
+      {
+        "part": "Let's talk A",
+        "sents": [
+          "Look! That's the tallest dinosaur in this hall.",
+          "Yes, it is. How tall is it?",
+          "Maybe 4 metres.",
+          "Wow! It's taller than both of us together.",
+          "Look! There are more dinosaurs over there!",
+          "They're all so big and tall.",
+          "Hey, this dinosaur isn't tall! I'm taller than this one.",
+          "Oh, yes. How tall are you?",
+          "I'm 1.65 metres."
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "How tall are you?",
+          "I'm 1.61 metres.",
+          "Oh! I'm taller.",
+          "You're older than me, too.",
+          "How heavy are you, Jim?",
+          "I'm 52 kilograms.",
+          "You're heavier than me."
+        ]
+      },
+      {
+        "part": "Let's talk B",
+        "sents": [
+          "Those shoes in the window are nice! Let's have a look.",
+          "What size are your shoes, Mike?",
+          "Size 7.",
+          "Size 7? That's so small.",
+          "In China I wear size 38 shoes.",
+          "Oh! Your feet are bigger than mine. My shoes are size 37.",
+          "Really? You look taller than me.",
+          "But I think you are heavier. How heavy are you?",
+          "I'm 48 kilograms.",
+          "Yes, you're heavier. I'm 46 kilograms."
+        ]
+      },
+      {
+        "part": "Read and write",
+        "sents": [
+          "Little Duck is watching the sun go down.",
+          "It is getting lower and lower, but his shadow is getting longer and longer.",
+          "Why is that?",
+          "You are older and smarter than me.",
+          "Tell me, why is my shadow longer when the sun gets lower?",
+          "That's easy, Little Duck.",
+          "The sun goes down every day, and we grow older every day.",
+          "Your shadow grows longer because you are growing taller.",
+          "You are becoming a big beautiful bird!"
+        ]
+      }
+    ]
+  },
+  {
+    "unit": "Unit 2",
+    "title": "Last weekend",
+    "cn": "上周末",
+    "color": "#fbbf24",
+    "grad": [
+      "#fbbf24",
+      "#fde68a"
+    ],
+    "parts": [
+      {
+        "part": "Let's talk A",
+        "sents": [
+          "Hi, Grandpa. How are you? How was your weekend?",
+          "I'm fine, Mike. It was good, thank you.",
+          "What did you do?",
+          "Well, I stayed at home with your grandma.",
+          "We drank tea in the afternoon and watched TV.",
+          "I watched TV, too.",
+          "I watched some children's shows on TV.",
+          "That's nice. Did you do anything else?",
+          "Yes, I cleaned my room and washed my clothes.",
+          "You are a good boy!"
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "How was your weekend?",
+          "It was fine, thanks.",
+          "What did you do?",
+          "I stayed at home and watched TV.",
+          "What did you do last weekend?",
+          "I saw a film.",
+          "Did you like it?",
+          "Yes, I did. It was great."
+        ]
+      },
+      {
+        "part": "Let's talk B",
+        "sents": [
+          "Hey, Amy. Let's go to the bookstore.",
+          "I want to buy the new film magazine.",
+          "Oh, I read it last weekend.",
+          "Was it interesting?",
+          "Yes, it talked about a lot of new films.",
+          "What did you do last weekend? Did you see a film?",
+          "No, I had a cold. I stayed at home all weekend and slept.",
+          "Oh, I'm sorry. I'm happy you feel better now.",
+          "Thanks. Let's go by bus. It's faster than walking."
+        ]
+      },
+      {
+        "part": "Read and write",
+        "sents": [
+          "Our weekend at your hotel was bad.",
+          "Our room was big but everything was very old.",
+          "Our friend Robin cleaned our room and fixed a broken chair.",
+          "My mother wanted to read a book but the lamp was too small.",
+          "My dad got some hamburgers from the hotel kitchen, but they were cold and tasted bad.",
+          "I wanted to watch TV but the TV didn't work.",
+          "The people in Room 301 listened to loud music.",
+          "I didn't sleep all night.",
+          "I'm sorry, but we didn't enjoy our stay very much."
+        ]
+      }
+    ]
+  },
+  {
+    "unit": "Unit 3",
+    "title": "Where did you go?",
+    "cn": "你去了哪里？",
+    "color": "#34d399",
+    "grad": [
+      "#34d399",
+      "#6ee7b7"
+    ],
+    "parts": [
+      {
+        "part": "Let's talk A",
+        "sents": [
+          "What happened?",
+          "I fell off my bike last Saturday and hurt my foot.",
+          "That's too bad! Are you all right?",
+          "I'm OK now. Come and look at my photos from the Labour Day holiday.",
+          "Where did you go?",
+          "Mt. Tianshan, Xinjiang. I rode a horse.",
+          "Look, it's very small!",
+          "Oh, yes. It looks like a mule!",
+          "Did you go to Turpan?",
+          "Yes, we did. We saw lots of grapes there, but we couldn't eat them.",
+          "They won't be ready till August."
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "Where did you go last Saturday?",
+          "I went to a forest park.",
+          "What did you do there?",
+          "I rode a bike.",
+          "How was your summer holiday, Yifan?",
+          "It was good.",
+          "I went swimming every weekend and took lots of pictures."
+        ]
+      },
+      {
+        "part": "Let's talk B",
+        "sents": [
+          "Where did you go over the winter holiday?",
+          "My family and I went to Sanya.",
+          "Really? Did you like it?",
+          "Yes, it was so warm.",
+          "Hainan is far from here. How did you go there?",
+          "We went there by plane.",
+          "How was the beach? What did you do there?",
+          "It was beautiful. I took lots of pictures, and I also went swimming.",
+          "Sounds great! Can I see your pictures sometime?",
+          "Sure."
+        ]
+      },
+      {
+        "part": "Read and write",
+        "sents": [
+          "Today was a sunny day.",
+          "In the morning, we rode a bike for three people.",
+          "Max sat in a basket on the front of the bike.",
+          "That was fun!",
+          "We took pictures of the beautiful countryside.",
+          "We bought some gifts and ate some delicious food.",
+          "In the afternoon, Mum ate some bad fruit and didn't feel well.",
+          "So we stayed in the hotel.",
+          "Dad and I wanted to make her happy.",
+          "We dressed up and made a funny play.",
+          "Robin played the part of a dog.",
+          "He was so cute.",
+          "It was a bad day but also a good day!"
+        ]
+      }
+    ]
+  },
+  {
+    "unit": "Unit 4",
+    "title": "Then and now",
+    "cn": "过去和现在",
+    "color": "#60a5fa",
+    "grad": [
+      "#60a5fa",
+      "#93c5fd"
+    ],
+    "parts": [
+      {
+        "part": "Let's talk A",
+        "sents": [
+          "Wow, a library! There was no library in my old school.",
+          "Tell us about your school, please.",
+          "There was only one small building on a hill.",
+          "Could you see stars at night?",
+          "Yes, I liked the stars.",
+          "Me too. One day I'm going to visit the moon.",
+          "The Americans took about five days to get there in 1969.",
+          "How do you know that?",
+          "Easy, I looked it up on the Internet.",
+          "Ah! There were no computers or Internet in my time."
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "There was no gym in my school twenty years ago.",
+          "Now there's a new one in our school.",
+          "I didn't like winter before.",
+          "I thought it was too cold, and I couldn't go cycling.",
+          "How about now?",
+          "Now I love to ice-skate, so I like winter."
+        ]
+      },
+      {
+        "part": "Let's talk B",
+        "sents": [
+          "John, come and look at Mike's old photos!",
+          "That's funny, Mike! You're wearing a pink T-shirt.",
+          "Yes, but I don't like pink now.",
+          "We are all different now!",
+          "Right. Before, I was quiet. Now, I'm very active in class.",
+          "How about you?",
+          "Well, I was short, so I couldn't ride my bike well.",
+          "Now, I go cycling every day. I like it very much.",
+          "That's good exercise."
+        ]
+      },
+      {
+        "part": "Read and write",
+        "sents": [
+          "Wu Yifan had a race with his father and Max.",
+          "There were many people there.",
+          "His father ran very fast, but Wu Yifan could not.",
+          "There was nothing he could do. He was so worried.",
+          "I could run fast at school, he thought.",
+          "Why am I so slow now?",
+          "Then Robin said, Drink this!",
+          "He gave Wu Yifan some water.",
+          "Wu Yifan drank it and suddenly he felt good.",
+          "He could run fast again.",
+          "There was a second race.",
+          "Wu Yifan ran like a cheetah.",
+          "He could win the race!",
+          "But suddenly he tripped and fell.",
+          "Then he woke up. He was in bed.",
+          "It was all a dream!"
+        ]
+      }
+    ]
+  },
+  {
+    "unit": "Recycle",
+    "title": "Mike's happy days",
+    "cn": "Mike的快乐日子",
+    "color": "#a78bfa",
+    "grad": [
+      "#a78bfa",
+      "#c4b5fd"
+    ],
+    "parts": [
+      {
+        "part": "Let's talk A",
+        "sents": [
+          "It is time to leave our school.",
+          "We are all going to middle school soon, so we will say goodbye to each other.",
+          "We are going to have a farewell party.",
+          "You can bring your friends.",
+          "We will draw pictures and sing songs.",
+          "We are going to give prizes for the best pictures.",
+          "We are going to have cake, candy and juice, too.",
+          "We will listen to music, play games and dance.",
+          "It will be great fun.",
+          "See you at the party!"
+        ]
+      },
+      {
+        "part": "Let's learn",
+        "sents": [
+          "I go to school from Monday to Friday.",
+          "My favourite day is Monday.",
+          "On Monday I have maths, English, music and PE.",
+          "I like PE best.",
+          "Maths is my first class.",
+          "I often answer maths questions.",
+          "Sometimes they're difficult.",
+          "In English class, I read many English stories.",
+          "I like to speak English with my friends.",
+          "I play the piano or sing songs in music class.",
+          "In the afternoon I have PE class.",
+          "I sometimes play football or exercise in the gym.",
+          "I'm not good at running, but I like football best!"
+        ]
+      },
+      {
+        "part": "Let's talk B",
+        "sents": [
+          "Saturday was a busy day for me.",
+          "In the morning, I got up early.",
+          "Then I had breakfast.",
+          "After that, I cleaned my room.",
+          "Next, I went fishing.",
+          "In the afternoon, I read a storybook.",
+          "In the evening, I wrote an email.",
+          "Finally, I went to bed at 10 p.m."
+        ]
+      },
+      {
+        "part": "Read and write",
+        "sents": [
+          "The party is on Friday.",
+          "It's time to say goodbye.",
+          "We won't sing any sad songs.",
+          "And we'll have lots of fun.",
+          "The party is on Friday.",
+          "We'll dance and sing and play.",
+          "Don't be late for the party.",
+          "We'll have a happy, happy day."
+        ]
+      }
+    ]
+  }
+];
+
+
+const box = document.getElementById('box');
+box.innerHTML = '';
+var _unitBases = [106,46,43,117,44,111];
+
+// 进度模拟
+(function(){
+  var p = 0;
+  var ring = document.getElementById('blRing');
+  var num = document.getElementById('blNum');
+  var bar = document.getElementById('blBar');
+  var timer = setInterval(function(){
+    if(!num || !bar) return;
+    if(p < 85){ p += Math.max(1, (85-p)*0.08); }
+    p = Math.min(99, p);
+    var pi = Math.floor(p);
+    num.textContent = pi + '%';
+    bar.style.width = pi + '%';
+    if(ring) ring.style.setProperty('--p', (pi*3.6)+'deg');
+  }, 200);
+  window.__finishLoading = function(){
+    clearInterval(timer);
+  };
+})();
+
+UNITS.forEach((u, ui)=>{
+  const card = document.createElement('div');
+  card.className = 'unit-card';
+  // 默认全部折叠
+
+  const head = document.createElement('div');
+  head.className = 'unit-head';
+  head.style.background = 'linear-gradient(135deg,'+u.grad[0]+','+u.grad[1]+')';
+  head.innerHTML = '<span class="unum">'+u.unit+'</span><span class="utitle">'+u.title+'</span><span class="ucn">'+u.cn+'</span><span class="arrow">▼</span>';
+  head.addEventListener('click', ()=>{
+    const wasOpen = card.classList.contains('open');
+    document.querySelectorAll('.unit-card.open').forEach(c=>c.classList.remove('open'));
+    if(!wasOpen){ card.classList.add('open'); var ap = card.querySelector('.pane.active'); if(ap) preloadPane(ap); }
+  });
+  card.appendChild(head);
+
+  const body = document.createElement('div');
+  body.className = 'unit-body';
+
+  const tabs = document.createElement('div');
+  tabs.className = 'tabs';
+  var unitBase = _unitBases[ui]; var _sentSeq = 0;
+  u.parts.forEach((p, pi)=>{
+    const t = document.createElement('div');
+    t.className = 'tab' + (pi===0?' active':'');
+    const ICONS = {
+      "Let's talk A": "💬", "Let's talk B": "💬",
+      "Role-play": "🎭", "Ask and answer": "❓",
+      "Choose and role-play": "🎭", "Count and say": "🔢",
+      "Guess and check": "🔍", "Colour and say": "🎨",
+      "Look and talk": "👀", "Look and say": "👀",
+      "Do a survey": "📋",
+      "Let's learn": "📖", "Let's learn B": "📖",
+      "Listen and do": "👂", "Listen and chant": "🎵", "Listen and chant B": "🎵",
+      "Start to read": "📚", "Reading time": "📖",
+      "Let's spell A": "🔤", "Read and write": "📝",
+      "Project": "✏️"
+    };
+    t.innerHTML = '<span style="margin-right:4px">'+(ICONS[p.part]||'•')+'</span>'+p.part;
+    t.style.setProperty('--c', u.color);
+    if(pi===0){ t.style.background = u.color; t.style.color='#fff'; }
+    t.addEventListener('click', ()=>{
+      tabs.querySelectorAll('.tab').forEach(x=>{x.classList.remove('active');x.style.background='';x.style.color='';});
+      t.classList.add('active'); t.style.background=u.color; t.style.color='#fff';
+      body.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+      var panes = body.querySelectorAll('.pane'); panes.forEach(x=>x.classList.remove('active')); panes[pi].classList.add('active'); preloadPane(panes[pi]);
+    });
+    tabs.appendChild(t);
+  });
+  body.appendChild(tabs);
+
+  u.parts.forEach((p, pi)=>{
+    const pane = document.createElement('div');
+    pane.className = 'pane' + (pi===0?' active':'');
+    // 播放全部按钮
+    if(p.sents.length > 1){
+      const allBtn = document.createElement('button');
+      allBtn.className = 'play-all';
+      allBtn.textContent = '播放全部';
+      allBtn.onclick = ()=>playAll(pane, allBtn);
+      pane.appendChild(allBtn);
+    }
+    p.sents.forEach(s=>{
+      const sc = document.createElement('div');
+      sc.className = 'sent-card';
+      var thisBase = unitBase + (_sentSeq%41)-20; _sentSeq++; if(thisBase<0) thisBase=0;
+      let html = '<div class="sent-top"><button class="sent-play" data-s="'+s.replace(/"/g,'&quot;')+'" data-base="'+thisBase+'" data-count="'+thisBase+'">▶</button><div class="dbg" style="font-size:11px;color:#10b981;margin-left:8px;line-height:1;display:flex;align-items:center">已播放'+thisBase+'次</div></div>';
+      html += '<div class="sent-text">';
+      s.split(/(\s+)/).forEach(tok=>{
+        if(/^\s+$/.test(tok)){ html += tok; return; }
+        const mm = tok.match(/^([A-Za-z']+)([^A-Za-z']*)$/);
+        if(mm){
+          html += '<span class="w" data-w="'+mm[1].toLowerCase()+'">'+esc(mm[1])+'</span>';
+          if(mm[2]) html += '<span class="pun">'+esc(mm[2])+'</span>';
+        }else{ html += '<span class="pun">'+esc(tok)+'</span>'; }
+      });
+      html += '</div>';
+      html += '<div class="word-pop"><div class="wp-head"><span class="wp-word"></span><span class="wp-ph"></span></div><div class="wp-pos"></div><div class="wp-src"></div></div>';
+      sc.innerHTML = html;
+      pane.appendChild(sc);
+    });
+    body.appendChild(pane);
+  });
+
+  card.appendChild(body);
+  box.appendChild(card);
+  if(window.__finishLoading) window.__finishLoading();
+});
+
+let _failTimer = null;
+// 复用单个 Audio 对象，避免移动端 Audio 对象累积导致资源耗尽
+const _currentAudio = new Audio();
+_currentAudio.preload = 'auto';
+_currentAudio.style.display = 'none';
+document.body.appendChild(_currentAudio);
+
+function resetBtn(btn, orig){
+  btn.textContent = '▶';
+  btn.disabled = false;
+  if(_failTimer){ clearTimeout(_failTimer); _failTimer = null; }
+}
+
+function playOnce(url, text){
+  try{ _currentAudio.pause(); }catch(e){}
+  try{ _currentAudio.removeAttribute('src'); _currentAudio.load(); }catch(e){}
+  _currentAudio.src = url;
+  return _currentAudio;
+}
+
+let _playingAll = false;
+function playAll(pane, allBtn){
+  if(_playingAll){
+    _playingAll = false;
+    if(_currentAudio){ try{_currentAudio.pause();}catch(e){} }
+    allBtn.textContent='播放全部'; allBtn.classList.remove('playing');
+    return;
+  }
+  const btns = [...pane.querySelectorAll('.sent-play')];
+  if(!btns.length) return;
+  _playingAll = true;
+  allBtn.textContent = '停止播放';
+  allBtn.classList.add('playing');
+  let i = 0;
+  function next(){
+    if(!_playingAll) return;
+    if(i >= btns.length){ _playingAll=false; allBtn.textContent='播放全部'; allBtn.classList.remove('playing'); return; }
+    const btn = btns[i++];
+    // 传入 onEnd 回调：播放成功后自动播下一句
+    playSentence(btn.dataset.s, btn, '▶', ()=>{ if(_playingAll) setTimeout(next, 400); });
+  }
+  next();
+}
+
+
+// === 全局播放计数 ===
+var _GC_PREFIX = 'wj62_';
+function _gcKey(text){
+  var h = 0;
+  for(var i=0;i<text.length;i++){ h=((h<<5)-h+text.charCodeAt(i))|0; }
+  return 's'+Math.abs(h);
+}
+
+function showPlusOne(btn){
+  var dbg = btn.parentElement.querySelector('.dbg');
+  var el = document.createElement('span');
+  el.className = 'plus-one';
+  el.textContent = '+1';
+  dbg.appendChild(el);
+  setTimeout(function(){ el.remove(); }, 850);
+}
+
+function gcHit(text, cb){
+  var k = _GC_PREFIX + _gcKey(text);
+  try{
+    var cur = parseInt(localStorage.getItem(k)||'0');
+    cur += 1;
+    localStorage.setItem(k, cur);
+    cb(cur);
+  }catch(e){ cb(null); }
+}
+function gcGet(text, cb){
+  var k = _GC_PREFIX + _gcKey(text);
+  try{
+    var v = parseInt(localStorage.getItem(k)||'0');
+    cb(v);
+  }catch(e){ cb(null); }
+}
+function preloadPane(pane){
+  pane.querySelectorAll('.sent-play').forEach(btn=>{
+    // 预加载音频
+    var txt = btn.dataset.s;
+    if(typeof AUDIO_MAP !== 'undefined' && AUDIO_MAP[txt] && AUDIO_MAP[txt].indexOf('audio/')===0){
+      var a = new Audio();
+      a.preload = 'auto';
+      a.src = AUDIO_MAP[txt];
+    }
+    var dbg = btn.parentElement.querySelector('.dbg');
+    if(dbg.dataset.loaded) return;
+    dbg.dataset.loaded = '1';
+    var b = parseInt(btn.dataset.base)||0;
+    gcGet(btn.dataset.s, function(v){
+      if(v!=null){ btn.dataset.count = b+v; dbg.textContent = '已播放'+(b+v)+'次'; dbg.style.color='#10b981'; }
+    });
+  });
+}
+
+function playSentence(text, btn, orig, onEnd){
+  const dbg = btn.parentElement.querySelector('.dbg');
+  
+  // 优先用本地 base64 音频（不依赖网络，不会被浏览器拦截）
+  if(typeof AUDIO_MAP !== 'undefined' && AUDIO_MAP[text]){
+    var b0 = parseInt(btn.dataset.base)||0;
+    var c0 = parseInt(btn.dataset.count)||b0;
+    btn.dataset.count = c0+1;
+    dbg.textContent = '已播放'+(c0+1)+'次';
+    dbg.style.color = '#10b981';
+    showPlusOne(btn);
+    gcHit(text, function(v){ if(v!=null){ btn.dataset.count = b0+v; dbg.textContent = '已播放'+(b0+v)+'次'; } });
+    const audio = playOnce(AUDIO_MAP[text]);
+    audio.onplaying = ()=>{ resetBtn(btn, orig); };
+    if(onEnd) audio.onended = onEnd;
+    audio.play().catch(()=>{ if(onEnd) onEnd(); });
+    resetBtn(btn, orig);
+    return;
+  }
+  
+  // 本地没有的句子，走在线 TTS
+  let step = 0;
+  function getUrl(i){
+    if(i===0) return 'https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(text) + '&type=2';
+    if(i===1) return 'https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(text) + '&type=1';
+    return 'https://fanyi.baidu.com/gettts?lan=en&text=' + encodeURIComponent(text) + '&spd=3&source=web';
+  }
+  const labels = ['有道美式', '有道英式', '百度TTS'];
+
+  function tryPlay(){
+    /* loading */
+    dbg.style.color = '#f59e0b';
+    const audio = playOnce(getUrl(step) + (step>0?'&_t='+Date.now():''));
+    audio.onplaying = ()=>{
+      var b1 = parseInt(btn.dataset.base)||0;
+      var c1 = parseInt(btn.dataset.count)||b1;
+      btn.dataset.count = c1+1;
+      dbg.textContent = '已播放'+(c1+1)+'次';
+      dbg.style.color = '#10b981';
+      showPlusOne(btn);
+      gcHit(text, function(v){ if(v!=null){ btn.dataset.count = b1+v; dbg.textContent = '已播放'+(b1+v)+'次'; } });
+      resetBtn(btn, orig);
+      if(onEnd) audio.onended = onEnd;
+    };
+    audio.onerror = ()=>{
+      const c = audio.error ? audio.error.code : 0;
+      if(c===1) return;
+      step++;
+      if(step < 3){ setTimeout(tryPlay, 300); return; }
+      resetBtn(btn, orig);
+      if(onEnd) onEnd();
+    };
+    audio.play().catch(()=>{
+      step++;
+      if(step < 3){ setTimeout(tryPlay, 300); }
+      else{
+        resetBtn(btn, orig);
+        if(onEnd) onEnd();
+      }
+    });
+  }
+  tryPlay();
+
+  if(_failTimer) clearTimeout(_failTimer);
+  _failTimer = setTimeout(()=>{ dbg.style.color='#ef4444'; resetBtn(btn, orig); if(onEnd) onEnd(); }, 12000);
+}
+
+document.querySelectorAll('.sent-play').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    // 如果正在播放全部，先停止
+    if(_playingAll){
+      _playingAll = false;
+      document.querySelectorAll('.play-all.playing').forEach(b=>{b.textContent='播放全部';b.classList.remove('playing');});
+    }
+    const orig = btn.textContent;
+    btn.textContent = '…';
+    btn.disabled = true;
+    playSentence(btn.dataset.s, btn, orig);
+  });
+});
+
+
+document.querySelectorAll('.w').forEach(el=>{
+  el.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const pop = el.closest('.sent-card').querySelector('.word-pop');
+    // 如果点的是当前已展开的单词，toggle收起
+    const wasActive = el.classList.contains('active');
+    // 先关掉所有已展开的
+    document.querySelectorAll('.w.active').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.word-pop.show').forEach(p=>p.classList.remove('show'));
+    if(wasActive){ return; }
+    el.classList.add('active');
+    lookupWord(el.dataset.w, pop);
+  });
+});
+// 点击单词详情区自身时收起
+document.addEventListener('click', (e)=>{
+  if(e.target.closest('.word-pop')){
+    document.querySelectorAll('.w.active').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.word-pop.show').forEach(p=>p.classList.remove('show'));
+  }
+});
+
+function lookupWord(w, pop){
+  speak(w);
+  const entry = DICT[w];
+  if(entry){ fillPop(pop, w, entry.ph||'', entry.pos, '本地词库'); return; }
+  pop.classList.add('show');
+  pop.querySelector('.wp-word').textContent = w;
+  pop.querySelector('.wp-ph').textContent = '…';
+  pop.querySelector('.wp-pos').textContent = '正在查询在线词典…';
+  pop.querySelector('.wp-src').textContent = '';
+  fetchYoudao(w, pop);
+}
+
+function fillPop(pop, word, ph, posArr, src){
+  pop.classList.add('show');
+  pop.querySelector('.wp-word').textContent = word;
+  pop.querySelector('.wp-ph').textContent = ph || '';
+  pop.querySelector('.wp-pos').innerHTML = posArr.map(p=>'<div><b>'+esc(p.p)+'</b>'+esc(p.m)+'</div>').join('');
+  pop.querySelector('.wp-src').textContent = src ? '来源：'+src : '';
+}
+
+let _cbSeq = 0;
+function fetchYoudao(w, pop){
+  const cb = '__yd_'+(++_cbSeq);
+  window[cb] = function(data){
+    try{ delete window[cb]; }catch(e){ window[cb]=undefined; }
+    const s = document.getElementById('__yd_scr');
+    if(s && s.parentNode) s.parentNode.removeChild(s);
+    if(data && data.result && data.result.code===200 && data.data && data.data.entries && data.data.entries.length){
+      const en = data.data.entries[0];
+      // 检查返回词是否匹配查询词（不区分大小写），避免 suggest 模糊匹配到别的词
+      if(en.entry && en.entry.toLowerCase() === w){
+        fillPop(pop, en.entry, '', parseYd(en.explain||''), '有道词典');
+      }else{
+        pop.querySelector('.wp-word').textContent = w;
+        pop.querySelector('.wp-pos').textContent = '未找到该词释义';
+      }
+    }else{
+      pop.querySelector('.wp-word').textContent = w;
+      pop.querySelector('.wp-pos').textContent = '未找到该词释义';
+    }
+  };
+  const s = document.createElement('script');
+  s.id = '__yd_scr';
+  s.src = 'https://dict.youdao.com/suggest?num=1&doctype=json&q='+encodeURIComponent(w)+'&callback='+cb;
+  s.onerror = ()=>{ pop.querySelector('.wp-pos').textContent = '在线查询失败（需联网）'; };
+  document.body.appendChild(s);
+}
+
+function parseYd(txt){
+  if(!txt) return [{p:'',m:'（暂无释义）'}];
+  const parts = txt.split(/(?=(?:n|v|adj|adv|prep|conj|pron|num|int|art|aux|modal)\.)/);
+  const out = [];
+  parts.forEach(p=>{
+    p = p.trim(); if(!p) return;
+    const m = p.match(/^((?:n|v|adj|adv|prep|conj|pron|num|int|art|aux|modal)\.)\s*(.*)/);
+    if(m) out.push({p:m[1], m:m[2]||''});
+    else out.push({p:'', m:p});
+  });
+  return out.length ? out : [{p:'',m:txt}];
+}
+
+function speak(text){
+  if(!text) return;
+  // 单词发音用独立Audio，不影响整句播放的全局Audio
+  const a = new Audio('https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(text) + '&type=2');
+  a.play().catch(()=>{});
+}
+
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+
+
+// === 本地音频库（base64嵌入）===
+const AUDIO_MAP = {
+  "Look! That's the tallest dinosaur in this hall.": "audio/62_6bd7d2f87fb0.mp3",
+  "Yes, it is. How tall is it?": "audio/62_2e68c90fabef.mp3",
+  "Maybe 4 metres.": "audio/62_6646753b3dea.mp3",
+  "Wow! It's taller than both of us together.": "audio/62_591ec5ced08e.mp3",
+  "Look! There are more dinosaurs over there!": "audio/62_ee305ce23d65.mp3",
+  "They're all so big and tall.": "audio/62_3c9f8fa1f7d7.mp3",
+  "Hey, this dinosaur isn't tall! I'm taller than this one.": "audio/62_2db7d79444b5.mp3",
+  "Oh, yes. How tall are you?": "audio/62_2fc39ee446ab.mp3",
+  "I'm 1.65 metres.": "audio/62_b268aa03316b.mp3",
+  "How tall are you?": "audio/62_f9c8adea0529.mp3",
+  "I'm 1.61 metres.": "audio/62_88559c19fc40.mp3",
+  "Oh! I'm taller.": "audio/62_0db1f6348dc4.mp3",
+  "You're older than me, too.": "audio/62_32c4cdeda274.mp3",
+  "How heavy are you, Jim?": "audio/62_73fb9f5ba35f.mp3",
+  "I'm 52 kilograms.": "audio/62_f5db3a6c57db.mp3",
+  "You're heavier than me.": "audio/62_9fc02b713fc3.mp3",
+  "Those shoes in the window are nice! Let's have a look.": "audio/62_70c6c422d3d2.mp3",
+  "What size are your shoes, Mike?": "audio/62_1ecfc75cb173.mp3",
+  "Size 7.": "audio/62_5b1856fbae9d.mp3",
+  "Size 7? That's so small.": "audio/62_5c736d5e402f.mp3",
+  "In China I wear size 38 shoes.": "audio/62_33dbc1c105ff.mp3",
+  "Oh! Your feet are bigger than mine. My shoes are size 37.": "audio/62_92a87d4d0f93.mp3",
+  "Really? You look taller than me.": "audio/62_02d02f6090eb.mp3",
+  "But I think you are heavier. How heavy are you?": "audio/62_4be708ddec61.mp3",
+  "I'm 48 kilograms.": "audio/62_796309ab67bf.mp3",
+  "Yes, you're heavier. I'm 46 kilograms.": "audio/62_5881773c58ab.mp3",
+  "Little Duck is watching the sun go down.": "audio/62_548f0f9e32ea.mp3",
+  "It is getting lower and lower, but his shadow is getting longer and longer.": "audio/62_ef6235f3576d.mp3",
+  "Why is that?": "audio/62_5f751c02301b.mp3",
+  "You are older and smarter than me.": "audio/62_f36e142b9a2e.mp3",
+  "Tell me, why is my shadow longer when the sun gets lower?": "audio/62_4c115515a47e.mp3",
+  "That's easy, Little Duck.": "audio/62_fcff008c3252.mp3",
+  "The sun goes down every day, and we grow older every day.": "audio/62_aac0c29a5446.mp3",
+  "Your shadow grows longer because you are growing taller.": "audio/62_fdca8e4826c6.mp3",
+  "You are becoming a big beautiful bird!": "audio/62_779be404b303.mp3",
+  "Hi, Grandpa. How are you? How was your weekend?": "audio/62_8582d75d6441.mp3",
+  "I'm fine, Mike. It was good, thank you.": "audio/62_34457489969a.mp3",
+  "What did you do?": "audio/62_f8cfce86dff5.mp3",
+  "Well, I stayed at home with your grandma.": "audio/62_568fbf96e9f2.mp3",
+  "We drank tea in the afternoon and watched TV.": "audio/62_0fb0233bef6f.mp3",
+  "I watched TV, too.": "audio/62_67d4e20540ca.mp3",
+  "I watched some children's shows on TV.": "audio/62_0c3cc5066abb.mp3",
+  "That's nice. Did you do anything else?": "audio/62_f479890a2d21.mp3",
+  "Yes, I cleaned my room and washed my clothes.": "audio/62_fb7198a1d416.mp3",
+  "You are a good boy!": "audio/62_ec53c6656b9f.mp3",
+  "How was your weekend?": "audio/62_0d3a5c08a880.mp3",
+  "It was fine, thanks.": "audio/62_95b80cf6ab45.mp3",
+  "I stayed at home and watched TV.": "audio/62_3b3861890db9.mp3",
+  "What did you do last weekend?": "audio/62_51aecaa2ec7d.mp3",
+  "I saw a film.": "audio/62_ebde36ab4c23.mp3",
+  "Did you like it?": "audio/62_8bf0164dec5a.mp3",
+  "Yes, I did. It was great.": "audio/62_f0e2f3fda5ac.mp3",
+  "Hey, Amy. Let's go to the bookstore.": "audio/62_d5d3adfab2fe.mp3",
+  "I want to buy the new film magazine.": "audio/62_2ddedd084d66.mp3",
+  "Oh, I read it last weekend.": "audio/62_33644523efff.mp3",
+  "Was it interesting?": "audio/62_c8dd25c131f4.mp3",
+  "Yes, it talked about a lot of new films.": "audio/62_00fd7bb8c96a.mp3",
+  "What did you do last weekend? Did you see a film?": "audio/62_d919c90a2f2e.mp3",
+  "No, I had a cold. I stayed at home all weekend and slept.": "audio/62_a7591458df63.mp3",
+  "Oh, I'm sorry. I'm happy you feel better now.": "audio/62_735911804278.mp3",
+  "Thanks. Let's go by bus. It's faster than walking.": "audio/62_7d478019e5e6.mp3",
+  "Our weekend at your hotel was bad.": "audio/62_b408029114da.mp3",
+  "Our room was big but everything was very old.": "audio/62_8c250de31995.mp3",
+  "Our friend Robin cleaned our room and fixed a broken chair.": "audio/62_a67c2e472f6f.mp3",
+  "My mother wanted to read a book but the lamp was too small.": "audio/62_cc869173a0c9.mp3",
+  "My dad got some hamburgers from the hotel kitchen, but they were cold and tasted bad.": "audio/62_46aa548d566a.mp3",
+  "I wanted to watch TV but the TV didn't work.": "audio/62_60256f8ad62c.mp3",
+  "The people in Room 301 listened to loud music.": "audio/62_bd6d463700bb.mp3",
+  "I didn't sleep all night.": "audio/62_0116ab9cbfbf.mp3",
+  "I'm sorry, but we didn't enjoy our stay very much.": "audio/62_c0131a853c84.mp3",
+  "What happened?": "audio/62_fa692d85f08c.mp3",
+  "I fell off my bike last Saturday and hurt my foot.": "audio/62_d2cd160f59de.mp3",
+  "That's too bad! Are you all right?": "audio/62_69a801240343.mp3",
+  "I'm OK now. Come and look at my photos from the Labour Day holiday.": "audio/62_7be3dd34722e.mp3",
+  "Where did you go?": "audio/62_10bc30c88ee7.mp3",
+  "Mt. Tianshan, Xinjiang. I rode a horse.": "audio/62_43ec119cf694.mp3",
+  "Look, it's very small!": "audio/62_4c1833b1c2c3.mp3",
+  "Oh, yes. It looks like a mule!": "audio/62_5934d98b0756.mp3",
+  "Did you go to Turpan?": "audio/62_069d811e818c.mp3",
+  "Yes, we did. We saw lots of grapes there, but we couldn't eat them.": "audio/62_7ef3ec5b0c14.mp3",
+  "They won't be ready till August.": "audio/62_4c992a863f64.mp3",
+  "Where did you go last Saturday?": "audio/62_80525d1a91b9.mp3",
+  "I went to a forest park.": "audio/62_c445edfea5a2.mp3",
+  "What did you do there?": "audio/62_41fb5dbec60b.mp3",
+  "I rode a bike.": "audio/62_280d81e75bdb.mp3",
+  "How was your summer holiday, Yifan?": "audio/62_89a67503189e.mp3",
+  "It was good.": "audio/62_09accb2047ef.mp3",
+  "I went swimming every weekend and took lots of pictures.": "audio/62_cda71b2b23be.mp3",
+  "Where did you go over the winter holiday?": "audio/62_b9a7c3cec65a.mp3",
+  "My family and I went to Sanya.": "audio/62_e674e1c2ca3c.mp3",
+  "Really? Did you like it?": "audio/62_b06501b1c7a8.mp3",
+  "Yes, it was so warm.": "audio/62_b18e59623acd.mp3",
+  "Hainan is far from here. How did you go there?": "audio/62_fb07284a948b.mp3",
+  "We went there by plane.": "audio/62_8ee38019c202.mp3",
+  "How was the beach? What did you do there?": "audio/62_5992f6c27a67.mp3",
+  "It was beautiful. I took lots of pictures, and I also went swimming.": "audio/62_8f4585d7fbe7.mp3",
+  "Sounds great! Can I see your pictures sometime?": "audio/62_a7852af28557.mp3",
+  "Sure.": "audio/62_b2f4b32b5e4d.mp3",
+  "Today was a sunny day.": "audio/62_c35cd1f5f641.mp3",
+  "In the morning, we rode a bike for three people.": "audio/62_1a72d933ac8c.mp3",
+  "Max sat in a basket on the front of the bike.": "audio/62_a9a365030e7e.mp3",
+  "That was fun!": "audio/62_55989a8c4d98.mp3",
+  "We took pictures of the beautiful countryside.": "audio/62_92cafe686679.mp3",
+  "We bought some gifts and ate some delicious food.": "audio/62_b7f4c650c9af.mp3",
+  "In the afternoon, Mum ate some bad fruit and didn't feel well.": "audio/62_d72490798598.mp3",
+  "So we stayed in the hotel.": "audio/62_dc0e9e2256d6.mp3",
+  "Dad and I wanted to make her happy.": "audio/62_bc1bfe7b0c43.mp3",
+  "We dressed up and made a funny play.": "audio/62_27cc3ba95a50.mp3",
+  "Robin played the part of a dog.": "audio/62_5876b6483034.mp3",
+  "He was so cute.": "audio/62_902e747ef4ec.mp3",
+  "It was a bad day but also a good day!": "audio/62_e1b04f325027.mp3",
+  "Wow, a library! There was no library in my old school.": "audio/62_26cd77404da9.mp3",
+  "Tell us about your school, please.": "audio/62_93572e32a0b0.mp3",
+  "There was only one small building on a hill.": "audio/62_65ed352d6ae6.mp3",
+  "Could you see stars at night?": "audio/62_8563f593199c.mp3",
+  "Yes, I liked the stars.": "audio/62_718aec24c100.mp3",
+  "Me too. One day I'm going to visit the moon.": "audio/62_e96d72eb01c6.mp3",
+  "The Americans took about five days to get there in 1969.": "audio/62_5f456e02a640.mp3",
+  "How do you know that?": "audio/62_1a20f3a6670e.mp3",
+  "Easy, I looked it up on the Internet.": "audio/62_3bc736fdc861.mp3",
+  "Ah! There were no computers or Internet in my time.": "audio/62_5db7f5cea37e.mp3",
+  "There was no gym in my school twenty years ago.": "audio/62_0535fa454769.mp3",
+  "Now there's a new one in our school.": "audio/62_25c1b377e91f.mp3",
+  "I didn't like winter before.": "audio/62_35abdedfd0f3.mp3",
+  "I thought it was too cold, and I couldn't go cycling.": "audio/62_b3e25e3e3b16.mp3",
+  "How about now?": "audio/62_295c184088dd.mp3",
+  "Now I love to ice-skate, so I like winter.": "audio/62_377fdffd21c8.mp3",
+  "John, come and look at Mike's old photos!": "audio/62_80403080ba20.mp3",
+  "That's funny, Mike! You're wearing a pink T-shirt.": "audio/62_4b37a4d0c75e.mp3",
+  "Yes, but I don't like pink now.": "audio/62_23b35c9743bf.mp3",
+  "We are all different now!": "audio/62_495019d5b35b.mp3",
+  "Right. Before, I was quiet. Now, I'm very active in class.": "audio/62_1eb7a7f72bef.mp3",
+  "How about you?": "audio/62_d198e54c1d27.mp3",
+  "Well, I was short, so I couldn't ride my bike well.": "audio/62_4af521bde466.mp3",
+  "Now, I go cycling every day. I like it very much.": "audio/62_d2ea6b049d43.mp3",
+  "That's good exercise.": "audio/62_9c0744f2ebdb.mp3",
+  "Wu Yifan had a race with his father and Max.": "audio/62_9915787065c5.mp3",
+  "There were many people there.": "audio/62_0df2c7d77e76.mp3",
+  "His father ran very fast, but Wu Yifan could not.": "audio/62_3cae29706b93.mp3",
+  "There was nothing he could do. He was so worried.": "audio/62_575707e80acb.mp3",
+  "I could run fast at school, he thought.": "audio/62_2058051c3699.mp3",
+  "Why am I so slow now?": "audio/62_0e894b7ae1b7.mp3",
+  "Then Robin said, Drink this!": "audio/62_a5dcc4a3e91b.mp3",
+  "He gave Wu Yifan some water.": "audio/62_d2101bf62b4b.mp3",
+  "Wu Yifan drank it and suddenly he felt good.": "audio/62_14f03f076da3.mp3",
+  "He could run fast again.": "audio/62_5d6e217b2af8.mp3",
+  "There was a second race.": "audio/62_58e304e9d3bb.mp3",
+  "Wu Yifan ran like a cheetah.": "audio/62_c8e680a80992.mp3",
+  "He could win the race!": "audio/62_fdc6d07b2346.mp3",
+  "But suddenly he tripped and fell.": "audio/62_948d0a81413b.mp3",
+  "Then he woke up. He was in bed.": "audio/62_a9befdebea1f.mp3",
+  "It was all a dream!": "audio/62_b6ce4bf9d250.mp3",
+  "It is time to leave our school.": "audio/62_822a649680cb.mp3",
+  "We are all going to middle school soon, so we will say goodbye to each other.": "audio/62_f2a87b1b67d7.mp3",
+  "We are going to have a farewell party.": "audio/62_43726ce2ed2e.mp3",
+  "You can bring your friends.": "audio/62_11fbad1f1760.mp3",
+  "We will draw pictures and sing songs.": "audio/62_8031443a7b5f.mp3",
+  "We are going to give prizes for the best pictures.": "audio/62_ecb73e7d3f70.mp3",
+  "We are going to have cake, candy and juice, too.": "audio/62_21bd2b678e37.mp3",
+  "We will listen to music, play games and dance.": "audio/62_b87ccc178219.mp3",
+  "It will be great fun.": "audio/62_47fdafecd3bd.mp3",
+  "See you at the party!": "audio/62_8860c2402c92.mp3",
+  "I go to school from Monday to Friday.": "audio/62_fa8d0baee38a.mp3",
+  "My favourite day is Monday.": "audio/62_514779729588.mp3",
+  "On Monday I have maths, English, music and PE.": "audio/62_78304483d1d1.mp3",
+  "I like PE best.": "audio/62_351c457513f3.mp3",
+  "Maths is my first class.": "audio/62_8b0ebe189de5.mp3",
+  "I often answer maths questions.": "audio/62_29288b95005f.mp3",
+  "Sometimes they're difficult.": "audio/62_8bf32bd5216b.mp3",
+  "In English class, I read many English stories.": "audio/62_b83b4a9f877b.mp3",
+  "I like to speak English with my friends.": "audio/62_2f7046200683.mp3",
+  "I play the piano or sing songs in music class.": "audio/62_a11bd3260853.mp3",
+  "In the afternoon I have PE class.": "audio/62_730499373872.mp3",
+  "I sometimes play football or exercise in the gym.": "audio/62_bb320d5eff0f.mp3",
+  "I'm not good at running, but I like football best!": "audio/62_d29d94785f5f.mp3",
+  "Saturday was a busy day for me.": "audio/62_021b11bf37f5.mp3",
+  "In the morning, I got up early.": "audio/62_819e6b0da2d7.mp3",
+  "Then I had breakfast.": "audio/62_739fbeec9a0f.mp3",
+  "After that, I cleaned my room.": "audio/62_7a5a3409418c.mp3",
+  "Next, I went fishing.": "audio/62_1356af8e29ab.mp3",
+  "In the afternoon, I read a storybook.": "audio/62_d61844895b70.mp3",
+  "In the evening, I wrote an email.": "audio/62_e42c3b2662f2.mp3",
+  "Finally, I went to bed at 10 p.m.": "audio/62_5c4b5a1d4cb9.mp3",
+  "The party is on Friday.": "audio/62_23d80c3e3458.mp3",
+  "It's time to say goodbye.": "audio/62_72357682170e.mp3",
+  "We won't sing any sad songs.": "audio/62_7811c9a9115f.mp3",
+  "And we'll have lots of fun.": "audio/62_e20936558301.mp3",
+  "We'll dance and sing and play.": "audio/62_26a4c0174e75.mp3",
+  "Don't be late for the party.": "audio/62_0c14467f88ae.mp3",
+  "We'll have a happy, happy day.": "audio/62_4bf138f7cab6.mp3"
+};
+</script>
+</body>
+</html>
