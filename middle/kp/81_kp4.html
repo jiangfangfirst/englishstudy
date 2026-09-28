@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学线上课堂</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
+    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
+    --green:#059669; --green-bg:#ecfdf5;
+    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
+    --line:#e5e7eb; --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
+  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
+  .hero .tip{margin-top:10px;font-size:12.5px;color:var(--blue-d)}
+  .pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .pill{flex:1;min-width:100px;border-radius:12px;padding:12px 8px;text-align:center;border:1.5px solid var(--line);background:#fafbfd}
+  .pill b{display:block;font-size:14px;color:var(--blue-d)}
+  .pill span{font-size:11px;color:var(--ink-3)}
+  .pill.c-a{background:#fff;border-color:var(--blue)}
+  .pill.c-b{background:var(--amber-bg);border-color:var(--amber-bd)}
+  .pill.c-c{background:var(--green-bg);border-color:var(--green)}
+  .verdict{margin-top:14px;background:#fff;border-left:4px solid var(--blue);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--blue-d)}
+  .verdict b{color:var(--blue-d)}
+
+  section.block{margin-top:30px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+  .khead h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .khead .desc{font-size:11px;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+  .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
+  .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:8px;overflow-wrap:break-word;word-break:break-word}
+  .gram p b{color:var(--blue-d)}
+  .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
+  .witem:last-child{border-bottom:none}
+  .witem .wh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .witem .word{font-size:15px;font-weight:800;color:var(--blue-d)}
+  .witem .ph{font-size:11.5px;color:var(--ink-3)}
+  .witem .pos{font-size:11.5px;color:var(--ink-3);background:#f3f4f6;padding:1px 7px;border-radius:999px}
+  .witem p{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:break-word;word-break:break-word}
+  .witem p b{color:var(--blue-d)}
+  .witem .sen{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .plist{margin-top:4px}
+  .pgroup{margin-bottom:12px}
+  .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .pgroup .pg::after{content:"";flex:1;height:1px;background:var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .chip b{color:var(--blue-d);font-weight:700}
+  .chip span{color:var(--ink-3);font-size:11px}
+
+  .klist{margin-top:4px}
+  .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .kitem:last-child{border-bottom:none}
+  .kitem .n{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue);color:var(--blue-d);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .kitem .bd{flex:1;min-width:0}
+  .kitem .bd .kt{display:block;font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
+  .kitem .bd p{font-size:13px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .kitem .bd p b{color:var(--blue-d)}
+  .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
+
+  .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .sitem:last-child{border-bottom:none}
+  .sitem .n{color:var(--blue);font-weight:800;font-size:13px;flex:none;margin-top:2px}
+  .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
+
+  .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+  .warn ol{list-style:none;counter-reset:ec}
+  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li:last-child{border-bottom:none}
+  .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .warn li b{color:#92400e}
+
+  .divider{height:1px;background:var(--line);margin:26px 0 0}
+
+  footer{margin-top:24px;padding:18px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .inner{max-width:720px;margin:0 auto}
+
+  @media (max-width:400px){
+    .hero h1{font-size:21px}
+    .khead h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">初中英语 · 学霸笔记</div>
+    <h1>八年级上册 · KP 4</h1>
+    <div class="tip">要点：① 最高级构成（-est / most / 不规则）；② one of the + 最高级 + 复数名词；③ 序数词 + 最高级；④ 副词最高级 the 可省略；⑤ 否定词 + 比较级表最高级含义。</div>
+    <div class="pills">
+      <div class="pill c-a"><b>最高级</b><span>the tallest · the best · the most</span></div>
+      <div class="pill c-b"><b>最高级句型</b><span>one of the... · the second longest</span></div>
+      <div class="pill c-c"><b>动植物与环保</b><span>bamboo · blue whale · protect · in danger</span></div>
+    </div>
+    <div class="verdict">本 KP 三个关键：① 三者以上用<b>最高级</b>，the + -est/most；② <b>one of the + 最高级 + 复数名词</b>；③ 副词最高级前 <b>the 可省</b>。</div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><h2>语法核心</h2><span class="desc">本单元两大语法</span></div>
+
+    <div class="gram">
+      <div class="gt">语法一：形容词和副词的最高级</div>
+      <p>三者或以上比较用最高级。构成：单音节加 -est（tall→tallest）；e 结尾加 -st（nice→nicest）；辅+y 变 i+est（happy→happiest）；重读闭音节双写末辅音（big→biggest）；多音节加 most（outgoing→most outgoing）；不规则：good/well→best，bad/badly→worst，many/much→most，little→least。</p>
+      <p>句型：<b>the + 最高级 + in/of</b>（在……中最……）；<b>one of the + 最高级 + 复数名词</b>（最……之一）；<b>序数词 + 最高级</b>（第几最……）；Which/Who is + the 最高级, A, B or C?（三者选择）。副词最高级修饰动词时 the 可省略。</p>
+      <div class="ex">The blue whale is the largest animal in the world.</div>
+      <div class="ex">She is one of the most popular teachers in our school.</div>
+      <div class="ex">The Yellow River is the second longest river in China.</div>
+      <div class="ex">He runs fastest in his class.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">语法二：比较级与同级比较（复习）</div>
+      <p>两者比较用比较级 + than；much/a little/even/far 修饰比较级；比较级+and+比较级（越来越……）；the+比较级，the+比较级（越……越……）。<b>否定词 + 比较级</b>表最高级含义（It couldn't be better. 再好不过了）。</p>
+      <p>as + 原级 + as 和……一样；not as/so + 原级 + as 不如……。比较对象要一致，用 that/those 替代前面名词。</p>
+      <div class="ex">The harder you work, the better grades you will get.</div>
+      <div class="ex">It couldn't be better.</div>
+      <div class="ex">The weather in Beijing is colder than that in Guangzhou.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点词汇精讲</h2><span class="desc">1–20</span></div>
+    <div class="wlist">
+
+      <div class="witem">
+        <div class="wh"><span class="word">bamboo</span><span class="ph">/ˌbæmˈbuː/</span><span class="pos">n. 竹子</span></div>
+        <p>不可数名词，表"一根竹子"可用 a bamboo。</p>
+        <div class="sen">Bamboo is one of the fastest-growing plants.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">bee</span><span class="ph">/biː/</span><span class="pos">n. 蜜蜂</span></div>
+        <div class="sen">Bees help about 80 per cent of the plants grow.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">blue whale</span><span class="ph">/ˌbluː ˈweɪl/</span><span class="pos">n. 蓝鲸</span></div>
+        <div class="sen">The blue whale is the largest animal in the world.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">cheetah</span><span class="ph">/ˈtʃiːtə/</span><span class="pos">n. 猎豹</span></div>
+        <div class="sen">The cheetah is the fastest land animal.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">ginkgo</span><span class="ph">/ˈɡɪŋkəʊ/</span><span class="pos">n. 银杏</span></div>
+        <div class="sen">The ginkgo tree is one of the oldest living trees on earth.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">redwood</span><span class="ph">/ˈredwʊd/</span><span class="pos">n. 红杉</span></div>
+        <div class="sen">Redwood trees can live for thousands of years.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">pollination</span><span class="ph">/ˌpɒləˈneɪʃn/</span><span class="pos">n. 传粉</span></div>
+        <div class="sen">Bees are important for pollination.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">ocean</span><span class="ph">/ˈəʊʃn/</span><span class="pos">n. 海洋</span></div>
+        <div class="sen">The blue whale lives in the ocean.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">symbol</span><span class="ph">/ˈsɪmbl/</span><span class="pos">n. 象征</span></div>
+        <p>搭配 <b>a symbol of</b> ……的象征。</p>
+        <div class="sen">The dove is a symbol of peace.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">protect</span><span class="ph">/prəˈtekt/</span><span class="pos">v. 保护</span></div>
+        <p>搭配 <b>protect...from...</b> 保护……免受……</p>
+        <div class="sen">We should protect animals because they are our friends.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">environment</span><span class="ph">/ɪnˈvaɪrənmənt/</span><span class="pos">n. 环境</span></div>
+        <div class="sen">We should protect the environment.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">destroy</span><span class="ph">/dɪˈstrɔɪ/</span><span class="pos">v. 破坏；毁坏</span></div>
+        <div class="sen">Don't destroy the forest.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">danger</span><span class="ph">/ˈdeɪndʒə(r)/</span><span class="pos">n. 危险</span></div>
+        <p>搭配 <b>in danger</b> 处于危险中。</p>
+        <div class="sen">Many animals are in danger.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">service</span><span class="ph">/ˈsɜːvɪs/</span><span class="pos">n. 服务</span></div>
+        <div class="sen">The waiters are kind and friendly. I like the service.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">popular</span><span class="ph">/ˈpɒpjələ(r)/</span><span class="pos">adj. 受欢迎的</span></div>
+        <p>搭配 <b>be popular with</b> 受……欢迎。</p>
+        <div class="sen">This song is popular with young people.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">serious</span><span class="ph">/ˈsɪəriəs/</span><span class="pos">adj. 严肃的；严重的</span></div>
+        <div class="sen">Which is the most serious, floods, droughts or earthquakes?</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">warm</span><span class="ph">/wɔːm/</span><span class="pos">adj. 温暖的</span></div>
+        <div class="sen">Last autumn was the warmest in the past ten years.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">longest</span><span class="ph">/ˈlɒŋɡɪst/</span><span class="pos">adj. 最长的</span></div>
+        <div class="sen">The Yangtze River is the longest river in China.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">highest</span><span class="ph">/ˈhaɪɪst/</span><span class="pos">adj. 最高的</span></div>
+        <div class="sen">The highest mountain in the world is Mount Everest.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">fastest-growing</span><span class="ph">/ˈfɑːstɪst ˈɡrəʊɪŋ/</span><span class="pos">adj. 生长最快的</span></div>
+        <div class="sen">Some bamboo can grow almost one metre in a day.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点短语</h2><span class="desc">三类分类记忆</span></div>
+    <div class="plist">
+      <div class="pgroup">
+        <div class="pg">最高级句型</div>
+        <div class="chips">
+          <span class="chip"><b>one of the + 最高级 + 复数名词</b><span>最……之一</span></span>
+          <span class="chip"><b>the + 最高级 + in/of</b><span>在……中最……</span></span>
+          <span class="chip"><b>the second longest</b><span>第二长的</span></span>
+          <span class="chip"><b>the most popular</b><span>最受欢迎的</span></span>
+          <span class="chip"><b>the most serious</b><span>最严重的</span></span>
+          <span class="chip"><b>the fastest-growing</b><span>生长最快的</span></span>
+          <span class="chip"><b>the largest animal</b><span>最大的动物</span></span>
+          <span class="chip"><b>the oldest living trees</b><span>最古老的活树</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">环保与保护</div>
+        <div class="chips">
+          <span class="chip"><b>a symbol of</b><span>……的象征</span></span>
+          <span class="chip"><b>in danger</b><span>处于危险中</span></span>
+          <span class="chip"><b>protect...from...</b><span>保护……免受</span></span>
+          <span class="chip"><b>take action</b><span>采取行动</span></span>
+          <span class="chip"><b>plant more trees</b><span>种更多树</span></span>
+          <span class="chip"><b>cut down</b><span>砍倒</span></span>
+          <span class="chip"><b>care about</b><span>关心；在意</span></span>
+          <span class="chip"><b>help...grow</b><span>帮助……生长</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">其他高频</div>
+        <div class="chips">
+          <span class="chip"><b>be popular with</b><span>受……欢迎</span></span>
+          <span class="chip"><b>the service of</b><span>……的服务</span></span>
+          <span class="chip"><b>in the world</b><span>在世界上</span></span>
+          <span class="chip"><b>in the past ten years</b><span>在过去十年</span></span>
+          <span class="chip"><b>one metre in a day</b><span>一天一米</span></span>
+          <span class="chip"><b>80 per cent of</b><span>百分之八十的</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>中考常考考点与易错点</h2><span class="desc">1–12</span></div>
+    <div class="klist">
+
+      <div class="kitem"><div class="n">1</div><div class="bd">
+        <b class="kt">考点一：最高级的构成</b>
+        <p>单音节加 -est，多音节加 most；重读闭音节双写；辅+y 变 i+est。</p>
+        <div class="ex">big→biggest · happy→happiest · outgoing→most outgoing</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">2</div><div class="bd">
+        <b class="kt">考点二：最高级句型</b>
+        <p>the+最高级+in/of；one of the+最高级+复数名词；序数词+最高级。</p>
+        <div class="ex">She is one of the most popular teachers in our school.</div>
+        <div class="ex">The Yellow River is the second longest river in China.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">3</div><div class="bd">
+        <b class="kt">考点三：副词最高级</b>
+        <p>副词最高级修饰动词时，the 可省略。</p>
+        <div class="ex">He runs fastest in his class.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">4</div><div class="bd">
+        <b class="kt">考点四：比较级与最高级区别</b>
+        <p>两者用比较级，三者以上用最高级。</p>
+        <div class="ex">She is taller than her brother. / She is the tallest in her class.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">5</div><div class="bd">
+        <b class="kt">考点五：比较级 + and + 比较级</b>
+        <p>表示"越来越……"。</p>
+        <div class="ex">The world is getting smaller and smaller.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">6</div><div class="bd">
+        <b class="kt">考点六：the + 比较级，the + 比较级</b>
+        <p>表示"越……越……"。</p>
+        <div class="ex">The harder you work, the better grades you will get.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">7</div><div class="bd">
+        <b class="kt">考点七：否定词 + 比较级表最高级</b>
+        <p>It couldn't be better. 再好不过了。</p>
+        <div class="ex">I couldn't agree more. 我再同意不过了。</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">8</div><div class="bd">
+        <b class="kt">考点八：as...as 与 not as/so...as</b>
+        <p>as...as 中间用原级；not as/so...as 不如……。</p>
+        <div class="ex">She is as tall as her sister.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">9</div><div class="bd">
+        <b class="kt">考点九：比较对象要一致</b>
+        <p>用 that/those 代替前面提到的名词。</p>
+        <div class="ex">The weather in Beijing is colder than that in Guangzhou.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">10</div><div class="bd">
+        <b class="kt">考点十：动植物词汇辨析</b>
+        <p>bamboo、bee、blue whale、cheetah、ginkgo、redwood、pollination、ocean、symbol。</p>
+        <div class="ex">The blue whale is the largest animal in the world.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">11</div><div class="bd">
+        <b class="kt">考点十一：保护动物与环境</b>
+        <p>protect、in danger、take action、plant more trees、cut down。</p>
+        <div class="ex">Many animals are in danger because people destroy their living places.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">12</div><div class="bd">
+        <b class="kt">考点十二：情景交际</b>
+        <p>问最……用 What/Which is the 最高级...?；同意 I agree；祝贺 Congratulations。</p>
+        <div class="ex">— Which is the biggest, the sun, the moon or the earth? — The sun.</div>
+      </div></div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
+    <div class="slist">
+      <div class="sitem"><span class="n">1</span><div class="en">The blue whale is the largest animal in the world.</div></div>
+      <div class="sitem"><span class="n">2</span><div class="en">Bamboo is one of the fastest-growing plants.</div></div>
+      <div class="sitem"><span class="n">3</span><div class="en">The ginkgo tree is one of the oldest living trees on earth.</div></div>
+      <div class="sitem"><span class="n">4</span><div class="en">The Yangtze River is the longest river in China.</div></div>
+      <div class="sitem"><span class="n">5</span><div class="en">Beijing Olympic Tower is one of the highest towers in the city.</div></div>
+      <div class="sitem"><span class="n">6</span><div class="en">She is one of the most popular teachers in our school.</div></div>
+      <div class="sitem"><span class="n">7</span><div class="en">The Yellow River is the second longest river in China.</div></div>
+      <div class="sitem"><span class="n">8</span><div class="en">Which is the biggest, the sun, the moon or the earth?</div></div>
+      <div class="sitem"><span class="n">9</span><div class="en">Who is the tallest, Tom, Jack or Bill?</div></div>
+      <div class="sitem"><span class="n">10</span><div class="en">He runs fastest in his class.</div></div>
+      <div class="sitem"><span class="n">11</span><div class="en">Mary cleans the shoes most carefully in her family.</div></div>
+      <div class="sitem"><span class="n">12</span><div class="en">The world is getting smaller and smaller.</div></div>
+      <div class="sitem"><span class="n">13</span><div class="en">The harder you work, the better grades you will get.</div></div>
+      <div class="sitem"><span class="n">14</span><div class="en">It couldn't be better.</div></div>
+      <div class="sitem"><span class="n">15</span><div class="en">She is as tall as her sister.</div></div>
+      <div class="sitem"><span class="n">16</span><div class="en">This book is not as interesting as that one.</div></div>
+      <div class="sitem"><span class="n">17</span><div class="en">We should protect animals because they are our friends.</div></div>
+      <div class="sitem"><span class="n">18</span><div class="en">Many animals are in danger because people destroy their living places.</div></div>
+      <div class="sitem"><span class="n">19</span><div class="en">The ginkgo tree is a symbol of hope and long life.</div></div>
+      <div class="sitem"><span class="n">20</span><div class="en">— I think the blue whale is the largest animal. — I agree.</div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>语法易错点总结</h2><span class="desc">考前必看</span></div>
+    <div class="warn">
+      <div class="whd"><div class="dot">!</div>姜老师提醒 · 高频易错，务必牢记</div>
+      <ol>
+        <li><b>三者以上用最高级，形容词最高级前通常加 the。</b></li>
+        <li><b>副词最高级前 the 可省略。</b></li>
+        <li><b>单音节加 -est，多音节加 most。</b></li>
+        <li><b>重读闭音节双写末辅音再加 -est。</b></li>
+        <li><b>辅+y 结尾变 y 为 i 再加 -est。</b></li>
+        <li><b>good/well→best，bad/badly→worst。</b></li>
+        <li><b>one of the + 最高级 + 复数名词。</b></li>
+        <li><b>序数词 + 最高级 表"第几最……"。</b></li>
+        <li><b>两者比较用比较级，三者以上用最高级。</b></li>
+        <li><b>比较级+and+比较级 表"越来越……"。</b></li>
+        <li><b>the+比较级，the+比较级 表"越……越……"。</b></li>
+        <li><b>否定词+比较级 表最高级含义。</b></li>
+        <li><b>as...as 中间用原级。</b></li>
+        <li><b>比较对象一致，用 that/those 替代。</b></li>
+        <li><b>动植物词汇准确辨析。</b></li>
+        <li><b>in danger / protect / destroy / take action 熟练运用。</b></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+</div>
+
+<footer>
+  <div class="inner">多多好学版权所有</div>
+</footer>
+
+</body>
+</html>

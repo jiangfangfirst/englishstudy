@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学线上课堂</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
+    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
+    --green:#059669; --green-bg:#ecfdf5;
+    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
+    --line:#e5e7eb; --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
+  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
+  .hero .tip{margin-top:10px;font-size:12.5px;color:var(--blue-d)}
+  .pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .pill{flex:1;min-width:100px;border-radius:12px;padding:12px 8px;text-align:center;border:1.5px solid var(--line);background:#fafbfd}
+  .pill b{display:block;font-size:14px;color:var(--blue-d)}
+  .pill span{font-size:11px;color:var(--ink-3)}
+  .pill.c-a{background:#fff;border-color:var(--blue)}
+  .pill.c-b{background:var(--amber-bg);border-color:var(--amber-bd)}
+  .pill.c-c{background:var(--green-bg);border-color:var(--green)}
+  .verdict{margin-top:14px;background:#fff;border-left:4px solid var(--blue);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--blue-d)}
+  .verdict b{color:var(--blue-d)}
+
+  section.block{margin-top:30px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+  .khead h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .khead .desc{font-size:11px;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+  .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
+  .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:8px;overflow-wrap:break-word;word-break:break-word}
+  .gram p b{color:var(--blue-d)}
+  .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
+  .witem:last-child{border-bottom:none}
+  .witem .wh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .witem .word{font-size:15px;font-weight:800;color:var(--blue-d)}
+  .witem .ph{font-size:11.5px;color:var(--ink-3)}
+  .witem .pos{font-size:11.5px;color:var(--ink-3);background:#f3f4f6;padding:1px 7px;border-radius:999px}
+  .witem p{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:break-word;word-break:break-word}
+  .witem p b{color:var(--blue-d)}
+  .witem .sen{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .plist{margin-top:4px}
+  .pgroup{margin-bottom:12px}
+  .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .pgroup .pg::after{content:"";flex:1;height:1px;background:var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .chip b{color:var(--blue-d);font-weight:700}
+  .chip span{color:var(--ink-3);font-size:11px}
+
+  .klist{margin-top:4px}
+  .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .kitem:last-child{border-bottom:none}
+  .kitem .n{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue);color:var(--blue-d);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .kitem .bd{flex:1;min-width:0}
+  .kitem .bd .kt{display:block;font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
+  .kitem .bd p{font-size:13px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .kitem .bd p b{color:var(--blue-d)}
+  .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
+
+  .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .sitem:last-child{border-bottom:none}
+  .sitem .n{color:var(--blue);font-weight:800;font-size:13px;flex:none;margin-top:2px}
+  .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
+
+  .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+  .warn ol{list-style:none;counter-reset:ec}
+  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li:last-child{border-bottom:none}
+  .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .warn li b{color:#92400e}
+
+  .divider{height:1px;background:var(--line);margin:26px 0 0}
+
+  footer{margin-top:24px;padding:18px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .inner{max-width:720px;margin:0 auto}
+
+  @media (max-width:400px){
+    .hero h1{font-size:21px}
+    .khead h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">初中英语 · 学霸笔记</div>
+    <h1>八年级上册 · KP 7</h1>
+    <div class="tip">要点：① will + 动词原形表将来（否定 won't）；② be going to 表计划/有迹象；③ there will be / there is going to be（不与 have 连用）；④ if 条件句主将从现；⑤ 现在进行时表按计划即将发生。</div>
+    <div class="pills">
+      <div class="pill c-a"><b>will 将来时</b><span>will do · won't · Will...?</span></div>
+      <div class="pill c-b"><b>be going to</b><span>计划 · 有迹象 · be+going to do</span></div>
+      <div class="pill c-c"><b>未来预测</b><span>robot · pollution · future · replace</span></div>
+    </div>
+    <div class="verdict">本 KP 三个关键：① will 与 be going to 后都接<b>动词原形</b>；② there be 将来时<b>不与 have 连用</b>；③ if 条件句<b>主句将来、从句现在</b>（主将从现）。</div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><h2>语法核心</h2><span class="desc">本单元四大语法</span></div>
+
+    <div class="gram">
+      <div class="gt">语法一：一般将来时 will</div>
+      <p>will + 动词原形，常与 tomorrow、next week、in the future、in 100 years 连用。否定 <b>will not = won't</b>；疑问把 will 提到主语前。</p>
+      <div class="ex">The meeting will start in ten minutes.</div>
+      <div class="ex">People will live on Mars one day.</div>
+      <div class="ex">— Will there be less pollution? — Yes, there will.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">语法二：be going to 结构</div>
+      <p>be going to + 动词原形，表打算/计划，或根据迹象即将发生。be 随主语变化。<b>be going to</b> 强调计划/安排；<b>will</b> 强调单纯将来或临时决定。</p>
+      <div class="ex">I'm going to visit my grandparents this weekend.</div>
+      <div class="ex">Look at the clouds. It's going to rain.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">语法三：there be 句型的将来时</div>
+      <p>用 <b>there will be</b> 或 <b>there is/are going to be</b>，<b>不能与 have 连用</b>。be 与最近主语一致。</p>
+      <div class="ex">There will be a meeting tomorrow morning.</div>
+      <div class="ex">There are going to be two football matches tomorrow.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">语法四：现在进行时表示将来</div>
+      <p>现在进行时可表示按计划即将发生的动作，常与将来时间状语连用。</p>
+      <div class="ex">I am leaving for Beijing tomorrow.</div>
+      <div class="ex">We are going to the museum tomorrow.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点词汇精讲</h2><span class="desc">1–20</span></div>
+    <div class="wlist">
+
+      <div class="witem">
+        <div class="wh"><span class="word">pollution</span><span class="ph">/pəˈluːʃn/</span><span class="pos">n. 污染</span></div>
+        <div class="sen">Too much pollution makes the air dirty and harmful.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">prediction</span><span class="ph">/prɪˈdɪkʃn/</span><span class="pos">n. 预测；预言</span></div>
+        <div class="sen">What's your prediction about the future of AI?</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">future</span><span class="ph">/ˈfjuːtʃə(r)/</span><span class="pos">n. 将来；未来</span></div>
+        <p>搭配 <b>in the future</b> 在未来。</p>
+        <div class="sen">What will the future be like?</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">space</span><span class="ph">/speɪs/</span><span class="pos">n. 太空；空间</span></div>
+        <div class="sen">China has sent many spaceships into space.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">human</span><span class="ph">/ˈhjuːmən/</span><span class="pos">n. 人；人类</span></div>
+        <div class="sen">Humans can create amazing things with their wisdom.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">robot</span><span class="ph">/ˈrəʊbɒt/</span><span class="pos">n. 机器人</span></div>
+        <div class="sen">Robots can do many dangerous jobs for humans.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">replace</span><span class="ph">/rɪˈpleɪs/</span><span class="pos">v. 取代；代替</span></div>
+        <div class="sen">Robots will replace humans in some repetitive jobs.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">research</span><span class="ph">/rɪˈsɜːtʃ/</span><span class="pos">n. 研究；调查</span></div>
+        <p><b>不可数名词</b>，搭配 do research on。</p>
+        <div class="sen">Scientists are doing research on how AI helps medical care.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">cure</span><span class="ph">/kjʊə(r)/</span><span class="pos">v. 治愈；治疗</span></div>
+        <div class="sen">Scientists will find a way to cure cancer some day.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">service</span><span class="ph">/ˈsɜːvɪs/</span><span class="pos">n. 服务</span></div>
+        <div class="sen">The restaurant provides good service.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">accept</span><span class="ph">/əkˈsept/</span><span class="pos">v. 接受；认可</span></div>
+        <div class="sen">She accepted his invitation.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">mention</span><span class="ph">/ˈmenʃn/</span><span class="pos">v. 提到；说起</span></div>
+        <div class="sen">He didn't mention his parents in the letter.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">environment</span><span class="ph">/ɪnˈvaɪrənmənt/</span><span class="pos">n. 环境</span></div>
+        <div class="sen">We should protect the environment.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">quality</span><span class="ph">/ˈkwɒləti/</span><span class="pos">n. 质量；品质</span></div>
+        <div class="sen">Planting more trees helps improve air quality.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">positive</span><span class="ph">/ˈpɒzətɪv/</span><span class="pos">adj. 积极的；正面的</span></div>
+        <div class="sen">We should have a positive attitude towards life.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">challenging</span><span class="ph">/ˈtʃælɪndʒɪŋ/</span><span class="pos">adj. 有挑战性的</span></div>
+        <div class="sen">Learning a new language is challenging but interesting.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">depend</span><span class="ph">/dɪˈpend/</span><span class="pos">v. 依靠；取决于</span></div>
+        <p>搭配 <b>depend on</b> 依靠；取决于。</p>
+        <div class="sen">We should depend on ourselves to solve the problem.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">come true</span><span class="ph">/kʌm truː/</span><span class="pos">phr. 实现</span></div>
+        <div class="sen">His dream of becoming a pilot came true at last.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">learn about</span><span class="ph">/lɜːn əˈbaʊt/</span><span class="pos">phr. 了解</span></div>
+        <div class="sen">We can learn about different cultures by reading books.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">play a part in</span><span class="ph">/pleɪ ə pɑːt ɪn/</span><span class="pos">phr. 在……发挥作用</span></div>
+        <div class="sen">Everyone should play a part in protecting the environment.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点短语</h2><span class="desc">三类分类记忆</span></div>
+    <div class="plist">
+      <div class="pgroup">
+        <div class="pg">将来时表达</div>
+        <div class="chips">
+          <span class="chip"><b>in the future</b><span>在未来</span></span>
+          <span class="chip"><b>in 100 years</b><span>一百年后</span></span>
+          <span class="chip"><b>there will be</b><span>将会有</span></span>
+          <span class="chip"><b>will do sth.</b><span>将要做某事</span></span>
+          <span class="chip"><b>be going to</b><span>打算；将要</span></span>
+          <span class="chip"><b>make a prediction</b><span>做出预测</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">未来主题</div>
+        <div class="chips">
+          <span class="chip"><b>air quality</b><span>空气质量</span></span>
+          <span class="chip"><b>medical services</b><span>医疗服务</span></span>
+          <span class="chip"><b>high-speed trains</b><span>高速列车</span></span>
+          <span class="chip"><b>clean energy</b><span>清洁能源</span></span>
+          <span class="chip"><b>world peace</b><span>世界和平</span></span>
+          <span class="chip"><b>emotional intelligence</b><span>情商</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">其他高频</div>
+        <div class="chips">
+          <span class="chip"><b>depend on</b><span>依靠；取决于</span></span>
+          <span class="chip"><b>come true</b><span>实现</span></span>
+          <span class="chip"><b>learn about</b><span>了解</span></span>
+          <span class="chip"><b>play a part in</b><span>在……发挥作用</span></span>
+          <span class="chip"><b>as long as</b><span>只要</span></span>
+          <span class="chip"><b>look forward to</b><span>期待</span></span>
+          <span class="chip"><b>in the past</b><span>在过去</span></span>
+          <span class="chip"><b>over and over again</b><span>反复地</span></span>
+          <span class="chip"><b>fall down</b><span>倒塌</span></span>
+          <span class="chip"><b>take up</b><span>开始从事</span></span>
+          <span class="chip"><b>give up</b><span>放弃</span></span>
+          <span class="chip"><b>look for</b><span>寻找</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>中考常考考点与易错点</h2><span class="desc">1–6</span></div>
+    <div class="klist">
+
+      <div class="kitem"><div class="n">1</div><div class="bd">
+        <b class="kt">考点一：will 与 be going to 区别</b>
+        <p>be going to 强调计划/安排；will 强调单纯将来或临时决定。</p>
+        <div class="ex">I'm going to take up a new hobby next term.（计划）</div>
+        <div class="ex">I will help you with your homework.（临时决定）</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">2</div><div class="bd">
+        <b class="kt">考点二：there be 将来时</b>
+        <p>there will be 或 there is/are going to be，<b>不与 have 连用</b>。</p>
+        <div class="ex">There will be a meeting tomorrow morning.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">3</div><div class="bd">
+        <b class="kt">考点三：if 条件状语从句主将从现</b>
+        <p>if 引导条件状语从句，<b>主句用一般将来时，从句用一般现在时</b>表将来。</p>
+        <div class="ex">If you study hard, you will pass the exam easily.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">4</div><div class="bd">
+        <b class="kt">考点四：现在进行时表将来</b>
+        <p>按计划即将发生的动作，常与将来时间状语连用。</p>
+        <div class="ex">I am leaving for Beijing tomorrow.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">5</div><div class="bd">
+        <b class="kt">考点五：词汇辨析</b>
+        <p>pollution、prediction、future、space、robot、replace、research（不可数）、cure、accept、mention、quality、positive、challenging、depend。</p>
+        <div class="ex">Robots will replace humans in some repetitive jobs.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">6</div><div class="bd">
+        <b class="kt">考点六：情景交际</b>
+        <p>问未来 What will the future be like?；同意 I agree；希望 I hope so；安慰 Don't worry。</p>
+        <div class="ex">— What will the future be like? — There will be more robots and less pollution.</div>
+      </div></div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
+    <div class="slist">
+      <div class="sitem"><span class="n">1</span><div class="en">The meeting will start in ten minutes.</div></div>
+      <div class="sitem"><span class="n">2</span><div class="en">People will live on Mars one day.</div></div>
+      <div class="sitem"><span class="n">3</span><div class="en">Will people live to be 200 years old?</div></div>
+      <div class="sitem"><span class="n">4</span><div class="en">What will the future be like?</div></div>
+      <div class="sitem"><span class="n">5</span><div class="en">There will be a meeting tomorrow morning.</div></div>
+      <div class="sitem"><span class="n">6</span><div class="en">There are going to be two football matches on TV tomorrow.</div></div>
+      <div class="sitem"><span class="n">7</span><div class="en">I am leaving for Beijing to have an important meeting.</div></div>
+      <div class="sitem"><span class="n">8</span><div class="en">If you study hard, you will pass the exam easily.</div></div>
+      <div class="sitem"><span class="n">9</span><div class="en">Robots will replace humans in some repetitive jobs.</div></div>
+      <div class="sitem"><span class="n">10</span><div class="en">Scientists are doing research on how AI helps medical care.</div></div>
+      <div class="sitem"><span class="n">11</span><div class="en">Scientists will find a way to cure cancer some day.</div></div>
+      <div class="sitem"><span class="n">12</span><div class="en">We need to plant more trees to improve our environment.</div></div>
+      <div class="sitem"><span class="n">13</span><div class="en">Everyone should play a part in protecting the environment.</div></div>
+      <div class="sitem"><span class="n">14</span><div class="en">We should depend on ourselves to solve the problem.</div></div>
+      <div class="sitem"><span class="n">15</span><div class="en">Her dream of being a writer came true at last.</div></div>
+      <div class="sitem"><span class="n">16</span><div class="en">We will learn about ancient civilizations in history class.</div></div>
+      <div class="sitem"><span class="n">17</span><div class="en">As long as you follow the rules, you'll have a great time.</div></div>
+      <div class="sitem"><span class="n">18</span><div class="en">Can you come over to my house this evening?</div></div>
+      <div class="sitem"><span class="n">19</span><div class="en">Shall we go to the concert together this weekend?</div></div>
+      <div class="sitem"><span class="n">20</span><div class="en">— What's your prediction about the future? — There will be more robots.</div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>语法易错点总结</h2><span class="desc">考前必看</span></div>
+    <div class="warn">
+      <div class="whd"><div class="dot">!</div>姜老师提醒 · 高频易错，务必牢记</div>
+      <ol>
+        <li><b>will 后接动词原形。</b></li>
+        <li><b>be going to 后接动词原形。</b></li>
+        <li><b>there be 将来时不与 have 连用。</b></li>
+        <li><b>if 条件句：主句将来，从句现在（主将从现）。</b></li>
+        <li><b>现在进行时可表按计划即将发生。</b></li>
+        <li><b>be going to 强调计划，will 强调临时决定。</b></li>
+        <li><b>research 不可数，prediction 可数。</b></li>
+        <li><b>depend on / come true / learn about / play a part in 区分。</b></li>
+        <li><b>positive / challenging 等形容词用法。</b></li>
+        <li><b>情景交际：I hope so. / I agree. / Don't worry.</b></li>
+        <li><b>there be 句型 be 动词就近原则。</b></li>
+        <li><b>will / be going to 的疑问结构。</b></li>
+        <li><b>as long as 引导条件状语从句"只要"。</b></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+</div>
+
+<footer>
+  <div class="inner">多多好学版权所有</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学线上课堂</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
+    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
+    --green:#059669; --green-bg:#ecfdf5;
+    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
+    --line:#e5e7eb; --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
+  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
+  .hero .tip{margin-top:10px;font-size:12.5px;color:var(--blue-d)}
+  .pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .pill{flex:1;min-width:100px;border-radius:12px;padding:12px 8px;text-align:center;border:1.5px solid var(--line);background:#fafbfd}
+  .pill b{display:block;font-size:14px;color:var(--blue-d)}
+  .pill span{font-size:11px;color:var(--ink-3)}
+  .pill.c-a{background:#fff;border-color:var(--blue)}
+  .pill.c-b{background:var(--amber-bg);border-color:var(--amber-bd)}
+  .pill.c-c{background:var(--green-bg);border-color:var(--green)}
+  .verdict{margin-top:14px;background:#fff;border-left:4px solid var(--blue);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--blue-d)}
+  .verdict b{color:var(--blue-d)}
+
+  section.block{margin-top:30px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+  .khead h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .khead .desc{font-size:11px;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+  .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
+  .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:8px;overflow-wrap:break-word;word-break:break-word}
+  .gram p b{color:var(--blue-d)}
+  .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
+  .witem:last-child{border-bottom:none}
+  .witem .wh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .witem .word{font-size:15px;font-weight:800;color:var(--blue-d)}
+  .witem .ph{font-size:11.5px;color:var(--ink-3)}
+  .witem .pos{font-size:11.5px;color:var(--ink-3);background:#f3f4f6;padding:1px 7px;border-radius:999px}
+  .witem p{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:break-word;word-break:break-word}
+  .witem p b{color:var(--blue-d)}
+  .witem .sen{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .plist{margin-top:4px}
+  .pgroup{margin-bottom:12px}
+  .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .pgroup .pg::after{content:"";flex:1;height:1px;background:var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .chip b{color:var(--blue-d);font-weight:700}
+  .chip span{color:var(--ink-3);font-size:11px}
+
+  .klist{margin-top:4px}
+  .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .kitem:last-child{border-bottom:none}
+  .kitem .n{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue);color:var(--blue-d);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .kitem .bd{flex:1;min-width:0}
+  .kitem .bd .kt{display:block;font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
+  .kitem .bd p{font-size:13px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .kitem .bd p b{color:var(--blue-d)}
+  .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
+
+  .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .sitem:last-child{border-bottom:none}
+  .sitem .n{color:var(--blue);font-weight:800;font-size:13px;flex:none;margin-top:2px}
+  .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
+
+  .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+  .warn ol{list-style:none;counter-reset:ec}
+  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li:last-child{border-bottom:none}
+  .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .warn li b{color:#92400e}
+
+  .divider{height:1px;background:var(--line);margin:26px 0 0}
+
+  footer{margin-top:24px;padding:18px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .inner{max-width:720px;margin:0 auto}
+
+  @media (max-width:400px){
+    .hero h1{font-size:21px}
+    .khead h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">初中英语 · 学霸笔记</div>
+    <h1>八年级上册 · KP 6</h1>
+    <div class="tip">要点：① be going to + 动词原形表打算/计划；② there is/are going to be（不与 have 连用）；③ 现在进行时表按计划即将发生；④ will 与 be going to 区别；⑤ 职业词汇与动词短语辨析。</div>
+    <div class="pills">
+      <div class="pill c-a"><b>be going to</b><span>打算 · 计划 · 决心</span></div>
+      <div class="pill c-b"><b>职业梦想</b><span>pilot · engineer · scientist</span></div>
+      <div class="pill c-c"><b>动词短语</b><span>take up · give up · put up · look up</span></div>
+    </div>
+    <div class="verdict">本 KP 三个关键：① be going to 后接<b>动词原形</b>；② there be 将来时用 <b>there is/are going to be</b>，不能用 have；③ be going to 强调<b>计划</b>，will 强调<b>临时决定</b>。</div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><h2>语法核心</h2><span class="desc">本单元两大语法</span></div>
+
+    <div class="gram">
+      <div class="gt">语法一：be going to 结构</div>
+      <p>be going to do sth. 表示"打算/计划做某事"，be 动词随主语变化（I am / he is / they are），to 后接<b>动词原形</b>。否定在 be 后加 not；疑问把 be 提到主语前。</p>
+      <p><b>there be 将来时</b>：there is/are going to be 或 there will be，<b>不能与 have 连用</b>，be 与最近主语一致。<b>现在进行时表将来</b>：表示按计划即将发生的动作。</p>
+      <div class="ex">I'm going to visit my grandparents this weekend.</div>
+      <div class="ex">There is going to be a talent show in ten minutes.</div>
+      <div class="ex">I am leaving for Beijing tomorrow.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">语法二：will 表示将来</div>
+      <p>will + 动词原形，常与 tomorrow、next week、in the future 连用。<b>be going to</b> 强调计划/已有安排；<b>will</b> 强调单纯将来或临时决定。</p>
+      <div class="ex">I will make a delicious cake for my mother.</div>
+      <div class="ex">I'm going to take up a new hobby next term.（计划）</div>
+      <div class="ex">I will help you with your homework.（临时决定）</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点词汇精讲</h2><span class="desc">1–20</span></div>
+    <div class="wlist">
+
+      <div class="witem">
+        <div class="wh"><span class="word">resolution</span><span class="ph">/ˌrezəˈluːʃn/</span><span class="pos">n. 决心；决议</span></div>
+        <p>搭配 make a resolution 下决心；New Year's resolution 新年决心。</p>
+        <div class="sen">My New Year's resolution is to improve my English.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">relationship</span><span class="ph">/rɪˈleɪʃnʃɪp/</span><span class="pos">n. 关系；联系</span></div>
+        <p>搭配 have a close relationship with sb.。</p>
+        <div class="sen">I hear you have a close relationship with Mrs. Miller.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">literature</span><span class="ph">/ˈlɪtrətʃə(r)/</span><span class="pos">n. 文学</span></div>
+        <div class="sen">She is interested in Chinese literature.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">pilot</span><span class="ph">/ˈpaɪlət/</span><span class="pos">n. 飞行员</span></div>
+        <div class="sen">I want to be a pilot when I grow up.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">engineer</span><span class="ph">/ˌendʒɪˈnɪə(r)/</span><span class="pos">n. 工程师</span></div>
+        <div class="sen">I want to be an engineer because I like building things.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">designer</span><span class="ph">/dɪˈzaɪnə(r)/</span><span class="pos">n. 设计师</span></div>
+        <div class="sen">She is a fashion designer.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">violinist</span><span class="ph">/ˌvaɪəˈlɪnɪst/</span><span class="pos">n. 小提琴手</span></div>
+        <div class="sen">She wants to be a violinist in the future.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">pianist</span><span class="ph">/ˈpiənɪst/</span><span class="pos">n. 钢琴家</span></div>
+        <div class="sen">I want to be a pianist like Lang Lang.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">scientist</span><span class="ph">/ˈsaɪəntɪst/</span><span class="pos">n. 科学家</span></div>
+        <div class="sen">I'm going to be a scientist when I grow up.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">photographer</span><span class="ph">/fəˈtɒɡrəfə(r)/</span><span class="pos">n. 摄影师</span></div>
+        <div class="sen">She wants to be a photographer.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">architect</span><span class="ph">/ˈɑːkɪtekt/</span><span class="pos">n. 建筑师</span></div>
+        <div class="sen">He dreams of becoming an architect.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">lawyer</span><span class="ph">/ˈlɔːjə(r)/</span><span class="pos">n. 律师</span></div>
+        <div class="sen">My dream is to be a lawyer.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">creative</span><span class="ph">/kriˈeɪtɪv/</span><span class="pos">adj. 有创造力的</span></div>
+        <div class="sen">He always has some creative ideas.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">energetic</span><span class="ph">/ˌenəˈdʒetɪk/</span><span class="pos">adj. 精力充沛的</span></div>
+        <div class="sen">Children are always energetic and hopeful.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">confident</span><span class="ph">/ˈkɒnfɪdənt/</span><span class="pos">adj. 自信的</span></div>
+        <p>搭配 <b>be confident in</b> 对……有信心。</p>
+        <div class="sen">My cousin is confident in his drawing skills.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">patient</span><span class="ph">/ˈpeɪʃnt/</span><span class="pos">adj. 有耐心的</span></div>
+        <div class="sen">A good teacher should be patient with students.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">purpose</span><span class="ph">/ˈpɜːpəs/</span><span class="pos">n. 目的；意图</span></div>
+        <div class="sen">The purpose of the meeting is to discuss the new plan.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">talent</span><span class="ph">/ˈtælənt/</span><span class="pos">n. 天赋；才能</span></div>
+        <p>搭配 <b>have a talent for</b> 在……有天赋。</p>
+        <div class="sen">She has a talent for music.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">hero</span><span class="ph">/ˈhɪərəʊ/</span><span class="pos">n. 英雄；偶像</span></div>
+        <div class="sen">My father is my hero.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">dream</span><span class="ph">/driːm/</span><span class="pos">n. 梦想 · v. 做梦</span></div>
+        <div class="sen">What's your biggest dream in life?</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点短语</h2><span class="desc">三类分类记忆</span></div>
+    <div class="plist">
+      <div class="pgroup">
+        <div class="pg">将来时与计划</div>
+        <div class="chips">
+          <span class="chip"><b>be going to do sth.</b><span>打算做某事</span></span>
+          <span class="chip"><b>there is/are going to be</b><span>将会有</span></span>
+          <span class="chip"><b>make a resolution</b><span>下决心</span></span>
+          <span class="chip"><b>New Year's resolution</b><span>新年决心</span></span>
+          <span class="chip"><b>grow up</b><span>长大</span></span>
+          <span class="chip"><b>in the future</b><span>在未来</span></span>
+          <span class="chip"><b>take lessons</b><span>上课</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">动词短语</div>
+        <div class="chips">
+          <span class="chip"><b>take up</b><span>开始从事</span></span>
+          <span class="chip"><b>give up</b><span>放弃</span></span>
+          <span class="chip"><b>give away</b><span>捐赠</span></span>
+          <span class="chip"><b>put out</b><span>扑灭</span></span>
+          <span class="chip"><b>put off</b><span>推迟</span></span>
+          <span class="chip"><b>put away</b><span>收起</span></span>
+          <span class="chip"><b>put up</b><span>举起；张贴</span></span>
+          <span class="chip"><b>look up</b><span>查阅</span></span>
+          <span class="chip"><b>clean up</b><span>打扫；清理</span></span>
+          <span class="chip"><b>take care of</b><span>照顾</span></span>
+          <span class="chip"><b>worry about</b><span>担心</span></span>
+          <span class="chip"><b>make sure</b><span>确保</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">其他高频</div>
+        <div class="chips">
+          <span class="chip"><b>so that</b><span>以便</span></span>
+          <span class="chip"><b>work as</b><span>作为……工作</span></span>
+          <span class="chip"><b>be confident in</b><span>对……有信心</span></span>
+          <span class="chip"><b>be sure to do sth.</b><span>一定会做</span></span>
+          <span class="chip"><b>take place</b><span>举行；发生</span></span>
+          <span class="chip"><b>be good at</b><span>擅长</span></span>
+          <span class="chip"><b>be interested in</b><span>对……感兴趣</span></span>
+          <span class="chip"><b>have a talent for</b><span>在……有天赋</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>中考常考考点与易错点</h2><span class="desc">1–10</span></div>
+    <div class="klist">
+
+      <div class="kitem"><div class="n">1</div><div class="bd">
+        <b class="kt">考点一：be going to 结构</b>
+        <p>be going to + 动词原形；be 随主语变化；否定在 be 后加 not。</p>
+        <div class="ex">I'm going to visit my grandparents this weekend.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">2</div><div class="bd">
+        <b class="kt">考点二：there be 将来时</b>
+        <p>there is/are going to be 或 there will be，<b>不能与 have 连用</b>。</p>
+        <div class="ex">There are going to be two football matches tomorrow.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">3</div><div class="bd">
+        <b class="kt">考点三：现在进行时表将来</b>
+        <p>表示按计划即将发生的动作，常与将来时间状语连用。</p>
+        <div class="ex">I am leaving for Beijing tomorrow.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">4</div><div class="bd">
+        <b class="kt">考点四：will 与 be going to 区别</b>
+        <p>be going to 强调计划/安排；will 强调单纯将来或临时决定。</p>
+        <div class="ex">I'm going to take up a new hobby next term.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">5</div><div class="bd">
+        <b class="kt">考点五：职业词汇辨析</b>
+        <p>pilot、engineer、designer、violinist、pianist、scientist、photographer、architect、lawyer。注意冠词 a/an。</p>
+        <div class="ex">I want to be an engineer. / He is a pilot.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">6</div><div class="bd">
+        <b class="kt">考点六：动词短语辨析</b>
+        <p>take up 开始从事；give up 放弃；put out 扑灭；put off 推迟；look up 查阅；clean up 打扫。</p>
+        <div class="ex">He is going to take up a new hobby.</div>
+        <div class="ex">The firemen tried their best to put out the fire.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">7</div><div class="bd">
+        <b class="kt">考点七：名词与形容词辨析</b>
+        <p>resolution、relationship、purpose、talent（名词）；creative、energetic、confident、patient（形容词）。</p>
+        <div class="ex">My New Year's resolution is to improve my English.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">8</div><div class="bd">
+        <b class="kt">考点八：so that 目的状语从句</b>
+        <p>so that 以便，从句常含 can/could/may/might。</p>
+        <div class="ex">He gets up early so that he can catch the early bus.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">9</div><div class="bd">
+        <b class="kt">考点九：be sure to do 与 be confident in</b>
+        <p>be sure to do 一定会做；be confident in 对……有信心。</p>
+        <div class="ex">Tony works so hard and he is sure to succeed.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">10</div><div class="bd">
+        <b class="kt">考点十：情景交际</b>
+        <p>问梦想 What's your dream job?；问计划 What are you going to do?；同意 I agree；安慰 Don't worry；回答道歉 It doesn't matter。</p>
+        <div class="ex">— What are you going to be when you grow up? — I'm going to be a doctor.</div>
+      </div></div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
+    <div class="slist">
+      <div class="sitem"><span class="n">1</span><div class="en">What are you going to be when you grow up? — I'm going to be a doctor.</div></div>
+      <div class="sitem"><span class="n">2</span><div class="en">How are you going to do that? — I'm going to study hard.</div></div>
+      <div class="sitem"><span class="n">3</span><div class="en">What are you going to do this weekend? — I'm going to visit my grandparents.</div></div>
+      <div class="sitem"><span class="n">4</span><div class="en">There is going to be a talent show in ten minutes.</div></div>
+      <div class="sitem"><span class="n">5</span><div class="en">There are going to be two football matches on TV tomorrow.</div></div>
+      <div class="sitem"><span class="n">6</span><div class="en">I am leaving for Beijing to have an important meeting.</div></div>
+      <div class="sitem"><span class="n">7</span><div class="en">My New Year's resolution is to improve my English speaking skills.</div></div>
+      <div class="sitem"><span class="n">8</span><div class="en">He made a resolution to spend more time with his family.</div></div>
+      <div class="sitem"><span class="n">9</span><div class="en">She is going to take art lessons to improve her drawing skills.</div></div>
+      <div class="sitem"><span class="n">10</span><div class="en">I want to be an engineer because I like building things.</div></div>
+      <div class="sitem"><span class="n">11</span><div class="en">He is a pilot and he flies planes to different countries.</div></div>
+      <div class="sitem"><span class="n">12</span><div class="en">The firemen tried their best to put out the fire.</div></div>
+      <div class="sitem"><span class="n">13</span><div class="en">He is going to take up a new hobby like playing the guitar.</div></div>
+      <div class="sitem"><span class="n">14</span><div class="en">She gets up early so that she can catch the early bus.</div></div>
+      <div class="sitem"><span class="n">15</span><div class="en">Tony works so hard and he is sure to succeed.</div></div>
+      <div class="sitem"><span class="n">16</span><div class="en">My cousin is confident in his drawing skills.</div></div>
+      <div class="sitem"><span class="n">17</span><div class="en">The purpose of the meeting is to discuss the new plan.</div></div>
+      <div class="sitem"><span class="n">18</span><div class="en">She has a talent for music.</div></div>
+      <div class="sitem"><span class="n">19</span><div class="en">Your hero is the person who you admire and want to be like.</div></div>
+      <div class="sitem"><span class="n">20</span><div class="en">— What's your biggest dream in life? — To travel around the world.</div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>语法易错点总结</h2><span class="desc">考前必看</span></div>
+    <div class="warn">
+      <div class="whd"><div class="dot">!</div>姜老师提醒 · 高频易错，务必牢记</div>
+      <ol>
+        <li><b>be going to 后接动词原形。</b></li>
+        <li><b>be 动词随主语变化：I am / he is / they are。</b></li>
+        <li><b>there be 将来时用 there is/are going to be，不与 have 连用。</b></li>
+        <li><b>现在进行时可表按计划即将发生。</b></li>
+        <li><b>be going to 强调计划，will 强调临时决定。</b></li>
+        <li><b>职业词汇注意冠词 a/an。</b></li>
+        <li><b>take up / give up / put out / put off / look up 区分含义。</b></li>
+        <li><b>名词与形容词区分词性。</b></li>
+        <li><b>so that 从句常含情态动词。</b></li>
+        <li><b>be sure to do 与 be confident in 区分。</b></li>
+        <li><b>情景交际：What's your dream job? / How are you going to do that?</b></li>
+        <li><b>information 不可数，resolution 可数。</b></li>
+        <li><b>want to do / dream is to do 不定式。</b></li>
+        <li><b>make a resolution to do sth. to 后接动词原形。</b></li>
+        <li><b>take up 后接名词或动名词。</b></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+</div>
+
+<footer>
+  <div class="inner">多多好学版权所有</div>
+</footer>
+
+</body>
+</html>

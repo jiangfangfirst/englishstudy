@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学线上课堂</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
+    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
+    --green:#059669; --green-bg:#ecfdf5;
+    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
+    --line:#e5e7eb; --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
+  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
+  .hero .tip{margin-top:10px;font-size:12.5px;color:var(--blue-d)}
+  .pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .pill{flex:1;min-width:100px;border-radius:12px;padding:12px 8px;text-align:center;border:1.5px solid var(--line);background:#fafbfd}
+  .pill b{display:block;font-size:14px;color:var(--blue-d)}
+  .pill span{font-size:11px;color:var(--ink-3)}
+  .pill.c-a{background:#fff;border-color:var(--blue)}
+  .pill.c-b{background:var(--amber-bg);border-color:var(--amber-bd)}
+  .pill.c-c{background:var(--green-bg);border-color:var(--green)}
+  .verdict{margin-top:14px;background:#fff;border-left:4px solid var(--blue);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--blue-d)}
+  .verdict b{color:var(--blue-d)}
+
+  section.block{margin-top:30px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+  .khead h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .khead .desc{font-size:11px;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+  .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
+  .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:8px;overflow-wrap:break-word;word-break:break-word}
+  .gram p b{color:var(--blue-d)}
+  .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
+  .witem:last-child{border-bottom:none}
+  .witem .wh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .witem .word{font-size:15px;font-weight:800;color:var(--blue-d)}
+  .witem .ph{font-size:11.5px;color:var(--ink-3)}
+  .witem .pos{font-size:11.5px;color:var(--ink-3);background:#f3f4f6;padding:1px 7px;border-radius:999px}
+  .witem p{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:break-word;word-break:break-word}
+  .witem p b{color:var(--blue-d)}
+  .witem .sen{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .plist{margin-top:4px}
+  .pgroup{margin-bottom:12px}
+  .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .pgroup .pg::after{content:"";flex:1;height:1px;background:var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .chip b{color:var(--blue-d);font-weight:700}
+  .chip span{color:var(--ink-3);font-size:11px}
+
+  .klist{margin-top:4px}
+  .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .kitem:last-child{border-bottom:none}
+  .kitem .n{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue);color:var(--blue-d);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .kitem .bd{flex:1;min-width:0}
+  .kitem .bd .kt{display:block;font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
+  .kitem .bd p{font-size:13px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .kitem .bd p b{color:var(--blue-d)}
+  .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
+
+  .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .sitem:last-child{border-bottom:none}
+  .sitem .n{color:var(--blue);font-weight:800;font-size:13px;flex:none;margin-top:2px}
+  .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
+
+  .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+  .warn ol{list-style:none;counter-reset:ec}
+  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li:last-child{border-bottom:none}
+  .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .warn li b{color:#92400e}
+
+  .divider{height:1px;background:var(--line);margin:26px 0 0}
+
+  footer{margin-top:24px;padding:18px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .inner{max-width:720px;margin:0 auto}
+
+  @media (max-width:400px){
+    .hero h1{font-size:21px}
+    .khead h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">初中英语 · 学霸笔记</div>
+    <h1>八年级上册 · KP 2</h1>
+    <div class="tip">要点：① 频度副词 always/usually/often/sometimes/hardly ever/never 的位置与排序；② How often 提问频率；③ could 委婉请求许可；④ borrow 与 lend 区别。</div>
+    <div class="pills">
+      <div class="pill c-a"><b>频度副词</b><span>always · usually · often · never</span></div>
+      <div class="pill c-b"><b>请求许可</b><span>Could I...? · Could you please...?</span></div>
+      <div class="pill c-c"><b>家庭生活</b><span>housework · borrow · lend · tidy</span></div>
+    </div>
+    <div class="verdict">本 KP 三个关键：① 频度副词放在<b>实义动词前、be 动词后</b>；② borrow 借入（from），lend 借出（to）；③ hardly ever 本身含否定，反意疑问句用肯定。</div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><h2>语法核心</h2><span class="desc">本单元四大语法</span></div>
+
+    <div class="gram">
+      <div class="gt">语法一：频度副词与 How often</div>
+      <p>常见频度副词：<b>always > usually > often > sometimes > hardly ever > never</b>。放在实义动词之前，be 动词/助动词/情态动词之后。<b>How often</b> 提问频率，答语用 once a week、twice a month、every day 等。</p>
+      <div class="ex">He always gets up early. / She is never late for school.</div>
+      <div class="ex">— How often do you exercise? — Twice a week.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">语法二：情态动词 could 表示请求许可</div>
+      <p><b>Could I...?</b> 委婉请求许可；<b>Could you please...?</b> 委婉请对方做事。肯定回答 Sure/Of course/No problem；否定回答 Sorry, I can't.。</p>
+      <div class="ex">— Could I use your bike? — Of course.</div>
+      <div class="ex">— Could you please fold the clothes? — Sorry, I can't.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">语法三：一般现在时与 there be</div>
+      <p>一般现在时表经常性动作；第三人称单数谓语加 -s/-es。<b>there be</b> 表"某地有某物"，be 与最近的主语一致（就近原则）。</p>
+      <div class="ex">My father watches TV after supper every day.</div>
+      <div class="ex">There is a lot of juice in the bottle. / There are some books on the desk.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">语法四：复合不定代词</div>
+      <p>肯定句用 some-，否定疑问用 any-；形容词修饰时<b>后置</b>；作主语谓语用<b>单数</b>。</p>
+      <div class="ex">I have something important to tell you.</div>
+      <div class="ex">Did you buy anything special? / Everything was excellent.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点词汇精讲</h2><span class="desc">1–25</span></div>
+    <div class="wlist">
+
+      <div class="witem">
+        <div class="wh"><span class="word">home</span><span class="ph">/həʊm/</span><span class="pos">n. 家 · adv. 在家</span></div>
+        <div class="sen">My home is a two-story house with a garden.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">house</span><span class="ph">/haʊs/</span><span class="pos">n. 房子；住宅</span></div>
+        <div class="sen">They live in a big house near the park.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">garden</span><span class="ph">/ˈɡɑːdn/</span><span class="pos">n. 花园；园子</span></div>
+        <div class="sen">There is a beautiful garden behind our house.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">bathroom</span><span class="ph">/ˈbɑːθruːm/</span><span class="pos">n. 浴室；洗手间</span></div>
+        <div class="sen">The bathroom has a modern shower.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">comfortable</span><span class="ph">/ˈkʌmftəbl/</span><span class="pos">adj. 舒适的</span></div>
+        <div class="sen">My home is warm and comfortable.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">familiar</span><span class="ph">/fəˈmɪliə(r)/</span><span class="pos">adj. 熟悉的</span></div>
+        <p>搭配 <b>be familiar with</b> 对……熟悉。</p>
+        <div class="sen">I am familiar with the streets in my neighborhood.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">feeling</span><span class="ph">/ˈfiːlɪŋ/</span><span class="pos">n. 感觉；情感</span></div>
+        <div class="sen">I like the feeling of my home because it's warm.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">sweet</span><span class="ph">/swiːt/</span><span class="pos">adj. 甜蜜的；可爱的</span></div>
+        <div class="sen">What a sweet home it is!</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">tidy</span><span class="ph">/ˈtaɪdi/</span><span class="pos">v. 整理 · adj. 整洁的</span></div>
+        <div class="sen">She spent two hours tidying her room yesterday.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">fold</span><span class="ph">/fəʊld/</span><span class="pos">v. 折叠；对折</span></div>
+        <p>搭配 fold the clothes 叠衣服。</p>
+        <div class="sen">Could you please fold the clothes for me?</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">sweep</span><span class="ph">/swiːp/</span><span class="pos">v. 扫；打扫</span></div>
+        <p>过去式 <b>swept</b>。</p>
+        <div class="sen">I often sweep the floor after dinner.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">rubbish</span><span class="ph">/ˈrʌbɪʃ/</span><span class="pos">n. 垃圾</span></div>
+        <p>搭配 take out the rubbish 倒垃圾。</p>
+        <div class="sen">I often take out the rubbish at home.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">borrow</span><span class="ph">/ˈbɒrəʊ/</span><span class="pos">v. 借入；借用</span></div>
+        <p>搭配 <b>borrow sth. from sb.</b> 向某人借。</p>
+        <div class="sen">May I borrow your bike, Kate?</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">lend</span><span class="ph">/lend/</span><span class="pos">v. 借出</span></div>
+        <p>过去式 lent。搭配 <b>lend sth. to sb.</b> 把某物借给某人。</p>
+        <div class="sen">Could you lend your pen to me?</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">pack</span><span class="ph">/pæk/</span><span class="pos">v. 打包；收拾行李</span></div>
+        <p>搭配 pack up 打包。</p>
+        <div class="sen">You should pack up your things carefully.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">share</span><span class="ph">/ʃeə(r)/</span><span class="pos">v. 分享；共用</span></div>
+        <p>搭配 <b>share sth. with sb.</b> 与某人分享。</p>
+        <div class="sen">Sally always shares her new hobbies with her friends.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">advice</span><span class="ph">/ədˈvaɪs/</span><span class="pos">n. 建议；意见</span></div>
+        <p><b>不可数名词</b>。</p>
+        <div class="sen">He gave me some good advice.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">smell</span><span class="ph">/smel/</span><span class="pos">n. 气味 · v. 闻起来</span></div>
+        <div class="sen">The flowers smell sweet.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">dead</span><span class="ph">/ded/</span><span class="pos">adj. 死的；失去生命的</span></div>
+        <div class="sen">The old tree is dead.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">percent</span><span class="ph">/pəˈsent/</span><span class="pos">n. 百分之……</span></div>
+        <div class="sen">Sixty percent of them are teachers and students.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">through</span><span class="ph">/θruː/</span><span class="pos">prep. 通过；穿过</span></div>
+        <div class="sen">We walked through the forest.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">although</span><span class="ph">/ɔːlˈðəʊ/</span><span class="pos">conj. 虽然；尽管</span></div>
+        <p>引导让步状语从句，<b>不与 but 连用</b>。</p>
+        <div class="sen">Although he was very tired, he continued working.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">until</span><span class="ph">/ənˈtɪl/</span><span class="pos">conj. 直到……为止</span></div>
+        <p>搭配 <b>not...until...</b> 直到……才……</p>
+        <div class="sen">He didn't go to bed until he finished his homework.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">hardly</span><span class="ph">/ˈhɑːdli/</span><span class="pos">adv. 几乎不</span></div>
+        <p>hardly ever 几乎从不，本身含否定。</p>
+        <div class="sen">He hardly ever exercises. He is very lazy.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">once</span><span class="ph">/wʌns/</span><span class="pos">adv. 一次；曾经</span></div>
+        <div class="sen">I go to the movies once a month.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点短语</h2><span class="desc">三类分类记忆</span></div>
+    <div class="plist">
+      <div class="pgroup">
+        <div class="pg">家务与频率</div>
+        <div class="chips">
+          <span class="chip"><b>take out the rubbish</b><span>倒垃圾</span></span>
+          <span class="chip"><b>sweep the floor</b><span>扫地</span></span>
+          <span class="chip"><b>fold the clothes</b><span>叠衣服</span></span>
+          <span class="chip"><b>clean the living room</b><span>打扫客厅</span></span>
+          <span class="chip"><b>tidy one's room</b><span>整理房间</span></span>
+          <span class="chip"><b>make the bed</b><span>铺床</span></span>
+          <span class="chip"><b>do the dishes</b><span>洗碗</span></span>
+          <span class="chip"><b>help sb. with housework</b><span>帮做家务</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">频率表达</div>
+        <div class="chips">
+          <span class="chip"><b>how often</b><span>多久一次</span></span>
+          <span class="chip"><b>once a week</b><span>每周一次</span></span>
+          <span class="chip"><b>twice a month</b><span>每月两次</span></span>
+          <span class="chip"><b>three times a day</b><span>一天三次</span></span>
+          <span class="chip"><b>every day</b><span>每天</span></span>
+          <span class="chip"><b>hardly ever</b><span>几乎从不</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">常考搭配</div>
+        <div class="chips">
+          <span class="chip"><b>be familiar with</b><span>对……熟悉</span></span>
+          <span class="chip"><b>share sth. with sb.</b><span>与某人分享</span></span>
+          <span class="chip"><b>borrow sth. from sb.</b><span>向某人借</span></span>
+          <span class="chip"><b>lend sth. to sb.</b><span>借给某人</span></span>
+          <span class="chip"><b>pack up</b><span>打包</span></span>
+          <span class="chip"><b>take care of</b><span>照顾</span></span>
+          <span class="chip"><b>look forward to</b><span>期待</span></span>
+          <span class="chip"><b>be careful with</b><span>小心</span></span>
+          <span class="chip"><b>at least</b><span>至少</span></span>
+          <span class="chip"><b>stay up late</b><span>熬夜</span></span>
+          <span class="chip"><b>not...until...</b><span>直到……才</span></span>
+          <span class="chip"><b>percent of</b><span>……的百分之</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>中考常考考点与易错点</h2><span class="desc">1–12</span></div>
+    <div class="klist">
+
+      <div class="kitem"><div class="n">1</div><div class="bd">
+        <b class="kt">考点一：How often 提问频率</b>
+        <p>How often 提问频率；How long 问时长；How soon 问多久以后；How far 问距离。</p>
+        <div class="ex">— How often do you exercise? — Twice a week.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">2</div><div class="bd">
+        <b class="kt">考点二：频度副词的位置</b>
+        <p>实义动词之前，be 动词/助动词/情态动词之后。</p>
+        <div class="ex">He always gets up early. / She is never late for school.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">3</div><div class="bd">
+        <b class="kt">考点三：hardly ever 与 never</b>
+        <p>hardly ever 几乎从不，本身含否定，反意疑问句用肯定；never 从不。</p>
+        <div class="ex">She hardly ever goes to bed late, does she?</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">4</div><div class="bd">
+        <b class="kt">考点四：could 表示请求许可</b>
+        <p>Could I...? 请求许可；Could you please...? 请对方做。肯定 Sure/Of course，否定 Sorry, I can't.</p>
+        <div class="ex">— Could I use your bike? — Of course.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">5</div><div class="bd">
+        <b class="kt">考点五：borrow 与 lend</b>
+        <p>borrow 借入（from sb.）；lend 借出（to sb.）。</p>
+        <div class="ex">I want to borrow a pen from Tom.</div>
+        <div class="ex">Could you lend your bike to me?</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">6</div><div class="bd">
+        <b class="kt">考点六：复合不定代词</b>
+        <p>肯定句用 some-，否定疑问用 any-；形容词后置；作主语谓语用单数。</p>
+        <div class="ex">I have something important to tell you.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">7</div><div class="bd">
+        <b class="kt">考点七：反身代词</b>
+        <p>与主语一致，常考 enjoy oneself、teach oneself、by oneself。</p>
+        <div class="ex">Nobody taught me. I taught myself.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">8</div><div class="bd">
+        <b class="kt">考点八：主谓一致</b>
+        <p>the number of 作主语谓语用单数；a number of 用复数；百分数作主语与 of 后名词一致。</p>
+        <div class="ex">The number of volunteers is 2,000.</div>
+        <div class="ex">Sixty percent of them are teachers.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">9</div><div class="bd">
+        <b class="kt">考点九：复合形容词作定语</b>
+        <p>数词+名词+形容词构成复合形容词，名词用单数，加连字符。</p>
+        <div class="ex">He is an eight-year-old boy.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">10</div><div class="bd">
+        <b class="kt">考点十：although 与 until</b>
+        <p>although 尽管，不与 but 连用；not...until... 直到……才……</p>
+        <div class="ex">Although he was tired, he continued working.</div>
+        <div class="ex">We won't start until all the guests arrive.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">11</div><div class="bd">
+        <b class="kt">考点十一：spend 与 take</b>
+        <p>spend 主语是人，spend time doing；take 用 It takes sb. time to do。</p>
+        <div class="ex">She spent two hours tidying her room.</div>
+        <div class="ex">It took me two hours to finish homework.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">12</div><div class="bd">
+        <b class="kt">考点十二：情景交际</b>
+        <p>问频率用 How often；问家庭用 What...look like?；感叹用 What a sweet home!；请求用 Could I...?</p>
+        <div class="ex">— What does your home look like? — It's a two-story house with a garden.</div>
+      </div></div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
+    <div class="slist">
+      <div class="sitem"><span class="n">1</span><div class="en">— How often do you exercise? — Twice a week.</div></div>
+      <div class="sitem"><span class="n">2</span><div class="en">— How often does she go to the library? — Once a month.</div></div>
+      <div class="sitem"><span class="n">3</span><div class="en">He hardly ever watches TV.</div></div>
+      <div class="sitem"><span class="n">4</span><div class="en">— Could I use your bike? — Of course.</div></div>
+      <div class="sitem"><span class="n">5</span><div class="en">— Could you please fold the clothes? — Sorry, I can't.</div></div>
+      <div class="sitem"><span class="n">6</span><div class="en">I often take out the rubbish and sweep the floor at home.</div></div>
+      <div class="sitem"><span class="n">7</span><div class="en">My home is warm and comfortable.</div></div>
+      <div class="sitem"><span class="n">8</span><div class="en">What a sweet home it is!</div></div>
+      <div class="sitem"><span class="n">9</span><div class="en">What does your home look like?</div></div>
+      <div class="sitem"><span class="n">10</span><div class="en">It's a two-story house with a garden.</div></div>
+      <div class="sitem"><span class="n">11</span><div class="en">I have something important to tell you.</div></div>
+      <div class="sitem"><span class="n">12</span><div class="en">Did you buy anything special?</div></div>
+      <div class="sitem"><span class="n">13</span><div class="en">Everything was excellent.</div></div>
+      <div class="sitem"><span class="n">14</span><div class="en">Nobody taught me. I taught myself.</div></div>
+      <div class="sitem"><span class="n">15</span><div class="en">The number of volunteers is 2,000.</div></div>
+      <div class="sitem"><span class="n">16</span><div class="en">Sixty percent of them are teachers and students.</div></div>
+      <div class="sitem"><span class="n">17</span><div class="en">Although he was very tired, he continued working.</div></div>
+      <div class="sitem"><span class="n">18</span><div class="en">We won't start the party until all the guests arrive.</div></div>
+      <div class="sitem"><span class="n">19</span><div class="en">She spent two hours tidying her room yesterday.</div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>语法易错点总结</h2><span class="desc">考前必看</span></div>
+    <div class="warn">
+      <div class="whd"><div class="dot">!</div>姜老师提醒 · 高频易错，务必牢记</div>
+      <ol>
+        <li><b>How often 问频率，How long 问时长，How soon 问多久以后，How far 问距离。</b></li>
+        <li><b>频度副词放在实义动词前、be 动词后。</b></li>
+        <li><b>hardly ever 含否定，反意疑问句用肯定形式。</b></li>
+        <li><b>Could I...? / Could you please...? 回答要礼貌。</b></li>
+        <li><b>borrow 借入（from），lend 借出（to）。</b></li>
+        <li><b>复合不定代词作主语谓语用单数。</b></li>
+        <li><b>形容词修饰复合不定代词后置。</b></li>
+        <li><b>反身代词与主语一致。</b></li>
+        <li><b>the number of 用单数，a number of 用复数。</b></li>
+        <li><b>百分数作主语与 of 后名词一致。</b></li>
+        <li><b>复合形容词名词用单数，加连字符。</b></li>
+        <li><b>although 不能和 but 同时使用。</b></li>
+        <li><b>not...until... 直到……才……</b></li>
+        <li><b>spend 主语是人，spend time doing。</b></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+</div>
+
+<footer>
+  <div class="inner">多多好学版权所有</div>
+</footer>
+
+</body>
+</html>

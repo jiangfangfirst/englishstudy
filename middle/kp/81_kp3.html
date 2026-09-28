@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学线上课堂</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
+    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
+    --green:#059669; --green-bg:#ecfdf5;
+    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
+    --line:#e5e7eb; --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
+  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
+  .hero .tip{margin-top:10px;font-size:12.5px;color:var(--blue-d)}
+  .pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .pill{flex:1;min-width:100px;border-radius:12px;padding:12px 8px;text-align:center;border:1.5px solid var(--line);background:#fafbfd}
+  .pill b{display:block;font-size:14px;color:var(--blue-d)}
+  .pill span{font-size:11px;color:var(--ink-3)}
+  .pill.c-a{background:#fff;border-color:var(--blue)}
+  .pill.c-b{background:var(--amber-bg);border-color:var(--amber-bd)}
+  .pill.c-c{background:var(--green-bg);border-color:var(--green)}
+  .verdict{margin-top:14px;background:#fff;border-left:4px solid var(--blue);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--blue-d)}
+  .verdict b{color:var(--blue-d)}
+
+  section.block{margin-top:30px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+  .khead h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .khead .desc{font-size:11px;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+  .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
+  .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:8px;overflow-wrap:break-word;word-break:break-word}
+  .gram p b{color:var(--blue-d)}
+  .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
+  .witem:last-child{border-bottom:none}
+  .witem .wh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .witem .word{font-size:15px;font-weight:800;color:var(--blue-d)}
+  .witem .ph{font-size:11.5px;color:var(--ink-3)}
+  .witem .pos{font-size:11.5px;color:var(--ink-3);background:#f3f4f6;padding:1px 7px;border-radius:999px}
+  .witem p{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:break-word;word-break:break-word}
+  .witem p b{color:var(--blue-d)}
+  .witem .sen{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .plist{margin-top:4px}
+  .pgroup{margin-bottom:12px}
+  .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .pgroup .pg::after{content:"";flex:1;height:1px;background:var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .chip b{color:var(--blue-d);font-weight:700}
+  .chip span{color:var(--ink-3);font-size:11px}
+
+  .klist{margin-top:4px}
+  .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .kitem:last-child{border-bottom:none}
+  .kitem .n{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue);color:var(--blue-d);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .kitem .bd{flex:1;min-width:0}
+  .kitem .bd .kt{display:block;font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
+  .kitem .bd p{font-size:13px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .kitem .bd p b{color:var(--blue-d)}
+  .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
+
+  .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .sitem:last-child{border-bottom:none}
+  .sitem .n{color:var(--blue);font-weight:800;font-size:13px;flex:none;margin-top:2px}
+  .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
+
+  .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+  .warn ol{list-style:none;counter-reset:ec}
+  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li:last-child{border-bottom:none}
+  .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .warn li b{color:#92400e}
+
+  .divider{height:1px;background:var(--line);margin:26px 0 0}
+
+  footer{margin-top:24px;padding:18px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .inner{max-width:720px;margin:0 auto}
+
+  @media (max-width:400px){
+    .hero h1{font-size:21px}
+    .khead h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">初中英语 · 学霸笔记</div>
+    <h1>八年级上册 · KP 3</h1>
+    <div class="tip">要点：① 形容词/副词比较级构成（-er / more / 不规则）；② as...as 同级比较与 not as/so...as；③ both/either/neither 连接并列主语就近原则；④ than any other + 单数名词表最高级。</div>
+    <div class="pills">
+      <div class="pill c-a"><b>比较级</b><span>taller · more outgoing · better</span></div>
+      <div class="pill c-b"><b>同级比较</b><span>as...as · different from · similar to</span></div>
+      <div class="pill c-c"><b>异同表达</b><span>both · either · neither · in common</span></div>
+    </div>
+    <div class="verdict">本 KP 三个关键：① 两者比较用<b>比较级 + than</b>；② as...as 中间用<b>原级</b>；③ either...or / neither...nor 谓语<b>就近一致</b>。</div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><h2>语法核心</h2><span class="desc">本单元两大语法</span></div>
+
+    <div class="gram">
+      <div class="gt">语法一：形容词和副词比较级</div>
+      <p>两者比较用比较级，常与 <b>than</b> 连用。构成：单音节加 -er（tall→taller）；e 结尾加 -r（nice→nicer）；辅+y 变 i+er（happy→happier）；重读闭音节双写末辅音（big→bigger）；多音节加 more（outgoing→more outgoing）；不规则：good/well→better，bad/badly→worse，many/much→more。</p>
+      <p>修饰比较级用 <b>much / a little / even / far / still</b>。句型：比较级+and+比较级（越来越……）；the+比较级，the+比较级（越……越……）。</p>
+      <div class="ex">She is taller than her brother.</div>
+      <div class="ex">His English is much better than mine.</div>
+      <div class="ex">The harder you work, the better grades you will get.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">语法二：同级比较与异同表达</div>
+      <p><b>as + 原级 + as</b> 和……一样；<b>not as/so + 原级 + as</b> 不如……。be different from 与……不同；be similar to 与……相似；the same as 和……一样；have...in common 有共同之处。</p>
+      <p><b>both...and</b> 两者都（复数谓语）；<b>either...or</b> 要么……要么（就近）；<b>neither...nor</b> 两者都不（就近）。</p>
+      <div class="ex">She is as tall as her sister.</div>
+      <div class="ex">Neither Tom nor Jim is here.</div>
+      <div class="ex">We have a lot in common.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点词汇精讲</h2><span class="desc">1–25</span></div>
+    <div class="wlist">
+
+      <div class="witem">
+        <div class="wh"><span class="word">outgoing</span><span class="ph">/ˌaʊtˈɡəʊɪŋ/</span><span class="pos">adj. 外向的</span></div>
+        <div class="sen">Tina is more outgoing than Tara.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">better</span><span class="ph">/ˈbetə(r)/</span><span class="pos">adj./adv. 更好的</span></div>
+        <p>good / well 的比较级。</p>
+        <div class="sen">Sam did better in his studies than last year.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">loudly</span><span class="ph">/ˈlaʊdli/</span><span class="pos">adv. 大声地</span></div>
+        <div class="sen">She speaks more loudly than her sister.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">quietly</span><span class="ph">/ˈkwaɪətli/</span><span class="pos">adv. 安静地</span></div>
+        <div class="sen">Please close the door quietly.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">hard-working</span><span class="ph">/ˌhɑːdˈwɜːkɪŋ/</span><span class="pos">adj. 勤勉的</span></div>
+        <div class="sen">Leo is more hard-working than his sister.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">competition</span><span class="ph">/ˌkɒmpəˈtɪʃn/</span><span class="pos">n. 比赛；竞争</span></div>
+        <div class="sen">She won the English speech competition.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">fantastic</span><span class="ph">/fænˈtæstɪk/</span><span class="pos">adj. 极好的</span></div>
+        <div class="sen">We had a fantastic time at the party.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">which</span><span class="ph">/wɪtʃ/</span><span class="pos">pron. 哪一个</span></div>
+        <div class="sen">Which is better, this one or that one?</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">clearly</span><span class="ph">/ˈklɪəli/</span><span class="pos">adv. 清楚地</span></div>
+        <div class="sen">Please speak more clearly.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">win</span><span class="ph">/wɪn/</span><span class="pos">v. 赢；获胜</span></div>
+        <p>过去式和过去分词 <b>won</b>。</p>
+        <div class="sen">She won the first prize.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">though</span><span class="ph">/ðəʊ/</span><span class="pos">conj. 虽然；尽管</span></div>
+        <div class="sen">Though he is young, he knows a lot.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">care</span><span class="ph">/keə(r)/</span><span class="pos">v. 关心；在意</span></div>
+        <p>搭配 <b>care about</b> 关心；在意。</p>
+        <div class="sen">A good friend cares about you.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">serious</span><span class="ph">/ˈsɪəriəs/</span><span class="pos">adj. 严肃的；严重的</span></div>
+        <div class="sen">He is more serious than his brother.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">mirror</span><span class="ph">/ˈmɪrə(r)/</span><span class="pos">n. 镜子</span></div>
+        <div class="sen">She looked at herself in the mirror.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">necessary</span><span class="ph">/ˈnesəsəri/</span><span class="pos">adj. 必要的</span></div>
+        <div class="sen">It is necessary to have good friends.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">break</span><span class="ph">/breɪk/</span><span class="pos">v. 打破；弄坏</span></div>
+        <p>过去式 broke，过去分词 broken。</p>
+        <div class="sen">Don't break the rules.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">touch</span><span class="ph">/tʌtʃ/</span><span class="pos">v. 触摸；感动</span></div>
+        <div class="sen">Her story touched me deeply.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">reach</span><span class="ph">/riːtʃ/</span><span class="pos">v. 到达；伸手够到</span></div>
+        <div class="sen">He is too short to reach the book.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">heart</span><span class="ph">/hɑːt/</span><span class="pos">n. 心；内心</span></div>
+        <div class="sen">She has a kind heart.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">share</span><span class="ph">/ʃeə(r)/</span><span class="pos">v. 分享；共用</span></div>
+        <p>搭配 share sth. with sb.。</p>
+        <div class="sen">I have some good news to share with you.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">character</span><span class="ph">/ˈkærəktə(r)/</span><span class="pos">n. 性格；品质</span></div>
+        <div class="sen">Her kind and caring character makes her a great friend.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">appearance</span><span class="ph">/əˈpɪərəns/</span><span class="pos">n. 外貌；外观</span></div>
+        <div class="sen">Don't judge a person by his appearance.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">perform</span><span class="ph">/pəˈfɔːm/</span><span class="pos">v. 表演；执行</span></div>
+        <div class="sen">She performed very well in the competition.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">similar</span><span class="ph">/ˈsɪmələ(r)/</span><span class="pos">adj. 相似的</span></div>
+        <p>搭配 <b>be similar to</b>。</p>
+        <div class="sen">Your idea is similar to mine.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">talented</span><span class="ph">/ˈtæləntɪd/</span><span class="pos">adj. 有天赋的</span></div>
+        <p>搭配 <b>be talented in</b>。</p>
+        <div class="sen">She is talented in music.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点短语</h2><span class="desc">三类分类记忆</span></div>
+    <div class="plist">
+      <div class="pgroup">
+        <div class="pg">比较与异同</div>
+        <div class="chips">
+          <span class="chip"><b>more outgoing than</b><span>比……更外向</span></span>
+          <span class="chip"><b>as tall as</b><span>和……一样高</span></span>
+          <span class="chip"><b>not as/so outgoing as</b><span>不如……外向</span></span>
+          <span class="chip"><b>be different from</b><span>与……不同</span></span>
+          <span class="chip"><b>be similar to</b><span>与……相似</span></span>
+          <span class="chip"><b>the same as</b><span>和……一样</span></span>
+          <span class="chip"><b>have...in common</b><span>有共同之处</span></span>
+          <span class="chip"><b>be different in</b><span>在……方面不同</span></span>
+          <span class="chip"><b>be similar in</b><span>在……方面相似</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">both / either / neither</div>
+        <div class="chips">
+          <span class="chip"><b>both...and...</b><span>两者都</span></span>
+          <span class="chip"><b>either...or...</b><span>要么……要么</span></span>
+          <span class="chip"><b>neither...nor...</b><span>两者都不</span></span>
+          <span class="chip"><b>in common</b><span>共同</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">常考搭配</div>
+        <div class="chips">
+          <span class="chip"><b>care about</b><span>关心；在意</span></span>
+          <span class="chip"><b>care for</b><span>照顾；关心</span></span>
+          <span class="chip"><b>be talented in</b><span>在……有天赋</span></span>
+          <span class="chip"><b>be good at</b><span>擅长</span></span>
+          <span class="chip"><b>be good with</b><span>与……相处好</span></span>
+          <span class="chip"><b>be popular with</b><span>受……欢迎</span></span>
+          <span class="chip"><b>be serious about</b><span>对……认真</span></span>
+          <span class="chip"><b>bring out</b><span>使显现</span></span>
+          <span class="chip"><b>thanks to</b><span>多亏了</span></span>
+          <span class="chip"><b>perform well</b><span>表演得好</span></span>
+          <span class="chip"><b>win the competition</b><span>赢得比赛</span></span>
+          <span class="chip"><b>make friends</b><span>交朋友</span></span>
+          <span class="chip"><b>be friendly to</b><span>对……友好</span></span>
+          <span class="chip"><b>play a role</b><span>发挥作用</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>中考常考考点与易错点</h2><span class="desc">1–15</span></div>
+    <div class="klist">
+
+      <div class="kitem"><div class="n">1</div><div class="bd">
+        <b class="kt">考点一：比较级基本用法</b>
+        <p>两者比较用比较级，常与 than 连用。</p>
+        <div class="ex">She is taller than her brother.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">2</div><div class="bd">
+        <b class="kt">考点二：比较级的构成</b>
+        <p>单音节加 -er，多音节加 more；重读闭音节双写末辅音；辅+y 变 i+er。</p>
+        <div class="ex">big→bigger · happy→happier · outgoing→more outgoing</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">3</div><div class="bd">
+        <b class="kt">考点三：不规则比较级</b>
+        <p>good/well→better，bad/badly→worse，many/much→more，little→less。</p>
+        <div class="ex">Sam did better than last year.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">4</div><div class="bd">
+        <b class="kt">考点四：修饰比较级的词</b>
+        <p>much、a little、even、far、still 可修饰比较级。</p>
+        <div class="ex">His English is much better than mine.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">5</div><div class="bd">
+        <b class="kt">考点五：比较级 + and + 比较级</b>
+        <p>表示"越来越……"。</p>
+        <div class="ex">The world is getting smaller and smaller.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">6</div><div class="bd">
+        <b class="kt">考点六：the + 比较级，the + 比较级</b>
+        <p>表示"越……越……"。</p>
+        <div class="ex">The harder you work, the better grades you will get.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">7</div><div class="bd">
+        <b class="kt">考点七：as...as 与 not as/so...as</b>
+        <p>as...as 中间用原级；not as/so...as 表"不如"。</p>
+        <div class="ex">She is as tall as her sister.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">8</div><div class="bd">
+        <b class="kt">考点八：be different from 与 be similar to</b>
+        <p>different from 与……不同；similar to 与……相似。</p>
+        <div class="ex">My deskmate is different from me.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">9</div><div class="bd">
+        <b class="kt">考点九：both / either / neither</b>
+        <p>both 两者都；either 任一；neither 都不。either...or 和 neither...nor 谓语<b>就近一致</b>。</p>
+        <div class="ex">Neither Tom nor Jim is here.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">10</div><div class="bd">
+        <b class="kt">考点十：have...in common</b>
+        <p>表示"有……共同之处"。</p>
+        <div class="ex">We have a lot in common.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">11</div><div class="bd">
+        <b class="kt">考点十一：care about 与 care for</b>
+        <p>care about 关心在意；care for 照顾。</p>
+        <div class="ex">A good friend cares about you.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">12</div><div class="bd">
+        <b class="kt">考点十二：thanks to</b>
+        <p>表示"多亏了"，to 是介词后接名词/代词。</p>
+        <div class="ex">Thanks to your hard work, we finished on time.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">13</div><div class="bd">
+        <b class="kt">考点十三：Congratulations</b>
+        <p>表示"祝贺"，用于祝贺对方成功。</p>
+        <div class="ex">— I got the first place. — Congratulations!</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">14</div><div class="bd">
+        <b class="kt">考点十四：比较对象要一致</b>
+        <p>前后比较对象要一致，常用 that/those 代替前面的名词。</p>
+        <div class="ex">The weather in Beijing is colder than that in Guangzhou.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">15</div><div class="bd">
+        <b class="kt">考点十五：than any other + 单数名词</b>
+        <p>用比较级表达最高级含义："比任何其他……都……"。</p>
+        <div class="ex">She is taller than any other student in her class.</div>
+      </div></div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
+    <div class="slist">
+      <div class="sitem"><span class="n">1</span><div class="en">I'm more outgoing than my sister.</div></div>
+      <div class="sitem"><span class="n">2</span><div class="en">Sam did better in his studies this year than last year.</div></div>
+      <div class="sitem"><span class="n">3</span><div class="en">Tina is more outgoing than Tara.</div></div>
+      <div class="sitem"><span class="n">4</span><div class="en">She is taller than her brother.</div></div>
+      <div class="sitem"><span class="n">5</span><div class="en">He runs faster than his friend.</div></div>
+      <div class="sitem"><span class="n">6</span><div class="en">The harder you work, the better grades you will get.</div></div>
+      <div class="sitem"><span class="n">7</span><div class="en">The Internet makes the world smaller and smaller.</div></div>
+      <div class="sitem"><span class="n">8</span><div class="en">She is as tall as her sister.</div></div>
+      <div class="sitem"><span class="n">9</span><div class="en">This book is not as interesting as that one.</div></div>
+      <div class="sitem"><span class="n">10</span><div class="en">My deskmate is different from me.</div></div>
+      <div class="sitem"><span class="n">11</span><div class="en">The twin sisters are similar to each other.</div></div>
+      <div class="sitem"><span class="n">12</span><div class="en">Both Tom and Sam are outgoing.</div></div>
+      <div class="sitem"><span class="n">13</span><div class="en">Neither Tom nor Jim is here.</div></div>
+      <div class="sitem"><span class="n">14</span><div class="en">We have a lot in common.</div></div>
+      <div class="sitem"><span class="n">15</span><div class="en">A good friend cares about you.</div></div>
+      <div class="sitem"><span class="n">16</span><div class="en">Thanks to your hard work, we finished the project on time.</div></div>
+      <div class="sitem"><span class="n">17</span><div class="en">She is talented in music.</div></div>
+      <div class="sitem"><span class="n">18</span><div class="en">Her kind and caring character makes her a great friend.</div></div>
+      <div class="sitem"><span class="n">19</span><div class="en">Her appearance changed completely after she got a new haircut.</div></div>
+      <div class="sitem"><span class="n">20</span><div class="en">Who is more outgoing, Tina or Tara?</div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>语法易错点总结</h2><span class="desc">考前必看</span></div>
+    <div class="warn">
+      <div class="whd"><div class="dot">!</div>姜老师提醒 · 高频易错，务必牢记</div>
+      <ol>
+        <li><b>两者比较用比较级，常与 than 连用。</b></li>
+        <li><b>单音节加 -er，多音节加 more。</b></li>
+        <li><b>重读闭音节双写末辅音再加 -er。</b></li>
+        <li><b>辅+y 结尾变 y 为 i 再加 -er。</b></li>
+        <li><b>good/well→better，bad/badly→worse。</b></li>
+        <li><b>much/a little/even/far/still 修饰比较级。</b></li>
+        <li><b>比较级+and+比较级 表"越来越……"。</b></li>
+        <li><b>the+比较级，the+比较级 表"越……越……"。</b></li>
+        <li><b>as...as 中间用原级，否定用 not as/so...as。</b></li>
+        <li><b>different from 与 similar to 不要混。</b></li>
+        <li><b>both 两者都，either 任一，neither 都不。</b></li>
+        <li><b>either...or / neither...nor 谓语就近一致。</b></li>
+        <li><b>have...in common 有共同之处。</b></li>
+        <li><b>care about 关心，care for 照顾。</b></li>
+        <li><b>Thanks to 多亏了，to 是介词。</b></li>
+        <li><b>比较对象要一致，用 that/those 替代。</b></li>
+        <li><b>than any other + 单数名词表最高级含义。</b></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+</div>
+
+<footer>
+  <div class="inner">多多好学版权所有</div>
+</footer>
+
+</body>
+</html>

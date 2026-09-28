@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学线上课堂</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
+    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
+    --green:#059669; --green-bg:#ecfdf5;
+    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
+    --line:#e5e7eb; --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
+  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
+  .hero .tip{margin-top:10px;font-size:12.5px;color:var(--blue-d)}
+  .pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .pill{flex:1;min-width:100px;border-radius:12px;padding:12px 8px;text-align:center;border:1.5px solid var(--line);background:#fafbfd}
+  .pill b{display:block;font-size:14px;color:var(--blue-d)}
+  .pill span{font-size:11px;color:var(--ink-3)}
+  .pill.c-a{background:#fff;border-color:var(--blue)}
+  .pill.c-b{background:var(--amber-bg);border-color:var(--amber-bd)}
+  .pill.c-c{background:var(--green-bg);border-color:var(--green)}
+  .verdict{margin-top:14px;background:#fff;border-left:4px solid var(--blue);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--blue-d)}
+  .verdict b{color:var(--blue-d)}
+
+  section.block{margin-top:30px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+  .khead h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .khead .desc{font-size:11px;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+  .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
+  .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:8px;overflow-wrap:break-word;word-break:break-word}
+  .gram p b{color:var(--blue-d)}
+  .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
+  .witem:last-child{border-bottom:none}
+  .witem .wh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .witem .word{font-size:15px;font-weight:800;color:var(--blue-d)}
+  .witem .ph{font-size:11.5px;color:var(--ink-3)}
+  .witem .pos{font-size:11.5px;color:var(--ink-3);background:#f3f4f6;padding:1px 7px;border-radius:999px}
+  .witem p{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:break-word;word-break:break-word}
+  .witem p b{color:var(--blue-d)}
+  .witem .sen{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .plist{margin-top:4px}
+  .pgroup{margin-bottom:12px}
+  .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .pgroup .pg::after{content:"";flex:1;height:1px;background:var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .chip b{color:var(--blue-d);font-weight:700}
+  .chip span{color:var(--ink-3);font-size:11px}
+
+  .klist{margin-top:4px}
+  .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .kitem:last-child{border-bottom:none}
+  .kitem .n{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue);color:var(--blue-d);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .kitem .bd{flex:1;min-width:0}
+  .kitem .bd .kt{display:block;font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
+  .kitem .bd p{font-size:13px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .kitem .bd p b{color:var(--blue-d)}
+  .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
+
+  .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .sitem:last-child{border-bottom:none}
+  .sitem .n{color:var(--blue);font-weight:800;font-size:13px;flex:none;margin-top:2px}
+  .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
+
+  .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+  .warn ol{list-style:none;counter-reset:ec}
+  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li:last-child{border-bottom:none}
+  .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .warn li b{color:#92400e}
+
+  .divider{height:1px;background:var(--line);margin:26px 0 0}
+
+  footer{margin-top:24px;padding:18px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .inner{max-width:720px;margin:0 auto}
+
+  @media (max-width:400px){
+    .hero h1{font-size:21px}
+    .khead h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">初中英语 · 学霸笔记</div>
+    <h1>八年级上册 · KP 5</h1>
+    <div class="tip">要点：① what/how 引导感叹句的选择；② 不可数名词和复数名词前不用 what a/an；③ 烹饪动词 cut up/add...to/pour...into/mix...with；④ 量词 a bowl of/a piece of/a spoon of；⑤ taste 系动词 + 形容词。</div>
+    <div class="pills">
+      <div class="pill c-a"><b>感叹句</b><span>What a...! · How...!</span></div>
+      <div class="pill c-b"><b>烹饪动词</b><span>cut up · add · pour · mix</span></div>
+      <div class="pill c-c"><b>量词与食物</b><span>a bowl of · a piece of · a spoon of</span></div>
+    </div>
+    <div class="verdict">本 KP 三个关键：① what 后接<b>名词短语</b>，how 后接<b>形容词/副词</b>；② 不可数名词前<b>不加 a/an</b>；③ taste 是<b>系动词</b>后接形容词。</div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><h2>语法核心</h2><span class="desc">本单元两大语法</span></div>
+
+    <div class="gram">
+      <div class="gt">语法一：感叹句</div>
+      <p><b>What</b> 修饰名词：What + a/an + 形容词 + 可数单数 + 主谓！；What + 形容词 + 复数/不可数 + 主谓！。<b>How</b> 修饰形容词/副词：How + 形容词/副词 + 主谓！。做题先看感叹词后是名词还是形容词。</p>
+      <p>不可数名词（weather/bread/milk）和复数名词前<b>不能用 what a/an</b>。</p>
+      <div class="ex">What a delicious meal it is!</div>
+      <div class="ex">How delicious the soup tastes!</div>
+      <div class="ex">What nice weather it is!（不能说 What a nice weather!）</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">语法二：烹饪动词与量词</div>
+      <p>烹饪动词：<b>cut up</b> 切碎；<b>add...to...</b> 把……加到……；<b>pour...into...</b> 把……倒入……；<b>mix...with...</b> 把……和……混合；<b>boil</b> 煮沸。</p>
+      <p>量词：a bowl of 一碗；a piece of 一片/块；a spoon of 一勺；a cup of 一杯。不可数名词借量词表数量，量词变复数时量词本身加 s。</p>
+      <div class="ex">Cut up the tomatoes first. / Add some salt to the soup.</div>
+      <div class="ex">I'd like a bowl of noodles. / two pieces of bread</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点词汇精讲</h2><span class="desc">1–25</span></div>
+    <div class="wlist">
+
+      <div class="witem">
+        <div class="wh"><span class="word">meal</span><span class="ph">/miːl/</span><span class="pos">n. 一餐；一顿饭</span></div>
+        <div class="sen">We have three meals a day.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">delicious</span><span class="ph">/dɪˈlɪʃəs/</span><span class="pos">adj. 美味的</span></div>
+        <div class="sen">The fish soup tastes delicious.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">instruction</span><span class="ph">/ɪnˈstrʌkʃn/</span><span class="pos">n. 说明；指示</span></div>
+        <p>常用复数 <b>instructions</b> 用法说明。</p>
+        <div class="sen">Read the instructions before you use the new machine.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">mixture</span><span class="ph">/ˈmɪkstʃə(r)/</span><span class="pos">n. 混合物</span></div>
+        <div class="sen">The cake is a mixture of flour, eggs and sugar.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">boil</span><span class="ph">/bɔɪl/</span><span class="pos">v. 煮沸；烧开</span></div>
+        <div class="sen">Boil the water first, then put the noodles in.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">pour</span><span class="ph">/pɔː(r)/</span><span class="pos">v. 倒；灌</span></div>
+        <div class="sen">Pour the milk into the cup.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">add</span><span class="ph">/æd/</span><span class="pos">v. 添加；增加</span></div>
+        <p>搭配 <b>add...to...</b> 把……加到……</p>
+        <div class="sen">Add some honey to the hot milk.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">cut up</span><span class="ph">/kʌt ʌp/</span><span class="pos">phr. 切碎</span></div>
+        <div class="sen">Cut up the tomatoes and the beef.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">bowl</span><span class="ph">/bəʊl/</span><span class="pos">n. 碗</span></div>
+        <div class="sen">I'd like a big bowl of beef noodles.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">spoon</span><span class="ph">/spuːn/</span><span class="pos">n. 勺；调羹</span></div>
+        <div class="sen">Add two spoons of honey.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">piece</span><span class="ph">/piːs/</span><span class="pos">n. 片；块；张</span></div>
+        <div class="sen">I had a piece of bread for breakfast.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">finally</span><span class="ph">/ˈfaɪnəli/</span><span class="pos">adv. 最后；终于</span></div>
+        <div class="sen">Finally, add some salt and mix them together.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">first</span><span class="ph">/fɜːst/</span><span class="pos">adv. 首先</span></div>
+        <div class="sen">First, wash the fruit.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">then</span><span class="ph">/ðen/</span><span class="pos">adv. 然后；接着</span></div>
+        <div class="sen">Then, put them into the pot.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">next</span><span class="ph">/nekst/</span><span class="pos">adv. 接下来</span></div>
+        <div class="sen">Next, boil the water.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">salty</span><span class="ph">/ˈsɔːlti/</span><span class="pos">adj. 咸的</span></div>
+        <div class="sen">The soup tastes a little salty.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">sweet</span><span class="ph">/swiːt/</span><span class="pos">adj. 甜的</span></div>
+        <div class="sen">The cake is very sweet.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">sour</span><span class="ph">/ˈsaʊə(r)/</span><span class="pos">adj. 酸的</span></div>
+        <div class="sen">The lemon tastes sour.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">healthy</span><span class="ph">/ˈhelθi/</span><span class="pos">adj. 健康的</span></div>
+        <div class="sen">We should eat more healthy food.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">popular</span><span class="ph">/ˈpɒpjələ(r)/</span><span class="pos">adj. 受欢迎的</span></div>
+        <p>搭配 be popular with。</p>
+        <div class="sen">Pizza is one of the most popular foods in the world.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">university</span><span class="ph">/ˌjuːnɪˈvɜːsəti/</span><span class="pos">n. 大学</span></div>
+        <div class="sen">She studies at a famous university.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">experience</span><span class="ph">/ɪkˈspɪəriəns/</span><span class="pos">n. 经历；经验</span></div>
+        <p>"经历"可数，"经验"不可数。</p>
+        <div class="sen">What an exciting experience they had!</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">creative</span><span class="ph">/kriˈeɪtɪv/</span><span class="pos">adj. 有创造力的</span></div>
+        <div class="sen">She is a creative cook.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">mess</span><span class="ph">/mes/</span><span class="pos">n. 混乱；杂乱</span></div>
+        <p>搭配 <b>make a mess</b> 弄得一团糟。</p>
+        <div class="sen">The boy made a mess in the kitchen.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点短语</h2><span class="desc">三类分类记忆</span></div>
+    <div class="plist">
+      <div class="pgroup">
+        <div class="pg">烹饪动作</div>
+        <div class="chips">
+          <span class="chip"><b>cut up</b><span>切碎</span></span>
+          <span class="chip"><b>add...to...</b><span>把……加到……</span></span>
+          <span class="chip"><b>pour...into...</b><span>把……倒入……</span></span>
+          <span class="chip"><b>mix...with...</b><span>把……和……混合</span></span>
+          <span class="chip"><b>boil the water</b><span>烧水</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">量词</div>
+        <div class="chips">
+          <span class="chip"><b>a bowl of</b><span>一碗</span></span>
+          <span class="chip"><b>a piece of</b><span>一片/块</span></span>
+          <span class="chip"><b>a spoon of</b><span>一勺</span></span>
+          <span class="chip"><b>a cup of</b><span>一杯</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">其他高频</div>
+        <div class="chips">
+          <span class="chip"><b>make a mess</b><span>弄得一团糟</span></span>
+          <span class="chip"><b>read the instructions</b><span>阅读说明</span></span>
+          <span class="chip"><b>have breakfast</b><span>吃早饭</span></span>
+          <span class="chip"><b>have dinner</b><span>吃晚饭</span></span>
+          <span class="chip"><b>eat out</b><span>外出就餐</span></span>
+          <span class="chip"><b>be popular with</b><span>受……欢迎</span></span>
+          <span class="chip"><b>be good for</b><span>对……有好处</span></span>
+          <span class="chip"><b>be full</b><span>吃饱了</span></span>
+          <span class="chip"><b>would like</b><span>想要</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>中考常考考点与易错点</h2><span class="desc">1–12</span></div>
+    <div class="klist">
+
+      <div class="kitem"><div class="n">1</div><div class="bd">
+        <b class="kt">考点一：what 和 how 的选择</b>
+        <p>what 后接名词短语，how 后接形容词/副词。</p>
+        <div class="ex">What a delicious meal it is! / How delicious the meal is!</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">2</div><div class="bd">
+        <b class="kt">考点二：不可数名词前不用 what a/an</b>
+        <p>weather/bread/milk 等不可数名词前不加 a/an。</p>
+        <div class="ex">What nice weather!（不能说 What a nice weather!）</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">3</div><div class="bd">
+        <b class="kt">考点三：how 引导的感叹句</b>
+        <p>How + 形容词/副词 + 主谓；How + 形容词 + a/an + 名词 + 主谓。</p>
+        <div class="ex">How exciting a moment it is!</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">4</div><div class="bd">
+        <b class="kt">考点四：可数与不可数名词</b>
+        <p>可数有单复数；不可数无复数，借量词表数量。</p>
+        <div class="ex">tomato→tomatoes · bread/milk/honey 不可数</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">5</div><div class="bd">
+        <b class="kt">考点五：量词的正确使用</b>
+        <p>量词变复数时量词本身加 s：two pieces of bread。</p>
+        <div class="ex">two bowls of noodles · three spoons of honey</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">6</div><div class="bd">
+        <b class="kt">考点六：祈使句</b>
+        <p>动词原形开头；否定用 Don't + 动词原形。</p>
+        <div class="ex">Cut up the tomatoes first. / Don't make a mess.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">7</div><div class="bd">
+        <b class="kt">考点七：一般将来时</b>
+        <p>will + 动词原形。</p>
+        <div class="ex">I will make tomato and egg soup for dinner tonight.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">8</div><div class="bd">
+        <b class="kt">考点八：must 和 can</b>
+        <p>must 必须；can 可以、能够。</p>
+        <div class="ex">You must go with your dad. / Can I have a cup of tea?</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">9</div><div class="bd">
+        <b class="kt">考点九：would like</b>
+        <p>后接名词或不定式（to do）。</p>
+        <div class="ex">I'd like a bowl of noodles. / Would you like to have dinner?</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">10</div><div class="bd">
+        <b class="kt">考点十：It's important to do sth.</b>
+        <p>it 作形式主语，真正主语是不定式。</p>
+        <div class="ex">It's important to have breakfast every morning.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">11</div><div class="bd">
+        <b class="kt">考点十一：taste + 形容词</b>
+        <p>taste 是系动词，后接形容词作表语。</p>
+        <div class="ex">The soup tastes delicious. / The cake tastes sweet.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">12</div><div class="bd">
+        <b class="kt">考点十二：情景交际</b>
+        <p>问想要 What would you like?；问做法 How do you make...? 用 First...Then...Next...Finally... 回答。</p>
+        <div class="ex">— How do you make fruit salad? — First, wash the fruit. Then cut it up.</div>
+      </div></div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
+    <div class="slist">
+      <div class="sitem"><span class="n">1</span><div class="en">What a delicious meal it is!</div></div>
+      <div class="sitem"><span class="n">2</span><div class="en">How delicious the soup tastes!</div></div>
+      <div class="sitem"><span class="n">3</span><div class="en">What an exciting experience they had!</div></div>
+      <div class="sitem"><span class="n">4</span><div class="en">How fast the boy is running!</div></div>
+      <div class="sitem"><span class="n">5</span><div class="en">What nice weather it is!</div></div>
+      <div class="sitem"><span class="n">6</span><div class="en">What beautiful flowers they are!</div></div>
+      <div class="sitem"><span class="n">7</span><div class="en">Cut up the tomatoes first.</div></div>
+      <div class="sitem"><span class="n">8</span><div class="en">Add some salt to the soup.</div></div>
+      <div class="sitem"><span class="n">9</span><div class="en">Pour the milk into the cup.</div></div>
+      <div class="sitem"><span class="n">10</span><div class="en">Mix the flour with water.</div></div>
+      <div class="sitem"><span class="n">11</span><div class="en">Boil the water first.</div></div>
+      <div class="sitem"><span class="n">12</span><div class="en">I'd like a big bowl of beef noodles.</div></div>
+      <div class="sitem"><span class="n">13</span><div class="en">I had a piece of bread for breakfast.</div></div>
+      <div class="sitem"><span class="n">14</span><div class="en">Add two spoons of honey.</div></div>
+      <div class="sitem"><span class="n">15</span><div class="en">It's important to have breakfast every morning.</div></div>
+      <div class="sitem"><span class="n">16</span><div class="en">I will make tomato and egg soup for dinner tonight.</div></div>
+      <div class="sitem"><span class="n">17</span><div class="en">You must go with your dad.</div></div>
+      <div class="sitem"><span class="n">18</span><div class="en">The soup tastes a little salty.</div></div>
+      <div class="sitem"><span class="n">19</span><div class="en">— How do you make a fruit salad? — First, wash the fruit. Then cut it up.</div></div>
+      <div class="sitem"><span class="n">20</span><div class="en">— Would you like some more soup? — No, thanks. I'm full.</div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>语法易错点总结</h2><span class="desc">考前必看</span></div>
+    <div class="warn">
+      <div class="whd"><div class="dot">!</div>姜老师提醒 · 高频易错，务必牢记</div>
+      <ol>
+        <li><b>what 修饰名词短语，how 修饰形容词或副词。</b></li>
+        <li><b>不可数名词和复数名词前不能用 what a/an。</b></li>
+        <li><b>How + 形容词 + a/an + 名词 + 主谓。</b></li>
+        <li><b>可数名词有单复数，不可数名词没有复数。</b></li>
+        <li><b>不可数名词借量词表数量，量词本身变复数。</b></li>
+        <li><b>祈使句动词原形开头，否定 Don't + 动词原形。</b></li>
+        <li><b>一般将来时 will + 动词原形。</b></li>
+        <li><b>must 必须，can 可以。</b></li>
+        <li><b>would like 后接名词或不定式。</b></li>
+        <li><b>It's important to do sth. 中 it 是形式主语。</b></li>
+        <li><b>taste 是系动词，后接形容词。</b></li>
+        <li><b>描述制作步骤用 First...Then...Next...Finally...。</b></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+</div>
+
+<footer>
+  <div class="inner">多多好学版权所有</div>
+</footer>
+
+</body>
+</html>
