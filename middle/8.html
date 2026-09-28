@@ -7,57 +7,57 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <style>
- body { background: linear-gradient(-45deg, #e0f2fe, #ecfdf5, #fffbeb, #f5f3ff); background-size: 400% 400%; animation: gradientShift 18s ease infinite; font-family: "PingFang SC","Microsoft YaHei",sans-serif; color: #1F2937; min-height: 100vh; }
+ body { background: #ffffff; font-family: "PingFang SC","Microsoft YaHei",sans-serif; color: #1F2937; min-height: 100vh; }
  @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
- .header-animate-bg { background: linear-gradient(-45deg, #34d399, #22d3ee, #fbbf24); background-size: 180% 180%; animation: gradientMove 14s ease infinite; }
+ .header-animate-bg { background-size: 180% 180%; animation: gradientMove 14s ease infinite; }
  @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
  .tab-bar { display: flex; gap: 24px; padding: 12px 4px; border-bottom: 2px solid #e5e7eb; margin-bottom: 8px; }
  .tab { font-size: 15px; font-weight: 600; color: #9ca3af; cursor: pointer; }
  .tab.active { font-weight: 800; }
- .vol-title { font-size: 16px; font-weight: 800; margin: 16px 0 4px; padding: 4px 4px 10px; border-bottom: 2px solid; }
  .vol-panel { display: none; }
  .vol-panel.active { display: block; animation: fadeIn .3s ease; }
  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
  .row { display: flex; align-items: center; padding: 12px 4px; border-bottom: 1px dashed #e5e7eb; cursor: pointer; }
  .row:active { background: #f9fafb; }
- .row-title { flex: 1; }
+ .row-title { flex: 1; text-decoration: none; color: inherit; }
  .row-title .name { font-size: 15px; font-weight: 600; display: block; }
  .row-title .stats { font-size: 11px; color: #9ca3af; margin-top: 2px; display: block; }
- .row-check { font-size: 13px; font-weight: 600; padding: 5px 14px; border-radius: 8px; text-decoration: none; white-space: nowrap; flex-shrink: 0; margin-left: 12px; }
+ .row-check { font-size: 13px; font-weight: 600; padding: 5px 14px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; margin-left: 12px; text-decoration: none; }
+ .vol-title { font-size: 16px; font-weight: 800; margin: 16px 0 4px; padding: 4px 4px 10px; border-bottom: 2px solid; }
 </style>
 </head>
 <body class="min-h-screen pb-12">
-<header class="header-animate-bg text-white py-6 px-6 rounded-b-3xl">
+<header class="header-animate-bg text-white py-6 px-6 rounded-b-3xl" style="background:linear-gradient(-45deg,#f59e0b,#fbbf24,#fcd34d);">
  <div class="max-w-xl mx-auto text-center">
- <h1 class="text-2xl font-extrabold">八年级英语</h1></div></header><main class="max-w-xl mx-auto px-5 mt-4"><div class="tab-bar" style="border-bottom-color:#06b6d4;"><div class="tab active" data-target="panel-81" onclick="switchTab(this)" data-color="#06b6d4" style="color:#06b6d4;border-color:#06b6d4;">八年级上册</div><div class="tab" data-target="panel-82" onclick="switchTab(this)" data-color="#06b6d4" style="border-color:#06b6d4;">八年级下册</div></div><div class="vol-panel active" id="panel-81"><div class="row" data-key="wj8_81_kp1" data-base="1030" data-color="#06b6d4" data-href="kp/81_kp1.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 1</span><span class="stats"></span></div><a href="test/81_kp1.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_81_kp2" data-base="1095" data-color="#06b6d4" data-href="kp/81_kp2.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 2</span><span class="stats"></span></div><a href="test/81_kp2.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_81_kp3" data-base="1223" data-color="#06b6d4" data-href="kp/81_kp3.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 3</span><span class="stats"></span></div><a href="test/81_kp3.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_81_kp4" data-base="1238" data-color="#06b6d4" data-href="kp/81_kp4.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 4</span><span class="stats"></span></div><a href="test/81_kp4.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_81_kp5" data-base="1517" data-color="#06b6d4" data-href="kp/81_kp5.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 5</span><span class="stats"></span></div><a href="test/81_kp5.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_81_kp6" data-base="1616" data-color="#06b6d4" data-href="kp/81_kp6.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 6</span><span class="stats"></span></div><a href="test/81_kp6.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_81_kp7" data-base="1027" data-color="#06b6d4" data-href="kp/81_kp7.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 7</span><span class="stats"></span></div><a href="test/81_kp7.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_81_kp8" data-base="1574" data-color="#06b6d4" data-href="kp/81_kp8.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 8</span><span class="stats"></span></div><a href="test/81_kp8.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-</div><div class="vol-panel" id="panel-82"><div class="row" data-key="wj8_82_kp1" data-base="1203" data-color="#06b6d4" data-href="kp/82_kp1.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 1</span><span class="stats"></span></div><a href="test/82_kp1.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_82_kp2" data-base="1733" data-color="#06b6d4" data-href="kp/82_kp2.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 2</span><span class="stats"></span></div><a href="test/82_kp2.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_82_kp3" data-base="1665" data-color="#06b6d4" data-href="kp/82_kp3.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 3</span><span class="stats"></span></div><a href="test/82_kp3.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_82_kp4" data-base="1718" data-color="#06b6d4" data-href="kp/82_kp4.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 4</span><span class="stats"></span></div><a href="test/82_kp4.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_82_kp5" data-base="1558" data-color="#06b6d4" data-href="kp/82_kp5.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 5</span><span class="stats"></span></div><a href="test/82_kp5.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_82_kp6" data-base="1429" data-color="#06b6d4" data-href="kp/82_kp6.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 6</span><span class="stats"></span></div><a href="test/82_kp6.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_82_kp7" data-base="1225" data-color="#06b6d4" data-href="kp/82_kp7.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 7</span><span class="stats"></span></div><a href="test/82_kp7.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
-<div class="row" data-key="wj8_82_kp8" data-base="1459" data-color="#06b6d4" data-href="kp/82_kp8.html" onclick="goRow(this)"><div class="row-title"><span class="name">Key Point 8</span><span class="stats"></span></div><a href="test/82_kp8.html" class="row-check" style="background:#06b6d415;color:#06b6d4;" onclick="event.stopPropagation();">检测</a></div>
+ <h1 class="text-2xl font-extrabold">八年级英语</h1></div></header><main class="max-w-xl mx-auto px-5 mt-4"><div class="tab-bar" style="border-bottom-color:#f59e0b;"><div class="tab active" data-target="panel-81" onclick="switchTab(this)" data-color="#f59e0b" style="color:#f59e0b;border-color:#f59e0b;">八年级上册</div><div class="tab" data-target="panel-82" onclick="switchTab(this)" data-color="#f59e0b" style="border-color:#f59e0b;">八年级下册</div></div><div class="vol-panel active" id="panel-81"><div class="row"><a href="kp/81_kp1.html" class="row-title" data-key="wj8_81_kp1" data-base="1030" data-color="#f59e0b"><span class="name">Key Point 1</span><span class="stats"></span></a><a href="test/81_kp1.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/81_kp2.html" class="row-title" data-key="wj8_81_kp2" data-base="1095" data-color="#f59e0b"><span class="name">Key Point 2</span><span class="stats"></span></a><a href="test/81_kp2.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/81_kp3.html" class="row-title" data-key="wj8_81_kp3" data-base="1223" data-color="#f59e0b"><span class="name">Key Point 3</span><span class="stats"></span></a><a href="test/81_kp3.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/81_kp4.html" class="row-title" data-key="wj8_81_kp4" data-base="1238" data-color="#f59e0b"><span class="name">Key Point 4</span><span class="stats"></span></a><a href="test/81_kp4.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/81_kp5.html" class="row-title" data-key="wj8_81_kp5" data-base="1517" data-color="#f59e0b"><span class="name">Key Point 5</span><span class="stats"></span></a><a href="test/81_kp5.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/81_kp6.html" class="row-title" data-key="wj8_81_kp6" data-base="1616" data-color="#f59e0b"><span class="name">Key Point 6</span><span class="stats"></span></a><a href="test/81_kp6.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/81_kp7.html" class="row-title" data-key="wj8_81_kp7" data-base="1027" data-color="#f59e0b"><span class="name">Key Point 7</span><span class="stats"></span></a><a href="test/81_kp7.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/81_kp8.html" class="row-title" data-key="wj8_81_kp8" data-base="1574" data-color="#f59e0b"><span class="name">Key Point 8</span><span class="stats"></span></a><a href="test/81_kp8.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+</div><div class="vol-panel" id="panel-82"><div class="row"><a href="kp/82_kp1.html" class="row-title" data-key="wj8_82_kp1" data-base="1203" data-color="#f59e0b"><span class="name">Key Point 1</span><span class="stats"></span></a><a href="test/82_kp1.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/82_kp2.html" class="row-title" data-key="wj8_82_kp2" data-base="1733" data-color="#f59e0b"><span class="name">Key Point 2</span><span class="stats"></span></a><a href="test/82_kp2.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/82_kp3.html" class="row-title" data-key="wj8_82_kp3" data-base="1665" data-color="#f59e0b"><span class="name">Key Point 3</span><span class="stats"></span></a><a href="test/82_kp3.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/82_kp4.html" class="row-title" data-key="wj8_82_kp4" data-base="1718" data-color="#f59e0b"><span class="name">Key Point 4</span><span class="stats"></span></a><a href="test/82_kp4.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/82_kp5.html" class="row-title" data-key="wj8_82_kp5" data-base="1558" data-color="#f59e0b"><span class="name">Key Point 5</span><span class="stats"></span></a><a href="test/82_kp5.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/82_kp6.html" class="row-title" data-key="wj8_82_kp6" data-base="1429" data-color="#f59e0b"><span class="name">Key Point 6</span><span class="stats"></span></a><a href="test/82_kp6.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/82_kp7.html" class="row-title" data-key="wj8_82_kp7" data-base="1225" data-color="#f59e0b"><span class="name">Key Point 7</span><span class="stats"></span></a><a href="test/82_kp7.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
+<div class="row"><a href="kp/82_kp8.html" class="row-title" data-key="wj8_82_kp8" data-base="1459" data-color="#f59e0b"><span class="name">Key Point 8</span><span class="stats"></span></a><a href="test/82_kp8.html" class="row-check" style="background:#f59e0b15;color:#f59e0b;">检测</a></div>
 </div></main>
 <script>
- function goRow(row) {
-   localStorage.setItem(row.dataset.key, (parseInt(localStorage.getItem(row.dataset.key)||'0')+1).toString());
-   location.href = row.dataset.href;
- }
- document.querySelectorAll('.row').forEach(row => {
-   const k = row.dataset.key;
-   const el = row.querySelector('.stats');
-   const base = parseInt(row.dataset.base);
-   const color = row.dataset.color;
+ // 初始化stats
+ document.querySelectorAll('.row-title').forEach(a => {
+   const k = a.dataset.key;
+   const el = a.querySelector('.stats');
+   const base = parseInt(a.dataset.base);
+   const color = a.dataset.color;
    const real = parseInt(localStorage.getItem(k) || '0');
    el.innerHTML = '<b style="color:' + color + ';">' + (base + real) + '</b>人已经学习';
+   a.addEventListener('click', () => {
+     localStorage.setItem(k, (parseInt(localStorage.getItem(k)||'0')+1).toString());
+   });
  });
  function switchTab(el) {
    const bar = el.parentElement;
