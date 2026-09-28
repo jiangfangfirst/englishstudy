@@ -2542,14 +2542,22 @@ function playAll(pane, allBtn){
 }
 
 
-// === 全局播放计数 ===
-var _GC_PREFIX = 'wj52_';
+// === 全局播放计数（Upstash Redis）===
+var _GC_PREFIX = '52_';
+var UP_URL = "https://fitting-ostrich-312589.upstash.io";
+var UP_TOKEN = "gQAAAAAABMUNAAIgcDFiZDU2MDM2YWJkYzg0YTgyOTRlOTUzMjM1MWY1ZGJhNg";
 function _gcKey(text){
   var h = 0;
   for(var i=0;i<text.length;i++){ h=((h<<5)-h+text.charCodeAt(i))|0; }
   return 's'+Math.abs(h);
 }
-
+function upGet(k){
+  return fetch(UP_URL+"/get/"+k,{headers:{"Authorization":"Bearer "+UP_TOKEN}})
+    .then(r=>r.json()).then(d=>parseInt(d.result)||0).catch(()=>0);
+}
+function upIncr(k){
+  fetch(UP_URL+"/incr/"+k,{headers:{"Authorization":"Bearer "+UP_TOKEN}}).catch(()=>{});
+}
 function showPlusOne(btn){
   var dbg = btn.parentElement.querySelector('.dbg');
   var el = document.createElement('span');
@@ -2557,23 +2565,6 @@ function showPlusOne(btn){
   el.textContent = '+1';
   dbg.appendChild(el);
   setTimeout(function(){ el.remove(); }, 850);
-}
-
-function gcHit(text, cb){
-  var k = _GC_PREFIX + _gcKey(text);
-  try{
-    var cur = parseInt(localStorage.getItem(k)||'0');
-    cur += 1;
-    localStorage.setItem(k, cur);
-    cb(cur);
-  }catch(e){ cb(null); }
-}
-function gcGet(text, cb){
-  var k = _GC_PREFIX + _gcKey(text);
-  try{
-    var v = parseInt(localStorage.getItem(k)||'0');
-    cb(v);
-  }catch(e){ cb(null); }
 }
 function preloadPane(pane){
   pane.querySelectorAll('.sent-play').forEach(btn=>{
@@ -2587,10 +2578,10 @@ function preloadPane(pane){
     if(dbg.dataset.loaded) return;
     dbg.dataset.loaded = '1';
     var b = parseInt(btn.dataset.base)||0;
-    try{
-      var v = parseInt(localStorage.getItem(_GC_PREFIX+_gcKey(txt))||'0');
+    var k = _GC_PREFIX + _gcKey(txt);
+    upGet(k).then(function(v){
       if(v>0){ btn.dataset.count = b+v; dbg.textContent = '播放'+(b+v)+'次'; dbg.style.color='#10b981'; }
-    }catch(e){}
+    });
   });
 }
 
@@ -2610,7 +2601,7 @@ function playSentence(text, btn, orig, onEnd){
     else dbg.textContent = '播放'+newCount+'次';
     dbg.style.color = '#10b981';
     showPlusOne(btn);
-    try{ var k=_GC_PREFIX+_gcKey(text); localStorage.setItem(k, parseInt(localStorage.getItem(k)||'0')+1); }catch(e){}
+    upIncr(_GC_PREFIX+_gcKey(text));
     const audio = playOnce(AUDIO_MAP[text]);
     var card = btn.closest('.sent-card');
     audio.onplaying = ()=>{ btn.classList.add('playing'); card.classList.add('playing'); resetBtn(btn, orig); };
@@ -2642,7 +2633,7 @@ function playSentence(text, btn, orig, onEnd){
       else dbg.textContent = '播放'+nc1+'次';
       dbg.style.color = '#10b981';
       showPlusOne(btn);
-      try{ var k2=_GC_PREFIX+_gcKey(text); localStorage.setItem(k2, parseInt(localStorage.getItem(k2)||'0')+1); }catch(e){}
+      upIncr(_GC_PREFIX+_gcKey(text));
       var card2 = btn.closest('.sent-card');
       btn.classList.add('playing'); card2.classList.add('playing');
       resetBtn(btn, orig);
