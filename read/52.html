@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+<head><script>
+ // 登录检查
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../login.html'; }
+ })();
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>多多好学 · 小学英语早晚读</title>

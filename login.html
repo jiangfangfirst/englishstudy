@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>多多好学英语课堂 - 登录</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+ body { background: linear-gradient(-45deg, #3b82f6, #10b981, #f59e0b); background-size: 300% 300%; animation: gradient 12s ease infinite; font-family: "PingFang SC","Microsoft YaHei",sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+ @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+ .card { background: rgba(255,255,255,.95); backdrop-filter: blur(20px); border-radius: 24px; padding: 40px 32px; width: 90%; max-width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,.2); }
+ input { width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 12px; font-size: 16px; outline: none; transition: border .2s; }
+ input:focus { border-color: #3b82f6; }
+ button { width: 100%; padding: 14px; background: #3b82f6; color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 16px; }
+ button:active { transform: scale(.98); }
+ .err { color: #ef4444; font-size: 13px; margin-top: 10px; text-align: center; display: none; }
+ .tip { color: #6b7280; font-size: 12px; margin-top: 8px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="card">
+ <h1 style="text-align:center;font-size:22px;font-weight:800;margin-bottom:6px;color:#1f2937;">多多好学英语课堂</h1>
+ <p style="text-align:center;font-size:13px;color:#6b7280;margin-bottom:28px;">请输入学习码进入</p>
+ <input type="text" id="code" placeholder="学习码" autocomplete="off" />
+ <div class="err" id="err"></div>
+ <button onclick="login()">进 入</button>
+ <p class="tip">学习码已绑定设备，换设备需联系老师解锁</p>
+ <p style="text-align:center;font-size:11px;color:#9ca3af;margin-top:16px;">如有疑问请联系姜老师 180 1926 7856</p>
+</div>
+<script>
+ const UP_URL = "https://fitting-ostrich-312589.upstash.io";
+ const UP_TOKEN = "gQAAAAAABMUNAAIgcDFiZDU2MDM2YWJkYzg0YTgyOTRlOTUzMjM1MWY1ZGJhNg";
+ const VALID_CODES = ['duoduo2026','jiang2026','abc123'];
+
+ function getDeviceId(){
+   let d = localStorage.getItem('dd_device_id');
+   if(!d){ d = 'd_' + Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('dd_device_id', d); }
+   return d;
+ }
+ async function upGet(k){
+   try{
+     const r = await fetch(UP_URL + '/get/' + k, { headers: { 'Authorization': 'Bearer ' + UP_TOKEN } });
+     const d = await r.json();
+     return d.result;
+   }catch(e){ return null; }
+ }
+ async function upSet(k, v){
+   try{
+     await fetch(UP_URL + '/set/' + k + '/' + encodeURIComponent(v), { headers: { 'Authorization': 'Bearer ' + UP_TOKEN } });
+   }catch(e){}
+ }
+ function showErr(m){ const e=document.getElementById('err'); e.textContent=m; e.style.display='block'; }
+
+ async function login(){
+   const c = document.getElementById('code').value.trim().toLowerCase();
+   if(!VALID_CODES.includes(c)){ showErr('学习码错误，请重试'); return; }
+   const did = getDeviceId();
+   const key = 'device:' + c;
+   const bound = await upGet(key);
+   if(bound && bound !== did){
+     showErr('此学习码已在其他设备使用，请联系老师解锁');
+     return;
+   }
+   if(!bound){
+     await upSet(key, did);
+   }
+   localStorage.setItem('dd_auth', c);
+   localStorage.setItem('dd_login_time', Date.now().toString());
+   location.href = 'index.html';
+ }
+ document.getElementById('code').addEventListener('keydown', e => { if(e.key==='Enter') login(); });
+</script>
+</body>
+</html>
