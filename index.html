@@ -9,15 +9,18 @@
 <style>
   * { box-sizing: border-box; }
   body {
-    background: #f0f4ff;
+    background: linear-gradient(-45deg, #e0f2fe, #ecfdf5, #fffbeb, #f5f3ff, #fce7f3);
+    background-size: 400% 400%;
+    animation: gradientShift 18s ease infinite;
     font-family: "PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
     color: #1F2937;
-    transition: background .4s;
+    min-height: 100vh;
   }
-  body.g3 { background: linear-gradient(180deg,#ecfdf5 0%,#f0f4ff 100%); }
-  body.g4 { background: linear-gradient(180deg,#eff6ff 0%,#f0f4ff 100%); }
-  body.g5 { background: linear-gradient(180deg,#fffbeb 0%,#f0f4ff 100%); }
-  body.g6 { background: linear-gradient(180deg,#f5f3ff 0%,#f0f4ff 100%); }
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
   .top-banner {
     border-radius: 0 0 28px 28px;
@@ -25,72 +28,74 @@
     color: #fff;
     position: relative;
     overflow: hidden;
-    transition: background .4s;
   }
-  .top-banner.g3 { background: linear-gradient(135deg,#10b981,#34d399); }
-  .top-banner.g4 { background: linear-gradient(135deg,#1476ff,#4e9bff); }
-  .top-banner.g5 { background: linear-gradient(135deg,#f59e0b,#fbbf24); }
-  .top-banner.g6 { background: linear-gradient(135deg,#8b5cf6,#a78bfa); }
-  .top-banner h1 { font-size: 26px; font-weight: 900; }
-  .top-banner p { font-size: 13px; opacity: .9; margin-top: 6px; }
-  .blob { position: absolute; border-radius: 50%; background: rgba(255,255,255,.12); }
+  .banner-slide {
+    position: absolute; inset: 0; opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  .banner-slide.active { opacity: 1; }
+  .banner-text { position: relative; z-index: 1; }
+  .top-banner h1 { font-size: 26px; font-weight: 900; text-shadow: 0 2px 8px rgba(0,0,0,.3); }
+  .top-banner p { font-size: 13px; opacity: .95; margin-top: 6px; text-shadow: 0 1px 4px rgba(0,0,0,.3); }
 
   .card {
-    background: #fff; border-radius: 20px; padding: 18px;
-    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    background: rgba(255,255,255,.82); backdrop-filter: blur(12px);
+    border-radius: 20px; padding: 18px;
+    box-shadow: 0 8px 28px rgba(100,120,180,.08);
+    transition: box-shadow .3s;
   }
+  .card:hover { box-shadow: 0 12px 36px rgba(100,120,180,.12); }
   .section-title {
     font-size: 16px; font-weight: 800; margin-bottom: 4px;
     display: flex; align-items: center; gap: 8px;
   }
   .section-title::before {
     content: ""; width: 4px; height: 16px; border-radius: 2px;
+    background: linear-gradient(180deg,#06b6d4,#3b82f6);
   }
-  .g3 .section-title::before { background: #10b981; }
-  .g4 .section-title::before { background: #1476ff; }
-  .g5 .section-title::before { background: #f59e0b; }
-  .g6 .section-title::before { background: #8b5cf6; }
   .sub-title { font-size: 12px; color: #9ca3af; margin: 0 0 14px 12px; }
 
-  .tab-wrap { display: flex; gap: 8px; margin-bottom: 16px; }
+  .tab-wrap { display: flex; gap: 0; margin-bottom: 16px; border-bottom: 2px solid #e5e7eb; }
   .tab-item {
-    flex: 1; text-align: center; padding: 9px 4px;
-    border-radius: 999px; font-size: 14px; cursor: pointer;
-    background: #f0f4fa; color: #5b6673; transition: all .25s;
-    font-weight: 600;
+    flex: 1; text-align: center; padding: 10px 4px;
+    font-size: 15px; cursor: pointer;
+    color: #6b7280; transition: all .25s;
+    font-weight: 600; position: relative;
   }
-  .tab-item.active { color: #fff; transform: scale(1.03); }
-  .g3 .tab-item.active { background: #10b981; }
-  .g4 .tab-item.active { background: #1476ff; }
-  .g5 .tab-item.active { background: #f59e0b; }
-  .g6 .tab-item.active { background: #8b5cf6; }
+  .tab-item.active { color: #0f172a; }
+  .tab-item.active::after {
+    content: ""; position: absolute; bottom: -2px; left: 25%; right: 25%;
+    height: 3px; border-radius: 2px; background: #3b82f6;
+  }
 
   .panel { display: none; }
-  .panel.active { display: block; animation: fadeUp .35s ease; }
+  .panel.active { display: block; animation: fadeUp .4s ease; }
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
+    from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
   .grid-block {
     border-radius: 16px; padding: 16px 8px;
     display: flex; flex-direction: column; align-items: center; gap: 8px;
-    transition: transform .15s; text-align: center;
+    transition: transform .2s, box-shadow .2s; text-align: center;
   }
+  .grid-block:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.08); }
   .grid-block:active { transform: scale(.95); }
   .icon-box {
     width: 48px; height: 48px; border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
     font-size: 22px; color: #fff;
-    box-shadow: 0 6px 14px rgba(0,0,0,.12);
+    box-shadow: 0 6px 14px rgba(0,0,0,.15);
   }
   .block-label { font-size: 13px; font-weight: 700; }
   .block-en { font-size: 10px; color: #9ca3af; }
 
   /* 跑马灯 */
   .marquee-block {
-    background: #fff; border-radius: 18px; padding: 14px;
-    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    background: rgba(255,255,255,.82); backdrop-filter: blur(12px);
+    border-radius: 18px; padding: 14px;
+    box-shadow: 0 8px 28px rgba(100,120,180,.08);
     overflow: hidden; margin-bottom: 16px;
   }
   .marquee-track {
@@ -154,13 +159,16 @@
   }
 </style>
 </head>
-<body class="g3">
+<body>
 <div class="max-w-[480px] mx-auto pb-6">
-  <div class="top-banner g3" id="banner">
-    <div class="blob" style="width:140px;height:140px;right:-30px;top:-30px;"></div>
-    <div class="blob" style="width:80px;height:80px;right:40px;bottom:-20px;"></div>
-    <h1>多多好学 | 英语课堂</h1>
-    <p>在线学习 · 及时反馈 · 海量资源 · 快速更新</p>
+  <div class="top-banner" id="banner">
+    <div class="banner-slide active" style="background:url('assets/banner1.jpg') center/cover no-repeat;"></div>
+    <div class="banner-slide" style="background:url('assets/banner2.jpg') center/cover no-repeat;"></div>
+    <div class="banner-slide" style="background:url('assets/banner3.jpg') center/cover no-repeat;"></div>
+    <div class="banner-text">
+      <h1>多多好学 | 英语课堂</h1>
+      <p>在线学习 · 及时反馈 · 海量资源 · 快速更新</p>
+    </div>
   </div>
 
   <div class="px-4 -mt-8 relative z-10 space-y-4">
@@ -415,10 +423,15 @@
     tabs.forEach(function(t){ t.classList.remove('active'); });
     panels[i].classList.add('active');
     el.classList.add('active');
-    var g = el.dataset.g;
-    document.body.className = 'g' + g;
-    document.getElementById('banner').className = 'top-banner g' + g;
   }
+  // banner轮播
+  var slides = document.querySelectorAll('.banner-slide');
+  var si = 0;
+  setInterval(function(){
+    slides[si].classList.remove('active');
+    si = (si + 1) % slides.length;
+    slides[si].classList.add('active');
+  }, 4000);
 </script>
 </body>
 </html>
