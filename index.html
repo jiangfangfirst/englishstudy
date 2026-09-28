@@ -1,7 +1,21 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+<head><script>
+ // 登录检查
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = 'login.html'; }
+ })();
+</script>
+
 <meta charset="UTF-8" />
+<!-- 微信/社交分享 -->
+<meta property="og:title" content="多多好学英语课堂" />
+<meta property="og:description" content="小学初中英语点读学习平台" />
+<meta property="og:image" content="https://jiangfangfirst.github.io/englishstudy/assets/logo2.jpg" />
+<meta property="og:url" content="https://jiangfangfirst.github.io/englishstudy/" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>多多好学英语课堂</title>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -187,22 +201,22 @@
         <div class="grid grid-cols-4 gap-3">
           <a href="read/31.html" class="grid-block" style="background:#ecfdf5;">
             <div class="icon-box" style="background:#10b981;"><i class="fa fa-book"></i></div>
-            <div class="block-label">上 册</div>
+            <div class="block-label">上册点读</div>
             <div class="block-en">Grade 3</div>
           </a>
           <a href="read/32.html" class="grid-block" style="background:#d1fae5;">
             <div class="icon-box" style="background:#059669;"><i class="fa fa-book"></i></div>
-            <div class="block-label">下 册</div>
+            <div class="block-label">下册点读</div>
             <div class="block-en">Grade 3</div>
           </a>
           <a href="#" class="grid-block" style="background:#f0fdf4;">
             <div class="icon-box" style="background:#34d399;"><i class="fa fa-list"></i></div>
-            <div class="block-label">单词表</div>
+            <div class="block-label">单词总表</div>
             <div class="block-en">Words</div>
           </a>
           <a href="#" class="grid-block" style="background:#ecfdf5;">
             <div class="icon-box" style="background:#6ee7b7;"><i class="fa fa-headphones"></i></div>
-            <div class="block-label">听 力</div>
+            <div class="block-label">听力</div>
             <div class="block-en">Listen</div>
           </a>
         </div>
@@ -212,22 +226,22 @@
         <div class="grid grid-cols-4 gap-3">
           <a href="read/41.html" class="grid-block" style="background:#eff6ff;">
             <div class="icon-box" style="background:#1476ff;"><i class="fa fa-book"></i></div>
-            <div class="block-label">上 册</div>
+            <div class="block-label">上册点读</div>
             <div class="block-en">Grade 4</div>
           </a>
           <a href="read/42.html" class="grid-block" style="background:#dbeafe;">
             <div class="icon-box" style="background:#2563eb;"><i class="fa fa-book"></i></div>
-            <div class="block-label">下 册</div>
+            <div class="block-label">下册点读</div>
             <div class="block-en">Grade 4</div>
           </a>
           <a href="#" class="grid-block" style="background:#f0f7ff;">
             <div class="icon-box" style="background:#60a5fa;"><i class="fa fa-list"></i></div>
-            <div class="block-label">单词表</div>
+            <div class="block-label">单词总表</div>
             <div class="block-en">Words</div>
           </a>
           <a href="#" class="grid-block" style="background:#eff6ff;">
             <div class="icon-box" style="background:#93c5fd;"><i class="fa fa-headphones"></i></div>
-            <div class="block-label">听 力</div>
+            <div class="block-label">听力</div>
             <div class="block-en">Listen</div>
           </a>
         </div>
@@ -237,22 +251,22 @@
         <div class="grid grid-cols-4 gap-3">
           <a href="read/51.html" class="grid-block" style="background:#fffbeb;">
             <div class="icon-box" style="background:#f59e0b;"><i class="fa fa-book"></i></div>
-            <div class="block-label">上 册</div>
+            <div class="block-label">上册点读</div>
             <div class="block-en">Grade 5</div>
           </a>
           <a href="read/52.html" class="grid-block" style="background:#fef3c7;">
             <div class="icon-box" style="background:#d97706;"><i class="fa fa-book"></i></div>
-            <div class="block-label">下 册</div>
+            <div class="block-label">下册点读</div>
             <div class="block-en">Grade 5</div>
           </a>
           <a href="#" class="grid-block" style="background:#fffbeb;">
             <div class="icon-box" style="background:#fbbf24;"><i class="fa fa-list"></i></div>
-            <div class="block-label">单词表</div>
+            <div class="block-label">单词总表</div>
             <div class="block-en">Words</div>
           </a>
           <a href="#" class="grid-block" style="background:#fff7ed;">
             <div class="icon-box" style="background:#fcd34d;"><i class="fa fa-headphones"></i></div>
-            <div class="block-label">听 力</div>
+            <div class="block-label">听力</div>
             <div class="block-en">Listen</div>
           </a>
         </div>
@@ -284,13 +298,30 @@
       </div>
     </div>
 
+    <!-- 跑马灯 -->
+    <div class="marquee-block">
+      <div class="marquee-track">
+        <span class="marquee-seg seg-1"><span class="logo-circle">望</span>望江托育</span>
+        <span class="marquee-seg seg-2"><span class="logo-circle">机</span>机构入口</span>
+        <span class="marquee-seg seg-3"><span class="logo-circle">照</span>贴心照护</span>
+        <span class="marquee-seg seg-4"><span class="logo-circle">伴</span>成长陪伴</span>
+        <span class="marquee-seg seg-5"><span class="logo-circle">早</span>早教启蒙</span>
+        <span class="marquee-seg seg-6"><span class="logo-circle">习</span>习惯培养</span>
+        <span class="marquee-seg seg-1"><span class="logo-circle">望</span>望江托育</span>
+        <span class="marquee-seg seg-2"><span class="logo-circle">机</span>机构入口</span>
+        <span class="marquee-seg seg-3"><span class="logo-circle">照</span>贴心照护</span>
+        <span class="marquee-seg seg-4"><span class="logo-circle">伴</span>成长陪伴</span>
+        <span class="marquee-seg seg-5"><span class="logo-circle">早</span>早教启蒙</span>
+        <span class="marquee-seg seg-6"><span class="logo-circle">习</span>习惯培养</span>
+      </div>
+    </div>
 
     <!-- 初中英语同步学习 -->
     <div class="card">
       <div class="section-title">初中英语同步学习</div>
       <div class="sub-title">章节详解，考点解析，在线检测</div>
       <div class="grid grid-cols-2 gap-3">
-        <a href="middle/7.html" class="rc-card" style="background:linear-gradient(135deg,#1476ff,#4e9bff);">
+        <a href="#" class="rc-card" style="background:linear-gradient(135deg,#1476ff,#4e9bff);">
           <span class="rc-tag">人教版PEP</span>
           <div>
             <div class="rc-title">七年级<br>知识点归纳</div>
@@ -298,7 +329,7 @@
           </div>
           <span class="rc-more">去学习</span>
         </a>
-        <a href="middle/8.html" class="rc-card" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);">
+        <a href="#" class="rc-card" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);">
           <span class="rc-tag">人教版PEP</span>
           <div>
             <div class="rc-title">八年级<br>知识点归纳</div>
@@ -306,7 +337,7 @@
           </div>
           <span class="rc-more">去学习</span>
         </a>
-        <a href="middle/9.html" class="rc-card" style="background:linear-gradient(135deg,#10b981,#34d399);">
+        <a href="#" class="rc-card" style="background:linear-gradient(135deg,#10b981,#34d399);">
           <span class="rc-tag">人教版PEP</span>
           <div>
             <div class="rc-title">九年级<br>知识点归纳</div>
@@ -325,26 +356,6 @@
       </div>
     </div>
 
-
-
-
-     <!-- 跑马灯 -->
-     <div class="marquee-block">
-      <div class="marquee-track">
-        <span class="marquee-seg seg-1"><span class="logo-circle">望</span>望江托育</span>
-        <span class="marquee-seg seg-2"><span class="logo-circle">机</span>机构入口</span>
-        <span class="marquee-seg seg-3"><span class="logo-circle">照</span>贴心照护</span>
-        <span class="marquee-seg seg-4"><span class="logo-circle">伴</span>成长陪伴</span>
-        <span class="marquee-seg seg-5"><span class="logo-circle">早</span>早教启蒙</span>
-        <span class="marquee-seg seg-6"><span class="logo-circle">习</span>习惯培养</span>
-        <span class="marquee-seg seg-1"><span class="logo-circle">望</span>望江托育</span>
-        <span class="marquee-seg seg-2"><span class="logo-circle">机</span>机构入口</span>
-        <span class="marquee-seg seg-3"><span class="logo-circle">照</span>贴心照护</span>
-        <span class="marquee-seg seg-4"><span class="logo-circle">伴</span>成长陪伴</span>
-        <span class="marquee-seg seg-5"><span class="logo-circle">早</span>早教启蒙</span>
-        <span class="marquee-seg seg-6"><span class="logo-circle">习</span>习惯培养</span>
-      </div>
-    </div>
     <!-- 语法专题 -->
     <div class="card">
       <div class="section-title">语法专题</div>
