@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学线上课堂</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
+    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
+    --green:#059669; --green-bg:#ecfdf5;
+    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
+    --line:#e5e7eb; --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
+  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
+  .hero .tip{margin-top:10px;font-size:12.5px;color:var(--blue-d)}
+  .hero .tagline{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
+
+  .pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .pill{flex:1;min-width:100px;border-radius:12px;padding:12px 8px;text-align:center;border:1.5px solid var(--line);background:#fafbfd}
+  .pill b{display:block;font-size:14px;color:var(--blue-d)}
+  .pill span{font-size:11px;color:var(--ink-3)}
+  .pill.c-a{background:#fff;border-color:var(--blue)}
+  .pill.c-b{background:var(--amber-bg);border-color:var(--amber-bd)}
+  .pill.c-c{background:var(--green-bg);border-color:var(--green)}
+  .verdict{margin-top:14px;background:#fff;border-left:4px solid var(--blue);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--blue-d)}
+  .verdict b{color:var(--blue-d)}
+
+  section.block{margin-top:30px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+  .khead h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .khead .desc{font-size:11px;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+  .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
+  .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .gram p b{color:var(--blue-d)}
+  .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
+  .witem:last-child{border-bottom:none}
+  .witem .wh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .witem .word{font-size:15px;font-weight:800;color:var(--blue-d)}
+  .witem .ph{font-size:11.5px;color:var(--ink-3)}
+  .witem .pos{font-size:11.5px;color:var(--ink-3);background:#f3f4f6;padding:1px 7px;border-radius:999px}
+  .witem p{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:break-word;word-break:break-word}
+  .witem p b{color:var(--blue-d)}
+  .witem .sen{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+  .witem .notebox{font-size:12px;color:var(--ink-3);margin-top:6px;overflow-wrap:break-word;word-break:break-word}
+  .witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
+
+  .plist{margin-top:4px}
+  .pgroup{margin-bottom:12px}
+  .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .pgroup .pg::after{content:"";flex:1;height:1px;background:var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .chip b{color:var(--blue-d);font-weight:700}
+  .chip span{color:var(--ink-3);font-size:11px}
+
+  .klist{margin-top:4px}
+  .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .kitem:last-child{border-bottom:none}
+  .kitem .n{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue);color:var(--blue-d);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .kitem .bd{flex:1;min-width:0}
+  .kitem .bd .kt{display:block;font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
+  .kitem .bd p{font-size:13px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .kitem .bd p b{color:var(--blue-d)}
+  .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
+
+  .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .sitem:last-child{border-bottom:none}
+  .sitem .n{color:var(--blue);font-weight:800;font-size:13px;flex:none;margin-top:2px}
+  .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
+
+  .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+  .warn ol{list-style:none;counter-reset:ec}
+  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li:last-child{border-bottom:none}
+  .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .warn li b{color:#92400e}
+
+  .divider{height:1px;background:var(--line);margin:26px 0 0}
+
+  footer{margin-top:24px;padding:18px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .inner{max-width:720px;margin:0 auto}
+
+  @media (max-width:400px){
+    .hero h1{font-size:21px}
+    .khead h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">初中英语 · 学霸笔记</div>
+    <h1>八年级上册 · KP 1</h1>
+    <div class="tip">要点：① 复合不定代词 some-/any-/no-/every- 的用法；② 一般过去时构成与 was/were；③ 形容词修饰复合不定代词后置；④ 假期活动话题情景交际。</div>
+    <div class="pills">
+      <div class="pill c-a"><b>复合不定代词</b><span>something · anything · nothing</span></div>
+      <div class="pill c-b"><b>一般过去时</b><span>did / was · were · -ed</span></div>
+      <div class="pill c-c"><b>假期话题</b><span>vacation · camp · fantastic</span></div>
+    </div>
+    <div class="verdict">本 KP 三个关键：① 肯定句用 some-、否定疑问用 any-；② 形容词修饰不定代词必须<b>后置</b>；③ 一般过去时否定疑问用 <b>didn't / Did</b> + 动词原形。</div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><h2>语法核心</h2><span class="desc">本单元两大语法</span></div>
+
+    <div class="gram">
+      <div class="gt">语法一：复合不定代词</div>
+      <p>由 <b>some-/any-/no-/every-</b> 加 <b>-body/-one/-thing</b> 构成，作主语时谓语用<b>单数</b>。<b>some-</b> 类多用于肯定句；<b>any-</b> 类多用于否定句、疑问句和条件从句；表示请求、建议或希望得到肯定回答的疑问句仍用 some-。形容词、else 或不定式修饰时<b>必须后置</b>。</p>
+      <div class="ex">Did you buy anything special?</div>
+      <div class="ex">Would you like something to drink?</div>
+      <div class="ex">Everything tasted good. / Nobody taught me.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">语法二：一般过去时</div>
+      <p>表示过去某个时间发生的动作或状态，常与 yesterday、last summer、two days ago、in 2010 等连用。规则动词加 -ed；不规则动词需单独记忆。否定句用 <b>didn't + 动词原形</b>，疑问句用 <b>Did + 主语 + 动词原形</b>。be 动词：I/he/she/it/单数用 <b>was</b>；you/we/they/复数用 <b>were</b>。</p>
+      <div class="ex">Where did you go on vacation?</div>
+      <div class="ex">I went to the mountains with my friends.</div>
+      <div class="ex">Did you buy anything special? — Yes, I did. / No, I didn't.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点词汇精讲</h2><span class="desc">1–20</span></div>
+    <div class="wlist">
+
+      <div class="witem">
+        <div class="wh"><span class="word">vacation</span><span class="ph">/vəˈkeɪʃn/</span><span class="pos">n. 假期；度假</span></div>
+        <p>美式英语，英式常用 holiday。搭配 <b>go on vacation</b> 去度假。</p>
+        <div class="sen">Where did you go on vacation?</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">camp</span><span class="ph">/kæmp/</span><span class="pos">n. 度假营 · v. 露营</span></div>
+        <p>搭配 <b>go to summer camp</b> 去夏令营。</p>
+        <div class="sen">I went to summer camp with my friends.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">guide</span><span class="ph">/ɡaɪd/</span><span class="pos">n. 导游；指南 · v. 指导</span></div>
+        <div class="sen">I worked as a tour guide at a museum.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">ancient</span><span class="ph">/ˈeɪnʃənt/</span><span class="pos">adj. 古代的；古老的</span></div>
+        <div class="sen">We visited some ancient buildings in Beijing.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">landscape</span><span class="ph">/ˈlændskeɪp/</span><span class="pos">n. 风景；景色</span></div>
+        <div class="sen">The landscape there was amazing.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">scenery</span><span class="ph">/ˈsiːnəri/</span><span class="pos">n. 风景；景色</span></div>
+        <div class="sen">The scenery along the river is beautiful.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">silk</span><span class="ph">/sɪlk/</span><span class="pos">n. 丝绸</span></div>
+        <div class="sen">Hangzhou is famous for its silk.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">scarf</span><span class="ph">/skɑːf/</span><span class="pos">n. 围巾</span></div>
+        <p>复数形式为 <b>scarves</b>。</p>
+        <div class="sen">I bought a red scarf for my mother.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">comfortable</span><span class="ph">/ˈkʌmftəbl/</span><span class="pos">adj. 舒适的</span></div>
+        <p>副词形式 <b>comfortably</b>。</p>
+        <div class="sen">The hotel was very comfortable.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">bored</span><span class="ph">/bɔːd/</span><span class="pos">adj. 厌倦的；烦闷的</span></div>
+        <p>修饰<b>人</b>，常与 with 连用；<b>boring</b> 修饰物。</p>
+        <div class="sen">I was so bored that I read a book.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">ready</span><span class="ph">/ˈredi/</span><span class="pos">adj. 准备好的；愿意的</span></div>
+        <p>搭配 <b>be ready to do sth.</b> 愿意做某事；<b>be ready for sth.</b> 为……做好准备。</p>
+        <div class="sen">I'm ready to go on vacation.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">somewhere</span><span class="ph">/ˈsʌmweə(r)/</span><span class="pos">adv. 在某处；到某处</span></div>
+        <div class="sen">I went somewhere interesting on vacation.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">anywhere</span><span class="ph">/ˈeniweə(r)/</span><span class="pos">adv. 在任何地方</span></div>
+        <div class="sen">Did you go anywhere interesting?</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">nothing</span><span class="ph">/ˈnʌθɪŋ/</span><span class="pos">pron. 没有任何东西</span></div>
+        <div class="sen">Nothing special. I just stayed at home.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">fantastic</span><span class="ph">/fænˈtæstɪk/</span><span class="pos">adj. 极好的；吸引人的</span></div>
+        <div class="sen">How was your holiday? It was fantastic!</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">breath</span><span class="ph">/breθ/</span><span class="pos">n. 呼吸的空气；一口气</span></div>
+        <p>搭配 <b>take one's breath away</b> 令人惊叹。</p>
+        <div class="sen">The view from the top took my breath away.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">remind</span><span class="ph">/rɪˈmaɪnd/</span><span class="pos">v. 提醒；使想起</span></div>
+        <p>搭配 <b>remind sb. of sth.</b> 使某人想起；<b>remind sb. to do sth.</b> 提醒某人做某事。</p>
+        <div class="sen">This song reminds me of my childhood.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">fight</span><span class="ph">/faɪt/</span><span class="pos">v./n. 战斗；打架</span></div>
+        <p>过去式 <b>fought</b>。搭配 fight against 与……作斗争。</p>
+        <div class="sen">We should fight against pollution.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">peace</span><span class="ph">/piːs/</span><span class="pos">n. 和平；太平</span></div>
+        <div class="sen">People all over the world love peace.</div>
+      </div>
+
+      <div class="witem">
+        <div class="wh"><span class="word">probably</span><span class="ph">/ˈprɒbəbli/</span><span class="pos">adv. 很可能；大概</span></div>
+        <div class="sen">It will probably rain tomorrow.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点短语</h2><span class="desc">三类分类记忆</span></div>
+    <div class="plist">
+      <div class="pgroup">
+        <div class="pg">假期活动</div>
+        <div class="chips">
+          <span class="chip"><b>go on vacation</b><span>去度假</span></span>
+          <span class="chip"><b>go to the mountains</b><span>去爬山</span></span>
+          <span class="chip"><b>go to summer camp</b><span>去夏令营</span></span>
+          <span class="chip"><b>visit museums</b><span>参观博物馆</span></span>
+          <span class="chip"><b>visit grandparents</b><span>看望祖父母</span></span>
+          <span class="chip"><b>visit ancient buildings</b><span>参观古建筑</span></span>
+          <span class="chip"><b>take photos</b><span>拍照</span></span>
+          <span class="chip"><b>go shopping</b><span>去购物</span></span>
+          <span class="chip"><b>go hiking</b><span>去徒步</span></span>
+          <span class="chip"><b>see the sunrise</b><span>看日出</span></span>
+          <span class="chip"><b>try local dishes</b><span>品尝当地美食</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">常考搭配</div>
+        <div class="chips">
+          <span class="chip"><b>take one's breath away</b><span>令人惊叹</span></span>
+          <span class="chip"><b>remind sb. of sth.</b><span>使某人想起</span></span>
+          <span class="chip"><b>remind sb. to do sth.</b><span>提醒某人做</span></span>
+          <span class="chip"><b>be ready to do sth.</b><span>愿意做某事</span></span>
+          <span class="chip"><b>feel / be bored with</b><span>对……厌倦</span></span>
+          <span class="chip"><b>be surprised to do sth.</b><span>很惊讶做某事</span></span>
+          <span class="chip"><b>fight against</b><span>与……作斗争</span></span>
+          <span class="chip"><b>thousands of</b><span>成千上万的</span></span>
+        </div>
+      </div>
+      <div class="pgroup">
+        <div class="pg">其他高频短语</div>
+        <div class="chips">
+          <span class="chip"><b>stay at home</b><span>待在家里</span></span>
+          <span class="chip"><b>stay with sb.</b><span>和某人待一起</span></span>
+          <span class="chip"><b>get together</b><span>相聚；聚会</span></span>
+          <span class="chip"><b>walk around</b><span>四处走走</span></span>
+          <span class="chip"><b>look for</b><span>寻找</span></span>
+          <span class="chip"><b>turn around</b><span>转身</span></span>
+          <span class="chip"><b>make a noise</b><span>制造噪声</span></span>
+          <span class="chip"><b>in the sun</b><span>在阳光下</span></span>
+          <span class="chip"><b>at noon</b><span>在中午</span></span>
+          <span class="chip"><b>during the holiday</b><span>在假期期间</span></span>
+          <span class="chip"><b>because of</b><span>因为</span></span>
+          <span class="chip"><b>nothing but</b><span>只有；只是</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>中考常考考点与易错点</h2><span class="desc">1–14</span></div>
+    <div class="klist">
+
+      <div class="kitem"><div class="n">1</div><div class="bd">
+        <b class="kt">考点一：复合不定代词的选用</b>
+        <p>肯定句用 some- 类，否定句和疑问句用 any- 类；表示请求、建议或希望得到肯定回答的疑问句用 some- 类。</p>
+        <div class="ex">Did you do anything interesting?</div>
+        <div class="ex">Would you like something to drink?</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">2</div><div class="bd">
+        <b class="kt">考点二：形容词修饰复合不定代词后置</b>
+        <p>形容词、else、不定式修饰复合不定代词时必须后置。</p>
+        <div class="ex">Did you buy anything special?</div>
+        <div class="ex">I have something important to tell you.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">3</div><div class="bd">
+        <b class="kt">考点三：复合不定代词作主语谓语用单数</b>
+        <p>复合不定代词作主语时，谓语动词用单数。</p>
+        <div class="ex">Everything tasted good.</div>
+        <div class="ex">Nobody knows the answer.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">4</div><div class="bd">
+        <b class="kt">考点四：no- 类与 every- 类</b>
+        <p>no- 类表示否定含义；every- 类表示"全部、人人"。</p>
+        <div class="ex">Nothing special. I just stayed at home.</div>
+        <div class="ex">Everyone loved it.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">5</div><div class="bd">
+        <b class="kt">考点五：一般过去时的否定句和疑问句</b>
+        <p>否定句用 <b>didn't + 动词原形</b>；疑问句用 <b>Did + 主语 + 动词原形</b>。</p>
+        <div class="ex">He didn't go to the beach last Sunday.</div>
+        <div class="ex">Did you buy anything special? — Yes, I did. / No, I didn't.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">6</div><div class="bd">
+        <b class="kt">考点六：was 与 were 的选用</b>
+        <p>主语是 I/he/she/it 或单数名词用 was；主语是 you/we/they 或复数名词用 were。</p>
+        <div class="ex">It was wonderful.</div>
+        <div class="ex">We were at the beach last summer.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">7</div><div class="bd">
+        <b class="kt">考点七：反身代词的用法</b>
+        <p>反身代词与主语一致，常考 teach oneself、enjoy oneself、by oneself、keep oneself safe。</p>
+        <div class="ex">Nobody taught me. I taught myself.</div>
+        <div class="ex">Did you enjoy yourself at the party?</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">8</div><div class="bd">
+        <b class="kt">考点八：how 询问假期情况</b>
+        <p>How was your holiday? 回答用 It was fantastic / great / wonderful / terrible.</p>
+        <div class="ex">— How was your holiday? — It was fantastic!</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">9</div><div class="bd">
+        <b class="kt">考点九：询问假期去向与活动</b>
+        <p>Where did you go on vacation? 问去向；What did you do during the holiday? 问活动。</p>
+        <div class="ex">— Where did you go on vacation? — I went to the mountains.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">10</div><div class="bd">
+        <b class="kt">考点十：take one's breath away</b>
+        <p>表示"令人惊叹；让人叹绝"。</p>
+        <div class="ex">The view from the top of the mountain took my breath away.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">11</div><div class="bd">
+        <b class="kt">考点十一：remind 的用法</b>
+        <p>remind sb. of sth. 使某人想起；remind sb. to do sth. 提醒某人做某事。</p>
+        <div class="ex">This photo reminds me of my holiday in Yunnan.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">12</div><div class="bd">
+        <b class="kt">考点十二：nothing but 与 ready to do</b>
+        <p>nothing but 只有；只是；ready to do sth. 愿意做某事。</p>
+        <div class="ex">I did nothing but stay at home.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">13</div><div class="bd">
+        <b class="kt">考点十三：be surprised to do sth.</b>
+        <p>表示"很惊讶做某事"。</p>
+        <div class="ex">I was surprised to see him there.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">14</div><div class="bd">
+        <b class="kt">考点十四：情景交际</b>
+        <p>询问感受 How was your holiday?；询问去向 Where did you go on vacation?；询问活动 What did you do...?。</p>
+        <div class="ex">— Did you go to the mountain? — No, I didn't. We went to the Science Museum.</div>
+      </div></div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
+    <div class="slist">
+      <div class="sitem"><span class="n">1</span><div class="en">Where did you go on vacation? — I went to the mountains.</div></div>
+      <div class="sitem"><span class="n">2</span><div class="en">How was your holiday? — It was fantastic!</div></div>
+      <div class="sitem"><span class="n">3</span><div class="en">Did you do anything interesting? — Yes, I did. / No, I didn't.</div></div>
+      <div class="sitem"><span class="n">4</span><div class="en">Did you go anywhere interesting? — Yes, I went to Yunnan.</div></div>
+      <div class="sitem"><span class="n">5</span><div class="en">Did you go with anyone? — Yes, I went with my family.</div></div>
+      <div class="sitem"><span class="n">6</span><div class="en">I tried something new — I worked as a tour guide at a museum.</div></div>
+      <div class="sitem"><span class="n">7</span><div class="en">Everything tasted good, especially the steamed chicken soup.</div></div>
+      <div class="sitem"><span class="n">8</span><div class="en">Nobody taught me. I taught myself.</div></div>
+      <div class="sitem"><span class="n">9</span><div class="en">To keep yourself safe, you'd better not go out alone at night.</div></div>
+      <div class="sitem"><span class="n">10</span><div class="en">The view from the top of the mountain took my breath away.</div></div>
+      <div class="sitem"><span class="n">11</span><div class="en">It reminds us that peace does not come easily.</div></div>
+      <div class="sitem"><span class="n">12</span><div class="en">I was so bored that I read a book.</div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><h2>语法易错点总结</h2><span class="desc">考前必看</span></div>
+    <div class="warn">
+      <div class="whd"><div class="dot">!</div>姜老师提醒 · 高频易错，务必牢记</div>
+      <ol>
+        <li><b>肯定句用 some- 类，否定句和疑问句用 any- 类。</b></li>
+        <li><b>表示请求或希望得到肯定回答的疑问句仍用 some- 类。</b></li>
+        <li><b>形容词、else、不定式修饰复合不定代词时必须后置。</b></li>
+        <li><b>复合不定代词作主语时，谓语动词用单数。</b></li>
+        <li><b>no- 类表示否定，every- 类表示"全部、人人"。</b></li>
+        <li><b>一般过去时否定句用 didn't + 动词原形。</b></li>
+        <li><b>疑问句用 Did + 主语 + 动词原形？</b></li>
+        <li><b>I/he/she/it/单数用 was，you/we/they/复数用 were。</b></li>
+        <li><b>反身代词与主语保持一致。</b></li>
+        <li><b>How was your holiday? 回答用 It was fantastic / great / wonderful / terrible。</b></li>
+        <li><b>take one's breath away 表示"令人惊叹"。</b></li>
+        <li><b>remind sb. of sth. 与 remind sb. to do sth. 意义不同。</b></li>
+        <li><b>nothing but 表示"只有；只是"。</b></li>
+        <li><b>be surprised to do sth. 表示"很惊讶做某事"。</b></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+</div>
+
+<footer>
+  <div class="inner">多多好学版权所有</div>
+</footer>
+
+</body>
+</html>
