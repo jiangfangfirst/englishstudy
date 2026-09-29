@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>八年级KP2</h1>
+        <p>情态动词can/could · 频度副词 · 词汇短语辨析 · 综合语法</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">八年级上册Unit 2 · 在线检测</span>
+      <h2>单元检测核心库KP2</h2>
+      <p>涵盖情态动词can与could、频度副词、动词短语搭配、词汇辨析、情景交际等高频考点。系统从全量题库中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+  {q:"—May I borrow your bike, Kate? Mine is broken. —Of course. It's over there.", o:["borrow","buy","lend","sell"], a:0, e:"borrow 表示借入，根据 Mine is broken 可知是借入。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—Could I use your car? —No, you can't. I have to go out now.", o:["needn't","can't","mustn't","won't"], a:1, e:"Could I...? 的否定回答用 can't 或 couldn't。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—Dad, could we hang out with our friends after we clean up the new house? —Of course you can.", o:["may","could","must","should"], a:1, e:"could 表示委婉请求许可，答语用 can。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"—Mum, may I borrow your phone to call Grandma? —Of course you may.", o:["need","must","may","should"], a:2, e:"may 表示请求许可，答语用 may。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"—Could you please sweep the floor before the guests arrive? —No problem. I'll do it right away.", o:["Yes, I could","Never mind","No problem","Not at all"], a:2, e:"No problem 表示没问题，同意对方的请求。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"—Can I use your scissors to cut some paper? —Sorry, I lent them to my cousin this morning. You can go and ask her.", o:["lent","borrowed","kept","returned"], a:0, e:"lend 表示借出，lend sth. to sb. 表示把某物借给某人。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"—Can I move the table in the living room? It takes up too much space. —Yes, you can.", o:["Must","Should","Can","Need"], a:2, e:"Can I...? 表示请求许可。", source:"人教版(2024)(安徽)英语八年级上册Unit 2高频考点训练"},
+  {q:"—Could you please not open the window? It's cold outside. —Sorry. I'll close it right away.", o:["not open","not to open","don't open","to not open"], a:0, e:"Could you please not do sth. 表示请你不要做某事。", source:"人教版(2024)(安徽)英语八年级上册Unit 2高频考点训练"},
+  {q:"—Can I stay out until ten tonight? —No, you can't. You have to come back before 9:30.", o:["can't","couldn't","needn't","mustn't"], a:0, e:"Can I...? 的否定回答用 can't。", source:"人教版(2024)(安徽)英语八年级上册Unit 2高频考点训练"},
+  {q:"—Can you go to the traditional craft show with me this Saturday? —I'd love to, but I have to prepare for my English test.", o:["Must","Should","Can","Need"], a:2, e:"Can you...? 表示邀请或请求。", source:"Unit 2 Home Sweet Home情态动词can和could的用法精讲精练"},
+  {q:"My cousin can play the guitar very well. He won first prize in the school music competition last year.", o:["must","can","may","should"], a:1, e:"can 表示能力，根据 won first prize 可知他会弹吉他。", source:"Unit 2 Home Sweet Home情态动词can和could的用法精讲精练"},
+  {q:"—Jack, could you please help me take out the rubbish? —Sorry, I can't, Mum. I am doing my homework now.", o:["couldn't; am doing","can't; do","can't; did","can't; am doing"], a:3, e:"第一空用 can't 表示不能；第二空用 am doing 表示正在做作业。", source:"Unit 2 Home Sweet Home情态动词can和could的用法精讲精练"},
+  {q:"—Mom, could I invite my friends to a party? —Sorry, you can't. You have a test on Monday.", o:["could; couldn't","could; can't","can; don't have to","can; can't"], a:1, e:"could 表示委婉请求，否定回答用 can't。", source:"Unit 2 Home Sweet Home情态动词can和could的用法精讲精练"},
+  {q:"—Bill, can I use your ruler? —Of course! Here you are.", o:["can","must","need","should"], a:0, e:"can 表示请求许可。", source:"Unit 2 Home Sweet Home情态动词can和could的用法精讲精练"},
+  {q:"—Jim, can you give me a rubbish bag? —Sure. Here you are!", o:["must","should","can","need"], a:2, e:"can 表示请求。", source:"Unit 2 Home Sweet Home情态动词can和could的用法精讲精练"},
+  {q:"—May I call you this evening? —Sure. I can be free after 7 o'clock, so feel free to call me then.", o:["Must; must","Should; can","May; can","Need; should"], a:2, e:"第一空 May I...? 表示请求许可；第二空 can 表示可能性。", source:"Unit 2 Home Sweet Home情态动词can和could的用法精讲精练"},
+  {q:"—Mom, can I hang out with my classmates this Sunday afternoon? —Yes, of course you can.", o:["can","must","need","should"], a:0, e:"Can I...? 表示请求许可。", source:"Unit 2 Home Sweet Home情态动词can和could的用法精讲精练"},
+  {q:"—Could I use your car? —No, you can't. I have to go out now.", o:["needn't","can't","mustn't","won't"], a:1, e:"Could I...? 的否定回答用 can't。", source:"Unit 2 Home Sweet Home情态动词can和could的用法精讲精练"},
+  {q:"Good habits can help us a lot and we will make great progress.", o:["can","must","need","should"], a:0, e:"can 表示客观可能性，好习惯能够帮助我们。", source:"Unit 2 Home Sweet Home情态动词can和could的用法精讲精练"},
+  {q:"—Someone is knocking at the door. It may be Jim. —No, it can't be him. He is now in another city.", o:["must; can't","can; mustn't","may; can't","may; mustn't"], a:2, e:"第一空 may 表示不确定推测；第二空 can't 表示否定推测。", source:"Unit 2 Home Sweet Home情态动词can和could的用法精讲精练"},
+  {q:"Before we moved to the new apartment, I helped my little brother pack his toys into boxes and write his name on each one.", o:["pack","borrow","invite","describe"], a:0, e:"pack 表示打包，把玩具装进盒子里。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"—Mom, could you help me hang up these photos on the wall? —Sure. But where are the nails?", o:["put away","hang up","turn on","wake up"], a:1, e:"hang up 表示挂起，把照片挂在墙上。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"The journey back to our hometown took almost six hours, but the moment we saw Grandfather waiting at the village entrance, we all felt so glad.", o:["bored","tired","terrible","glad"], a:3, e:"glad 表示高兴的，根据 saw Grandfather waiting 可知感到高兴。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"—How long did it take you to clean the whole apartment? —About two hours. We all worked together.", o:["spend","take","cost","pay"], a:1, e:"It takes sb. some time to do sth. 是固定句型。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"Thank you very much for inviting us to your housewarming party.", o:["invite","inviting","invited","invites"], a:1, e:"for 是介词，后接动名词 inviting。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"My mother is busy cooking dinner in the kitchen, so please keep quiet.", o:["cook","cooking","to cook","cooks"], a:1, e:"be busy doing sth. 表示忙于做某事。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"—Do you know the man standing at the gate? —Yes. He is our new neighbour.", o:["stand","standing","stood","stands"], a:1, e:"standing 作后置定语，修饰 the man。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"Wherever you go, home is always a warm place that is happy to see you.", o:["Whatever","Whenever","Wherever","However"], a:2, e:"Wherever 表示无论哪里，根据 home is always a warm place 可知。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"When Mum opened the box, the biscuits made by Grandma smelled so good that we could not stop eating them.", o:["smell","sound","look","feel"], a:0, e:"smell 表示闻起来，根据 biscuits 可知是气味。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"In our community, everyone is friendly and always ready to give others a hand.", o:["give","make","do","keep"], a:0, e:"give sb. a hand 表示帮助某人。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"Which of the following underlined parts has the same sound as borrow?", o:["bedroom","cover","passport","block"], a:3, e:"borrow 中的 o 发音为 /ɒ/，block 中的 o 发音也为 /ɒ/。", source:"Unit 2 Home Sweet Home综合测试卷"},
+  {q:"—I'm going to the movies. Could you give me a lift there?", o:["the; a","a; the","the; the","a; a"], a:0, e:"go to the movies 是固定搭配；give sb. a lift 是固定搭配。", source:"Unit 2 Home Sweet Home综合测试卷"},
+  {q:"I used to live in a small cottage, but now I live in a big apartment in the city.", o:["used to","was used to","am used to","use to"], a:0, e:"used to do sth. 表示过去常常做某事。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"There isn't much furniture in my new bedroom, just a bed and a desk.", o:["furnitures","furniture","tables","chairs"], a:1, e:"furniture 是不可数名词，没有复数形式。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"Great changes have taken place in my hometown since my parents got married.", o:["take place","took place","have taken place","are taking place"], a:2, e:"since 引导时间状语从句，主句用现在完成时。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"Our neighborhood is very quiet and safe, with a small park where kids often play.", o:["house","apartment","neighborhood","country"], a:2, e:"neighborhood 表示社区，根据 a small park where kids often play 可知。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"I feel comfortable in my new bed; it's soft and fits me perfectly.", o:["comfortable","convenient","interesting","boring"], a:0, e:"comfortable 表示舒适的，根据 soft and fits me perfectly 可知。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"My grandparents own a two-story house with a vegetable garden in the countryside.", o:["own","owe","keep","hold"], a:0, e:"own 表示拥有。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"We need to clean up the living room before our relatives come for the Spring Festival.", o:["clean out","clean up","clean off","clean away"], a:1, e:"clean up 表示打扫、清理。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"The white curtains match the light-colored walls in our living room very well.", o:["curtains","beds","desks","shelves"], a:0, e:"curtains 表示窗帘，与墙壁搭配。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"You need a pair of scissors to cut the paper for your art project.", o:["scissors","pencils","rulers","brushes"], a:0, e:"scissors 表示剪刀，用来剪纸。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"There's a new bathroom in our house, and it has a modern shower.", o:["bathroom","uniform","advice","group"], a:0, e:"bathroom 表示浴室，有淋浴设备。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"If the door doesn't open, try to pull it hard.", o:["pull","build","jump","pick"], a:0, e:"pull 表示拉，与 open 对应。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—Can you help your sister hang up the photos? —No problem!", o:["cut down","hang out","hang up","work out"], a:2, e:"hang up 表示挂起。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"This song sounds very familiar. I think I heard it somewhere last month.", o:["strange","quiet","difficult","familiar"], a:3, e:"familiar 表示熟悉的，根据 I heard it somewhere 可知。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—I have some exciting news to share with you. —Really? I can't wait to hear it!", o:["share with","look after","turn around","agree with"], a:0, e:"share sth. with sb. 表示与某人分享某事。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—How often do you go to the movies? —Three times a week.", o:["When","How often","How long","How many times"], a:1, e:"How often 提问频率，答语 Three times a week 表示频率。", source:"安徽省芜湖市无为市部分学校期中考试八年级英语试卷"},
+  {q:"—More and more foreigners are becoming interested in Beijing Opera. —That's true. It's an important part of Chinese culture.", o:["culture","service","role","result"], a:0, e:"culture 表示文化，京剧是中国文化的一部分。", source:"安徽省淮南市田家庵区淮南实验中学期中英语试题"},
+  {q:"Mr. Li is a great teacher. He often uses games to make his lessons enjoyable.", o:["common","serious","enjoyable","boring"], a:2, e:"enjoyable 表示令人愉快的，根据 uses games 可知。", source:"安徽省淮南市田家庵区淮南实验中学期中英语试题"},
+  {q:"—My parents expect me to get better grades this term. —You can do it if you always work hard.", o:["decide","wonder","expect","choose"], a:2, e:"expect sb. to do sth. 表示期望某人做某事。", source:"安徽省淮南市田家庵区淮南实验中学期中英语试题"},
+  {q:"—I think friendship is very important in life. —Yes. A good friend can help to bring out the best in us.", o:["make up","dress up","find out","bring out"], a:3, e:"bring out the best in sb. 表示使某人展现出最好的一面。", source:"安徽省淮南市田家庵区淮南实验中学期中英语试题"},
+  {q:"You should go home early, or your parents will worry about you.", o:["might","maybe","should","would"], a:2, e:"should 表示应该，根据 or your parents will worry 可知。", source:"安徽省淮南市田家庵区淮南实验中学期中英语试题"},
+  {q:"We can buy clothes cheaply during Double Eleven Shopping Festival online.", o:["cheaply","clearly","quietly","hardly"], a:0, e:"cheaply 表示便宜地，双十一购物节可以便宜地买衣服。", source:"安徽省淮南市田家庵区淮南实验中学期中英语试题"},
+  {q:"—Learning to love is like learning to walk. —Yes, as long as we step out bravely, we'll find it not so difficult.", o:["at least","as long as","in fact","because of"], a:1, e:"as long as 表示只要，引导条件状语从句。", source:"安徽省淮南市田家庵区淮南实验中学期中英语试题"},
+  {q:"—Where did she go on vacation last summer? —She went to New York City.", o:["did; goes","does; went","did; went","do; go"], a:2, e:"last summer 提示用一般过去时，第一空用 did，第二空用 went。", source:"安徽省淮南市田家庵区淮南实验中学期中英语试题"},
+  {q:"—How often do you have an English test? —Once a month.", o:["How often","How long","How soon","How far"], a:0, e:"How often 提问频率，答语 Once a month 表示频率。", source:"人教版(2024)(安徽)英语八年级上册Unit 2高频考点训练"},
+  {q:"He is the first to get to school every day. He is never late for school.", o:["always","often","sometimes","never"], a:3, e:"根据 the first to get to school 可知他从不迟到，用 never。", source:"人教版(2024)(安徽)英语八年级上册Unit 2高频考点训练"},
+  {q:"—How's Susan? —Oh. I hardly see her because she lives abroad.", o:["always","often","almost","hardly"], a:3, e:"根据 she lives abroad 可知几乎见不到她，hardly 表示几乎不。", source:"人教版(2024)(安徽)英语八年级上册Unit 2高频考点训练"},
+  {q:"We hardly play sports on school days. You know, we don't have enough time.", o:["often","usually","hardly","ever"], a:2, e:"根据 we don't have enough time 可知几乎不运动，用 hardly。", source:"人教版(2024)(安徽)英语八年级上册Unit 2高频考点训练"},
+  {q:"—I don't know you take a bus to school. —Oh. I hardly take a bus, but it is snowing today.", o:["hardly","often","sometimes","usually"], a:0, e:"根据 but it is snowing today 可知平时几乎不坐公交车。", source:"人教版(2024)(安徽)英语八年级上册Unit 2高频考点训练"},
+  {q:"Look at the rainbow after the rain. It has seven colors and it looks very beautiful.", o:["balcony","scarf","rainbow","biscuit"], a:2, e:"rainbow 表示彩虹，雨后出现且有七种颜色。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+  {q:"We didn't go back to the hotel until it began to rain heavily.", o:["until","so","whether","or"], a:0, e:"not...until... 表示直到……才……。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+  {q:"We didn't tell them we were coming. They felt surprised when they saw us at the station.", o:["interested","surprised","bored","stupid"], a:1, e:"surprised 表示惊讶的，根据 We didn't tell them 可知。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+  {q:"My brother covers the box with a piece of paper.", o:["in","from","for","with"], a:3, e:"cover...with... 表示用……覆盖……。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+  {q:"—The rubbish gives off a bad smell. —Oh, I'll take it out at once.", o:["sound","look","smell","piece"], a:2, e:"give off a bad smell 表示散发出难闻的气味。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+  {q:"—Can you describe your new coach? —Hmm... I think he is very humorous.", o:["believe","describe","support","follow"], a:1, e:"describe 表示描述，根据 I think he is very humorous 可知。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+  {q:"—Where is your brother, Jim? —Oh, he is having a bath in the bathroom.", o:["kitchen","bathroom","living room"], a:1, e:"bathroom 表示浴室，根据 having a bath 可知。", source:"Unit 2 Home Sweet Home单词过关选择题专项练习"},
+  {q:"This is a basket of apples. Let's put them into the box.", o:["put","take","get"], a:0, e:"put...into... 表示把……放进……。", source:"Unit 2 Home Sweet Home单词过关选择题专项练习"},
+  {q:"What subject do you like to study?", o:["Math","Music","Art"], a:0, e:"Math 是学科名称，符合 subject 的语境。", source:"2025-2026学年人教版八年级英语上册Unit2单元测试卷"},
+  {q:"You can do the work better in the future.", o:["could did","will can","can do","could do"], a:2, e:"can do 表示能够做，in the future 提示用一般现在时表将来。", source:"Unit 2 Home Sweet Home单元质量评价"},
+  {q:"Mr. Wang couldn't write last year, he has been ill for three years.", o:["mustn't","couldn't","shouldn't","needn't"], a:1, e:"couldn't 表示不能，根据 he has been ill 可知。", source:"Unit 2 Home Sweet Home单元质量评价"},
+  {q:"—Can you help me answer the telephone? —Sure.", o:["Must","Should","Can","Need"], a:2, e:"Can you...? 表示请求。", source:"Unit 2 Home Sweet Home单元质量评价"},
+  {q:"—Could you go to the new movie with me now? —Sorry, I can't. Look, it's time for me to watch The Readers on CCTV.", o:["can't","couldn't","needn't","mustn't"], a:0, e:"Could you...? 的否定回答用 can't。", source:"Unit 2 Home Sweet Home单元质量评价"},
+  {q:"My uncle has lived in this apartment for over 10 years, and he doesn't want to move.", o:["has come","came","has lived","lives"], a:2, e:"for over 10 years 提示用现在完成时。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"We have a small storage room to keep our old clothes and seasonal items.", o:["store","storage","storing","stored"], a:1, e:"storage room 表示储藏室。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"He used not to like doing housework, but now he helps his mom clean the house every weekend.", o:["didn't used to","used not to","wasn't used to","isn't used to"], a:1, e:"used not to do sth. 表示过去不常做某事。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"I love sitting on the balcony to watch the stars and the city lights at night.", o:["floor","balcony","kitchen","bathroom"], a:1, e:"balcony 表示阳台，可以坐在上面看星星和城市灯光。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"We are looking forward to moving into our new house next month; we've already bought all the furniture.", o:["looking forward to","looking for","looking after","looking up"], a:0, e:"look forward to 表示期待。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"We can't afford to buy a house in the city center, so we decide to rent one near the subway station.", o:["buy; rent","rent; buy","live; stay","stay; live"], a:0, e:"buy 表示买，rent 表示租，根据 can't afford 和 decide to 可知。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"—How long have you lived in this town? —For about seven years.", o:["How soon","How long","How often","How far"], a:1, e:"How long 提问时间长度，答语 For about seven years 表示一段时间。", source:"Unit 2 Home Sweet Home单元练习"},
+  {q:"—Could you please help me take out the rubbish? —Sure, I can.", o:["Yes, please","No, I couldn't","Sure, I can","You're welcome"], a:2, e:"对 Could you please...? 的肯定回答用 Sure, I can。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—Sally always shares her new hobbies with her best friends. —Yeah. She is very kind and outgoing.", o:["for","about","with","from"], a:2, e:"share sth. with sb. 是固定搭配。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"Mum asked me to water the flowers in the garden every morning.", o:["water","feed","sweep","cook"], a:0, e:"water 表示浇水，water the flowers 表示给花浇水。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"Could you take out the rubbish when you go out? It's getting smelly.", o:["take out","hang up","pack up","clean up"], a:0, e:"take out the rubbish 表示倒垃圾。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"—Is there a library near here? —Yes, there is. You can find it at the end of this road.", o:["in","at","by","on"], a:1, e:"at the end of 表示在……的尽头。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"—Do you take the bus to school every day? —Yes. It takes me about 20 minutes.", o:["take; spends","spend; costs","take; takes","spend; takes"], a:2, e:"第一空 take the bus 表示乘公交车；第二空 It takes sb. some time 表示花费某人多长时间。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"—Mom, can you go shopping with me this Sunday? —I'm afraid not. I have to look after your grandma. You can go with your sister.", o:["can; have to","can; can","must; have to","must; can"], a:0, e:"第一空 can 表示请求；第二空 have to 表示不得不。", source:"Unit 2 Home Sweet Home单元测试卷"},
+  {q:"—I'm sorry to trouble you. —It doesn't matter.", o:["You're welcome","It doesn't matter","That's right","Thank you"], a:1, e:"It doesn't matter 回答道歉，表示没关系。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—Thank you for helping me with my English. —No problem.", o:["That's right","No problem","Never mind","It doesn't matter"], a:1, e:"No problem 回答感谢，表示不客气。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—Would you like to go shopping with me? —Yes, I'd love to.", o:["Sorry, I can't","Yes, I'd love to","No, thanks","That's all right"], a:1, e:"根据 I'd love to 可知接受邀请。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—What a sunny day! Why not go camping with your friends? —That sounds great.", o:["It's my pleasure.","You'd better not.","No, I don't mind.","That sounds great."], a:3, e:"That sounds great. 表示听起来很棒，同意对方的建议。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—This is so difficult that I want to give up. —Take it easy. After all, it takes time to learn something new.", o:["In that case","For example","By the way","After all"], a:3, e:"after all 表示毕竟，毕竟学新东西需要时间。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—What do you like about the movie Ne Zha? —It's wonderful. And I have seen it twice.", o:["How","What","Why","When"], a:1, e:"What do you like about...? 表示你喜欢……的什么。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—I had a pleasant summer vacation with my family in the south. —Glad to hear that.", o:["Oh, that's nice of you","Enjoy yourself","Glad to hear that","It was awful"], a:2, e:"Glad to hear that 表示听到这个很高兴。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—How was your summer camp last week? —Really good.", o:["Let's go","That's right","I'm fine","Really good"], a:3, e:"Really good 是对 How was...? 的恰当回答。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—Did you go to the mountain with your parents, Tom? —No, I didn't. We went to the Science Museum.", o:["Yes, I did","Yes, I was","No, I didn't","No, I wasn't"], a:2, e:"根据 We went to the Science Museum 可知没去爬山。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"},
+  {q:"—Did you go anywhere interesting this summer vacation? —Not really. I only stayed at home to study for the test.", o:["Of course","No problem","Not really","Sounds great"], a:2, e:"Not really 表示不完全是，根据 I only stayed at home 可知。", source:"人教版(安徽)八年级上册Unit 2单元检测卷"}
+];
+
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('82_kp2_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('82_kp2_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('82_kp2_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = '第 ' + (state.qi+1) + ' / ' + state.quiz.length + ' 题';
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100) + '%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML = '<span class="key">' + LETTERS[i] + '</span><span class="txt">' + op + '</span>';
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? '<div class="verdict">回答正确 · +5 分</div><div class="exp">' + q.e + '</div>'
+    : '<div class="verdict">回答错误 · 正确答案 ' + LETTERS[q.a] + '</div><div class="exp">' + q.e + '</div>';
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 2 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 2 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent='答对 ' + (state.score/5) + ' 题，得分 ' + state.score + ' / 100。' + s;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>'<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>').join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>
