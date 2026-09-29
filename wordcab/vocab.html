@@ -566,17 +566,9 @@ function onBottomBtn(){
   }
 }
 
-document.getElementById('userName').textContent = localStorage.getItem('dd_name') || '';
-// 先同步读本地数据并刷新
-function init(){
-  // 直接调setGrade，它会同步读本地显示，再异步拉云端
-  setGrade('7A');
-}
-if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+// 页面加载后立即初始化
+window.addEventListener('load', function(){ setGrade('7A'); });
+setTimeout(function(){ setGrade('7A'); }, 100);
 </script>
 <div style="text-align:center;padding:20px 16px 30px;font-size:11px;color:#9ca3af;line-height:2">
   <div>@多多好学 版权所有</div>
