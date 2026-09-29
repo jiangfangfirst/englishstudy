@@ -3,7 +3,7 @@
 <head>
 <script>
 // 登录检查：未登录跳回login.html
-if(!localStorage.getItem('dd_auth')){ location.href='login.html'; }
+if(!localStorage.getItem('dd_auth')){ location.href='../login.html'; }
 </script>
 
 <meta charset="UTF-8" />
@@ -567,7 +567,7 @@ function logout(){
   localStorage.removeItem('dd_auth');
   localStorage.removeItem('dd_name');
   localStorage.removeItem('dd_login_time');
-  location.href='login.html';
+  location.href='../login.html';
 }
 function clearAllData(){
   if(!confirm('确定清空所有年级的所有学习数据？')) return;
