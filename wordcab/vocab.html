@@ -372,7 +372,7 @@ function renderKeyboard(){
 }
 
 function pressKey(l){
-  if(typed.length >= current.w.length) return;
+  if(typed.length >= current.w.length + 2) return;
   typed += l.toLowerCase();
   updateBlank();
 }
