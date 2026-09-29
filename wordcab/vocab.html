@@ -35,7 +35,7 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 .grade-tabs .tab:hover { color: #374151; }
 
 .example-en { font-size: 20px; line-height: 1.8; color: #1f2937; margin-bottom: 12px; }
-.blank { display: inline-block; min-width: 80px; border-bottom: 2px solid #10b981; text-align: center; font-weight: 700; padding: 0 6px; }
+.blank { display: inline-block; border-bottom: 2px solid #10b981; text-align: center; font-weight: 700; padding: 0 10px; min-width: 80px; }
 .example-cn { font-size: 15px; color: #6b7280; margin-bottom: 16px; }
 .phonetic { font-size: 16px; color: #3b82f6; margin-bottom: 16px; font-family: "Lucida Sans Unicode",sans-serif; }
 .feedback { margin-top: 12px; padding: 12px; border-radius: 10px; font-size: 14px; display: none; }
@@ -181,14 +181,15 @@ function saveState(){
   cloudSet(storageKey(), data);
 }
 
-function setGrade(g){
+async function setGrade(g){
   grade = g;
   WORDS = GRADE_MAP[g].data;
   document.querySelectorAll('#gradeTabs .tab').forEach(t=>{
     t.classList.toggle('active', t.dataset.grade===g);
   });
-  loadState();
+  await loadState();
   setMode('learn');
+  refreshAllGradeStats();
 }
 
 function remainNew(){
@@ -215,16 +216,35 @@ function makeBlank(en, word){
   for(const v of vs){
     const re = new RegExp('\\b'+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i');
     if(re.test(html)){
-      return html.replace(re, '<span class="blank" id="blankSpace">&nbsp;</span>');
+      var bw = (v.length + 2) * 14 + 20; return html.replace(re, '<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>');
     }
   }
   // 如果没匹配到（例句里没有目标词），在句末加横线
-  return html + ' <span class="blank" id="blankSpace">&nbsp;</span>';
+  var bw2 = (word.length + 2) * 14 + 20; return html + ' <span class="blank" id="blankSpace" style="min-width:'+bw2+'px">&nbsp;</span>';
 }
 
+function refreshAllGradeStats(){
+  // 统计所有年级总数
+  let totalLearned = 0, totalReview = 0;
+  ['7A','7B','8A','8B','9'].forEach(g=>{
+    try{
+      const k = 'dd_'+_auth+'_'+g;
+      const local = localStorage.getItem(k);
+      if(local){
+        const j = JSON.parse(local);
+        totalLearned += (j.learned || 0);
+        totalReview += (j.review || []).length;
+      }
+    }catch(e){}
+  });
+  const el = document.getElementById('learned');
+  const er = document.getElementById('review');
+  if(el) el.textContent = totalLearned;
+  if(er) er.textContent = totalReview;
+}
 function refreshStats(){
-  document.getElementById('learned').textContent = learnedCount;
-  document.getElementById('review').textContent = reviewSet.length;
+  // header显示总数，选项卡显示当前年级
+  refreshAllGradeStats();
   document.getElementById('reviewCount').textContent = reviewSet.length;
   const sn = document.getElementById('statN');
   const sm = document.getElementById('statM');
