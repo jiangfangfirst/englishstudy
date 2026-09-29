@@ -64,11 +64,7 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 <body>
 <div class="header">
   <h1>多多好学背单词</h1>
-  <div class="stats" id="userName" style="font-size:12px;color:#9ca3af;margin-right:auto"></div>
-  <div class="stats">
-    <span>已学 <b id="learned">0</b></span>
-    <span>待复习 <b id="review">0</b></span>
-  </div>
+  <div style="margin-left:auto;font-size:12px;color:#9ca3af" id="headerInfo"></div>
 </div>
 <div class="container">
   <!-- 册选择：移到card外面 -->
@@ -82,8 +78,8 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 
   <div class="card">
     <div class="tabs" id="modeTabs">
-      <div class="tab active" id="learnTab" onclick="setMode('learn')">学新词(<span id="learnCount">0</span>)</div>
-      <div class="tab" id="reviewTab" onclick="setMode('review')">复习(<span id="reviewCount">0</span>)</div>
+      <div class="tab active" id="learnTab" onclick="setMode('learn')">学新词（剩余<span id="learnCount">0</span>）</div>
+      <div class="tab" id="reviewTab" onclick="setMode('review')">待复习（<span id="reviewCount">0</span>）</div>
     </div>
 
     <div class="content-area">
@@ -94,8 +90,8 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 
       <div id="learnPage" class="hide">
         <div style="display:flex;justify-content:space-around;font-size:11px;color:#9ca3af;margin-bottom:10px">
-          <span>已学 <b id="statN" style="color:#9ca3af;font-size:12px;font-weight:400">0</b></span>
-          <span>待记 <b id="statM" style="color:#9ca3af;font-size:12px;font-weight:400">0</b></span>
+          <span>检测通过 <b id="statN" style="color:#9ca3af;font-size:12px;font-weight:400">0</b></span>
+          <span>需要复习 <b id="statM" style="color:#9ca3af;font-size:12px;font-weight:400">0</b></span>
           <span>成功率 <b id="statT" style="color:#9ca3af;font-size:12px;font-weight:400">0%</b></span>
         </div>
         <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
@@ -154,7 +150,8 @@ async function cloudSet(k, v){
   }catch(e){}
 }
 async function loadState(){
-  // 先读本地
+  // 先读本地新key
+  let found = false;
   try{
     const local = localStorage.getItem(storageKey());
     if(local){
@@ -162,8 +159,26 @@ async function loadState(){
       learnedCount = j.learned || 0;
       reviewSet = j.review || [];
       masteredSet = j.mastered || [];
+      found = true;
     }
-  }catch(e){ learnedCount=0; reviewSet=[]; masteredSet=[]; }
+  }catch(e){}
+  // 迁移旧key（dd_{grade}_mastered/review/learned）
+  if(!found){
+    try{
+      const oldM = localStorage.getItem('dd_'+grade+'_mastered');
+      const oldR = localStorage.getItem('dd_'+grade+'_review');
+      const oldL = localStorage.getItem('dd_'+grade+'_learned');
+      if(oldM || oldR || oldL){
+        masteredSet = oldM ? JSON.parse(oldM) : [];
+        reviewSet = oldR ? JSON.parse(oldR) : [];
+        learnedCount = parseInt(oldL || '0');
+        // 写入新key
+        saveState();
+        found = true;
+      }
+    }catch(e){}
+  }
+  if(!found){ learnedCount=0; reviewSet=[]; masteredSet=[]; }
   // 从云端拉取最新
   const cloud = await cloudGet(storageKey());
   if(cloud){
@@ -190,6 +205,13 @@ async function setGrade(g){
   });
   await loadState();
   setMode('learn');
+  refreshStats();
+  refreshAllGradeStats();
+}
+// 立即刷新本地数据（不等云端）
+function refreshLocalNow(){
+  setMode('learn');
+  refreshStats();
   refreshAllGradeStats();
 }
 
@@ -225,23 +247,20 @@ function makeBlank(en, word){
 }
 
 function refreshAllGradeStats(){
-  // 统计所有年级总数
-  let totalLearned = 0, totalReview = 0;
+  let total = 0;
   ['7A','7B','8A','8B','9'].forEach(g=>{
     try{
       const k = 'dd_'+_auth+'_'+g;
       const local = localStorage.getItem(k);
       if(local){
         const j = JSON.parse(local);
-        totalLearned += (j.learned || 0);
-        totalReview += (j.review || []).length;
+        total += (j.learned || 0) + (j.review || []).length;
       }
     }catch(e){}
   });
-  const el = document.getElementById('learned');
-  const er = document.getElementById('review');
-  if(el) el.textContent = totalLearned;
-  if(er) er.textContent = totalReview;
+  const name = localStorage.getItem('dd_name') || '同学';
+  const el = document.getElementById('headerInfo');
+  if(el) el.textContent = name + ' 已学' + total;
 }
 function refreshStats(){
   // header显示总数，选项卡显示当前年级
@@ -502,7 +521,25 @@ function onBottomBtn(){
 }
 
 document.getElementById('userName').textContent = localStorage.getItem('dd_name') || '';
-setGrade('7A');
+// 先同步读本地数据并刷新
+(function(){
+  grade = '7A';
+  WORDS = GRADE_MAP['7A'].data;
+  try{
+    const local = localStorage.getItem(storageKey());
+    if(local){
+      const j = JSON.parse(local);
+      learnedCount = j.learned || 0;
+      reviewSet = j.review || [];
+      masteredSet = j.mastered || [];
+    }
+  }catch(e){}
+  setMode('learn');
+  refreshStats();
+  refreshAllGradeStats();
+  // 再异步拉云端更新
+  setGrade('7A');
+})();
 </script>
 <div style="text-align:center;padding:20px 16px 30px;font-size:11px;color:#9ca3af;line-height:2">
   <div>@多多好学 版权所有</div>
