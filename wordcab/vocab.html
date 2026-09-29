@@ -64,6 +64,7 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 <body>
 <div class="header">
   <h1>多多好学背单词</h1>
+  <div class="stats" id="userName" style="font-size:12px;color:#9ca3af;margin-right:auto"></div>
   <div class="stats">
     <span>已学 <b id="learned">0</b></span>
     <span>待复习 <b id="review">0</b></span>
@@ -500,6 +501,7 @@ function onBottomBtn(){
   }
 }
 
+document.getElementById('userName').textContent = localStorage.getItem('dd_name') || '';
 setGrade('7A');
 </script>
 </body>

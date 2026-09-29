@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8" />
@@ -30,7 +30,13 @@
 <script>
  const UP_URL = "https://fitting-ostrich-312589.upstash.io";
  const UP_TOKEN = "gQAAAAAABMUNAAIgcDFiZDU2MDM2YWJkYzg0YTgyOTRlOTUzMjM1MWY1ZGJhNg";
- const VALID_CODES = ['duoduo2026','jiang2026','abc123','zw123','cs123'];
+ const VALID_CODES = ['duoduo2026','jiang2026','abc123','jiang2**3*6','1**01*9*'];
+ // 学习码 → 学生名映射（老师可自行增删）
+ const STUDENT_MAP = {
+   'duoduo2026': '多多',
+   'jiang2026': '姜老师',
+   'abc123': '测试同学'
+ };
 
  function getDeviceId(){
    let d = localStorage.getItem('dd_device_id');
@@ -53,7 +59,16 @@
 
  async function login(){
    const c = document.getElementById('code').value.trim().toLowerCase();
-   if(!VALID_CODES.includes(c)){ showErr('学习码错误，请重试'); return; }
+     // 支持通配符 *（匹配任意字符）
+  function matchCode(code){
+    return VALID_CODES.some(pattern=>{
+      if(pattern===code) return true;
+      if(pattern.indexOf('*')<0) return false;
+      const reg = new RegExp('^'+pattern.replace(/[.+?^${}()|[\]\\]/g,'\\$&').replace(/\*/g,'.*')+'$');
+      return reg.test(code);
+    });
+  }
+  if(!matchCode(c)){ showErr('学习码错误，请重试'); return; }
    const did = getDeviceId();
    const key = 'device:' + c;
    const bound = await upGet(key);
@@ -66,6 +81,7 @@
    }
    localStorage.setItem('dd_auth', c);
    localStorage.setItem('dd_login_time', Date.now().toString());
+   localStorage.setItem('dd_name', STUDENT_MAP[c] || '同学');
    location.href = 'index.html';
  }
  document.getElementById('code').addEventListener('keydown', e => { if(e.key==='Enter') login(); });
