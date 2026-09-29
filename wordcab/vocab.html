@@ -504,5 +504,21 @@ function onBottomBtn(){
 document.getElementById('userName').textContent = localStorage.getItem('dd_name') || '';
 setGrade('7A');
 </script>
+<div style="text-align:center;padding:20px 16px 30px;font-size:11px;color:#9ca3af;line-height:2">
+  <div>@多多好学 版权所有</div>
+  <div style="margin-top:6px"><a href="javascript:void(0)" onclick="clearAllData()" style="color:#ef4444;font-size:11px">一键清空所有数据（测试用）</a></div>
+</div>
+<script>
+function clearAllData(){
+  if(!confirm('确定清空所有年级的所有学习数据？')) return;
+  ['7A','7B','8A','8B','9'].forEach(g=>{
+    const k = 'dd_'+_auth+'_'+g;
+    localStorage.removeItem(k);
+    cloudSet(k, JSON.stringify({learned:0,review:[],mastered:[]}));
+  });
+  alert('已清空');
+  location.reload();
+}
+</script>
 </body>
 </html>
