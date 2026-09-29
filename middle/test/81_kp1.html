@@ -1,0 +1,618 @@
+# Query: 
+# ContextLines: 1
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>八年级KP1</h1>
+        <p>复合不定代词 · 一般过去时 · 词汇短语辨析 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">八年级上册Unit 1 · 在线检测</span>
+      <h2>单元检测核心库KP1</h2>
+      <p>涵盖复合不定代词、一般过去时、形容词辨析、动词短语搭配、情景交际等高频考点。系统从全量题库中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"—What's new in the newspaper? —Israel and Palestine are still in war and a large number of people are losing their lives.", o:["Anything new","Nothing new","Something new"], a:0, e:"疑问句中用 anything，形容词 new 修饰复合不定代词时后置。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"Although everything was expensive in Hong Kong, I still bought ________ for my daughter.", o:["special something","something special","special anything","anything special"], a:1, e:"肯定句中用 something；形容词 special 后置。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Why did you call me yesterday? —I want to tell you ________.", o:["something important","anything important","important something","important anything"], a:0, e:"肯定句中用 something；形容词 important 后置。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Can I have something to eat, mom? —Sorry, there is ________ left at home. Let's go shopping now.", o:["anything","everything","nothing","something"], a:2, e:"根据“Let's go shopping now”可知家里没剩下什么吃的，用 nothing。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—How is Lily in the new school? —She is doing very well. There is ________ to worry about.", o:["something","nothing","everything"], a:1, e:"根据“She is doing very well”可知没什么好担心的。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Would you like to go shopping with me? —Sorry, I have ________ to do.", o:["something else","nothing else","anything else"], a:0, e:"肯定句中用 something；else 后置。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Did you buy ________ when you were in Hong Kong, Dad? —Yes, I bought a toy robot for you.", o:["special something","special anything","nothing special","anything special"], a:3, e:"疑问句中用 anything；形容词 special 后置。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"Michael had to walk to work because there was ________ with his car.", o:["something wrong","anything wrong","nothing wrong"], a:0, e:"肯定句中用 something；形容词 wrong 后置。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Why didn't you come to Jenny's birthday party? ________ else was there. —Sorry, I had to take a piano lesson.", o:["Everybody","Nobody","Anybody"], a:0, e:"根据“I had to take a piano lesson”可知其他人都在。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"Boys and girls, please follow your heart and never let ________ take away your dreams.", o:["no one","anyone","everyone"], a:1, e:"never let anyone take away your dreams 表示“不要让任何人夺走你的梦想”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Is there ________ in today's newspaper? —No, there's ________.", o:["anything special, something enjoyable","anything special, nothing enjoyable","special anything, nothing enjoyable","special anything, enjoyable nothing"], a:1, e:"疑问句中用 anything special；根据“No”可知没什么令人愉快的新闻，用 nothing enjoyable。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Why do you come to school on foot? —There is ________ with my bike.", o:["anything wrong","something wrong","wrong something"], a:1, e:"肯定句中用 something；形容词 wrong 后置。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"Tomorrow is Father's Day, but I can't think of ________ to buy for my father.", o:["anything special","something special","special something"], a:0, e:"否定句中用 anything special。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"Did you do ________ in the countryside with your family?", o:["something interesting","interesting something","anything interesting","interesting anything"], a:2, e:"疑问句中用 anything；形容词 interesting 后置。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"—I'll have a tennis game tomorrow. I'm a little bit nervous. —Believe in ________. You're the best in our club.", o:["herself","myself","yourself","himself"], a:2, e:"主语是 you，用反身代词 yourself，believe in oneself 表示“相信自己”。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"There isn't ________ in the classroom. All the students are having a PE lesson in the playground.", o:["somebody","anybody","nobody","everybody"], a:1, e:"否定句中用 anybody。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"I didn't buy anything for ________ when I was on vacation.", o:["me","my","myself","mine"], a:2, e:"buy sth. for oneself 表示“给自己买某物”。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"—Would you like ________ to drink? —Great, a glass of cold coke please.", o:["something cold","cold something","anything cold","cold anything"], a:0, e:"表示委婉请求的疑问句中用 something；形容词 cold 后置。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"—Helen, did you do ________ last weekend? —Yes, I visited my grandparents in the countryside.", o:["anything special","something special","special anything","special something"], a:0, e:"疑问句中用 anything；形容词 special 后置。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"Mary wanted to have a word with Tom. She had ________ to tell him.", o:["important something","nothing important","anything important","something important"], a:3, e:"肯定句中用 something；形容词 important 后置。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"—Did everyone have a good time? —Oh, yes. ________ was excellent. We love it so much.", o:["Something","Nothing","Anything","Everything"], a:3, e:"根据“We love it so much”可知一切都很棒。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"—The math exam was very difficult. —Don't worry. ________ is impossible if you put your heart into it.", o:["Nothing","Something","Everything","Anything"], a:0, e:"根据句意“只要用心，没有什么是不可能的”。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"There is ________ interesting in today's newspaper.", o:["something","nothing","anything","everything"], a:1, e:"根据语境，报纸上没什么有趣的东西。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—How is it going, Sally? —________ is excellent.", o:["Nothing","Anything","Something","Everything"], a:3, e:"根据“excellent”可知一切都很棒。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"Be quiet, please. I have ________ important to tell you.", o:["anything","something","nothing","everything"], a:1, e:"肯定句中用 something；形容词 important 后置。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"All the students went out. There was ________ in the classroom now.", o:["somebody","anybody","nobody","everybody"], a:2, e:"根据“All the students went out”可知教室里没有人。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"________ had a good time at the party yesterday.", o:["Somebody","Anybody","Nobody","Everybody"], a:3, e:"根据语境，每个人都在聚会上玩得很开心。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—Did you buy ________ special? —Yes, I bought some souvenirs.", o:["something","anything","nothing","everything"], a:1, e:"疑问句中用 anything。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"I have ________ to say. Thank you for listening.", o:["something else","else something","anything else","else anything"], a:0, e:"肯定句中用 something；else 后置。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"Yesterday ________ unusual took place at the famous restaurant.", o:["nothing","anything","something","everything"], a:2, e:"肯定句中用 something，表示“某件不寻常的事”。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—Jane, you look unhappy. Is ________ all right? —Yes. I'm just bored and I've got ________ interesting to do.", o:["anything; nothing","everything; something","everything; nothing","anything; something"], a:2, e:"第一空 Is everything all right? 是固定表达；第二空根据“bored”可知没什么有趣的事做。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"Without saying ________, he left.", o:["anything else","something else","else something","else anything"], a:0, e:"without 是否定词，用 anything；else 后置。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—Tom, you played the piano very well at the concert. Who taught you? —________. I taught myself.", o:["Somebody","Anybody","Nobody","Everybody"], a:2, e:"根据“I taught myself”可知没有人教他。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—Here is today's newspaper! I just read it. —Thanks, is there ________ in it?", o:["something new","new something","anything new","new anything"], a:2, e:"疑问句中用 anything；形容词 new 后置。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—Is there ________ in today's newspaper? —The 19th Asian Games are held in Hangzhou, China from September 23 to October 8.", o:["nothing important","important nothing","anything important","important anything"], a:2, e:"疑问句中用 anything；形容词 important 后置。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—Mrs. Williams, what's your ________ of being a wonderful tennis player? —Nothing special. I just work hard every day.", o:["hope","secret","change","information"], a:1, e:"secret 表示“秘诀”，根据“Nothing special. I just work hard”可知。", source:"专题01单项选择（期中真题汇编，安徽专用）八年级英语上学期"},
+{q:"________ wants to make their dreams come true, but few can make it.", o:["Somebody","Anybody","Nobody","Everybody"], a:3, e:"根据“but few can make it”可知每个人都想实现梦想。", source:"专题01单项选择（期中真题汇编，安徽专用）八年级英语上学期"},
+{q:"—Why did you miss the meeting? —I'm so ________ these days. I just forgot about it.", o:["lucky","forgetful","awful","safe"], a:1, e:"forgetful 表示“健忘的”，根据“I just forgot about it”可知。", source:"专题01单项选择（期中真题汇编，安徽专用）八年级英语上学期"},
+{q:"The two sides decided to ________ their differences on the football field.", o:["fight for","fight against","fight with","fight out"], a:3, e:"fight out 表示“通过斗争解决”，双方决定在足球场上解决分歧。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"—What kind of music do you like? —I like many kinds, ________ pop music.", o:["usually","quickly","especially","probably"], a:2, e:"especially 表示“尤其”，根据“I like many kinds”可知尤其喜欢流行音乐。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"The sisters often have a ________ over who gets to use the computer first.", o:["fight","meal","trip","song"], a:0, e:"have a fight over 表示“因为……争吵”。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"—How did you move all these things to your new house quickly? —Some of my neighbors ________ to help me last weekend.", o:["stopped","asked","offered","forgot"], a:2, e:"offer to do sth. 表示“主动提出做某事”。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"Many hotels in China ________ free toothbrushes to every guest.", o:["offer","provide","manage","develop"], a:0, e:"offer sth. to sb. 表示“向某人提供某物”。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"He is so honest a man that we all ________ him.", o:["teach","trust","refuse","advise"], a:1, e:"trust 表示“信任”，根据“so honest a man”可知。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"—They ________ working after a quick dinner. —Well, I advised them to have a rest, but they refused.", o:["hated","stopped","continued","practiced"], a:2, e:"continue doing sth. 表示“继续做同一件事”。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"You can drive my car as long as you promise to drive ________.", o:["beautifully","carefully","quietly","quickly"], a:1, e:"carefully 表示“小心地”，开车要小心。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"Mary isn't a ________ nurse, so now she is receiving a week's ________ in a hospital.", o:["trained; train","training; training","training; train","trained; training"], a:3, e:"trained 是形容词，表示“受过训练的”；training 是名词，表示“培训”。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"I want to have a ________ talk with you.", o:["face-to-face","back to back","shoulder to shoulder","step by step"], a:0, e:"face-to-face 是复合形容词，表示“面对面的”。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"—Miss Zhang, what can I do to improve my English? —I think you should realize the ________ of learning English first.", o:["idea","opinion","difficulty","importance"], a:3, e:"importance 表示“重要性”，意识到学英语的重要性。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"—Do you think we have a ________ of winning the game? —Of course. We practice a lot.", o:["difficulty","chance","choice","change"], a:1, e:"chance 表示“机会”，have a chance of doing sth. 表示“有做某事的机会”。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"—What did you do ________ the summer vacation? —We went to the beach and visited my grandparents in the summer vacation.", o:["after","before","during","between"], a:2, e:"during the summer vacation 表示“在暑假期间”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—How was your vacation? —Pretty good! I ________ the Great Wall with my friends.", o:["climb","am climbing","climbed","can climb"], a:2, e:"根据“How was your vacation”可知回答用一般过去时 climbed。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"Jeff didn't wear his raincoat in the heavy rain, ________ he was all wet.", o:["because","but","or","so"], a:3, e:"so 表示结果，根据“he was all wet”可知结果是他全身湿透了。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What did you do yesterday evening, Gina? —I ________ Titanic 3D in the City Cinema.", o:["watch","watched","am watching","will watch"], a:1, e:"yesterday evening 提示用一般过去时 watched。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Where did you go on vacation last winter? —I ________ to Hainan with my family and had a good time there.", o:["fly","flew","flying","will fly"], a:1, e:"last winter 提示用一般过去时，fly 的过去式是 flew。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"Tom ________ the piano every day when he was in primary school.", o:["plays","played","is playing","will play"], a:1, e:"when he was in primary school 提示用一般过去时 played。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Did you ________ last week? —Yes. I went to Beijing with my family.", o:["go somewhere","go anywhere","went somewhere","went anywhere"], a:1, e:"Did 后接动词原形 go；疑问句中用 anywhere。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—What did you do last weekend? —I ________ to the movies with my friends.", o:["will go","go","goes","went"], a:3, e:"last weekend 提示用一般过去时 went。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"Jessica ________ every night before her Chinese test and got good results.", o:["studies","studied","is studying","will study"], a:1, e:"根据“got”可知句子用一般过去时，study 的过去式是 studied。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Peter, did you play table tennis with your friends after school yesterday? —No, I didn't. We ________ vegetables in our school garden.", o:["water","waters","watered","are watering"], a:2, e:"根据“did you play”和“No, I didn't”可知回答用一般过去时 watered。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"They ________ to visit the museum last week.", o:["go","went","are going","will go"], a:1, e:"last week 提示用一般过去时 went。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"Mother ________ me a nice present on my birthday last year.", o:["gives","gave","is giving","will give"], a:1, e:"last year 提示用一般过去时 gave。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"________ you ________ to the beach last Sunday?", o:["Do; go","Did; go","Are; going","Will; go"], a:1, e:"last Sunday 提示用一般过去时，疑问句用 Did + 主语 + 动词原形。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"She ________ her homework at home yesterday.", o:["doesn't do","didn't do","isn't doing","won't do"], a:1, e:"yesterday 提示用一般过去时，否定句用 didn't + 动词原形。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—What did you do on your vacation? —I ________ my grandparents in the countryside.", o:["visit","visited","am visiting","will visit"], a:1, e:"根据“did you do”可知回答用一般过去时 visited。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"We ________ a great time at the party last night.", o:["have","had","are having","will have"], a:1, e:"last night 提示用一般过去时 had。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"He ________ up early and ________ to school on foot yesterday morning.", o:["gets; goes","got; went","is getting; is going","will get; will go"], a:1, e:"yesterday morning 提示用一般过去时，get 的过去式是 got，go 的过去式是 went。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—________ your father ________ to work by bus yesterday? —Yes, he did.", o:["Does; go","Did; go","Is; going","Will; go"], a:1, e:"yesterday 提示用一般过去时，疑问句用 Did + 主语 + 动词原形。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"The little boy ________ his mother at the bus stop an hour ago.", o:["meets","met","is meeting","will meet"], a:1, e:"an hour ago 提示用一般过去时 met。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—Did you enjoy your vacation? —Yes, I ________ a wonderful time.", o:["have","had","am having","will have"], a:1, e:"根据“Did you enjoy”可知回答用一般过去时 had。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"Last summer, my family ________ to Sanya for a holiday.", o:["go","went","goes","will go"], a:1, e:"last summer 提示用一般过去时 went。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"—When ________ you ________ the Great Wall? —Last month.", o:["do; visit","did; visit","are; visiting","will; visit"], a:1, e:"根据答语“Last month”可知用一般过去时，疑问句用 Did + 主语 + 动词原形。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"She ________ TV with her family last night.", o:["watch","watched","is watching","will watch"], a:1, e:"last night 提示用一般过去时 watched。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"—How was your weekend? —It ________ great! We ________ to the park.", o:["is; go","was; went","is; went","was; go"], a:1, e:"根据“How was”可知回答用一般过去时，第一空用 was，第二空用 went。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"I ________ a book about history last Sunday.", o:["read","reads","am reading","will read"], a:0, e:"last Sunday 提示用一般过去时，read 的过去式仍是 read。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"—Who ________ you to the zoo yesterday? —My father did.", o:["takes","took","is taking","will take"], a:1, e:"yesterday 提示用一般过去时 took。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"The students ________ a school trip last week.", o:["have","had","are having","will have"], a:1, e:"last week 提示用一般过去时 had。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"—Did your sister go shopping with you? —No, she ________ at home.", o:["stays","stayed","is staying","will stay"], a:1, e:"根据“Did your sister go”可知回答用一般过去时 stayed。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"He ________ me a postcard from Beijing last month.", o:["sends","sent","is sending","will send"], a:1, e:"last month 提示用一般过去时 sent。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"—Where ________ you go on vacation? —I went to the mountains.", o:["do","did","are","will"], a:1, e:"根据答语“went”可知问句用一般过去时 did。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"It ________ rainy last weekend, so we stayed at home.", o:["is","was","are","were"], a:1, e:"last weekend 提示用一般过去时，主语 it 用 was。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"—What ________ she do last Sunday? —She visited her aunt.", o:["does","did","is","will"], a:1, e:"last Sunday 提示用一般过去时，疑问句用 did。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"We ________ many photos during our trip to Guilin.", o:["take","took","are taking","will take"], a:1, e:"描述过去的旅行经历，用一般过去时 took。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"—Did you ________ the museum last week? —Yes, I did.", o:["visit","visited","visiting","visits"], a:0, e:"Did 后接动词原形 visit。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"My brother ________ born in 2010.", o:["is","was","are","were"], a:1, e:"in 2010 是过去时间，用 was born。", source:"八年级英语上册Unit 1单元自测卷-安徽专用"},
+{q:"We didn't go back to the hotel ________ it began to rain heavily.", o:["until","so","whether","or"], a:0, e:"not...until... 表示“直到……才……”。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—The rubbish gives off a bad ________. —Oh, I'll take it out at once.", o:["sound","look","smell","piece"], a:2, e:"give off a bad smell 表示“散发出难闻的气味”。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—Can you ________ your new coach? —Hmm... I think he is very humorous.", o:["believe","describe","support","follow"], a:1, e:"describe 表示“描述”，根据“I think he is very humorous”可知是描述新教练。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—I didn't go anywhere on vacation. What about you? —I didn't go anywhere, ________.", o:["too","also","either","neither"], a:2, e:"either 用于否定句末尾，表示“也”。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"________ your head, and you will have an idea.", o:["Use","Using","To use","Used"], a:0, e:"祈使句以动词原形开头。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"Don't come ________ I phone you.", o:["if","unless","when","because"], a:1, e:"unless 表示“除非”，除非我打电话，否则不要来。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"The proper ________ of your spare time will make your life colorful.", o:["date","use","name","cause"], a:1, e:"use of spare time 表示“业余时间的利用”。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—I had a pleasant summer vacation with my family in the south. —________.", o:["Oh, that's nice of you","Enjoy yourself","Glad to hear that","It was awful"], a:2, e:"Glad to hear that 表示“听到这个很高兴”。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—How was your summer camp last week? —________.", o:["Let's go","That's right","I'm fine","Really good"], a:3, e:"Really good 是对 How was...? 的恰当回答。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Did you go to the mountain with your parents, Tom? —________. We went to the Science Museum.", o:["Yes, I did","Yes, I was","No, I didn't","No, I wasn't"], a:2, e:"根据“We went to the Science Museum”可知没去爬山，用 No, I didn't。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Did you go anywhere interesting this summer vacation? —________. I only stayed at home to study for the test.", o:["Of course","No problem","Not really","Sounds great"], a:2, e:"Not really 表示“不完全是”，根据“I only stayed at home”可知。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Where did you go for your holiday? —I ________ to the mountains with my friends.", o:["go","went","am going","will go"], a:1, e:"描述过去的假期经历，用一般过去时 went。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Did you enjoy ________ at the party? —Yes, we did.", o:["yourself","yourselves","myself","themselves"], a:1, e:"主语是 we，用反身代词 yourselves，enjoy oneself 表示“玩得开心”。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—What did you do on your last day off? —I ________ my room and ________ my homework.", o:["clean; do","cleaned; did","am cleaning; am doing","will clean; will do"], a:1, e:"根据“did you do”可知回答用一般过去时 cleaned 和 did。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Did you go to the beach last summer? —No, I ________. I went to the mountains.", o:["don't","didn't","am not","won't"], a:1, e:"对 Did you...? 的否定回答用 No, I didn't。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Why did you miss the meeting? —I'm so ________ these days. I just forgot about it.", o:["lucky","forgetful","awful","safe"], a:1, e:"forgetful 表示“健忘的”，根据“I just forgot about it”可知。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What kind of music do you like? —I like many kinds, ________ pop music.", o:["usually","quickly","especially","probably"], a:2, e:"especially 表示“尤其”，根据“I like many kinds”可知尤其喜欢流行音乐。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"The sisters often have a ________ over who gets to use the computer first.", o:["fight","meal","trip","song"], a:0, e:"have a fight over 表示“因为……争吵”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—I can't find my English book. What should I do? —Don't worry. I will help you ________ it.", o:["look for","look at","look after","look up"], a:0, e:"look for 表示“寻找”，根据“I can't find my English book”可知。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—I had a pleasant summer vacation with my family in the south. —________.", o:["Oh, that's nice of you","Enjoy yourself","Glad to hear that","It was awful"], a:2, e:"Glad to hear that 表示“听到这个很高兴”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"Linda is new in our school so she has ________ friends here. Let's play with her together.", o:["all","few","both","little"], a:1, e:"few 表示“很少”，修饰可数名词复数，根据“Let's play with her together”可知她朋友很少。", source:"八年级英语上册UNIT 1 Where did you go on vacation单元测试卷（人教安徽版）"},
+{q:"Mary wants to write down what is going on, so she keeps a(n) ________ every day.", o:["dream","diary","habit","idea"], a:1, e:"keep a diary 表示“写日记”。", source:"八年级英语上册UNIT 1 Where did you go on vacation单元测试卷（人教安徽版）"},
+{q:"—Listen! ________ is singing in the hall. —I think it is Helen.", o:["Someone","Anyone","Everyone","No one"], a:0, e:"someone 表示“某人”，用于肯定句。", source:"八年级英语上册UNIT 1 Where did you go on vacation单元测试卷（人教安徽版）"},
+{q:"—Where did you go on vacation? —I went to a small town near Shanghai.", o:["Where did you go on vacation","Where did she go on vacation","When did you go","Where did you come from"], a:0, e:"根据答语“I went to a small town near Shanghai”可知询问地点。", source:"八年级英语上册UNIT 1 Where did you go on vacation单元测试卷（人教安徽版）"},
+{q:"There is ________ with my car. It doesn't work.", o:["something wrong","anything wrong","wrong something","wrong anything"], a:0, e:"肯定句中用 something；形容词 wrong 后置。", source:"八年级英语上册UNIT 1 Where did you go on vacation单元测试卷（人教安徽版）"},
+{q:"Did you do ________ in the countryside with your family?", o:["something interesting","interesting something","anything interesting","interesting anything"], a:2, e:"疑问句中用 anything；形容词 interesting 后置。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"—The students worked hard for months and finally won the ________ in the science competition. —Wow! Their efforts paid off!", o:["victory","vacation","visitor","village"], a:0, e:"victory 表示“胜利”，根据“won”和“science competition”可知。", source:"人教版(2024)(安徽)英语八年级上册Unit 1高频考点训练"},
+{q:"—How was your summer camp last week? —________.", o:["Let's go","That's right","I'm fine","Really good"], a:3, e:"Really good 是对 How was...? 的恰当回答。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Did you go to the mountain with your parents, Tom? —________. We went to the Science Museum.", o:["Yes, I did","Yes, I was","No, I didn't","No, I wasn't"], a:2, e:"根据“We went to the Science Museum”可知没去爬山。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Where did you go for your holiday? —I ________ to the mountains with my friends.", o:["go","went","am going","will go"], a:1, e:"描述过去的假期经历，用一般过去时 went。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Did you enjoy ________ at the party? —Yes, we did.", o:["yourself","yourselves","myself","themselves"], a:1, e:"主语是 we，用反身代词 yourselves。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—What did you do on your last day off? —I ________ my room and ________ my homework.", o:["clean; do","cleaned; did","am cleaning; am doing","will clean; will do"], a:1, e:"根据“did you do”可知回答用一般过去时 cleaned 和 did。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—Did you go anywhere interesting this summer vacation? —________. I only stayed at home to study for the test.", o:["Of course","No problem","Not really","Sounds great"], a:2, e:"Not really 表示“不完全是”，根据“I only stayed at home”可知。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"We didn't go back to the hotel ________ it began to rain heavily.", o:["until","so","whether","or"], a:0, e:"not...until... 表示“直到……才……”。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—The rubbish gives off a bad ________. —Oh, I'll take it out at once.", o:["sound","look","smell","piece"], a:2, e:"give off a bad smell 表示“散发出难闻的气味”。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—Can you ________ your new coach? —Hmm... I think he is very humorous.", o:["believe","describe","support","follow"], a:1, e:"describe 表示“描述”，根据“I think he is very humorous”可知是描述新教练。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—I didn't go anywhere on vacation. What about you? —I didn't go anywhere, ________.", o:["too","also","either","neither"], a:2, e:"either 用于否定句末尾，表示“也”。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"________ your head, and you will have an idea.", o:["Use","Using","To use","Used"], a:0, e:"祈使句以动词原形开头。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"Don't come ________ I phone you.", o:["if","unless","when","because"], a:1, e:"unless 表示“除非”，除非我打电话，否则不要来。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"The proper ________ of your spare time will make your life colorful.", o:["date","use","name","cause"], a:1, e:"use of spare time 表示“业余时间的利用”。", source:"人教版(安徽)八年级上册Units 1-2月考检测卷"},
+{q:"—The little girl looks so scared after seeing the big dog. —Let's try to ________ her down. She might feel better.", o:["bring","calm","take","put"], a:1, e:"calm sb. down 表示“使某人平静下来”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What a nice T-shirt! How much did you ________ it? —It ________ me twenty yuan.", o:["spend on; take","pay for; cost","spend in; took","pay for; costs"], a:1, e:"pay for 表示“为……付款”，主语是人；cost 表示“花费金钱”，主语是物。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"The computer is a common ________ for communication.", o:["medium","clause","event","opportunity"], a:0, e:"medium 表示“媒介”，电脑是常见的交流媒介。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—They ________ working after a quick dinner. —Well, I advised them to have a rest, but they refused.", o:["hated","stopped","continued","practiced"], a:2, e:"continue doing sth. 表示“继续做同一件事”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"If you want to build good relationships with your classmates, you should ________ them and share your feelings with them.", o:["forget","point","trust","leave"], a:2, e:"trust 表示“信任”，建立良好关系需要信任同学。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"It's ________ to talk loudly in the library.", o:["important","useful","possible","impolite"], a:3, e:"impolite 表示“不礼貌的”，在图书馆大声说话是不礼貌的。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Do your homework ________, or you'll make a lot of mistakes. —OK, I will.", o:["carefully","quickly","hopefully","clearly"], a:0, e:"carefully 表示“仔细地”，仔细做作业才不会犯错。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"Running outdoors is getting popular. It is good for our health and it almost nothing.", o:["pays","takes","spends","costs"], a:3, e:"cost 表示“花费金钱”，主语是物，跑步几乎不花钱。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Miss Zhang, what can I do to improve my English? —I think you should realize the ________ of learning English first.", o:["idea","opinion","difficulty","importance"], a:3, e:"importance 表示“重要性”，意识到学英语的重要性。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Do you think we have a ________ of winning the game? —Of course. We practice a lot.", o:["difficulty","chance","choice","change"], a:1, e:"chance 表示“机会”，have a chance of doing sth. 表示“有做某事的机会”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"I want to have a ________ talk with you.", o:["face-to-face","back to back","shoulder to shoulder","step by step"], a:0, e:"face-to-face 是复合形容词，表示“面对面的”，修饰 talk。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"Mom, can you pick me up ________ after school?", o:["on time","last time","all the time","any time"], a:0, e:"on time 表示“准时”，放学后准时来接我。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"You can drive my car as long as you promise to drive ________.", o:["beautifully","carefully","quietly","quickly"], a:1, e:"carefully 表示“小心地”，开车要小心。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"Mary isn't a ________ nurse, so now she is receiving a week's ________ in a hospital.", o:["trained; train","training; training","training; train","trained; training"], a:3, e:"trained 是形容词，表示“受过训练的”；training 是名词，表示“培训”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—She often argues ________ her parents ________ everything.", o:["with, with","to, about","with, about","about, with"], a:2, e:"argue with sb. about sth. 是固定短语，表示“与某人争论某事”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—You shouldn't argue ________ your parents. —I know. But sometimes they don't understand me.", o:["from","for","with","about"], a:2, e:"argue with sb. 表示“与某人争论”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—I'm going to take a driving test next week. I'm a bit nervous. —Don't worry. Just make sure you ________ the traffic rules during the test.", o:["pay attention to","move on to","look up to","look forward to"], a:0, e:"pay attention to 表示“注意”，考试时要注意交通规则。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Did you decide on the ________ of your school trip? —Not yet. But most students think it should be after the exam.", o:["date","partner","place","price"], a:0, e:"date 表示“日期”，根据“after the exam”可知讨论的是日期。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Is it possible for us to finish painting the room today? —If we start right now and don't take too many breaks, we ________ can.", o:["hardly","surely","suddenly","luckily"], a:1, e:"surely 表示“当然；肯定”，如果现在开始，我们肯定能完成。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"In the geography class, the teacher used a stick to ________ at the different places on the world map and told us something about them.", o:["draw","touch","point","mark"], a:2, e:"point at 表示“指向”，老师用棍子指着地图上的不同地方。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Thank you so much for telling me so many communication skills. —________. I'm glad I could help.", o:["I disagree","That's not right","Never mind","You're welcome"], a:3, e:"You're welcome 是回答感谢的常用表达。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—I don't know if she ________ to my birthday party tomorrow. —If she ________, I'll be happy.", o:["comes; comes","comes; will come","will come; will come","will come; comes"], a:3, e:"第一空 if 引导宾语从句，用将来时；第二空 if 引导条件状语从句，主将从现。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"Fu Xing will go to the science museum with us ________ she is free tomorrow.", o:["before","after","if","although"], a:2, e:"if 引导条件状语从句，表示“如果她明天有空”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Teng Fei, you made a mistake. I think you should say sorry to Mom. —________. I'll talk to her when she gets home.", o:["I'm afraid not","I guess you're right","That's really too bad","I don't agree with you"], a:1, e:"I guess you're right 表示“我想你是对的”，接受对方的建议。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—I'm really nervous because I lost my key. —Don't be worried. Stay ________ and think about where you might have left it.", o:["worried","calm","nervous","disappointed"], a:1, e:"calm 表示“冷静的”，stay calm 表示“保持冷静”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—How was your vacation? —It was ________. I didn't enjoy it at all.", o:["wonderful","terrible","fantastic","great"], a:1, e:"根据“I didn't enjoy it at all”可知假期很糟糕。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—I'm sorry I'm late. —________.", o:["That's right","It doesn't matter","You're welcome","All right"], a:1, e:"It doesn't matter 回答道歉，表示“没关系”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Thank you for helping me with my English. —________.", o:["That's right","No problem","Never mind","It doesn't matter"], a:1, e:"No problem 回答感谢，表示“不客气”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Would you like to go shopping with me? —________. I'd love to.", o:["Sorry, I can't","Yes, I'd love to","No, thanks","That's all right"], a:1, e:"根据“I'd love to”可知接受邀请。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What a sunny day! Why not go camping with your friends? —________.", o:["It's my pleasure.","You'd better not.","No, I don't mind.","That sounds great."], a:3, e:"That sounds great. 表示“听起来很棒”，同意对方的建议。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—This is so difficult that I want to give up. —Take it easy. ________, it takes time to learn something new.", o:["In that case","For example","By the way","After all"], a:3, e:"after all 表示“毕竟”，毕竟学新东西需要时间。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—________ do you like the movie Ne Zha? —It's wonderful. And I have seen it twice.", o:["How","What","Why","When"], a:1, e:"What do you like about...? 表示“你喜欢……的什么”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—I had a pleasant summer vacation with my family in the south. —________.", o:["Oh, that's nice of you","Enjoy yourself","Glad to hear that","It was awful"], a:2, e:"Glad to hear that 表示“听到这个很高兴”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—How was your summer camp last week? —________.", o:["Let's go","That's right","I'm fine","Really good"], a:3, e:"Really good 是对 How was...? 的恰当回答。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—How long does it take to make the pizza? —________.", o:["Five minutes.","Fifteen minutes.","Twenty minutes."], a:1, e:"制作披萨需要15分钟。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Where did Lucy go with her family last month? —________.", o:["Shanghai.","Guizhou.","Beijing."], a:1, e:"Lucy 和家人上个月去了贵州。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Did Lucy see Huangguoshu Waterfall? —________.", o:["Yes, she did.","No, she didn't.","Yes, she was."], a:0, e:"Lucy 看到了黄果树瀑布。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Who visited Lucy's family? —________.", o:["Her uncle.","Her aunt.","Her friend."], a:1, e:"Lucy 的姑姑拜访了她家。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Where did Vince go on vacation? —________.", o:["To Australia.","To New York.","To Shanghai."], a:2, e:"Vince 去了上海度假。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—How was Helen's weekend? —________.", o:["It was good.","It was OK.","It was very busy."], a:2, e:"Helen 的周末非常忙碌。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What did Ben do this morning? —________.", o:["He played basketball.","He went fishing.","He went to the beach."], a:1, e:"Ben 今天早上去钓鱼了。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Where was Laura yesterday? —________.", o:["She was at home.","She was at school.","She was in a hospital."], a:2, e:"Laura 昨天在医院。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What did Mike do last weekend? —________.", o:["He played basketball.","He went fishing.","He went to the beach."], a:0, e:"Mike 上周末打篮球了。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What did Peter see in the countryside? —________.", o:["He saw a hill.","He saw a hall.","He saw a hotel."], a:0, e:"Peter 在乡下看到了一座小山。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Which city is really wonderful? —________.", o:["Beijing.","Shanghai.","Guizhou."], a:1, e:"上海真的很棒。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What size does the boy want? —________.", o:["A large one.","A small one.","A medium one."], a:0, e:"男孩想要一个大号的。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—When is the boy's father's birthday? —________.", o:["Today.","Tomorrow.","Yesterday."], a:1, e:"男孩父亲的生日是明天。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What does the boy want to do? —________.", o:["Buy a scarf for his father.","Make a cake for his father.","Order a cake for his father."], a:2, e:"男孩想为父亲订一个蛋糕。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—How did Li Hua like Huangguoshu Waterfall? —________.", o:["It was really wonderful.","It was really boring.","It was really terrible."], a:0, e:"李华觉得黄果树瀑布真的很棒。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—How was your vacation? —It was ________. I didn't enjoy it at all.", o:["wonderful","terrible","fantastic","great"], a:1, e:"根据“I didn't enjoy it at all”可知假期很糟糕。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—I'm sorry I'm late. —________.", o:["That's right","It doesn't matter","You're welcome","All right"], a:1, e:"It doesn't matter 回答道歉，表示“没关系”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Thank you for helping me with my English. —________.", o:["That's right","No problem","Never mind","It doesn't matter"], a:1, e:"No problem 回答感谢，表示“不客气”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Would you like to go shopping with me? —________. I'd love to.", o:["Sorry, I can't","Yes, I'd love to","No, thanks","That's all right"], a:1, e:"根据“I'd love to”可知接受邀请。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What a sunny day! Why not go camping with your friends? —________.", o:["It's my pleasure.","You'd better not.","No, I don't mind.","That sounds great."], a:3, e:"That sounds great. 表示“听起来很棒”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—This is so difficult that I want to give up. —Take it easy. ________, it takes time to learn something new.", o:["In that case","For example","By the way","After all"], a:3, e:"after all 表示“毕竟”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—________ do you like the movie Ne Zha? —It's wonderful. And I have seen it twice.", o:["How","What","Why","When"], a:1, e:"What do you like about...? 表示“你喜欢……的什么”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—I had a pleasant summer vacation with my family in the south. —________.", o:["Oh, that's nice of you","Enjoy yourself","Glad to hear that","It was awful"], a:2, e:"Glad to hear that 表示“听到这个很高兴”。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—How was your summer camp last week? —________.", o:["Let's go","That's right","I'm fine","Really good"], a:3, e:"Really good 是对 How was...? 的恰当回答。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—How long does it take to make the pizza? —________.", o:["Five minutes.","Fifteen minutes.","Twenty minutes."], a:1, e:"制作披萨需要15分钟。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Where did Lucy go with her family last month? —________.", o:["Shanghai.","Guizhou.","Beijing."], a:1, e:"Lucy 和家人上个月去了贵州。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Did Lucy see Huangguoshu Waterfall? —________.", o:["Yes, she did.","No, she didn't.","Yes, she was."], a:0, e:"Lucy 看到了黄果树瀑布。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Who visited Lucy's family? —________.", o:["Her uncle.","Her aunt.","Her friend."], a:1, e:"Lucy 的姑姑拜访了她家。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Where did Vince go on vacation? —________.", o:["To Australia.","To New York.","To Shanghai."], a:2, e:"Vince 去了上海度假。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—How was Helen's weekend? —________.", o:["It was good.","It was OK.","It was very busy."], a:2, e:"Helen 的周末非常忙碌。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What did Ben do this morning? —________.", o:["He played basketball.","He went fishing.","He went to the beach."], a:1, e:"Ben 今天早上去钓鱼了。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Where was Laura yesterday? —________.", o:["She was at home.","She was at school.","She was in a hospital."], a:2, e:"Laura 昨天在医院。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What did Mike do last weekend? —________.", o:["He played basketball.","He went fishing.","He went to the beach."], a:0, e:"Mike 上周末打篮球了。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What did Peter see in the countryside? —________.", o:["He saw a hill.","He saw a hall.","He saw a hotel."], a:0, e:"Peter 在乡下看到了一座小山。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—Which city is really wonderful? —________.", o:["Beijing.","Shanghai.","Guizhou."], a:1, e:"上海真的很棒。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What size does the boy want? —________.", o:["A large one.","A small one.","A medium one."], a:0, e:"男孩想要一个大号的。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—When is the boy's father's birthday? —________.", o:["Today.","Tomorrow.","Yesterday."], a:1, e:"男孩父亲的生日是明天。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—What does the boy want to do? —________.", o:["Buy a scarf for his father.","Make a cake for his father.","Order a cake for his father."], a:2, e:"男孩想为父亲订一个蛋糕。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—How did Li Hua like Huangguoshu Waterfall? —________.", o:["It was really wonderful.","It was really boring.","It was really terrible."], a:0, e:"李华觉得黄果树瀑布真的很棒。", source:"人教版(安徽)八年级上册Unit 1单元检测卷"},
+{q:"—I had a pleasant summer vacation with my family in the south. —________.", o:["Oh, that's nice of you","Enjoy yourself","Glad to hear that","It was awful"], a:2, e:"Glad to hear that 表示“听到这个很高兴”。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"},
+{q:"—How was your summer camp last week? —________.", o:["Let's go","That's right","I'm fine","Really good"], a:3, e:"Really good 是对 How was...? 的恰当回答。", source:"安徽省芜湖市无为市部分学校2025-2026学年上学期期中考试八年级英语试卷"}
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('81_kp1_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('81_kp1_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('81_kp1_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 1 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 1 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>
