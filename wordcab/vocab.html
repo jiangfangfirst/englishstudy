@@ -284,29 +284,31 @@ function makeBlank(en, word){
 }
 
 function refreshAllGradeStats(){
-  let total = 0;
+  let totalDone = 0, totalRemain = 0, totalAll = 0;
   ['7A','7B','8A','8B','9'].forEach(g=>{
     try{
-      // 新key
+      const data = GRADE_MAP[g].data;
+      totalAll += data.length;
+      let mastered = [], review = [];
       let k = 'dd_'+_auth+'_'+g;
       let local = localStorage.getItem(k);
       if(local){
         const j = JSON.parse(local);
-        total += (j.learned || 0) + (j.review || []).length;
+        mastered = j.mastered || [];
+        review = j.review || [];
       } else {
-        // 旧key（无auth前缀，3个分开的）
         const oldM = localStorage.getItem('dd_'+g+'_mastered');
         const oldR = localStorage.getItem('dd_'+g+'_review');
-        const oldL = localStorage.getItem('dd_'+g+'_learned');
-        if(oldM || oldR || oldL){
-          total += parseInt(oldL||'0') + (oldR ? JSON.parse(oldR).length : 0);
-        }
+        if(oldM) mastered = JSON.parse(oldM);
+        if(oldR) review = JSON.parse(oldR);
       }
+      totalDone += mastered.length + review.length;
+      totalRemain += data.filter(w => !mastered.includes(w.w.toLowerCase()) && !review.includes(w.w.toLowerCase())).length;
     }catch(e){}
   });
   const name = STUDENT_MAP[_auth] || localStorage.getItem('dd_name') || '同学';
   const el = document.getElementById('headerInfo');
-  if(el) el.textContent = name + ' 已学' + total;
+  if(el) el.textContent = name + ' 已学' + totalDone + ' 剩余' + totalRemain + '/共' + totalAll;
 }
 function refreshStats(){
   // header显示总数，选项卡显示当前年级
