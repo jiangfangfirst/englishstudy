@@ -139,6 +139,13 @@ let sessionAnswered = 0, sessionCorrect = 0, sessionReviewed = 0;
 let learnedCount = 0, reviewSet = [], masteredSet = [];
 
 let _auth = localStorage.getItem('dd_auth') || 'guest';
+const STUDENT_MAP = {
+  'duoduo2026': '多多',
+  'abc123': '测试同学',
+  '10001090': '周卫',
+  'jf': '姜老师',
+  'jiang2026': '姜仿'
+};
 function storageKey(){ return 'dd_'+_auth+'_'+grade; }
 const UP_URL = 'https://fitting-ostrich-312589.upstash.io';
 const UP_TOKEN = 'gQAAAAAABMUNAAIgcDFiZDU2MDM2YWJkYzg0YTgyOTRlOTUzMjM1MWY1ZGJhNg';
@@ -208,10 +215,35 @@ async function setGrade(g){
   document.querySelectorAll('#gradeTabs .tab').forEach(t=>{
     t.classList.toggle('active', t.dataset.grade===g);
   });
-  await loadState();
+  // 先同步读本地立即显示
+  try{
+    const local = localStorage.getItem(storageKey());
+    if(local){
+      const j = JSON.parse(local);
+      learnedCount = j.learned || 0;
+      reviewSet = j.review || [];
+      masteredSet = j.mastered || [];
+    } else {
+      learnedCount = 0; reviewSet = []; masteredSet = [];
+    }
+  }catch(e){ learnedCount = 0; reviewSet = []; masteredSet = []; }
   setMode('learn');
   refreshStats();
   refreshAllGradeStats();
+  // 再异步拉云端更新
+  try{
+    const cloud = await cloudGet(storageKey());
+    if(cloud){
+      const j = JSON.parse(cloud);
+      learnedCount = j.learned || 0;
+      reviewSet = j.review || [];
+      masteredSet = j.mastered || [];
+      localStorage.setItem(storageKey(), cloud);
+      setMode('learn');
+      refreshStats();
+      refreshAllGradeStats();
+    }
+  }catch(e){}
 }
 // 立即刷新本地数据（不等云端）
 function refreshLocalNow(){
@@ -272,7 +304,7 @@ function refreshAllGradeStats(){
       }
     }catch(e){}
   });
-  const name = localStorage.getItem('dd_name') || '同学';
+  const name = STUDENT_MAP[_auth] || localStorage.getItem('dd_name') || '同学';
   const el = document.getElementById('headerInfo');
   if(el) el.textContent = name + ' 已学' + total;
 }
@@ -537,25 +569,14 @@ function onBottomBtn(){
 document.getElementById('userName').textContent = localStorage.getItem('dd_name') || '';
 // 先同步读本地数据并刷新
 function init(){
-  grade = '7A';
-  WORDS = GRADE_MAP['7A'].data;
-  try{
-    const local = localStorage.getItem(storageKey());
-    if(local){
-      const j = JSON.parse(local);
-      learnedCount = j.learned || 0;
-      reviewSet = j.review || [];
-      masteredSet = j.mastered || [];
-    }
-  }catch(e){}
-  setMode('learn');
-  refreshStats();
-  refreshAllGradeStats();
-  // 再异步拉云端更新
+  // 直接调setGrade，它会同步读本地显示，再异步拉云端
   setGrade('7A');
 }
-document.addEventListener('DOMContentLoaded', init);
-init();
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 </script>
 <div style="text-align:center;padding:20px 16px 30px;font-size:11px;color:#9ca3af;line-height:2">
   <div>@多多好学 版权所有</div>
