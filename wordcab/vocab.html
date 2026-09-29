@@ -1,9 +1,14 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<script>
+// 登录检查：未登录跳回login.html
+if(!localStorage.getItem('dd_auth')){ location.href='login.html'; }
+</script>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>多多好学背单词</title>
+<title>单词一扫光</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: linear-gradient(-45deg,#e0f2fe,#ecfdf5,#fffbeb); background-size: 400% 400%; animation: grad 15s ease infinite; min-height: 100vh; }
@@ -63,7 +68,7 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 </head>
 <body>
 <div class="header">
-  <h1>多多好学背单词</h1>
+  <h1>单词一扫光</h1>
   <div style="margin-left:auto;font-size:12px;color:#9ca3af" id="headerInfo"></div>
 </div>
 <div class="container">
@@ -250,11 +255,20 @@ function refreshAllGradeStats(){
   let total = 0;
   ['7A','7B','8A','8B','9'].forEach(g=>{
     try{
-      const k = 'dd_'+_auth+'_'+g;
-      const local = localStorage.getItem(k);
+      // 新key
+      let k = 'dd_'+_auth+'_'+g;
+      let local = localStorage.getItem(k);
       if(local){
         const j = JSON.parse(local);
         total += (j.learned || 0) + (j.review || []).length;
+      } else {
+        // 旧key（无auth前缀，3个分开的）
+        const oldM = localStorage.getItem('dd_'+g+'_mastered');
+        const oldR = localStorage.getItem('dd_'+g+'_review');
+        const oldL = localStorage.getItem('dd_'+g+'_learned');
+        if(oldM || oldR || oldL){
+          total += parseInt(oldL||'0') + (oldR ? JSON.parse(oldR).length : 0);
+        }
       }
     }catch(e){}
   });
@@ -522,7 +536,7 @@ function onBottomBtn(){
 
 document.getElementById('userName').textContent = localStorage.getItem('dd_name') || '';
 // 先同步读本地数据并刷新
-(function(){
+function init(){
   grade = '7A';
   WORDS = GRADE_MAP['7A'].data;
   try{
@@ -539,7 +553,9 @@ document.getElementById('userName').textContent = localStorage.getItem('dd_name'
   refreshAllGradeStats();
   // 再异步拉云端更新
   setGrade('7A');
-})();
+}
+document.addEventListener('DOMContentLoaded', init);
+init();
 </script>
 <div style="text-align:center;padding:20px 16px 30px;font-size:11px;color:#9ca3af;line-height:2">
   <div>@多多好学 版权所有</div>
