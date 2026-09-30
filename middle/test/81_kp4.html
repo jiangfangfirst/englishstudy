@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>八年级KP4</h1>
+        <p>复合不定代词 · 一般过去时 · 词汇短语辨析 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">八年级上册Unit 4 · 在线检测</span>
+      <h2>单元检测核心库KP4</h2>
+      <p>涵盖复合不定代词、一般过去时、形容词辨析、动词短语搭配、情景交际等高频考点。系统从全量题库中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"—Ms Miller is very ________ in our school. —Yes. Everyone can't wait to have her classes.", o:["popular","boring","difficult","important"], a:0, e:"popular表示\"受欢迎的\"，根据\"Everyone can't wait to have her classes\"可知。", source:"人教版(2024)八年级上册Unit 4 Section A 2a-2e精品同步训练题"},
+{q:"Of all the girls, Lily has eaten ________ rice because she cares much about her weight.", o:["little","less","least","the least"], a:3, e:"Of all the girls 表示范围，用最高级 the least。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"The cheetah runs very ________. It is one of the fastest land animals.", o:["fastest","faster","the faster","fast"], a:3, e:"修饰动词 runs 用副词原级 fast。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"The weather in Beijing is colder than ________ in Guangzhou.", o:["that","it","this","one"], a:0, e:"比较对象要一致，用 that 代替前面提到的 weather。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"Healthy eating is important. It is best ________ your eating habits early!", o:["improving","improve","improved","to improve"], a:3, e:"It is best to do sth. 是固定句型。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"We can use bamboo ________ houses and tools.", o:["build","building","to build","built"], a:2, e:"use sth. to do sth. 表示\"用某物做某事\"。", source:"人教版英语八年级上册Unit 4 Section B同步课时练"},
+{q:"—This dress is too expensive. Do you have a cheaper one? —Sorry, but that's the ________ one.", o:["biggest","smallest","cheapest","longest"], a:2, e:"根据\"cheaper\"可知询问更便宜的，回答是最便宜的那件，用cheapest。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"The ginkgo tree is one of ________ living trees on earth.", o:["ancient","more ancient","most ancient","the most ancient"], a:3, e:"one of the + 最高级 + 复数名词。", source:"Unit 4 Amazing Plants and Animals 综合测试卷"},
+{q:"—Who sings ________ in your class? —Li Mei does. She has a beautiful voice.", o:["well","better","best","the best"], a:2, e:"in your class 表示范围，用最高级 best。", source:"安徽省2025八年级英语上册Unit 4单元拔尖检测试卷"},
+{q:"All living things ________ each other in nature.", o:["connect with","are connected with","connect to","are connected for"], a:1, e:"be connected with 表示\"与……相连\"。", source:"2026-2027学年-人教版八年级上册英语Unit 4 暑期单元卷"},
+{q:"What makes us truly beautiful is not our appearance, but the ________ inside our hearts.", o:["goodness","interest","humour","fact"], a:0, e:"goodness 表示\"善良\"。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"I went to Dali last week. It's one of ________ I have ever seen.", o:["the beautiful places","the beautiful place","the most beautiful places","the most beautiful place"], a:2, e:"one of the + 最高级 + 复数名词。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"The ________ of the mountain is about 2,000 meters.", o:["high","height","weigh","weight"], a:1, e:"height 表示\"高度\"，根据\"about 2,000 meters\"可知。", source:"人教版英语八年级上册Unit 4 Section B同步课时练"},
+{q:"Fishing is one of ________ activities among the middle-aged people.", o:["popular","more popular","most popular","the most popular"], a:3, e:"one of the + 最高级 + 复数名词。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"Lucy works ________ than her brother, but she is not ________ student in her class.", o:["harder; the hardest","hard; the hardest","harder; hardest","the hardest; harder"], a:0, e:"第一空than提示用比较级harder；第二空in her class表示范围，用最高级the hardest。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"—Is Jay Chou ________ singer of all the singers? —Of course. He is my favorite.", o:["popular","more popular","the much popular","the most popular"], a:3, e:"of all the singers 表示范围，用最高级 the most popular。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"Giraffes have long necks that allow them to ________ the leaves on tall trees easily.", o:["look at","reach","touch","smell"], a:1, e:"reach 表示\"够到\"。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"The Internet is closely ________ with our daily life. Can you imagine life without it?", o:["closed","connected","caught","expected"], a:1, e:"be connected with 表示\"与……相连\"。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"Of all the animals, the cheetah runs ________.", o:["fast","faster","the fastest","most fast"], a:2, e:"Of all the animals 表示范围，用最高级 the fastest。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"Hua Tuo was one of ________ doctors in ancient China.", o:["the greatest","greatest","greater","great"], a:0, e:"one of the + 最高级 + 复数名词，表示\"最……之一\"。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"To save energy, our company chose this model because it uses ________ power among all computers.", o:["more","the most","less","the least"], a:3, e:"among all computers 表示范围，用最高级 the least。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"Success is connected ________ hard work.", o:["with","to","for","from"], a:1, e:"be connected to 表示\"与……相连\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"It was funny to find an olive ________ the grapes.", o:["among","between","and","in"], a:0, e:"among 用于三者或三者以上之间，表示\"在……之中\"。", source:"2025人教版初中英语八年级上册 Unit 4随堂小测练习"},
+{q:"Bamboo is one of ________ useful plants in the world.", o:["more","the more","most","the most"], a:3, e:"one of the + 最高级 + 复数名词。", source:"Unit 4 Amazing Plants and Animals 综合测试卷"},
+{q:"—Oh, no! I have to lose weight. The sweater doesn't fit me. Could you show me a ________ one?", o:["bigger","biggest","smaller","smallest"], a:2, e:"根据\"have to lose weight\"可知需要更小的一件，用比较级 smaller。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"This kind of plant ________ insects by closing its leaves quickly when they land on it.", o:["protects","catches","feeds","grows"], a:1, e:"catch 表示\"捕捉\"，根据\"closing its leaves quickly\"可知。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"The weather in Beijing is much ________ than in Guangzhou in winter.", o:["cold","colder","coldest","the coldest"], a:1, e:"than 提示用比较级，much 修饰 colder。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"—What do you think of the movie about animals? —It's ________ one I have ever seen.", o:["interesting","more interesting","the most interesting","most interesting"], a:2, e:"I have ever seen 表示范围，用最高级 the most interesting。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"This is one of ________ parks in our city.", o:["most beautiful","more beautiful","the most beautiful","the more beautiful"], a:2, e:"one of the + 最高级 + 复数名词。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"—Do you know Shanghai is one of ________ in the world? —Yes, it's bigger than ________ city I know.", o:["the biggest city; any","the biggest cities; any other","the biggest cities; any","the biggest cities; the other"], a:1, e:"one of the + 最高级 + 复数名词；than any other city 表示\"比其他任何城市都大\"。", source:"人教版(2024)八年级上册Unit 4 第4课时 Section B（2a-4d）课时练习"},
+{q:"—Which mountain is ________, Mount Tai, Mount Huang or Mount Tianzi? —Mount Tianzi, I think.", o:["high","higher","highest","the highest"], a:3, e:"三者比较用最高级 the highest。", source:"河南省2025秋八年级英语上册Unit 4单元拔尖检测试卷"},
+{q:"Bamboo is one of the most popular ________ in many Chinese gardens.", o:["subject","subjects","subject's","subjects'"], a:1, e:"one of the + 最高级 + 复数名词。", source:"2026-2027学年八年级英语上册单元素养达标培优卷"},
+{q:"The girl sitting ________ to you is one of my ________ friends.", o:["close; closest","close; closer","closed; close","closed; closest"], a:0, e:"第一空 close to 表示\"靠近\"；第二空 one of my closest friends 表示\"我最亲密的朋友之一\"。", source:"2024版人教版八年级英语上册Unit 4课时作业专练"},
+{q:"—Which is ________, the Yangtze River or the Yellow River? —The Yangtze River, of course. It is the ________ river in China.", o:["long; longer","longer; longest","longer; longer","longest; longer"], a:1, e:"第一空两者比较用比较级longer；第二空in China表示范围，用最高级longest。", source:"人教版(2024)八年级上册Unit 4 Section A Grammar Focus课后"},
+{q:"The butterflies are still ________ after the cold winter. Now the forest is ________.", o:["lively; lively","alive; alive","alive; lively","lively; alive"], a:2, e:"第一空表示\"活着的\"用 alive；第二空表示\"充满活力的\"用 lively。", source:"Unit 4 Amazing Plants and Animals 单元质量测评"},
+{q:"The boy is ________ to go to school.", o:["enough old","old enough","enough young","young enough"], a:1, e:"old enough to do sth. 表示\"足够大能做某事\"。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"—What's ________ animal in the world? —The blue whale. It can weigh up to 200 tons.", o:["the heaviest","heavier","heavy","the heavier"], a:0, e:"in the world 表示范围，用最高级 the heaviest。", source:"Unit 4 Amazing Plants and Animals 综合测试卷"},
+{q:"—Humans cannot live ________ animals or plants. —Right. They play an important part in the world.", o:["without","for","as","across"], a:0, e:"without 表示\"没有\"。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"The population of Beijing is ________ larger than ________ of Xi'an.", o:["much; it","more; that","more; one","much; that"], a:3, e:"第一空 much 修饰比较级；第二空用 that 代替 the population。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"There are many new inventions that make our life much ________ and more interesting.", o:["easy","easier","easiest","the easiest"], a:1, e:"much 修饰比较级 easier。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"The Great Wall is one of the ________ in the world.", o:["great wonder","greater wonders","greatest wonder","greatest wonders"], a:3, e:"one of the + 最高级 + 复数名词。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"—Could you tell me some facts about wild plants?", o:["Don't worry.","Feel free to ask me anything.","That's right.","You're welcome."], a:1, e:"Feel free to ask me anything 表示\"随便问我任何事\"。", source:"2026-2027学年-人教版八年级上册英语Unit 4 暑期单元卷"},
+{q:"China is over 5,000 years old. It's one of ________ countries in the world.", o:["old","older","the older","the oldest"], a:3, e:"one of the + 最高级 + 复数名词。", source:"2024版人教版八年级英语上册Unit 4课时作业专练"},
+{q:"China is almost as ________ as the US, and it is the ________ country in Asia.", o:["big; bigger","big; biggest","bigger; biggest","big; big"], a:1, e:"第一空 as...as 中间用原级 big；第二空 in Asia 表示范围，用最高级 biggest。", source:"Unit 4 Amazing Plants and Animals 单元质量测评"},
+{q:"—The apple pies here taste ________ than those from anywhere else. —Yes. But it will be better if they are less expensive.", o:["more delicious","less delicious","more expensive","less expensive"], a:0, e:"than 提示用比较级，根据\"less expensive\"可知前面说的是味道更好。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"Many pine trees can ________ hundreds of years.", o:["live up to","depend on","take care of","feed on"], a:0, e:"live up to 表示\"活到\"。", source:"2026-2027学年-人教版八年级上册英语Unit 4 暑期单元卷"},
+{q:"Who sings ________ in the group?", o:["good","better","best","the best"], a:2, e:"in the group 表示范围，用最高级 best。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"Many animals ________ themselves by changing their colors to match the environment.", o:["hide","help","hurt","show"], a:0, e:"hide 表示\"隐藏\"。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"—I want to buy a shirt. But I have a little money. —The shirts here are all very cheap. And the yellow one is ________. Do you like it?", o:["cheap","cheaper","the cheapest","expensive"], a:2, e:"根据\"all very cheap\"可知黄色的是最便宜的，用the cheapest。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"How to connect this part ________ that part is a big problem.", o:["of","for","with","from"], a:2, e:"connect...with... 表示\"把……和……连接起来\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"—Why is the blue whale important to the ocean? —Because when it dies, it becomes food for many sea animals and helps create a ________ ecosystem.", o:["lively","more lively","liveliest","the liveliest"], a:1, e:"比较级 more lively 表示\"更加充满活力的\"。", source:"Unit 4 Amazing Plants and Animals 综合测试卷"},
+{q:"Many fruits can't grow well ________ bees' pollination.", o:["with","without","for","about"], a:1, e:"without 表示\"没有\"，根据\"can't grow well\"可知。", source:"人教版英语八年级上册Unit 4 Section B同步课时练"},
+{q:"—How do bees communicate with each other? —They use a special dance to tell others where the food is and how ________ it is.", o:["far","farther","farthest","the farthest"], a:0, e:"how far 表示\"多远\"。", source:"Unit 4 Amazing Plants and Animals 综合测试卷"},
+{q:"The two apples are both pretty. Please feel free ________ one of them.", o:["choose","choosing","to choose","to choosing"], a:2, e:"feel free to do sth. 表示\"可以随便做某事\"。", source:"2024版人教版八年级英语上册Unit 4 课时作业专练"},
+{q:"When seeing the Shenzhou-18 manned spaceship flying into the sky, my mother was ________ than any one of us.", o:["more excited","more exciting","the most excited","the most exciting"], a:0, e:"than 提示用比较级，修饰人用 excited。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"—You seem ________ a lot about the zoo. —That's true. Because I visited it last week.", o:["know","knew","to know","knowing"], a:2, e:"seem to do sth. 表示\"似乎做某事\"。", source:"2024版人教版八年级英语上册Unit 4 课时作业专练"},
+{q:"—Kate, is Ma Long popular among young people? —Of course. I think I can't find a ________ table tennis player in China.", o:["good","better","bad","worse"], a:1, e:"否定词 can't + 比较级 better 表示最高级含义。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"The 2025 Harbin Asian Winter Games was one of ________ sports events in China this year.", o:["the most popular","most popular","more popular","popular"], a:0, e:"one of the + 最高级 + 复数名词。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"I'm sure ________ to college.", o:["admit","admits","admiting","to admit"], a:3, e:"be sure to do sth. 表示\"一定会做某事\"。", source:"2025人教版初中英语八年级上册 Unit 4随堂小测练习"},
+{q:"—How do you like The Chinese Poetry Competition on CCTV? —Wonderful! It's the ________ programme I've ever watched.", o:["better","best","worse","worst"], a:1, e:"I've ever watched表示范围，用最高级best。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"Elephants are ________ land animals in the world.", o:["big","bigger","biggest","the biggest"], a:3, e:"in the world 表示范围，用最高级 the biggest。", source:"人教版英语八年级上册Unit 4 Section B同步课时练"},
+{q:"My sister sings ________ in her class.", o:["beautiful","more beautiful","most beautiful","the most beautifully"], a:3, e:"修饰动词 sings 用副词，in her class 表示范围，用最高级 the most beautifully。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"—What do you think we should do to protect our earth? —We can start from small ________. For example, we can pick up litter in the park.", o:["subjects","matches","habits","actions"], a:3, e:"actions 表示\"行动\"，根据\"pick up litter\"可知。", source:"2025人教版初中英语八年级上册 Unit 4 单元测试卷"},
+{q:"Paul loves animals, so he looks after Mary's pet dog ________ of all her friends.", o:["more careful","the most careful","the most carefully","more carefully"], a:2, e:"修饰动词 looks after 用副词，of all her friends 表示范围，用最高级 the most carefully。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"—Do you know ________ African elephant? —Yes. It's ________ huge animal living on grasslands.", o:["an; a","a; an","an; an","a; a"], a:0, e:"第一空 African 以元音音素开头，用 an；第二空 huge 以辅音音素开头，用 a。", source:"2026-2027学年-人教版八年级上册英语Unit 4 暑期单元卷"},
+{q:"Canada is the second ________ country of the world.", o:["larger","largest","the largest","large"], a:1, e:"序数词 + 最高级，用the second largest。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"Your silly mistake let everyone down. (替换画线部分)", o:["made...happy","made...disappointed","made...angry"], a:1, e:"let sb. down 与 make sb. disappointed 意思相近，表示\"让某人失望\"。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"Of the four bags, this one is the ________.", o:["heaviest","heavy","more heavy","heavier"], a:0, e:"Of the four bags 表示四者比较，用最高级 heaviest。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"—Which is ________, the sun, the moon or the earth? —The sun, of course.", o:["big","bigger","the biggest","biggest"], a:2, e:"三者比较用最高级 the biggest。", source:"人教版(2024)八年级上册Unit 4 Section A Grammar Focus课后"},
+{q:"Emily likes Frozen and she thinks it's ________ of all cartoons.", o:["more interesting","the most interesting","interesting","most interesting"], a:1, e:"of all cartoons表示范围，用最高级the most interesting。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"I think bamboo is ________ plant in the world.", o:["useful","more useful","most useful","the most useful"], a:3, e:"in the world 表示范围，用最高级 the most useful。", source:"2026-2027学年八年级英语上册单元素养达标培优卷"},
+{q:"The umbrella will protect you ________ the rain.", o:["from","with","by","out"], a:0, e:"protect...from... 表示\"保护……免受……\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"—Who do you think will win the singing competition, Bob, Timo or Tom? —It must be Bob. I think he sings ________.", o:["beautifully","more beautifully","the most beautiful","the most beautifully"], a:3, e:"三者比较，修饰动词 sings 用副词最高级 the most beautifully。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"I ________ believe he ________ speak three languages.", o:["don't; can't","do; can't","don't; can","do; can"], a:2, e:"根据语境，我不相信他会说三种语言，用 don't believe 和 can。", source:"2025人教版初中英语八年级上册 Unit 4随堂小测练习"},
+{q:"Not all people realize the importance of ________ animals.", o:["considering","hunting","killing","protecting"], a:3, e:"protect 表示\"保护\"。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"Jim runs ________ than Tony, but Frank runs ________ of them.", o:["fast; fast","faster; faster","fastest; fastest","faster; fastest"], a:3, e:"第一空than提示用比较级faster；第二空of them表示范围，用最高级fastest。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"I find it ________ that he passed the exam.", o:["amaze","amazing","amazed","amazement"], a:1, e:"find it + 形容词 + that 从句，it 是形式宾语，amazing 表示\"令人惊奇的\"。", source:"2025人教版初中英语八年级上册 Unit 4随堂小测练习"},
+{q:"Winter is the ________ season of the year in China.", o:["warmest","longest","coldest","heaviest"], a:2, e:"根据常识，冬天是中国最冷的季节，用coldest。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"The new movie star is really popular. Yes, and he will ________ on the talk show this evening.", o:["appear","happen","follow","become"], a:0, e:"appear 表示\"出现\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"Which subject do you like ________, English, math or Chinese?", o:["well","better","best","the best"], a:2, e:"三者比较用最高级 best。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"—What are you going to do this weekend? —I'm going to the library ________ find some information about my work.", o:["thanks to","instead of","in order to","for this reason"], a:2, e:"in order to 表示\"为了\"，引导目的状语。", source:"2025人教版初中英语八年级上册 Unit 4单元测试卷"},
+{q:"Playing phone games is ________ with many students, but don't spend too much time on it.", o:["interested","popular","lovely","fit"], a:1, e:"be popular with 表示\"受……欢迎\"。", source:"Unit 4 Amazing Plants and Animals 单元质量测评"},
+{q:"It's impolite to drop ________ a friend's home ________ calling first in my country.", o:["on, without","by, without","by, with"], a:1, e:"drop by 表示\"顺道拜访\"；without calling 表示\"没有打电话\"。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"We should protect frogs because they help ________ insects and keep the ecosystem balanced.", o:["eat","eats","eating","ate"], a:0, e:"help do sth. 中不带 to。", source:"Unit 4 Amazing Plants and Animals 综合测试卷"},
+{q:"CITI Tower in Beijing is probably one of ________ buildings in the whole world.", o:["tall","taller","tallest","the tallest"], a:3, e:"one of the + 最高级 + 复数名词。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"Do you often communicate ________ English ________ your classmates?", o:["in; with","with; in","in; to","with; to"], a:0, e:"communicate in English 表示\"用英语交流\"；communicate with sb. 表示\"与某人交流\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"I failed the exam. What ________ news! I worried that my parents would be ________ at my grades.", o:["disappointing; disappointing","disappointed; disappointed","disappointed; disappointing","disappointing; disappointed"], a:3, e:"第一空修饰物用 disappointing；第二空修饰人用 disappointed。", source:"Unit 4 Amazing Plants and Animals 单元质量测评"},
+{q:"We must give thanks to the teachers who ________ teach us knowledge and help us to grow.", o:["exactly","actually","completely","quickly"], a:1, e:"actually 表示\"实际上\"。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"The African elephant is the second ________ land animal in the world, just behind the Asian elephant.", o:["larger","large","the largest","largest"], a:3, e:"序数词 + 最高级，用 the second largest。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"Linlin's school has ________ weeks off for summer holiday.", o:["the most","the fewest","more","fewer"], a:1, e:"根据语境，琳琳的学校暑假放假周数最少，用the fewest。", source:"2025-2026学年人教版（2024）八年级英语Unit 4单元同步练"},
+{q:"My sister is interested in ________ all kinds of amazing plants and takes photos of them.", o:["collect","collects","collecting","collected"], a:2, e:"be interested in doing sth. 中 in 是介词，后接动名词。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"—Judy, which place do you like staying better, in the city or in the countryside? —In the countryside. The air there is a lot ________ than that in the city.", o:["fresh","the freshest","freshest","fresher"], a:3, e:"than 提示用比较级 fresher。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"There are already over two ________ workers in this factory, and ________ of young people still want to work in it.", o:["thousand; thousand","thousands; thousands","thousand; thousands","thousands; thousand"], a:2, e:"第一空具体数字后 thousand 用单数；第二空 thousands of 表示\"成千上万的\"。", source:"Unit 4 Amazing Plants and Animals 单元质量测评"},
+{q:"The report about rare plants is so ________ that I feel really ________.", o:["moving; excited","moved; exciting","exciting; moved","excited; moving"], a:0, e:"第一空修饰物用 moving；第二空修饰人用 excited。", source:"2026-2027学年-人教版八年级上册英语Unit 4 暑期单元卷"},
+{q:"—You mean that we'll work on the farm tomorrow. —________. That's what I'm trying to say.", o:["Probably","Exactly","Especially","Hopefully"], a:1, e:"Exactly 表示\"正是如此\"，同意对方的说法。", source:"2025人教版初中英语八年级上册 Unit 4单元测试卷"},
+{q:"Among all the dresses you tried on, this is the ________ expensive one in our shop, and honestly, you look amazing ________ it.", o:["second more; in","second most; in","most second; on","more second; on"], a:1, e:"the second most expensive 表示\"第二贵的\"；in 表示\"穿着\"。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"Mary cleans the shoes ________ in her family and a lot more carefully than her parents.", o:["the most careful","more careful","the most carefully","most carefully"], a:2, e:"修饰动词 cleans 用副词，in her family 表示范围，用最高级 the most carefully。", source:"人教版(2024)八年级上册Unit 4 第4课时 Section B（2a-4d）课时练习"},
+{q:"—This story is not funny at all. —OK. Now I'll tell you ________ one.", o:["a much funnier","the funniest","a more funnier","much funniest"], a:0, e:"两者比较用比较级，a much funnier one 表示\"一个有趣得多的\"。", source:"2026-2027学年八年级英语上册单元素养达标培优卷"},
+{q:"—What do you think of the cheetah? —It's amazing! It runs ________ than any other land animal.", o:["fast","faster","fastest","the fastest"], a:1, e:"than any other land animal 提示用比较级 faster。", source:"Unit 4 Amazing Plants and Animals 综合测试卷"},
+{q:"Tony likes swimming and he thinks it's ________ of all sports.", o:["more relaxing","relaxing","the most relaxing","most relaxing"], a:2, e:"of all sports表示范围，用最高级the most relaxing。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"Julie sings ________ of the three.", o:["the most beautifully","the most beautiful","more beautifully"], a:0, e:"修饰动词 sings 用副词，of the three 表示范围，用最高级 the most beautifully。", source:"人教版英语八年级上册Unit 4 Amazing Plants and Animals 单元练习"},
+{q:"Our city is becoming ________.", o:["more and more beautiful","beautiful and beautiful","more beautiful and more beautiful","most and most beautiful"], a:0, e:"\"比较级 + and + 比较级\"表示\"越来越……\"。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"Pandas are one of ________ animals in the world. Many people like them.", o:["the cutest","cuter","cute","the cute"], a:0, e:"one of the + 最高级 + 复数名词。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"—Why do birds fly to the south in winter? —Because they want to ________ the cold weather.", o:["get used to","adapt to","run away from","look forward to"], a:2, e:"run away from 表示\"逃离\"。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"DeepSeek is a ________ AI tool. I ________ it to help me finish my homework yesterday.", o:["useless; use","useful; use","useless; used","useful; used"], a:3, e:"第一空根据语境用 useful；第二空 yesterday 提示用一般过去时 used。", source:"2024版人教版八年级英语上册Unit 4 课时作业专练"},
+{q:"—Did you visit the Bamboo Sea in Sichuan? —Yes. It's ________ bamboo forest in China and I learnt a lot there.", o:["large","larger","the largest","largest"], a:2, e:"in China 表示范围，用最高级 the largest。", source:"Unit 4 Amazing Plants and Animals 综合测试卷"},
+{q:"Friendship requires ________, especially when our friends' ideas are different from ours.", o:["records","represents","repeats","communication"], a:3, e:"communication 表示\"沟通\"。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"________ people live in this big city.", o:["Million of","A million of","Millions of","An millions"], a:2, e:"millions of 表示\"数百万的\"。", source:"2025人教版初中英语八年级上册 Unit 4随堂小测练习"},
+{q:"—It seems that you're ________ in the book. —Yes, I can learn many facts about nature from it.", o:["interested; interesting","interested; interested","interesting; interesting","interesting; interested"], a:0, e:"第一空 be interested in 表示\"对……感兴趣\"；第二空修饰物用 interesting。", source:"2024版人教版八年级英语上册Unit 4 课时作业专练"},
+{q:"The teacher ________ us ________ harder.", o:["hopes; to come","hopes; come","wishes; to come","wishes; come"], a:2, e:"wish sb. to do sth. 表示\"希望某人做某事\"；hope 不能接 sb. to do sth.。", source:"2025人教版初中英语八年级上册 Unit 4随堂小测练习"},
+{q:"English is used ________ talking with others ________ a second language by travellers and business people all over the world.", o:["as; for","for; as","as; as","for; for"], a:1, e:"第一空be used for doing sth.表示\"被用于做某事\"；第二空as表示\"作为\"。", source:"人教版(2024)八年级上册Unit 4 Section A Grammar Focus课后"},
+{q:"The air is ________ polluted so each of us should ________ in the environmental protection.", o:["badly; take a part","badly; play a part","deeply; play part","seriously; take part"], a:1, e:"第一空 badly 表示\"严重地\"；第二空 play a part 表示\"发挥作用\"。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"—Your parents always say you are excellent. Can you ________ their praise? —I'll try my best. I don't want to let them down.", o:["live up to","take care of","come up with","fall in love with"], a:0, e:"live up to 表示\"不辜负\"，根据\"I don't want to let them down\"可知。", source:"2025人教版初中英语八年级上册 Unit 4单元测试卷"},
+{q:"Bamboo is ________ for building houses.", o:["used","using","uses","use"], a:0, e:"be used for 表示\"被用于\"。", source:"2026-2027学年八年级英语上册单元素养达标培优卷"},
+{q:"Many animals are in ________ because of the pollution.", o:["dangerous","danger","endanger","endangered"], a:1, e:"in danger 表示\"处于危险中\"。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"—Did you see the TV series called She and Her Girls last night? —Yes, it's so great. I have never seen a ________ one.", o:["worse","good","better","bad"], a:2, e:"否定词 never + 比较级 better 表示最高级含义。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"Koalas are ________ for sleeping up to 20 hours a day in the eucalyptus trees.", o:["ready","famous","sorry","good"], a:1, e:"be famous for 表示\"因……而闻名\"。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"—Whose home is ________ from school in your class?", o:["further","farther","the most furthest","the farthest"], a:3, e:"in your class表示范围，用最高级the farthest。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"________ a party member, I must be strict with myself.", o:["For","Because","As","Of"], a:2, e:"as 表示\"作为\"。", source:"2025人教版初中英语八年级上册 Unit 4随堂小测练习"},
+{q:"Ma Yun, the head of Alibaba, is one of ________ people in the world.", o:["rich","richer","richest","the richest"], a:3, e:"one of the + 最高级 + 复数名词。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"I studied so hard, but I didn't pass the exam. Oh no! That's too bad. You must be really ________.", o:["surprised","disappointed","interested","excited"], a:1, e:"disappointed 表示\"失望的\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"—Our classroom is so dirty. Shall we clean it this afternoon or tomorrow? —________. Any time is OK.", o:["Excuse me","It's up to you","It doesn't matter","I'm afraid not"], a:1, e:"It's up to you 表示\"由你决定\"。", source:"Unit 4 Amazing Plants and Animals 单元质量测评"},
+{q:"This kind of plant grows ________ in our country. You can see it everywhere.", o:["good","well","better","best"], a:1, e:"修饰动词 grows 用副词 well。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"—Why do pandas love bamboo so much? —Because it's their favourite food and it ________ quickly, so there's plenty for them to eat.", o:["grows","grew","is growing","will grow"], a:0, e:"根据\"so there's plenty for them to eat\"可知用一般现在时。", source:"Unit 4 Amazing Plants and Animals 综合测试卷"},
+{q:"We should play a role ________ helping the old and caring ________ the young.", o:["in; about","on; about","in; of","on; of"], a:0, e:"play a role in 表示\"在……中发挥作用\"；care about 表示\"关心\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"Which underlined sound is different?", o:["prince","bring","title","wing"], a:2, e:"title 中的 i 发音为 /aɪ/，其他三个发音为 /ɪ/。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"The blue whale is ________ animal on the earth.", o:["the large","larger","the largest","largest"], a:2, e:"on the earth 表示范围，用最高级 the largest。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"________ runs the fastest, Jim, Tim or Julie?", o:["Which","Who","Whom"], a:1, e:"询问\"谁\"跑得最快，用 Who。", source:"人教版英语八年级上册Unit 4 Amazing Plants and Animals 单元练习"},
+{q:"—Which game do you like to watch better, football or baseball? —Football. I think it's ________.", o:["excited","exciting","more excited","more exciting"], a:3, e:"两者比较用比较级 more exciting。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"All of us were ________ when we watched the ________ match.", o:["disappointed, disappointed","disappointing, disappointing","disappointed, disappointing","disappointing, disappointed"], a:2, e:"第一空修饰人用 disappointed；第二空修饰物用 disappointing。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"Which is ________, the first, second or third tree?", o:["taller","tall","the tallest","more tall"], a:2, e:"三者比较用最高级 the tallest。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"This is ________ oldest tree in our city.", o:["a","an","the","/"], a:2, e:"最高级前加定冠词 the。", source:"Unit 4 Amazing Plants and Animals 单元检测卷（浙江专用）"},
+{q:"—Which is ________ season in your hometown? —Summer.", o:["hot","hotter","the hottest","hottest"], a:2, e:"in your hometown 表示范围，用最高级 the hottest。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"This is ________ book in our library.", o:["useful","more useful","the most useful","most useful"], a:2, e:"in our library 表示范围，用最高级 the most useful。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"—Thank you, Mum. Whenever I meet trouble, you will ________ to help me. —Because you are my dearest baby.", o:["attend","touch","appear","compare"], a:2, e:"appear表示\"出现\"，每当遇到困难时妈妈总会出现在我身边帮助我。", source:"人教版(2024)八年级上册Unit 4 Section A 2a-2e精品同步训练题"},
+{q:"—You look so tired. What's wrong? —I ________ late last night to finish my homework.", o:["stayed up","got up","put up","took up"], a:0, e:"stay up late表示\"熬夜到很晚\"。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"Can you imagine ________ deep into the rainforest to study flowers?", o:["walk","to walk","walking","walked"], a:2, e:"imagine doing sth. 表示\"想象做某事\"。", source:"2026-2027学年-人教版八年级上册英语Unit 4 暑期单元卷"},
+{q:"I heard your team lost the basketball game yesterday. That's too bad. Well, ________, we didn't lose. We won!", o:["quickly","brightly","actually","certainly"], a:2, e:"actually 表示\"实际上\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"—What kind of person do you expect ________? —The one who can sing ________ in our school. I really love to sing.", o:["to become; most beautifully","becoming; more beautifully","to become; most beautiful","becoming; most beautiful"], a:0, e:"第一空 expect to do sth.；第二空修饰动词 sing 用副词最高级 most beautifully。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"Bees are very important to our ecosystem. ________ them, many plants can't grow.", o:["With","Without","For","About"], a:1, e:"Without 表示\"没有\"。", source:"Unit 4 Amazing Plants and Animals 综合测试卷"},
+{q:"—Which do you like ________, fish, birds or dogs? —I like dogs best.", o:["good","well","better","best"], a:3, e:"三者比较用最高级 best。", source:"人教版英语八年级上册Unit 4 Section B同步课时练"},
+{q:"The ginkgo tree is one of the most ancient living ________ on earth.", o:["tree","the tree","trees"], a:2, e:"one of the + 最高级 + 复数名词，用 trees。", source:"人教版英语八年级上册Unit 4 Amazing Plants and Animals 单元练习"},
+{q:"—Why didn't Mr. Wu choose Jack to do the class project? —Because he always does things ________ in his class.", o:["carefully","less carefully","the most carefully","the least carefully"], a:3, e:"根据\"Why didn't Mr. Wu choose Jack\"可知他做事最不认真，用 the least carefully。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"Of all the seats on the high speed train, the ones by the windows are the ________.", o:["comfortable","more comfortable","most comfortable","as comfortable"], a:2, e:"Of all the seats表示范围，用最高级most comfortable。", source:"2025-2026学年人教版（2024）八年级英语Unit 4单元同步练"},
+{q:"________ their work, about 80 per cent of the plants cannot grow.", o:["Because","Without","For","With"], a:1, e:"Without 表示\"没有\"。", source:"2026-2027学年八年级英语上册单元素养达标培优卷"},
+{q:"Most birds fly south in winter ________ the snowy owl.", o:["besides","except","without","through"], a:1, e:"except 表示\"除……之外（不包括）\"。", source:"2026-2027学年-人教版八年级上册英语Unit 4 暑期单元卷"},
+{q:"Nowadays museums are becoming more popular ________ people want to learn more about culture and history.", o:["until","unless","as","although"], a:2, e:"as 引导原因状语从句。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"________ make her dream come true, she worked day and night.", o:["Because of","Except from","In order to","In addition to"], a:2, e:"In order to 表示\"为了\"，引导目的状语。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"The cactus can store a large amount of water in its thick stem to survive in the desert.", o:["cactus","rose","maple","sunflower"], a:0, e:"cactus 表示\"仙人掌\"，能在沙漠中储存大量水分。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"Among all the students, Tom studies ________.", o:["hard","harder","the hardest","hardest"], a:3, e:"Among all the students 表示范围，用最高级。副词最高级前 the 可省略。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"The little boy was so excited when he ________ a rare bird in the forest last weekend.", o:["finds","found","has found","will find"], a:1, e:"last weekend 提示用一般过去时 found。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"I'll have trouble ________ the math problem ________ your help.", o:["to work out, without","working out, without","to work out, with"], a:1, e:"have trouble doing sth. 表示\"做某事有困难\"；without your help 表示\"没有你的帮助\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"The redwood tree is ________ tree in the world.", o:["tall","taller","tallest","the tallest"], a:3, e:"in the world 表示范围，用最高级 the tallest。", source:"2026-2027学年-人教版八年级上册英语Unit 4 暑期单元卷"},
+{q:"—What's the ________ of the elephant? —About two tons.", o:["high","height","weigh","weight"], a:3, e:"weight 表示\"重量\"，根据\"About two tons\"可知。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"He is ________ student in our class.", o:["tall","taller","the tallest","tallest"], a:2, e:"in our class表示范围，用最高级the tallest。", source:"2025-2026学年人教版（2024）八年级英语Unit 4单元同步练"},
+{q:"Computers play an important ________ in our daily life. We can't live without them.", o:["item","way","role","tool"], a:2, e:"play an important role in 表示\"在……中发挥重要作用\"。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"—Kitty, how much do you know about The Book of Songs? —It is the ________ collection of poems in China and the beginning of China's poetry tradition.", o:["earlier","earliest","later","last"], a:1, e:"in China 表示范围，用最高级 earliest。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"Which animal jumps ________, the lion, the monkey or the tree frog?", o:["the high","higher","the highest"], a:2, e:"三者比较用最高级 the highest。", source:"人教版英语八年级上册Unit 4 Amazing Plants and Animals 单元练习"},
+{q:"—How often do you go skating? —Never. ________, I can't skate at all.", o:["Finally","Usually","Actually","Especially"], a:2, e:"Actually表示\"实际上\"，根据\"I can't skate at all\"可知。", source:"人教版(2024)八年级上册Unit 4 Section A 2a-2e精品同步训练题"},
+{q:"—Do you think Mike is the ________ in our class? —No. Dave is ________ than him.", o:["tall; taller","taller; taller","taller; tallest","tallest; taller"], a:3, e:"第一空in our class表示范围，用最高级tallest；第二空than提示用比较级taller。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"—Is Jack one of ________ runners in your class? —Of course! And he runs much ________ than me.", o:["fast; faster","faster; fast","the fastest; faster","faster; the fastest"], a:2, e:"第一空 one of the + 最高级 + 复数名词；第二空 than 提示用比较级 faster。", source:"Unit 4 Amazing Plants and Animals 单元质量测评"},
+{q:"Who will go to the cinema tonight? Everyone in our class will go there ________ Frank. He is ill at home.", o:["except","besides","between","without"], a:0, e:"except 表示\"除……之外（不包括）\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"The little monkey ________ only 1 kilo at birth. Now we know its ________ is 12 kilos.", o:["weighs; weight","weighed; weight","weight; weighs","weighed; weighs"], a:1, e:"第一空用过去式 weighed；第二空用名词 weight。", source:"2026-2027学年-人教版八年级上册英语Unit 4 暑期单元卷"},
+{q:"—Wang Lin did ________ in the final exam this term again. —That's not strange. He always gets full marks in all of his subjects.", o:["worst","worse","best","better"], a:2, e:"根据\"gets full marks\"可知他考得最好，用best。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"________ get lost in the forest, we'd better take a compass with us.", o:["In order to","Don't in order to","In order not to","In order to not"], a:2, e:"in order not to do sth. 表示\"为了不做某事\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"Wild pandas feed ________ fresh bamboo.", o:["in","on","with","at"], a:1, e:"feed on 表示\"以……为食\"。", source:"Unit 4 Amazing Plants and Animals 单元检测卷（浙江专用）"},
+{q:"—Your friend Jeff is good at telling jokes. —Yes. He is ________ person I know.", o:["funnier","the funniest","more serious","the most serious"], a:1, e:"I know 表示范围，用最高级 the funniest。", source:"人教版(2024)八年级上册Unit 4 第4课时 Section B（2a-4d）课时练习"},
+{q:"Basketball is so popular a game in the world and ________ people play it for fun and exercise.", o:["million of","millions of","two million of","two millions"], a:1, e:"millions of 表示\"数百万的\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"The guide told us that this kind of flower ________ only at night.", o:["blooms","bloomed","will bloom","bloom"], a:0, e:"宾语从句表示客观事实，用一般现在时。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"If someone is against your idea, it's wise to communicate ________ him.", o:["through","with","to","over"], a:1, e:"communicate with sb.表示\"与某人交流\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析强化练"},
+{q:"—Look! I think this clear river is the second ________ river in our area. —Yes, you're right.", o:["long","longer","longest","the longest"], a:2, e:"序数词 + 最高级，用 the second longest。", source:"2024版人教版八年级英语上册Unit 4课时作业专练"},
+{q:"The ________ of the tree is very thick.", o:["trunk","leaf","branch","root"], a:0, e:"trunk 表示\"树干\"，根据\"very thick\"可知。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"The elephant birds were ________ birds ever on the earth.", o:["the large","larger","the largest"], a:2, e:"ever 表示范围，用最高级 the largest。", source:"人教版英语八年级上册Unit 4 Amazing Plants and Animals 单元练习"},
+{q:"The rose is one of ________ flowers in our daily life.", o:["useful","more useful","most useful","the most useful"], a:3, e:"one of the + 最高级 + 复数名词。", source:"2026-2027学年-人教版八年级上册英语Unit 4 暑期单元卷"},
+{q:"It's important for us to ________ wild animals instead of hunting them for money.", o:["care for","look at","run after","shout at"], a:0, e:"care for 表示\"关心、照顾\"。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"I like doing sports. I think swimming is ________ than skiing.", o:["easy","easiest","easier","the easiest"], a:2, e:"than 提示用比较级 easier。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"The ________ of the baby elephant is about 200 kilos.", o:["high","height","weigh","weight"], a:3, e:"weight 表示\"重量\"，根据\"about 200 kilos\"可知。", source:"人教版英语八年级上册Unit 4 Section B同步课时练"},
+{q:"Some sea animals have special lights on their bodies to ________ in the dark deep sea.", o:["hunt food","keep warm","hide themselves","breathe fresh air"], a:0, e:"hunt food 表示\"捕猎食物\"，根据\"special lights\"可知。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"—Which subject is ________, Chinese, math or English? —It's hard to say.", o:["the most important","more important","most important","the more important"], a:0, e:"三者比较用最高级the most important。", source:"人教版(2024)八年级上册Unit 4 Section A Grammar Focus课后"},
+{q:"These birds always ________ in warm weather. So you can see them in early summer.", o:["fight","appear","grow","shoot"], a:1, e:"appear 表示\"出现\"，根据\"you can see them in early summer\"可知。", source:"2024版人教版八年级英语上册Unit 4 课时作业专练"},
+{q:"English is used ________ talking with people from other countries.", o:["for","as","by","with"], a:0, e:"be used for doing sth. 表示\"被用于做某事\"。", source:"人教版(2024)八年级上册Unit 4 Section A Grammar Focus课后"},
+{q:"—Of the three boys, Jim is ________ one. —Yes, he is shorter than Tom and me.", o:["shorter","the shortest","short"], a:1, e:"Of the three boys表示三者比较，用最高级the shortest。", source:"人教版(2024)八年级上册Unit 4 Grammar形容词副词的最高级"},
+{q:"To save the earth, we'd better use less water and plant ________ trees.", o:["many","more","few","fewer"], a:1, e:"根据语境，应该种更多的树，用 more。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"The Amazon rainforest ________ thousands of kinds of plants and animals.", o:["is made of","is full of","is short of","is tired of"], a:1, e:"be full of 表示\"充满\"。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"The fans ________ bamboo look very beautiful.", o:["made of","make of","made from","make from"], a:0, e:"be made of 表示\"由……制成\"，能看出原材料。", source:"人教版英语八年级上册Unit 4 Section B同步课时练"},
+{q:"Jenny became ________ girl in her class in Grade Six.", o:["the tallest","taller","tall","as"], a:0, e:"in her class 表示范围，用最高级 the tallest。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"We should protect bees ________ they are very important to our life.", o:["so","because","but","however"], a:1, e:"because 引导原因状语从句。", source:"人教版英语八年级上册Unit 4 Section B同步课时练"},
+{q:"I can't imagine my life ________ my pets.", o:["with","for","without","of"], a:2, e:"without 表示\"没有\"。", source:"2026-2027学年八年级英语上册单元素养达标培优卷"},
+{q:"The panda ________ 100 grams at birth. But now the ________ of it is 100 kilograms.", o:["weighs; weight","weight; weighs","weighed; weight","weighed; weigh"], a:0, e:"第一空用动词 weighs；第二空用名词 weight。", source:"Unit 4 Amazing Plants and Animals 单元质量测评"},
+{q:"The flowers in the garden smell so ________.", o:["well","nice","nicely","better"], a:1, e:"smell 是系动词，后接形容词 nice。", source:"河南省2025秋八年级英语上册Unit 4单元拔尖检测试卷"},
+{q:"The Yangtze River is one of ________ rivers in the world.", o:["long","longer","the longest","the longer"], a:2, e:"one of the + 最高级 + 复数名词。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"The panda is one of the ________ of China.", o:["symbol","symbols","symbolic","symbolize"], a:1, e:"one of the + 复数名词，用 symbols。", source:"人教版英语八年级上册Unit 4 Section B同步课时练"},
+{q:"They seem ________ a good time at the party.", o:["have","having","to have","to having"], a:2, e:"seem to do sth. 表示\"似乎做某事\"。", source:"2025人教版初中英语八年级上册 Unit 4随堂小测练习"},
+{q:"—The new movie star is really popular. —Yes, and he will ________ on the talk show this evening.", o:["appear","happen","follow","become"], a:0, e:"appear 表示\"出现\"。", source:"2025人教版初中英语八年级上册 Unit 4 单元测试卷"},
+{q:"Jim is talented in drawing. He draws ________ in his family.", o:["the most beautifully","the most beautiful","more beautifully","more beautiful"], a:0, e:"修饰动词draws用副词，in his family表示范围，用最高级the most beautifully。", source:"2025-2026学年人教版（2024）八年级英语Unit 4单元同步练"},
+{q:"Hard work ________ achieving success.", o:["plays a big role in","makes a difference to","looks forward to","pays attention to"], a:0, e:"play a big role in 表示\"在……中发挥重要作用\"。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"The Fuxing high-speed train is one of ________ trains in the world.", o:["modern","more modern","most modern","the most modern"], a:3, e:"one of the + 最高级 + 复数名词。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"—China is one of ________ countries in the world. —Yes. It has much ________ history than the US.", o:["older; longest","older; longer","the oldest; longest","the oldest; longer"], a:3, e:"第一空one of the + 最高级 + 复数名词；第二空than提示用比较级longer。", source:"2025-2026学年人教版（2024）八年级英语Unit 4单元同步练"},
+{q:"It is important ________ students ________ part in outdoor activities.", o:["for; to taking","for; to take","of; to taking","of; to take"], a:1, e:"It is important for sb. to do sth. 是固定句型。", source:"Unit 4 Amazing Plants and Animals 易错语法辨析 强化练"},
+{q:"I don't agree ________ you. I think he has something to do ________ it.", o:["on; with","with; with","with; to","on; on"], a:1, e:"agree with sb. 表示\"同意某人\"；have something to do with 表示\"与……有关\"。", source:"2025人教版初中英语八年级上册 Unit 4随堂小测练习"},
+{q:"The elephant is much ________ than the panda.", o:["big","bigger","biggest","the biggest"], a:1, e:"than 提示用比较级，much 修饰 bigger。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"The local government has built a nature reserve to provide a safe ________ for wild animals.", o:["soil","climate","habitat","mountain"], a:2, e:"habitat 表示\"栖息地\"。", source:"2026-2027学年新教材英语人教版八年级上册Unit 4 单元检测试题"},
+{q:"Chinese is one of ________ in the world. As Chinese students, we should learn it well.", o:["the old language","oldest languages","the most old language","the oldest languages"], a:3, e:"one of the + 最高级 + 复数名词，old 的最高级是 oldest。", source:"河南省2025秋八年级英语上册Unit 4单元拔尖检测试卷"},
+{q:"—Can I use your color pencils? —Sure, feel free ________ them. I'm not using them now.", o:["use","to use","using","uses"], a:1, e:"feel free to do sth. 表示\"可以随便做某事\"。", source:"2025人教版初中英语八年级上册 Unit 4单元测试卷"},
+{q:"Amy works ________ of all the children.", o:["more hard","hard","harder","hardest"], a:3, e:"of all the children 表示范围，用最高级 hardest。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"Please keep as ________ as possible while watching birds, as noise will make them afraid and fly away.", o:["quiet","quieter","quietly","most quietly"], a:0, e:"as...as 中间用原级 quiet。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"They are ________ a new car.", o:["interesting to buy","interesting in buying","interested to buying","interested in buying"], a:3, e:"be interested in doing sth. 表示\"对做某事感兴趣\"。", source:"2025人教版初中英语八年级上册 Unit 4随堂小测练习"},
+{q:"The two pictures look almost ________. I can't find any differences.", o:["same","the same","different","different from"], a:1, e:"look the same 表示\"看起来一样\"。", source:"2026-2027学年八年级英语上册单元素养达标培优卷"},
+{q:"Michael was late for school ________ he missed the school bus.", o:["so","but","as","if"], a:2, e:"as 引导原因状语从句，表示\"因为\"。", source:"Unit 4 Amazing Plants and Animals 易混语法辨析单选 专题练"},
+{q:"—Which notebook do you want to buy? —I will pick the black one, because it's three times ________ than the others.", o:["cheap","cheaper","cheapest","as cheap as"], a:1, e:"倍数 + 比较级 + than 结构。", source:"人教版（2024）八年级上册英语Units3-4 语法专练"},
+{q:"The harder you study, ________ results you will get.", o:["good","better","the better","the best"], a:2, e:"\"the + 比较级，the + 比较级\"结构。", source:"Unit 4 Amazing Plants and Animals Section A测试卷"},
+{q:"English is a useful ________ to introduce Chinese culture to the world.", o:["plan","tool","radio","film"], a:1, e:"tool表示\"工具\"，英语是向世界介绍中国文化的有用工具。", source:"人教版(2024)八年级上册Unit 4 Section A 2a-2e精品同步训练题"},
+{q:"I ________ a lot of interesting things when I was there.", o:["learn","learns","learnt","learning"], a:2, e:"when I was there 提示用一般过去时 learnt。", source:"2026-2027学年八年级英语上册单元素养达标培优卷"},
+{q:"For him, a space camp is ________ than any other camp in the world.", o:["great","greater","the greatest","greatest"], a:1, e:"than any other camp 提示用比较级 greater。", source:"2024版人教版八年级英语上册Unit 4课时作业专练"},
+{q:"Shanghai is one of ________ cities in China. Lots of visitors come here every year.", o:["big","bigger","biggest","the biggest"], a:3, e:"one of the + 最高级 + 复数名词。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('84_kp4_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('84_kp4_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('84_kp4_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 4 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 4 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>
