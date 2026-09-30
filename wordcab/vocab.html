@@ -454,24 +454,9 @@ function delKey(){
   updateBlank();
 }
 /* 点击字母即时发音（本地固定音频·同一发音人，微信内可用）
-   预加载缓存：首次用户手势后后台逐个解码 26 个本地字母音频（含起止点裁剪），之后点击零延迟且声音紧凑 */
+   播放走 Audio 元素（与点击单词同机制，兼容性最好）；WebAudio 仅分析静音边界做裁剪，分析失败也不影响发声 */
 var _letterCache = {};
 var _preloading = false;
-var _letterCtx = null;
-function getLetterCtx(){
-  if(!_letterCtx) _letterCtx = new (window.AudioContext || window.webkitAudioContext)();
-  if(_letterCtx.state === 'suspended'){ try{ _letterCtx.resume(); }catch(e){} }
-  return _letterCtx;
-}
-function analyzeBounds(buf){
-  var ch = buf.getChannelData(0), sr = buf.sampleRate;
-  var th = 0.012, start = 0, end = ch.length;
-  for(var i = 0; i < ch.length; i++){ if(Math.abs(ch[i]) > th){ start = i; break; } }
-  for(var i = ch.length - 1; i > start; i--){ if(Math.abs(ch[i]) > th){ end = i + Math.round(sr * 0.10); break; } }
-  if(end > ch.length) end = ch.length;
-  if(start >= end || end - start < Math.round(sr * 0.15)){ start = 0; end = ch.length; }
-  return { buf: buf, start: start / sr, end: end / sr };
-}
 function preloadLetters(){
   if(_preloading) return;
   _preloading = true;
@@ -480,38 +465,64 @@ function preloadLetters(){
     if(!q.length){ _preloading = false; return; }
     var l = q.shift();
     fetch('sounds/letters/' + l + '.mp3')
-      .then(function(r){ return r.arrayBuffer(); })
-      .then(function(ab){ return getLetterCtx().decodeAudioData(ab); })
-      .then(function(buf){ _letterCache[l] = analyzeBounds(buf); next(); })
+      .then(function(r){ return r.blob(); })
+      .then(function(b){
+        var url = URL.createObjectURL(b);
+        var item = { url: url, start: 0, end: 0 };
+        analyzeAudio(b).then(function(se){
+          if(se){ item.start = se.start; item.end = se.end; }
+          _letterCache[l] = item;
+          next();
+        }).catch(function(){ _letterCache[l] = item; next(); });
+      })
       .catch(function(){ next(); });
   })();
 }
+function analyzeAudio(blob){
+  try{
+    if(!(window.AudioContext || window.webkitAudioContext)) return Promise.resolve(null);
+    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+    return blob.arrayBuffer().then(function(ab){ return ctx.decodeAudioData(ab); })
+      .then(function(buf){
+        var ch = buf.getChannelData(0), sr = buf.sampleRate, th = 0.012, s = 0, e = ch.length;
+        for(var i = 0; i < ch.length; i++){ if(Math.abs(ch[i]) > th){ s = i; break; } }
+        for(var i = ch.length - 1; i > s; i--){ if(Math.abs(ch[i]) > th){ e = i + Math.round(sr * 0.10); break; } }
+        if(e > ch.length) e = ch.length;
+        if(s >= e || e - s < Math.round(sr * 0.15)){ s = 0; e = 0; }
+        try{ ctx.close(); }catch(err){}
+        return { start: s / sr, end: e / sr || 0 };
+      }).catch(function(){ return null; });
+  }catch(err){ return Promise.resolve(null); }
+}
+function playLetter(o){
+  try{
+    if(!_audio) _audio = new Audio();
+    _audio.src = o.url;
+    var start = o.start || 0;
+    var end = o.end || 0;
+    clearInterval(_audio._et);
+    function go(){
+      try{ if(start > 0.03) _audio.currentTime = start; }catch(e){}
+      _audio.play().catch(function(e){ console.log('play fail',e); });
+      if(end > start + 0.15){
+        _audio._et = setInterval(function(){
+          if(_audio.currentTime >= end - 0.06){ try{ _audio.pause(); }catch(e){} clearInterval(_audio._et); }
+        }, 120);
+      }
+    }
+    if(_audio.readyState >= 2){ go(); } else { _audio.addEventListener('canplay', go, {once:true}); }
+  }catch(e){ console.log(e); }
+}
 function speakLetter(l){
   try{
-    if(_letterCache[l] && _letterCache[l].buf){
-      var ctx = getLetterCtx();
-      var cur = _letterCache[l].playing;
-      if(cur){ try{ cur.stop(); }catch(e){} }
-      var src = ctx.createBufferSource();
-      src.buffer = _letterCache[l].buf;
-      src.connect(ctx.destination);
-      src.start(0, _letterCache[l].start, _letterCache[l].end - _letterCache[l].start);
-      _letterCache[l].playing = src;
-      return;
-    }
+    var o = _letterCache[l];
+    if(o && o.url){ playLetter(o); return; }
     if(!_preloading) preloadLetters();
     if(!_audio) _audio = new Audio();
-    _audio.src = 'sounds/letters/' + l + '.mp3';
+    _audio.src = 'https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(l) + '&type=1';
     _audio.currentTime = 0;
     _audio.play().catch(function(e){ console.log('play fail',e); });
-  }catch(e){
-    try{
-      if(!_audio) _audio = new Audio();
-      _audio.src = 'sounds/letters/' + l + '.mp3';
-      _audio.currentTime = 0;
-      _audio.play().catch(function(){});
-    }catch(e2){ console.log(e2); }
-  }
+  }catch(e){ console.log(e); }
 }
 function updateBlank(){
   const b = document.getElementById('blankSpace');
