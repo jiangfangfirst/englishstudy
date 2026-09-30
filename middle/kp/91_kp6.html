@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学线上课堂</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
+    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
+    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
+    --line:#e5e7eb; --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  /* hero —— 简洁浅蓝标题条 */
+  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
+  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
+  .hero .sub{color:var(--ink-2);font-size:13.5px;margin-top:8px;max-width:36em}
+  .hero .tagline{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
+  .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
+
+  /* Key Point section header */
+  section.block{margin-top:30px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+  .khead .kp{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1px;background:var(--blue-bg);border:1px solid var(--blue);padding:2px 9px;border-radius:6px;flex:none}
+  .khead h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .khead .desc{font-size:11px;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+  .lead{font-size:13.5px;color:var(--ink-2);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
+  .lead b{color:var(--blue-d)}
+
+  /* 语法要点块 */
+  .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
+  .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 词汇列表 —— 紧凑词条 */
+  .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
+  .witem:last-child{border-bottom:none}
+  .witem .wh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .witem .word{font-size:15px;font-weight:800;color:var(--blue-d)}
+  .witem .ph{font-size:11.5px;color:var(--ink-3)}
+  .witem .pos{font-size:11.5px;color:var(--ink-3);background:#f3f4f6;padding:1px 7px;border-radius:999px}
+  .witem p{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:break-word;word-break:break-word}
+  .witem p b{color:var(--blue-d)}
+  .witem .sen{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+  .witem .notebox{font-size:12px;color:var(--ink-3);margin-top:6px;padding-left:0;position:relative;overflow-wrap:break-word;word-break:break-word}
+.witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber,#f59e0b);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
+  .witem .notebox b{color:var(--accent-c,var(--amber-d,#b45309))}
+
+  /* 短语标签云 */
+  .plist{margin-top:4px}
+  .pgroup{margin-bottom:12px}
+  .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .pgroup .pg::after{content:"";flex:1;height:1px;background:var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .chip b{color:var(--blue-d);font-weight:700}
+  .chip span{color:var(--ink-3);font-size:11px}
+
+  /* 考点列表 —— 编号清单 */
+  .klist{margin-top:4px}
+  .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .kitem:last-child{border-bottom:none}
+  .kitem .n{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue);color:var(--blue-d);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .kitem .bd{flex:1;min-width:0}
+  .kitem .bd .kt{display:block;font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
+  .kitem .bd p{font-size:13px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .kitem .bd p b{color:var(--blue-d)}
+  .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 句型列表 */
+  .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .sitem:last-child{border-bottom:none}
+  .sitem .n{color:var(--blue);font-weight:800;font-size:13px;flex:none;margin-top:2px}
+  .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
+  .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 易错清单 —— 琥珀 */
+  .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+  .warn ol{list-style:none;counter-reset:ec}
+  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li:last-child{border-bottom:none}
+  .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .warn li b{color:#92400e}
+
+  .divider{height:1px;background:var(--line);margin:26px 0 0}
+
+  footer{margin-top:24px;padding:18px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .inner{max-width:720px;margin:0 auto}
+
+  @media (max-width:400px){
+    .hero h1{font-size:21px}
+    .khead h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">初中英语 · 学霸笔记</div>
+    <h1>九年级全册 · Key Point 6</h1>
+    <div class="tip">Unit 6 Beyond Earth · 探索太空 · 知识精讲</div>
+    <div class="tagline">
+      <span class="t">语法核心</span>
+      <span class="t">重点词汇</span>
+      <span class="t">高频短语</span>
+      <span class="t">12 个考点</span>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><h2>语法核心</h2><span class="desc">本单元两大语法</span></div>
+
+    <div class="gram">
+      <div class="gt">被动语态（三大时态）</div>
+      <p>一般现在时被动：am/is/are + done（is given、are sent）；一般过去时被动：was/were + done（was launched、was built）；一般将来时被动：will be + done（will be built、will be launched、will be sent、will be found、will be solved）。</p><p>被动语态强调动作承受者，动作执行者用 by 引出。</p>
+      <div class="ex">The spaceship will be designed by the engineers next year.</div><div class="ex">The International Space Station was built by several countries together.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">现在完成时（so far / since then）</div>
+      <p>现在完成时：have/has + 过去分词；常与 so far（到目前为止）、since then（自那以后）、in the past fifty years（在过去的五十年里）连用。</p>
+      <div class="ex">So far, humans have walked on the moon several times.</div><div class="ex">Many new technologies have been developed through space exploration in the past fifty years.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">情态动词被动与 whether/if 宾语从句</div>
+      <p>情态动词被动：must be dealt with、can be seen、may be found。</p><p>whether/if 引导宾语从句表“是否”，与 or not 连用只用 whether。</p>
+      <div class="ex">Space pollution must be dealt with well in the future.</div><div class="ex">We don't know whether there is life on other planets.</div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点词汇精讲</h2><span class="desc">1–10</span></div>
+    <div class="wlist">
+      <div class="witem">
+        <div class="wh"><span class="word">spacecraft</span><span class="ph">/ˈspeɪskrɑːft/</span><span class="pos">n. 宇宙飞船；航天器</span></div>
+        <p>单复数同形。</p>
+        <div class="sen">The spacecraft landed successfully on the moon's surface last month.</div>
+        <div class="notebox"><b>易错</b>spacecraft 单复数同形，不加 s。</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">astronaut</span><span class="ph">/ˈæstrənɔːt/</span><span class="pos">n. 宇航员</span></div>
+        <p>astronaut 乘飞船进入太空。</p>
+        <div class="sen">Yang Liwei is the first Chinese astronaut to travel into space.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">launch</span><span class="ph">/lɔːntʃ/</span><span class="pos">v. 发射；发起</span></div>
+        <p>launch a rocket 发射火箭。</p>
+        <div class="sen">The rocket will be launched next month.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">mission</span><span class="ph">/ˈmɪʃn/</span><span class="pos">n. 任务；使命</span></div>
+        <p>space mission 太空任务。</p>
+        <div class="sen">The mission of the team was to explore the moon.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">universe</span><span class="ph">/ˈjuːnɪvɜːs/</span><span class="pos">n. 宇宙</span></div>
+        <p>in the universe 在宇宙中。</p>
+        <div class="sen">It is believed that there are billions of stars in the universe.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">galaxy</span><span class="ph">/ˈɡæləksi/</span><span class="pos">n. 星系</span></div>
+        <p>银河系 the Galaxy / the Milky Way。</p>
+        <div class="sen">The sun belongs to a big galaxy in the universe.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">gravity</span><span class="ph">/ˈɡrævəti/</span><span class="pos">n. 重力；引力</span></div>
+        <p>zero gravity 失重。</p>
+        <div class="sen">Gravity is the force that pulls objects towards the center of the Earth.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">planet</span><span class="ph">/ˈplænɪt/</span><span class="pos">n. 行星</span></div>
+        <p>the planets around the sun。</p>
+        <div class="sen">We can see many planets and stars in space at night.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">satellite</span><span class="ph">/ˈsætəlaɪt/</span><span class="pos">n. 卫星</span></div>
+        <p>man-made satellite 人造卫星。</p>
+        <div class="sen">The first man-made satellite was sent into space in 1957.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">explore</span><span class="ph">/ɪkˈsplɔː(r)/</span><span class="pos">v. 探索；探究</span></div>
+        <p>exploration n. 探索；explorer n. 探险家。</p>
+        <div class="sen">There are still many mysterious natural wonders waiting for humans to explore.</div>
+        
+      </div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点短语</h2><span class="desc">分类记忆</span></div>
+    <div class="plist">
+      <div class="pgroup">
+        <div class="pg">太空探索短语</div>
+        <div class="chips">
+          <span class="chip"><b>lift off</b><span>（火箭）升空</span></span><span class="chip"><b>set foot on</b><span>踏上</span></span><span class="chip"><b>carry out</b><span>执行；开展</span></span><span class="chip"><b>make progress</b><span>取得进步</span></span><span class="chip"><b>in order to</b><span>为了</span></span><span class="chip"><b>on board</b><span>在船/机/航天器上</span></span><span class="chip"><b>be equipped with</b><span>装备有</span></span><span class="chip"><b>bring about</b><span>引起；带来</span></span>
+        </div>
+      </div>
+
+            <div class="pgroup">
+        <div class="pg">太空生活表达</div>
+        <div class="chips">
+          <span class="chip"><b>fall asleep</b><span>入睡</span></span><span class="chip"><b>look for</b><span>寻找</span></span><span class="chip"><b>run out</b><span>用完；耗尽</span></span><span class="chip"><b>be proud of</b><span>为……自豪</span></span><span class="chip"><b>look up at</b><span>抬头看</span></span><span class="chip"><b>take photos</b><span>拍照</span></span><span class="chip"><b>send...to...</b><span>把……送往</span></span><span class="chip"><b>return to</b><span>返回</span></span>
+        </div>
+      </div>
+
+            <div class="pgroup">
+        <div class="pg">情景交际·应答</div>
+        <div class="chips">
+          <span class="chip"><b>Have a good time!</b><span>玩得开心！</span></span><span class="chip"><b>Of course.</b><span>当然。</span></span><span class="chip"><b>Maybe.</b><span>也许吧。</span></span><span class="chip"><b>Sounds great!</b><span>听起来很棒！</span></span><span class="chip"><b>That's amazing!</b><span>太神奇了！</span></span><span class="chip"><b>I can't wait.</b><span>我等不及了。</span></span><span class="chip"><b>Really?</b><span>真的吗？</span></span><span class="chip"><b>So do I.</b><span>我也一样。</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>中考常考考点与易错点</h2><span class="desc">1–12</span></div>
+    <div class="klist">
+<div class="kitem"><div class="n">1</div><div class="bd">
+        <b class="kt">一般现在时被动</b>
+        <p>is/are + 过去分词；主语单复数决定 is/are。</p>
+        <div class="ex">The space station can be seen in the sky at night if the weather is clear.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">2</div><div class="bd">
+        <b class="kt">一般过去时被动</b>
+        <p>was/were + 过去分词；常与过去时间连用。</p>
+        <div class="ex">This spacecraft was launched in 1977.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">3</div><div class="bd">
+        <b class="kt">一般将来时被动</b>
+        <p>will be + 过去分词；不用 will is/was。</p>
+        <div class="ex">Better ways to travel in space will be invented.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">4</div><div class="bd">
+        <b class="kt">情态动词被动</b>
+        <p>must/can/may/should be + 过去分词。</p>
+        <div class="ex">The problem will be dealt with new methods.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">5</div><div class="bd">
+        <b class="kt">现在完成时 so far / since then</b>
+        <p>have/has + 过去分词；so far 常与现在完成时连用。</p>
+        <div class="ex">So far, humans have walked on the moon several times.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">6</div><div class="bd">
+        <b class="kt">in the past fifty years</b>
+        <p>in the past + 时间段 与现在完成时连用。</p>
+        <div class="ex">Many new technologies have been developed through space exploration in the past fifty years.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">7</div><div class="bd">
+        <b class="kt">whether/if 宾语从句</b>
+        <p>表“是否”；与 or not 连用只能用 whether。</p>
+        <div class="ex">The space trip will be cancelled because of bad weather tomorrow.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">8</div><div class="bd">
+        <b class="kt">lift off / set foot on / carry out</b>
+        <p>lift off（火箭）升空；set foot on 踏上；carry out 执行任务。</p>
+        <div class="ex">The rocket lifted off into the sky, carrying the satellite.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">9</div><div class="bd">
+        <b class="kt">be proud of / be equipped with</b>
+        <p>be proud of 为……自豪；be equipped with 装备有（with 介词）。</p>
+        <div class="ex">The whole nation is proud of the astronauts who made the mission a success.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">10</div><div class="bd">
+        <b class="kt">词性转换：explore/exploration</b>
+        <p>explore v. 探索；exploration n.；explorer n. 探险家。</p>
+        <div class="ex">It takes great courage to become a successful astronaut.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">11</div><div class="bd">
+        <b class="kt">情景交际——表达期待</b>
+        <p>I can't wait to do sth. 等不及做某事；Sounds great 表赞同。</p>
+        <div class="ex">—I'm going to the space museum tomorrow. —Have a good time!</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">12</div><div class="bd">
+        <b class="kt">情景交际——表可能</b>
+        <p>Maybe/Perhaps 表可能；Of course 表当然。</p>
+        <div class="ex">—Will the sports meet be held next week? —Yes, it will.</div>
+      </div></div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
+    <div class="slist">
+      <div class="sitem"><span class="n">1</span><div><div class="en">The spaceship will be designed by the engineers next year.</div><div class="zh">宇宙飞船明年将由工程师们发射。</div></div></div>
+      <div class="sitem"><span class="n">2</span><div><div class="en">The moon goes around the Earth.</div><div class="zh">月球绕着地球转。</div></div></div>
+      <div class="sitem"><span class="n">3</span><div><div class="en">Many new technologies have been developed through space exploration in the past fifty years.</div><div class="zh">到目前为止，科学家们已经研制出多种航天器。</div></div></div>
+      <div class="sitem"><span class="n">4</span><div><div class="en">The problem will be dealt with new methods.</div><div class="zh">发射前必须处理这个问题。</div></div></div>
+      <div class="sitem"><span class="n">5</span><div><div class="en">So far, humans have walked on the moon several times.</div><div class="zh">宇航员已经登上过月球。</div></div></div>
+      <div class="sitem"><span class="n">6</span><div><div class="en">We don't know whether there is life on other planets.</div><div class="zh">我想知道其他行星上是否有生命。</div></div></div>
+      <div class="sitem"><span class="n">7</span><div><div class="en">In 1969, American astronauts set foot on the moon for the first time.</div><div class="zh">火箭升空，踏上飞往太空的旅程。</div></div></div>
+      <div class="sitem"><span class="n">8</span><div><div class="en">Scientists have made great progress in space technology over the last decade.</div><div class="zh">我们为在太空领域的伟大成就感到自豪。</div></div></div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>语法易错点总结</h2><span class="desc">考前必看</span></div>
+        <div class="warn">
+      <div class="whd"><div class="dot">!</div>姜老师提醒 · 高频易错，务必牢记</div>
+      <ol>
+        <li><b>被动语态将来时：will be + 过去分词，will 后不接 is/are。</b></li>
+        <li><b>have/has + 过去分词，过去分词不随主语变化。</b></li>
+        <li><b>so far / since then / in the past fifty years 均与现在完成时连用。</b></li>
+        <li><b>whether...or not 固定搭配，不能用 if...or not。</b></li>
+        <li><b>spacecraft 单复数同形，spacecrafts 是错误形式。</b></li>
+        <li><b>set foot on 踏上，foot 前不加冠词（set foot on the moon）。</b></li>
+        <li><b>lift off 主语是火箭/飞船，不是人。</b></li>
+        <li><b>be equipped with 用 with 引出装备，不接 by。</b></li>
+        <li><b>bring about 带来（变化），take place 发生（不及物）。</b></li>
+        <li><b>in order to 后接动词原形，表目的。</b></li>
+        <li><b>fall asleep 入睡（短暂动作），be asleep 睡着（状态）。</b></li>
+        <li><b>carry out 执行（任务/计划），代词放中间：carry it out。</b></li>
+      </ol>
+    </div>
+  </section>
+
+<div class="divider"></div>
+</div>
+
+<footer>
+  <div class="inner">
+    多多好学版权所有
+  </div>
+</footer>
+
+</body>
+</html>
+

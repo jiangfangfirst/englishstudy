@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学线上课堂</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
+    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
+    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
+    --line:#e5e7eb; --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  /* hero —— 简洁浅蓝标题条 */
+  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
+  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
+  .hero .sub{color:var(--ink-2);font-size:13.5px;margin-top:8px;max-width:36em}
+  .hero .tagline{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
+  .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
+
+  /* Key Point section header */
+  section.block{margin-top:30px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+  .khead .kp{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1px;background:var(--blue-bg);border:1px solid var(--blue);padding:2px 9px;border-radius:6px;flex:none}
+  .khead h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .khead .desc{font-size:11px;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+  .lead{font-size:13.5px;color:var(--ink-2);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
+  .lead b{color:var(--blue-d)}
+
+  /* 语法要点块 */
+  .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
+  .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 词汇列表 —— 紧凑词条 */
+  .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
+  .witem:last-child{border-bottom:none}
+  .witem .wh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .witem .word{font-size:15px;font-weight:800;color:var(--blue-d)}
+  .witem .ph{font-size:11.5px;color:var(--ink-3)}
+  .witem .pos{font-size:11.5px;color:var(--ink-3);background:#f3f4f6;padding:1px 7px;border-radius:999px}
+  .witem p{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:break-word;word-break:break-word}
+  .witem p b{color:var(--blue-d)}
+  .witem .sen{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+  .witem .notebox{font-size:12px;color:var(--ink-3);margin-top:6px;padding-left:0;position:relative;overflow-wrap:break-word;word-break:break-word}
+.witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber,#f59e0b);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
+  .witem .notebox b{color:var(--accent-c,var(--amber-d,#b45309))}
+
+  /* 短语标签云 */
+  .plist{margin-top:4px}
+  .pgroup{margin-bottom:12px}
+  .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .pgroup .pg::after{content:"";flex:1;height:1px;background:var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .chip b{color:var(--blue-d);font-weight:700}
+  .chip span{color:var(--ink-3);font-size:11px}
+
+  /* 考点列表 —— 编号清单 */
+  .klist{margin-top:4px}
+  .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .kitem:last-child{border-bottom:none}
+  .kitem .n{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue);color:var(--blue-d);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .kitem .bd{flex:1;min-width:0}
+  .kitem .bd .kt{display:block;font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
+  .kitem .bd p{font-size:13px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .kitem .bd p b{color:var(--blue-d)}
+  .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 句型列表 */
+  .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .sitem:last-child{border-bottom:none}
+  .sitem .n{color:var(--blue);font-weight:800;font-size:13px;flex:none;margin-top:2px}
+  .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
+  .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 易错清单 —— 琥珀 */
+  .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+  .warn ol{list-style:none;counter-reset:ec}
+  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li:last-child{border-bottom:none}
+  .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .warn li b{color:#92400e}
+
+  .divider{height:1px;background:var(--line);margin:26px 0 0}
+
+  footer{margin-top:24px;padding:18px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .inner{max-width:720px;margin:0 auto}
+
+  @media (max-width:400px){
+    .hero h1{font-size:21px}
+    .khead h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">初中英语 · 学霸笔记</div>
+    <h1>九年级全册 · Key Point 3</h1>
+    <div class="tip">Unit 3 Smart Learning · 智慧学习 · 知识精讲</div>
+    <div class="tagline">
+      <span class="t">语法核心</span>
+      <span class="t">重点词汇</span>
+      <span class="t">高频短语</span>
+      <span class="t">12 个考点</span>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><h2>语法核心</h2><span class="desc">本单元两大语法</span></div>
+
+    <div class="gram">
+      <div class="gt">宾语从句（一）：引导词与语序</div>
+      <p>宾语从句三要素：① 引导词 that（陈述句，可省略）、if/whether（一般疑问句）、特殊疑问词（特殊疑问句）；② 陈述语序（主语 + 谓语）；③ 时态呼应（主句过去时，从句一般用相应的过去时；客观真理用一般现在时）。</p><p>主句为一般现在时，从句可按需用任何时态；主句为一般过去时，从句用过去时态，但客观真理不受影响。</p>
+      <div class="ex">I believe that practice makes perfect in learning English.</div><div class="ex">The teacher asked us whether we had finished our homework or not.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">宾语从句（二）：否定前置与 if/whether</div>
+      <p>think/believe/expect/suppose 等动词后接否定宾语从句时，否定前移到主句：I don't think...。</p><p>介词后、与 or not 连用、句首时只用 whether 不用 if；一般情况 if/whether 可互换。</p>
+      <div class="ex">I don't think he can finish the work in such a short time.</div><div class="ex">We are talking about whether we should have a group discussion tomorrow.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">suggest doing · have trouble doing · the+比较级</div>
+      <p>suggest doing sth. 建议做某事；suggest + that 从句（should）do；suggest 后不接 to do。</p><p>have trouble/difficulty (in) doing sth. 做某事有困难。</p><p>the + 比较级，the + 比较级：越……，越……。</p>
+      <div class="ex">The teacher suggested reading aloud every day to improve our pronunciation.</div><div class="ex">The more we practise, the better we learn.</div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点词汇精讲</h2><span class="desc">1–10</span></div>
+    <div class="wlist">
+      <div class="witem">
+        <div class="wh"><span class="word">method</span><span class="ph">/ˈmeθəd/</span><span class="pos">n. 方法；办法</span></div>
+        <p>a method of doing sth. 做某事的方法。</p>
+        <div class="sen">Using a smart phone is a good method of remembering new words.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">strategy</span><span class="ph">/ˈstrætədʒi/</span><span class="pos">n. 策略；战略</span></div>
+        <p>learning strategy 学习策略。</p>
+        <div class="sen">Binbin finds learning English enjoyable because he uses many good strategies.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">resource</span><span class="ph">/rɪˈsɔːs/</span><span class="pos">n. 资源；资料</span></div>
+        <p>learning resources 学习资源。</p>
+        <div class="sen">The library offers many free learning resources online, such as videos and recordings.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">feedback</span><span class="ph">/ˈfiːdbæk/</span><span class="pos">n. 反馈</span></div>
+        <p>give feedback on sth. 对……给予反馈。</p>
+        <div class="sen">Listening to useful feedback can help us become better learners.</div>
+        <div class="notebox"><b>常考</b>feedback 不可数，无复数形式。</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">mindset</span><span class="ph">/ˈmaɪndset/</span><span class="pos">n. 思维方式；心态</span></div>
+        <p>a growth mindset 成长型思维。</p>
+        <div class="sen">She has a positive mindset, which helps her learn from mistakes.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">efficient</span><span class="ph">/ɪˈfɪʃnt/</span><span class="pos">adj. 高效的</span></div>
+        <p>efficiently adv. 高效地；efficiency n.。</p>
+        <div class="sen">The AI robot is efficient, and it can finish the work in just 63 seconds.</div>
+        <div class="notebox"><b>易错</b>efficient 是“高效的”，effective 是“有效的”，勿混。</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">resourceful</span><span class="ph">/rɪˈsɔːsfl/</span><span class="pos">adj. 足智多谋的</span></div>
+        <p>善于利用资源的。</p>
+        <div class="sen">Online videos serve as a great learning resource for students.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">podcast</span><span class="ph">/ˈpɒdkɑːst/</span><span class="pos">n. 播客</span></div>
+        <p>可作听力学习资源。</p>
+        <div class="sen">Ella invited Binbin to her podcast to talk about active learning.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">flashcard</span><span class="ph">/ˈflæʃkɑːd/</span><span class="pos">n. 闪卡；抽认卡</span></div>
+        <p>用于记忆单词。</p>
+        <div class="sen">Many students use flashcards to remember new words.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">dialogue</span><span class="ph">/ˈdaɪəlɒɡ/</span><span class="pos">n. 对话</span></div>
+        <p>make up a dialogue 编一段对话。</p>
+        <div class="sen">Our English teacher always makes up some interesting dialogues in class.</div>
+        
+      </div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点短语</h2><span class="desc">分类记忆</span></div>
+    <div class="plist">
+      <div class="pgroup">
+        <div class="pg">学习行为短语</div>
+        <div class="chips">
+          <span class="chip"><b>take advantage of</b><span>利用</span></span><span class="chip"><b>look up</b><span>查阅</span></span><span class="chip"><b>come across</b><span>偶然遇到</span></span><span class="chip"><b>put off</b><span>推迟</span></span><span class="chip"><b>build up</b><span>逐步建立；增强</span></span><span class="chip"><b>prepare for</b><span>为……做准备</span></span><span class="chip"><b>connect...with...</b><span>把……与……联系起来</span></span><span class="chip"><b>see...as...</b><span>把……看作……</span></span>
+        </div>
+      </div>
+
+            <div class="pgroup">
+        <div class="pg">学习方式表达</div>
+        <div class="chips">
+          <span class="chip"><b>step by step</b><span>一步一步地</span></span><span class="chip"><b>in part</b><span>部分地</span></span><span class="chip"><b>in general</b><span>总体而言</span></span><span class="chip"><b>in addition</b><span>此外</span></span><span class="chip"><b>learn by heart</b><span>用心记住</span></span><span class="chip"><b>make notes</b><span>记笔记</span></span><span class="chip"><b>ask for help</b><span>寻求帮助</span></span><span class="chip"><b>share with sb.</b><span>与某人分享</span></span>
+        </div>
+      </div>
+
+            <div class="pgroup">
+        <div class="pg">情景交际·应答</div>
+        <div class="chips">
+          <span class="chip"><b>That's true.</b><span>确实如此。</span></span><span class="chip"><b>My pleasure.</b><span>我的荣幸。</span></span><span class="chip"><b>Have a good time!</b><span>玩得开心！</span></span><span class="chip"><b>Practice makes perfect.</b><span>熟能生巧。</span></span><span class="chip"><b>Take it easy.</b><span>放轻松。</span></span><span class="chip"><b>Good idea!</b><span>好主意！</span></span><span class="chip"><b>No problem.</b><span>没问题。</span></span><span class="chip"><b>You're welcome.</b><span>不客气。</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>中考常考考点与易错点</h2><span class="desc">1–12</span></div>
+    <div class="klist">
+<div class="kitem"><div class="n">1</div><div class="bd">
+        <b class="kt">宾语从句引导词 that</b>
+        <p>that 引导陈述句宾语从句，可省略；从句用陈述语序。</p>
+        <div class="ex">Mr. Wang finds that he can train his memory by drawing mind maps.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">2</div><div class="bd">
+        <b class="kt">if / whether 辨析</b>
+        <p>与 or not 连用、作介词宾语、句首引导从句时只能用 whether。</p>
+        <div class="ex">I don't know whether he can take part in the research project or not.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">3</div><div class="bd">
+        <b class="kt">否定前置</b>
+        <p>think/believe/expect 的否定宾语从句否定前移：I don't think...。</p>
+        <div class="ex">I don't think that speaking aloud is useful for pronunciation.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">4</div><div class="bd">
+        <b class="kt">宾语从句时态呼应</b>
+        <p>主句过去时，从句用相应过去时；客观真理用一般现在时。</p>
+        <div class="ex">She said that she would go to Beijing the next week.</div><div class="ex">The teacher told us that the earth goes around the sun.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">5</div><div class="bd">
+        <b class="kt">suggest doing / suggest that (should) do</b>
+        <p>suggest 后接 doing；接从句用 should do（should 可省略）；不接 sb. to do。</p>
+        <div class="ex">Mr Li suggests watching English movies to improve our listening.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">6</div><div class="bd">
+        <b class="kt">have trouble (in) doing sth.</b>
+        <p>trouble/difficulty 后接 in doing，in 可省略。</p>
+        <div class="ex">Many students have trouble understanding English grammar. They need more practice.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">7</div><div class="bd">
+        <b class="kt">the + 比较级，the + 比较级</b>
+        <p>表示“越……，越……”，两个比较级前都要加 the。</p>
+        <div class="ex">The harder you work, the greater progress you will make.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">8</div><div class="bd">
+        <b class="kt">no matter what / whatever 让步状语从句</b>
+        <p>no matter what = whatever（无论什么），引导让步状语从句；主句一般不用将来时。</p>
+        <div class="ex">no matter what happens, it's best to remember the good things.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">9</div><div class="bd">
+        <b class="kt">take advantage of / look up / come across</b>
+        <p>take advantage of 利用；look up 查阅（代词放中间）；come across 偶然遇到。</p>
+        <div class="ex">As a student, you should take advantage of the school library to read more good books.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">10</div><div class="bd">
+        <b class="kt">词性转换：method/strategy/resource</b>
+        <p>method of doing；learning strategy；resource 复数 resources。</p>
+        <div class="ex">—How is your English study, Sarah? —It has improved a lot. Your method really works.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">11</div><div class="bd">
+        <b class="kt">情景交际——感谢与应答</b>
+        <p>Thank you. 应答：You're welcome. / My pleasure. / Not at all.</p>
+        <div class="ex">—Thanks for giving me so much advice about how to learn English. —My pleasure.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">12</div><div class="bd">
+        <b class="kt">情景交际——祝愿</b>
+        <p>Have a good time! 祝玩得开心；Good luck! 祝好运。</p>
+        <div class="ex">—I'm afraid I can't remember the new words. —Don't worry. You can write them in a notebook and review them often.</div>
+      </div></div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
+    <div class="slist">
+      <div class="sitem"><span class="n">1</span><div><div class="en">I believe that practice makes perfect in learning English.</div><div class="zh">我认为学英语既有趣又有用。</div></div></div>
+      <div class="sitem"><span class="n">2</span><div><div class="en">I don't think he can finish the work in such a short time.</div><div class="zh">我认为他不可能在这么短的时间里完成工作。</div></div></div>
+      <div class="sitem"><span class="n">3</span><div><div class="en">The teacher wondered whether or not we could finish the science project on time.</div><div class="zh">老师问我们是否完成了作业。</div></div></div>
+      <div class="sitem"><span class="n">4</span><div><div class="en">The more we practise, the better we learn.</div><div class="zh">我们练习得越多，学得越好。</div></div></div>
+      <div class="sitem"><span class="n">5</span><div><div class="en">Whatever your goals are, never lose your courage.</div><div class="zh">无论发生什么，继续努力，永不放弃。</div></div></div>
+      <div class="sitem"><span class="n">6</span><div><div class="en">—I have trouble memorizing the new words. —You can read them aloud every morning.</div><div class="zh">我记这么多生词有困难。</div></div></div>
+      <div class="sitem"><span class="n">7</span><div><div class="en">Our head teacher suggests summarizing exam mistakes every weekend to avoid the same errors.</div><div class="zh">老师建议边听边记笔记。</div></div></div>
+      <div class="sitem"><span class="n">8</span><div><div class="en">We should take advantage of the Internet to search for useful information.</div><div class="zh">利用每一分钟为考试做准备。</div></div></div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>语法易错点总结</h2><span class="desc">考前必看</span></div>
+        <div class="warn">
+      <div class="whd"><div class="dot">!</div>姜老师提醒 · 高频易错，务必牢记</div>
+      <ol>
+        <li><b>宾语从句必须用陈述语序，疑问句结构要还原：He asked where I lived. 而非 where did I live.。</b></li>
+        <li><b>if/whether 与 or not 连用时只能用 whether。</b></li>
+        <li><b>think/believe 的否定要前移：I don't think he is right. 不写 I think he isn't right.。</b></li>
+        <li><b>suggest 后不接 sb. to do；接 doing 或 that (should) do。</b></li>
+        <li><b>have trouble/difficulty (in) doing sth.，介词 in 可省略。</b></li>
+        <li><b>the + 比较级，the + 比较级 中两个 the 都不能少。</b></li>
+        <li><b>no matter what/where/when 后主句不用将来时，用一般现在时表将来。</b></li>
+        <li><b>look up 后接代词作宾语时放中间：look it up。</b></li>
+        <li><b>come across 表“偶然遇到”，run into 同义。</b></li>
+        <li><b>feedback 不可数，many feedback 是错的。</b></li>
+        <li><b>efficient（高效）与 effective（有效）含义不同，勿混用。</b></li>
+        <li><b>practice 是名词/动词，practise 英式动词；practice makes perfect 是谚语。</b></li>
+      </ol>
+    </div>
+  </section>
+
+<div class="divider"></div>
+</div>
+
+<footer>
+  <div class="inner">
+    多多好学版权所有
+  </div>
+</footer>
+
+</body>
+</html>
+

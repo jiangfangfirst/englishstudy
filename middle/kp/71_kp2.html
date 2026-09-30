@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学线上课堂</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
+    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
+    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
+    --line:#e5e7eb; --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  /* hero —— 简洁浅蓝标题条 */
+  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
+  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
+  .hero .sub{color:var(--ink-2);font-size:13.5px;margin-top:8px;max-width:36em}
+  .hero .tagline{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
+  .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
+
+  /* Key Point section header */
+  section.block{margin-top:30px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+  .khead .kp{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1px;background:var(--blue-bg);border:1px solid var(--blue);padding:2px 9px;border-radius:6px;flex:none}
+  .khead h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .khead .desc{font-size:11px;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+  .lead{font-size:13.5px;color:var(--ink-2);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
+  .lead b{color:var(--blue-d)}
+
+  /* 语法要点块 */
+  .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
+  .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 词汇列表 —— 紧凑词条 */
+  .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
+  .witem:last-child{border-bottom:none}
+  .witem .wh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .witem .word{font-size:15px;font-weight:800;color:var(--blue-d)}
+  .witem .ph{font-size:11.5px;color:var(--ink-3)}
+  .witem .pos{font-size:11.5px;color:var(--ink-3);background:#f3f4f6;padding:1px 7px;border-radius:999px}
+  .witem p{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:break-word;word-break:break-word}
+  .witem p b{color:var(--blue-d)}
+  .witem .sen{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+  .witem .notebox{font-size:12px;color:var(--ink-3);margin-top:6px;padding-left:0;position:relative;overflow-wrap:break-word;word-break:break-word}
+.witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber,#f59e0b);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
+  .witem .notebox b{color:var(--accent-c,var(--amber-d,#b45309))}
+
+  /* 短语标签云 */
+  .plist{margin-top:4px}
+  .pgroup{margin-bottom:12px}
+  .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .pgroup .pg::after{content:"";flex:1;height:1px;background:var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .chip b{color:var(--blue-d);font-weight:700}
+  .chip span{color:var(--ink-3);font-size:11px}
+
+  /* 考点列表 —— 编号清单 */
+  .klist{margin-top:4px}
+  .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .kitem:last-child{border-bottom:none}
+  .kitem .n{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue);color:var(--blue-d);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .kitem .bd{flex:1;min-width:0}
+  .kitem .bd .kt{display:block;font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
+  .kitem .bd p{font-size:13px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .kitem .bd p b{color:var(--blue-d)}
+  .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 句型列表 */
+  .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .sitem:last-child{border-bottom:none}
+  .sitem .n{color:var(--blue);font-weight:800;font-size:13px;flex:none;margin-top:2px}
+  .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
+  .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 易错清单 —— 琥珀 */
+  .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+  .warn ol{list-style:none;counter-reset:ec}
+  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li:last-child{border-bottom:none}
+  .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .warn li b{color:#92400e}
+
+  .divider{height:1px;background:var(--line);margin:26px 0 0}
+
+  footer{margin-top:24px;padding:18px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .inner{max-width:720px;margin:0 auto}
+
+  @media (max-width:400px){
+    .hero h1{font-size:21px}
+    .khead h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">初中英语 · 学霸笔记</div>
+    <h1>七年级上册 · KP 2</h1>
+    <div class="tip">要点：① 实义动词一般现在时（三单变化、do/does 疑问与否定）；② 名词所有格（'s 与 s'）；③ 家庭称谓与代词辨析；④ this/that/these/those 指示代词。</div>
+    <div class="tagline">
+      <span class="t">语法核心</span>
+      <span class="t">重点词汇</span>
+      <span class="t">高频短语</span>
+      <span class="t">12 个考点</span>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><h2>语法核心</h2><span class="desc">本单元两大语法</span></div>
+
+    <div class="gram">
+      <div class="gt">一般现在时：第三人称单数</div>
+      <p>主语为第三人称单数（he / she / it 及单数名词）时，实义动词加 -s / -es：like→likes、have→has、go→goes、watch→watches、study→studies。</p><p>否定句用 <b>doesn't + 动词原形</b>，疑问句用 <b>Does + 主语 + 动词原形</b>。</p>
+      <div class="ex">My grandfather likes reading after supper every day.</div><div class="ex">—Does Judy have a hat? —Yes, she does. Her hat is yellow.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">名词所有格</div>
+      <p>有生命名词的所有格加 's：Tom's book；以 s 结尾的复数只加 '：the students' books；不以 s 结尾的复数加 's：the children's toys。</p><p>无生命名词常用 of 结构：a photo of my family。</p>
+      <div class="ex">This is Anna's ruler. And that is my schoolbag.</div><div class="ex">The students' room is very clean. They like reading there.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">指示代词 this / that / these / those</div>
+      <p>this（这，单数）/ that（那，单数）/ these（这些）/ those（那些）。be 动词：this/that 用 is，these/those 用 are。</p><p>电话用语中 this 指自己，that 指对方。</p>
+      <div class="ex">—Who are they? —They're my cousins.</div><div class="ex">—Who's that boy? —He is my brother.</div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点词汇精讲</h2><span class="desc">1–10</span></div>
+    <div class="wlist">
+      <div class="witem">
+        <div class="wh"><span class="word">family</span><span class="ph">/ˈfæməli/</span><span class="pos">n. 家；家庭</span></div>
+        <p>指整体时谓语用单数，指家人时可用复数。</p>
+        <div class="sen">She has a big family.</div>
+        <div class="notebox"><b>易错</b>My family are watching TV.（指家人用复数）</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">parent</span><span class="ph">/ˈpeərənt/</span><span class="pos">n. 父（母）亲</span></div>
+        <p>复数 parents 父母双亲。</p>
+        <div class="sen">Those are my parents. They are teachers.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">grandparent</span><span class="ph">/ˈɡrænpeərənt/</span><span class="pos">n. 祖父（母）</span></div>
+        <p>复数 grandparents 祖父母。</p>
+        <div class="sen">My grandparents are in a small village. They are very happy.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">cousin</span><span class="ph">/ˈkʌzn/</span><span class="pos">n. 堂（表）兄弟姐妹</span></div>
+        <p>uncle/aunt 的孩子。</p>
+        <div class="sen">The girl in red is my cousin. Her name is Lily.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">uncle</span><span class="ph">/ˈʌŋkl/</span><span class="pos">n. 叔；伯；舅；姑父</span></div>
+        <p>家庭男性成员称谓。</p>
+        <div class="sen">—Who is the man in the blue jacket? —He's my uncle.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">aunt</span><span class="ph">/ɑːnt/</span><span class="pos">n. 姑母；姨母；婶母</span></div>
+        <p>家庭女性成员称谓。</p>
+        <div class="sen">My mother's sister is my aunt.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">sister</span><span class="ph">/ˈsɪstə(r)/</span><span class="pos">n. 姐；妹</span></div>
+        <p>brother 兄弟。</p>
+        <div class="sen">—Who is the girl with long hair over there? —She is my sister, Gina.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">photo</span><span class="ph">/ˈfəʊtəʊ/</span><span class="pos">n. 照片</span></div>
+        <p>复数 photos（直接加 s）。</p>
+        <div class="sen">This is a photo of my family.</div>
+        <div class="notebox"><b>常考</b>photo 复数直接加 s，不是 photoes。</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">picture</span><span class="ph">/ˈpɪktʃə(r)/</span><span class="pos">n. 图画；照片</span></div>
+        <p>picture 可指图画或照片。</p>
+        <div class="sen">—Where is your family photo? —It's on the wall.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">next</span><span class="ph">/nekst/</span><span class="pos">adv./adj. 下一个（的）</span></div>
+        <p>next to 紧邻。</p>
+        <div class="sen">—Who's that boy? —He is my brother.</div>
+        
+      </div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点短语</h2><span class="desc">分类记忆</span></div>
+    <div class="plist">
+      <div class="pgroup">
+        <div class="pg">家庭称谓与介绍</div>
+        <div class="chips">
+          <span class="chip"><b>my family</b><span>我的家庭</span></span><span class="chip"><b>my parents</b><span>我的父母</span></span><span class="chip"><b>my grandparents</b><span>我的祖父母</span></span><span class="chip"><b>my uncle / aunt / cousin</b><span>我的叔叔/姑姑/表兄妹</span></span><span class="chip"><b>a photo of my family</b><span>一张全家福</span></span><span class="chip"><b>family photo</b><span>全家福照片</span></span><span class="chip"><b>this is...</b><span>这是……（介绍用语）</span></span>
+        </div>
+      </div>
+
+            <div class="pgroup">
+        <div class="pg">日常动作（一般现在时）</div>
+        <div class="chips">
+          <span class="chip"><b>like doing sth.</b><span>喜欢做某事</span></span><span class="chip"><b>have a big family</b><span>有一个大家庭</span></span><span class="chip"><b>work in a hospital</b><span>在医院工作</span></span><span class="chip"><b>go to work</b><span>去上班</span></span><span class="chip"><b>live with sb.</b><span>和某人住在一起</span></span><span class="chip"><b>get up early</b><span>早起</span></span><span class="chip"><b>do homework</b><span>做作业</span></span><span class="chip"><b>watch TV</b><span>看电视</span></span>
+        </div>
+      </div>
+
+            <div class="pgroup">
+        <div class="pg">其他高频短语</div>
+        <div class="chips">
+          <span class="chip"><b>next to</b><span>紧邻</span></span><span class="chip"><b>on the left / right</b><span>在左边/右边</span></span><span class="chip"><b>in the photo</b><span>在照片里</span></span><span class="chip"><b>the name of...</b><span>……的名字</span></span><span class="chip"><b>come from / be from</b><span>来自</span></span><span class="chip"><b>very much</b><span>非常</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>中考常考考点与易错点</h2><span class="desc">1–12</span></div>
+    <div class="klist">
+<div class="kitem"><div class="n">1</div><div class="bd">
+        <b class="kt">考点一：三单变化规则</b>
+        <p>一般加 -s：likes；以 s/x/ch/sh/o 结尾加 -es：watches、goes；辅音字母+y 变 y 为 i 加 -es：studies；have 变 has。</p>
+        <div class="ex">—Does Anna go to school by bus every day? —No, she usually walks to school.</div><div class="ex">My father watches TV every evening. He loves sports shows.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">2</div><div class="bd">
+        <b class="kt">考点二：否定句与疑问句</b>
+        <p>doesn't + 动词原形；Does + 主语 + 动词原形？答语 Yes, he does. / No, he doesn't.</p>
+        <div class="ex">My sister doesn't like watching TV. She likes reading books.</div><div class="ex">—Does he like playing ping-pong? —Yes, he does. He likes playing badminton, too.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">3</div><div class="bd">
+        <b class="kt">考点三：名词所有格</b>
+        <p>单数加 's；以 s 结尾的复数加 '；不以 s 结尾的复数加 's。</p>
+        <div class="ex">Tom's father spends a lot of time reading newspapers every evening.</div><div class="ex">The students' room is very clean. They like reading there.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">4</div><div class="bd">
+        <b class="kt">考点四：of 结构表所属</b>
+        <p>无生命名词用 of：a photo of my family；the name of the school。</p>
+        <div class="ex">This is a photo of my family.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">5</div><div class="bd">
+        <b class="kt">考点五：this/that/these/those</b>
+        <p>this/that 单数用 is；these/those 复数用 are。</p>
+        <div class="ex">—Are those your grandparents? —Yes, they are.</div><div class="ex">—Who is she? —She's Grace's aunt.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">6</div><div class="bd">
+        <b class="kt">考点六：Who 引导的特殊疑问句</b>
+        <p>Who is this? 询问“这是谁”；回答 This/That is...。</p>
+        <div class="ex">—Who is that girl in the photo? —She's my cousin, Lily.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">7</div><div class="bd">
+        <b class="kt">考点七：have 的三单 has</b>
+        <p>have→has，无 haves；Does he have...? 中仍用 have。</p>
+        <div class="ex">—Who's Jack? —He's my cousin, my aunt's son.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">8</div><div class="bd">
+        <b class="kt">考点八：like 后接 doing</b>
+        <p>like doing sth. / like to do sth. 都喜欢做某事。</p>
+        <div class="ex">My brother likes playing basketball, but he doesn't like to play basketball today because he's tired.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">9</div><div class="bd">
+        <b class="kt">考点九：家庭成员介绍</b>
+        <p>介绍某人用 This is...（单数）/ These are...（复数），不用 He/She is 直接开头介绍。</p>
+        <div class="ex">These are my cousins Bill and Alan. Their father is my uncle.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">10</div><div class="bd">
+        <b class="kt">考点十：频度副词位置</b>
+        <p>always / usually / often / sometimes / never 放在 be 后、实义动词前。</p>
+        <div class="ex">—Do you often do housework at home? —Yes. I help my mother with it every day.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">11</div><div class="bd">
+        <b class="kt">考点十一：情景交际——确认对方</b>
+        <p>Is this your...? 回答 Yes, it is. / No, it isn't.；注意代词 it 指代 this/that。</p>
+        <div class="ex">—Look! This is my family photo. —Wow, it's nice!</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">12</div><div class="bd">
+        <b class="kt">考点十二：照片与图画辨析</b>
+        <p>photo 只指照片；picture 可指图画和照片。</p>
+        <div class="ex">Let's draw a family tree together.</div>
+      </div></div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
+    <div class="slist">
+      <div class="sitem"><span class="n">1</span><div><div class="en">This is his brother and those are his parents.</div></div></div>
+      <div class="sitem"><span class="n">2</span><div><div class="en">—Are those your sisters? —Yes, they are.</div></div></div>
+      <div class="sitem"><span class="n">3</span><div><div class="en">—Who is the boy under the tree? —He is my cousin, Jim.</div></div></div>
+      <div class="sitem"><span class="n">4</span><div><div class="en">—What does your father like doing? —He likes reading books in the evening.</div><div class="zh">三单 likes 后接 doing。</div></div></div>
+      <div class="sitem"><span class="n">5</span><div><div class="en">His uncle works in a hospital. He works very hard every day.</div><div class="zh">Does 后接动词原形。</div></div></div>
+      <div class="sitem"><span class="n">6</span><div><div class="en">My grandparents are old, but they are very kind.</div></div></div>
+      <div class="sitem"><span class="n">7</span><div><div class="en">This is a photo of my family.</div><div class="zh">无生命名词用 of 结构。</div></div></div>
+      <div class="sitem"><span class="n">8</span><div><div class="en">—Who's that boy? —He is my brother.</div><div class="zh">next to 紧邻。</div></div></div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>语法易错点总结</h2><span class="desc">考前必看</span></div>
+        <div class="warn">
+      <div class="whd"><div class="dot">!</div>姜老师提醒 · 高频易错，务必牢记</div>
+      <ol>
+        <li><b>三单变化：have→has，不能写 haves；Does 后接动词原形。</b></li>
+        <li><b>否定句用 doesn't + 动词原形，不能写 doesn't likes。</b></li>
+        <li><b>以 s 结尾的复数名词所有格只加 '：the students' books。</b></li>
+        <li><b>photo 的复数是 photos，不是 photoes。</b></li>
+        <li><b>介绍家庭成员用 This is... / These are...，不用 He is... 直接开头。</b></li>
+        <li><b>family 指整体用单数、指家人用复数，据语境判断。</b></li>
+        <li><b>this/that 与 is 搭配，these/those 与 are 搭配。</b></li>
+        <li><b>Who is this? 询问身份，回答 This/That is...。</b></li>
+        <li><b>like doing 与 like to do 均可，注意三单 likes。</b></li>
+        <li><b>频度副词放 be 后、实义动词前：She often helps...。</b></li>
+        <li><b>a photo of my family 是“一张全家福”，of 表所属关系。</b></li>
+        <li><b>Is this your...? 回答用 it 指代：Yes, it is.。</b></li>
+      </ol>
+    </div>
+  </section>
+
+<div class="divider"></div>
+</div>
+
+<footer>
+  <div class="inner">
+    多多好学版权所有
+  </div>
+</footer>
+
+</body>
+</html>
+

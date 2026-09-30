@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学线上课堂</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
+    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
+    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
+    --line:#e5e7eb; --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  /* hero —— 简洁浅蓝标题条 */
+  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
+  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
+  .hero .sub{color:var(--ink-2);font-size:13.5px;margin-top:8px;max-width:36em}
+  .hero .tagline{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
+  .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
+
+  /* Key Point section header */
+  section.block{margin-top:30px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+  .khead .kp{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1px;background:var(--blue-bg);border:1px solid var(--blue);padding:2px 9px;border-radius:6px;flex:none}
+  .khead h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .khead .desc{font-size:11px;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+  .lead{font-size:13.5px;color:var(--ink-2);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
+  .lead b{color:var(--blue-d)}
+
+  /* 语法要点块 */
+  .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
+  .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 词汇列表 —— 紧凑词条 */
+  .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
+  .witem:last-child{border-bottom:none}
+  .witem .wh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .witem .word{font-size:15px;font-weight:800;color:var(--blue-d)}
+  .witem .ph{font-size:11.5px;color:var(--ink-3)}
+  .witem .pos{font-size:11.5px;color:var(--ink-3);background:#f3f4f6;padding:1px 7px;border-radius:999px}
+  .witem p{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:break-word;word-break:break-word}
+  .witem p b{color:var(--blue-d)}
+  .witem .sen{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+  .witem .notebox{font-size:12px;color:var(--ink-3);margin-top:6px;padding-left:0;position:relative;overflow-wrap:break-word;word-break:break-word}
+.witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber,#f59e0b);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
+  .witem .notebox b{color:var(--accent-c,var(--amber-d,#b45309))}
+
+  /* 短语标签云 */
+  .plist{margin-top:4px}
+  .pgroup{margin-bottom:12px}
+  .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .pgroup .pg::after{content:"";flex:1;height:1px;background:var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .chip b{color:var(--blue-d);font-weight:700}
+  .chip span{color:var(--ink-3);font-size:11px}
+
+  /* 考点列表 —— 编号清单 */
+  .klist{margin-top:4px}
+  .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .kitem:last-child{border-bottom:none}
+  .kitem .n{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue);color:var(--blue-d);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .kitem .bd{flex:1;min-width:0}
+  .kitem .bd .kt{display:block;font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
+  .kitem .bd p{font-size:13px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .kitem .bd p b{color:var(--blue-d)}
+  .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 句型列表 */
+  .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .sitem:last-child{border-bottom:none}
+  .sitem .n{color:var(--blue);font-weight:800;font-size:13px;flex:none;margin-top:2px}
+  .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
+  .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 易错清单 —— 琥珀 */
+  .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+  .warn ol{list-style:none;counter-reset:ec}
+  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li:last-child{border-bottom:none}
+  .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .warn li b{color:#92400e}
+
+  .divider{height:1px;background:var(--line);margin:26px 0 0}
+
+  footer{margin-top:24px;padding:18px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .inner{max-width:720px;margin:0 auto}
+
+  @media (max-width:400px){
+    .hero h1{font-size:21px}
+    .khead h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">初中英语 · 学霸笔记</div>
+    <h1>七年级上册 · KP 6</h1>
+    <div class="tip">要点：① 时间表达法（顺读/逆读、a quarter / half past）；② What time / When 特殊疑问句；③ 一般现在时三单与 do/does；④ 频度副词与日常作息短语。</div>
+    <div class="tagline">
+      <span class="t">语法核心</span>
+      <span class="t">重点词汇</span>
+      <span class="t">高频短语</span>
+      <span class="t">12 个考点</span>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><h2>语法核心</h2><span class="desc">本单元两大语法</span></div>
+
+    <div class="gram">
+      <div class="gt">时间表达法</div>
+      <p>顺读：7:15 → seven fifteen；逆读：分钟不超过 30 用 <b>past</b>（a quarter past seven 七点一刻），超过 30 用 <b>to</b>（a quarter to eight 差一刻八点）；30 分钟用 <b>half past</b>（half past seven 七点半）。</p><p>询问时间：What time is it? / What's the time?</p>
+      <div class="ex">—What time is it now? —It's half past seven.</div><div class="ex">—What time is it now? —It's a quarter to seven. It's 6:45.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">What time 与 When</div>
+      <p>What time 询问具体时刻；When 询问时间（时刻、日期、年份均可）。答语用 at + 时刻。</p>
+      <div class="ex">—What time do you usually get up? —At 6:45 in the morning.</div><div class="ex">—When does Lisa do her homework? —After dinner.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">一般现在时三单与频度副词</div>
+      <p>主语三单时动词加 -s/-es：get→gets、do→does；否定 doesn't + 原形、疑问 Does + 原形。</p><p>频度副词 <b>usually / never / sometimes / often</b> 放在 be 后、实义动词前。</p>
+      <div class="ex">My sister usually gets up at half past six in the morning.</div><div class="ex">He doesn't watch TV on school nights.</div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点词汇精讲</h2><span class="desc">1–10</span></div>
+    <div class="wlist">
+      <div class="witem">
+        <div class="wh"><span class="word">shower</span><span class="ph">/ˈʃaʊə(r)/</span><span class="pos">n. 淋浴；阵雨</span></div>
+        <p>take a shower 洗澡。</p>
+        <div class="sen">She takes a shower before breakfast every day.</div>
+        <div class="notebox"><b>常考</b>take a shower 冲澡，是固定搭配。</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">brush</span><span class="ph">/brʌʃ/</span><span class="pos">v. 刷 · n. 刷子</span></div>
+        <p>brush one's teeth 刷牙。</p>
+        <div class="sen">We need to brush our teeth after eating cake to have good teeth.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">teeth</span><span class="ph">/tiːθ/</span><span class="pos">n. 牙齿（复数）</span></div>
+        <p>单数 tooth。</p>
+        <div class="sen">Tom brushes his teeth at seven every morning.</div>
+        <div class="notebox"><b>易错</b>tooth 的复数是 teeth，不是 tooths。</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">homework</span><span class="ph">/ˈhəʊmwɜːk/</span><span class="pos">n. 家庭作业</span></div>
+        <p>不可数名词；do homework 做作业。</p>
+        <div class="sen">Linda usually finishes her homework after dinner.</div>
+        <div class="notebox"><b>易错</b>homework 不可数，不说 a homework / homeworks。</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">usually</span><span class="ph">/ˈjuːʒuəli/</span><span class="pos">adv. 通常地</span></div>
+        <p>频度副词，放实义动词前、be 后。</p>
+        <div class="sen">Tom walks to school every day because his home is near the school.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">never</span><span class="ph">/ˈnevə(r)/</span><span class="pos">adv. 从不；绝不</span></div>
+        <p>频度副词（0%）。</p>
+        <div class="sen">He is a good student. He never comes to school late.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">sometimes</span><span class="ph">/ˈsʌmtaɪmz/</span><span class="pos">adv. 有时</span></div>
+        <p>频度副词（50%左右），可放句首/句尾。</p>
+        <div class="sen">—What do you do after dinner? —Sometimes I read books.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">quarter</span><span class="ph">/ˈkwɔːtə(r)/</span><span class="pos">n. 一刻钟；四分之一</span></div>
+        <p>a quarter past / to 差一刻。</p>
+        <div class="sen">Leo's Afternoon lessons start at half past twelve and end at a quarter past two.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">half</span><span class="ph">/hɑːf/</span><span class="pos">n. 一半</span></div>
+        <p>half past 半点；复数 halves。</p>
+        <div class="sen">My school begins at 9:00. There are four classes in the morning.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">early</span><span class="ph">/ˈɜːli/</span><span class="pos">adv./adj. 早（的）</span></div>
+        <p>反义词 late。</p>
+        <div class="sen">I can't get up early on weekdays. I think I need an alarm clock on my bedside table.</div>
+        
+      </div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点短语</h2><span class="desc">分类记忆</span></div>
+    <div class="plist">
+      <div class="pgroup">
+        <div class="pg">日常作息</div>
+        <div class="chips">
+          <span class="chip"><b>get up</b><span>起床</span></span><span class="chip"><b>go to bed</b><span>上床睡觉</span></span><span class="chip"><b>take a shower</b><span>洗澡</span></span><span class="chip"><b>brush one's teeth</b><span>刷牙</span></span><span class="chip"><b>do homework</b><span>做作业</span></span><span class="chip"><b>have breakfast / lunch / dinner</b><span>吃早/午/晚餐</span></span><span class="chip"><b>go to school</b><span>去上学</span></span><span class="chip"><b>go home</b><span>回家</span></span><span class="chip"><b>get dressed</b><span>穿衣服</span></span>
+        </div>
+      </div>
+
+            <div class="pgroup">
+        <div class="pg">时间表达</div>
+        <div class="chips">
+          <span class="chip"><b>at 6:30 / at half past six</b><span>在六点半</span></span><span class="chip"><b>a quarter past / to</b><span>过一刻/差一刻</span></span><span class="chip"><b>in the morning / afternoon / evening</b><span>在上午/下午/晚上</span></span><span class="chip"><b>at night</b><span>在夜里</span></span><span class="chip"><b>at noon</b><span>在中午</span></span><span class="chip"><b>from...to...</b><span>从……到……</span></span>
+        </div>
+      </div>
+
+            <div class="pgroup">
+        <div class="pg">频度与习惯</div>
+        <div class="chips">
+          <span class="chip"><b>usually / often / sometimes / never</b><span>通常/经常/有时/从不</span></span><span class="chip"><b>every day</b><span>每天</span></span><span class="chip"><b>on weekdays</b><span>在工作日</span></span><span class="chip"><b>on weekends</b><span>在周末</span></span><span class="chip"><b>be late for</b><span>迟到</span></span><span class="chip"><b>go to bed early / late</b><span>早/晚睡</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>中考常考考点与易错点</h2><span class="desc">1–12</span></div>
+    <div class="klist">
+<div class="kitem"><div class="n">1</div><div class="bd">
+        <b class="kt">考点一：顺读与逆读</b>
+        <p>顺读按数字读；逆读：分钟≤30 用 past，>30 用 to（差……到下一整点）。</p>
+        <div class="ex">—What time is it now? —It's 8:45. We can say "a quarter to nine".</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">2</div><div class="bd">
+        <b class="kt">考点二：half 与 quarter</b>
+        <p>half past 半点；a quarter 一刻钟（15 分钟）。</p>
+        <div class="ex">—What time is it now? —It's half past seven.</div><div class="ex">—What time is it now? —It's a quarter to seven. It's 6:45.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">3</div><div class="bd">
+        <b class="kt">考点三：What time 询问具体时刻</b>
+        <p>What time...? 答语用 at + 时刻。</p>
+        <div class="ex">—What time does your brother go to school? —At eight o'clock.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">4</div><div class="bd">
+        <b class="kt">考点四：When 与 What time 区别</b>
+        <p>When 时间范围更广（时刻/日期/年份）；What time 只问具体几点。</p>
+        <div class="ex">—When does Leo go to his club? —After school.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">5</div><div class="bd">
+        <b class="kt">考点五：三单变化</b>
+        <p>get→gets、brush→brushes、watch→watches、study→studies、have→has。</p>
+        <div class="ex">—What time does your mother cook dinner? —She usually cooks it at 6:00 p.m.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">6</div><div class="bd">
+        <b class="kt">考点六：do/does 疑问与否定</b>
+        <p>Does + 主语 + 动词原形? / doesn't + 动词原形。</p>
+        <div class="ex">—Does your sister do her homework in the evening? —Yes, she does.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">7</div><div class="bd">
+        <b class="kt">考点七：频度副词位置</b>
+        <p>频度副词放实义动词前、be 动词后。</p>
+        <div class="ex">My sister usually goes to bed at 10:00 p.m.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">8</div><div class="bd">
+        <b class="kt">考点八：时间介词 at / in / on</b>
+        <p>at + 时刻/noon/night；in + 上午下午晚上/月份；on + 星期/具体日期。</p>
+        <div class="ex">—It's 7:30. It's time for you to read English.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">9</div><div class="bd">
+        <b class="kt">考点九：homework 不可数</b>
+        <p>do homework 做作业；不说 a homework。</p>
+        <div class="ex">My sister and I do homework together every evening.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">10</div><div class="bd">
+        <b class="kt">考点十：tooth / teeth 单复数</b>
+        <p>tooth 复数为 teeth；brush one's teeth 刷牙。</p>
+        <div class="ex">Tom brushes his teeth at seven every morning.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">11</div><div class="bd">
+        <b class="kt">考点十一：be late for</b>
+        <p>be late for + 事物：be late for school 上学迟到。</p>
+        <div class="ex">I always get up early, so I never go to school late.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">12</div><div class="bd">
+        <b class="kt">考点十二：情景交际——时间问答</b>
+        <p>What time is it? / What's the time? 询问现在几点。</p>
+        <div class="ex">Leo's Afternoon lessons start at half past twelve and end at a quarter past two.</div>
+      </div></div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
+    <div class="slist">
+      <div class="sitem"><span class="n">1</span><div><div class="en">—What time do you usually get up? —At 6:30 a.m.</div></div></div>
+      <div class="sitem"><span class="n">2</span><div><div class="en">In the evening I usually take a shower before I go to bed.</div></div></div>
+      <div class="sitem"><span class="n">3</span><div><div class="en">—What do they usually do after dinner? —They usually do their homework.</div><div class="zh">通常+做作业：do homework。</div></div></div>
+      <div class="sitem"><span class="n">4</span><div><div class="en">—You are late. We must get to school at a quarter to eight, not a quarter past eight. —I'm sorry.</div><div class="zh">a quarter to 差一刻到八点。</div></div></div>
+      <div class="sitem"><span class="n">5</span><div><div class="en">I can't get up early on weekdays. I think I need an alarm clock on my bedside table.</div><div class="zh">never 放实义动词前。</div></div></div>
+      <div class="sitem"><span class="n">6</span><div><div class="en">After school, he plays basketball for a while.</div></div></div>
+      <div class="sitem"><span class="n">7</span><div><div class="en">—Do they go home at 5 p.m.? —No, they don't. They go home at 5:30.</div><div class="zh">Does 后接动词原形。</div></div></div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>语法易错点总结</h2><span class="desc">考前必看</span></div>
+        <div class="warn">
+      <div class="whd"><div class="dot">!</div>姜老师提醒 · 高频易错，务必牢记</div>
+      <ol>
+        <li><b>逆读法：分钟≤30 用 past，>30 用 to。</b></li>
+        <li><b>half past 半点；a quarter 一刻钟。</b></li>
+        <li><b>What time 问几点，When 问时间（更广）。</b></li>
+        <li><b>do/does 疑问句中动词用原形：Does he go...?。</b></li>
+        <li><b>频度副词放实义动词前、be 后。</b></li>
+        <li><b>homework 不可数名词，不说 a homework。</b></li>
+        <li><b>tooth 复数是 teeth：brush one's teeth。</b></li>
+        <li><b>at + 时刻；in + 上午下午晚上；on + 星期/日期。</b></li>
+        <li><b>take a shower 洗澡，固定搭配。</b></li>
+        <li><b>be late for school 上学迟到。</b></li>
+        <li><b>go home 回家（home 副词不加 to）；go to school 上学。</b></li>
+        <li><b>get dressed 穿衣服，get 后接形容词。</b></li>
+      </ol>
+    </div>
+  </section>
+
+<div class="divider"></div>
+</div>
+
+<footer>
+  <div class="inner">
+    多多好学版权所有
+  </div>
+</footer>
+
+</body>
+</html>
+

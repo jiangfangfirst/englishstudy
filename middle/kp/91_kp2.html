@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学线上课堂</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
+    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
+    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
+    --line:#e5e7eb; --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  /* hero —— 简洁浅蓝标题条 */
+  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
+  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
+  .hero .sub{color:var(--ink-2);font-size:13.5px;margin-top:8px;max-width:36em}
+  .hero .tagline{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
+  .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
+
+  /* Key Point section header */
+  section.block{margin-top:30px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+  .khead .kp{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1px;background:var(--blue-bg);border:1px solid var(--blue);padding:2px 9px;border-radius:6px;flex:none}
+  .khead h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:.3px}
+  .khead .desc{font-size:11px;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+  .lead{font-size:13.5px;color:var(--ink-2);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
+  .lead b{color:var(--blue-d)}
+
+  /* 语法要点块 */
+  .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
+  .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 词汇列表 —— 紧凑词条 */
+  .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
+  .witem:last-child{border-bottom:none}
+  .witem .wh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .witem .word{font-size:15px;font-weight:800;color:var(--blue-d)}
+  .witem .ph{font-size:11.5px;color:var(--ink-3)}
+  .witem .pos{font-size:11.5px;color:var(--ink-3);background:#f3f4f6;padding:1px 7px;border-radius:999px}
+  .witem p{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:break-word;word-break:break-word}
+  .witem p b{color:var(--blue-d)}
+  .witem .sen{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
+  .witem .notebox{font-size:12px;color:var(--ink-3);margin-top:6px;padding-left:0;position:relative;overflow-wrap:break-word;word-break:break-word}
+.witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber,#f59e0b);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
+  .witem .notebox b{color:var(--accent-c,var(--amber-d,#b45309))}
+
+  /* 短语标签云 */
+  .plist{margin-top:4px}
+  .pgroup{margin-bottom:12px}
+  .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .pgroup .pg::after{content:"";flex:1;height:1px;background:var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .chip b{color:var(--blue-d);font-weight:700}
+  .chip span{color:var(--ink-3);font-size:11px}
+
+  /* 考点列表 —— 编号清单 */
+  .klist{margin-top:4px}
+  .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .kitem:last-child{border-bottom:none}
+  .kitem .n{width:26px;height:26px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue);color:var(--blue-d);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .kitem .bd{flex:1;min-width:0}
+  .kitem .bd .kt{display:block;font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
+  .kitem .bd p{font-size:13px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
+  .kitem .bd p b{color:var(--blue-d)}
+  .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 句型列表 */
+  .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .sitem:last-child{border-bottom:none}
+  .sitem .n{color:var(--blue);font-weight:800;font-size:13px;flex:none;margin-top:2px}
+  .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
+  .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
+
+  /* 易错清单 —— 琥珀 */
+  .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+  .warn ol{list-style:none;counter-reset:ec}
+  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li:last-child{border-bottom:none}
+  .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .warn li b{color:#92400e}
+
+  .divider{height:1px;background:var(--line);margin:26px 0 0}
+
+  footer{margin-top:24px;padding:18px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .inner{max-width:720px;margin:0 auto}
+
+  @media (max-width:400px){
+    .hero h1{font-size:21px}
+    .khead h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">初中英语 · 学霸笔记</div>
+    <h1>九年级全册 · Key Point 2</h1>
+    <div class="tip">Unit 2 Inspiring People · 励志人物 · 知识精讲</div>
+    <div class="tagline">
+      <span class="t">语法核心</span>
+      <span class="t">重点词汇</span>
+      <span class="t">高频短语</span>
+      <span class="t">12 个考点</span>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><h2>语法核心</h2><span class="desc">本单元两大语法</span></div>
+
+    <div class="gram">
+      <div class="gt">of / for + sb. + to do 句型</div>
+      <p>It is/was + adj. + of sb. to do sth. 中 of 前的形容词说明人物的品质、性格（kind、brave、wise、clever、nice、polite 等），可改写为 sb. is + adj. + to do sth.。</p><p>It is/was + adj. + for sb. to do sth. 中 for 前的形容词说明事情的性质（important、easy、difficult、possible、necessary、interesting 等），不能改写为 sb. is + adj.。</p><p>判断口诀：形容词描述“人”用 of，描述“事”用 for。</p>
+      <div class="ex">It was very brave of the firefighter to rush into the burning building.</div><div class="ex">It's difficult for me to make more friends.</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">强调句与主语从句</div>
+      <p>强调句结构：It is/was + 被强调部分 + that/who + 其余部分，可强调主语、宾语、状语；去掉 It is...that 后句子依然完整。</p><p>主语从句：It is said / believed / reported / known that...（据说/人们相信/据报道/众所周知……），it 作形式主语，真正主语是 that 从句。</p>
+      <div class="ex">It was in the small park that we first met each other ten years ago.</div><div class="ex">—It is said that he climbed Mount Qomolangma at the age of 70. —Really? He is so amazing!</div>
+    </div>
+
+    <div class="gram">
+      <div class="gt">定语从句 · used to · 现在完成时</div>
+      <p>定语从句：先行词指人用 who/that（作主语）、whom/that（作宾语，可省略）；指物用 which/that；表“某人的”用 whose。</p><p>used to do sth. 过去常常做某事（现在不做了）；be used to doing sth. 习惯做某事；be used to do sth. 被用来做某事。</p><p>现在完成时：since + 过去时间点 / for + 时间段；yet 用于否定与疑问，already 用于肯定。</p>
+      <div class="ex">—Who is the person you look up to most? —My father. He is full of courage and wisdom.</div><div class="ex">We didn't use to admire scientists, but now we are used to learning their spirits.</div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点词汇精讲</h2><span class="desc">1–10</span></div>
+    <div class="wlist">
+      <div class="witem">
+        <div class="wh"><span class="word">admire</span><span class="ph">/ədˈmaɪə(r)/</span><span class="pos">v. 钦佩；欣赏</span></div>
+        <p>admire sb. for sth. 因某事钦佩某人。</p>
+        <div class="sen">I admire my father for his hard work and honesty.</div>
+        <div class="notebox"><b>常考</b>admire 后接被钦佩的人或事物，表“钦佩”而非“羡慕”。</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">encourage</span><span class="ph">/ɪnˈkʌrɪdʒ/</span><span class="pos">v. 鼓励</span></div>
+        <p>encourage sb. to do sth. 鼓励某人做某事；encouragement n.。</p>
+        <div class="sen">Amelia Earhart's parents always encouraged her to stick to her flying dream.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">devote</span><span class="ph">/dɪˈvəʊt/</span><span class="pos">v. 奉献；致力于</span></div>
+        <p>devote oneself/one's life to doing sth. 献身于做某事，to 是介词后接动名词。</p>
+        <div class="sen">The doctor devoted all his time to helping the poor patients in mountain areas.</div>
+        <div class="notebox"><b>易错</b>devote...to 中 to 是介词，后接 doing，不是动词原形。</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">courage</span><span class="ph">/ˈkʌrɪdʒ/</span><span class="pos">n. 勇气</span></div>
+        <p>have the courage to do sth. 有勇气做某事；courageous adj. 勇敢的。</p>
+        <div class="sen">His parents' support gave him the courage to keep going when he wanted to quit.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">wisdom</span><span class="ph">/ˈwɪzdəm/</span><span class="pos">n. 智慧；才智</span></div>
+        <p>wise adj. 明智的。</p>
+        <div class="sen">—Why is it admirable to help others? —Because it shows kindness and wisdom.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">effort</span><span class="ph">/ˈefət/</span><span class="pos">n. 努力；精力</span></div>
+        <p>make an effort to do sth. 努力做某事；spare no effort 不遗余力。</p>
+        <div class="sen">Through her efforts, Jane's dream of traveling around the world came true at last.</div>
+        <div class="notebox"><b>常考</b>make efforts / make an effort to do sth. 是高频搭配。</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">hero</span><span class="ph">/ˈhɪərəʊ/</span><span class="pos">n. 英雄</span></div>
+        <p>heroine n. 女英雄；复数 heroes。</p>
+        <div class="sen">The admirable hero lost his legs in the war, but he never gave up hope.</div>
+        <div class="notebox"><b>易错</b>hero 复数直接加 es：heroes。</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">achieve</span><span class="ph">/əˈtʃiːv/</span><span class="pos">v. 实现；达到</span></div>
+        <p>achieve one's dream/goal 实现梦想/目标；achievement n. 成就。</p>
+        <div class="sen">After years of hard work, she finally achieved her dream of becoming a famous writer.</div>
+        
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">succeed</span><span class="ph">/səkˈsiːd/</span><span class="pos">v. 成功</span></div>
+        <p>succeed in doing sth. 成功做成某事；success n.；successful adj.；successfully adv.。</p>
+        <div class="sen">After trying many times, she finally succeeded in finishing the difficult task.</div>
+        <div class="notebox"><b>易错</b>succeed 后接 in doing，不接 to do。</div>
+      </div>
+
+            <div class="witem">
+        <div class="wh"><span class="word">wisely</span><span class="ph">/ˈwaɪzli/</span><span class="pos">adv. 明智地</span></div>
+        <p>wise 的副词形式。</p>
+        <div class="sen">—Yuan Longping is really an inspiring scientist. —Yes. It is wise of him to devote his whole life to solving the food problem.</div>
+        
+      </div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点短语</h2><span class="desc">分类记忆</span></div>
+    <div class="plist">
+      <div class="pgroup">
+        <div class="pg">励志人物·品质短语</div>
+        <div class="chips">
+          <span class="chip"><b>look up to</b><span>尊敬；敬仰</span></span><span class="chip"><b>drop out of</b><span>退学；退出</span></span><span class="chip"><b>come true</b><span>（梦想）实现</span></span><span class="chip"><b>make sure</b><span>确保</span></span><span class="chip"><b>take advantage of</b><span>利用</span></span><span class="chip"><b>give up</b><span>放弃</span></span><span class="chip"><b>devote...to doing</b><span>献身于</span></span><span class="chip"><b>encourage sb. to do</b><span>鼓励某人做</span></span>
+        </div>
+      </div>
+
+            <div class="pgroup">
+        <div class="pg">坚持与努力</div>
+        <div class="chips">
+          <span class="chip"><b>stick to</b><span>坚持</span></span><span class="chip"><b>keep on doing</b><span>继续做</span></span><span class="chip"><b>try one's best</b><span>尽最大努力</span></span><span class="chip"><b>work hard at</b><span>努力从事</span></span><span class="chip"><b>in order to</b><span>为了</span></span><span class="chip"><b>be full of</b><span>充满</span></span><span class="chip"><b>pay attention to</b><span>注意</span></span><span class="chip"><b>make progress</b><span>取得进步</span></span>
+        </div>
+      </div>
+
+            <div class="pgroup">
+        <div class="pg">情景交际·观点表达</div>
+        <div class="chips">
+          <span class="chip"><b>I couldn't agree more</b><span>我再同意不过了</span></span><span class="chip"><b>May I...?</b><span>我可以……吗？</span></span><span class="chip"><b>Of course, go ahead.</b><span>当然，请便。</span></span><span class="chip"><b>Sounds like a good plan.</b><span>听起来是个好计划。</span></span><span class="chip"><b>That's amazing!</b><span>太令人惊叹了！</span></span><span class="chip"><b>Well done!</b><span>做得好！</span></span><span class="chip"><b>I'm proud of you.</b><span>我为你骄傲。</span></span><span class="chip"><b>Never give up.</b><span>永不放弃。</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>中考常考考点与易错点</h2><span class="desc">1–12</span></div>
+    <div class="klist">
+<div class="kitem"><div class="n">1</div><div class="bd">
+        <b class="kt">It is + adj. + of / for sb. to do 辨析</b>
+        <p>of 前形容词表人的品质（kind/brave/wise/clever/nice/polite/foolish 等）；for 前形容词表事情性质（important/easy/difficult/necessary/possible 等）。</p>
+        <div class="ex">It was wise of Confucius to say that we should treat our elders with respect.</div><div class="ex">It is necessary for everyone to follow the traffic rules to keep safe.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">2</div><div class="bd">
+        <b class="kt">强调句 It was...that</b>
+        <p>强调人可用 who，其余用 that；去掉 It was...that 句子仍完整。</p>
+        <div class="ex">It was in the Eastern Han Dynasty that Cai Lun improved the paper-making technique.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">3</div><div class="bd">
+        <b class="kt">It is said/believed that 主语从句</b>
+        <p>it 作形式主语；类似结构：It is reported/known/suggested that...。</p>
+        <div class="ex">It is believed that hard work leads to success.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">4</div><div class="bd">
+        <b class="kt">定语从句 who / that / whose</b>
+        <p>先行词指人：作主语用 who/that，作宾语用 whom/that（可省略），表所属用 whose。</p>
+        <div class="ex">The man who is standing over there is my history teacher.</div><div class="ex">She is the scientist whose discovery changed the world.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">5</div><div class="bd">
+        <b class="kt">used to do / be used to doing</b>
+        <p>used to do 过去常常（现在不）；be used to doing 习惯于；be used to do 被用来。</p>
+        <div class="ex">In the past, people used to give up their dreams easily because of poor conditions.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">6</div><div class="bd">
+        <b class="kt">现在完成时 since / for</b>
+        <p>since + 点时间/从句，for + 段时间；谓语用延续性动词。</p>
+        <div class="ex">Scientists have collected thousands of valuable seeds for our seed banks since 2001.</div><div class="ex">We have known the great seed scientist for nearly two months.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">7</div><div class="bd">
+        <b class="kt">yet / already 用法</b>
+        <p>yet 用于否定句与疑问句（句末），already 用于肯定句（句中/句末）。</p>
+        <div class="ex">—Have you finished reading the story about Sima Qian yet? —Yes, I have already finished it before dinner.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">8</div><div class="bd">
+        <b class="kt">encourage / advise / ask sb. to do</b>
+        <p>动词 + sb. + to do：encourage、advise、ask、tell、want、allow 等。</p>
+        <div class="ex">Our teacher often encourages us to help each other as a team.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">9</div><div class="bd">
+        <b class="kt">devote...to doing 介词 to</b>
+        <p>devote/be used to/look forward to/pay attention to 等短语中 to 为介词，后接动名词。</p>
+        <div class="ex">The old teacher devoted nearly 40 years to teaching in the mountain village.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">10</div><div class="bd">
+        <b class="kt">名词→形容词词性转换</b>
+        <p>courage→courageous；wisdom→wise；success→successful；effort 本身为名词。</p>
+        <div class="ex">Li Na is one of the most successful tennis players in China, and she won many international prizes.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">11</div><div class="bd">
+        <b class="kt">情景交际——征求意见</b>
+        <p>May I ask you some questions? 应答：Of course, go ahead. / Sure. / Certainly.</p>
+        <div class="ex">—Might I ask you some questions about your hero? —Of course, go ahead.</div>
+      </div></div>
+
+      <div class="kitem"><div class="n">12</div><div class="bd">
+        <b class="kt">情景交际——表达赞同</b>
+        <p>I couldn't agree more 我再同意不过；That's true.；I agree with you.；Exactly.。</p>
+        <div class="ex">—I think Zhong Yang is one of the most inspiring scientists. —I couldn't agree more. His work has made a great difference to the world.</div>
+      </div></div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
+    <div class="slist">
+      <div class="sitem"><span class="n">1</span><div><div class="en">It was brave of Zhang Qian to cross dangerous lands to finish his task.</div><div class="zh">消防员从火中救出男孩，真是勇敢。</div></div></div>
+      <div class="sitem"><span class="n">2</span><div><div class="en">It is important for us to learn from inspiring people and their stories.</div><div class="zh">对我们来说制定一个好计划很重要。</div></div></div>
+      <div class="sitem"><span class="n">3</span><div><div class="en">It was in the small park that we first met each other ten years ago.</div><div class="zh">杨利伟是在 2003 年进入太空的。</div></div></div>
+      <div class="sitem"><span class="n">4</span><div><div class="en">—It is said that he climbed Mount Qomolangma at the age of 70. —Really? He is so amazing!</div><div class="zh">据说他已经实现了梦想。</div></div></div>
+      <div class="sitem"><span class="n">5</span><div><div class="en">We all admire the brave firefighters who saved people from the big fire last month.</div><div class="zh">我最钦佩的人是我的父亲。</div></div></div>
+      <div class="sitem"><span class="n">6</span><div><div class="en">We didn't use to admire scientists, but now we are used to learning their spirits.</div><div class="zh">她过去害怕坐飞机，现在却喜欢飞行。</div></div></div>
+      <div class="sitem"><span class="n">7</span><div><div class="en">Many inspiring changes have taken place in our school since we learned about great people's stories.</div><div class="zh">我从小学起就认识我最好的朋友了。</div></div></div>
+      <div class="sitem"><span class="n">8</span><div><div class="en">The story tells us that hard work can make our dreams come true at last.</div><div class="zh">永不放弃，你的梦想就会实现。</div></div></div>
+    </div>
+  </section>
+
+    <section class="block">
+    <div class="khead"><h2>语法易错点总结</h2><span class="desc">考前必看</span></div>
+        <div class="warn">
+      <div class="whd"><div class="dot">!</div>姜老师提醒 · 高频易错，务必牢记</div>
+      <ol>
+        <li><b>of sb. to do 与 for sb. to do 判断：看形容词描述人还是事，brave/kind/wise 用 of。</b></li>
+        <li><b>It is said that... 中 it 是形式主语，不可省略；that 从句是真正主语。</b></li>
+        <li><b>used to do（过去常常）与 be used to doing（习惯于）与 be used to do（被用来）三者易混。</b></li>
+        <li><b>devote...to / look forward to / pay attention to / be used to 中 to 均为介词，后接 doing。</b></li>
+        <li><b>现在完成时 since 接点时间，for 接段时间，不可混淆。</b></li>
+        <li><b>yet 用于否定与疑问，already 用于肯定；already 不与 yet 互换。</b></li>
+        <li><b>succeed in doing sth. 不接 to do；success 是名词，successful 是形容词。</b></li>
+        <li><b>hero 复数是 heroes，courageous 中 ous 是形容词后缀。</b></li>
+        <li><b>encourage sb. to do sth. 不定式作宾语补足语，sb. 与 do 是主谓关系。</b></li>
+        <li><b>强调句中被强调部分是状语时，只能用 that 不能用 when/where。</b></li>
+        <li><b>定语从句中先行词指人作宾语时 whom/that 可省略，作主语时 who/that 不可省略。</b></li>
+        <li><b>achieve 是及物动词，直接接宾语：achieve one's dream，不加介词。</b></li>
+      </ol>
+    </div>
+  </section>
+
+<div class="divider"></div>
+</div>
+
+<footer>
+  <div class="inner">
+    多多好学版权所有
+  </div>
+</footer>
+
+</body>
+</html>
+
