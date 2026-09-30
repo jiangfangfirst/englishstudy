@@ -453,8 +453,8 @@ function delKey(){
   typed = typed.slice(0,-1);
   updateBlank();
 }
-/* 点击字母即时发音（与点击单词同一有道音频机制，微信内可用，零文件增加）
-   预加载缓存：首次用户手势后后台逐个缓存 26 个字母音频，之后点击零延迟 */
+/* 点击字母即时发音（本地固定音频·同一发音人，微信内可用）
+   预加载缓存：首次用户手势后后台逐个缓存 26 个本地字母音频，之后点击零延迟 */
 var _letterCache = {};
 var _preloading = false;
 function preloadLetters(){
@@ -464,7 +464,7 @@ function preloadLetters(){
   (function next(){
     if(!q.length){ _preloading = false; return; }
     var l = q.shift();
-    fetch('https://dict.youdao.com/dictvoice?audio=' + l + '&type=1')
+    fetch('sounds/letters/' + l + '.mp3')
       .then(function(r){ return r.blob(); })
       .then(function(b){ _letterCache[l] = URL.createObjectURL(b); next(); })
       .catch(function(){ next(); });
