@@ -36,7 +36,7 @@
   .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
     padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
   .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
-  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero p{display:none;}
   .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
   .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
   .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
@@ -310,17 +310,17 @@ const BANK = [
 {q:"If you want to ______ your dream, you need to work hard and never give up.", o:["achieve","fail","introduce","form"], a:0, e:"achieve one's dream表示“实现梦想”。", source:"初中英语人教版（2024）八上Unit6 Plan for Yourself（词汇语法）练习"},
 {q:"—What do you want to be when you grow up? —I want ________ an IT engineer.", o:["be","to be","being","to being"], a:1, e:"want后接动词不定式作宾语，want to do sth.。", source:"2026-2027学年Unit 6单元检测试题(学科网)"},
 {q:"I don't think it is easy ________ a resolution if you don't have a clear plan.", o:["keep","to keep","keeping","keeps"], a:1, e:"It is + 形容词 + to do sth.句型。", source:"Unit 6 Plan for Yourself单元检测题（含答案）人教版新教材英语八年级上册"},
-{q:"My sister ______ Chengdu next month, and she's very excited to see the pandas there.", o:["visits","is going to visit","visited"], a:1, e:"next month提示用一般将来时。", source:"2026-2027学年人教版八年级上Unit 6单元测试题"},
+{q:"My sister ______ Chengdu next month, and she's very excited to see the pandas there.", o:["visits","is going to visit","visited","was visiting"], a:1, e:"next month提示用一般将来时。", source:"2026-2027学年人教版八年级上Unit 6单元测试题"},
 {q:"My sister ________ take acting classes. She wants to be an actress.", o:["am going to","is going to","are going to","be going to"], a:1, e:"主语My sister是第三人称单数，be动词用is。", source:"（单元培优卷）Unit 6 Plan for Yourself 单元综合素养培优卷"},
 {q:"Jack wants to ______ a new hobby, like playing the guitar, to make his life more colorful.", o:["take up","take off","take out","take down"], a:0, e:"take up表示“开始从事”。", source:"2026-2027学年新教材英语人教版八年级上册Unit 6单元练习"},
 {q:"My sister is going to take English lessons ______ she can speak English well.", o:["so that","such that","in order to","enough to"], a:0, e:"so that引导目的状语从句，意为\"以便\"。", source:"Unit 6单元检测题B卷(学科网)"},
 {q:"She decided to take up ______ because she enjoys taking photos of nature and people.", o:["photography","literature","fashion","law"], a:0, e:"photography表示“摄影”。", source:"初中英语人教版（2024）八上Unit6 Plan for Yourself（词汇语法）练习"},
-{q:"Mary's father's birthday is coming. She ________ a T-shirt for him tomorrow.", o:["is going to buy","bought","buys"], a:2, e:"tomorrow提示一般将来时，主语she用is going to buy。", source:"Unit 6 be going to专项(学科网)"},
+{q:"Mary's father's birthday is coming. She ________ a T-shirt for him tomorrow.", o:["is going to buy","bought","buys","is buying"], a:0, e:"tomorrow提示一般将来时，主语she用is going to buy。", source:"Unit 6 be going to专项(学科网)"},
 {q:"You should ______ sure that you lock the door before you leave the house.", o:["take","get","make","do"], a:2, e:"make sure表示“确保”。", source:"初中英语人教版（2024）八上Unit6 Plan for Yourself（词汇语法）练习"},
 {q:"We are planning ________ to Beijing next year.", o:["go","going","to go","went"], a:2, e:"plan to do sth.。", source:"人教新版八年级上册《Unit 6 Section B 1a-2e》2021年同步练习卷"},
 {q:"Good resolutions ________ us to become a better person.", o:["help","helps","helping","helped"], a:0, e:"主语Good resolutions是复数，谓语用help。", source:"Unit 6 Plan for Yourself单元检测题（含答案）人教版新教材英语八年级上册"},
 {q:"—Let's discuss the plan, shall we? —Not now. I ______ to school to meet Tom.", o:["go","went","am going","have gone"], a:2, e:"现在进行时可表示按计划即将发生的动作。", source:"人教版(安徽)八年级上册Unit 6单元检测卷"},
-{q:"—______ you ______ a poster for the art festival next month? —Yes, I plan to draw the outline this evening.", o:["Are; going to make","Do; make","Did; make"], a:0, e:"next month提示用一般将来时，be going to结构。", source:"2026-2027学年人教版八年级上Unit 6单元测试题"},
+{q:"—______ you ______ a poster for the art festival next month? —Yes, I plan to draw the outline this evening.", o:["Are; going to make","Do; make","Did; make","Will; made"], a:0, e:"next month提示用一般将来时，be going to结构。", source:"2026-2027学年人教版八年级上Unit 6单元测试题"},
 {q:"Fu Xing is going to keep on ________ stories and essays.", o:["writing","write","to write","writes"], a:0, e:"keep on doing sth.意为\"继续做某事\"。", source:"2026-2027学年Unit 6单元检测试题(学科网)"},
 {q:"Jim felt ______ because he lost his pet.", o:["disappoint","disappointed","disappointing","to disappoint"], a:1, e:"人作主语用disappointed。", source:"人教版英语八年级上册Unit 6 Section B课时同步练习"},
 {q:"—What's your ______ for the coming weekend? —I'm going to visit my grandparents and help them with housework.", o:["plan","hobby","resolution","promise"], a:0, e:"plan表示“计划”。", source:"2026-2027学年新教材英语人教版八年级上册Unit 6单元练习"},
@@ -344,7 +344,7 @@ const BANK = [
 {q:"Always ________ your resolution is possible to achieve.", o:["take up","stick to","make sure","have to do with"], a:2, e:"make sure意为\"确保、务必\"，后接宾语从句。", source:"2026-2027学年Unit 6单元检测试题(学科网)"},
 {q:"My brother is studying at ________ university. He hopes to become ________ engineer some day.", o:["an; a","a; an","an; an","a; a"], a:1, e:"第一空university以辅音音素/j/开头，用a；第二空engineer以元音音素开头，用an。", source:"人教版英语八年级上册Unit 6 单元测试卷-组卷网"},
 {q:"I regret not studying harder for the exam. I ________ it.", o:["remembered","forgot","passed","failed"], a:3, e:"failed表示“失败”。", source:"Unit 6 Plan for Yourself - 八年级英语上册单元检测（人教版2024）"},
-{q:"—________ and never give up your dream. —OK, I will.", o:["Stick learning","Sticking to learn","Stick to learning"], a:2, e:"stick to意为\"坚持\"，to是介词后接动名词，用于祈使句。", source:"Unit 6 Section B同步练习(学科网)"},
+{q:"—________ and never give up your dream. —OK, I will.", o:["Stick learning","Sticking to learn","Stick to learning","Sticks to learning"], a:2, e:"stick to意为\"坚持\"，to是介词后接动名词，用于祈使句。", source:"Unit 6 Section B同步练习(学科网)"},
 {q:"Her dream is ______ a scientist and invent new things for people.", o:["be","to be","being","been"], a:1, e:"不定式to be作表语，dream is to be...表示\"梦想是成为……\"。", source:"Unit 6单元检测题B卷(学科网)"},
 {q:"I ________ some work as a volunteer in the museum next month.", o:["am doing","did","do","am going to do"], a:3, e:"next month提示一般将来时，用am going to do。", source:"Unit 6 be going to专项(学科网)"},
 {q:"According to Deepseek, dreams ________ about one quarter of our sleeping time.", o:["take down","take in","take up","take on"], a:2, e:"take up表示“占据”。", source:"Unit 6 Plan for Yourself - 八年级英语上册单元检测（人教版2024）"},
@@ -385,7 +385,7 @@ const BANK = [
 {q:"If you want to be in good ________ you’d better eat ________ food.", o:["health; health","healthy; healthily","health; healthy","healthy; health"], a:2, e:"第一空in good health表示“身体健康”；第二空修饰food用形容词healthy。", source:"Unit 6 Plan for Yourself单元拔尖检测"},
 {q:"All of China’s four great ________ novels are worth reading, and they are both meaningful and interesting.", o:["cultural","foreign","classic","popular"], a:2, e:"classic表示“经典的”。", source:"Unit 6 Plan for Yourself - 八年级英语上册单元检测（人教版2024）"},
 {q:"—I'm going to travel to New York next week. —________", o:["You're welcome","Have a good time","That's right","Never mind"], a:1, e:"Have a good time表示“玩得开心”。", source:"人教新版八年级上册《Unit 6 Section B 1a-2e》2021年同步练习卷"},
-{q:"The firefighters quickly ________ their uniforms and rushed to ________ the fire in the building.", o:["put on; put out","put away; put up","put up; put on"], a:2, e:"第一空put on穿上制服；第二空put out扑灭大火。", source:"Unit 6 Section B同步练习(学科网)"},
+{q:"The firefighters quickly ________ their uniforms and rushed to ________ the fire in the building.", o:["put on; put out","put away; put up","put up; put on","put off; put away"], a:0, e:"第一空put on穿上制服；第二空put out扑灭大火。", source:"Unit 6 Section B同步练习(学科网)"},
 {q:"She is a ______; she paints beautiful pictures of mountains and rivers.", o:["painter","designer","engineer","musician"], a:0, e:"painter表示“画家”。", source:"初中英语人教版（2024）八上Unit6 Plan for Yourself（词汇语法）练习"},
 {q:"—I can’t remember so many telephone numbers. —Why not ________?", o:["write down it","write down them","write it down","write them down"], a:3, e:"write down是“动词+副词”短语，代词作宾语时放在中间；telephone numbers是复数，用them。", source:"人教版英语八年级上册Unit 6 单元测试卷-组卷网"},
 {q:"—It will be a sunny day tomorrow. Let's climb the Zijin Mountain with Alice! —Sounds great! But she ________ Suzhou soon.", o:["left for","is going to leave for","am going to leaving for","leaves for"], a:1, e:"根据soon可知用一般将来时，be going to do sth.表示计划中的动作，主语she用is。", source:"Unit 6 Section A过关练(学科网)"},
@@ -412,7 +412,7 @@ const BANK = [
 {q:"He is ______ enough to solve this difficult math problem by himself.", o:["able","tired","confident","organized"], a:0, e:"be able to表示“能够”。", source:"初中英语人教版（2024）八上Unit6 Plan for Yourself（词汇语法）练习"},
 {q:"He is going to ______ driving lessons because he wants to drive a car.", o:["take","make","do","have"], a:0, e:"take lessons意为\"上课\"，take driving lessons上驾驶课。", source:"Unit 6单元检测题B卷(学科网)"},
 {q:"Too many resolutions have to do ________ personal self-improvement.", o:["for","with","at","to"], a:1, e:"have to do with表示“与……有关”。", source:"Unit 6 Plan for Yourself单元检测题（含答案）人教版新教材英语八年级上册"},
-{q:"—______ Wang Junfeng ______ play football tomorrow morning? —Yes, he is.", o:["Will; goes to","Is; going to","Will; going to"], a:1, e:"be going to结构的一般疑问句，把be动词提前。", source:"2026-2027学年人教版八年级上Unit 6单元测试题"},
+{q:"—______ Wang Junfeng ______ play football tomorrow morning? —Yes, he is.", o:["Will; goes to","Is; going to","Will; going to","Does; go to"], a:1, e:"be going to结构的一般疑问句，把be动词提前。", source:"2026-2027学年人教版八年级上Unit 6单元测试题"},
 {q:"As students, we should ______ good habits.", o:["form","set","take","achieve"], a:0, e:"form good habits表示“养成好习惯”。", source:"人教版英语八年级上册Unit 6 Section B课时同步练习"},
 {q:"Next weekend, students will ______ plays to celebrate the New Year.", o:["put on","put up","put out","put down"], a:0, e:"put on表示“上演”。", source:"人教版英语八年级上册Unit 6 Section B课时同步练习"},
 {q:"We need to make a ______ for our trip to Beijing next month.", o:["hobby","plan","resolution","wish"], a:1, e:"make a plan意为\"制定计划\"，对应北京之旅。", source:"Unit 6单元检测题B卷(学科网)"},
@@ -424,7 +424,7 @@ const BANK = [
 {q:"Don't forget ______ your coat, it's cold out.", o:["take","to take","taking","took"], a:1, e:"forget to do sth.表示“忘记去做某事”。", source:"人教版英语八年级上册Unit 6 Section B课时同步练习"},
 {q:"—I'm going to ______ my bad habits and live a healthy life. —That's a good decision.", o:["take up","give up","put up","look up"], a:1, e:"give up意为\"放弃、戒掉\"，符合戒掉坏习惯的语境。", source:"Unit 6单元检测题B卷(学科网)"},
 {q:"Don't set a goal that is too difficult, or you may ________ it.", o:["keep","achieve","plan","fail"], a:3, e:"fail意为\"失败、未能做到\"，与too difficult相呼应。", source:"2026-2027学年Unit 6单元检测试题(学科网)"},
-{q:"There ______ a basketball game between Class 1 and Class 2 the day after tomorrow.", o:["is going to have","will have","is going to be"], a:2, e:"there be句型的将来时用there is going to be，不能与have连用。", source:"Unit 6 Plan for Yourself综合测试卷"},
+{q:"There ______ a basketball game between Class 1 and Class 2 the day after tomorrow.", o:["is going to have","will have","is going to be","are going to have"], a:2, e:"there be句型的将来时用there is going to be，不能与have连用。", source:"Unit 6 Plan for Yourself综合测试卷"},
 {q:"My cousin is going to ______ a pilot, so he is taking flying lessons now.", o:["be","being","been","was"], a:0, e:"be going to后接动词原形be。", source:"2026-2027学年新教材英语人教版八年级上册Unit 6单元练习"},
 {q:"I want to get ________ to keep healthy.", o:["exercise","exercises","exercising","to exercise"], a:0, e:"get exercise表示“锻炼”。", source:"人教新版八年级上册《Unit 6 Section B 1a-2e》2021年同步练习卷"},
 {q:"—I have decided ________ the book Tiny Times by the famous writer. —You had better ________ his books. The stories he tells are far from real life.", o:["buying; don’t read","to buy; not read","buying; not read","to buy; not to read"], a:1, e:"decide to do sth.；had better not do sth.。", source:"Unit6 Plan for Yourself 语法Grammar be going to 引导的一将来时和动词不定式作宾语"},
@@ -432,7 +432,7 @@ const BANK = [
 {q:"—Many convenient apps are widely used in our everyday life. —Exactly, but we should use them ________.", o:["wisely","widely","easily","clearly"], a:0, e:"wisely表示“明智地”。", source:"Unit 6 Plan for Yourself单元拔尖检测"},
 {q:"Everything is OK. We are ready ________ the game.", o:["to start","to starting","start","starting"], a:0, e:"be ready to do sth.表示“准备好做某事”。", source:"Unit6 Plan for Yourself 语法Grammar be going to 引导的一将来时和动词不定式作宾语"},
 {q:"—What are you going to be when you grow up? —I want to be a fashion designer. I ______ take art lessons to improve my drawing skills.", o:["am going to","will going to","am","was going to"], a:0, e:"be going to do sth.表示“打算做某事”，主语I搭配am。B选项will going to结构错误。", source:"Unit 6 Plan for Yourself综合测试卷"},
-{q:"—What’s their plan? —They ________ in the park this weekend.", o:["are going to play","play","played"], a:0, e:"根据“What’s their plan”及“this weekend”可知，此处是回答将来发生的动作，用一般将来时。", source:"2026---2027学年人教版八年级上Unit 6 Plan for Yourself单元测试题"},
+{q:"—What’s their plan? —They ________ in the park this weekend.", o:["are going to play","play","played","plays"], a:0, e:"根据“What’s their plan”及“this weekend”可知，此处是回答将来发生的动作，用一般将来时。", source:"2026---2027学年人教版八年级上Unit 6 Plan for Yourself单元测试题"},
 {q:"His father is a good ______ and there are many beautiful photos in his home.", o:["lawyer","director","painter","photographer"], a:3, e:"photographer表示“摄影师”，根据“many beautiful photos”可知。", source:"人教版(安徽)八年级上册Unit 6单元检测卷"},
 {q:"Joel's a little worried because he ________ take a math test soon and Pete thinks Joel ________ make an improvement this time.", o:["will; will","will; is going to","is going to; is going to","is going to; will"], a:3, e:"已确定的安排用is going to；对结果的预测用will。", source:"Unit 6 be going to专项(学科网)"},
 {q:"As a great writer, Mark Twain has an important place in the field of ______.", o:["culture","literature","business","travel"], a:1, e:"literature表示“文学”，马克·吐温是著名作家。", source:"人教版(安徽)八年级上册Unit 6单元检测卷"},
@@ -458,7 +458,7 @@ const BANK = [
 {q:"If you want to improve your English, you should ______ speaking it every day.", o:["practice","finish","stop","forget"], a:0, e:"practice doing sth.意为\"练习做某事\"，should后接动词原形。", source:"2026-2027学年Unit 6单元测试(学科网)"},
 {q:"—________ are you going to do? —I'm going to fly a kite.", o:["What","How","Where","When"], a:0, e:"What表示“什么”。", source:"人教新版八年级上册《Unit 6 Section B 1a-2e》2021年同步练习卷"},
 {q:"—The school art festival is coming. Let's ______ a logo for it. —Good idea. We can think about its color first.", o:["find","design","copy","clean"], a:1, e:"design表示“设计”，根据“a logo”可知。", source:"人教版(安徽)八年级上册Unit 6单元检测卷"},
-{q:"—We ______ a trip to Kunming next week. —How wonderful! I love that city.", o:["had","have","are going to have"], a:2, e:"next week提示用一般将来时，be going to have表示“打算去”。", source:"2026-2027学年人教版八年级上Unit 6单元测试题"},
+{q:"—We ______ a trip to Kunming next week. —How wonderful! I love that city.", o:["had","have","are going to have","has"], a:2, e:"next week提示用一般将来时，be going to have表示“打算去”。", source:"2026-2027学年人教版八年级上Unit 6单元测试题"},
 {q:"—I'm going to ______ a new hobby like gardening. —That's a good way to relax.", o:["take up","give up","put up","look up"], a:0, e:"take up意为\"开始从事（爱好）\"。", source:"Unit 6单元检测题B卷(学科网)"},
 {q:"With the development of ______, many difficult tasks can be finished by smart machines.", o:["literature","photography","AI","fashion"], a:2, e:"AI表示“人工智能”。", source:"初中英语人教版（2024）八上Unit6 Plan for Yourself（词汇语法）练习"},
 {q:"Lin Ling likes _________ very much. She wants to be a _________ when she grows up.", o:["painter; painting","painting; painting","painting; painter","painter; painter"], a:2, e:"第一空like后接动名词painting；第二空be a painter表示\"成为画家\"。", source:"Unit 6基础通关卷(学科网)"},

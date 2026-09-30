@@ -36,7 +36,7 @@
   .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
     padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
   .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
-  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero p{display:none;}
   .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
   .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
   .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
@@ -259,7 +259,7 @@ const BANK = [
 {q:"Finding information is not hard today, but the ____ is how we can tell whether the information is true or not.", o:["courage","message","challenge","knowledge"], a:2, e:"challenge表示“挑战”。", source:"2025-2026学年人教版（2024）八年级英语第一学期Unit5 What a delicious Meal单元同步练"},
 {q:"—How many ________ can you see in the picture —Ten.", o:["tomato","tomatoes","tomato's","tomatoes'"], a:1, e:"How many后接可数名词复数，tomato的复数是tomatoes。", source:"人教版英语八年级上册Unit 5 What a Delicious Meal 单元基础练习-组卷网"},
 {q:"—Could you please ________ the tomatoes into small pieces We need them for the soup. —Sure.", o:["cut up","cut down","cut off","cut out"], a:0, e:"cut up表示“切碎”。", source:"Unit 5 What a Delicious Meal! 综合测试卷—人教版（2024）英语八年级上册"},
-{q:"—Good evening, madam. Need any help —Sure. I'd like a big ________ of beef noodles with some vegetables. Maybe some cabbage", o:["cup","bowl","kilo"], a:1, e:"a bowl of beef noodles表示“一碗牛肉面”。", source:"〖单元考点培优〗Unit 5 What a Delicious Meal! 专题01 单项选择题"},
+{q:"—Good evening, madam. Need any help —Sure. I'd like a big ________ of beef noodles with some vegetables. Maybe some cabbage", o:["cup","bowl","kilo","plate"], a:1, e:"a bowl of beef noodles表示“一碗牛肉面”。", source:"〖单元考点培优〗Unit 5 What a Delicious Meal! 专题01 单项选择题"},
 {q:"________ beautiful flowers they are!", o:["What","What a","How","How a"], a:0, e:"flowers是复数名词，用What。", source:"人教版英语八年级上册Unit 5 What a Delicious Meal 单元基础练习-组卷网"},
 {q:"Look! There is a small ________ in the middle of the lake.", o:["river","stream","forest","island"], a:3, e:"island表示“岛屿”，在湖中间。", source:"Unit 5 What a Delicious Meal!单项选择检测练习题—2025新人教版八年级英语上册"},
 {q:"The ______ of the cake is thin and crispy, just like I like it.", o:["crust","cream","filling","mixture"], a:0, e:"crust表示“外壳”。", source:"人教新版八上Unit 5 What a Delicious Meal! 单元词汇及语法练习题"},
@@ -285,7 +285,7 @@ const BANK = [
 {q:"Annie can dance well. It seems that she was born ________ a great talent for dancing.", o:["in","with","of","into"], a:1, e:"be born with表示“天生具有”。", source:"Unit 5 What a Delicious Meal!单项选择检测练习题—2025新人教版八年级英语上册"},
 {q:"—Can I help you —Yes, I'd like ________.", o:["three pieces of bread","three piece of bread","three pieces of breads","three piece of breads"], a:0, e:"three pieces of bread表示“三片面包”。", source:"Unit 5 What a Delicious Meal! 语法专项练习—2025-2026学年英语人教版2024八年级上册"},
 {q:"How many ________ do you need", o:["box of oranges","boxes of orange","boxes of oranges","box of orange"], a:2, e:"How many后接可数名词复数，boxes of oranges表示“几箱橙子”。", source:"Unit 5 What a Delicious Meal!单项选择检测练习题—2025新人教版八年级英语上册"},
-{q:"First, ________ two tomatoes and some beef. Then put them into boiled water.", o:["cut up","cut off","cut down"], a:0, e:"cut up表示“切碎”。", source:"〖单元考点培优〗Unit 5 What a Delicious Meal! 专题01 单项选择题"},
+{q:"First, ________ two tomatoes and some beef. Then put them into boiled water.", o:["cut up","cut off","cut down","cut out"], a:0, e:"cut up表示“切碎”。", source:"〖单元考点培优〗Unit 5 What a Delicious Meal! 专题01 单项选择题"},
 {q:"________ hard the students are working!", o:["What","What a","How","How a"], a:2, e:"中心词是副词hard，用How。", source:"人教版英语八年级上册Unit 5 What a Delicious Meal 单元基础练习-组卷网"},
 {q:"____ important news is to everybody in the modern world!", o:["How","How an","What","What an"], a:0, e:"中心词是形容词important，用How。", source:"2025-2026学年人教版（2024）八年级英语第一学期Unit5 What a delicious Meal单元同步练"},
 {q:"There ________ some water in the glass.", o:["is","are","have","has"], a:0, e:"water是不可数名词，be动词用is。", source:"Unit 5 What a Delicious Meal! 语法专项练习—2025-2026学年英语人教版2024八年级上册"},
@@ -317,7 +317,7 @@ const BANK = [
 {q:"We need to plant more trees to improve our living ________.", o:["environment","condition","situation","place"], a:0, e:"living environment表示“生活环境”。", source:"安徽省2025八年级英语上册Unit 5 What a Delicious Meal学情评估试卷"},
 {q:"________ exciting news! We will have a ________ holiday after the exam.", o:["What an; two days","How an; two days","What; two-day","How; two days'"], a:2, e:"第一空news是不可数名词，用What；第二空two-day是复合形容词，作定语修饰holiday。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
 {q:"I'd like some ________ and a glass of milk for breakfast.", o:["potato","egg","bread","tomato"], a:2, e:"bread是不可数名词，some bread表示“一些面包”。", source:"Unit5 What a Delicious Meal 语法Grammar感叹句和名词的数—2026-2027学年人教版八年级英语上册"},
-{q:"Look! ________ carefully Cathy is studying! We should learn from her.", o:["How","What a","What"], a:0, e:"中心词是副词carefully，用How。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
+{q:"Look! ________ carefully Cathy is studying! We should learn from her.", o:["How","What a","What","How a"], a:0, e:"中心词是副词carefully，用How。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
 {q:"________ loud noises when you are eating in a formal restaurant. It is not polite.", o:["Make","Don't make","Not make","Making"], a:1, e:"祈使句的否定形式用Don't + 动词原形。", source:"2026-2027学年-人教版八年级上册英语Unit 5 What a Delicious Meal核心考点练习"},
 {q:"I love Italian food: pizza, ________ and so on.", o:["noodles","pasta","rice","dumplings"], a:1, e:"pasta是意大利面食。", source:"〖单元考点培优〗Unit 5 What a Delicious Meal! 专题01 单项选择题"},
 {q:"My grandmother's ______ for tomato soup is a family secret.", o:["instruction","recipe","title","ingredient"], a:1, e:"recipe表示“食谱”。", source:"人教新版八上Unit 5 What a Delicious Meal! 单元词汇及语法练习题"},
@@ -353,7 +353,7 @@ const BANK = [
 {q:"—Why do people in the south like eating rice —Because the warm climate is good for growing ____.", o:["corn","wheat","rice","potatoes"], a:2, e:"根据“people in the south like eating rice”可知是rice。", source:"Unit 5 What a Delicious Meal! 综合测试卷—人教版（2024）英语八年级上册"},
 {q:"—I followed your advice and the fish tastes delicious! —________. I'm glad you like it.", o:["Never mind","My pleasure","Have a good time","Better not"], a:1, e:"My pleasure表示“不客气”。", source:"2026-2027学年-人教版八年级上册英语Unit 5 What a Delicious Meal核心考点练习"},
 {q:"It will be ________ tomorrow, so there will be a lot of ________ tomorrow.", o:["rain; rain","rainy; rain","rain; rainy","rainy; rainy"], a:1, e:"第一空用形容词rainy作表语；第二空用名词rain。", source:"Unit5 What a Delicious Meal 语法Grammar感叹句和名词的数—2026-2027学年人教版八年级英语上册"},
-{q:"—How many ________ do you need to make the salad —Only two teaspoons.", o:["strawberry","yogurt","pears","bananas"], a:1, e:"How much提问不可数名词，yogurt是不可数名词。", source:"Unit 5 What a Delicious Meal! 语法专项练习—2025-2026学年英语人教版2024八年级上册"},
+{q:"—How much ________ do we need to make the milk shake —Only two teaspoons.", o:["strawberry","yogurt","pears","bananas"], a:1, e:"How much提问不可数名词，yogurt是不可数名词。", source:"Unit 5 What a Delicious Meal! 语法专项练习—2025-2026学年英语人教版2024八年级上册"},
 {q:"These are ________.", o:["two cups of tea","two cup of tea","two cups of teas","two cup of teas"], a:0, e:"tea是不可数名词，two cups of tea表示“两杯茶”。", source:"人教版英语八年级上册Unit 5 What a Delicious Meal 单元基础练习-组卷网"},
 {q:"There is ________ in the fridge.", o:["two bottles of milk","two bottles of milks","a bottle of milk","a bottle of milks"], a:2, e:"a bottle of milk表示“一瓶牛奶”。", source:"Unit 5 What a Delicious Meal! 单元练习-组卷网"},
 {q:"Robots can do simple jobs ________ and never get bored.", o:["over and over again","now and then","up and down","here and there"], a:0, e:"over and over again表示“反复地”。", source:"安徽省2025八年级英语上册Unit 5 What a Delicious Meal学情评估试卷"},
@@ -431,7 +431,7 @@ const BANK = [
 {q:"There ________ a book and two pens on the desk.", o:["is","are","have","has"], a:0, e:"there be句型遵循就近原则，a book是单数，be动词用is。", source:"Unit 5 What a Delicious Meal! 语法专项练习—2025-2026学年英语人教版2024八年级上册"},
 {q:"When you ________ vegetables for cooking, be careful not to cut your fingers with the knife.", o:["cut up","put up","give up","wake up"], a:0, e:"cut up表示“切碎”。", source:"2026-2027学年-人教版八年级上册英语Unit 5 What a Delicious Meal核心考点练习"},
 {q:"—What's your favorite ____ —I like Italian food best, especially pizza and pasta.", o:["food","dish","cuisine","meal"], a:2, e:"cuisine表示“烹饪风格、菜系”。", source:"Unit 5 What a Delicious Meal! 综合测试卷—人教版（2024）英语八年级上册"},
-{q:"_______ fast Liu Xiang runs!", o:["What","What a","How"], a:2, e:"中心词是副词fast，用How。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
+{q:"_______ fast Liu Xiang runs!", o:["What","What a","How","How a"], a:2, e:"中心词是副词fast，用How。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
 {q:"There are two ________ and six ________ in the zoo.", o:["monkeys; wolfs","monkeys; wolves","monkeies; wolves","monkeies; wolfs"], a:1, e:"monkey的复数是monkeys；wolf的复数是wolves。", source:"Unit 5 What a Delicious Meal!单项选择检测练习题—2025新人教版八年级英语上册"},
 {q:"The chef added a little salt to the soup to improve its ____.", o:["taste","smell","look","feel"], a:0, e:"improve its taste表示“改善味道”。", source:"Unit 5 What a Delicious Meal! 综合测试卷—人教版（2024）英语八年级上册"},
 {q:"—________ fine weather! It's a good match for going on a picnic.", o:["How","What","How a","What a"], a:1, e:"weather是不可数名词，用What。", source:"人教版英语八年级上册Unit 5 What a Delicious Meal 单元练习-组卷网"},
@@ -451,7 +451,7 @@ const BANK = [
 {q:"The lion is often used as a ____ of courage.", o:["signal","sign","symbol","mark"], a:2, e:"a symbol of courage表示“勇气的象征”。", source:"2025-2026学年人教版（2024）八年级英语第一学期Unit5 What a delicious Meal单元同步练"},
 {q:"______ a great party! ______ delicious the food is!", o:["What; How","How; How","What; What","How; What"], a:0, e:"第一空party是可数名词单数，用What a；第二空中心词是形容词delicious，用How。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
 {q:"________ teenagers said they dreamed of _______ to the moon one day.", o:["A quite few; going","A few quite; go","Quite a few; to go","Quite a few; going"], a:3, e:"quite a few表示“相当多”；dream of doing sth.表示“梦想做某事”。", source:"Unit 5 What a Delicious Meal!单项选择检测练习题—2025新人教版八年级英语上册"},
-{q:"—________ expensive car it is! —Sure is. It's my uncle's.", o:["How","What","What an"], a:2, e:"car是可数名词单数，expensive以元音音素开头，用What an。", source:"〖单元考点培优〗Unit 5 What a Delicious Meal! 专题01 单项选择题"},
+{q:"—________ expensive car it is! —Sure is. It's my uncle's.", o:["How","What","What an","What a"], a:2, e:"car是可数名词单数，expensive以元音音素开头，用What an。", source:"〖单元考点培优〗Unit 5 What a Delicious Meal! 专题01 单项选择题"},
 {q:"________ useful language English is!", o:["What an","How","What a","What"], a:2, e:"language是可数名词单数，useful以辅音音素开头，用What a。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
 {q:"—________ nice girl Lucy is! —Yes. She always helps others.", o:["What a","What an","How","How a"], a:0, e:"girl是可数名词单数，nice以辅音音素开头，用What a。", source:"〖单元考点培优〗Unit 5 What a Delicious Meal! 专题01 单项选择题"},
 {q:"________ the mooncakes are!", o:["How delicious","How a delicious","What a delicious","What delicious"], a:0, e:"中心词是形容词delicious，用How delicious。", source:"Unit 5 What a Delicious Meal! 语法专项练习—2025-2026学年英语人教版2024八年级上册"},
@@ -464,7 +464,7 @@ const BANK = [
 {q:"—What would you like to drink —I'd like ________.", o:["a cup of tea","a cup of teas","two cup of tea","two cups of teas"], a:0, e:"a cup of tea表示“一杯茶”。", source:"Unit 5 What a Delicious Meal! 语法专项练习—2025-2026学年英语人教版2024八年级上册"},
 {q:"It is ________ to say \"thank you\" when the waiter serves you food in a restaurant.", o:["rude","polite","boring","strange"], a:1, e:"polite表示“礼貌的”。", source:"2026-2027学年-人教版八年级上册英语Unit 5 What a Delicious Meal核心考点练习"},
 {q:"The first ______ on the shopping list is milk. Don't forget to buy it.", o:["name","item","price","shop"], a:1, e:"item表示“项目”，购物清单上的第一项是牛奶。", source:"初中英语新人教版八上Unit5 What a Delicious Meal综合检测卷"},
-{q:"________ funny the story is!", o:["What","How","What a"], a:1, e:"中心词是形容词funny，用How。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
+{q:"________ funny the story is!", o:["What","How","What a","How a"], a:1, e:"中心词是形容词funny，用How。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
 {q:"I'd like three ________.", o:["pieces of papers","pieces of paper","piece of paper","piece of papers"], a:1, e:"paper是不可数名词，three pieces of paper表示“三张纸”。", source:"Unit 5 What a Delicious Meal! 单元练习-组卷网"},
 {q:"—________ bad weather it is! We can't go boating on Xuanwu Lake. —Don't worry! Let's go to Nanjing Museum instead.", o:["What","What a","How a","How"], a:0, e:"weather是不可数名词，用What。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
 {q:"—I'm having problems using this camera. What should I do? —You'd better read the ____ first. It will tell you how to use it.", o:["novel","advice","instructions","newspaper"], a:2, e:"instructions表示“说明”。", source:"2025人教版初中英语八年级上册Unit 5 What a Delicious Meal单元测试卷"},
@@ -479,7 +479,7 @@ const BANK = [
 {q:"My mother asked me to ________ some salt to the soup.", o:["add","put","take","bring"], a:0, e:"add...to...表示“把……加到……中”。", source:"Unit 5 What a Delicious Meal! 综合测试卷—人教版（2024）英语八年级上册"},
 {q:"Before we start the basketball game, let's ______ for five minutes to avoid getting hurt.", o:["cool down","warm up","sit down","stand up"], a:1, e:"warm up表示“热身”。", source:"初中英语新人教版八上Unit5 What a Delicious Meal综合检测卷"},
 {q:"________ good time the children had playing football on the playground!", o:["What a","How","How a","What"], a:0, e:"time表示“一段时光”时是可数名词，用What a。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
-{q:"—________ difficult the exam is! —But she got a high mark. ________ clever girl she is!", o:["What, What","How, What","How, What a"], a:2, e:"第一空中心词是形容词difficult，用How；第二空girl是可数名词单数，clever以辅音音素开头，用What a。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
+{q:"—________ difficult the exam is! —But she got a high mark. ________ clever girl she is!", o:["What, What","How, What","How, What a","What, How a"], a:2, e:"第一空中心词是形容词difficult，用How；第二空girl是可数名词单数，clever以辅音音素开头，用What a。", source:"Unit 5 What a Delicious Meal! 感叹句的构成和用法—2025秋人教版英语八年级上册"},
 {q:"____difference a day makes!", o:["What","What a","How","How a"], a:1, e:"difference是可数名词单数，用What a。", source:"2025-2026学年人教版（2024）八年级英语第一学期Unit5 What a delicious Meal单元同步练"}
 ];
 const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
