@@ -38,6 +38,7 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
   50% { box-shadow: 0 0 0 6px rgba(16,185,129,0); }
 }
 .grade-tabs .tab:hover { color: #374151; }
+.grade-tabs .tab .tab-count { display: block; font-size: 10px; font-weight: 400; color: #b0b7c3; margin-top: 2px; }
 
 .example-en { font-size: 20px; line-height: 1.8; color: #1f2937; margin-bottom: 12px; }
 .blank { display: inline-block; border-bottom: 2px solid #10b981; text-align: center; font-weight: 700; padding: 0 10px; min-width: 80px; }
@@ -64,6 +65,15 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 #phon:active { color: #10b981; }
 #phonBtn { display: inline-block; color: #9ca3af; font-size: 13px; margin: 6px 0; cursor: pointer; user-select: none; }
 #phonBtn:active { color: #10b981; }
+
+/* 开始页动画：流光标题 + 漂浮字母 + 呼吸光晕 */
+#modeDesc { font-size: 15px; font-weight: 600; margin-bottom: 12px; background: linear-gradient(90deg,#059669,#10b981,#34d399,#059669); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: flowText 6s linear infinite; }
+@keyframes flowText { 0%{ background-position: 0% 50%; } 100%{ background-position: 300% 50%; } }
+.start-halo { position: absolute; left: 50%; top: 50%; width: 220px; height: 220px; margin: -110px 0 0 -110px; border-radius: 50%; background: radial-gradient(circle, rgba(16,185,129,.14) 0%, rgba(16,185,129,0) 70%); animation: halo 4s ease-in-out infinite; pointer-events: none; }
+@keyframes halo { 0%,100%{ transform: scale(1); opacity: .6; } 50%{ transform: scale(1.18); opacity: 1; } }
+.float-letters { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.float-letters span { position: absolute; bottom: -30px; font-size: 22px; font-weight: 700; color: rgba(16,185,129,.28); animation: floatUp 8s linear infinite; }
+@keyframes floatUp { 0%{ transform: translateY(0) rotate(0deg); opacity: 0; } 12%{ opacity: .85; } 85%{ opacity: .5; } 100%{ transform: translateY(-280px) rotate(28deg); opacity: 0; } }
 </style>
 </head>
 <body>
@@ -74,9 +84,9 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 <div class="container">
   <!-- 词源分级选择 -->
   <div class="tabs grade-tabs" id="gradeTabs" style="margin:0 4px 12px">
-    <div class="tab active" data-grade="basic" onclick="setGrade('basic')"><span class="dot"></span>基础</div>
-    <div class="tab" data-grade="core" onclick="setGrade('core')"><span class="dot"></span>核心</div>
-    <div class="tab" data-grade="extra" onclick="setGrade('extra')"><span class="dot"></span>拓展</div>
+    <div class="tab active" data-grade="basic" onclick="setGrade('basic')"><span class="dot"></span>基础<span class="tab-count">0</span></div>
+    <div class="tab" data-grade="core" onclick="setGrade('core')"><span class="dot"></span>核心<span class="tab-count">0</span></div>
+    <div class="tab" data-grade="extra" onclick="setGrade('extra')"><span class="dot"></span>拓展<span class="tab-count">0</span></div>
   </div>
 
   <div class="card">
@@ -86,8 +96,10 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
     </div>
 
     <div class="content-area">
-      <div id="startPage" style="padding:20px 0;text-align:center">
-        <p style="color:#6b7280;font-size:14px;margin-bottom:12px" id="modeDesc">七年级上册单词 · 开始学习</p>
+      <div id="startPage" style="padding:24px 0;text-align:center;position:relative;overflow:hidden">
+        <div class="start-halo"></div>
+        <div class="float-letters"><span style="left:8%;animation-delay:0s">A</span><span style="left:26%;animation-delay:1.6s">b</span><span style="left:44%;animation-delay:3s">C</span><span style="left:60%;animation-delay:.8s">d</span><span style="left:78%;animation-delay:2.4s">E</span><span style="left:90%;animation-delay:3.8s">f</span></div>
+        <p id="modeDesc">基础词汇 · 开始学习</p>
         <p id="tipMsg" style="color:#f59e0b;font-size:14px;display:none"></p>
       </div>
 
@@ -193,6 +205,7 @@ function saveState(){
 async function setGrade(g){
   grade = g;
   WORDS = GRADE_MAP[g].data;
+  fillLevelCounts();
   document.querySelectorAll('#gradeTabs .tab').forEach(t=>{
     t.classList.toggle('active', t.dataset.grade===g);
   });
@@ -231,6 +244,15 @@ function refreshLocalNow(){
   setMode('learn');
   refreshStats();
   refreshAllGradeStats();
+}
+
+// 选项卡下方显示各级词数
+function fillLevelCounts(){
+  document.querySelectorAll('#gradeTabs .tab').forEach(t=>{
+    const g = t.dataset.grade;
+    const el = t.querySelector('.tab-count');
+    if(el && GRADE_MAP[g]) el.textContent = GRADE_MAP[g].data.length;
+  });
 }
 
 function remainNew(){
