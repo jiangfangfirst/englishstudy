@@ -54,9 +54,9 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 .hide { display: none !important; }
 
 /* 答错柔和红光闪动（两下） */
-#redOverlay { position: fixed; inset: 0; pointer-events: none; z-index: 998; background: rgba(248,113,113,0); }
+#redOverlay { position: fixed; inset: 0; pointer-events: none; z-index: 998; background: rgba(220,38,38,0); }
 #redOverlay.flashing { animation: redFlash .55s ease-in-out 2; }
-@keyframes redFlash { 0%,55%,100%{ background: rgba(248,113,113,0); } 25%,80%{ background: rgba(248,113,113,.16); } }
+@keyframes redFlash { 0%,55%,100%{ background: rgba(220,38,38,0); } 25%,80%{ background: rgba(220,38,38,.38); } }
 /* 答对庆祝粒子：上浮渐隐 */
 .celebrate { position: fixed; pointer-events: none; z-index: 999; font-size: 22px; animation: riseUp 1.35s ease-out forwards; }
 @keyframes riseUp { 0%{ transform: translateY(0) scale(.5); opacity: 1; } 100%{ transform: translateY(-170px) scale(1.2); opacity: 0; } }
@@ -694,20 +694,17 @@ function flashRed(){
 }
 function celebrate(){
   try{
-    const emojis = ['🎉','✨','🎊','🌟','🎈','⭐'];
     const ref = document.getElementById('exEn') || document.body;
     const rect = ref.getBoundingClientRect();
     const x = rect.left + rect.width/2, y = rect.top + 10;
-    for(let i=0;i<14;i++){
-      const el = document.createElement('div');
-      el.className = 'celebrate';
-      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-      el.style.left = (x + (Math.random()*180-90)) + 'px';
-      el.style.top = y + 'px';
-      el.style.animationDelay = (Math.random()*0.35).toFixed(2) + 's';
-      document.body.appendChild(el);
-      setTimeout(()=>{ try{ el.remove(); }catch(e){} }, 1900);
-    }
+    const el = document.createElement('div');
+    el.className = 'celebrate';
+    el.textContent = '⭐';
+    el.style.left = (x - 40) + 'px';
+    el.style.top = y + 'px';
+    el.style.fontSize = '80px';
+    document.body.appendChild(el);
+    setTimeout(()=>{ try{ el.remove(); }catch(e){} }, 1800);
   }catch(e){}
 }
 
