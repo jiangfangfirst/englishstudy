@@ -28,7 +28,7 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 .tab.disabled { opacity: .35; pointer-events: none; }
 
 /* 年级选择：文字式，无背景无边框 */
-.grade-tabs { display: grid; grid-template-columns: repeat(5,1fr); gap: 6px; margin: 28px 4px; border-bottom: none; }
+.grade-tabs { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin: 28px 4px; border-bottom: none; }
 .grade-tabs .tab { padding: 8px 4px; margin-bottom: 0; font-size: 13px; color: #9ca3af; background: none; border: none; transition: all .2s; }
 .grade-tabs .tab .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: currentColor; margin-right: 4px; vertical-align: middle; opacity: .5; }
 .grade-tabs .tab.active { color: #10b981; font-weight: 600; font-size: 15px; }
@@ -72,13 +72,11 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
   <div style="margin-left:auto;font-size:12px;color:#9ca3af" id="headerInfo"></div>
 </div>
 <div class="container">
-  <!-- 册选择：移到card外面 -->
+  <!-- 词源分级选择 -->
   <div class="tabs grade-tabs" id="gradeTabs" style="margin:0 4px 12px">
-    <div class="tab active" data-grade="7A" onclick="setGrade('7A')"><span class="dot"></span>七上</div>
-    <div class="tab" data-grade="7B" onclick="setGrade('7B')"><span class="dot"></span>七下</div>
-    <div class="tab" data-grade="8A" onclick="setGrade('8A')"><span class="dot"></span>八上</div>
-    <div class="tab" data-grade="8B" onclick="setGrade('8B')"><span class="dot"></span>八下</div>
-    <div class="tab" data-grade="9" onclick="setGrade('9')"><span class="dot"></span>九年级</div>
+    <div class="tab active" data-grade="basic" onclick="setGrade('basic')"><span class="dot"></span>基础</div>
+    <div class="tab" data-grade="core" onclick="setGrade('core')"><span class="dot"></span>核心</div>
+    <div class="tab" data-grade="extra" onclick="setGrade('extra')"><span class="dot"></span>拓展</div>
   </div>
 
   <div class="card">
@@ -119,17 +117,15 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
   </div>
 </div>
 
-<script src="全年级单词库.js"></script>
+<script src="分级单词库.js"></script>
 <script>
 const GRADE_MAP = {
-  '7A': { data: WORDS_7A, label: '七年级上册' },
-  '7B': { data: WORDS_7B, label: '七年级下册' },
-  '8A': { data: WORDS_8A, label: '八年级上册' },
-  '8B': { data: WORDS_8B, label: '八年级下册' },
-  '9':  { data: WORDS_9,  label: '九年级全册' },
+  'basic': { data: WORDS_BASIC, label: '基础词汇' },
+  'core':  { data: WORDS_CORE,  label: '核心词汇' },
+  'extra': { data: WORDS_EXTRA, label: '拓展词汇' },
 };
 
-let grade = '7A';
+let grade = 'basic';
 let WORDS = [];
 let mode = 'learn';
 let queue = [];
@@ -174,22 +170,7 @@ async function loadState(){
       found = true;
     }
   }catch(e){}
-  // 迁移旧key（dd_{grade}_mastered/review/learned）
-  if(!found){
-    try{
-      const oldM = localStorage.getItem('dd_'+grade+'_mastered');
-      const oldR = localStorage.getItem('dd_'+grade+'_review');
-      const oldL = localStorage.getItem('dd_'+grade+'_learned');
-      if(oldM || oldR || oldL){
-        masteredSet = oldM ? JSON.parse(oldM) : [];
-        reviewSet = oldR ? JSON.parse(oldR) : [];
-        learnedCount = parseInt(oldL || '0');
-        // 写入新key
-        saveState();
-        found = true;
-      }
-    }catch(e){}
-  }
+  // 迁移旧key（dd_{grade}_mastered/review/learned，年级维度的历史数据不再迁移到分级键）
   if(!found){ learnedCount=0; reviewSet=[]; masteredSet=[]; }
   // 从云端拉取最新
   const cloud = await cloudGet(storageKey());
@@ -285,7 +266,7 @@ function makeBlank(en, word){
 
 function refreshAllGradeStats(){
   let totalDone = 0, totalRemain = 0, totalAll = 0;
-  ['7A','7B','8A','8B','9'].forEach(g=>{
+  ['basic','core','extra'].forEach(g=>{
     try{
       const data = GRADE_MAP[g].data;
       totalAll += data.length;
@@ -296,11 +277,6 @@ function refreshAllGradeStats(){
         const j = JSON.parse(local);
         mastered = j.mastered || [];
         review = j.review || [];
-      } else {
-        const oldM = localStorage.getItem('dd_'+g+'_mastered');
-        const oldR = localStorage.getItem('dd_'+g+'_review');
-        if(oldM) mastered = JSON.parse(oldM);
-        if(oldR) review = JSON.parse(oldR);
       }
       totalDone += mastered.length + review.length;
       totalRemain += data.filter(w => !mastered.includes(w.w.toLowerCase()) && !review.includes(w.w.toLowerCase())).length;
@@ -575,8 +551,8 @@ function onBottomBtn(){
 }
 
 // 页面加载后立即初始化
-window.addEventListener('load', function(){ setGrade('7A'); });
-setTimeout(function(){ setGrade('7A'); }, 100);
+window.addEventListener('load', function(){ setGrade('basic'); });
+setTimeout(function(){ setGrade('basic'); }, 100);
 </script>
 <div style="text-align:center;padding:20px 16px 30px;font-size:11px;color:#9ca3af;line-height:2">
   <div>@多多好学 版权所有</div>
