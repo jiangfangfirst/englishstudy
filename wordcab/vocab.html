@@ -470,7 +470,7 @@ function analyzeBounds(buf){
   for(var i = ch.length - 1; i > start; i--){ if(Math.abs(ch[i]) > th){ end = i + Math.round(sr * 0.10); break; } }
   if(end > ch.length) end = ch.length;
   if(start >= end || end - start < Math.round(sr * 0.15)){ start = 0; end = ch.length; }
-  return { start: start / sr, end: end / sr };
+  return { buf: buf, start: start / sr, end: end / sr };
 }
 function preloadLetters(){
   if(_preloading) return;
@@ -488,7 +488,7 @@ function preloadLetters(){
 }
 function speakLetter(l){
   try{
-    if(_letterCache[l]){
+    if(_letterCache[l] && _letterCache[l].buf){
       var ctx = getLetterCtx();
       var cur = _letterCache[l].playing;
       if(cur){ try{ cur.stop(); }catch(e){} }
@@ -501,10 +501,17 @@ function speakLetter(l){
     }
     if(!_preloading) preloadLetters();
     if(!_audio) _audio = new Audio();
-    _audio.src = 'https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(l) + '&type=1';
+    _audio.src = 'sounds/letters/' + l + '.mp3';
     _audio.currentTime = 0;
     _audio.play().catch(function(e){ console.log('play fail',e); });
-  }catch(e){ console.log(e); }
+  }catch(e){
+    try{
+      if(!_audio) _audio = new Audio();
+      _audio.src = 'sounds/letters/' + l + '.mp3';
+      _audio.currentTime = 0;
+      _audio.play().catch(function(){});
+    }catch(e2){ console.log(e2); }
+  }
 }
 function updateBlank(){
   const b = document.getElementById('blankSpace');
