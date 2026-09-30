@@ -431,8 +431,9 @@ function renderKeyboard(){
   row2.forEach(l=> html += `<button class="key" onclick="pressKey('${l}')">${l}</button>`);
   row3.forEach(l=> html += `<button class="key" onclick="pressKey('${l}')">${l}</button>`);
   row4.forEach(l=> html += `<button class="key" onclick="pressKey('${l}')">${l}</button>`);
+  html += `<button class="key" onclick="pressSpace()">空格</button>`;
   html += `<button class="key del" onclick="delKey()">⌫</button>`;
-  html += `<button class="key confirm" onclick="check()">确认</button>`;
+  html += `<button class="key confirm" onclick="check()" style="grid-column:1/-1">确认</button>`;
   html += '</div>';
   document.getElementById('actionArea').innerHTML = html;
   updateBlank();
@@ -441,6 +442,11 @@ function renderKeyboard(){
 function pressKey(l){
   if(typed.length >= current.w.length + 2) return;
   typed += l.toLowerCase();
+  updateBlank();
+}
+function pressSpace(){
+  if(typed.length >= current.w.length + 2) return;
+  typed += ' ';
   updateBlank();
 }
 function delKey(){
