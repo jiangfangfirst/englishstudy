@@ -409,14 +409,13 @@ function speakWord(w){
     _audio.play().catch(e=>console.log('play fail',e));
   }catch(e){ console.log(e); }
 }
-// 首次任意点击解锁音频 + 后台预加载 26 个字母发音
+// 首次任意点击解锁音频
 document.addEventListener('click', function once(){
   try{
     if(!_audio) _audio = new Audio();
     _audio.src = 'https://dict.youdao.com/dictvoice?audio=test&type=1';
     _audio.play().then(()=>_audio.pause()).catch(()=>{});
   }catch(e){}
-  setTimeout(preloadLetters, 300);
   document.removeEventListener('click', once);
 });
 
@@ -442,84 +441,24 @@ function pressKey(l){
   if(typed.length >= current.w.length + 2) return;
   typed += l.toLowerCase();
   updateBlank();
-  speakLetter(l);
+  playKeySound();
 }
 function pressSpace(){
   if(typed.length >= current.w.length + 2) return;
   typed += ' ';
   updateBlank();
+  playKeySound();
 }
 function delKey(){
   typed = typed.slice(0,-1);
   updateBlank();
+  playKeySound();
 }
-/* 点击字母即时发音（本地固定音频·同一发音人，微信内可用）
-   播放走 Audio 元素（与点击单词同机制，兼容性最好）；WebAudio 仅分析静音边界做裁剪，分析失败也不影响发声 */
-var _letterCache = {};
-var _preloading = false;
-function preloadLetters(){
-  if(_preloading) return;
-  _preloading = true;
-  var q = 'abcdefghijklmnopqrstuvwxyz'.split('').filter(function(l){ return !_letterCache[l]; });
-  (function next(){
-    if(!q.length){ _preloading = false; return; }
-    var l = q.shift();
-    fetch('sounds/letters/' + l + '.mp3')
-      .then(function(r){ return r.blob(); })
-      .then(function(b){
-        var url = URL.createObjectURL(b);
-        var item = { url: url, start: 0, end: 0 };
-        analyzeAudio(b).then(function(se){
-          if(se){ item.start = se.start; item.end = se.end; }
-          _letterCache[l] = item;
-          next();
-        }).catch(function(){ _letterCache[l] = item; next(); });
-      })
-      .catch(function(){ next(); });
-  })();
-}
-function analyzeAudio(blob){
-  try{
-    if(!(window.AudioContext || window.webkitAudioContext)) return Promise.resolve(null);
-    var ctx = new (window.AudioContext || window.webkitAudioContext)();
-    return blob.arrayBuffer().then(function(ab){ return ctx.decodeAudioData(ab); })
-      .then(function(buf){
-        var ch = buf.getChannelData(0), sr = buf.sampleRate, th = 0.012, s = 0, e = ch.length;
-        for(var i = 0; i < ch.length; i++){ if(Math.abs(ch[i]) > th){ s = i; break; } }
-        for(var i = ch.length - 1; i > s; i--){ if(Math.abs(ch[i]) > th){ e = i + Math.round(sr * 0.10); break; } }
-        if(e > ch.length) e = ch.length;
-        if(s >= e || e - s < Math.round(sr * 0.15)){ s = 0; e = 0; }
-        try{ ctx.close(); }catch(err){}
-        return { start: s / sr, end: e / sr || 0 };
-      }).catch(function(){ return null; });
-  }catch(err){ return Promise.resolve(null); }
-}
-function playLetter(o){
+/* 统一键盘敲击音（每个键同一短促音效，微信内可用） */
+function playKeySound(){
   try{
     if(!_audio) _audio = new Audio();
-    _audio.src = o.url;
-    var start = o.start || 0;
-    var end = o.end || 0;
-    clearInterval(_audio._et);
-    function go(){
-      try{ if(start > 0.03) _audio.currentTime = start; }catch(e){}
-      _audio.play().catch(function(e){ console.log('play fail',e); });
-      if(end > start + 0.15){
-        _audio._et = setInterval(function(){
-          if(_audio.currentTime >= end - 0.06){ try{ _audio.pause(); }catch(e){} clearInterval(_audio._et); }
-        }, 120);
-      }
-    }
-    if(_audio.readyState >= 2){ go(); } else { _audio.addEventListener('canplay', go, {once:true}); }
-  }catch(e){ console.log(e); }
-}
-function speakLetter(l){
-  try{
-    var o = _letterCache[l];
-    if(o && o.url){ playLetter(o); return; }
-    if(!_preloading) preloadLetters();
-    if(!_audio) _audio = new Audio();
-    _audio.src = 'https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(l) + '&type=1';
+    _audio.src = 'sounds/key.wav';
     _audio.currentTime = 0;
     _audio.play().catch(function(e){ console.log('play fail',e); });
   }catch(e){ console.log(e); }
@@ -540,6 +479,7 @@ function showPhonetic(){
 
 function check(){
   if(!current) return;
+  playKeySound();
   const v = typed.toLowerCase();
   const target = current.w.toLowerCase();
   sessionAnswered++;
