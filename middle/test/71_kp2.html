@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>七年级KP2</h1>
+        <p>一般现在时 · 名词所有格 · 家庭称谓 · 代词 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">七年级上册Unit 2 · 在线检测</span>
+      <h2>单元检测核心库KP1</h2>
+      <p>涵盖实义动词一般现在时（三单/Do/Does）、名词所有格、家庭称谓、代词辨析、频度副词与固定搭配等高频考点。系统从全量题库（200 道）中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"It's time ____ school. Let's go!", o:["to", "for", "with", "at"], a:1, e:"It's time for sth. 是……的时候了。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—Are these ____ keys? —No, they aren't mine.", o:["you", "your", "yours", "yourself"], a:1, e:"修饰 keys 用形容词性物主代词 your。", source:"U2单元练习(组卷网)"},
+{q:"My friend Lu Yi is ____ China.", o:["at", "for", "in", "to"], a:2, e:"in China 表示\"在中国\"。", source:"U2单项选择篇专项(学科网)"},
+{q:"—____ you often do housework at home? —Yes. I ____ my mother with it every day.", o:["Does; help", "Do; helps", "Does; helps", "Do; help"], a:3, e:"主语 you 用助动词 Do；I 后动词原形 help。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—____ people are there in your family? —Five. They are my parents, my two sisters and me.", o:["How much", "How long", "How many", "How old"], a:2, e:"询问可数名词数量用 How many。", source:"U2重点知识梳理巩固(学科网)"},
+{q:"This is my brother. ____ name is Tom.", o:["His", "He", "Him", "He's"], a:0, e:"brother 是男性，修饰 name 用 His。", source:"U2单元练习(组卷网)"},
+{q:"—Look! ____ is my family photo. —Wow, it's nice!", o:["This", "These", "That", "Those"], a:0, e:"单数名词 photo 前用 This。", source:"U2配套练习题(学科网)"},
+{q:"The festival is relaxing. I ____ like it.", o:["very", "always", "really"], a:2, e:"really 副词修饰动词 like，表示\"真的\"。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"His brother ____ have a volleyball, ____ he has a basketball.", o:["don't; but", "don't; and", "doesn't; but", "doesn't; and"], a:2, e:"brother 三单否定 doesn't；转折用 but。", source:"U2单项选择篇专项(学科网)"},
+{q:"Jack and Sarah stand ____ of the family photo.", o:["next to", "close to", "in the middle", "in front"], a:2, e:"站在照片中间 in the middle。", source:"U2语法专项训练(21cnjy)"},
+{q:"This is a picture ____ our classroom.", o:["for", "with", "of", "to"], a:2, e:"a picture of... 表示\"一张……的图片\"。", source:"U2单元卷2025-2026(学科网)"},
+{q:"—David, do you ____ do sports after school? —Yes, I run in the morning every weekday.", o:["always", "never", "hardly ever", "sometimes"], a:0, e:"答语说明频率高，用 always。", source:"U2易混易错语法专项(豆丁)"},
+{q:"There is a photo ____ my family on the wall of my bedroom.", o:["of", "to", "with", "for"], a:0, e:"a photo of... 一张……的照片。", source:"U2重点知识梳理巩固(学科网)"},
+{q:"Look! These ____ your pencils and eraser on the desk.", o:["is", "am", "are", "be"], a:2, e:"These 复数用 are。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—____ you have a camera? —No, I don't. But my friend ____ one.", o:["Do; has", "Do; have", "Does; has", "Does; have"], a:0, e:"主语 you 用 Do；my friend 三单用 has。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"This is ____ room. It looks very clean.", o:["Kitty's and Mary's", "Kitty and Mary's", "Kitty's and Mary", "Kitty and Mary"], a:1, e:"两人共用一个房间，只在后者加 's。", source:"U2单项选择篇专项(学科网)"},
+{q:"My family ____ big. There are only 3 people.", o:["aren't", "isn't", "is", "are"], a:1, e:"family 作整体概念视为单数，否定用 isn't。", source:"U2单项选择篇专项(学科网)"},
+{q:"My mother often tells me stories, and they always make me ____ happily.", o:["laugh", "laughs", "laughing", "to laugh"], a:0, e:"make sb. do sth. 使某人做某事。", source:"U2重点知识梳理巩固(学科网)"},
+{q:"My grandparents ____ in a small village. They are very happy.", o:["am", "is", "are", "be"], a:2, e:"My grandparents 复数用 are。", source:"U2单元素养测评卷(学科网)"},
+{q:"—Does Judy have a hat? —____. Her hat is yellow.", o:["Yes, she does", "No, she doesn't", "Yes, she has", "No, she hasn't"], a:0, e:"Her hat is yellow 说明有帽子，肯定回答 Yes, she does。", source:"U2单项选择篇专项(学科网)"},
+{q:"I get up early and then do some sports ____.", o:["everyday", "every day", "day", "days"], a:1, e:"every day 作时间状语表示\"每天\"。", source:"U2单项选择篇专项(学科网)"},
+{q:"My grandfather ____ reading after supper every day.", o:["liked", "is liking", "like", "likes"], a:3, e:"every day 一般现在时，主语三单用 likes。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"My father ____ eggs for breakfast every morning.", o:["eat", "eats", "eating", "to eat"], a:1, e:"My father 三单用 eats。", source:"U2单元练习(组卷网)"},
+{q:"The ____ room is very clean. They like reading there.", o:["students", "student's", "students'"], a:2, e:"复数名词所有格 students'。", source:"U2单元测试题(学科网)"},
+{q:"This is my mother, and I'm her ____.", o:["teacher", "daughter", "parents", "mother"], a:1, e:"我是妈妈的女儿 daughter。", source:"U2单项选择篇专项(学科网)"},
+{q:"If you want to learn English well, you should read ____ English ____.", o:["everyday; everyday", "everyday; every day", "every day; everyday", "every day; every day"], a:1, e:"修饰名词用 everyday；作状语用 every day。", source:"U2单项选择篇专项(学科网)"},
+{q:"—____ these her hats? —No, they ____.", o:["Is; isn't", "Am; are", "Are; isn't", "Are; aren't"], a:3, e:"these 复数用 Are；否定回答 they aren't。", source:"U2单项选择篇专项(学科网)"},
+{q:"Jane needs a new ____ for table tennis.", o:["violin", "fishing rod", "chess", "ping-pong bat"], a:3, e:"打乒乓球需要新的球拍 ping-pong bat。", source:"U2语法专项训练(21cnjy)"},
+{q:"For us students, we should spend more time ____ our study.", o:["in", "on", "with", "to"], a:1, e:"spend time on sth. 在……上花时间。", source:"U2单项选择篇专项(学科网)"},
+{q:"—____ do you like about your family? —The love and warmth.", o:["What", "How", "Why", "When"], a:0, e:"询问喜欢的对象用 What。", source:"U2达标卷(学科网)"},
+{q:"—____ Alice ____ a blue schoolbag? —No, she doesn't. Her brother has one.", o:["Do; have", "Do; has", "Does; have", "Does; has"], a:2, e:"Alice 三单用 Does；后接动词原形 have。", source:"U2单项选择篇专项(学科网)"},
+{q:"My father and my mother ____ teachers.", o:["am", "is", "are", "be"], a:2, e:"My father and my mother 是复数，用 are。", source:"U2单元卷2025-2026(学科网)"},
+{q:"下面单词中，划线部分发音与其他三项不同的是：____", o:["her", "player", "letter", "offer"], a:0, e:"her 中 er 发 /ɜː/，其余发 /ə/。", source:"U2易混易错语法专项(豆丁)"},
+{q:"—Who are ____? —They are my brothers.", o:["this", "that", "these", "it"], a:2, e:"are 对应复数 these。", source:"U2单元卷2025-2026(学科网)"},
+{q:"—____ is she? —She's my mother.", o:["What", "How", "Who", "Where"], a:2, e:"询问人物用 Who。", source:"U2语法专项训练(21cnjy)"},
+{q:"I like ____ stories because they are very interesting.", o:["boring", "lazy", "funny", "quiet"], a:2, e:"有趣的故事用 funny。", source:"U2易混易错语法专项(豆丁)"},
+{q:"Tim is a ____ boy and he studies ____ at school.", o:["good; well", "good; good", "well; well", "well; good"], a:0, e:"修饰名词 boy 用 good；修饰动词 studies 用 well。", source:"U2单项选择篇专项(学科网)"},
+{q:"—____ bedroom is that? —It's ____.", o:["Whose; Nancy's", "Whose; Nancy", "Who's; Nancy's", "Which; Nancy's"], a:0, e:"询问所属用 Whose；回答用名词所有格 Nancy's。", source:"U2单项选择篇专项(学科网)"},
+{q:"—What ____ your brother ____? —He has a bottle of water.", o:["do; have", "does; have", "do; has", "does; has"], a:1, e:"your brother 三单用 Does；后接原形 have。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"Look! Here ____ an apple and two bananas.", o:["be", "am", "is", "are"], a:2, e:"Here be 就近原则，an apple 单数用 is。", source:"U2单项选择篇专项(学科网)"},
+{q:"I ____ twelve years old, and my sister ____ nine.", o:["am; is", "am; am", "are; is", "is; are"], a:0, e:"I 用 am；my sister 三单用 is。", source:"U2语法专项训练(21cnjy)"},
+{q:"—Is the girl your friend? —Yes, ____ is. ____ name is Linda.", o:["she; Her", "she; She", "her; Her", "her; She"], a:0, e:"作主语用 She；修饰 name 用 Her。", source:"U2单元练习(组卷网)"},
+{q:"Chinese chess and international chess are ____.", o:["beautiful", "tired", "friendly", "different"], a:3, e:"两种棋是不同的 different。", source:"U2语法专项训练(21cnjy)"},
+{q:"—Where is your bike, Amy? —Oh, it's over there, between ____.", o:["Tim and Tom's", "Tim's and Tom", "Tim's and Tom's", "Tim and Toms'"], a:2, e:"两人各自的东西，分别加 's。", source:"U2易混易错语法专项(豆丁)"},
+{q:"My father ____ TV every evening. He ____ sports shows.", o:["watch; love", "watches; loves", "watches; love"], a:1, e:"主语三单，两空都用三单形式。", source:"U2单元测试题(学科网)"},
+{q:"—What does your father ____? —He is a doctor.", o:["do", "does", "doing", "is"], a:0, e:"助动词 does 后接动词原形 do。", source:"U2单元卷2025-2026(学科网)"},
+{q:"We should eat ____ fruit and vegetables. They're good for our health.", o:["a lot", "lot of", "lots of", "a lots of"], a:2, e:"lots of 修饰可数/不可数名词，表示\"许多\"。", source:"U2易混易错语法专项(豆丁)"},
+{q:"—Does he like playing ping-pong? —____. He likes playing badminton, too.", o:["Yes, he is", "Yes, he does", "No, he doesn't"], a:1, e:"助动词 Does 的肯定简答 Yes, he does。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—Are those your grandparents? —Yes, ____ are.", o:["these", "those", "they", "it"], a:2, e:"those 的简略回答用 they。", source:"U2达标卷(学科网)"},
+{q:"Those ____ hats are on the shelf.", o:["woman's", "women's", "womans'"], a:1, e:"women 的复数所有格是 women's。", source:"U2知识点梳理与复习(学科网)"},
+{q:"My friend ____ a dog. ____ name is Coco.", o:["have; Its", "has; Its", "has; It's"], a:1, e:"My friend 三单用 has；Its name 它的名字。", source:"U2单元测试题(学科网)"},
+{q:"—Who are they? —They are my ____.", o:["parent", "grandparent", "friend", "sisters"], a:3, e:"They are 后接复数 sisters。", source:"U2单项选择篇专项(学科网)"},
+{q:"Those ____ my parents. ____ are teachers.", o:["ares; He", "is; They", "are; They", "am; Their"], a:2, e:"parents 复数用 are；They 作主语。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"They go ____ in the mountains every month.", o:["swimming", "hiking", "fishing", "shopping"], a:1, e:"go hiking 去远足。", source:"U2语法专项训练(21cnjy)"},
+{q:"—Is Han Mei a teacher? —Yes, she is. She ____ at a village school.", o:["teaches", "taught", "teach", "will teach"], a:0, e:"一般现在时主语 She 是第三人称单数，动词用 teaches。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"When I go into the classroom, I always ____.", o:["keep it quiet", "keep quietly", "keep quiet", "keep clean"], a:2, e:"keep quiet 保持安静。", source:"U2易混易错语法专项(豆丁)"},
+{q:"____ are Lily's friends and ____ is her mother.", o:["These; these", "Those; those", "These; this", "That; those"], a:2, e:"friends 复数用 These；mother 单数用 this。", source:"U2单项选择篇专项(学科网)"},
+{q:"There are four ____ in my family, my father, my mother, my brother and I.", o:["relations", "opinions", "members", "results"], a:2, e:"家庭成员用 members。", source:"U2易混易错语法专项(豆丁)"},
+{q:"Her family ____ all at home now.", o:["be", "are", "is", "am"], a:1, e:"family 指家庭成员时视为复数，用 are。", source:"U2单项选择篇专项(学科网)"},
+{q:"—Are these blue pens John's? —____. His are black.", o:["Yes, it is.", "No, it isn't.", "No, they aren't.", "Yes, they are."], a:2, e:"these 的否定回答用 they aren't。", source:"U2易混易错语法专项(豆丁)"},
+{q:"This is my dog. ____ name is Lucky.", o:["It's", "Its", "It", "His"], a:1, e:"Its 表示\"它的\"，修饰 name。", source:"U2配套练习题(学科网)"},
+{q:"My brother likes ____ basketball, but he doesn't like ____ basketball today because he's tired.", o:["play; play", "playing; to play", "to play; playing", "playing; play"], a:1, e:"like doing 表习惯；like to do 表偶尔想做。", source:"U2重点知识梳理巩固(学科网)"},
+{q:"The ____ coats are on the chair. ____ are red.", o:["women's; They", "woman's; It", "women's; It"], a:0, e:"复数所有格 women's；指代复数用 They。", source:"U2单元测试题(学科网)"},
+{q:"Tom's father ____ a lot of time reading newspapers every evening.", o:["spend", "spends", "spending", "to spend"], a:1, e:"Tom's father 三单用 spends。", source:"U2重点知识梳理巩固(学科网)"},
+{q:"These are my ____. I love them very much.", o:["parent", "parents", "parentes", "a parent"], a:1, e:"These are 后接复数 parents。", source:"U2单元卷2025-2026(学科网)"},
+{q:"I call my ____ brother uncle.", o:["grandmother's", "cousin's", "father's", "grandfather's"], a:2, e:"爸爸的兄弟是叔叔 uncle，用 father's。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"—Do you like tigers? —Yes, I like them ____.", o:["a lot of", "a lot", "lots of", "many"], a:1, e:"修饰动词 like 用副词 a lot。", source:"U2单项选择篇专项(学科网)"},
+{q:"Please ____. The doctor will see you in a minute.", o:["come in", "come on", "come out", "come over"], a:0, e:"come in 表示\"进来\"。", source:"U2易混易错语法专项(豆丁)"},
+{q:"Tom ____ an hour playing basketball with his brother every weekend.", o:["spends", "takes", "costs", "pays"], a:0, e:"spend time doing sth. 花时间做某事。", source:"U2单元素养测评卷(学科网)"},
+{q:"—Is it an animal? —Right, it's a ____ of the cat family.", o:["kind", "number", "member", "piece"], a:2, e:"member 表示\"成员\"，猫科动物的一员。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"—What does Nick often do on Sundays? —He ____ us English on Sundays.", o:["teaching", "teach", "teaches"], a:2, e:"主语 He 三单，动词用 teaches。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"My mother's sister is my ____.", o:["aunt", "uncle", "grandmother", "sister"], a:0, e:"妈妈的姐妹是阿姨 aunt。", source:"U2单元卷2025-2026(学科网)"},
+{q:"Lily's mum reads stories ____ when Sam sleeps.", o:["at lunch", "at night", "at the top", "in the middle"], a:1, e:"at night 在晚上。", source:"U2语法专项训练(21cnjy)"},
+{q:"—____ everyone in your family ____ the Spring Festival? —Yes, of course.", o:["Do; like", "Does; like", "Is; likes", "Are; likes"], a:1, e:"everyone 视为三单，用 Does；后接原形 like。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"This is ____. And that is my schoolbag.", o:["Anna rulers", "Anna's rulers", "Anna ruler", "Anna's ruler"], a:3, e:"Anna's ruler 表示\"安娜的尺子\"。", source:"U2语法专项训练(21cnjy)"},
+{q:"—____ Anna go to school by bus every day? —No, she usually ____ to school.", o:["Do; walk", "Does; walk", "Do; walks", "Does; walks"], a:3, e:"Anna 三单用 Does；she 三单用 walks。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—____ is the man in the blue jacket? —He's my uncle.", o:["What", "Who", "How", "Where"], a:1, e:"询问人物用 Who。", source:"U2配套练习题(学科网)"},
+{q:"—What does your father like doing? —He likes ____ books in the evening.", o:["read", "reads", "reading", "to reading"], a:2, e:"like doing sth. 喜欢做某事。", source:"U2单元素养测评卷(学科网)"},
+{q:"Here ____ Jenny's and Mary's family trees.", o:["am", "is", "are", "/"], a:2, e:"family trees 是复数，Here are + 复数。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"____ are the books I like.", o:["You", "These", "This", "That"], a:1, e:"are 对应复数主语 These。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"—Hi, my name's Emma. —____.", o:["Hi, I'm Li Hua.", "Hello", "Hi", "Good afternoon"], a:0, e:"回应自我介绍，问候并介绍自己。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—Are the model plane ____ the radio your brother's? —No. The model plane is his, ____ the radio is my sister's.", o:["and, /", "and, but", "but, and", "/, but"], a:1, e:"第一空 and 并列；第二空 but 表转折。", source:"U2单项选择篇专项(学科网)"},
+{q:"—____ your brother a student? —Yes, he is.", o:["Are", "Is", "Am", "Be"], a:1, e:"your brother 是第三人称单数，用 Is。", source:"U2单元卷2025-2026(学科网)"},
+{q:"My mother's brother is my ____.", o:["uncle", "aunt", "cousin", "grandpa"], a:0, e:"妈妈的兄弟是舅舅 uncle。", source:"U2达标卷(学科网)"},
+{q:"Tom often ____ time with his family on Sundays. They usually go to the park.", o:["takes", "spends", "pays"], a:1, e:"spend time with sb. 与某人共度时光。", source:"U2知识点梳理与复习(学科网)"},
+{q:"—Mr. Brown, may I ____ with you? I won't take up too much of your time. —OK. Go ahead.", o:["give a speech", "tell a joke", "have a talk", "tell a lie"], a:2, e:"have a talk with sb. 与某人谈谈。", source:"U2易混易错语法专项(豆丁)"},
+{q:"When Sam tells a joke, everyone ____ loudly.", o:["spends", "means", "laughs", "hikes"], a:2, e:"讲笑话大家会大笑 laughs。", source:"U2语法专项训练(21cnjy)"},
+{q:"—Who's that boy? —____ is my brother.", o:["This", "That", "He", "Him"], a:2, e:"指代 the boy 作主语用 He。", source:"U2单元练习(组卷网)"},
+{q:"She ____ a cat. It ____ two big eyes.", o:["have; has", "has; has", "has; have"], a:1, e:"She 三单用 has；It 三单也用 has。", source:"U2单元测试题(学科网)"},
+{q:"—My parents ____ like music. What about you and your parents? —We ____ like music, too.", o:["all; both", "both; all", "all; all", "both; both"], a:1, e:"My parents 两人用 both；答语三人以上用 all。", source:"U2易混易错语法专项(豆丁)"},
+{q:"—Dad, is this ____ volleyball? —No, ____ is in that box.", o:["Bill; his", "Bill's; his", "Bill; he", "Bill's; he"], a:1, e:"修饰名词用所有格 Bill's；表语用名词性物主代词 his。", source:"U2单项选择篇专项(学科网)"},
+{q:"—What does \"family\" ____ to you? —It means love and warmth for me.", o:["tell", "say", "mean", "talk"], a:2, e:"mean to sb. 对某人意味着。", source:"U2重点知识梳理巩固(学科网)"},
+{q:"—____ is she? —She's Grace's aunt.", o:["Who", "What", "How", "Where"], a:0, e:"询问人物关系用 Who。", source:"U2单项选择篇专项(学科网)"},
+{q:"____ are my friends, Bob and Dale.", o:["These", "That", "This", "It"], a:0, e:"复数名词 friends 用 These。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"We often take photos ____ our family.", o:["for", "of", "with", "at"], a:1, e:"take photos of 拍……的照片。", source:"U2达标卷(学科网)"},
+{q:"—David, these are my friends, Bob and Mike. —____", o:["How are you?", "Thanks.", "What's your name?", "Nice to meet you!"], a:3, e:"初次见面介绍朋友后回应 Nice to meet you。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"This ____ his brother and those ____ his parents.", o:["is; is", "is; are", "are; is", "are; are"], a:1, e:"This 单数用 is；those 复数用 are。", source:"U2单项选择篇专项(学科网)"},
+{q:"—Bill is only 5 years old. He ____ reading. —He usually ____ picture books with his dad in the morning.", o:["like; read", "likes; read", "like; reads", "likes; reads"], a:3, e:"He 三单用 likes；usually 一般现在时三单 reads。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"My sister ____ watching TV. She likes reading books.", o:["don't like", "doesn't like", "like", "likes"], a:1, e:"My sister 三单否定用 doesn't like。", source:"U2单元练习(组卷网)"},
+{q:"This is my sister. ____ name is Lucy.", o:["His", "Her", "Your", "My"], a:1, e:"sister 是女性，修饰 name 用 Her。", source:"U2达标卷(学科网)"},
+{q:"We have ____ information about the new student. We know she is from the US.", o:["a lot", "a lot of", "many"], a:1, e:"information 不可数，用 a lot of 修饰。", source:"U2知识点梳理与复习(学科网)"},
+{q:"He ____ in Beijing, but his parents ____ in Shanghai.", o:["live; lives", "lives; live", "live; live"], a:1, e:"He 三单用 lives；parents 复数用 live。", source:"U2知识点梳理与复习(学科网)"},
+{q:"—What ____ your mother usually do on weekends? —She usually cleans the house.", o:["do", "does", "is", "are"], a:1, e:"your mother 三单，助动词用 does。", source:"U2重点知识梳理巩固(学科网)"},
+{q:"This is our school farm. It's not big, ____ we grow many different plants here.", o:["or", "because", "so", "but"], a:3, e:"前后转折，用 but。", source:"U2易混易错语法专项(豆丁)"},
+{q:"This is ____ room. It's clean and tidy.", o:["Tom and Jim", "Tom's and Jim's", "Tom and Jim's"], a:2, e:"两人共有房间，只在后者加 's。", source:"U2知识点梳理与复习(学科网)"},
+{q:"She ____ tomatoes, so she never eats them.", o:["like", "don't like", "likes", "doesn't like"], a:3, e:"主语 She 三单否定用 doesn't like。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—Are those your sisters? —Yes, ____ are.", o:["those", "they", "these", "them"], a:1, e:"those 的简略回答用 they。", source:"U2单元练习(组卷网)"},
+{q:"The man ____ a black coat is my father's friend. He is from Canada.", o:["in", "on", "with", "for"], a:0, e:"in + 服装，表示\"穿着\"。", source:"U2重点知识梳理巩固(学科网)"},
+{q:"This is a photo ____ my family.", o:["of", "for", "at", "in"], a:0, e:"a photo of... 一张……的照片。", source:"U2单元练习(组卷网)"},
+{q:"____ these your ____ photos?", o:["Are; family", "Is; family's", "Are; families"], a:0, e:"these 复数用 Are；family 作定语修饰 photos。", source:"U2单元测试题(学科网)"},
+{q:"I ____ Tengfei and he ____ Fuxing.", o:["is; is", "am; is", "is; am", "are; is"], a:1, e:"I 用 am；he 用 is。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—____ is the man in the photo? —He's my father.", o:["What", "Who", "Where", "How"], a:1, e:"询问人物用 Who。", source:"U2达标卷(学科网)"},
+{q:"—Do you have a dictionary? —____. It's on my desk.", o:["Yes, I have", "Yes, I do", "No, I don't", "No, I don't have"], a:1, e:"Do you 的肯定简答 Yes, I do。", source:"U2单项选择篇专项(学科网)"},
+{q:"Little Sam sits on his father's ____ in the picture.", o:["hat", "knee", "violin", "bat"], a:1, e:"坐在爸爸的膝盖 knee 上。", source:"U2语法专项训练(21cnjy)"},
+{q:"—____ you have a happy family? —Yes, I do.", o:["Do", "Does", "Are", "Is"], a:0, e:"主语 you 用助动词 Do。", source:"U2达标卷(学科网)"},
+{q:"Look, this is my ____. He is my aunt's husband.", o:["uncle", "brother", "cousin", "father"], a:0, e:"阿姨的丈夫是姨夫 uncle。", source:"U2易混易错语法专项(豆丁)"},
+{q:"—Does your brother ____ ping-pong balls? —Yes, he ____ three.", o:["have; have", "has; has", "has; have", "have; has"], a:3, e:"助动词 does 后接原形 have；he 三单用 has。", source:"U2单项选择篇专项(学科网)"},
+{q:"Miss Rose is serious in the English class, but she is ____ to us after class.", o:["similar", "careful", "popular", "kind"], a:3, e:"be kind to sb. 对某人友善。", source:"U2易混易错语法专项(豆丁)"},
+{q:"My brother often ____ TV very late at night.", o:["watch", "watches", "is watching", "are watching"], a:1, e:"主语 My brother 三单，一般现在时用 watches。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"We can learn a lot from ____ in school.", o:["activity", "activities", "an activity", "the activity"], a:1, e:"泛指多项活动，用复数 activities。", source:"U2易混易错语法专项(豆丁)"},
+{q:"I like my teachers and they like me ____.", o:["too", "either", "but", "also"], a:0, e:"肯定句句末\"也\"用 too。", source:"U2单项选择篇专项(学科网)"},
+{q:"My grandparents are old, ____ they are very kind.", o:["and", "but", "or", "so"], a:1, e:"前后语义转折，用 but。", source:"U2单元卷2025-2026(学科网)"},
+{q:"I can see ____ school ID cards are at the Lost and Found. Let's call them!", o:["Mike and Tom's", "Mike's and Tom's", "Mike and Tom"], a:1, e:"两人各自的学生卡，分别加 's。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"I'm a teacher, ____ he isn't.", o:["and", "but", "or", "so"], a:1, e:"前后转折，用 but。", source:"U2语法专项训练(21cnjy)"},
+{q:"My mother spends two hours ____ housework every day.", o:["do", "to do", "doing", "does"], a:2, e:"spend time doing sth. 花时间做某事。", source:"U2易混易错语法专项(豆丁)"},
+{q:"—Who ____ they? —They're my cousins.", o:["am", "is", "are", "be"], a:2, e:"They 复数用 are。", source:"U2配套练习题(学科网)"},
+{q:"The girl in red is ____ cousin. ____ name is Lily.", o:["my; Her", "mine; She", "my; She"], a:0, e:"修饰名词用 my；Her name 她的名字。", source:"U2单元测试题(学科网)"},
+{q:"Mike and Ben ____ sports. They only ____ ball games on TV.", o:["doesn't play, watch", "don't play, watch", "doesn't play, watches", "don't play, watches"], a:1, e:"主语复数用 don't；They 后用动词原形 watch。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—Who is the woman? —____ is my mother.", o:["He", "It", "She", "I"], a:2, e:"指代 the woman（女性）作主语用 She。", source:"U2单元卷2025-2026(学科网)"},
+{q:"The red bag is ____. Her mother buys it for her.", o:["Lucy", "Lucys", "Lucy's", "Lucys'"], a:2, e:"名词所有格 Lucy's 表示\"露西的\"。", source:"U2单元素养测评卷(学科网)"},
+{q:"—____ is that girl in the photo? —She's my cousin, Lily.", o:["Who", "What", "How", "Where"], a:0, e:"询问人物用 Who。", source:"U2单元素养测评卷(学科网)"},
+{q:"____ your brother ____ a soccer ball?", o:["Do; have", "Does; have", "Does; has"], a:1, e:"your brother 三单用 Does；后接原形 have。", source:"U2单元测试题(学科网)"},
+{q:"—____, Lily? —I'm fine, thanks.", o:["How are you", "What is it", "Where are they", "Who is she"], a:0, e:"答语 I'm fine 对应 How are you。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"____ parents are teachers. They work in the same school.", o:["Tom and Jerry", "Tom's and Jerry", "Tom and Jerry's"], a:2, e:"两人共有的父母，只在后者加 's。", source:"U2单元测试题(学科网)"},
+{q:"—Who is ____ girl with long hair over there? —She is my sister, Gina.", o:["an", "a", "the", "/"], a:2, e:"特指那边那个长头发女孩，用 the。", source:"U2单项选择篇专项(学科网)"},
+{q:"—Is that ____ schoolbag? —No, it's ____ brother's.", o:["your; my", "yours; my", "your; mine"], a:2, e:"修饰名词用 your；名词性物主代词用 mine。", source:"U2单元测试题(学科网)"},
+{q:"—____ your sister ____ a violin? —Yes, she does.", o:["Do; have", "Does; have", "Does; has"], a:1, e:"your sister 三单用 Does；后接动词原形 have。", source:"U2知识点梳理与复习(学科网)"},
+{q:"These are my cousins Bill and Alan. ____ father is my uncle.", o:["His", "Their", "Her", "Mine"], a:1, e:"Bill and Alan 两人，用 Their。", source:"U2语法专项训练(21cnjy)"},
+{q:"—____ is the boy under the tree? —He is my cousin, Jim.", o:["What", "Who", "How", "Where"], a:1, e:"询问人物身份用 Who。", source:"U2单元卷2025-2026(学科网)"},
+{q:"—Do you like to go shopping ____ swimming? —Go shopping.", o:["and", "but", "or", "so"], a:2, e:"选择疑问句用 or 连接选项。", source:"U2单项选择篇专项(学科网)"},
+{q:"—Do you often go hiking with your family? —No, I ____.", o:["don't", "doesn't", "am not"], a:0, e:"Do you 的否定简答 No, I don't。", source:"U2知识点梳理与复习(学科网)"},
+{q:"—Thank you for your help! —____", o:["I'm fine.", "Nice to meet you.", "You're welcome.", "Have a good day."], a:2, e:"回应感谢用 You're welcome。", source:"U2配套练习题(学科网)"},
+{q:"The boy has lots of bad habits. I ____ don't know how to help him.", o:["really", "loudly", "quietly", "quickly"], a:0, e:"really 副词修饰动词，表示\"真的\"。", source:"U2易混易错语法专项(豆丁)"},
+{q:"Mike makes faces to make his little brother ____.", o:["laugh", "to laugh", "laughing"], a:0, e:"make sb. do sth. 使某人做某事。", source:"U2知识点梳理与复习(学科网)"},
+{q:"His uncle ____ in a hospital. He ____ very hard every day.", o:["work; works", "works; work", "works; works"], a:2, e:"主语三单，两空都用 works。", source:"U2单元测试题(学科网)"},
+{q:"The earth ____ around the sun.", o:["moving", "moves", "moved", "move"], a:1, e:"科学事实用一般现在时，三单 moves。", source:"U2语法专项训练(21cnjy)"},
+{q:"—Spell it, please. —____.", o:["It's a key.", "K-E-Y.", "The key", "A key"], a:1, e:"拼写单词直接拼出字母 K-E-Y。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"Linda doesn't like maths. I don't like it, ____.", o:["too", "also", "either", "neither"], a:2, e:"否定句中\"也\"用 either。", source:"U2单项选择篇专项(学科网)"},
+{q:"—Where ____ you come from? —I ____ China.", o:["do; from", "do; come from", "are; come from", "are; am from"], a:1, e:"实义动词 come from 的疑问用助动词 do；回答用 come from。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—Are those your brothers? —____ They are my friends.", o:["Yes, they are.", "No, they aren't.", "Yes, he is.", "No, he isn't."], a:1, e:"后句 They are my friends 说明是否定回答。", source:"U2单项选择篇专项(学科网)"},
+{q:"This is my father. ____ name is Bob.", o:["His", "Her", "He", "My"], a:0, e:"father 是男性，修饰 name 用 His。", source:"U2单元卷2025-2026(学科网)"},
+{q:"Miss Li is kind ____ us. But sometimes she is kind ____ serious.", o:["to, of", "with, to", "of, to", "of, of"], a:0, e:"be kind to sb. 对某人友善；kind of 有点。", source:"U2单项选择篇专项(学科网)"},
+{q:"She ____ a big family.", o:["have", "has", "is having", "having"], a:1, e:"主语 She 三单，用 has。", source:"U2达标卷(学科网)"},
+{q:"—____ is your family photo? —It's on the wall.", o:["What", "Who", "Where", "How"], a:2, e:"答语 on the wall 是位置，用 Where 提问。", source:"U2达标卷(学科网)"},
+{q:"—My name is Sue. I'm a student. —____.", o:["I'm from England", "Nice to meet you", "So did I"], a:1, e:"初次认识自我介绍后回应 Nice to meet you。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"In my family, I have ____ uncle and ____ aunt.", o:["a; a", "a; an", "an; a", "an; an"], a:3, e:"uncle、aunt 均以元音音素开头，用 an。", source:"U2单项选择篇专项(学科网)"},
+{q:"—____ is the girl with long hair? —Oh, she is my friend Lucy.", o:["Who", "Whose", "What", "How"], a:0, e:"询问人物用 Who。", source:"U2单元复习(21cnjy)"},
+{q:"—Whose pen is this? —It's ____.", o:["Lily", "Lily's", "Lilys'"], a:1, e:"名词所有格 Lily's 表示\"莉莉的\"。", source:"U2单元测试题(学科网)"},
+{q:"Tom and Mike are ____. Their mother is Jenny.", o:["brothers", "daughters", "sons", "fathers"], a:0, e:"有共同的母亲说明他们是兄弟 brothers。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"My parents ____ very kind to me.", o:["is", "are", "am", "be"], a:1, e:"My parents 复数用 are。", source:"U2达标卷(学科网)"},
+{q:"Our Chinese teacher is very funny. He often makes us ____.", o:["to laugh", "laugh", "laughing", "laughs"], a:1, e:"make sb. do sth. 使某人做某事。", source:"U2单项选择篇专项(学科网)"},
+{q:"____ Mike ____ a baseball bat?", o:["Do; has", "Does; have", "Do; have"], a:1, e:"Mike 三单用 Does；后接原形 have。", source:"U2单元测试题(学科网)"},
+{q:"—Is this your uncle's son? —Yes, he's my ____.", o:["brother", "sister", "cousin", "friend"], a:2, e:"叔叔的儿子是堂兄弟 cousin。", source:"U2单元素养测评卷(学科网)"},
+{q:"Which of the underlined parts has a different pronunciation?", o:["dessert", "serve", "worker", "stranger"], a:3, e:"stranger 中 er 发 /ə/，其余发 /ɜː/。", source:"U2易混易错语法专项(豆丁)"},
+{q:"Look at the two boys. ____ are my brothers.", o:["That", "This", "Those", "They"], a:3, e:"指代 the two boys 作主语用 They。", source:"U2单元练习(组卷网)"},
+{q:"—____ your brother ____ a baseball? —Yes, he does. He likes playing it.", o:["Do; have", "Does; have", "Do; has", "Does; has"], a:1, e:"your brother 三单用 Does；助动词后接原形 have。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—Who's Jack? —He's my ____, my aunt's son.", o:["cousin", "friend", "uncle", "sister"], a:0, e:"姑姑的儿子是表兄弟 cousin。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"Mom, ____ my friend, Kate.", o:["this is", "that is", "it's", "its"], a:0, e:"向妈妈介绍朋友用 This is...。", source:"U2单项选择篇专项(学科网)"},
+{q:"Hi, Frank. Here ____ two cups for you and your brother.", o:["are", "is", "am", "be"], a:0, e:"Here are + 复数名词 two cups。", source:"U2单项选择篇专项(学科网)"},
+{q:"This is ____ bedroom. The twin sisters share it together.", o:["Lucy and Lily", "Lucy's and Lily's", "Lucy and Lily's", "Lucy's and Lily"], a:2, e:"两人共有的卧室，只在后者加 's。", source:"U2重点知识梳理巩固(学科网)"},
+{q:"Here ____ for you.", o:["is a book", "a book is", "is book", "book is"], a:0, e:"Here is 倒装句，主语 a book 是单数。", source:"U2易混易错语法专项(豆丁)"},
+{q:"—What's your name? —____ name is Mary.", o:["Your", "Her", "She", "My"], a:3, e:"回答用 My name is Mary。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"This is ____ family photo. The man in blue is my father.", o:["I", "me", "my", "mine"], a:2, e:"修饰 family photo 用形容词性物主代词 my。", source:"U2单元素养测评卷(学科网)"},
+{q:"These ____ my grandfather and grandmother.", o:["is", "are", "am", "be"], a:1, e:"These 复数用 are。", source:"U2单元练习(组卷网)"},
+{q:"This is a storybook ____ a lot of beautiful pictures.", o:["in", "at", "with"], a:2, e:"with 表示\"带有、具有\"。", source:"U2单项选择篇专项(学科网)"},
+{q:"—____? —The girl under the tree? I don't know.", o:["What's that", "What the girl", "Who's that girl", "Whose is she"], a:2, e:"答语提到 the girl，提问用 Who's that girl。", source:"U2单项选择篇专项(学科网)"},
+{q:"—Is that your uncle? —____.", o:["Yes, that is", "Yes, it is", "Yes, he is", "Yes, this is"], a:2, e:"指代 uncle 用 he 回答。", source:"U2单元练习(组卷网)"},
+{q:"There are ____ people in my family.", o:["much", "a little", "a lot", "many"], a:3, e:"people 是可数名词复数，用 many。", source:"U2达标卷(学科网)"},
+{q:"Bob has a basketball, but his brother ____ one.", o:["has not", "don't have", "doesn't have", "has"], a:2, e:"his brother 三单否定用 doesn't have。", source:"U2单项选择篇专项(学科网)"},
+{q:"Look! These are photos ____ my family.", o:["in", "on", "of", "to"], a:2, e:"a photo of... 表示\"……的照片\"。", source:"U2单元卷2025-2026(学科网)"},
+{q:"My mother often tells me interesting stories ____ night.", o:["in", "on", "at", "of"], a:2, e:"at night 在晚上。", source:"U2易混易错语法专项(豆丁)"},
+{q:"We are ____ people, and we think ____.", o:["different; differences", "differently; different", "different; differently", "difference; differently"], a:2, e:"修饰 people 用形容词 different；修饰 think 用副词 differently。", source:"U2易混易错语法专项(豆丁)"},
+{q:"—____ your friend Tim like art and geography? —No. His favorite subject is music.", o:["Do", "Does", "Is", "Are"], a:1, e:"your friend Tim 三单，用 Does。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"He likes to play ____ his friends.", o:["with", "on", "to", "of"], a:0, e:"play with sb. 和某人一起玩。", source:"U2单项选择篇专项(学科网)"},
+{q:"In the library, the readers should be quiet and keep it ____.", o:["shy", "cool", "clean", "healthy"], a:2, e:"保持图书馆干净整洁，用 clean。", source:"U2易混易错语法专项(豆丁)"},
+{q:"____ Mr. Brown's books?", o:["Is this", "Is that", "Are that", "Are those"], a:3, e:"books 是复数，用 Are；复数名词前用 those。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"We spend half an hour ____ to school.", o:["in get", "get", "to get", "getting"], a:3, e:"spend time doing sth. 花时间做某事。", source:"U2单项选择篇专项(学科网)"},
+{q:"Mom, this is my teacher, Mr. Lee. Mr. Lee, ____.", o:["thank you", "how are you", "this is my mom", "this is your mom"], a:2, e:"向老师介绍妈妈用 This is my mom。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"My sister ____ short black hair.", o:["don't have", "don't has", "doesn't have", "doesn't has"], a:2, e:"My sister 三单否定用 doesn't have。", source:"U2语法专项训练(21cnjy)"},
+{q:"—Are those your brothers? —____", o:["Yes, they are", "No, those aren't", "No, these aren't", "Yes, those are"], a:0, e:"those 的简略回答用 they are。", source:"U2单元测试卷2026-2027(学科网)"},
+{q:"—Is Mrs. White your ____? —Yes. She's my father's mother.", o:["grandmother", "mother", "daughter", "aunt"], a:0, e:"爸爸的妈妈是奶奶 grandmother。", source:"U2单元复习(21cnjy)"},
+{q:"\"____ fun!\" says Hu Xiao about her family.", o:["Have", "Spend", "Mean", "Be"], a:0, e:"Have fun 玩得开心。", source:"U2语法专项训练(21cnjy)"},
+{q:"Judy ____ most of her free time helping her parents with the housework.", o:["spends", "costs", "takes", "pays"], a:0, e:"spend time doing sth. 花时间做某事。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—What's your sister's job? —____ is a nurse.", o:["He", "She", "Her", "His"], a:1, e:"指代 sister 作主语用 She。", source:"U2单元卷2025-2026(学科网)"},
+{q:"—Does the fruit shop ____ on Sunday? —Yes, it ____ from 8 a.m. to 10 p.m.", o:["opens; is open", "open; is open", "opens; open", "open; opens"], a:1, e:"助动词 does 后接原形 open；表示状态用 is open。", source:"U2单元话题单项选择(21cnjy)"},
+{q:"—What does your brother look like? —He is ____.", o:["fine", "nice and friendly", "good", "tall and handsome"], a:3, e:"询问外貌，回答外貌特征 tall and handsome。", source:"U2易混易错语法专项(豆丁)"},
+{q:"Let's ____ a family tree together.", o:["draw", "to draw", "drawing", "draws"], a:0, e:"Let's 后接动词原形。", source:"U2达标卷(学科网)"},
+{q:"Here is ____ my family.", o:["a photo of", "photo of", "a photo at", "photo at"], a:0, e:"a photo of my family 一张我的全家福。", source:"U2单项选择篇专项(学科网)"},
+{q:"—Is he your uncle? —No, ____. He is my father.", o:["he is", "he isn't", "she is", "she isn't"], a:1, e:"指代 he 的否定回答 he isn't。", source:"U2单元卷2025-2026(学科网)"},
+{q:"The two bikes are very nice. They are ____.", o:["Tom's and Jim's", "Tom and Jim's", "Tom's and Jim", "Tom and Jim"], a:0, e:"两辆自行车分属两人，分别加 's。", source:"U2易混易错语法专项(豆丁)"}
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('71_kp2_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('71_kp2_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('71_kp2_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 1 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 1 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>
