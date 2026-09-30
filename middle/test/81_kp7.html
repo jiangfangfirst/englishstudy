@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>八年级KP7</h1>
+        <p>一般将来时 will 结构 · 未来预测词汇 · less/fewer/more 数量表达 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">八年级上册Unit 7 · 在线检测</span>
+      <h2>单元检测核心库KP7</h2>
+      <p>涵盖一般将来时 will 结构、未来预测话题词汇（prediction、take over、impossible 等）、less/fewer/more 数量表达与情景交际等高频考点。系统从全量题库中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"My parents and I ________ trees next Sunday.", o:["plant","will plant","planted","have planted"], a:1, e:"next Sunday 提示一般将来时，用 will plant。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—I'm so happy! The school music club finally _______ me as a member. —Congratulations!", o:["accepted","refused","protected","changed"], a:0, e:"accept 意为\"接受\"，俱乐部接受了他成为成员。", source:"Unit 7单元自测卷武汉专用(学科网)"},
+{q:"There ________ a basketball game between Class 1 and Class 3 tomorrow.", o:["is going to have","will have","is going to be","are going to be"], a:2, e:"tomorrow 提示将来时，there be 句型将来时为 there is going to be。", source:"Unit 7单元测试(学科网)"},
+{q:"—What did Anna say in the text message? Does ________ go well at the new school? —I have no idea. She didn't ________ anything about her school life.", o:["everything; mention","anything; discover","something; connect","something; confirm"], a:0, e:"everything 一切；mention 提及。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—It is best not to ________ our problems. —I think so. We should always try to solve them.", o:["be sure about","prepare for","hear from","run away from"], a:3, e:"run away from 意为\"逃避\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—Is there _________ in today's newspaper? —Yes, the UK's Queen Elizabeth II passed away at 96. You can read this news _________.", o:["new anything; somewhere","anything new; everywhere","something new; nowhere","new something; anywhere"], a:1, e:"形容词修饰复合不定代词要后置，疑问句用 anything；everywhere 到处。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—It's a secret. —OK, I ________ tell anyone.", o:["will","won't","am not","don't"], a:1, e:"表示承诺\"不会告诉任何人\"，用 won't。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"—Do you think there will be more people in 100 years? —________, I hope.", o:["No, there isn't","No, there aren't","No, there won't","No, they won't"], a:2, e:"there be 句型一般疑问句的否定回答用 No, there won't。", source:"Unit 7单元测试(学科网)"},
+{q:"Robots can help us do many dangerous jobs, ________ we don't have to risk our lives.", o:["so","but","or","because"], a:0, e:"so 表示结果，机器人做危险工作，所以我们不必冒险。", source:"Unit 7单元测试(学科网)"},
+{q:"To improve his basketball skills, Wang Feng keeps on ________ playing basketball every day.", o:["practice","practices","practicing","to practice"], a:2, e:"keep on doing sth. 意为\"坚持做某事\"。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"________ a meeting next Monday afternoon.", o:["There is","There are","There will be"], a:2, e:"next Monday afternoon 提示将来时，there be 句型将来时为 there will be。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"More and more people can ________ over 100 years old in the future.", o:["live for","live in","live to be","live be"], a:2, e:"live to be 意为\"活到……岁\"。", source:"Unit 7习题课件(学科网)"},
+{q:"—The CR450 high-speed train will be able to reach a speed of 450 kilometers per hour. —Amazing! How ________ our country's transport system will be!", o:["efficient","careful","confident","meaningful"], a:0, e:"efficient 意为\"高效的\"。", source:"Unit 7单元自测卷武汉专用(学科网)"},
+{q:"Don't worry about your grades ________ you work hard.", o:["as long","so long","as long as","as longer as"], a:2, e:"as long as 意为\"只要\"。", source:"Unit 7习题课件(学科网)"},
+{q:"I think there will be ________ pollution in the future because people are paying more attention to the environment.", o:["more","less","fewer","little"], a:1, e:"污染是不可数名词，人们重视环保所以污染更少，用 less。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"Modern medicine is developing quickly and now most eye problems ________ be cured.", o:["can","must","shall","need"], a:0, e:"can 表示\"能够\"，现在多数眼病能够被治愈。", source:"Unit 7习题课件(学科网)"},
+{q:"In the future, robots ________ more work for us.", o:["will do","do","did","are doing"], a:0, e:"In the future 提示一般将来时，用 will do。", source:"Unit 7 Section A过关练(学科网)"},
+{q:"My friend John ________ me with my English tomorrow afternoon.", o:["helps","will help","is helping","helped"], a:1, e:"tomorrow afternoon 提示一般将来时，用 will help。", source:"Unit 7习题课件(学科网)"},
+{q:"—Chris, what will you do next Sunday? —I ________ the Science Museum with my friends.", o:["visit","visited","will visit","has visited"], a:2, e:"next Sunday 提示将来时，回答用 will visit。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"Tomorrow ________ my mother's birthday.", o:["is","will","will be","is going to"], a:2, e:"表示将来的事实，用 will be。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"I can't be ________ what time it happened.", o:["positive about","positive of","serious of","serious in"], a:0, e:"be positive about 意为\"对……有把握\"。", source:"Unit 7习题课件(学科网)"},
+{q:"In 2100, what ________ the world be like?", o:["is","will","was","are"], a:1, e:"In 2100 提示一般将来时，用 will。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"After graduation, we________ a new journey in life.", o:["start","will start","started"], a:1, e:"After graduation 表将来，用 will start。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"Steve invited me ________ a movie about the Tibetan antelope with him last night.", o:["watch","to watch","watching","watched"], a:1, e:"invite sb. to do sth. 意为\"邀请某人做某事\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—Why are you in such a hurry, Mike? —There ________ an NBA basketball game in ten minutes.", o:["will have","is going to have","will be","are going to be"], a:2, e:"in ten minutes 提示将来时，there be 句型将来时为 there will be。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—I'm afraid I can't finish the work alone. —Don't worry. I ________ help you.", o:["will","am","am going to","going to"], a:0, e:"临时决定提供帮助，用 will。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"My father is a computer ________. He often helps others solve computer problems.", o:["reporter","programmer","actor","singer"], a:1, e:"programmer 意为\"程序员\"，与解决电脑问题相符。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"—What's your prediction about the future? —I think there will be ________ pollution and ________ trees.", o:["more; fewer","less; more","more; more","less; fewer"], a:1, e:"pollution 不可数用 less；trees 可数用 more。", source:"Unit 7单元测试(学科网)"},
+{q:"Tony will ________ the company when his father retires.", o:["take over","take up","take off","take in"], a:0, e:"take over 意为\"接管\"，父亲退休后接管公司。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"I feel much ________ today. I think I'll go to work.", o:["better","worst","best","worse"], a:0, e:"much 修饰比较级，感觉好多了用 better。", source:"Unit 7 Section A过关练(学科网)"},
+{q:"It is helpful ________ a good habit of reading in language learning.", o:["to show","to offer","to develop","to match"], a:2, e:"develop a good habit 意为\"养成好习惯\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"Nowadays, people in China needn't too much ________ with them when shopping because they often use Alipay or WeChat pay.", o:["cash","money","information","paper"], a:0, e:"cash 意为\"现金\"，用支付宝微信支付不必带现金。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"Robots will be able to talk to people ________ 25 to 50 years.", o:["after","in","for","during"], a:1, e:"in + 时间段表示\"在……之后\"，用于将来时。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"—________ will the cities of the future ________? —I think the cities will be bigger and nicer.", o:["How; like","What; like","How; be like","What; be like"], a:3, e:"What will...be like? 询问将来城市是什么样。", source:"Unit 7习题课件(学科网)"},
+{q:"—Did Jim ________ you to his party? —Yes, but I refused him. I have to look after my sister at home.", o:["accepted","allow","invite"], a:2, e:"invite sb. to one's party 意为\"邀请某人参加聚会\"。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"I think she ________ a famous singer in the future.", o:["is","will be","is going to","be"], a:1, e:"表示对未来的预测，用 will be。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"—What's your ________ about the result of our school basketball match next week? —I'm sure Class 8 will be the winner.", o:["information","prediction","discussion","imagination"], a:1, e:"prediction 意为\"预测\"，对比赛结果的预测。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—________ you be at home tonight? —Yes, I will.", o:["Do","Are","Will","Shall"], a:2, e:"询问将来情况的一般疑问句，用 Will 开头。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"My parents often tell me ________ in the street. It's dangerous.", o:["not play","not to play","to not play","don't play"], a:1, e:"tell sb. not to do sth. 意为\"告诉某人不要做某事\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"Mike is the ________ in our class because he often thinks out new ideas.", o:["most careful","most outgoing","most creative","most friendly"], a:2, e:"most creative 意为\"最有创造力的\"，与想出新点子相符。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—Are you going to do a part-time job in your free time? —Yes. I don't think I should always ________ my parents.", o:["turn on","put on","depend on","come on"], a:2, e:"depend on 意为\"依靠、依赖\"。", source:"Unit 7基础通关卷(学科网)"},
+{q:"We all know that the earth ________ around the sun.", o:["go","goes","went","will go"], a:1, e:"描述客观事实用一般现在时，主语 the earth 是第三人称单数，用 goes。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"—Do you know the ________ of the fame show? —I'm not really sure. Maybe Richard Smith.", o:["price","news","winner","result"], a:2, e:"winner 意为\"获胜者\"，Maybe Richard Smith 是人。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"I believe I ________ a better level if I practice more.", o:["reach","will reach","reached","am reaching"], a:1, e:"if 条件句主将从现，主句用 will reach。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—What are your plans for the weekend? —I'm not sure. Maybe I ________ a movie with my family.", o:["see","will see","saw"], a:1, e:"Maybe 表示不确定的将来打算，用 will see。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—Is Helen here? —No, she isn't. She ________ in half an hour.", o:["arrives","arrived","will arrive","has arrive"], a:2, e:"in half an hour 表示\"半小时后\"，用 will arrive。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"We must study harder next term. There will be ________ subjects, so we will have ________ time for each subject.", o:["less; fewer","less; less","more; less","more; fewer"], a:2, e:"subjects 可数用 more 修饰；time 不可数用 less 修饰。", source:"Unit 7基础通关卷(学科网)"},
+{q:"—Do you have fun ________ English stories in class? —Yes. They're quite interesting.", o:["listening","to listen to","listening to"], a:2, e:"have fun doing sth. 做某事有趣；listen to 听。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—Why do you learn computer programming? —________ I want to be a software engineer in the future.", o:["Because","So","But","Or"], a:0, e:"Because 回答 why 的提问，表示原因。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"—What ________ the world ________ like in 100 years? —Maybe there will be more robots everywhere.", o:["will; be","is; going to be","will; is","is; be"], a:0, e:"问句含将来时间 in 100 years，用一般将来时 will + 动词原形 be。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"Mike will come back from America ________.", o:["two months ago","after a year","in half a year","for a month"], a:2, e:"in + 时间段用于一般将来时，表示\"在……之后\"。", source:"Unit 7习题课件(学科网)"},
+{q:"I think people here are friendly. Do you agree________ me?", o:["with","to","on","from"], a:0, e:"agree with sb. 意为\"同意某人的看法\"。", source:"Unit 7单元测试(学科网)"},
+{q:"—Do you think people ________ live on Mars in 50 years? —Maybe. Scientists are working hard on space travel.", o:["will","are going to","used to","can"], a:0, e:"in 50 years 是将来时间，用 will 表示预测。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"—________ will the future be like? —Cities will be more polluted.", o:["How","When","What","Where"], a:2, e:"What...be like? 询问\"……是什么样子\"。", source:"Unit 7单元测试(学科网)"},
+{q:"Camels are useful means of ________ in the desert.", o:["transport","traffic","voyage","trains"], a:0, e:"means of transport 意为\"交通工具\"。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—________ will people work in the future? —They will work fewer hours and have more free time.", o:["How long","How often","How soon","How many hours"], a:3, e:"How many hours 询问工作时长。", source:"Unit 7单元测试(学科网)"},
+{q:"—________ we make a meal for our grandparents on Double Ninth Festival? —Good idea. Let's do it right now.", o:["Must","Will","Could","Shall"], a:3, e:"Shall we...? 用于提出建议。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"There ________ an important meeting this afternoon. All of you should attend it.", o:["will have","will be","will hold","has"], a:1, e:"there be 句型一般将来时为 there will be。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—Shall we have a picnic next Saturday? —________", o:["Yes, please","No, thanks","That's a good idea","No, we won't"], a:2, e:"That's a good idea 表示赞同对方的建议。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—I ________ football after school in the playground. Do you want to come? —Sure. I'll be there after school.", o:["play","played","playing","will play"], a:3, e:"after school 提示将来动作，用 will play。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"________ you work together, you will be able to finish the task quickly.", o:["As long as","As soon as","As well as","As far as"], a:0, e:"As long as 意为\"只要\"，引导条件状语从句。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—Who do you think ________ the singing competition? —Maybe Lucy. She sings really well.", o:["wins","won","will win","is winning"], a:2, e:"对未来比赛结果的推测，用 will win。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"We are glad to hear that the Greens ________ to a new flat next week.", o:["move","moved","will move","have moved"], a:2, e:"next week 提示一般将来时，用 will move。", source:"Unit 7单元测试(学科网)"},
+{q:"—I ________ for you in front of the library after school. —OK. Catch you then.", o:["wait","am waiting","will wait","waited"], a:2, e:"after school 提示将来动作，用 will wait。", source:"Unit 7习题课件(学科网)"},
+{q:"I need a ________ to practice English dialogues with, so I joined the club.", o:["winner","expert","partner","pilot"], a:2, e:"partner 意为\"搭档\"，练习对话需要搭档。", source:"Unit 7基础通关卷(学科网)"},
+{q:"—How ________ you ________ your summer vacation next year? —I'm going to visit the space museum in Beijing.", o:["do; spend","will; spend","did; spend","are; spending"], a:1, e:"next year 提示一般将来时，特殊疑问句用 will + 主语 + 动词原形。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"—Our library has a self-service borrowing and returning ________, so we don't need to wait for librarians. —That's good news for students.", o:["knowledge","system","course","memory"], a:1, e:"system 意为\"系统\"，自助借还系统。", source:"Unit 7单元自测卷武汉专用(学科网)"},
+{q:"There are ________ students in our school.", o:["hundreds of","hundred of","three hundreds","three hundreds of"], a:0, e:"hundreds of 表示\"成百上千的\"；数词 + hundred 后不加 of 且 hundred 用单数。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"—What do you think the world ________ like in 100 years? —It will be more beautiful and greener.", o:["is","was","will be","has been"], a:2, e:"in 100 years 提示一般将来时，用 will be。", source:"Unit 7单元测试(学科网)"},
+{q:"There ________ a big sports meeting in our city next month.", o:["is","will be","was","has been"], a:1, e:"next month 提示将来时，there be 句型将来时为 there will be。", source:"Unit 7单元测试(学科网)"},
+{q:"Tom was able ________ himself when he was six.", o:["dress up","dresses up","to dress up","dressed up"], a:2, e:"be able to do sth. 意为\"能够做某事\"。", source:"Unit 7 Section A过关练(学科网)"},
+{q:"Technology plays an important part in improving our daily lives.", o:["plays an important role","is interesting","is not important","plays a small part"], a:0, e:"同义替换题: 选出与画线部分意思相同或相近的选项。plays an important part 与 plays an important role 同义，意为\"起重要作用\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"She plans ________ art in Paris because there are many famous art museums there.", o:["study","studying","to study","studied"], a:2, e:"plan to do sth. 意为\"计划做某事\"。", source:"Unit 7基础通关卷(学科网)"},
+{q:"Scientists are trying to make robots ________ humans and do the same things as we do.", o:["look for","look at","look like","look after"], a:2, e:"look like 意为\"看起来像\"，机器人模仿人类的外形。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"The film Ne Zha 2 has become a huge success in the film ________.", o:["theatre","industry","factory"], a:1, e:"film industry 意为\"电影行业\"。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—I don't know ________ to work out the math problem. What can I do? —You can ask your teachers for help.", o:["what","when","where","how"], a:3, e:"疑问词 + 不定式，how to work out 意为\"如何解出\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—Did you call Jenny? —Oh no, I forgot. I ________ call her now.", o:["am going to","will","am","going to"], a:1, e:"忘记后临时决定现在打，用 will。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"My mother is a ________. She often writes articles for newspapers.", o:["teacher","doctor","scientist","reporter"], a:3, e:"reporter 表示\"记者\"，为报纸写文章。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"Schools play the most important role in ________.", o:["technology","transport","education","system"], a:2, e:"education 意为\"教育\"，学校在教育中作用最大。", source:"Unit 7习题课件(学科网)"},
+{q:"Our company developed a new umbrella last month.", o:["found","bought","created","sold"], a:2, e:"同义替换题: 选出与画线部分意思相同或相近的选项。developed 意为\"开发\"，与 created 同义。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"The thing flew very fast in the sky and soon it .Nobody knew what it was.", o:["appeared","disappeared","arrived","reached"], a:1, e:"同义替换题: 选出与画线部分意思相同或相近的选项。disappeared 意为\"消失了\"。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"It's ________ for me to give a speech in public. I have to prepare carefully ahead.", o:["emotional","impossible","challenging","creative"], a:2, e:"challenging 意为\"有挑战性的\"。", source:"Unit 7习题课件(学科网)"},
+{q:"You can certainly do it well if you keep on ________ the rock climbing.", o:["practise","practices","practised","practising"], a:3, e:"keep on doing sth. 意为\"坚持做某事\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—How was your trip to London, Jack? —Couldn't be ________. The bad weather made everything in a mess.", o:["better","best","worse","worst"], a:2, e:"Couldn't be worse 意为\"再糟糕不过了\"，否定词+比较级表最高级。", source:"Unit 7 Section A过关练(学科网)"},
+{q:"—Our school basketball team needs more players. Why not join us, Tom? —That sounds great. I ________ the training this afternoon.", o:["join","joined","will join","have joined"], a:2, e:"this afternoon 提示将来动作，用 will join。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—Do you think the new energy cars can ________ the oil ones? —Maybe, but I'm not sure.", o:["disappear","influence","replace","develop"], a:2, e:"replace 意为\"取代\"。", source:"Unit 7习题课件(学科网)"},
+{q:"There are ________ students in the school. But I don't know ________ the girls among them.", o:["a number of; a number of","the number of; the number of","a number of; the number of","the number of; a number of"], a:2, e:"a number of 许多（修饰复数名词）；the number of ……的数量（后接 is）。", source:"Unit 7单元测试(学科网)"},
+{q:"There ________ no more paper books in the future. People will read e-books.", o:["will have","will be","is going to have","are going to have"], a:1, e:"in the future 提示将来时，there be 句型将来时为 there will be。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"This photo reminds me ________ my English teacher, Miss Green.", o:["to","from","in","of"], a:3, e:"remind sb. of... 意为\"使某人想起……\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—________ there be less pollution in the future? —I hope so. We should protect the environment now.", o:["Do","Will","Are","Did"], a:1, e:"in the future 提示一般将来时，一般疑问句把 will 提前。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"I'm sure they ________ the game next week.", o:["win","won","will win","are winning"], a:2, e:"next week 提示将来时，表示确信他们会赢，用 will win。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"—Don't kick the ball like that. It will________your feet. —Thank you. I won't do it again.", o:["be satisfied with","do harm to","get rid of","be connected with"], a:1, e:"do harm to 意为\"对……有害\"。", source:"Unit 7单元自测卷武汉专用(学科网)"},
+{q:"—Who is hosting the meeting now? —Mr. Wang. He _______ the meeting when the head teacher had to leave early.", o:["took over","took up","did with","reached for"], a:0, e:"take over 意为\"接管\"，王老师接管了会议。", source:"Unit 7单元自测卷武汉专用(学科网)"},
+{q:"—Who ________ will come to the party tomorrow? —Fred.", o:["other","else","another","others"], a:1, e:"else 常用于疑问词 who 之后。", source:"Unit 7单项选择过关(学科网)"},
+{q:"Tina and Mary ________ a party this weekend. They are getting ready for it.", o:["will have","have","had","has"], a:0, e:"this weekend 提示将来时，用 will have。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"Wait a moment, please. The party ______ after everyone arrives.", o:["starts","will start","has started","started"], a:1, e:"after everyone arrives 提示将来开始，用 will start。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—________ there a class meeting tomorrow? —Maybe. I saw our teacher writing his speech just now.", o:["Will; have","Will; be","Is; having","Does; have"], a:1, e:"there be 句型一般疑问句将来时用 Will there be。", source:"Unit 7习题课件(学科网)"},
+{q:"—Can I borrow your bike tomorrow? —It ________ my plan. If I don't use it, you can take it.", o:["writes down","agrees with","finds out","depends on"], a:3, e:"depend on 意为\"取决于\"，取决于我的计划。", source:"Unit 7单元自测卷武汉专用(学科网)"},
+{q:"—I ________ Mount Lu with my parents. —Really? I really admire you. Have a good time!", o:["was visiting","have visited","will visit","visited"], a:2, e:"还没去参观，叙述将要做的事，用 will visit。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—________ will the train arrive? —In 10 minutes.", o:["How long","How soon","How often","How far"], a:1, e:"How soon 询问\"还要多久\"，答语 In 10 minutes。", source:"Unit 7基础通关卷(学科网)"},
+{q:"These natural ________ have warned us that everyone should start to protect the environment immediately.", o:["scenes","disasters","competition","messages"], a:1, e:"disasters 意为\"灾难\"，自然灾难警示我们。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"I left my mobile phone ________ in the shop but I can't find it ________.", o:["somewhere; anywhere","somewhere; everywhere","anywhere; everywhere","everywhere; somewhere"], a:0, e:"肯定句用 somewhere，否定句用 anywhere。", source:"Unit 7单项选择过关(学科网)"},
+{q:"If there are ________ people driving, there will be ________ air pollution.", o:["less; less","fewer; fewer","fewer; less","less; fewer"], a:2, e:"people 可数用 fewer；pollution 不可数用 less。", source:"Unit 7习题课件(学科网)"},
+{q:"—I'm so nervous about the math exam tomorrow. I'm not sure if I can ________ it. —Don't worry. You study hard these days.", o:["pass","fail","miss","take"], a:0, e:"pass 意为\"通过（考试）\"。", source:"Unit 7 Section A过关练(学科网)"},
+{q:"The music is very ________ and it makes all the students feel ________.", o:["bored; bored","boring; bored","bored; boring","boring; boring"], a:1, e:"boring 修饰事物；bored 修饰人的感受。", source:"Unit 7单项选择过关(学科网)"},
+{q:"Look! The baby is walking towards the hot water. She ________ get hurt!", o:["will","is going to","won't","isn't going to"], a:1, e:"根据眼前迹象（婴儿走向热水）预测即将发生，用 is going to。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"—Wuhan makes ________ services available for everyone. Hospitals won't refuse any patients. —That's great news!", o:["personal","medical","ready","successful"], a:1, e:"medical services 意为\"医疗服务\"。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"Xu Yuanchong translated many books ________ English and French during his life.", o:["for","into","with","by"], a:1, e:"translate...into... 意为\"把……翻译成……\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"I think Helen can get that nice job, because she has a good ________ background.", o:["kindness","choice","courage","education"], a:3, e:"education background 意为\"教育背景\"。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"If it rains tomorrow, we ________ at home.", o:["stay","stayed","will stay","are staying"], a:2, e:"if 条件句主将从现，主句用 will stay。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"—Now I know how to do these things well by ________. —So you don't have to ________ your parents.", o:["me; depend on","myself; depend in","myself; depend on","me; depend in"], a:2, e:"by myself 独自；depend on 依靠。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—What ________ your life ________ in 10 years? —I think I'll be a doctor working in a big hospital.", o:["will; like","is; like","did; like","does; like"], a:0, e:"in 10 years 提示一般将来时，What will...be like? 询问将是什么样。", source:"Unit 7基础通关卷(学科网)"},
+{q:"My sister loves music, so ______ weekends she always goes to the ______.", o:["at; gym","on; stadium","for; dining hall","at; concert"], a:3, e:"at/on weekends 在周末，go to the concert 去听音乐会。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—Do you have any plans for this weekend? —Yes. I ______ with my dad.", o:["will go fishing","went fishing","go fishing","going fishing"], a:0, e:"this weekend 提示将来计划，用 will go fishing。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"There ________ a basketball game between Class 1 and Class 3 tomorrow afternoon.", o:["is going to have","will have","is going to be","are going to be"], a:2, e:"tomorrow afternoon 提示将来时，there be 句型将来时为 there is going to be。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"—Life is a journey with so many problems. —Yes, and it is _________ to solve all problems by ourselves.", o:["impossible","confident","positive","energetic"], a:0, e:"impossible 意为\"不可能的\"，靠我们自己解决所有问题不可能。", source:"Unit 7单元自测卷武汉专用(学科网)"},
+{q:"What will the life ________ in 100 years?", o:["like","to like","to be like","be like"], a:3, e:"What will...be like? 询问将来是什么样，will 后接动词原形。", source:"Unit 7单项选择过关(学科网)"},
+{q:"We need to save water because we can only use about 1% of the water ________ the earth.", o:["in","on","at","to"], a:1, e:"on the earth 意为\"在地球上\"，固定搭配。", source:"Unit 7 Section A过关练(学科网)"},
+{q:"My father ________ a new car next year, because his old one is broken.", o:["buys","bought","will buy","has bought"], a:2, e:"next year 提示一般将来时，用 will buy。", source:"Unit 7单元测试(学科网)"},
+{q:"Nowadays, people drive new energy cars to replace gas-powered cars.", o:["instead","instead of","take the place of","take place"], a:2, e:"同义替换题: 选出与画线部分意思相同或相近的选项。replace 意为\"取代\"，与 take the place of 同义。", source:"Unit 7单项选择过关(学科网)"},
+{q:"Mr. Smith ________ to England next week after spending 10 years teaching in Singapore.", o:["returns","returned","has returned","will return"], a:3, e:"next week 提示一般将来时，用 will return。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—What will schools ________ like in the future? —Students may study at home with online teachers.", o:["be","is","are","was"], a:0, e:"What will ... be like? 询问将来是什么样子，will 后接动词原形 be。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"If you study hard, you________ good grades.", o:["get","got","will get","are getting"], a:2, e:"if 条件句主将从现，主句用一般将来时 will get。", source:"Unit 7单元测试(学科网)"},
+{q:"The man gave up smoking because of lung ________.", o:["system","ache","breath","cancer"], a:3, e:"lung cancer 意为\"肺癌\"。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—Sam, do you know ________ woman in a black coat? —Yes, she is ________ expert from Beijing Hospital.", o:["a; an","an; a","the; an"], a:2, e:"第一空特指穿黑外套的女人用 the；第二空泛指一位专家，expert 以元音音素开头用 an。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—Do you ________ like reading the books on cooking, Mrs. White? —No, and my husband doesn't like them ________.", o:["too; also","also; either","either; as well","as well; either"], a:1, e:"also 用于句中；either 用于否定句句末。", source:"Unit 7 Section A过关练(学科网)"},
+{q:"Since science and technology are developing fast, scientists and doctors will certainly find a way to ________ cancer some day.", o:["cure","review","discover","admire"], a:0, e:"cure 意为\"治愈\"，找到治愈癌症的方法。", source:"Unit 7 Section A过关练(学科网)"},
+{q:"John went to Japan yesterday. And he will come back ________ two days.", o:["in","at","to","for"], a:0, e:"in + 时间段表示\"在……之后\"，用于一般将来时。", source:"Unit 7单项选择过关(学科网)"},
+{q:"What is the meaning of positive?", o:["looks for the good in all situations","looks for the bad in all situations","be easy to lose hope"], a:0, e:"同义替换题: 选出与画线部分意思相同或相近的选项。positive 意为\"积极的\"，指凡事往好处看。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"I believe that everyone ________ a happy life in the future.", o:["will have","has","had","have"], a:0, e:"in the future 提示一般将来时，用 will have。", source:"Unit 7单元测试(学科网)"},
+{q:"—Oh, no! Your brother left his umbrella at home. There ________ a heavy rain this afternoon. —Don't worry, Mum. I'll bring it to him.", o:["was","has been","are","will be"], a:3, e:"this afternoon 提示对未来的预测，用 will be。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"Your suggestion will have an important influence ________ my decision.", o:["in","at","on","to"], a:2, e:"have an influence on... 意为\"对……有影响\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"The students ________ about vegetables tomorrow.", o:["are learning","learnt","is going learn","will learn"], a:3, e:"tomorrow 提示一般将来时，用 will learn。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"It's ________ for Tony to finish such hard math problems in 10 minutes. Because he isn't good at math.", o:["impossible","possible","easy","nice"], a:0, e:"impossible 意为\"不可能的\"，与不擅长数学相符。", source:"Unit 7单项选择过关(学科网)"},
+{q:"The ________ of the movie is so interesting that many people like it.", o:["prediction","story","future","plant"], a:1, e:"story 表示\"故事\"，电影的故事有趣。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"Where ________ you go travelling in the coming summer holiday?", o:["did","do","will","does"], a:2, e:"in the coming summer holiday 提示将来时，用 will。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—What is your plan for the coming holiday? —I ________ homeless people to get a good place to live in.", o:["is helping","helps","will help"], a:2, e:"the coming holiday 提示将来，用 will help。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—________ will you return home? —In a week.", o:["How long","How far","How soon","How often"], a:2, e:"How soon 询问\"还要多久\"，答语 In a week。", source:"Unit 7习题课件(学科网)"},
+{q:"—It's very useful for students to join in ________. —Yes, they can learn how to help people in need.", o:["basketball matches","ball games","school sports","community services"], a:3, e:"community services 意为\"社区服务\"，帮助有需要的人。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"Mr.Brown is busy now. He ________ you after work this afternoon, OK?", o:["met","meets","is meeting","will meet"], a:3, e:"this afternoon 提示将来动作，用 will meet。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"The scientist believes there will be ________ cars and ________ pollution.", o:["less; fewer","fewer; less","few; fewer","less; less"], a:1, e:"cars 可数用 fewer；pollution 不可数用 less。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—Do you think people will live to be 200 years old? —________ It's hard to say, but maybe with the development of medicine.", o:["No, they won't","Yes, they will","I don't know","I hope not"], a:2, e:"It's hard to say 表示不确定，用 I don't know。", source:"Unit 7单元测试(学科网)"},
+{q:"We hope there ________ war in the world. Everyone can live a happy life.", o:["will not have","is not going to have","is going to be","will not be"], a:3, e:"there be 句型将来时否定形式为 there will not be。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"We ________ a vacation in three days. How happy we are!", o:["have taken","took","will take","had taken"], a:2, e:"in three days 表示\"三天后\"，用一般将来时 will take。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—I think there will be more wild animals living in forests in the future if we keep protecting the environment. —________. We need to take action from now on.", o:["That's bad","I hope so","I disagree","It's a pity"], a:1, e:"I hope so 表示希望如此，认同对方观点。", source:"Unit 7单元自测卷武汉专用(学科网)"},
+{q:"The robots can do some jobs as ________ as people.", o:["good","well","better","best"], a:1, e:"as...as 中间用原级，修饰动词 do 用副词 well。", source:"Unit 7单元测试(学科网)"},
+{q:"The ________ of the robot is so amazing that it can clean the house without any instructions.", o:["mind","shape","technology","color"], a:2, e:"technology 表示\"技术\"，机器人技术令人惊叹。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"We ________ have a robot in every home in 50 years.", o:["are","will","are going","do"], a:1, e:"in 50 years 提示一般将来时，表示预测用 will。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"—Hey, Lisa! You look unhappy. ________? —I failed the math exam again.", o:["What's up","What's that","How are you","How's the weather"], a:0, e:"What's up 意为\"怎么了\"，询问对方不开心的原因。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—Human beings should not eat or kill wild animals anymore! —________", o:["Thanks a lot.","What a pity!","I can't agree more.","Don't mention it."], a:2, e:"I can't agree more 意为\"我再同意不过了\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"Life in the future ________ different from life today because of technological development.", o:["is","was","will be","has been"], a:2, e:"in the future 提示一般将来时，用 will be。", source:"Unit 7基础通关卷(学科网)"},
+{q:"—What would you like to drink? —I ________ have a cup of coffee, please.", o:["will to","am going to","will","am"], a:2, e:"点餐是临时决定，用 will have。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"We should use less water ________ we can save more for future.", o:["so that","because","when","if"], a:0, e:"so that 引导目的状语从句，意为\"以便\"。", source:"Unit 7基础通关卷(学科网)"},
+{q:"—What's your ________ about the future, Mike? —I think people won't go to work in the factories in thirty years.", o:["hobby","prediction","problem","promise"], a:1, e:"prediction 意为\"预测\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"It ________ rain this evening. The sky is getting dark and cloudy.", o:["may","must","should","need"], a:0, e:"may 表示\"可能\"，根据乌云密布的迹象推测可能下雨。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"Will Jill play a part in ________ the plan for English study?", o:["make","makes","made","making"], a:3, e:"play a part in doing sth. 意为\"在……中发挥作用\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"We __________ a picnic tomorrow.", o:["have","has","will have","had"], a:2, e:"tomorrow 提示一般将来时，用 will have。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"Friends are like books. You don't need a lot of ________ them as long as they are good.", o:["or","and","as long as","as soon as"], a:2, e:"as long as 意为\"只要\"。", source:"Unit 7习题课件(学科网)"},
+{q:"China has the world's ________ population of university graduates, so providing them with jobs is really a ________ for the government.", o:["largest; situation","most; competition","largest; challenge","most; change"], a:2, e:"largest population 人口最多；challenge 挑战。", source:"Unit 7单项选择过关(学科网)"},
+{q:"She ________ a gift yesterday but she didn't ________ it.", o:["received; receive","accepted; accept","received; accepted","received; accept"], a:3, e:"receive 客观收到，accept 主观接受；didn't 后接动词原形。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"After years of hard work, he became a(n) ________ in this field.", o:["expert","guest","disaster","service"], a:0, e:"expert 意为\"专家\"。", source:"Unit 7习题课件(学科网)"},
+{q:"—How amazing the picture is! I like the cat in it. —I agree. Lisa is ________ at drawing animals—her pictures always look very real.", o:["private","expert","terrible","necessary"], a:1, e:"be expert at 意为\"擅长……\"。", source:"Unit 7单元自测卷武汉专用(学科网)"},
+{q:"There ________ more green trees in our city next year because we are planting more now.", o:["will have","is going to be","are going to have","was"], a:1, e:"next year 提示将来时，there be 句型的将来时为 there will be / there is going to be。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"________ your brother come back from London soon?", o:["Does","Will","Is","Are"], a:1, e:"soon 提示将来时，一般疑问句用 Will 开头。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"I don't like this small bag. Could you give me a ________ one?", o:["big","bigger","biggest","the biggest"], a:1, e:"与 small 相对，用比较级 bigger 表示\"更大一点的\"。", source:"Unit 7单元测试(学科网)"},
+{q:"—Will there be more trees in the future? —________ Because people will plant more.", o:["Yes, there will","No, there won't","Yes, there are","No, there aren't"], a:0, e:"根据后文人们会种更多树，作肯定回答 Yes, there will。", source:"Unit 7习题课件(学科网)"},
+{q:"—Did you create the poster for the English Festival? —Yes, it is on the board now.", o:["destroy","make","overlook"], a:1, e:"同义替换题: 选出与画线部分意思相同或相近的选项。create 意为\"创造、制作\"，与 make 同义。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—It's dangerous to drive after drinking. —That's true. It can increase the risk of ________ accidents.", o:["transport","travel","traffic","journey"], a:2, e:"traffic accidents 意为\"交通事故\"。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"If Open AI technology is used properly, the world ________ better and better.", o:["becomes","become","is becoming","will become"], a:3, e:"if 条件句主将从现，主句用一般将来时 will become。", source:"Unit 7单项选择过关(学科网)"},
+{q:"In the future, robots ________ the problem of taking care of the old people.", o:["solved","will solve","is solving","solves"], a:1, e:"In the future 提示一般将来时，用 will solve。", source:"Unit 7习题课件(学科网)"},
+{q:"—Where is Alice? The film will begin soon. —Don't worry. I ________ her to find out what's wrong.", o:["called","call","is going to call","will call"], a:3, e:"打电话行为还未发生，用 will call。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"He promises he ________ computer games again.", o:["won't play","will play","isn't playing","doesn't play"], a:0, e:"表示承诺\"不再玩\"，用否定形式 won't play。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"—Will there be fewer paper books? —________ More books will be on computers.", o:["No, there won't","Yes, there will","Yes, they will","No, they won't"], a:1, e:"更多书在电脑上，说明纸质书更少，作肯定回答 Yes, there will。", source:"Unit 7习题课件(学科网)"},
+{q:"The TV news reports that there ________ a storm the day after tomorrow.", o:["is","is going to be","was","is going to"], a:1, e:"the day after tomorrow 提示将来时，there be 将来时为 there is going to be。", source:"Unit 7单项选择过关(学科网)"},
+{q:"I've made my decision. I ________ study abroad next year.", o:["will","am going to","am","do"], a:1, e:"已做好决定、事先计划好，用 be going to。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"If you ________ hard, you will get good grades.", o:["study","will study","studied","are studying"], a:0, e:"if 条件句主将从现，从句用一般现在时。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"________________ you don't give up, your dreams will come true.", o:["As long as","As soon as","As well as","As far as"], a:0, e:"As long as 意为\"只要\"，引导条件状语从句。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—The superstar hopes to keep his personal life away from the ________. —I can understand him.", o:["public","private","young"], a:0, e:"the public 意为\"公众\"。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"Study hard or you will fail in the maths exam.", o:["get good results in","miss","not pass","not go"], a:2, e:"同义替换题: 选出与画线部分意思相同或相近的选项。fail 意为\"不及格\"，与 not pass 同义。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"A lot of foreign people ________ to Mingsha Mountain next week.", o:["travel","travelled","will travel","travelling"], a:2, e:"next week 提示一般将来时，用 will travel。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—What do you _______ that store? —I think it has the best _______ clothes.", o:["think of; quality","like; quality","think; screen","like; service"], a:0, e:"What do you think of...? 你认为……怎么样；quality 质量。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"My cousin ________ a spaceship to the moon when she grows up. She's interested in space.", o:["will fly","flies","flew","is flying"], a:0, e:"when she grows up 表将来，用一般将来时 will fly。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"—Sam, would you like to go to Zhou Shen's concert with me this Sunday? —Sorry, I ________ to visit my uncle with my parents that day.", o:["go","went","will go"], a:2, e:"that day 指周日（将来），用 will go。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"The environment ________ better if everyone plays a part in protecting it.", o:["will become","becomes","became","is becoming"], a:0, e:"if 条件句主将从现，主句用一般将来时 will become。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"—________ will you be a teacher? —In five years.", o:["How long","How soon","How often","How far"], a:1, e:"How soon 询问\"还要多久\"，答语 In five years。", source:"Unit 7单元测试(学科网)"},
+{q:"There will be ________ jobs for people because some robots will do the same jobs as people.", o:["many","more","fewer","fewest"], a:2, e:"机器人和人做同样的工作，所以人的工作机会更少，用 fewer。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"—What will you do next Sunday? —We ________ a picnic in the park.", o:["have","had","will have","are having"], a:2, e:"问句含 will 和 next Sunday，回答用一般将来时 will have。", source:"Unit 7基础通关卷(学科网)"},
+{q:"It's ________ to live on another planet now, but maybe it will be possible in 50 years.", o:["possible","impossible","easy","difficult"], a:1, e:"impossible 意为\"不可能的\"，现在移居其他星球不可能。", source:"Unit 7单元测试(学科网)"},
+{q:"—I think it's very important for parents to ________ a sense of duty in their children. —I can't agree more.", o:["help","develop","shape","accept"], a:1, e:"develop a sense of duty 意为\"培养责任感\"。", source:"Unit 7单元自测卷武汉专用(学科网)"},
+{q:"—Do you think people will live on the moon one day? —________. It's too far from the earth.", o:["I hope so","I'm sure","I don't agree","I agree"], a:2, e:"月球离地球太远，对方不同意这种观点，用 I don't agree。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"If you keep practicing, you will ________ your skills over time.", o:["develop","discover","lose","forget"], a:0, e:"develop 意为\"发展、提升\"，坚持练习提升技能。", source:"Unit 7基础通关卷(学科网)"},
+{q:"—May I live together with my best friend, Mum? —You should live ________ your own because you are old enough.", o:["on","by","of","in"], a:0, e:"on one's own 意为\"独立地、独自\"。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"My father told me to eat ________ vegetables and ________ meat because it's good for health.", o:["much; less","more; less","many; few","more; fewer"], a:1, e:"vegetables 可数用 more；meat 不可数用 less。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—My bag is so heavy. —I ________ carry it for you.", o:["will","am","am going to","do"], a:0, e:"临时决定帮忙拿包，用 will。", source:"Unit 7单元语法情态动词will(学科网)"},
+{q:"We should play a part in ________ the earth a better place to live.", o:["make","making","to make","made"], a:1, e:"play a part in doing sth. 意为\"在……中起作用\"，介词 in 后接动名词。", source:"Unit 7 Section B测试卷(学科网)"},
+{q:"—I like reading this novel by Charlotte. The stories are so ________! —Me too. I think her experience as a teacher had a direct ________ on her work.", o:["exciting; progress","excited; introduction","touched; treat","touching; influence"], a:3, e:"touching 感人的；have an influence on 对……有影响。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—Let's predict the future of technology! —________ It's so interesting to imagine it.", o:["No way!","Great!","Sorry, I can't","You're welcome!"], a:1, e:"Great! 表示赞同，回应对方提出的有趣提议。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"She dreams of ________ a scientist to study the universe when she graduates.", o:["be","to be","being","was"], a:2, e:"dream of doing sth. 意为\"梦想做某事\"，介词 of 后接动名词。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"To live a green life, we should try to save ________ energy and produce ________ pollution.", o:["more; less","less; more","more; fewer","most; least"], a:0, e:"save more energy 节约更多能源，produce less pollution 产生更少污染。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—Can you tell me something ________ your school life in the USA? —Sure. It's quite different from that in China.", o:["from","about","in","for"], a:1, e:"something about... 意为\"关于……的一些事情\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"Xinyue not only has high ________, but also studies hard. She always does well in the exams.", o:["intelligence","quality","appearance","emergency"], a:0, e:"intelligence 意为\"智力\"。", source:"Unit 7习题课件(学科网)"},
+{q:"My father always does some ________ on how to cook delicious food.", o:["research","researcher","researches","a research"], a:0, e:"do some research 意为\"做些研究\"，research 不可数。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"The students in our school ________ some vegetables in the field next year.", o:["will grow","grow","grew","are growing"], a:0, e:"next year 提示一般将来时，用 will grow。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"Mr. Green ________ in a small house 10 years ago. He ________ in a big apartment in a tall building in 10 years.", o:["lived; lives","lived; lived","lives; will live","lived; will live"], a:3, e:"10 years ago 用一般过去时；in 10 years 用一般将来时。", source:"Unit 7习题课件(学科网)"},
+{q:"Would you like me to ________ the driving for a while?", o:["take up","take over","take after","take off"], a:1, e:"take over 意为\"接管、接替\"。", source:"Unit 7习题课件(学科网)"},
+{q:"All life on earth depends ________ the sun.", o:["with","on","under","by"], a:1, e:"depend on 意为\"依赖\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"She spends a lot of time ________ about her future career.", o:["think","to think","thinking","thought"], a:2, e:"spend time (in) doing sth. 意为\"花费时间做某事\"。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"We ________ use paper money in the future. Most people will pay with digital wallets.", o:["won't","don't","didn't","aren't"], a:0, e:"in the future 提示将来时，根据后文大多数人用电子钱包可知不会用纸币，用 won't。", source:"Unit 7重点知识点练习(学科网)"},
+{q:"There are special machines that will carve ice to artists' designs. Because of this new ________, ice sculptors can create designs with more detail.", o:["material","programme","evidence","technology"], a:3, e:"technology 意为\"技术\"，新技术让冰雕更精细。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—Will there be fewer trees? —No, ________.", o:["there won't","they won't","they aren't","there will"], a:0, e:"there be 句型一般疑问句的否定回答用 No, there won't。", source:"Unit 7单项选择过关(学科网)"},
+{q:"—________ do you visit your grandparents, Timmy? —Once a week.", o:["How many","How long","How much","How often"], a:3, e:"How often 询问频率，答语 Once a week。", source:"Unit 7习题课件(学科网)"},
+{q:"—Sally, I heard you're going to America. ________ will you stay there? —For two whole years.", o:["How soon","How often","How long","How much"], a:2, e:"How long 询问多长时间，答语 For two whole years。", source:"Unit 7习题课件(学科网)"},
+{q:"—What a(n) _______ girl! She often leaves things somewhere. —I think it's _______ for her to make a change right now.", o:["careless; unpossible","uncareful; impossible","careless; impossible","uncareful; possible"], a:2, e:"careless 粗心的；impossible 不可能的。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"How long will cats live ________?", o:["be","to be","on","for"], a:1, e:"live to be 意为\"活到……岁\"。", source:"Unit 7单项选择过关(学科网)"},
+{q:"I ________ a movie with my friends tomorrow evening.", o:["watch","watched","am watching","will watch"], a:3, e:"tomorrow evening 提示一般将来时，用 will watch。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"He did not mention the quarrel with his wife.", o:["think of","look after","talk about","speak with"], a:2, e:"同义替换题: 选出与画线部分意思相同或相近的选项。mention 意为\"提及\"，与 talk about 同义。", source:"Unit 7单项选择过关(学科网)"},
+{q:"Next Monday is my mother's birthday. I ______ her a big present on that day.", o:["give","will give","gave"], a:1, e:"Next Monday 提示将来时，用 will give。", source:"Unit 7语法Grammar will练习(学科网)"},
+{q:"—Shall we make a cake for Tina as a birthday gift? —________ It will give her a big surprise.", o:["Good idea.","It's a pity.","You're welcome.","Never mind."], a:0, e:"Good idea 表示赞同建议。", source:"Unit 7习题课件(学科网)"},
+{q:"I ________ a picnic with my brother next Saturday.", o:["have","had","will have","am having"], a:2, e:"next Saturday 提示一般将来时，用 will have。", source:"Unit 7单项选择过关(学科网)"},
+{q:"\"Bad traffic\" is perhaps ________ excuse, for everyone knows it's only a five-minute walk.", o:["a better","the best","a worse","the worst"], a:3, e:"the worst excuse 意为\"最糟糕的借口\"。", source:"Unit 7易错易混辨析(学科网)"},
+{q:"—There is a worried expression on Amy's face. What's wrong with her? —She lost her ________ this morning and she is afraid to tell her parents.", o:["experience","expectation","examination","wallet"], a:3, e:"wallet 意为\"钱包\"，丢了钱包不敢告诉父母。", source:"Unit 7易错易混辨析(学科网)"}
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('87_kp7_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('87_kp7_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('87_kp7_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 7 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 7 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>
