@@ -53,6 +53,14 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 .start-btn:disabled { opacity: .4; cursor: not-allowed; }
 .hide { display: none !important; }
 
+/* 答错柔和红光闪动（两下） */
+#redOverlay { position: fixed; inset: 0; pointer-events: none; z-index: 998; background: rgba(248,113,113,0); }
+#redOverlay.flashing { animation: redFlash .55s ease-in-out 2; }
+@keyframes redFlash { 0%,55%,100%{ background: rgba(248,113,113,0); } 25%,80%{ background: rgba(248,113,113,.16); } }
+/* 答对庆祝粒子：上浮渐隐 */
+.celebrate { position: fixed; pointer-events: none; z-index: 999; font-size: 22px; animation: riseUp 1.35s ease-out forwards; }
+@keyframes riseUp { 0%{ transform: translateY(0) scale(.5); opacity: 1; } 100%{ transform: translateY(-170px) scale(1.2); opacity: 0; } }
+
 /* 屏幕键盘 */
 .keyboard { display: grid; grid-template-columns: repeat(7,1fr); gap: 6px; margin-top: 16px; }
 .key { height: 44px; line-height: 44px; text-align: center; background: #f3f4f6; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; color: #374151; cursor: pointer; user-select: none; padding: 0; width: 100%; }
@@ -259,31 +267,88 @@ function remainNew(){
   return WORDS.filter(w => !masteredSet.includes(w.w.toLowerCase()) && !reviewSet.includes(w.w.toLowerCase())).length;
 }
 
-// 生成目标词的可能变形
-function variants(word){
-  const w = word.toLowerCase();
+// ===== 增强例句匹配：词级变体 + 不规则表 + 短语组合 + ...通配 + 占位符 =====
+const IRREG = {found:'find',sent:'send',bought:'buy',became:'become',won:'win',stole:'steal',caught:'catch',fought:'fight',paid:'pay',overslept:'oversleep',got:'get',fell:'fall',made:'make',took:'take',gave:'give',did:'do',went:'go',was:'be',were:'be',am:'be',is:'be',are:'be',bled:'bleed',cancelled:'cancel',clapped:'clap',nodded:'nod',led:'lead',built:'build',held:'hold',kept:'keep',left:'leave',met:'meet',read:'read',said:'say',saw:'see',spoke:'speak',stood:'stand',taught:'teach',thought:'think',came:'come',ran:'run',sang:'sing',sat:'sit',swam:'swim',wrote:'write',ate:'eat',drank:'drink',drove:'drive',rode:'ride',threw:'throw',wore:'wear',broke:'break',chose:'choose',drew:'draw',flew:'fly',grew:'grow',knew:'know',showed:'show',told:'tell',understood:'understand',woke:'wake',spent:'spend',felt:'feel',lost:'lose',heard:'hear',hurt:'hurt',cut:'cut',put:'put',let:'let',sold:'sell',teeth:'tooth',feet:'foot',men:'man',women:'woman',children:'child',leaves:'leaf'};
+
+function wordVariants(w){
+  w = w.toLowerCase();
   const vs = [w];
-  // 常见变形
-  if(w.endsWith('y')) vs.push(w.slice(0,-1)+'ies'), vs.push(w.slice(0,-1)+'ied');
-  if(w.endsWith('e')){ vs.push(w+'d'); vs.push(w.slice(0,-1)+'ing'); vs.push(w+'s'); }
-  vs.push(w+'s'); vs.push(w+'es'); vs.push(w+'ed'); vs.push(w+'ing'); vs.push(w+'d');
-  // 不规则常见
+  if(w.endsWith('y') && w.length>1 && !'aeiou'.includes(w[w.length-2])){ vs.push(w.slice(0,-1)+'ies'); vs.push(w.slice(0,-1)+'ied'); }
+  else if(w.endsWith('e')){ vs.push(w+'d'); vs.push(w.slice(0,-1)+'ing'); vs.push(w+'s'); }
+  else { vs.push(w+'s'); vs.push(w+'es'); vs.push(w+'ed'); vs.push(w+'ing'); }
+  if(w.length>=3 && 'bcdfghjklmnpqrstvwxz'.includes(w[w.length-1]) && 'aeiou'.includes(w[w.length-2]) && !'aeiou'.includes(w[w.length-3])){ vs.push(w+w[w.length-1]+'ed'); vs.push(w+w[w.length-1]+'ing'); }
+  for(const ir in IRREG){ if(IRREG[ir]===w) vs.push(ir); }
   return [...new Set(vs)];
 }
-
+function wordPat(w){
+  const wl = w.toLowerCase();
+  if(wl==="sb's" || wl==="one's") return ["\\S+'s", '\\S+'];
+  if(wl==='sb' || wl==='sb.') return ['\\S+'];
+  if(wl==='doing') return ['\\w+ing', '\\b'+w+'\\b'];
+  return wordVariants(w).map(v=>'\\b'+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b');
+}
+function cartesian(arrays){
+  if(!arrays.length) return [[]];
+  const f = arrays[0], rest = arrays.slice(1), rc = cartesian(rest), out = [];
+  for(const x of f) for(const r of rc) out.push([x].concat(r));
+  return out;
+}
+function phrasePats(w){
+  if(w.indexOf('...')>=0){
+    const parts = w.split('...').map(s=>s.trim()).filter(Boolean);
+    const fp = parts[0].split(' ').map(wordPat);
+    const lp = parts[parts.length-1].split(' ').map(wordPat);
+    const out = [];
+    for(const fc of cartesian(fp)) for(const lc of cartesian(lp)){
+      out.push('\\b'+fc.join('\\s+')+'\\b(?:\\s+\\S+){0,2}\\s+\\b'+lc.join('\\s+')+'\\b');
+    }
+    return out;
+  }
+  const words = w.split(' ');
+  if(words.length===1) return wordPat(words[0]);
+  const out = [];
+  for(const combo of cartesian(words.map(wordPat))){
+    out.push('\\b'+combo.join('\\s+')+'\\b');
+  }
+  return out;
+}
+let _lastSeg = '';
 function makeBlank(en, word){
-  const vs = variants(word);
-  let html = en;
-  // 最长匹配优先
-  vs.sort((a,b)=>b.length-a.length);
-  for(const v of vs){
-    const re = new RegExp('\\b'+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i');
-    if(re.test(html)){
-      var bw = (v.length + 2) * 14 + 20; return html.replace(re, '<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>');
+  _lastSeg = '';
+  const pats = phrasePats(word);
+  for(const p of pats){
+    const re = new RegExp(p, 'i');
+    const m = re.exec(en);
+    if(m){
+      _lastSeg = m[0];
+      const bw = (m[0].length + 2) * 14 + 20;
+      return en.slice(0,m.index) + '<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>' + en.slice(m.index+m[0].length);
     }
   }
-  // 如果没匹配到（例句里没有目标词），在句末加横线
-  var bw2 = (word.length + 2) * 14 + 20; return html + ' <span class="blank" id="blankSpace" style="min-width:'+bw2+'px">&nbsp;</span>';
+  const bw2 = (word.length + 2) * 14 + 20;
+  return en + ' <span class="blank" id="blankSpace" style="min-width:'+bw2+'px">&nbsp;</span>';
+}
+// 归约判定：小写、去标点、不规则归原形、剥规则后缀
+function stripW(w){
+  if(w.length<=4) return w;
+  if(w.endsWith('ying')) return w.slice(0,-3)+'y';
+  if(w.endsWith('ies')) return w.slice(0,-3)+'y';
+  if(w.endsWith('es')) return w.slice(0,-2);
+  if(w.endsWith('ed')) return w.slice(0,-2);
+  if(w.endsWith('ing')) return w.slice(0,-3);
+  if(w.endsWith('s')) return w.slice(0,-1);
+  return w;
+}
+function canonical(s){
+  return (s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(Boolean).map(w=>IRREG[w]||stripW(w)).join(' ');
+}
+function isCorrect(typed, w, seg){
+  const tn = (typed||'').toLowerCase().replace(/\s+/g,' ').trim();
+  if(!tn) return false;
+  const wn = (w||'').toLowerCase().replace(/\s+/g,' ').trim();
+  const sn = (seg||'').toLowerCase().replace(/\s+/g,' ').trim();
+  if(tn===wn || tn===sn) return true;
+  return canonical(tn)===canonical(wn) || canonical(tn)===canonical(sn);
 }
 
 function refreshAllGradeStats(){
@@ -385,6 +450,7 @@ function nextCard(){
   current = queue.shift();
   typed = '';
   document.getElementById('exEn').innerHTML = makeBlank(current.en, current.w);
+  current.seg = _lastSeg;
   document.getElementById('exCn').textContent = current.cn;
   document.getElementById('phon').textContent = current.p;
   document.getElementById('phon').style.display = 'none';
@@ -409,15 +475,47 @@ function speakWord(w){
     _audio.play().catch(e=>console.log('play fail',e));
   }catch(e){ console.log(e); }
 }
-// 首次任意点击解锁音频
+// 首次任意点击解锁音频（独立临时元素，不干扰其他播放）
 document.addEventListener('click', function once(){
   try{
-    if(!_audio) _audio = new Audio();
-    _audio.src = 'https://dict.youdao.com/dictvoice?audio=test&type=1';
-    _audio.play().then(()=>_audio.pause()).catch(()=>{});
+    var u = new Audio('https://dict.youdao.com/dictvoice?audio=test&type=1');
+    u.play().then(()=>u.pause()).catch(()=>{});
   }catch(e){}
   document.removeEventListener('click', once);
 });
+// 统一键盘敲击音：独立 Audio 元素播放 key.wav；加载失败自动回退 WebAudio 合成音
+let _keyAudio = null;
+let _kctx = null;
+function synthKey(){
+  try{
+    if(!_kctx) _kctx = new (window.AudioContext || window.webkitAudioContext)();
+    if(_kctx.state === 'suspended'){ _kctx.resume(); }
+    var t = _kctx.currentTime, o = _kctx.createOscillator(), g = _kctx.createGain();
+    o.type = 'square';
+    o.frequency.value = 1700;
+    g.gain.setValueAtTime(0.10, t);
+    g.gain.exponentialRampToValueAtTime(0.0008, t + 0.05);
+    o.connect(g); g.connect(_kctx.destination);
+    o.start(t); o.stop(t + 0.06);
+  }catch(e){}
+}
+function playKeySound(){
+  try{
+    if(!_keyAudio){
+      _keyAudio = new Audio('sounds/key.wav');
+      _keyAudio.preload = 'auto';
+    }
+    if(_keyAudio.readyState >= 1){
+      _keyAudio.currentTime = 0;
+      var p = _keyAudio.play();
+      if(p && p.catch) p.catch(function(){ synthKey(); });
+    } else {
+      synthKey();
+    }
+  }catch(e){ synthKey(); }
+}
+// 页面加载后立即预加载敲击音（不播放，仅缓存）
+try{ _keyAudio = new Audio('sounds/key.wav'); _keyAudio.preload = 'auto'; }catch(e){}
 
 function renderKeyboard(){
   let html = '<div class="keyboard">';
@@ -467,9 +565,8 @@ function updateBlank(){
   const b = document.getElementById('blankSpace');
   if(!b) return;
   if(!typed){ b.innerHTML='&nbsp;'; b.style.color=''; return; }
-  const target = current.w.toLowerCase();
   b.innerHTML = typed;
-  b.style.color = typed === target ? '#10b981' : '#9ca3af';
+  b.style.color = isCorrect(typed, current.w, current.seg) ? '#10b981' : '#9ca3af';
 }
 
 function showPhonetic(){
@@ -485,7 +582,6 @@ function check(){
   sessionAnswered++;
   document.querySelector('.keyboard') && (document.querySelector('.keyboard').style.display='none');
 
-  function rootMatch(a,b){ return a.replace(/(s|es|ed|ing)$/,'')===b.replace(/(s|es|ed|ing)$/,''); }
   let fb = document.getElementById('fb');
   if(!fb){
     fb = document.createElement('div');
@@ -494,7 +590,7 @@ function check(){
     document.getElementById('actionArea').appendChild(fb);
   }
 
-  if(rootMatch(v,target)){
+  if(isCorrect(typed, current.w, current.seg)){
     sessionCorrect++;
     if(mode==='review'){
       const idx = reviewSet.indexOf(target);
@@ -504,6 +600,7 @@ function check(){
     saveState();
     fb.className = 'feedback ok';
     fb.innerHTML = '✓ 正确！<span style="font-size:11px;color:#34d399;font-weight:400;margin-left:8px">未记牢可加入复习仓</span>';
+    celebrate();
     var btnText = queue.length===0 ? '完成' : '下一题';
     document.getElementById('actionArea').innerHTML += '<div style="display:flex;gap:10px;margin-top:12px"><button onclick="passCard()" style="flex:1;padding:12px;background:#10b981;color:#fff;border:none;border-radius:10px;font-size:14px;cursor:pointer">'+btnText+'</button><button onclick="reviewCard()" style="flex:1;padding:12px;background:#fff;color:#f59e0b;border:2px solid #f59e0b;border-radius:10px;font-size:14px;cursor:pointer">加入复习</button></div>';
   } else {
@@ -511,6 +608,7 @@ function check(){
     if(!reviewSet.includes(target)){ reviewSet.push(target); saveState(); }
     fb.className = 'feedback err';
     fb.innerHTML = '✗ 正确答案：<b>'+current.w+'</b>（'+current.m+'）';
+    flashRed();
     var btnText2 = queue.length===0 ? '完成' : '下一题';
     document.getElementById('actionArea').innerHTML += '<button onclick="nextCard()" style="width:100%;padding:12px;background:#fff;color:#10b981;border:2px solid #10b981;border-radius:10px;font-size:14px;cursor:pointer;margin-top:12px">'+btnText2+'</button>';
   }
@@ -583,6 +681,34 @@ function onBottomBtn(){
     if(mode==='review' && reviewSet.length>0) startSession();
     refreshStats();
   }
+}
+
+// ===== 答对庆祝粒子（上浮渐隐） / 答错柔和红光闪动 =====
+let _ov = null;
+function flashRed(){
+  try{
+    if(!_ov){ _ov = document.createElement('div'); _ov.id = 'redOverlay'; document.body.appendChild(_ov); }
+    _ov.classList.remove('flashing'); void _ov.offsetWidth; _ov.classList.add('flashing');
+    setTimeout(()=>{ if(_ov) _ov.classList.remove('flashing'); }, 1250);
+  }catch(e){}
+}
+function celebrate(){
+  try{
+    const emojis = ['🎉','✨','🎊','🌟','🎈','⭐'];
+    const ref = document.getElementById('exEn') || document.body;
+    const rect = ref.getBoundingClientRect();
+    const x = rect.left + rect.width/2, y = rect.top + 10;
+    for(let i=0;i<14;i++){
+      const el = document.createElement('div');
+      el.className = 'celebrate';
+      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      el.style.left = (x + (Math.random()*180-90)) + 'px';
+      el.style.top = y + 'px';
+      el.style.animationDelay = (Math.random()*0.35).toFixed(2) + 's';
+      document.body.appendChild(el);
+      setTimeout(()=>{ try{ el.remove(); }catch(e){} }, 1900);
+    }
+  }catch(e){}
 }
 
 // 页面加载后立即初始化
