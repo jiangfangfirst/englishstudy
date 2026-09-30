@@ -441,6 +441,7 @@ function pressKey(l){
   if(typed.length >= current.w.length + 2) return;
   typed += l.toLowerCase();
   updateBlank();
+  speakLetter(l);
 }
 function pressSpace(){
   if(typed.length >= current.w.length + 2) return;
@@ -450,6 +451,17 @@ function pressSpace(){
 function delKey(){
   typed = typed.slice(0,-1);
   updateBlank();
+}
+/* 点击字母即时发音（系统 TTS，零文件增加；不支持的环境静默） */
+var LETTER_SPEECH = {a:'ay',b:'bee',c:'see',d:'dee',e:'ee',f:'eff',g:'gee',h:'aitch',i:'eye',j:'jay',k:'kay',l:'ell',m:'em',n:'en',o:'oh',p:'pee',q:'cue',r:'are',s:'ess',t:'tee',u:'you',v:'vee',w:'double u',x:'ex',y:'why',z:'zed'};
+function speakLetter(l){
+  if(!('speechSynthesis' in window)) return;
+  var u = new SpeechSynthesisUtterance(LETTER_SPEECH[l] || l);
+  u.lang = 'en-US';
+  u.rate = 0.8;
+  u.pitch = 1;
+  try{ window.speechSynthesis.cancel(); }catch(e){}
+  window.speechSynthesis.speak(u);
 }
 function updateBlank(){
   const b = document.getElementById('blankSpace');
