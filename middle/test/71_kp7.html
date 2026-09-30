@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>七年级KP7</h1>
+        <p>日期表达 · 序数词 · When/How old/How much 问答 · 生日庆祝短语 · 购物用语 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">七年级上册Unit 7 · 在线检测</span>
+      <h2>单元检测核心库KP7</h2>
+      <p>涵盖日期表达法（月份+序数词、on+具体日期）、序数词（first/second/twelfth）、When/How old/How much/How many 特殊疑问句、make a wish/blow out the candles/have a birthday party 等生日庆祝短语、buy sth. for sb./Can I help you?/What's the total? 等购物用语与情景交际高频考点。系统从全量题库（127 道）中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"—How many ____ do you need? —Two, please.", o:["Balloon", "balloon's", "balloons", "balloones"], a:2, e:"How many 后接可数名词复数 balloons。", source:"U7单元检测(学科网)"},
+{q:"—____ homework do you have every day? —Just a little.", o:["How much", "How many", "How heavy"], a:0, e:"homework 不可数，用 How much。", source:"U7分层作业第二课时"},
+{q:"—When is your birthday party? —It is ____.", o:["in June 22nd", "on June two", "on June 22nd", "on June"], a:2, e:"具体日期用 on+月份+序数词。", source:"U7分层作业第一课时"},
+{q:"I want to do ____ next time.", o:["anything different", "different something", "something different", "different anything"], a:2, e:"肯定句用 something，形容词后置。", source:"U7单元自测湖北专用(学科网)"},
+{q:"This is ____ birthday cake. We made it ourselves.", o:["my sister's", "my sister", "my sister is"], a:0, e:"名词所有格 my sister's 修饰蛋糕。", source:"U7单元测试卷(学科网)"},
+{q:"—____ is the birthday gift? —It's 50 yuan.", o:["How many", "How much", "How old", "How"], a:1, e:"答语是价格，问价格用 How much。", source:"U7单元综合测试卷(学科网)"},
+{q:"—It doesn't look very nice outside today. —Yes. I think it's going to rain ____.", o:["only", "later", "sometimes", "also"], a:1, e:"稍后要下雨用 later。", source:"U7单元自测湖北专用(学科网)"},
+{q:"I bought ____ for my father on Father's Day.", o:["special something", "special anything", "anything special", "something special"], a:3, e:"肯定句用 something，形容词后置。", source:"U7分层作业第二课时"},
+{q:"—____ balloons do you want? —I want ten.", o:["How many", "How much", "How old", "What"], a:0, e:"问可数名词数量用 How many。", source:"U7语法专练(学科网)"},
+{q:"Mother's Day is on the ____ Sunday of May.", o:["first", "second", "third", "fourth"], a:1, e:"母亲节是五月第二个星期日 second。", source:"U7暑期同步练(学科网)"},
+{q:"—____ you like chocolate cakes? —Yes, I do.", o:["Does", "Do", "Are"], a:1, e:"主语 you 用助动词 Do。", source:"U7单元测试卷(学科网)"},
+{q:"—____ bottles of milk do you want? —Ten bottles, please.", o:["How much", "How many", "How old", "How long"], a:1, e:"问可数名词复数数量用 How many。", source:"U7实验班自主检测(学科网)"},
+{q:"—____? —I'm thirteen.", o:["How old are you", "When is your birthday", "What's your name", "How are you"], a:0, e:"答语是年龄，问 How old are you?。", source:"U7暑期同步练(学科网)"},
+{q:"—____ do you usually celebrate your birthday with? —My parents.", o:["When", "Who", "Why", "Where"], a:1, e:"答语是人，问和谁一起用 Who。", source:"U7语法专练(学科网)"},
+{q:"—____ you from? —I'm from America.", o:["How are", "Where am", "How do", "Where are"], a:3, e:"问来自哪里用 Where are you from?。", source:"U7单元自测湖北专用(学科网)"},
+{q:"Tony is ____ years old and this is his ____ birthday.", o:["twelve; twelve", "twelve; twelfth", "twelfth; twelve", "twelfth; twelfth"], a:1, e:"年龄用基数词，第几个生日用序数词。", source:"U7实验班自主检测(学科网)"},
+{q:"—Can I help you? —____. How much is the cake?", o:["Yes, please", "No, thanks", "Sorry"], a:0, e:"购物应答用 Yes, please。", source:"U7单元测试卷(学科网)"},
+{q:"Which of the following is the right intonation?", o:["A: Is this your book? B: Yes, it", "A: Where is my schoolbag? B: It's on the bed.", "A: These are my pens. Are those your pens? B: No, they aren't."], a:1, e:"一般疑问句用升调、陈述句用降调。", source:"U7分层作业第一课时"},
+{q:"We usually eat noodles ____ our birthday in China.", o:["in", "on", "at", "for"], a:1, e:"具体到生日当天用 on。", source:"U7组卷网单元练习"},
+{q:"—____ are you? —I'm thirteen years old.", o:["How old", "Who", "Why"], a:0, e:"问年龄用 How old。", source:"U7实验班自主检测(学科网)"},
+{q:"—How do you celebrate your birthday? —I ____.", o:["eat birthday cake", "go to school", "do homework", "watch TV"], a:0, e:"庆祝生日吃生日蛋糕。", source:"U7暑期同步练(学科网)"},
+{q:"—____ are you? —I'm twelve.", o:["How much", "How many", "How old"], a:2, e:"问年龄用 How old。", source:"U7单元测试卷(学科网)"},
+{q:"My mother always ____ a chocolate cake on my birthday.", o:["make", "makes", "making"], a:1, e:"My mother 三单，用 makes。", source:"U7单元测试卷(学科网)"},
+{q:"We ____ a big birthday party last night.", o:["have", "has", "had", "having"], a:2, e:"last night 用一般过去时 had。", source:"U7组卷网单元练习"},
+{q:"—____ is the yogurt? —Five yuan a bottle.", o:["How long", "How old", "How many", "How much"], a:3, e:"问价格用 How much。", source:"U7单元自测湖北专用(学科网)"},
+{q:"—What is the ____ of the socks? —They're $7.", o:["price", "number", "date", "time"], a:0, e:"问价格用 price。", source:"U7单元练习木牍安徽教辅(学科网)"},
+{q:"My birthday is ____ June 15th.", o:["in", "on", "at", "for"], a:1, e:"具体到某一天用介词 on。", source:"U7单元综合测试卷(学科网)"},
+{q:"My birthday is ____ 8th August.", o:["in", "at", "on", "for"], a:2, e:"具体日期前用 on。", source:"U7单元检测(学科网)"},
+{q:"The sports meeting is ____ 28th October.", o:["in", "at", "on", "for"], a:2, e:"具体日期前用介词 on。", source:"U7语法专练(学科网)"},
+{q:"—Can I help you? —____. I need some balloons for my birthday party.", o:["Yes, please", "No, thank you", "You're welcome", "That's OK"], a:0, e:"购物应答用 Yes, please。", source:"U7单元自测湖北专用(学科网)"},
+{q:"Jack, don't spend so much time on mobile phones. You have more ____ things to do.", o:["delicious", "difficult", "meaningful", "boring"], a:2, e:"做更有意义的事用 meaningful。", source:"U7单元练习木牍安徽教辅(学科网)"},
+{q:"—What's the ____? —165 yuan.", o:["tall", "tell", "total"], a:2, e:"问总价用 What's the total?。", source:"U7单元测试卷(学科网)"},
+{q:"We want to give our teacher a ____ for her birthday.", o:["Surprise", "sale", "price", "list"], a:0, e:"给老师一个惊喜 surprise。", source:"U7单元检测(学科网)"},
+{q:"My mother's birthday is ____ May 5th.", o:["in", "on", "at", "for"], a:1, e:"具体日期前用 on。", source:"U7组卷网单元练习"},
+{q:"—____ is Mother's Day? —It's on May 10th this year.", o:["What", "When", "How", "Where"], a:1, e:"问节日日期用 When。", source:"U7单元自测湖北专用(学科网)"},
+{q:"Your wish will come true if you ____ all the candles in one go on your birthday.", o:["act out", "blow out", "work out", "take out"], a:1, e:"吹灭蜡烛用 blow out。", source:"U7实验班自主检测(学科网)"},
+{q:"—____ pens do you want for the party? —I want five.", o:["How much", "How old", "How many", "What"], a:2, e:"问可数名词复数数量用 How many。", source:"U7单元自测湖北专用(学科网)"},
+{q:"There are ____ months in a year. September is the ____ month.", o:["twelve; nine", "twelfth; ninth", "twelfth; nine", "twelve; ninth"], a:3, e:"基数词表数量 twelve；序数词表第九 ninth。", source:"U7语法专练(学科网)"},
+{q:"Let's make a shopping ____ for the party.", o:["surprise", "price", "list", "sale"], a:2, e:"购物清单 shopping list。", source:"U7单元检测(学科网)"},
+{q:"—When is your School Day? —It's ____.", o:["in April fifth", "on June fourth", "on July one", "on June 1nd"], a:1, e:"日期表达用 on+月份+序数词。", source:"U7分层作业第一课时"},
+{q:"This gift is ____ you, Mum.", o:["to", "for", "at"], a:1, e:"This gift is for you 是给你的。", source:"U7单元测试卷(学科网)"},
+{q:"—____ is your birthday? —It's on 2nd August.", o:["What", "Where", "When"], a:2, e:"问生日日期用 When。", source:"U7单元测试卷(学科网)"},
+{q:"The cake tastes ____. We all like it.", o:["well", "good", "boring", "expensive"], a:1, e:"系动词后接形容词 good。", source:"U7单元检测(学科网)"},
+{q:"In China, long noodles ____ a symbol of long life.", o:["is", "are", "am", "be"], a:1, e:"主语 long noodles 是复数，用 are。", source:"U7语法专练(学科网)"},
+{q:"Try your best to ____ all the candles in one go.", o:["blow out", "run away", "cut down", "get up"], a:0, e:"一口气吹灭蜡烛用 blow out。", source:"U7单元练习木牍安徽教辅(学科网)"},
+{q:"—Mother's Day is coming. This is my gift for her. Nick, you can't tell her about it. —Oh, I see. You want to ____ her.", o:["discover", "remember", "surprise", "celebrate"], a:2, e:"给惊喜用 surprise her。", source:"U7单元练习木牍安徽教辅(学科网)"},
+{q:"—____ is your sister? —She's eight.", o:["How much", "How old", "How many", "How long"], a:1, e:"问年龄用 How old。", source:"U7组卷网单元练习"},
+{q:"—Excuse me. ____ the green beans today? —Thirteen yuan a kilo.", o:["How many kilos are", "How many kilos is", "How much are", "How much is"], a:2, e:"问价格用 How much，主语复数用 are。", source:"U7分层作业第二课时"},
+{q:"—____ books do you read every month, Mike? —Two or three.", o:["How much", "How many", "How old"], a:1, e:"问可数名词复数数量用 How many。", source:"U7分层作业第二课时"},
+{q:"—____ is your mother's birthday? —It's on May ____.", o:["When; one", "What; three", "When; first", "What; 3rd"], a:2, e:"问日期用 When；日期用序数词 first。", source:"U7分层作业第一课时"},
+{q:"—Can you come to my birthday party? —____.", o:["Yes, I can't", "Sure. I'd love to", "No, I can", "I don't know"], a:1, e:"接受邀请用 Sure. I'd love to.。", source:"U7单元检测(学科网)"},
+{q:"—Your father is so handsome. ____ is your father? —He's 45 years old.", o:["How many", "How much", "How old", "What"], a:2, e:"答语是年龄，问年龄用 How old。", source:"U7语法专练(学科网)"},
+{q:"My mother buys some ____ for my birthday party.", o:["chocolates", "chocolate", "a chocolate", "chocolateses"], a:1, e:"chocolate 不可数名词。", source:"U7单元检测(学科网)"},
+{q:"—This birthday cake is so beautiful. ____ is it? —It's 85 yuan.", o:["How many", "How old", "How much", "What"], a:2, e:"问价格用 How much。", source:"U7语法专练(学科网)"},
+{q:"September 5th should be read ____.", o:["September five", "September the five", "September fifth", "September the fifth"], a:3, e:"日期读法用 the+序数词。", source:"U7分层作业第一课时"},
+{q:"The toy car is 15 American ____.", o:["dollar", "dollars", "yuan", "yuans"], a:1, e:"15 后用复数 dollars。", source:"U7组卷网单元练习"},
+{q:"—Wow, your sweater looks nice. ____ is it? —It's only ten dollars.", o:["Where", "How old", "How much"], a:2, e:"问价格用 How much。", source:"U7分层作业第二课时"},
+{q:"Many people enjoy ____ zongzi on the Dragon Boat Festival.", o:["making", "made", "make", "makes"], a:0, e:"enjoy doing sth. 喜欢做某事。", source:"U7单元自测湖北专用(学科网)"},
+{q:"—____ is your birthday? —It's on December 25th.", o:["What", "When", "Where", "How"], a:1, e:"问生日日期用 When。", source:"U7暑期同步练(学科网)"},
+{q:"—I will have a summer trip in Dalian. —____.", o:["No, it's bad", "Have fun", "That's all right", "You're welcome"], a:1, e:"听到别人出游计划，祝福 Have fun。", source:"U7单元练习木牍安徽教辅(学科网)"},
+{q:"—When is your birthday, Jack? —It's ____.", o:["May 18th", "18th May", "A and B"], a:2, e:"两种日期表达方式都对。", source:"U7分层作业第一课时"},
+{q:"What is the date today? It's ____.", o:["10 October", "Sunday", "6:40"], a:0, e:"问日期回答 10 October。", source:"U7分层作业第一课时"},
+{q:"I have ____ orange sweater for my birthday.", o:["a", "an", "the", "/"], a:1, e:"orange 以元音音素开头用 an。", source:"U7组卷网单元练习"},
+{q:"—Happy birthday! —____.", o:["Thank you", "You're welcome", "The same to you", "Happy birthday"], a:0, e:"收到生日祝福应回答 Thank you.。", source:"U7暑期同步练(学科网)"},
+{q:"—When is Lucy's birthday? —It's on the ____ of July.", o:["twenty-third", "twenty-three", "twenty-three's"], a:0, e:"日期用序数词 twenty-third。", source:"U7单元测试卷(学科网)"},
+{q:"—____ is this birthday cake? —It's 100 yuan.", o:["How many", "How much", "How old", "How far"], a:1, e:"问价格用 How much。", source:"U7单元检测(学科网)"},
+{q:"The first month of the year is ____.", o:["December", "January", "February", "March"], a:1, e:"一月是第一个月 January。", source:"U7暑期同步练(学科网)"},
+{q:"Jimmy's birthday party is ____ six o'clock ____ Saturday evening.", o:["at; at", "on; on", "on; at", "at; on"], a:3, e:"具体时刻用 at；某天晚上用 on。", source:"U7单元自测湖北专用(学科网)"},
+{q:"—How old are you? —I'm ____ years old.", o:["twelveth", "twelve", "twelfth", "the twelve"], a:1, e:"表达年龄用基数词 twelve。", source:"U7单元综合测试卷(学科网)"},
+{q:"For some students, English is difficult and boring, ____ I think it's interesting.", o:["or", "and", "so", "but"], a:3, e:"前后转折用 but。", source:"U7单元练习木牍安徽教辅(学科网)"},
+{q:"—____ do you like music so much? —Because it makes me relaxed.", o:["What", "When", "Why", "Where"], a:2, e:"答语由 Because 引导，问原因用 Why。", source:"U7语法专练(学科网)"},
+{q:"There are ____ months in a year.", o:["ten", "eleven", "twelve", "thirteen"], a:2, e:"一年有十二个月 twelve。", source:"U7暑期同步练(学科网)"},
+{q:"—Happy birthday, Lily! —____.", o:["Happy birthday too", "That's right", "You're welcome", "Thank you"], a:3, e:"收到生日祝福应回答 Thank you.。", source:"U7实验班自主检测(学科网)"},
+{q:"Which sound is different from the other?", o:["home", "hope", "hour", "house"], a:2, e:"hour 中 h 不发音，其余发 /h/。", source:"U7分层作业第一课时"},
+{q:"I want to buy a ____ for my friend's birthday.", o:["book", "gift", "pen", "bag"], a:1, e:"生日礼物用 gift。", source:"U7组卷网单元练习"},
+{q:"—____ is your birthday? —It's on 12th June.", o:["What", "Where", "When", "How"], a:2, e:"问生日日期用 When。", source:"U7单元检测(学科网)"},
+{q:"—____ is this birthday cake? —It's 85 yuan.", o:["How many", "How much", "How old"], a:1, e:"问价格用 How much。", source:"U7单元测试卷(学科网)"},
+{q:"—When is your uncle's birthday? —It's ____ March.", o:["on", "at", "in", "for"], a:2, e:"只说到月份 March 用 in。", source:"U7单元练习木牍安徽教辅(学科网)"},
+{q:"—Tree Planting Day is on ____ of March. —It's the best time to plant trees.", o:["twelve", "the twelfth", "twelfth"], a:1, e:"日期前序数词加 the。", source:"U7分层作业第一课时"},
+{q:"You can't open the gift on the table now. Please open it ____.", o:["later", "only", "also", "either"], a:0, e:"稍后再打开用 later。", source:"U7单元练习木牍安徽教辅(学科网)"},
+{q:"This year, I want ____ a small tree for my birthday.", o:["plant", "to plant", "making", "make"], a:1, e:"want to do sth. 想要做某事。", source:"U7语法专练(学科网)"},
+{q:"____ is this birthday cake?", o:["How many", "How old", "How much", "How long"], a:2, e:"问价格用 How much。", source:"U7组卷网单元练习"},
+{q:"Tom, please come here. I have ____ to tell you.", o:["something new", "new something", "anything new", "new anything"], a:0, e:"肯定句用 something，形容词后置。", source:"U7实验班自主检测(学科网)"},
+{q:"December is the ____ month of the year.", o:["eleven", "eleventh", "twelve", "twelfth"], a:3, e:"十二月是第十二个月，用序数词 twelfth。", source:"U7单元自测湖北专用(学科网)"},
+{q:"We celebrate birthdays ____ our family.", o:["to", "for", "with", "of"], a:2, e:"和家人一起用 with our family。", source:"U7单元检测(学科网)"},
+{q:"—____ is your dog? —It's four months old.", o:["How old", "What", "How", "What time"], a:0, e:"问年龄用 How old。", source:"U7分层作业第二课时"},
+{q:"—____ is your birthday? —It's on May 10th.", o:["What", "Why", "When", "How"], a:2, e:"答语是日期，问生日日期用 When。", source:"U7单元综合测试卷(学科网)"},
+{q:"My birthday is ____ June.", o:["on", "in", "at"], a:1, e:"月份前用介词 in。", source:"U7单元测试卷(学科网)"},
+{q:"The store has a big sale. The apples are 5 yuan ____ kilo.", o:["A", "an", "the", "/"], a:0, e:"a kilo 每公斤。", source:"U7单元检测(学科网)"},
+{q:"—____ Coke do we need? —Five tins, please.", o:["How much", "How many", "How heavy"], a:0, e:"Coke 不可数，用 How much。", source:"U7分层作业第二课时"},
+{q:"We often buy some flowers ____ our teachers on September 10th.", o:["for", "to", "with", "of"], a:0, e:"buy sth. for sb. 为某人买某物。", source:"U7单元综合测试卷(学科网)"},
+{q:"My friends ____ the \"Happy Birthday\" song for me.", o:["sing", "sings", "singing"], a:0, e:"My friends 复数，动词用原形 sing。", source:"U7单元测试卷(学科网)"},
+{q:"下列每组单词中，有一个划线部分的发音与其它两个不同，选出这个单词。", o:["name", "thank", "fine"], a:1, e:"thank 中划线 a 读 /æ/，其余读 /eɪ/ 和 /aɪ/。", source:"U7分层作业第二课时"},
+{q:"Let's go and buy something ____ her.", o:["on", "in", "for", "at"], a:2, e:"buy sth. for sb. 为某人买某物。", source:"U7单元自测湖北专用(学科网)"},
+{q:"—____ do you want for your birthday? —A new schoolbag.", o:["How", "Why", "When", "What"], a:3, e:"答语是物品，问想要什么用 What。", source:"U7单元综合测试卷(学科网)"},
+{q:"The apples are four yuan ____ kilo.", o:["a", "the", "/"], a:0, e:"four yuan a kilo 每公斤四元。", source:"U7单元测试卷(学科网)"},
+{q:"Tom is ____ years old.", o:["thirteen", "thirtyteen", "thirteenth", "thirtieth"], a:0, e:"表达年龄用基数词 thirteen。", source:"U7组卷网单元练习"},
+{q:"—What's the price of the pen? —____.", o:["It's 5 yuan.", "I'm 10.", "It's red.", "I like it."], a:0, e:"问价格回答 It's 5 yuan.。", source:"U7组卷网单元练习"},
+{q:"—What's your hobby, Diana? —Well, I have many hobbies, ____, dancing.", o:["for example", "after all", "because of", "at first"], a:0, e:"列举用 for example 例如。", source:"U7单元练习木牍安徽教辅(学科网)"},
+{q:"—Hi, Emma. ____ is your birthday? —It's on June 13th.", o:["What", "When", "Where", "Who"], a:1, e:"问生日日期用 When。", source:"U7语法专练(学科网)"},
+{q:"—____ are these shoes? —They are 80 yuan.", o:["How much", "How many", "How far", "How long"], a:0, e:"问价格用 How much。", source:"U7实验班自主检测(学科网)"},
+{q:"—____ do you usually celebrate your birthday? —I have a party with my family.", o:["What", "When", "How", "Where"], a:2, e:"答语是庆祝方式，用 How 提问。", source:"U7单元综合测试卷(学科网)"},
+{q:"January is the ____ month of the year.", o:["one", "first", "once", "last"], a:1, e:"一月是一年中第一个月，用序数词 first。", source:"U7单元综合测试卷(学科网)"},
+{q:"Before eating the cake, let's ____ the candles on it.", o:["go out", "act out", "blow out", "work out"], a:2, e:"吹灭蜡烛用 blow out。", source:"U7单元自测湖北专用(学科网)"},
+{q:"We put twelve ____ on the birthday cake.", o:["candles", "gifts", "cakes", "cards"], a:0, e:"蛋糕上插蜡烛 candles。", source:"U7组卷网单元练习"},
+{q:"My birthday is on 2nd October, ____ is my sister's.", o:["and", "but", "so", "or"], a:0, e:"并列关系用 and。", source:"U7单元检测(学科网)"},
+{q:"—How much do you spend in the supermarket? —The fruit cost 15 yuan and the snacks cost 10 yuan so the ____ is 25 yuan.", o:["price", "total", "gold"], a:1, e:"总价用 total。", source:"U7分层作业第二课时"},
+{q:"—____ kilos of oranges do you want? —Five kilos.", o:["How much", "What", "How many"], a:2, e:"问可数名词复数数量用 How many。", source:"U7单元测试卷(学科网)"},
+{q:"—____ are you? —I'm 13 years old.", o:["How old", "How many", "How much", "How far"], a:0, e:"问年龄用 How old。", source:"U7单元检测(学科网)"},
+{q:"There are ____ days in February in a common year.", o:["28", "29", "30", "31"], a:0, e:"平年二月有 28 天。", source:"U7暑期同步练(学科网)"},
+{q:"Twenty and ten is ____.", o:["eleven", "twenty", "thirty", "forty"], a:2, e:"二十加十等于三十 thirty。", source:"U7组卷网单元练习"},
+{q:"My mother's birthday is ____ July.", o:["in", "on", "at", "to"], a:0, e:"只说到月份 July 用介词 in。", source:"U7单元综合测试卷(学科网)"},
+{q:"—Happy birthday to you! —____.", o:["Thank you.", "The same to you.", "You're welcome.", "That's OK."], a:0, e:"收到生日祝福应回答 Thank you.。", source:"U7单元综合测试卷(学科网)"},
+{q:"—____ is the total price? —It's 200 yuan.", o:["What", "How", "How many", "How much"], a:0, e:"问总价用 What is the total price?。", source:"U7单元检测(学科网)"},
+{q:"—____ does your brother like the pet snake? —Because he thinks it's exciting.", o:["What", "When", "Why", "How"], a:2, e:"答语由 Because 引导，问原因用 Why。", source:"U7单元自测湖北专用(学科网)"},
+{q:"My birthday is ____ January.", o:["in", "on", "at", "for"], a:0, e:"月份前用 in。", source:"U7暑期同步练(学科网)"},
+{q:"My birthday is on ____.", o:["third of July", "July three", "July 3rd", "three July"], a:2, e:"日期表达用月份+序数词 July 3rd。", source:"U7暑期同步练(学科网)"},
+{q:"—When is Children's Day? —It's on ____.", o:["June 1st", "July 1st", "May 1st", "October 1st"], a:0, e:"儿童节是六月一日 June 1st。", source:"U7暑期同步练(学科网)"},
+{q:"—How much are these two books? —Let me see. One is 20 yuan and the other is 36 yuan. The ____ price is 56 yuan.", o:["similar", "little", "total"], a:2, e:"总价用 total price。", source:"U7实验班自主检测(学科网)"},
+{q:"—When is your birthday? —It's ____ May 5th.", o:["in", "on", "at", "for"], a:1, e:"具体日期前用 on。", source:"U7暑期同步练(学科网)"},
+{q:"I'd like ____ my birthday with my family.", o:["celebrate", "celebrating", "to celebrate"], a:2, e:"would like to do sth.。", source:"U7单元测试卷(学科网)"},
+{q:"September is the ____ month of the year.", o:["ninth", "nineth", "nine", "nineteen"], a:0, e:"九月是第九个月，序数词 ninth。", source:"U7暑期同步练(学科网)"},
+{q:"Life is so great, for it brings us ____ new every day.", o:["everything", "nothing", "anything", "something"], a:2, e:"每天带来一些新鲜事用 something。", source:"U7单元练习木牍安徽教辅(学科网)"},
+{q:"—____ is the party? —At seven in the evening.", o:["When", "What time", "Where", "How"], a:1, e:"问具体时刻用 What time。", source:"U7暑期同步练(学科网)"},
+{q:"My grandma makes a ____ birthday cake for me every year.", o:["delicious", "bad", "sad", "boring"], a:0, e:"美味的蛋糕用 delicious。", source:"U7组卷网单元练习"},
+{q:"—When is your birthday? —It's on ____.", o:["February 2nd", "August 21th", "June 3st", "April 4rd"], a:0, e:"2 的序数词缩写是 2nd。", source:"U7单元自测湖北专用(学科网)"},
+{q:"Don't tell Mum anything. We want to have a ____ birthday party for her today.", o:["reading", "singing", "surprise"], a:2, e:"惊喜派对用 surprise party。", source:"U7实验班自主检测(学科网)"}
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('71_kp7_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('71_kp7_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('71_kp7_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 7 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 7 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>

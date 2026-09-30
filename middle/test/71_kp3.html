@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>七年级KP3</h1>
+        <p>There be 句型 · 方位介词 · 校园场所词汇 · 语音辨析 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">七年级上册Unit 3 · 在线检测</span>
+      <h2>单元检测核心库KP3</h2>
+      <p>涵盖 there be 句型（含就近原则、否定与疑问）、方位介词（across from/next to/in front of/between...and）、校园场所词汇、语音辨析与情景交际等高频考点。系统从全量题库（200 道）中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"Look! There ____ many interesting books in his schoolbag.", o:["do", "are", "have", "is"], a:1, e:"there be 句型，books 复数用 are。", source:"U3易混易错单选专项(学科网)"},
+{q:"—____ is your school? —It's big and beautiful.", o:["What", "How", "Where", "Who"], a:1, e:"答语描述大小，问\"怎么样\"用 How。", source:"U3单元提优测试卷(学科网)"},
+{q:"We often play basketball on the ____ after class.", o:["playground", "classroom", "library", "office"], a:0, e:"打篮球在操场 playground。", source:"U3单元提优测试卷(学科网)"},
+{q:"We have art class ____ the art room.", o:["in", "on", "to"], a:0, e:"在美术室里用 in。", source:"U3单元自测武汉专用(学科网)"},
+{q:"The map is ____ the wall.", o:["in", "under", "on", "at"], a:2, e:"地图挂在墙上用 on。", source:"U3知识点总结单元练习(学科网)"},
+{q:"—____ is the tape? —It's on the sofa.", o:["Where", "What", "What color"], a:0, e:"答语 on the sofa 是位置，用 Where。", source:"U3易混易错单选专项(学科网)"},
+{q:"—Where are you in your classroom? —I am ____ Li Ming. He is just on my right.", o:["next to", "between", "behind", "in front of"], a:0, e:"李明的右边，我在他旁边 next to。", source:"U3语法There be+方位介词(学科网)"},
+{q:"There ____ a red bag and a blue one on the desk.", o:["Is", "are", "have", "has"], a:0, e:"就近原则 a red bag 单数用 Is。", source:"U3重点语法分析练习(21cnjy)"},
+{q:"There ____ two pencils and an eraser in the pencil case.", o:["is", "are", "be", "am"], a:1, e:"就近原则 two pencils 复数用 are。", source:"U3单元语法精练(学科网)"},
+{q:"从所给的四个选项中选出划线部分的字母或字母组合的发音与所给音标 /ɒ/ 相同的单词：____", o:["monitor", "open", "polite", "become"], a:0, e:"monitor 中 o 发 /ɒ/。", source:"U3易混易错单选专项(学科网)"},
+{q:"We can have meals in the ____.", o:["sports field", "dining hall", "classroom", "office"], a:1, e:"吃饭在食堂 dining hall。", source:"U3期末复习基础练习(学科网)"},
+{q:"The science ____ is on the third floor. We do experiments there.", o:["lab", "room", "office", "library"], a:0, e:"做实验的场所是科学实验室 lab。", source:"U3单元提优测试卷(学科网)"},
+{q:"—Where do you have science class? —____", o:["In the science lab", "It's cool", "Yes, we do"], a:0, e:"问地点，答语 In the science lab。", source:"U3单元自测武汉专用(学科网)"},
+{q:"Many students like ice-cream, because it's ____.", o:["healthy", "delicious", "beautiful"], a:1, e:"冰淇淋美味 delicious。", source:"U3易混易错单选专项(学科网)"},
+{q:"The teacher's desk is ____ the blackboard.", o:["Behind", "between", "on", "in front of"], a:3, e:"讲台在黑板前面 in front of。", source:"U3重点语法分析练习(21cnjy)"},
+{q:"—Why are you standing there, Maggie? I can't see the blackboard clearly. Two tall boys are sitting ____ me.", o:["Behind", "in front of", "next to", "opposite"], a:1, e:"高个子男生坐我前面 in front of。", source:"U3重点语法分析练习(21cnjy)"},
+{q:"There ____ a library and two gyms in our school.", o:["is", "are", "have", "has"], a:0, e:"就近原则 a library 单数用 is。", source:"U3单元测试卷(学科网)"},
+{q:"The park is in front of the school, so the school is ____ the park.", o:["behind", "between", "in front of", "on the left of"], a:0, e:"学校在公园的后面 behind。", source:"U3易混易错单选专项(学科网)"},
+{q:"The science building has several well-equipped ____, providing good conditions for experiments.", o:["labs", "halls", "fields", "offices"], a:0, e:"科学楼配备多个实验室 labs。", source:"U3提升测试卷(学科网)"},
+{q:"—Is there a dining hall in your school? —Yes, we have lunch ____ every day.", o:["there", "here", "where", "when"], a:0, e:"在那里吃午饭用 there。", source:"U3单元提优测试卷(学科网)"},
+{q:"There ____ any pieces of bread on the plate.", o:["is", "are", "isn't", "aren't"], a:3, e:"pieces 复数且 any 表否定，用 aren't。", source:"U3语法There be+方位介词(学科网)"},
+{q:"There ____ a post office and two restaurants across from the street.", o:["is", "are", "be"], a:0, e:"就近原则 a post office 单数用 is。", source:"U3易混易错单选专项(学科网)"},
+{q:"—____ is the computer building your favourite place? —Because I sometimes can play computer games there.", o:["What", "When", "Why", "Where"], a:2, e:"答语 Because 说明问原因用 Why。", source:"U3单元基础知识精练(学科网)"},
+{q:"This is a map ____ our school.", o:["of", "on", "in", "from"], a:0, e:"a map of... 一张……的地图。", source:"U3单元测试2026-2027(学科网)"},
+{q:"We often eat lunch in the ____.", o:["library", "dining hall", "sports field", "classroom"], a:1, e:"吃午饭在食堂 dining hall。", source:"U3单元测试卷(学科网)"},
+{q:"There ____ a table and two sofas in the living room.", o:["are", "is", "have", "has"], a:1, e:"就近原则 a table 单数用 is。", source:"U3语法There be+方位介词(学科网)"},
+{q:"Our teacher likes to sit ____ the room when she has a class meeting.", o:["in front of", "at front of", "in the front of", "before"], a:2, e:"坐在教室内部的前面用 in the front of。", source:"U3语法There be+方位介词(学科网)"},
+{q:"—____ your new school ____? —Oh, it is very modern and beautiful.", o:["What's; like", "How's; like", "What does; like", "How does; like"], a:0, e:"询问学校什么样用 What's...like。", source:"U3SectionA同步习题(学科网)"},
+{q:"下列单词中画线部分发音与所给音标 /ɔː/ 不同的选项是：____", o:["sport", "short", "fork", "work"], a:3, e:"work 发 /ɜː/，其余发 /ɔː/。", source:"U3期末复习基础练习(学科网)"},
+{q:"stop、lock、fox、hope 四个单词中画线部分发音与其他三个不同的是：____", o:["stop", "lock", "fox", "hope"], a:3, e:"hope 发 /əʊ/，其余发 /ɒ/。", source:"U3单元练习题(学科网)"},
+{q:"The teachers' office is ____ the library. They face each other.", o:["across from", "next", "behind of", "between"], a:0, e:"面对面说明在对面 across from。", source:"U3单元测试卷(学科网)"},
+{q:"There ____ a library and two classroom buildings in our school.", o:["is", "are", "have", "has"], a:0, e:"There be 句型就近原则，a library 单数用 is。", source:"U3单元测试2026-2027(学科网)"},
+{q:"I have to ____ my travel plan because of the bad weather.", o:["fix", "make", "join", "change"], a:1, e:"天气不好要改变计划 change。", source:"U3单元基础知识精练(学科网)"},
+{q:"The music ____ so nice. I like it very much.", o:["sounds", "looks", "meets", "sees"], a:0, e:"音乐听起来好听用 sounds。", source:"U3易混易错单选专项(学科网)"},
+{q:"It's ____ for us to learn English well.", o:["interesting", "important", "boring", "exciting"], a:1, e:"学好英语很重要 important。", source:"U3期末复习基础练习(学科网)"},
+{q:"Look, ____ many restaurants in front of the bank.", o:["has", "have", "there is", "there are"], a:3, e:"there be 句型，restaurants 复数用 are。", source:"U3易混易错单选专项(学科网)"},
+{q:"There ____ some orange juice and some ____ on the table.", o:["have, oranges", "are, oranges", "is, oranges", "has, oranges"], a:2, e:"juice 不可数用 is；oranges 复数。", source:"U3单元语法精练(学科网)"},
+{q:"Most of my family members don't like Luosifen, but my brother thinks it is ____.", o:["big", "funny", "hot", "delicious"], a:3, e:"弟弟觉得螺蛳粉美味 delicious。", source:"U3素养练习安徽专区(book118)"},
+{q:"—____ is my hat, Mum? I can't find it. —Haha! It's on your head.", o:["Where", "Who", "How", "Which"], a:0, e:"问帽子在哪用 Where。", source:"U3学情调研真题圈(学科网)"},
+{q:"You should ask him to ____ his bad habits.", o:["raise", "put", "change", "tell"], a:2, e:"改变坏习惯用 change。", source:"U3学情调研真题圈(学科网)"},
+{q:"____ a pair of trousers in the case.", o:["There are", "There is", "There have", "There has"], a:1, e:"a pair 单数概念用 There is。", source:"U3单元语法精练(学科网)"},
+{q:"The library is ____ the classroom building ____ the gym.", o:["between; and", "from; to", "next; to", "in; front"], a:0, e:"between...and... 在……之间。", source:"U3单元练习题(学科网)"},
+{q:"The students ____ to the library twice a week to borrow books.", o:["go", "goes", "went", "are going"], a:0, e:"twice a week 一般现在时，students 复数用 go。", source:"U3提升测试卷(学科网)"},
+{q:"Look! The map is ____ the wall.", o:["in", "on", "under", "at"], a:1, e:"地图挂在墙上用 on。", source:"U3单元测试卷(学科网)"},
+{q:"—Have a nice time, dear, and drive carefully. —OK. Mum. ____.", o:["Bye for now", "Thank you", "Come in", "It's OK"], a:0, e:"道别用语 Bye for now。", source:"U3学情调研真题圈(学科网)"},
+{q:"Our school has a big ____. We can read many books there.", o:["library", "classroom", "playground", "office"], a:0, e:"读书的地方是图书馆 library。", source:"U3单元提优测试卷(学科网)"},
+{q:"—Is ____ an ____ panda in the picture? —No, there isn't.", o:["there; smart", "those; interesting", "there; ugly", "that; scary"], a:2, e:"there be 问句用 there；an 后接元音音素开头 ugly。", source:"U3易混易错单选专项(学科网)"},
+{q:"下列单词中画线字母发音不同的选项是：____", o:["word", "sport", "worker"], a:1, e:"sport 发 /ɔː/，其余发 /ɜː/。", source:"U3SectionA同步习题(学科网)"},
+{q:"The tall boy is ____ me. I can't see the movie.", o:["next to", "in front of", "behind"], a:1, e:"挡住视线说明在前面 in front of。", source:"U3语法There be+方位介词(学科网)"},
+{q:"—How about ____ some chicken for the picnic? —Good idea.", o:["cook", "cooks", "cooking"], a:2, e:"how about doing sth. 做某事怎么样。", source:"U3易混易错单选专项(学科网)"},
+{q:"—Where is the cat? —Oh, look! It's hiding ____ the door.", o:["under", "behind", "above", "from"], a:1, e:"猫藏在门后面 behind。", source:"U3易混易错单选专项(学科网)"},
+{q:"The dining hall is ____ the gym. We can see it when we stand at the gate of the gym.", o:["across from", "in front", "next", "between"], a:0, e:"站在体育馆门口能看到食堂，说明在对面 across from。", source:"U3单元练习题(学科网)"},
+{q:"There ____ a computer and some books on the teacher's desk.", o:["is", "are", "have", "has"], a:0, e:"就近原则 a computer 单数用 is。", source:"U3单元练习(21cnjy)"},
+{q:"____ there ____ eggs in the fridge, Jim?", o:["Are; some", "Are; any", "Is; some", "Is; any"], a:1, e:"eggs 复数用 Are；疑问句用 any。", source:"U3Grammar Focus单选(学科网)"},
+{q:"There ____ some desks and a chair in the room.", o:["am", "is", "are", "be"], a:2, e:"就近原则 some desks 复数用 are。", source:"U3语法There be+方位介词(学科网)"},
+{q:"We have music class in the ____. There are many pianos there.", o:["library", "music room", "gym", "lab"], a:1, e:"有钢琴的是音乐教室 music room。", source:"U3单元提优测试卷(学科网)"},
+{q:"—Where is the art room? —It's ____ the second floor.", o:["in", "on", "at", "for"], a:1, e:"在几楼用 on the...floor。", source:"U3单元提优测试卷(学科网)"},
+{q:"—How about ____ basketball on the sports field after school? —Good idea!", o:["play", "plays", "playing", "to play"], a:2, e:"How about doing sth.。", source:"U3单元练习题(学科网)"},
+{q:"—Why are you unhappy these days, Li Lan? —I can't see the blackboard because two tall boys sit ____ me.", o:["behind", "next to", "in front of", "across from"], a:2, e:"坐我前面挡黑板，用 in front of。", source:"U3语法There be+方位介词(学科网)"},
+{q:"Our school is not very big, ____ it is clean and beautiful.", o:["and", "but", "or", "so"], a:1, e:"前后转折，用 but。", source:"U3单元测试2026-2027(学科网)"},
+{q:"—____? —It's between the supermarket and the school.", o:["Where is the library", "Is there a library near here", "How can I go to the library", "Can you go to the library with me"], a:0, e:"答语是位置，问 Where is the library。", source:"U3质量监测安徽专版(学科网)"},
+{q:"—Thanks for your zongzi. It's really ____. —You're welcome! I'm happy you like it.", o:["hot", "funny", "delicious", "small"], a:2, e:"粽子好吃 delicious。", source:"U3质量监测安徽专版(学科网)"},
+{q:"—Do you have a computer room in your school? —Yes, it's on ____ first floor.", o:["a", "an", "the", "/"], a:2, e:"序数词前用 the。", source:"U3单元提优测试卷(学科网)"},
+{q:"This is ____ desk. ____ books are on it.", o:["my; My", "I; Me", "me; My"], a:0, e:"修饰名词用形容词性物主代词 my。", source:"U3单元自测武汉专用(学科网)"},
+{q:"There ____ a pen and two rulers in my pencil case.", o:["is", "are", "have", "has"], a:0, e:"就近原则 a pen 单数用 is。", source:"U3单元练习题(学科网)"},
+{q:"—Dad, ____ is my MP4? —It's in your desk.", o:["what", "where", "whose"], a:1, e:"答语 in your desk 是位置，用 Where。", source:"U3易混易错单选专项(学科网)"},
+{q:"Tom sits ____ the classroom while John sits ____ it.", o:["in front of, at back of", "in the front of; at the back of", "in front of; at the back of", "in the front of, at back of"], a:1, e:"教室内部前面/后面用 in the front of/at the back of。", source:"U3重点语法分析练习(21cnjy)"},
+{q:"Every Monday, we ____ the flag on the sports field.", o:["buy", "raise", "watch", "wash"], a:1, e:"升国旗用 raise the flag。", source:"U3质量监测安徽专版(学科网)"},
+{q:"—Please don't stand ____ me. I can't see the words on the blackboard. —Oh, sorry.", o:["behind", "next to", "in front of", "under"], a:2, e:"站我前面挡视线，用 in front of。", source:"U3语法There be+方位介词(学科网)"},
+{q:"She ____ a poster about the sports meeting yesterday.", o:["put up", "put on", "put off", "put down"], a:0, e:"昨天张贴海报用 put up。", source:"U3期末复习基础练习(学科网)"},
+{q:"—Is there a library in your school? —____", o:["Yes, it is", "Yes, there is", "Yes, there are", "No, it isn't"], a:1, e:"Is there 的肯定回答 Yes, there is。", source:"U3单元练习题(学科网)"},
+{q:"—Where do you have music lessons? —In the ____.", o:["science lab", "music room", "dining hall", "sports field"], a:1, e:"音乐课在音乐教室 music room 上。", source:"U3单元测试2026-2027(学科网)"},
+{q:"The playground is ____ the classroom building. We can see it from our window.", o:["under", "behind", "in", "with"], a:1, e:"操场在教学楼后面，用 behind。", source:"U3单元测试2026-2027(学科网)"},
+{q:"There ____ a clock and two pictures on the wall.", o:["is", "are", "am"], a:0, e:"就近原则 a clock 单数用 is。", source:"U3语法There be+方位介词(学科网)"},
+{q:"Mary ____ a nice room. And there ____ many interesting things in it.", o:["have; are", "has; is", "have; is", "has; are"], a:3, e:"Mary 三单用 has；things 复数用 are。", source:"U3单元语法精练(学科网)"},
+{q:"food、book、look、good 四个单词中画线部分发音与其他三个不同的是：____", o:["food", "book", "look", "good"], a:0, e:"food 发 /uː/，其余发 /ʊ/。", source:"U3单元练习题(学科网)"},
+{q:"There ____ lots of ____ on the Internet.", o:["is; informations", "are; informations", "are; information", "is; information"], a:3, e:"information 不可数，用 is。", source:"U3单元语法精练(学科网)"},
+{q:"Let me ____ you around our new school.", o:["show", "shows", "to show", "showing"], a:0, e:"let sb. do sth. 用动词原形 show。", source:"U3单元测试卷(学科网)"},
+{q:"—Look, Eddie! There ____ sheep. —Yes. I often see them eat grass in the morning.", o:["is", "are", "have", "has"], a:1, e:"sheep 单复同形，此处复数用 are。", source:"U3单元语法精练(学科网)"},
+{q:"The new smart classroom is equipped with a large-screen ____, which makes teaching more vivid.", o:["whiteboard", "blackboard", "screen", "noticeboard"], a:2, e:"智慧教室配备大屏幕，用 screen。", source:"U3提升测试卷(学科网)"},
+{q:"The boy ____ me is too tall. I can't see the blackboard.", o:["across from", "next to", "in front of", "at the back of"], a:2, e:"坐我前面挡黑板用 in front of。", source:"U3质量监测安徽专版(学科网)"},
+{q:"____ three science labs and one computer room in the science building.", o:["There is", "There are", "There isn't", "There aren't"], a:1, e:"labs 复数用 There are。", source:"U3学情调研真题圈(学科网)"},
+{q:"My English book is ____ my schoolbag.", o:["on", "in", "under", "for"], a:1, e:"书在书包里 in。", source:"U3知识点总结单元练习(学科网)"},
+{q:"There ____ any food in the fridge. We need to buy some.", o:["are", "is", "aren't", "isn't"], a:3, e:"food 不可数且否定用 isn't。", source:"U3单元语法精练(学科网)"},
+{q:"Mary is similar ____ her father. They both have big eyes.", o:["with", "like", "to", "for"], a:2, e:"be similar to 与……相似。", source:"U3学情调研真题圈(学科网)"},
+{q:"—There ____ only an apple on the table. We need to buy some. —OK, let's go.", o:["Is", "was", "are", "were"], a:0, e:"a apple 单数一般现在时用 Is。", source:"U3重点语法分析练习(21cnjy)"},
+{q:"There ____ a lot of orange in the glass.", o:["has", "are", "is", "have"], a:2, e:"orange 作\"橙汁\"不可数，用 is。", source:"U3语法There be+方位介词(学科网)"},
+{q:"—You should take more ____. —I agree with you. It's good for my health.", o:["exercise", "work", "sport", "time"], a:0, e:"多锻炼身体 take more exercise。", source:"U3质量监测安徽专版(学科网)"},
+{q:"There ____ some water in the bottle.", o:["Is", "are", "have", "be"], a:0, e:"water 不可数用 Is。", source:"U3重点语法分析练习(21cnjy)"},
+{q:"—How many ____ are there in your school? —Ten.", o:["classroom", "classrooms", "a classroom"], a:1, e:"How many 后接可数名词复数 classrooms。", source:"U3单元自测武汉专用(学科网)"},
+{q:"You can ____ your pictures on the wall, then everyone can see them.", o:["talk about", "make friends", "look at", "put up"], a:3, e:"把画张贴在墙上用 put up。", source:"U3单元基础知识精练(学科网)"},
+{q:"There is a grocery store just ____ our home. You can see it easily.", o:["across from", "to", "on", "through"], a:0, e:"across from 在……对面。", source:"U3易混易错单选专项(学科网)"},
+{q:"—What do you like ____ your school? —The big library.", o:["for", "about", "with", "at"], a:1, e:"like about 喜欢……的方面。", source:"U3单元测试卷(学科网)"},
+{q:"—Is there a dining hall in your school? —____", o:["Yes, they are", "No, there isn't", "Yes, it is"], a:1, e:"Is there 的否定回答 No, there isn't。", source:"U3单元自测武汉专用(学科网)"},
+{q:"—There is a book on my desk. Is it ____? —Oh yes! Thanks for finding it!", o:["his", "her", "you", "yours"], a:3, e:"名词性物主代词 yours。", source:"U3质量监测安徽专版(学科网)"},
+{q:"—Is this your pencil? —____, it's my brother's.", o:["Yes", "No", "Sorry", "Excuse me"], a:1, e:"是弟弟的，回答 No。", source:"U3单元练习(21cnjy)"},
+{q:"There ____ only a little milk and several eggs in the fridge. Let's get some.", o:["is", "are", "have", "has"], a:0, e:"就近原则 milk 不可数用 is。", source:"U3单元语法精练(学科网)"},
+{q:"—What is your favourite place at school? —The ____. I like doing sports there.", o:["playground", "library", "music room", "hall"], a:0, e:"做运动的场所是操场 playground。", source:"U3单元测试2026-2027(学科网)"},
+{q:"—____ do you go to school? —At 7:30 a.m. every weekday.", o:["What", "Where", "When", "How"], a:2, e:"答语是时间，用 When。", source:"U3单元提优测试卷(学科网)"},
+{q:"His office is on the top of the tall ____. You should take a lift to the thirtieth floor.", o:["building", "room", "library", "hall"], a:0, e:"办公室在高楼顶层，用 building。", source:"U3SectionA同步习题(学科网)"},
+{q:"We often read books in the ____ after class.", o:["library", "dining hall", "gate", "office"], a:0, e:"读书的地方是图书馆 library。", source:"U3单元测试2026-2027(学科网)"},
+{q:"—Where is the library? —It's ____ the second floor.", o:["in", "on", "under", "at"], a:1, e:"在几楼用 on the...floor。", source:"U3单元练习(21cnjy)"},
+{q:"—How many cows ____ on Jim's farm? —About 100.", o:["there is", "there are", "are there", "is there"], a:2, e:"特殊疑问句 be 提前，cows 复数用 are。", source:"U3语法There be+方位介词(学科网)"},
+{q:"—What do you think of Mary? —She is shy so she always walks ____ her mother.", o:["behind", "between", "among", "before"], a:0, e:"害羞总是走在妈妈后面 behind。", source:"U3语法There be+方位介词(学科网)"},
+{q:"The library is not only a place for reading but also a ____ where students can discuss problems together.", o:["centre", "corner", "seat", "drawer"], a:0, e:"图书馆也是学生讨论问题的中心 centre。", source:"U3提升测试卷(学科网)"},
+{q:"There is a big tree ____ the classroom building.", o:["in front of", "in the front of", "between", "next"], a:0, e:"树在教学楼外部前面用 in front of。", source:"U3单元练习题(学科网)"},
+{q:"—Is there a computer in your classroom? —____. But there is a smart whiteboard.", o:["Yes, it is", "No, it isn't", "Yes, there is", "No, there isn't"], a:3, e:"but 说明没有电脑，No, there isn't。", source:"U3单元测试卷(学科网)"},
+{q:"There ____ some milk and apples on the table.", o:["has", "have", "are", "is"], a:3, e:"就近原则，milk 不可数用 is。", source:"U3语法There be+方位介词(学科网)"},
+{q:"The classroom is ____ the building, so we can't see it from the gate.", o:["in front of", "across from", "Behind"], a:2, e:"从门口看不见说明在大楼后面 behind。", source:"U3单元自测武汉专用(学科网)"},
+{q:"—What does your new school look like? —____", o:["It's big and bright", "I like it very much", "It's a middle school", "Good idea!"], a:0, e:"询问外观，回答描述性形容词。", source:"U3单元练习题(学科网)"},
+{q:"The school garden is a peaceful ____ where students can relax and enjoy nature.", o:["space", "place", "room", "area"], a:1, e:"花园是具体的地方，用 place。", source:"U3提升测试卷(学科网)"},
+{q:"The blackboard is ____ the classroom.", o:["in the front of", "Next", "in front of", "on the right of"], a:0, e:"黑板在教室内部前面 in the front of。", source:"U3重点语法分析练习(21cnjy)"},
+{q:"—Is there a cinema around the old street? —____, I often watch movies there.", o:["Yes, there is", "No, there isn't", "Yes, there are", "No, there aren't"], a:0, e:"经常看电影说明有电影院，Yes, there is。", source:"U3重点语法分析练习(21cnjy)"},
+{q:"My wish is to become a scientist. What is ____?", o:["you", "your", "yours", "yourself"], a:2, e:"名词性物主代词 yours 作表语。", source:"U3易混易错单选专项(学科网)"},
+{q:"The students are having a party in the classroom. There ____ some juice and a lot of snacks on each desk.", o:["is", "are", "has", "have"], a:0, e:"就近原则，juice 不可数用 is。", source:"U3语法There be+方位介词(学科网)"},
+{q:"Our school ____ at 8:00 a.m. and finishes at 4:30 p.m.", o:["start", "starts", "to start", "starting"], a:1, e:"school 三单，一般现在时用 starts。", source:"U3单元提优测试卷(学科网)"},
+{q:"My sweater looks ____ my sister's, but they are in different colours.", o:["different from", "the same with", "same as", "similar to"], a:3, e:"be similar to 与……相似。", source:"U3质量监测安徽专版(学科网)"},
+{q:"—____ there a smart classroom in your school? —Yes, there ____. There ____ ten smart classrooms in our school.", o:["Is; is; is", "Are; are; are", "Is; is; are", "Are; are; is"], a:2, e:"a smart classroom 单数用 Is/is；ten classrooms 复数用 are。", source:"U3SectionA同步习题(学科网)"},
+{q:"These ____ our new labs.", o:["is", "am", "are"], a:2, e:"These 复数用 are。", source:"U3单元自测武汉专用(学科网)"},
+{q:"You are so tall. Please don't sit ____ me. I can't see the words on the blackboard.", o:["behind", "in front of", "in the front of", "next to"], a:1, e:"坐我前面挡黑板，外部前面用 in front of。", source:"U3Grammar Focus单选(学科网)"},
+{q:"—Do you have to go across the street to get home? —Yes. My home is ____ the school.", o:["behind", "between", "across from", "in front of"], a:2, e:"过街才能回家，说明家在对面 across from。", source:"U3语法There be+方位介词(学科网)"},
+{q:"—____ there any milk on the table? —Yes. There ____ four bottles of milk and some juice.", o:["Is; is", "Are; are", "Is; are", "Are; is"], a:2, e:"milk 不可数用 Is；bottles 复数用 are。", source:"U3语法There be+方位介词(学科网)"},
+{q:"—____ there any computers in your classroom? —Yes. There ____ a computer on the teacher's desk.", o:["Are; are", "Are; is", "Is; is"], a:1, e:"computers 复数用 Are；a computer 单数用 is。", source:"U3语法There be+方位介词(学科网)"},
+{q:"—Where is the gym? —It's ____ our school.", o:["behind", "in", "on", "between"], a:0, e:"体育馆在学校后面 behind。", source:"U3知识点总结单元练习(学科网)"},
+{q:"\"____\" means on the opposite side of something.", o:["Next to", "In front of", "Across from", "Between"], a:2, e:"across from 表示\"在……对面\"。", source:"U3语法There be+方位介词(学科网)"},
+{q:"You should ____ the notice on the wall carefully.", o:["notice", "see", "watch", "look"], a:0, e:"注意看通知用 notice。", source:"U3期末复习基础练习(学科网)"},
+{q:"—Are there any boys on the playground? —____. But some girls are there.", o:["Yes, there are", "No, there aren't", "Yes, they are", "No, they aren't"], a:1, e:"but 说明否定回答，No, there aren't。", source:"U3语法There be+方位介词(学科网)"},
+{q:"After class, students often go to teachers' ____ to ask questions.", o:["field", "classroom", "office", "hall"], a:2, e:"问问题去教师办公室 office。", source:"U3单元基础知识精练(学科网)"},
+{q:"—Why do you have to cross the street to get home? —Because it's ____ our school.", o:["across from", "on", "behind", "in front of"], a:0, e:"过街回家说明家在对面 across from。", source:"U3重点语法分析练习(21cnjy)"},
+{q:"There ____ some milk and five eggs in the fridge.", o:["has", "is", "are", "have"], a:1, e:"there be 句型就近原则，milk 不可数用 is。", source:"U3语法There be+方位介词(学科网)"},
+{q:"There ____ an apple and four bananas in the basket. You can take all of them.", o:["is", "are", "has", "have"], a:0, e:"就近原则 an apple 单数用 is。", source:"U3易混易错单选专项(学科网)"},
+{q:"There ____ a big tree behind the shop. You can see many birds in it.", o:["is", "are", "am"], a:0, e:"a big tree 单数用 is。", source:"U3语法There be+方位介词(学科网)"},
+{q:"—Peter, I have a new basketball. Let's ____ basketball. —It's boring. How about ____ ping-pong?", o:["play; play", "playing; play", "play; playing", "playing; playing"], a:2, e:"Let's do；How about doing。", source:"U3学情调研真题圈(学科网)"},
+{q:"go、no、not、home 四个单词中画线部分发音与其他三个不同的是：____", o:["go", "no", "not", "home"], a:2, e:"not 发 /ɒ/，其余发 /əʊ/。", source:"U3单元练习题(学科网)"},
+{q:"—____ there any banks near here? —No, but there ____ a bank on Center Street.", o:["Are; is", "Is; are", "Does; is", "Are; are"], a:0, e:"banks 复数用 Are；a bank 单数用 is。", source:"U3重点语法分析练习(21cnjy)"},
+{q:"There ____ a book and two rulers on the desk.", o:["is", "are", "have"], a:0, e:"就近原则 a book 单数用 is。", source:"U3语法There be+方位介词(学科网)"},
+{q:"—____ there any things in the new room? —Yes. There ____ a round table and two chairs.", o:["Is; are", "Is; is", "Are; is", "Are; are"], a:2, e:"things 复数用 Are；a round table 单数用 is。", source:"U3Grammar Focus单选(学科网)"},
+{q:"下列单词中画线部分发音与所给音标 /ɒ/ 不同的选项是：____", o:["shot", "fox", "clock", "open"], a:3, e:"open 发 /əʊ/，其余发 /ɒ/。", source:"U3期末复习基础练习(学科网)"},
+{q:"—____ classrooms are there in your school? —Thirty.", o:["How old", "How many", "How much", "How about"], a:1, e:"询问可数名词数量用 How many。", source:"U3单元测试2026-2027(学科网)"},
+{q:"—I'm so sorry to break your glass. —It is OK! I just want to ____ it for a new one.", o:["spend", "mean", "start", "change"], a:3, e:"换一个新杯子用 change。", source:"U3素养练习安徽专区(book118)"},
+{q:"The music ____ nice. Everyone can enjoy it.", o:["listen", "sound", "listens", "sounds"], a:3, e:"music 三单，sounds nice 听起来很好。", source:"U3单元基础知识精练(学科网)"},
+{q:"for、horse、storm、worth 四个单词中画线部分发音与其他三个不同的是：____", o:["for", "horse", "storm", "worth"], a:3, e:"worth 发 /ɜː/，其余发 /ɔː/。", source:"U3单元练习题(学科网)"},
+{q:"—How do you go to school? —I go to school ____ bike.", o:["by", "on", "in", "with"], a:0, e:"by bike 骑自行车。", source:"U3单元提优测试卷(学科网)"},
+{q:"There ____ many trees around our school.", o:["is", "are", "has", "have"], a:1, e:"trees 复数用 are。", source:"U3单元测试卷(学科网)"},
+{q:"The school is planning to ____ the old playground to make it more modern.", o:["change", "raise", "improve", "build"], a:2, e:"改进旧操场用 improve。", source:"U3提升测试卷(学科网)"},
+{q:"The teachers' office is next ____ the art room.", o:["of", "for", "to", "with"], a:2, e:"next to 表示\"紧挨着\"。", source:"U3单元测试2026-2027(学科网)"},
+{q:"____ some books and a pen on the desk.", o:["There is", "There are", "It is", "They are"], a:1, e:"就近原则 some books 复数用 There are。", source:"U3语法There be+方位介词(学科网)"},
+{q:"There ____ an apple and ten oranges on the desk. You can take any of them.", o:["are", "is", "am", "isn't"], a:1, e:"就近原则 an apple 单数用 is。", source:"U3语法There be+方位介词(学科网)"},
+{q:"We can play basketball on the ____.", o:["computer room", "playground", "Library"], a:1, e:"打篮球的场所在操场 playground。", source:"U3单元自测武汉专用(学科网)"},
+{q:"The little boy gives his ____ to the old man on the bus.", o:["shop", "seat", "field", "foot"], a:1, e:"把座位让给老人用 seat。", source:"U3学情调研真题圈(学科网)"},
+{q:"My father is ____ work now.", o:["on", "at", "in", "for"], a:1, e:"at work 在工作。", source:"U3知识点总结单元练习(学科网)"},
+{q:"—What a ____ schoolbag! —Yes. It is very different from the others in the shop.", o:["smart", "special", "similar", "short"], a:1, e:"与别的书包不同说明特别 special。", source:"U3素养练习安徽专区(book118)"},
+{q:"The sports field is ____ the classroom building.", o:["in front", "in front of", "in the front", "in the front of"], a:1, e:"操场在教学楼外部前面用 in front of。", source:"U3单元测试卷(学科网)"},
+{q:"Most boys like playing basketball, but I'm ____ them. I like dancing.", o:["similar to", "good at", "different from", "famous for"], a:2, e:"与大多数男孩不同用 different from。", source:"U3单元基础知识精练(学科网)"},
+{q:"There ____ a dog and two cats in the room.", o:["is", "are", "am", "be"], a:0, e:"就近原则 a dog 单数用 is。", source:"U3语法There be+方位介词(学科网)"},
+{q:"The teachers' office is ____ the second floor.", o:["in", "at", "on"], a:2, e:"在几楼用 on the...floor。", source:"U3单元自测武汉专用(学科网)"},
+{q:"—Do you mean the new library is opposite our school? —Yes. It's ____ our school.", o:["across from", "among", "through", "over"], a:0, e:"across from 在……对面。", source:"U3语法There be+方位介词(学科网)"},
+{q:"以下单词，包含音素 /ɒ/ 的是：____", o:["sofa", "morning", "not"], a:2, e:"not 中 o 发 /ɒ/。", source:"U3易混易错单选专项(学科网)"},
+{q:"This is ____ office and ____ office is not big.", o:["a; the", "an; the", "the; a", "the; an"], a:1, e:"泛指用 an；特指前面提到的办公室用 the。", source:"U3素养练习安徽专区(book118)"},
+{q:"—My sister is nice to me. How about ____? —She is nice too.", o:["you", "yours", "she", "her"], a:1, e:"名词性物主代词 yours 指\"你的姐姐\"。", source:"U3学情调研真题圈(学科网)"},
+{q:"Look! There is a teacher's desk ____ our classroom and there is a big tree ____ the classroom.", o:["in the front of; in the front of", "in front of; in front of", "in front of; in the front of", "in the front of; in front of"], a:3, e:"讲桌在教室内部前面，树在教室外部前面。", source:"U3SectionA同步习题(学科网)"},
+{q:"There ____ any eggs in the fridge. I need to buy some.", o:["are", "aren't", "haven't", "isn't"], a:1, e:"eggs 复数且否定用 aren't。", source:"U3单元语法精练(学科网)"},
+{q:"Look, there is ____ art building in this school. Does Mike study in ____ building?", o:["an; an", "an; the", "a; the", "a; an"], a:1, e:"泛指用 an；特指前面提到的楼用 the。", source:"U3学情调研真题圈(学科网)"},
+{q:"—Where is the science lab? —It is ____ the second floor.", o:["in", "on", "at", "to"], a:1, e:"表示\"在几楼\"用 on the... floor。", source:"U3单元测试2026-2027(学科网)"},
+{q:"Look! The traffic light is green. We can go ____ the road now.", o:["across", "above", "below", "through"], a:0, e:"横穿马路用 across。", source:"U3单元基础知识精练(学科网)"},
+{q:"The dining hall is between the library ____ the school hall.", o:["and", "or", "but", "so"], a:0, e:"between...and... 在……和……之间。", source:"U3单元测试2026-2027(学科网)"},
+{q:"Students ____ most of the time in their classroom.", o:["cost", "pay", "spend"], a:2, e:"人作主语花费时间用 spend。", source:"U3单元自测武汉专用(学科网)"},
+{q:"—____ there a bank and a post office here? —Yes, ____.", o:["Is; there is", "Is; it is", "Are; there are", "Are; they are"], a:0, e:"就近原则 a bank 单数用 Is；回答 there is。", source:"U3易混易错单选专项(学科网)"},
+{q:"—Mum, there ____ no milk on the table. —Oh, but there ____ three bottles of orange juice.", o:["are; is", "are; are", "is; are", "is; is"], a:2, e:"milk 不可数用 is；bottles 复数用 are。", source:"U3Grammar Focus单选(学科网)"},
+{q:"The students are busy ____ the new notice about the sports meeting on the bulletin board.", o:["putting up", "looking up", "taking up", "giving up"], a:0, e:"把通知张贴在布告栏用 put up。", source:"U3提升测试卷(学科网)"},
+{q:"Which \"u\" sounds different?", o:["blue", "cup", "lunch", "subject"], a:0, e:"blue 中 u 发 /uː/，其余发 /ʌ/。", source:"U3易混易错单选专项(学科网)"},
+{q:"In the picture, the toy box is ____ the sofa.", o:["Above", "under", "next to", "behind"], a:2, e:"玩具盒挨着沙发 next to。", source:"U3重点语法分析练习(21cnjy)"},
+{q:"—Please take care of the tree. —OK. I know. It's ____.", o:["easy", "tidy", "special", "large"], a:2, e:"特别照顾这棵树用 special。", source:"U3学情调研真题圈(学科网)"},
+{q:"smart、mark、warm、art 四个单词中画线部分发音与其他三个不同的是：____", o:["smart", "mark", "warm", "art"], a:2, e:"warm 发 /ɔː/，其余发 /ɑː/。", source:"U3单元练习题(学科网)"},
+{q:"There ____ many Chinese poems in this book.", o:["are", "is", "have", "has"], a:0, e:"poems 复数用 are。", source:"U3语法There be+方位介词(学科网)"},
+{q:"—Where's your school? —Our school is ____ the library and the restaurant.", o:["next to", "near", "between", "across from"], a:2, e:"between...and... 在……之间。", source:"U3易混易错单选专项(学科网)"},
+{q:"There are many ____ in our school garden. They are very beautiful.", o:["book", "student", "flower", "flowers"], a:3, e:"many 后接可数名词复数 flowers。", source:"U3单元提优测试卷(学科网)"},
+{q:"There ____ any students in the classroom now.", o:["is", "are", "isn't", "aren't"], a:3, e:"students 复数且 any 用于否定，用 aren't。", source:"U3单元测试2026-2027(学科网)"},
+{q:"—Is there a computer room in your school? —____. We have two.", o:["Yes, there is", "No, there isn't", "Yes, it is", "No, it isn't"], a:0, e:"Is there 的肯定回答 Yes, there is。", source:"U3单元测试2026-2027(学科网)"},
+{q:"I couldn't see the film clearly. Two tall boys were sitting ____ me.", o:["between", "in front of", "next to", "behind"], a:1, e:"高个子男孩坐在我前面 in front of。", source:"U3SectionA同步习题(学科网)"},
+{q:"—Are there any lockers in the classroom? —____. We put our things in the desk drawers.", o:["Yes, they are", "No, they aren't", "No, there aren't", "Yes, there are"], a:2, e:"抽屉放东西说明没有储物柜，No, there aren't。", source:"U3质量监测安徽专版(学科网)"},
+{q:"My school is ____ my home, so I walk to school every day.", o:["far from", "next to", "behind", "near"], a:3, e:"走路去学校说明家近 near。", source:"U3单元提优测试卷(学科网)"},
+{q:"—____ there any books in the room? —No, there ____.", o:["Are; are", "Is; is", "Are; aren't", "Is; isn't"], a:2, e:"books 复数用 Are；否定回答 aren't。", source:"U3单元语法精练(学科网)"},
+{q:"下列单词中画线部分发音与所给音标 /ʊ/ 不同的选项是：____", o:["look", "school", "good", "book"], a:1, e:"school 发 /uː/，其余发 /ʊ/。", source:"U3期末复习基础练习(学科网)"},
+{q:"—Let's play basketball together after school, Emma. —I don't like playing basketball. How about ____?", o:["play games", "playing games", "to play games", "playing game"], a:1, e:"How about doing sth.。", source:"U3质量监测安徽专版(学科网)"},
+{q:"Welcome ____ our school. Let me show you around.", o:["for", "to", "at", "with"], a:1, e:"welcome to 欢迎来到。", source:"U3单元测试2026-2027(学科网)"},
+{q:"There are some trees ____ the sports field.", o:["on front of", "in front", "in front of", "between"], a:2, e:"in front of 表示\"在……前面\"。", source:"U3单元测试2026-2027(学科网)"},
+{q:"—Where does Lisa often go after school? —To the ____. She plays tennis in it.", o:["gym", "shop", "office", "field"], a:0, e:"打网球的场所是体育馆 gym。", source:"U3SectionA同步习题(学科网)"},
+{q:"There aren't ____ books on the teacher's desk.", o:["some", "any", "a", "much"], a:1, e:"否定句中用 any。", source:"U3单元练习题(学科网)"},
+{q:"下列单词中画线部分发音与所给音标 /uː/ 不同的选项是：____", o:["soon", "tooth", "food", "book"], a:3, e:"book 发 /ʊ/，其余发 /uː/。", source:"U3期末复习基础练习(学科网)"},
+{q:"下列单词中画线部分发音与所给音标 /juː/ 不同的选项是：____", o:["rule", "cute", "computer", "music"], a:0, e:"rule 发 /uː/，其余发 /juː/。", source:"U3期末复习基础练习(学科网)"},
+{q:"—Where is your classroom? —It's ____ the library and the teachers' office.", o:["between", "in", "on", "behind"], a:0, e:"between...and... 在……之间。", source:"U3单元提优测试卷(学科网)"},
+{q:"We have a music class ____ the music room every Wednesday.", o:["on", "at", "in", "to"], a:2, e:"在某个房间里用 in。", source:"U3单元练习题(学科网)"},
+{q:"____ 20 girls in my class, and I ____ two good friends of them.", o:["There have; are", "There have; have", "There is; are", "There are; have"], a:3, e:"there be 用 There are；I 后用 have。", source:"U3单元语法精练(学科网)"},
+{q:"—____ is your classroom? —It's on the second floor.", o:["What", "Who", "Where", "How"], a:2, e:"问地点用 Where。", source:"U3单元测试卷(学科网)"},
+{q:"—Why can't Mary see the blackboard? —Because a boy sits ____ her, and he is very tall.", o:["behind", "next to", "across from", "in front of"], a:3, e:"坐她前面挡住视线，用 in front of。", source:"U3语法There be+方位介词(学科网)"},
+{q:"The library is ____ from the teaching building.", o:["across", "cross", "crossing", "crossed"], a:0, e:"across from 在……对面。", source:"U3期末复习基础练习(学科网)"},
+{q:"My school ____ a big sports field. We often play there.", o:["have", "has", "is", "are"], a:1, e:"school 三单用 has。", source:"U3单元练习题(学科网)"},
+{q:"The library is ____ the classroom building and the dining hall.", o:["next", "between", "of", "for"], a:1, e:"between...and... 在……之间。", source:"U3知识点总结单元练习(学科网)"},
+{q:"—How many ____ are there in your school? —Thirty. Each has forty students.", o:["classrooms", "student", "book", "teacher"], a:0, e:"How many 后接可数名词复数 classrooms。", source:"U3单元提优测试卷(学科网)"}
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('71_kp3_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('71_kp3_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('71_kp3_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 3 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 3 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>

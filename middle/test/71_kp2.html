@@ -159,7 +159,7 @@
   <section class="view active" id="view-home">
     <div class="hero">
       <span class="tag">七年级上册Unit 2 · 在线检测</span>
-      <h2>单元检测核心库KP1</h2>
+      <h2>单元检测核心库KP2</h2>
       <p>涵盖实义动词一般现在时（三单/Do/Does）、名词所有格、家庭称谓、代词辨析、频度副词与固定搭配等高频考点。系统从全量题库（200 道）中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
       <div class="hero-meta">
         <span id="totalCount">-- 道题</span>
@@ -566,10 +566,10 @@ function renderResult(){
   $('rScore').textContent = state.score;
   $('ring').style.setProperty('--p', pct);
   let t,s;
-  if(pct>=90){t='太棒了！';s='Unit 1 考点掌握扎实，基本全对，继续保持。';}
+  if(pct>=90){t='太棒了！';s='Unit 2 考点掌握扎实，基本全对，继续保持。';}
   else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
   else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
-  else {t='需要加油哦';s='Unit 1 考点还不太熟，建议先浏览全量题库再测一次。';}
+  else {t='需要加油哦';s='Unit 2 考点还不太熟，建议先浏览全量题库再测一次。';}
   $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
   const list=$('rList'); list.innerHTML='';
   state.userAns.forEach((r,idx)=>{

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>七年级KP6</h1>
+        <p>时间表达 · What time/When 问答 · 一般现在时三单 · 频度副词 · 日常作息短语 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">七年级上册Unit 6 · 在线检测</span>
+      <h2>单元检测核心库KP6</h2>
+      <p>涵盖时间表达法（顺读/逆读、a quarter/half past、at+时刻）、What time/When 特殊疑问句、一般现在时三单与 do/does 疑问否定、频度副词（usually/never/sometimes）、get up/take a shower/do homework 等日常作息短语、时间介词 at/in/on 等高频考点。系统从全量题库（129 道）中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"—Do you usually play sports after school? —____. I sometimes play football.", o:["No, I don't", "Yes, I do", "Yes, I am", "No, I'm not"], a:0, e:"只是有时踢球，否定回答 No, I don't。", source:"U6单元达标检测卷(学科网)"},
+{q:"—Where do you have breakfast? —At home. My father cooks for the family ____ the morning.", o:["from", "on", "at", "in"], a:3, e:"在早上用 in the morning。", source:"U6综合练习(学科网)"},
+{q:"Miss Wang ____ goes to work by car, because she likes walking.", o:["never", "always", "often", "sometimes"], a:0, e:"喜欢步行所以从不开车 never。", source:"U6单元自测湖北专用(学科网)"},
+{q:"—Mr Brown, I spend all day working without a ____. —All right. You may go out to relax.", o:["reason", "break", "change", "mistake"], a:1, e:"整天工作没有休息 break。", source:"U6木牍中考安徽教辅(学科网)"},
+{q:"chicken 中划线部分的读音是（ ）", o:["/i:/", "/ʊ/", "/ɜː/", "/ɪ/"], a:3, e:"chicken 发音 /ˈtʃɪkɪn/，划线 i 读 /ɪ/。", source:"U6单元检测重庆专用(学科网)"},
+{q:"My dad takes a walk ____ and it's very important in his ____ life.", o:["everyday; everyday", "everyday; every day", "every day; everyday", "every day; every day"], a:2, e:"状语用 every day；修饰名词用 everyday。", source:"U6单元自测湖北专用(学科网)"},
+{q:"He is a good student. He ____ comes to school late.", o:["always", "usually", "sometimes", "never"], a:3, e:"好学生从不迟到，用 never。", source:"U6单元自测北京专用(学科网)"},
+{q:"—I think reading should be an important part of a student's ____ life. —Yeah, you're right.", o:["useful", "similar", "daily", "magic"], a:2, e:"学生的日常生活用 daily life。", source:"U6暑假单元自测(学科网)"},
+{q:"I usually go to school at ____.", o:["a half past seven", "quarter to seven", "a quarter to seven", "half to seven"], a:2, e:"7:45 用 a quarter to seven。", source:"U6单元自测湖北专用(学科网)"},
+{q:"—____ do you do after dinner? —Sometimes I read books.", o:["What time", "When", "What", "Where"], a:2, e:"问做的事情用 What。", source:"U6单元综合测试卷2026-2027(学科网)"},
+{q:"Ella is ____ seven years old, but she can play the piano very well.", o:["often", "already", "only", "soon"], a:2, e:"才七岁用 only。", source:"U6综合练习(学科网)"},
+{q:"When Leo gets home at 4:00 p.m. in Finland, the sky is already dark. That's because it is ____ there.", o:["summer", "spring", "December", "autumn"], a:2, e:"芬兰冬天下午四点天已黑，December 是冬季。", source:"U6单元达标检测卷(学科网)"},
+{q:"My sister usually ____ at 10:00 p.m.", o:["goes to bed", "go to bed", "gets up", "get up"], a:0, e:"sister 三单用 goes to bed。", source:"U6单元综合测试卷2026-2027(学科网)"},
+{q:"After school, he plays basketball ____ a while.", o:["on", "at", "for", "in"], a:2, e:"一段时间前用 for。", source:"U6单元综合测试卷2026-2027(学科网)"},
+{q:"Lucy usually has ____ breakfast at ____ home.", o:["a; an", "a; the", "the; a", "/; /"], a:3, e:"have breakfast、at home 均不用冠词。", source:"U6单元自测湖北专用(学科网)"},
+{q:"—What do you usually do on weekends? —I usually ____ with my parents.", o:["go shop", "go to shop", "go shopping", "going shopping"], a:2, e:"go shopping 固定搭配去购物。", source:"U6单元测试2026-2027(学科网)"},
+{q:"I usually read books ____ a while after dinner.", o:["at", "in", "for", "on"], a:2, e:"一段时间前用 for。", source:"U6单元练习Unit5-7(学科网)"},
+{q:"Our teachers always ____ their lessons carefully to make classes fun.", o:["change", "check", "discover", "prepare"], a:3, e:"备课用 prepare lessons。", source:"U6暑假单元自测(学科网)"},
+{q:"—____ do you often do after school, Lucy? —I often read books in the library.", o:["What", "Why", "When", "Who"], a:0, e:"问做的事情用 What。", source:"U6核心语法精练(学科网)"},
+{q:"—It's 7:30. It's time ____ you ____ English.", o:["for; read", "with; to read", "for; to read", "for; reads"], a:2, e:"It's time for sb. to do sth.。", source:"U6单元自测湖北专用(学科网)"},
+{q:"carrot 中划线部分的读音是（ ）", o:["/ʌ/", "/e/", "/ɑː/", "/æ/"], a:3, e:"carrot 发音 /ˈkærət/，划线 a 读 /æ/。", source:"U6单元检测重庆专用(学科网)"},
+{q:"Leo's ____ lessons start at half past twelve and end at a quarter past two.", o:["Morning", "Evening", "Afternoon", "Night"], a:2, e:"12:30 到 2:15 是下午课 Afternoon。", source:"U6单元达标检测卷(学科网)"},
+{q:"—____ do you play the guitar? —At eight o'clock.", o:["Where", "Why", "What", "When"], a:3, e:"问时刻用 When。", source:"U6木牍中考安徽教辅(学科网)"},
+{q:"—What time do you go to school in the morning, Sally? —____ 7:50.", o:["On", "In", "At", "For"], a:2, e:"具体时刻前用 at。", source:"U6单元自测湖北专用(学科网)"},
+{q:"—It's ____ 10:00 pm now. Let's go to bed. —OK! Early to bed, early to rise!", o:["really", "already", "usually", "only"], a:1, e:"已经十点了用 already。", source:"U6暑假单元自测(学科网)"},
+{q:"She ____ breakfast at 7:00 every morning.", o:["have", "has", "is having", "had"], a:1, e:"every morning 一般现在时，She 三单用 has。", source:"U6单元练习Unit5-7(学科网)"},
+{q:"—We should keep our classroom tidy every day. —I agree. It's everyone's ____ to make our classroom a nice place to study.", o:["reason", "symbol", "duty", "ability"], a:2, e:"人人有责用 duty。", source:"U6暑假单元自测(学科网)"},
+{q:"She ____ a shower before breakfast every day.", o:["take", "takes", "taking", "to take"], a:1, e:"She 三单用 takes。", source:"U6单元练习Unit5-7(学科网)"},
+{q:"—What time do you ____ work in the afternoon? —I usually finish work at 5 o'clock and then go home.", o:["get up", "get off", "get to", "get out"], a:1, e:"下班用 get off work。", source:"U6综合练习(学科网)"},
+{q:"—You are late. We must get to school at a quarter ____ eight, not a quarter ____ eight. —I'm sorry.", o:["to; to", "past; past", "to; past", "past; to"], a:2, e:"7:45 用 a quarter to eight；8:15 用 a quarter past eight。", source:"U6核心语法精练(学科网)"},
+{q:"Leo usually ____ dinner at 6:00 p.m.", o:["have", "has", "haves", "having"], a:1, e:"Leo 三单，have 变 has。", source:"U6单元达标检测卷(学科网)"},
+{q:"—When does your father ____ work? —At 5:30 p.m.", o:["start", "finish", "do", "have"], a:1, e:"下班用 finish work。", source:"U6单元测试2026-2027(学科网)"},
+{q:"—What do you do after school? —I ____ my homework.", o:["do", "does", "doing", "to do"], a:0, e:"做作业用 do my homework。", source:"U6单元练习Unit5-7(学科网)"},
+{q:"There's a ____ between two lessons.", o:["weekend", "break", "day", "second"], a:1, e:"课间休息用 break。", source:"U6单元自测湖北专用(学科网)"},
+{q:"—____ does Leo go to his club? —After school.", o:["What time", "When", "How", "Where"], a:1, e:"答语是时段 After school，用 When。", source:"U6单元达标检测卷(学科网)"},
+{q:"Jack doesn't like watching TV at home, but he likes playing sports ____.", o:["really", "soon", "exactly", "outside"], a:3, e:"在户外运动 outside。", source:"U6木牍中考安徽教辅(学科网)"},
+{q:"Gina is a kind girl. She ____ helps others in need.", o:["usually", "hardly", "heavily", "finally"], a:0, e:"善良的女孩通常帮助别人 usually。", source:"U6综合练习(学科网)"},
+{q:"—Mum, can I watch the game shows on TV now? —____. You must finish your homework first.", o:["Sure", "Sorry", "Yes", "OK"], a:1, e:"先做完作业，婉拒用 Sorry。", source:"U6木牍中考安徽教辅(学科网)"},
+{q:"Mike usually ____ to school at 7:50.", o:["go", "goes", "going", "to go"], a:1, e:"Mike 三单用 goes。", source:"U6单元达标检测卷(学科网)"},
+{q:"—What time do you usually get up? —____ 6:45 in the morning.", o:["In", "On", "At", "For"], a:2, e:"具体时刻前用 at。", source:"U6单元测试2026-2027(学科网)"},
+{q:"We have ____ breakfast at eight ____ morning.", o:["the; in", "/; in the", "an; in the", "/; in"], a:1, e:"三餐前不加冠词；在早上 in the morning。", source:"U6核心语法精练(学科网)"},
+{q:"—Do they go home at 5 p.m.? —____. They go home at 5:30.", o:["No, they don't", "Yes, they do", "Yes, they are", "No, they aren't"], a:0, e:"5:30 回家，否定回答 No, they don't。", source:"U6核心语法精练(学科网)"},
+{q:"—He's ____ a 5-year-old boy, but he knows a lot about history. —He must be very smart.", o:["only", "already", "even", "exactly"], a:0, e:"才五岁用 only。", source:"U6暑假单元自测(学科网)"},
+{q:"He ____ at 7:00 in the evening.", o:["go to bed", "goes to bed", "go to the bed", "goes to the bed"], a:1, e:"He 三单用 goes to bed。", source:"U6暑假单元自测(学科网)"},
+{q:"Our math teacher only gives us five minutes to ____ this difficult problem.", o:["get up", "work out", "put up", "act out"], a:1, e:"解出难题用 work out。", source:"U6综合练习(学科网)"},
+{q:"—____ does your mother get up ____ school days? —At 6:00.", o:["What time; on", "What; on", "What time; in", "How; in"], a:0, e:"问时刻用 What time；上学日 on school days。", source:"U6单元综合测试卷2026-2027(学科网)"},
+{q:"Most men like doing sports, ____ women enjoy going shopping.", o:["although", "when", "while", "because"], a:2, e:"前后对比用 while。", source:"U6暑假单元自测(学科网)"},
+{q:"I can't ____ early on weekdays. I think I need an alarm clock on my bedside table.", o:["grow up", "get up", "put up", "stand up"], a:1, e:"早起用 get up。", source:"U6暑假单元自测(学科网)"},
+{q:"I usually ____ breakfast with my parents at 6:50. But today we ____ breakfast at 7:00.", o:["have; has", "has; has", "have; have", "has; have"], a:2, e:"I 用原形 have；we 用原形 have。", source:"U6核心语法精练(学科网)"},
+{q:"My father ____ to work at 7:30 and ____ home at 6:00.", o:["go; come", "goes; comes", "going; coming", "went; came"], a:1, e:"father 三单用 goes; comes。", source:"U6单元练习Unit5-7(学科网)"},
+{q:"In the evening I usually take a ____ before I go to bed.", o:["photo", "bus", "rest", "shower"], a:3, e:"睡前洗澡 take a shower。", source:"U6综合练习(学科网)"},
+{q:"—____ does your mother go to work? —By bus.", o:["What", "How", "Where", "When"], a:1, e:"问方式用 How。", source:"U6单元练习Unit5-7(学科网)"},
+{q:"—Does your sister do her homework in the evening? —Yes, ____.", o:["she is", "she does", "she has", "she can"], a:1, e:"Does 问句用 she does 肯定回答。", source:"U6通关全能练(学科网)"},
+{q:"—When does Lisa do her homework? —____ dinner.", o:["In", "At", "Before", "After"], a:3, e:"晚饭后做作业用 After dinner。", source:"U6单元自测北京专用(学科网)"},
+{q:"—How can I ____ early in the morning, Mom? —First, you must go to bed early at night.", o:["get up", "go home", "take a shower", "do homework"], a:0, e:"早起用 get up。", source:"U6综合练习(学科网)"},
+{q:"We need to brush our teeth ____ eating cake to have good teeth.", o:["after", "before", "at", "for"], a:0, e:"吃蛋糕后要刷牙用 after。", source:"U6单元综合测试卷2026-2027(学科网)"},
+{q:"—How long does it ____ to get to school? —About 15 minutes.", o:["get", "go", "take", "have"], a:2, e:"花费时间用 take。", source:"U6单元练习Unit5-7(学科网)"},
+{q:"We usually have lunch ____ 12:00 ____ school.", o:["at; at", "in; in", "on; at", "at; in"], a:0, e:"具体时刻 at；在学校 at school。", source:"U6单元达标检测卷(学科网)"},
+{q:"____ you usually get up early?", o:["Do", "Does", "Are", "Is"], a:0, e:"主语 you 用助动词 Do。", source:"U6核心语法精练(学科网)"},
+{q:"—____ does he play soccer? —In the afternoon.", o:["What", "What time", "Where", "When"], a:3, e:"答语是时段，用 When。", source:"U6单元自测湖北专用(学科网)"},
+{q:"—____ bottles of milk are there in the box? —Only two. We can buy more this evening.", o:["How much", "How many", "How long", "How old"], a:1, e:"问可数名词数量用 How many。", source:"U6通关全能练(学科网)"},
+{q:"Tom ____ to school every day because his home is near the school.", o:["walks", "takes the bus", "takes the subway", "drives"], a:0, e:"家离学校近，步行上学 walks。", source:"U6单元测试2026-2027(学科网)"},
+{q:"—When is the volleyball game? —It's ____ 10th June.", o:["on", "in", "at", "of"], a:0, e:"具体日期前用 on。", source:"U6通关全能练(学科网)"},
+{q:"My sister usually ____ at half past six in the morning.", o:["gets up", "get up", "getting up", "to get up"], a:0, e:"usually 一般现在时，sister 三单用 gets up。", source:"U6单元自测北京专用(学科网)"},
+{q:"I like pop music, ____ my brother likes classical music.", o:["when", "while", "because", "if"], a:1, e:"前后对比用 while。", source:"U6通关全能练(学科网)"},
+{q:"—How do you go to school every day? —I ____ go by bike, but sometimes I take a bus when the weather is bad.", o:["never", "usually", "always", "seldom"], a:1, e:"通常骑车用 usually。", source:"U6暑假单元自测(学科网)"},
+{q:"—____ does your sister have her dancing lesson? —Every Saturday morning.", o:["What", "What time", "When", "Who"], a:2, e:"答语是周期性时间，用 When。", source:"U6单元达标检测卷(学科网)"},
+{q:"Lily goes home at four forty-five.（同义替换）", o:["a quarter past five", "forty-five past five", "a quarter to five", "a quarter to four"], a:2, e:"4:45 即差一刻到五点 a quarter to five。", source:"U6核心语法精练(学科网)"},
+{q:"I want ____ a good plan for my daily life.", o:["make", "making", "to make", "makes"], a:2, e:"want to do sth.。", source:"U6单元自测湖北专用(学科网)"},
+{q:"—What time ____ your brother go to school? —At eight o'clock.", o:["do", "does", "is", "are"], a:1, e:"brother 三单，助动词用 does。", source:"U6单元自测北京专用(学科网)"},
+{q:"Linda usually ____ her homework after dinner.", o:["finish", "finishes", "finished", "finishing"], a:1, e:"Linda 三单用 finishes。", source:"U6单元测试2026-2027(学科网)"},
+{q:"My sister usually ____ milk and bread for breakfast.", o:["have", "has", "having", "to have"], a:1, e:"sister 三单用 has。", source:"U6单元测试2026-2027(学科网)"},
+{q:"—When do you have lunch? —____ 12:00.", o:["On", "At", "In", "For"], a:1, e:"具体时刻前用 at。", source:"U6单元达标检测卷(学科网)"},
+{q:"—____ do you get dressed? —I get dressed ____ five forty-five.", o:["What time; in", "When; in", "What time; at", "When; on"], a:2, e:"问时刻用 What time；具体时刻用 at。", source:"U6综合练习(学科网)"},
+{q:"—____ do they usually do after dinner? —They usually do their homework.", o:["What", "What time", "When", "Why"], a:0, e:"问做的事情用 What。", source:"U6核心语法精练(学科网)"},
+{q:"—I am very tired. I just want to go to bed. —You'd better ____ first and then have a rest.", o:["take a message", "take a shower", "take a walk", "take a break"], a:3, e:"先休息一下 take a break。", source:"U6综合练习(学科网)"},
+{q:"—Does Jack usually take a shower in the morning? —____. He usually takes it in the evening.", o:["Yes, he does", "No, he doesn't", "No, he isn't", "Yes, he is"], a:1, e:"晚上洗澡，否定回答 No, he doesn't。", source:"U6单元达标检测卷(学科网)"},
+{q:"—What about taking a walk ____ the park? —Sounds great!", o:["of", "about", "with", "around"], a:3, e:"在公园里散步 around the park。", source:"U6暑假单元自测(学科网)"},
+{q:"—Does your mother ____ housework in the evening? —Yes, she cleans the room and washes clothes.", o:["do", "does", "doing", "to do"], a:0, e:"Does 后接动词原形 do。", source:"U6单元测试2026-2027(学科网)"},
+{q:"—What time is it now? —It's a quarter ____ seven. It's 6:45.", o:["past", "at", "to", "for"], a:2, e:"6:45 即差一刻到七点 a quarter to seven。", source:"U6单元达标检测卷(学科网)"},
+{q:"Some people like watching talk shows for fun ____ eating.", o:["but", "while", "so", "and"], a:1, e:"边吃边看对比用 while。", source:"U6木牍中考安徽教辅(学科网)"},
+{q:"The teacher says it's important ____ a good breakfast every day.", o:["have", "to have", "having", "has"], a:1, e:"It's important to do sth.。", source:"U6单元测试2026-2027(学科网)"},
+{q:"Early to bed and early to rise ____ good for our health.", o:["am", "is", "are", "be"], a:1, e:"Early to bed...作主语视为单数，用 is。", source:"U6单元综合测试卷2026-2027(学科网)"},
+{q:"—Would you like to see a film with me this afternoon? —Sorry, I must ____ the basketball match with our team.", o:["look for", "prepare for", "ask for", "wait for"], a:1, e:"为比赛做准备 prepare for。", source:"U6综合练习(学科网)"},
+{q:"—Excuse me, is your school far from here? —No, it's only a ____ walk.", o:["15 minutes", "15 minute", "15-minute", "15 minute's"], a:2, e:"复合形容词 15-minute 修饰名词。", source:"U6综合练习(学科网)"},
+{q:"—How do you like your school, Tom? —It's a good place for us to ____ ourselves for the future.", o:["show", "send", "choose", "prepare"], a:3, e:"为未来做好准备 prepare ourselves。", source:"U6综合练习(学科网)"},
+{q:"—____ do you have your English class every week? —On Wednesdays and Fridays.", o:["What time", "When", "What", "Where"], a:1, e:"答语是星期，用 When。", source:"U6核心语法精练(学科网)"},
+{q:"I ____ go to school on foot. I walk every day.", o:["never", "sometimes", "always", "hardly"], a:2, e:"每天都步行，用 always。", source:"U6单元练习Unit5-7(学科网)"},
+{q:"—____ do you usually get up? —At 6:30 a.m.", o:["What", "What time", "Where", "How"], a:1, e:"问具体时刻用 What time。", source:"U6单元自测北京专用(学科网)"},
+{q:"—Help your brother ____, Anne. —OK, but where are his sweater and trousers?", o:["brush his teeth", "get dressed", "take a shower", "make a wish"], a:1, e:"穿衣服用 get dressed。", source:"U6暑假单元自测(学科网)"},
+{q:"Each lesson is 45 minutes long and there's a break ____ lessons.", o:["in", "between", "among", "at"], a:1, e:"课间休息用 between。", source:"U6单元练习Unit5-7(学科网)"},
+{q:"After dinner, Timo often ____ chess with his father, but his mother often ____ to music on the radio.", o:["play; listens", "does; listen", "does; listens", "plays; listens"], a:3, e:"Timo 三单 plays；mother 三单 listens。", source:"U6单元自测湖北专用(学科网)"},
+{q:"—What time is it now? —It's 8:45. We can say \"____\".", o:["a quarter past eight", "a quarter to nine", "half past eight", "a quarter to eight"], a:1, e:"8:45 即差一刻到九点 a quarter to nine。", source:"U6单元自测北京专用(学科网)"},
+{q:"We should ____ every minute to prepare for the exam.", o:["make good use of", "fall in love with", "act out", "work out"], a:0, e:"充分利用每一分钟 make good use of。", source:"U6暑假单元自测(学科网)"},
+{q:"It's time ____ us ____ go to bed.", o:["for; to", "to; for", "for; for", "to; to"], a:0, e:"It's time for sb. to do sth.。", source:"U6单元练习Unit5-7(学科网)"},
+{q:"The sun ____ in the east in the morning.", o:["comes", "rises", "rise", "goes"], a:1, e:"太阳升起用 rises。", source:"U6单元自测湖北专用(学科网)"},
+{q:"She ____ breakfast at seven o'clock every day.", o:["has", "have", "having", "to have"], a:0, e:"She 三单，吃早餐用 has。", source:"U6单元自测北京专用(学科网)"},
+{q:"I usually go to the library ____ Saturday mornings.", o:["in", "at", "on", "in the"], a:2, e:"具体某天早上用 on。", source:"U6单元自测湖北专用(学科网)"},
+{q:"We got to the top at 5 a.m. and watched the sun ____ over the mountain.", o:["sleep", "wait", "rise", "raise"], a:2, e:"看日出用 rise。", source:"U6综合练习(学科网)"},
+{q:"You have to ____ now, baby. It's time for school.", o:["get down", "put up", "act out", "get up"], a:3, e:"起床去上学 get up。", source:"U6木牍中考安徽教辅(学科网)"},
+{q:"—____ do you go to the library? —Three times a week.", o:["How long", "How often", "How far", "How much"], a:1, e:"问频率用 How often。", source:"U6单元测试2026-2027(学科网)"},
+{q:"It's time ____ us ____ go to school.", o:["for; for", "to; to", "for; to", "to; for"], a:2, e:"It's time for sb. to do sth.。", source:"U6单元自测北京专用(学科网)"},
+{q:"—____ do you usually do after dinner? —I usually read a book.", o:["What", "Who", "When", "Which"], a:0, e:"问做的事情用 What。", source:"U6综合练习(学科网)"},
+{q:"Tom ____ his teeth at seven every morning.", o:["brush", "brushing", "brushes", "to brush"], a:2, e:"every morning 一般现在时，Tom 三单用 brushes。", source:"U6单元自测北京专用(学科网)"},
+{q:"—____ does your father go to work? —On weekdays.", o:["What", "How", "What time", "When"], a:3, e:"答语是时间段 On weekdays，用 When。", source:"U6单元自测北京专用(学科网)"},
+{q:"—I'm so tired. I have just finished the 1000-meter race. —You did a good job! Why not have a ____ and drink some water now?", o:["break", "hobby", "look", "while"], a:0, e:"休息一下用 have a break。", source:"U6综合练习(学科网)"},
+{q:"—John, your shoes are clean. —Yeah, I often ____ them.", o:["paint", "brush", "draw", "collect"], a:1, e:"刷鞋用 brush。", source:"U6木牍中考安徽教辅(学科网)"},
+{q:"My school ____ at 9:00. There ____ four classes in the morning.", o:["begins; are", "begins; is", "start; are", "starts; is"], a:0, e:"My school 三单 begins；four classes 复数用 are。", source:"U6核心语法精练(学科网)"},
+{q:"—Wang Ling, can you help me ____ this maths problem? —OK. Let me help you.", o:["get up", "work out", "play with", "put up"], a:1, e:"解出数学题用 work out。", source:"U6综合练习(学科网)"},
+{q:"We all know that Taiwan is a ____ of China.", o:["part", "country", "symbol", "city"], a:0, e:"台湾是中国的一部分 part。", source:"U6暑假单元自测(学科网)"},
+{q:"My sister and I ____ homework together every evening.", o:["do", "does", "doing", "to do"], a:0, e:"and 连接复数主语用原形 do。", source:"U6单元达标检测卷(学科网)"},
+{q:"tomato 中划线部分的读音是（ ）", o:["/e/", "/ə/", "/aʊ/", "/əʊ/"], a:3, e:"tomato 发音 /təˈmɑːtəʊ/，划线 o 读 /əʊ/。", source:"U6单元检测重庆专用(学科网)"},
+{q:"In order to save energy, we should learn to sort the rubbish and ____ some of it again.", o:["make use of", "make fun of", "take care of", "ran out of"], a:0, e:"再次利用用 make use of。", source:"U6综合练习(学科网)"},
+{q:"He doesn't ____ TV on school nights.", o:["watch", "watches", "watching", "to watch"], a:0, e:"doesn't 后接动词原形 watch。", source:"U6单元自测北京专用(学科网)"},
+{q:"I go to school ____ 7:30 ____ the morning.", o:["in; at", "at; on", "at; in", "on; in"], a:2, e:"具体时刻用 at；在早上用 in the morning。", source:"U6单元自测北京专用(学科网)"},
+{q:"—I usually go to bed at 9:30. What about you? —____. I go to bed at 10:00.", o:["Me too", "That's great", "Not really", "I agree"], a:2, e:"睡觉时间不同，用 Not really。", source:"U6单元达标检测卷(学科网)"},
+{q:"I ____ get up early, so I ____ go to school late.", o:["always, never", "always, usually", "often, usually", "never, never"], a:0, e:"早起所以从不迟到 always, never。", source:"U6单元自测湖北专用(学科网)"},
+{q:"My mother ____ goes to work by bike, but today she drives to work.", o:["usually", "seldom", "never", "sometimes"], a:0, e:"平时骑车用 usually。", source:"U6通关全能练(学科网)"},
+{q:"umbrella 中划线部分的读音是（ ）", o:["/ʌ/", "/e/", "/ʊ/", "/u:/"], a:0, e:"umbrella 发音 /ʌmˈbrelə/，划线 u 读 /ʌ/。", source:"U6单元检测重庆专用(学科网)"},
+{q:"welcome 中划线部分的读音是（ ）", o:["/ə/", "/ɒ/", "/e/", "/ɪ/"], a:2, e:"welcome 发音 /ˈwelkəm/，划线 e 读 /e/。", source:"U6单元检测重庆专用(学科网)"},
+{q:"—What time does your father go to work on Monday? —____.", o:["In October", "At eight thirty", "On Monday", "30 minutes"], a:1, e:"问具体时刻答 At eight thirty。", source:"U6综合练习(学科网)"},
+{q:"My dad does some reading ____ going to bed every day. I want to learn from him.", o:["before", "around", "after", "then"], a:0, e:"睡前读书用 before。", source:"U6木牍中考安徽教辅(学科网)"},
+{q:"As students, we must make good use ____ our time.", o:["for", "of", "about", "with"], a:1, e:"make good use of 充分利用。", source:"U6暑假单元自测(学科网)"},
+{q:"—____ is your mother's job? —She's a nurse.", o:["What", "Who", "Where", "When"], a:0, e:"问职业用 What。", source:"U6通关全能练(学科网)"},
+{q:"She ____ a shower at 8:00 every night.", o:["take", "takes", "have", "had"], a:1, e:"She 三单，洗澡用 takes a shower。", source:"U6暑假单元自测(学科网)"},
+{q:"—____ does your mother cook dinner? —She usually cooks it at 6:00 p.m.", o:["What time", "How", "Where", "Who"], a:0, e:"问具体时刻用 What time。", source:"U6单元达标检测卷(学科网)"},
+{q:"You are ____ today and you should clean the whiteboard.", o:["on show", "in time", "on duty", "in need"], a:2, e:"今天值日用 on duty。", source:"U6木牍中考安徽教辅(学科网)"},
+{q:"My father ____ goes to work by car. He takes the bus.", o:["never", "usually", "always", "sometimes"], a:0, e:"乘公交上班，从不开车 never。", source:"U6单元达标检测卷(学科网)"},
+{q:"—____ is it now? —It's half past seven.", o:["What time", "What day", "How old", "How much"], a:0, e:"问时刻用 What time。", source:"U6单元练习Unit5-7(学科网)"}
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('71_kp6_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('71_kp6_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('71_kp6_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 6 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 6 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>
