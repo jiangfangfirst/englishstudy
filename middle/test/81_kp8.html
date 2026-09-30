@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>八年级KP8</h1>
+        <p>if 条件状语从句 · 情态动词 can/should · how + 不定式 · 沟通词汇与情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">八年级上册Unit 8 · 在线检测</span>
+      <h2>单元检测核心库KP8</h2>
+      <p>涵盖 if 条件状语从句（主将从现）、情态动词 can/should、how + 不定式结构，以及 communicate with、pay attention to、argue with、face to face、in person、find out、make up、right away 等沟通话题词汇与情景交际高频考点。系统从全量题库中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"Our school will put on a ____ next week. Would you like to watch it?", o:["game", "drama", "sport", "concert"], a:1, e:"drama 意为\"戏剧\"，学校下周上演戏剧。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"—Why did you choose Lucy, but not Lily? —Oh, Lucy's reply was ____.", o:["worse", "the worst", "the most reasonable", "more reasonable"], a:3, e:"两者比较用比较级 more reasonable，露西的回答更合理。", source:"Unit 8单元能力达标题-学科网"},
+{q:"It's important ____ us to use proper words in different communication situations.", o:["for", "of", "to", "with"], a:0, e:"It's important for sb. to do sth. 意为\"对某人来说做某事很重要\"。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"She ____ three hours shopping for her dress, but it ____ her only $50.", o:["spent, cost", "took, paid", "paid, took", "take, pay"], a:0, e:"第一空主语是人用 spend；第二空主语是物用 cost。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"—How ____ you improve your English communication? —I will practise every day.", o:["do", "did", "will", "are"], a:2, e:"根据答语 I will practise 可知问句用一般将来时 will。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"—Why me again? Why not ask Mark to do it? —I won't ____ with you. Just do it!", o:["share", "live", "argue", "return"], a:2, e:"argue with sb. 意为\"与某人争吵\"，不想和你争吵。", source:"Unit 8安徽培优卷-学科网"},
+{q:"We should ____ the traffic rules when we cross the road.", o:["pay attention to", "take pride in", "look forward to", "get used to"], a:0, e:"pay attention to 意为\"注意\"，过马路时应注意交通规则。", source:"Unit 8教材考点精练-学科网"},
+{q:"—Can I go to watch a basketball game this afternoon, Mom? —I'm afraid you can't ____ you don't finish your homework.", o:["if", "after", "though", "when"], a:0, e:"if 引导条件状语从句，意为\"如果\"。", source:"Unit 8教材考点精练-学科网"},
+{q:"It's important ____ honest and polite when we talk with others.", o:["be", "being", "to be", "are"], a:2, e:"It's + 形容词 + to do sth. 句型，用不定式 to be。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"Don't worry. If he ____, he ____ us as soon as possible.", o:["will come; call", "comes; will call", "comes; call", "will come; will call"], a:1, e:"if 条件句\"主将从现\"：从句用 comes，主句用 will call。", source:"Unit 8Grammar 3a-3c课后作业-学科网"},
+{q:"My parents often argue ____ me ____ my study habits.", o:["with; about", "about; with", "for; about", "with; for"], a:0, e:"argue with sb. about sth. 意为\"与某人争论某事\"。", source:"Unit 8单元测试卷-学科网"},
+{q:"Please don't ask me such ____ questions. They make me uncomfortable.", o:["public", "common", "general", "personal"], a:3, e:"personal 意为\"私人的\"，私人问题让人不舒服。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"It's impolite to ask others ____ questions in public.", o:["personal", "serious", "nervous", "reasonable"], a:0, e:"personal 意为\"私人的\"，在公共场合问私人问题不礼貌。", source:"Unit 8基础通关卷-学科网"},
+{q:"The two brothers ____ after they argued with each other.", o:["got up", "cut up", "made up", "took up"], a:2, e:"make up 意为\"和好\"，争吵后和好了。", source:"Unit 8课时练-学科网"},
+{q:"____ you do your homework, ____ mistakes you will make.", o:["The more careful; the less", "The more carefully; the fewer", "The more careful; the fewer", "The more carefully; the less"], a:1, e:"\"The+比较级..., the+比较级...\"意为\"越……，就越……\"；第一空修饰动词用副词比较级，第二空修饰可数名词 mistakes 用 fewer。", source:"Unit 8教材考点精练-学科网"},
+{q:"—I just had a test and now I am so ____. —Try to get some milk and have a rest.", o:["surprised", "impolite", "nervous", "creative"], a:2, e:"nervous 意为\"紧张的\"，刚考完试很紧张。", source:"Unit 8单元练习木牍中考-学科网"},
+{q:"____ quiet if others are talking. It is a basic manner.", o:["To keep", "Keeping", "Keep", "Keeps"], a:2, e:"祈使句以动词原形开头，Keep quiet 意为\"保持安静\"。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"We should ____ the old and treat them with kindness.", o:["honour", "accept", "decide", "praise"], a:0, e:"honour 意为\"尊敬\"，尊敬老人。", source:"Unit 8习题课件-学科网"},
+{q:"If you practice speaking English every day, you will ____ make progress.", o:["easily", "slowly", "surely", "quietly"], a:2, e:"surely 意为\"必定\"，每天练习就必定会进步。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"Zookeepers work hard every day ____ the animals healthy and happy.", o:["to keep", "keeping", "kept", "keeps"], a:0, e:"不定式 to keep 作目的状语，努力工作是为了让动物保持健康。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"He pretended ____ when his mother came into the room.", o:["sleep", "to sleep", "sleeping", "slept"], a:1, e:"pretend to do sth. 意为\"假装做某事\"。", source:"Unit 8单元测试卷-学科网"},
+{q:"The teacher asked the students to ____ a story about a trip to the Moon.", o:["give up", "cheer up", "take up", "make up"], a:3, e:"make up 意为\"编造\"，编一个关于月球旅行的故事。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"—I feel a little ____ about making a speech in front of people. —Take it easy. The more you prepare, the better you will feel.", o:["energetic", "tired", "nervous", "bored"], a:2, e:"nervous 意为\"紧张的\"，当众演讲感到紧张。", source:"Unit 8单元能力达标题-学科网"},
+{q:"It's always better to ____ after a quarrel with your friend instead of staying angry.", o:["make up", "break up", "give up", "show up"], a:0, e:"make up 意为\"和好\"，争吵后和好而不是一直生气。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"He didn't ____ what the teacher said because he was busy talking with his deskmate.", o:["listen", "hear", "follow", "catch"], a:2, e:"follow 意为\"听懂、领会\"，他忙着聊天没听懂老师讲的内容。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"—Could you please ____ me a message when you see him? —Sure, no problem.", o:["take", "bring", "carry", "get"], a:0, e:"take a message 意为\"捎口信\"，符合语境。", source:"Unit 8单元复习卷-学科网"},
+{q:"—How's it going, Tina? —Great. My company has ____ me a good job.", o:["offered", "expected", "introduced", "discovered"], a:0, e:"offer sb. sth. 意为\"提供给某人某物\"，公司给我提供了一份好工作。", source:"Unit 8中考能力提升题-学科网"},
+{q:"The doctor told him to ____ smoking to stay healthy.", o:["keep away", "give up", "put off", "take away"], a:1, e:"give up 意为\"放弃\"，戒烟以保持健康。", source:"Unit 8习题课件-学科网"},
+{q:"—What do you plan ____ on TV? —I hope that I can ____ what's going on around the world.", o:["watching; find", "to watch; find out", "watching; find out", "to watch; look for"], a:1, e:"plan to do sth.；find out 意为\"弄清、查明\"。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"If I eat too much food, I ____ too fat.", o:["am", "was", "will", "will be"], a:3, e:"if 条件句\"主将从现\"，主句用一般将来时 will be。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"Good communication ____ understanding between people. We should try our best to communicate well.", o:["allows", "improves", "breaks", "stops"], a:1, e:"improves 意为\"改善\"，良好的沟通增进人与人之间的理解。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"—If you ____ after 6:30 tomorrow morning, you ____ the train. —Could you wake me up at 6:00?", o:["get up; will miss", "will get up; miss", "get up; miss"], a:0, e:"if 条件句\"主将从现\"：从句用一般现在时 get up，主句用一般将来时 will miss。", source:"Unit 8教材考点精练-学科网"},
+{q:"Talk to your teacher and you will get help ____ you have a problem.", o:["but", "if", "until", "so"], a:1, e:"if 引导条件状语从句，意为\"如果\"。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"The little boy is too shy to ____ with strangers. He always hides behind his mother.", o:["argue", "communicate", "fight", "play"], a:1, e:"communicate with sb. 意为\"与某人交流\"，他太害羞不敢与陌生人交流。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"—How do you like the two TV shows? —I think the first one is as interesting as the second one. I like them ____.", o:["either", "all", "both", "each"], a:2, e:"both 意为\"两者都\"，两个节目都喜欢。", source:"Unit 8课时练-学科网"},
+{q:"She is ____ girl. She always tells the truth.", o:["a honest", "an honest", "the honest", "honest"], a:1, e:"honest 以元音音素开头，用 an 表示\"一个诚实的女孩\"。", source:"Unit 8单元测试卷-学科网"},
+{q:"She tried to stay ____ during the interview.", o:["angry", "calm", "nervous", "excited"], a:1, e:"calm 意为\"镇静的\"，面试时努力保持镇静。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"If it ____ next Sunday, ____ you still ____ the Great Wall?", o:["will rain; do; visit", "will rain; will; visit", "rains; do; visit", "rains; will; visit"], a:3, e:"if 条件句\"主将从现\"：从句用一般现在时 rains，主句用一般将来时 will visit。", source:"Unit 8教材考点精练-学科网"},
+{q:"If you hurt your friend's feelings, you should apologize ____.", o:["right away", "step by step", "once in a while", "all the time"], a:0, e:"right away 意为\"马上\"，伤害了朋友应该马上道歉。", source:"Units7-8语法综合练-学科网"},
+{q:"Please call me if you ____ any help.", o:["need", "will need", "needed", "needing"], a:0, e:"if 条件句\"主将从现\"，从句用一般现在时 need。", source:"Unit 8Grammar 3a-3c课后作业-学科网"},
+{q:"Our geography teacher told us to ____ more information about our city and share it next week.", o:["turn off", "keep away", "find out", "use up"], a:2, e:"find out 意为\"查明、找出\"，先查明信息再分享。", source:"Unit 8教材考点精练-学科网"},
+{q:"—What's the ____ today? —It's May 10th.", o:["day", "date", "time", "month"], a:1, e:"date 意为\"日期\"，问今天是几月几号。", source:"Unit 8习题课件-学科网"},
+{q:"I rang the bell, but there was no ____. Later I knew Mr Wang was out.", o:["way", "place", "reply", "name"], a:2, e:"reply 意为\"回应\"，按门铃没有回应。", source:"Unit 8综合检测卷上分卷-学科网"},
+{q:"—I'm afraid I can't follow you. Could you speak more slowly? —____", o:["Not at all.", "That's right.", "Sorry, I won't.", "Of course."], a:3, e:"Of course 意为\"当然可以\"，回答请求。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"Now people have many more ways of ____, but they don't get as close as before.", o:["condition", "communication", "conversation", "competition"], a:1, e:"communication 意为\"交流、沟通\"，现在有更多交流方式。", source:"Unit 8Section A 1a-1d课时作业-学科网"},
+{q:"—How much is the ticket to Inner Mongolia? —A one-way ticket ____ 1800 yuan, and you can ____ another 300 yuan for a round-trip.", o:["costs; pay", "cost; spend", "pay; spend", "spends; pay"], a:0, e:"第一空主语是物用 costs；第二空 sb. pay(s) some money for sth. 用 pay。", source:"Unit 8教材考点精练-学科网"},
+{q:"We will visit the museum ____ the weather is nice at the weekend.", o:["unless", "because", "although", "if"], a:3, e:"条件状语从句置于主句之后，前面不用逗号，用 if 引导。", source:"Unit 8if条件句语法精练-学科网"},
+{q:"—What do you think of The Belt and Road Initiative? —Great! It will help China improve the ____ with those related countries.", o:["relationship", "agreement", "environment", "information"], a:0, e:"relationship 意为\"关系\"，改善与相关国家的关系。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"He ____ his sick mother in the hospital and his job also ____ him.", o:["worries; worries", "worries about; worries", "worries; worries about", "worries about; worries about"], a:1, e:"worry about 意为\"担心\"；worries 作及物动词意为\"使……担忧\"。", source:"Unit 8教材考点精练-学科网"},
+{q:"If you ____ about your problems with someone, you ____ halfway to solving them.", o:["don't talk; are", "won't talk; are", "talk; will be", "will talk; will be"], a:2, e:"if 条件句\"主将从现\"：从句用一般现在时 talk，主句用一般将来时 will be。", source:"Unit 8教材考点精练-学科网"},
+{q:"When communicating online, we should be careful with our words because they may ____ misunderstandings.", o:["cause", "solve", "avoid", "explain"], a:0, e:"cause 意为\"引起\"，不当的言辞可能引起误解。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"She ____ happy if she ____ the present.", o:["will be; receives", "is; will receive", "will be; will receive", "is; receives"], a:0, e:"if 条件句\"主将从现\"：主句用 will be，从句用 receives。", source:"Unit 8Grammar 3a-3c课后作业-学科网"},
+{q:"—Sorry for interrupting you. I have a question to ask. —____", o:["That's OK. Go ahead.", "You're welcome.", "It's my pleasure.", "No, you can't."], a:0, e:"That's OK. Go ahead. 意为\"没关系，请讲\"，礼貌允许对方提问。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"—Can I call you after dinner? —Sure, you ____.", o:["need", "must", "can", "should"], a:2, e:"Can 引导的一般疑问句，肯定回答用 you can。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"When you meet someone for the first time, it's polite to ____.", o:["ask his age", "talk about the weather", "ask his weight", "talk about his personal information"], a:1, e:"初次见面谈论天气是礼貌的，询问年龄体重等不礼貌。", source:"Unit 8单元测试卷-学科网"},
+{q:"Please ____ me when you arrive at the station.", o:["call", "calls", "calling", "to call"], a:0, e:"祈使句用动词原形，call 意为\"打电话\"。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"Good communication can help us ____ good relationships with people around us.", o:["build", "building", "to building", "built"], a:0, e:"help sb. (to) do sth.，用动词原形 build。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"—I'm really ____ before the exam. —Don't worry. You are the best.", o:["surprised", "nervous", "comfortable", "confident"], a:1, e:"nervous 意为\"紧张的\"，考前很紧张。", source:"Unit 8安徽培优卷-学科网"},
+{q:"—There is no ____ talking about such a foolish thing over and over again. —I can't agree more. Let's do something meaningful.", o:["difference", "hope", "habit", "point"], a:3, e:"There is no point doing sth. 意为\"做某事没有意义\"。", source:"Unit 8教材考点精练-学科网"},
+{q:"Tina will have a test tomorrow. She's going over her lessons as ____ as possible ____.", o:["carefully; alone", "careful; by herself", "careful; on her own", "carefully; on herself"], a:0, e:"修饰动词用副词 carefully；alone 意为\"独自地\"。", source:"Unit 8教材考点精练-学科网"},
+{q:"In a conversation between two persons, 65% of ____ is done through body language.", o:["environment", "relation", "communication", "situation"], a:2, e:"communication 意为\"交流\"，65% 的交流通过肢体语言完成。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"You can know a lot about people through their ____ and body language.", o:["exercises", "experiments", "experiences", "expressions"], a:3, e:"expressions 意为\"表情\"，通过表情和肢体语言了解人。", source:"Unit 8课时练-学科网"},
+{q:"If you're friendly to people, you ____ a lot more back.", o:["get", "got", "will get", "are getting"], a:2, e:"if 条件句遵循\"主将从现\"，主句用一般将来时 will get。", source:"Unit 8综合检测-学科网"},
+{q:"If you have any questions, just ____ a line to me.", o:["call", "email", "visit", "drop"], a:3, e:"drop sb. a line 意为\"给某人写信\"，固定短语。", source:"Unit 8单元测试卷-学科网"},
+{q:"If you don't ____, you will never know if you can succeed.", o:["try", "tried", "trying", "tries"], a:0, e:"if 条件句从句用一般现在时，主语 you 用动词原形 try。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"Lily writes as ____ as the other students in her class.", o:["careful", "more careful", "carefully", "more carefully"], a:2, e:"as...as 中间用形容词或副词原级，修饰动词 writes 用副词 carefully。", source:"Unit 8教材考点精练-学科网"},
+{q:"—Do everything ____, or you may make mistakes. —I see. I know what to do now.", o:["nearly", "hardly", "carefully", "luckily"], a:2, e:"carefully 意为\"认真地\"，认真做每件事以免出错。", source:"Unit 8综合检测卷上分卷-学科网"},
+{q:"If you take this exam ____, you will get good grades for sure.", o:["serious enough", "enough serious", "seriously enough", "enough seriously"], a:2, e:"副词 seriously 修饰动词 take；enough 修饰副词时后置。", source:"Unit 8教材考点精练-学科网"},
+{q:"—I'm worried about my oral English. I can't communicate with others smoothly. —Don't worry. ____ more practice, you'll make progress.", o:["With", "Without", "For", "By"], a:0, e:"With more practice 意为\"通过更多的练习\"。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"The two brothers often help ____ with their homework.", o:["themselves", "each other", "another", "both B and C"], a:1, e:"each other 意为\"互相\"，兄弟俩经常互相帮助。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"I can lend my bike to you ____ you can take good care of it.", o:["although", "if", "until", "while"], a:1, e:"if 引导条件状语从句，意为\"如果\"。", source:"Unit 8单元测试卷-学科网"},
+{q:"If you have trouble working out the problem, ____ the teacher for help.", o:["asks", "asked", "asking", "ask"], a:3, e:"if 条件句\"主祈从现\"：主句是祈使句用动词原形 ask。", source:"Unit 8安徽培优卷-学科网"},
+{q:"If it ____ sunny tomorrow, we ____ to the park.", o:["is; will go", "will be; go", "is; go", "will be; will go"], a:0, e:"if 条件句\"主将从现\"：从句用 is，主句用 will go。", source:"Unit 8单元测试卷-学科网"},
+{q:"—We are busy on weekdays. Let's have a party at the weekend. —____.", o:["That's a good idea", "Thank you", "I'm fine", "Have a great time"], a:0, e:"That's a good idea 意为\"好主意\"，表示赞同建议。", source:"Unit 8单元测试卷-学科网"},
+{q:"We should always be honest and fight for the ____ of our class.", o:["honour", "reply", "event", "cost"], a:0, e:"honour 意为\"荣誉\"，为班级的荣誉而奋斗。", source:"Unit 8能力提升卷-学科网"},
+{q:"The little girl didn't know how ____ to her pen pal's letter.", o:["reply", "replying", "to reply", "replied"], a:2, e:"\"疑问词+不定式\"结构 how to reply 意为\"如何回复\"。", source:"Unit 8单元复习卷-学科网"},
+{q:"If there is any news of the missing girl, I ____ you as soon as possible.", o:["called", "call", "am calling", "will call"], a:3, e:"if 条件句\"主将从现\"，主句用一般将来时 will call。", source:"Unit 8单元练习木牍中考-学科网"},
+{q:"Before giving a ____, practice well so that you can express your ideas clearly.", o:["sign", "score", "speech", "screen"], a:2, e:"give a speech 意为\"做演讲\"，演讲前好好练习。", source:"Unit 8安徽培优卷-学科网"},
+{q:"You ____ stay calm when you have a disagreement with others. It helps a lot.", o:["can", "should", "would", "could"], a:1, e:"should 意为\"应当\"，有分歧时应当保持冷静。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"We should learn to ____ our ideas clearly when we have a discussion.", o:["express", "create", "develop", "discover"], a:0, e:"express 意为\"表达\"，express our ideas 意为\"表达我们的想法\"。", source:"Unit 8单元复习卷-学科网"},
+{q:"My father doesn't like soap operas, and my mother doesn't like them, ____.", o:["too", "also", "either", "as well"], a:2, e:"否定句中\"也\"用 either，放在句末。", source:"Unit 8单元测试题-学科网"},
+{q:"You won't fully experience the culture of a foreign country unless you go there ____.", o:["in fact", "in time", "in return", "in person"], a:3, e:"in person 意为\"亲自\"，亲自去才能充分体验文化。", source:"Unit 8单元练习木牍中考-学科网"},
+{q:"—Bob, please ____ your spelling. You've dropped the \"d\" in the word \"knowledge\". —Oh, yes. I'll be more careful next time.", o:["listen to", "look forward to", "pay attention to", "get used to"], a:2, e:"pay attention to 意为\"注意\"，提醒对方注意拼写。", source:"Unit 8能力提升卷-学科网"},
+{q:"Don't ____ your lessons. We can help you with them.", o:["look about", "worry about", "argue about", "care about"], a:1, e:"worry about 意为\"担心\"，不用担心功课。", source:"Unit 8综合检测卷上分卷-学科网"},
+{q:"It's impolite ____ others when they are talking about something important.", o:["interrupt", "interrupting", "to interrupt", "interrupted"], a:2, e:"It's + 形容词 + to do sth. 句型，用不定式 to interrupt。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"Peter often communicates with his friends ____ talking on the phone.", o:["with", "through", "across", "by"], a:3, e:"by doing sth. 意为\"通过做某事的方式\"。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"The teacher asked us to make ____ with the new words.", o:["sentences", "plans", "photos", "pictures"], a:0, e:"make sentences 意为\"造句\"，用新单词造句。", source:"Unit 8习题课件-学科网"},
+{q:"—Don't ____ your son. He can take good care of himself. —All right.", o:["care about", "talk about", "think about", "worry about"], a:3, e:"worry about 意为\"担心\"，不要担心儿子。", source:"Unit 8习题课件-学科网"},
+{q:"If he does all the things I say tomorrow, I ____ him.", o:["trust", "am trusting", "trusted", "will trust"], a:3, e:"if 条件句\"主将从现\"，主句用一般将来时 will trust。", source:"Unit 8单元能力达标题-学科网"},
+{q:"The two boys had a fight yesterday, but they ____ today and went swimming together.", o:["ate up", "made up", "took up", "put up"], a:1, e:"make up 意为\"和好\"，两人打架后和好了。", source:"Unit 8单元能力达标题-学科网"},
+{q:"We would like to invite Professor Wang ____ a speech on teenagers' communication skills.", o:["give", "to give", "giving", "gave"], a:1, e:"invite sb. to do sth. 意为\"邀请某人做某事\"，用不定式 to give。", source:"Unit 8基础通关卷-学科网"},
+{q:"—How do you feel today, boy? —Much ____. The medicine works well. Thanks, Doctor.", o:["best", "better", "worst", "worse"], a:1, e:"根据\"药效很好\"可知身体状况好转，much 修饰比较级用 better。", source:"Unit 8基础通关卷-学科网"},
+{q:"What a good ____! You can show your singing ability in front of all students.", o:["score", "advice", "chance", "dream"], a:2, e:"chance 意为\"机会\"，展示歌唱能力的好机会。", source:"Units7-8语法综合练-学科网"},
+{q:"If you ____ English every day, you ____ speak it well.", o:["will practise; will", "practise; will", "practise; would", "will practise; can"], a:1, e:"if 条件句用一般现在时表将来，主语 you 用 practise；主句用 will speak。", source:"Unit 8if条件句语法精练-学科网"},
+{q:"This was just a simple stick, but it ____ 1,000 yuan.", o:["paid", "spent", "cost", "took"], a:2, e:"cost 主语是物，sth. cost(s) some money 意为\"某物价值多少钱\"。", source:"Unit 8教材考点精练-学科网"},
+{q:"—Why do you know so much ____ about the accident? —I was having a walk nearby when it happened.", o:["detail", "knowledge", "meaning", "action"], a:0, e:"detail 意为\"细节\"，知道事故的很多细节。", source:"Unit 8课时练-学科网"},
+{q:"—Did you reply ____ your pen pal's letter? —Yes, of course.", o:["to", "in", "for", "with"], a:0, e:"reply to 意为\"回复\"，为固定搭配。", source:"Unit 8综合检测-学科网"},
+{q:"One of the most important ways ____ is to practice more.", o:["learn", "to learn", "learning"], a:1, e:"不定式 to learn 作后置定语修饰 ways。", source:"Unit 8课后巩固练习-学科网"},
+{q:"—At the start of the new term, I'm going to make some new friends. —Me, too. But it's ____ for me to talk with a stranger. Got any advice?", o:["possible", "impolite", "valuable", "challenging"], a:3, e:"challenging 意为\"有挑战性的\"，和陌生人交谈有挑战性。", source:"Units7-8语法综合练-学科网"},
+{q:"You will not make so many mistakes if you read the book ____.", o:["simply", "hardly", "nearly", "carefully"], a:3, e:"carefully 意为\"仔细地\"，仔细读书就不会犯那么多错。", source:"Unit 8安徽培优卷-学科网"},
+{q:"The Dragon Boat Festival always ____ on the fifth day of the fifth lunar month.", o:["takes out", "takes place", "takes over", "takes up"], a:1, e:"take place 意为\"举行、发生\"，描述客观事实用一般现在时。", source:"Unit 8单元测试卷-学科网"},
+{q:"AI technology has won high praise because it can ____ more opportunities to people.", o:["offer", "prepare", "cost", "protect"], a:0, e:"offer 意为\"提供\"，提供更多机会。", source:"Unit 8单元能力达标题-学科网"},
+{q:"She speaks English ____ that she can chat with foreign students freely.", o:["such fluent", "so fluent", "such fluently", "so fluently"], a:3, e:"so + 副词 + that... 意为\"如此……以至于……\"，修饰 speaks 用副词 fluently。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"The two leaders met ____ to discuss an important plan.", o:["face to face", "side by side", "hand in hand", "one by one"], a:0, e:"face to face 意为\"面对面地\"，两位领导会面。", source:"Unit 8习题课件-学科网"},
+{q:"You will be late for school if you ____ up early.", o:["don't get", "didn't get", "won't get"], a:0, e:"if 条件句\"主将从现\"，从句用一般现在时 don't get。", source:"Unit 8课后巩固练习-学科网"},
+{q:"The meeting tomorrow is very important. Please ____ the time and place carefully.", o:["look forward to", "get close to", "happen to", "pay attention to"], a:3, e:"pay attention to 意为\"注意\"，注意会议的时间和地点。", source:"Unit 8教材考点精练-学科网"},
+{q:"—Could you please ____ a message for me when you see him? —Sure, no problem.", o:["take", "bring", "carry", "get"], a:0, e:"take a message 意为\"捎口信\"，为固定搭配。", source:"Unit 8基础通关卷-学科网"},
+{q:"If you ____ careful enough, you will make some mistakes in communication.", o:["aren't", "won't be", "don't", "can't"], a:0, e:"if 条件句\"主将从现\"，careful 前用 be 动词，主语 you 用 aren't。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"—What did your teacher say just now? —She told us ____ late for the meeting tomorrow.", o:["not be", "don't be", "not to be", "won't be"], a:2, e:"tell sb. not to do sth. 意为\"告诉某人不要做某事\"。", source:"Unit 8单元复习卷-学科网"},
+{q:"If you want to solve the problem, you'd better talk to him ____.", o:["in person", "in the person", "in persons", "in a person"], a:0, e:"in person 意为\"亲自、亲身\"，为固定短语。", source:"Unit 8单元测试卷-学科网"},
+{q:"—Lucy, you mustn't tell others about your ____ information easily. —I see, Mum. I will protect myself.", o:["personal", "social", "possible", "nervous"], a:0, e:"personal 意为\"私人的\"，个人信息。", source:"Unit 8中考能力提升题-学科网"},
+{q:"Try to ____ and just tell me what happened.", o:["shout out", "cry loudly", "go mad", "keep calm"], a:3, e:"keep calm 意为\"保持冷静\"，冷静下来告诉我发生了什么。", source:"Unit 8习题课件-学科网"},
+{q:"—Lucy, the Dragon Boat Festival is coming. I want to learn how to make zongzi. —OK. If my grandma ____ free tomorrow, she will teach us.", o:["is", "are", "am", "will be"], a:0, e:"if 条件句\"主将从现\"，主语 my grandma 用 is。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"—Do you think Andy can be a good policeman? —Yes, I think so. He is able to stay ____ when something dangerous happens.", o:["excited", "calm", "afraid", "nervous"], a:1, e:"calm 意为\"镇定的\"，危险发生时能保持镇定。", source:"Unit 8单元测试卷-学科网"},
+{q:"When we watch English movies, we can get the meaning from the body language and the ____ on the actors' faces if we don't understand them.", o:["expressions", "instructions", "invitations", "celebrations"], a:0, e:"expressions 意为\"表情\"，通过肢体语言和表情理解意思。", source:"Unit 8单元练习木牍中考-学科网"},
+{q:"The firemen had much difficulty ____ people from the fire.", o:["saving", "save", "saved", "to save"], a:0, e:"have difficulty doing sth. 意为\"做某事有困难\"，用动名词 saving。", source:"Unit 8综合检测-学科网"},
+{q:"There ____ a new talk show about communication skills next Monday.", o:["is", "was", "will be", "are"], a:2, e:"根据 next Monday 用 there be 的将来时 there will be。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"We can see the two men stand ____ in the picture.", o:["face to face", "side by side", "back to back", "hand in hand"], a:0, e:"face to face 意为\"面对面地\"，两人面对面站着。", source:"Unit 8单元测试卷-学科网"},
+{q:"—You shouldn't argue ____ your parents. It is impolite. —I know. But sometimes they don't understand me.", o:["from", "for", "with", "about"], a:2, e:"argue with sb. 意为\"与某人争吵\"。", source:"Unit 8单元测试卷-学科网"},
+{q:"After a short rest, they continued ____ the work.", o:["do", "doing", "to doing", "does"], a:1, e:"continue doing sth. 表示继续做同一件事。", source:"Unit 8单元测试卷-学科网"},
+{q:"—Don't forget to ____ me a line after the trip! —OK, I will.", o:["write", "drop", "send", "take"], a:1, e:"drop sb. a line 意为\"给某人写信\"，固定短语。", source:"Unit 8Section A Grammar分层作业-学科网"},
+{q:"—I'm really nervous before the English speech. —____. You can make it.", o:["Take it easy", "It doesn't matter", "I'm sorry", "That's right"], a:0, e:"Take it easy 意为\"放轻松\"，安慰对方。", source:"Unit 8单元测试题-学科网"},
+{q:"—I really don't know what to say in front of you. —Don't be ____. Say as you think.", o:["excited", "strange", "slow", "nervous"], a:3, e:"nervous 意为\"紧张的\"，不要紧张按你想的说。", source:"Unit 8综合检测卷上分卷-学科网"},
+{q:"We should talk ____ to solve this problem.", o:["in email", "on line", "phone", "face to face"], a:3, e:"face to face 意为\"面对面地\"，面对面交谈来解决问题。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"If we ____ take environmental problems seriously, the earth ____ worse and worse.", o:["don't; will be", "won't; isn't", "won't; is", "don't; won't be"], a:0, e:"if 条件句\"主将从现\"：从句用 don't take，主句用 will be。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"My grandparents live far away, so we often have a ____ to see each other.", o:["message", "phone call", "video call", "letter"], a:2, e:"video call 意为\"视频通话\"，爷爷奶奶住得远所以常视频通话。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"He pretended ____ asleep when his mother came in.", o:["to be", "be", "being"], a:0, e:"pretend to do sth. 意为\"假装做某事\"。", source:"Unit 8课后巩固练习-学科网"},
+{q:"—Can you help me with my math problems? —Sure. I'll come to your house ____.", o:["just now", "for a while", "just then", "right away"], a:3, e:"right away 意为\"马上、立刻\"，表示立即去帮忙。", source:"Unit 8综合检测-学科网"},
+{q:"It's time ____ a bridge over the river.", o:["build", "building", "to build", "for build"], a:2, e:"It's time to do sth. 意为\"该做某事了\"。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"As a volunteer, Wang Fan went to Xinjiang. Now he works at a ____ hospital.", o:["local", "direct", "polite", "correct"], a:0, e:"local 意为\"当地的\"，在当地医院工作。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"My sister plans ____ a speech about good communication next week.", o:["give", "to give", "giving", "gives"], a:1, e:"plan to do sth. 意为\"计划做某事\"。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"She gave a ____ apology for her mistake, and everyone forgave her.", o:["sincere", "fake", "careless", "quick"], a:0, e:"sincere 意为\"真诚的\"，真诚的道歉让大家原谅了她。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"After finishing the maths problems, the students ____ the next subject.", o:["moved on to", "looked for", "gave up", "thought about"], a:0, e:"move on to 意为\"继续做（下一件事）\"，做完数学题继续下一科。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"You can ask your teacher for help ____ you don't know how to solve the problem.", o:["if", "so", "but", "and"], a:0, e:"if 引导条件状语从句，意为\"如果\"。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"The teacher told his students that they should take their study ____, or they would not pass the test.", o:["surely", "exactly", "finally", "seriously"], a:3, e:"take sth. seriously 意为\"认真对待某事\"。", source:"Unit 8单元能力达标题-学科网"},
+{q:"If you don't know the word, you can ____ it ____ in the dictionary.", o:["look; for", "look; up", "give; up", "put; up"], a:1, e:"look up 意为\"查阅\"，在词典里查单词。", source:"Unit 8Grammar 3a-3c课后作业-学科网"},
+{q:"My mother always tells me to be ____ to the elderly when talking to them.", o:["polite", "rude", "impolite", "insincere"], a:0, e:"be polite to sb. 意为\"对某人有礼貌\"。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"If it ____ rain tomorrow, we will go for a picnic.", o:["doesn't", "won't", "didn't"], a:0, e:"if 条件句\"主将从现\"，从句用一般现在时 doesn't rain。", source:"Unit 8课后巩固练习-学科网"},
+{q:"I don't think swimming is as exciting as skating, but ____ of them are interesting.", o:["all", "both", "either", "some"], a:1, e:"both 意为\"两者都\"，游泳和滑冰都有趣。", source:"Unit 8单元练习木牍中考-学科网"},
+{q:"I will give him the book if I ____ him next week.", o:["meet", "met", "meeting", "will meet"], a:0, e:"if 条件句\"主将从现\"，从句用一般现在时 meet。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"I prefer talking ____ rather than chatting online.", o:["step by step", "hand in hand", "side by side", "face to face"], a:3, e:"face to face 意为\"面对面地\"，比起网上聊天更喜欢面对面交谈。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"Their friendship is ____ warm tea. The longer it lasts, the warmer it becomes.", o:["as soon as", "as well as", "as good as", "as long as"], a:2, e:"as good as 意为\"和……一样好\"，be 动词后接形容词 good。", source:"Unit 8能力提升卷-学科网"},
+{q:"—Do you know how I can get any information about the city? —Sure. You can ask the ____ people. They will help you.", o:["local", "busy", "weak", "thirsty"], a:0, e:"local 意为\"当地的\"，问当地人了解城市信息。", source:"Unit 8Section A 1a-1d课时作业-学科网"},
+{q:"—What will happen ____ AI robots take the place of humans? —Don't worry. AI will never replace humans for their creativity and emotional intelligence.", o:["because", "so", "if", "but"], a:2, e:"if 引导条件状语从句，意为\"如果\"。", source:"Unit 8单元能力达标题-学科网"},
+{q:"The old pictures makes my mother ____ her childhood.", o:["think over", "to think over", "think of", "to think of"], a:2, e:"make sb. do sth. 用动词原形；think of 意为\"想起\"。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"When I was in trouble, my friend ____ help me. I felt very happy.", o:["decided", "refused to", "offered to", "forgot to"], a:2, e:"offer to do sth. 意为\"主动提出做某事\"，朋友主动提出帮我。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"He ____ much healthier if he ____ enough exercise in his free time.", o:["is; take", "will be; takes", "will be; take", "was; is taking"], a:1, e:"if 条件句\"主将从现\"：主句用 will be，从句用 takes。", source:"Unit 8课时练-学科网"},
+{q:"I'm not good at math. I don't know how to ____ the problems.", o:["deal with", "agree with", "talk with", "come up with"], a:0, e:"deal with 意为\"处理\"，不知道怎么处理这些数学题。", source:"Unit 8单元测试题-学科网"},
+{q:"The sign means that we must slow down and drive ____ near the school.", o:["quickly", "quietly", "carefully", "seriously"], a:2, e:"carefully 意为\"小心地\"，在学校附近小心驾驶。", source:"Unit 8单元测试卷-学科网"},
+{q:"If you have a fight with your brother, you should ____ with him.", o:["communicate", "compare", "compete", "complain"], a:0, e:"communicate with sb. 意为\"与某人沟通\"，与弟弟打架后应与他沟通。", source:"Unit 8单元测试题-学科网"},
+{q:"I don't think the boy with a pair of glasses finishes his work ____ his cousin.", o:["more careful than", "as careful as", "as more carefully as", "as carefully as"], a:3, e:"as...as 中间用原级，修饰动词 finishes 用副词 carefully。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"Many hotels in China ____ free toothbrushes to every guest. But in some European countries, guests might need to bring their own.", o:["offer", "provide", "manage", "develop"], a:0, e:"offer sth. to sb. 意为\"向某人提供某物\"，符合语境。", source:"Unit 8单元能力检测-学科网"},
+{q:"—I argued with my best friend. What should I do? —You should ____ him so that you can say sorry.", o:["call", "forget", "leave", "bring"], a:0, e:"call 意为\"打电话\"，打电话给他以便道歉。", source:"Unit 8单元测试题-学科网"},
+{q:"—Don't ____ your English. I can help you with it. —Thank you very much. It's very kind of you.", o:["worry about", "care about", "think about", "talk about"], a:0, e:"worry about 意为\"担心\"，让对方不要担心英语。", source:"Unit 8综合检测-学科网"},
+{q:"—Shall we make a cake by ourselves instead of buying one? —____", o:["That's a good idea", "Don't worry", "Never mind", "The same to you"], a:0, e:"That's a good idea 意为\"好主意\"，表示同意提议。", source:"Unit 8安徽培优卷-学科网"},
+{q:"We can ____ our friends by sending messages and making video calls.", o:["communicate with", "talk for", "help with", "agree with"], a:0, e:"communicate with 意为\"与……交流\"，固定短语。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"He didn't go to the movie. ____, he watched TV at home.", o:["Instead of", "Instead", "Because", "Because of"], a:1, e:"instead 意为\"反而、代替\"，单独使用位于句首。", source:"Unit 8单元测试卷-学科网"},
+{q:"—Does the computer ____ you lots of money? —Yes. I ____ more than 9,000 yuan on it.", o:["spend; cost", "cost; take", "cost; spend", "take; spend"], a:2, e:"第一空主语是物用 cost；第二空主语是人且花费金钱用 spend。", source:"Unit 8综合检测-学科网"},
+{q:"Grandma has a(n) ____ way of cooking—she always makes the food look like lovely animals.", o:["creative", "local", "efficient"], a:0, e:"creative 意为\"有创意的\"，把食物做成动物形状。", source:"Units7-8语法综合练-学科网"},
+{q:"To improve your English, it's important to ____ every chance to practice.", o:["makes use of", "make use of", "making use of", "made use of"], a:1, e:"It's important to do sth.，用动词原形 make use of。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"—Could you please clean your room? —OK, I'll do it ____.", o:["in the future", "just now", "at last", "right away"], a:3, e:"right away 意为\"马上\"，马上打扫房间。", source:"Unit 8习题课件-学科网"},
+{q:"We should ____ others' opinions even if we don't agree with them. It's a basic communication rule.", o:["listen", "hear", "respect", "refuse"], a:2, e:"respect 意为\"尊重\"，即使不赞同也应尊重他人的观点。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"You should practice more ____ you want to improve your spoken English.", o:["if", "unless", "because", "until"], a:0, e:"if 引导条件状语从句，意为\"如果\"。", source:"Unit 8Grammar 3a-3c课后作业-学科网"},
+{q:"Mary will go to Sanya if she ____ a five-day holiday.", o:["have", "had", "will have", "has"], a:3, e:"if 条件句\"主将从现\"，从句主语 she 用一般现在时 has。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"After reading the story of Benjamin Franklin, he ____ that lifelong learning is important.", o:["makes sure", "is aware of", "finds out", "searches for"], a:2, e:"finds out 意为\"发现\"，后接 that 从句。", source:"Unit 8教材考点精练-学科网"},
+{q:"—Could I borrow your pencil box? —Sure, you ____. But you ____ keep all stationery tidy.", o:["could; can", "can; must", "must; can", "could; must"], a:1, e:"委婉请求的肯定回答用 can；后句提出硬性要求用 must。", source:"Unit 8能力提升卷-学科网"},
+{q:"____ the window if you want fresh air in the room.", o:["To open", "Opening", "Don't open", "Open"], a:3, e:"主句是动词原形开头的祈使句，if 从句用一般现在时，即\"主祈从现\"。", source:"Unit 8if条件句语法精练-学科网"},
+{q:"—I hear that you will go back to your country soon. —Actually not. I will ____ my study here for another half a year.", o:["continue", "start", "finish", "miss"], a:0, e:"continue 意为\"继续\"，继续在这里学习半年。", source:"Unit 8单元练习木牍中考-学科网"},
+{q:"—Reading makes a full man. —____. Wherever I go, there is always a book with me.", o:["I truly agree with you", "You are joking", "It sounds like fun", "I don't think so"], a:0, e:"I truly agree with you 意为\"我完全同意你的看法\"。", source:"Unit 8单元练习木牍中考-学科网"},
+{q:"If you want to improve your communication skills, being a good ____ is very important.", o:["partner", "listener", "writer", "teacher"], a:1, e:"listener 意为\"倾听者\"，成为好的倾听者很重要。", source:"Unit 8周末基础巩固-学科网"},
+{q:"____ of my parents are teachers.", o:["Both", "All", "Neither", "Either"], a:0, e:"both... 意为\"两者都\"，父母两人都是老师。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"If it ____ tomorrow, we will go for a walk in the park.", o:["is sunny", "will be sunny", "was sunny", "is sunning"], a:0, e:"if 条件句用一般现在时表将来，主语 it 用 is sunny。", source:"Unit 8if条件句语法精练-学科网"},
+{q:"It's important to ____ clearly with your teammates during the game.", o:["communicate", "communication", "communicating", "communicated"], a:0, e:"to 后接动词原形，communicate with sb. 意为\"与某人交流\"。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"If my friend ____ free this Sunday, we ____ make a video call.", o:["is; will", "will be; are", "are; will"], a:0, e:"if 条件句\"主将从现\"：从句用 is，主句用 will。", source:"Units7-8语法综合练-学科网"},
+{q:"—I can't decide whether to accept or ____ the invitation. —You should think about it carefully before making a decision.", o:["refuse", "return", "reply", "receive"], a:0, e:"refuse 意为\"拒绝\"，与 accept（接受）相对。", source:"Unit 8单元复习卷-学科网"},
+{q:"Last Sunday, Frank wasn't careful ____ his words during the meeting.", o:["with", "at", "of", "for"], a:0, e:"be careful with 意为\"小心对待\"，固定搭配。", source:"Unit 8课时练-学科网"},
+{q:"If you want to get good grades, you ____ study hard.", o:["may", "can", "should", "would"], a:2, e:"should 意为\"应该\"，想取得好成绩就应该努力学习。", source:"Unit 8单元测试题-学科网"},
+{q:"—Will you go to the party? —If I ____ invited, I will go.", o:["am", "will be", "was", "were"], a:0, e:"if 条件句\"主将从现\"，从句用一般现在时 am invited。", source:"Unit 8Grammar 3a-3c课后作业-学科网"},
+{q:"It's time for us ____ to the teacher carefully.", o:["listen", "to listen", "listening"], a:1, e:"It's time for sb. to do sth. 意为\"该某人做某事了\"。", source:"Unit 8课后巩固练习-学科网"},
+{q:"It's ____ to ask someone's age or salary in Western countries.", o:["reasonable", "impolite", "sincere", "creative"], a:1, e:"impolite 意为\"不礼貌的\"，询问年龄工资是不礼貌的。", source:"Unit 8周末基础巩固-学科网"},
+{q:"We should take labour education ____. It will be helpful in our whole life.", o:["carefully", "strangely", "especially", "seriously"], a:3, e:"take sth. seriously 意为\"认真对待某事\"。", source:"Unit 8单元练习木牍中考-学科网"},
+{q:"—What are you doing this Sunday? —I'm ____ my aunt.", o:["visit", "visits", "visiting", "visited"], a:2, e:"现在进行时表将来，表示周日计划去看望姑姑。", source:"Unit 8单元测试卷-学科网"},
+{q:"The new bicycle ____ me 200 dollars.", o:["cost", "spent", "took", "paid"], a:0, e:"cost 主语是物，sth. cost(s) sb. some money。", source:"Unit 8单元测试卷-学科网"},
+{q:"I need to ____ what time the train leaves. Can you help me check the schedule?", o:["take out", "look at", "find out", "put away"], a:2, e:"find out 意为\"查明\"，查明火车出发时间。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"—____ should I do if my friend is angry with me? —You should say sorry to her.", o:["What", "How", "Why", "Where"], a:0, e:"根据答语\"你应该向她道歉\"可知问的是\"做什么\"，用 What。", source:"Unit 8基础通关卷-学科网"},
+{q:"You ____ join the reading club if you fill in the form today.", o:["will", "can", "should", "must"], a:1, e:"主句含情态动词 can，if 从句用一般现在时，即\"主情从现\"。", source:"Unit 8if条件句语法精练-学科网"},
+{q:"If you have a problem, it's often better to talk ____ rather than sending a text message.", o:["hand in hand", "face to face", "step by step", "side by side"], a:1, e:"face to face 意为\"面对面地\"，当面交谈比发信息更好。", source:"Unit 8教材考点精练-学科网"},
+{q:"If you take this train, you ____ in Shanghai in four hours.", o:["arrive", "arrived", "will arrive", "arrives"], a:2, e:"if 条件句\"主将从现\"，主句用一般将来时 will arrive。", source:"Unit 8单元测试卷-学科网"},
+{q:"Our country will be much better for everyone in the future ____ we all do something to help now.", o:["if", "before", "so that", "even though"], a:0, e:"if 引导条件状语从句，意为\"如果\"。", source:"Unit 8安徽培优卷-学科网"},
+{q:"The little boy was so ____ that he made some mistakes in the speech.", o:["nervous", "angry", "happy", "excited"], a:0, e:"nervous 意为\"紧张的\"，小男孩太紧张演讲出了错。", source:"Unit 8习题课件-学科网"},
+{q:"Today, WeChat becomes very popular, and more and more people like to use it to ____ each other.", o:["depend on", "compete against", "communicate with", "compare to"], a:2, e:"communicate with 意为\"与……交流\"，用微信与他人交流。", source:"Unit 8安徽培优卷-学科网"},
+{q:"If he ____ free this weekend, he will join our discussion group.", o:["comes", "come", "will come", "came"], a:0, e:"if 条件句\"主将从现\"，主语 he 用一般现在时 comes。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"My parents don't allow me ____ TV on school nights.", o:["watch", "to watch", "watching", "watched"], a:1, e:"allow sb. to do sth. 意为\"允许某人做某事\"，用不定式 to watch。", source:"Unit 8单元测试题-学科网"},
+{q:"For me, this singing competition is a ____ to show my talent. I won't miss it.", o:["change", "chance", "skill", "goal"], a:1, e:"chance 意为\"机会\"，唱歌比赛是展示才华的机会。", source:"Unit 8中考能力提升题-学科网"},
+{q:"If you ____ carefully, you ____ the report well.", o:["listen; will understand", "will listen; understand", "listen; understand", "will listen; will understand"], a:0, e:"if 条件句\"主将从现\"：从句用 listen，主句用 will understand。", source:"Unit 8Grammar 3a-3c课后作业-学科网"},
+{q:"You ____ waste too much time on useless online chats.", o:["not should", "should not", "don't should", "shouldn't not"], a:1, e:"should 的否定形式为 should not，意为\"不应该\"。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"It is really dangerous ____ people run the red traffic light.", o:["unless", "if", "though", "until"], a:1, e:"if 意为\"如果\"，如果人们闯红灯会很危险。", source:"Unit 8Section A Grammar分层作业-学科网"},
+{q:"—Dear Sir, Could you teach me the ways to study this term's new subject Physics? —The ____ you listen to teachers in class, the ____ your understanding of lessons will be.", o:["more quickly; better", "more carefully; clearer", "more loudly; easier", "more happily; deeper"], a:1, e:"the+比较级, the+比较级 表示\"越……越……\"，听得越认真理解越清晰。", source:"Units7-8语法综合练-学科网"},
+{q:"—Could you please tell me how to communicate with foreigners politely? —Sure. You should speak ____ and avoid interrupting them.", o:["fluent", "fluently", "sincere", "seriously"], a:1, e:"修饰动词 speak 用副词 fluently，意为\"流利地\"。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"The Browns often ____ food to homeless people and ____ books for the children in need.", o:["provide; give", "provide; offer", "offer; give", "offer; provide"], a:3, e:"offer sth. to sb. 与 provide sth. for sb. 均为固定搭配。", source:"Unit 8教材考点精练-学科网"},
+{q:"When I was ill, our teacher came to see me ____, which moved me a lot.", o:["at birth", "in person", "in public", "in turn"], a:1, e:"in person 意为\"亲自\"，老师亲自来看我。", source:"Unit 8安徽培优卷-学科网"},
+{q:"We should pay more attention ____ our pronunciation.", o:["at", "to", "in", "for"], a:1, e:"pay attention to 意为\"注意、关注\"，为固定搭配。", source:"Unit 8单元测试卷-学科网"},
+{q:"You can feel better ____ you take a walk in the park for 20 minutes.", o:["if", "before", "until", "while"], a:0, e:"if 引导条件状语从句，意为\"如果\"。", source:"Unit 8习题课件-学科网"},
+{q:"—What's wrong with you, Dave? —My homework can't be ____ on time because I've left it at home.", o:["given out", "got over", "showed up", "handed in"], a:3, e:"hand in 意为\"上交\"，作业不能按时上交因为忘在家里了。", source:"Unit 8单元测试题-学科网"},
+{q:"Please send me a ____ when you arrive.", o:["news", "information", "message", "advice"], a:2, e:"send a message 意为\"发消息\"，news/information/advice 不可数。", source:"Unit 8单元测试卷-学科网"},
+{q:"My sister often communicates ____ her best friend ____ WeChat.", o:["with; by", "to; through", "with; on", "to; on"], a:2, e:"communicate with sb. 意为\"与某人交流\"；在微信上用介词 on。", source:"Unit 8单元复习卷-学科网"},
+{q:"—How do you usually communicate with your pen pal? —By writing emails. She always replies to my letters ____.", o:["in time", "on time", "at time", "for time"], a:1, e:"on time 意为\"准时\"，她总是按时回信。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"Lily has some difficulties in ____ English.", o:["to learn", "learn", "to learning", "learning"], a:3, e:"have difficulties (in) doing sth. 意为\"在做某事方面有困难\"，用动名词 learning。", source:"Unit 8基础通关卷-学科网"},
+{q:"—____ does the sports meeting ____ in your school? —Twice a year.", o:["How long, happen", "How soon, take place", "How often, take place", "How many times, happen"], a:2, e:"根据答语 Twice a year 问频率用 How often；举行用 take place。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"It's necessary ____ us ____ communicate politely.", o:["for; to", "of; to", "for; for", "of; for"], a:0, e:"It's necessary for sb. to do sth. 意为\"对某人来说做某事是必要的\"。", source:"Unit 8Grammar 3a-3c课后作业-学科网"},
+{q:"—Let's hang out after school. —____. I have to finish my homework first.", o:["Good idea", "Sounds great", "Sorry, I can't", "No problem"], a:2, e:"根据\"我得先完成作业\"可知要委婉拒绝，用 Sorry, I can't。", source:"Unit 8基础通关卷-学科网"},
+{q:"—I'm afraid to speak in public. —You ____ practice more if you want to be brave.", o:["should", "can", "may", "would"], a:0, e:"should 意为\"应该\"，想变得勇敢就应该多练习。", source:"Unit 8Grammar 3a-3c课后作业-学科网"},
+{q:"The Smiths always offer ____ people in need. They are very nice and helpful.", o:["help", "to help", "helping", "helps"], a:1, e:"offer to do sth. 意为\"主动提出做某事\"，用不定式 to help。", source:"Unit 8综合检测-学科网"},
+{q:"—Could you please put out your cigarette? I can't stand the smell. —Sorry. I'll do it ____.", o:["in person", "right away", "in public", "for a minute"], a:1, e:"right away 意为\"马上、立刻\"。", source:"Unit 8核心词汇短语专项练-学科网"},
+{q:"It's ____ to interrupt others while they are speaking.", o:["polite", "impolite", "friendly", "kind"], a:1, e:"impolite 意为\"不礼貌的\"，打断别人说话是不礼貌的。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"Hiking is more and more popular. It's healthy and costs ____.", o:["nothing", "everything", "anything", "something"], a:0, e:"costs nothing 意为\"不花钱\"，符合语境。", source:"Unit 8能力提升卷-学科网"},
+{q:"____ your help, I finished the project on time.", o:["Thanks you", "Thanks to", "Thank for", "Thanks with"], a:1, e:"thanks to 意为\"多亏、由于\"，由于你的帮助我按时完成了项目。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"If she ____ enough sleep, she ____ tired at school.", o:["won't get; will feel", "won't get; feels", "doesn't get; will feel", "doesn't get; feels"], a:2, e:"if 条件句\"主将从现\"：从句用 doesn't get，主句用 will feel。", source:"Unit 8安徽培优卷-学科网"},
+{q:"____ she invites me, I ____ to her birthday party.", o:["Because; went", "When; went", "So; will go", "If; will go"], a:3, e:"if 条件句\"主将从现\"：从句用 invites，主句用 will go。", source:"Unit 8Section A Grammar分层作业-学科网"},
+{q:"If she ____ harder, she ____ better grades in the exam.", o:["studies; will get", "will study; gets", "studies; gets", "will study; will get"], a:0, e:"if 条件句遵循\"主将从现\"：主句用 will get，从句主语 she 用一般现在时 studies。", source:"Unit 8if条件句语法精练-学科网"},
+{q:"If you ____ hungry, you ____ eat something.", o:["will feel; can", "feel; can't", "feel; should", "will feel; may"], a:2, e:"if 条件句\"主情从现\"：从句用一般现在时 feel，主句用情态动词 should。", source:"Unit 8能力提升卷-学科网"},
+{q:"He offered ____ me carry the heavy box.", o:["help", "helping", "to help", "helped"], a:2, e:"offer to do sth. 意为\"主动提出做某事\"。", source:"Unit 8单元测试卷-学科网"},
+{q:"Good body language ____ you make better conversations.", o:["help", "helps", "will help", "helped"], a:1, e:"陈述客观事实用一般现在时；主语 Good body language 视为三单，谓语用 helps。", source:"Unit 8基础通关卷-学科网"},
+{q:"If it ____ fine tomorrow, we ____ have an outdoor party.", o:["is; will", "will be; will", "is; can be", "will be; are"], a:0, e:"if 条件句\"主将从现\"：从句用 is，主句用 will。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"—I'm sorry I forgot ____ your book back. —It doesn't matter. You can return it tomorrow.", o:["bring", "bringing", "to bring", "brought"], a:2, e:"forget to do sth. 意为\"忘记去做某事\"（还没做）。", source:"Unit 8单元复习卷-学科网"},
+{q:"The concert will ____ in the city hall next week.", o:["take place", "take up", "take part in", "take care of"], a:0, e:"take place 意为\"举行、发生\"，音乐会在市政厅举行。", source:"Unit 8习题课件-学科网"},
+{q:"DeepSeek offers many ____, such as improving education and solving problems.", o:["benefits", "relationships", "speeches", "replies"], a:0, e:"benefits 意为\"益处\"，AI 带来许多好处。", source:"Unit 8单元能力达标题-学科网"},
+{q:"You ____ late for school if you ____ up early.", o:["won't be; get", "aren't; will get", "won't be; will get", "aren't; get"], a:0, e:"if 条件句\"主将从现\"：主句用 won't be，从句用 get。", source:"Unit 8Grammar 3a-3c课后作业-学科网"},
+{q:"We feel it is ____ honour to get your invitation to the meeting.", o:["a", "an", "the", "/"], a:1, e:"honour 以元音音素开头，用不定冠词 an。", source:"Unit 8单元测试卷-学科网"},
+{q:"—____ do you communicate with your classmates? —By chatting on WeChat.", o:["What", "How", "Why", "When"], a:1, e:"根据答语\"By chatting on WeChat\"可知问的是方式，用 How。", source:"Unit 8单元测试卷-学科网"},
+{q:"She is ____ angry with him ____ say a word.", o:["too; to", "so; that", "such; that", "enough; to"], a:0, e:"too...to... 意为\"太……而不能……\"，她太生气以至于说不出话。", source:"Unit 8单元测试题-学科网"},
+{q:"—What will you do if you ____ the exam? —I will try again next time.", o:["will fail", "fail", "failed", "failing"], a:1, e:"if 条件句\"主将从现\"，从句用一般现在时 fail。", source:"Unit 8Grammar 3a-3c课后作业-学科网"},
+{q:"—The class ____ gives us a chance to know each other's lives. —Yes, we haven't seen each other for five years.", o:["member", "instruction", "role", "reunion"], a:3, e:"reunion 意为\"团聚\"，同学聚会让我们了解彼此的生活。", source:"Unit 8课时练-学科网"},
+{q:"If you ____ red and yellow, you get orange.", o:["mix", "mixed", "will mix"], a:0, e:"客观真理：if 条件句用一般现在时 mix，主句也用一般现在时。", source:"Unit 8课后巩固练习-学科网"},
+{q:"If it ____ tomorrow, we ____ to the park.", o:["rains; won't go", "will rain; don't go", "rains; don't go", "will rain; won't go"], a:0, e:"if 条件句遵循\"主将从现\"：从句用一般现在时 rains，主句用一般将来时 won't go。", source:"Unit 8基础通关卷-学科网"},
+{q:"—When will you ____ your plan to the class? —Tomorrow morning. I'm preparing for it now.", o:["explain", "suggest", "promise", "remind"], a:0, e:"explain 意为\"解释、说明\"，符合语境。", source:"Unit 8单元复习卷-学科网"},
+{q:"If you ____ more in speaking, your communication skills will improve quickly.", o:["Practise", "practises", "will practise", "practised"], a:0, e:"if 条件句\"主将从现\"，主语 you 用动词原形 practise。", source:"Unit 8单元跟踪检测卷-学科网"},
+{q:"We need to ____ who broke the window.", o:["put out", "find out", "act out", "work out"], a:1, e:"find out 意为\"查明\"，查明是谁打破了窗户。", source:"Unit 8习题课件-学科网"},
+{q:"In modern society, people often use social media as a tool for ____.", o:["communication", "imagination", "technology", "education"], a:0, e:"communication 意为\"交流\"，社交媒体作为交流工具。", source:"Unit 8周末基础巩固-学科网"},
+{q:"People ____ fly small planes for trips in the future.", o:["will", "are", "do"], a:0, e:"根据 in the future 用一般将来时 will。", source:"Units7-8语法综合练-学科网"},
+{q:"—Did Tina finish her job? —I don't know. But I think she will give me a call if she ____ her job.", o:["finished", "finishes", "is finishing", "will finish"], a:1, e:"if 条件句\"主将从现\"，从句用一般现在时 finishes。", source:"Unit 8课时练-学科网"},
+{q:"We should have a ____ talk to solve the problem.", o:["face-to-face", "face to face", "faces-to-faces", "face to faces"], a:0, e:"face-to-face 是复合形容词，修饰名词 talk。", source:"Unit 8单元测试卷-学科网"},
+{q:"The school sports meeting ____ the day after tomorrow.", o:["takes place", "will take place", "took place"], a:1, e:"根据 the day after tomorrow 用一般将来时 will take place。", source:"Unit 8Section A 1a-1d课时作业-学科网"},
+{q:"He continued ____ the mountain until he got to the top.", o:["to climb", "climbing", "climbed", "climb"], a:1, e:"continue doing sth. 表示继续做同一件事，爬山是持续进行的动作。", source:"Unit 8综合检测-学科网"},
+{q:"When meeting a hot potato, simply stay calm and you will ____ the way to solve it.", o:["find out", "look for", "worry about", "argue with"], a:0, e:"find out 意为\"找到、查明\"，冷静下来找到解决方法。", source:"Unit 8单元练习木牍中考-学科网"},
+{q:"—What should I do if I don't agree with others' ideas? —You should express your opinion ____ instead of arguing with them angrily.", o:["sincerely", "loudly", "carelessly", "suddenly"], a:0, e:"sincerely 意为\"真诚地\"，真诚地表达观点而不是愤怒争吵。", source:"Unit 8知识点讲解与练习-学科网"},
+{q:"—____ we go to the cinema? —Good idea!", o:["Will", "Shall", "Are", "Do"], a:1, e:"Shall we...? 是固定句型，用来提出建议。", source:"Units7-8语法综合练-学科网"},
+{q:"It is good for your health ____ you take a walk after supper.", o:["until", "if", "although"], a:1, e:"if 引导条件状语从句，意为\"如果\"。", source:"Unit 8Section A 1a-1d课时作业-学科网"},
+{q:"—Why do you always believe in him? —Because I ____ him completely.", o:["trust", "hate", "refuse", "forget"], a:0, e:"trust 意为\"信任\"，完全信任他。", source:"Unit 8优化设计同步测控-学科网"},
+{q:"You have a good ____ of passing the exam if you are more careful.", o:["luck", "chance", "service", "result"], a:1, e:"chance 意为\"机会\"，更细心就有好机会通过考试。", source:"Unit 8习题课件-学科网"}
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('88_kp8_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('88_kp8_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('88_kp8_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 8 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 8 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>
