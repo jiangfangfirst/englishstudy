@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>九年级KP5</h1>
+        <p>被动语态（be made of/from/in/by/into、be used for/as/to、be invented/discovered by） · 主动表被动（feel/spread/keep） · 定语从句（who/which） · 高频短语辨析 · 发明主题词汇 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">九年级全一册Unit 5 · 在线检测</span>
+      <h2>单元检测核心库KP5</h2>
+      <p>涵盖被动语态（一般现在时 is/are done、一般过去时 was/were done、一般将来时 will be done、情态动词 can/must/should be done，be made of/from/in/by/into、be used for/as/to、be invented/discovered by、主动形式表被动含义的 feel/spread/keep 等）、定语从句（who/which 引导词辨析）、come up with / lead to / take action / make a difference / think twice / be responsible for / turn...into reality / speed up / result in / hundreds of / all over the world / in one's view / be supposed to / make good use of / look up / stick to / think of 等高频短语、invent / inventor / invention / creative / creation / discover / discovery / development / technology / power / idea / rapid / widely / famous / afford / design / printer / produce / shape / melt / wheel / reality / camera / tunnel / button / fibre 等 Power of Ideas 主题词汇、My pleasure / Have a good time / I agree with you / Sounds like a good plan 等情景交际高频考点。系统从全量题库（249 道）中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"The letter ___ by my mother last night.", o:["was written", "is written", "wrote", "writes"], a:0, e:"was written 一般过去时被动，信昨晚被妈妈写了。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"This helped to spread the ___ of tea around the world.", o:["popularity", "popular", "popularly", "popularize"], a:0, e:"popularity 普及，名词作宾语。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"Students are ___ enjoyable experiences by the smart dining hall.", o:["offered", "offering", "offer", "offers"], a:0, e:"are offered 被动，学生被提供愉快体验。", source:"Unit 5通关全能练(改写)"},
+{q:"Paper is usually ___ wood, while notebooks are ___ paper.", o:["made from; made of", "made of; made from", "made in; made by", "made into; made from"], a:0, e:"made from 看不出原材料，made of 看得出原材料。", source:"Unit 5通关全能练(10)"},
+{q:"The bridge over the river ___ in 1998.", o:["builds", "built", "was built", "is built"], a:2, e:"was built 一般过去时被动，桥建于 1998 年。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"I started to ___ on the design with my deskmate.", o:["work", "work out", "works", "working"], a:0, e:"work on 致力于，和同桌一起设计。", source:"Unit 5单元测试卷(改写)"},
+{q:"He is a creative boy who can always ___ new ways to solve problems.", o:["come up with", "catch up with", "agree with", "deal with"], a:0, e:"come up with 想出，想出解决问题的新方法。", source:"Unit 5单元培优测试卷(10)"},
+{q:"They are ___ used by people of all ages.", o:["widely", "wide", "wider", "widest"], a:0, e:"widely 广泛地，副词修饰 used。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"There was also an early form of paper ___ from jute.", o:["make", "made", "making", "to make"], a:1, e:"made from jute 过去分词短语作后置定语。", source:"Unit 5通关全能练(改写)"},
+{q:"Many new ___ are shown in the invention show.", o:["products", "productions", "producers", "product"], a:0, e:"products 产品，many 后接复数。", source:"Unit 5核心词汇专项(改写)"},
+{q:"New kinds of phones will ___ by inventors.", o:["be designed", "design", "designed", "be designing"], a:0, e:"will be designed 一般将来时被动，新手机会被设计。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Reading ancient books gives him new ___ for creative ideas.", o:["inspiration", "inspire", "inspiring", "inspired"], a:0, e:"inspiration 灵感，名词作宾语。", source:"Unit 5单元检测(改写)"},
+{q:"A new hospital ___ in our town next year.", o:["will be built", "will build", "is built", "builds"], a:0, e:"will be built 一般将来时被动，新医院明年将被建造。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"This plan is ___ for students to make small inventions.", o:["suitable", "suit", "suited", "suiting"], a:0, e:"be suitable for 适合。", source:"Unit 5核心词汇专项(改写)"},
+{q:"It is very ___ for us to protect the environment.", o:["important", "famous", "interesting", "expensive"], a:0, e:"important 重要的，保护环境对我们很重要。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"This great ___ changed people's daily life.", o:["invention", "invent", "inventor", "inventing"], a:0, e:"invention 名词，伟大的发明改变了日常生活。", source:"Unit 5核心词汇专项(改写)"},
+{q:"The coat is too expensive. I can't ___ it.", o:["afford", "affordable", "affording", "affords"], a:0, e:"afford 买得起，can't afford 买不起。", source:"Unit 5通关全能练(改写)"},
+{q:"It ___ that tea was first discovered by Shen Nong.", o:["is said", "was said", "says", "said"], a:0, e:"It is said that 据说。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"We ___ our invention with the class.", o:["shared", "sharing", "share", "shares"], a:0, e:"shared 一般过去时，我们与全班分享。", source:"Unit 5单元测试卷(改写)"},
+{q:"This new medical tool is ___ used in every big hospital now.", o:["rapidly", "widely", "gradually", "fully"], a:1, e:"widely 广泛地，新医疗工具被广泛使用。", source:"Unit 5核心词汇专项(10)"},
+{q:"We are ___ to use paper wisely and not waste it.", o:["supposed", "supposing", "suppose", "supposes"], a:0, e:"be supposed to 应该。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"The mobile phone ___ by Martin Cooper in 1973.", o:["invented", "is invented", "invents", "was invented"], a:3, e:"was invented 一般过去时被动，手机 1973 年被发明。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"The ___ of wheels completely changed ancient people's travelling ways.", o:["discovery", "invention", "collection", "discussion"], a:1, e:"invention 发明，轮子的发明改变了古人出行方式。", source:"Unit 5单元测试卷(9)"},
+{q:"The TV is old, but ___ still works well.", o:["it", "its", "they", "he"], a:0, e:"it 指代 the TV，旧电视仍然好用。", source:"Unit 5单元质量检测卷(10)"},
+{q:"The scientist ___ his thought into a real invention last year.", o:["turned", "turns", "turn", "turning"], a:0, e:"turned 一般过去时，turn...into 把……变成。", source:"Unit 5单元检测(改写)"},
+{q:"I decided to ___ a tap that turns off automatically.", o:["create", "recall", "divide", "produce"], a:0, e:"create 创造，决定发明一个自动关闭的水龙头。", source:"Unit 5单元测试卷(改写)"},
+{q:"A new school ___ in our town next year.", o:["will be built", "is built", "was built", "builds"], a:0, e:"will be built 一般将来时被动，新学校明年将建。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Paper was first ___ by Cai Lun in the Han Dynasty.", o:["invented", "discovered", "created", "produced"], a:1, e:"invented 发明，纸是蔡伦在汉代发明的。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"The window ___ by Tom yesterday.", o:["was broken", "is broken", "broke", "breaks"], a:0, e:"was broken 一般过去时被动，窗户昨天被汤姆打破。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"One of the world's favorite ___ was invented in this way.", o:["drinks", "drink", "drinking", "drunk"], a:0, e:"one of+复数名词 drinks。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"Tea is a symbol of Chinese culture and ___.", o:["wisdom", "wise", "wisely", "wiseness"], a:0, e:"wisdom 智慧，名词与 culture 并列。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"We should learn from those great ___ around the world.", o:["minds", "mind", "minded", "minding"], a:0, e:"minds 头脑、人才，those 后接复数。", source:"Unit 5单元检测(改写)"},
+{q:"All kinds of toys, chairs, and tables can ___ by the 3D printer.", o:["make", "be made", "made", "making"], a:1, e:"can be made 情态动词被动，可以被 3D 打印机制作。", source:"Unit 5单元自测卷·北京专用(12)"},
+{q:"Great ideas can change the world, so we should try to turn our ideas ___ reality.", o:["in", "on", "into", "for"], a:2, e:"turn...into reality 把……变成现实，固定搭配。", source:"Unit 5单元自测卷·北京专用(12)"},
+{q:"He became so ___ in his work that his wife needed to tell him to eat.", o:["interested", "interest", "interesting", "interests"], a:0, e:"be interested in 对……感兴趣。", source:"Unit 5综合检测(改写)"},
+{q:"___ papermaking spread to China's neighbouring countries.", o:["Later on", "At once", "In fact", "As a result"], a:0, e:"Later on 后来，造纸术后来传播到邻国。", source:"Unit 5通关全能练(改写)"},
+{q:"The telephone ___ by Alexander Bell in 1876.", o:["invented", "is invented", "was invented", "invents"], a:2, e:"was invented 一般过去时被动，1876 年电话被贝尔发明。", source:"Unit 5单元自测卷·北京专用(12)"},
+{q:"Modern ___ have changed the way we live.", o:["technologies", "technology", "techniques", "technical"], a:0, e:"technologies 技术，复数形式作主语。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"The radio message ___ across the Atlantic Ocean for the first time in 1901.", o:["sends", "sent", "is sent", "was sent"], a:3, e:"was sent 一般过去时被动，无线电信息 1901 年被发送。", source:"Unit 5单元自测卷·北京专用(12)"},
+{q:"The writer ___ an interesting character in his new story.", o:["discovered", "refused", "produced", "created"], a:3, e:"create 创造（作品、人物），创造人物角色。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"This new kind of cloth is ___ than silk.", o:["cheaper", "cheap", "cheapest", "cheaply"], a:0, e:"cheaper 比较级，than 标志。", source:"Unit 5核心词汇专项(改写)"},
+{q:"The bridge ___ in 2000.", o:["was built", "is built", "was building", "builds"], a:0, e:"was built 一般过去时被动，桥建于 2000 年。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"I never thought my idea ___ such a big difference.", o:["would make", "will make", "makes", "made"], a:0, e:"would make 过去将来时，从未想到会产生如此大的影响。", source:"Unit 5单元测试卷(改写)"},
+{q:"Too much plastic rubbish will ___ serious pollution to rivers and farmland.", o:["lead to", "look up to", "keep in mind", "take advantage of"], a:0, e:"lead to 导致，塑料垃圾导致污染。", source:"Unit 5单元测试卷(9)"},
+{q:"This book ___ by Lu Xun in the 1920s.", o:["was written", "writes", "is written", "wrote"], a:0, e:"was written 一般过去时被动，这本书是鲁迅写的。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"Every small effort can lead ___ big changes.", o:["to", "in", "for", "at"], a:0, e:"lead to 导致，固定搭配。", source:"Unit 5单元培优测试卷(改写)"},
+{q:"The river is very ___ at this point.", o:["wide", "widely", "widen", "width"], a:0, e:"wide 宽的，形容词作表语。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Paper ___ in ancient China and later it ___ to other parts of the world.", o:["invented; spread", "was invented; spread", "invented; was spread", "was invented; was spread"], a:1, e:"was invented 被动；spread 不及物动词不用被动，过去式与原形同形。", source:"Unit 5单元自测卷·北京专用(12)"},
+{q:"A mini-camera ___ to the front of these special glasses to help people read.", o:["connects", "is connected", "connected", "was connecting"], a:1, e:"is connected 一般现在时被动，微型摄像头被连接到眼镜前。", source:"Unit 5单元自测卷·北京专用(12)"},
+{q:"Many great inventions come from creative ___ that ordinary people have.", o:["habits", "dreams", "plans", "ideas"], a:3, e:"creative ideas 创造性的想法，固定搭配。", source:"Unit 5单元培优测试卷(10)"},
+{q:"Every citizen should be ___ for the rubbish around their living neighbourhood.", o:["suitable", "responsible", "rapid", "ideal"], a:1, e:"be responsible for 对……负责，公民应对垃圾负责。", source:"Unit 5单元测试卷(9)"},
+{q:"This factory ___ plastic cups and toys every single day.", o:["produces", "creates", "gains", "melts"], a:0, e:"produce 大批量生产，工厂每天生产塑料杯和玩具。", source:"Unit 5核心词汇专项(10)"},
+{q:"You should ___ before you make an important decision.", o:["move on", "give up", "think twice", "cheer up"], a:2, e:"think twice 三思而后行。", source:"Unit 5单元培优测试卷(10)"},
+{q:"Warm sunshine will make the frozen ice ___ into clean running water.", o:["melt", "gain", "afford", "suppose"], a:0, e:"melt 融化，阳光让冰融化成水。", source:"Unit 5单元测试卷(9)"},
+{q:"She ___ to make the bag.", o:["started", "starts", "start", "starting"], a:0, e:"started 一般过去时，她开始做包。", source:"Unit 5单元测试卷(改写)"},
+{q:"Super See glasses are ___ for people who can't see well.", o:["design", "designed", "designing", "designs"], a:1, e:"be designed for 为……而设计。", source:"Unit 5通关全能练(改写)"},
+{q:"—When ___ the first man ___ into space? —In 1961.", o:["is; sent", "was; sent", "did; send", "was; sending"], a:1, e:"was...sent 一般过去时被动疑问，1961 年人类首次被送入太空。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"Knowledge is very ___ for our future, so we should keep learning.", o:["famous", "important", "careless", "widely"], a:1, e:"important 重要的，知识对未来很重要。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"—I think creativity is one of the most important skills for us. —___. It helps us solve problems better.", o:["I don't think so", "That's all right", "I agree with you", "It doesn't matter"], a:2, e:"I agree with you 我同意你的看法。", source:"Unit 5单元测试卷(10)"},
+{q:"This new tool is much ___ than the old one for our daily life.", o:["more useful", "useful", "most useful", "the most useful"], a:0, e:"much+比较级 more useful，比旧工具有用得多。", source:"Unit 5单元检测(改写)"},
+{q:"You ___ read the instructions before using the 3D printer.", o:["are supposed to", "look up to", "take advantage of", "build up"], a:0, e:"be supposed to 应该，使用 3D 打印机前应读说明。", source:"Unit 5核心词汇专项(10)"},
+{q:"The machine was ___ in this factory last year.", o:["produced", "producing", "produces", "produce"], a:0, e:"was produced 被动，机器去年在这家工厂生产。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Tom asked his father how to use the ___ to print the homework clearly.", o:["printer", "printing", "printer's", "print"], a:0, e:"printer 打印机，用于打印。", source:"Unit 5通关全能练(改写)"},
+{q:"The new railway built many ___ to cross high mountains.", o:["wheels", "tunnels", "buttons", "fibres"], a:1, e:"tunnels 隧道，修铁路穿高山需要建隧道。", source:"Unit 5核心词汇专项(10)"},
+{q:"With the ___ of science and technology, our life becomes more colourful.", o:["development", "discovery", "invention", "production"], a:0, e:"with the development of 随着……的发展。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"She ___ reporters that she just wanted to help her grandma.", o:["told", "tells", "tell", "telling"], a:0, e:"told 一般过去时，她告诉记者。", source:"Unit 5单元测试卷(改写)"},
+{q:"The Great Wall ___ by millions of people every year.", o:["visits", "is visited", "visited", "was visited"], a:1, e:"is visited 一般现在时被动，长城每年被参观。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"In my ___, sticking to creative thinking is the key to progress.", o:["ability", "memory", "choice", "view"], a:3, e:"in one's view 在某人看来。", source:"Unit 5单元培优测试卷(10)"},
+{q:"Cai Lun became interested in ___ to solve the problem.", o:["try", "trying", "tried", "to try"], a:1, e:"be interested in doing 对做某事感兴趣。", source:"Unit 5通关全能练(改写)"},
+{q:"Thomas Edison died in 1931 at ___ age of 84.", o:["the", "a", "an", "one"], a:0, e:"at the age of 在……岁时，固定搭配。", source:"Unit 5综合检测(改写)"},
+{q:"He worked as a telegraph operator while still ___ much time on inventions.", o:["spending", "spend", "spent", "spends"], a:0, e:"while+doing，spending 现在分词。", source:"Unit 5综合检测(改写)"},
+{q:"Modern ___ makes it possible for us to talk to friends far away.", o:["technology", "technique", "television", "temperature"], a:0, e:"technology 科技，现代科技让我们能与远方朋友交谈。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"This new dictionary is very ___ for English learners.", o:["useful", "use", "useless", "used"], a:0, e:"useful 有用的，这本词典对学习者很有用。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"The light bulb was ___ by Thomas Edison in 1879.", o:["discovered", "invented", "created", "produced"], a:1, e:"invent 发明实物，电灯是爱迪生发明的。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"The little girl sings ___. Everyone enjoys her songs.", o:["badly", "beautifully", "carefully", "slowly"], a:1, e:"beautifully 优美地，修饰 sings。", source:"Unit 5单元质量检测卷(10)"},
+{q:"To his surprise, it ___ quite delicious.", o:["was", "is", "are", "were"], a:0, e:"was 一般过去时，茶的味道很好。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"We can ___ computers to search for information.", o:["use", "used", "using", "uses"], a:0, e:"use 使用，can 后接动词原形。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"You need to think ___ before you carry out your new idea.", o:["carefully", "careful", "careless", "care"], a:0, e:"carefully 仔细地，副词修饰 think。", source:"Unit 5单元检测(改写)"},
+{q:"Cai Lun was a ___ man. His idea changed the world.", o:["creative", "lazy", "careless", "silly"], a:0, e:"creative 有创造力的，蔡伦的想法改变了世界。", source:"Unit 5单元质量检测卷(10)"},
+{q:"—Do you know the man ___ is giving a speech over there? —Yes, he's a famous inventor from America.", o:["which", "whose", "who", "whom"], a:2, e:"who 引导定语从句指人作主语。", source:"Unit 5单元测试卷(10)"},
+{q:"Later, ___ kinds of light bulbs came out.", o:["hundreds of", "hundred of", "hundred", "hundreds"], a:0, e:"hundreds of 成百上千的。", source:"Unit 5通关全能练(改写)"},
+{q:"This watch is ___ of gold and looks very expensive.", o:["made", "produced", "created", "invented"], a:0, e:"be made of 由……制成（看得出原材料）。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"My grandma is good at making ___ but stylish clothes.", o:["cheap", "cheaply", "cheaper", "cheapest"], a:0, e:"cheap 便宜的，形容词修饰 clothes。", source:"Unit 5单元自测卷·安徽专用(改写)"},
+{q:"We ___ protect the environment and cut down plastic waste in daily life.", o:["are supposed to", "run out of", "mix up", "go through"], a:0, e:"be supposed to 应该，我们应该保护环境。", source:"Unit 5单元测试卷(9)"},
+{q:"This soft glue can ___ small paper pieces together well.", o:["lead", "stick", "melt", "shape"], a:1, e:"stick 粘贴，软胶水能把纸片粘在一起。", source:"Unit 5核心词汇专项(10)"},
+{q:"Light bulbs are useful ___ that make our nights bright.", o:["inventions", "inventors", "invention", "inventing"], a:0, e:"inventions 发明物，复数。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Thomas Edison was a famous ___.", o:["inventor", "invention", "inventing", "invented"], a:0, e:"inventor 发明家，爱迪生是著名发明家。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"This kind of table ___ wood.", o:["is made of", "is made from", "is made in", "is made by"], a:0, e:"is made of 由……制成（看得出原材料），桌子由木头制成。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"With the ___ of technology, our life is becoming better and better.", o:["development", "discovery", "invention", "improvement"], a:0, e:"with the development of 随着……的发展。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"This kind of silk ___ soft and smooth.", o:["feels", "is felt", "feeling", "to feel"], a:0, e:"feel 作系动词，主动形式表被动含义，摸起来柔软光滑。", source:"Unit 5通关全能练(10)"},
+{q:"—Thank you for showing me around the lab. —___.", o:["That's right", "My pleasure", "Good luck", "Of course"], a:1, e:"My pleasure 不客气，回应感谢。", source:"Unit 5单元质量检测卷(10)"},
+{q:"All the ingredients were mixed and ___ in water.", o:["boil", "boiling", "boiled", "to boil"], a:2, e:"boiled 过去分词，与 were mixed 并列。", source:"Unit 5通关全能练(改写)"},
+{q:"This machine can print texts and colourful photos for us.", o:["printer", "rocket", "baton", "keyboard"], a:0, e:"printer 打印机，能打印文字和彩色照片。", source:"Unit 5单元测试卷(9)"},
+{q:"This machine is ___ for cutting paper in the factory.", o:["used", "made", "created", "produced"], a:0, e:"be used for doing 被用来做某事。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"It is normal ___ during the process of creation.", o:["to fail", "fail", "failing", "failed"], a:0, e:"It is + adj + to do，to fail 不定式作真正主语。", source:"Unit 5单元培优测试卷(改写)"},
+{q:"The ice ___ quickly when the sun came out.", o:["melting", "melted", "melts", "melt"], a:1, e:"melted 一般过去时，太阳出来后冰很快融化了。", source:"Unit 5通关全能练(改写)"},
+{q:"This money allowed him ___ his first proper workshop.", o:["to build", "build", "building", "built"], a:0, e:"allow sb to do 允许某人做，to build。", source:"Unit 5综合检测(改写)"},
+{q:"We need to write down the ___ ideas on the poster.", o:["creative", "create", "creator", "creation"], a:0, e:"creative 有创意的，形容词修饰 ideas。", source:"Unit 5核心词汇专项(改写)"},
+{q:"The artist ___ many beautiful pictures for children.", o:["created", "produced", "made", "drew"], a:0, e:"created 创作，艺术家为孩子创作了很多画。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"When you see your idea become real, you feel so ___.", o:["happy", "happily", "happiness", "unhappy"], a:0, e:"happy 高兴的，feel+形容词。", source:"Unit 5单元测试卷(改写)"},
+{q:"This machine ___ cutting paper.", o:["is used for", "is made for", "is famous for", "is ready for"], a:0, e:"is used for 被用来做某事，用于裁纸。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"The scientist ___ has changed people's life greatly is very modest.", o:["which", "who", "whom", "whose"], a:1, e:"who 引导定语从句指人，在从句中作主语。", source:"Unit 5单元培优测试卷(10)"},
+{q:"Rice ___ in the south of China.", o:["is grown", "was grown", "grows", "grew"], a:0, e:"is grown 一般现在时被动，水稻在中国南方被种植。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Many trees ___ in our city every spring.", o:["plant", "are planted", "were planted", "planted"], a:1, e:"are planted 一般现在时被动，树每年春天被种植。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"Creative ideas can ___ our world better.", o:["make", "be made", "make to", "to make"], a:0, e:"can 后接动词原形，make 主动形式。", source:"Unit 5通关全能练(10)"},
+{q:"People ___ dare to try new things are more likely to make progress.", o:["who", "which", "whose", "whom"], a:0, e:"who 引导定语从句指人作主语。", source:"Unit 5单元培优测试卷(改写)"},
+{q:"You can't use the machine ___ you read the instructions first.", o:["after", "when", "so", "until"], a:3, e:"not...until 直到……才，先读说明才能用机器。", source:"Unit 5单元质量检测卷(10)"},
+{q:"Anna was a little nervous, but she ___ it well.", o:["did", "do", "does", "doing"], a:0, e:"did 一般过去时，她做得很好。", source:"Unit 5单元测试卷(改写)"},
+{q:"Hundreds of dishes ___ by the Smart Cook machine every day.", o:["are made", "is made", "was made", "will make"], a:0, e:"are made 一般现在时被动，菜肴每天被制作。", source:"Unit 5单元自测卷·北京专用(12)"},
+{q:"Paper was ___ in China about two thousand years ago.", o:["invented", "discovered", "created", "produced"], a:0, e:"invented 被发明，纸两千年前在中国被发明。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Bell was the ___ of the telephone.", o:["inventor", "invention", "invent", "invented"], a:0, e:"inventor 发明者，贝尔是电话的发明者。", source:"Unit 5核心词汇专项(改写)"},
+{q:"The ___ of ideas can change the world.", o:["power", "powerful", "powder", "point"], a:0, e:"power 力量，想法的力量能改变世界。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"He had difficulty ___ in one ear.", o:["hearing", "hear", "heard", "hears"], a:0, e:"have difficulty doing 做某事有困难，hearing。", source:"Unit 5综合检测(改写)"},
+{q:"Mike bought a ___ so that he could take many pictures in summer.", o:["camera", "candies", "calendar", "cards"], a:0, e:"camera 照相机，用来拍照。", source:"Unit 5通关全能练(改写)"},
+{q:"A good idea often comes from ___ questions we ask in daily life.", o:["interesting", "boring", "usual", "unusual"], a:3, e:"unusual 不寻常的，好主意来自日常提出的不寻常问题。", source:"Unit 5单元测试卷(10)"},
+{q:"From his calm look, I ___ he has already known the good news.", o:["suppose", "supposing", "supposed", "supposes"], a:0, e:"suppose 推断、认为，I suppose 我认为。", source:"Unit 5单元自测卷·安徽专用(改写)"},
+{q:"Today, paper is used ___ people all over the world for writing and printing.", o:["by", "with", "for", "from"], a:0, e:"by 被，被动语态引出执行者。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"The artist's new ___ was praised by everyone.", o:["creation", "create", "creator", "creative"], a:0, e:"creation 作品，艺术家的新作品受到称赞。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"A small ___ sticky note can mark your book pages clearly.", o:["piece of", "piece", "pieces", "pieces of"], a:0, e:"a piece of 一张。", source:"Unit 5核心词汇专项(改写)"},
+{q:"—___ do you come up with creative ideas? —I usually observe things around me carefully and think deeply.", o:["When", "How", "Why", "Where"], a:1, e:"How 怎样，询问方式。", source:"Unit 5单元测试卷(10)"},
+{q:"Many long ___ were built for the Qinghai-Xizang Railway.", o:["tunnels", "tunnel", "tunnelling", "tunnelled"], a:0, e:"tunnels 隧道，many 后接复数。", source:"Unit 5核心词汇专项(改写)"},
+{q:"A government ___ helped solve the problem in our community.", o:["officer", "official", "office", "officially"], a:1, e:"official 官员，政府官员帮助解决问题。", source:"Unit 5通关全能练(改写)"},
+{q:"The papermaking technique ___ the development of Chinese culture.", o:["speeded up", "slowed down", "turned off", "took off"], a:0, e:"speed up 加速，造纸技术加速了中国文化发展。", source:"Unit 5通关全能练(改写)"},
+{q:"The ___ is that we need more creative ideas.", o:["reality", "real", "realize", "realistic"], a:0, e:"reality 现实，现实是我们需要更多创意。", source:"Unit 5通关全能练(改写)"},
+{q:"Many phones ___ in China every year.", o:["are made", "is made", "were made", "made"], a:0, e:"are made 一般现在时被动，many phones 复数。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"It is not just a dream. It can become ___ one day.", o:["reality", "real", "realize", "realistic"], a:0, e:"reality 现实，become reality 成为现实。", source:"Unit 5单元质量检测卷(改写)"},
+{q:"Students choose meals ___ first in the smart dining hall.", o:["online", "outside", "inside", "alone"], a:0, e:"online 在线地，学生先在线选餐。", source:"Unit 5通关全能练(改写)"},
+{q:"The development of ___ brings more jobs to small towns.", o:["tourism", "tour", "tourist", "touring"], a:0, e:"tourism 旅游业，名词作主语。", source:"Unit 5核心词汇专项(改写)"},
+{q:"The telephone ___ by Alexander Graham Bell in 1876.", o:["was invented", "is invented", "invented", "invents"], a:0, e:"was invented 一般过去时被动，电话 1876 年被贝尔发明。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"In the 6th and 7th centuries, tea ___ to Korea and Japan.", o:["was brought", "is brought", "brought", "brings"], a:0, e:"was brought 一般过去时被动，茶被带到韩日。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"Teenagers ___ spend their money wisely.", o:["are supposed to", "are ready to", "are able to", "are afraid to"], a:0, e:"be supposed to 应该，青少年应该明智花钱。", source:"Unit 5通关全能练(改写)"},
+{q:"It seems that many people all over the ___ drink Chinese tea.", o:["world", "word", "way", "whole"], a:0, e:"all over the world 全世界。", source:"Unit 5通关全能练(改写)"},
+{q:"The story of tea shows how a simple ___ can become a global tradition.", o:["discovery", "discover", "discoverer", "discovered"], a:0, e:"discovery 发现，名词作主语。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"The ___ of the plane changed the way people travel long distances.", o:["invent", "invention", "inventor", "creative"], a:1, e:"invention 名词，飞机的发明改变了长途出行方式。", source:"Unit 5核心词汇专项(10)"},
+{q:"The warm sunshine made the snow ___ fast in spring.", o:["shape", "melt", "stick", "spread"], a:1, e:"melt 融化，温暖的阳光使雪很快融化。", source:"Unit 5核心词汇专项(10)"},
+{q:"The new high-speed train can ___ and carry more passengers at the same time.", o:["slow down", "speed up", "wear out", "divide into"], a:1, e:"speed up 加速，高铁提速并载客。", source:"Unit 5单元测试卷(9)"},
+{q:"After many tests, our invention was ___ ready.", o:["finally", "usually", "suddenly", "nearly"], a:0, e:"finally 最终，经过多次测试终于准备好了。", source:"Unit 5单元测试卷(改写)"},
+{q:"Thomas Edison was one of the greatest ___ in history.", o:["inventors", "inventions", "invented", "inventing"], a:0, e:"inventors 发明家，one of 后接复数名词。", source:"Unit 5综合检测(改写)"},
+{q:"___ the Qinghai-Xizang Railway completed?", o:["When was", "When is", "Where was", "How was"], a:0, e:"When was...completed 过去时被动疑问，青藏铁路何时建成。", source:"Unit 5通关全能练(改写)"},
+{q:"This book is ___ for middle school students.", o:["suitable", "suit", "suited", "suiting"], a:0, e:"be suitable for 适合，这本书适合中学生。", source:"Unit 5通关全能练(改写)"},
+{q:"—I feel very happy that I ___ to be the host. —Congratulations!", o:["choose", "am choosing", "was chosen", "have chosen"], a:2, e:"was chosen 一般过去时被动，我被选为主持人。", source:"Unit 5通关全能练(10)"},
+{q:"The leaves ___ by hand and then sent for processing.", o:["are picked", "were picked", "pick", "picks"], a:0, e:"are picked 一般现在时被动，茶叶被手工采摘。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"English ___ all over the world.", o:["is widely used", "was widely used", "is wide used", "is using"], a:0, e:"is widely used 一般现在时被动，英语被广泛使用。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"The cup has a round ___.", o:["shape", "sharp", "shame", "shade"], a:0, e:"shape 形状，杯子是圆的。", source:"Unit 5单元质量检测卷(改写)"},
+{q:"The fibre was dried and ___ to form paper.", o:["press", "pressing", "pressed", "to press"], a:2, e:"pressed 过去分词，与 was dried 并列。", source:"Unit 5通关全能练(改写)"},
+{q:"The snow ___ when the sun comes out every spring.", o:["melts", "melt", "melted", "melting"], a:0, e:"melts 一般现在时三单，雪每年春天融化。", source:"Unit 5核心词汇专项(改写)"},
+{q:"The invention ___ helps people save water is very popular in many cities.", o:["which", "who", "what", "whom"], a:0, e:"which 引导定语从句指物，在从句中作主语。", source:"Unit 5单元测试卷(10)"},
+{q:"Too much rain will ___ heavy floods in mountain villages.", o:["stand up", "result in", "speed up", "look up"], a:1, e:"result in 造成，雨太多造成山洪。", source:"Unit 5核心词汇专项(10)"},
+{q:"The story of the young inventor ___ many teenagers to follow their dreams so far.", o:["encourages", "encouraged", "has encouraged", "is encouraging"], a:2, e:"so far 现在完成时，has encouraged。", source:"Unit 5单元测试卷(10)"},
+{q:"Paper making technology spread ___ through Arabic people.", o:["all over the world", "step by step", "in part", "to start with"], a:0, e:"all over the world 全世界，造纸术通过阿拉伯人传遍世界。", source:"Unit 5核心词汇专项(10)"},
+{q:"The paper is ___ from wood, so we should save trees.", o:["invented", "used", "made", "produced"], a:2, e:"be made from 由……制成（看不出原材料）。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"True innovation needs us to ___ old thinking patterns and try new things.", o:["follow", "respect", "break", "support"], a:2, e:"break old thinking patterns 突破固有思维模式。", source:"Unit 5单元培优测试卷(10)"},
+{q:"The new app ___ last month now helps thousands of people manage their time.", o:["invented", "was invented", "invents", "is invented"], a:0, e:"invented 过去分词作后置定语，上个月发明的应用。", source:"Unit 5单元测试卷(10)"},
+{q:"The sports meeting ___ in our school next month.", o:["will be held", "is held", "was held", "holds"], a:0, e:"will be held 一般将来时被动，运动会下月将举行。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Matt said he didn't get the book. But I'm ___ that I gave it back to him.", o:["certain", "careful", "curious", "clever"], a:0, e:"certain 确定的，我确定把书还给他了。", source:"Unit 5单元自测卷·安徽专用(改写)"},
+{q:"The ___ of the new planet surprised scientists.", o:["discovery", "discover", "discoverer", "discovered"], a:0, e:"discovery 发现，新行星的发现使科学家惊讶。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Press down the ___ and the machine will start working.", o:["button", "board", "bottle", "bridge"], a:0, e:"button 按钮，按下按钮机器启动。", source:"Unit 5通关全能练(改写)"},
+{q:"When the teacher comes in, please ___ quietly.", o:["stand up", "stand out", "stand for", "stand by"], a:0, e:"stand up 起立，老师进教室时请起立。", source:"Unit 5核心词汇专项(改写)"},
+{q:"We need to observe life ___ to find new ideas.", o:["carefully", "careful", "careless", "care"], a:0, e:"carefully 仔细地，副词修饰 observe。", source:"Unit 5单元培优测试卷(改写)"},
+{q:"The school has used four ___ in the dining hall to record eating conditions.", o:["cameras", "camera", "camels", "campuses"], a:0, e:"cameras 摄像机，four 后接复数。", source:"Unit 5通关全能练(改写)"},
+{q:"Everyone can ___ to the world with their own unique ideas and efforts.", o:["make a promise", "make a difference", "make a mistake", "make a decision"], a:1, e:"make a difference 产生影响、有所作为。", source:"Unit 5单元培优测试卷(10)"},
+{q:"Her teacher asked her ___ it to the class.", o:["to show", "show", "showing", "shows"], a:0, e:"ask sb to do 让某人做。", source:"Unit 5单元测试卷(改写)"},
+{q:"Cai Lun's creation ___ to the emperor in 105 CE.", o:["was shown", "was showing", "shows", "showed"], a:0, e:"was shown 一般过去时被动，蔡伦的创造被呈献给皇帝。", source:"Unit 5通关全能练(改写)"},
+{q:"The meeting ___ in the hall tomorrow afternoon.", o:["will be held", "will hold", "holds", "is held"], a:0, e:"will be held 一般将来时被动，会议明天下午将举行。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"The small camera ___ to the front of the sunglasses to help with reading.", o:["connects", "is connected", "connected", "was connecting"], a:1, e:"is connected 一般现在时被动，摄像头被连接到眼镜前。", source:"Unit 5通关全能练(10)"},
+{q:"The news ___ rapidly through social media these days.", o:["spread", "spreads", "is spread", "are spread"], a:1, e:"spread 作不及物动词不用被动，news 不可数用 spreads。", source:"Unit 5单元自测卷·北京专用(12)"},
+{q:"We must take ___ action.", o:["practical", "practice", "practiced", "practicing"], a:0, e:"practical 实际的，形容词修饰 action。", source:"Unit 5单元培优测试卷(改写)"},
+{q:"Edison ___ in Ohio in 1847.", o:["was born", "is born", "born", "bears"], a:0, e:"was born 出生，固定表达，in 1847 过去时间。", source:"Unit 5综合检测(改写)"},
+{q:"We should learn to doubt old rules and come up with new ___.", o:["thoughts", "thought", "thinking", "think"], a:0, e:"thoughts 想法，new 后接复数名词。", source:"Unit 5单元培优测试卷(改写)"},
+{q:"The population grew ___ after the railway was built.", o:["rapid", "rapidly", "rapider", "rapidest"], a:1, e:"rapidly 快速地，副词修饰动词 grew。", source:"Unit 5通关全能练(改写)"},
+{q:"—What do you think ___ the most important invention of all time? —I think it is the wheel.", o:["is", "was", "are", "were"], a:0, e:"do you think 作插入语，正常语序 What is...。", source:"Unit 5单元自测卷·北京专用(12)"},
+{q:"The glue feels very ___ on my fingers.", o:["sticky", "sticking", "stick", "stuck"], a:0, e:"sticky 粘的，胶水在手指上感觉粘。", source:"Unit 5通关全能练(改写)"},
+{q:"That ___ me to create something useful.", o:["inspired", "inspires", "inspiring", "inspire"], a:0, e:"inspired 一般过去时，那启发了我。", source:"Unit 5单元测试卷(改写)"},
+{q:"—Where did you go last Sunday? —I ___ to the museum with my friends.", o:["go", "have gone", "will go", "went"], a:3, e:"last Sunday 过去时间，用一般过去时 went。", source:"Unit 5单元质量检测卷(10)"},
+{q:"He started a fire ___ and was asked to leave.", o:["accidentally", "accident", "accidental", "accidents"], a:0, e:"accidentally 意外地，副词修饰 started。", source:"Unit 5综合检测(改写)"},
+{q:"Success belongs to people who ___ keep trying and never give up.", o:["never", "seldom", "always", "hardly"], a:2, e:"always 总是，成功属于坚持尝试的人。", source:"Unit 5单元培优测试卷(10)"},
+{q:"Then she ___ an idea: a shopping bag with wheels.", o:["had", "has", "have", "having"], a:0, e:"had 一般过去时，她有了一个主意。", source:"Unit 5单元测试卷(改写)"},
+{q:"Now mobile phones ___ everywhere.", o:["are seen", "were seen", "see", "saw"], a:0, e:"are seen 一般现在时被动，手机到处可见。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Many great changes ___ by small and creative thoughts in history.", o:["were brought", "are brought", "bring", "brought"], a:0, e:"were brought 一般过去时被动，历史上许多大改变由小创意带来。", source:"Unit 5单元培优测试卷(改写)"},
+{q:"Success belongs to those who keep ___.", o:["trying", "try", "tries", "tried"], a:0, e:"keep doing 坚持做，trying。", source:"Unit 5单元培优测试卷(改写)"},
+{q:"Paper-making is one of the greatest ___ in Chinese history.", o:["inventions", "inventors", "invented", "inventing"], a:0, e:"inventions 发明，造纸术是中国最伟大的发明之一。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"This kind of cup ___ paper and looks very light.", o:["is made of", "is made from", "is made in", "is made by"], a:0, e:"is made of 由……制成（看得出原材料）。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"It, more than any other invention, ___ responsible for the rapid spread of information.", o:["was", "is", "are", "were"], a:0, e:"was 一般过去时，它比其他任何发明都对信息快速传播负责。", source:"Unit 5通关全能练(改写)"},
+{q:"English ___ in many countries around the world.", o:["speaks", "is speaking", "is spoken", "spoke"], a:2, e:"is spoken 被动语态，英语被使用。", source:"Unit 5单元质量检测卷(10)"},
+{q:"We should be ___ for our own learning. Nobody can do it for us.", o:["responsible", "responsibility", "response", "responsibly"], a:0, e:"be responsible for 对……负责。", source:"Unit 5单元自测卷·北京专用(12)"},
+{q:"This kind of car ___ in Germany every year.", o:["makes", "was made", "is made", "made"], a:2, e:"is made 一般现在时被动，这种车每年在德国制造。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"The new transport brings great development to local ___.", o:["tourism", "creation", "production", "workshop"], a:0, e:"tourism 旅游业，新交通带动当地旅游发展。", source:"Unit 5核心词汇专项(10)"},
+{q:"Scientists have ___ a new kind of clean energy.", o:["discovered", "invented", "created", "produced"], a:0, e:"discovered 发现，科学家发现了一种新清洁能源。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Cai Lun showed his ___ to the emperor in 105 CE.", o:["create", "creation", "creator", "creative"], a:1, e:"creation 作品、创造物。", source:"Unit 5通关全能练(改写)"},
+{q:"Many cars ___ in this factory every year.", o:["are made", "is made", "were made", "make"], a:0, e:"are made 一般现在时被动，many cars 复数。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"The Chinese are ___ doubt the ones who best understand the nature of tea.", o:["without", "with", "within", "for"], a:0, e:"without doubt 毫无疑问。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"This small invention ___ people for its simple design and great value.", o:["is known for", "is famous as", "is ready for", "is strict with"], a:0, e:"be known for 因……而出名。", source:"Unit 5单元培优测试卷(10)"},
+{q:"This bridge ___ to keep wild animals safe. It was completed last year.", o:["builds", "built", "is built", "was built"], a:3, e:"was built 一般过去时被动，这座桥去年建成。", source:"Unit 5单元自测卷·北京专用(12)"},
+{q:"Later, Anna ___ a prize for her invention at the science fair.", o:["won", "win", "wins", "winning"], a:0, e:"won 一般过去时，安娜获奖。", source:"Unit 5单元测试卷(改写)"},
+{q:"Today, tea ___ in many parts of China.", o:["is grown", "was grown", "grows", "grew"], a:0, e:"is grown 一般现在时被动，茶在中国许多地方被种植。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"With hard work, his ___ research made great progress.", o:["medical", "medicine", "medic", "medically"], a:0, e:"medical 医学的，形容词修饰 research。", source:"Unit 5单元检测(改写)"},
+{q:"This project taught me that ___ doesn't come easily.", o:["success", "succeed", "successful", "successfully"], a:0, e:"success 成功，名词作主语。", source:"Unit 5单元测试卷(改写)"},
+{q:"Local factories ___ different kinds of daily goods every single day.", o:["memorize", "produce", "recall", "divide"], a:1, e:"produce 生产，工厂每天生产日用品。", source:"Unit 5单元测试卷(9)"},
+{q:"Lu Xun is a ___ writer in Chinese history.", o:["careless", "useful", "famous", "widely"], a:2, e:"famous 著名的，鲁迅是著名作家。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"English ___ by people in many countries.", o:["is spoken", "was spoken", "speaks", "spoke"], a:0, e:"is spoken 一般现在时被动，英语被很多人说。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Paper is ___ from wood.", o:["made", "making", "make", "makes"], a:0, e:"be made from 由……制成，纸由木头制成。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"The young ___ spends most of his time in the lab.", o:["scientist", "scientist's", "scientific", "science"], a:0, e:"scientist 科学家，年轻科学家在实验室度过时间。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"This problem is difficult, but I think we can ___ it with a creative idea.", o:["solve", "answer", "find", "ask"], a:0, e:"solve 解决，用创意解决问题。", source:"Unit 5单元测试卷(10)"},
+{q:"Many great ___ have changed the way we live.", o:["discoveries", "discoverers", "discovery", "discovering"], a:0, e:"discoveries 发现，many 后接复数。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"The telephone was invented ___ Alexander Bell in 1876.", o:["for", "with", "by", "of"], a:2, e:"被动语态 by+动作执行者，电话是贝尔发明的。", source:"Unit 5单元质量检测卷(10)"},
+{q:"Little changes and creative thoughts can ___ great progress in the future.", o:["lead to", "take up", "turn out", "put off"], a:0, e:"lead to 带来、导致，小改变带来大进步。", source:"Unit 5单元培优测试卷(10)"},
+{q:"—When ___ the telephone ___ by Alexander Bell? —In 1876.", o:["did; invent", "was; invented", "is; invented", "has; invented"], a:1, e:"was invented 一般过去时被动，电话于 1876 年被发明。", source:"Unit 5通关全能练(10)"},
+{q:"We tried our best to turn our ideas into ___.", o:["reality", "real", "realize", "realistic"], a:0, e:"reality 现实，turn...into reality 把想法变成现实。", source:"Unit 5单元自测卷·安徽专用(改写)"},
+{q:"We were ___ excited that we jumped up and down.", o:["so", "such", "very", "too"], a:0, e:"so...that 如此……以至于。", source:"Unit 5单元测试卷(改写)"},
+{q:"Too much water will result ___ bad paper.", o:["in", "to", "for", "at"], a:0, e:"result in 导致，水太多导致纸张质量差。", source:"Unit 5通关全能练(10)"},
+{q:"Her grandma ___ very happy.", o:["was", "is", "are", "were"], a:0, e:"was 一般过去时，外婆很高兴。", source:"Unit 5单元测试卷(改写)"},
+{q:"The light bulb is a useful ___ that changed the world.", o:["invention", "information", "instruction", "interest"], a:0, e:"invention 发明，电灯是改变世界的发明。", source:"Unit 5通关全能练(改写)"},
+{q:"The heavy rain ___ in serious floods last summer.", o:["resulted", "result", "results", "resulting"], a:0, e:"resulted 一般过去时，result in 造成。", source:"Unit 5核心词汇专项(改写)"},
+{q:"We should ___ our own studies.", o:["be responsible for", "be famous for", "be ready for", "be strict with"], a:0, e:"be responsible for 对……负责。", source:"Unit 5通关全能练(改写)"},
+{q:"All these books should ___ to the library on time.", o:["return", "returned", "be returned", "have returned"], a:2, e:"should be returned 情态动词被动，书应被归还。", source:"Unit 5通关全能练(10)"},
+{q:"The ___ of this movie cost a lot of money.", o:["production", "product", "produce", "producer"], a:0, e:"production 制作（过程），电影制作花了很多钱。", source:"Unit 5通关全能练(改写)"},
+{q:"The computer ___ to do many things in our daily life.", o:["is used", "was used", "uses", "used"], a:0, e:"is used 一般现在时被动，电脑被用来做很多事。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"The boy keeps ___ down all his small ideas in his notebook every day.", o:["writing", "write", "writes", "written"], a:0, e:"keep doing 持续做，writing 动名词。", source:"Unit 5单元检测(改写)"},
+{q:"Before the Internet ___, people had to wait for days to receive news from faraway places.", o:["invents", "invented", "is invented", "was invented"], a:3, e:"was invented 一般过去时被动，互联网被发明之前。", source:"Unit 5单元自测卷·北京专用(12)"},
+{q:"Marie Curie ___ radium in 1898 and won the Nobel Prize.", o:["invented", "made", "created", "discovered"], a:3, e:"discover 发现原本存在的事物，居里夫人发现镭。", source:"Unit 5词汇语法专练卷(20)"},
+{q:"We should learn more ___ knowledge.", o:["scientific", "science", "scientist", "scientifically"], a:0, e:"scientific 科学的，形容词修饰 knowledge。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Our classroom is big and bright. It ___ every day.", o:["has cleaned", "was cleaned", "is cleaned", "will clean"], a:2, e:"is cleaned 一般现在时被动，教室每天被打扫。", source:"Unit 5通关全能练(10)"},
+{q:"As technology develops ___, more and more AI tools will be invented in the future.", o:["rapidly", "rapid", "rapider", "rapidest"], a:0, e:"rapidly 快速地，副词修饰 develops。", source:"Unit 5单元自测卷·安徽专用(改写)"},
+{q:"Please ___ the new words in the dictionary.", o:["look after", "turn on", "give up", "look up"], a:3, e:"look up 查阅，在词典里查生词。", source:"Unit 5单元质量检测卷(10)"},
+{q:"Besides providing ___ food, the smart school helps students develop good habits.", o:["delicious", "dangerous", "delighted", "different"], a:0, e:"delicious 美味的，提供美味的食物。", source:"Unit 5通关全能练(改写)"},
+{q:"More useful things ___ by people in the future.", o:["will be created", "are created", "were created", "create"], a:0, e:"will be created 一般将来时被动，未来更多有用之物会被创造。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Her grandma had trouble ___ heavy bags when she went shopping.", o:["carrying", "carry", "carries", "carried"], a:0, e:"have trouble doing 做某事有困难。", source:"Unit 5单元测试卷(改写)"},
+{q:"It can be produced ___ large quantities.", o:["in", "on", "at", "for"], a:0, e:"in large quantities 大量地。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"The Great Wall is ___ all over the world.", o:["famous", "familiar", "favourite", "far"], a:0, e:"famous 著名的，长城举世闻名。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"—Who inspired you to become a creative person? —My art teacher. She always encouraged us ___ new things.", o:["try", "trying", "to try", "tried"], a:2, e:"encourage sb to do sth 鼓励某人做某事。", source:"Unit 5单元测试卷(10)"},
+{q:"Anna is a 15-year-old girl who loves ___ things.", o:["creating", "create", "creates", "created"], a:0, e:"love doing 喜欢做，creating。", source:"Unit 5单元测试卷(改写)"},
+{q:"The ___ was one of the most important inventions in history.", o:["wheel", "wheels", "wheelbarrow", "wheelchair"], a:0, e:"wheel 轮子，单数指轮子这一发明。", source:"Unit 5单元质量检测卷(改写)"},
+{q:"At first, telephones ___ only by rich people.", o:["were used", "are used", "use", "used"], a:0, e:"were used 一般过去时被动，起初电话只被富人使用。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"—How does the 3D printer work? —First, the object ___ on a computer.", o:["design", "designed", "is designed", "was designed"], a:2, e:"is designed 一般现在时被动，物体在电脑上被设计。", source:"Unit 5通关全能练(10)"},
+{q:"The 3D printer ___ make houses now.", o:["must", "need", "can", "should"], a:2, e:"can 表能力，3D 打印机现在能造房子。", source:"Unit 5单元质量检测卷(10)"},
+{q:"Some ___ from a tea plant fell into the water.", o:["leaves", "leaf", "leafs", "leaving"], a:0, e:"leaves 叶子，some 后接复数。", source:"Unit 5 Section A综合训练题(改写)"},
+{q:"Technologies have brought many changes to ___ life.", o:["our", "we", "ours", "their"], a:0, e:"our 我们的，形容词性物主代词修饰 life。", source:"Unit 5通关全能练(改写)"},
+{q:"The ___ of this tool came from one small problem in daily life.", o:["creation", "create", "creator", "creative"], a:0, e:"creation 创造，工具的产生来自日常小问题。", source:"Unit 5单元检测(改写)"},
+{q:"Ice will ___ when the weather gets warm.", o:["melt", "melted", "melts", "melting"], a:0, e:"will 后接动词原形 melt，天暖冰会融化。", source:"Unit 5单元质量检测卷(改写)"},
+{q:"News spread at a ___ speed.", o:["rapid", "rapidly", "rapider", "rapidest"], a:0, e:"rapid 快速的，形容词修饰 speed。", source:"Unit 5单元质量检测卷(改写)"},
+{q:"The light bulb was ___ by Edison.", o:["created", "creating", "creates", "create"], a:0, e:"was created 被动，电灯是爱迪生创造的。", source:"Unit 5词汇语法专练卷(改写)"},
+{q:"Failure teaches us valuable ___ for our future work.", o:["lessons", "lesson", "learning", "learn"], a:0, e:"lessons 教训、经验，valuable 后接复数。", source:"Unit 5单元检测(改写)"},
+{q:"You can't get creative ideas ___ you are afraid to make mistakes.", o:["if", "unless", "though", "because"], a:0, e:"if 如果，如果害怕犯错就得不到创意。", source:"Unit 5单元测试卷(10)"},
+{q:"They will finally make a big ___ to our life.", o:["difference", "different", "differ", "differences"], a:0, e:"make a big difference 产生大影响。", source:"Unit 5单元培优测试卷(改写)"},
+{q:"Craftsmen use jute and wood to ___ all kinds of beautiful handcrafts.", o:["shape", "tick", "tap", "tie"], a:0, e:"shape 塑造，工匠用麻和木头塑造手工艺品。", source:"Unit 5单元测试卷(9)"},
+{q:"We were asked to think of an ___ that could solve a daily problem.", o:["invention", "inventor", "inventing", "invented"], a:0, e:"invention 发明物，an 后接名词。", source:"Unit 5单元测试卷(改写)"},
+{q:"Scientists ___ over 300 plants since three years ago.", o:["have tested", "tested", "test", "has tested"], a:0, e:"since 现在完成时，主语复数用 have tested。", source:"Unit 5单元检测(改写)"},
+{q:"Bark, certain plants, and old clothes could ___ to make paper.", o:["be used", "use", "using", "used"], a:0, e:"could be used 情态动词被动，树皮等可被用来造纸。", source:"Unit 5通关全能练(改写)"},
+{q:"This machine is ___ used in many factories.", o:["wide", "widely", "widest", "wider"], a:1, e:"widely 广泛地，副词修饰 used。", source:"Unit 5词汇语法专练卷(改写)"},
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('91_kp5_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('91_kp5_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('91_kp5_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 5 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 5 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>

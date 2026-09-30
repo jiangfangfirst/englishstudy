@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>九年级KP8</h1>
+        <p>主谓一致（everyone / each / neither of / the number of 用单数，both...and 用复数，either...or / neither...nor 就近原则，with / as well as 就远原则） · 体育主题词汇短语 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">九年级全一册Unit 8 · 在线检测</span>
+      <h2>单元检测核心库KP8</h2>
+      <p>涵盖主谓一致全部核心考点：everybody / everyone / each / neither of / either of 等不定代词作主语时谓语用单数（Everybody is ready...）；both...and / both of 连接两个主语时谓语用复数（Both kung fu and boxing are popular）；either...or / neither...nor / not only...but also / there be 遵循就近原则（Either you or I am going to attend...）；with / together with / as well as / except / besides 引出插入语遵循就远原则（The coach with two players is at the gate）；动名词短语作主语视为单数（Playing sports makes us strong）；the Winter Olympics start / The Olympic Games are held 等复数形式专有名词谓语用复数；the 100-metre race / The news / Maths / Fifteen seconds / Ten years / Five hundred dollars 等形复实单或时间·距离·金钱整体作单数；family / team / group / class 强调整体用单数、强调成员用复数（My family are watching TV now）；police / the old 表示一类人谓语用复数；a number of 用复数、the number of 用单数；relay / baton / handoff / judge / champion / medal / motto / mascot / competition / compete / tryout / pride / figure skating / ski jumping / speed skating / opening ceremony / take the lead / catch up with / make up ground on / sign up for / try out / set a record / help out / no matter how / give up / take part in 等体育主题词汇与短语辨析及情景交际高频考点。系统从全量题库（250 道）中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"He is a true example of the Olympic ________.", o:["spirit", "spirits", "spirit's", "spiriting"], a:0, e:"the Olympic spirit 奥林匹克精神。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"A ________ is a stick passed between runners in a relay.", o:["baton", "medal", "judge", "champion"], a:0, e:"baton 接力棒。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Wang Yaming for Class 1 ________ the lead first.", o:["takes", "passes", "keeps", "drops"], a:0, e:"take the lead 带头；领先。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"They ________ from traditional rock climbing.", o:["come", "comes", "coming", "came"], a:0, e:"主语 they 复数，一般现在时用 come。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"The most important thing in sport is not winning but ________.", o:["taking part", "taken part", "take part", "took part"], a:0, e:"not...but 连接动名词，用 taking part。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Many ________ helped during the Olympic Games.", o:["volunteers", "citizens", "prizes", "medals"], a:0, e:"volunteer 志愿者。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"—Whose duty is it to decide the winner of the competition? —The ________ over there.", o:["runner", "champion", "volunteer", "judge"], a:3, e:"judge 裁判员。判定获胜者的是裁判。", source:"Unit 8单元检测试题(15)"},
+{q:"Ten years ________ a long time for everyone.", o:["is", "are", "has", "have"], a:0, e:"表示时间的复数名词视为整体，谓语用单数 is。", source:"Unit 8语法精讲精练(15)"},
+{q:"The number of players in our team ________ twelve.", o:["is", "are", "be", "were"], a:0, e:"the number of 指数量，中心词 number 单数，用 is。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"The last day to sign up for the relay race is ________.", o:["tomorrow", "today", "yesterday", "next week"], a:0, e:"报名截止日期是明天。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Athletes hope to ________ experience and honour.", o:["gain", "get", "win", "achieve"], a:0, e:"gain 获得；赢得。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"In 2022, nearly 2,900 athletes attended and ________ in 109 events in Beijing.", o:["compete", "competed", "have competed", "are competing"], a:1, e:"and 连接并列谓语，前面 attended 为过去式，用 competed。", source:"Unit 8单元检测试题(15)"},
+{q:"A number of students ________ playing on the playground.", o:["is", "are", "has", "have"], a:1, e:"a number of+复数名词作主语，谓语用复数 are。", source:"Unit 8语法精讲精练(15)"},
+{q:"The purpose of the Olympics is to bring people together for peace and ________.", o:["harmony", "harmonies", "harmonious", "harmonize"], a:0, e:"peace and harmony 和平与和谐。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"The team ________ different members.", o:["consists of", "consist of", "consisting of", "consisted of"], a:0, e:"team 强调整体，谓语用单数 consists of。", source:"Unit 8同步练习题(20)"},
+{q:"Each of the runners ________ a unique story.", o:["has", "have", "had", "having"], a:0, e:"each of 作主语，谓语用单数 has。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Everyone in our class ________ sports.", o:["loves", "love", "loving", "loved"], a:0, e:"everyone 作主语，谓语用单数 loves。据据原题改写。", source:"Unit 8分层语法B卷(改写)"},
+{q:"Either you or I ________ going to attend the opening ceremony.", o:["am", "is", "are", "be"], a:0, e:"either...or 就近原则，I 用 am。", source:"Unit 8同步练习题(20)"},
+{q:"Everyone who takes part in the race ________ a chance to win.", o:["has", "have", "had", "having"], a:0, e:"everyone 作主语，谓语用单数 has。", source:"Unit 8主题词汇补充(改写)"},
+{q:"Each event ________ difficult to me.", o:["sounds", "sound", "sounding", "sounded"], a:0, e:"each 作主语，谓语用单数 sounds。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Neither of them ________ good at running.", o:["is", "are", "was", "be"], a:0, e:"neither of 作主语，谓语用单数 is。据据原题改写。", source:"Unit 8分层语法B卷(改写)"},
+{q:"Each type ________ different.", o:["is", "are", "was", "be"], a:0, e:"each 作主语，谓语用单数 is。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Everyone ________ a story to tell.", o:["has", "have", "had", "having"], a:0, e:"everyone 作主语，谓语用单数 has。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"He ________ in the 100-metre race.", o:["competed", "caught up", "helped out", "signed up"], a:0, e:"compete in 参加（比赛），过去式 competed。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Both Tom and Mary ________ to school by bike every day.", o:["go", "goes", "going", "gone"], a:0, e:"both...and 连接两个主语，谓语用复数 go。", source:"Unit 8语法精讲精练(15)"},
+{q:"Either you or he ________ going to sing.", o:["is", "are", "am", "be"], a:0, e:"either...or 就近原则，he 单数用 is。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"I ________ a huge fan of the mascot, Bing Dwen Dwen.", o:["became", "become", "becomes", "becoming"], a:0, e:"叙述过去经历用过去式 became。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"引体向上的英文是 ________。", o:["pull-up", "shot-put", "relay", "baton"], a:0, e:"pull-up 引体向上。", source:"Unit 8主题词汇补充(改写)"},
+{q:"The ________ of the 2022 Winter Olympics is Bing Dwen Dwen.", o:["mascot", "motto", "medal", "record"], a:0, e:"mascot 吉祥物。冰墩墩是 2022 年冬奥会吉祥物。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"The purpose of the Olympics is ________ relationships between people.", o:["to build", "build", "building", "built"], a:0, e:"不定式 to build 作表语。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"The purpose of the Olympics is to bring people together ________ peace and harmony.", o:["for", "with", "at", "on"], a:0, e:"bring people together for peace and harmony 为和平与和谐而团结。", source:"Unit 8主题词汇补充(改写)"},
+{q:"Everyone ________ here except Tom.", o:["is", "are", "was", "were"], a:0, e:"everyone 是不定代词，谓语用单数 is。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"花样滑冰的英文是 ________。", o:["figure skating", "ski jumping", "speed skating", "ice hockey"], a:0, e:"figure skating 花样滑冰。", source:"Unit 8主题词汇补充(改写)"},
+{q:"—Where ________ your family? —They are watching the relay race on the playground.", o:["are", "is", "was", "be"], a:0, e:"答语 they 说明 family 指家庭成员，谓语用复数 are。", source:"Unit 8单元检测试题(15)"},
+{q:"Swimming ________ me stay fit.", o:["helps", "help", "helping", "helped"], a:0, e:"动名词短语作主语视为单数，谓语用 helps。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Either you or she ________ to do the work.", o:["has", "have", "had", "having"], a:0, e:"either...or 就近原则，最近的主语 she 用 has。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"Ten kilometres ________ not a long distance.", o:["is", "are", "was", "be"], a:0, e:"表示距离的复数名词视为整体，谓语用单数 is。", source:"Unit 8主题词汇补充(改写)"},
+{q:"I love seeing the athletes ________ through the air.", o:["fly", "flies", "flying", "flew"], a:0, e:"see sb do sth，用动词原形 fly。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Everybody ________ a chance to play.", o:["has", "have", "having", "to have"], a:0, e:"everybody 是不定代词，谓语用单数 has。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"We ________ trained hard for months.", o:["have", "has", "had", "having"], a:0, e:"主语 we 复数，现在完成时用 have。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"The two sets of uniforms ________ on the shelf now.", o:["are", "was", "is", "be"], a:0, e:"中心词 sets 为复数，谓语用 are。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"make up ground on 意为 ________。", o:["逼近正在向前的人或物", "追上并超过", "落后于", "与……并驾齐驱"], a:0, e:"make up ground on 逼近正在向前的人或物。", source:"Unit 8主题词汇补充(改写)"},
+{q:"My family all ________ watching the Olympic Games.", o:["like", "likes", "liking", "liked"], a:0, e:"family 在此强调成员，谓语用复数 like。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"Either Tom or Jim ________ the winner.", o:["is", "are", "be", "am"], a:0, e:"either...or 就近原则，Jim 单数用 is。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Everybody ________ excited about the race.", o:["is", "are", "has", "have"], a:0, e:"everybody 是不定代词，谓语用单数 is。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Now everybody is ________ forward to the opening ceremony.", o:["looking", "look", "looks", "looked"], a:0, e:"be looking forward to 期待。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"One of the best players ________ in our class.", o:["is", "were", "are", "be"], a:0, e:"one of 作主语中心词是 one，谓语用单数 is。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Something interesting ________ during the 4x100-metre relay.", o:["happened", "happens", "happening", "happen"], a:0, e:"叙述过去发生的事，用过去式 happened。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"The 100-metre race ________ very exciting.", o:["are", "is", "were", "am"], a:1, e:"the 100-metre race 是单数概念，谓语用 is。", source:"Unit 8同步练习题(20)"},
+{q:"The number of cars in this city ________ every year.", o:["increases", "increase", "increased", "increasing"], a:0, e:"the number of 作主语谓语用单数，every year 用一般现在时 increases。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"Each student ________ a dream.", o:["has", "have", "having", "had"], a:0, e:"each 作主语，谓语用单数 has。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Neither my parents nor I ________ been to the Olympic Games.", o:["have", "has", "had", "having"], a:0, e:"neither...nor 就近原则，靠近谓语的 I 用 have。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Many volunteers and citizens ________ out at the Olympics.", o:["helped", "help", "helps", "helping"], a:0, e:"叙述过去事实，用过去式 helped。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"________ every day makes us stronger.", o:["Exercising", "Exercise", "Exercised", "To exercising"], a:0, e:"动名词短语作主语视为单数，用 Exercising。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"I fell in love with those brave and ________ athletes.", o:["talented", "talent", "talently", "talents"], a:0, e:"修饰名词 athletes 用形容词 talented。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"The boy with two basketballs ________ my brother.", o:["is", "are", "were", "be"], a:0, e:"with 短语不改变主语 boy 的数，谓语用单数 is。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Five hundred dollars ________ not enough for the trip.", o:["is", "are", "has", "have"], a:0, e:"表示金钱的复数名词视为整体，谓语用单数 is。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"A number of volunteers ________ from different countries.", o:["come", "comes", "coming", "is coming"], a:0, e:"a number of+复数名词，谓语用复数 come。", source:"Unit 8同步练习题(20)"},
+{q:"The swimming events are so exciting because swimmers often ________ by just 0.01 seconds.", o:["win", "wins", "winning", "won"], a:0, e:"主语 swimmers 复数，一般现在时用 win。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Fifteen seconds ________ not enough for him to finish.", o:["is", "are", "am", "be"], a:0, e:"表示时间的复数名词视为整体，谓语用单数 is。", source:"Unit 8同步练习题(20)"},
+{q:"Everyone in my group ________ ready for Sports Day.", o:["is", "are", "were", "be"], a:0, e:"everyone 作主语时谓语用单数 is。", source:"Unit 8单元检测试题(15)"},
+{q:"There ________ many exciting moments in the Beijing Olympics.", o:["were", "was", "are", "is"], a:0, e:"moments 复数且指过去，用 were。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"When runners pass the baton to each other, it is called a ________.", o:["finish line", "handoff", "starting line", "record"], a:1, e:"handoff 交接棒。传递接力棒的动作叫交接棒。", source:"Unit 8单元检测试题(15)"},
+{q:"The captain, together with two players, ________ at the gate now.", o:["is", "are", "was", "were"], a:0, e:"together with 引出插入语，真正主语 captain 单数，用 is。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"The news ________ exciting.", o:["sounds", "sound", "sounding", "sounded"], a:0, e:"news 意义单数，谓语用单数 sounds。据据原题改写。", source:"Unit 8分层语法B卷(改写)"},
+{q:"Maths ________ my favourite subject.", o:["is", "are", "was", "be"], a:0, e:"maths 形式复数意义单数，谓语用单数 is。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"Everyone in our club ________ a role.", o:["has", "have", "had", "having"], a:0, e:"everyone 是不定代词，谓语用单数 has。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"I watched in wonder as Usain Bolt ________ his way across the finish line.", o:["smiled", "smiles", "smiling", "smile"], a:0, e:"as 引导从句描述过去，用过去式 smiled。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"A number of people ________ to the meeting yesterday.", o:["came", "comes", "coming", "had come"], a:0, e:"a number of+复数名词，谓语用复数，yesterday 用过去式 came。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"________ of the players are from our school.", o:["Both", "Each", "Either", "Neither"], a:0, e:"both of+复数名词，谓语用复数 are。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Neither of the answers ________ right.", o:["is", "are", "be", "am"], a:0, e:"neither of 作主语，谓语用单数 is。据据原题改写。", source:"Unit 8分层语法B卷(改写)"},
+{q:"Either Wang Yaming or Adam ________ a possible choice for the last leg.", o:["are", "is", "be", "were"], a:1, e:"either...or 连接主语时谓语就近一致，Adam 为单数，用 is。", source:"Unit 8单元检测试题(15)"},
+{q:"The ________ match was very exciting.", o:["final", "first", "last", "next"], a:0, e:"final 决赛。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"They all ________ a lot of training.", o:["require", "requires", "requiring", "required"], a:0, e:"they all 是复数，谓语用原形 require。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"look forward ________ doing sth. 意为“期待做某事”。", o:["to", "for", "at", "in"], a:0, e:"look forward to doing sth. 期待做某事。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Everybody in our class ________ looking forward to Sports Day.", o:["is", "are", "were", "be"], a:0, e:"everybody 作主语谓语用单数 is。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"Our group ________ going to give a report.", o:["is", "are", "was", "be"], a:0, e:"group 是集合名词，强调整体时谓语用单数 is。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"The number of students ________ growing.", o:["is", "are", "was", "be"], a:0, e:"the number of 作主语，谓语用单数 is。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"He tried hard ________ the race.", o:["to finish", "finish", "finishing", "finished"], a:0, e:"try hard to do sth 努力做某事。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Sixty minutes ________ an hour.", o:["is", "are", "am", "be"], a:0, e:"表示时间的复数名词视为整体，谓语用单数 is。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"The athletes as well as the coach ________ hard.", o:["work", "works", "working", "is working"], a:0, e:"as well as 引出插入语，就远原则，真正主语 the athletes 复数，用 work。", source:"Unit 8同步练习题(20)"},
+{q:"Neither of the two boys ________ from America.", o:["is", "are", "am", "be"], a:0, e:"neither of+复数名词作主语，谓语用单数 is。", source:"Unit 8语法精讲精练(15)"},
+{q:"Each of the players ________ a medal.", o:["want", "wants", "wanting", "are wanting"], a:1, e:"each of+复数名词作主语，谓语用单数 wants。", source:"Unit 8同步练习题(20)"},
+{q:"It ________ one of the newest sports in the Olympic Games.", o:["is", "are", "was", "be"], a:0, e:"主语 it 单数，用 is。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Both Games showed China's ________ in its reform and opening-up.", o:["success", "succeed", "successful", "successfully"], a:0, e:"China's 后接名词 success 成功。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Neither he nor I ________ interested in the game.", o:["am", "is", "are", "be"], a:0, e:"neither...nor 就近原则，最近的主语 I 用 am。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"The losing team managed to ________ in the last minute of the event.", o:["catch up", "give up", "set up", "look up"], a:0, e:"catch up 赶上；追上。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"either...or、neither...nor 连接两个主语时，谓语通常与________的主语一致。", o:["靠近谓语", "远离谓语", "第一个", "最后一个"], a:0, e:"either...or / neither...nor 遵循就近原则，谓语与靠近它的主语一致。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"She won first ________ in the competition.", o:["prize", "medal", "pride", "record"], a:0, e:"win first prize 赢得一等奖。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Neither of the two events ________ suitable for me.", o:["is", "are", "was", "be"], a:0, e:"neither of 作主语谓语常用单数 is。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Both Ben and Leo ________ football every week.", o:["play", "plays", "played", "playing"], a:0, e:"both...and 连接主语，谓语用复数 play。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Everyone ________ training hard for the Olympics.", o:["is", "are", "was", "be"], a:0, e:"everyone 作主语谓语用单数 is。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"My ________ is to bring water to the athletes.", o:["task", "tasks", "tasking", "tasked"], a:0, e:"task 任务。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"推铅球的英文是 ________。", o:["shot-put", "pull-up", "relay", "boxing"], a:0, e:"shot-put 推铅球。", source:"Unit 8主题词汇补充(改写)"},
+{q:"Both kung fu and boxing ________ popular.", o:["are", "is", "was", "be"], a:0, e:"both...and 连接主语，谓语用复数 are。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"The teacher, as well as his students, ________ music.", o:["likes", "like", "liked", "liking"], a:0, e:"as well as 引出插入语，真正主语 the teacher 单数，用 likes。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"Neither he nor I ________ good at boxing.", o:["am", "is", "are", "be"], a:0, e:"neither...nor 就近原则，I 用 am。据据原题改写。", source:"Unit 8分层语法B卷(改写)"},
+{q:"Not only the students but also the teacher ________ interested in the film.", o:["is", "are", "am", "be"], a:0, e:"not only...but also 就近原则，the teacher 单数，用 is。", source:"Unit 8语法精讲精练(15)"},
+{q:"A gold ________ is given to the winner.", o:["medal", "baton", "judge", "record"], a:0, e:"gold medal 金牌。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Nobody ________ the answer.", o:["knows", "know", "knowing", "knew"], a:0, e:"nobody 是不定代词，谓语用单数 knows。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"The swimming events are so ________ because swimmers often win by just 0.01 seconds.", o:["exciting", "excited", "excite", "excitement"], a:0, e:"修饰物用 exciting。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"My family ________ watching TV now.", o:["are", "is", "was", "were"], a:0, e:"family 强调个体成员（正在看电视），谓语用复数 are。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"The ________ race requires four runners.", o:["relay", "long", "high", "shot-put"], a:0, e:"relay race 接力赛。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"dramatic 意为 ________。", o:["激动人心的；出乎意料的", "普通的", "令人失望的", "悲伤的"], a:0, e:"dramatic 戏剧性的；激动人心的。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"She decided to ________ for the relay race.", o:["try out", "help out", "catch up", "give up"], a:0, e:"try out 参加选拔；试用。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"everybody、everyone 作主语，谓语用________数。", o:["单", "复", "原", "过去"], a:0, e:"everybody / everyone 是不定代词，谓语用单数。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Each player ________ a number.", o:["has", "have", "had", "having"], a:0, e:"each 作主语，谓语用单数 has。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"The teacher with his students ________ going to visit the museum.", o:["is", "are", "am", "be"], a:0, e:"with 引出插入语，就远原则，真正主语 the teacher 单数，用 is。", source:"Unit 8语法精讲精练(15)"},
+{q:"Each runner ________ an amazing story.", o:["has", "have", "had", "having"], a:0, e:"each 作主语，谓语用单数 has。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"Neither of the two answers ________ correct.", o:["is", "are", "was", "be"], a:0, e:"neither of 作主语谓语常用单数 is。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Sport climbing ________ from traditional rock climbing.", o:["comes", "come", "coming", "came"], a:0, e:"主语 it 单数，一般现在时用 comes。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"My parents ________ proud of me.", o:["are", "is", "was", "be"], a:0, e:"my parents 复数，谓语用 are。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Everyone in the two groups ________ so.", o:["thinks", "think", "thinking", "thought"], a:0, e:"everyone 作主语，谓语用单数 thinks。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"They came together to ________ in the events.", o:["compete", "competition", "competitive", "competitor"], a:0, e:"不定式 to 后接动词原形 compete。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"With hard work, Eric later became quite ________ at the 100 metres.", o:["fast", "fastly", "faster", "fastest"], a:0, e:"became 后接形容词 fast。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Both Lily and Lucy ________ in the school team.", o:["are", "is", "was", "be"], a:0, e:"both...and 连接主语，谓语用复数 are。据据原题改写。", source:"Unit 8分层语法B卷(改写)"},
+{q:"The number of students in our class ________ 50.", o:["is", "are", "has", "have"], a:0, e:"the number of+复数名词作主语，谓语用单数 is。", source:"Unit 8语法精讲精练(15)"},
+{q:"A total of nearly 2,900 athletes ________ and competed in 109 events.", o:["attended", "attend", "attends", "attending"], a:0, e:"与 competed 并列，用过去式 attended。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"He is good at neither running ________ jumping.", o:["nor", "or", "and", "but"], a:0, e:"neither...nor 既不……也不……。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"The Olympic Games build ________ between countries.", o:["bridges", "bridge", "bridging", "bridged"], a:0, e:"build bridges 搭建桥梁。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Both Anna and Ben ________ the weekly practice.", o:["organise", "organises", "organised", "organising"], a:0, e:"both...and 连接主语，谓语用复数 organise。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Playing sports ________ us strong.", o:["makes", "make", "making", "made"], a:0, e:"动名词短语作主语视为单数，用 makes。据据原题改写。", source:"Unit 8分层语法B卷(改写)"},
+{q:"take the lead 的中文意思是 ________。", o:["带头；领先", "赶上", "落后", "放弃"], a:0, e:"take the lead 带头；领先。", source:"Unit 8主题词汇补充(改写)"},
+{q:"Tennis ________ strength and skill.", o:["requires", "require", "requiring", "required"], a:0, e:"Tennis 为单数运动项目名，谓语用第三人称单数 requires。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"A number of athletes ________ taking part in the event.", o:["are", "is", "was", "be"], a:0, e:"a number of+复数名词，谓语用复数 are。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"tryout 意为 ________。", o:["预赛；选拔赛", "决赛", "半决赛", "热身赛"], a:0, e:"tryout 预赛；选拔赛。", source:"Unit 8主题词汇补充(改写)"},
+{q:"What ________ the rules of sport climbing?", o:["are", "is", "was", "be"], a:0, e:"rules 复数，用 are。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Runners begin a race at the ________.", o:["starting line", "finish line", "baton", "relay"], a:0, e:"starting line 起跑线。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"The team ________ wearing their new sports clothes.", o:["are", "is", "was", "be"], a:0, e:"集合名词强调成员个体时，谓语用复数 are。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Both kung fu and boxing ________ popular sports among young people.", o:["are", "is", "was", "be"], a:0, e:"both...and 连接两个主语时谓语用复数 are。", source:"Unit 8单元检测试题(15)"},
+{q:"The team ________ training hard every day.", o:["is", "are", "am", "be"], a:0, e:"team 强调整体时谓语用单数 is。", source:"Unit 8同步练习题(20)"},
+{q:"The news about the games ________ exciting.", o:["is", "are", "were", "be"], a:0, e:"news 意义单数，谓语用单数 is。据据原题改写。", source:"Unit 8分层语法B卷(改写)"},
+{q:"Beijing is the first city to host both the Summer and the Winter ________.", o:["Olympics", "Olympic", "Olympians", "Olympus"], a:0, e:"the Winter Olympics 冬奥会。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"one of+复数名词作主语时，谓语通常用________。", o:["单数", "复数", "原形", "过去式"], a:0, e:"one of+复数名词的中心词是 one，谓语用单数。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Each player ________ a clean shirt for every match.", o:["wears", "to wear", "wearing", "wear"], a:0, e:"each 作主语，谓语用单数 wears。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"baton 是 ________。", o:["接力棒", "金牌", "裁判", "终点线"], a:0, e:"baton 接力棒。", source:"Unit 8主题词汇补充(改写)"},
+{q:"both...and... 连接两个主语，谓语用________数。", o:["复", "单", "原", "过去"], a:0, e:"both...and 连接主语，谓语用复数。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Either the boys or Anna ________ the key now.", o:["has", "have", "having", "to have"], a:0, e:"either...or 就近原则，Anna 单数用 has。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Both my father and my mother ________ watching basketball.", o:["enjoy", "enjoys", "enjoying", "enjoyed"], a:0, e:"both...and 连接主语，谓语用复数 enjoy。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"Many volunteers and citizens ________ out in both Olympic Games.", o:["helped", "help", "helps", "helping"], a:0, e:"叙述过去事实，用过去式 helped。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Nobody but Jim and Tom ________ the secret.", o:["know", "knows", "knowing", "known"], a:1, e:"but 引出插入语，就远原则，真正主语 nobody 用单数 knows。", source:"Unit 8语法精讲精练(15)"},
+{q:"Either you or I ________ wrong.", o:["is", "are", "am", "be"], a:2, e:"either...or 就近原则，最近的主语是 I，用 am。", source:"Unit 8语法精讲精练(15)"},
+{q:"Four runners ________ a team for the relay race.", o:["make up", "makes up", "making up", "made up"], a:0, e:"主语 four runners 复数，谓语用 make up。", source:"Unit 8同步练习题(20)"},
+{q:"Everyone ________ to win the game.", o:["wants", "want", "wanting", "wanted"], a:0, e:"everyone 作主语，谓语用单数 wants。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Some of the water ________ been polluted.", o:["has", "have", "is", "are"], a:0, e:"some of+不可数名词 water，谓语用单数，现在完成时用 has。", source:"Unit 8语法精讲精练(15)"},
+{q:"Playing as a team ________ us to trust one another.", o:["teaches", "teach", "taught", "teaching"], a:0, e:"动名词短语作主语视为单数，用 teaches。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Teng Fei's ________ are Peter and Han Lin.", o:["teammates", "team", "teams", "teammate"], a:0, e:"are 提示主语为复数 teammates 队友。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"________ kung fu and boxing are popular.", o:["Both", "Each", "Either", "Neither"], a:0, e:"both...and 连接主语，谓语用复数 are。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"The figure skater ________ some new moves, but they did not satisfy the coach.", o:["tried out", "took out", "found out", "worked out"], a:0, e:"try out 参加选拔；试用。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"His family ________ a big one. They ________ all very kind.", o:["is; is", "are; are", "is; are", "are; is"], a:2, e:"第一空 family 强调整体用 is；第二空 they 指成员用复数 are。", source:"Unit 8语法精讲精练(15)"},
+{q:"He ________ for the tryouts last week.", o:["signed up", "set a record", "helped out", "caught up"], a:0, e:"sign up 报名参加，last week 用过去式 signed up。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Both he and I ________ from China.", o:["are", "is", "am", "be"], a:0, e:"both...and 连接主语，谓语用复数 are。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"主语后跟 with、together with 短语时，谓语通常与________一致。", o:["前面的主语", "with 后的名词", "谓语", "宾语"], a:0, e:"with / together with 引出插入语，遵循就远原则，谓语与真正主语一致。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"The Winter Olympics ________ next month, and I can't wait to watch them.", o:["starts", "started", "start", "is start"], a:2, e:"Olympics 为复数形式的专有名词，谓语用复数 start。", source:"Unit 8单元检测试题(15)"},
+{q:"He took great ________ in his achievement.", o:["pride", "proud", "proudly", "priding"], a:0, e:"take pride in 以……为傲。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"一般现在时中，单数第三人称主语通常搭配动词________形式。", o:["第三人称单数", "复数", "原形", "过去式"], a:0, e:"一般现在时中，单数第三人称主语搭配动词第三人称单数形式。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Each of the athletes ________ trained for years.", o:["has", "have", "had", "having"], a:0, e:"each of+复数名词作主语，谓语用单数 has。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"One of my friends ________ every morning.", o:["runs", "run", "ran", "running"], a:0, e:"one of 作主语中心词是 one，谓语用单数 runs。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"relay 的中文意思是 ________。", o:["接力赛", "推铅球", "拳击", "跳高"], a:0, e:"relay 接力；接力赛。", source:"Unit 8主题词汇补充(改写)"},
+{q:"Each of us ________ proud of our teammates.", o:["is", "are", "was", "be"], a:0, e:"each of us 作主语，谓语用单数 is。", source:"Unit 8主题词汇补充(改写)"},
+{q:"A ________ is an athlete or team that has won first place.", o:["champion", "medal", "judge", "volunteer"], a:0, e:"champion 冠军。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Neither the players nor the coach ________ satisfied with the result.", o:["are", "were", "is", "be"], a:2, e:"neither...nor 连接主语时谓语就近一致，the coach 为单数，用 is。", source:"Unit 8单元检测试题(15)"},
+{q:"跳台滑雪的英文是 ________。", o:["ski jumping", "figure skating", "long jump", "high jump"], a:0, e:"ski jumping 跳台滑雪。", source:"Unit 8主题词汇补充(改写)"},
+{q:"Du Li won her second Olympic gold ________.", o:["medal", "medals", "medal's", "medalling"], a:0, e:"gold medal 金牌。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Athletes train for years to try out for the Olympics, and each ________ a unique story.", o:["have", "having", "to have", "has"], a:3, e:"each 作主语时谓语用单数 has。", source:"Unit 8单元检测试题(15)"},
+{q:"Either you or he ________ going to take part.", o:["is", "are", "am", "be"], a:0, e:"either...or 就近原则，he 单数用 is。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"My favourite sport ________ swimming and running.", o:["is", "are", "am", "be"], a:0, e:"主语 my favourite sport 单数，谓语用 is。", source:"Unit 8同步练习题(20)"},
+{q:"________ Li Lei or Adam is a possible choice for the relay race.", o:["Either", "Both", "Neither", "Each"], a:0, e:"either...or 要么……要么……。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"Everyone ________ ready for the match now.", o:["is", "are", "was", "were"], a:0, e:"everyone 是不定代词，谓语用单数 is。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"A ________ is a person who finally decides the winner.", o:["judge", "champion", "volunteer", "runner"], a:0, e:"judge 裁判员。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"There ________ a pen and some books on the desk.", o:["is", "are", "has", "have"], a:0, e:"there be 就近原则，最近的主语 a pen 单数，用 is。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"He ________ in the high jump event.", o:["set a record", "signed up", "tried out", "helped out"], a:0, e:"set a record 创造纪录。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"My family watch sports together, ________ speed skating.", o:["especially", "especial", "specially", "special"], a:0, e:"especially 尤其；特别。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"This pair of shoes ________ mine. Those shoes ________ his.", o:["is; are", "are; is", "is; is", "are; are"], a:0, e:"this pair of shoes 中 pair 是单数用 is；those shoes 是复数用 are。", source:"Unit 8语法精讲精练(15)"},
+{q:"The most important thing in sport is not ________ but taking part.", o:["winning", "win", "to win", "won"], a:0, e:"not...but 连接动名词，用 winning。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Either you or he ________ right.", o:["is", "are", "am", "be"], a:0, e:"either...or 就近原则，he 单数用 is。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Sports Day ________ coming soon.", o:["is", "are", "was", "be"], a:0, e:"主语 Sports Day 单数，谓语用 is。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"We need to ________ for the tryouts by Friday.", o:["sign up", "set a record", "help out", "give up"], a:0, e:"sign up 报名（参加）。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"The rules of sport climbing ________ difficult.", o:["sound", "sounds", "sounding", "sounded"], a:0, e:"主语 the rules 复数，谓语用 sound。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"Both Wang Yaming and Adam ________ quite fast.", o:["are", "is", "was", "be"], a:0, e:"both...and 连接主语，谓语用复数 are。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"There ________ neither team sports nor water sports in the first Olympics.", o:["were", "was", "are", "is"], a:0, e:"neither...nor 就近一致，water sports 为复数且指过去，用 were。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"Both running and swimming ________ good exercise.", o:["are", "is", "was", "be"], a:0, e:"both...and 连接主语，谓语用复数 are。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"In bouldering, there ________ no safety ropes.", o:["are", "is", "was", "be"], a:0, e:"there be 就近原则，ropes 复数用 are。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"There ________ two balls beside the door now.", o:["are", "is", "was", "were"], a:0, e:"there be 就近原则，two balls 复数用 are。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Nobody in my family ________ ever won a medal.", o:["has", "have", "had", "having"], a:0, e:"nobody 作主语谓语用单数，与 ever 搭配现在完成时 has。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"A race ends at the ________.", o:["finish line", "starting line", "baton", "handoff"], a:0, e:"finish line 终点线。比赛在终点线结束。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Everybody ________ so excited about Sports Day.", o:["is", "are", "was", "were"], a:0, e:"everybody 是不定代词，谓语用单数 is。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Tennis ________ skill.", o:["requires", "require", "requiring", "required"], a:0, e:"Tennis 是单数运动项目名，谓语用 requires。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"He and I ________ from Britain.", o:["come", "comes", "coming", "came"], a:0, e:"he and I 为复数主语，谓语用 come。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"The number of the events ________ 109.", o:["is", "are", "was", "be"], a:0, e:"the number of 作主语谓语用单数 is。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"All of us ________ forward to it.", o:["look", "looks", "looking", "looked"], a:0, e:"all of us 复数，谓语用 look。据据原题改写。", source:"Unit 8分层语法B卷(改写)"},
+{q:"Either you or he ________ a possible choice.", o:["is", "are", "am", "be"], a:0, e:"either...or 就近原则，he 单数用 is。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"The 4x100-metre relay is my ________ event.", o:["favourite", "favor", "favouring", "favours"], a:0, e:"修饰名词 event 用形容词 favourite。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Either Tom or Jim ________ going to carry the flag.", o:["is", "are", "be", "am"], a:0, e:"either...or 就近原则，Jim 单数用 is。据据原题改写。", source:"Unit 8分层语法B卷(改写)"},
+{q:"Neither I nor my cousin ________ ever taken part in a real sports event.", o:["have", "is", "are", "has"], a:3, e:"neither...nor 就近一致，my cousin 为单数，现在完成时用 has。", source:"Unit 8单元检测试题(15)"},
+{q:"The ancient Olympic games ________ every four years until they were stopped.", o:["were held", "held", "are held", "hold"], a:0, e:"games 与 hold 构成被动且指过去，用 were held。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"Each of the younger players ________ help.", o:["gets", "get", "got", "getting"], a:0, e:"each of 作主语，谓语用单数 gets。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Both Wang Yaming and Adam ________ good at running.", o:["are", "is", "was", "be"], a:0, e:"both...and 连接主语，谓语用复数 are。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"The coach, together with two older students, ________ at the gym now.", o:["is", "are", "was", "were"], a:0, e:"together with 引出插入语，真正主语 coach 单数用 is。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Each athlete ________ an amazing story.", o:["has", "have", "had", "having"], a:0, e:"each 作主语，谓语用单数 has。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"The ancient Olympic Games ________ in 394 CE.", o:["ended", "ends", "ending", "had ended"], a:0, e:"394 CE 表示过去，用一般过去时 ended。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"Greek ________ from different cities came together to compete in the events.", o:["citizens", "citizen", "citizen's", "citizens'"], a:0, e:"citizen 为可数名词，此处应用复数 citizens。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"I'm always amazed by their ________ and technique.", o:["strength", "strong", "strongly", "stronger"], a:0, e:"their 后接名词 strength 力量。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Each of the players ________ a number.", o:["has", "have", "had", "having"], a:0, e:"each of 作主语，中心词是 each，谓语用单数 has。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Two hours ________ enough for the race.", o:["is", "are", "was", "be"], a:0, e:"表示时间的复数名词视为整体，谓语用单数 is。", source:"Unit 8主题词汇补充(改写)"},
+{q:"Everyone in our class ________ English.", o:["like", "likes", "liking", "liked"], a:1, e:"everyone 是复合不定代词，谓语用单数 likes。", source:"Unit 8语法精讲精练(15)"},
+{q:"Figure skating amazes me by their strength and ________.", o:["skill", "skills", "skilled", "skilling"], a:0, e:"strength and skill 力量与技巧。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Today, the Olympic Games have ________ the love and interest of people worldwide.", o:["gained", "gain", "gaining", "has gained"], a:0, e:"have 后接过去分词构成现在完成时 gained。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"Everybody ________ looking forward to the 4x100-metre relay.", o:["are", "is", "were", "be"], a:1, e:"everybody 是不定代词，作主语时谓语用单数，故选 is。", source:"Unit 8单元检测试题(15)"},
+{q:"They ________ with pride to make sure people had a pleasant stay.", o:["worked", "work", "works", "working"], a:0, e:"叙述过去事实，用过去式 worked。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Neither the players nor the coach ________ here now.", o:["is", "are", "was", "be"], a:0, e:"neither...nor 就近原则，靠近谓语的是 coach，用 is。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Each of the students ________ a ball.", o:["has", "have", "had", "having"], a:0, e:"each of 作主语，谓语用单数 has。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"The players ________ stories.", o:["have", "has", "had", "having"], a:0, e:"the players 复数，谓语用 have。据据原题改写。", source:"Unit 8分层语法B卷(改写)"},
+{q:"Fu Xing will ________ for the high jump this time.", o:["sign up", "help out", "catch up", "give up"], a:0, e:"sign up for 报名参加。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Eric Moussambani ________ swimming only six months before the games.", o:["began", "begins", "begin", "begun"], a:0, e:"叙述过去，用过去式 began。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"There ________ many exciting moments in the 2022 Winter Olympics.", o:["was", "were", "is", "are"], a:1, e:"moments 复数且指过去，用 were。", source:"Unit 8同步练习题(20)"},
+{q:"Neither he nor she ________ late.", o:["is", "are", "am", "be"], a:0, e:"neither...nor 就近原则，she 单数用 is。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Both the coach and the captain ________ here now.", o:["are", "be", "is", "was"], a:0, e:"both...and 连接主语，谓语用复数 are。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"Everybody except me ________ watching figure skating.", o:["enjoy", "enjoying", "enjoys", "have enjoyed"], a:2, e:"主语是 everybody，except me 只作补充说明，谓语仍用单数 enjoys。", source:"Unit 8单元检测试题(15)"},
+{q:"Neither winning nor losing ________ everything in the Olympics.", o:["is", "are", "was", "be"], a:0, e:"neither...nor 就近原则，losing 为单数，用 is。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Both the 100 metres and the 4x100 m relay ________ exciting.", o:["are", "is", "was", "be"], a:0, e:"both...and 连接主语，谓语用复数 are。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Nearly the whole world watched the fantastic figure skating and ski jumping ________.", o:["events", "event", "event's", "eventing"], a:0, e:"复数 events 项目。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"The police ________ looking for the lost child.", o:["is", "are", "has", "have"], a:1, e:"police 形式单数但意义复数，谓语用复数 are。", source:"Unit 8语法精讲精练(15)"},
+{q:"everyone、everybody、each 作主语时，谓语通常用________。", o:["单数", "复数", "原形", "过去式"], a:0, e:"复合不定代词和 each 作主语时，谓语用单数。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"The whole family ________ watching the Olympics together.", o:["enjoy", "enjoys", "enjoying", "are enjoy"], a:1, e:"family 强调整体时谓语用单数 enjoys。", source:"Unit 8同步练习题(20)"},
+{q:"Each of the players ________ a story.", o:["has", "have", "had", "having"], a:0, e:"each of 作主语，谓语用单数 has。据据原题改写。", source:"Unit 8分层语法A卷(改写)"},
+{q:"I also became a huge ________ of the mascot, Bing Dwen Dwen.", o:["fan", "fans", "fanning", "fanned"], a:0, e:"a huge fan of ……的超级粉丝。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"The coach ________ the team for the relay.", o:["helps train", "help train", "helps training", "help to training"], a:0, e:"coach 单数，谓语用 helps，后接动词原形 train。", source:"Unit 8主题词汇补充(改写)"},
+{q:"In 1904, gold ________ were introduced as prizes for the winners.", o:["medals", "medal", "medal's", "medalling"], a:0, e:"medal 为可数名词，应用复数 medals。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"Running every morning ________ him feel better.", o:["makes", "to make", "making", "make"], a:0, e:"动名词短语作主语用单数，谓语用 makes。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"The news about the match ________ exciting.", o:["is", "are", "was", "were"], a:0, e:"news 形式复数意义单数，谓语用单数 is。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"In 1896, the ________ modern Olympics were held in Greece.", o:["first", "one", "once", "ones"], a:0, e:"表示第一应用序数词 first。据据原题改写。", source:"Unit 8单元检测试题(改写)"},
+{q:"Everyone ________ forward to the opening ceremony.", o:["looks", "look", "looking", "looked"], a:0, e:"everyone 是不定代词，谓语用单数 looks。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"These ________ touch my heart quite deeply.", o:["mottos", "motto", "motto's", "mottoing"], a:0, e:"these 后接复数 mottos。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"The Olympic mottoes ________ my heart quite deeply.", o:["touch", "touches", "touched", "has touched"], a:0, e:"主语 mottoes 为复数，谓语用 touch。", source:"Unit 8单元检测试题(15)"},
+{q:"either...or... 连接主语时，谓语与________的主语保持一致。", o:["靠近", "远离", "前面", "后面"], a:0, e:"either...or 遵循就近原则。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Both of them ________ quite fast.", o:["are", "is", "was", "be"], a:0, e:"both of+复数代词，谓语用复数 are。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"With hard work and practice, his time for the 100 metres ________.", o:["improved", "improves", "improving", "improve"], a:0, e:"叙述过去变化，用过去式 improved。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Don't forget to watch the ________.", o:["opening ceremony", "closing ceremony", "relay race", "long jump"], a:0, e:"opening ceremony 开幕式。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"Neither Ben nor his friends ________ late today.", o:["are", "be", "was", "is"], a:0, e:"neither...nor 就近原则，friends 复数用 are。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"The Olympic Games ________ every four years.", o:["hold", "is held", "are held", "holds"], a:2, e:"奥林匹克运动会每四年举办一次，被动语态 are held。", source:"Unit 8同步练习题(20)"},
+{q:"He never ________ no matter how hard it was.", o:["gave up", "gave in", "gave out", "gave away"], a:0, e:"give up 放弃。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"Everybody ________ here today.", o:["is", "are", "be", "am"], a:0, e:"everybody 是不定代词，谓语用单数 is。据据原题改写。", source:"Unit 8分层语法C卷(改写)"},
+{q:"Neither of the two athletes ________ given up.", o:["have", "has", "are", "is"], a:1, e:"neither of+复数名词作主语，谓语用单数 has。", source:"Unit 8同步练习题(20)"},
+{q:"The police ________ looking for the missing athlete.", o:["is", "are", "am", "be"], a:1, e:"police 意义复数，谓语用复数 are。", source:"Unit 8同步练习题(20)"},
+{q:"Both of the answers ________ correct.", o:["are", "is", "was", "be"], a:0, e:"both of+复数名词作主语，谓语用复数 are。据据原题改写。", source:"Unit 8语法精讲精练(改写)"},
+{q:"Nobody in the group ________ been to the Olympic Games.", o:["has", "have", "had", "having"], a:0, e:"nobody 是不定代词，谓语用单数 has。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+{q:"He later became the ________ of the national swimming team.", o:["coach", "coaches", "coach's", "coaching"], a:0, e:"coach 教练。据据原题改写。", source:"Unit 8同步练习题(改写)"},
+{q:"The coach, not the players, ________ speaking now.", o:["is", "are", "were", "be"], a:0, e:"not the players 是插入对比，不改变 coach 的单数，用 is。据据原题改写。", source:"Unit 8语法专项训练(改写)"},
+{q:"She won her second Olympic gold ________.", o:["medal", "metal", "motto", "record"], a:0, e:"gold medal 金牌。据据原题改写。", source:"Unit 8单元过关卷(改写)"},
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('91_kp8_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('91_kp8_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('91_kp8_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 8 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 8 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>

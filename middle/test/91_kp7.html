@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>九年级KP7</h1>
+        <p>定语从句（that/which/who/whose/whom 引导词与先行词辨析） · 定语从句主谓一致 · 音乐主题词汇短语 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">九年级全一册Unit 7 · 在线检测</span>
+      <h2>单元检测核心库KP7</h2>
+      <p>涵盖定语从句关系代词 that/which/who/whose/whom 的选择（先行词指人用 who/that、指物用 which/that、先行词被 the only/the first/the best/序数词/最高级修饰或先行词为 everything/anything/somebody 等不定代词时只能用 that）、关系代词作主语/宾语/定语的功能辨析（从句中不再保留 it/her 等宾语代词）、定语从句主谓一致（先行词单复数决定从句谓语：tells/plays/live/go/are/was 等）、the one that uses.../a piece that everyone loves 等经典句型、dance to / sing along to / be full of / take up / stop to listen / take care of / pass away / leave behind / make progress / be proud of / stick to / look down on / with all one's soul 等高频短语、music / song / musician / guitar / erhu / pipa / guqin / piano / violin / keyboard / trumpet / rhythm / lyrics / beat / voice / melody / soul / energy / joy / celebration / creative / gifted / energetic / traditional / folk / classical / pop / rock / rap / jazz / electronic / deaf / performance 等 Feel the Rhythm 音乐主题词汇、Have a good time / Sounds great / Maybe 等情景交际高频考点。系统从全量题库（232 道）中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"I like music that ________ a story.", o:["tells", "tell", "told", "telling"], a:0, e:"先行词 music 单数，从句谓语用三单 tells。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"These are musicians ________ make us happy every weekend.", o:["who/that", "which", "whose", "what"], a:0, e:"先行词 musicians 指人，从句缺主语，用 who/that。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"I prefer musicians ________ can write their own songs.", o:["who/that", "which", "what", "whom"], a:0, e:"先行词 musicians 指人，用 who/that。", source:"Unit 7复习试题A卷(10)"},
+{q:"The musician ________ plays the erhu is famous.", o:["who", "which", "what", "whom"], a:0, e:"先行词 musician 是人，用 who。", source:"Unit 7分层语法C卷(10)"},
+{q:"Han Lin wants to find out what kind of music ________ likes.", o:["everyone", "he", "she", "they"], a:0, e:"everyone 每个人。他们想找出大家都喜欢的音乐类型。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"Clarice likes music that she can ________ to.", o:["dance", "sing", "listen", "point"], a:0, e:"dance to 随着……跳舞。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"Their works are ________ into beautiful songs.", o:["turned", "made", "put", "looked"], a:0, e:"be turned into 被改编成。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The lead singer, Bob Wu, has a ________ that I could listen to all day!", o:["voice", "song", "music", "beat"], a:0, e:"voice 嗓音。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"在定语从句中，先行词被序数词修饰时，关系代词只能用 ________。", o:["that", "which", "who", "whom"], a:0, e:"先行词被序数词或最高级修饰时，关系代词只能用 that。", source:"Unit 7主题词汇补充(改写)"},
+{q:"The girl ________ won the prize is only ten.", o:["who", "which", "what", "whom"], a:0, e:"先行词 girl 是人，用 who。", source:"Unit 7分层语法C卷(10)"},
+{q:"The girl ________ you met at the concert is a gifted poet.", o:["who/that", "which", "what", "where"], a:0, e:"先行词 girl 指人，用 who/that；关系词作宾语时可省略。", source:"Unit 7复习试题B卷(10)"},
+{q:"The man ________ is singing is my uncle.", o:["who", "which", "what", "whom"], a:0, e:"先行词 man 指人，不能用 which，应用 who/that。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"He is a man who never ________ up.", o:["gives", "give", "gave", "giving"], a:0, e:"先行词 man 单数，never gives up 永不放弃。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"Here is the song I ________ yesterday.", o:["downloaded", "download", "downloads", "downloading"], a:0, e:"yesterday 提示过去式，用 downloaded。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"People ________ love music are often happy.", o:["who", "which", "what", "whom"], a:0, e:"先行词 people 是人，用 who。", source:"Unit 7分层语法C卷(10)"},
+{q:"When he plays the piano, he no longer ________ shy.", o:["feels", "felt", "feeling", "to feel"], a:0, e:"主语 he 为三单，一般现在时用 feels。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"The piece ________ was written by a deaf composer is beautiful.", o:["which/that", "who", "whom", "what"], a:0, e:"先行词 piece 是物，用 which/that。", source:"Unit 7复习试题B卷(10)"},
+{q:"Debbie's favourite music is ________.", o:["pop", "folk", "rock", "rap"], a:0, e:"Debbie 喜欢 pop 流行音乐。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"She is a girl ________ loves reading.", o:["who/that", "which", "what", "whom"], a:0, e:"先行词 girl 指人，从句缺主语，用 who/that。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The man ________ is singing is my teacher.", o:["which", "who", "what", "whom"], a:1, e:"先行词 man 是人，用 who。", source:"Unit 7分层语法C卷(10)"},
+{q:"It's a piece ________ everyone loves!", o:["which/that", "who", "whom", "what"], a:0, e:"先行词 piece 是物，用 which/that。", source:"Unit 7复习试题A卷(10)"},
+{q:"keyboard 是 ________。", o:["电子琴", "小号", "喇叭", "吉他"], a:0, e:"keyboard 电子琴；键盘。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"Jack likes musicians who are ________.", o:["creative", "quiet", "shy", "common"], a:0, e:"creative 有创造力的。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"performance 意为 ________。", o:["演出", "练习", "作曲", "排练"], a:0, e:"performance 演出；表演。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"The boys who ________ singing are my friends.", o:["are", "is", "was", "were"], a:0, e:"先行词 the boys 复数，从句谓语用 are。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"I prefer songs ________ are full of joy.", o:["who", "that", "whom", "what"], a:1, e:"先行词 songs 是物，用 that/which。", source:"Unit 7分层语法C卷(10)"},
+{q:"The girl in purple is a gifted poet. I met her at university. （合并）The girl in purple ________ I met at university is a gifted poet.", o:["who/that", "which", "what", "where"], a:0, e:"先行词 girl 指人，关系词作宾语，用 who/that。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"Some wish themselves good luck for future growth as ________ move forward.", o:["they", "we", "you", "he"], a:0, e:"they 指代前面的 young people。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"Music ________ is full of joy and celebration makes me happy.", o:["that", "who", "whom", "what"], a:0, e:"先行词 music 是物，用 that/which 引导。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"After his mother's death, Beethoven took care ________ his two younger brothers by himself.", o:["of", "from", "for", "with"], a:0, e:"take care of 照顾。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"I like the movie star ________ is kind and always helps people in need.", o:["which", "who", "whom", "what"], a:1, e:"先行词 movie star 指人，从句缺主语，用 who。", source:"Unit 7语法Focus同步练习(10)"},
+{q:"The musician and his works ________ we talked about are famous.", o:["that", "which", "who", "whom"], a:0, e:"先行词同时包含人和物时，关系代词只能用 that。", source:"Unit 7复习试题B卷(10)"},
+{q:"Young people would like to accept traditional culture ________ is spread in lively and relaxing ways.", o:["which", "who", "whom", "what"], a:0, e:"先行词 culture 是物，用 which/that。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"This is the best concert ________ I have ever been to.", o:["that", "which", "who", "what"], a:0, e:"先行词前有最高级 the best 修饰时，关系代词只能用 that。", source:"Unit 7复习试题B卷(10)"},
+{q:"Last year he met a composer who ________ a beautiful piece of music for him.", o:["wrote", "write", "writes", "writing"], a:0, e:"last year 提示一般过去时，用 wrote。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"The Chinese Dragon band is going to ________ at our New Year School Concert!", o:["perform", "practice", "prepare", "prevent"], a:0, e:"perform 表演。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"George is listening to some electronic music ________ he downloaded last night.", o:["that/which", "who", "whom", "what"], a:0, e:"关系词作 downloaded 的宾语，指物，用 that/which。", source:"Unit 7复习试题A卷(10)"},
+{q:"I like musicians ________ play different kinds of music.", o:["who/that", "which", "what", "whom"], a:0, e:"先行词 musicians 是人，关系词作主语不可省略，用 who/that。", source:"Unit 7复习试题A卷(10)"},
+{q:"The piano ________ I bought last year sounds good.", o:["who", "which", "whom", "what"], a:1, e:"先行词 piano 是物，用 which/that。", source:"Unit 7分层语法C卷(10)"},
+{q:"It seems people are having talks ________ ancient poets beyond time and space.", o:["with", "to", "at", "for"], a:0, e:"have talks with 与……交谈。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The lead singer has a voice ________ I could listen to all day.", o:["that/which", "who", "whom", "what"], a:0, e:"先行词 voice 是物，关系词作宾语，用 that/which。", source:"Unit 7复习试题A卷(10)"},
+{q:"The policewoman will help you. She is standing near the concert hall. （合并）The policewoman ________ is standing near the concert hall will help you.", o:["who/that", "which", "what", "whom"], a:0, e:"先行词 policewoman 指人，从句缺主语，用 who/that。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"Poetry and music have had a close ________ since ancient times.", o:["connection", "action", "direction", "question"], a:0, e:"close connection 紧密联系。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"This is the most beautiful song that I have ________ heard.", o:["ever", "never", "often", "already"], a:0, e:"the most... that I have ever heard 我听过的最……的。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"The term zhiyin is now used to describe a friend ________ knows you well.", o:["who", "which", "what", "whom"], a:0, e:"先行词 friend 指人，从句缺主语，用 who/that。据据原题改写。", source:"Unit 7复习试题(改写)"},
+{q:"I like the song ________ tells a story.", o:["that", "who", "what", "whom"], a:0, e:"先行词 song 是物，用 that/which。", source:"Unit 7分层语法C卷(10)"},
+{q:"I prefer musicians ________ play different kinds of music.", o:["which", "whom", "whose", "who"], a:3, e:"先行词 musicians 指人（复数），关系代词在从句中作主语，用 who。", source:"Unit 7单元自测卷·北京(12)"},
+{q:"The book ________ you lent to me yesterday is interesting.", o:["which/that", "who", "whom", "what"], a:0, e:"先行词 book 是物，关系词作宾语，用 which/that。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The man ________ wrote the song is deaf.", o:["who", "which", "what", "whom"], a:0, e:"先行词 man 指人，从句缺主语，用 who。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"Boya was a gifted musician ________ played the guqin with all his soul.", o:["who", "which", "whose", "what"], a:0, e:"先行词 musician 指人，从句缺主语，用 who。据据原题改写。", source:"Unit 7复习试题(改写)"},
+{q:"The song has a strong ________, so people can't help dancing to it.", o:["beat", "lyrics", "voice", "melody"], a:0, e:"a strong beat 强烈的节拍。", source:"Unit 7主题词汇补充(改写)"},
+{q:"This piece is my favourite. It uses the violin and piano. （合并）The piece ________ uses the violin and piano is my favourite.", o:["that/which", "who", "whom", "what"], a:0, e:"先行词 piece 是物，从句缺主语，用 that/which。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"Is there anything ________ you want to say about the concert?", o:["that", "which", "who", "whom"], a:0, e:"先行词是 anything，只能用 that。", source:"Unit 7复习试题B卷(10)"},
+{q:"The story of zhiyin shows us the Chinese ideal of ________.", o:["courage", "kindness", "friendship", "wisdom"], a:2, e:"friendship 友谊。知音的故事讲的是伯牙与钟子期的友谊。", source:"Unit 7单元检测试题(15)"},
+{q:"traditional 意为 ________。", o:["传统的", "现代的", "外国的", "古老的"], a:0, e:"traditional 传统的。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"I love traditional music ________ tells a story.", o:["who", "which", "whose", "whom"], a:1, e:"先行词 music 为物，从句缺主语，用 which/that 引导定语从句。故选 which。", source:"Unit 7单元检测试题(15)"},
+{q:"I prefer the music ________ everyone likes.", o:["that", "whom", "who", "what"], a:0, e:"先行词 music 是物，不能用 whom，应用 that/which。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"The erhu and pipa ________ were played together sounded amazing.", o:["that/which", "who", "whom", "what"], a:0, e:"先行词是乐器（物），用 that/which。", source:"Unit 7复习试题B卷(10)"},
+{q:"This is a song ________ us of our hometown.", o:["that reminds", "which remind", "who reminds", "what reminds"], a:0, e:"先行词 song 是物，从句缺主语，用 that/which，谓语三单 reminds。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"Zhong Ziqi was the friend ________ fully understood Boya's music.", o:["who/that", "which", "what", "whom"], a:0, e:"先行词 friend 是人，用 who/that。", source:"Unit 7复习试题B卷(10)"},
+{q:"Jack has got a T-shirt ________ has the band's name on the back!", o:["that", "who", "whom", "what"], a:0, e:"先行词 T-shirt 是物，用 that/which。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"先行词是物时，关系代词不能用 ________.", o:["that", "which", "who", "whom"], a:2, e:"先行词是物时不能用 who，应用 that/which。", source:"Unit 7分层语法B卷(10)"},
+{q:"The Beijing Opera ________ we watched was wonderful.", o:["that/which", "who", "what", "whom"], a:0, e:"先行词 Beijing Opera 是物，关系词作宾语，用 that/which。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"When his mother became seriously ill, Beethoven ________ home.", o:["returned", "returns", "has returned", "is returning"], a:0, e:"描述过去事实，用一般过去时 returned。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"In 1787, Beethoven played for ________ famous musician Wolfgang Mozart.", o:["the", "a", "an", "/"], a:0, e:"特指 Mozart 这位著名音乐家，用定冠词 the。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"I love music ________ is full of joy and celebration.", o:["who", "which", "whom", "whose"], a:1, e:"先行词 music 是物，关系代词在从句中作主语，用 which/that。", source:"Unit 7单元自测卷·北京(12)"},
+{q:"The erhu is a Chinese musical instrument ________ has a history of over a thousand years.", o:["who", "it", "whom", "which"], a:3, e:"先行词 instrument 为物，从句缺主语，用 which 引导。", source:"Unit 7单元检测试题(15)"},
+{q:"While composing, he played his songs on the piano ________ how they sounded.", o:["to hear", "hearing", "hear", "heard"], a:0, e:"played...to hear 弹奏以便听效果，不定式表目的。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"Parents are the people ________ love us forever.", o:["who/that", "which", "what", "whom"], a:0, e:"先行词 people 指人，从句缺主语，用 who/that。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"Jack needs music that has a strong ________.", o:["rhythm", "beauty", "lyrics", "beat"], a:0, e:"a strong rhythm 强烈的节奏。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"This is the piece ________ was written by Beethoven.", o:["which", "who", "what", "whose"], a:0, e:"先行词 piece 为物，从句缺主语，用 which 引导。", source:"Unit 7单元检测试题(15)"},
+{q:"The story that the song ________ is good.", o:["tells", "tell", "told", "telling"], a:0, e:"先行词 the story 单数，从句谓语用三单 tells。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"—What kind of music do you like? —I like music ________ has beautiful lyrics.", o:["who", "whom", "what", "that"], a:3, e:"先行词 music 是物，关系代词在从句中作主语，用 that/which。what 不能引导定语从句。", source:"Unit 7单元自测卷·北京(12)"},
+{q:"Teng Fei asks if they'll play “________ Lovers”.", o:["Butterfly", "Spring", "Golden", "Horse"], a:0, e:"Butterfly Lovers 梁祝。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"Beethoven played the music ________ was written by other people and became famous as a performer.", o:["which", "who", "what", "whom"], a:0, e:"先行词 music 是物，从句缺主语，用 which/that。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"classical 意为 ________。", o:["古典的", "现代的", "传统的", "流行的"], a:0, e:"classical 古典音乐的；古典的。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"The man ________ came to our party with a gift is my good friend.", o:["who/that", "which", "whose", "whom"], a:0, e:"先行词 man 指人，从句缺主语，用 who/that。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"She is the girl ________ everyone likes.", o:["that", "which", "who", "whom"], a:0, e:"that 指人指物通用，作从句宾语。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"Full of deep feelings, poems can ________ touch people's hearts.", o:["easily", "slowly", "hardly", "quietly"], a:0, e:"easily 容易地。诗歌能轻易触动人心。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"I like music ________ I can sing along to.", o:["which", "who", "whom", "what"], a:0, e:"先行词 music 是物，关系代词在从句中作 sing along to 的宾语，用 which/that。who/whom 指人，what 不能引导定语从句。", source:"Unit 7单元自测卷·北京(12)"},
+{q:"People usually ________ this song because it has such a strong beat.", o:["look down on", "dance to", "look for", "take up"], a:1, e:"dance to 随着……跳舞。句意：人们常常随着这首歌跳舞，因为它的节奏很强烈。", source:"Unit 7单元检测试题(15)"},
+{q:"Music ________ makes me happy when I am sad will always be part of my life.", o:["that", "who", "whom", "what"], a:0, e:"先行词 music 是物，用 that/which。据据原题改写。", source:"Unit 7复习试题(改写)"},
+{q:"—What kind of musicians do you like? —I like musicians ________ play different kinds of music.", o:["which", "whose", "who", "what"], a:2, e:"先行词 musicians 指人，从句缺主语，用 who。", source:"Unit 7语法Focus同步练习(10)"},
+{q:"The erhu is a traditional Chinese instrument ________ has two strings.", o:["who", "which", "whom", "what"], a:1, e:"先行词 instrument 是物，从句缺主语，用 which/that。", source:"Unit 7单元自测卷·北京(12)"},
+{q:"Jack's favourite music is ________.", o:["rap", "folk", "rock", "pop"], a:0, e:"Jack 喜欢 rap 说唱乐。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"After years of practice, it has become something ________ he is good at.", o:["that", "who", "whose", "whom"], a:0, e:"先行词 something 为不定代词，关系代词用 that。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"The music is full of joy and makes me ________.", o:["happy", "sad", "angry", "tired"], a:0, e:"make me happy 使我快乐。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"The people who ________ in the city love music.", o:["live", "lives", "lived", "living"], a:0, e:"先行词 people 复数，从句谓语用原形 live。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"—Have you heard the ________? —The Chinese Dragon band is going to perform at our New Year School Concert!", o:["news", "music", "song", "voice"], a:0, e:"hear the news 听到这个消息。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"I prefer ________ which is quiet.", o:["music", "song", "book", "film"], a:0, e:"music 音乐，which 引导定语从句修饰。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"I like music ________ has great lyrics.", o:["that", "whom", "who", "what"], a:0, e:"先行词 music 是物，不能用 who，应用 that/which。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"先行词是人、关系代词在从句中作主语时，不能用 ________.", o:["who", "that", "which", "whom"], a:2, e:"指人作主语时可用 who/that，不能用 which。", source:"Unit 7分层语法C卷(10)"},
+{q:"She is a ________ who plays the piano well.", o:["musician", "song", "book", "film"], a:0, e:"musician 音乐家，后接 who 引导定语从句。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"I like musicians ________ can write their own songs.", o:["who/that", "which", "what", "whom"], a:0, e:"先行词 musicians 是人，用 who/that。", source:"Unit 7复习试题B卷(10)"},
+{q:"Chris is a shy boy ________ finds it difficult to talk to others.", o:["who", "which", "what", "whose"], a:0, e:"先行词 boy 指人，从句缺主语，用 who 引导。", source:"Unit 7单元检测试题(15)"},
+{q:"They play music. It was written by a deaf man. （合并）They play music ________ was written by a deaf man.", o:["that", "who", "whom", "what"], a:0, e:"先行词 music 是物，用 that/which。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"I like musicians ________ are creative.", o:["which", "who", "whose", "what"], a:1, e:"先行词 musicians 指人，从句缺主语，用 who 引导。", source:"Unit 7单元检测试题(15)"},
+{q:"Debbie prefers music that she can ________ along to.", o:["sing", "dance", "play", "write"], a:0, e:"sing along to 跟着唱。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"—Do you know Henry Lau? —Sure. He is a talented singer ________ can write and sing his own music.", o:["what", "which", "who", "whom"], a:2, e:"先行词 singer 指人，从句缺主语，用 who。", source:"Unit 7语法Focus同步练习(10)"},
+{q:"George is listening to some electronic music. He downloaded it last night. （合并）George is listening to some electronic music ________ he downloaded last night.", o:["that/which", "who", "what", "whom"], a:0, e:"关系词作 downloaded 的宾语，指物用 that/which。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"The book ________ is on the desk is mine.", o:["which", "who", "whom", "what"], a:0, e:"先行词 book 是物，用 which/that。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"The musicians that ________ here were great.", o:["played", "play", "plays", "playing"], a:0, e:"主句为过去时，从句也用过去式 played。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"The people ________ live there used to play chess or watch TV after dinner.", o:["who", "which", "whose", "what"], a:0, e:"先行词 people 指人，用 who/that。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"—________ did Chris begin to play the piano for the elderly? —In 2019.", o:["When", "Where", "Why", "How"], a:0, e:"对时间状语 in 2019 提问用 When。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"Teng Fei likes traditional music that ________ a story.", o:["tells", "tell", "told", "telling"], a:0, e:"先行词 music 单数，从句谓语用三单 tells。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"It's amazing to hear the ________ and pipa being played together with the keyboard and electric guitar.", o:["erhu", "violin", "piano", "trumpet"], a:0, e:"erhu 二胡。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"People often say Suzhou's local language has one of the ________ sounds in China.", o:["sweetest", "sweet", "sweeter", "sweetly"], a:0, e:"one of + the + 最高级 + 名词复数，sweetest 最甜美的。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The policewoman ________ is standing near the concert hall will help you.", o:["who/that", "which", "what", "whom"], a:0, e:"先行词 policewoman 指人，从句缺主语，用 who/that。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"When you ________ to the music, you move your body with the beat.", o:["dance", "listen", "sing", "point"], a:0, e:"dance to the music 随着音乐起舞。", source:"Unit 7主题词汇补充(改写)"},
+{q:"After Ziqi passed away, Boya broke the instrument ________ he loved into pieces.", o:["that", "whose", "who", "whom"], a:0, e:"先行词 instrument 是物，关系词作宾语，用 that/which。据据原题改写。", source:"Unit 7复习试题(改写)"},
+{q:"The song ________ uses the violin is nice.", o:["which", "who", "whom", "what"], a:0, e:"先行词 song 是物，用 which/that。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"先行词是物时，关系代词用 that 或 ________。", o:["which", "who", "whom", "what"], a:0, e:"先行词指物时用 that/which。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"The piece of music ________ written by a deaf composer.", o:["was", "is", "were", "are"], a:0, e:"这支乐曲是由聋人作曲家创作的，过去事实用一般过去时被动 was written。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"I love ________ that tells a story.", o:["music", "song", "book", "film"], a:0, e:"music 音乐，后接 that 引导定语从句。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"Suzhou Pingtan performers ________ have their own special ways of playing and singing.", o:["artists", "artist", "artists'", "artist's"], a:0, e:"Pingtan performers 复数，此处指表演者们，用复数 artists。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The song which ________ the erhu is popular.", o:["uses", "use", "using", "used"], a:0, e:"先行词 the song 单数，从句谓语用三单 uses。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"I'll never forget the days ________ we spent together five years ago.", o:["which", "who", "when", "what"], a:0, e:"先行词 days 是物，关系词作 spent 的宾语，用 which/that。", source:"Unit 7语法Focus同步练习(10)"},
+{q:"The musician plays the ________, a traditional Chinese instrument with two strings.", o:["erhu", "piano", "violin", "trumpet"], a:0, e:"erhu 二胡，中国传统弦乐器。", source:"Unit 7主题词汇补充(改写)"},
+{q:"The woman will help you. She is nearby. （合并）The woman ________ is nearby will help you.", o:["who", "which", "what", "whom"], a:0, e:"先行词 woman 指人，从句缺主语，用 who/that。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"Beethoven composed some of his greatest pieces of music when he was ________ deaf.", o:["completely", "complete", "completion", "completing"], a:0, e:"修饰形容词 deaf 用副词 completely。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The Palace Museum is the only place ________ I've ever visited in Beijing.", o:["who", "where", "that", "what"], a:2, e:"先行词被 the only 修饰，关系代词用 that。", source:"Unit 7语法Focus同步练习(10)"},
+{q:"I ________ the song last week.", o:["downloaded", "download", "downloads", "downloading"], a:0, e:"last week 提示一般过去时，用 downloaded。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"But he ________ still able to communicate through music.", o:["is", "are", "was", "were"], a:0, e:"主语 he 为三单，一般现在时用 is。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"jazz 是哪种音乐类型？", o:["爵士乐", "说唱乐", "民谣", "摇滚乐"], a:0, e:"jazz 爵士乐。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"The singer ________ sang at the party is my aunt.", o:["who", "which", "what", "whom"], a:0, e:"先行词 singer 是人，作主语用 who。", source:"Unit 7分层语法B卷(10)"},
+{q:"Everything ________ I know about music I learnt from my father.", o:["that", "which", "who", "whom"], a:0, e:"先行词是 everything 等不定代词时，关系代词只能用 that，不能用 which。", source:"Unit 7复习试题B卷(10)"},
+{q:"Chopin left behind more than 200 musical works ________ are still loved today.", o:["that", "who", "whose", "whom"], a:0, e:"先行词 works 是物，从句缺主语，用 that/which。据据原题改写。", source:"Unit 7复习试题(改写)"},
+{q:"The boy ________ is playing the piano is my brother.", o:["who", "which", "what", "whom"], a:0, e:"先行词 boy 指人，从句缺主语，用 who。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"Music can cheer us up. It has a strong beat. （合并）Music ________ has a strong beat can cheer us up.", o:["which", "who", "whom", "what"], a:0, e:"先行词 music 是物，用 which/that。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"Some schoolmates ________ invited me to join their band are now my good friends.", o:["who", "which", "whose", "what"], a:0, e:"先行词 schoolmates 指人，从句缺主语，用 who/that。据据原题改写。", source:"Unit 7复习试题(改写)"},
+{q:"Chris is a shy boy who ________ it difficult to talk to others.", o:["finds", "found", "will find", "has found"], a:0, e:"先行词 boy 单数，从句谓语用三单 finds。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"Chopin was a gifted composer ________ left more than 200 works.", o:["which", "whom", "whose", "who"], a:3, e:"先行词 a gifted composer 指人，关系代词在从句中作主语，用 who。", source:"Unit 7单元自测卷·北京(12)"},
+{q:"The song which ________ the erhu is my favourite.", o:["uses", "use", "using", "used"], a:0, e:"先行词 the song 单数，从句谓语用三单 uses。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"folk music 指的是 ________。", o:["民间音乐", "古典音乐", "流行音乐", "摇滚乐"], a:0, e:"folk music 民间音乐。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"Debbie is not that into ________.", o:["rap", "rock", "pop", "folk"], a:0, e:"be not that into 对……不太感兴趣；Debbie 不太喜欢说唱乐。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"—How do you like the TV program? —I think it is the best program ________ I have ever watched.", o:["that", "which", "who", "whom"], a:0, e:"先行词被最高级 the best 修饰，关系代词用 that。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"prefer 意为“更________”。", o:["喜欢", "讨厌", "擅长", "害怕"], a:0, e:"prefer 更喜欢，prefer A to B 比起 B 更喜欢 A。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"The song ________ everyone likes is from a film.", o:["who", "that", "what", "whom"], a:1, e:"先行词 song 是物、作宾语，用 that/which。", source:"Unit 7分层语法B卷(10)"},
+{q:"rhythm 的中文意思是 ________。", o:["节奏", "旋律", "歌词", "乐器"], a:0, e:"rhythm 节奏；韵律。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"The girl in purple ________ I met at university is a gifted poet.", o:["who/that", "which", "whose", "what"], a:0, e:"先行词 girl 指人，关系词作 met 的宾语，用 who/that，可省略。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"She is the singer ________ everyone loves.", o:["that", "which", "what", "whom"], a:0, e:"that 指人指物通用，作从句宾语。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"The music that ________ energetic makes me happy.", o:["is", "are", "be", "am"], a:0, e:"关系代词 that 作主语，谓语与先行词 the music（不可数）保持一致，用单数 is。", source:"Unit 7单元自测卷·北京(12)"},
+{q:"The song ________ uses the erhu is beautiful.", o:["who", "which", "whom", "what"], a:1, e:"先行词 song 是物，用 which/that。", source:"Unit 7分层语法B卷(10)"},
+{q:"The music reminds me of my hometown. （同义句）The music ________ me think of my hometown.", o:["makes", "make", "made", "is making"], a:0, e:"remind sb of sth 与 make sb think of sth 同义；主语 The music 为三单，用 makes。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"We want to find out the kind of music that everyone ________.", o:["likes", "like", "liked", "liking"], a:0, e:"先行词 music 单数，从句谓语用三单 likes。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"rap 指 ________。", o:["说唱乐", "爵士乐", "古典乐", "民乐"], a:0, e:"rap 说唱乐。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"I like everything ________ you gave me.", o:["that", "which", "who", "whom"], a:0, e:"先行词 everything 不定代词，关系代词用 that。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The music Chris ________ on the piano makes them all stop to listen.", o:["plays", "played", "is playing", "will play"], a:0, e:"Chris 为三单主语，描述一般事实用 plays。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"The boy ________ is singing is my friend.", o:["who", "which", "what", "whom"], a:0, e:"先行词 boy 指人，用 who。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"The piece of music was written by a ________ composer who could not hear.", o:["deaf", "blind", "young", "brave"], a:0, e:"deaf 聋的；听不见。", source:"Unit 7主题词汇补充(改写)"},
+{q:"At the age of four, Beethoven's father began to teach ________ to play the piano.", o:["him", "he", "himself", "his"], a:0, e:"teach sb to do sth，动词后用宾格 him。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"I love music ________ I can dance to.", o:["who", "that", "what", "whom"], a:1, e:"先行词 music 是物，关系词作宾语，用 that/which。", source:"Unit 7分层语法B卷(10)"},
+{q:"The present ________ changed my life was the guitar my father bought me.", o:["that", "who", "whose", "whom"], a:0, e:"先行词 present 是物，从句缺主语，用 that/which。据据原题改写。", source:"Unit 7复习试题(改写)"},
+{q:"The music ________ Chris plays makes them stop to listen.", o:["that/which", "who", "whom", "what"], a:0, e:"关系词在从句中作 plays 的宾语，先行词是物，用 that/which。", source:"Unit 7复习试题B卷(10)"},
+{q:"I will never forget the concert ________ we enjoyed last night.", o:["who", "whom", "that", "what"], a:2, e:"先行词 the concert 是物，关系代词在从句中作 enjoyed 的宾语，用 that/which。", source:"Unit 7单元自测卷·北京(12)"},
+{q:"Among the 12 animals of the Chinese zodiac, the dragon is the only one ________ is not real.", o:["what", "who", "that", "whom"], a:2, e:"先行词被 the only 修饰时，关系代词只能用 that。", source:"Unit 7语法Focus同步练习(10)"},
+{q:"He is the kind of man ________ never gives up.", o:["that", "which", "who", "whom"], a:0, e:"先行词 man 指人，that 通用。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"Music that is played on the erhu is a kind of ________ music.", o:["traditional", "modern", "foreign", "western"], a:0, e:"二胡是中国传统乐器，二胡演奏的音乐属于传统音乐。", source:"Unit 7主题词汇补充(改写)"},
+{q:"He is happy to be around people ________ enjoy his playing.", o:["who", "which", "whose", "whom"], a:0, e:"先行词 people 指人，从句缺主语，用 who/that。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"—Do you know everybody ________ came to the club? —No, I don't know the one you had a long talk with near the door.", o:["who", "whom", "whose", "which"], a:0, e:"先行词 everybody 指人，从句缺主语，用 who。", source:"Unit 7语法Focus同步练习(10)"},
+{q:"They love music ________ touches their hearts and makes them smile.", o:["that", "who", "whom", "what"], a:0, e:"先行词 music 是物，用 that/which。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"This is the ________ that I downloaded yesterday.", o:["song", "music", "book", "film"], a:0, e:"song 歌曲，后接 that 引导定语从句。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"This is the kind of music ________ everyone in my class likes.", o:["what", "who", "whose", "that"], a:3, e:"先行词 music 为物，关系代词在从句中作 likes 的宾语，用 that/which。", source:"Unit 7单元检测试题(15)"},
+{q:"lyric 指歌曲的 ________。", o:["歌词", "旋律", "节奏", "乐器"], a:0, e:"lyric 歌词。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"Do you know the boy ________ is playing the piano?", o:["which", "who", "whose", "what"], a:1, e:"先行词 boy 是人，用 who。", source:"Unit 7分层语法B卷(10)"},
+{q:"trumpet 是 ________。", o:["小号", "电子琴", "钢琴", "二胡"], a:0, e:"trumpet 小号；喇叭。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"The girl who ________ the guitar well is in my class.", o:["plays", "play", "playing", "played"], a:0, e:"先行词 girl 单数，从句谓语用三单 plays。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"先行词是人时，关系代词用 who 或 ________。", o:["that", "which", "whom", "what"], a:0, e:"先行词指人时用 who/that。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"The boy ________ is singing is my brother.", o:["who", "which", "what", "whom"], a:0, e:"先行词 boy 指人，用 who/that。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"I love traditional ________ that tells a story.", o:["music", "song", "book", "film"], a:0, e:"traditional music 传统音乐，后接 that 引导定语从句。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"Clarice likes the fact that they mix rock, pop, and ________ to make a new style.", o:["traditional", "classical", "electronic", "folk"], a:0, e:"traditional 传统的。他们把摇滚、流行与传统元素融合。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"They are playing a beautiful piece of music. It was written by a deaf composer. （合并）The beautiful piece of music ________ they are playing was written by a deaf composer.", o:["that/which", "who", "whom", "what"], a:0, e:"先行词 music 是物，关系词作宾语，用 that/which。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"The music they played was so ________ that everyone wanted to dance.", o:["valuable", "gifted", "energetic", "common"], a:2, e:"valuable 珍贵的；gifted 有天赋的；energetic 充满活力的；common 普通的。根据 everyone wanted to dance 可知音乐充满活力，故选 energetic。", source:"Unit 7单元检测试题(15)"},
+{q:"The library ________ we visited last Monday usually is very crowded at weekends.", o:["that", "where", "who", "whose"], a:0, e:"先行词 library 是物，关系词在从句中作 visited 的宾语，用 that/which。", source:"Unit 7语法Focus同步练习(10)"},
+{q:"We want to find out the kind of music ________ everyone likes.", o:["that/which", "who", "whom", "what"], a:0, e:"关系词在从句中作宾语，指物用 that/which，可省略。", source:"Unit 7复习试题A卷(10)"},
+{q:"Clarice says Jack should ________ it to the concert!", o:["wear", "read", "eat", "drink"], a:0, e:"wear 穿（T恤）。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"Music makes their lives full of ________.", o:["joy", "sadness", "fear", "anger"], a:0, e:"be full of joy 充满欢乐。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"Mr Chen is a teacher ________ I want to learn from.", o:["who/that", "which", "whose", "whom"], a:0, e:"先行词 teacher 指人，关系词作宾语，用 who/that。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The musician has written many songs ________ touch people's hearts.", o:["that", "who", "whom", "what"], a:0, e:"先行词 songs 是物，用 that/which 引导。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"Teng Fei's favourite music is ________.", o:["folk", "rock", "rap", "pop"], a:0, e:"Teng Fei 喜欢 folk 民间音乐。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"This is the piece of music ________ was written by a deaf composer.", o:["that", "who", "what", "whom"], a:0, e:"先行词 music 是物，用 that/which。", source:"Unit 7分层语法B卷(10)"},
+{q:"They are playing a beautiful piece of music ________ was written by a deaf composer.", o:["which/that", "who", "whom", "what"], a:0, e:"先行词 music 是物，用 which/that。", source:"Unit 7复习试题A卷(10)"},
+{q:"Clarice's favourite music is ________.", o:["rock", "folk", "rap", "pop"], a:0, e:"Clarice 喜欢 rock 摇滚乐。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"The girl is my classmate. She is in purple. （合并）The girl in ________ is my classmate.", o:["purple", "blue", "red", "green"], a:0, e:"in purple 穿紫色衣服的。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"Many experts attended the Zhuzi Studies Conference ________ was held in Nanping on 18th October 2025.", o:["which", "when", "who", "what"], a:0, e:"先行词 Conference 是物，从句缺主语，用 which。", source:"Unit 7语法Focus同步练习(10)"},
+{q:"He is a musician ________ can write his own songs.", o:["which", "whom", "who", "what"], a:2, e:"先行词 a musician 指人，从句缺主语，用 who。", source:"Unit 7单元自测卷·北京(12)"},
+{q:"The policewoman is standing near the concert ________.", o:["hall", "theatre", "office", "station"], a:0, e:"concert hall 音乐厅。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"My brother likes ________ who are creative.", o:["musicians", "songs", "books", "films"], a:0, e:"musicians 音乐家，后接 who 引导定语从句。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"It is said that the young Beethoven's talent ________ by Mozart.", o:["was recognized", "is recognized", "recognized", "has recognized"], a:0, e:"talent 是被认可，过去事实用一般过去时被动 was recognized。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The man ________ you are looking for is over there.", o:["that", "which", "what", "whom"], a:0, e:"先行词 man 是人、作宾语，用 that/who。", source:"Unit 7分层语法B卷(10)"},
+{q:"I ________ music that is full of joy and celebration.", o:["prefer", "hate", "dislike", "forget"], a:0, e:"prefer 更喜欢。句意：我更喜欢充满欢乐与喜庆的音乐。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"I prefer music ________ is full of joy and celebration.", o:["what", "who", "that", "whose"], a:2, e:"先行词 music 为物，从句缺主语，用 that/which；选项中只有 that。", source:"Unit 7单元检测试题(15)"},
+{q:"This is the film ________ touched many people.", o:["who", "that", "whom", "what"], a:1, e:"先行词 film 是物，用 that/which。", source:"Unit 7分层语法C卷(10)"},
+{q:"Boya played the guqin with all his ________, but only Ziqi understood it.", o:["soul", "mind", "hand", "life"], a:0, e:"with all one's soul 全心全意地。句意：伯牙倾注全部心灵弹奏古琴，但只有子期能真正听懂。", source:"Unit 7单元检测试题(15)"},
+{q:"________ music is usually played by bands with electric guitars and drums.", o:["Rock", "Classical", "Folk", "Jazz"], a:0, e:"Rock music 摇滚乐，常用电吉他和鼓演奏。", source:"Unit 7主题词汇补充(改写)"},
+{q:"The musician ________ plays the erhu well is my music teacher.", o:["which", "who", "whom", "whose"], a:1, e:"先行词 the musician 指人，关系代词在从句中作主语，用 who。", source:"Unit 7单元自测卷·北京(12)"},
+{q:"The music makes them all stop ________.", o:["to listen", "listening", "listen", "listened"], a:0, e:"stop to do sth 停下来去做某事。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"在定语从句中，先行词被 the only 修饰时，关系代词只能用 ________。", o:["that", "which", "who", "whom"], a:0, e:"先行词被 the only、the very、the same 等修饰时，关系代词只能用 that。", source:"Unit 7主题词汇补充(改写)"},
+{q:"When he plays the piano, he is happy to be around people ________ enjoy his playing.", o:["who/that", "which", "whom", "what"], a:0, e:"先行词 people 指人，用 who/that。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"This is the best piece of music ________ I have ever heard.", o:["that", "which", "who", "what"], a:0, e:"先行词 piece 被最高级 the best 修饰时，关系代词只能用 that。", source:"Unit 7单元自测卷·北京(12)"},
+{q:"The piece ________ he played about mountains reminded Ziqi of high mountains.", o:["that", "whom", "what", "who"], a:0, e:"先行词 piece 是物，关系词作宾语，用 that/which。据据原题改写。", source:"Unit 7复习试题(改写)"},
+{q:"I love music ________ tells a story.", o:["that", "who", "whom", "what"], a:0, e:"先行词 music 是物，用 that/which 引导。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"The song uses the erhu. It is my favourite. （合并）The song ________ uses the erhu is my favourite.", o:["which", "who", "whom", "what"], a:0, e:"先行词 song 是物、作主语，用 which/that。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"The train G828 is the first direct high-speed train ________ connects Xi'an and Hong Kong.", o:["that", "which", "who", "what"], a:0, e:"先行词 train 前有 the first 修饰，关系代词只能用 that。", source:"Unit 7语法Focus同步练习(10)"},
+{q:"The girl ________ is standing near the concert hall is a gifted poet.", o:["which", "whom", "who", "whose"], a:2, e:"先行词 the girl 指人，关系代词在从句中作主语，用 who。", source:"Unit 7单元自测卷·北京(12)"},
+{q:"My favourite ________ is the one that uses the violin and the erhu.", o:["song", "music", "book", "film"], a:0, e:"my favourite song 我最喜欢的歌曲。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"Nobody should ________ traditional music; it is part of our culture.", o:["take care of", "pay attention to", "dream of", "look down on"], a:3, e:"look down on 轻视、看不起。句意：谁都不应该轻视传统音乐，它是我们文化的一部分。", source:"Unit 7单元检测试题(15)"},
+{q:"The little girl ________ plays the guqin so beautifully is only ten.", o:["who", "which", "whose", "what"], a:0, e:"先行词 girl 指人，从句缺主语，用 who 引导。", source:"Unit 7单元检测试题(15)"},
+{q:"Sheng Xiaoyun, ________ is a famous Pingtan performer, says, “This dialect goes easily with music.”", o:["who", "which", "what", "whom"], a:0, e:"先行词 Sheng Xiaoyun 指人，从句缺主语，用 who。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"People that ________ to the concert love music.", o:["go", "goes", "going", "went"], a:0, e:"先行词 people 复数，从句谓语用原形 go。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"________ culture will stay lively as long as we find proper methods to pass it down.", o:["Traditional", "Modern", "Foreign", "Popular"], a:0, e:"Traditional culture 传统文化。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"By 1820, Beethoven was totally ________.", o:["deaf", "the most deaf", "less deaf", "deafness"], a:0, e:"deaf 聋的，作表语用形容词原级。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"Music ________ is full of energy makes me excited.", o:["who", "which", "whom", "what"], a:1, e:"先行词 music 是物，用 which/that。", source:"Unit 7分层语法B卷(10)"},
+{q:"This new fashion ________ classic culture full of new energy.", o:["makes", "made", "making", "make"], a:0, e:"主语 This new fashion 单数，谓语用三单 makes。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The ________ that uses the erhu is beautiful.", o:["song", "music", "book", "film"], a:0, e:"song 歌曲，that 引导定语从句。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"This is the song ________ was written by Chopin.", o:["that", "who", "whom", "what"], a:0, e:"先行词 song 是物，that 已在从句中作主语，不再保留 it。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"—What kind of music do you like? —I like music ________ I can sing along to.", o:["who", "that", "what", "whose"], a:1, e:"先行词 music 为物，关系代词在从句中作介词 to 的宾语，用 that/which。", source:"Unit 7单元检测试题(15)"},
+{q:"Chopin was a great composer ________ music encouraged his people.", o:["who", "which", "whose", "whom"], a:2, e:"先行词 composer 与从句中 music 是所属关系，用 whose 引导。", source:"Unit 7单元检测试题(15)"},
+{q:"Debbie thinks they should play “Horse ________”! It's a piece everyone loves!", o:["Racing", "Boating", "Driving", "Sailing"], a:0, e:"Horse Racing 赛马，著名民乐合奏曲。据据原题改写。", source:"Unit 7复习试题A卷(改写)"},
+{q:"Pingtan is a new art form ________ became very popular during the Qing Dynasty.", o:["which", "who", "whom", "what"], a:0, e:"先行词 art form 是物，从句缺主语，用 which/that。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"定语从句所修饰的名词叫________词。", o:["先行", "被修饰", "修饰", "关系"], a:0, e:"定语从句所修饰的名词叫先行词。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"Online platforms list great ________ like Li Bai and Su Shi as singers.", o:["poets", "musicians", "painters", "actors"], a:0, e:"poets 诗人。李白、苏轼是著名诗人。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The film ________ we saw last night was moving.", o:["which", "who", "whom", "what"], a:0, e:"先行词 film 是物、作宾语，用 which/that。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"My favourite song is the one ________ uses the violin and the erhu.", o:["that", "who", "whom", "what"], a:0, e:"关系代词指物作主语，用 that/which 引导定语从句。据据原题改写。", source:"Unit 7分层语法A卷(改写)"},
+{q:"The man is a composer. You met him. （合并）The man ________ you met is a composer.", o:["that", "which", "who", "whom"], a:0, e:"先行词 man 指人、作宾语，用 that/who。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"Chris began to show ________ interest in playing the piano when he was five years old.", o:["an", "a", "the", "/"], a:0, e:"interest 以元音音素开头，show an interest in 对……产生兴趣。据据原题改写。", source:"Unit 7单元检测试题(改写)"},
+{q:"be full ________ 充满。", o:["of", "with", "in", "at"], a:0, e:"be full of 充满。据据原题改写。", source:"Unit 7分层语法C卷(改写)"},
+{q:"The music ________ he wrote is popular.", o:["who", "which", "whom", "what"], a:1, e:"先行词 music 是物，用 which/that。", source:"Unit 7分层语法C卷(10)"},
+{q:"Young fans follow these poets on music apps and ________ to their songs over and over again.", o:["listen", "look", "point", "turn"], a:0, e:"listen to their songs 听他们的歌。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"The book is about Chopin. I bought it. （合并）The book ________ I bought is about Chopin.", o:["that", "who", "whom", "what"], a:0, e:"先行词 book 是物、作宾语，用 that/which。据据原题改写。", source:"Unit 7分层语法B卷(改写)"},
+{q:"Andy prefers movies ________ give him something to think about.", o:["which/that", "who", "whom", "what"], a:0, e:"先行词 movies 是物，从句缺主语，用 which/that。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+{q:"He would rewrite his music over and over ________ he was pleased with it.", o:["until", "though", "if", "because"], a:0, e:"until 直到。他反复改写直到满意为止。据据原题改写。", source:"Unit 7语法Focus同步练习(改写)"},
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('91_kp7_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('91_kp7_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('91_kp7_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 7 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 7 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>

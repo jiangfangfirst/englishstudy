@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>九年级KP4</h1>
+        <p>宾语从句（that/whether/if/what/which/who 引导词与陈述语序） · 过去将来时 would · 动名词作主语 · used to do · 记忆主题词汇 · 高频短语辨析 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">九年级全一册Unit 4 · 在线检测</span>
+      <h2>单元检测核心库KP4</h2>
+      <p>涵盖宾语从句（that/whether/if/what/which/who/where/when/how/why 引导词辨析、陈述语序、过去将来时 would）、remember/forget to do 与 doing 辨析、used to do、动名词作主语、the + 比较级、词性转换（memory/memorize、forget/forgetful、confident/confidence、stress/stressed、react/reaction、health/healthy 等）、keep...in mind / divide...into / link...with / mix up / run out of / go through / take notes / pay attention to / make use of / put...to good use / build up / wear out / last but not least / use it or lose it / react to / remind sb of / boost 等高频短语、memory / recall / technique / mind map / stress / stable / detail / long-term / short-term / lecture / password / notebook / diary 等 Our Memory 主题词汇、Pardon me / In that case / No problem / Have a good time 等情景交际高频考点。系统从全量题库（236 道）中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"I don't know ___ he was late this morning.", o:["what", "where", "when", "why"], a:3, e:"why 为什么，不知道他今天早上为什么迟到。", source:"Unit 4同步提优训练(改写)"},
+{q:"I'm looking forward to ___ from my pen pal.", o:["hear", "hearing", "heard", "hears"], a:1, e:"look forward to doing sth 期待做某事。", source:"Unit 4基础通关卷(15)"},
+{q:"___ dolphins can recognize their old partners with good memory.", o:["Wildly", "Wildness", "Wilder", "Wild"], a:3, e:"Wild 野生的，野生海豚凭记忆认出老伙伴。", source:"Unit 4单元巩固提升(改写)"},
+{q:"We ___ games together after class, like hide-and-seek and football.", o:["play", "plays", "playing", "played"], a:3, e:"played 玩，过去时常玩游戏。", source:"Unit 4单元测试(改写)"},
+{q:"Please ___ the sentence after me so you can remember it better.", o:["review", "recall", "react", "repeat"], a:3, e:"repeat 重复，跟读句子记得更牢。", source:"Unit 4单元素能测评题(改写)"},
+{q:"___ your notes after class to make the knowledge last longer.", o:["Repeat", "Review", "Recall", "React"], a:1, e:"Review 复习，课后复习笔记。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"—___ do you keep your old photos? —I put them in a box under my bed.", o:["Where", "When", "Why", "How"], a:0, e:"where 哪里，答语表示存放地点。", source:"Unit 4单元测试(10)"},
+{q:"My grandfather and I ___ time there every weekend.", o:["spend", "spends", "spending", "spent"], a:3, e:"spent 度过，过去的周末时光。", source:"Unit 4单元测试(改写)"},
+{q:"I still remember ___ to the beach with my parents when I was a child.", o:["go", "going", "to go", "gone"], a:1, e:"remember doing 记得做过（已发生），记得小时候去过海滩。", source:"Unit 4单元测试(10)"},
+{q:"—Do you know what ___ Tom on his way to the library? —He fell off his bike.", o:["happened with", "happened at", "happened for", "happened to"], a:3, e:"happen to sb 发生在某人身上。", source:"Unit 4基础通关卷(改写)"},
+{q:"Please ___ these new words ___ because they are helpful for memorization.", o:["take; in mind", "put; in mind", "make; in mind", "keep; in mind"], a:3, e:"keep...in mind 牢记。", source:"Unit 4基础通关卷(改写)"},
+{q:"I ___ in a small village when I was a child.", o:["live", "lives", "living", "lived"], a:3, e:"lived 居住，when I was a child 过去时。", source:"Unit 4单元测试(改写)"},
+{q:"It ___ me that I forgot to bring my wallet to school today.", o:["happened to", "looked for", "waited for", "turned to"], a:0, e:"happen to sb 发生在某人身上，今天忘带钱包的事发生在我身上。", source:"Unit 4单元巩固提升(20)"},
+{q:"After two years of hard work, the new library in our city was ___ open to the public last month.", o:["widely", "fully", "nearly", "hardly"], a:1, e:"fully open 全面开放，图书馆建成开放。", source:"Unit 4单元素能测评题(10)"},
+{q:"—I can't finish the essay. I've ___ all my ideas. —Don't worry. Take a walk outside. It might help.", o:["looked back at", "run out of", "taken advantage of", "come up with"], a:1, e:"run out of 用完，耗尽，点子用完了写不出文章。", source:"Unit 4单元素能测评题(10)"},
+{q:"Too much ___ makes memory worse, so we should reduce it and stay confident.", o:["sadness", "hunger", "laziness", "stress"], a:3, e:"stress 压力，减压保持自信。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Don't be under too much ___. Take it easy.", o:["press", "stress", "sadness", "pleasure"], a:1, e:"under too much stress 承受太多压力，固定搭配。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"Can you tell me ___ the train leaves?", o:["when", "that", "if", "what"], a:0, e:"when 什么时候，从句缺时间状语。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"Could you tell me ___ it is easy to forget a word?", o:["that", "why", "what", "who"], a:1, e:"why 为什么，为什么单词容易忘。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"We should keep in ___ the happy time we spent with family.", o:["mood", "heart", "brain", "mind"], a:3, e:"keep...in mind 牢记，把家庭快乐时光记在心里。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"You should ___ all the important points in your mind when learning new knowledge.", o:["mix up", "keep in mind", "give up", "cheer up"], a:1, e:"keep in mind 牢记，把要点记在心里。", source:"Unit 4单元测试卷(10)"},
+{q:"___, we should try our best to use these memory methods.", o:["First of all", "In the end", "At present", "Last but not least"], a:3, e:"Last but not least 最后但同样重要的是。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Before the group discussion, our teacher usually ___ the whole class into eight groups.", o:["develops", "divides", "creates", "turns"], a:1, e:"divide...into... 把……分成，老师把全班分成八组。", source:"Unit 4单元素能测评题(10)"},
+{q:"___ with memorizing abstract words, remembering pictures is much easier.", o:["Compare", "Comparing", "To compare", "Compared"], a:3, e:"Compared with 与……相比，过去分词短语作状语。", source:"Unit 4单元巩固提升(改写)"},
+{q:"Start with a small place and place five ___ in it.", o:["item", "thing", "piece", "items"], a:3, e:"five items 五个物品，复数。", source:"Unit 4单元巩固提升(改写)"},
+{q:"The teacher asked us to ___ the key points in class.", o:["put up", "turn on", "write down", "take off"], a:2, e:"write down 写下，写下要点。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"Please ___ what your teacher says in class.", o:["pay a visit to", "take part in", "look forward to", "pay attention to"], a:3, e:"pay attention to 注意，上课注意听老师讲。", source:"Unit 4同步提优训练(改写)"},
+{q:"Don't get the two similar words ___ up.", o:["mixing", "mix", "mixed", "mixes"], a:2, e:"get sth mixed up 把某事弄混，过去分词作宾补。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Instead of ___ every word, you should remember the key points.", o:["memorize", "memorized", "to memorize", "memorizing"], a:3, e:"instead of doing sth 而不是做某事。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"We should stay ___ and keep exercising every day.", o:["act", "action", "actively", "active"], a:3, e:"stay active 保持活跃，stay 后接形容词。", source:"Unit 4同步提优训练(改写)"},
+{q:"The more you ___ knowledge, the better you remember it.", o:["reviewing", "review", "reviewed", "reviews"], a:1, e:"the more...the better 句型，祈使句用动词原形 review。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Why ___ this method work so well?", o:["do", "did", "is", "does"], a:3, e:"does 助动词，work 实义动词需助动词提问。", source:"Unit 4单元巩固提升(改写)"},
+{q:"The saying use it or lose it means you will forget knowledge if you don't use it.", o:["practice makes perfect", "no pains no gains", "all work and no play", "use it or lose it"], a:3, e:"Use it or lose it 用进废退，固定说法。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"—I wonder ___ I can remember so many chemical formulas. —Practice makes perfect. Try to review them regularly.", o:["why", "when", "how", "what"], a:2, e:"how 怎样，结合答语“熟能生巧”可知询问方式。", source:"Unit 4单元素能测评题(10)"},
+{q:"I don't know when he will ___ back.", o:["coming", "came", "comes", "come"], a:3, e:"will 后接动词原形 come。", source:"Unit 4同步提优训练(改写)"},
+{q:"Bob does not know ___ took his wallet.", o:["where", "when", "who", "why"], a:2, e:"who 谁，从句缺主语且指人。", source:"Unit 4能力提升培优卷(15)"},
+{q:"She wrote down the phone number so that she wouldn't ___ it.", o:["remember", "keep", "review", "forget"], a:3, e:"forget 忘记，写下号码以免忘记。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"___ every day's accumulation in ___, and your grades will increase gradually.", o:["Keep; heart", "Put; mind", "Take; mind", "Keep; mind"], a:3, e:"Keep...in mind 记住，每天积累牢记在心。", source:"Unit 4单元巩固提升(改写)"},
+{q:"Another useful way is to ___ connections between new and old information.", o:["close", "cover", "cancel", "create"], a:3, e:"create connections 建立联系，新旧知识建立关联。", source:"Unit 4单元巩固提升(改写)"},
+{q:"It's important to stay ___ if you want a good memory.", o:["health", "healthy", "healthily", "unhealth"], a:1, e:"stay healthy 保持健康，stay 后接形容词。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"She asked me ___ I had been to Beijing.", o:["that", "what", "which", "whether"], a:3, e:"whether 是否，asked 后表是否。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"I can't remember ___ things you asked me to buy.", o:["which", "who", "that", "if"], a:0, e:"which 哪些，things 前需限定词 which。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"Do you know ___ she is from?", o:["why", "when", "how", "where"], a:3, e:"where 哪里，来自哪里。", source:"Unit 4同步提优训练(改写)"},
+{q:"The old man is ___ a hard time after his wife passed away.", o:["going over", "going on", "going out", "going through"], a:3, e:"go through 经历，妻子去世后经历艰难时光。", source:"Unit 4同步提优训练(改写)"},
+{q:"I wonder ___ he bought the gift for.", o:["that", "which", "who", "whose"], a:2, e:"for 后缺宾语且指人，用 who。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"Do you know ___ the library is?", o:["that", "if", "what", "where"], a:3, e:"where 哪里，从句缺地点状语。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"She asked me why I ___ finished my homework.", o:["don't", "didn't", "won't", "hadn't"], a:3, e:"hadn't finished 没有完成，过去的过去用过去完成时。", source:"Unit 4同步提优训练(改写)"},
+{q:"She cannot remember ___ she put the opera ticket.", o:["what", "where", "why", "how"], a:1, e:"where 哪里，从句缺地点状语。", source:"Unit 4能力提升培优卷(15)"},
+{q:"—What's your favorite memory from childhood? —___ my grandmother taught me to make dumplings.", o:["That", "What", "When", "Which"], a:0, e:"that 引导表语从句，奶奶教我包饺子是童年记忆。", source:"Unit 4单元测试(10)"},
+{q:"The twin sisters look so similar that many people often ___ them ___.", o:["mix; up", "put; up", "take; up", "give; up"], a:0, e:"mix up 混淆，姐妹太像常被弄混。", source:"Unit 4能力提升培优卷(15)"},
+{q:"How did she ___ to the news about the accident?", o:["react", "retell", "memorize", "mix"], a:0, e:"react to 对……作出反应。", source:"Unit 4能力提升培优卷(15)"},
+{q:"The teacher explained ___ group discussions can help us understand difficult ideas better.", o:["that", "how", "what", "whether"], a:1, e:"how 怎样，解释小组讨论如何帮助理解难点。", source:"Unit 4单元自测卷·北京专用(12)"},
+{q:"My grandfather likes to ___ his old experiences when we chat together.", o:["recall", "discuss", "view", "divide"], a:0, e:"recall 回忆，聊天时回忆旧日经历。", source:"Unit 4单元巩固提升(20)"},
+{q:"The film was so ___ that I will never forget it.", o:["forgetful", "forgettable", "forgotten", "unforgettable"], a:3, e:"unforgettable 令人难忘的，forget 加 un- 和 -able。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"With practice, your memory palace ___ larger and more detailed.", o:["becomes", "became", "has become", "will become"], a:3, e:"will become 将会变得，条件伴随将来。", source:"Unit 4单元巩固提升(改写)"},
+{q:"You should ___ attention to your pronunciation.", o:["take", "make", "pay", "give"], a:2, e:"pay attention to 注意，固定搭配。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"Enough sleep helps your brain ___ memories.", o:["organizing", "organized", "organizes", "organize"], a:3, e:"help sb do sth，help 后接动词原形。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Most people will ___ differently to the same thing in different moods.", o:["recall", "react", "recognize", "retell"], a:1, e:"react to 对……作出反应，情绪不同反应不同。", source:"Unit 4单元巩固提升(20)"},
+{q:"Many animals can remember the ___ places where they store food.", o:["hide", "hiding", "hides", "hidden"], a:3, e:"hidden places 隐藏的地方，过去分词作定语。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Please ___ that honesty is the best policy in your life.", o:["keep it in mind", "make up your mind", "change your mind", "lose your mind"], a:0, e:"keep...in mind 牢记，牢记诚实是最好的策略。", source:"Unit 4单元巩固提升(20)"},
+{q:"I don't understand ___ she's going through.", o:["that", "what", "if", "whether"], a:1, e:"go through 缺宾语，用连接代词 what。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"—How do you make the old books from your grandma's home useful? —I plan to put them to ___ by setting up a small “book sharing corner” in my community.", o:["good use", "great value", "small steps", "large stages"], a:0, e:"put sth to good use 充分利用某物，固定搭配。", source:"Unit 4单元素养培优卷(15)"},
+{q:"—I can't find my key. Did you see it? —Sorry, I ___ it.", o:["don't see", "didn't see", "haven't seen", "won't see"], a:1, e:"didn't see 刚才没看见，与 Did you see it 呼应。", source:"Unit 4单元测试(10)"},
+{q:"The doctor ___ knows how to treat this kind of wound effectively.", o:["hardly", "nearly", "partly", "fully"], a:3, e:"fully 完全地，医生完全清楚如何治疗。", source:"Unit 4单元巩固提升(改写)"},
+{q:"A good ___ is important for remembering new information.", o:["technique", "technology", "television", "temperature"], a:0, e:"technique 技巧，好技巧对记住信息很重要。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"The bridge is very ___, so heavy trucks can pass through it safely.", o:["wild", "stable", "short-term", "likely"], a:1, e:"stable 稳固的，桥稳固卡车才安全通过。", source:"Unit 4单元巩固提升(20)"},
+{q:"We plan to have a ___ in the park this sunny weekend.", o:["opera", "picnic", "gunshot", "mall"], a:1, e:"picnic 野餐，阳光周末去公园野餐。", source:"Unit 4单元巩固提升(20)"},
+{q:"Can you tell me the ___ between the two similar words?", o:["differ", "different", "differently", "difference"], a:3, e:"the difference between 两者之间的区别。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Doing brain training games can help ___ your memory.", o:["impress", "imagine", "invite", "improve"], a:3, e:"improve your memory 提高记忆力。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Our ___ memory keeps information only for a short time.", o:["long-term", "strong", "weak", "short-term"], a:3, e:"short-term memory 短期记忆。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Please ___ the safety rules ___ when you are at school.", o:["run; out of", "happen; to", "take; place", "keep; in mind"], a:3, e:"keep...in mind 牢记，在学校牢记安全规则。", source:"Unit 4单元素养培优卷(15)"},
+{q:"I tried to ___ the name of the old classmate, but I couldn't remember it at all.", o:["recall", "receive", "realize", "record"], a:0, e:"recall 回忆，试图回忆起老同学的名字。", source:"Unit 4单元测试卷(10)"},
+{q:"We should put our spare time ___ to improve our English skills.", o:["to good use", "in trouble", "on duty", "in danger"], a:0, e:"put...to good use 充分利用，空闲时间用于提升英语。", source:"Unit 4单元巩固提升(20)"},
+{q:"I ___ up with my grandparents, who loved me very much.", o:["grow", "grows", "grown", "grew"], a:3, e:"grow up 长大，全文过去时。", source:"Unit 4单元测试(改写)"},
+{q:"I wonder ___ she can help me with my memory problem.", o:["that", "if", "what", "who"], a:1, e:"wonder 想知道是否，从句成分完整用 if。", source:"Unit 4基础通关卷(15)"},
+{q:"Some bad habits will stop us ___ having a good memory.", o:["from", "to", "of", "with"], a:0, e:"stop sb from doing 阻止某人做某事。", source:"Unit 4单元测试卷(10)"},
+{q:"Can you tell me ___ the school library is open on Sundays? I want to study there.", o:["that", "whether", "which", "what"], a:1, e:"whether 是否，询问图书馆周日是否开放。", source:"Unit 4单元自测卷·北京专用(12)"},
+{q:"She wondered what ___ to her grandma years ago.", o:["happen", "happening", "happens", "happened"], a:3, e:"years ago 过去时间，从句用一般过去时 happened。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"When the teacher told the students about the sudden test, most of them didn't know how to ___ at first—some looked surprised, while others felt worried.", o:["react", "forget", "prepare", "imagine"], a:0, e:"react 反应，不知道如何反应。", source:"Unit 4单元素养培优卷(15)"},
+{q:"___ people should learn to view different opinions rationally.", o:["Grown-ups", "Growing", "Grown", "Grown-up"], a:3, e:"Grown-up 成年的，形容词作定语修饰 people。", source:"Unit 4单元巩固提升(改写)"},
+{q:"Please tell us where you ___ yesterday.", o:["go", "gone", "goes", "went"], a:3, e:"yesterday 过去时间，用过去式 went。", source:"Unit 4同步提优训练(改写)"},
+{q:"Your memory technique is simple but ___.", o:["effectively", "effect", "affected", "effective"], a:3, e:"effective 有效的，形容词作表语。", source:"Unit 4同步提优训练(改写)"},
+{q:"We should ___ the problem into three small parts to solve it easily.", o:["wear out", "divide", "pass", "view"], a:1, e:"divide...into 把……分成，化整为零解决问题。", source:"Unit 4单元巩固提升(20)"},
+{q:"___ is not always a bad thing; sometimes it helps us move on.", o:["Forgetful", "Forgetting", "Forget", "Forgetfulness"], a:3, e:"Forgetting 动名词作主语，健忘不总是坏事。", source:"Unit 4同步提优训练(改写)"},
+{q:"Our teacher will give a ___ on English reading skills this Friday afternoon.", o:["passage", "lecture", "password", "graph"], a:1, e:"lecture 讲座，周五下午的阅读技巧讲座。", source:"Unit 4单元巩固提升(20)"},
+{q:"—Did you understand the introduction to the bridge's history? —Yes! The guide explained it so clearly that I could ___ get it.", o:["bravely", "fully", "quietly", "slowly"], a:1, e:"fully 完全地，讲解清楚所以完全理解。", source:"Unit 4单元素养培优卷(15)"},
+{q:"Either reading or listening ___ helpful for improving our memory.", o:["is", "are", "was", "were"], a:0, e:"either...or 就近原则，listening 单数用 is。", source:"Unit 4单元测试卷(10)"},
+{q:"Remembering pictures is much ___ than memorizing abstract words.", o:["easy", "easiest", "more easily", "easier"], a:3, e:"much easier than 比……容易得多，比较级。", source:"Unit 4单元巩固提升(改写)"},
+{q:"After watching the short film about environmental protection, our teacher asked us to ___ the ways to save water in groups.", o:["discuss", "draw", "count", "select"], a:0, e:"discuss 讨论，分组讨论节水方法。", source:"Unit 4能力提升培优卷(15)"},
+{q:"When Lisa heard that her favourite pet cat was lost, she couldn't hide her ___ and even cried a little.", o:["happiness", "sadness", "excitement", "kindness"], a:1, e:"sadness 悲伤，宠物丢失忍不住悲伤。", source:"Unit 4单元素养培优卷(15)"},
+{q:"—___ does the song remind you ___? —My childhood.", o:["What; about", "Which; of", "How; of", "What; of"], a:3, e:"What does the song remind you of 这首歌让你想起什么。", source:"Unit 4基础通关卷(改写)"},
+{q:"Have you ever walked into a room and forgotten ___ you came in for?", o:["what", "which", "that", "whether"], a:0, e:"what 作 for 的宾语，忘了进房间是要做什么。", source:"Unit 4单元自测卷·北京专用(12)"},
+{q:"Pay attention to small ___ when you learn new words.", o:["dreams", "degrees", "details", "dates"], a:2, e:"pay attention to details 注意细节。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Reviewing regularly can help ___ up your memory.", o:["break", "cut", "put", "build"], a:3, e:"build up 增强，定期复习增强记忆力。", source:"Unit 4单元巩固提升(改写)"},
+{q:"The government has taken action to ___ the old temples in our city.", o:["produce", "provide", "prevent", "protect"], a:3, e:"protect 保护，政府采取措施保护古庙。", source:"Unit 4单元素能测评题(改写)"},
+{q:"The memory palace ___ as one of the oldest memory techniques.", o:["is called", "is used", "is made", "is known"], a:3, e:"be known as 作为……而闻名，记忆宫殿是最古老的记忆技巧。", source:"Unit 4单元巩固提升(改写)"},
+{q:"Many people enjoy watching traditional ___ with beautiful music.", o:["operators", "operations", "opening", "operas"], a:3, e:"traditional operas 传统歌剧，复数表泛指。", source:"Unit 4基础通关卷(改写)"},
+{q:"To keep your personal information safe online, never tell strangers your bank ___ or password.", o:["address", "account", "name", "number"], a:1, e:"bank account 银行账户，网络信息安全语境。", source:"Unit 4单元素能测评题(10)"},
+{q:"Use it or ___ it. Remember to review knowledge often.", o:["leave", "lack", "lose", "learn"], a:2, e:"Use it or lose it 用进废退，固定表达。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Sleep is necessary for our brain to ___ and store information.", o:["process", "produce", "protect", "prepare"], a:0, e:"process 处理，大脑处理并储存信息。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"—Why do many people choose to walk or cycle in Wuhan these days? —It helps ___ the use of shared bikes and reduce air pollution.", o:["change", "control", "stop", "increase"], a:3, e:"increase 增加，绿色出行增加共享单车使用。", source:"Unit 4单元素养培优卷(15)"},
+{q:"Every morning I ___ to the village school with my friends.", o:["walks", "walk", "walking", "walked"], a:3, e:"walked 步行，回忆童年用过去时。", source:"Unit 4单元测试(改写)"},
+{q:"The more you review what you have learned, ___ better grades you will get.", o:["the", "a", "an", "/"], a:0, e:"the+比较级 the+比较级，越复习成绩越好。", source:"Unit 4单元测试卷(10)"},
+{q:"___ taking notes is a very effective learning way.", o:["In my opinion", "At first", "On the way", "In my case"], a:3, e:"In my case 就我的情况而言。", source:"Unit 4单元巩固提升(改写)"},
+{q:"I don't know ___ car it is.", o:["whose", "that", "what", "if"], a:0, e:"whose 谁的，询问所属。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"The new teaching method has ___ to be very effective.", o:["promised", "prepared", "provided", "proved"], a:3, e:"prove to be 被证明是，has proved 现在完成时。", source:"Unit 4单元素能测评题(改写)"},
+{q:"—Do you still ___ your first day at middle school? —Of course! I met my best friend that day.", o:["remind", "remember", "recall", "forget"], a:1, e:"remember 记得，还记得初中的第一天。", source:"Unit 4单元测试(10)"},
+{q:"Those days ___ the happiest in my life.", o:["was", "are", "is", "were"], a:3, e:"were 是，those days 复数用 were。", source:"Unit 4单元测试(改写)"},
+{q:"The teacher asked us ___ we had any questions about the lecture.", o:["that", "what", "whether", "which"], a:2, e:"whether 是否，询问是否有问题。", source:"Unit 4单元自测卷·北京专用(12)"},
+{q:"—What did the teacher say about the exam? —She said ___.", o:["we will have it next Monday", "we would have it the next Monday", "we have it next Monday", "we had had it next Monday"], a:1, e:"主句 said 为过去时，从句用过去将来时 would。", source:"Unit 4单元自测卷·北京专用(12)"},
+{q:"We should take the initiative to discuss and ___ the main content of this activity.", o:["outlook", "output", "outside", "outline"], a:3, e:"outline 概述，讨论并概述活动主要内容。", source:"Unit 4单元巩固提升(改写)"},
+{q:"Can you tell me what you are ___ through?", o:["running", "looking", "getting", "going"], a:3, e:"go through 经历，你正在经历什么。", source:"Unit 4同步提优训练(改写)"},
+{q:"She has lived in this city ___ she was five years old.", o:["for", "since", "when", "until"], a:1, e:"since 自从，与现在完成时和过去时间点搭配。", source:"Unit 4单元测试(10)"},
+{q:"Could you tell me ___ you organize your study notes? I always end up with a mess.", o:["how", "that", "whether", "what"], a:0, e:"how 怎样，询问如何整理笔记。", source:"Unit 4单元自测卷·北京专用(12)"},
+{q:"Draw ___ maps to organize information clearly.", o:["moon", "music", "mind", "math"], a:2, e:"mind maps 思维导图，固定搭配。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"You should ___ all the important points when learning new knowledge.", o:["mix up", "keep in mind", "give up", "cheer up"], a:1, e:"keep in mind 牢记，学习新知识时记住要点。", source:"Unit 4基础通关卷(15)"},
+{q:"Don't ___ the two similar words, or you will make mistakes in exams.", o:["mix up", "put up", "take up", "pick up"], a:0, e:"mix up 混淆，不要混淆形近词。", source:"Unit 4单元巩固提升(20)"},
+{q:"She has a clear ___ of the day when she first met her best friend.", o:["memory", "sadness", "position", "detail"], a:0, e:"have a clear memory of 对……有清晰记忆。", source:"Unit 4基础通关卷(15)"},
+{q:"We can ___ our senses to build mental pictures to remember knowledge.", o:["make fun of", "take care of", "get rid of", "make use of"], a:3, e:"make use of 利用，利用感官构建图像。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"You can make flashcards and go ___ them often.", o:["after", "against", "off", "through"], a:3, e:"go through 浏览，经常翻看单词卡。", source:"Unit 4单元巩固提升(改写)"},
+{q:"This learning method is only for short-term use, not ___ study.", o:["long-term", "one-size-fits-all", "short-term", "grown-up"], a:0, e:"long-term 长期的，与 short-term 相对。", source:"Unit 4单元巩固提升(20)"},
+{q:"She asked ___ had taken her notebook.", o:["whom", "whose", "what", "who"], a:3, e:"who 谁，从句缺主语且指人。", source:"Unit 4同步提优训练(改写)"},
+{q:"Before you pay online, make sure you keep your ___ safe.", o:["address", "password", "graph", "image"], a:1, e:"password 密码，网上支付要保护好密码。", source:"Unit 4能力提升培优卷(15)"},
+{q:"We should ___ the main points ___ the details when we listen.", o:["link; to", "put; with", "take; with", "link; with"], a:3, e:"link...with... 把……与……联系起来。", source:"Unit 4同步提优训练(改写)"},
+{q:"I'm not sure ___ come to the party.", o:["if he will that", "what he will", "that he will", "whether he will"], a:3, e:"whether he will come 是否来，宾语从句陈述语序。", source:"Unit 4基础通关卷(改写)"},
+{q:"Long-term tiredness will ___ your body and make you exhausted.", o:["wear off", "wear up", "wear away", "wear out"], a:3, e:"wear out 磨损，使疲惫，长期劳累损耗身体。", source:"Unit 4单元巩固提升(改写)"},
+{q:"The number of wild animals in this area has ___ in recent years.", o:["increased", "divided", "recalled", "reacted"], a:0, e:"increase 增加，野生动物数量增加了。", source:"Unit 4能力提升培优卷(15)"},
+{q:"I don't know ___ book you like best.", o:["who", "whose", "that", "which"], a:3, e:"which 哪本，限定 book 需用 which。", source:"Unit 4同步提优训练(改写)"},
+{q:"The old man is so ___ that he often forgets his way home.", o:["friendly", "funny", "foolish", "forgetful"], a:3, e:"so forgetful that 如此健忘以至于经常迷路。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"I need to ___ these new words before the English test.", o:["memorize", "retell", "react", "shake"], a:0, e:"memorize 记住，考试前记住生词。", source:"Unit 4能力提升培优卷(15)"},
+{q:"Eating more vegetables can ___ our brain power.", o:["increase", "include", "invite", "invent"], a:0, e:"increase 增强，多吃蔬菜增强脑力。", source:"Unit 4基础通关卷(改写)"},
+{q:"She often ___ her happy school days.", o:["reminds", "repeats", "reduces", "recalls"], a:3, e:"recall 回忆，回忆快乐校园时光。", source:"Unit 4基础通关卷(改写)"},
+{q:"If you don't save water, it will ___ soon in some dry areas.", o:["go through", "run out", "wear out", "divide up"], a:1, e:"run out 用完，耗尽，干旱地区不节水水会用完。", source:"Unit 4单元巩固提升(20)"},
+{q:"The ___ of the accident are still under investigation.", o:["details", "memories", "positions", "abilities"], a:0, e:"details 细节，事故细节仍在调查中。", source:"Unit 4基础通关卷(15)"},
+{q:"—What should I do to prepare for the Wuhan Folk Culture Show? —___, you can learn the story behind the dragon dance first.", o:["In fact", "At last", "For example", "To start with"], a:3, e:"To start with 首先，与 first 呼应。", source:"Unit 4单元素养培优卷(15)"},
+{q:"___: don't panic. Just recall the key words and continue your speech.", o:["Keep on", "Keep up", "Keep off", "Keep in mind"], a:3, e:"Keep in mind 记住，牢记要点别慌张。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Don't ___ similar words; study the small details between them carefully.", o:["give up", "put up", "pick up", "mix up"], a:3, e:"mix up 混淆，仔细区分形近词。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"With a quiet place to study, you can learn more ___ than before.", o:["effectively", "hard", "carefully", "slowly"], a:0, e:"effectively 有效地，安静环境学习更高效。", source:"Unit 4单元巩固提升(改写)"},
+{q:"Could you please ___ me for my careless mistake just now?", o:["pardon", "recognize", "address", "increase"], a:0, e:"pardon 原谅，为刚才的粗心错误请求原谅。", source:"Unit 4单元巩固提升(20)"},
+{q:"When you're focused, your brain can take in new information more ___.", o:["quietly", "suddenly", "nearly", "effectively"], a:3, e:"effectively 有效地，专注时大脑更有效接收信息。", source:"Unit 4单元巩固提升(改写)"},
+{q:"I believe ___ everyone can become a good learner if they find the right method.", o:["that", "if", "whether", "what"], a:0, e:"believe 后接陈述句用 that 引导宾语从句。", source:"Unit 4单元自测卷·北京专用(12)"},
+{q:"Keeping a ___ is a good way to record your daily memories.", o:["dictionary", "diagram", "dialogue", "diary"], a:3, e:"diary 日记，写日记记录日常记忆。", source:"Unit 4单元素能测评题(改写)"},
+{q:"I'm not sure ___ he can pass the exam or not. He didn't prepare well.", o:["that", "if", "whether", "what"], a:2, e:"or not 与 whether 搭配，构成 whether...or not。", source:"Unit 4单元自测卷·北京专用(12)"},
+{q:"Sometimes our memory seems to ___ us when we need it most.", o:["succeed", "help", "serve", "fail"], a:3, e:"fail 辜负，关键时刻记忆可能辜负我们。", source:"Unit 4单元巩固提升(改写)"},
+{q:"___ what he has lost, he always tries to remember the happy times.", o:["Because of", "As for", "Instead of", "Thanks to"], a:2, e:"Instead of 而不是，不去想失去的而记住快乐时光。", source:"Unit 4单元素养培优卷(15)"},
+{q:"—Tom cut his finger while cooking. —___, you should clean the wound with running water first.", o:["In that case", "By the way", "To my surprise", "As a result"], a:0, e:"In that case 既然那样，承接突发情况给出建议。", source:"Unit 4单元素能测评题(10)"},
+{q:"My grandmother always forgets ___ she puts her glasses, so I often help her find them.", o:["where", "that", "if", "how"], a:0, e:"where 哪里，忘记眼镜放在哪儿。", source:"Unit 4单元自测卷·北京专用(12)"},
+{q:"When you forget words, you should stay ___ and don't panic.", o:["cold", "calm", "careful", "clever"], a:1, e:"stay calm 保持冷静，忘了单词别慌张。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Enough ___ can make the engine run stably all the time.", o:["food", "fog", "fun", "fuel"], a:3, e:"fuel 燃料，足够燃料让发动机稳定运转。", source:"Unit 4单元巩固提升(改写)"},
+{q:"We can use our ___ to create mental images in the brain.", o:["sensing", "sensed", "senses", "sense"], a:2, e:"use our senses 利用我们的感官，senses 常用复数。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"The old house ___ me of my grandmother who used to live there.", o:["remembers", "reminds", "connects", "describes"], a:1, e:"remind sb of sth 使某人想起，老房子让作者想起祖母。", source:"Unit 4基础通关卷(15)"},
+{q:"Physical activity ___ blood move to the brain.", o:["help", "helped", "helping", "helps"], a:3, e:"helps 帮助，主语 activity 三单。", source:"Unit 4单元巩固提升(改写)"},
+{q:"I will keep these ___ in my heart forever.", o:["memos", "memorials", "minds", "memories"], a:3, e:"memories 记忆，把这些记忆永远留在心里。", source:"Unit 4单元测试(改写)"},
+{q:"I ___ to be shy, but now I'm more outgoing.", o:["use", "used", "am used", "was used"], a:1, e:"used to do 过去常常，过去害羞现在外向。", source:"Unit 4单元测试(10)"},
+{q:"Our memory improves greatly ___ we get enough sleep and do regular exercise.", o:["though", "until", "as", "unless"], a:2, e:"as 因为，充足睡眠和锻炼促进记忆改善。", source:"Unit 4单元素能测评题(10)"},
+{q:"The little girl cried with ___ when she lost her favorite toy.", o:["sadness", "happiness", "excitement", "kindness"], a:0, e:"sadness 悲伤，玩具丢了伤心地哭。", source:"Unit 4单元巩固提升(20)"},
+{q:"He has a good memory, so he can ___ what he learnt last year.", o:["refuse", "recall", "reduce", "relax"], a:1, e:"recall 回忆起，回忆起去年学的内容。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"—I failed to pass the English exam. I feel really down. —Don't hide your ___. Talk to your friends, and you'll feel better.", o:["sickness", "kindness", "shyness", "sadness"], a:3, e:"sadness 悲伤，不要隐藏悲伤情绪。", source:"Unit 4单元素养培优卷(15)"},
+{q:"When the little boy saw the big dog running towards him, he ___ by crying loudly.", o:["recalled", "reacted", "retold", "reviewed"], a:1, e:"react 反应，男孩看到大狗的反应是大哭。", source:"Unit 4能力提升培优卷(15)"},
+{q:"We had a ___ time in the beautiful town.", o:["happily", "happiness", "unhappy", "happy"], a:3, e:"have a happy time 度过快乐时光，形容词修饰名词。", source:"Unit 4单元测试(改写)"},
+{q:"My ___ of childhood is very warm.", o:["mood", "meaning", "method", "memory"], a:3, e:"memory 记忆，童年的记忆很温暖。", source:"Unit 4基础通关卷(改写)"},
+{q:"I remember ___ the door before I left, but I'm not sure.", o:["lock", "to lock", "locking", "locked"], a:2, e:"remember doing 记得做过（已发生），锁门发生在离开前。", source:"Unit 4基础通关卷(15)"},
+{q:"Good learners often ___ what they need to learn ___ something interesting.", o:["link; with", "come; with", "mix; with", "put; with"], a:0, e:"link...with 把……和……联系起来，固定搭配。", source:"Unit 4能力提升培优卷(15)"},
+{q:"I'm not sure ___ he will come to the party or not.", o:["that", "if", "whether", "what"], a:2, e:"whether...or not 固定搭配。", source:"Unit 4基础通关卷(15)"},
+{q:"Even a 20-minute walk a day can make a ___.", o:["decision", "mistake", "plan", "difference"], a:3, e:"make a difference 产生影响，每天散步二十分钟也有用。", source:"Unit 4单元巩固提升(改写)"},
+{q:"___ English words every day is a good way to improve your memory.", o:["Memorize", "Memorizing", "Memorized", "Memorizes"], a:1, e:"动名词作主语，Memorizing English words。", source:"Unit 4单元测试卷(10)"},
+{q:"You can write down your plans in your ___.", o:["notices", "notion", "notebook", "notebooks"], a:2, e:"notebook 笔记本，write down in your notebook。", source:"Unit 4基础通关卷(改写)"},
+{q:"My grandfather promised that he ___ take me to visit the Science Museum the next weekend.", o:["will", "may", "can", "would"], a:3, e:"promised 为过去时，从句用过去将来时 would。", source:"Unit 4单元素能测评题(10)"},
+{q:"You just take a mental walk through your house ___ pick up each item.", o:["but", "or", "so", "and"], a:3, e:"and 连接并列动作，走过房子并拾起每件物品。", source:"Unit 4单元巩固提升(改写)"},
+{q:"Review what you learn often, but ___ after studying for forty minutes.", o:["take a rest", "take a walk", "take a break", "take a note"], a:2, e:"take a break 休息一下，学 40 分钟休息一次。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"She felt a deep sense of ___ when she heard the bad news.", o:["sickness", "kindness", "weakness", "sadness"], a:3, e:"sadness 悲伤，a deep sense of sadness 深深的悲伤。", source:"Unit 4基础通关卷(改写)"},
+{q:"Writing down key points is a useful memory ___.", o:["technology", "television", "temperature", "technique"], a:3, e:"memory technique 记忆技巧。", source:"Unit 4基础通关卷(改写)"},
+{q:"___ new knowledge with old knowledge is a good way to learn.", o:["Connect", "Connected", "Connecting", "To connect"], a:2, e:"动名词作主语，Connecting...is。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Please tell me how the machine ___.", o:["work", "working", "worked", "works"], a:3, e:"works 运转，一般现在时三单。", source:"Unit 4同步提优训练(改写)"},
+{q:"You must ___ all the difficulties if you want to achieve your dream.", o:["go through", "put through", "run through", "get through"], a:0, e:"go through 经历，实现梦想须经历困难。", source:"Unit 4单元巩固提升(20)"},
+{q:"The teacher told us that good memory ___ lots of practice.", o:["requires", "repeats", "refuses", "relaxes"], a:0, e:"require 需要，好记性需要大量练习。", source:"Unit 4单元测试卷(10)"},
+{q:"A river ___ the small village into two parts, so people there have to cross a bridge every day.", o:["separates", "increases", "divides", "reduces"], a:2, e:"divide...into 把……分成，河把村庄分成两部分。", source:"Unit 4能力提升培优卷(15)"},
+{q:"Study ___ they are different from each other.", o:["that", "if", "how", "what"], a:2, e:"how 如何，研究它们如何不同。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"I forgot to buy sugar, and now we are ___ it.", o:["running away from", "running after", "running into", "running out of"], a:3, e:"run out of 用完，糖快用完了。", source:"Unit 4同步提优训练(改写)"},
+{q:"You can ___ your memory by sleeping and exercising well.", o:["begin", "boost", "build", "borrow"], a:1, e:"boost one's memory 提升记忆力。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Taking morning exercise can ___ your physical health greatly.", o:["wear", "boost", "divide", "discuss"], a:1, e:"boost 增强，晨练大大增强身体健康。", source:"Unit 4单元巩固提升(20)"},
+{q:"Too much ___ makes people forget things easily.", o:["sugar", "snow", "smoke", "stress"], a:3, e:"too much stress 压力过大，影响记忆。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Can you tell me ___ the library opens?", o:["who", "whose", "which", "when"], a:3, e:"when 什么时候，询问图书馆开放时间。", source:"Unit 4同步提优训练(改写)"},
+{q:"—Could you please repeat the key point of the lecture? —___. I was taking notes just now.", o:["No problem", "Pardon me", "Never mind", "Good idea"], a:1, e:"Pardon me 请再说一遍，刚才记笔记没听清。", source:"Unit 4单元素能测评题(10)"},
+{q:"Please tell me ___ I can improve my memory.", o:["that", "how", "what", "if"], a:1, e:"how 怎样，告诉我怎样提高记忆力。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"Please show me ___ you organized the information.", o:["that", "if", "what", "how"], a:3, e:"how 怎样，告诉我你是如何整理信息的。", source:"Unit 4同步提优训练(改写)"},
+{q:"Last week the teacher ___ us ___ four groups to memorize words.", o:["divided; by", "put; into", "kept; in", "divided; into"], a:3, e:"divide...into... 把……分成……，last week 用过去式。", source:"Unit 4基础通关卷(改写)"},
+{q:"Our money is ___. We need to borrow some from our parents.", o:["running out", "running away", "running after", "running into"], a:0, e:"run out 耗尽，钱快用完了。", source:"Unit 4能力提升培优卷(15)"},
+{q:"Please ___ to turn off the lights before you leave.", o:["remember", "remind", "review", "repeat"], a:0, e:"remember to do sth 记得要做某事，remind 是提醒。", source:"Unit 4词汇语法专练卷(20)"},
+{q:"Don't ___ up these two similar English words.", o:["mark", "mend", "make", "mix"], a:3, e:"mix up 混淆，形近词易混淆。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"His ___ to the bad news surprised everyone.", o:["react", "reacting", "reacted", "reaction"], a:3, e:"reaction 反应，名词作主语。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"The story he told us was so ___ that everyone felt touched.", o:["forgettable", "unforgettable", "usual", "common"], a:1, e:"unforgettable 令人难忘的，故事让人感动。", source:"Unit 4单元测试(10)"},
+{q:"—Do you know ___? —By making mind maps and reviewing them regularly.", o:["how I can study more effectively", "how can I study more effectively", "what I can study", "where can I study"], a:0, e:"宾语从句用陈述语序，答语表示方式用 how。", source:"Unit 4单元自测卷·北京专用(12)"},
+{q:"The old lady becomes more ___ as she grows old.", o:["forget", "forgetfully", "forgetfulness", "forgetful"], a:3, e:"become forgetful 变得健忘，forgetful 形容词。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"My grandma has a poor ___, so she often forgets things.", o:["memory", "condition", "ability", "difficulty"], a:0, e:"memory 记忆力，a poor memory 记忆力差。", source:"Unit 4单元测试卷(10)"},
+{q:"Teachers encourage students to use ___ learning methods, such as mind maps, to improve memory.", o:["effective", "expensive", "natural", "common"], a:0, e:"effective 有效的，思维导图是有效的学习方法。", source:"Unit 4单元素能测评题(10)"},
+{q:"—Do you know the poem on the wall of the Yellow Crane Tower? —Of course! I can ___ the words of Cui Hao's poem even from far away.", o:["write", "copy", "recognize", "read"], a:2, e:"recognize 辨认，从远处辨认诗的字迹。", source:"Unit 4单元素养培优卷(15)"},
+{q:"When I look at those photos, I can ___ the happy days we spent there.", o:["record", "reduce", "refuse", "recall"], a:3, e:"recall 回忆起，看照片回忆起快乐的日子。", source:"Unit 4单元测试(改写)"},
+{q:"—Have you seen the photos of the egrets in Wuhan's East Lake Wetland Park? —Yeah! The ___ birds look so beautiful flying over the water.", o:["wild", "small", "funny", "shy"], a:0, e:"wild 野生的，湿地公园的白鹭是野生鸟类。", source:"Unit 4单元素养培优卷(15)"},
+{q:"Please remember ___ the windows when you leave the room.", o:["close", "to close", "closing", "closed"], a:1, e:"remember to do 记得去做（未发生），离开时要关窗。", source:"Unit 4基础通关卷(15)"},
+{q:"My grandmother ___ me stories every night before I went to bed.", o:["tells", "tell", "telling", "told"], a:3, e:"told 讲，每晚讲故事用过去时。", source:"Unit 4单元测试(改写)"},
+{q:"You need to ___ the key points of the text before the final exam.", o:["memorize", "tick", "outline", "boost"], a:0, e:"memorize 记住，考前记住课文要点。", source:"Unit 4单元巩固提升(20)"},
+{q:"—I'm wondering ___ our team members can reach an agreement. —Of course they will. They all want the best for our team.", o:["when", "whether", "where", "how"], a:1, e:"whether 是否，询问能否达成一致。", source:"Unit 4单元素养培优卷(15)"},
+{q:"She couldn't help ___ when she heard the funny story.", o:["laugh", "to laugh", "laughing", "laughed"], a:2, e:"couldn't help doing sth 忍不住做某事。", source:"Unit 4基础通关卷(15)"},
+{q:"Please take ___ in class to write down all the key points.", o:["numbers", "notices", "notes", "notebooks"], a:2, e:"take notes 记笔记，固定搭配。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"Please write these words on the paper ___.", o:["in a hurry", "in the end", "in silence", "in the correct order"], a:3, e:"in the correct order 按照正确顺序。", source:"Unit 4基础通关卷(改写)"},
+{q:"This new study method helps students remember knowledge faster. Most students say it's more ___ than the old one.", o:["interesting", "expensive", "difficult", "effective"], a:3, e:"effective 有效的，新方法让学生记得更快说明更有效。", source:"Unit 4能力提升培优卷(15)"},
+{q:"Many students find it hard to ___ all the new words in a short time.", o:["divide", "memorize", "increase", "recognize"], a:1, e:"memorize 记忆，短时间内记住所有生词很难。", source:"Unit 4单元素养培优卷(15)"},
+{q:"He felt ___ because he always forgot things.", o:["stress", "stressed", "stressing", "stressful"], a:1, e:"felt stressed 感到有压力，人作主语用过去分词形容词。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"—I'm nervous about the school's Chinese Poetry Conference. —Take it easy. Many students ___ the same feelings before the competition.", o:["give up", "care about", "go through", "look for"], a:2, e:"go through 经历，很多学生赛前都经历过同样感受。", source:"Unit 4单元素养培优卷(15)"},
+{q:"I want to know where she ___.", o:["live", "living", "lived", "lives"], a:3, e:"lives 居住，宾语从句谓语与主语 she 一致。", source:"Unit 4同步提优训练(改写)"},
+{q:"—How can I improve my short-term memory? —___ doing more daily memory exercises.", o:["By", "With", "In", "For"], a:0, e:"by doing sth 通过做某事，表示方式。", source:"Unit 4单元测试卷(10)"},
+{q:"This ___ teaching method can suit all students in different situations.", o:["effective", "wild", "one-size-fits-all", "stable"], a:2, e:"one-size-fits-all 一刀切的，能适合所有学生的通用方法。", source:"Unit 4单元巩固提升(20)"},
+{q:"My grandma is getting old and forgetful, and she always ___ me my dad's name.", o:["tells", "says", "speaks", "calls"], a:3, e:"call sb one's name 把某人叫成某人的名字。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"___ you need to master basic learning techniques to study efficiently.", o:["In the end", "By the way", "At last", "To start with"], a:3, e:"To start with 首先，引出第一条建议。", source:"Unit 4单元巩固提升(改写)"},
+{q:"We ___ a lot of new friends during our summer camp last year.", o:["made", "make", "were making", "have made"], a:0, e:"last year 一般过去时，make friends 交朋友。", source:"Unit 4单元测试(10)"},
+{q:"I wonder ___ this memory technique really works. I want to give it a try.", o:["that", "if", "which", "what"], a:1, e:"wonder 想知道是否，用 if 引导。", source:"Unit 4单元自测卷·北京专用(12)"},
+{q:"We can ___ the whole class ___ six groups to finish the task.", o:["divide; by", "put; into", "make; into", "divide; into"], a:3, e:"divide...into... 把……分成……。", source:"Unit 4单元巩固提升(改写)"},
+{q:"A healthy diet is ___ for a strong memory, too.", o:["impossible", "impolite", "improper", "important"], a:3, e:"be important for 对……重要，健康饮食对记忆重要。", source:"Unit 4单元巩固提升(改写)"},
+{q:"To improve our memory, we can ___ new knowledge ___ old knowledge.", o:["connect; to", "link; with", "mix; with", "put; with"], a:1, e:"link...with... 把……和……联系起来。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"—Oh no! I can't finish my “Wuhan food” project. My ideas are ___. —Don't worry. You can talk about doupi and mianwo as well.", o:["running out", "coming out", "turning out", "working out"], a:0, e:"run out 耗尽，想法快用完了。", source:"Unit 4单元素养培优卷(15)"},
+{q:"None of the students ___ able to solve the difficult memory training problem just now.", o:["is", "are", "was", "were"], a:2, e:"just now 用一般过去时，none of+复数谓语单数优先用 was。", source:"Unit 4单元测试卷(10)"},
+{q:"He asked why the shop ___.", o:["is closed", "close", "closes", "was closed"], a:3, e:"was closed 关门了，主句过去时从句也过去时。", source:"Unit 4同步提优训练(改写)"},
+{q:"It is ___ to rain this afternoon, so take an umbrella with you.", o:["stable", "effective", "likely", "fully"], a:2, e:"likely 可能的，下午很可能下雨。", source:"Unit 4单元巩固提升(20)"},
+{q:"Please remember ___ off the lights when you leave.", o:["not turning", "to not turn", "don't turn", "not to turn"], a:3, e:"remember not to do 记得不要做某事。", source:"Unit 4基础通关卷(改写)"},
+{q:"If you need ___ a shopping list, you can imagine a loaf of bread on the sofa.", o:["remember", "remembering", "remembered", "to remember"], a:3, e:"need to do sth 需要做某事。", source:"Unit 4单元巩固提升(改写)"},
+{q:"Being short of sleep can be harmful to ___ memory.", o:["you", "yours", "yourselves", "your"], a:3, e:"your memory 你的记忆，物主代词修饰名词。", source:"Unit 4单元巩固提升(改写)"},
+{q:"You should be ___ in yourself when you give a speech.", o:["confidence", "confident", "confidently", "confidential"], a:1, e:"be confident in oneself 对自己有信心。", source:"Unit 4基础知识巩固训练(改写)"},
+{q:"I remember ___ door before I left home.", o:["to lock a", "lock the", "locked the", "locking the"], a:3, e:"remember doing 记得做过，锁门已发生。", source:"Unit 4基础通关卷(改写)"},
+{q:"I don't understand ___ some classmates can finish their homework so quickly while I spend hours on it.", o:["that", "why", "whether", "how"], a:1, e:"why 为什么，不明白为什么别人做得快。", source:"Unit 4单元自测卷·北京专用(12)"},
+{q:"We have two main kinds of memory: short-term and ___ memory.", o:["long-term", "long-last", "longer", "long"], a:0, e:"long-term memory 长期记忆，与短期记忆相对。", source:"Unit 4基础通关卷(改写)"},
+{q:"It's going to rain heavily this afternoon, so it's ___ that our outdoor PE class will be canceled.", o:["likely", "lucky", "lonely", "lively"], a:0, e:"likely 可能的，下雨户外课很可能取消。", source:"Unit 4能力提升培优卷(15)"},
+{q:"This technique ___ by ancient Greek and Roman speakers to remember long speeches.", o:["is used", "uses", "used", "was used"], a:3, e:"was used by 被使用，古罗马演说家用它记长演讲。", source:"Unit 4单元巩固提升(改写)"},
+{q:"She ___ crying when she heard the news.", o:["couldn't help to", "couldn't stop to", "couldn't begin", "couldn't stop"], a:3, e:"couldn't stop doing 忍不住做某事。", source:"Unit 4基础通关卷(改写)"},
+{q:"In my ___, taking exercise every day is better than staying up late.", o:["case", "opinion", "image", "technique"], a:1, e:"in one's opinion 依某人看来。", source:"Unit 4单元巩固提升(20)"},
+{q:"The old photo ___ me of my happy days in the countryside.", o:["makes", "reminds", "tells", "shows"], a:1, e:"remind sb of sth 使某人想起，旧照片唤起乡村快乐时光。", source:"Unit 4单元测试(10)"},
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('91_kp4_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('91_kp4_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('91_kp4_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 4 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 4 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>
