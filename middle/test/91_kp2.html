@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>九年级KP1</h1>
+        <p>It is/was + adj. + of/for sb. to do · 强调句与主语从句 · 定语从句 · 励志人物词汇短语 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">九年级全一册Unit 2 · 在线检测</span>
+      <h2>单元检测核心库KP2</h2>
+      <p>涵盖 It is/was + adj. + of/for sb. to do 句型（of 表品质 / for 表事情）、It was…that 强调句、It is said/believed/amazing that 主语从句、who/that/whose/whom 引导的定语从句、used to do 与 be used to doing、现在完成时（since/for/yet/already）、admire / look up to / live on / drop out of / come true / make sure / take advantage of / devote…to doing / encourage sb. to do 等励志人物主题词汇短语、情景交际（I couldn’t agree more / May I…? 等）高频考点。系统从全量题库（236 道）中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"Through her efforts, Jane's dream of traveling around the world ________ at last.", o:["made up", "came true", "got off", "took away"], a:1, e:"come true 表示\"实现\"。", source:"素养拓展提升集训"},
+{q:"When he was young, Zhong Yang showed a deep ________ for the things he studied.", o:["courage", "balance", "curiosity", "pyramid"], a:2, e:"curiosity 表示\"好奇心\"。", source:"单元检测试题"},
+{q:"It is hard to ride a bike slowly in a straight line because it's difficult to keep your ________.", o:["balance", "promise", "habit", "temperature"], a:0, e:"keep one's balance 表示\"保持平衡\"。", source:"素养拓展提升集训"},
+{q:"The ______ spent months analyzing the chemical elements in the water to find the cause of pollution.", o:["historian", "physicist", "chemist", "researcher"], a:2, e:"分析化学元素的是化学家（chemist）。", source:"单元练习题"},
+{q:"Amelia Earhart's parents always encouraged ______ to stick to her flying dream.", o:["she", "her", "hers", "herself"], a:1, e:"encourage 后接宾格 her。", source:"Section B同步课时练"},
+{q:"It is ________ knowledge that the earth goes around the sun.", o:["common", "western", "brave", "creative"], a:0, e:"common knowledge 为固定搭配，表示\"常识\"。", source:"核心知识点单选提升练"},
+{q:"The man rushed into the burning building to save the boy. His behavior is truly ________.", o:["wounded", "admirable", "whole", "silent"], a:1, e:"admirable 表示\"令人钦佩的\"，冲进着火建筑救人是可敬的。", source:"单元自测卷·安徽专用"},
+{q:"—Who is the person you ______ most? —My father. He is full of courage and wisdom.", o:["look after", "look for", "look up to", "look through"], a:2, e:"look up to 表示\"仰慕、敬佩\"。", source:"单元练习题"},
+{q:"The _________ of the Sanxingdui Ruins (遗址) surprised the world.", o:["development", "direction", "discovery", "difference"], a:2, e:"discovery 表示\"发现\"，三星堆遗址的发现震惊世界。", source:"单元自测卷·安徽专用"},
+{q:"—What should we do to be an inspiring person? —We should keep working ________ and never give up.", o:["easily", "quickly", "hard", "slowly"], a:2, e:"work hard 表示\"努力工作\"。", source:"基础通关卷"},
+{q:"—________ I ask you some questions about your hero? —Of course, go ahead.", o:["Must", "Need", "Should", "Might"], a:3, e:"Might I…? 表示委婉请求许可。", source:"基础通关卷"},
+{q:"It was very considerate _______ you to bring me a gift on my birthday.", o:["for", "of", "to", "with"], a:1, e:"considerate 描述人的品质用 of。", source:"单元练习题"},
+{q:"The teacher told us that we should ______ every chance to learn new things.", o:["make use of", "get along with", "keep up with", "look forward to"], a:0, e:"make use of 表示\"利用\"。", source:"单元复习与测试"},
+{q:"Wang Yaping is full of ______. She was China's first woman to walk in space.", o:["encourage", "courageously", "courageous", "courage"], a:3, e:"full of 后接名词，用 courage（勇气）。", source:"单元培优练习卷"},
+{q:"Many inspiring changes ______ in our school since we learned about great people's stories.", o:["took place", "take place", "have taken place", "were taking place"], a:2, e:"since 引导的时间状语与现在完成时连用。", source:"单元测试卷"},
+{q:"We should ________ every chance to learn from inspiring people.", o:["take pride in", "take advantage of", "come true", "drop out of"], a:1, e:"take advantage of 表示\"利用\"。", source:"基础通关卷"},
+{q:"The soldier saved the little girl and then ________ to the army base safely.", o:["returned", "designed", "encouraged", "supported"], a:0, e:"return to 表示\"返回\"，士兵救完人后返回基地。", source:"核心知识点单选提升练"},
+{q:"The rain ________ for the whole day and showed no sign of stopping.", o:["refused", "continued", "designed", "supported"], a:1, e:"continue 表示\"持续\"，雨持续了一整天。", source:"核心知识点单选提升练"},
+{q:"We should do something to stop these beautiful animals from ________ forever.", o:["disappearing", "discovering", "designing", "developing"], a:0, e:"disappear 表示\"消失\"，stop…from doing 阻止灭绝。", source:"核心知识点单选提升练"},
+{q:"-What do you think of the book? -It's amazing. It tells us how a common person _______ a big difference in the world.", o:["does", "makes", "gets", "takes"], a:1, e:"make a big difference 表示\"产生重大影响\"。", source:"Section A练习作业"},
+{q:"It is ________ great honor to introduce our inspiring hero to all of you.", o:["a", "an", "the", "/"], a:0, e:"honor 以辅音音素/h/开头，a great honor 表示\"一种荣幸\"，用不定冠词 a。", source:"Unit 2基础通关"},
+{q:"Many students ________ Yuan Longping because he helped end hunger.", o:["look up to", "look for", "look after", "look through"], a:0, e:"look up to 表示\"尊敬、仰慕\"。", source:"基础通关卷"},
+{q:"Many young people ______ Zhong Yang and find him an inspiring person.", o:["look up to", "look after", "look for", "look through"], a:0, e:"look up to 表示\"钦佩、敬仰\"。", source:"单元培优练习卷"},
+{q:"Yuan Longping devoted his life to ________ hunger all over the world.", o:["reduce", "reducing", "reduced", "reduces"], a:1, e:"devote…to doing 表示\"奉献于做某事\"，用动名词。", source:"能力提升卷"},
+{q:"It was amazing that Faraday did research even though he didn't __________ a formal education.", o:["receive", "receives", "received", "receiving"], a:0, e:"didn't 后用动词原形 receive。", source:"能力提升卷"},
+{q:"A true friend is someone who ________ you and always stays by your side.", o:["drops out of", "looks up to", "cares about", "gives up"], a:2, e:"care about 表示\"关心\"，真正的朋友关心你并陪伴你。", source:"核心知识点单选提升练"},
+{q:"—Have you read the article about Zhong Yang ______? —Yes, I finished it yesterday afternoon.", o:["yet", "already", "just", "ever"], a:0, e:"疑问句用 yet。", source:"Section B同步课时练"},
+{q:"—We all ____ Yuan Longping for his great work on rice research. —Yes, he saved millions of people from hunger.", o:["look for", "look up to", "look after", "look down on"], a:1, e:"look up to 表示\"尊敬、仰慕\"。", source:"单元测试"},
+{q:"Mozi was a man ____ fought for peace all his life, so we respect him deeply.", o:["which", "what", "whose", "who"], a:3, e:"who 引导定语从句，指人作主语。", source:"单元测试"},
+{q:"Zhong Yang set up a training programme ______ more young people to do seed research.", o:["to train", "train", "training", "trained"], a:0, e:"不定式 to train 表目的。", source:"Section B同步课时练"},
+{q:"—I think you'll never get the chance to join the basketball team. —I agree. It's ________ lost.", o:["suddenly", "recently", "forever", "halfway"], a:2, e:"forever 表示\"永远\"，机会永远失去了。", source:"单元自测卷·安徽专用"},
+{q:"—It's kind ____ you to help the disabled boy with his study. —Thanks. I think it's important ____ him to receive education.", o:["of; of", "for; for", "of; for", "for; of"], a:2, e:"kind 描述品质用 of；important 描述事情属性用 for。", source:"单元检测"},
+{q:"It was ________ of Zhang Qian to cross dangerous lands to finish his task.", o:["wise", "brave", "creative", "inspiring"], a:1, e:"穿越危险地带需要勇气，brave 符合语境。", source:"基础通关卷"},
+{q:"—I think Zhong Yang is one of the most inspiring scientists. —______. His work has made a great difference to the world.", o:["That's not the case", "I don't think so", "I couldn't agree more", "That's a good idea"], a:2, e:"I couldn't agree more 表示\"我完全同意\"。", source:"单元培优练习卷"},
+{q:"The book ______ was written by a famous historian is very popular.", o:["who", "whose", "which", "whom"], a:2, e:"which 引导定语从句指物作主语。", source:"Units 1-3综合练习"},
+{q:"Marie Curie made important discoveries in physics and chemistry. She was a great ______.", o:["historian", "physicist", "biologist", "chemist"], a:3, e:"居里夫人是化学家（chemist）。", source:"单元培优练习卷"},
+{q:"In many cultures, people show ________ to the elderly by offering them seats.", o:["respect", "hunger", "courage", "wisdom"], a:0, e:"respect 表示\"尊重\"，给老人让座是表示尊重。", source:"核心知识点单选提升练"},
+{q:"It is ________ for us to wear a helmet when riding an e-bike to keep ourselves safe.", o:["impossible", "unusual", "necessary", "comfortable"], a:2, e:"necessary 表示\"必要的\"，骑车戴头盔是必要的。", source:"素养拓展提升集训"},
+{q:"He ______ school at 16 to help his family.", o:["dropped out of", "looked up to", "ran out of", "took part in"], a:0, e:"drop out of school 表示\"辍学\"。", source:"单元检测"},
+{q:"Children often ________ heroes. They want to be brave and kind like them.", o:["pay attention to", "run low on", "make up with", "look up to"], a:3, e:"look up to 表示\"仰慕、敬佩\"。", source:"单元自测卷·安徽专用"},
+{q:"Although the great scientist has passed away, his spirit ________ in his students.", o:["lives on", "drops out", "comes true", "stands up"], a:0, e:"live on 表示\"继续存在\"，科学家的精神在学生中延续。", source:"核心知识点单选提升练"},
+{q:"The seed banks protect all kinds of plant seeds, ________ the ones we need for food.", o:["including", "instead of", "according to", "because of"], a:0, e:"including 表示\"包括\"，食物种子是其中一部分。", source:"核心知识点单选提升练"},
+{q:"I admire my father ______ his hard work and honesty.", o:["to", "for", "with", "of"], a:1, e:"admire sb. for sth. 表示\"因……敬佩某人\"。", source:"Units 1-3综合练习"},
+{q:"The young man ______ we met yesterday is a talented musician.", o:["who", "which", "whose", "whom"], a:3, e:"whom 引导定语从句作宾语，指人。", source:"Units 1-3综合练习"},
+{q:"The little boy has great ________ about everything. He always asks \"why\".", o:["curiosity", "courage", "hunger", "wisdom"], a:0, e:"curiosity 表示\"好奇心\"，爱问为什么。", source:"核心知识点单选提升练"},
+{q:"The memory of that day will stay with me ________.", o:["whole", "nearly", "forever", "common"], a:2, e:"forever 表示\"永远\"，修饰动词 stay。", source:"核心知识点单选提升练"},
+{q:"______ is no doubt that he is one of the greatest scientists in history.", o:["That", "This", "It", "There"], a:3, e:"There is no doubt that… 为固定句型。", source:"Units 1-3综合练习"},
+{q:"To protect ourselves from the virus, we should ________ going to crowded places.", o:["avoid", "enjoy", "practice", "keep"], a:0, e:"avoid doing sth. 表示\"避免做某事\"，避免去拥挤场所。", source:"核心知识点单选提升练"},
+{q:"—I always feel tired these days. —You need to keep a ________ between study and exercise.", o:["nation", "balance", "calendar", "radio"], a:1, e:"keep a balance 表示\"保持平衡\"。", source:"单元自测卷·安徽专用"},
+{q:"Yuan Longping ______ a new kind of rice and helped feed millions of people.", o:["develops", "developed", "had developed", "will develop"], a:1, e:"句中 helped 为过去时，用一般过去时 developed。", source:"单元培优练习卷"},
+{q:"It was really brave ______ Zhang Qian to travel to the Western Regions.", o:["for", "of", "to", "with"], a:1, e:"brave 描述张骞的品质，用 It is + adj. + of sb to do 句型。", source:"单元培优练习卷"},
+{q:"It was amazing ________ Michael Faraday did scientific research in physics and chemistry without a formal education.", o:["what", "how", "which", "that"], a:3, e:"It was amazing that… 为主语从句。", source:"单元检测试题"},
+{q:"You need to be ______ if you want to finish this tough task on time.", o:["lazy", "careless", "determined", "impatient"], a:2, e:"determined 表示\"坚定的、有决心的\"。", source:"单元复习与测试"},
+{q:"It is ________ for everyone to follow the traffic rules to keep safe.", o:["valuable", "western", "necessary", "common"], a:2, e:"necessary 表示\"必要的\"，遵守交通规则是必要的。", source:"核心知识点单选提升练"},
+{q:"She is the first woman ________ into space in this country.", o:["goes", "to go", "going", "go"], a:1, e:"the first woman to do 不定式作定语。", source:"能力提升卷"},
+{q:"My teacher gave me some useful ________ on how to improve my English.", o:["respect", "advice", "effort", "disease"], a:1, e:"advice 表示\"建议\"，老师给我一些有用的建议。", source:"核心知识点单选提升练"},
+{q:"—What are they talking about? —They wonder ________ or not they should make a research about population aging.", o:["when", "how", "why", "whether"], a:3, e:"whether…or not 为固定搭配。", source:"单元自测卷·安徽专用"},
+{q:"The box ____ old magazines and story-books.", o:["is full of", "is good for", "is interested in", "is ready for"], a:0, e:"be full of 表示\"装满\"。", source:"单元复习卷"},
+{q:"It is ____ for every teenager to keep asking new questions like scientists do.", o:["boring", "useless", "valuable", "meaningless"], a:2, e:"valuable 表示\"有价值的\"，不断提问是有价值的。", source:"单元测试"},
+{q:"Li Na is one of the most ______ tennis players in China, and she won many international prizes.", o:["meaningless", "successful", "hopeless", "careless"], a:1, e:"successful 表示\"成功的\"，李娜是中国最成功的网球选手之一。", source:"单元复习与测试"},
+{q:"Zhong Yang spent his ________ life researching plants and seeds.", o:["common", "whole", "western", "necessary"], a:1, e:"whole 表示\"整个的\"，spend one's whole life 表示\"毕生\"。", source:"核心知识点单选提升练"},
+{q:"—Why do you admire Zhong Nanshan so much? —Because he has ________ many patients and saved countless lives.", o:["helped", "stopped", "prevented", "refused"], a:0, e:"helped 表示\"帮助\"，与 saved countless lives 呼应。", source:"Unit 2基础通关"},
+{q:"—Can you tell me the way to learn English well? —Yes, I think ________, you should love English.", o:["after all", "at all", "in all", "above all"], a:3, e:"above all 表示\"最重要的是\"。", source:"单元自测卷·安徽专用"},
+{q:"— Alexander Fleming, a famous British ________, discovered penicillin by accident. — His great discovery made a huge difference to human medicine.", o:["biologist", "physicist", "historian", "engineer"], a:0, e:"弗莱明是生物学家（biologist），发现青霉素。", source:"能力提升卷"},
+{q:"With the support of his family, his wish to study abroad finally ________.", o:["came in", "came out", "came on", "came true"], a:3, e:"come true 表示\"（梦想）实现\"，出国留学的愿望实现了。", source:"核心知识点单选提升练"},
+{q:"The story of the disabled boy learning to play the piano ______ everyone in the hall.", o:["touched", "hurt", "shocked", "bored"], a:0, e:"touched 表示\"感动\"，残疾男孩的故事感动了大家。", source:"单元复习与测试"},
+{q:"It's not easy to ______ such a big challenge, but he did it successfully.", o:["overcome", "create", "invent", "discover"], a:0, e:"overcome 表示\"克服\"，克服挑战。", source:"单元复习与测试"},
+{q:"Confucius was a wise ____ whose ideas still guide us today.", o:["pioneer", "physicist", "thinker", "chemist"], a:2, e:"thinker 表示\"思想家\"，孔子是伟大的思想家。", source:"单元测试"},
+{q:"The great ________ Marie Curie won two Nobel Prizes.", o:["researcher", "engineer", "pilot", "thinker"], a:0, e:"researcher 表示\"研究员\"，居里夫人是伟大的研究员。", source:"基础通关卷"},
+{q:"This design keeps a good ________ between Chinese and Western styles.", o:["kindness", "balance", "wisdom", "courage"], a:1, e:"keep a balance between 表示\"在……之间保持平衡\"。", source:"基础通关卷"},
+{q:"The fire ______ quickly through the forest, destroying thousands of trees.", o:["spread", "dropped", "admired", "developed"], a:0, e:"spread 表示\"蔓延\"，大火在森林中迅速蔓延。", source:"核心知识点单选提升练"},
+{q:"It ________ necessary for teenagers to develop good habits from an early age.", o:["were", "was", "is", "be"], a:2, e:"It is necessary for sb. to do sth. 为固定句型，用一般现在时 is。", source:"Unit 2基础通关"},
+{q:"A great number of students ______ to realize their dreams and make them ____.", o:["want; come true", "wants; give up", "want; run away", "wants; find out"], a:0, e:"want to do；make…come true 表示\"使……实现\"。", source:"单元复习卷"},
+{q:"His story _______ me a lot, and I decided to work harder.", o:["inspired", "disappointed", "embarrassed", "relaxed"], a:0, e:"inspired 表示\"鼓舞\"。", source:"单元练习题"},
+{q:"He had to ____ of school because his family was very poor.", o:["drop out", "give up", "leave behind", "get out"], a:0, e:"drop out of school 表示\"辍学\"。", source:"单元复习卷"},
+{q:"His speech kept a perfect ________ between facts and emotions.", o:["kindness", "balance", "wisdom", "courage"], a:1, e:"keep a balance between…and… 表示\"在……之间保持平衡\"。", source:"Unit 2基础通关"},
+{q:"The doctor devoted all his time ______ the poor patients in mountain areas.", o:["help", "to help", "helping", "to helping"], a:3, e:"devote…to doing sth. 表示\"把……奉献给做某事\"。", source:"单元测试卷"},
+{q:"—What ____ does a great person need most? —Courage and strong curiosity.", o:["method", "quality", "habit", "secret"], a:1, e:"quality 表示\"品质\"，伟大的人最需要的品质。", source:"单元测试"},
+{q:"Marie Curie is considered a ______ in the history of science.", o:["soldier", "historian", "disease", "pioneer"], a:3, e:"pioneer 表示\"先驱\"，居里夫人是科学史上的先驱。", source:"核心知识点单选提升练"},
+{q:"The story of the brave firefighter is very ________. It encourages us to face difficulties bravely.", o:["interested", "tired", "inspiring", "relaxed"], a:2, e:"inspiring 表示\"鼓舞人心的\"。", source:"素养拓展提升集训"},
+{q:"My grandmother is a woman ______ kindness is known to everyone.", o:["who", "which", "whom", "whose"], a:3, e:"whose 引导定语从句，表示\"她的善良\"。", source:"Units 1-3综合练习"},
+{q:"Scientists ______ thousands of valuable seeds for our seed banks since 2001.", o:["collect", "collected", "have collected", "will collect"], a:2, e:"since 2001 与现在完成时连用。", source:"Section B同步课时练"},
+{q:"Yuan Longping is a ______ in the field of hybrid rice, and his work has helped feed millions of people.", o:["pioneer", "manager", "villager", "customer"], a:0, e:"pioneer 表示\"先驱\"，袁隆平是杂交水稻领域的先驱。", source:"单元复习与测试"},
+{q:"It ______ impossible for ordinary people to cross Xizang's high mountains easily at that time.", o:["seem", "seems", "seemed", "has seemed"], a:2, e:"at that time 用一般过去时 seemed。", source:"Section B同步课时练"},
+{q:"— Why do you look up to him so much? — Because he has ______ many difficulties to become a doctor.", o:["gone through", "gone over", "gone out", "gone off"], a:0, e:"go through 表示\"经历、经受\"。", source:"单元复习与测试"},
+{q:"—Why do you respect Tu Youyou so much? —I ______ her for her courage and hard work in discovering artemisinin.", o:["spread", "admire", "drop", "discover"], a:1, e:"admire 表示\"敬佩\"，与问句中的 respect 呼应。", source:"核心知识点单选提升练"},
+{q:"It was ________ of the explorer to sail across the unknown ocean to reach new lands.", o:["wise", "brave", "creative", "inspiring"], a:1, e:"横渡未知大洋需要勇气，brave 表示\"勇敢的\"。", source:"Unit 2基础通关"},
+{q:"Every small effort will finally ________ to big achievements.", o:["lead", "take", "make", "get"], a:0, e:"lead to 表示\"导致、通向\"。", source:"能力提升卷"},
+{q:"Mozi believed that states should not ________ one another.", o:["bring", "show", "attack", "avoid"], a:2, e:"attack 表示\"攻打\"，体现墨子\"非攻\"思想。", source:"核心知识点单选提升练"},
+{q:"The nurse took good care of the ______ soldiers in the field hospital.", o:["British", "wounded", "inspiring", "admirable"], a:1, e:"wounded 表示\"受伤的\"，护士在野战医院照顾伤员。", source:"核心知识点单选提升练"},
+{q:"—Yuan Longping is really an inspiring scientist. —Yes. It is _______ him to devote his whole life to solving the food problem.", o:["important for", "important of", "wise for", "wise of"], a:3, e:"wise 描述袁隆平的品质，用 of。", source:"单元检测卷·云南专用"},
+{q:"As a ________ of the Silk Road, Zhang Qian opened up the road between China and the West.", o:["pioneer", "professor", "pilot", "patient"], a:0, e:"pioneer 表示\"先驱\"。", source:"单元检测试题"},
+{q:"Many young people _______ the basketball star and want to be like him.", o:["look up to", "look down on", "look forward to", "look into"], a:0, e:"look up to 表示\"仰慕\"，想成为像他那样的人。", source:"Section A练习作业"},
+{q:"—____ is it admirable to help others? —Because it shows kindness and ____.", o:["Why; wisdom", "How; strength", "When; power", "Where; skill"], a:0, e:"第一空问原因用 Why；第二空 wisdom 表示\"智慧\"。", source:"单元检测"},
+{q:"We ______ the great seed scientist for nearly two months.", o:["know", "knew", "have known", "will know"], a:2, e:"for nearly two months 与现在完成时连用。", source:"Section B同步课时练"},
+{q:"—Who wrote the book Dream of the Red Chamber? —Cao Xueqin did. He was a great writer of the Qing ____.", o:["Century", "period", "dynasty", "time"], a:2, e:"dynasty 表示\"朝代\"，曹雪芹是清朝作家。", source:"单元检测"},
+{q:"—Could you tell me _______? —Because he never gives up and always works hard.", o:["why do you admire this great man", "why you admire this great man", "what do you admire this great man", "what you admire this great man"], a:1, e:"宾语从句用陈述语序，why you admire…。", source:"单元检测卷·云南专用"},
+{q:"Though Mozi lived more than 2,000 years ago, his ideas ______. He is still an inspiration today.", o:["live on", "live in", "live for", "live with"], a:0, e:"live on 表示\"继续存在、流传下去\"。", source:"单元培优练习卷"},
+{q:"—Wow! How did you learn that bees can dance? —I saw it in a video. This amazing _________ made me want to explore more about nature!", o:["competition", "landscape", "discovery", "question"], a:2, e:"discovery 表示\"发现\"，有趣的发现激发探索欲。", source:"Section A分层练习"},
+{q:"After trying many times, she finally succeeded in ________ the difficult task.", o:["finishing", "finished", "to finish", "to finishing"], a:0, e:"succeed in doing sth. 表示\"成功做某事\"，用 finishing。", source:"核心知识点单选提升练"},
+{q:"—________ I borrow your notes about the great scientist? —Of course. Here you are.", o:["Must", "Need", "Should", "May"], a:3, e:"May I…? 表示请求许可，语气委婉。", source:"Unit 2基础通关"},
+{q:"It was in the small park _______ we first met each other ten years ago.", o:["where", "which", "that", "when"], a:2, e:"It was + 被强调部分 + that 强调句型。", source:"单元练习题"},
+{q:"The scientist spent his whole life ________ medical research.", o:["in", "on", "at", "for"], a:1, e:"spend…on sth. 为固定搭配，表示\"花费……在某事上\"。", source:"Unit 2基础通关"},
+{q:"He worked hard day and night, and finally he ________ his dream of becoming a scientist.", o:["discovered", "invented", "admired", "realized"], a:3, e:"realize one's dream 表示\"实现梦想\"。", source:"素养拓展提升集训"},
+{q:"My grandpa is good at ________. He made this wooden chair all by himself.", o:["woodwork", "kingdom", "mankind", "period"], a:0, e:"woodwork 表示\"木工活\"，爷爷自己做木椅。", source:"核心知识点单选提升练"},
+{q:"There ______ few seed banks in China thirty years ago.", o:["is", "are", "was", "were"], a:3, e:"thirty years ago 用一般过去时；主语复数用 were。", source:"Section B同步课时练"},
+{q:"Millie introduces ________ and her classmates to Jenny.", o:["she", "her", "hers", "herself"], a:3, e:"introduce oneself 表示\"自我介绍\"，用反身代词 herself。", source:"单元自测卷·安徽专用"},
+{q:"It is important for everyone ______ good learning habits.", o:["develop", "developing", "to develop", "developed"], a:2, e:"It is + adj. + for sb to do。", source:"单元练习题"},
+{q:"Amelia Earhart worked hard to make her dream of flying ________.", o:["come out", "come up", "come on", "come true"], a:3, e:"make one's dream come true 表示\"实现梦想\"。", source:"单元检测试题"},
+{q:"It was very ________ of Zhong Yang to brave the cold weather and great heights in Xizang.", o:["brave", "important", "necessary", "difficult"], a:0, e:"brave 描述钟扬的品质，用 of。", source:"单元检测试题"},
+{q:"As a student, you should learn how to ________ your schoolwork with your hobbies.", o:["spread", "admire", "discover", "balance"], a:3, e:"balance 表示\"平衡\"，学会平衡学业与爱好。", source:"素养拓展提升集训"},
+{q:"I think ______ important for students to develop good learning habits.", o:["that", "it", "this", "what"], a:1, e:"think it + adj. + to do，it 作形式宾语。", source:"Units 1-3综合练习"},
+{q:"— It's polite ________ you ________ the line in public. — Thank you. That's what I should do.", o:["of; to jump", "for; to jump", "of; not to jump", "for; not to jump"], a:2, e:"polite 描述人的品质用 of；在公共场合不插队是礼貌的。", source:"单元自测卷·安徽专用"},
+{q:"Yuan Longping is a great scientist, and people all over the world ________ him for his work on rice.", o:["look for", "look after", "look up to", "look down on"], a:2, e:"look up to 表示\"尊敬、仰慕\"。", source:"单元检测试题"},
+{q:"—Although Ben is just a primary school student, he's a very ________ boy. —Yes. He has the ________ to face all the difficulties in his life.", o:["brave; brave", "courage; courage", "brave; courage", "courage; brave"], a:2, e:"第一空用形容词 brave；第二空 the + 名词 courage。", source:"Section A分层练习"},
+{q:"We should learn to ____ for ourselves when we are in trouble.", o:["care about", "stand up", "look up", "give up"], a:1, e:"stand up for 表示\"捍卫、为……辩护\"。", source:"单元复习卷"},
+{q:"The ______ of his success is his hard work and never-give-up attitude.", o:["secret", "problem", "result", "reason"], a:0, e:"secret 表示\"秘诀\"，成功的秘诀是努力。", source:"单元复习与测试"},
+{q:"A person who studies living things is called a ________.", o:["physicist", "chemist", "historian", "biologist"], a:3, e:"biologist 表示\"生物学家\"，研究生物。", source:"单元检测试题"},
+{q:"It is hard ________ ordinary people to finish such hard research work.", o:["of", "to", "for", "at"], a:2, e:"It's + adj. + for sb to do，for 描述事情属性。", source:"基础通关卷"},
+{q:"—Who was Confucius? —He was a great Chinese ____ and educator.", o:["Thinker", "worker", "farmer", "traveler"], a:0, e:"thinker 表示\"思想家\"，孔子是伟大的思想家。", source:"单元检测"},
+{q:"We all ______ the brave firefighters who saved people from the big fire last month.", o:["doubt", "admire", "refuse", "ignore"], a:1, e:"admire 表示\"敬佩\"。", source:"单元复习与测试"},
+{q:"______ is believed that hard work leads to success.", o:["That", "This", "It", "What"], a:2, e:"It is believed that… 表示\"人们相信……\"。", source:"Units 1-3综合练习"},
+{q:"We should work together to build a ________ of a shared future for all.", o:["kingdom", "community", "period", "woodwork"], a:1, e:"community 表示\"共同体\"，构建人类命运共同体。", source:"核心知识点单选提升练"},
+{q:"Mozi ______ his whole life trying to bring peace to the world thousands of years ago.", o:["spend", "spends", "spent", "has spent"], a:2, e:"thousands of years ago 用一般过去时 spent。", source:"Section B同步课时练"},
+{q:"The scientist _______ discovered the new type of medicine is only 35 years old.", o:["which", "whom", "who", "what"], a:2, e:"who 引导定语从句，指人作主语。", source:"单元检测卷·云南专用"},
+{q:"In order to stay healthy, we find it ________ to do sports for at least an hour every day.", o:["necessary", "harmful", "strange", "polite"], a:0, e:"find it necessary to do 表示\"觉得做某事是必要的\"。", source:"素养拓展提升集训"},
+{q:"Mozi spent his whole life ________ to bring peace to the world.", o:["trying", "to try", "to trying", "tried"], a:0, e:"spend time (in) doing sth. 用动名词 trying。", source:"核心知识点单选提升练"},
+{q:"It ______ necessary for everyone to protect the environment.", o:["be", "are", "is", "were"], a:2, e:"一般现在时 is。", source:"Units 1-3综合练习"},
+{q:"His story _______ that everyone can achieve their dreams with hard work.", o:["refuses", "reminds", "requires", "realizes"], a:1, e:"remind 表示\"提醒、使想起\"，他的故事提醒我们努力能实现梦想。", source:"Section A练习作业"},
+{q:"It was in the Eastern Han Dynasty ______ Cai Lun improved the paper-making technique.", o:["where", "who", "which", "that"], a:3, e:"It was + 被强调部分 + that 为强调句型。", source:"单元培优练习卷"},
+{q:"Our teacher often encourages us ____ each other as a team.", o:["Help", "helping", "helps", "to help"], a:3, e:"encourage sb. to do 表示\"鼓励某人做某事\"。", source:"单元检测"},
+{q:"—What do you think of Yuan Longping? —He is ____ great scientist. His work helps solve ____ hunger problem.", o:["a; the", "the; a", "an; the", "a; /"], a:0, e:"第一次提及用 a；hunger problem 特指用 the。", source:"单元检测"},
+{q:"We must fight ____ the bad habits in our daily life.", o:["for", "against", "with", "to"], a:1, e:"fight against 表示\"与……作斗争\"。", source:"单元复习卷"},
+{q:"Marie Curie made many important discoveries in physics and ________.", o:["chemistry", "history", "geography", "biology"], a:0, e:"居里夫人在物理和化学方面做出重要发现。", source:"单元检测试题"},
+{q:"The ______ of a new planet made the whole scientific community excited.", o:["discovery", "hunger", "spread", "disease"], a:0, e:"discovery 表示\"发现\"，新行星的发现使科学界兴奋。", source:"核心知识点单选提升练"},
+{q:"Mozi's ideas still ________ in people's hearts.", o:["live on", "build up", "take place", "come across"], a:0, e:"live on 表示\"流传、延续\"。", source:"基础通关卷"},
+{q:"It was admirable ________ Amelia Earhart to fly across the Atlantic.", o:["for", "of", "with", "about"], a:1, e:"admirable 描述人的品质用 of。", source:"基础通关卷"},
+{q:"—What do you know about Leonardo da Vinci? —He was not only a painter but also an ____.", o:["Inventor", "artist", "scientist", "doctor"], a:0, e:"达·芬奇不仅是画家还是发明家（inventor）。", source:"单元检测"},
+{q:"After years of hard work, she finally ______ her dream of becoming a famous writer.", o:["achieved", "lost", "missed", "broke"], a:0, e:"achieve one's dream 表示\"实现梦想\"。", source:"单元复习与测试"},
+{q:"\"Please check your calendar\" means to check ____.", o:["your phone", "your homework", "your schedule", "your book"], a:2, e:"calendar 表示\"日程表\"，check your calendar 即查看日程安排。", source:"单元检测"},
+{q:"It's wise ______ teenagers to learn from inspiring people, because they set good examples ______ us.", o:["for; for", "of; for", "for; to", "of; to"], a:2, e:"It's + adj. + for sb to do；set good examples to us。", source:"单元测试卷"},
+{q:"What makes Zhong Yang admired by people? His spirit makes ______ easy for us to keep chasing our dreams.", o:["this", "that", "it", "one"], a:2, e:"make it + adj. + to do，it 作形式宾语。", source:"Section B同步课时练"},
+{q:"There is no doubt ______ hard work and persistence lead to final success.", o:["if", "whether", "that", "what"], a:2, e:"There is no doubt that… 为固定句型。", source:"单元测试卷"},
+{q:"—____ was the first woman to win a Nobel Prize? —Marie Curie. She made this ____ in 1903.", o:["Who; discovery", "What; decision", "When; progress", "Where; change"], a:0, e:"第一空问人用 Who；第二空 discovery 表示\"发现\"。", source:"单元检测"},
+{q:"The ______ hero lost his legs in the war, but he never gave up hope.", o:["awful", "admirable", "inspiring", "British"], a:1, e:"admirable 表示\"令人钦佩的\"，英雄在逆境中坚持值得钦佩。", source:"核心知识点单选提升练"},
+{q:"In the past, people ______ give up their dreams easily because of poor conditions.", o:["used to", "are used to", "were used to", "use to"], a:0, e:"used to do 表示\"过去常常做某事\"。", source:"单元测试卷"},
+{q:"It is important ________ us to learn from inspiring people and their stories.", o:["of", "for", "with", "to"], a:1, e:"It is + adj. + for sb to do，for 描述事情属性。", source:"单元检测试题"},
+{q:"The old teacher _______ nearly 40 years to teaching in the mountain village.", o:["spent", "devoted", "took", "cost"], a:1, e:"devote…to 表示\"奉献\"，老师把近 40 年奉献给教学。", source:"Section A练习作业"},
+{q:"The beautiful scenery of the mountains gave the writer a lot of ________ for his new book.", o:["courage", "inspiration", "disease", "discovery"], a:1, e:"inspiration 表示\"灵感\"。", source:"素养拓展提升集训"},
+{q:"—More and more young people ________ traditional Chinese culture through short videos. —Exactly!", o:["discover", "protect", "spread", "compare"], a:2, e:"spread 表示\"传播\"，年轻人通过短视频传播传统文化。", source:"单元自测卷·安徽专用"},
+{q:"My parents always ________ me to be myself and never give up.", o:["expect", "encourage", "excuse", "explain"], a:1, e:"encourage sb. to do 表示\"鼓励某人做某事\"。", source:"单元检测试题"},
+{q:"—Why is the Silk Road important? —It connects China ____ the Western Regions.", o:["For", "by", "with", "to"], a:2, e:"connect…with… 表示\"把……与……连接起来\"。", source:"单元检测"},
+{q:"The story tells us that hard work can make our dreams ________ at last.", o:["come true", "to come true", "coming true", "came true"], a:0, e:"make our dreams come true 表示'使我们的梦想实现'。", source:"能力提升卷"},
+{q:"You are careless. No wonder you fail again. Several letters ________ in your writing.", o:["are left for", "are left aside", "are left behind", "are left out"], a:3, e:"be left out 表示\"被遗漏\"，写作中遗漏了几个字母。", source:"单元自测卷·安徽专用"},
+{q:"—Where is Mr. Zhang? —He ______ to Beijing to attend a science meeting. He will be back next week.", o:["has been", "has gone", "went", "goes"], a:1, e:"has gone to 表示\"去了某地（未回）\"，与 He will be back 呼应。", source:"单元测试卷"},
+{q:"____, he didn't know much about the scientific world at first.", o:["In fact", "Around the world", "Of course", "Above all"], a:0, e:"In fact 表示\"事实上\"。", source:"单元复习卷"},
+{q:"The historian brought back ________ information about the ancient dynasty.", o:["valuable", "western", "necessary", "common"], a:0, e:"valuable 表示\"有价值的\"，历史学家带回宝贵信息。", source:"核心知识点单选提升练"},
+{q:"—Why did he ______ college? —Because he wanted to start his own business.", o:["drop by", "drop off", "drop out of", "drop into"], a:2, e:"drop out of 表示\"退学、辍学\"，与想创业的语境相符。", source:"核心知识点单选提升练"},
+{q:"During the Warring States Period, many kingdoms were ________ each other.", o:["fighting for", "fighting against", "fighting with", "fighting about"], a:1, e:"fight against 表示\"与……作战\"，契合战国混战情景。", source:"核心知识点单选提升练"},
+{q:"The _______ who invented the electric light bulb is Thomas Edison.", o:["actor", "inventor", "director", "painter"], a:1, e:"inventor 表示\"发明家\"，爱迪生发明电灯泡。", source:"单元练习题"},
+{q:"The young man _______ to help others even though he was not rich.", o:["tried his best", "tried his better", "try his best", "try his better"], a:0, e:"try one's best to do 表示\"尽某人最大努力\"。", source:"单元检测卷·云南专用"},
+{q:"—Who do you admire the most? —________. He developed a new kind of rice and helped reduce hunger.", o:["Yuan Longping", "Mozi", "Galileo", "I. M. Pei"], a:0, e:"袁隆平研发出新型水稻并帮助减少饥饿。", source:"单元检测试题"},
+{q:"The Tang ________ was a golden age of Chinese poetry and culture.", o:["Period", "Kingdom", "Kindness", "Mankind"], a:0, e:"Period 表示\"时期\"，唐朝是中国诗歌文化的黄金时代。", source:"核心知识点单选提升练"},
+{q:"It was ________ of Confucius to say that we should treat our elders with respect.", o:["wisdom", "wise", "wiser", "wisely"], a:1, e:"wise 描述孔子的品质，用形容词。", source:"单元检测试题"},
+{q:"—What do you think of Marie Curie? —She was an ____ woman who changed science.", o:["Important", "interesting", "inspiring", "amazing"], a:2, e:"inspiring 表示\"鼓舞人心的\"，居里夫人改变了科学。", source:"单元检测"},
+{q:"We often talk ________ great people who changed the world.", o:["of", "to", "with", "about"], a:3, e:"talk about 表示\"谈论\"。", source:"Unit 2基础通关"},
+{q:"It was very brave _______ the firefighter to rush into the burning building.", o:["for", "of", "to", "with"], a:1, e:"brave 描述消防员的品质，用 of。", source:"单元检测卷·云南专用"},
+{q:"—Have you finished reading the story about Sima Qian ______? —Yes, I have ______ finished it before dinner.", o:["already; yet", "yet; already", "ever; never", "never; ever"], a:1, e:"疑问句用 yet，肯定句用 already。", source:"单元测试卷"},
+{q:"—____ was the first airplane flight invented? —____ was in 1903 by the Wright brothers.", o:["When; It", "Where; That", "Why; This", "How; Which"], a:0, e:"第一空问时间用 When；第二空 It 作主语。", source:"单元检测"},
+{q:"We all ________ Zhong Yang for his great contributions to seed research.", o:["spread", "admire", "prevent", "predict"], a:1, e:"admire 表示\"敬佩\"。", source:"基础通关卷"},
+{q:"Tu Youyou is famous _______ discovering artemisinin and saving millions of lives.", o:["as", "for", "in", "with"], a:1, e:"be famous for 表示\"因……而著名\"。", source:"单元检测卷·云南专用"},
+{q:"My mother always encourages me _______ my dreams, no matter how difficult they seem.", o:["pursue", "to pursue", "pursuing", "pursued"], a:1, e:"encourage sb. to do 表示\"鼓励某人做某事\"。", source:"单元检测卷·云南专用"},
+{q:"The story of Zhong Yang is so ____ that it encourages lots of biology students.", o:["inspired", "inspire", "inspiring", "inspiration"], a:2, e:"inspiring 表示\"鼓舞人心的\"，修饰 story。", source:"单元测试"},
+{q:"She is the scientist ______ discovery changed the world.", o:["who", "which", "whose", "whom"], a:2, e:"whose 引导定语从句，表示\"她的发现\"。", source:"Units 1-3综合练习"},
+{q:"His parents' support gave him the ______ to keep going when he wanted to quit.", o:["trouble", "courage", "excuse", "fear"], a:1, e:"courage 表示\"勇气\"，父母的支持给了他勇气。", source:"单元复习与测试"},
+{q:"The famous ________ Tu Youyou discovered artemisinin and won a Nobel Prize.", o:["researcher", "engineer", "pilot", "thinker"], a:0, e:"屠呦呦是研究员（researcher），发现青蒿素并获得诺贝尔奖。", source:"Unit 2基础通关"},
+{q:"Mozi was a soldier, an inventor, and a thinker. ________, he was a great thinker.", o:["In fact", "As usual", "After all", "Above all"], a:3, e:"Above all 表示\"最重要的是\"，突出思想家身份。", source:"核心知识点单选提升练"},
+{q:"Please ________ you turn off the lights before you leave the classroom.", o:["come true", "make sure", "care about", "look up to"], a:1, e:"make sure 表示\"确保\"。", source:"核心知识点单选提升练"},
+{q:"It's brave ______ Zhong Yang to keep working when he felt sick in Xizang.", o:["for", "of", "to", "with"], a:1, e:"brave 描述钟扬的品质用 of。", source:"Section B同步课时练"},
+{q:"It's ________ for you to keep secrets for your friends. In this way, you can win their trust.", o:["strange", "necessary", "impossible", "lucky"], a:1, e:"necessary 表示\"必要的\"，为朋友保守秘密是必要的。", source:"Section A分层练习"},
+{q:"Helen Keller's story is truly ______, and it encourages many people to face difficulties bravely.", o:["boring", "inspiring", "surprising", "confusing"], a:1, e:"inspiring 表示\"鼓舞人心的\"。", source:"单元复习与测试"},
+{q:"-How did the little girl make such great progress? -She was _______ by her teacher's words every day.", o:["inspired", "invented", "introduced", "included"], a:0, e:"inspire 表示\"鼓舞\"，老师的话鼓舞了她。", source:"Section A练习作业"},
+{q:"It's very kind ________ you to help the blind man cross the busy street.", o:["for", "to", "with", "of"], a:3, e:"kind 描述人的品质用 of。", source:"素养拓展提升集训"},
+{q:"We didn't use to ______ scientists, but now we are used to ______ their spirits.", o:["admire; learn", "admired; learning", "admire; learning", "admired; learn"], a:2, e:"used to do 后用动词原形；be used to doing 后用动名词。", source:"单元测试卷"},
+{q:"The library ________ all the students ________ enough books to read.", o:["provides; for", "provides; with", "spreads; to", "leaves; behind"], a:1, e:"provide sb. with sth. 表示\"给某人提供某物\"。", source:"核心知识点单选提升练"},
+{q:"It is necessary for us ________ the environment to save our earth.", o:["protect", "to protect", "protecting", "protected"], a:1, e:"It is + adj. + for sb to do。", source:"素养拓展提升集训"},
+{q:"—Why do you look up to Zhang Guimei so much? —Because she has ________ many girls in poor areas to go to college.", o:["helped", "stopped", "prevented", "refused"], a:0, e:"helped 表示\"帮助\"，张桂梅帮助贫困女孩上大学。", source:"基础通关卷"},
+{q:"I don't know ________ I should join the club or not. Can you give me some advice?", o:["whether", "that", "when", "if"], a:0, e:"whether…or not 为固定搭配，表示\"是否\"。", source:"核心知识点单选提升练"},
+{q:"The new policy helps ________ the pollution in the city.", o:["reduce", "spread", "develop", "discover"], a:0, e:"reduce 表示\"减少\"，新政策有助于减少污染。", source:"核心知识点单选提升练"},
+{q:"Since it's your first visit to ________, you'd better learn something about ________ culture.", o:["Britain; Britain", "British; British", "British; Britain", "Britain; British"], a:3, e:"第一空填国家名 Britain；第二空修饰 culture 用形容词 British。", source:"Section A分层练习"},
+{q:"Many young scientists ____ Zhong Yang's footsteps to study plant seeds.", o:["follow", "copy", "miss", "avoid"], a:0, e:"follow one's footsteps 表示\"追随某人的脚步\"。", source:"单元测试"},
+{q:"The great man's success lies in his brave and ________ thoughts.", o:["inspire", "inspired", "inspiring", "inspiration"], a:2, e:"inspiring 表示\"鼓舞人心的\"，修饰 thoughts。", source:"单元自测卷·安徽专用"},
+{q:"He ______ continue his research even though he met lots of difficulties last year.", o:["will", "would", "has", "had"], a:1, e:"与过去相关，用 would 表示\"过去愿意/坚持\"。", source:"单元测试卷"},
+{q:"If you want to be a great scientist, you need to ____ your dream and never give up.", o:["spread", "achieve", "repeat", "review"], a:1, e:"achieve one's dream 表示\"实现梦想\"。", source:"单元测试"},
+{q:"Confucius's words still have a deep ________ on people today.", o:["influence", "mistake", "promise", "method"], a:0, e:"have a deep influence on 表示\"对……有深远影响\"。", source:"Unit 2基础通关"},
+{q:"Zhong Yang ______ his whole life collecting seeds for China's seed banks.", o:["spent", "took", "cost", "paid"], a:0, e:"spend…doing 为固定搭配，主语为人用 spend。", source:"单元培优练习卷"},
+{q:"—How can we become inspiring people? —We must keep working ________ and never lose heart.", o:["easily", "quickly", "hard", "slowly"], a:2, e:"work hard 表示\"努力工作\"。", source:"Unit 2基础通关"},
+{q:"—Do you know _______? —Yes, she is a famous doctor who saved many lives.", o:["who is she", "who she is", "what is she", "what she is"], a:1, e:"宾语从句用陈述语序 who she is。", source:"单元练习题"},
+{q:"The charity organization is trying to raise money to fight ______ in poor areas.", o:["hunger", "chemistry", "discovery", "wealth"], a:0, e:"慈善机构在贫困地区筹款是为了对抗饥饿（hunger）。", source:"核心知识点单选提升练"},
+{q:"Mozi spent his life trying to bring peace, and his ideas still ________ today.", o:["put on", "get on", "live on", "turn on"], a:2, e:"live on 表示\"流传、延续至今\"。", source:"单元检测试题"},
+{q:"Many great scientists ______ valuable knowledge for us when they passed away.", o:["leave out", "leave behind", "leave for", "leave off"], a:1, e:"leave behind 表示\"留下\"。", source:"单元练习题"},
+{q:"She ______ a lot of time to volunteering and helped hundreds of homeless children.", o:["spent", "took", "paid", "cost"], a:0, e:"spend time 表示\"花费时间\"，主语为人用 spent。", source:"单元复习与测试"},
+{q:"Over the past ten years, this small village has ______ a popular tourist attraction.", o:["spread into", "dropped into", "admired into", "developed into"], a:3, e:"develop into 表示\"发展成\"，符合村庄变成旅游景点的语境。", source:"核心知识点单选提升练"},
+{q:"My grandma became interested ____ painting ____ an early age.", o:["in; at", "on; in", "at; for", "to; of"], a:0, e:"be interested in 表示\"对……感兴趣\"；at an early age 表示\"在很小的时候\"。", source:"单元复习卷"},
+{q:"—It seems that everybody knows it now! —I wonder who ________ the news around.", o:["treated", "spread", "admired", "laid"], a:1, e:"spread 表示\"传播\"，谁传播了这个消息。", source:"Section A分层练习"},
+{q:"—Have you read the book The Story of My Life? —Yes. It tells the ________ story of Helen Keller.", o:["amazing", "bored", "relaxed", "tiring"], a:0, e:"amazing 表示\"令人惊叹的\"，海伦·凯勒的故事令人惊叹。", source:"基础通关卷"},
+{q:"The young ________ spent ten years creating his first flying machine.", o:["thinker", "inventor", "soldier", "pioneer"], a:1, e:"inventor 表示\"发明家\"，制造飞行器的人。", source:"核心知识点单选提升练"},
+{q:"The doctor told me that this kind of ______ could be passed from person to person.", o:["discovery", "disease", "hunger", "pioneer"], a:1, e:"disease 表示\"疾病\"，可人传人。", source:"核心知识点单选提升练"},
+{q:"At that time, few girls could go to college, so Marie Curie ____ knowledge in her free time.", o:["dropped out of", "gave away", "took up", "turned down"], a:2, e:"take up 表示\"开始学习\"，居里夫人利用空闲时间学习知识。", source:"单元测试"},
+{q:"Young people ________ those who make great contributions to the country.", o:["look up to", "look for", "look after", "look through"], a:0, e:"look up to 表示\"尊敬、仰慕\"。", source:"Unit 2基础通关"},
+{q:"The man ______ is standing over there is my history teacher.", o:["which", "whom", "who", "whose"], a:2, e:"who 引导定语从句，指人作主语。", source:"Units 1-3综合练习"},
+{q:"The spirit of these pioneers will always ________ in our memories.", o:["live on", "build up", "take place", "come across"], a:0, e:"live on 表示\"继续存在、留存\"，与 in our memories 搭配。", source:"Unit 2基础通关"},
+{q:"It's difficult ________ me ________ more friends.", o:["of; making", "for; to make", "of; to make", "for; making"], a:1, e:"It's + adj. + for sb to do，for 描述事情属性。", source:"单元自测卷·安徽专用"},
+{q:"It ________ important for us to keep learning from pioneers.", o:["were", "was", "is", "be"], a:2, e:"一般现在时 is。", source:"基础通关卷"},
+{q:"One of I.M.Pei's famous ________ is the Suzhou Museum.", o:["design", "designer", "designs", "designers"], a:2, e:"one of + 复数名词，designs 表示\"设计作品\"。", source:"能力提升卷"},
+{q:"The astronauts are preparing for a new ______ to the moon.", o:["curiosity", "disaster", "advertisement", "exploration"], a:3, e:"exploration 表示\"探索\"，宇航员准备新的月球探索。", source:"单元自测卷·安徽专用"},
+{q:"—______ have you kept this biography book about Yuan Longping? —For nearly three weeks.", o:["How soon", "How long", "How often", "How far"], a:1, e:"For 引导时间段，用 How long 提问。", source:"单元测试卷"},
+{q:"—Who do you look up to most? —My mother. She always encourages me ________ forward bravely.", o:["move", "moving", "to move", "moves"], a:2, e:"encourage sb. to do 表示\"鼓励某人做某事\"。", source:"能力提升卷"},
+{q:"It is very important ______ scientists to share their findings.", o:["of", "to", "for", "with"], a:2, e:"It is + adj. + for sb to do。", source:"单元检测"},
+{q:"Yuan Longping is a great scientist ________ has devoted his life to rice research.", o:["which", "who", "whom", "whose"], a:1, e:"who 引导定语从句，指人作主语。", source:"基础通关卷"},
+{q:"—Have you watched the film The Battle at Lake Changjin? —Yes. It tells the ________ story of our brave soldiers.", o:["amazing", "bored", "relaxed", "tiring"], a:0, e:"amazing 表示\"令人惊叹的\"，修饰 story。", source:"Unit 2基础通关"},
+{q:"As students, we should ________ every opportunity to improve ourselves.", o:["take pride in", "take advantage of", "come true", "drop out of"], a:1, e:"take advantage of 表示\"利用\"，符合\"利用每个机会\"的语境。", source:"Unit 2基础通关"},
+{q:"It took the researchers three years ______ the experiment.", o:["complete", "completing", "to complete", "completed"], a:2, e:"It takes sb. time to do sth.。", source:"Units 1-3综合练习"},
+{q:"The little girl didn't ______ even though she failed the exam three times.", o:["give out", "give up", "give in", "give away"], a:1, e:"give up 表示\"放弃\"。", source:"单元复习与测试"},
+{q:"It is important for us _______ from these inspiring people and follow their examples.", o:["learn", "to learn", "learning", "learned"], a:1, e:"It is + adj. + for sb to do。", source:"单元检测卷·云南专用"},
+{q:"—____ is it important to learn from great people? —____ helps us benefit from their experiences.", o:["Why; It", "How; That", "When; This", "Where; Which"], a:0, e:"第一空问原因用 Why；第二空 It 作主语指代前文。", source:"单元检测"},
+{q:"—I think Zhong Yang is the best seed scientist. —______. His work changed the world.", o:["I agree", "Good luck", "Never mind", "Of course not"], a:0, e:"对对方观点表示赞同，用 I agree。", source:"单元检测"},
+{q:"It was really ____ of Florence Nightingale to care for wounded soldiers day and night.", o:["difficult", "kind", "necessary", "common"], a:1, e:"kind 描述南丁格尔的品质，日夜照顾伤员是善良的。", source:"单元测试"},
+{q:"—_______ is said that he climbed Mount Qomolangma at the age of 70. —Really? He is so amazing!", o:["This", "That", "One", "It"], a:3, e:"It is said that… 表示\"据说……\"。", source:"单元检测卷·云南专用"},
+{q:"Zhong Yang is a great ________ to many young people. They all want to be like him.", o:["inspiration", "instruction", "invitation", "introduction"], a:0, e:"inspiration 表示\"鼓舞人心的人/事\"。", source:"单元检测试题"},
+{q:"—Who do you ____ most? —I ____ Tu Youyou because she discovered artemisinin.", o:["look up to; admire", "look for; respect", "look after; support", "look at; help"], a:0, e:"look up to 与 admire 都表示\"仰慕、敬佩\"。", source:"单元检测"},
+{q:"______ he was caught by the enemy, Zhang Qian never gave up his task.", o:["Unless", "Because", "Although", "If"], a:2, e:"Although 引导让步状语从句，表示\"虽然\"。", source:"单元培优练习卷"},
+{q:"—____ do you know about the pyramids? —They are ancient ____ in Egypt.", o:["What; wonders", "Who; buildings", "When; places", "Where; houses"], a:0, e:"第一空问内容用 What；第二空 wonders 表示\"奇迹\"。", source:"单元检测"},
+{q:"Zhang Qian was a great explorer in Chinese history. His story _______ us to be brave and never give up.", o:["improves", "encourages", "records", "refuses"], a:1, e:"encourage sb. to do 表示\"鼓励某人做某事\"。", source:"单元检测卷·云南专用"},
+{q:"My grandma has a strong ______ and she never complains about her hard life.", o:["weakness", "kindness", "spirit", "sadness"], a:2, e:"spirit 表示\"精神\"，奶奶有坚强的精神。", source:"单元复习与测试"},
+{q:"________ amazing ________ the painting Dwelling in the Fuchun Mountains is so beautiful!", o:["It's; that", "It; that", "That's; it", "That; it"], a:0, e:"It's amazing that… 为固定句型。", source:"单元自测卷·安徽专用"},
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('91_kp2_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('91_kp2_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('91_kp2_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 2 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 2 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>

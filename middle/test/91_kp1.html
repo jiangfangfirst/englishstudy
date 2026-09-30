@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head><script>
@@ -7,7 +6,6 @@
    if(!a){ location.href = '../../login.html'; }
  })();
 </script>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>多多好学题库</title>
@@ -55,8 +53,13 @@
   .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
   .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
   .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
-  .q-text{font-size:17px; font-weight:700; margin-bottom:20px; padding:14px 16px; background:var(--soft);
-    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
   .options{display:flex; flex-direction:column; gap:10px;}
   .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
     padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
@@ -94,7 +97,7 @@
   .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
   .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
   .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
-  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word;}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
   .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
   .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
   .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
@@ -115,6 +118,11 @@
   .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
     display:flex; align-items:center; justify-content:center; height:30px;}
   .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
   .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
   .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
   .bank-item .b-options .op b{color:var(--ink);}
@@ -143,57 +151,55 @@
       <div class="logo">题</div>
       <div>
         <h1>九年级KP1</h1>
-        <p>by doing · patient · 词汇辨析 · 连词搭配 · 动名词</p>
+        <p>现在完成时 · used to do/be used to doing · take place 无被动 · bring about/benefit from/feed on/lead · 固定搭配 · 情景交际</p>
       </div>
     </div>
     <button class="btn-back" id="btnHome" style="display:none">返回</button>
   </header>
-
   <section class="view active" id="view-home">
     <div class="hero">
-      <span class="tag">九年级全一册KP1 · 在线检测</span>
+      <span class="tag">九年级全一册Unit 1 · 在线检测</span>
       <h2>单元检测核心库KP1</h2>
-      <p>涵盖 by doing 结构、patient 用法、discover/invent/find out/create 辨析、pay attention to/ability/knowledge 搭配、连词与非谓语动词等高频考点。系统从全量题库中<b>随机抽取 10 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <p>涵盖现在完成时（since/for/ever/never/yet/already、延续性与短暂性动词、have/has gone to 与 been to 辨析）、used to do 与 be used to doing 对比、take place 无被动语态、population 主谓一致与 What is the population of... 句型、bring about/benefit from/feed on/lead/cut down 等动词短语、with ease/be covered with/depend on/keep in touch with 等固定搭配、although/so that/because of 等连词与介词、情景交际等高频考点。系统从全量题库（240 道）中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
       <div class="hero-meta">
         <span id="totalCount">-- 道题</span>
-        <span>随机 10 题</span>
-        <span>每答一题翻页</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
       </div>
       <div class="actions">
         <button class="btn btn-primary" id="btnStart">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
           开始随机答题
         </button>
         <button class="btn btn-ghost" id="btnBank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M19 17H6a2 2 0 0 0-2 2"/><path d="M8 7h6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
           浏览全量题库
         </button>
       </div>
     </div>
-    <div class="note">答题规则：每题先作答，选对得 1 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 10 题后自动显示得分与逐题回顾。题库共 120 题，覆盖七大考点分类。</div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
   </section>
-
   <section class="view" id="view-quiz">
     <div class="quiz-card">
       <div class="quiz-head">
-        <span class="num" id="qNum">第 1 / 10 题</span>
+        <span class="num" id="qNum">第 1 / 20 题</span>
         <div class="progress"><div class="bar" id="qBar"></div></div>
         <span class="score-chip" id="qScore">0 分</span>
       </div>
       <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
       <div class="options" id="qOptions"></div>
       <div class="feedback" id="qFeedback"></div>
       <div class="quiz-foot">
         <button class="btn btn-primary next-btn" id="qNext">下一题
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
         </button>
       </div>
     </div>
   </section>
-
   <section class="view" id="view-result">
     <div class="result-card">
-      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 10 分</span></div></div>
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
       <h3 id="rTitle"></h3>
       <div class="verdict-line" id="rSub"></div>
       <div class="result-list">
@@ -202,14 +208,13 @@
       </div>
       <div class="result-actions">
         <button class="btn btn-primary" id="btnRetry">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
-          再抽 10 题重测
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
         </button>
         <button class="btn btn-ghost" id="btnHome2">返回</button>
       </div>
     </div>
   </section>
-
   <section class="view" id="view-bank">
     <div class="bank-toolbar">
       <div class="seg">
@@ -217,7 +222,7 @@
         <button data-f="no">未答对</button>
       </div>
       <div class="search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
         <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
       </div>
       <span class="count" id="bankCount"></span>
@@ -225,148 +230,300 @@
     <div class="bank-list" id="bankList"></div>
     <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
   </section>
-
   <footer>多多好学单元题库 · 点击题目可展开解析</footer>
 </div>
-
 <script>
-const BANK = [
-{q:"—How do you study for a test? —I study ______ working with a group.", o:["in","by","on","at"], a:1, e:"by + doing 表示通过某种方式，用来回答 how 引导的疑问句。"},
-{q:"The best way to learn English is ______ reading aloud.", o:["in","with","by","for"], a:2, e:"The best way to do sth. is by doing sth. 做某事的最好方法是……"},
-{q:"—How do you improve your listening? —______ watching English videos.", o:["With","By","In","On"], a:1, e:"by doing 是回答 how 提问学习方式的固定结构。"},
-{q:"—How does Mike learn English? —He learns it ______ English songs.", o:["by listening to","by listen to","with listening to","in listening to"], a:0, e:"by 是介词后接动名词；listen 是不及物动词需加 to 接宾语。"},
-{q:"—How does the girl improve her English listening? —______ English songs.", o:["By listening to","To listen to","Listen to","Listening"], a:0, e:"对 how 提问的学习方式回答用 by doing。"},
-{q:"You can improve your English ______ practicing more.", o:["by","with","of","in"], a:0, e:"by + doing 表示通过某种途径。"},
-{q:"—How do you learn new words? —I learn them ______ making word cards.", o:["in","on","by","at"], a:2, e:"by doing 表示通过做某事的方式。"},
-{q:"She learns English ______ to English songs.", o:["by listen","by listening","listen","listening"], a:1, e:"by 后接动名词形式。"},
-{q:"—How do you practice your spoken English? —I practice it ______ with my friends.", o:["by talking","by talk","to talk","talk"], a:0, e:"by doing 结构。"},
-{q:"He improved his writing skills ______ keeping a diary.", o:["with","by","in","on"], a:1, e:"by + doing 表示方式。"},
-{q:"—How can I improve my pronunciation? —______ listening to tapes.", o:["By","With","In","On"], a:0, e:"by doing 回答 how 提问。"},
-{q:"The more you read, ______ you will be.", o:["the more knowledge","the much knowledge","more knowledge","much knowledge"], a:0, e:"the + 比较级，the + 比较级结构；knowledge 不可数用 more 修饰。"},
-{q:"—How do you study Chinese? —I study it ______ reading textbooks.", o:["with","by","in","on"], a:1, e:"by doing 表示通过做某事。"},
-{q:"She learns grammar ______ doing exercises.", o:["in","on","by","at"], a:2, e:"by + doing。"},
-{q:"—How does your sister learn English? —She learns it ______ English movies.", o:["by watch","by watching","watch","watching"], a:1, e:"by + doing。"},
-{q:"We can learn English well ______ more speaking.", o:["in","by","with","on"], a:1, e:"by + doing 表示方式。"},
-{q:"—How do you remember new words? —I remember them ______ them many times.", o:["by reading","read","to read","reading"], a:0, e:"by + doing 结构。"},
-{q:"He studies for a test ______ asking the teacher for help.", o:["in","by","on","at"], a:1, e:"by doing 表示方式。"},
-{q:"—How do you practice writing? —I practice it ______ a diary every day.", o:["by keep","by keeping","keep","keeping"], a:1, e:"by + doing。"},
-{q:"The best way to improve your English is ______ more.", o:["speak","to speak","by speaking","speaking"], a:2, e:"The best way to do sth. is by doing sth."},
-{q:"—How does Tom learn Chinese? —He learns it ______ Chinese songs.", o:["by listening","by listen to","by listening to","listening"], a:2, e:"by + doing，listen 不及物动词后需加 to。"},
-{q:"I learn English ______ reading English newspapers.", o:["with","in","by","on"], a:2, e:"by + doing。"},
-{q:"—How do you improve your speaking skills? —I improve them ______ conversations with friends.", o:["by have","by having","have","having"], a:1, e:"by + doing。"},
-{q:"She learned to play the piano ______ practicing every day.", o:["in","by","with","on"], a:1, e:"by + doing。"},
-{q:"—How do you study for a test? —I study ______ making flashcards.", o:["with","in","by","on"], a:2, e:"by + doing 回答 how 提问。"},
-{q:"A good teacher should be patient ______ his students.", o:["to","with","for","at"], a:1, e:"be patient with sb. 固定搭配，对某人有耐心。"},
-{q:"The doctor is very patient ______ his patients.", o:["with","to","for","on"], a:0, e:"be patient with sb.；第一个 patient 形容词，第二个是名词病人。"},
-{q:"—I want to give up the driving test. —Just be ______! I finally succeeded after five road tests.", o:["serious","patient","brave","careful"], a:1, e:"根据语境不要放弃，应选 patient 有耐心的。"},
-{q:"The ______ often worries a lot and he needs more ______ to recover better.", o:["patient; patience","patient; patient","patience; patient","patience; patience"], a:0, e:"第一个空病人用 patient，第二个空耐心用 patience（名词）。"},
-{q:"My English teacher is very patient ______ us.", o:["to","with","for","at"], a:1, e:"be patient with sb. 固定搭配。"},
-{q:"You need to be patient ______ learning English. It takes time.", o:["with","to","for","at"], a:0, e:"be patient with sth. 对某事有耐心。"},
-{q:"—Why do you like Mr. Wang? —Because he is always patient ______ our questions.", o:["with","to","for","at"], a:0, e:"be patient with sth. 对……有耐心。"},
-{q:"The nurse is very patient ______ the old man.", o:["to","with","for","at"], a:1, e:"be patient with sb. 固定搭配。"},
-{q:"She is a ______ teacher. She never gets angry with us.", o:["patient","impatient","patiently","patience"], a:0, e:"patient 作形容词，表示有耐心的。"},
-{q:"To be a good doctor, you need both skills and ______.", o:["patient","patience","patiently","impatient"], a:1, e:"名词形式 patience 表示耐心。"},
-{q:"Please be patient ______ the children. They are too young.", o:["to","with","for","at"], a:1, e:"be patient with sb. 固定搭配。"},
-{q:"—I can't understand this word. —Be ______. Let me explain it to you.", o:["patient","impatient","careful","brave"], a:0, e:"根据语境应让对方耐心点。"},
-{q:"The ______ is getting better with the doctor's help.", o:["patience","patient","patiently","impatient"], a:1, e:"patient 作名词，表示病人。"},
-{q:"A good learner should be patient ______ himself.", o:["to","with","for","at"], a:1, e:"be patient with sb. 固定搭配。"},
-{q:"Our teacher is very patient. She explains everything ______ us.", o:["to","with","for","at"], a:0, e:"explain sth. to sb. 向某人解释某事。"},
-{q:"Scientists ______ a new kind of plant in the forest last year.", o:["invented","discovered","found out","created"], a:1, e:"discover 指发现已经存在但之前未知的事物。"},
-{q:"Edison ______ the light bulb.", o:["discovered","found","invented","looked for"], a:2, e:"invent 指发明原本不存在的东西。"},
-{q:"Can you help me ______ who broke the window just now?", o:["find","find out","discover","invent"], a:1, e:"find out 表示通过调查弄清楚真相。"},
-{q:"It was China that first ______ coal and used it in the world.", o:["found","found out","discovered","invented"], a:2, e:"discover 指发现已存在但未被知晓的事物。"},
-{q:"Last year, he ______ a new star which is much brighter than the sun.", o:["discovered","found","created","invented"], a:0, e:"发现新的星星用 discover。"},
-{q:"Who ______ the car?", o:["invented","discovered","solved","forgot"], a:0, e:"汽车的发明用 invent。"},
-{q:"They have many different kinds of wild animals in the forest. They were ______ last year.", o:["discovered","invented","looked for","found"], a:0, e:"发现野生动物用 discover。"},
-{q:"The artist ______ a beautiful painting last month.", o:["discovered","invented","created","found"], a:2, e:"create 指创造、创作出新的东西。"},
-{q:"Please ______ when the train leaves.", o:["find","discover","find out","invent"], a:2, e:"find out 表示通过查询弄清楚。"},
-{q:"Columbus ______ America in 1492.", o:["invented","discovered","found out","created"], a:1, e:"发现美洲用 discover。"},
-{q:"He ______ a machine. It is used for cleaning the glass of the windows.", o:["found; is used to","discovers; is used for","invented; is used to","invented; was used for"], a:2, e:"invent 发明；be used to do 被用来做某事。"},
-{q:"We need to ______ the truth about this matter.", o:["discover","invent","find out","create"], a:2, e:"find out 表示查明真相。"},
-{q:"The scientist ______ a new element in his experiment.", o:["invented","discovered","found out","created"], a:1, e:"发现新元素用 discover。"},
-{q:"Who can ______ the answer to this question?", o:["find out","discover","invent","create"], a:0, e:"find out 表示找出答案。"},
-{q:"The company ______ a new product last year.", o:["discovered","found","invented","looked for"], a:2, e:"发明新产品用 invent。"},
-{q:"Boys and girls, pay attention to ______ to what I will say!", o:["listen","listening","listened","listens"], a:1, e:"pay attention to 中 to 是介词，后接动名词。"},
-{q:"Some people showed their singing ______ and became famous in the TV program.", o:["ability","competition","suggestion","knowledge"], a:0, e:"ability 表示能力。"},
-{q:"He has the ability ______ new things quickly.", o:["learn","learning","to learn","learned"], a:2, e:"the ability to do sth. 固定搭配，后接不定式。"},
-{q:"He has a good ______ of Chinese history.", o:["knowledge","ability","patience","information"], a:0, e:"a good knowledge of 表示对……很了解。"},
-{q:"You should pay attention to ______ the teacher carefully.", o:["listen to","listening to","listened to","listens to"], a:1, e:"pay attention to + doing，listen to 固定搭配。"},
-{q:"______ is power.", o:["Knowledge","Ability","Patience","Information"], a:0, e:"Knowledge is power. 知识就是力量。"},
-{q:"She has the ability ______ English well.", o:["speak","speaking","to speak","spoke"], a:2, e:"the ability to do sth."},
-{q:"Please pay attention ______ your handwriting.", o:["to","at","in","for"], a:0, e:"pay attention to 固定搭配。"},
-{q:"He has a good knowledge ______ English grammar.", o:["of","in","on","at"], a:0, e:"a good knowledge of 固定搭配。"},
-{q:"The ability ______ is very important for a language learner.", o:["communicate","communicating","to communicate","communicated"], a:2, e:"the ability to do sth."},
-{q:"You must pay attention to ______ your homework on time.", o:["hand in","handing in","handed in","hands in"], a:1, e:"pay attention to + doing。"},
-{q:"Her ______ of English is very good. She can talk with foreigners freely.", o:["knowledge","ability","patience","information"], a:0, e:"knowledge of English 表示英语知识。"},
-{q:"He has the ability ______ the problem.", o:["solve","solving","to solve","solved"], a:2, e:"the ability to do sth."},
-{q:"Please pay attention to ______ the door when you leave.", o:["close","closing","closed","closes"], a:1, e:"pay attention to + doing。"},
-{q:"We should pay attention ______ our pronunciation.", o:["to","at","for","in"], a:0, e:"pay attention to 固定搭配。"},
-{q:"The ______ to learn is more important than the knowledge itself.", o:["ability","patience","information","competition"], a:0, e:"the ability to learn 学习的能力。"},
-{q:"He has ______ knowledge of Chinese culture.", o:["a good","good a","the good","good"], a:0, e:"a good knowledge of 固定搭配。"},
-{q:"Pay attention to ______ to the teacher carefully in class.", o:["listen","listening","listened","listens"], a:1, e:"pay attention to + doing。"},
-{q:"Her ability ______ English songs is amazing.", o:["sing","singing","to sing","sang"], a:2, e:"the ability to do sth."},
-{q:"______ about the universe is very important for scientists.", o:["Knowledge","Ability","Patience","Information"], a:0, e:"knowledge 作不可数名词，表示知识。"},
-{q:"He watched TV ______ doing his homework.", o:["instead of","instead","because of","because"], a:0, e:"instead of 是介词短语，后接动名词。"},
-{q:"He got up early ______ he could catch the bus.", o:["so that","so","because","though"], a:0, e:"so that 引导目的状语从句。"},
-{q:"______ it rains, I will go.", o:["Even if","Because","So","But"], a:0, e:"even if 表示即使。"},
-{q:"He was ______ tired ______ he couldn't walk.", o:["so; that","such; that","too; to","very; that"], a:0, e:"so + 形容词 + that 从句。"},
-{q:"She studied hard ______ she could pass the exam.", o:["so that","because","though","if"], a:0, e:"so that 引导目的状语从句。"},
-{q:"______ he is poor, he is happy.", o:["Even though","Because","So","But"], a:0, e:"even though 表示尽管。"},
-{q:"He walked to school ______ taking a bus.", o:["instead of","instead","because of","so"], a:0, e:"instead of + doing。"},
-{q:"It was ______ a good book ______ I wanted to read it again.", o:["so; that","such; that","too; to","very; that"], a:1, e:"such + a/an + 形容词 + 名词 + that 从句。"},
-{q:"______ you work hard, you will succeed.", o:["If","So","But","Though"], a:0, e:"if 引导条件状语从句。"},
-{q:"He got up early ______ catch the first bus.", o:["so that","in order to","in order that","so"], a:1, e:"in order to + 动词原形，表示目的。"},
-{q:"She spoke loudly ______ everyone could hear her.", o:["so that","so","because","though"], a:0, e:"so that 引导目的状语从句。"},
-{q:"He didn't go to school ______ he was ill.", o:["because","so","though","if"], a:0, e:"because 引导原因状语从句。"},
-{q:"______ he is old, he works hard.", o:["Although","Because","So","But"], a:0, e:"although 引导让步状语从句，不能和 but 连用。"},
-{q:"He studied hard ______ he could get good grades.", o:["so that","because","but","or"], a:0, e:"so that 引导目的状语从句。"},
-{q:"______ you don't hurry, you will be late.", o:["If","So","But","Though"], a:0, e:"if 引导条件状语从句。"},
-{q:"He finished ______ his homework at 9 o'clock.", o:["do","doing","to do","did"], a:1, e:"finish + doing。"},
-{q:"She practices ______ English every morning.", o:["speak","speaking","to speak","spoke"], a:1, e:"practice + doing。"},
-{q:"He enjoys ______ English songs.", o:["sing","singing","to sing","sang"], a:1, e:"enjoy + doing。"},
-{q:"Do you mind ______ the window?", o:["open","opening","to open","opened"], a:1, e:"mind + doing。"},
-{q:"He kept ______ for two hours.", o:["read","reading","to read","reads"], a:1, e:"keep + doing。"},
-{q:"She finished ______ the book last night.", o:["read","reading","to read","reads"], a:1, e:"finish + doing。"},
-{q:"He practices ______ the piano every day.", o:["play","playing","to play","played"], a:1, e:"practice + doing。"},
-{q:"She enjoys ______ to music.", o:["listen","listening","to listen","listened"], a:1, e:"enjoy + doing。"},
-{q:"Would you mind ______ me with my English?", o:["help","helping","to help","helped"], a:1, e:"mind + doing。"},
-{q:"He kept ______ the same mistake.", o:["make","making","to make","made"], a:1, e:"keep + doing。"},
-{q:"She finished ______ her homework before dinner.", o:["do","doing","to do","did"], a:1, e:"finish + doing。"},
-{q:"He practices ______ English with his friends every day.", o:["speak","speaking","to speak","spoke"], a:1, e:"practice + doing。"},
-{q:"She enjoys ______ books in her free time.", o:["read","reading","to read","reads"], a:1, e:"enjoy + doing。"},
-{q:"Do you mind ______ the door? It's cold.", o:["close","closing","to close","closed"], a:1, e:"mind + doing。"},
-{q:"He kept ______ until midnight.", o:["study","studying","to study","studied"], a:1, e:"keep + doing。"},
-{q:"—What's the ______ to language learning? —Keep practicing.", o:["secret","way","key","answer"], a:0, e:"the secret to... 表示……的秘诀。"},
-{q:"I'm afraid ______ in class because of my poor pronunciation.", o:["speak","speaking","to speak","spoke"], a:2, e:"be afraid to do sth. 害怕做某事。"},
-{q:"Jack can't ______ his schoolbag. He is ______ it everywhere.", o:["find; looking for","look for; finding","find; finding","look for; looking for"], a:0, e:"find 强调结果找到，look for 强调动作寻找。"},
-{q:"I often make mistakes ______ grammar.", o:["in","at","on","for"], a:0, e:"make mistakes in 表示在……方面犯错误。"},
-{q:"He is active ______ class discussions.", o:["in","at","on","for"], a:0, e:"be active in 表示在……方面积极。"},
-{q:"We should take an active part ______ sports.", o:["in","at","on","for"], a:0, e:"take an active part in 表示积极参加。"},
-{q:"Please ______ the computer ______ the printer.", o:["connect; to","connect; with","connect; in","connect; on"], a:0, e:"connect...to... 把……连接到……。"},
-{q:"The book is worth ______.", o:["read","reading","to read","reads"], a:1, e:"be worth + doing。"},
-{q:"He is good ______ English and he is also good ______ his classmates.", o:["at; with","at; at","with; at","with; with"], a:0, e:"be good at 擅长；be good with 与……相处好。"},
-{q:"I discovered that ______ to something interesting is the secret to language learning.", o:["listen","listening","listened","listens"], a:1, e:"动名词作从句主语。"},
-{q:"He was so careless that he made many spelling ______.", o:["plans","decisions","discussions","mistakes"], a:3, e:"make mistakes 表示犯错误。"},
-{q:"Don't worry! I'll ______ the main points at the end of the class.", o:["record","review","require","repeat"], a:1, e:"review 表示复习、回顾。"},
-{q:"We hope to come very ______, but we don't know if we'll ______.", o:["successfully; succeed","successful; succeed","succeed; successful","success; successfully"], a:1, e:"come 后接形容词 successful 作表语；will 后接动词原形 succeed。"},
-{q:"—Don't worry! I'll help you. —______.", o:["Thanks a lot","I'm sorry","That's right","No problem"], a:0, e:"对别人的帮助表示感谢。"},
-{q:"If you are running along a road, wear light-colored clothes ______ drivers can see you clearly.", o:["so that","because","though","if"], a:0, e:"so that 引导目的状语从句。"}
-];
-
-const state = { mode:'home', quiz:[], qi:0, score:0, userAns:[] };
-const $ = id => document.getElementById(id);
-function showView(id){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  $(id).classList.add('active');
-  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
 }
+
+const BANK = [
+{q:"—______ do you improve your English? —By reading English newspapers every day.", o:["What", "How", "When", "Where"], a:1, e:"答语 By doing sth. 表方式，用 How 提问", source:"58816533单元练习题"},
+{q:"He has worked as a teacher _____ he left university.", o:["since", "for", "when", "while"], a:0, e:"主句现在完成时 + since + 一般过去时从句", source:"59532855单元测试卷33页"},
+{q:"Local people have benefited a lot ____ the new road.", o:["for", "from", "with", "at"], a:1, e:"benefit from 意为\"从……中获益\"", source:"59602111安徽中考规格测试卷"},
+{q:"The population of this city _____ grown rapidly in the past ten years.", o:["have", "has", "is", "are"], a:1, e:"population 作主语谓语用单数，in the past ten years 用现在完成时 has grown", source:"59532855单元测试卷33页"},
+{q:"—Have you visited the new village library ____? —Yes, I went there last Sunday.", o:["already", "yet", "just", "ever"], a:1, e:"疑问句用 yet 表示\"已经\"", source:"58989582 Section A课时练"},
+{q:"—Excuse me, could you tell me the way to the history museum? —Sure. Just go straight along this road, and it will ____ you right to the main gate.", o:["influence", "lead", "cause", "attract"], a:1, e:"lead 意为\"带领，指引\"，lead sb. to 表示\"把某人引向……\"，指路语境符合", source:"58885057安徽专用自测卷"},
+{q:"Now more than two million people choose ________ the new railway every year.", o:["to use", "use", "using", "used"], a:0, e:"choose to do sth. 意为\"选择做某事\"", source:"58906474能力提升自测卷"},
+{q:"The government has taken measures to _____ the living conditions of the poor.", o:["improve", "invent", "increase", "imagine"], a:0, e:"improve 意为\"改善\"，improve living conditions 改善居住条件", source:"59532855单元测试卷33页"},
+{q:"The weather in my hometown ____ a lot in the past few years. It's getting warmer.", o:["changes", "changed", "has changed", "will change"], a:2, e:"in the past few years 为现在完成时标志，主语单数用 has changed", source:"59378738单元进阶试题"},
+{q:"English ___ in many countries.", o:["speaks", "is spoken", "spoke", "is speaking"], a:1, e:"English 作主语与 speak 为被动关系，用一般现在时被动 is spoken", source:"58305676暑假自学课讲义"},
+{q:"There ____ a modern library and two new schools in our town now.", o:["is", "are", "was", "were"], a:0, e:"there be 句型就近原则，a modern library 为单数，用 is", source:"59604507单元检测试题"},
+{q:"Her grandfather ____ a car in 2006. He ____ the car for 20 years.", o:["buys; has bought", "buys; has had", "bought; has had", "bought; has bought"], a:2, e:"in 2006 用一般过去时 bought；for 20 years 用延续性动词 has had", source:"58837987吉林基础知识过关"},
+{q:"I'm so hungry because I ____ anything since breakfast.", o:["didn't eat", "haven't eaten", "don't eat", "didn't have eaten"], a:1, e:"since breakfast 为现在完成时标志，用 haven't eaten", source:"58552040八升九暑假预习"},
+{q:"It took my sister three hours ____ her book report.", o:["finish", "finishing", "to finish", "to finishing"], a:2, e:"It takes/took sb. some time to do sth. 固定句型，用不定式 to finish", source:"59694231核心知识单选提升练"},
+{q:"There ____ several new cafes on the street since last summer.", o:["are", "were", "have been", "will be"], a:2, e:"since last summer 为现在完成时标志，there be 句型完成时用 there have been", source:"59694231核心知识单选提升练"},
+{q:"Our tree-planting activity ____ for two hours this morning. We were tired but very satisfied.", o:["lasts", "lasted", "has lasted", "will last"], a:1, e:"this morning 已结束的活动用一般过去时 lasted", source:"58837987吉林基础知识过关"},
+{q:"—Many students think AI can help with their study. —I don't agree. ____ AI develops fast, we still need to learn to think.", o:["If", "Though", "Until", "Because"], a:1, e:"though 引导让步状语从句，意为\"虽然\"，前后构成转折关系", source:"58885057安徽专用自测卷"},
+{q:"—How long have you ____ your grandpa? —For about 20 years. He ____ a good friend of my family.", o:["known; became", "known; has become", "know; became", "knew; has become"], a:0, e:"第一空 how long 用延续性动词过去分词 known；第二空 He 后接 became 一般过去时表过去事实", source:"58845885武汉专用自测卷"},
+{q:"—How do you like your hometown now? —____. It has changed a lot and become more beautiful.", o:["I don't like it", "I'm not sure", "I love it", "It's terrible"], a:2, e:"答语说家乡变化很大变得更美，表明\"喜欢家乡\"，故选 I love it", source:"58845885武汉专用自测卷"},
+{q:"The old man ____ taking a walk after dinner every day; it has become a habit.", o:["used to", "is used to", "use to", "was used to"], a:1, e:"be used to doing 表\"习惯于做\"，已成习惯用 is used to", source:"58552040八升九暑假预习"},
+{q:"Great changes have ____ in our hometown in recent years.", o:["taken place", "happened", "taken up", "happened to"], a:0, e:"take place 为不及物动词短语，意为\"发生\"，无被动语态，主语 changes 与 take place 搭配最恰当，且与 in recent years 的现在完成时语境吻合", source:"59437678单元测试题"},
+{q:"—____ great changes ____ in your hometown? —Yes, many new roads and hospitals have appeared.", o:["Did; take place", "Have; taken place", "Do; take place", "Will; take place"], a:1, e:"现在完成时疑问句 Have + 过去分词 taken place，与答语时态呼应", source:"58989582 Section A课时练"},
+{q:"Great changes ____ in our hometown over the past ten years.", o:["took place", "take place", "will take place", "have taken place"], a:3, e:"over the past ten years 为现在完成时标志，take place 无被动，用 have taken place", source:"59694231核心知识单选提升练"},
+{q:"It is necessary that we ___ our environment.", o:["protect", "protected", "protecting", "will protect"], a:0, e:"It is necessary that 从句用动词原形（虚拟语气）protect", source:"58305676暑假自学课讲义"},
+{q:"It ____ people lots of time to travel to the city centre in the old days.", o:["took", "cost", "spent", "paid"], a:0, e:"It took sb. some time to do sth. 句型，in the old days 用一般过去时", source:"21cnjy26252002 Section A分层练习"},
+{q:"—The air here is much fresher than before. —Exactly! We ____ plenty of trees in the last few years.", o:["planted", "have planted", "were planted", "were planting"], a:1, e:"in the last few years 是现在完成时标志，主语 We 用 have planted", source:"58885057安徽专用自测卷"},
+{q:"—Have you ever been to Saihanba? —Yes, I ____ there last summer.", o:["go", "went", "have gone", "will go"], a:1, e:"last summer 为过去时间状语，用一般过去时 went", source:"59602111安徽中考规格测试卷"},
+{q:"People use different kinds of ____ to cook food in daily life.", o:["oils", "ores", "onions", "orders"], a:0, e:"oils 意为\"油类\"，做饭需要使用不同种类的油", source:"58910559单元测试卷"},
+{q:"—____ your grandfather ____ work on a farm? —Yes, he did.", o:["Did; use to", "Was; used to", "Did; used to", "Has; used to"], a:0, e:"used to 变一般疑问句用 Did + use to，答语 he did 佐证", source:"58552040八升九暑假预习"},
+{q:"I ________ getting up early in the morning to read English aloud, but I ________ hate it when I was in primary school.", o:["am used to; used to", "used to; am used to", "used to; used to", "am used to; am used to"], a:0, e:"be used to doing 表现在习惯；used to do 表过去常常", source:"58906474能力提升自测卷"},
+{q:"Great changes ____ in our hometown over the last fifteen years.", o:["have taken place", "have been taken place", "took place", "were taken place"], a:0, e:"over the last fifteen years 用现在完成时，take place 无被动", source:"21cnjy26252002 Section A分层练习"},
+{q:"The school ___ us with good learning environment.", o:["gives", "provides", "offers", "sends"], a:1, e:"provide sb. with sth. 意为\"为某人提供某物\"", source:"58305676暑假自学课讲义"},
+{q:"The new railway ____ in 2017, and it ____ many people's lives since then.", o:["opened; has improved", "was opened; has improved", "has opened; improved", "was opened; improved"], a:1, e:"in 2017 用被动语态 was opened；since then 用现在完成时 has improved", source:"59006056北京专用自测卷"},
+{q:"The student sold his old guitar ____ a classmate for fifty dollars.", o:["to", "at", "for", "with"], a:0, e:"sell sth. to sb. 意为\"把某物卖给某人\"", source:"59694231核心知识单选提升练"},
+{q:"—Mike, you look happy today. What happened? —Yes! Our school ____ a new library since last year. It's now open to us.", o:["builds", "built", "has built", "will build"], a:2, e:"since last year 为现在完成时标志，主语 Our school 单数用 has built", source:"59378738单元进阶试题"},
+{q:"Maria used to ____ interested in music, but now she's used to ____ tennis.", o:["be; playing", "being; play", "being; playing", "be; plays"], a:0, e:"used to do 表\"过去常常\"，be used to doing 表\"现在习惯于\"", source:"59694231核心知识单选提升练"},
+{q:"The road is too ____ for two cars to pass at the same time. We'd better drive slowly.", o:["wide", "narrow", "straight", "clean"], a:1, e:"narrow 意为\"狭窄的\"，路太窄两车无法同时通过，故选 narrow", source:"58885057安徽专用自测卷"},
+{q:"—______ have you lived in this city? —For about five years.", o:["How often", "How long", "How soon", "How far"], a:1, e:"回答 For + 时间段，用 How long 询问持续多久", source:"58816533单元练习题"},
+{q:"—How long have you lived here? —____ three years ago.", o:["For", "Since", "In", "After"], a:1, e:"since + 过去时间点，与现在完成时连用", source:"59604507单元检测试题"},
+{q:"____ you ____ your homework yet?", o:["Did; finish", "Have; finished", "Do; finish", "Are; finishing"], a:1, e:"yet 提示现在完成时疑问句 Have + finished", source:"58552040八升九暑假预习"},
+{q:"—Do you know how to solve the problem, my dear students? —Yes. After discussing it, we ____ a bright idea.", o:["caught up with", "dreamed of", "got along with", "came up with"], a:3, e:"come up with 意为\"想出，提出\"，come up with an idea 表示\"想出主意\"", source:"58845885武汉专用自测卷"},
+{q:"—I hear that your good friend David ____ books about history. —Yes, but now he ____ novels about amazing natural wonders.", o:["used to read; is used to reading", "is used to reading; is used to reading", "used to read; used to read", "is used to reading; used to read"], a:0, e:"used to do 表\"过去常常\"，is used to doing 表\"现在习惯于\"，与 but now 对比", source:"58885057安徽专用自测卷"},
+{q:"—Our hometown has built a new high-speed railway recently. —________", o:["Sounds great!", "That's terrible!", "You're welcome.", "I don't mind."], a:0, e:"Sounds great 意为\"听起来很棒\"，回应好消息", source:"58906474能力提升自测卷"},
+{q:"There ____ a small river in front of the village, but now it has disappeared.", o:["used to be", "was used to be", "used to being", "was used to being"], a:0, e:"used to be 意为\"过去曾有\"，与 but now 形成今昔对比", source:"21cnjy26252002 Section A分层练习"},
+{q:"—____ has life changed in your hometown? —Greatly. We now have new houses, a hospital and a library.", o:["How much", "How many", "What", "Which"], a:0, e:"询问变化程度用 how much，答语 Greatly 说明程度很大", source:"58845885武汉专用自测卷"},
+{q:"—Sally spent most of the morning making phone calls and chatting with her friends. It made the boss really mad. —I think she needs to get down to ____ and finish the project now.", o:["trick", "ground", "deal", "business"], a:3, e:"get down to business 为固定短语，意为\"开始干正事，着手处理正事\"", source:"58845885武汉专用自测卷"},
+{q:"We have planted thousands of trees ________ sandstorms.", o:["stop", "to stop", "stopping", "stopped"], a:1, e:"不定式作目的状语，意为\"为了阻止沙尘暴\"", source:"58906474能力提升自测卷"},
+{q:"My grandpa keeps an old ____ from one hundred years ago as a treasure.", o:["coin", "coat", "coal", "coast"], a:0, e:"coin 意为\"硬币\"，一百年前的旧硬币作为珍藏", source:"58910559单元测试卷"},
+{q:"The Internet makes it ____ for people to communicate with each other than before.", o:["easy", "easier", "easiest", "the easiest"], a:1, e:"than before 提示比较级，make it + 比较级 + to do sth.", source:"59604507单元检测试题"},
+{q:"—Your village looks so beautiful now! —Thanks. We ____ many trees on the hills since 2010.", o:["plant", "planted", "have planted", "are planting"], a:2, e:"since 2010 为现在完成时标志，主语 We 用 have planted", source:"58910559单元测试卷"},
+{q:"The little boy can work out the math problem ____.", o:["with ease", "in surprise", "in trouble", "with care"], a:0, e:"with ease 意为\"轻松地\"，小男孩轻松解出数学题", source:"58910559单元测试卷"},
+{q:"Lucy is good at maths. She can solve the difficult maths problem ____.", o:["in fact", "in danger", "with ease", "for example"], a:2, e:"with ease 意为\"轻松地\"，擅长数学所以轻松解题", source:"59694231核心知识单选提升练"},
+{q:"(2026云南昭通期中) Great changes ____ in my hometown since I left here ten years ago.", o:["have taken place", "took place", "were taking place", "will take place"], a:0, e:"since I left 为现在完成时标志，take place 无被动", source:"59350542同步练习"},
+{q:"We should ____ each other in difficult times. That's how we become stronger together.", o:["change", "host", "support", "punish"], a:2, e:"support 意为\"支持，帮助\"，困难时互相支持使我们更坚强", source:"58885057安徽专用自测卷"},
+{q:"The hills were covered ____ green trees.", o:["by", "on", "in", "with"], a:3, e:"be covered with 意为\"被……覆盖\"", source:"58643885暑期预习单元测试"},
+{q:"—I think paper books won't disappear in the future with the development of electronic ____. —I agree with you. Paper books can't be replaced.", o:["projects", "processes", "products", "programs"], a:2, e:"products 意为\"产品\"，electronic products 指电子产品，纸质书不会被电子产品取代", source:"58885057安徽专用自测卷"},
+{q:"So far, we ____ many new highways in our city.", o:["build", "built", "have built", "will build"], a:2, e:"so far 为现在完成时标志，主语 we 用 have built", source:"21cnjy26252002 Section A分层练习"},
+{q:"—Have you ever ____ to the new library? —Yes, I ____ there last weekend.", o:["been; went", "gone; went", "been; have gone", "gone; have been"], a:0, e:"have been to 表\"去过已回\"；last weekend 用一般过去时 went", source:"59006056北京专用自测卷"},
+{q:"—China is developing so fast. —That's true. It ____ a lot already.", o:["changed", "has changed", "will change", "changes"], a:1, e:"already 为现在完成时标志，主语单数用 has changed", source:"59351998 Section B单元测试"},
+{q:"There used to be many ____ in this area in spring.", o:["sandstorm", "sandstorms", "the sandstorm", "a sandstorm"], a:1, e:"many 后接可数名词复数 sandstorms", source:"58643885暑期预习单元测试"},
+{q:"The new app makes ____ easy for students ____ their spoken English online every day.", o:["it; practice", "it; to practice", "it's; to practice", "that; practice"], a:1, e:"make it + adj. + for sb. + to do sth. 句型，it 作形式宾语，to practice 作真正宾语", source:"58885057安徽专用自测卷"},
+{q:"The machine ____ cut wood. It is very useful.", o:["used to", "is used to", "was used to", "gets used to"], a:1, e:"be used to do sth. 意为\"被用来做某事\"，主语 the machine 用 is used to cut", source:"59613858单元测试卷"},
+{q:"Mr Li has rich experience in business, so he was chosen as the ____ of the new company last month.", o:["manager", "worker", "reporter", "businessman"], a:0, e:"manager 意为\"经理\"，因有商业经验被选为公司经理", source:"59351998 Section B单元测试"},
+{q:"The new railway has cut the travel time ____ about four hours.", o:["in", "on", "to", "at"], a:2, e:"cut the travel time to 意为\"把出行时间缩短至\"", source:"59602111安徽中考规格测试卷"},
+{q:"Different apps on the phone make it ____ to learn English for the students than before.", o:["easily", "easier", "easy", "more easily"], a:1, e:"make it + 比较级 + to do sth. 句型，than before 提示用比较级 easier", source:"58885057安徽专用自测卷"},
+{q:"—Hello, may I speak to Mary? —Sorry, she isn't in. She _____ to the library.", o:["has been", "has gone", "went", "will go"], a:1, e:"has gone to 表\"去了未归\"，与 she isn't in 呼应", source:"59532855单元测试卷33页"},
+{q:"____ with China's help in 2017.", o:["The railway has been built", "The railway was built", "The railway built", "The railway is built"], a:1, e:"in 2017 为过去时间，铁路被建成用一般过去时被动 was built", source:"58643885暑期预习单元测试"},
+{q:"Cutting down too many trees ____ sandstorms more serious in some areas.", o:["make", "makes", "making", "made"], a:1, e:"动名词作主语谓语用单数 makes", source:"21cnjy26252002 Section A分层练习"},
+{q:"____ my grandpa is over 80 years old, he still looks strong and healthy.", o:["Although", "Because", "Unless", "Since"], a:0, e:"although 引导让步状语从句，\"虽然爷爷 80 多岁，仍健康\"", source:"59351998 Section B单元测试"},
+{q:"The feeling of love and happiness ____ in my family.", o:["stays", "keeps", "remains", "all the above"], a:3, e:"stays/keeps/remains 均有\"保持\"之意，三者都对，故选 all the above", source:"58643885暑期预习单元测试"},
+{q:"We should not only depend ____ ourselves but also help others.", o:["in", "on", "at", "for"], a:1, e:"depend on 意为\"依靠，依赖\"，depend on ourselves 表示\"依靠自己\"", source:"59613858单元测试卷"},
+{q:"Today many cities are known ____ their clean environment and high-tech development.", o:["for", "as", "to", "with"], a:0, e:"be known for 意为\"因……而出名\"，强调因某特点而闻名", source:"59437678单元测试题"},
+{q:"—I have been to Shanghai twice. —______. I went there last year.", o:["So have I", "So I have", "Neither have I", "I have so"], a:0, e:"So + 助动词 + 主语表\"我也一样\"，前句为肯定句用 So have I", source:"58816533单元练习题"},
+{q:"The little village has changed ____. You can hardly recognize it.", o:["quite a lot of", "quite a lot", "lot of", "a lots"], a:1, e:"quite a lot 意为\"很多，非常大\"，副词短语修饰 changed", source:"21cnjy26252002 Section A分层练习"},
+{q:"A supermarket manager said people have ________ fresh food to eat than before.", o:["many", "much", "more", "most"], a:2, e:"than 提示比较级，more fresh food 更多新鲜食物", source:"58906474能力提升自测卷"},
+{q:"—Have you ever been to the new science museum? —Yes. I ____ it last month.", o:["visit", "visited", "have visited", "will visit"], a:1, e:"last month 为过去时间状语，谓语动词用一般过去时 visited", source:"59437678单元测试题"},
+{q:"Mike's father ____ to New York on business. He ____ the airport at five this morning.", o:["has gone; left for", "has been; has gone to", "has been; left for", "went; has been to"], a:0, e:"has gone to 表\"去了未归\"，left for 表\"动身前往\"，at five this morning 用一般过去时", source:"59694231核心知识单选提升练"},
+{q:"The village is no longer ____ it was ten years ago.", o:["what", "how", "that", "which"], a:0, e:"what 引导表语从句，村庄不再是十年前的样子", source:"59604507单元检测试题"},
+{q:"Technology ____ many great changes in our daily life.", o:["has brought about", "brought out", "brings up", "has taken place"], a:0, e:"bring about 意为\"带来，引起\"，Technology 为单数主语，现在完成时用 has brought about", source:"59613858单元测试卷"},
+{q:"—I can't believe the hills are covered with trees now. —Yes. They used to be covered ____ sand.", o:["of", "with", "in", "for"], a:1, e:"be covered with 意为\"被……覆盖\"", source:"59602111安徽中考规格测试卷"},
+{q:"____ the government's support, people's living conditions have improved a lot.", o:["Thanks for", "Thanks to", "Because", "Since"], a:1, e:"thanks to 意为\"多亏，由于\"，后接名词短语", source:"21cnjy26252002 Section A分层练习"},
+{q:"—________ you ever ________ to the city science museum? —Yes, I ________ there with my classmates last winter holiday.", o:["Did; go; went", "Have; been; went", "Have; been; have been", "Did; go; have been"], a:1, e:"ever 提示现在完成时 Have been to；last winter holiday 用一般过去时 went", source:"58906474能力提升自测卷"},
+{q:"My grandfather ____ in a factory, but now he is retired and ____ gardening every day.", o:["used to work; enjoys", "used to working; enjoys", "used to work; enjoyed", "was used to work; enjoys"], a:0, e:"used to do 表过去常常；now 提示现在一般现在时 enjoys", source:"59006056北京专用自测卷"},
+{q:"In my opinion, online learning makes it ____ for students to get knowledge anytime.", o:["easy", "easier", "easily", "more easily"], a:1, e:"make it + 比较级 + to do sth.，在线学习让获取知识更容易", source:"59378738单元进阶试题"},
+{q:"It is hot and dry for long, so the ____ area becomes larger and larger.", o:["sandy", "freezing", "grassy", "wet"], a:0, e:"sandy 意为\"沙质的\"，干热使沙化区域扩大", source:"58837987吉林基础知识过关"},
+{q:"It's not ____ to take a taxi during rush hour. The traffic is too heavy.", o:["slow", "safe", "convenient", "possible"], a:2, e:"convenient 意为\"方便的\"，高峰期打车不方便", source:"59351998 Section B单元测试"},
+{q:"She ____ living in the city now, so she doesn't miss the village.", o:["used to", "is used to", "was used to", "use to"], a:1, e:"be used to doing sth. 意为\"习惯于做某事\"，now 表明现在习惯，主语 she 用 is used to", source:"59613858单元测试卷"},
+{q:"My hometown ____ a lot in the past few years.", o:["changes", "changed", "has changed", "will change"], a:2, e:"in the past few years 是现在完成时标志，主语 My hometown 为第三人称单数，用 has changed", source:"59613858单元测试卷"},
+{q:"The old bridge in our town ____ last year, and a new one was built in its place.", o:["took down", "is taken down", "was taken down", "will be taken down"], a:2, e:"last year 用一般过去时，桥被拆除用被动语态 was taken down", source:"59378738单元进阶试题"},
+{q:"We walked along the ____ beach and enjoyed the sea wind.", o:["sandy", "silly", "sleepy", "strict"], a:0, e:"sandy 意为\"沙质的，多沙的\"，sandy beach 表示\"沙滩\"", source:"58910559单元测试卷"},
+{q:"Though they had a long ____, they came to an agreement on the project at last.", o:["instruction", "organization", "discussion", "attraction"], a:2, e:"discussion 意为\"讨论\"，have a long discussion 表示\"长时间讨论\"，与后文达成协议呼应", source:"58885057安徽专用自测卷"},
+{q:"In the past, there ____ no hospital in our town. Now a big one ____ near the square.", o:["is; is built", "used to be; has been built", "used to be; built", "was; has built"], a:1, e:"in the past 用 used to be；now 强调对现在影响用 has been built", source:"59006056北京专用自测卷"},
+{q:"Monkey King ____ a group of monkeys against the Emperor of Heaven.", o:["develops", "refuses", "leads", "protects"], a:2, e:"lead 意为\"带领\"，孙悟空带领群猴对抗天庭", source:"59694231核心知识单选提升练"},
+{q:"The farmers ____ enough water for their crops in the past.", o:["lack", "lacked", "have lacked", "will lack"], a:1, e:"in the past 为过去时间状语，用一般过去时 lacked", source:"59049596 Units1-3综合练习"},
+{q:"The ground ____ snow in winter.", o:["covers with", "is covered with", "covered with", "is covering with"], a:1, e:"be covered with 意为\"被……覆盖\"，表状态用被动语态", source:"59049596 Units1-3综合练习"},
+{q:"My hometown used to ____ a small village, but now it has become a modern town.", o:["be", "being", "is", "was"], a:0, e:"used to do sth.，to 后接动词原形 be", source:"59602111安徽中考规格测试卷"},
+{q:"____ takes us about 20 minutes to get to the train station.", o:["That", "This", "It", "He"], a:2, e:"It takes sb. time to do sth. 句型，It 作形式主语", source:"59049596 Units1-3综合练习"},
+{q:"—Excuse me, may I use your ruler? I ____ mine. —Of course! Here you are.", o:["have lost", "will lose", "am losing", "loses"], a:0, e:"强调丢失对现在的影响（现在没有尺子），用现在完成时 have lost", source:"58837987吉林基础知识过关"},
+{q:"Trees can help keep ____ in place even if there is a storm.", o:["corn", "salt", "energy", "soil"], a:3, e:"soil 意为\"土壤\"，树木能固定土壤防止流失", source:"59694231核心知识单选提升练"},
+{q:"The new railway makes it ___ for people to travel.", o:["convenience", "convenient", "conveniently", "more convenient"], a:1, e:"make it + 形容词 + to do sth.，convenient 为形容词", source:"58305676暑假自学课讲义"},
+{q:"____ your grandpa ____ in the old house in the past?", o:["Did; live", "Has; lived", "Have; lived", "Do; live"], a:0, e:"in the past 为过去时间状语，一般过去时疑问句用 Did + 动词原形 live", source:"58885057安徽专用自测卷"},
+{q:"I ____ this book for two weeks. It's very interesting.", o:["have bought", "bought", "have had", "buy"], a:2, e:"for two weeks 为时间段，须用延续性动词 have had 的现在完成时", source:"59613858单元测试卷"},
+{q:"My father ______ walk to work, but now he drives his car.", o:["used to", "is used to", "was used to", "use to"], a:0, e:"used to do 表\"过去常常\"，与 but now 对比", source:"58816533单元练习题"},
+{q:"Modern technology has ____ great changes in people's daily life.", o:["taken about", "brought about", "looked about", "turned about"], a:1, e:"bring about 意为\"引起，导致\"，bring about great changes 表示\"带来巨大变化\"", source:"59437678单元测试题"},
+{q:"______ it rained heavily, we still went to school on time.", o:["But", "Although", "So", "Because"], a:1, e:"although 引导让步状语从句，意为\"虽然\"", source:"58816533单元练习题"},
+{q:"—Peter is too shy to express his own opinions. —I think he should believe in himself and be more ____.", o:["modest", "organized", "creative", "confident"], a:3, e:"confident 意为\"自信的\"，害羞不敢表达观点应更加自信", source:"58845885武汉专用自测卷"},
+{q:"Many young people ____ work in big cities, but now they come back.", o:["used to", "was used to", "is used to", "gets used to"], a:0, e:"used to do 表\"过去常常\"，与 but now 对比", source:"58643885暑期预习单元测试"},
+{q:"Sand used to cover much land, but now ________ green trees cover the hills.", o:["thousand", "thousands", "thousand of", "thousands of"], a:3, e:"thousands of 意为\"成千上万的\"，表概数", source:"58906474能力提升自测卷"},
+{q:"Local people have ____ a lot from the new railway.", o:["benefit", "benefited", "benefits", "benefiting"], a:1, e:"have 后接过去分词 benefited，benefit from 意为\"从……中获益\"", source:"58643885暑期预习单元测试"},
+{q:"—Where is Lisa? —She ____ to the supermarket. She ____ about ten minutes ago.", o:["has gone; left", "has been; has left", "went; left", "has gone; has left"], a:0, e:"has gone to 表\"去了未归\"；ten minutes ago 用一般过去时 left", source:"59006056北京专用自测卷"},
+{q:"We are determined ____ the work done before New Year's Day.", o:["get", "to get", "getting", "got"], a:1, e:"be determined to do sth. 意为\"决心做某事\"", source:"59694231核心知识单选提升练"},
+{q:"____ Mr Hunt's help, I ____ much progress in maths since last year.", o:["With; made", "At; have made", "With; have made", "Under; will made"], a:2, e:"with sb.'s help 意为\"在某人的帮助下\"，since last year 用现在完成时 have made", source:"59694231核心知识单选提升练"},
+{q:"—____ do you think brings about these changes? —Hard work and the government's support.", o:["What", "Who", "How", "When"], a:0, e:"what 作主语询问\"什么带来了这些变化\"", source:"59602111安徽中考规格测试卷"},
+{q:"We should always ____ our friends when they need help.", o:["support", "to support", "supporting", "supports"], a:0, e:"should 后接动词原形 support", source:"59350542同步练习"},
+{q:"Over the last few years, many changes ____ in the town.", o:["have been", "has been", "was", "were"], a:0, e:"over the last few years 用现在完成时，changes 复数用 have been", source:"58643885暑期预习单元测试"},
+{q:"The bridge ____ the two sides of the river.", o:["mixes", "follows", "cuts", "links"], a:3, e:"link 意为\"连接\"，桥梁连接河两岸", source:"59694231核心知识单选提升练"},
+{q:"The bushes are planted ____ stop sandstorms and protect the land.", o:["to", "for", "with", "at"], a:0, e:"不定式 to stop 作目的状语，意为\"为了阻止沙尘暴\"", source:"58989582 Section A课时练"},
+{q:"My grandma ____ live in a small old house, but now she lives in a bright flat.", o:["used to", "is used to", "was used to", "gets used to"], a:0, e:"used to do 表\"过去常常\"，与 but now 对比", source:"59604507单元检测试题"},
+{q:"—Have you ____ been to the new city park? —Yes, I have. I went there last month.", o:["ever", "never", "just", "yet"], a:0, e:"疑问句用 ever 表示\"曾经\"", source:"59604507单元检测试题"},
+{q:"—Has your sister finished her homework ____? —Yes, she has ____ finished it.", o:["yet; already", "already; yet", "yet; yet", "already; already"], a:0, e:"疑问句用 yet，肯定答语用 already 表\"已经\"", source:"59604507单元检测试题"},
+{q:"—What makes villagers richer than before? —Better transport makes ____ easy to sell local products far away.", o:["this", "that", "it", "one"], a:2, e:"make it + adj. + to do sth. 句型，it 作形式宾语", source:"58989582 Section A课时练"},
+{q:"—How do you like your new school? —It's much ____ than my old one.", o:["big", "bigger", "biggest", "the biggest"], a:1, e:"than 提示比较级，much 修饰比较级 bigger", source:"59049596 Units1-3综合练习"},
+{q:"Our village ____ a new hospital and a library so far.", o:["has built", "built", "builds", "is building"], a:0, e:"so far 为现在完成时标志，主语单数用 has built", source:"58643885暑期预习单元测试"},
+{q:"The ____ allows farmers to grow vegetables even in cold winter.", o:["highway", "greenhouse", "railway", "sandstorm"], a:1, e:"greenhouse 意为\"温室\"，冬天种菜靠温室", source:"59006056北京专用自测卷"},
+{q:"Thanks for your strong ____; I can finish the difficult task smoothly.", o:["support", "surface", "survey", "symbol"], a:0, e:"support 意为\"支持\"，strong support 表示\"大力支持\"", source:"58910559单元测试卷"},
+{q:"—The path(小路) in the mountains is so ____ that we need to walk carefully to avoid falling. —You're right! It's full of stones and holes.", o:["soft", "rough", "clean", "bright"], a:1, e:"rough 意为\"崎岖的，不平的\"，满是石头和坑的路很崎岖", source:"58837987吉林基础知识过关"},
+{q:"The government ________ thousands of kilometres of highways since 2010.", o:["builds", "has built", "built", "will build"], a:1, e:"since 2010 为现在完成时标志，主语单数用 has built", source:"58906474能力提升自测卷"},
+{q:"My grandma ____ live in the countryside, but now she enjoys living with us in the city.", o:["used to", "is used to", "was used to", "use to"], a:0, e:"used to do 表\"过去常常\"，与 but now 形成对比", source:"59378738单元进阶试题"},
+{q:"—____ has the population of our city changed over the years? —It has increased a lot because more people come here for jobs.", o:["How", "What", "Which", "Who"], a:0, e:"how 询问方式/程度，人口如何变化用 how", source:"59378738单元进阶试题"},
+{q:"Xinzhai village is a great place to grow high-quality coffee plants. ____ soil and proper temperature make it a great place.", o:["A", "An", "The", "/"], a:2, e:"特指该村的土壤和适宜温度，用定冠词 the", source:"59350542同步练习"},
+{q:"My grandfather ________ live in the countryside, but now he lives with us in the city.", o:["used to", "is used to", "was used to", "use to"], a:0, e:"used to do 表\"过去常常\"，与 but now 对比", source:"58906474能力提升自测卷"},
+{q:"My mother ____ my final exam result and gave me a small gift.", o:["is happy with", "was happy with", "is good for", "was good for"], a:1, e:"be happy with 意为\"对……满意\"，gave 提示过去时，用 was happy with", source:"58910559单元测试卷"},
+{q:"The government ____ many highways in Guizhou over the past ten years.", o:["built", "builds", "has built", "will build"], a:2, e:"over the past ten years 为现在完成时标志，主语单数用 has built", source:"58989582 Section A课时练"},
+{q:"____ a small shop on this corner, but now it's a supermarket.", o:["There used to be", "There is used to be", "There use to be", "It used to be"], a:0, e:"there used to be 意为\"过去曾有\"，与 but now 对比", source:"58552040八升九暑假预习"},
+{q:"—Our hometown is becoming more and more beautiful. —____. I love it so much.", o:["That's all right", "That's true", "Good luck", "Congratulations"], a:1, e:"That's true 意为\"确实如此\"，表示赞同对方说法", source:"59604507单元检测试题"},
+{q:"My father is proud ____ the great changes of our country.", o:["of", "in", "with", "for"], a:0, e:"be proud of 意为\"为……感到自豪\"", source:"59604507单元检测试题"},
+{q:"Many villagers make money ____ selling fruits online.", o:["by", "in", "with", "on"], a:0, e:"by doing sth. 表示\"通过做某事\"，by selling fruits online 意为\"通过网上卖水果\"", source:"59613858单元测试卷"},
+{q:"More than two ____ people take part in the volunteer activity to help protect the environment every year.", o:["million", "millions", "million of", "millions of"], a:0, e:"two million 表具体数量，million 用单数不加 of", source:"58837987吉林基础知识过关"},
+{q:"Many international students ____ to visit our school since last year.", o:["are coming", "have come", "came", "will come"], a:1, e:"since last year 用现在完成时，主语复数用 have come", source:"58837987吉林基础知识过关"},
+{q:"The city ____ a lot since I left ten years ago.", o:["changes", "changed", "has changed", "will change"], a:2, e:"since 引导时间状语从句，主句用现在完成时 has changed", source:"59049596 Units1-3综合练习"},
+{q:"Our city is much ____ than it was ten years ago. There are more tall buildings now.", o:["beautiful", "more beautiful", "most beautiful", "the most beautiful"], a:1, e:"than 提示比较级，much 修饰比较级 more beautiful", source:"59378738单元进阶试题"},
+{q:"It ____ my mother about an hour ____ dinner every day.", o:["takes; to cook", "spends; cooking", "takes; cooking", "spends; to cook"], a:0, e:"It takes sb. time to do sth. 句型，every day 用一般现在时", source:"59049596 Units1-3综合练习"},
+{q:"—How long have you used this book? —Since you ____ it to me.", o:["lent", "has lent", "lend", "will lend"], a:0, e:"since 从句用一般过去时，lend 的过去式为 lent", source:"59694231核心知识单选提升练"},
+{q:"—_____ is the population of your hometown? —About 50,000.", o:["How many", "How much", "What", "Which"], a:2, e:"询问人口用 What is the population of...? 固定句型", source:"59532855单元测试卷33页"},
+{q:"It ____ me 45 minutes to finish my English homework yesterday.", o:["spent", "took", "cost", "paid"], a:1, e:"It took sb. some time to do sth. 句型，主语 It 用 took", source:"59694231核心知识单选提升练"},
+{q:"—____ did your hometown change in the past ten years? —It has changed a lot.", o:["How", "What", "Where", "When"], a:0, e:"how 询问变化程度/方式，答语 It has changed a lot 说明程度", source:"59049596 Units1-3综合练习"},
+{q:"The kind nurse tried her best to ____ the old man's pain with soft words and gentle care.", o:["cause", "lack", "ease", "link"], a:2, e:"ease 意为\"减轻，缓解\"，ease the pain 表示\"缓解疼痛\"，符合护士用温和话语照顾老人的语境", source:"58885057安徽专用自测卷"},
+{q:"The temperature in this ____ is always kept above 25℃.", o:["sandstorm", "process", "greenhouse", "competition"], a:2, e:"greenhouse 意为\"温室，大棚\"，温室内温度保持恒定", source:"59694231核心知识单选提升练"},
+{q:"Reading a lot can ____ us what we can't imagine.", o:["benefit", "remember", "describe", "care"], a:0, e:"benefit 意为\"使受益\"，多阅读使我们受益", source:"59694231核心知识单选提升练"},
+{q:"We ____ each other for nearly twenty years.", o:["know", "knew", "have known", "will know"], a:2, e:"for nearly twenty years 为时间段，用延续性动词现在完成时 have known", source:"58989582 Section A课时练"},
+{q:"The villagers planted bushes ____ the soil together.", o:["hold", "holding", "to hold", "held"], a:2, e:"不定式 to hold 作目的状语，意为\"为了固定土壤\"", source:"59602111安徽中考规格测试卷"},
+{q:"—Where is your father? —He ____ Shanghai on business. He will come back in three days.", o:["has been to", "has gone to", "went to", "has been in"], a:1, e:"has gone to 表\"去了未归\"，与 will come back in three days 呼应", source:"21cnjy26252002 Section A分层练习"},
+{q:"These hens on the farm mainly feed on ____.", o:["sand", "yogurt", "corn", "salt"], a:2, e:"feed on 意为\"以……为食\"，母鸡以玉米为食", source:"59694231核心知识单选提升练"},
+{q:"The government ____ many trees in the desert area last year.", o:["plants", "planted", "has planted", "will plant"], a:1, e:"last year 为过去时间状语，用一般过去时 planted", source:"59049596 Units1-3综合练习"},
+{q:"—How long have you _____ this bike? —Since I was twelve.", o:["bought", "had", "borrowed", "received"], a:1, e:"how long/since 需延续性动词，have 表\"拥有\"为延续性动词", source:"59532855单元测试卷33页"},
+{q:"Life today is quite different ____ that in the past.", o:["from", "with", "of", "for"], a:0, e:"be different from 意为\"与……不同\"", source:"58643885暑期预习单元测试"},
+{q:"Over 140 ____ trash has been left on Mount Qomolangma.", o:["ton of", "tons of", "tons", "a ton of"], a:1, e:"tons of 意为\"大量的，成吨的\"，后接不可数名词 trash", source:"59694231核心知识单选提升练"},
+{q:"More and more tourists come to the town, so tourism ____ quickly these years.", o:["develops", "developed", "has developed", "will develop"], a:2, e:"these years 为现在完成时标志，tourism 单数用 has developed", source:"59604507单元检测试题"},
+{q:"—Good news! A team of scientists ____ a new type of ocean creature in the deep sea. —Wow! It will help us learn more about the ocean.", o:["discover", "discovered", "have discovered", "will discover"], a:2, e:"强调发现对现在的影响（帮助我们了解更多），用现在完成时，主语为单数集体 A team 用 have discovered", source:"58885057安徽专用自测卷"},
+{q:"Our teachers are happy ____ our great progress.", o:["to", "with", "for", "at"], a:1, e:"be happy with 意为\"对……满意\"，be happy with our progress 表示对进步感到满意", source:"59613858单元测试卷"},
+{q:"—Why does he take two part-time jobs after work? —He has a large family to ____.", o:["supply", "manage", "afford", "support"], a:3, e:"support 意为\"养活，赡养\"，support a family 表示\"养家\"", source:"58845885武汉专用自测卷"},
+{q:"My grandparents _____ in this small village for over fifty years.", o:["live", "lived", "have lived", "will live"], a:2, e:"for over fifty years 为时间段，用延续性动词现在完成时 have lived", source:"59532855单元测试卷33页"},
+{q:"He ____ to the Great Wall twice, but he ____ there last year for the first time.", o:["has been; went", "went; has been", "has gone; went", "was; has been"], a:0, e:"twice 表经历用 has been to；last year 用一般过去时 went", source:"58552040八升九暑假预习"},
+{q:"Many young people leave their hometowns to ____ better jobs in big cities.", o:["look after", "look for", "look up", "look down"], a:1, e:"look for 意为\"寻找\"，到大城市寻找更好的工作", source:"59604507单元检测试题"},
+{q:"There is a ____ of clean water in some dry villages these days.", o:["shortage", "secret", "silence", "signal"], a:0, e:"shortage 意为\"短缺，缺少\"，a shortage of clean water 表示\"清洁水的短缺\"", source:"58910559单元测试卷"},
+{q:"____ the help of the government, rural people's life has become much better.", o:["Under", "With", "In", "On"], a:1, e:"with the help of 意为\"在……的帮助下\"，为固定搭配", source:"59604507单元检测试题"},
+{q:"The new highway has made it ________ for villagers to travel to the city.", o:["easy", "easily", "convenient", "difficult"], a:2, e:"make it + adj. + to do sth.，新公路使出行方便用 convenient", source:"58906474能力提升自测卷"},
+{q:"It ____ the villagers many years to turn the desert into farmland.", o:["spent", "took", "cost", "paid"], a:1, e:"句型 It takes/took sb. some time to do sth. 表示\"花某人多长时间做某事\"，主语为 It 时用 took", source:"59437678单元测试题"},
+{q:"My father ____ a lot, but he gave it up for his health.", o:["is used to smoke", "used to smoke", "was used to smoking", "used to smoking"], a:1, e:"used to do 表\"过去常常\"，gave up 提示过去习惯", source:"58552040八升九暑假预习"},
+{q:"There are many ____ in Sichuan, like Jiuzhaigou Valley.", o:["road signs", "transport policies", "weather reports", "tourist attractions"], a:3, e:"tourist attractions 意为\"旅游景点\"，九寨沟是著名景点", source:"59694231核心知识单选提升练"},
+{q:"She used to ___ late, but now she is used to ___ early.", o:["get up; get up", "getting up; get up", "get up; getting up", "getting up; getting up"], a:2, e:"used to do 表过去常常；be used to doing 表现在习惯", source:"58305676暑假自学课讲义"},
+{q:"Learning English well ____ Jim about five years, and at that time he ____ two hours reading English every day.", o:["took; took", "spent; spent", "took; spent", "spent; took"], a:2, e:"It took sb. time 句型用 took；spend time doing sth. 用 spent", source:"58837987吉林基础知识过关"},
+{q:"—Did you watch the basketball game last night? —No, I ____ asleep before it started.", o:["fell", "have fallen", "fall", "was falling"], a:0, e:"before it started 为过去语境，用一般过去时 fell", source:"58552040八升九暑假预习"},
+{q:"This river ____ very clean. Look at all the rubbish in it now!", o:["used to be", "is used to being", "is used to be", "uses to be"], a:0, e:"used to be 表\"过去曾经是\"，与现在脏乱对比", source:"58552040八升九暑假预习"},
+{q:"The population of this small town ____ large, and two-thirds of the population ____ farmers.", o:["is; are", "are; is", "is; is", "are; are"], a:0, e:"population 作主语强调整体用单数 is；two-thirds of the population 指具体成员用复数 are", source:"21cnjy26252002 Section A分层练习"},
+{q:"(2026北京房山期中) Many students think e-books are ____ than paper books because they are easy to carry around.", o:["convenient", "more convenient", "most convenient", "the most convenient"], a:1, e:"than 提示比较级，more convenient 更便利", source:"59350542同步练习"},
+{q:"This small village has developed rapidly ____ the help of the local government.", o:["thanks for", "because", "with", "instead of"], a:2, e:"with the help of 意为\"在……的帮助下\"", source:"59378738单元进阶试题"},
+{q:"The world is changing fast, and we should keep ____ new knowledge.", o:["learn", "learning", "to learn", "learned"], a:1, e:"keep doing sth. 表示\"持续做某事\"，keep learning 意为\"不断学习\"", source:"59437678单元测试题"},
+{q:"—The sci-fi book The Three-Body Problem is fascinating. How long may I ____ it? —____ two weeks. But remember to return it on time.", o:["keep; For", "borrow; For", "lend; In", "keep; In"], a:0, e:"how long 与延续性动词 keep 连用，回答时间段用 For two weeks", source:"58845885武汉专用自测卷"},
+{q:"Blue whales are the largest and heaviest animals in the world, but they ____ the smallest sea animals.", o:["bring about", "result in", "feed on", "build up"], a:2, e:"feed on 意为\"以……为食\"，蓝鲸以最小的海洋动物为食", source:"58885057安徽专用自测卷"},
+{q:"The road used to be narrow and dirty. Now, it is much ________ and cleaner.", o:["wide", "wider", "widest", "more wide"], a:1, e:"much 修饰比较级，and 连接并列成分 cleaner，用 wider", source:"58906474能力提升自测卷"},
+{q:"People ____ walk many miles to the town to shop in the past.", o:["used to", "are used to", "were used to", "use to"], a:0, e:"in the past 提示过去习惯，used to do sth.", source:"58989582 Section A课时练"},
+{q:"—Could you please tell me ____? —Sure. People used to get information from newspapers, but now they use the Internet.", o:["how people got information in the past", "how did people get information in the past", "what people got information in the past", "what did people get information in the past"], a:0, e:"宾语从句用陈述语序，how people got information in the past 正确", source:"59378738单元进阶试题"},
+{q:"There ____ lots of sandstorms here when I was a little kid.", o:["is", "are", "was", "were"], a:3, e:"when I was a little kid 为过去语境，sandstorms 复数用 were", source:"58989582 Section A课时练"},
+{q:"Many students ______ greatly from online learning in recent years.", o:["benefit", "have benefited", "benefited", "will benefit"], a:1, e:"in recent years 为现在完成时标志，主语复数用 have benefited", source:"58816533单元练习题"},
+{q:"Months ago, many people ____ Chengdu Air Show in Dong'an Lake.", o:["will attend", "attended", "have attended", "had been attended"], a:1, e:"Months ago 为过去时间状语，用一般过去时 attended", source:"59694231核心知识单选提升练"},
+{q:"—I heard that Mr. Smith's 8-year-old son won the first prize in the competition. —What great progress he has made! His hard work finally ____.", o:["put off", "took off", "cut off", "paid off"], a:3, e:"pay off 意为\"取得成功，得到回报\"，付出终于得到回报", source:"58845885武汉专用自测卷"},
+{q:"(2025云南昆明期中) ____ it is raining heavily, the traffic police are still working on the street.", o:["Although; but", "Although; /", "But; although", "But; /"], a:1, e:"although 引导让步状语从句，不与 but 连用", source:"59350542同步练习"},
+{q:"I ____ reading the book yet. I ____ it this weekend.", o:["haven't finished; will finish", "didn't finish; finish", "haven't finished; finished", "don't finish; will finish"], a:0, e:"yet 提示现在完成时否定；this weekend 用一般将来时 will finish", source:"59006056北京专用自测卷"},
+{q:"The ____ makes many rules to protect farmers' right.", o:["government", "graduate", "grammar", "grain"], a:0, e:"government 意为\"政府\"，政府制定规则保护农民权益", source:"58910559单元测试卷"},
+{q:"—Online shopping is so ____. I don't need to go out to buy things. —That's why more and more people like it.", o:["convenient", "comfortable", "meaningful", "available"], a:0, e:"convenient 意为\"方便的\"，网购无需出门购物，体现\"方便\"特点", source:"58885057安徽专用自测卷"},
+{q:"Many young workers ____ to big cities to make money years ago. Now they return home.", o:["go", "went", "have gone", "will go"], a:1, e:"years ago 为过去时间状语，用一般过去时 went", source:"58989582 Section A课时练"},
+{q:"We haven't seen each other ____ ages.", o:["since", "for", "in", "at"], a:1, e:"for + 时间段 ages 与现在完成时连用", source:"21cnjy26252002 Section A分层练习"},
+{q:"The new road is very ____ and clean, so it is convenient to drive.", o:["wide", "widely", "width", "widen"], a:0, e:"wide 为形容词作表语，与 clean 并列", source:"58643885暑期预习单元测试"},
+{q:"Lei Feng ____ for many years, but his spirit is still encouraging us.", o:["died", "has died", "was dead", "has been dead"], a:3, e:"for many years 需延续性动词，has been dead 表示\"已去世多年\"", source:"59694231核心知识单选提升练"},
+{q:"—Have you ____ been to the new railway station? —No, I haven't been there ____.", o:["ever; yet", "already; yet", "ever; already", "yet; ever"], a:0, e:"疑问句用 ever，否定句用 yet", source:"21cnjy26252002 Section A分层练习"},
+{q:"With the ____ of the local government, many sandy areas have turned into green land.", o:["support", "suggestion", "doubt", "pressure"], a:0, e:"with the support of 意为\"在……的支持下\"，符合\"在政府支持下沙地变绿\"的语境", source:"59437678单元测试题"},
+{q:"The development of robots may ____ some changes in our society.", o:["care about", "bring about", "take up", "bring down"], a:1, e:"bring about 意为\"带来，引起\"，bring about changes 表示\"带来变化\"", source:"59694231核心知识单选提升练"},
+{q:"Great changes ____ in our school since last year.", o:["have taken place", "took place", "happen", "happened"], a:0, e:"since last year 提示现在完成时，take place 无被动语态，主语复数用 have taken place", source:"59613858单元测试卷"},
+{q:"With the _____ of the Internet, we can get information more easily.", o:["progress", "development", "increase", "achievement"], a:1, e:"with the development of 意为\"随着……的发展\"", source:"59532855单元测试卷33页"},
+{q:"Many young people have come back to work in their hometown ____ the better life there.", o:["so", "but", "because", "because of"], a:3, e:"because of 后接名词短语 the better life，表原因", source:"59602111安徽中考规格测试卷"},
+{q:"—How long have you studied English? —____ six years ago.", o:["For", "Since", "In", "From"], a:1, e:"since 后接过去时间点 six years ago，主句用现在完成时", source:"59613858单元测试卷"},
+{q:"—I hear you moved to a bigger flat. —Yes. ____, one thing stays the same: the love in my family.", o:["However", "Because", "So", "Although"], a:0, e:"however 表转折，\"然而有一件事保持不变\"", source:"59602111安徽中考规格测试卷"},
+{q:"The door is not ____ enough for the elephant to pass.", o:["thick", "wide", "tidy", "fair"], a:1, e:"wide 意为\"宽的\"，门不够宽大象无法通过", source:"59694231核心知识单选提升练"},
+{q:"In the past, people _____ write letters to keep in touch, but now they use smartphones.", o:["used to", "were used to", "are used to", "use to"], a:0, e:"used to do 表\"过去常常\"，与 but now 对比", source:"59532855单元测试卷33页"},
+{q:"We should remember the people who ____ a lot to our hometown's development.", o:["contribute", "contributed", "have contributed", "will contribute"], a:2, e:"强调对现在的影响（家乡发展），用现在完成时 have contributed", source:"59604507单元检测试题"},
+{q:"—I haven't finished my homework ____. —Don't worry. You have enough time.", o:["already", "just", "yet", "ever"], a:2, e:"否定句中用 yet 表示\"还（没有）\"，haven't finished...yet 意为\"还没有完成\"", source:"59613858单元测试卷"},
+{q:"People's living conditions have improved ____ in recent years.", o:["greatly", "quietly", "slowly", "luckily"], a:0, e:"greatly 意为\"大大地\"，生活条件大幅改善", source:"59604507单元检测试题"},
+{q:"It ____ only two hours to get to the city now, but it ____ a whole day before.", o:["takes; took", "take; takes", "took; takes", "takes; take"], a:0, e:"now 用一般现在时 takes，before 用一般过去时 took", source:"58989582 Section A课时练"},
+{q:"—____ have you worked in this hospital? —For about eight years.", o:["How long", "How often", "How soon", "How far"], a:0, e:"回答 For + 时间段，询问持续多久用 How long", source:"59006056北京专用自测卷"},
+{q:"—As time goes on, her illness gets worse and worse. —She is always a strong-minded lady. Hope a ____ will happen.", o:["miracle", "success", "failure", "business"], a:0, e:"miracle 意为\"奇迹\"，病情加重仍希望奇迹发生", source:"58845885武汉专用自测卷"},
+{q:"He can finish all his work ____ ease.", o:["in", "on", "with", "by"], a:2, e:"with ease 为固定短语，意为\"轻松地，轻而易举地\"", source:"59613858单元测试卷"},
+{q:"He succeeded ____ a new kind of high-tech product after years of hard work.", o:["develop", "to develop", "in developing", "developing"], a:2, e:"succeed in doing sth. 意为\"成功做某事\"", source:"21cnjy26252002 Section A分层练习"},
+{q:"He ____ live in the countryside, but now he lives in the city.", o:["used to", "is used to", "was used to", "gets used to"], a:0, e:"used to do sth. 表示\"过去常常做某事（现在不再）\"，与 but now 形成今昔对比", source:"59613858单元测试卷"},
+{q:"The sports meeting ______ next Friday.", o:["will take place", "will happen", "is happened", "was taken place"], a:0, e:"next Friday 表将来，take place 无被动，用 will take place", source:"58816533单元练习题"},
+{q:"____ a lack of water, some plants can't grow well in dry areas.", o:["Thanks to", "Because of", "Instead of", "According to"], a:1, e:"because of 意为\"因为，由于\"，后接名词短语 a lack of water 表示缺水导致植物长不好", source:"59437678单元测试题"},
+{q:"The sports meeting will ____ next Friday afternoon.", o:["take place", "take after", "take off", "take in"], a:0, e:"take place 意为\"举行，发生\"，无被动语态", source:"58643885暑期预习单元测试"},
+{q:"I ____ some good friends since I came to this school.", o:["has made", "made", "make", "have made"], a:3, e:"since 引导时间状语从句，主句用现在完成时 have made", source:"58837987吉林基础知识过关"},
+{q:"She has made great ___ in English.", o:["progress", "progresses", "a progress", "two progresses"], a:0, e:"make great progress 为固定搭配，progress 为不可数名词", source:"58305676暑假自学课讲义"},
+{q:"My life has changed a lot, ____ one thing stays the same.", o:["and", "but", "or", "so"], a:1, e:"前后语义转折，\"生活改变很多，但有一件事不变\"，用 but", source:"58643885暑期预习单元测试"},
+{q:"Uncle Zhao ____ the army in 1990. He ____ in the army since then.", o:["joined; is", "has joined; has been", "has joined; is", "joined; has been"], a:3, e:"in 1990 用一般过去时 joined；since then 用现在完成时，延续性动词 has been", source:"59694231核心知识单选提升练"},
+{q:"___ the development of 5G, our life is changing rapidly.", o:["For", "With", "In", "At"], a:1, e:"with the development of 意为\"随着……的发展\"", source:"58305676暑假自学课讲义"},
+{q:"There ____ no hospitals in this town fifty years ago.", o:["is", "are", "was", "were"], a:3, e:"fifty years ago 为过去语境，hospitals 复数用 were", source:"59049596 Units1-3综合练习"},
+{q:"Look, your keys are in the ____. They are under some small branches.", o:["leaves", "grass", "flowers", "bushes"], a:3, e:"bushes 意为\"灌木丛\"，钥匙在小树枝下的灌木丛里", source:"58837987吉林基础知识过关"},
+{q:"—Have you ____ been to Beijing? —No, I have ____ been there.", o:["ever; never", "never; ever", "just; ever", "yet; just"], a:0, e:"疑问句用 ever 表\"曾经\"，否定答语用 never 表\"从未\"", source:"59613858单元测试卷"},
+{q:"People don't need to carry cash ____ because of e-payment.", o:["all the time", "at times", "in time", "on time"], a:0, e:"all the time 意为\"一直，总是\"，说明电子支付普及后人们不必一直携带现金", source:"59437678单元测试题"},
+{q:"We have received 50 applications ______.", o:["so far", "as far", "by far", "too far"], a:0, e:"so far 意为\"到目前为止\"，与现在完成时连用", source:"58816533单元练习题"},
+{q:"Great ____ have taken place in my hometown over the past ten years.", o:["change", "changes", "changed", "changing"], a:1, e:"have taken place 需复数主语，changes 为可数名词复数", source:"58643885暑期预习单元测试"},
+{q:"These changes ____ a lot of tourists to our village and ____ our lives much better.", o:["has brought; made", "have brought; made", "have brought; have made", "brought; have made"], a:2, e:"changes 复数用 have brought；and 连接并列结构也用现在完成时 have made", source:"59006056北京专用自测卷"},
+{q:"We should do something ____ the environment.", o:["protect", "to protect", "protecting", "protected"], a:1, e:"不定式 to protect 作目的状语，意为\"为了保护环境\"", source:"59049596 Units1-3综合练习"},
+{q:"My father ____ to work by bus every day.", o:["go", "goes", "went", "has gone"], a:1, e:"every day 提示一般现在时，主语三单用 goes", source:"59049596 Units1-3综合练习"},
+{q:"Many old people keep in touch ____ their relatives by using mobile phones now.", o:["to", "with", "for", "of"], a:1, e:"keep in touch with 意为\"与……保持联系\"", source:"21cnjy26252002 Section A分层练习"},
+{q:"So far, the government ____ more than 2,000 new houses for the villagers.", o:["builds", "has built", "built", "is building"], a:1, e:"so far 为现在完成时标志，主语单数用 has built", source:"59006056北京专用自测卷"},
+{q:"Giant pandas become fewer and fewer as their homes have become ____.", o:["highway", "greenhouse", "railroad", "farmland"], a:3, e:"farmland 意为\"农田\"，栖息地变成农田导致大熊猫减少", source:"59694231核心知识单选提升练"},
+{q:"—I heard you moved to a new flat. —Yes, but I'm still not ____ living there.", o:["used to", "use to", "used for", "use for"], a:0, e:"be used to doing 表\"习惯于\"，否定形式 not used to", source:"58552040八升九暑假预习"},
+{q:"Many young people return to their villages ____ they can develop farming business.", o:["so that", "in order to", "such that", "because of"], a:0, e:"so that 引导目的状语从句，意为\"以便\"，后接完整句子", source:"58910559单元测试卷"},
+{q:"Great changes ___ in our city in the past ten years.", o:["take place", "took place", "have taken place", "are taking"], a:2, e:"in the past ten years 为现在完成时标志，changes 复数用 have taken place", source:"58305676暑假自学课讲义"},
+{q:"The villagers' lives ____ greatly since the new road ____.", o:["have improved; was built", "improved; has been built", "have improved; has been built", "improved; was built"], a:0, e:"since 主句用现在完成时 have improved，从句用一般过去时被动 was built", source:"59006056北京专用自测卷"},
+{q:"—____ do you think plays the most important role in our country's development? —I think education does. It changes people's lives.", o:["How", "What", "Which", "Who"], a:1, e:"what 作主语询问\"什么\"，教育在发展中起重要作用", source:"59378738单元进阶试题"},
+{q:"The railway shows ____ different countries can work together.", o:["how", "what", "why", "where"], a:0, e:"how 引导宾语从句，展示不同国家如何合作", source:"58643885暑期预习单元测试"}
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('91_kp1_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('91_kp1_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('91_kp1_used_indexes');
+}
+
 function shuffle(arr){
   const a = arr.slice();
   for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
   return a;
 }
-const LETTERS=['A','B','C','D','E'];
 
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
 $('btnStart').onclick = startQuiz;
 $('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
 $('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
@@ -380,9 +537,16 @@ document.querySelectorAll('.seg button').forEach(b=>{
   };
 });
 
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
 function startQuiz(){
   state.mode='quiz';
-  state.quiz = shuffle(BANK).slice(0,10);
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
   state.qi=0; state.score=0; state.userAns=[];
   showView('view-quiz');
   renderQuestion();
@@ -393,7 +557,9 @@ function renderQuestion(){
   $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
   $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
   $('qScore').textContent = state.score + ' 分';
-  $('qStem').textContent = q.q;
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
   const wrap = $('qOptions'); wrap.innerHTML='';
   q.o.forEach((op,i)=>{
     const el=document.createElement('div');
@@ -407,10 +573,11 @@ function renderQuestion(){
   nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
   nxt.onclick = nextQuestion;
 }
+
 function answer(i, el){
   const q = state.quiz[state.qi];
   const correct = (i === q.a);
-  if(correct) state.score++;
+  if(correct) state.score += 5;
   state.userAns.push({q, pick:i, ok:correct});
   const opts = $('qOptions').children;
   for(let k=0;k<opts.length;k++){
@@ -421,11 +588,12 @@ function answer(i, el){
   const fb=$('qFeedback');
   fb.className = 'feedback show ' + (correct?'ok':'bad');
   fb.innerHTML = correct
-    ? `<div class="verdict">回答正确 · +1 分</div><div class="exp">${q.e}</div>`
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
     : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
   $('qNext').classList.add('show');
   $('qScore').textContent = state.score + ' 分';
 }
+
 function nextQuestion(){
   state.qi++;
   if(state.qi < state.quiz.length){ renderQuestion(); }
@@ -434,7 +602,7 @@ function nextQuestion(){
 
 function renderResult(){
   const n = state.quiz.length;
-  const pct = Math.round(state.score/n*100);
+  const pct = Math.round(state.score/100*100);
   $('rScore').textContent = state.score;
   $('ring').style.setProperty('--p', pct);
   let t,s;
@@ -442,14 +610,14 @@ function renderResult(){
   else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
   else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
   else {t='需要加油哦';s='Unit 1 考点还不太熟，建议先浏览全量题库再测一次。';}
-  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score} 题，正确率 ${pct}%。${s}`;
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
   const list=$('rList'); list.innerHTML='';
   state.userAns.forEach((r,idx)=>{
     const div=document.createElement('div'); div.className='r-item';
     const mark = r.ok?'✓':'✕';
     div.innerHTML = `
       <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
-        <div><div class="r-stem">${idx+1}. ${r.q.q}</div>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
         <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
       </div>
       <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
@@ -471,16 +639,16 @@ function renderBank(){
     const div=document.createElement('div'); div.className='bank-item';
     div.innerHTML = `
       <div class="b-head"><span class="b-no">${it.no}</span>
-        <div><div class="b-stem">${it.q.q}</div>
-        <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
-        <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
-        <div class="b-exp"><b>解析：</b>${it.q.e}</div>
-      </div></div>`;
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
     div.onclick = ()=>div.classList.toggle('open');
     list.appendChild(div);
   });
 }
-
 $('totalCount').textContent = BANK.length + ' 道题';
 </script>
 </body>
