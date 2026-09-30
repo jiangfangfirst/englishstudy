@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>
+ (function(){
+   var a = localStorage.getItem('dd_auth');
+   if(!a){ location.href = '../../login.html'; }
+ })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%235B7CFA'/%3E%3Ctext x='32' y='42' font-size='30' fill='%23fff' text-anchor='middle' font-family='Arial'%3E%E9%A2%98%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1f2733; --muted:#6b7688;
+    --brand:#5b7cfa; --brand-2:#7c9bfa; --ok:#22a06b; --bad:#e5484d;
+    --line:#e3e8f0; --soft:#eef2fb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:28px 18px 60px;}
+  header.top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;}
+  .brand h1{font-size:20px; font-weight:800;}
+  .brand p{font-size:12px; color:var(--muted);}
+  .btn-back{border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px;
+    padding:8px 14px; font-size:13px; cursor:pointer; transition:.15s;}
+  .btn-back:hover{background:var(--soft);}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .hero{text-align:center; padding:46px 20px 30px;}
+  .hero .tag{display:inline-block; background:var(--soft); color:var(--brand); font-size:12px;
+    padding:4px 12px; border-radius:20px; margin-bottom:16px; font-weight:600;}
+  .hero h2{font-size:28px; font-weight:800; margin-bottom:10px;}
+  .hero p{color:var(--muted); font-size:14px; max-width:560px; margin:0 auto;}
+  .hero-meta{margin:18px auto 0; display:inline-flex; gap:8px; font-size:12px; color:var(--muted); flex-wrap:wrap; justify-content:center;}
+  .hero-meta span{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px;}
+  .actions{display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; border-radius:12px; cursor:pointer;
+    font-size:15px; font-weight:700; padding:14px 26px; transition:.16s; box-shadow:0 4px 14px rgba(91,124,250,.18);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn svg{width:18px;height:18px;}
+  .quiz-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .quiz-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .quiz-head .num{font-size:12px; color:var(--muted); font-weight:600;}
+  .progress{flex:1; height:8px; background:var(--soft); border-radius:8px; overflow:hidden;}
+  .progress .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius:8px; transition:width .3s;}
+  .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
+  .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
+    border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
+  .q-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 16px 4px;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
+  .option .key{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:var(--soft);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;transition:.15s;}
+  .option .txt{font-size:15px; overflow-wrap:break-word; word-break:break-word;}
+  .option:hover{border-color:var(--brand-2); background:#fafcff;}
+  .option.correct{border-color:var(--ok); background:#effaf4;}
+  .option.correct .key{background:var(--ok); color:#fff;}
+  .option.wrong{border-color:var(--bad); background:#fdf0f0;}
+  .option.wrong .key{background:var(--bad); color:#fff;}
+  .option.disabled{pointer-events:none;}
+  .feedback{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:14px; display:none; overflow-wrap:break-word; word-break:break-word;}
+  .feedback.show{display:block; animation:fade .2s ease;}
+  .feedback.ok{background:#effaf4; border:1px solid #bfe8d4;}
+  .feedback.bad{background:#fdf0f0; border:1px solid #f3c2c3;}
+  .feedback .verdict{font-weight:800; margin-bottom:6px;}
+  .feedback.ok .verdict{color:var(--ok);} .feedback.bad .verdict{color:var(--bad);}
+  .feedback .exp{color:#37414f; font-size:14px; line-height:1.7;}
+  .feedback .exp b{color:var(--brand);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px;}
+  .next-btn{display:none;}
+  .next-btn.show{display:inline-flex; margin-left:auto;}
+  .result-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 26px; text-align:center; box-shadow:0 6px 24px rgba(31,39,51,.05);}
+  .score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;
+    background:conic-gradient(var(--brand) calc(var(--p)*1%), var(--soft) 0);}
+  .score-ring .inner{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-ring .inner .big{font-size:30px;font-weight:800;color:var(--brand);}
+  .score-ring .inner .small{font-size:12px;color:var(--muted);}
+  .result-card h3{font-size:22px; font-weight:800; margin-bottom:4px;}
+  .result-card .verdict-line{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .result-list{margin-top:18px; text-align:left;}
+  .result-list h4{font-size:15px; font-weight:800; margin-bottom:10px;}
+  .r-item{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px;}
+  .r-item .r-head{display:flex; gap:8px; align-items:flex-start;}
+  .r-item .r-mark{flex:0 0 22px; font-size:13px; font-weight:800; line-height:22px;}
+  .r-item .r-mark.ok{color:var(--ok);} .r-item .r-mark.bad{color:var(--bad);}
+  .r-item .r-stem{font-size:14px; font-weight:600; overflow-wrap:break-word; word-break:break-word; line-height:1.7;}
+  .r-item .r-ans{font-size:13px; color:var(--muted); margin-top:4px;}
+  .r-item .r-ans .u{color:var(--bad);} .r-item .r-ans .c{color:var(--ok);}
+  .r-item .r-exp{margin-top:8px; font-size:13px; background:var(--soft); padding:8px 10px; border-radius:8px; line-height:1.7; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .result-actions{display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;}
+  .bank-toolbar{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+  .bank-toolbar .count{font-size:13px; color:var(--muted);}
+  .search{flex:1; min-width:200px; position:relative;}
+  .search input{width:100%; padding:11px 14px 11px 38px; border:1px solid var(--line); border-radius:10px; font-size:14px; outline:none;}
+  .search input:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(91,124,250,.12);}
+  .search svg{position:absolute; left:11px; top:12px; width:17px; height:17px; color:var(--muted);}
+  .seg{display:inline-flex; background:var(--soft); border-radius:10px; padding:3px;}
+  .seg button{border:none; background:transparent; padding:7px 14px; border-radius:8px; font-size:13px; cursor:pointer; color:var(--muted); font-weight:600;}
+  .seg button.on{background:#fff; color:var(--brand); box-shadow:0 1px 4px rgba(31,39,51,.08);}
+  .bank-list{display:flex; flex-direction:column; gap:10px;}
+  .bank-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; transition:.15s;}
+  .bank-item:hover{border-color:var(--brand-2);}
+  .bank-item .b-head{display:flex; gap:10px; align-items:flex-start;}
+  .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; height:30px;}
+  .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-source{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 8px;
+  }
+  .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
+  .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item .b-options .op b{color:var(--ink);}
+  .bank-item .b-foot{margin-top:9px; display:flex; gap:10px; align-items:center;}
+  .bank-item .b-ans{font-size:13px; color:var(--ok); font-weight:700;}
+  .bank-item .b-exp{display:none; margin-top:10px; font-size:13px; background:var(--soft); padding:10px 12px; border-radius:8px; line-height:1.8; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
+  .bank-item.open .b-exp{display:block; animation:fade .2s ease;}
+  .bank-item .b-exp b{color:var(--brand);}
+  .empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px;}
+  .note{margin-top:26px; font-size:12px; color:var(--muted); background:#fff; border:1px dashed var(--line);
+    border-radius:10px; padding:12px 14px; line-height:1.8;}
+  footer{margin-top:30px; text-align:center; font-size:12px; color:var(--muted);}
+  @media(max-width:600px){
+    .wrap{padding:18px 12px 48px;}
+    .hero{padding:32px 8px 22px;}
+    .hero h2{font-size:23px;}
+    .q-text{font-size:15px;}
+    .actions .btn{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">题</div>
+      <div>
+        <h1>七年级KP1</h1>
+        <p>复合不定代词 · 一般过去时 · 词汇短语辨析 · 情景交际</p>
+      </div>
+    </div>
+    <button class="btn-back" id="btnHome" style="display:none">返回</button>
+  </header>
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <span class="tag">七年级上册Unit 1 · 在线检测</span>
+      <h2>单元检测核心库KP1</h2>
+      <p>涵盖 be 动词、人称代词、形容词性物主代词、姓名国籍班级表达、情景交际等高频考点。系统从全量题库（230 道）中<b>随机抽取 20 道</b>，逐题作答，答完自动统计得分并给出解析。</p>
+      <div class="hero-meta">
+        <span id="totalCount">-- 道题</span>
+        <span>随机 20 题</span>
+        <span>满分 100 分</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z" /></svg>
+          开始随机答题
+        </button>
+        <button class="btn btn-ghost" id="btnBank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M19 17H6a2 2 0 0 0-2 2" /><path d="M8 7h6" /></svg>
+          浏览全量题库
+        </button>
+      </div>
+    </div>
+    <div class="note">答题规则：每题先作答，选对得 5 分，满分 100 分；作答后立即显示答案与解析，点击「下一题」翻页；完成全部 20 题后自动显示得分与逐题回顾。</div>
+  </section>
+  <section class="view" id="view-quiz">
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span class="num" id="qNum">第 1 / 20 题</span>
+        <div class="progress"><div class="bar" id="qBar"></div></div>
+        <span class="score-chip" id="qScore">0 分</span>
+      </div>
+      <div class="q-text"><span id="qStem"></span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="feedback" id="qFeedback"></div>
+      <div class="quiz-foot">
+        <button class="btn btn-primary next-btn" id="qNext">下一题
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-result">
+    <div class="result-card">
+      <div class="score-ring" id="ring"><div class="inner"><span class="big" id="rScore">0</span><span class="small">/ 100 分</span></div></div>
+      <h3 id="rTitle"></h3>
+      <div class="verdict-line" id="rSub"></div>
+      <div class="result-list">
+        <h4>逐题回顾与解析</h4>
+        <div id="rList"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btnRetry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+          再抽 20 题重测
+        </button>
+        <button class="btn btn-ghost" id="btnHome2">返回</button>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-bank">
+    <div class="bank-toolbar">
+      <div class="seg">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="no">未答对</button>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input id="bankSearch" placeholder="搜索题干 / 考点关键词…">
+      </div>
+      <span class="count" id="bankCount"></span>
+    </div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="empty" id="bankEmpty" style="display:none">没有匹配的题目</div>
+  </section>
+  <footer>多多好学单元题库 · 点击题目可展开解析</footer>
+</div>
+<script>
+// 工具：对话题干自动换行
+function formatDialog(str){
+  return str.replace(/ —/g, '<br>—');
+}
+
+const BANK = [
+{q:"—Is this your ruler? —Yes, ____ is.", o:["this", "that", "it", "they"], a:2, e:"指代 this 用 it。", source:"Unit1组卷网单元练习"},
+{q:"—Is this ____ computer? —No, it's Lily's. Mine is on the table.", o:["your", "his", "her", "its"], a:0, e:"修饰 computer 用形容词性物主代词 your。", source:"book118七上U1单元检测卷"},
+{q:"I ____ a student. My name ____ Li Ming.", o:["is; is", "am; is", "are; am", "am; are"], a:1, e:"I 用 am；name 单数用 is。", source:"Unit1 be动词练习(学科网)"},
+{q:"____ name is Mary.", o:["She", "Her", "He", "His"], a:1, e:"修饰 name 用形容词性物主代词 Her。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"Don't worry. Tom and I are ____ safe here.", o:["both", "all", "either", "neither"], a:0, e:"Tom and I 是两人，用 both 表示\"两者都\"。", source:"book118新人教2024七上U1检测卷"},
+{q:"—Hello! What's ____ name? —My name is Tom.", o:["your", "you", "my"], a:0, e:"修饰 name 用形容词性物主代词 your。", source:"Unit1单元测试(学科网2026)"},
+{q:"—Who is that? —____ my cousin.", o:["That's", "This are", "Those is", "These are"], a:0, e:"That's my cousin。", source:"Unit1组卷网单元练习"},
+{q:"—____ he your brother? —Yes, he is.", o:["Are", "Is", "Am", "Be"], a:1, e:"he 单数用 Is。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"My new classmate's name is Mike Miller. Mike is his ____ name.", o:["last", "first", "full", "family"], a:1, e:"Mike 是名（first name）。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"Let's ____ new classmates by introducing our favourite food.", o:["make friends", "get to know", "play the guitar", "full of"], a:1, e:"get to know 表示\"了解、认识\"。", source:"Unit1能力提升测试卷(原创力文档)"},
+{q:"My mother is a doctor. ____ works in a hospital.", o:["He", "His", "She", "Her"], a:2, e:"指代 my mother（女性）作主语用 She。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"Miss Black is a kind teacher. We all like ____.", o:["she", "her", "he", "him"], a:1, e:"like 后用宾格；Miss Black 女性用 her。", source:"Unit1单项选择练习(豆丁)"},
+{q:"I have ____ rulers. Two are yellow and three are black.", o:["two", "three", "five", "six"], a:2, e:"2+3=5，共 five 把尺子。", source:"Unit1单项选择练习(豆丁)"},
+{q:"—____ your hobby? —I like singing.", o:["What", "What's", "How", "How's"], a:1, e:"What's your hobby? 询问爱好。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"—____ is he? —He is my new classmate.", o:["What", "Who", "Where"], a:1, e:"询问人物身份用 Who。", source:"Unit1单元测试(学科网2026)"},
+{q:"These students ____ from my class. They are my friends.", o:["am", "is", "are", "/"], a:2, e:"students 复数用 are。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"Mary's birthday is coming. We've decided to make a cake for ____.", o:["him", "her", "you", "them"], a:1, e:"指代 Mary 用宾格 her。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"She ____ a student.", o:["am", "is", "are", "be"], a:1, e:"She 单数用 is。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"—Hi, my name is Tim. It's my first time to be here. —____.", o:["It's all right", "Nice to meet you", "Very well, thank you", "That would be very nice"], a:1, e:"初次见面打招呼用 Nice to meet you。", source:"Unit1单项选择练习(豆丁)"},
+{q:"My English teacher is Mary Smith and we call her ____.", o:["Ms Mary", "Ms Smith", "Mr Smith", "Smith"], a:1, e:"称呼语 Ms/Mr 后接姓氏：Ms Smith。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"Mr. Liu teaches ____ English. We like ____ class very much.", o:["me; he", "me; her", "us; his", "us; her"], a:2, e:"teach us English；his class。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"—Nice to meet you, Tom. —____.", o:["Thank you", "Goodbye", "Nice to meet you too", "You're welcome"], a:2, e:"Nice to meet you 的应答是 Nice to meet you too。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"以下单词中划线部分发音不同的是", o:["hat", "Kate", "game"], a:0, e:"hat 中 a 发 /æ/，Kate 和 game 中 a 发 /eɪ/。", source:"book118新人教2024七上U1检测卷"},
+{q:"____ are my good friends.", o:["That", "This", "Those", "It"], a:2, e:"复数 friends 用 Those。", source:"Unit1组卷网单元练习"},
+{q:"—How ____ you? —I ____ fine, thank you.", o:["is; am", "are; am", "am; are", "are; is"], a:1, e:"How are you? 固定问候；回答 I am fine。", source:"Unit1 be动词练习(学科网)"},
+{q:"—____ —Her name is Candy.", o:["What's her name?", "Are you Linda?", "Who is he?", "May I know your name?"], a:0, e:"答语 Her name is Candy 对应提问 What's her name?", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"—____ your father a teacher? —Yes, he ____.", o:["Is; is", "Are; is", "Am; are", "Is; are"], a:0, e:"your father 单数用 Is；回答 he is。", source:"Unit1 be动词练习(学科网)"},
+{q:"The girl is Helen Green. Green is her ____.", o:["first name", "last name", "full name", "middle name"], a:1, e:"Green 是姓 last name。", source:"Unit1单元素养检测(21cnjy)"},
+{q:"—Is that ____ jacket? —No, it's not ____. It's Tom's.", o:["your, my", "you, mine", "yours, mine", "your, mine"], a:3, e:"修饰 jacket 用 your；表语用 mine。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"My ____ is Grade 7, Class 2. We have a kind class teacher.", o:["name", "grade", "country", "band"], a:1, e:"Grade 7, Class 2 是年级班级 grade。", source:"Unit1能力提升测试卷(原创力文档)"},
+{q:"Tony is in ____.", o:["Class 2, Grade 7", "class 1, Grade 7", "class 1, grade 7"], a:0, e:"班级表达 Class+数字, Grade+数字，首字母大写。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"—____ your name Mark? —____.", o:["Is; Yes, I am", "Is; Yes, it is", "Are; Yes, I am", "Are; Yes, it is"], a:1, e:"your name 单数用 Is；回答 Yes, it is。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"Frank would like ____ this weekend.", o:["skating", "skate", "skates", "to skate"], a:3, e:"would like to do sth. 想要做某事。", source:"book118七上U1单元检测卷"},
+{q:"—____ the book interesting? —Yes, it ____.", o:["Is; are", "Are; are", "Is; is", "Are; is"], a:2, e:"the book 单数用 Is；回答 it is。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"—Are you a student? —Yes, ____.", o:["I'm", "I am", "you are", "we are"], a:1, e:"肯定简答用 I am（不用缩写 I'm）。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"I like Zheng Qinwen very much. Her favourite ____ is tennis.", o:["food", "place", "sport", "colour"], a:2, e:"tennis 网球是运动 sport。", source:"Unit1单元素养检测(21cnjy)"},
+{q:"This is Wang Fang. ____ is twelve.", o:["His", "She", "Her", "Its"], a:1, e:"指代 Wang Fang（女性）作主语用 She。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"—Is he Jack? —____ He is Bob.", o:["Yes, he is.", "Yes, she is.", "No, he isn't.", "No, she isn't."], a:2, e:"后句 He is Bob 说明是否定回答：No, he isn't.", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"This is my bag. ____ is very good.", o:["It", "He", "She", "They"], a:0, e:"指代 my bag（单数）用 It。", source:"book118期末语法综合练100题"},
+{q:"Please sit between Lucy and ____.", o:["she", "I", "he", "me"], a:3, e:"between...and 后接宾格 me。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"—Hello! I'm John. —Hi! I'm Henry White. Henry is my ____ name.", o:["last", "first", "middle", "family"], a:1, e:"Henry White 中 Henry 是名（first name）。", source:"book118七上U1单元检测卷"},
+{q:"—What's this? —____ a rabbit.", o:["It's", "This", "Its"], a:0, e:"指代 this 用 It，加 be 动词为 It's。", source:"book118期末语法综合练100题"},
+{q:"In our class, ____ Tom and Jim like playing tennis after school.", o:["both", "all", "every", "each"], a:0, e:"Tom and Jim 两人用 both。", source:"Unit1能力提升测试卷(原创力文档)"},
+{q:"—What class ____ your sister in? —She ____ in Class 5, Grade 7.", o:["is; is", "are; is", "is; are"], a:0, e:"your sister 单数用 is。", source:"Unit1分层检测(学科网)"},
+{q:"—What's your ____? —It's Smith. You can call me John Smith.", o:["first name", "last name", "grade", "hobby"], a:1, e:"Smith 是姓 last name。", source:"Unit1能力提升测试卷(原创力文档)"},
+{q:"—How ____ you? —I ____ fine, thanks.", o:["am; are", "am; am", "are; am", "are; are"], a:2, e:"How are you? 固定问候；回答 I am fine。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"I have two ____.", o:["box", "boxs", "boxes", "boxies"], a:2, e:"box 复数加 -es 为 boxes。", source:"Unit1语法知识专项训练(学科网)"},
+{q:"—____ you want to be my friend? —Yes, I do.", o:["Do", "Does", "Are", "Is"], a:0, e:"主语 you 的助动词用 Do。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"—Hello! How are you? —____.", o:["Who are you?", "I am fine, thank you. And you?", "How do you do?", "Nice to meet you"], a:1, e:"How are you 用 I am fine 回答。", source:"Unit1单项选择练习(豆丁)"},
+{q:"This photo of my family is very ____. I love it very much.", o:["boring", "tidy", "nice", "difficult"], a:2, e:"nice 表示\"好的、好看的\"。", source:"Unit1基础单元检测卷(学科网)"},
+{q:"—Is this ____ ruler? —Yes, it is. (her)", o:["her", "she", "hers", "he"], a:0, e:"修饰 ruler 用 her。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"Mum, this is my best friend Amy. ____ are in the same class.", o:["You", "Ours", "We", "They"], a:2, e:"指代\"我和 Amy\"用 We。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"—Who's that girl ____ a red skirt? —She's my sister, Lily.", o:["on", "with", "in", "at"], a:2, e:"介词 in 表示穿着（衣物）：in a red skirt。", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"—Is ____ your pen? —No, ____ isn't. It's Lucy's.", o:["this; this", "that; it", "it; that"], a:1, e:"指代 this 用 it。", source:"Unit1分层检测(学科网)"},
+{q:"—Nice to meet you, Ms. Zhang! —____.", o:["Hello", "Goodbye", "Fine, thanks", "Nice to meet you, too"], a:3, e:"情景交际——初次见面问候语 Nice to meet you 的固定应答是 Nice to meet you, too.", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"—Is that your book? —No, ____ isn't.", o:["it", "this", "that", "he"], a:0, e:"指代 your book 用 it。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"—Where are Lily and Lucy from? —____ are from the USA.", o:["Ours", "We", "Theirs", "They"], a:3, e:"指代 Lily and Lucy（复数）用 They。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"—What ____ you like to do? —I like reading books.", o:["do", "are", "is"], a:0, e:"主语 you 的助动词用 do。", source:"Unit1单元测试(学科网2026)"},
+{q:"This isn't my dictionary. ____ is over there, on the desk.", o:["His", "Mine", "Hers", "Yours"], a:1, e:"作主语用名词性物主代词 Mine。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"We're in ____ same class.", o:["a", "an", "the"], a:2, e:"the same 固定搭配。", source:"Unit1分层检测(学科网)"},
+{q:"—Where ____ pandas from? —____ from China.", o:["are; It's", "is; It's", "are; They're", "is; They're"], a:2, e:"pandas 是复数用 are；答语指代复数用 They're。", source:"book118七上U1单元检测卷"},
+{q:"—____ is your favourite food? —Dumplings.", o:["Which", "What", "Whose", "When"], a:1, e:"询问事物用 What。", source:"Unit1语法知识专项训练(学科网)"},
+{q:"Li Mei is my friend. ____ is 11 and ____ English name is Alice.", o:["Her; she", "She; her", "Her; her", "She; she"], a:1, e:"作主语用主格 She；修饰 name 用 her。", source:"book118期末语法综合练100题"},
+{q:"Jane and I go to the same school. ____ are classmates.", o:["We", "You", "They", "She"], a:0, e:"指代 Jane and I 用 We。", source:"book118期末语法综合练100题"},
+{q:"These books ____ very interesting. I'll share them with my friends.", o:["is", "are", "was", "were"], a:1, e:"主语 These books 是复数，一般现在时用 are。", source:"Unit1重点语法归纳专项练(学科网)"},
+{q:"—Hi, Eric! ____? —I'm fine, thanks.", o:["How old are you", "How are you", "What are you", "Where are you"], a:1, e:"答语 I'm fine, thanks. 对应问候语 How are you?", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"选出划线部分读音与其他三个不同的一项：go, no, hello, not", o:["go", "no", "hello", "not"], a:3, e:"not 发 /ɒ/，其余发 /əʊ/。", source:"Unit1基础单元检测卷(学科网)"},
+{q:"This is my friend. ____ name is Lisa.", o:["He", "Her", "His"], a:1, e:"Lisa 是女孩，修饰 name 用 Her。", source:"Unit1单元测试(学科网2026)"},
+{q:"—Is that boy Tom? —No, ____ isn't.", o:["he", "she", "it", "that"], a:0, e:"指代 that boy 用 he。", source:"Unit1组卷网单元练习"},
+{q:"—Who is the boy in the picture? —He is my ____, my mother's brother's son.", o:["cousin", "brother", "uncle", "father"], a:0, e:"母亲兄弟的儿子是堂（表）兄弟姐妹 cousin。", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"—____ is that girl? —She's my sister.", o:["What", "Where", "Who", "How"], a:2, e:"询问人物用 Who。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"—Morning! ____ you Alice? —No. That girl ____ Alice.", o:["Are, am", "Is, am", "Are, is", "Is, is"], a:2, e:"主语 you 用 are；That girl 单数用 is。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"选出与字母\"i\"有相同音素的单词", o:["eat", "his", "evening", "hi"], a:3, e:"字母 i 的读音是 /aɪ/，hi 中 i 发 /aɪ/，其余发 /iː/ 或 /ɪ/。", source:"book118新人教2024七上U1检测卷"},
+{q:"My parents ____ from Shanghai, and I ____ from Beijing.", o:["is; am", "are; am", "are; is"], a:1, e:"My parents 复数用 are；I 用 am。", source:"Unit1分层检测(学科网)"},
+{q:"Bob and Mike ____ good friends.", o:["am", "is", "are"], a:2, e:"Bob and Mike 复数用 are。", source:"Unit1单元测试(学科网2026)"},
+{q:"I ____ a boy. My friend, Jim, ____ a boy too.", o:["am; is", "is; am", "are; is", "am; are"], a:0, e:"I 用 am；Jim 单数用 is。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"There ____ a lot of interesting books in the reading club.", o:["is", "are", "has", "have"], a:1, e:"there be 句型中 books 复数用 are。", source:"Unit1单项选择练习(豆丁)"},
+{q:"Rose is ____ English girl. She is ____ China now.", o:["a; in", "an; on", "the; on", "an; in"], a:3, e:"English 元音音素开头用 an；in China。", source:"Unit1单项选择练习(豆丁)"},
+{q:"My sister is good at singing. ____ can even sing some French songs.", o:["I", "He", "You", "She"], a:3, e:"指代 my sister（女性）作主语用 She。", source:"Unit1重点语法归纳专项练(学科网)"},
+{q:"—Hello, I'm new here. —Hi, ____. If you need help, you can ask me.", o:["That's OK.", "Welcome", "You're welcome", "Fine"], a:1, e:"对方说自己是新来的，回答 Welcome 表示欢迎。", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"Lily and Lucy are ____. They look the same and are in the same class.", o:["twins", "classmates", "bands", "parrots"], a:0, e:"双胞胎长得一样，twins。", source:"Unit1能力提升测试卷(原创力文档)"},
+{q:"Which one is a full name?", o:["Peter", "Ella Miller", "Meimei"], a:1, e:"full name 是全名，Ella Miller 名+姓是完整姓名。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"The ruler and the pen ____ yellow.", o:["am", "is", "are", "be"], a:2, e:"主语 The ruler and the pen 是复数，用 are。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"—Hello! I'm Simon. —____.", o:["This is Amy", "Hello! I'm Amy", "Nice to meet you", "Fine, thank you"], a:1, e:"自我介绍后用 Hello! I'm... 回应。", source:"Unit1单项选择练习(豆丁)"},
+{q:"This is my new classmate. ____ name is Tom, and ____ is a good boy.", o:["His; he", "He; his", "Her; she", "She; her"], a:0, e:"修饰 name 用 His；主语用 he。", source:"Unit1基础单元检测卷(学科网)"},
+{q:"—Where ____ you from? —I'm from China.", o:["is", "are", "am"], a:1, e:"主语 you 用 are。", source:"Unit1单元测试(学科网2026)"},
+{q:"Lily and I ____ good friends.", o:["am", "is", "are", "be"], a:2, e:"Lily and I 复数用 are。", source:"Unit1组卷网单元练习"},
+{q:"—What are these? —____ are apple trees.", o:["These", "They", "This"], a:1, e:"疑问句用 these，答语用 they 指代。", source:"book118期末语法综合练100题"},
+{q:"Her phone number ____ 568-9012.", o:["am", "is", "are", "be"], a:1, e:"phone number 单数用 is。", source:"Unit1组卷网单元练习"},
+{q:"Two ____ are in the classroom.", o:["girl", "girls", "a girl", "girl's"], a:1, e:"Two 后接名词复数 girls。", source:"Unit1组卷网单元练习"},
+{q:"This is my schoolbag. ____ are over there.", o:["Your", "Yours", "You", "Mine"], a:1, e:"作主语用名词性物主代词 Yours。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"—____ is Mr Smith from? —He's from the US.", o:["What", "Where", "Who", "How"], a:1, e:"答语 the US 是地点，用 Where 提问。", source:"Unit1单元素养检测(21cnjy)"},
+{q:"—Hello, are you Mr. Green? —Yes. That's ____.", o:["Him", "me", "you", "us"], a:1, e:"That's me. 介词/系动词后用宾格 me。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"—Hi, I'm Tom Brown. Tom is my given name. Can you tell me your full name? —Sure. ____.", o:["Li Ming", "My name's Li Ming, Li is my family name.", "I'm fine, thank you.", "It's 358-4629"], a:1, e:"对方询问全名，应给出完整姓名并说明姓氏。", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"—Nice to meet you! —____.", o:["Good morning!", "Nice to meet you, too!", "Thank you.", "I'm fine."], a:1, e:"回应 Nice to meet you 用 Nice to meet you, too。", source:"Unit1单项选择练习(豆丁)"},
+{q:"—____ is the boy in a blue jacket? —He's my brother, Jack.", o:["What", "Where", "Who", "How"], a:2, e:"答语 He's my brother 说明人物身份，用 Who 提问。", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"—How ____ your mother? —She's fine.", o:["am", "is", "are"], a:1, e:"your mother 是第三人称单数，用 is。", source:"book118新人教2024七上U1检测卷"},
+{q:"My parents ____ doctors. They ____ very busy.", o:["is; is", "are; are", "am; are", "are; is"], a:1, e:"My parents 复数用 are；They 复数用 are。", source:"Unit1 be动词练习(学科网)"},
+{q:"—What's ____ name? —____ name is Amy.", o:["you; My", "your; My", "your; I", "you; I"], a:1, e:"修饰 name 均用形容词性物主代词。", source:"Unit1单项选择练习(豆丁)"},
+{q:"Her mother ____ a teacher.", o:["am", "is", "are", "be"], a:1, e:"Her mother 单数用 is。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"—What's your ____ name? —Yingsha. My full name is Sun Yingsha.", o:["Chinese", "English", "first", "last"], a:2, e:"Yingsha 是名 first name。", source:"Unit1单项选择练习(豆丁)"},
+{q:"—Nice to meet you! —Nice to meet you, ____.", o:["to", "too", "two", "either"], a:1, e:"too 表示\"也\"。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"It's time ____ our self-introduction. Let's begin.", o:["to", "for", "of", "with"], a:1, e:"It's time for sth. 固定搭配。", source:"Unit1基础单元检测卷(学科网)"},
+{q:"—____ your parents in the first photo? —Yes, ____ are. I love them.", o:["Are; They", "Is; They", "Are; they", "Is; they"], a:0, e:"parents 复数用 Are；肯定回答 They are（句首大写）。", source:"book118期末语法综合练100题"},
+{q:"____ am Linda. ____ phone number is 345-7890.", o:["I; My", "Me; I", "I; Me"], a:0, e:"作主语用 I；修饰 phone number 用 My。", source:"Unit1单元测试(学科网2026)"},
+{q:"I like my new classmates, ____ I don't know their phone numbers.", o:["and", "but", "because", "so"], a:1, e:"前后语义转折，用 but。", source:"Unit1基础单元检测卷(学科网)"},
+{q:"Wang Yaming lives in Beijing ____ his big family.", o:["at", "for", "from", "with"], a:3, e:"with 表示\"和……一起\"。", source:"Unit1单元素养检测(21cnjy)"},
+{q:"—What do you like to do? —I like to ____ books.", o:["read", "reading", "reads", "to read"], a:0, e:"like to do sth. 喜欢做某事。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"—Thank you very much. —____.", o:["OK", "You're welcome", "That's right", "Goodbye"], a:1, e:"回应感谢用 You're welcome。", source:"Unit1语法知识专项训练(学科网)"},
+{q:"These ____ my new classmates.", o:["am", "is", "are", "be"], a:2, e:"These 复数用 are。", source:"Unit1组卷网单元练习"},
+{q:"—What's your favourite ____? —I like playing the guitar.", o:["sport", "food", "hobby", "pet"], a:2, e:"弹吉他是爱好 hobby。", source:"Unit1单元素养检测(21cnjy)"},
+{q:"There ____ a teacher and some students waiting for the school bus outside.", o:["are", "is", "be", "am"], a:1, e:"there be 句型就近原则，a teacher 是单数，用 is。", source:"book118新人教2024七上U1检测卷"},
+{q:"She is my friend. ____ name is Lucy.", o:["She", "Her", "He", "His"], a:1, e:"修饰 name 用 Her。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"The girl is Grace Brown. Grace is her ____ name and her ____ name is Brown.", o:["first; last", "last; first", "first; first", "last; last"], a:0, e:"Grace 是名，Brown 是姓。", source:"Unit1单项选择练习(豆丁)"},
+{q:"Emma is ____.", o:["12 year old", "13 years old", "14 years"], a:1, e:"年龄表达\"数字+years old\"。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"I don't know these words. Let me look ____ up in this book.", o:["they", "it", "them", "their"], a:2, e:"look sth. up 查阅，宾语用宾格；words 复数用 them。", source:"Unit1单项选择练习(豆丁)"},
+{q:"—Are you in Class Two? —____. I'm in Class Three.", o:["Yes, I am", "No, I'm not", "No, he isn't"], a:1, e:"后句 I'm in Class Three 说明是否定回答。", source:"Unit1单元测试(学科网2026)"},
+{q:"—What's your name? —My name is Tom Black. Black is my family name and Tom is my ____.", o:["middle name", "last name", "full name", "first name"], a:3, e:"Tom 是名 first name。", source:"Unit1单项选择练习(豆丁)"},
+{q:"—Who ____ that boy? —He ____ my brother.", o:["is; is", "are; is", "is; are", "are; are"], a:0, e:"that boy 单数用 is；He 单数用 is。", source:"Unit1 be动词练习(学科网)"},
+{q:"—____ class are you in? —I'm in Class One.", o:["What", "Who", "How"], a:0, e:"询问班级用 What class。", source:"Unit1单元测试(学科网2026)"},
+{q:"She ____ a new student. Let's say hello to her.", o:["am", "is", "are", "be"], a:1, e:"She 单数用 is。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"We often play games ____ our teachers.", o:["and", "with", "for", "of"], a:1, e:"play with sb. 与某人玩。", source:"Unit1语法知识专项训练(学科网)"},
+{q:"This is a bird. I don't know ____ name.", o:["its'", "it's", "it", "its"], a:3, e:"修饰 name 用形容词性物主代词 its。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"There ____ any oranges in the fridge now. But there ____ some orange juice.", o:["are; isn't", "aren't; are", "is; isn't", "aren't; is"], a:3, e:"oranges 复数否定用 aren't；orange juice 不可数用 is。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"—____ are you from? —I'm from China.", o:["What", "Where", "Who", "How"], a:1, e:"询问地点用 Where。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"—What's her ____? —She is 12 years old.", o:["name", "age", "class"], a:1, e:"答语 12 years old 是年龄 age。", source:"Unit1单元测试(学科网2026)"},
+{q:"I want to make ____ with the new student.", o:["friend", "friends", "a friend", "friend's"], a:1, e:"make friends 固定搭配。", source:"Unit1语法知识专项训练(学科网)"},
+{q:"—Where are you from? —I'm from Sydney, which is a city in ____.", o:["the UK", "the US", "Australia", "Singapore"], a:2, e:"悉尼是澳大利亚的城市。", source:"Unit1能力提升测试卷(原创力文档)"},
+{q:"He and I ____ in Class 1. We are classmates.", o:["am", "is", "are", "be"], a:2, e:"He and I 是复数，用 are。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"—____ are you from? —I'm from Beijing.", o:["What", "Where", "Who", "How"], a:1, e:"询问来自哪里用 Where。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"—What's ____ favorite animal? —It's the monkey.", o:["you", "your", "yours", "yourself"], a:1, e:"修饰名词 favorite animal 用形容词性物主代词 your。", source:"Unit1重点语法归纳专项练(学科网)"},
+{q:"—What's Frank's ID card number? —____ is 608622.", o:["He", "This", "That", "It"], a:3, e:"指代 ID card number 用 It。", source:"Unit1单项选择练习(豆丁)"},
+{q:"—____ you Kate Green? —No, I ____ Alice Green.", o:["Is; am", "Are; is", "Are; am", "Is; is"], a:2, e:"you 用 Are；I 用 am。", source:"Unit1单项选择练习(豆丁)"},
+{q:"Are these ____ books?", o:["you", "your", "yours", "me"], a:1, e:"修饰 books 用 your。", source:"Unit1组卷网单元练习"},
+{q:"—____ is your father? —He is fine.", o:["What", "Where", "Who", "How"], a:3, e:"答语 He is fine 对应 How is your father?", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"—What's ____ name? —____ name is Jack.", o:["his; His", "he; His", "him; He", "his; He"], a:0, e:"修饰 name 均用 his。", source:"Unit1组卷网单元练习"},
+{q:"I like sports, because I think it's good for ____.", o:["me", "I", "my", "mine"], a:0, e:"介词 for 后用宾格 me。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"—What's your full name? —____ Gina Brown.", o:["I'm", "I am's", "My name", "Me is"], a:0, e:"答语 I'm Gina Brown。", source:"Unit1组卷网单元练习"},
+{q:"—What's your ____ name? —It's Green. You can call me Mr. Green.", o:["first", "last", "middle", "full"], a:1, e:"答语 Green 是姓，问的是 last name。", source:"Unit1基础单元检测卷(学科网)"},
+{q:"Nice ____ you, Mr. Wang.", o:["meet", "to meet", "meeting", "meets"], a:1, e:"Nice to meet you 固定搭配。", source:"Unit1组卷网单元练习"},
+{q:"—Where ____ he from? —He is from the United States.", o:["was", "are", "am", "is"], a:3, e:"主语 he 对应 be 动词 is。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"____ is a student, and ____ name is Lucy.", o:["She; her", "He; his", "Her; hers", "Hers; his"], a:0, e:"主语用主格 She；修饰 name 用 her。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"—____ is that girl over there? —She is my new friend, Amy.", o:["What day", "What time", "Who", "What subject"], a:2, e:"询问人物身份用 Who。", source:"Unit1基础单元检测卷(学科网)"},
+{q:"—Good morning, Mr. Wu! —____, Simon. Let's start the class.", o:["Good luck", "Morning", "Stay healthy", "Glad to meet you"], a:1, e:"回应 Good morning 用 Morning。", source:"Unit1单项选择练习(豆丁)"},
+{q:"“____” and “bed” have the same vowel(相同元音).", o:["Jacket", "Desk", "Feet"], a:1, e:"bed 中 e 发 /e/，Desk 中 e 也发 /e/，读音相同。", source:"book118新人教2024七上U1检测卷"},
+{q:"This pen isn't mine. It is ____.", o:["he", "him", "his", "he's"], a:2, e:"表语用名词性物主代词 his。", source:"Unit1语法知识专项训练(学科网)"},
+{q:"My name ____ Lily. What about yours?", o:["am", "is", "are", "be"], a:1, e:"name 单数用 is。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"Let ____ help you with your English.", o:["I", "me", "my", "mine"], a:1, e:"Let 后用宾格 me。", source:"Unit1组卷网单元练习"},
+{q:"There is a school ____ in our school. They often play music at school parties.", o:["band", "classmate", "twin", "pot"], a:0, e:"演奏音乐的乐队是 band。", source:"Unit1能力提升测试卷(原创力文档)"},
+{q:"My sister and I ____ in the same school.", o:["am", "is", "are", "be"], a:2, e:"My sister and I 复数用 are。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"—Is the black watch ____? —Yes, it's ____.", o:["you, me", "yours, mine", "your, my", "your, mine"], a:1, e:"表语用名词性物主代词 yours 和 mine。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"—Let's play basketball after class. —____!", o:["That's right", "That sounds good", "You're welcome", "Thank you"], a:1, e:"That sounds good 表示赞同建议。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"—Who is the lady in red? —Miss Gao. She teaches ____ English.", o:["we", "us", "our", "ours"], a:1, e:"teach sb. sth.，动词后用宾格 us。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"Mrs. Li is our English teacher. ____ always encourages us to speak English in class.", o:["He", "She", "His", "Her"], a:1, e:"Mrs. Li 是女性且作主语，用 She。", source:"Unit1重点语法归纳专项练(学科网)"},
+{q:"—____ these your pencils? —No, they ____.", o:["Are; aren't", "Is; isn't", "Are; isn't", "Is; aren't"], a:0, e:"these 复数用 Are；否定回答 they aren't。", source:"Unit1 be动词练习(学科网)"},
+{q:"Tom and I ____ in the school band. We ____ like playing the guitar.", o:["am; both", "are; both", "am; same", "are; same"], a:1, e:"Tom and I 是复数主语用 are；指代两人用 both 表示\"两者都\"。", source:"book118期末语法综合练100题"},
+{q:"—What are these in English? —____ are dumplings.", o:["There", "Those", "They", "These"], a:2, e:"指代 these 用 They。", source:"Unit1单项选择练习(豆丁)"},
+{q:"—Let's introduce ourselves! —OK. I ____ Li Hua.", o:["am", "is", "are", "be"], a:0, e:"I 用 am。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"Her phone number ____ 123-4567. My phone number ____ 765-4321.", o:["is; is", "are; are", "is; are", "are; is"], a:0, e:"phone number 是单数概念，均用 is。", source:"Unit1 be动词练习(学科网)"},
+{q:"We are in the same class. Let's ____ friends.", o:["am", "is", "are", "be"], a:3, e:"Let's 后接动词原形 be。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"This is ____ brother. ____ is ten.", o:["my; He", "I; His", "me; He", "my; His"], a:0, e:"修饰 brother 用 my；主语用 He。", source:"Unit1组卷网单元练习"},
+{q:"—What's your ____ number? —It's 139-0876-2345.", o:["school", "phone", "pen", "map"], a:1, e:"答句给出电话号码，提问的是 phone number。", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"I ____ make friends with you. You seem very friendly.", o:["would like to", "get to know", "full of", "play the"], a:0, e:"would like to do sth. 想要做某事。", source:"Unit1能力提升测试卷(原创力文档)"},
+{q:"____ often plays ping-pong with her friends at school.", o:["She", "Her", "His", "Hers"], a:0, e:"缺主语，用主格 She。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"This is my friend. ____ name is Alan.", o:["He", "Him", "His", "He's"], a:2, e:"修饰 name 用 His。", source:"Unit1组卷网单元练习"},
+{q:"—What ____ four and five? —____ nine.", o:["are; They are", "is; It's", "is; Its", "are; It's"], a:1, e:"What is four and five? 回答 It's nine。", source:"Unit1单项选择练习(豆丁)"},
+{q:"This is Kate. ____ is my friend.", o:["Her", "She", "Hers", "She's"], a:1, e:"指代 Kate 作主语用 She。", source:"Unit1组卷网单元练习"},
+{q:"—What is your mother's job? —____.", o:["She is fine", "She is at home", "She is a teacher", "She is 40"], a:2, e:"问职业，答 She is a teacher。", source:"Unit1语法知识专项训练(学科网)"},
+{q:"—Are the two boys your brothers? —Yes, ____ are.", o:["they", "we", "you", "their"], a:0, e:"指代 the two boys 用 they。", source:"book118期末语法综合练100题"},
+{q:"This is my sister. ____ is a nurse.", o:["He", "She", "Her", "His"], a:1, e:"指代 sister（女性）作主语用 She。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"My name is Anna Smith. Anna is my ____ name and Smith is my ____ name.", o:["first; last", "last; first", "family; last", "full; nice"], a:0, e:"英文姓名名在前姓在后：first name 是名，last name 是姓。", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"—Where ____ my books? —They ____ on the desk.", o:["is; is", "are; are", "is; are", "are; is"], a:1, e:"my books 复数用 are；They 复数用 are。", source:"Unit1 be动词练习(学科网)"},
+{q:"Mike's aunt is ____ English teacher. We all like ____.", o:["our; she", "our; her", "we; she", "we; her"], a:1, e:"修饰 teacher 用 our；like 后用宾格 her。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"—Is this your new friend? —Yes, ____.", o:["he is", "he's", "it's"], a:0, e:"指代 your new friend 用 he，肯定回答 he is。", source:"Unit1单元测试(学科网2026)"},
+{q:"Li Ping and Peter are in the ____ school this term.", o:["same", "full", "cute", "different"], a:0, e:"the same school 同一所学校。", source:"Unit1单元素养检测(21cnjy)"},
+{q:"They ____ from England.", o:["am", "is", "are", "be"], a:2, e:"They 复数用 are。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"—____ your classmates and you happy in English class? —Yes, we are.", o:["Is", "Am", "Are", "Be"], a:2, e:"classmates and you 复数用 Are。", source:"Unit1单项选择练习(豆丁)"},
+{q:"Canada is a beautiful ____, I want to go there for a vacation.", o:["symbol", "country", "house", "village"], a:1, e:"Canada 是一个国家 country。", source:"book118新人教2024七上U1检测卷"},
+{q:"Li Lei ____ an English boy. ____ is in class 13.", o:["am; He", "is; Her", "are; His", "is; He"], a:3, e:"Li Lei 单数用 is；主语用 He。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"This ____ my friend. Her name ____ Wang Fang.", o:["is; is", "are; is", "is; are", "are; are"], a:0, e:"This 单数用 is；Her name 单数用 is。", source:"Unit1 be动词练习(学科网)"},
+{q:"One of my classmates ____ from America. He can't speak Chinese very well.", o:["are", "am", "is"], a:2, e:"One of + 复数名词作主语，谓语动词用单数 is。", source:"book118期末语法综合练100题"},
+{q:"—What's your phone number? —____ 123-4567.", o:["It's", "I'm", "My", "Its"], a:0, e:"指代 phone number 用 It's。", source:"Unit1单项选择练习(豆丁)"},
+{q:"Betty is from ____.", o:["the us", "UK", "the USA"], a:2, e:"国家名称正确表达 the USA；the us 大小写错误，UK 前需加 the。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"A lot of water ____ in this cup.", o:["are", "am", "be", "is"], a:3, e:"water 是不可数名词，be 动词用 is。", source:"Unit1语法讲解及练习(学科网)"},
+{q:"We are thirsty. Can you give ____ some juice?", o:["him", "her", "us", "them"], a:2, e:"give sb. sth.，根据 We are thirsty 用宾格 us。", source:"Unit1单项选择练习(豆丁)"},
+{q:"—Hi, Peter. Would you like ____ to the Great Wall with me? —Yes, I'd love to.", o:["go", "to go", "going", "goes"], a:1, e:"would like to do sth. 想要做某事。", source:"Unit1单元素养检测(21cnjy)"},
+{q:"—What ____ your brother's name? —____ name is Tony.", o:["is; He", "are; His", "is; His"], a:2, e:"your brother's name 单数用 is；修饰 name 用 His。", source:"Unit1分层检测(学科网)"},
+{q:"选出划线部分读音与其他三个不同的一项：nice, fine, this, five", o:["nice", "fine", "this", "five"], a:2, e:"this 发 /ɪ/，其余发 /aɪ/。", source:"Unit1基础单元检测卷(学科网)"},
+{q:"—Are you Emma? —____. I'm Ella.", o:["Yes, I am", "Yes, he is", "No, I'm not", "No, he isn't"], a:2, e:"后句 I'm Ella 说明不是 Emma，否定回答 No, I'm not。", source:"Unit1单元素养检测(21cnjy)"},
+{q:"—Where ____ you from, Eric? —I'm from China.", o:["Is", "am", "are", "be"], a:2, e:"主语 you 对应的 be 动词是 are：Where are you from?", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"—Mom, I lost my Chinese book at home. Can you help bring ____ to me? —OK.", o:["it", "them", "its", "they"], a:0, e:"指代 book（单数）用宾格 it。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"—Is this ____ ruler, Anna? —No, it isn't. ____ is over there.", o:["my; My", "your; Yours", "my; Mine", "your; My"], a:1, e:"第一空修饰名词 ruler 用形容词性物主代词 your；第二空作主语用名词性物主代词 Yours。", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"Don't worry about making ____ when speaking English. It's normal for beginners.", o:["friends", "mistakes", "grades", "hobbies"], a:1, e:"make mistakes 表示\"犯错误\"。", source:"Unit1能力提升测试卷(原创力文档)"},
+{q:"My brother and I like sports. ____ often play football together after school.", o:["They", "We", "You", "I"], a:1, e:"指代 my brother and I 用 We。", source:"Unit1重点语法归纳专项练(学科网)"},
+{q:"—____ your name? —I'm Tom.", o:["What", "What's", "Who", "Who's"], a:1, e:"问名字用 What's your name?", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"—What's your ____? —I like playing the guitar and reading books.", o:["grade", "country", "hobby", "information"], a:2, e:"弹吉他、看书是爱好 hobby。", source:"Unit1能力提升测试卷(原创力文档)"},
+{q:"My name ____ Tom.", o:["am", "is", "are", "be"], a:1, e:"name 单数用 is。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"My brother loves music, and ____ guitar sounds amazing.", o:["your", "their", "her", "his"], a:3, e:"指代 my brother（男性）用形容词性物主代词 his。", source:"Unit1重点语法归纳专项练(学科网)"},
+{q:"We can share our stories ____ each other in this unit.", o:["to", "with", "for", "of"], a:1, e:"share...with... 与某人分享。", source:"Unit1单元测试卷2025-2026(学科网)"},
+{q:"I have a pet bird. ____ name is Coco.", o:["It", "It's", "Its", "Is"], a:2, e:"修饰 name 用形容词性物主代词 Its。", source:"Unit1单元素养检测(21cnjy)"},
+{q:"—____ Can I help you? —Yes, please. I want a hat for my daughter.", o:["Goodbye.", "Good night.", "Good job.", "Good morning."], a:3, e:"购物招呼用 Good morning 等问候语。", source:"Unit1单项选择练习(豆丁)"},
+{q:"Look! The cat ____ on the chair. It ____ white.", o:["is; is", "are; is", "is; are", "are; are"], a:0, e:"The cat 单数用 is；It 单数用 is。", source:"Unit1 be动词练习(学科网)"},
+{q:"Look, something ____ wrong with the helicopter.", o:["is", "are", "was", "were"], a:0, e:"不定代词 something 视为单数，be 动词用 is。", source:"Unit1重点语法归纳专项练(学科网)"},
+{q:"This is my ____. He is my father's brother.", o:["aunt", "uncle", "cousin", "sister"], a:1, e:"父亲的兄弟是叔叔 uncle。", source:"Unit1语法知识专项训练(学科网)"},
+{q:"Tom is from America, so he is ____.", o:["America", "American", "an American", "Americans"], a:1, e:"so 后作表语用国籍形容词 American。", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"—This is ____ ____ orange. We all like it.", o:["orange; a", "an; orange", "a; orange", "orange; an"], a:1, e:"orange 以元音音素开头用 an；第二个 orange 作形容词修饰 orange（橙子）。", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"This is ____ book. (I)", o:["my", "me", "I", "mine"], a:0, e:"修饰 book 用形容词性物主代词 my。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"—Is your name Bob Smith? —____. I'm John Smith.", o:["Yes, I am", "No, it isn't", "Yes, it is", "No, I'm not"], a:1, e:"I'm John Smith 说明不是 Bob Smith，用 No, it isn't。", source:"Unit1单项选择练习(豆丁)"},
+{q:"下列各项中划线部分字母发音完全相同的一项是", o:["head, great", "Sunday, student", "clothes, fifth", "volleyball, geography"], a:3, e:"volleyball 与 geography 中 o 均发 /ɒ/，其余各组发音不同。", source:"book118新人教2024七上U1检测卷"},
+{q:"I like music, ____ my brother likes sports.", o:["and", "but", "or", "so"], a:1, e:"前后转折用 but。", source:"Unit1语法知识专项训练(学科网)"},
+{q:"选出划线部分读音与其他三个不同的一项：meet, see, he, name", o:["meet", "see", "he", "name"], a:3, e:"meet、see、he 中 ee/e 发 /iː/，name 发 /eɪ/。", source:"Unit1基础单元检测卷(学科网)"},
+{q:"In the following words, which underlined letter has a different sound from the others?", o:["shine", "ship", "smile"], a:1, e:"ship 中 i 发 /ɪ/，shine 和 smile 中 i 发 /aɪ/。", source:"book118新人教2024七上U1检测卷"},
+{q:"Let's ____ new friends.", o:["make", "to make", "making", "makes"], a:0, e:"Let's 后接动词原形。", source:"Unit1组卷网单元练习"},
+{q:"—Who is the girl in the classroom? —____ is Mary. Mary is ____ first name.", o:["She; her", "He; his", "It; its", "He; her"], a:0, e:"主语用 She；修饰 name 用 her。", source:"Unit1单项选择练习(豆丁)"},
+{q:"—Are these your new pens? —Yes, ____ ____.", o:["it; is", "these; are", "they; are", "those; are"], a:2, e:"these 的简略回答用 they are。", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"—Is your mother a teacher? —No, ____ ____. She is a doctor.", o:["he; isn't", "he; is", "she; isn't", "she; is"], a:2, e:"your mother 是女性，答语主语用 she；否定用 isn't。", source:"Unit1单元测试卷2026-2027(学科网)"},
+{q:"I ____ a student. My dad ____ a teacher.", o:["am; is", "is; am", "are; is"], a:0, e:"I 用 am；My dad 单数用 is。", source:"Unit1单元测试(学科网2026)"},
+{q:"____ pen is red. (He)", o:["He", "His", "Her", "Him"], a:1, e:"修饰 pen 用形容词性物主代词 His。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"—What's your name? —____ Li Ming.", o:["I'm", "I", "My", "Me"], a:0, e:"答语 I'm Li Ming。", source:"Unit1组卷网单元练习"},
+{q:"—How ____ your grandmother? —She's fine.", o:["am", "is", "are", "be"], a:1, e:"your grandmother 是第三人称单数，How+is+sb. 询问身体状况。", source:"book118七上U1单元检测卷"},
+{q:"____ school is small, but we love it.", o:["We", "Us", "Our", "Ours"], a:2, e:"修饰 school 用 Our。", source:"Unit1组卷网单元练习"},
+{q:"Tom and I ____ good friends.", o:["am", "is", "are", "be"], a:2, e:"Tom and I 复数用 are。", source:"Unit1单元素养检测(21cnjy)"},
+{q:"There ____ some milk in the bottles, and the bottles ____ white.", o:["is; are", "is; is", "are; are", "are; is"], a:0, e:"milk 不可数用 is；bottles 复数用 are。", source:"Unit1单项选择练习(豆丁)"},
+{q:"This boy likes ____ because he can learn to greet new people and introduce himself.", o:["English", "Geography", "Biology", "Maths"], a:0, e:"学习问候与自我介绍对应英语课 English。", source:"Unit1基础单元检测卷(学科网)"},
+{q:"—What are those? —____ are pens.", o:["This", "That", "These", "They"], a:3, e:"指代 those 用 They。", source:"Unit1组卷网单元练习"},
+{q:"Linda and I ____ good friends. I often play with her.", o:["am", "is", "are", "be"], a:2, e:"Linda and I 是复数，用 are。", source:"Unit1 SectionA同步练习(学科网)"},
+{q:"—Hello, Tommy. ____ Lisa. —Nice to meet you!", o:["He is", "His name is", "This is", "Her name"], a:2, e:"向对方介绍他人用 This is...。", source:"book118七上U1单元检测卷"},
+{q:"—What is that? —____ is a book.", o:["That", "It", "This"], a:1, e:"指代 that 用 It。", source:"Unit1单项选择练习(豆丁)"},
+{q:"—____ are they? —They are my parents.", o:["What", "Where", "Who", "How"], a:2, e:"询问人物用 Who。", source:"Unit1单元测试卷2024-2025(学科网)"},
+{q:"____ is your full name?", o:["What", "Who", "Where", "How"], a:0, e:"询问名字用 What。", source:"Unit1语法知识专项训练(学科网)"}
+];
+const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
+const $ = id => document.getElementById(id);
+
+// 历史做题下标存取
+function getUsedIndexes(){
+  const raw = localStorage.getItem('71_kp1_used_indexes');
+  if(!raw) return [];
+  try{ return JSON.parse(raw); }catch(e){ return []; }
+}
+function saveUsedIndexes(list){
+  localStorage.setItem('71_kp1_used_indexes', JSON.stringify(list));
+}
+function clearUsedIndexes(){
+  localStorage.removeItem('71_kp1_used_indexes');
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// 获取不重复的题号下标，优先避开历史做过的
+function pickQuizIndex(totalCount, needCount){
+  let used = getUsedIndexes();
+  let allIdx = Array.from({length:totalCount}, (_,i)=>i);
+  // 候选 = 全部下标排除已使用
+  let candidate = allIdx.filter(x=> !used.includes(x));
+  // 如果候选不够，清空历史，重新全部作为候选
+  if(candidate.length < needCount){
+    clearUsedIndexes();
+    used = [];
+    candidate = [...allIdx];
+  }
+  // 洗牌候选数组取前N
+  const shuffled = shuffle(candidate);
+  const selected = shuffled.slice(0, needCount);
+  // 将本次选到的加入历史记录
+  const newUsed = [...new Set([...used, ...selected])];
+  saveUsedIndexes(newUsed);
+  return selected;
+}
+
+const LETTERS=['A','B','C','D','E'];
+$('btnStart').onclick = startQuiz;
+$('btnBank').onclick = ()=>{ state.mode='bank'; showView('view-bank'); renderBank(); };
+$('btnHome').onclick = $('btnHome2').onclick = ()=>{ showView('view-home'); };
+$('btnRetry').onclick = startQuiz;
+$('bankSearch').oninput = renderBank;
+document.querySelectorAll('.seg button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderBank();
+  };
+});
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $(id).classList.add('active');
+  $('btnHome').style.display = (id==='view-home') ? 'none' : 'block';
+}
+
+function startQuiz(){
+  state.mode='quiz';
+  state.quizIndexList = pickQuizIndex(BANK.length,20);
+  state.quiz = state.quizIndexList.map(idx=> BANK[idx]);
+  state.qi=0; state.score=0; state.userAns=[];
+  showView('view-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = state.quiz[state.qi];
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
+  $('qScore').textContent = state.score + ' 分';
+  $('qStem').innerHTML = formatDialog(q.q);
+  $('qSource').textContent = '来源：' + q.source;
+  
+  const wrap = $('qOptions'); wrap.innerHTML='';
+  q.o.forEach((op,i)=>{
+    const el=document.createElement('div');
+    el.className='option';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
+    el.onclick = ()=>answer(i, el);
+    wrap.appendChild(el);
+  });
+  const fb=$('qFeedback'); fb.className='feedback'; fb.innerHTML='';
+  const nxt=$('qNext'); nxt.classList.remove('show');
+  nxt.textContent = (state.qi === state.quiz.length-1) ? '查看成绩' : '下一题';
+  nxt.onclick = nextQuestion;
+}
+
+function answer(i, el){
+  const q = state.quiz[state.qi];
+  const correct = (i === q.a);
+  if(correct) state.score += 5;
+  state.userAns.push({q, pick:i, ok:correct});
+  const opts = $('qOptions').children;
+  for(let k=0;k<opts.length;k++){
+    opts[k].classList.add('disabled');
+    if(k===q.a) opts[k].classList.add('correct');
+    if(k===i && !correct) opts[k].classList.add('wrong');
+  }
+  const fb=$('qFeedback');
+  fb.className = 'feedback show ' + (correct?'ok':'bad');
+  fb.innerHTML = correct
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
+  $('qNext').classList.add('show');
+  $('qScore').textContent = state.score + ' 分';
+}
+
+function nextQuestion(){
+  state.qi++;
+  if(state.qi < state.quiz.length){ renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function renderResult(){
+  const n = state.quiz.length;
+  const pct = Math.round(state.score/100*100);
+  $('rScore').textContent = state.score;
+  $('ring').style.setProperty('--p', pct);
+  let t,s;
+  if(pct>=90){t='太棒了！';s='Unit 1 考点掌握扎实，基本全对，继续保持。';}
+  else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
+  else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
+  else {t='需要加油哦';s='Unit 1 考点还不太熟，建议先浏览全量题库再测一次。';}
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
+  const list=$('rList'); list.innerHTML='';
+  state.userAns.forEach((r,idx)=>{
+    const div=document.createElement('div'); div.className='r-item';
+    const mark = r.ok?'✓':'✕';
+    div.innerHTML = `
+      <div class="r-head"><span class="r-mark ${r.ok?'ok':'bad'}">${mark}</span>
+        <div><div class="r-stem">${formatDialog(r.q.q)}</div>
+        <div class="r-ans">你的答案：<span class="u">${LETTERS[r.pick]} ${r.q.o[r.pick]}</span>　·　正确答案：<span class="c">${LETTERS[r.q.a]} ${r.q.o[r.q.a]}</span></div></div>
+      </div>
+      <div class="r-exp"><b>解析：</b>${r.q.e}</div>`;
+    list.appendChild(div);
+  });
+  showView('view-result');
+}
+
+function renderBank(){
+  const kw = $('bankSearch').value.trim().toLowerCase();
+  const f = document.querySelector('.seg button.on').dataset.f;
+  let items = BANK.map((q,idx)=>({q,no:idx+1}));
+  if(kw) items = items.filter(x => (x.q.q+' '+x.q.o.join(' ')).toLowerCase().includes(kw));
+  if(f==='no') items = items.filter(x => !state.userAns.some(u=>u.q===x.q && u.ok));
+  $('bankCount').textContent = items.length + ' / ' + BANK.length + ' 题';
+  $('bankEmpty').style.display = items.length? 'none':'block';
+  const list=$('bankList'); list.innerHTML='';
+  items.forEach(it=>{
+    const div=document.createElement('div'); div.className='bank-item';
+    div.innerHTML = `
+      <div class="b-head"><span class="b-no">${it.no}</span>
+        <div><div class="b-stem">${formatDialog(it.q.q)}</div>
+          <div class="b-source">来源：${it.q.source}</div>
+          <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
+          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
+          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+        </div></div>`;
+    div.onclick = ()=>div.classList.toggle('open');
+    list.appendChild(div);
+  });
+}
+$('totalCount').textContent = BANK.length + ' 道题';
+</script>
+</body>
+</html>
