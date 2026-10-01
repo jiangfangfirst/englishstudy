@@ -55,20 +55,18 @@
   .block-list{display:flex;flex-direction:column;gap:9px}
   .extra-sec{display:flex;flex-direction:column;gap:10px}
   .extra-sec .unit-card{margin:0}
-  .blk-wrap{display:flex;align-items:center;gap:8px}
-  .blk-row{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid #e2e8f0;border-radius:14px;padding:10px 12px;cursor:pointer;transition:all .2s}
+  .blk-row{position:relative;display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid #e2e8f0;border-radius:14px;padding:12px 14px;cursor:pointer;transition:all .2s;margin-bottom:10px}
   .blk-row:active{transform:scale(.985)}
   .blk-row.playing{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-color:#6ee7b7}
   .blk-row.loading{background:linear-gradient(135deg,#fffbeb,#fef3c7);border-color:#fbbf24}
-  .blk-main{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
+  .blk-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.55);color:#334155;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 2px 8px rgba(30,41,59,.18);pointer-events:none;z-index:2}
+  .blk-row.playing .blk-play{background:rgba(255,255,255,.6);color:#0f766e}
+  .blk-main{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px;padding:0 44px}
   .blk-name{font-size:14px;font-weight:800;line-height:1.3}
   .blk-sub{display:flex;align-items:baseline;gap:8px;min-width:0}
   .blk-title{font-size:12px;color:#64748b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1 1 auto;min-width:0}
   .blk-dur{font-size:11px;color:#b6c2d2;flex:0 0 auto}
-  .blk-pause{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:#f1f5f9;color:#94a3b8;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .2s}
-  .blk-pause.on{background:linear-gradient(135deg,#94a3b8,#cbd5e1);color:#fff}
-</style>
-</head>
+</style></head>
 <body>
 <div class="wrap">
   <div class="hero">
@@ -94,17 +92,15 @@ function fmtDur(d){
 }
 function renderBlock(b, color){
   var id = 'blk'+b.file.replace(/[^a-z0-9]/g,'');
-  return '<div class="blk-wrap">' +
-    '<div class="blk-row" id="'+id+'" data-file="'+b.file+'" data-title="'+esc(b.title)+'" onclick="playBlock(this)">' +
-      '<span class="blk-main">' +
-        '<span class="blk-name" style="color:'+color+'">'+esc(b.name)+'</span>' +
-        '<span class="blk-sub">' +
-          '<span class="blk-title">'+esc(b.title)+'</span>' +
-          '<span class="blk-dur">'+fmtDur(b.dur)+'</span>' +
-        '</span>' +
+  return '<div class="blk-row" id="'+id+'" data-file="'+b.file+'" data-title="'+esc(b.title)+'" onclick="playBlock(this)">' +
+    '<span class="blk-play">▶</span>' +
+    '<span class="blk-main">' +
+      '<span class="blk-name" style="color:'+color+'">'+esc(b.name)+'</span>' +
+      '<span class="blk-sub">' +
+        '<span class="blk-title">'+esc(b.title)+'</span>' +
+        '<span class="blk-dur">'+fmtDur(b.dur)+'</span>' +
       '</span>' +
-    '</div>' +
-    '<span class="blk-pause" onclick="togglePause(this)">⏸</span>' +
+    '</span>' +
   '</div>';
 }
 function renderUnits(){
@@ -179,20 +175,45 @@ function preloadAudio2(file){
 }
 function playBlock(row){
   var file = row.dataset.file;
-  if(_cur && _cur.file === file){ stopBlock(); return; }
+  if(_cur && _cur.file === file){
+    if(_cur.started){
+      // 播放/暂停切换
+      if(_paused){
+        _cur.audio.play().catch(function(){});
+        _paused = false;
+        var bp1 = row.querySelector('.blk-play');
+        if(bp1) bp1.textContent = '⏸';
+      } else {
+        _cur.audio.pause();
+        _paused = true;
+        var bp2 = row.querySelector('.blk-play');
+        if(bp2) bp2.textContent = '▶';
+      }
+    }
+    return;  // 加载中再点：忽略
+  }
   stopBlock();
   _cur = {file:file, audio:null, row:row, started:false};
+  // 已下载缓存（blob）：本地播放，不显示任何加载状态
+  if(_blobCache[file]){
+    var a = new Audio(_blobCache[file]);
+    _cur.audio = a;
+    bindPlay(a, row);
+    a.play().catch(function(){});
+    return;
+  }
+  // 无缓存：显示真实加载进度 + Audio 渐进播放（立即出声、不中断）
   row.classList.add('loading');
   row.querySelector('.blk-title').innerHTML = '<span class="loading-txt">加载中 <b class="pct">0%</b></span>';
-  // 1) Audio 渐进播放：点播放立即出声，缓冲期间也不中断（优先本地 blob，其次预取实例）
-  var a;
-  if(_blobCache[file]){
-    a = new Audio(_blobCache[file]);
-  } else {
-    a = _audioCache[file] || new Audio('audio/' + file);
-    a.preload = 'auto';
-  }
-  _cur.audio = a;
+  var a2 = _audioCache[file] || new Audio('audio/' + file);
+  a2.preload = 'auto';
+  _cur.audio = a2;
+  bindPlay(a2, row);
+  a2.play().catch(function(){});
+  startProgXhr(row, file);
+}
+function bindPlay(a, row){
+  var file = row.dataset.file;
   a.oncanplay = function(){ enterPlaying(row); };
   a.onplaying = function(){ enterPlaying(row); };
   a.onended = function(){ resetBlock(); };
@@ -200,17 +221,14 @@ function playBlock(row){
     if(_blobCache[file]){
       var a2 = new Audio(_blobCache[file]);
       _cur.audio = a2;
-      a2.play().catch(function(){});
       a2.onended = function(){ resetBlock(); };
       a2.onerror = function(){ loadFail(row); };
+      a2.play().catch(function(){});
       enterPlaying(row);
       return;
     }
     loadFail(row);
   };
-  a.play().catch(function(){});
-  // 2) XHR 并行下载：真实字节进度，完成即缓存供后续秒开
-  startProgXhr(row, file);
 }
 function startProgXhr(row, file){
   if(_blobCache[file]){ finishTitle(row); return; }
@@ -232,7 +250,7 @@ function startProgXhr(row, file){
   };
   xhr.onload = function(){
     if(xhr.status === 200 || xhr.status === 0){
-      _blobCache[file] = URL.createObjectURL(xhr.response);
+      try{ _blobCache[file] = URL.createObjectURL(xhr.response); }catch(e){}
     }
     delete _xhrCache[file];
     if(_cur && _cur.row === row && _cur.file === file) finishTitle(row);
@@ -244,32 +262,18 @@ function enterPlaying(row){
   _cur.started = true;
   row.classList.remove('loading');
   row.classList.add('playing');
-  var pb = row.parentElement.querySelector('.blk-pause');
-  if(pb){ pb.textContent = '⏸'; pb.classList.remove('on'); }
+  var bp = row.querySelector('.blk-play');
+  if(bp) bp.textContent = '⏸';
 }
 function finishTitle(row){
   var t = row.querySelector('.blk-title');
   if(t && t.querySelector('.loading-txt')) t.textContent = row.dataset.title;
 }
-function togglePause(btn){
-  var row = btn.parentElement.querySelector('.blk-row');
-  if(!_cur || _cur.row !== row || !_cur.started) return;
-  if(_paused){
-    _cur.audio.play().catch(function(){});
-    _paused = false;
-    btn.textContent = '⏸';
-    btn.classList.remove('on');
-  } else {
-    _cur.audio.pause();
-    _paused = true;
-    btn.textContent = '▶';
-    btn.classList.add('on');
-  }
-}
 function loadFail(row){
   if(!_cur || _cur.row !== row) return;
   row.classList.remove('loading');
   row.querySelector('.blk-title').innerHTML = '<span class="loading-txt">加载失败 · 点我重试</span>';
+  var bp = row.querySelector('.blk-play'); if(bp) bp.textContent = '▶';
   _cur = null;
 }
 function stopBlock(){
@@ -283,8 +287,7 @@ function resetBlock(){
     var row = _cur.row;
     row.classList.remove('loading','playing');
     var t = row.querySelector('.blk-title'); if(t) t.textContent = row.dataset.title;
-    var pb = row.parentElement.querySelector('.blk-pause');
-    if(pb){ pb.textContent = '⏸'; pb.classList.remove('on'); }
+    var bp = row.querySelector('.blk-play'); if(bp) bp.textContent = '▶';
     _cur = null;
     _paused = false;
   }
