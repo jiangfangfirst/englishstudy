@@ -44,8 +44,6 @@
   @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
   .loading-txt{color:#f59e0b;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:5px}
   .loading-txt .pct{font-weight:900;font-style:normal}
-  .spin{width:12px;height:12px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;display:inline-block;animation:rot .7s linear infinite}
-  @keyframes rot{to{transform:rotate(360deg)}}
   .tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-start;margin:16px auto 2px}
   .tab{flex:0 0 auto;min-width:58px;text-align:center;padding:8px 12px;border-radius:20px;background:#eef2f7;color:#64748b;font-size:13px;font-weight:700;transition:all .25s;cursor:pointer}
   .tab.active{background:linear-gradient(135deg,#ff6b9d,#818cf8);color:#fff;box-shadow:0 4px 14px rgba(255,107,157,.35)}
@@ -62,9 +60,6 @@
   .blk-row:active{transform:scale(.985)}
   .blk-row.playing{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-color:#6ee7b7}
   .blk-row.loading{background:linear-gradient(135deg,#fffbeb,#fef3c7);border-color:#fbbf24}
-  .blk-ic{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#ff6b9d,#818cf8);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
-  .blk-row.playing .blk-ic{background:linear-gradient(135deg,#0ea5e9,#22d3ee)}
-  .blk-row.loading .blk-ic{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
   .blk-main{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
   .blk-name{font-size:14px;font-weight:800;line-height:1.3}
   .blk-sub{display:flex;align-items:baseline;gap:8px;min-width:0}
@@ -72,15 +67,6 @@
   .blk-dur{font-size:11px;color:#b6c2d2;flex:0 0 auto}
   .blk-pause{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:#f1f5f9;color:#94a3b8;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .2s}
   .blk-pause.on{background:linear-gradient(135deg,#94a3b8,#cbd5e1);color:#fff}
-  .loading-txt{color:#f59e0b;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:5px}
-  .loading-txt .pct{font-weight:900;font-style:normal}
-  .spin{width:12px;height:12px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;display:inline-block;animation:rot .7s linear infinite}
-  @keyframes rot{to{transform:rotate(360deg)}}
-  .dots{display:inline-flex;gap:2.5px;align-items:flex-end;height:12px}
-  .dots i{width:3px;background:#fff;border-radius:2px;animation:dotB .9s ease-in-out infinite}
-  .dots i:nth-child(2){animation-delay:.18s}
-  .dots i:nth-child(3){animation-delay:.36s}
-  @keyframes dotB{0%,100%{height:4px}50%{height:12px}}
 </style>
 </head>
 <body>
@@ -110,7 +96,6 @@ function renderBlock(b, color){
   var id = 'blk'+b.file.replace(/[^a-z0-9]/g,'');
   return '<div class="blk-wrap">' +
     '<div class="blk-row" id="'+id+'" data-file="'+b.file+'" data-title="'+esc(b.title)+'" onclick="playBlock(this)">' +
-      '<span class="blk-ic"><span class="ic-play">▶</span></span>' +
       '<span class="blk-main">' +
         '<span class="blk-name" style="color:'+color+'">'+esc(b.name)+'</span>' +
         '<span class="blk-sub">' +
@@ -198,7 +183,6 @@ function playBlock(row){
   stopBlock();
   _cur = {file:file, audio:null, row:row, started:false};
   row.classList.add('loading');
-  row.querySelector('.ic-play').innerHTML = '<span class="spin"></span>';
   row.querySelector('.blk-title').innerHTML = '<span class="loading-txt">加载中 <b class="pct">0%</b></span>';
   // 1) Audio 渐进播放：点播放立即出声，缓冲期间也不中断（优先本地 blob，其次预取实例）
   var a;
@@ -260,7 +244,6 @@ function enterPlaying(row){
   _cur.started = true;
   row.classList.remove('loading');
   row.classList.add('playing');
-  row.querySelector('.ic-play').innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
   var pb = row.parentElement.querySelector('.blk-pause');
   if(pb){ pb.textContent = '⏸'; pb.classList.remove('on'); }
 }
@@ -276,22 +259,17 @@ function togglePause(btn){
     _paused = false;
     btn.textContent = '⏸';
     btn.classList.remove('on');
-    var ip = _cur.row.querySelector('.ic-play');
-    if(ip) ip.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
   } else {
     _cur.audio.pause();
     _paused = true;
     btn.textContent = '▶';
     btn.classList.add('on');
-    var ip = _cur.row.querySelector('.ic-play');
-    if(ip) ip.innerHTML = '▶';
   }
 }
 function loadFail(row){
   if(!_cur || _cur.row !== row) return;
   row.classList.remove('loading');
   row.querySelector('.blk-title').innerHTML = '<span class="loading-txt">加载失败 · 点我重试</span>';
-  row.querySelector('.ic-play').innerHTML = '▶';
   _cur = null;
 }
 function stopBlock(){
@@ -304,7 +282,6 @@ function resetBlock(){
   if(_cur){
     var row = _cur.row;
     row.classList.remove('loading','playing');
-    var ip = row.querySelector('.ic-play'); if(ip) ip.innerHTML = '▶';
     var t = row.querySelector('.blk-title'); if(t) t.textContent = row.dataset.title;
     var pb = row.parentElement.querySelector('.blk-pause');
     if(pb){ pb.textContent = '⏸'; pb.classList.remove('on'); }
