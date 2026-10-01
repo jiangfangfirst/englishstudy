@@ -49,8 +49,15 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 .feedback.err { background: #fee2e2; color: #991b1b; display: block; }
 .progress-bar { height: 6px; background: #e5e7eb; border-radius: 3px; margin: 0 auto 16px; overflow: hidden; width: 65%; }
 .progress-fill { height: 100%; background: #10b981; transition: width .3s; }
-.start-btn { width: 100%; padding: 16px; background: linear-gradient(135deg,#10b981,#059669); color: #fff; border: none; border-radius: 12px; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 16px; }
-.start-btn:disabled { opacity: .4; cursor: not-allowed; }
+.start-split { display: flex; position: relative; margin-top: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 14px rgba(16,185,129,.22); }
+.start-half { flex: 1; padding: 15px 0; color: #fff; border: none; font-size: 16px; font-weight: 700; cursor: pointer; transition: filter .15s; }
+.start-half:active { filter: brightness(.92); }
+.start-half.left { background: linear-gradient(135deg,#10b981,#059669); }
+.start-half.right { background: linear-gradient(135deg,#0ea5e9,#0369a1); }
+/* 中间斜线分隔 */
+.start-split::before { content: ''; position: absolute; left: 50%; top: -10px; bottom: -10px; width: 2.5px; background: rgba(255,255,255,.95); transform: rotate(18deg); z-index: 1; pointer-events: none; }
+.start-split.single .start-half.right { display: none; }
+.start-split.single .start-half.left { width: 100%; }
 .hide { display: none !important; }
 
 /* 答错柔和红光闪动（两下） */
@@ -77,7 +84,7 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 /* 开始页动画：流光标题 + 漂浮字母 + 呼吸光晕 */
 #modeDesc { font-size: 15px; font-weight: 600; margin-bottom: 12px; background: linear-gradient(90deg,#059669,#10b981,#34d399,#059669); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: flowText 6s linear infinite; }
 @keyframes flowText { 0%{ background-position: 0% 50%; } 100%{ background-position: 300% 50%; } }
-.start-halo { position: absolute; left: 50%; top: 50%; width: 220px; height: 220px; margin: -110px 0 0 -110px; border-radius: 50%; background: radial-gradient(circle, rgba(16,185,129,.14) 0%, rgba(16,185,129,0) 70%); animation: halo 4s ease-in-out infinite; pointer-events: none; }
+.start-halo { position: absolute; left: 50%; top: 50%; width: 380px; height: 380px; margin: -190px 0 0 -190px; border-radius: 50%; background: radial-gradient(circle at 38% 38%, rgba(16,185,129,.17) 0%, rgba(16,185,129,0) 55%), radial-gradient(circle at 62% 62%, rgba(59,130,246,.13) 0%, rgba(59,130,246,0) 55%); animation: halo 5s ease-in-out infinite; pointer-events: none; }
 @keyframes halo { 0%,100%{ transform: scale(1); opacity: .6; } 50%{ transform: scale(1.18); opacity: 1; } }
 .float-letters { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .float-letters span { position: absolute; bottom: -30px; font-size: 22px; font-weight: 700; color: rgba(16,185,129,.28); animation: floatUp 8s linear infinite; }
@@ -133,11 +140,14 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
       </div>
     </div>
 
-    <button class="start-btn" id="startBtn" onclick="onBottomBtn()">开始记单词</button>
+    <div class="start-split" id="startBtn">
+      <button class="start-half left" id="halfL" onclick="onBottomBtn('sentence')">句中记</button>
+      <button class="start-half right" id="halfR" onclick="onBottomBtn('meaning')">释义记</button>
+    </div>
   </div>
 </div>
 
-<script src="分级单词库.js"></script>
+<script src="分级单词库.js?v=20261001"></script>
 <script>
 const GRADE_MAP = {
   'basic': { data: WORDS_BASIC, label: '基础词汇' },
@@ -148,6 +158,7 @@ const GRADE_MAP = {
 let grade = 'basic';
 let WORDS = [];
 let mode = 'learn';
+let sessionMode = 'sentence'; // 'sentence' 句中记 / 'meaning' 释义记
 let queue = [];
 let current = null;
 let typed = '';
@@ -313,16 +324,20 @@ function phrasePats(w){
   return out;
 }
 let _lastSeg = '';
+let _lastSegFirst = false;
 function makeBlank(en, word){
   _lastSeg = '';
+  _lastSegFirst = false;
   const pats = phrasePats(word);
   for(const p of pats){
     const re = new RegExp(p, 'i');
     const m = re.exec(en);
     if(m){
       _lastSeg = m[0];
+      _lastSegFirst = /^[\s"'()]*$/.test(en.slice(0, m.index));
       const bw = (m[0].length + 2) * 14 + 20;
-      return en.slice(0,m.index) + '<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>' + en.slice(m.index+m[0].length);
+      const reG = new RegExp(p, 'gi');
+      return en.replace(reG, '<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>');
     }
   }
   const bw2 = (word.length + 2) * 14 + 20;
@@ -399,10 +414,9 @@ function refreshStats(){
 
   const btn = document.getElementById('startBtn');
   if(remainNew()===0 && reviewSet.length===0){
-    btn.textContent = '全部重学一遍'; btn.onclick = resetAll;
+    setBottomBtn('全部重学一遍', resetAll, true);
   } else if(mode==='learn' && remainNew()===0){
-    btn.textContent = '去复习';
-    btn.onclick = function(){ setMode('review'); startSession(); };
+    setBottomBtn('去复习', function(){ setMode('review'); startSession(); }, true);
   }
 }
 
@@ -416,16 +430,33 @@ function setMode(m){
   document.getElementById('learnPage').classList.add('hide');
   document.getElementById('donePage').classList.add('hide');
   document.getElementById('startPage').classList.remove('hide');
-  document.getElementById('startBtn').style.display='block';
   if(m==='learn' && remainNew()===0){
-    document.getElementById('startBtn').textContent = reviewSet.length>0 ? '去复习' : '全部重学一遍';
-    document.getElementById('startBtn').onclick = reviewSet.length>0 ? function(){ setMode('review'); startSession(); } : resetAll;
+    setBottomBtn(reviewSet.length>0 ? '去复习' : '全部重学一遍',
+      reviewSet.length>0 ? function(){ setMode('review'); startSession(); } : resetAll, true);
   } else {
-    document.getElementById('startBtn').textContent = m==='learn' ? '开始记单词' : '开始复习';
-    document.getElementById('startBtn').onclick = onBottomBtn;
+    setBottomBtn(m==='learn' ? '开始记单词' : '开始复习', onBottomBtn, false);
   }
   refreshStats();
 }
+
+// 底部按钮统一控制：single=true 显示单一按钮（完成页等），false 显示两半（句中记/释义记）
+function setBottomBtn(label, fn, single){
+  const btn = document.getElementById('startBtn');
+  const L = document.getElementById('halfL'), R = document.getElementById('halfR');
+  btn.classList.remove('hide');
+  if(single){
+    btn.classList.add('single');
+    L.textContent = label;
+    L.onclick = fn;
+  } else {
+    btn.classList.remove('single');
+    L.textContent = '句中记';
+    L.onclick = function(){ onBottomBtn('sentence'); };
+    R.textContent = '释义记';
+    R.onclick = function(){ onBottomBtn('meaning'); };
+  }
+}
+function hideBottomBtn(){ document.getElementById('startBtn').classList.add('hide'); }
 
 function startSession(){
   sessionAnswered = 0; sessionCorrect = 0; sessionReviewed = 0;
@@ -440,7 +471,7 @@ function startSession(){
   document.getElementById('startPage').classList.add('hide');
   document.getElementById('donePage').classList.add('hide');
   document.getElementById('learnPage').classList.remove('hide');
-  document.getElementById('startBtn').style.display='none';
+  hideBottomBtn();
   refreshStats();
   nextCard();
 }
@@ -449,9 +480,19 @@ function nextCard(){
   if(queue.length===0){ showDone(); return; }
   current = queue.shift();
   typed = '';
-  document.getElementById('exEn').innerHTML = makeBlank(current.en, current.w);
-  current.seg = _lastSeg;
-  document.getElementById('exCn').textContent = current.cn;
+  if(sessionMode === 'meaning'){
+    // 释义记：显示中文释义 + （____）填单词
+    const bw = (current.w.length + 2) * 14 + 20;
+    document.getElementById('exEn').innerHTML = '<div style="font-size:25px;font-weight:700;color:#1f2937;line-height:1.7;margin-bottom:6px">'+current.m+'</div><div style="font-size:17px;color:#6b7280">（<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>）</div>';
+    document.getElementById('exCn').textContent = '';
+    current.seg = current.w;
+    current.segFirst = false;
+  } else {
+    document.getElementById('exEn').innerHTML = makeBlank(current.en, current.w);
+    current.seg = _lastSeg;
+    current.segFirst = _lastSegFirst;
+    document.getElementById('exCn').textContent = current.cn;
+  }
   document.getElementById('phon').textContent = current.p;
   document.getElementById('phon').style.display = 'none';
   document.getElementById('phon').style.cursor = 'pointer';
@@ -499,6 +540,40 @@ function synthKey(){
     o.start(t); o.stop(t + 0.06);
   }catch(e){}
 }
+// 答对成功音效：上行三音（C-E-G 短促欢快）
+function playOkSound(){
+  try{
+    if(!_kctx) _kctx = new (window.AudioContext || window.webkitAudioContext)();
+    if(_kctx.state === 'suspended'){ _kctx.resume(); }
+    var t = _kctx.currentTime;
+    [523.25, 659.25, 783.99].forEach(function(f, i){
+      var o = _kctx.createOscillator(), g = _kctx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      var s = t + i * 0.085;
+      g.gain.setValueAtTime(0.0001, s);
+      g.gain.exponentialRampToValueAtTime(0.16, s + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, s + 0.26);
+      o.connect(g); g.connect(_kctx.destination);
+      o.start(s); o.stop(s + 0.28);
+    });
+  }catch(e){}
+}
+// 答错警示音效：下行低沉（短促）
+function playErrSound(){
+  try{
+    if(!_kctx) _kctx = new (window.AudioContext || window.webkitAudioContext)();
+    if(_kctx.state === 'suspended'){ _kctx.resume(); }
+    var t = _kctx.currentTime, o = _kctx.createOscillator(), g = _kctx.createGain();
+    o.type = 'sawtooth';
+    o.frequency.setValueAtTime(220, t);
+    o.frequency.exponentialRampToValueAtTime(110, t + 0.25);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.13, t + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.3);
+    o.connect(g); g.connect(_kctx.destination);
+    o.start(t); o.stop(t + 0.32);
+  }catch(e){}
+}
 function playKeySound(){
   try{
     if(!_keyAudio){
@@ -537,7 +612,9 @@ function renderKeyboard(){
 
 function pressKey(l){
   if(typed.length >= current.w.length + 2) return;
-  typed += l.toLowerCase();
+  // 句首挖空时首字母自动大写（键盘不区分大小写）
+  if(!typed && current.segFirst) typed += l.toUpperCase();
+  else typed += l.toLowerCase();
   updateBlank();
   playKeySound();
 }
@@ -592,6 +669,7 @@ function check(){
 
   if(isCorrect(typed, current.w, current.seg)){
     sessionCorrect++;
+    playOkSound();
     if(mode==='review'){
       const idx = reviewSet.indexOf(target);
       if(idx>-1) reviewSet.splice(idx,1);
@@ -605,6 +683,7 @@ function check(){
     document.getElementById('actionArea').innerHTML += '<div style="display:flex;gap:10px;margin-top:12px"><button onclick="passCard()" style="flex:1;padding:12px;background:#10b981;color:#fff;border:none;border-radius:10px;font-size:14px;cursor:pointer">'+btnText+'</button><button onclick="reviewCard()" style="flex:1;padding:12px;background:#fff;color:#f59e0b;border:2px solid #f59e0b;border-radius:10px;font-size:14px;cursor:pointer">加入复习</button></div>';
   } else {
     sessionReviewed++;
+    playErrSound();
     if(!reviewSet.includes(target)){ reviewSet.push(target); saveState(); }
     fb.className = 'feedback err';
     fb.innerHTML = '✗ 正确答案：<b>'+current.w+'</b>（'+current.m+'）';
@@ -635,7 +714,6 @@ function showDone(){
   document.getElementById('learnPage').classList.add('hide');
   document.getElementById('startPage').classList.add('hide');
   document.getElementById('donePage').classList.remove('hide');
-  document.getElementById('startBtn').style.display='block';
   const acc = sessionAnswered>0 ? Math.round(sessionCorrect/sessionAnswered*100)+'%' : '0%';
   const accNum = sessionAnswered>0 ? Math.round(sessionCorrect/sessionAnswered*100) : 0;
   const accColor = accNum>80 ? '#10b981' : '#f59e0b';
@@ -644,23 +722,20 @@ function showDone(){
     document.getElementById('doneMsg').innerHTML = reviewSet.length>0
       ? '还剩 <b style="color:#f59e0b">'+reviewSet.length+'</b> 个待巩固，是否重新复习？'
       : '恭喜！全部掌握了！';
-    document.getElementById('startBtn').textContent = reviewSet.length>0 ? '重新复习' : '返回';
-    document.getElementById('startBtn').onclick = function(){ setMode('review'); startSession(); };
+    setBottomBtn(reviewSet.length>0 ? '重新复习' : '返回',
+      reviewSet.length>0 ? function(){ setMode('review'); startSession(); } : function(){ setMode('learn'); }, true);
   } else if(remainNew()===0 && reviewSet.length===0){
     document.getElementById('doneTitle').textContent = '🎉 恭喜！';
     document.getElementById('doneMsg').innerHTML = '全部单词记忆完成！正确率 <b style="color:#10b981">'+acc+'</b>';
-    document.getElementById('startBtn').textContent = '全部重新一遍';
-    document.getElementById('startBtn').onclick = resetAll;
+    setBottomBtn('全部重新一遍', resetAll, true);
   } else if(remainNew()===0 && reviewSet.length>0){
     document.getElementById('doneTitle').textContent = '本轮完成！';
     document.getElementById('doneMsg').innerHTML = '掌握 <b style="color:#10b981">'+sessionCorrect+'</b> 个，待复习 <b style="color:#f59e0b">'+sessionReviewed+'</b> 个，正确率 <b style="color:'+accColor+'">'+acc+'</b>';
-    document.getElementById('startBtn').textContent = '去复习';
-    document.getElementById('startBtn').onclick = function(){ setMode('review'); startSession(); };
+    setBottomBtn('去复习', function(){ setMode('review'); startSession(); }, true);
   } else {
     document.getElementById('doneTitle').textContent = '本轮完成！';
     document.getElementById('doneMsg').innerHTML = '掌握 <b style="color:#10b981">'+sessionCorrect+'</b> 个，待复习 <b style="color:#f59e0b">'+sessionReviewed+'</b> 个，正确率 <b style="color:'+accColor+'">'+acc+'</b>';
-    document.getElementById('startBtn').textContent = '继续学新词';
-    document.getElementById('startBtn').onclick = onBottomBtn;
+    setBottomBtn('继续学新词', onBottomBtn, false);
   }
 }
 
@@ -671,13 +746,13 @@ function resetAll(){
   setMode('learn');
 }
 
-function onBottomBtn(){
+function onBottomBtn(mode2){
+  if(mode2) sessionMode = mode2;
   if(!document.getElementById('startPage').classList.contains('hide')){ startSession(); }
   else if(!document.getElementById('donePage').classList.contains('hide')){
     document.getElementById('donePage').classList.add('hide');
     document.getElementById('startPage').classList.remove('hide');
-    document.getElementById('startBtn').style.display='block';
-    document.getElementById('startBtn').textContent = mode==='learn' ? '开始记单词' : '开始复习';
+    setBottomBtn(mode==='learn' ? '开始记单词' : '开始复习', onBottomBtn, false);
     if(mode==='review' && reviewSet.length>0) startSession();
     refreshStats();
   }
