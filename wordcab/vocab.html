@@ -364,7 +364,7 @@ function isCorrect(typed, w, seg){
 }
 
 function refreshAllGradeStats(){
-  let totalDone = 0, totalRemain = 0, totalAll = 0;
+  let masteredTotal = 0, totalAll = 0;
   ['basic','core','extra'].forEach(g=>{
     try{
       const data = GRADE_MAP[g].data;
@@ -377,13 +377,30 @@ function refreshAllGradeStats(){
         mastered = j.mastered || [];
         review = j.review || [];
       }
-      totalDone += mastered.length + review.length;
-      totalRemain += data.filter(w => !mastered.includes(w.w.toLowerCase()) && !review.includes(w.w.toLowerCase())).length;
+      masteredTotal += mastered.length;
     }catch(e){}
   });
   const name = STUDENT_MAP[_auth] || localStorage.getItem('dd_name') || '同学';
   const el = document.getElementById('headerInfo');
-  if(el) el.textContent = name + ' 已学' + totalDone + ' 剩余' + totalRemain + '/共' + totalAll;
+  if(el) el.innerHTML = name + buildAchievements(masteredTotal);
+}
+// 成就图标：每 20 词一颗小黄星，满 5 星 = 1 蓝月亮（100 词），满 5 月亮 = 1 太阳（500 词）
+// 5 个固定槽位：[☀️] [🌙] [⭐] [⭐] [⭐]（空槽淡 ○ 占位；太阳/月亮带数量防溢出）
+function buildAchievements(m){
+  const sun = Math.floor(m/500);
+  const moon = Math.floor((m%500)/100);
+  const star = Math.floor((m%100)/20);
+  const slots = ['', '', '', '', ''];
+  if(sun>0) slots[0] = '☀️'+(sun>1?'×'+sun:'');
+  if(moon>0) slots[1] = '🌙'+(moon>1?'×'+moon:'');
+  if(star>=4) slots[2] = '⭐×4';
+  else { for(let i=0;i<star;i++) slots[2+i] = '⭐'; }
+  const t = ['太阳 · 500词','蓝月亮 · 100词','小黄星 · 20词'];
+  return '<span style="display:inline-flex;gap:3px;margin-left:6px;font-size:13px;vertical-align:middle">'+
+    slots.map((s,i)=> s
+      ? '<span style="line-height:1" title="'+t[Math.min(i,2)]+'">'+s+'</span>'
+      : '<span style="opacity:.22;line-height:1">○</span>').join('') +
+    '</span>';
 }
 function refreshStats(){
   // header显示总数，选项卡显示当前年级
