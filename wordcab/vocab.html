@@ -91,7 +91,7 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 <body>
 <div class="header">
   <h1>单词一扫光</h1>
-  <div style="margin-left:auto;font-size:12px;color:#9ca3af" id="headerInfo"></div>
+  <div style="margin-left:auto;font-size:12px;color:#1f2937" id="headerInfo"></div>
 </div>
 <div class="container">
   <!-- 词源分级选择 -->
@@ -382,7 +382,7 @@ function refreshAllGradeStats(){
   });
   const name = STUDENT_MAP[_auth] || localStorage.getItem('dd_name') || '同学';
   const el = document.getElementById('headerInfo');
-  if(el) el.innerHTML = name + buildAchievements(masteredTotal) + '<span style="margin-left:5px;font-size:12px;color:#6b7280;font-weight:600">'+masteredTotal+'</span>';
+  if(el) el.innerHTML = name + buildAchievements(masteredTotal) + '<span style="margin-left:5px;font-size:12px;color:#9ca3af;font-weight:600">'+masteredTotal+'</span>';
 }
 // 成就图标：每 20 词一颗小黄星，满 5 星 = 1 蓝月亮（100 词），满 5 月亮 = 1 太阳（500 词）
 // 从左往右占位，无图标的位置不显示（最多 5 个）；太阳/月亮带数量防溢出，星星优先逐个显示
