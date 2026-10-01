@@ -46,7 +46,7 @@
   .loading-txt .pct{font-weight:900;font-style:normal}
   .spin{width:12px;height:12px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;display:inline-block;animation:rot .7s linear infinite}
   @keyframes rot{to{transform:rotate(360deg)}}
-  .tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:16px auto 2px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-start;margin:16px auto 2px}
   .tab{flex:0 0 auto;min-width:58px;text-align:center;padding:8px 12px;border-radius:20px;background:#eef2f7;color:#64748b;font-size:13px;font-weight:700;transition:all .25s;cursor:pointer}
   .tab.active{background:linear-gradient(135deg,#ff6b9d,#818cf8);color:#fff;box-shadow:0 4px 14px rgba(255,107,157,.35)}
   .main-panel{background:rgba(255,255,255,.92);border-radius:20px;padding:18px 14px;margin-bottom:16px;box-shadow:0 6px 24px rgba(30,41,59,.08);border:1.5px solid rgba(255,255,255,.9)}
@@ -57,7 +57,8 @@
   .block-list{display:flex;flex-direction:column;gap:9px}
   .extra-sec{display:flex;flex-direction:column;gap:10px}
   .extra-sec .unit-card{margin:0}
-  .blk-row{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid #e2e8f0;border-radius:14px;padding:10px 12px;cursor:pointer;transition:all .2s}
+  .blk-wrap{display:flex;align-items:center;gap:8px}
+  .blk-row{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid #e2e8f0;border-radius:14px;padding:10px 12px;cursor:pointer;transition:all .2s}
   .blk-row:active{transform:scale(.985)}
   .blk-row.playing{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-color:#6ee7b7}
   .blk-row.loading{background:linear-gradient(135deg,#fffbeb,#fef3c7);border-color:#fbbf24}
@@ -107,16 +108,19 @@ function fmtDur(d){
 }
 function renderBlock(b, color){
   var id = 'blk'+b.file.replace(/[^a-z0-9]/g,'');
-  return '<div class="blk-row" id="'+id+'" data-file="'+b.file+'" data-title="'+esc(b.title)+'" onclick="playBlock(this)">' +
-    '<span class="blk-ic"><span class="ic-play">▶</span></span>' +
-    '<span class="blk-main">' +
-      '<span class="blk-name" style="color:'+color+'">'+esc(b.name)+'</span>' +
-      '<span class="blk-sub">' +
-        '<span class="blk-title">'+esc(b.title)+'</span>' +
-        '<span class="blk-dur">'+fmtDur(b.dur)+'</span>' +
+  return '<div class="blk-wrap">' +
+    '<div class="blk-row" id="'+id+'" data-file="'+b.file+'" data-title="'+esc(b.title)+'" onclick="playBlock(this)">' +
+      '<span class="blk-ic"><span class="ic-play">▶</span></span>' +
+      '<span class="blk-main">' +
+        '<span class="blk-name" style="color:'+color+'">'+esc(b.name)+'</span>' +
+        '<span class="blk-sub">' +
+          '<span class="blk-title">'+esc(b.title)+'</span>' +
+          '<span class="blk-dur">'+fmtDur(b.dur)+'</span>' +
+        '</span>' +
       '</span>' +
-    '</span>' +
-    '<span class="blk-pause" onclick="event.stopPropagation();togglePause(this)">⏸</span></div>';
+    '</div>' +
+    '<span class="blk-pause" onclick="togglePause(this)">⏸</span>' +
+  '</div>';
 }
 function renderUnits(){
   var h = '';
@@ -159,7 +163,7 @@ function switchUnit(n){
   var h = '';
   u.blocks.forEach(function(b){ h += renderBlock(b, u.c1); });
   document.getElementById('blockList').innerHTML = h;
-  u.blocks.forEach(function(b){ preloadBlob(b.file); });
+  u.blocks.forEach(function(b){ preloadAudio2(b.file); });
 }
 function toggleUnit(head){
   var card = head.parentElement;
@@ -172,42 +176,60 @@ function toggleUnit(head){
     if(c !== card) c.classList.remove('open');
   });
   card.classList.add('open');
-  // 展开时后台预加载该单元全部块音频，点播放即可秒开
-  card.querySelectorAll('.blk-row').forEach(function(r){ preloadBlob(r.dataset.file); });
+  // 展开时后台预取该单元全部块音频，点播放即可快速出声
+  card.querySelectorAll('.blk-row').forEach(function(r){ preloadAudio2(r.dataset.file); });
 }
-// === 播放体系：XHR 下载（字节级真实进度）→ blob 秒播 ===
+// === 播放体系：Audio 渐进播放（立即出声、声音不中断）+ XHR 后台真实进度 ===
 var _cur = null;
 var _paused = false;
-var _blobCache = {};   // file -> blob URL（下载完成）
+var _blobCache = {};   // file -> blob URL（XHR 下载完成）
 var _xhrCache = {};    // file -> 进行中的 XHR
-function preloadBlob(file){
-  if(_blobCache[file] || _xhrCache[file]) return;
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'audio/' + file, true);
-  xhr.responseType = 'blob';
-  _xhrCache[file] = xhr;
-  xhr.onload = function(){
-    if(xhr.status === 200 || xhr.status === 0){
-      _blobCache[file] = URL.createObjectURL(xhr.response);
-    }
-    delete _xhrCache[file];
-  };
-  xhr.onerror = function(){ delete _xhrCache[file]; };
-  xhr.send();
+var _audioCache = {};  // file -> 预加载的 Audio 实例
+function preloadAudio2(file){
+  if(_audioCache[file]) return;
+  var a = new Audio('audio/' + file);
+  a.preload = 'auto';
+  a.load();
+  _audioCache[file] = a;
 }
 function playBlock(row){
   var file = row.dataset.file;
   if(_cur && _cur.file === file){ stopBlock(); return; }
   stopBlock();
-  // 立即登记当前加载目标（下载中也算"正在加载该块"），进度回调才能匹配
   _cur = {file:file, audio:null, row:row, started:false};
   row.classList.add('loading');
   row.querySelector('.ic-play').innerHTML = '<span class="spin"></span>';
   row.querySelector('.blk-title').innerHTML = '<span class="loading-txt">加载中 <b class="pct">0%</b></span>';
+  // 1) Audio 渐进播放：点播放立即出声，缓冲期间也不中断（优先本地 blob，其次预取实例）
+  var a;
   if(_blobCache[file]){
-    startPlay(row, file, _blobCache[file]);
-    return;
+    a = new Audio(_blobCache[file]);
+  } else {
+    a = _audioCache[file] || new Audio('audio/' + file);
+    a.preload = 'auto';
   }
+  _cur.audio = a;
+  a.oncanplay = function(){ enterPlaying(row); };
+  a.onplaying = function(){ enterPlaying(row); };
+  a.onended = function(){ resetBlock(); };
+  a.onerror = function(){
+    if(_blobCache[file]){
+      var a2 = new Audio(_blobCache[file]);
+      _cur.audio = a2;
+      a2.play().catch(function(){});
+      a2.onended = function(){ resetBlock(); };
+      a2.onerror = function(){ loadFail(row); };
+      enterPlaying(row);
+      return;
+    }
+    loadFail(row);
+  };
+  a.play().catch(function(){});
+  // 2) XHR 并行下载：真实字节进度，完成即缓存供后续秒开
+  startProgXhr(row, file);
+}
+function startProgXhr(row, file){
+  if(_blobCache[file]){ finishTitle(row); return; }
   var xhr = _xhrCache[file];
   if(!xhr){
     xhr = new XMLHttpRequest();
@@ -227,35 +249,28 @@ function playBlock(row){
   xhr.onload = function(){
     if(xhr.status === 200 || xhr.status === 0){
       _blobCache[file] = URL.createObjectURL(xhr.response);
-      if(_cur && _cur.row === row && _cur.file === file && !_cur.started){
-        startPlay(row, file, _blobCache[file]);
-      }
-    } else if(_cur && _cur.row === row && _cur.file === file){
-      loadFail(row);
     }
     delete _xhrCache[file];
+    if(_cur && _cur.row === row && _cur.file === file) finishTitle(row);
   };
-  xhr.onerror = function(){
-    delete _xhrCache[file];
-    if(_cur && _cur.row === row && _cur.file === file) loadFail(row);
-  };
+  xhr.onerror = function(){ delete _xhrCache[file]; };
 }
-function startPlay(row, file, url){
-  if(_cur && _cur.file === file && _cur.started) return;
-  var a = new Audio(url);
-  _cur = {file:file, audio:a, row:row, started:true};
-  a.play().catch(function(){});
+function enterPlaying(row){
+  if(!_cur || _cur.row !== row || _cur.started) return;
+  _cur.started = true;
   row.classList.remove('loading');
   row.classList.add('playing');
-  row.querySelector('.blk-title').textContent = row.dataset.title;
   row.querySelector('.ic-play').innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
-  var pb = row.querySelector('.blk-pause');
+  var pb = row.parentElement.querySelector('.blk-pause');
   if(pb){ pb.textContent = '⏸'; pb.classList.remove('on'); }
-  a.onended = function(){ resetBlock(); };
-  a.onerror = function(){ resetBlock(); };
+}
+function finishTitle(row){
+  var t = row.querySelector('.blk-title');
+  if(t && t.querySelector('.loading-txt')) t.textContent = row.dataset.title;
 }
 function togglePause(btn){
-  if(!_cur || _cur.row !== btn.parentElement || !_cur.started) return;
+  var row = btn.parentElement.querySelector('.blk-row');
+  if(!_cur || _cur.row !== row || !_cur.started) return;
   if(_paused){
     _cur.audio.play().catch(function(){});
     _paused = false;
@@ -281,7 +296,7 @@ function loadFail(row){
 }
 function stopBlock(){
   if(_cur){
-    try{ _cur.audio.pause(); _cur.audio.currentTime = 0; }catch(e){}
+    try{ if(_cur.audio){ _cur.audio.pause(); _cur.audio.currentTime = 0; } }catch(e){}
     resetBlock();
   }
 }
@@ -291,7 +306,7 @@ function resetBlock(){
     row.classList.remove('loading','playing');
     var ip = row.querySelector('.ic-play'); if(ip) ip.innerHTML = '▶';
     var t = row.querySelector('.blk-title'); if(t) t.textContent = row.dataset.title;
-    var pb = row.querySelector('.blk-pause');
+    var pb = row.parentElement.querySelector('.blk-pause');
     if(pb){ pb.textContent = '⏸'; pb.classList.remove('on'); }
     _cur = null;
     _paused = false;
