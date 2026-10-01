@@ -27,7 +27,6 @@
   .hero h1{font-size:24px;font-weight:900;
            background:linear-gradient(90deg,#ff6b9d,#818cf8,#34d399,#fbbf24);
            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-  .hero .tip{margin-top:8px;font-size:13px;color:#6b7280}
   .badge-wrap{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
   .badge{display:inline-block;background:linear-gradient(90deg,#ff6b9d,#f472b6);color:#fff;font-size:11px;font-weight:700;padding:5px 14px;border-radius:999px}
   .home-btn{display:inline-block;background:rgba(255,255,255,.85);color:#ff6b9d;font-size:13px;font-weight:700;padding:7px 16px;border-radius:999px;text-decoration:none;border:1.5px solid #ff6b9d}
@@ -61,6 +60,20 @@
   .spin{width:12px;height:12px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;display:inline-block;animation:rot .7s linear infinite}
   @keyframes rot{to{transform:rotate(360deg)}}
   .dots{display:inline-flex;gap:2.5px;align-items:flex-end;height:12px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:16px auto 2px}
+  .tab{flex:0 0 auto;min-width:58px;text-align:center;padding:8px 12px;border-radius:20px;background:#eef2f7;color:#64748b;font-size:13px;font-weight:700;transition:all .25s;cursor:pointer}
+  .tab.active{background:linear-gradient(135deg,#ff6b9d,#818cf8);color:#fff;box-shadow:0 4px 14px rgba(255,107,157,.35)}
+  .main-panel{background:rgba(255,255,255,.92);border-radius:20px;padding:18px 14px;margin-bottom:16px;box-shadow:0 6px 24px rgba(30,41,59,.08);border:1.5px solid rgba(255,255,255,.9)}
+  .main-title{display:flex;align-items:baseline;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+  .mt-en{font-size:20px;font-weight:900;color:#1e293b}
+  .mt-name{font-size:17px;font-weight:800;color:#ff6b9d}
+  .mt-cn{font-size:14px;color:#94a3b8}
+  .big-btn{display:block;margin:0 auto 16px;width:78px;height:78px;border-radius:50%;border:none;background:linear-gradient(135deg,#ff6b9d,#818cf8);color:#fff;font-size:30px;line-height:1;box-shadow:0 10px 24px rgba(255,107,157,.4);cursor:pointer;transition:transform .15s}
+  .big-btn:active{transform:scale(.92)}
+  .big-ic{display:block;line-height:1}
+  .block-list{display:flex;flex-direction:column;gap:9px}
+  .extra-sec{display:flex;flex-direction:column;gap:10px}
+  .extra-sec .unit-card{margin:0}
   .dots i{width:3px;background:#fff;border-radius:2px;animation:dotB .9s ease-in-out infinite}
   .dots i:nth-child(2){animation-delay:.18s}
   .dots i:nth-child(3){animation-delay:.36s}
@@ -75,7 +88,6 @@
       <a class="home-btn" href="../index.html">返回主页</a>
     </div>
     <h1>三年级上册 · 课文跟读</h1>
-    <p class="tip">点击单元展开即后台预加载；点 Part 名整段朗读，加载中显示进度</p>
   </div>
   <div id="box"></div>
 </div>
@@ -93,8 +105,7 @@ function fmtDur(d){
 }
 function renderBlock(b, color){
   var id = 'blk'+b.file.replace(/[^a-z0-9]/g,'');
-  return '<div class="blk-row" id="'+id+'" data-file="'+b.file+'" data-title="'+esc(b.title)+'"' +
-         ' style="border-left:4px solid '+color+'" onclick="playBlock(this)">' +
+  return '<div class="blk-row" id="'+id+'" data-file="'+b.file+'" data-title="'+esc(b.title)+'" onclick="playBlock(this)">' +
     '<span class="blk-ic"><span class="ic-play">▶</span></span>' +
     '<span class="blk-name" style="color:'+color+'">'+esc(b.name)+'</span>' +
     '<span class="blk-sep">|</span>' +
@@ -103,15 +114,21 @@ function renderBlock(b, color){
 }
 function renderUnits(){
   var h = '';
-  UNITS.forEach(function(u){
-    h += '<div class="unit-card" id="u'+u.un.replace('Unit ','')+'">' +
-      '<div class="unit-head" style="background:linear-gradient(135deg,'+u.c1+','+u.c2+')" onclick="toggleUnit(this)">' +
-      '<span class="unum">'+u.un+'</span><span class="utitle">'+u.title+'</span><span class="ucn">'+u.cn+'</span>' +
-      '<span class="arrow">▾</span></div><div class="unit-body">' +
-      '<p class="play-hint">共 '+u.blocks.length+' 块 · 点 Part 名整段朗读</p>';
-    u.blocks.forEach(function(b){ h += renderBlock({name:b.name, title:b.title, file:b.file, dur:b.dur}, u.c1); });
-    h += '</div></div>';
+  // 单元选项卡（素色 + 选中色）
+  h += '<div class="tabs">';
+  UNITS.forEach(function(u, i){
+    var n = i + 1;
+    h += '<span class="tab'+(n===1?' active':'')+'" data-n="'+n+'" onclick="switchUnit('+n+')">'+u.un+'</span>';
   });
+  h += '</div>';
+  // 主区：单元名 + 大播放/暂停按钮 + 该单元块列表
+  h += '<div class="main-panel">' +
+       '<div class="main-title"><span class="mt-en" id="mtEn"></span>' +
+       '<span class="mt-name" id="mtName"></span><span class="mt-cn" id="mtCn"></span></div>' +
+       '<button class="big-btn" id="bigBtn" onclick="toggleBig()"><span class="big-ic">▶</span></button>' +
+       '<div class="block-list" id="blockList"></div></div>';
+  // 复习与附录：留在下方不动
+  h += '<div class="extra-sec">';
   EXTRAS.forEach(function(e){
     h += '<div class="unit-card" id="ex'+e.file.replace(/[^a-z0-9]/g,'')+'">' +
       '<div class="unit-head" style="background:linear-gradient(135deg,'+e.c1+','+e.c2+')" onclick="toggleUnit(this)">' +
@@ -120,16 +137,64 @@ function renderUnits(){
       renderBlock({name:e.tag, title:e.title, file:e.file, dur:e.dur}, e.c1) +
       '</div></div>';
   });
+  h += '</div>';
   box.innerHTML = h;
+  switchUnit(1);
+}
+var _curUnit = 1;
+function switchUnit(n){
+  _curUnit = n;
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.classList.toggle('active', (+t.dataset.n) === n);
+  });
+  var u = UNITS[n-1];
+  document.getElementById('mtEn').textContent = u.un;
+  document.getElementById('mtName').textContent = u.title;
+  document.getElementById('mtCn').textContent = u.cn;
+  var h = '';
+  u.blocks.forEach(function(b){ h += renderBlock(b, u.c1); });
+  document.getElementById('blockList').innerHTML = h;
+  u.blocks.forEach(function(b){ preloadAudio(b.file); });
+  setBig('▶');
+}
+var _paused = false;
+function toggleBig(){
+  if(_cur && _cur.started){
+    if(_paused){
+      _cur.audio.play().catch(function(){});
+      _paused = false;
+      setBig('⏸');
+      var ip = _cur.row.querySelector('.ic-play');
+      if(ip) ip.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
+    } else {
+      _cur.audio.pause();
+      _paused = true;
+      setBig('▶');
+      var ip = _cur.row.querySelector('.ic-play');
+      if(ip) ip.innerHTML = '▶';
+    }
+    return;
+  }
+  var first = document.querySelector('#blockList .blk-row');
+  if(first) playBlock(first);
+}
+function setBig(ic){
+  var b = document.getElementById('bigBtn');
+  if(b){ var s = b.querySelector('.big-ic'); if(s) s.textContent = ic; }
 }
 function toggleUnit(head){
   var card = head.parentElement;
-  var wasOpen = card.classList.contains('open');
-  card.classList.toggle('open');
-  if(!wasOpen){
-    // 展开时后台预加载该单元全部块音频，点播放即可秒开
-    card.querySelectorAll('.blk-row').forEach(function(r){ preloadAudio(r.dataset.file); });
+  if(card.classList.contains('open')){
+    card.classList.remove('open');
+    return;
   }
+  // 手风琴单开：先收起其它已展开的单元
+  document.querySelectorAll('.unit-card.open').forEach(function(c){
+    if(c !== card) c.classList.remove('open');
+  });
+  card.classList.add('open');
+  // 展开时后台预加载该单元全部块音频，点播放即可秒开
+  card.querySelectorAll('.blk-row').forEach(function(r){ preloadAudio(r.dataset.file); });
 }
 // === 纯块列表播放（预加载 + 加载进度）===
 var _cur = null;
@@ -151,12 +216,31 @@ function playBlock(row){
   row.classList.add('loading');
   row.querySelector('.ic-play').innerHTML = '<span class="spin"></span>';
   row.querySelector('.blk-title').innerHTML = '<span class="loading-txt">加载中 <b class="pct">0%</b></span>';
+  // 真实进度：按浏览器报告的已缓冲时长 / 总时长 计算，事件驱动 + 轮询兜底
+  function updatePct(){
+    var el = row.querySelector('.pct');
+    if(!el || !a.duration || !a.buffered || !a.buffered.length) return;
+    try{
+      var p = Math.round(a.buffered.end(a.buffered.length-1)/a.duration*100);
+      if(p > 100) p = 100;
+      el.textContent = p + '%';
+    }catch(e){}
+  }
+  function tickPct(){
+    if(!_cur || _cur.file !== file || _cur.started) return;
+    updatePct();
+    setTimeout(tickPct, 250);
+  }
   a.onprogress = function(){
-    var el = _cur ? row.querySelector('.pct') : null;
-    if(el && a.duration && a.buffered && a.buffered.length){
-      try{ el.textContent = Math.round(a.buffered.end(a.buffered.length-1)/a.duration*100)+'%'; }catch(e){}
+    if(_cur && _cur.file === file && !_cur.started) updatePct();
+  };
+  a.onloadedmetadata = function(){
+    if(_cur && _cur.file === file && !_cur.started){
+      updatePct();
+      setTimeout(tickPct, 250);
     }
   };
+  if(a.readyState >= 1) setTimeout(tickPct, 250);
   a.oncanplay = function(){ tryPlay(); };
   a.onerror = function(){ loadFail(); };
   a.onended = function(){ resetBlock(); };
@@ -170,6 +254,7 @@ function playBlock(row){
       row.classList.add('playing');
       row.querySelector('.blk-title').textContent = row.dataset.title;
       row.querySelector('.ic-play').innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
+      setBig('⏸');
     }
   }
   function loadFail(){
@@ -193,6 +278,8 @@ function resetBlock(){
     var ip = row.querySelector('.ic-play'); if(ip) ip.innerHTML = '▶';
     var t = row.querySelector('.blk-title'); if(t) t.textContent = row.dataset.title;
     _cur = null;
+    _paused = false;
+    setBig('▶');
   }
 }
 renderUnits();
