@@ -211,15 +211,14 @@ function playBlock(row){
     a.play().catch(function(){});
     return;
   }
-  // 无缓存：显示真实加载进度 + Audio 渐进播放（立即出声、不中断）
+  // 无缓存：Audio 单路渐进播放优先（先出声），出声后再启动 XHR 下载进度
   row.classList.add('loading');
-  row.querySelector('.blk-title').innerHTML = '<span class="loading-txt">加载中 <b class="pct">0%</b></span>';
+  row.querySelector('.blk-title').innerHTML = '<span class="loading-txt">加载中…</span>';
   var a2 = _audioCache[file] || new Audio('audio/' + file);
   a2.preload = 'auto';
   _cur.audio = a2;
   bindPlay(a2, row);
   a2.play().catch(function(){});
-  startProgXhr(row, file);
 }
 function setStatus(row, kind){
   var st = row.querySelector('.blk-status');
@@ -248,6 +247,9 @@ function bindPlay(a, row){
 }
 function startProgXhr(row, file){
   if(_blobCache[file]){ finishTitle(row); return; }
+  // 标题升级为带真实百分比的加载提示（此时声音已开始）
+  var t = row.querySelector('.blk-title');
+  if(t && t.querySelector('.loading-txt')) t.innerHTML = '<span class="loading-txt">加载中 <b class="pct">0%</b></span>';
   var xhr = _xhrCache[file];
   if(!xhr){
     xhr = new XMLHttpRequest();
@@ -271,7 +273,11 @@ function startProgXhr(row, file){
     delete _xhrCache[file];
     if(_cur && _cur.row === row && _cur.file === file) finishTitle(row);
   };
-  xhr.onerror = function(){ delete _xhrCache[file]; };
+  xhr.onerror = function(){
+    delete _xhrCache[file];
+    // 播放不受影响，仅结束进度显示
+    if(_cur && _cur.row === row && _cur.file === file) finishTitle(row);
+  };
 }
 function enterPlaying(row){
   if(!_cur || _cur.row !== row || _cur.started) return;
@@ -279,6 +285,8 @@ function enterPlaying(row){
   row.classList.remove('loading');
   row.classList.add('playing');
   setStatus(row, 'wav');
+  // 声音已开始，此刻才启动 XHR 后台下载（缓存 + 真实进度），不与首播抢带宽
+  startProgXhr(row, _cur.file);
 }
 function finishTitle(row){
   var t = row.querySelector('.blk-title');
