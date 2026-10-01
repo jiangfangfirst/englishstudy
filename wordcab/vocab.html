@@ -49,13 +49,10 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 .feedback.err { background: #fee2e2; color: #991b1b; display: block; }
 .progress-bar { height: 6px; background: #e5e7eb; border-radius: 3px; margin: 0 auto 16px; overflow: hidden; width: 65%; }
 .progress-fill { height: 100%; background: #10b981; transition: width .3s; }
-.start-split { display: flex; position: relative; margin-top: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 14px rgba(16,185,129,.22); }
-.start-half { flex: 1; padding: 15px 0; color: #fff; border: none; font-size: 16px; font-weight: 700; cursor: pointer; transition: filter .15s; }
+.start-split { display: flex; position: relative; margin-top: 16px; border-radius: 12px; overflow: hidden; background: linear-gradient(113deg, #10b981 0%, #059669 48.7%, rgba(255,255,255,.96) 49.5%, rgba(255,255,255,.96) 50.5%, #0369a1 51.3%, #0ea5e9 100%); box-shadow: 0 4px 14px rgba(16,185,129,.22); }
+.start-half { flex: 1; padding: 15px 0; color: #fff; border: none; font-size: 16px; font-weight: 700; cursor: pointer; transition: filter .15s; background: transparent; }
 .start-half:active { filter: brightness(.92); }
-.start-half.left { background: linear-gradient(135deg,#10b981,#059669); }
-.start-half.right { background: linear-gradient(135deg,#0ea5e9,#0369a1); }
-/* 中间斜线分隔 */
-.start-split::before { content: ''; position: absolute; left: 50%; top: -10px; bottom: -10px; width: 2.5px; background: rgba(255,255,255,.95); transform: rotate(18deg); z-index: 1; pointer-events: none; }
+.start-split.single { background: linear-gradient(135deg,#10b981,#059669); }
 .start-split.single .start-half.right { display: none; }
 .start-split.single .start-half.left { width: 100%; }
 .hide { display: none !important; }
@@ -481,9 +478,11 @@ function nextCard(){
   current = queue.shift();
   typed = '';
   if(sessionMode === 'meaning'){
-    // 释义记：显示中文释义 + （____）填单词
+    // 释义记：显示中文释义 + （____）填单词；短语标注"短语"小标签
     const bw = (current.w.length + 2) * 14 + 20;
-    document.getElementById('exEn').innerHTML = '<div style="font-size:25px;font-weight:700;color:#1f2937;line-height:1.7;margin-bottom:6px">'+current.m+'</div><div style="font-size:17px;color:#6b7280">（<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>）</div>';
+    const isPh = (current.w.trim().indexOf(' ') >= 0);
+    const phTag = isPh ? '<span style="display:inline-block;font-size:11px;color:#d97706;border:1px solid #d97706;border-radius:4px;padding:1px 6px;margin-left:8px;vertical-align:middle;font-weight:400">短语</span>' : '';
+    document.getElementById('exEn').innerHTML = '<div style="font-size:25px;font-weight:700;color:#1f2937;line-height:1.7;margin-bottom:6px">'+current.m+phTag+'</div><div style="font-size:17px;color:#6b7280">（<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>）</div>';
     document.getElementById('exCn').textContent = '';
     current.seg = current.w;
     current.segFirst = false;
@@ -540,38 +539,23 @@ function synthKey(){
     o.start(t); o.stop(t + 0.06);
   }catch(e){}
 }
-// 答对成功音效：上行三音（C-E-G 短促欢快）
+// 答对成功音效：真人"Good job!"（sounds/ok.mp3）
+let _okAudio = null, _errAudio = null;
 function playOkSound(){
   try{
-    if(!_kctx) _kctx = new (window.AudioContext || window.webkitAudioContext)();
-    if(_kctx.state === 'suspended'){ _kctx.resume(); }
-    var t = _kctx.currentTime;
-    [523.25, 659.25, 783.99].forEach(function(f, i){
-      var o = _kctx.createOscillator(), g = _kctx.createGain();
-      o.type = 'sine'; o.frequency.value = f;
-      var s = t + i * 0.085;
-      g.gain.setValueAtTime(0.0001, s);
-      g.gain.exponentialRampToValueAtTime(0.16, s + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.0001, s + 0.26);
-      o.connect(g); g.connect(_kctx.destination);
-      o.start(s); o.stop(s + 0.28);
-    });
+    if(!_okAudio){ _okAudio = new Audio('sounds/ok.mp3'); _okAudio.preload = 'auto'; }
+    _okAudio.currentTime = 0;
+    var p = _okAudio.play();
+    if(p && p.catch) p.catch(function(){});
   }catch(e){}
 }
-// 答错警示音效：下行低沉（短促）
+// 答错警示音效：alert 双短一长警示音（sounds/err.wav）
 function playErrSound(){
   try{
-    if(!_kctx) _kctx = new (window.AudioContext || window.webkitAudioContext)();
-    if(_kctx.state === 'suspended'){ _kctx.resume(); }
-    var t = _kctx.currentTime, o = _kctx.createOscillator(), g = _kctx.createGain();
-    o.type = 'sawtooth';
-    o.frequency.setValueAtTime(220, t);
-    o.frequency.exponentialRampToValueAtTime(110, t + 0.25);
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(0.13, t + 0.015);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.3);
-    o.connect(g); g.connect(_kctx.destination);
-    o.start(t); o.stop(t + 0.32);
+    if(!_errAudio){ _errAudio = new Audio('sounds/err.wav'); _errAudio.preload = 'auto'; }
+    _errAudio.currentTime = 0;
+    var p = _errAudio.play();
+    if(p && p.catch) p.catch(function(){});
   }catch(e){}
 }
 function playKeySound(){
@@ -653,7 +637,6 @@ function showPhonetic(){
 
 function check(){
   if(!current) return;
-  playKeySound();
   const v = typed.toLowerCase();
   const target = current.w.toLowerCase();
   sessionAnswered++;
