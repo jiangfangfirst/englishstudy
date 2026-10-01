@@ -382,24 +382,24 @@ function refreshAllGradeStats(){
   });
   const name = STUDENT_MAP[_auth] || localStorage.getItem('dd_name') || '同学';
   const el = document.getElementById('headerInfo');
-  if(el) el.innerHTML = name + buildAchievements(masteredTotal);
+  if(el) el.innerHTML = name + buildAchievements(masteredTotal) + '<span style="margin-left:5px;font-size:12px;color:#6b7280;font-weight:600">'+masteredTotal+'</span>';
 }
 // 成就图标：每 20 词一颗小黄星，满 5 星 = 1 蓝月亮（100 词），满 5 月亮 = 1 太阳（500 词）
-// 5 个固定槽位：[☀️] [🌙] [⭐] [⭐] [⭐]（空槽淡 ○ 占位；太阳/月亮带数量防溢出）
+// 从左往右占位，无图标的位置不显示（最多 5 个）；太阳/月亮带数量防溢出，星星优先逐个显示
 function buildAchievements(m){
   const sun = Math.floor(m/500);
   const moon = Math.floor((m%500)/100);
   const star = Math.floor((m%100)/20);
-  const slots = ['', '', '', '', ''];
-  if(sun>0) slots[0] = '☀️'+(sun>1?'×'+sun:'');
-  if(moon>0) slots[1] = '🌙'+(moon>1?'×'+moon:'');
-  if(star>=4) slots[2] = '⭐×4';
-  else { for(let i=0;i<star;i++) slots[2+i] = '⭐'; }
-  const t = ['太阳 · 500词','蓝月亮 · 100词','小黄星 · 20词'];
+  const icons = [];
+  if(sun>0) icons.push('☀️'+(sun>1?'×'+sun:''));
+  if(moon>0) icons.push('🌙'+(moon>1?'×'+moon:''));
+  if(star>0){
+    if(icons.length + star <= 5){ for(let i=0;i<star;i++) icons.push('⭐'); }
+    else icons.push('⭐×'+star);
+  }
+  const ti = s => s.indexOf('☀️')>=0 ? '太阳 · 500词' : s.indexOf('🌙')>=0 ? '蓝月亮 · 100词' : '小黄星 · 20词';
   return '<span style="display:inline-flex;gap:3px;margin-left:6px;font-size:13px;vertical-align:middle">'+
-    slots.map((s,i)=> s
-      ? '<span style="line-height:1" title="'+t[Math.min(i,2)]+'">'+s+'</span>'
-      : '<span style="opacity:.22;line-height:1">○</span>').join('') +
+    icons.map(s => '<span style="line-height:1" title="'+ti(s)+'">'+s+'</span>').join('') +
     '</span>';
 }
 function refreshStats(){
