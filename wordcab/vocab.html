@@ -1,22 +1,23 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<!-- 登录检查已注释（本地预览用）
 <script>
 // 登录检查：未登录跳回login.html
 if(!localStorage.getItem('dd_auth')){ location.href='../login.html'; }
 </script>
+-->
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>单词一扫光</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: linear-gradient(-45deg,#e0f2fe,#ecfdf5,#fffbeb); background-size: 400% 400%; animation: grad 15s ease infinite; min-height: 100vh; }
-@keyframes grad { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-.header { background: rgba(255,255,255,.95); backdrop-filter: blur(10px); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,.06); position: sticky; top: 0; z-index: 10; flex-wrap: wrap; gap: 8px; }
-.header h1 { font-size: 22px; font-weight: 700; background: linear-gradient(135deg,#059669,#10b981,#34d399); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-.stats { display: flex; gap: 16px; font-size: 12px; color: #9ca3af; }
-.stats b { color: #9ca3af; font-size: 12px; font-weight: 400; }
+body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: #f7f7f7; min-height: 100vh; }
+.header { background: #666; padding: 22px 24px 14px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 6px 24px rgba(0,0,0,.35); position: sticky; top: 0; z-index: 10; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #888; }
+.header h1 { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,.25); }
+.stats { display: flex; gap: 16px; font-size: 12px; color: rgba(255,255,255,.72); }
+.stats b { color: rgba(255,255,255,.72); font-size: 12px; font-weight: 400; }
 .container { max-width: 600px; margin: 10px auto; padding: 0 12px; }
 .card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,.08); }
 
@@ -27,17 +28,18 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 #modeTabs .tab.active::after { content: ''; position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%); width: 40px; height: 3px; background: #10b981; border-radius: 2px; }
 .tab.disabled { opacity: .35; pointer-events: none; }
 
-/* 年级选择：文字式，无背景无边框 */
-.grade-tabs { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin: 28px 4px; border-bottom: none; }
-.grade-tabs .tab { padding: 8px 4px; margin-bottom: 0; font-size: 13px; color: #9ca3af; background: none; border: none; transition: all .2s; }
+/* 年级选择：与 header 紧连，共同 #666 底色，连接处凹槽 */
+.grade-tabs { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin: 0; border-bottom: none; border-top: 1px solid #555; background: #666; }
+.grade-tabs .tab { padding: 10px 4px; margin-bottom: 0; font-size: 13px; color: #d6d6d6; background: none; border: none; transition: all .2s; }
 .grade-tabs .tab .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: currentColor; margin-right: 4px; vertical-align: middle; opacity: .5; }
-.grade-tabs .tab.active { color: #10b981; font-weight: 600; font-size: 15px; }
-.grade-tabs .tab.active .dot { opacity: 1; background: #10b981; animation: breathe 2s ease-in-out infinite; box-shadow: 0 0 0 0 rgba(16,185,129,.6); }
+.grade-tabs .tab.active { color: #4ade80; font-weight: 600; font-size: 15px; }
+.grade-tabs .tab.active .dot { opacity: 1; background: #4ade80; animation: breathe 2s ease-in-out infinite; box-shadow: 0 0 0 0 rgba(74,222,128,.6); }
 @keyframes breathe {
-  0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,.6); }
-  50% { box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+  0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,.6); }
+  50% { box-shadow: 0 0 0 6px rgba(74,222,128,0); }
 }
-.grade-tabs .tab:hover { color: #374151; }
+.grade-tabs .tab:hover { color: rgba(255,255,255,.92); }
+.grade-tabs .tab-count { color: rgba(255,255,255,.55); }
 .grade-tabs .tab .tab-count { display: block; font-size: 10px; font-weight: 400; color: #b0b7c3; margin-top: 2px; }
 
 .example-en { font-size: 20px; line-height: 1.8; color: #1f2937; margin-bottom: 12px; }
@@ -72,7 +74,8 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 .key.del { background: #fee2e2; color: #991b1b; font-size: 20px; border-radius: 10px; height: 44px; line-height: 44px; }
 .key.confirm { background: #10b981; color: #fff; font-size: 14px; border-radius: 10px; height: 44px; line-height: 44px; }
 
-.content-area { min-height: 280px; display: flex; flex-direction: column; justify-content: center; }
+.content-area { min-height: 280px; display: flex; flex-direction: column; justify-content: center; background: url('assets/happy_student.jpg') center/cover no-repeat; border-radius: 16px; padding: 16px 14px; transition: background .3s; }
+.content-area.no-bg { background: transparent; padding: 0; }
 #phon { color: #9ca3af; font-size: 13px; margin: 6px 0; user-select: none; }
 #phon:active { color: #10b981; }
 #phonBtn { display: inline-block; color: #9ca3af; font-size: 13px; margin: 6px 0; cursor: pointer; user-select: none; }
@@ -91,15 +94,14 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
 <body>
 <div class="header">
   <h1>单词一扫光</h1>
-  <div style="margin-left:auto;font-size:12px;color:#1f2937" id="headerInfo"></div>
+  <div style="margin-left:auto;font-size:12px;color:#f0fdf4" id="headerInfo"></div>
+</div>
+<div class="tabs grade-tabs" id="gradeTabs">
+  <div class="tab active" data-grade="basic" onclick="setGrade('basic')"><span class="dot"></span>基础<span class="tab-count">0</span></div>
+  <div class="tab" data-grade="core" onclick="setGrade('core')"><span class="dot"></span>核心<span class="tab-count">0</span></div>
+  <div class="tab" data-grade="extra" onclick="setGrade('extra')"><span class="dot"></span>拓展<span class="tab-count">0</span></div>
 </div>
 <div class="container">
-  <!-- 词源分级选择 -->
-  <div class="tabs grade-tabs" id="gradeTabs" style="margin:0 4px 12px">
-    <div class="tab active" data-grade="basic" onclick="setGrade('basic')"><span class="dot"></span>基础<span class="tab-count">0</span></div>
-    <div class="tab" data-grade="core" onclick="setGrade('core')"><span class="dot"></span>核心<span class="tab-count">0</span></div>
-    <div class="tab" data-grade="extra" onclick="setGrade('extra')"><span class="dot"></span>拓展<span class="tab-count">0</span></div>
-  </div>
 
   <div class="card">
     <div class="tabs" id="modeTabs">
@@ -107,8 +109,8 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: line
       <div class="tab" id="reviewTab" onclick="setMode('review')">待复习（<span id="reviewCount">0</span>）</div>
     </div>
 
-    <div class="content-area">
-      <div id="startPage" style="padding:24px 0;text-align:center;position:relative;overflow:hidden">
+    <div class="content-area" id="contentArea">
+      <div id="startPage" class="hide" style="padding:24px 0;text-align:center;position:relative;overflow:hidden">
         <div class="start-halo"></div>
         <div class="float-letters"><span style="left:8%;animation-delay:0s">A</span><span style="left:26%;animation-delay:1.6s">b</span><span style="left:44%;animation-delay:3s">C</span><span style="left:60%;animation-delay:.8s">d</span><span style="left:78%;animation-delay:2.4s">E</span><span style="left:90%;animation-delay:3.8s">f</span></div>
         <p id="modeDesc">基础词汇 · 开始学习</p>
@@ -382,7 +384,7 @@ function refreshAllGradeStats(){
   });
   const name = STUDENT_MAP[_auth] || localStorage.getItem('dd_name') || '同学';
   const el = document.getElementById('headerInfo');
-  if(el) el.innerHTML = name + buildAchievements(masteredTotal) + '<span style="margin-left:5px;font-size:12px;color:#9ca3af;font-weight:600">'+masteredTotal+'</span>';
+  if(el) el.innerHTML = name + buildAchievements(masteredTotal) + '<span style="margin-left:5px;font-size:12px;color:rgba(255,255,255,.85);font-weight:600">'+masteredTotal+'</span>';
 }
 // 成就图标：每 20 词一颗小黄星，满 5 星 = 1 蓝月亮（100 词），满 5 月亮 = 1 太阳（500 词）
 // 从左往右占位，无图标的位置不显示（最多 5 个）；太阳/月亮带数量防溢出，星星优先逐个显示
@@ -443,7 +445,8 @@ function setMode(m){
     : GRADE_MAP[grade].label + ' · 答错的单词复习巩固';
   document.getElementById('learnPage').classList.add('hide');
   document.getElementById('donePage').classList.add('hide');
-  document.getElementById('startPage').classList.remove('hide');
+  document.getElementById('startPage').classList.add('hide');
+  document.getElementById('contentArea').classList.remove('no-bg');
   if(m==='learn' && remainNew()===0){
     setBottomBtn(reviewSet.length>0 ? '去复习' : '全部重学一遍',
       reviewSet.length>0 ? function(){ setMode('review'); startSession(); } : resetAll, true);
@@ -486,6 +489,7 @@ function startSession(){
   document.getElementById('donePage').classList.add('hide');
   document.getElementById('learnPage').classList.remove('hide');
   hideBottomBtn();
+  document.getElementById('contentArea').classList.add('no-bg');
   refreshStats();
   nextCard();
 }
@@ -714,6 +718,7 @@ function showDone(){
   document.getElementById('learnPage').classList.add('hide');
   document.getElementById('startPage').classList.add('hide');
   document.getElementById('donePage').classList.remove('hide');
+  document.getElementById('contentArea').classList.remove('no-bg');
   const acc = sessionAnswered>0 ? Math.round(sessionCorrect/sessionAnswered*100)+'%' : '0%';
   const accNum = sessionAnswered>0 ? Math.round(sessionCorrect/sessionAnswered*100) : 0;
   const accColor = accNum>80 ? '#10b981' : '#f59e0b';
@@ -748,13 +753,15 @@ function resetAll(){
 
 function onBottomBtn(mode2){
   if(mode2) sessionMode = mode2;
-  if(!document.getElementById('startPage').classList.contains('hide')){ startSession(); }
-  else if(!document.getElementById('donePage').classList.contains('hide')){
+  if(!document.getElementById('donePage').classList.contains('hide')){
     document.getElementById('donePage').classList.add('hide');
-    document.getElementById('startPage').classList.remove('hide');
+    document.getElementById('startPage').classList.add('hide');
+    document.getElementById('contentArea').classList.remove('no-bg');
     setBottomBtn(mode==='learn' ? '开始记单词' : '开始复习', onBottomBtn, false);
     if(mode==='review' && reviewSet.length>0) startSession();
     refreshStats();
+  } else {
+    startSession();
   }
 }
 
