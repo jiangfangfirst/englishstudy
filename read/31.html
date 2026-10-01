@@ -55,6 +55,11 @@
   .blk-row.playing{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-color:#6ee7b7}
   .blk-row.playing .blk-ic{background:linear-gradient(135deg,#0ea5e9,#22d3ee)}
   .blk-row.playing .blk-title{color:#475569}
+  .blk-row.loading .blk-ic{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+  .loading-txt{color:#f59e0b;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:5px}
+  .loading-txt .pct{font-weight:900;font-style:normal}
+  .spin{width:12px;height:12px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;display:inline-block;animation:rot .7s linear infinite}
+  @keyframes rot{to{transform:rotate(360deg)}}
   .dots{display:inline-flex;gap:2.5px;align-items:flex-end;height:12px}
   .dots i{width:3px;background:#fff;border-radius:2px;animation:dotB .9s ease-in-out infinite}
   .dots i:nth-child(2){animation-delay:.18s}
@@ -70,7 +75,7 @@
       <a class="home-btn" href="../index.html">返回主页</a>
     </div>
     <h1>三年级上册 · 课文跟读</h1>
-    <p class="tip">点击单元展开；点 Part A / Part B 等直接整段朗读</p>
+    <p class="tip">点击单元展开即后台预加载；点 Part 名整段朗读，加载中显示进度</p>
   </div>
   <div id="box"></div>
 </div>
@@ -88,7 +93,7 @@ function fmtDur(d){
 }
 function renderBlock(b, color){
   var id = 'blk'+b.file.replace(/[^a-z0-9]/g,'');
-  return '<div class="blk-row" id="'+id+'" data-file="'+b.file+'" data-name="'+esc(b.name)+'"' +
+  return '<div class="blk-row" id="'+id+'" data-file="'+b.file+'" data-title="'+esc(b.title)+'"' +
          ' style="border-left:4px solid '+color+'" onclick="playBlock(this)">' +
     '<span class="blk-ic"><span class="ic-play">▶</span></span>' +
     '<span class="blk-name" style="color:'+color+'">'+esc(b.name)+'</span>' +
@@ -118,21 +123,62 @@ function renderUnits(){
   box.innerHTML = h;
 }
 function toggleUnit(head){
-  head.parentElement.classList.toggle('open');
+  var card = head.parentElement;
+  var wasOpen = card.classList.contains('open');
+  card.classList.toggle('open');
+  if(!wasOpen){
+    // 展开时后台预加载该单元全部块音频，点播放即可秒开
+    card.querySelectorAll('.blk-row').forEach(function(r){ preloadAudio(r.dataset.file); });
+  }
 }
-// === 纯块列表播放 ===
+// === 纯块列表播放（预加载 + 加载进度）===
 var _cur = null;
+var _cache = {};
+function preloadAudio(file){
+  if(_cache[file]) return;
+  var a = new Audio('audio/' + file);
+  a.preload = 'auto';
+  a.load();
+  _cache[file] = a;
+}
 function playBlock(row){
   var file = row.dataset.file;
   if(_cur && _cur.file === file){ stopBlock(); return; }
   stopBlock();
-  var a = new Audio('audio/' + file);
-  a.play().catch(function(){});
-  _cur = {file:file, audio:a, row:row};
-  row.classList.add('playing');
-  row.querySelector('.ic-play').innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
-  a.addEventListener('ended', function(){ resetBlock(); });
-  a.addEventListener('error', function(){ resetBlock(); });
+  var a = _cache[file];
+  if(!a){ a = new Audio('audio/' + file); a.preload = 'auto'; _cache[file] = a; }
+  _cur = {file:file, audio:a, row:row, started:false};
+  row.classList.add('loading');
+  row.querySelector('.ic-play').innerHTML = '<span class="spin"></span>';
+  row.querySelector('.blk-title').innerHTML = '<span class="loading-txt">加载中 <b class="pct">0%</b></span>';
+  a.onprogress = function(){
+    var el = _cur ? row.querySelector('.pct') : null;
+    if(el && a.duration && a.buffered && a.buffered.length){
+      try{ el.textContent = Math.round(a.buffered.end(a.buffered.length-1)/a.duration*100)+'%'; }catch(e){}
+    }
+  };
+  a.oncanplay = function(){ tryPlay(); };
+  a.onerror = function(){ loadFail(); };
+  a.onended = function(){ resetBlock(); };
+  tryPlay();
+  function tryPlay(){
+    if(!_cur || _cur.file !== file || _cur.started) return;
+    if(a.readyState >= 3){
+      _cur.started = true;
+      a.play().catch(function(){});
+      row.classList.remove('loading');
+      row.classList.add('playing');
+      row.querySelector('.blk-title').textContent = row.dataset.title;
+      row.querySelector('.ic-play').innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
+    }
+  }
+  function loadFail(){
+    if(!_cur || _cur.file !== file) return;
+    row.classList.remove('loading');
+    row.querySelector('.blk-title').innerHTML = '<span class="loading-txt">加载失败 · 点我重试</span>';
+    row.querySelector('.ic-play').innerHTML = '▶';
+    _cur = null;
+  }
 }
 function stopBlock(){
   if(_cur){
@@ -142,9 +188,10 @@ function stopBlock(){
 }
 function resetBlock(){
   if(_cur){
-    _cur.row.classList.remove('playing');
-    var ip = _cur.row.querySelector('.ic-play');
-    if(ip) ip.innerHTML = '▶';
+    var row = _cur.row;
+    row.classList.remove('loading','playing');
+    var ip = row.querySelector('.ic-play'); if(ip) ip.innerHTML = '▶';
+    var t = row.querySelector('.blk-title'); if(t) t.textContent = row.dataset.title;
     _cur = null;
   }
 }
