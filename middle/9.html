@@ -1,57 +1,164 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head><script>
+<head>
+<script>
  // 登录检查
  (function(){
    var a = localStorage.getItem('dd_auth');
    if(!a){ location.href = '../login.html'; }
  })();
 </script>
-
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>多多好学|英语园地</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>多多好学 · 九年级英语</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
 <style>
- body { background: #ffffff; font-family: "PingFang SC","Microsoft YaHei",sans-serif; color: #1F2937; min-height: 100vh; }
- @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
- .header-animate-bg { background-size: 180% 180%; animation: gradientMove 14s ease infinite; }
- @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
- .tab-bar { display: flex; gap: 24px; padding: 12px 4px; border-bottom: 2px solid #e5e7eb; margin-bottom: 8px; }
- .tab { font-size: 15px; font-weight: 600; color: #9ca3af; cursor: pointer; }
- .tab.active { font-weight: 800; }
- .vol-panel { display: none; }
- .vol-panel.active { display: block; animation: fadeIn .3s ease; }
- @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
- .row { display: flex; align-items: center; padding: 12px 4px; border-bottom: 1px dashed #e5e7eb; cursor: pointer; }
- .row:active { background: #f9fafb; }
- .row-title { flex: 1; min-width: 0; text-decoration: none; color: inherit; }
- .row-title .name { font-size: 15px; font-weight: 600; display: inline; }
- .row-title .stats { font-size: 11px; color: #9ca3af; margin-top: 2px; display: block; }
- .row-title .intro { font-size: 12px; color: #6b7280; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 52%; vertical-align: middle; margin-left: 6px; }
- .row-check { font-size: 14px; font-weight: 600; padding: 9px 18px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; margin-left: 12px; text-decoration: none; }
- .vol-title { font-size: 16px; font-weight: 800; margin: 16px 0 4px; padding: 4px 4px 10px; border-bottom: 2px solid; }
+:root{
+  --paper:#F6F3EC;
+  --paper-2:#EFEBE0;
+  --ink:#2A2A26;
+  --ink-soft:#6B665B;
+  --deep:#1F3B5E;
+  --deep-2:#18304E;
+  --line:#E3DDD0;
+  --grade:#2E82A8;
+  --accent:#C08A3E;
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
+
+/* ===== Hero ===== */
+.hero{
+  background:var(--deep);
+  background-image:
+    radial-gradient(1200px 500px at 85% -10%, rgba(192,138,62,.18), transparent 60%),
+    radial-gradient(900px 420px at -5% 110%, rgba(46,130,168,.22), transparent 55%);
+  color:#F3EFE3;
+  padding:clamp(34px,6vw,60px) clamp(18px,5vw,60px) clamp(30px,4vw,40px);
+  text-align:center;
+}
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(26px,5vw,44px);
+  font-weight:700;line-height:1.2;letter-spacing:.02em;
+}
+.hero .sub{
+  font-size:12px;letter-spacing:.22em;font-weight:500;opacity:.85;
+  color:#C9B98F;margin-top:8px;text-transform:uppercase;
+}
+
+/* ===== 内容区 ===== */
+main{max-width:720px;margin:0 auto;padding:28px clamp(18px,5vw,60px) 70px}
+.vol-panel{display:none}
+.vol-panel.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.book-section{margin-top:6px}
+.book-head{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 6px 12px;border-bottom:2px solid var(--deep);
+}
+.book-head .num{
+  font-family:var(--serif);font-size:15px;font-weight:700;color:#fff;
+  background:var(--grade);border-radius:8px;padding:4px 12px;letter-spacing:.05em;
+}
+.book-head h2{font-family:var(--serif);font-size:clamp(19px,2.6vw,24px);font-weight:700}
+.book-head .meta{font-size:13px;color:var(--ink-soft);margin-left:auto;white-space:nowrap}
+
+.kp-list{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.kp-card{
+  background:#FBF9F3;border:1px solid var(--line);border-radius:12px;
+  display:flex;align-items:center;gap:6px;padding:5px;
+  overflow:hidden;
+}
+.kp-link{
+  flex:1;min-width:0;display:flex;align-items:center;gap:15px;
+  padding:10px 8px 10px 11px;border-radius:9px;text-align:left;
+  transition:background .12s;
+}
+.kp-link:hover{background:#F1EEE5}
+.kp-link:active{background:#EAE6DA}
+.badge{
+  flex:0 0 auto;width:52px;height:52px;border-radius:10px;
+  background:color-mix(in srgb, var(--grade) 14%, #fff);
+  color:var(--grade);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:var(--serif);font-weight:700;line-height:1.1;
+}
+.badge .u{font-size:10px;font-weight:600;letter-spacing:.03em;opacity:.85}
+.badge .n{font-size:18px}
+.body{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start}
+.body .en{font-size:16px;font-weight:600;color:var(--ink);font-family:var(--serif);display:block;line-height:1.35}
+.body .cn{font-size:13px;color:var(--ink-soft);margin-top:2px;display:block}
+.body .stats{font-size:12px;color:var(--ink-soft);margin-top:4px;display:block}
+.body .stats b{font-weight:700}
+.go{
+  flex:0 0 auto;margin-right:8px;padding:9px 18px;border-radius:10px;
+  background:color-mix(in srgb, var(--grade) 12%, #fff);
+  color:var(--grade);font-size:14px;font-weight:600;white-space:nowrap;
+  transition:all .15s;
+}
+.go:hover{background:var(--grade);color:#fff}
+
+footer{border-top:1px solid var(--line);padding:22px clamp(18px,5vw,60px) 40px;color:var(--ink-soft);font-size:13px;text-align:center}
+
+@media (max-width:430px){
+  .hero{padding:32px 16px 30px}
+  main{padding-top:20px}
+  .badge{width:46px;height:46px}
+  .badge .n{font-size:16px}
+  .kp-link{gap:12px;padding-left:8px}
+  .body .en{font-size:15px}
+  .go{padding:8px 14px;font-size:13px}
+}
 </style>
 </head>
-<body class="min-h-screen pb-12">
-<header class="header-animate-bg text-white py-6 px-6 rounded-b-3xl" style="background:linear-gradient(-45deg,#10b981,#34d399,#6ee7b7);">
- <div class="max-w-xl mx-auto text-center">
- <h1 class="text-2xl font-extrabold">九年级英语（全一册）</h1><div style="font-size:12px;letter-spacing:2px;font-weight:500;opacity:.85;margin-top:4px;">Grade 9 English · Full Book</div></div></header><main class="max-w-xl mx-auto px-5 mt-4"><div class="vol-panel active" id="panel-91"><div class="vol-title" style="color:#10b981;border-color:#10b981;">九年级全册</div><div class="row"><a href="kp/91_kp1.html" class="row-title" data-key="wj9_91_kp1" data-base="801" data-color="#10b981"><span class="name">Key Point 1</span><span class="intro">by doing·短语介词·词义辨析</span><span class="stats"></span></a><a href="test/91_kp1.html" class="row-check" style="background:#10b98115;color:#10b981;">检测</a></div>
-<div class="row"><a href="kp/91_kp2.html" class="row-title" data-key="wj9_91_kp2" data-base="642" data-color="#10b981"><span class="name">Key Point 2</span><span class="intro">励志人物·of/for·强调句</span><span class="stats"></span></a><a href="test/91_kp2.html" class="row-check" style="background:#10b98115;color:#10b981;">检测</a></div>
-<div class="row"><a href="kp/91_kp3.html" class="row-title" data-key="wj9_91_kp3" data-base="914" data-color="#10b981"><span class="name">Key Point 3</span><span class="intro">宾语从句·suggest·the+比较级</span><span class="stats"></span></a><a href="test/91_kp3.html" class="row-check" style="background:#10b98115;color:#10b981;">检测</a></div>
-<div class="row"><a href="kp/91_kp4.html" class="row-title" data-key="wj9_91_kp4" data-base="945" data-color="#10b981"><span class="name">Key Point 4</span><span class="intro">宾语从句·to do/doing·动名词</span><span class="stats"></span></a><a href="test/91_kp4.html" class="row-check" style="background:#10b98115;color:#10b981;">检测</a></div>
-<div class="row"><a href="kp/91_kp5.html" class="row-title" data-key="wj9_91_kp5" data-base="503" data-color="#10b981"><span class="name">Key Point 5</span><span class="intro">被动语态·定语从句</span><span class="stats"></span></a><a href="test/91_kp5.html" class="row-check" style="background:#10b98115;color:#10b981;">检测</a></div>
-<div class="row"><a href="kp/91_kp6.html" class="row-title" data-key="wj9_91_kp6" data-base="888" data-color="#10b981"><span class="name">Key Point 6</span><span class="intro">被动语态·完成时·太空</span><span class="stats"></span></a><a href="test/91_kp6.html" class="row-check" style="background:#10b98115;color:#10b981;">检测</a></div>
-<div class="row"><a href="kp/91_kp7.html" class="row-title" data-key="wj9_91_kp7" data-base="912" data-color="#10b981"><span class="name">Key Point 7</span><span class="intro">定语从句·主谓一致·音乐</span><span class="stats"></span></a><a href="test/91_kp7.html" class="row-check" style="background:#10b98115;color:#10b981;">检测</a></div>
-<div class="row"><a href="kp/91_kp8.html" class="row-title" data-key="wj9_91_kp8" data-base="581" data-color="#10b981"><span class="name">Key Point 8</span><span class="intro">主谓一致·就近就远·体育</span><span class="stats"></span></a><a href="test/91_kp8.html" class="row-check" style="background:#10b98115;color:#10b981;">检测</a></div>
+<body>
 
+<!-- ===== 顶部 Hero ===== -->
+<header class="hero">
+  <h1>九年级英语（全一册）</h1>
+  <div class="sub">Grade 9 English · Full Book</div>
+</header>
 
+<main>
+  <!-- ===== 九年级 全册 ===== -->
+  <div class="vol-panel active" id="panel-91">
+    <div class="book-section">
+      <div class="book-head">
+        <div class="num">全册</div>
+        <h2>九年级 · 全一册</h2>
+        <div class="meta">8 讲</div>
+      </div>
+      <div class="kp-list">
+        <div class="kp-card"><a class="kp-link" href="kp/91_kp1.html" data-key="wj9_91_kp1" data-base="801" data-color="#2E82A8"><span class="badge"><span class="u">KP</span><span class="n">1</span></span><span class="body"><span class="en">Key Point 1</span><span class="cn">by doing · 短语介词 · 词义辨析</span><span class="stats"></span></span></a><a class="go" href="test/91_kp1.html">检测</a></div>
+        <div class="kp-card"><a class="kp-link" href="kp/91_kp2.html" data-key="wj9_91_kp2" data-base="642" data-color="#2E82A8"><span class="badge"><span class="u">KP</span><span class="n">2</span></span><span class="body"><span class="en">Key Point 2</span><span class="cn">励志人物 · of/for · 强调句</span><span class="stats"></span></span></a><a class="go" href="test/91_kp2.html">检测</a></div>
+        <div class="kp-card"><a class="kp-link" href="kp/91_kp3.html" data-key="wj9_91_kp3" data-base="914" data-color="#2E82A8"><span class="badge"><span class="u">KP</span><span class="n">3</span></span><span class="body"><span class="en">Key Point 3</span><span class="cn">宾语从句 · suggest · the+比较级</span><span class="stats"></span></span></a><a class="go" href="test/91_kp3.html">检测</a></div>
+        <div class="kp-card"><a class="kp-link" href="kp/91_kp4.html" data-key="wj9_91_kp4" data-base="945" data-color="#2E82A8"><span class="badge"><span class="u">KP</span><span class="n">4</span></span><span class="body"><span class="en">Key Point 4</span><span class="cn">宾语从句 · to do/doing · 动名词</span><span class="stats"></span></span></a><a class="go" href="test/91_kp4.html">检测</a></div>
+        <div class="kp-card"><a class="kp-link" href="kp/91_kp5.html" data-key="wj9_91_kp5" data-base="503" data-color="#2E82A8"><span class="badge"><span class="u">KP</span><span class="n">5</span></span><span class="body"><span class="en">Key Point 5</span><span class="cn">被动语态 · 定语从句</span><span class="stats"></span></span></a><a class="go" href="test/91_kp5.html">检测</a></div>
+        <div class="kp-card"><a class="kp-link" href="kp/91_kp6.html" data-key="wj9_91_kp6" data-base="888" data-color="#2E82A8"><span class="badge"><span class="u">KP</span><span class="n">6</span></span><span class="body"><span class="en">Key Point 6</span><span class="cn">被动语态 · 完成时 · 太空</span><span class="stats"></span></span></a><a class="go" href="test/91_kp6.html">检测</a></div>
+        <div class="kp-card"><a class="kp-link" href="kp/91_kp7.html" data-key="wj9_91_kp7" data-base="912" data-color="#2E82A8"><span class="badge"><span class="u">KP</span><span class="n">7</span></span><span class="body"><span class="en">Key Point 7</span><span class="cn">定语从句 · 主谓一致 · 音乐</span><span class="stats"></span></span></a><a class="go" href="test/91_kp7.html">检测</a></div>
+        <div class="kp-card"><a class="kp-link" href="kp/91_kp8.html" data-key="wj9_91_kp8" data-base="581" data-color="#2E82A8"><span class="badge"><span class="u">KP</span><span class="n">8</span></span><span class="body"><span class="en">Key Point 8</span><span class="cn">主谓一致 · 就近就远 · 体育</span><span class="stats"></span></span></a><a class="go" href="test/91_kp8.html">检测</a></div>
+      </div>
+    </div>
+  </div>
+</main>
 
+<footer>多多好学 · 英语园地 · 九年级英语</footer>
 
-
-
-</div></main>
 <script>
  const UP_URL = "https://fitting-ostrich-312589.upstash.io";
  const UP_TOKEN = "gQAAAAAABMUNAAIgcDFiZDU2MDM2YWJkYzg0YTgyOTRlOTUzMjM1MWY1ZGJhNg";
@@ -67,7 +174,7 @@
      await fetch(UP_URL + "/incr/" + key, { headers: { "Authorization": "Bearer " + UP_TOKEN } });
    } catch(e) {}
  }
- document.querySelectorAll('.row-title').forEach(async a => {
+ document.querySelectorAll('.kp-link').forEach(async a => {
    const k = a.dataset.key;
    const el = a.querySelector('.stats');
    const base = parseInt(a.dataset.base);
@@ -76,13 +183,6 @@
    el.innerHTML = '<b style="color:' + color + ';">' + (base + real) + '</b>人已学';
    a.addEventListener('click', () => upIncr(k));
  });
- function switchTab(el) {
-   const bar = el.parentElement;
-   bar.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.style.color=''; });
-   el.classList.add('active');
-   el.style.color = el.dataset.color;
-   document.querySelectorAll('.vol-panel').forEach(p => p.classList.remove('active'));
-   document.getElementById(el.dataset.target).classList.add('active');
- }
 </script>
-</body></html>
+</body>
+</html>
