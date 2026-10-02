@@ -185,17 +185,22 @@
   .j-circle {
     position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
     width: 126px; height: 126px; border-radius: 50%;
-    background: var(--deep);
-    box-shadow: 0 0 0 12px #fff;
-    color: #fff; display: flex; align-items: center; justify-content: center;
+    background: #fff;
+    box-shadow: 0 0 0 8px rgba(246,243,236,.9);
+    color: var(--deep); display: flex; align-items: center; justify-content: center;
     text-align: center; text-decoration: none;
     z-index: 3; transition: transform .2s;
   }
+  .j-circle::before {
+    content: ""; position: absolute; inset: 12px; border-radius: 50%;
+    border: 2px dashed var(--g8); pointer-events: none;
+  }
+  .j-circle > span { position: relative; z-index: 1; }
   .j-circle:active { transform: translate(-50%,-50%) scale(.93); }
-  .jc-name { font-size: 17px; font-weight: 700; display: block; line-height: 1.2; font-family: var(--serif); }
-  .jc-sub { font-size: 10px; opacity: .92; display: block; margin-top: 3px; line-height: 1.45; color:#D8D2C0; }
+  .jc-name { font-size: 17px; font-weight: 700; color: var(--deep); display: block; line-height: 1.2; font-family: var(--serif); }
+  .jc-sub { font-size: 10px; color: var(--ink-soft); display: block; margin-top: 3px; line-height: 1.45; }
   .jc-btn {
-    font-size: 11px; background: rgba(255,255,255,.25);
+    font-size: 11px; background: var(--g8); color: #fff;
     border-radius: 999px; padding: 4px 12px; width: fit-content;
     display: block; margin: 5px auto 0;
   }
