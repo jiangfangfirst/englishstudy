@@ -42,7 +42,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
     radial-gradient(1200px 500px at 85% -10%, rgba(192,138,62,.18), transparent 60%),
     radial-gradient(900px 420px at -5% 110%, rgba(46,130,168,.22), transparent 55%);
   color:#F3EFE3;
-  padding:clamp(40px,7vw,72px) clamp(18px,5vw,60px) clamp(34px,5vw,52px);
+  padding:clamp(34px,6vw,60px) clamp(18px,5vw,60px) clamp(30px,4vw,40px);
   position:relative;
   overflow:hidden;
 }
@@ -56,8 +56,8 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .hero h1{
   font-family:var(--serif);
   font-size:clamp(28px,5.2vw,46px);
-  font-weight:700;line-height:1.25;
-  margin:18px 0 14px;letter-spacing:.01em;
+  font-weight:700;line-height:1.2;
+  margin:0;letter-spacing:.01em;
 }
 .hero h1 .accent{color:#E3A94F}
 .hero p.sub{
@@ -85,7 +85,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
   background:#FBF9F3;border:1px solid var(--line);border-radius:14px;
   box-shadow:0 6px 20px rgba(31,59,94,.06);
   padding:12px 14px;
-  display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+  display:flex;justify-content:center;align-items:center;
 }
 .search{flex:1 1 220px;min-width:180px;position:relative;display:flex;align-items:center}
 .search svg{position:absolute;left:12px;width:18px;height:18px;stroke:var(--ink-soft);pointer-events:none}
@@ -233,27 +233,13 @@ footer{
 <!-- ===== 顶部 Hero ===== -->
 <header class="hero">
   <div class="hero-inner">
-    <span class="hero-kicker">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      人教版（2024 版）· 教师备课参考
-    </span>
     <h1>初中英语 <span class="accent">单元范文</span> 目录</h1>
-    <p class="sub">精选七年级至九年级各单元常考范文，按教学要求逐篇点评并给出优化修改版。点击任一范文进入详情页，查看完整原文、分项点评与修改说明。</p>
-    <div class="stats">
-      <div class="stat"><div class="num" id="stat-total">0</div><div class="lbl">篇精选范文</div></div>
-      <div class="stat"><div class="num">3</div><div class="lbl">个年级</div></div>
-      <div class="stat"><div class="num" id="stat-books">0</div><div class="lbl">册 / 话题板块</div></div>
-    </div>
   </div>
 </header>
 
-<!-- ===== 搜索 + 年级 Tab ===== -->
+<!-- ===== 年级 Tab ===== -->
 <div class="control">
   <div class="control-bar">
-    <div class="search">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="text" placeholder="搜索单元、话题或考点，如：比较级 / 被动语态" autocomplete="off">
-    </div>
     <div class="tabs" id="tabs" role="tablist">
       <button class="tab" data-grade="七年级"><span class="dot" style="background:var(--g7)"></span>七年级</button>
       <button class="tab" data-grade="八年级"><span class="dot" style="background:var(--g8)"></span>八年级</button>
@@ -341,19 +327,13 @@ const GRADE_COLOR = {七年级:"var(--g7)", 八年级:"var(--g8)", 九年级:"va
 const GRADE_HASH = {七年级:"g7", 八年级:"g8", 九年级:"g9"};
 
 let currentGrade = "七年级";
-let currentQuery = "";
 
 const content = document.getElementById("content");
 const tabs = document.getElementById("tabs");
-const qInput = document.getElementById("q");
 const emptyState = document.getElementById("empty-state");
 const toast = document.getElementById("toast");
 const toastTxt = document.getElementById("toast-txt");
 let toastTimer = null;
-
-/* 统计 */
-document.getElementById("stat-total").textContent = DATA.length;
-document.getElementById("stat-books").textContent = new Set(DATA.map(d=>d.grade+"-"+d.book)).size;
 
 function esc(s){
   return String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -366,17 +346,8 @@ function shortBadge(unit){
   return {u:"话题", n:unit.replace("话题","")};
 }
 
-function matches(q, it){
-  const s = q.toLowerCase();
-  return it.en.toLowerCase().includes(s)
-    || it.cn.includes(q)
-    || it.unit.toLowerCase().includes(s)
-    || it.genre.includes(q)
-    || it.points.some(p=>p.toLowerCase().includes(s));
-}
-
 function render(){
-  const list = DATA.filter(it=> it.grade===currentGrade && (!currentQuery || matches(currentQuery,it)));
+  const list = DATA.filter(it=> it.grade===currentGrade);
   const books = [...new Set(list.map(it=>it.book))];
   content.innerHTML = "";
   const empty = emptyState;
@@ -450,12 +421,6 @@ function setGrade(g, updateHash){
 tabs.addEventListener("click", e=>{
   const b = e.target.closest(".tab");
   if(b) setGrade(b.dataset.grade);
-});
-
-/* 搜索 */
-qInput.addEventListener("input", ()=>{
-  currentQuery = qInput.value.trim();
-  render();
 });
 
 /* hash 路由 */
