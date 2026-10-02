@@ -10,26 +10,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>多多好学线上课堂</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%232563eb'/%3E%3Ctext x='12' y='16.5' font-size='12' text-anchor='middle' fill='%23fff' font-family='Arial'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
 <style>
   :root{
-    --blue:#2563eb; --blue-d:#1e40af; --blue-bg:#eef3fd;
-    --amber:#f59e0b; --amber-bg:#fff7e8; --amber-bd:#fcd34d;
-    --ink:#1f2937; --ink-2:#4b5563; --ink-3:#9ca3af;
-    --line:#e5e7eb; --bg:#ffffff;
+    --blue:#2E82A8; --blue-d:#1F3B5E; --blue-bg:#EAF2F7;
+    --amber:#C08A3E; --amber-bg:#FBF3E4; --amber-bd:#E6D6B5;
+    --ink:#2A2A26; --ink-2:#5C564C; --ink-3:#9A9384;
+    --line:#E3DDD0; --bg:#F6F3EC;
+    --serif:"Noto Serif SC",serif; --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{-webkit-text-size-adjust:100%}
-  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.75;-webkit-font-smoothing:antialiased}
   .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
 
-  .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
-  .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
-  .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
-  .hero .sub{color:var(--ink-2);font-size:13.5px;margin-top:8px;max-width:36em}
+  .hero{margin-top:18px;background:var(--blue-d);background-image:radial-gradient(900px 420px at 88% -10%, rgba(192,138,62,.20), transparent 60%),radial-gradient(700px 380px at -6% 110%, rgba(46,130,168,.25), transparent 55%);border-radius:16px;padding:24px 22px;color:#F3EFE3;box-shadow:0 8px 24px rgba(31,59,94,.12)}
+  .hero .kicker{display:inline-block;background:rgba(255,255,255,.16);color:#E3A94F;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
+  .hero h1{font-size:24px;line-height:1.3;color:#fff;font-family:var(--serif);font-weight:700;letter-spacing:.5px}
+  .hero .sub{color:#D8D2C0;font-size:13.5px;margin-top:8px;max-width:36em}
   .hero .tagline{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
-  .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
-  .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
+  .hero .tagline .t{font-size:12px;color:#F3EFE3;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:4px 12px;font-weight:600}
+  .hero .tip{margin-top:14px;font-size:12.5px;color:#E3A94F}
 
   section.block{margin-top:30px}
   .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
@@ -86,13 +89,13 @@
   .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
 
   .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
-  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
+  .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#8A5A1E;margin-bottom:6px}
   .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
   .warn ol{list-style:none;counter-reset:ec}
-  .warn li{counter-increment:ec;font-size:13px;color:#7c4a03;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #f3dab1;overflow-wrap:break-word;word-break:break-word}
+  .warn li{counter-increment:ec;font-size:13px;color:#6E4A1E;padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed #E6D6B5;overflow-wrap:break-word;word-break:break-word}
   .warn li:last-child{border-bottom:none}
   .warn li::before{content:counter(ec);position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:6px;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
-  .warn li b{color:#92400e}
+  .warn li b{color:#7C4A03}
 
   .divider{height:1px;background:var(--line);margin:26px 0 0}
 
