@@ -7,6 +7,7 @@
 if(!localStorage.getItem('dd_auth')){ location.href='../login.html'; }
 </script>
 -->
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>单词一扫光</title>
@@ -19,12 +20,14 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: #f7f
 .stats b { color: rgba(255,255,255,.72); font-size: 12px; font-weight: 400; }
 .container { max-width: 600px; margin: 10px auto; padding: 0 12px; }
 .card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,.08); }
+
 /* 下划线式选项卡（学习/复习用） */
 .tabs { display: flex; border-bottom: 1px solid #e5e7eb; margin-bottom: 16px; }
 .tab { flex: 1; text-align: center; padding: 12px 4px; cursor: pointer; font-size: 14px; color: #6b7280; position: relative; transition: all .2s; }
 .tab.active { color: #10b981; font-weight: 600; }
 #modeTabs .tab.active::after { content: ''; position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%); width: 40px; height: 3px; background: #10b981; border-radius: 2px; }
 .tab.disabled { opacity: .35; pointer-events: none; }
+
 /* 年级选择：与 header 紧连，共同 #666 底色，连接处凹槽 */
 .grade-tabs { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin: 0; border-bottom: none; border-top: 1px solid #555; background: #666; }
 .grade-tabs .tab { padding: 10px 4px; margin-bottom: 0; font-size: 13px; color: #d6d6d6; background: none; border: none; transition: all .2s; }
@@ -38,6 +41,7 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: #f7f
 .grade-tabs .tab:hover { color: rgba(255,255,255,.92); }
 .grade-tabs .tab-count { color: rgba(255,255,255,.55); }
 .grade-tabs .tab .tab-count { display: block; font-size: 10px; font-weight: 400; color: #b0b7c3; margin-top: 2px; }
+
 .example-en { font-size: 20px; line-height: 1.8; color: #1f2937; margin-bottom: 12px; }
 .blank { display: inline-block; border-bottom: 2px solid #10b981; text-align: center; font-weight: 700; padding: 0 10px; min-width: 80px; }
 .example-cn { font-size: 15px; color: #6b7280; margin-bottom: 16px; }
@@ -54,6 +58,7 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: #f7f
 .start-split.single .start-half.right { display: none; }
 .start-split.single .start-half.left { width: 100%; }
 .hide { display: none !important; }
+
 /* 答错柔和红光闪动（两下） */
 #redOverlay { position: fixed; inset: 0; pointer-events: none; z-index: 998; background: rgba(220,38,38,0); }
 #redOverlay.flashing { animation: redFlash .55s ease-in-out 2; }
@@ -61,6 +66,7 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: #f7f
 /* 答对庆祝粒子：上浮渐隐 */
 .celebrate { position: fixed; pointer-events: none; z-index: 999; font-size: 22px; animation: riseUp 1.35s ease-out forwards; }
 @keyframes riseUp { 0%{ transform: translateY(0) scale(.5); opacity: 1; } 100%{ transform: translateY(-170px) scale(1.2); opacity: 0; } }
+
 /* 屏幕键盘 */
 .keyboard { display: grid; grid-template-columns: repeat(7,1fr); gap: 6px; margin-top: 16px; }
 .key { height: 44px; line-height: 44px; text-align: center; background: #f3f4f6; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; color: #374151; cursor: pointer; user-select: none; padding: 0; width: 100%; }
@@ -68,47 +74,8 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: #f7f
 .key.del { background: #fee2e2; color: #991b1b; font-size: 20px; border-radius: 10px; height: 44px; line-height: 44px; }
 .key.confirm { background: #10b981; color: #fff; font-size: 14px; border-radius: 10px; height: 44px; line-height: 44px; }
 
-.content-area {
-  min-height: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  border-radius: 16px;
-  padding: 16px 14px;
-  transition: background .3s;
-  animation: bgFadeIn 1.1s ease forwards;
-}
-/* 底层背景视频 */
-.content-area__bg-video{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  pointer-events:none;
-  z-index:1;
-}
-/* no‑bg状态直接隐藏视频，彻底解决盖不住 */
-.content-area.no-bg .content-area__bg-video{
-  display:none;
-}
-.content-area__bg-video::-webkit-media-controls,
-.content-area__bg-video::-webkit-media-controls-enclosure{
-  display:none !important;
-}
-/* 上层原有全部内容置于视频之上 */
-.content-area > *{
-  position:relative;
-  z-index:2;
-}
-.content-area.no-bg {
-  background: transparent;
-  padding: 0;
-  animation: none;
-}
-
+.content-area { min-height: 280px; display: flex; flex-direction: column; justify-content: center; background: url('assets/happy_student.jpg') center/cover no-repeat; border-radius: 16px; padding: 16px 14px; transition: background .3s; animation: bgFadeIn 1.1s ease forwards; }
+.content-area.no-bg { background: transparent; padding: 0; animation: none; }
 @keyframes bgFadeIn {
   from { opacity: 0; filter: saturate(.3); }
   to { opacity: 1; filter: saturate(1); }
@@ -117,6 +84,7 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: #f7f
 #phon:active { color: #10b981; }
 #phonBtn { display: inline-block; color: #9ca3af; font-size: 13px; margin: 6px 0; cursor: pointer; user-select: none; }
 #phonBtn:active { color: #10b981; }
+
 /* 开始页动画：流光标题 + 漂浮字母 + 呼吸光晕 */
 #modeDesc { font-size: 15px; font-weight: 600; margin-bottom: 12px; background: linear-gradient(90deg,#059669,#10b981,#34d399,#059669); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: flowText 6s linear infinite; }
 @keyframes flowText { 0%{ background-position: 0% 50%; } 100%{ background-position: 300% 50%; } }
@@ -138,22 +106,21 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: #f7f
   <div class="tab" data-grade="extra" onclick="setGrade('extra')"><span class="dot"></span>拓展<span class="tab-count">0</span></div>
 </div>
 <div class="container">
+
   <div class="card">
     <div class="tabs" id="modeTabs">
       <div class="tab active" id="learnTab" onclick="setMode('learn')">学新词（剩余<span id="learnCount">0</span>）</div>
       <div class="tab" id="reviewTab" onclick="setMode('review')">待复习（<span id="reviewCount">0</span>）</div>
     </div>
+
     <div class="content-area" id="contentArea">
-      <!-- MP4背景视频 同assets目录，无声自动播放，不循环 -->
-      <video class="content-area__bg-video" autoplay muted playsinline preload="auto">
-        <source src="assets/happy_student.mp4" type="video/mp4">
-      </video>
       <div id="startPage" class="hide" style="padding:24px 0;text-align:center;position:relative;overflow:hidden">
         <div class="start-halo"></div>
         <div class="float-letters"><span style="left:8%;animation-delay:0s">A</span><span style="left:26%;animation-delay:1.6s">b</span><span style="left:44%;animation-delay:3s">C</span><span style="left:60%;animation-delay:.8s">d</span><span style="left:78%;animation-delay:2.4s">E</span><span style="left:90%;animation-delay:3.8s">f</span></div>
         <p id="modeDesc">基础词汇 · 开始学习</p>
         <p id="tipMsg" style="color:#f59e0b;font-size:14px;display:none"></p>
       </div>
+
       <div id="learnPage" class="hide">
         <div style="display:flex;justify-content:space-around;font-size:11px;color:#9ca3af;margin-bottom:10px">
           <span>检测通过 <b id="statN" style="color:#9ca3af;font-size:12px;font-weight:400">0</b></span>
@@ -169,17 +136,20 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: #f7f
         </div>
         <div id="actionArea"></div>
       </div>
+
       <div id="donePage" class="hide" style="padding:20px 0;text-align:center">
         <p style="color:#9ca3af;font-size:14px;margin-bottom:12px" id="doneTitle">本轮完成！</p>
         <p style="font-size:22px;color:#374151;line-height:1.8" id="doneMsg"></p>
       </div>
     </div>
+
     <div class="start-split" id="startBtn">
       <button class="start-half left" id="halfL" onclick="onBottomBtn('sentence')">句中记</button>
       <button class="start-half right" id="halfR" onclick="onBottomBtn('meaning')">释义记</button>
     </div>
   </div>
 </div>
+
 <script src="分级单词库.js?v=20261001"></script>
 <script>
 const GRADE_MAP = {
@@ -187,6 +157,7 @@ const GRADE_MAP = {
   'core':  { data: WORDS_CORE,  label: '核心词汇' },
   'extra': { data: WORDS_EXTRA, label: '拓展词汇' },
 };
+
 let grade = 'basic';
 let WORDS = [];
 let mode = 'learn';
@@ -196,6 +167,7 @@ let current = null;
 let typed = '';
 let sessionAnswered = 0, sessionCorrect = 0, sessionReviewed = 0;
 let learnedCount = 0, reviewSet = [], masteredSet = [];
+
 let _auth = localStorage.getItem('dd_auth') || 'guest';
 const STUDENT_MAP = {
   'duoduo2026': '多多',
@@ -251,6 +223,7 @@ function saveState(){
   localStorage.setItem(storageKey(), data);
   cloudSet(storageKey(), data);
 }
+
 async function setGrade(g){
   grade = g;
   WORDS = GRADE_MAP[g].data;
@@ -294,6 +267,7 @@ function refreshLocalNow(){
   refreshStats();
   refreshAllGradeStats();
 }
+
 // 选项卡下方显示各级词数
 function fillLevelCounts(){
   document.querySelectorAll('#gradeTabs .tab').forEach(t=>{
@@ -302,11 +276,14 @@ function fillLevelCounts(){
     if(el && GRADE_MAP[g]) el.textContent = GRADE_MAP[g].data.length;
   });
 }
+
 function remainNew(){
   return WORDS.filter(w => !masteredSet.includes(w.w.toLowerCase()) && !reviewSet.includes(w.w.toLowerCase())).length;
 }
+
 // ===== 增强例句匹配：词级变体 + 不规则表 + 短语组合 + ...通配 + 占位符 =====
 const IRREG = {found:'find',sent:'send',bought:'buy',became:'become',won:'win',stole:'steal',caught:'catch',fought:'fight',paid:'pay',overslept:'oversleep',got:'get',fell:'fall',made:'make',took:'take',gave:'give',did:'do',went:'go',was:'be',were:'be',am:'be',is:'be',are:'be',bled:'bleed',cancelled:'cancel',clapped:'clap',nodded:'nod',led:'lead',built:'build',held:'hold',kept:'keep',left:'leave',met:'meet',read:'read',said:'say',saw:'see',spoke:'speak',stood:'stand',taught:'teach',thought:'think',came:'come',ran:'run',sang:'sing',sat:'sit',swam:'swim',wrote:'write',ate:'eat',drank:'drink',drove:'drive',rode:'ride',threw:'throw',wore:'wear',broke:'break',chose:'choose',drew:'draw',flew:'fly',grew:'grow',knew:'know',showed:'show',told:'tell',understood:'understand',woke:'wake',spent:'spend',felt:'feel',lost:'lose',heard:'hear',hurt:'hurt',cut:'cut',put:'put',let:'let',sold:'sell',teeth:'tooth',feet:'foot',men:'man',women:'woman',children:'child',leaves:'leaf'};
+
 function wordVariants(w){
   w = w.toLowerCase();
   const vs = [w];
@@ -391,6 +368,7 @@ function isCorrect(typed, w, seg){
   if(tn===wn || tn===sn) return true;
   return canonical(tn)===canonical(wn) || canonical(tn)===canonical(sn);
 }
+
 function refreshAllGradeStats(){
   let masteredTotal = 0, totalAll = 0;
   ['basic','core','extra'].forEach(g=>{
@@ -441,16 +419,19 @@ function refreshStats(){
   if(sm) sm.textContent = sessionReviewed;
   if(document.getElementById('learnCount')) document.getElementById('learnCount').textContent = remainNew();
   if(st) st.textContent = sessionAnswered>0 ? Math.round(sessionCorrect/sessionAnswered*100)+'%' : '0%';
+
   const learnTab = document.getElementById('learnTab');
   learnTab.classList.toggle('disabled', remainNew()===0);
   const reviewTab = document.getElementById('reviewTab');
   reviewTab.classList.toggle('disabled', reviewSet.length===0);
+
   const tip = document.getElementById('tipMsg');
   if(remainNew()===0 && reviewSet.length===0){
     tip.style.display='block'; tip.textContent = '恭喜！全部完成单词记忆';
   } else if(remainNew()===0 && reviewSet.length>0){
     tip.style.display='block'; tip.textContent = '新词已学完，请去复习';
   } else { tip.style.display='none'; }
+
   const btn = document.getElementById('startBtn');
   if(remainNew()===0 && reviewSet.length===0){
     setBottomBtn('全部重学一遍', resetAll, true);
@@ -458,6 +439,7 @@ function refreshStats(){
     setBottomBtn('去复习', function(){ setMode('review'); startSession(); }, true);
   }
 }
+
 function setMode(m){
   mode = m;
   document.getElementById('learnTab').classList.toggle('active', m==='learn');
@@ -477,6 +459,7 @@ function setMode(m){
   }
   refreshStats();
 }
+
 // 底部按钮统一控制：single=true 显示单一按钮（完成页等），false 显示两半（句中记/释义记）
 function setBottomBtn(label, fn, single){
   const btn = document.getElementById('startBtn');
@@ -495,6 +478,7 @@ function setBottomBtn(label, fn, single){
   }
 }
 function hideBottomBtn(){ document.getElementById('startBtn').classList.add('hide'); }
+
 function startSession(){
   sessionAnswered = 0; sessionCorrect = 0; sessionReviewed = 0;
   if(mode==='learn'){
@@ -513,6 +497,7 @@ function startSession(){
   refreshStats();
   nextCard();
 }
+
 function nextCard(){
   if(queue.length===0){ showDone(); return; }
   current = queue.shift();
@@ -545,6 +530,8 @@ function nextCard(){
   renderKeyboard();
   document.getElementById('progFill').style.width = ((1-(queue.length+1)/WORDS.length)*100)+'%';
 }
+
+
 let _audio = null;
 function speakWord(w){
   try{
@@ -613,6 +600,7 @@ function playKeySound(){
 }
 // 页面加载后立即预加载敲击音（不播放，仅缓存）
 try{ _keyAudio = new Audio('sounds/key.wav'); _keyAudio.preload = 'auto'; }catch(e){}
+
 function renderKeyboard(){
   let html = '<div class="keyboard">';
   const row1 = 'abcdefg'.split('');
@@ -630,6 +618,7 @@ function renderKeyboard(){
   document.getElementById('actionArea').innerHTML = html;
   updateBlank();
 }
+
 function pressKey(l){
   if(typed.length >= current.w.length + 2) return;
   // 句首挖空时首字母自动大写（键盘不区分大小写）
@@ -665,16 +654,19 @@ function updateBlank(){
   b.innerHTML = typed;
   b.style.color = isCorrect(typed, current.w, current.seg) ? '#10b981' : '#9ca3af';
 }
+
 function showPhonetic(){
   document.getElementById('phon').style.display='block';
   document.getElementById('phonBtn').style.display='none';
 }
+
 function check(){
   if(!current) return;
   const v = typed.toLowerCase();
   const target = current.w.toLowerCase();
   sessionAnswered++;
   document.querySelector('.keyboard') && (document.querySelector('.keyboard').style.display='none');
+
   let fb = document.getElementById('fb');
   if(!fb){
     fb = document.createElement('div');
@@ -682,6 +674,7 @@ function check(){
     fb.id = 'fb';
     document.getElementById('actionArea').appendChild(fb);
   }
+
   if(isCorrect(typed, current.w, current.seg)){
     sessionCorrect++;
     playOkSound();
@@ -708,6 +701,7 @@ function check(){
   }
   refreshStats();
 }
+
 function passCard(){ nextCard(); }
 function reviewCard(){
   sessionReviewed++;
@@ -723,6 +717,7 @@ function reviewCard(){
   }
   saveState(); refreshStats(); nextCard();
 }
+
 function showDone(){
   document.getElementById('learnPage').classList.add('hide');
   document.getElementById('startPage').classList.add('hide');
@@ -752,12 +747,14 @@ function showDone(){
     setBottomBtn('继续学新词', onBottomBtn, false);
   }
 }
+
 function resetAll(){
   localStorage.removeItem(storageKey());
   cloudSet(storageKey(), JSON.stringify({learned:0,review:[],mastered:[]}));
   learnedCount=0; reviewSet=[]; masteredSet=[];
   setMode('learn');
 }
+
 function onBottomBtn(mode2){
   if(mode2) sessionMode = mode2;
   if(!document.getElementById('donePage').classList.contains('hide')){
@@ -771,6 +768,7 @@ function onBottomBtn(mode2){
     startSession();
   }
 }
+
 // ===== 答对庆祝粒子（上浮渐隐） / 答错柔和红光闪动 =====
 let _ov = null;
 function flashRed(){
@@ -795,27 +793,14 @@ function celebrate(){
     setTimeout(()=>{ try{ el.remove(); }catch(e){} }, 1800);
   }catch(e){}
 }
+
 // 页面加载后立即初始化
 window.addEventListener('load', function(){ setGrade('basic'); });
 setTimeout(function(){ setGrade('basic'); }, 100);
-
-// ==========新增：兜底播放背景视频==========
-window.addEventListener('load',function(){
-  const bgVideo = document.querySelector('.content-area__bg-video');
-  if(bgVideo){
-    bgVideo.play().catch(err=>{
-      console.log("自动播放被浏览器阻止，等待用户交互播放视频",err);
-      function oncePlay(){
-        bgVideo.play().catch(e=>{});
-        document.removeEventListener('click',oncePlay);
-      }
-      document.addEventListener('click',oncePlay);
-    });
-  }
-});
 </script>
 <div style="text-align:center;padding:20px 16px 30px;font-size:11px;color:#9ca3af;line-height:2">
   <div>@多多好学 版权所有</div>
+
 </div>
 <script>
 </script>
