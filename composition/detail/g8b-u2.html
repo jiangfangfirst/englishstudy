@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>范文 26 · Unit 2 · 健康生活</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --paper:#F6F3EC; --card:#FBF9F3; --line:#E3DDD0;
+    --deep:#1F3B5E; --deep-2:#18304E;
+    --g7:#2E82A8; --g8:#3A6B9E; --g9:#35507E;
+    --accent:#C08A3E; --gold:#E3A94F; --sub:#D8D2C0;
+    --ink:#2A2A26; --ink-soft:#6B665B; --ink-3:#9A9384;
+    --serif:"Noto Serif SC",serif; --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.8;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  .back{margin:16px 2px 0;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--g8);text-decoration:none;font-weight:600}
+  .back:hover{color:var(--deep)}
+
+  .hero{margin-top:14px;background:var(--deep);background-image:radial-gradient(900px 420px at 88% -10%, rgba(192,138,62,.20), transparent 60%),radial-gradient(700px 380px at -6% 110%, rgba(46,130,168,.25), transparent 55%);border-radius:18px;padding:26px 22px;color:#F3EFE3;box-shadow:0 10px 28px rgba(31,59,94,.14)}
+  .hero .kicker{display:inline-block;background:rgba(255,255,255,.16);color:var(--gold);font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:14px;letter-spacing:.5px}
+  .hero h1{font-size:30px;line-height:1.2;color:#fff;font-family:var(--serif);font-weight:700;letter-spacing:.5px}
+  .hero .sub{margin-top:8px;font-size:15px;color:var(--sub);font-weight:600}
+  .hero .tagline{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+  .hero .tagline .t{font-size:12px;color:#F3EFE3;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:4px 12px;font-weight:600}
+
+  section.block{margin-top:26px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--g8);padding-bottom:7px;margin-bottom:14px}
+  .khead .kp{color:var(--g8);font-size:12px;font-weight:800;letter-spacing:1px;background:#EAF2F7;border:1px solid var(--g8);padding:2px 9px;border-radius:6px;flex:none}
+  .khead h2{font-size:18px;font-weight:800;color:var(--ink);font-family:var(--serif);letter-spacing:.3px}
+
+  .essay{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 20px 8px;box-shadow:0 4px 16px rgba(31,59,94,.05)}
+  .essay p{font-size:15.5px;color:var(--ink);margin-bottom:16px;overflow-wrap:break-word;word-break:break-word}
+  .essay .en-label{display:inline-block;font-size:11px;font-weight:700;color:var(--g8);background:#EAF2F7;border-radius:999px;padding:2px 10px;margin-bottom:14px}
+
+  .trans{background:#fff;border:1px solid var(--line);border-left:4px solid var(--g8);border-radius:14px;padding:18px 20px}
+  .trans p{font-size:14px;color:var(--ink-soft);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
+  .trans p:last-child{margin-bottom:0}
+  .trans .zh-label{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--g8);border-radius:999px;padding:2px 10px;margin-bottom:12px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{display:inline-flex;align-items:center;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--g8);border-radius:10px;padding:9px 14px;font-size:14px;font-weight:600;color:var(--deep)}
+
+  .high{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 20px 12px}
+  .high ol{list-style:none;counter-reset:hl}
+  .high li{counter-increment:hl;position:relative;padding:12px 0 12px 40px;font-size:14.5px;color:var(--ink);border-bottom:1px dashed var(--line);overflow-wrap:break-word;word-break:break-word}
+  .high li:last-child{border-bottom:none}
+  .high li::before{content:counter(hl);position:absolute;left:0;top:14px;width:24px;height:24px;border-radius:50%;background:#EAF2F7;border:1.5px solid var(--g8);color:var(--g8);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+  .divider{height:1px;background:var(--line);margin:28px 0 0}
+  footer{margin-top:22px;padding:16px;text-align:center;color:var(--ink-3);font-size:12px}
+
+  @media (max-width:400px){
+    .hero h1{font-size:25px}
+    .essay p{font-size:14.5px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="../composition.html">← 返回范文目录</a>
+
+  <div class="hero">
+    <div class="kicker">八年级 · 单元范文</div>
+    <h1>范文 26</h1>
+    <div class="sub">下册 · Unit 2 · 健康生活</div>
+    <div class="tagline">
+      <span class="t">定稿范文</span>
+      <span class="t">中文翻译</span>
+      <span class="t">考点</span>
+      <span class="t">亮点</span>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><span class="kp">EN</span><h2>定稿范文</h2></div>
+    <div class="essay">
+      <div class="en-label">Stay Healthy</div>
+      <p>Nowadays, more and more people have come to focus on teenagers' health. As we know, health is the most important thing for everyone. Here is some advice on how to keep healthy.</p><p>First of all, we should develop good eating habits. We must eat more fresh fruit and vegetables and less junk food, because proper food gives us energy for the whole day. Secondly, doing exercise every day is necessary for us. We can run in the morning, swim at weekends or play ball games with our friends after school. Thirdly, we should get enough sleep. As the saying goes, "Early to bed and early to rise makes a man healthy, wealthy and wise." </p><p>Besides physical health, mental health is also important. When we feel stressed or unhappy, we can talk to our parents or teachers. We can also listen to soft music or do something we enjoy to relax ourselves.</p><p>In a word, a healthy life means both a healthy body and a healthy mind. If we follow this advice, we will feel energetic and enjoy our school life.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><span class="kp">CN</span><h2>中文翻译</h2></div>
+    <div class="trans">
+      <div class="zh-label">中文对照</div>
+      <p>如今，越来越多的人开始关注青少年的健康。众所周知，健康对每个人来说都是最重要的。以下是一些保持健康的建议。</p><p>首先，我们应该养成良好的饮食习惯。必须多吃新鲜水果和蔬菜，少吃垃圾食品，因为适当的食物给我们提供一整天的能量。其次，每天锻炼对我们很有必要。我们可以早上跑步、周末游泳或放学后和朋友打球。第三，我们应该获得充足睡眠。俗话说，“早睡早起使人健康、富有和聪明。”</p><p>除了身体健康，心理健康也很重要。当我们感到压力或不开心时，可以和父母或老师谈谈。也可以听轻音乐或做喜欢的事来放松自己。</p><p>总之，健康的生活意味着健康的身体和健康的心灵。如果遵循这些建议，我们会感到精力充沛，享受校园生活。</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><span class="kp">KP</span><h2>考点</h2></div>
+    <div class="chips">
+      <span class="chip">情态动词 should / must / can</span><span class="chip">动名词作主语</span><span class="chip">if 条件句</span><span class="chip">As the saying goes 引用谚语</span>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><span class="kp">STAR</span><h2>范文亮点</h2></div>
+    <div class="high">
+      <ol>
+        <li>用最高级 the most important 强化论点。</li><li>补 because proper food gives us energy，使饮食建议有理有据。</li><li>给三项运动各补时间 / 对象细节。</li><li>结尾用 if 条件句正面收束。</li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+</div>
+
+<footer>多多好学 · 初中英语单元范文</footer>
+
+</body>
+</html>

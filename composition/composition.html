@@ -398,8 +398,8 @@ function render(){
 }
 
 function openDetail(it){
-  /* 详情页尚未生成：先提示，生成后改为跳转 detail/<id>.html */
-  showToast("《"+it.en+"》详情页制作中，范文点评完善后即可查看");
+  /* 跳转到详情页 detail/<id>.html */
+  location.href = 'detail/' + it.id + '.html';
 }
 
 function showToast(msg){

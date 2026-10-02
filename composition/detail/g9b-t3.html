@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>范文 43 · 话题三 · 环境保护</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --paper:#F6F3EC; --card:#FBF9F3; --line:#E3DDD0;
+    --deep:#1F3B5E; --deep-2:#18304E;
+    --g7:#2E82A8; --g8:#3A6B9E; --g9:#35507E;
+    --accent:#C08A3E; --gold:#E3A94F; --sub:#D8D2C0;
+    --ink:#2A2A26; --ink-soft:#6B665B; --ink-3:#9A9384;
+    --serif:"Noto Serif SC",serif; --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.8;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
+
+  .back{margin:16px 2px 0;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--g8);text-decoration:none;font-weight:600}
+  .back:hover{color:var(--deep)}
+
+  .hero{margin-top:14px;background:var(--deep);background-image:radial-gradient(900px 420px at 88% -10%, rgba(192,138,62,.20), transparent 60%),radial-gradient(700px 380px at -6% 110%, rgba(46,130,168,.25), transparent 55%);border-radius:18px;padding:26px 22px;color:#F3EFE3;box-shadow:0 10px 28px rgba(31,59,94,.14)}
+  .hero .kicker{display:inline-block;background:rgba(255,255,255,.16);color:var(--gold);font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:14px;letter-spacing:.5px}
+  .hero h1{font-size:30px;line-height:1.2;color:#fff;font-family:var(--serif);font-weight:700;letter-spacing:.5px}
+  .hero .sub{margin-top:8px;font-size:15px;color:var(--sub);font-weight:600}
+  .hero .tagline{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+  .hero .tagline .t{font-size:12px;color:#F3EFE3;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:4px 12px;font-weight:600}
+
+  section.block{margin-top:26px}
+  .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--g9);padding-bottom:7px;margin-bottom:14px}
+  .khead .kp{color:var(--g9);font-size:12px;font-weight:800;letter-spacing:1px;background:#EAF2F7;border:1px solid var(--g9);padding:2px 9px;border-radius:6px;flex:none}
+  .khead h2{font-size:18px;font-weight:800;color:var(--ink);font-family:var(--serif);letter-spacing:.3px}
+
+  .essay{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 20px 8px;box-shadow:0 4px 16px rgba(31,59,94,.05)}
+  .essay p{font-size:15.5px;color:var(--ink);margin-bottom:16px;overflow-wrap:break-word;word-break:break-word}
+  .essay .en-label{display:inline-block;font-size:11px;font-weight:700;color:var(--g9);background:#EAF2F7;border-radius:999px;padding:2px 10px;margin-bottom:14px}
+
+  .trans{background:#fff;border:1px solid var(--line);border-left:4px solid var(--g9);border-radius:14px;padding:18px 20px}
+  .trans p{font-size:14px;color:var(--ink-soft);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
+  .trans p:last-child{margin-bottom:0}
+  .trans .zh-label{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--g9);border-radius:999px;padding:2px 10px;margin-bottom:12px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{display:inline-flex;align-items:center;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--g9);border-radius:10px;padding:9px 14px;font-size:14px;font-weight:600;color:var(--deep)}
+
+  .high{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 20px 12px}
+  .high ol{list-style:none;counter-reset:hl}
+  .high li{counter-increment:hl;position:relative;padding:12px 0 12px 40px;font-size:14.5px;color:var(--ink);border-bottom:1px dashed var(--line);overflow-wrap:break-word;word-break:break-word}
+  .high li:last-child{border-bottom:none}
+  .high li::before{content:counter(hl);position:absolute;left:0;top:14px;width:24px;height:24px;border-radius:50%;background:#EAF2F7;border:1.5px solid var(--g9);color:var(--g9);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+  .divider{height:1px;background:var(--line);margin:28px 0 0}
+  footer{margin-top:22px;padding:16px;text-align:center;color:var(--ink-3);font-size:12px}
+
+  @media (max-width:400px){
+    .hero h1{font-size:25px}
+    .essay p{font-size:14.5px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="../composition.html">← 返回范文目录</a>
+
+  <div class="hero">
+    <div class="kicker">九年级 · 单元范文</div>
+    <h1>范文 43</h1>
+    <div class="sub">中考话题 · 话题三 · 环境保护</div>
+    <div class="tagline">
+      <span class="t">定稿范文</span>
+      <span class="t">中文翻译</span>
+      <span class="t">考点</span>
+      <span class="t">亮点</span>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="khead"><span class="kp">EN</span><h2>定稿范文</h2></div>
+    <div class="essay">
+      <div class="en-label">Protecting the Environment</div>
+      <p>Hello, everyone! Today I'd like to talk about the environment.</p><p>As we all know, the environment around us is becoming worse and worse, and there is more and more pollution. Air pollution, water pollution and noise pollution have caused serious problems to our health and our daily life. It is high time that we took action to protect our environment.</p><p>What can we do in our daily life? First, we can save water and electricity. For example, we should turn off the lights when we leave a room and remember to turn off the tap in time. Second, we should reduce the use of plastic bags and use reusable ones instead when we go shopping. Third, we can plant more trees and take an active part in environmental activities.</p><p>As the saying goes, "Many hands make light work." If everyone makes a small effort, we can make a big difference to the world. Let's work together to make our world greener and cleaner. Thank you!</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><span class="kp">CN</span><h2>中文翻译</h2></div>
+    <div class="trans">
+      <div class="zh-label">中文对照</div>
+      <p>大家好！今天我想谈谈环境。</p><p>众所周知，我们周围的环境越来越糟，污染越来越多。空气污染、水污染和噪音污染已经给我们的健康和日常生活造成了严重问题。是时候我们采取行动保护环境了。</p><p>日常生活中我们能做什么呢？首先，我们可以节约用水用电。例如，离开房间时关灯，记得及时关水龙头。其次，购物时减少塑料袋的使用，改用可重复使用的袋子。第三，我们可以多种树，积极参加环保活动。</p><p>俗话说，“人多好办事。”如果每个人都付出一点努力，我们就能给世界带来巨大改变。让我们共同努力，让世界更绿更干净。谢谢！</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><span class="kp">KP</span><h2>考点</h2></div>
+    <div class="chips">
+      <span class="chip">现在完成时 have caused</span><span class="chip">It is high time that…</span><span class="chip">if 条件句</span><span class="chip">when 时间状语从句</span><span class="chip">比较级叠加</span>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="khead"><span class="kp">STAR</span><h2>范文亮点</h2></div>
+    <div class="high">
+      <ol>
+        <li>合并环境与污染两句。</li><li>补出污染危害对象。</li><li>把 classroom 改为 a room 更普适，并补关水龙头细节。</li><li>加 when we go shopping 使建议更具体；用 take an active part in 语气更积极。</li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+</div>
+
+<footer>多多好学 · 初中英语单元范文</footer>
+
+</body>
+</html>
