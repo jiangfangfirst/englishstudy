@@ -90,16 +90,24 @@ body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background: #f7f
   pointer-events:none;
   z-index:1;
 }
+/* no‑bg状态直接隐藏视频，彻底解决盖不住 */
+.content-area.no-bg .content-area__bg-video{
+  display:none;
+}
 .content-area__bg-video::-webkit-media-controls,
 .content-area__bg-video::-webkit-media-controls-enclosure{
   display:none !important;
 }
-/* 上层原有全部内容置于视频上方 */
+/* 上层原有全部内容置于视频之上 */
 .content-area > *{
   position:relative;
   z-index:2;
 }
-.content-area.no-bg { background: transparent; padding: 0; animation: none; }
+.content-area.no-bg {
+  background: transparent;
+  padding: 0;
+  animation: none;
+}
 
 @keyframes bgFadeIn {
   from { opacity: 0; filter: saturate(.3); }
@@ -790,6 +798,21 @@ function celebrate(){
 // 页面加载后立即初始化
 window.addEventListener('load', function(){ setGrade('basic'); });
 setTimeout(function(){ setGrade('basic'); }, 100);
+
+// ==========新增：兜底播放背景视频==========
+window.addEventListener('load',function(){
+  const bgVideo = document.querySelector('.content-area__bg-video');
+  if(bgVideo){
+    bgVideo.play().catch(err=>{
+      console.log("自动播放被浏览器阻止，等待用户交互播放视频",err);
+      function oncePlay(){
+        bgVideo.play().catch(e=>{});
+        document.removeEventListener('click',oncePlay);
+      }
+      document.addEventListener('click',oncePlay);
+    });
+  }
+});
 </script>
 <div style="text-align:center;padding:20px 16px 30px;font-size:11px;color:#9ca3af;line-height:2">
   <div>@多多好学 版权所有</div>
