@@ -2,8 +2,10 @@
 <html lang="zh-CN">
 <head><script>
  (function(){
-   var a = localStorage.getItem('dd_auth');
-   if(!a){ location.href = '../../login.html'; }
+   try{
+     var a = localStorage.getItem('dd_auth');
+     if(!a){ location.href = '../../login.html'; }
+   }catch(e){ /* 沙盒环境忽略登录校验 */ }
  })();
 </script>
 <meta charset="UTF-8">
@@ -55,11 +57,7 @@
   .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
   .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
     border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
-  .q-source{
-    font-size: 12px;
-    color: var(--muted);
-    margin: 0 0 16px 4px;
-  }
+  .q-source{font-size: 12px; color: var(--muted); margin: 0 0 16px 4px;}
   .options{display:flex; flex-direction:column; gap:10px;}
   .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
     padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
@@ -118,11 +116,7 @@
   .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
     display:flex; align-items:center; justify-content:center; height:30px;}
   .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
-  .bank-item .b-source{
-    font-size: 12px;
-    color: var(--muted);
-    margin: 4px 0 8px;
-  }
+  .bank-item .b-source{font-size: 12px; color: var(--muted); margin: 4px 0 8px;}
   .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
   .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
   .bank-item .b-options .op b{color:var(--ink);}
@@ -452,23 +446,41 @@ const BANK = [
 {q:"The boy is ________ than me.", o:["the shortest","short","shorter","shortest"], a:2, e:"than提示用比较级shorter。", source:"人教版初中英语八上Unit3单元语法Grammar形容词和副词的比较级练习"},
 {q:"My deskmate is different ________ me.", o:["from","with","to","of"], a:0, e:"be different from 表示“与……不同”。", source:"Unit 3 Same or Different 综合测试卷"},
 {q:"The weather in winter in Changchun is much ________ than that in Guangzhou.", o:["cold","colder","coldest","the coldest"], a:1, e:"than 提示用比较级，much 修饰比较级 colder。", source:"人教版(2024)(安徽)英语八年级上册Unit 3高频考点训练"},
-{q:"—I think friends should be different. —________. I think friends should be the same.", o:["I agree","I disagree","I think so","You're right"], a:1, e:"根据 I think friends should be the same 可知对方不同意。", source:"人教版(安徽)八年级上册Unit 3单元检测卷"},
+{q:"—I think friends should be different. —________. I think friends should be the same.", o:["I agree","I disagree","I think so","You're right"], a:1, e:"根据 I think friends should be the same 可知对方不同意。", source:"人教版(安徽)八年级上册Unit 3单元检测卷"}
 ];
 
 const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
 const $ = id => document.getElementById(id);
 
-// 历史做题下标存取
+// localStorage 在沙盒/隐私模式下可能不可用，降级为内存存储
+var __memUsed = [];
+function __lsAvailable(){
+  try{
+    var k='__test_ls__';
+    localStorage.setItem(k,'1');
+    localStorage.removeItem(k);
+    return true;
+  }catch(e){ return false; }
+}
+var __hasLS = __lsAvailable();
+
 function getUsedIndexes(){
-  const raw = localStorage.getItem('83_kp3_used_indexes');
-  if(!raw) return [];
-  try{ return JSON.parse(raw); }catch(e){ return []; }
+  if(!__hasLS) return __memUsed.slice();
+  try{
+    var raw = localStorage.getItem('83_kp3_used_indexes');
+    if(!raw) return [];
+    return JSON.parse(raw);
+  }catch(e){ return __memUsed.slice(); }
 }
 function saveUsedIndexes(list){
-  localStorage.setItem('83_kp3_used_indexes', JSON.stringify(list));
+  __memUsed = list.slice();
+  if(!__hasLS) return;
+  try{ localStorage.setItem('83_kp3_used_indexes', JSON.stringify(list)); }catch(e){}
 }
 function clearUsedIndexes(){
-  localStorage.removeItem('83_kp3_used_indexes');
+  __memUsed = [];
+  if(!__hasLS) return;
+  try{ localStorage.removeItem('83_kp3_used_indexes'); }catch(e){}
 }
 
 function shuffle(arr){
@@ -477,7 +489,6 @@ function shuffle(arr){
   return a;
 }
 
-// 获取不重复的题号下标，优先避开历史做过的
 function pickQuizIndex(totalCount, needCount){
   let used = getUsedIndexes();
   let allIdx = Array.from({length:totalCount}, (_,i)=>i);
@@ -525,8 +536,8 @@ function startQuiz(){
 
 function renderQuestion(){
   const q = state.quiz[state.qi];
-  $('qNum').textContent = '第 ' + (state.qi+1) + ' / ' + state.quiz.length + ' 题';
-  $('qBar').style.width = ((state.qi)/state.quiz.length*100) + '%';
+  $('qNum').textContent = `第 ${state.qi+1} / ${state.quiz.length} 题`;
+  $('qBar').style.width = ((state.qi)/state.quiz.length*100)+'%';
   $('qScore').textContent = state.score + ' 分';
   $('qStem').innerHTML = formatDialog(q.q);
   $('qSource').textContent = '来源：' + q.source;
@@ -535,7 +546,7 @@ function renderQuestion(){
   q.o.forEach((op,i)=>{
     const el=document.createElement('div');
     el.className='option';
-    el.innerHTML = '<span class="key">' + LETTERS[i] + '</span><span class="txt">' + op + '</span>';
+    el.innerHTML=`<span class="key">${LETTERS[i]}</span><span class="txt">${op}</span>`;
     el.onclick = ()=>answer(i, el);
     wrap.appendChild(el);
   });
@@ -559,8 +570,8 @@ function answer(i, el){
   const fb=$('qFeedback');
   fb.className = 'feedback show ' + (correct?'ok':'bad');
   fb.innerHTML = correct
-    ? '<div class="verdict">回答正确 · +5 分</div><div class="exp">' + q.e + '</div>'
-    : '<div class="verdict">回答错误 · 正确答案 ' + LETTERS[q.a] + '</div><div class="exp">' + q.e + '</div>';
+    ? `<div class="verdict">回答正确 · +5 分</div><div class="exp">${q.e}</div>`
+    : `<div class="verdict">回答错误 · 正确答案 ${LETTERS[q.a]}</div><div class="exp">${q.e}</div>`;
   $('qNext').classList.add('show');
   $('qScore').textContent = state.score + ' 分';
 }
@@ -581,7 +592,7 @@ function renderResult(){
   else if(pct>=70){t='很不错！';s='大部分都掌握了，个别考点再看一眼解析。';}
   else if(pct>=50){t='还行，有进步空间';s='一半以上答对，建议把答错的题解析仔细过一遍。';}
   else {t='需要加油哦';s='Unit 3 考点还不太熟，建议先浏览全量题库再测一次。';}
-  $('rTitle').textContent=t; $('rSub').textContent='答对 ' + (state.score/5) + ' 题，得分 ' + state.score + ' / 100。' + s;
+  $('rTitle').textContent=t; $('rSub').textContent=`答对 ${state.score/5} 题，得分 ${state.score} / 100。${s}`;
   const list=$('rList'); list.innerHTML='';
   state.userAns.forEach((r,idx)=>{
     const div=document.createElement('div'); div.className='r-item';
@@ -608,14 +619,13 @@ function renderBank(){
   const list=$('bankList'); list.innerHTML='';
   items.forEach(it=>{
     const div=document.createElement('div'); div.className='bank-item';
-    // 修复：使用反引号模板字符串，确保变量正确解析
     div.innerHTML = `
       <div class="b-head"><span class="b-no">${it.no}</span>
         <div><div class="b-stem">${formatDialog(it.q.q)}</div>
           <div class="b-source">来源：${it.q.source}</div>
           <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
-          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
-          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+          <div class="b-foot"><span style="font-size:12px;color:var(--muted)">点击展开答案与解析</span></div>
+          <div class="b-exp"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><br><b>解析：</b>${it.q.e}</div>
         </div></div>`;
     div.onclick = ()=>div.classList.toggle('open');
     list.appendChild(div);

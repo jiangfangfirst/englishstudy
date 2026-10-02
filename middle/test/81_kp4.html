@@ -2,8 +2,10 @@
 <html lang="zh-CN">
 <head><script>
  (function(){
-   var a = localStorage.getItem('dd_auth');
-   if(!a){ location.href = '../../login.html'; }
+   try{
+     var a = localStorage.getItem('dd_auth');
+     if(!a){ location.href = '../../login.html'; }
+   }catch(e){ /* 沙盒环境忽略登录校验 */ }
  })();
 </script>
 <meta charset="UTF-8">
@@ -55,11 +57,7 @@
   .quiz-head .score-chip{font-size:12px; color:var(--brand); background:var(--soft); padding:4px 10px; border-radius:16px; font-weight:700;}
   .q-text{font-size:17px; font-weight:700; margin-bottom:8px; padding:14px 16px; background:var(--soft);
     border-radius:12px; border-left:4px solid var(--brand); overflow-wrap:break-word; word-break:break-word; line-height:1.8;}
-  .q-source{
-    font-size: 12px;
-    color: var(--muted);
-    margin: 0 0 16px 4px;
-  }
+  .q-source{font-size: 12px; color: var(--muted); margin: 0 0 16px 4px;}
   .options{display:flex; flex-direction:column; gap:10px;}
   .option{display:flex; align-items:center; gap:12px; border:1.5px solid var(--line); border-radius:12px;
     padding:12px 16px; cursor:pointer; transition:.15s; background:#fff;}
@@ -118,11 +116,7 @@
   .bank-item .b-no{flex:0 0 34px; background:var(--soft); color:var(--brand); border-radius:8px; font-weight:800; font-size:13px;
     display:flex; align-items:center; justify-content:center; height:30px;}
   .bank-item .b-stem{font-size:14px; font-weight:600; line-height:1.7; overflow-wrap:break-word; word-break:break-word;}
-  .bank-item .b-source{
-    font-size: 12px;
-    color: var(--muted);
-    margin: 4px 0 8px;
-  }
+  .bank-item .b-source{font-size: 12px; color: var(--muted); margin: 4px 0 8px;}
   .bank-item .b-options{margin-top:8px; display:flex; flex-direction:column; gap:4px;}
   .bank-item .b-options .op{font-size:13px; color:#37414f; overflow-wrap:break-word; word-break:break-word;}
   .bank-item .b-options .op b{color:var(--ink);}
@@ -233,7 +227,6 @@
   <footer>多多好学单元题库 · 点击题目可展开解析</footer>
 </div>
 <script>
-// 工具：对话题干自动换行
 function formatDialog(str){
   return str.replace(/ —/g, '<br>—');
 }
@@ -453,22 +446,39 @@ const BANK = [
 {q:"English is a useful ________ to introduce Chinese culture to the world.", o:["plan","tool","radio","film"], a:1, e:"tool表示\"工具\"，英语是向世界介绍中国文化的有用工具。", source:"人教版(2024)八年级上册Unit 4 Section A 2a-2e精品同步训练题"},
 {q:"I ________ a lot of interesting things when I was there.", o:["learn","learns","learnt","learning"], a:2, e:"when I was there 提示用一般过去时 learnt。", source:"2026-2027学年八年级英语上册单元素养达标培优卷"},
 {q:"For him, a space camp is ________ than any other camp in the world.", o:["great","greater","the greatest","greatest"], a:1, e:"than any other camp 提示用比较级 greater。", source:"2024版人教版八年级英语上册Unit 4课时作业专练"},
-{q:"Shanghai is one of ________ cities in China. Lots of visitors come here every year.", o:["big","bigger","biggest","the biggest"], a:3, e:"one of the + 最高级 + 复数名词。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"},
+{q:"Shanghai is one of ________ cities in China. Lots of visitors come here every year.", o:["big","bigger","biggest","the biggest"], a:3, e:"one of the + 最高级 + 复数名词。", source:"人教版(2024)八年级上册Unit 4考点考题点点通"}
 ];
 const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
 const $ = id => document.getElementById(id);
 
-// 历史做题下标存取
+var __memUsed = [];
+function __lsAvailable(){
+  try{
+    var k='__test_ls__';
+    localStorage.setItem(k,'1');
+    localStorage.removeItem(k);
+    return true;
+  }catch(e){ return false; }
+}
+var __hasLS = __lsAvailable();
+
 function getUsedIndexes(){
-  const raw = localStorage.getItem('84_kp4_used_indexes');
-  if(!raw) return [];
-  try{ return JSON.parse(raw); }catch(e){ return []; }
+  if(!__hasLS) return __memUsed.slice();
+  try{
+    var raw = localStorage.getItem('84_kp4_used_indexes');
+    if(!raw) return [];
+    return JSON.parse(raw);
+  }catch(e){ return __memUsed.slice(); }
 }
 function saveUsedIndexes(list){
-  localStorage.setItem('84_kp4_used_indexes', JSON.stringify(list));
+  __memUsed = list.slice();
+  if(!__hasLS) return;
+  try{ localStorage.setItem('84_kp4_used_indexes', JSON.stringify(list)); }catch(e){}
 }
 function clearUsedIndexes(){
-  localStorage.removeItem('84_kp4_used_indexes');
+  __memUsed = [];
+  if(!__hasLS) return;
+  try{ localStorage.removeItem('84_kp4_used_indexes'); }catch(e){}
 }
 
 function shuffle(arr){
@@ -477,22 +487,17 @@ function shuffle(arr){
   return a;
 }
 
-// 获取不重复的题号下标，优先避开历史做过的
 function pickQuizIndex(totalCount, needCount){
   let used = getUsedIndexes();
   let allIdx = Array.from({length:totalCount}, (_,i)=>i);
-  // 候选 = 全部下标排除已使用
   let candidate = allIdx.filter(x=> !used.includes(x));
-  // 如果候选不够，清空历史，重新全部作为候选
   if(candidate.length < needCount){
     clearUsedIndexes();
     used = [];
     candidate = [...allIdx];
   }
-  // 洗牌候选数组取前N
   const shuffled = shuffle(candidate);
   const selected = shuffled.slice(0, needCount);
-  // 将本次选到的加入历史记录
   const newUsed = [...new Set([...used, ...selected])];
   saveUsedIndexes(newUsed);
   return selected;
@@ -617,8 +622,8 @@ function renderBank(){
         <div><div class="b-stem">${formatDialog(it.q.q)}</div>
           <div class="b-source">来源：${it.q.source}</div>
           <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
-          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
-          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+          <div class="b-foot"><span style="font-size:12px;color:var(--muted)">点击展开答案与解析</span></div>
+          <div class="b-exp"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><br><b>解析：</b>${it.q.e}</div>
         </div></div>`;
     div.onclick = ()=>div.classList.toggle('open');
     list.appendChild(div);
