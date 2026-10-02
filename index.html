@@ -9,7 +9,6 @@
  })();
 </script>
 -->
-
 <meta charset="UTF-8" />
 <!-- 微信/社交分享 -->
 <meta property="og:title" content="多多好学英语课堂" />
@@ -23,7 +22,13 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <style>
-  * { box-sizing: border-box; }
+  * { 
+    box-sizing: border-box; 
+    touch-action: manipulation;
+  }
+  a {
+    -webkit-tap-highlight-color: rgba(0,0,0,0.05);
+  }
   body {
     background: linear-gradient(-45deg, #e0f2fe, #ecfdf5, #fffbeb, #f5f3ff, #fce7f3);
     background-size: 400% 400%;
@@ -37,7 +42,6 @@
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
-
   .top-banner {
     border-radius: 0 0 28px 28px;
     padding: 28px 20px 50px;
@@ -53,7 +57,6 @@
   .banner-text { position: relative; z-index: 1; }
   .top-banner h1 { font-size: 26px; font-weight: 900; text-shadow: 0 2px 8px rgba(0,0,0,.3); }
   .top-banner p { font-size: 13px; opacity: .95; margin-top: 6px; text-shadow: 0 1px 4px rgba(0,0,0,.3); }
-
   .card {
     background: rgba(255,255,255,.82); backdrop-filter: blur(12px);
     border-radius: 20px; padding: 18px;
@@ -70,7 +73,6 @@
     background: linear-gradient(180deg,#06b6d4,#3b82f6);
   }
   .sub-title { font-size: 12px; color: #9ca3af; margin: 0 0 14px 12px; }
-
   .tab-wrap { display: flex; gap: 0; margin-bottom: 16px; border-bottom: 2px solid #e5e7eb; }
   .tab-item {
     flex: 1; text-align: center; padding: 10px 4px;
@@ -83,14 +85,12 @@
     content: ""; position: absolute; bottom: -2px; left: 25%; right: 25%;
     height: 3px; border-radius: 2px; background: #3b82f6;
   }
-
   .panel { display: none; }
   .panel.active { display: block; animation: fadeUp .4s ease; }
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
   .grid-block {
     border-radius: 16px; padding: 16px 8px;
     display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -106,7 +106,6 @@
   }
   .block-label { font-size: 13px; font-weight: 700; }
   .block-en { font-size: 10px; color: #9ca3af; }
-
   /* 跑马灯 */
   .marquee-block {
     background: rgba(255,255,255,.82); backdrop-filter: blur(12px);
@@ -138,7 +137,6 @@
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
-
   .rc-card {
     border-radius: 16px; padding: 14px; color: #fff;
     min-height: 130px; display: flex; flex-direction: column;
@@ -155,7 +153,6 @@
     font-size: 11px; background: rgba(255,255,255,.25);
     border-radius: 999px; padding: 4px 10px; width: fit-content;
   }
-
   /* 初中四格 + 中心圆形背单词入口（圆形居中叠层，白边框造间距） */
   .junior-grid { position: relative; }
   .j-circle {
@@ -176,7 +173,6 @@
     display: block; margin: 5px auto 0;
   }
   .j-right { align-items: flex-end; text-align: right; }
-
   .link-card {
     background: #f8fafc; border-radius: 14px; padding: 14px;
     display: flex; align-items: center; gap: 12px;
@@ -189,7 +185,6 @@
   .link-title { font-size: 14px; font-weight: 700; }
   .link-sub { font-size: 12px; color: #6b7280; }
   .arrow { margin-left: auto; color: #c7d0dd; }
-
   .footer {
     text-align: center; color: #9ca3af; font-size: 12px;
     padding: 28px 0 20px;
@@ -207,7 +202,6 @@
       <p>在线学习 · 及时反馈 · 海量资源 · 快速更新</p>
     </div>
   </div>
-
   <div class="px-4 -mt-8 relative z-10 space-y-4">
     <!-- 小学英语点读 -->
     <div class="card">
@@ -219,7 +213,6 @@
         <div class="tab-item" data-g="5" onclick="switchTab(2,this)">五年级</div>
         <div class="tab-item" data-g="6" onclick="switchTab(3,this)">六年级</div>
       </div>
-
       <div class="panel active" id="panel0">
         <div class="grid grid-cols-4 gap-3">
           <a href="read/31.html" class="grid-block" style="background:#ecfdf5;">
@@ -244,7 +237,6 @@
           </a>
         </div>
       </div>
-
       <div class="panel" id="panel1">
         <div class="grid grid-cols-4 gap-3">
           <a href="read/41.html" class="grid-block" style="background:#eff6ff;">
@@ -269,7 +261,6 @@
           </a>
         </div>
       </div>
-
       <div class="panel" id="panel2">
         <div class="grid grid-cols-4 gap-3">
           <a href="read/51.html" class="grid-block" style="background:#fffbeb;">
@@ -294,7 +285,6 @@
           </a>
         </div>
       </div>
-
       <div class="panel" id="panel3">
         <div class="grid grid-cols-4 gap-3">
           <a href="read/61.html" class="grid-block" style="background:#f5f3ff;">
@@ -320,16 +310,14 @@
         </div>
       </div>
     </div>
-
    
-
     <!-- 初中英语同步学习 -->
     <div class="card">
       <div class="section-title">初中英语同步学习</div>
       <div class="sub-title">章节详解，考点解析，在线检测</div>
       <div class="junior-grid">
         <div class="grid grid-cols-2 gap-3">
-          <a href="middle/7.html" class="rc-card" style="background:linear-gradient(135deg,#1476ff,#4e9bff);">
+          <a href="middle/7.html" rel="prefetch" class="rc-card" style="background:linear-gradient(135deg,#1476ff,#4e9bff);">
             <span class="rc-tag">人教版PEP</span>
             <div>
               <div class="rc-title">七年级<br>知识点归纳</div>
@@ -337,7 +325,7 @@
             </div>
             <span class="rc-more">去学习</span>
           </a>
-          <a href="middle/8.html" class="rc-card j-right" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);">
+          <a href="middle/8.html" rel="prefetch" class="rc-card j-right" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);">
             <span class="rc-tag">人教版PEP</span>
             <div>
               <div class="rc-title">八年级<br>知识点归纳</div>
@@ -345,7 +333,7 @@
             </div>
             <span class="rc-more">去学习</span>
           </a>
-          <a href="middle/9.html" class="rc-card" style="background:linear-gradient(135deg,#10b981,#34d399);">
+          <a href="middle/9.html" rel="prefetch" class="rc-card" style="background:linear-gradient(135deg,#10b981,#34d399);">
             <span class="rc-tag">人教版PEP</span>
             <div>
               <div class="rc-title">九年级<br>知识点归纳</div>
@@ -362,7 +350,7 @@
             <span class="rc-more">去测试</span>
           </a>
         </div>
-        <a href="wordcab/vocab.html" class="j-circle">
+        <a href="wordcab/vocab.html" rel="prefetch" class="j-circle">
           <span>
             <span class="jc-name">记单词</span>
             <span class="jc-sub">分级记・单词一扫光<br>成就感满级</span>
@@ -371,8 +359,6 @@
         </a>
       </div>
     </div>
-
-
      <!-- 跑马灯 -->
      <div class="marquee-block">
       <div class="marquee-track">
@@ -383,7 +369,7 @@
         <span class="marquee-seg seg-5"><span class="logo-circle">早</span>早教启蒙</span>
         <span class="marquee-seg seg-6"><span class="logo-circle">习</span>习惯培养</span>
         <span class="marquee-seg seg-1"><span class="logo-circle">望</span>望江托育</span>
-        <span class="marquee-seg seg-2"><span class="logo-circle">机</span>机构入口</span>
+        <span class="marquee-seg seg-2"><span class="logo-circle">机</span>构入口</span>
         <span class="marquee-seg seg-3"><span class="logo-circle">照</span>贴心照护</span>
         <span class="marquee-seg seg-4"><span class="logo-circle">伴</span>成长陪伴</span>
         <span class="marquee-seg seg-5"><span class="logo-circle">早</span>早教启蒙</span>
@@ -427,12 +413,11 @@
         </a>
       </div>
     </div>
-
     <!-- 快捷入口 -->
     <div class="card">
       <div class="section-title">快捷入口</div>
       <div class="space-y-3">
-        <a href="wordcab/vocab.html" class="link-card">
+        <a href="wordcab/vocab.html" rel="prefetch" class="link-card">
           <div class="link-thumb" style="background:#1476ff;"><i class="fa fa-calendar-check-o"></i></div>
           <div>
             <div class="link-title">每天记单词</div>
@@ -458,11 +443,9 @@
         </a>
       </div>
     </div>
-
     <div class="footer">多多好学姜老师版权所有（支持定制 180 1926 7856）</div>
   </div>
 </div>
-
 <script>
   var panels = document.querySelectorAll('.panel');
   var tabs = document.querySelectorAll('.tab-item');
