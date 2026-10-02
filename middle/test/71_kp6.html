@@ -2,8 +2,10 @@
 <html lang="zh-CN">
 <head><script>
  (function(){
-   var a = localStorage.getItem('dd_auth');
-   if(!a){ location.href = '../../login.html'; }
+   try{
+     var a = localStorage.getItem('dd_auth');
+     if(!a){ location.href = '../../login.html'; }
+   }catch(e){ /* 沙盒环境忽略登录校验 */ }
  })();
 </script>
 <meta charset="UTF-8">
@@ -372,17 +374,35 @@ const BANK = [
 const state = { mode:'home', quiz:[], quizIndexList:[], qi:0, score:0, userAns:[] };
 const $ = id => document.getElementById(id);
 
-// 历史做题下标存取
+// localStorage 在沙盒/隐私模式下可能不可用，降级为内存存储
+var __memUsed = [];
+function __lsAvailable(){
+  try{
+    var k='__test_ls__';
+    localStorage.setItem(k,'1');
+    localStorage.removeItem(k);
+    return true;
+  }catch(e){ return false; }
+}
+var __hasLS = __lsAvailable();
+
 function getUsedIndexes(){
-  const raw = localStorage.getItem('71_kp6_used_indexes');
-  if(!raw) return [];
-  try{ return JSON.parse(raw); }catch(e){ return []; }
+  if(!__hasLS) return __memUsed.slice();
+  try{
+    var raw = localStorage.getItem('71_kp6_used_indexes');
+    if(!raw) return [];
+    return JSON.parse(raw);
+  }catch(e){ return __memUsed.slice(); }
 }
 function saveUsedIndexes(list){
-  localStorage.setItem('71_kp6_used_indexes', JSON.stringify(list));
+  __memUsed = list.slice();
+  if(!__hasLS) return;
+  try{ localStorage.setItem('71_kp6_used_indexes', JSON.stringify(list)); }catch(e){}
 }
 function clearUsedIndexes(){
-  localStorage.removeItem('71_kp6_used_indexes');
+  __memUsed = [];
+  if(!__hasLS) return;
+  try{ localStorage.removeItem('71_kp6_used_indexes'); }catch(e){}
 }
 
 function shuffle(arr){
@@ -391,22 +411,17 @@ function shuffle(arr){
   return a;
 }
 
-// 获取不重复的题号下标，优先避开历史做过的
 function pickQuizIndex(totalCount, needCount){
   let used = getUsedIndexes();
   let allIdx = Array.from({length:totalCount}, (_,i)=>i);
-  // 候选 = 全部下标排除已使用
   let candidate = allIdx.filter(x=> !used.includes(x));
-  // 如果候选不够，清空历史，重新全部作为候选
   if(candidate.length < needCount){
     clearUsedIndexes();
     used = [];
     candidate = [...allIdx];
   }
-  // 洗牌候选数组取前N
   const shuffled = shuffle(candidate);
   const selected = shuffled.slice(0, needCount);
-  // 将本次选到的加入历史记录
   const newUsed = [...new Set([...used, ...selected])];
   saveUsedIndexes(newUsed);
   return selected;
@@ -531,8 +546,8 @@ function renderBank(){
         <div><div class="b-stem">${formatDialog(it.q.q)}</div>
           <div class="b-source">来源：${it.q.source}</div>
           <div class="b-options">${it.q.o.map((o,i)=>`<div class="op"><b>${LETTERS[i]}.</b> ${o}</div>`).join('')}</div>
-          <div class="b-foot"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><span style="font-size:12px;color:var(--muted)">点击展开解析</span></div>
-          <div class="b-exp"><b>解析：</b>${it.q.e}</div>
+          <div class="b-foot"><span style="font-size:12px;color:var(--muted)">点击展开答案与解析</span></div>
+          <div class="b-exp"><span class="b-ans">答案：${LETTERS[it.q.a]}</span><br><b>解析：</b>${it.q.e}</div>
         </div></div>`;
     div.onclick = ()=>div.classList.toggle('open');
     list.appendChild(div);
