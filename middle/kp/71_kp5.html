@@ -23,7 +23,6 @@
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
   .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
 
-  /* hero —— 简洁浅蓝标题条 */
   .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
   .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
   .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
@@ -32,7 +31,6 @@
   .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
   .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
 
-  /* Key Point section header */
   section.block{margin-top:30px}
   .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
   .khead .kp{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1px;background:var(--blue-bg);border:1px solid var(--blue);padding:2px 9px;border-radius:6px;flex:none}
@@ -42,13 +40,11 @@
   .lead{font-size:13.5px;color:var(--ink-2);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
   .lead b{color:var(--blue-d)}
 
-  /* 语法要点块 */
   .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
   .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
   .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
   .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 词汇列表 —— 紧凑词条 */
   .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
   .witem:last-child{border-bottom:none}
@@ -63,7 +59,6 @@
 .witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber,#f59e0b);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
   .witem .notebox b{color:var(--accent-c,var(--amber-d,#b45309))}
 
-  /* 短语标签云 */
   .plist{margin-top:4px}
   .pgroup{margin-bottom:12px}
   .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
@@ -73,7 +68,6 @@
   .chip b{color:var(--blue-d);font-weight:700}
   .chip span{color:var(--ink-3);font-size:11px}
 
-  /* 考点列表 —— 编号清单 */
   .klist{margin-top:4px}
   .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
   .kitem:last-child{border-bottom:none}
@@ -84,7 +78,6 @@
   .kitem .bd p b{color:var(--blue-d)}
   .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 句型列表 */
   .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
   .sitem:last-child{border-bottom:none}
@@ -92,7 +85,6 @@
   .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
   .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 易错清单 —— 琥珀 */
   .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
   .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
   .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
@@ -135,19 +127,19 @@
     <div class="gram">
       <div class="gt">情态动词 can</div>
       <p>can 表能力，<b>后接动词原形</b>；否定 <b>can't</b>；疑问 <b>Can + 主语 + 动词原形?</b>；无人称和数的变化。</p><p>can 与 be able to 同义，但 be able to 有人称时态变化。</p>
-      <div class="ex">The fish can swim, but it can't fly.</div><div class="ex">—Can you play the guitar? —Yes, I can.</div><div class="ex">—Can you play the piano? —No, I can't. But I can play the violin.</div>
+      <div class="ex">The fish can swim, but it can't fly.<br>鱼会游泳，但它不会飞。</div><div class="ex">—Can you play the guitar? —Yes, I can.<br>——你会弹吉他吗？——是的，我会。</div><div class="ex">—Can you play the piano? —No, I can't. But I can play the violin.<br>——你会弹钢琴吗？——不，我不会。但我会拉小提琴。</div>
     </div>
 
     <div class="gram">
       <div class="gt">play the + 乐器 / play + 球类</div>
       <p>乐器前加 <b>the</b>：play the piano / the violin / the drums；<b>球类前不加 the</b>：play football / basketball / chess。</p>
-      <div class="ex">She can play the violin very well.</div><div class="ex">My brother is good at playing basketball.</div>
+      <div class="ex">She can play the violin very well.<br>她小提琴拉得很好。</div><div class="ex">My brother is good at playing basketball.<br>我哥哥擅长打篮球。</div>
     </div>
 
     <div class="gram">
       <div class="gt">be good at / be interested in</div>
       <p><b>be good at</b> 擅长（后接名词/动名词）· <b>be interested in</b> 对……感兴趣 · <b>be good with</b> 善于与……相处。</p>
-      <div class="ex">She is good at drawing. She draws well.</div><div class="ex">I am very interested in the story. It's so funny.</div>
+      <div class="ex">She is good at drawing. She draws well.<br>她擅长画画。她画得很好。</div><div class="ex">I am very interested in the story. It's so funny.<br>我对这个故事非常感兴趣。它太有趣了。</div>
     </div>
   </section>
 
@@ -157,77 +149,77 @@
       <div class="witem">
         <div class="wh"><span class="word">club</span><span class="ph">/klʌb/</span><span class="pos">n. 俱乐部；社团</span></div>
         <p>join the art club 加入美术社团。</p>
-        <div class="sen">—Which club do you want to join? —The chess club.</div>
+        <div class="sen">—Which club do you want to join? —The chess club.<br>——你想加入哪个社团？——国际象棋社团。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">join</span><span class="ph">/dʒɔɪn/</span><span class="pos">v. 加入</span></div>
         <p>join + 组织/团体/活动。</p>
-        <div class="sen">I want to join the music club. I like music.</div>
+        <div class="sen">I want to join the music club. I like music.<br>我想加入音乐社团。我喜欢音乐。</div>
         <div class="notebox"><b>常考</b>join 后直接接组织，不用 join in 接组织。</div>
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">can</span><span class="ph">/kæn/</span><span class="pos">modal v. 能；会</span></div>
         <p>后接动词原形；can't 否定。</p>
-        <div class="sen">He can sing and dance.</div>
+        <div class="sen">He can sing and dance.<br>他会唱歌和跳舞。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">swim</span><span class="ph">/swɪm/</span><span class="pos">v. 游泳</span></div>
         <p>swimming 动名词；go swimming 去游泳。</p>
-        <div class="sen">She can't swim, but she can dance well.</div>
+        <div class="sen">She can't swim, but she can dance well.<br>她不会游泳，但她舞跳得很好。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">paint</span><span class="ph">/peɪnt/</span><span class="pos">v. 绘画；涂颜料</span></div>
         <p>painting n. 绘画；画。</p>
-        <div class="sen">My sister is good at painting. She can draw beautiful pictures.</div>
+        <div class="sen">My sister is good at painting. She can draw beautiful pictures.<br>我妹妹擅长绘画。她能画出美丽的画。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">draw</span><span class="ph">/drɔː/</span><span class="pos">v. 画；绘制</span></div>
         <p>draw a picture 画画。</p>
-        <div class="sen">She is good at drawing. She draws well.</div>
+        <div class="sen">She is good at drawing. She draws well.<br>她擅长画画。她画得很好。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">dance</span><span class="ph">/dɑːns/</span><span class="pos">v. 跳舞 · n. 舞蹈</span></div>
         <p>dancer 舞者。</p>
-        <div class="sen">My brother can dance. He wants to dance after school.</div>
+        <div class="sen">My brother can dance. He wants to dance after school.<br>我弟弟会跳舞。他想放学后去跳舞。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">sing</span><span class="ph">/sɪŋ/</span><span class="pos">v. 唱；唱歌</span></div>
         <p>singer 歌手。</p>
-        <div class="sen">—Can he sing? —Yes, he can. He can sing well.</div>
+        <div class="sen">—Can he sing? —Yes, he can. He can sing well.<br>——他会唱歌吗？——是的，他会。他唱得很好。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">chess</span><span class="ph">/tʃes/</span><span class="pos">n. 国际象棋</span></div>
         <p>play chess 下棋（不加 the）。</p>
-        <div class="sen">—What can you do? —I can play chess.</div>
+        <div class="sen">—What can you do? —I can play chess.<br>——你会做什么？——我会下国际象棋。</div>
         <div class="notebox"><b>易错</b>play chess 不加 the，与 play the piano 不同。</div>
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">drum</span><span class="ph">/drʌm/</span><span class="pos">n. 鼓</span></div>
         <p>play the drums 打鼓（乐器加 the）。</p>
-        <div class="sen">My brother can play the drums in the school band.</div>
+        <div class="sen">My brother can play the drums in the school band.<br>我哥哥会在学校乐队里打鼓。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">violin</span><span class="ph">/ˌvaɪəˈlɪn/</span><span class="pos">n. 小提琴</span></div>
         <p>play the violin 拉小提琴。</p>
-        <div class="sen">—What can your sister do? —She can play the violin.</div>
+        <div class="sen">—What can your sister do? —She can play the violin.<br>——你妹妹会做什么？——她会拉小提琴。</div>
         
       </div>
     </div>
@@ -265,73 +257,73 @@
 <div class="kitem"><div class="n">1</div><div class="bd">
         <b class="kt">考点一：can 后接动词原形</b>
         <p>can / can't 后必须接动词原形，无人称变化：He can sing.（不是 He can sings.）</p>
-        <div class="ex">Linda can speak three languages.</div>
+        <div class="ex">Linda can speak three languages.<br>琳达会说三种语言。</div>
       </div></div>
 
       <div class="kitem"><div class="n">2</div><div class="bd">
         <b class="kt">考点二：can 的疑问与回答</b>
         <p>Can + 主语 + 动词原形? 回答 Yes, 主语 + can. / No, 主语 + can't.</p>
-        <div class="ex">—Can your sister play the piano? —Yes, she can.</div>
+        <div class="ex">—Can your sister play the piano? —Yes, she can.<br>——你姐姐会弹钢琴吗？——是的，她会。</div>
       </div></div>
 
       <div class="kitem"><div class="n">3</div><div class="bd">
         <b class="kt">考点三：play 与冠词</b>
         <p>乐器前加 the：play the piano；球类/棋类前不加 the：play chess / play football。</p>
-        <div class="ex">—Can you play the guitar or the violin? —I can play the violin, but I can't play the guitar.</div>
+        <div class="ex">—Can you play the guitar or the violin? —I can play the violin, but I can't play the guitar.<br>——你会弹吉他还是会拉小提琴？——我会拉小提琴，但我不会弹吉他。</div>
       </div></div>
 
       <div class="kitem"><div class="n">4</div><div class="bd">
         <b class="kt">考点四：join 的用法</b>
         <p>join 加入组织/团体/活动：join the club；join sb. 加入某人行列。</p>
-        <div class="ex">—I want to join the swimming club. —Sounds good.</div>
+        <div class="ex">—I want to join the swimming club. —Sounds good.<br>——我想加入游泳俱乐部。——听起来不错。</div>
       </div></div>
 
       <div class="kitem"><div class="n">5</div><div class="bd">
         <b class="kt">考点五：be good at 后接 doing</b>
         <p>be good at 后接名词或动名词。</p>
-        <div class="ex">My brother is good at dancing. He wants to join the dance club.</div>
+        <div class="ex">My brother is good at dancing. He wants to join the dance club.<br>我哥哥擅长跳舞。他想加入舞蹈俱乐部。</div>
       </div></div>
 
       <div class="kitem"><div class="n">6</div><div class="bd">
         <b class="kt">考点六：be interested in 后接 doing</b>
         <p>be interested in 对……感兴趣，in 后接名词/动名词。</p>
-        <div class="ex">She is interested in collecting stamps, so she joins the stamp club.</div>
+        <div class="ex">She is interested in collecting stamps, so she joins the stamp club.<br>她对集邮感兴趣，所以她加入了集邮俱乐部。</div>
       </div></div>
 
       <div class="kitem"><div class="n">7</div><div class="bd">
         <b class="kt">考点七：be good at 与 be good with</b>
         <p>be good at 擅长；be good with 善于与……相处（接人或物）。</p>
-        <div class="ex">Mrs. Gao is good at music. She can be good with children in the music club.</div>
+        <div class="ex">Mrs. Gao is good at music. She can be good with children in the music club.<br>高老师擅长音乐。她能在音乐俱乐部里与孩子们相处得很好。</div>
       </div></div>
 
       <div class="kitem"><div class="n">8</div><div class="bd">
         <b class="kt">考点八：act out 表演</b>
         <p>act out 表演、演出（剧本/故事）。</p>
-        <div class="ex">—What do you do in the drama club? —We often act out stories.</div>
+        <div class="ex">—What do you do in the drama club? —We often act out stories.<br>——你们在戏剧社做什么？——我们经常表演故事。</div>
       </div></div>
 
       <div class="kitem"><div class="n">9</div><div class="bd">
         <b class="kt">考点九：want to do / would like to do</b>
         <p>want to do sth. 想要做某事；would like to do 愿意做某事。</p>
-        <div class="ex">—What club would you like to join? —I can sing and dance, so I want to be in the music club.</div>
+        <div class="ex">—What club would you like to join? —I can sing and dance, so I want to be in the music club.<br>——你想加入哪个俱乐部？——我会唱歌和跳舞，所以我想加入音乐俱乐部。</div>
       </div></div>
 
       <div class="kitem"><div class="n">10</div><div class="bd">
         <b class="kt">考点十：询问能力的情景交际</b>
         <p>What can you do? 询问能力；Can you...? 询问是否具备某能力。</p>
-        <div class="ex">—What can you do? —I can play chess.</div>
+        <div class="ex">—What can you do? —I can play chess.<br>——你会做什么？——我会下国际象棋。</div>
       </div></div>
 
       <div class="kitem"><div class="n">11</div><div class="bd">
         <b class="kt">考点十一：sing / swim 等动词三单</b>
         <p>一般现在时主语三单时动词变化：She sings well.</p>
-        <div class="ex">She joins the art club. She draws pictures there every week.</div>
+        <div class="ex">She joins the art club. She draws pictures there every week.<br>她加入了美术社团。她每周在那里画画。</div>
       </div></div>
 
       <div class="kitem"><div class="n">12</div><div class="bd">
         <b class="kt">考点十二：why 询问加入原因</b>
         <p>Why do you want to join the club? 用 Because... 回答。</p>
-        <div class="ex">—Why do you want to join the dance club? —Because I like dancing very much.</div>
+        <div class="ex">—Why do you want to join the dance club? —Because I like dancing very much.<br>——你为什么想加入舞蹈俱乐部？——因为我非常喜欢跳舞。</div>
       </div></div>
     </div>
   </section>
@@ -339,13 +331,13 @@
     <section class="block">
     <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
     <div class="slist">
-      <div class="sitem"><span class="n">1</span><div><div class="en">—Can you play the piano? —Yes, I can.</div><div class="zh">can 后接动词原形。</div></div></div>
-      <div class="sitem"><span class="n">2</span><div><div class="en">—What club do you want to join? —I want to join the art club.</div></div></div>
-      <div class="sitem"><span class="n">3</span><div><div class="en">My brother can sing, but he can't dance.</div><div class="zh">be good at 后接动名词。</div></div></div>
-      <div class="sitem"><span class="n">4</span><div><div class="en">—What can you do? —I can play chess.</div><div class="zh">play chess 不加 the。</div></div></div>
-      <div class="sitem"><span class="n">5</span><div><div class="en">—What instruments can your father play, Li Ting? —He can play the violin.</div><div class="zh">乐器前加 the。</div></div></div>
-      <div class="sitem"><span class="n">6</span><div><div class="en">She is interested in collecting stamps, so she joins the stamp club.</div></div></div>
-      <div class="sitem"><span class="n">7</span><div><div class="en">We're going to act out an English play in the next English Week.</div></div></div>
+      <div class="sitem"><span class="n">1</span><div><div class="en">—Can you play the piano? —Yes, I can.</div><div class="zh">——你会弹钢琴吗？——是的，我会。</div></div></div>
+      <div class="sitem"><span class="n">2</span><div><div class="en">—What club do you want to join? —I want to join the art club.</div><div class="zh">——你想加入哪个俱乐部？——我想加入美术俱乐部。</div></div></div>
+      <div class="sitem"><span class="n">3</span><div><div class="en">My brother can sing, but he can't dance.</div><div class="zh">我弟弟会唱歌，但他不会跳舞。</div></div></div>
+      <div class="sitem"><span class="n">4</span><div><div class="en">—What can you do? —I can play chess.</div><div class="zh">——你会做什么？——我会下国际象棋。</div></div></div>
+      <div class="sitem"><span class="n">5</span><div><div class="en">—What instruments can your father play, Li Ting? —He can play the violin.</div><div class="zh">——李婷，你爸爸会演奏什么乐器？——他会拉小提琴。</div></div></div>
+      <div class="sitem"><span class="n">6</span><div><div class="en">She is interested in collecting stamps, so she joins the stamp club.</div><div class="zh">她对集邮感兴趣，所以她加入了集邮俱乐部。</div></div></div>
+      <div class="sitem"><span class="n">7</span><div><div class="en">We're going to act out an English play in the next English Week.</div><div class="zh">我们将在下一个英语周表演一出英语剧。</div></div></div>
     </div>
   </section>
 
@@ -381,4 +373,3 @@
 
 </body>
 </html>
-

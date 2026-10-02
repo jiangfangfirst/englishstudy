@@ -23,7 +23,6 @@
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
   .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
 
-  /* hero —— 简洁浅蓝标题条 */
   .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #d1fae5}
   .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
   .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
@@ -32,7 +31,6 @@
   .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
   .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
 
-  /* Key Point section header */
   section.block{margin-top:30px}
   .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
   .khead .kp{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1px;background:var(--blue-bg);border:1px solid var(--blue);padding:2px 9px;border-radius:6px;flex:none}
@@ -42,13 +40,11 @@
   .lead{font-size:13.5px;color:var(--ink-2);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
   .lead b{color:var(--blue-d)}
 
-  /* 语法要点块 */
   .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
   .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
   .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
   .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 词汇列表 —— 紧凑词条 */
   .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
   .witem:last-child{border-bottom:none}
@@ -63,7 +59,6 @@
 .witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber,#f59e0b);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
   .witem .notebox b{color:var(--accent-c,var(--amber-d,#b45309))}
 
-  /* 短语标签云 */
   .plist{margin-top:4px}
   .pgroup{margin-bottom:12px}
   .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
@@ -73,7 +68,6 @@
   .chip b{color:var(--blue-d);font-weight:700}
   .chip span{color:var(--ink-3);font-size:11px}
 
-  /* 考点列表 —— 编号清单 */
   .klist{margin-top:4px}
   .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
   .kitem:last-child{border-bottom:none}
@@ -84,7 +78,6 @@
   .kitem .bd p b{color:var(--blue-d)}
   .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 句型列表 */
   .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
   .sitem:last-child{border-bottom:none}
@@ -92,7 +85,6 @@
   .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
   .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 易错清单 —— 琥珀 */
   .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
   .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
   .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
@@ -135,19 +127,19 @@
     <div class="gram">
       <div class="gt">被动语态（时态全览）</div>
       <p>一般现在时被动：am/is/are + done（is used、are made）；一般过去时被动：was/were + done（was invented、were built）；一般将来时被动：will be + done / be going to be + done；情态动词被动：can/must/should be + done。</p><p>be made of（看得出原材料）/ from（看不出原材料）/ in（产地）/ by（制作者）/ into（制成成品）。</p>
-      <div class="ex">Paper is usually made from wood, while notebooks are made of paper.</div><div class="ex">The bridge over the river was built in 1998.</div>
+      <div class="ex">Paper is usually made from wood, while notebooks are made of paper.<br>纸通常由木材制成，而笔记本由纸制成。</div><div class="ex">The bridge over the river was built in 1998.<br>河上的那座桥建于1998年。</div>
     </div>
 
     <div class="gram">
       <div class="gt">主动形式表被动含义</div>
       <p>feel、look、smell、taste、sound 等感官动词 + 形容词用主动表被动；read、sell、wash、write、spread、keep 等动词在某些语境中也可用主动形式表被动含义。</p>
-      <div class="ex">This kind of silk feels soft and smooth.</div><div class="ex">The book sells well among young readers.</div>
+      <div class="ex">This kind of silk feels soft and smooth.<br>这种丝绸摸起来柔软光滑。</div><div class="ex">The book sells well among young readers.<br>这本书在年轻读者中很畅销。</div>
     </div>
 
     <div class="gram">
       <div class="gt">定语从句 who / which</div>
       <p>先行词指人用 who/that；指物用 which/that；作宾语时可省略。</p>
-      <div class="ex">He is a creative boy who can always come up with new ways to solve problems.</div><div class="ex">The invention which helps people save water is very popular in many cities.</div>
+      <div class="ex">He is a creative boy who can always come up with new ways to solve problems.<br>他是一个有创造力的男孩，总能想出新的方法来解决问题。</div><div class="ex">The invention which helps people save water is very popular in many cities.<br>这项帮助人们节水的发明在许多城市非常受欢迎。</div>
     </div>
   </section>
 
@@ -157,70 +149,70 @@
       <div class="witem">
         <div class="wh"><span class="word">invent</span><span class="ph">/ɪnˈvent/</span><span class="pos">v. 发明</span></div>
         <p>inventor n. 发明家；invention n. 发明物。</p>
-        <div class="sen">The telephone was invented by Alexander Bell in 1876.</div>
+        <div class="sen">The telephone was invented by Alexander Bell in 1876.<br>电话是亚历山大·贝尔在1876年发明的。</div>
         <div class="notebox"><b>易错</b>invent 是发明（原本不存在），discover 是发现（原本存在）。</div>
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">discover</span><span class="ph">/dɪˈskʌvə(r)/</span><span class="pos">v. 发现</span></div>
         <p>discovery n. 发现；discoverer n. 发现者。</p>
-        <div class="sen">Scientists have discovered a new kind of clean energy.</div>
+        <div class="sen">Scientists have discovered a new kind of clean energy.<br>科学家们发现了一种新型清洁能源。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">creation</span><span class="ph">/kriˈeɪʃn/</span><span class="pos">n. 创造；作品</span></div>
         <p>create v. 创造；creative adj. 有创造力的。</p>
-        <div class="sen">The creation of this tool came from one small problem in daily life.</div>
+        <div class="sen">The creation of this tool came from one small problem in daily life.<br>这个工具的创造源于日常生活中的一个小问题。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">technology</span><span class="ph">/tekˈnɒlədʒi/</span><span class="pos">n. 技术</span></div>
         <p>science and technology 科学技术。</p>
-        <div class="sen">Modern technology makes it possible for us to talk to friends far away.</div>
+        <div class="sen">Modern technology makes it possible for us to talk to friends far away.<br>现代技术使我们能够与远方的朋友交谈。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">power</span><span class="ph">/ˈpaʊə(r)/</span><span class="pos">n. 力量；权力；电力</span></div>
         <p>the power of ideas 思想的力量。</p>
-        <div class="sen">The power of ideas can change the world.</div>
+        <div class="sen">The power of ideas can change the world.<br>思想的力量可以改变世界。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">idea</span><span class="ph">/aɪˈdɪə/</span><span class="pos">n. 主意；想法</span></div>
         <p>have an idea 有个主意；come up with an idea 想出主意。</p>
-        <div class="sen">Then she had an idea: a shopping bag with wheels.</div>
+        <div class="sen">Then she had an idea: a shopping bag with wheels.<br>然后她有了一个主意：带轮子的购物袋。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">rapid</span><span class="ph">/ˈræpɪd/</span><span class="pos">adj. 迅速的</span></div>
         <p>rapidly adv. 迅速地。</p>
-        <div class="sen">News spread at a rapid speed.</div>
+        <div class="sen">News spread at a rapid speed.<br>消息迅速传播开来。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">widely</span><span class="ph">/ˈwaɪdli/</span><span class="pos">adv. 广泛地</span></div>
         <p>wide adj. 宽的；广泛地。</p>
-        <div class="sen">English is widely used all over the world.</div>
+        <div class="sen">English is widely used all over the world.<br>英语在全世界被广泛使用。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">famous</span><span class="ph">/ˈfeɪməs/</span><span class="pos">adj. 著名的</span></div>
         <p>be famous for 因……而著名；be famous as 作为……而著名。</p>
-        <div class="sen">The Great Wall is famous all over the world.</div>
+        <div class="sen">The Great Wall is famous all over the world.<br>长城闻名全世界。</div>
         <div class="notebox"><b>易错</b>be famous for 因物/特性出名，be famous as 以身份出名。</div>
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">produce</span><span class="ph">/prəˈdjuːs/</span><span class="pos">v. 生产；制造</span></div>
         <p>production n. 生产；产品。</p>
-        <div class="sen">This factory produces plastic cups and toys every single day.</div>
+        <div class="sen">This factory produces plastic cups and toys every single day.<br>这家工厂每天都生产塑料杯和玩具。</div>
         
       </div>
     </div>
@@ -258,73 +250,73 @@
 <div class="kitem"><div class="n">1</div><div class="bd">
         <b class="kt">被动语态一般现在时</b>
         <p>am/is/are + 过去分词；主语决定 be 动词。</p>
-        <div class="ex">They are widely used by people of all ages.</div>
+        <div class="ex">They are widely used by people of all ages.<br>它们被各个年龄段的人广泛使用。</div>
       </div></div>
 
       <div class="kitem"><div class="n">2</div><div class="bd">
         <b class="kt">被动语态一般过去时</b>
         <p>was/were + 过去分词；常与过去时间状语连用。</p>
-        <div class="ex">The letter was written by my mother last night.</div>
+        <div class="ex">The letter was written by my mother last night.<br>这封信是我妈妈昨晚写的。</div>
       </div></div>
 
       <div class="kitem"><div class="n">3</div><div class="bd">
         <b class="kt">被动语态一般将来时</b>
         <p>will be + 过去分词 / be going to be + 过去分词。</p>
-        <div class="ex">A new hospital will be built in our town next year.</div>
+        <div class="ex">A new hospital will be built in our town next year.<br>明年我们镇上将建一所新医院。</div>
       </div></div>
 
       <div class="kitem"><div class="n">4</div><div class="bd">
         <b class="kt">情态动词被动语态</b>
         <p>can/must/should/may be + 过去分词。</p>
-        <div class="ex">All kinds of toys, chairs, and tables can be made by the 3D printer.</div>
+        <div class="ex">All kinds of toys, chairs, and tables can be made by the 3D printer.<br>各种各样的玩具、椅子和桌子都可以由3D打印机制作。</div>
       </div></div>
 
       <div class="kitem"><div class="n">5</div><div class="bd">
         <b class="kt">be made of / from / in / by / into</b>
         <p>of 看得出材料；from 看不出；in 产地；by 制造者；into 制成成品。</p>
-        <div class="ex">Paper is made from wood.</div><div class="ex">This kind of table is made of wood.</div>
+        <div class="ex">Paper is made from wood.<br>纸由木材制成。</div><div class="ex">This kind of table is made of wood.<br>这种桌子由木材制成。</div>
       </div></div>
 
       <div class="kitem"><div class="n">6</div><div class="bd">
         <b class="kt">主动形式表被动含义</b>
         <p>感官动词 + 形容词；sell/read/wash/write 等用主动形式表被动含义。</p>
-        <div class="ex">The glue feels very sticky on my fingers.</div><div class="ex">This kind of silk feels soft and smooth.</div>
+        <div class="ex">The glue feels very sticky on my fingers.<br>这胶水在我手指上感觉非常黏。</div><div class="ex">This kind of silk feels soft and smooth.<br>这种丝绸摸起来柔软光滑。</div>
       </div></div>
 
       <div class="kitem"><div class="n">7</div><div class="bd">
         <b class="kt">定语从句 who/which</b>
         <p>指人 who，指物 which；作宾语可省略。</p>
-        <div class="ex">The scientist who has changed people's life greatly is very modest.</div><div class="ex">The invention which helps people save water is very popular in many cities.</div>
+        <div class="ex">The scientist who has changed people's life greatly is very modest.<br>那位极大地改变了人们生活的科学家非常谦虚。</div><div class="ex">The invention which helps people save water is very popular in many cities.<br>这项帮助人们节水的发明在许多城市非常受欢迎。</div>
       </div></div>
 
       <div class="kitem"><div class="n">8</div><div class="bd">
         <b class="kt">come up with / lead to / result in</b>
         <p>come up with 想出；lead to / result in 导致（后接结果）。</p>
-        <div class="ex">He is a creative boy who can always come up with new ways to solve problems.</div>
+        <div class="ex">He is a creative boy who can always come up with new ways to solve problems.<br>他是一个有创造力的男孩，总能想出新的方法来解决问题。</div>
       </div></div>
 
       <div class="kitem"><div class="n">9</div><div class="bd">
         <b class="kt">be responsible for / be supposed to</b>
         <p>be responsible for 对……负责（for 介词）；be supposed to do 应该做。</p>
-        <div class="ex">Every citizen should be responsible for the rubbish around their living neighbourhood.</div>
+        <div class="ex">Every citizen should be responsible for the rubbish around their living neighbourhood.<br>每个公民都应该对居住区周围的垃圾负责。</div>
       </div></div>
 
       <div class="kitem"><div class="n">10</div><div class="bd">
         <b class="kt">词性转换：invent/discover</b>
         <p>invent 发明 → inventor/invention；discover 发现 → discovery。</p>
-        <div class="ex">The discovery of the new planet surprised scientists.</div>
+        <div class="ex">The discovery of the new planet surprised scientists.<br>这颗新行星的发现让科学家们感到惊讶。</div>
       </div></div>
 
       <div class="kitem"><div class="n">11</div><div class="bd">
         <b class="kt">make a difference / take action</b>
         <p>make a difference 产生影响；take action 采取行动（action 不可数常单数）。</p>
-        <div class="ex">Everyone can make a difference to the world with their own unique ideas and efforts.</div>
+        <div class="ex">Everyone can make a difference to the world with their own unique ideas and efforts.<br>每个人都可以用自己独特的想法和努力对世界产生影响。</div>
       </div></div>
 
       <div class="kitem"><div class="n">12</div><div class="bd">
         <b class="kt">情景交际——赞同</b>
         <p>I agree with you. / I can't agree more. / That's true. 表赞同。</p>
-        <div class="ex">—I think creativity is one of the most important skills for us. —I agree with you. It helps us solve problems better.</div>
+        <div class="ex">—I think creativity is one of the most important skills for us. —I agree with you. It helps us solve problems better.<br>——我认为创造力是对我们最重要的技能之一。——我同意你的看法。它帮助我们更好地解决问题。</div>
       </div></div>
     </div>
   </section>
@@ -333,12 +325,12 @@
     <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
     <div class="slist">
       <div class="sitem"><span class="n">1</span><div><div class="en">Paper is usually made from wood, while notebooks are made of paper.</div><div class="zh">纸通常由木材制成，而笔记本由纸制成。</div></div></div>
-      <div class="sitem"><span class="n">2</span><div><div class="en">The bridge over the river was built in 1998.</div><div class="zh">河上的那座桥建于 1998 年。</div></div></div>
-      <div class="sitem"><span class="n">3</span><div><div class="en">A new school will be built in our town next year.</div><div class="zh">明年我们镇上将建一座新图书馆。</div></div></div>
-      <div class="sitem"><span class="n">4</span><div><div class="en">All these books should be returned to the library on time.</div><div class="zh">这项工作必须在周五前完成。</div></div></div>
-      <div class="sitem"><span class="n">5</span><div><div class="en">He is a creative boy who can always come up with new ways to solve problems.</div><div class="zh">他是个有创造力的男孩，总能想出新的点子。</div></div></div>
-      <div class="sitem"><span class="n">6</span><div><div class="en">The telephone was invented by Alexander Graham Bell in 1876.</div><div class="zh">电话是贝尔发明的。</div></div></div>
-      <div class="sitem"><span class="n">7</span><div><div class="en">I never thought my idea would make such a big difference.</div><div class="zh">小小的行动也能产生巨大的影响。</div></div></div>
+      <div class="sitem"><span class="n">2</span><div><div class="en">The bridge over the river was built in 1998.</div><div class="zh">河上的那座桥建于1998年。</div></div></div>
+      <div class="sitem"><span class="n">3</span><div><div class="en">A new school will be built in our town next year.</div><div class="zh">明年我们镇上将建一所新学校。</div></div></div>
+      <div class="sitem"><span class="n">4</span><div><div class="en">All these books should be returned to the library on time.</div><div class="zh">所有这些书都应该按时归还图书馆。</div></div></div>
+      <div class="sitem"><span class="n">5</span><div><div class="en">He is a creative boy who can always come up with new ways to solve problems.</div><div class="zh">他是一个有创造力的男孩，总能想出新的方法来解决问题。</div></div></div>
+      <div class="sitem"><span class="n">6</span><div><div class="en">The telephone was invented by Alexander Graham Bell in 1876.</div><div class="zh">电话是亚历山大·格雷厄姆·贝尔在1876年发明的。</div></div></div>
+      <div class="sitem"><span class="n">7</span><div><div class="en">I never thought my idea would make such a big difference.</div><div class="zh">我从没想到我的想法会产生这么大的影响。</div></div></div>
       <div class="sitem"><span class="n">8</span><div><div class="en">English is widely used all over the world.</div><div class="zh">英语在全世界被广泛使用。</div></div></div>
     </div>
   </section>
@@ -375,4 +367,3 @@
 
 </body>
 </html>
-

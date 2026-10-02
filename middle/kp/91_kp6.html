@@ -23,7 +23,6 @@
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
   .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
 
-  /* hero —— 简洁浅蓝标题条 */
   .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #d1fae5}
   .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
   .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
@@ -32,7 +31,6 @@
   .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
   .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
 
-  /* Key Point section header */
   section.block{margin-top:30px}
   .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
   .khead .kp{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1px;background:var(--blue-bg);border:1px solid var(--blue);padding:2px 9px;border-radius:6px;flex:none}
@@ -42,13 +40,11 @@
   .lead{font-size:13.5px;color:var(--ink-2);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
   .lead b{color:var(--blue-d)}
 
-  /* 语法要点块 */
   .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
   .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
   .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
   .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 词汇列表 —— 紧凑词条 */
   .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
   .witem:last-child{border-bottom:none}
@@ -63,7 +59,6 @@
 .witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber,#f59e0b);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
   .witem .notebox b{color:var(--accent-c,var(--amber-d,#b45309))}
 
-  /* 短语标签云 */
   .plist{margin-top:4px}
   .pgroup{margin-bottom:12px}
   .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
@@ -73,7 +68,6 @@
   .chip b{color:var(--blue-d);font-weight:700}
   .chip span{color:var(--ink-3);font-size:11px}
 
-  /* 考点列表 —— 编号清单 */
   .klist{margin-top:4px}
   .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
   .kitem:last-child{border-bottom:none}
@@ -84,7 +78,6 @@
   .kitem .bd p b{color:var(--blue-d)}
   .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 句型列表 */
   .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
   .sitem:last-child{border-bottom:none}
@@ -92,7 +85,6 @@
   .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
   .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 易错清单 —— 琥珀 */
   .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
   .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
   .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
@@ -135,19 +127,19 @@
     <div class="gram">
       <div class="gt">被动语态（三大时态）</div>
       <p>一般现在时被动：am/is/are + done（is given、are sent）；一般过去时被动：was/were + done（was launched、was built）；一般将来时被动：will be + done（will be built、will be launched、will be sent、will be found、will be solved）。</p><p>被动语态强调动作承受者，动作执行者用 by 引出。</p>
-      <div class="ex">The spaceship will be designed by the engineers next year.</div><div class="ex">The International Space Station was built by several countries together.</div>
+      <div class="ex">The spaceship will be designed by the engineers next year.<br>宇宙飞船明年将由工程师们设计。</div><div class="ex">The International Space Station was built by several countries together.<br>国际空间站是由几个国家共同建造的。</div>
     </div>
 
     <div class="gram">
       <div class="gt">现在完成时（so far / since then）</div>
       <p>现在完成时：have/has + 过去分词；常与 so far（到目前为止）、since then（自那以后）、in the past fifty years（在过去的五十年里）连用。</p>
-      <div class="ex">So far, humans have walked on the moon several times.</div><div class="ex">Many new technologies have been developed through space exploration in the past fifty years.</div>
+      <div class="ex">So far, humans have walked on the moon several times.<br>到目前为止，人类已经多次在月球上行走。</div><div class="ex">Many new technologies have been developed through space exploration in the past fifty years.<br>在过去的五十年里，通过太空探索，许多新技术已经被开发出来。</div>
     </div>
 
     <div class="gram">
       <div class="gt">情态动词被动与 whether/if 宾语从句</div>
       <p>情态动词被动：must be dealt with、can be seen、may be found。</p><p>whether/if 引导宾语从句表“是否”，与 or not 连用只用 whether。</p>
-      <div class="ex">Space pollution must be dealt with well in the future.</div><div class="ex">We don't know whether there is life on other planets.</div>
+      <div class="ex">Space pollution must be dealt with well in the future.<br>太空污染必须在未来得到妥善处理。</div><div class="ex">We don't know whether there is life on other planets.<br>我们不知道其他行星上是否有生命。</div>
     </div>
   </section>
 
@@ -157,70 +149,70 @@
       <div class="witem">
         <div class="wh"><span class="word">spacecraft</span><span class="ph">/ˈspeɪskrɑːft/</span><span class="pos">n. 宇宙飞船；航天器</span></div>
         <p>单复数同形。</p>
-        <div class="sen">The spacecraft landed successfully on the moon's surface last month.</div>
+        <div class="sen">The spacecraft landed successfully on the moon's surface last month.<br>上个月，宇宙飞船成功降落在月球表面。</div>
         <div class="notebox"><b>易错</b>spacecraft 单复数同形，不加 s。</div>
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">astronaut</span><span class="ph">/ˈæstrənɔːt/</span><span class="pos">n. 宇航员</span></div>
         <p>astronaut 乘飞船进入太空。</p>
-        <div class="sen">Yang Liwei is the first Chinese astronaut to travel into space.</div>
+        <div class="sen">Yang Liwei is the first Chinese astronaut to travel into space.<br>杨利伟是第一位进入太空的中国宇航员。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">launch</span><span class="ph">/lɔːntʃ/</span><span class="pos">v. 发射；发起</span></div>
         <p>launch a rocket 发射火箭。</p>
-        <div class="sen">The rocket will be launched next month.</div>
+        <div class="sen">The rocket will be launched next month.<br>火箭将于下个月发射。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">mission</span><span class="ph">/ˈmɪʃn/</span><span class="pos">n. 任务；使命</span></div>
         <p>space mission 太空任务。</p>
-        <div class="sen">The mission of the team was to explore the moon.</div>
+        <div class="sen">The mission of the team was to explore the moon.<br>这个团队的任务是探索月球。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">universe</span><span class="ph">/ˈjuːnɪvɜːs/</span><span class="pos">n. 宇宙</span></div>
         <p>in the universe 在宇宙中。</p>
-        <div class="sen">It is believed that there are billions of stars in the universe.</div>
+        <div class="sen">It is believed that there are billions of stars in the universe.<br>人们相信宇宙中有数十亿颗恒星。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">galaxy</span><span class="ph">/ˈɡæləksi/</span><span class="pos">n. 星系</span></div>
         <p>银河系 the Galaxy / the Milky Way。</p>
-        <div class="sen">The sun belongs to a big galaxy in the universe.</div>
+        <div class="sen">The sun belongs to a big galaxy in the universe.<br>太阳属于宇宙中一个巨大的星系。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">gravity</span><span class="ph">/ˈɡrævəti/</span><span class="pos">n. 重力；引力</span></div>
         <p>zero gravity 失重。</p>
-        <div class="sen">Gravity is the force that pulls objects towards the center of the Earth.</div>
+        <div class="sen">Gravity is the force that pulls objects towards the center of the Earth.<br>重力是将物体拉向地心的力。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">planet</span><span class="ph">/ˈplænɪt/</span><span class="pos">n. 行星</span></div>
         <p>the planets around the sun。</p>
-        <div class="sen">We can see many planets and stars in space at night.</div>
+        <div class="sen">We can see many planets and stars in space at night.<br>晚上我们可以在太空中看到许多行星和恒星。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">satellite</span><span class="ph">/ˈsætəlaɪt/</span><span class="pos">n. 卫星</span></div>
         <p>man-made satellite 人造卫星。</p>
-        <div class="sen">The first man-made satellite was sent into space in 1957.</div>
+        <div class="sen">The first man-made satellite was sent into space in 1957.<br>第一颗人造卫星于1957年被送入太空。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">explore</span><span class="ph">/ɪkˈsplɔː(r)/</span><span class="pos">v. 探索；探究</span></div>
         <p>exploration n. 探索；explorer n. 探险家。</p>
-        <div class="sen">There are still many mysterious natural wonders waiting for humans to explore.</div>
+        <div class="sen">There are still many mysterious natural wonders waiting for humans to explore.<br>仍有许多神秘的自然奇观等待人类去探索。</div>
         
       </div>
     </div>
@@ -258,73 +250,73 @@
 <div class="kitem"><div class="n">1</div><div class="bd">
         <b class="kt">一般现在时被动</b>
         <p>is/are + 过去分词；主语单复数决定 is/are。</p>
-        <div class="ex">Astronauts are given special training before they go on a space mission.</div>
+        <div class="ex">Astronauts are given special training before they go on a space mission.<br>宇航员在执行太空任务前会接受特殊训练。</div>
       </div></div>
 
       <div class="kitem"><div class="n">2</div><div class="bd">
         <b class="kt">一般过去时被动</b>
         <p>was/were + 过去分词；常与过去时间连用。</p>
-        <div class="ex">This spacecraft was launched in 1977.</div>
+        <div class="ex">This spacecraft was launched in 1977.<br>这艘宇宙飞船于1977年发射。</div>
       </div></div>
 
       <div class="kitem"><div class="n">3</div><div class="bd">
         <b class="kt">一般将来时被动</b>
         <p>will be + 过去分词；不用 will is/was。</p>
-        <div class="ex">Better ways to travel in space will be invented.</div>
+        <div class="ex">Better ways to travel in space will be invented.<br>更好的太空旅行方式将被发明出来。</div>
       </div></div>
 
       <div class="kitem"><div class="n">4</div><div class="bd">
         <b class="kt">情态动词被动</b>
         <p>must/can/may/should be + 过去分词。</p>
-        <div class="ex">Water may be found on the moon in the future.</div>
+        <div class="ex">Water may be found on the moon in the future.<br>将来可能会在月球上发现水。</div>
       </div></div>
 
       <div class="kitem"><div class="n">5</div><div class="bd">
         <b class="kt">现在完成时 so far / since then</b>
         <p>have/has + 过去分词；so far 常与现在完成时连用。</p>
-        <div class="ex">So far, humans have walked on the moon several times.</div>
+        <div class="ex">So far, humans have walked on the moon several times.<br>到目前为止，人类已经多次在月球上行走。</div>
       </div></div>
 
       <div class="kitem"><div class="n">6</div><div class="bd">
         <b class="kt">in the past fifty years</b>
         <p>in the past + 时间段 与现在完成时连用。</p>
-        <div class="ex">Many new technologies have been developed through space exploration in the past fifty years.</div>
+        <div class="ex">Many new technologies have been developed through space exploration in the past fifty years.<br>在过去的五十年里，通过太空探索，许多新技术已经被开发出来。</div>
       </div></div>
 
       <div class="kitem"><div class="n">7</div><div class="bd">
         <b class="kt">whether/if 宾语从句</b>
         <p>表“是否”；与 or not 连用只能用 whether。</p>
-        <div class="ex">I wonder if we will be able to live on Mars one day.</div>
+        <div class="ex">I wonder if we will be able to live on Mars one day.<br>我想知道我们是否有一天能住在火星上。</div>
       </div></div>
 
       <div class="kitem"><div class="n">8</div><div class="bd">
         <b class="kt">lift off / set foot on / carry out</b>
         <p>lift off（火箭）升空；set foot on 踏上；carry out 执行任务。</p>
-        <div class="ex">The rocket lifted off into the sky, carrying the satellite.</div>
+        <div class="ex">The rocket lifted off into the sky, carrying the satellite.<br>火箭升空，运载着卫星。</div>
       </div></div>
 
       <div class="kitem"><div class="n">9</div><div class="bd">
         <b class="kt">be proud of / be equipped with</b>
         <p>be proud of 为……自豪；be equipped with 装备有（with 介词）。</p>
-        <div class="ex">The whole nation is proud of the astronauts who made the mission a success.</div>
+        <div class="ex">The whole nation is proud of the astronauts who made the mission a success.<br>全国人民都为那些使任务成功的宇航员感到自豪。</div>
       </div></div>
 
       <div class="kitem"><div class="n">10</div><div class="bd">
         <b class="kt">词性转换：explore/exploration</b>
         <p>explore v. 探索；exploration n.；explorer n. 探险家。</p>
-        <div class="ex">Space exploration is extremely difficult and dangerous.</div>
+        <div class="ex">Space exploration is extremely difficult and dangerous.<br>太空探索极其困难和危险。</div>
       </div></div>
 
       <div class="kitem"><div class="n">11</div><div class="bd">
         <b class="kt">情景交际——表达期待</b>
         <p>I can't wait to do sth. 等不及做某事；Sounds great 表赞同。</p>
-        <div class="ex">I can't wait to visit the space museum tomorrow.</div>
+        <div class="ex">I can't wait to visit the space museum tomorrow.<br>我迫不及待想明天去参观太空博物馆。</div>
       </div></div>
 
       <div class="kitem"><div class="n">12</div><div class="bd">
         <b class="kt">情景交际——表可能</b>
         <p>Maybe/Perhaps 表可能；Of course 表当然。</p>
-        <div class="ex">Maybe one day, Mars will be visited by humans.</div>
+        <div class="ex">Maybe one day, Mars will be visited by humans.<br>也许有一天，火星会被人类访问。</div>
       </div></div>
     </div>
   </section>
@@ -332,14 +324,14 @@
     <section class="block">
     <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
     <div class="slist">
-      <div class="sitem"><span class="n">1</span><div><div class="en">The spaceship will be designed by the engineers next year.</div><div class="zh">宇宙飞船明年将由工程师们发射。</div></div></div>
+      <div class="sitem"><span class="n">1</span><div><div class="en">The spaceship will be designed by the engineers next year.</div><div class="zh">宇宙飞船明年将由工程师们设计。</div></div></div>
       <div class="sitem"><span class="n">2</span><div><div class="en">The moon goes around the Earth.</div><div class="zh">月球绕着地球转。</div></div></div>
-      <div class="sitem"><span class="n">3</span><div><div class="en">Many new technologies have been developed through space exploration in the past fifty years.</div><div class="zh">到目前为止，科学家们已经研制出多种航天器。</div></div></div>
-      <div class="sitem"><span class="n">4</span><div><div class="en">The problem will be dealt with new methods.</div><div class="zh">发射前必须处理这个问题。</div></div></div>
-      <div class="sitem"><span class="n">5</span><div><div class="en">So far, humans have walked on the moon several times.</div><div class="zh">宇航员已经登上过月球。</div></div></div>
-      <div class="sitem"><span class="n">6</span><div><div class="en">We don't know whether there is life on other planets.</div><div class="zh">我想知道其他行星上是否有生命。</div></div></div>
-      <div class="sitem"><span class="n">7</span><div><div class="en">In 1969, American astronauts set foot on the moon for the first time.</div><div class="zh">火箭升空，踏上飞往太空的旅程。</div></div></div>
-      <div class="sitem"><span class="n">8</span><div><div class="en">Scientists have made great progress in space technology over the last decade.</div><div class="zh">我们为在太空领域的伟大成就感到自豪。</div></div></div>
+      <div class="sitem"><span class="n">3</span><div><div class="en">Many new technologies have been developed through space exploration in the past fifty years.</div><div class="zh">在过去的五十年里，通过太空探索，许多新技术已经被开发出来。</div></div></div>
+      <div class="sitem"><span class="n">4</span><div><div class="en">The problem will be dealt with using new methods.</div><div class="zh">这个问题将用新方法处理。</div></div></div>
+      <div class="sitem"><span class="n">5</span><div><div class="en">So far, humans have walked on the moon several times.</div><div class="zh">到目前为止，人类已经多次在月球上行走。</div></div></div>
+      <div class="sitem"><span class="n">6</span><div><div class="en">We don't know whether there is life on other planets.</div><div class="zh">我们不知道其他行星上是否有生命。</div></div></div>
+      <div class="sitem"><span class="n">7</span><div><div class="en">In 1969, American astronauts set foot on the moon for the first time.</div><div class="zh">1969年，美国宇航员首次踏上月球。</div></div></div>
+      <div class="sitem"><span class="n">8</span><div><div class="en">Scientists have made great progress in space technology over the last decade.</div><div class="zh">在过去的十年里，科学家们在太空技术方面取得了巨大进步。</div></div></div>
     </div>
   </section>
 
@@ -375,4 +367,3 @@
 
 </body>
 </html>
-

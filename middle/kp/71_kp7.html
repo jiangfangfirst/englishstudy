@@ -23,7 +23,6 @@
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
   .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
 
-  /* hero —— 简洁浅蓝标题条 */
   .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
   .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
   .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
@@ -32,7 +31,6 @@
   .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
   .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
 
-  /* Key Point section header */
   section.block{margin-top:30px}
   .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
   .khead .kp{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1px;background:var(--blue-bg);border:1px solid var(--blue);padding:2px 9px;border-radius:6px;flex:none}
@@ -42,13 +40,11 @@
   .lead{font-size:13.5px;color:var(--ink-2);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
   .lead b{color:var(--blue-d)}
 
-  /* 语法要点块 */
   .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
   .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
   .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
   .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 词汇列表 —— 紧凑词条 */
   .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
   .witem:last-child{border-bottom:none}
@@ -63,7 +59,6 @@
 .witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber,#f59e0b);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
   .witem .notebox b{color:var(--accent-c,var(--amber-d,#b45309))}
 
-  /* 短语标签云 */
   .plist{margin-top:4px}
   .pgroup{margin-bottom:12px}
   .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
@@ -73,7 +68,6 @@
   .chip b{color:var(--blue-d);font-weight:700}
   .chip span{color:var(--ink-3);font-size:11px}
 
-  /* 考点列表 —— 编号清单 */
   .klist{margin-top:4px}
   .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
   .kitem:last-child{border-bottom:none}
@@ -84,7 +78,6 @@
   .kitem .bd p b{color:var(--blue-d)}
   .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 句型列表 */
   .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
   .sitem:last-child{border-bottom:none}
@@ -92,7 +85,6 @@
   .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
   .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 易错清单 —— 琥珀 */
   .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
   .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
   .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
@@ -135,19 +127,19 @@
     <div class="gram">
       <div class="gt">序数词</div>
       <p>构成：first / second / third 特殊；fourth、fifth（ve→f+th）、twelfth（lve→lf+th）；整十变 y 为 ie：twentieth；其余加 -th：sixth、seventh、eighth、ninth、tenth。</p><p>序数词前通常加 <b>the</b>：the first day。</p>
-      <div class="ex">January is the first month of the year.</div><div class="ex">—Tree Planting Day is on the twelfth of March. —It's the best time to plant trees.</div>
+      <div class="ex">January is the first month of the year.<br>一月是一年中的第一个月。</div><div class="ex">—Tree Planting Day is on the twelfth of March. —It's the best time to plant trees.<br>——植树节在三月十二日。——那是种树的最佳时间。</div>
     </div>
 
     <div class="gram">
       <div class="gt">日期表达</div>
       <p>询问日期：<b>What's the date today?</b>（几月几号）vs <b>What day is it today?</b>（星期几）。</p><p>具体日期前用 <b>on</b>：on May 1st；月份前用 in：in May。</p>
-      <div class="ex">What is the date today? It's 10 October.</div><div class="ex">My birthday is on July 3rd.</div>
+      <div class="ex">What is the date today? It's 10 October.<br>今天几号？今天是十月十日。</div><div class="ex">My birthday is on July 3rd.<br>我的生日在七月三日。</div>
     </div>
 
     <div class="gram">
       <div class="gt">How old / How much / How many</div>
       <p><b>How old</b> 问年龄 · <b>How much</b> 问价格（不可数数量）· <b>How many</b> 问数量（可数名词复数，后接复数名词 + are there）。</p>
-      <div class="ex">—How old is your sister? —She's eight.</div><div class="ex">—How much is this birthday cake? —It's 100 yuan.</div>
+      <div class="ex">—How old is your sister? —She's eight.<br>——你妹妹多大了？——她八岁。</div><div class="ex">—How much is this birthday cake? —It's 100 yuan.<br>——这个生日蛋糕多少钱？——100元。</div>
     </div>
   </section>
 
@@ -157,70 +149,70 @@
       <div class="witem">
         <div class="wh"><span class="word">birthday</span><span class="ph">/ˈbɜːθdeɪ/</span><span class="pos">n. 生日</span></div>
         <p>Happy birthday! 生日快乐；birthday party 生日聚会。</p>
-        <div class="sen">—Happy birthday! —Thank you.</div>
+        <div class="sen">—Happy birthday! —Thank you.<br>——生日快乐！——谢谢。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">party</span><span class="ph">/ˈpɑːti/</span><span class="pos">n. 聚会；晚会</span></div>
         <p>复数 parties；have a birthday party 举办生日聚会。</p>
-        <div class="sen">We had a big birthday party last night.</div>
+        <div class="sen">We had a big birthday party last night.<br>昨晚我们举办了一个大型生日聚会。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">candle</span><span class="ph">/ˈkændl/</span><span class="pos">n. 蜡烛</span></div>
         <p>blow out the candles 吹灭蜡烛。</p>
-        <div class="sen">Your wish will come true if you blow out all the candles in one go on your birthday.</div>
+        <div class="sen">Your wish will come true if you blow out all the candles in one go on your birthday.<br>如果你生日时一口气吹灭所有蜡烛，你的愿望就会实现。</div>
         <div class="notebox"><b>常考</b>blow out 吹灭；make a wish 许愿。</div>
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">cake</span><span class="ph">/keɪk/</span><span class="pos">n. 蛋糕</span></div>
         <p>a birthday cake 生日蛋糕。</p>
-        <div class="sen">The cake tastes good. We all like it.</div>
+        <div class="sen">The cake tastes good. We all like it.<br>这个蛋糕味道很好。我们都喜欢。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">gift</span><span class="ph">/ɡɪft/</span><span class="pos">n. 礼物</span></div>
         <p>= present。</p>
-        <div class="sen">This gift is for you, Mum.</div>
+        <div class="sen">This gift is for you, Mum.<br>这个礼物是给你的，妈妈。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">present</span><span class="ph">/ˈpreznt/</span><span class="pos">n. 礼物；现在</span></div>
         <p>birthday present 生日礼物。</p>
-        <div class="sen">I got a lovely present on my birthday.</div>
+        <div class="sen">I got a lovely present on my birthday.<br>我生日那天收到了一份可爱的礼物。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">wish</span><span class="ph">/wɪʃ/</span><span class="pos">n. 愿望 · v. 希望</span></div>
         <p>make a wish 许愿。</p>
-        <div class="sen">Close your eyes and make a wish first.</div>
+        <div class="sen">Close your eyes and make a wish first.<br>先闭上眼睛许个愿吧。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">month</span><span class="ph">/mʌnθ/</span><span class="pos">n. 月份</span></div>
         <p>十二个月：January...December。</p>
-        <div class="sen">September is the ninth month of the year.</div>
+        <div class="sen">September is the ninth month of the year.<br>九月是一年中的第九个月。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">total</span><span class="ph">/ˈtəʊtl/</span><span class="pos">n. 总计 · adj. 总的</span></div>
         <p>What's the total? 一共多少钱？</p>
-        <div class="sen">—What's the total? —165 yuan.</div>
+        <div class="sen">—What's the total? —165 yuan.<br>——一共多少钱？——165元。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">order</span><span class="ph">/ˈɔːdə(r)/</span><span class="pos">n. 订单 · v. 订购</span></div>
         <p>order a cake 订蛋糕。</p>
-        <div class="sen">We will order a birthday cake online tomorrow.</div>
+        <div class="sen">We will order a birthday cake online tomorrow.<br>我们明天将在网上订一个生日蛋糕。</div>
         
       </div>
     </div>
@@ -258,73 +250,73 @@
 <div class="kitem"><div class="n">1</div><div class="bd">
         <b class="kt">考点一：序数词特殊拼写</b>
         <p>first / second / third 特殊；fifth（ve→f+th）、twelfth（lve→lf+th）、twentieth（ty→tie+th）。</p>
-        <div class="ex">Tony is twelve years old and this is his twelfth birthday.</div>
+        <div class="ex">Tony is twelve years old and this is his twelfth birthday.<br>托尼十二岁，这是他的十二岁生日。</div>
       </div></div>
 
       <div class="kitem"><div class="n">2</div><div class="bd">
         <b class="kt">考点二：序数词前加 the</b>
         <p>序数词前通常加 the；日期表达 May 1st 可省 the。</p>
-        <div class="ex">The first month of the year is January.</div>
+        <div class="ex">The first month of the year is January.<br>一年中的第一个月是一月。</div>
       </div></div>
 
       <div class="kitem"><div class="n">3</div><div class="bd">
         <b class="kt">考点三：日期问答</b>
         <p>What's the date today? 问几月几号；回答 It's + 月份 + 序数词。</p>
-        <div class="ex">What is the date today? It's 10 October.</div>
+        <div class="ex">What is the date today? It's 10 October.<br>今天几号？今天是十月十日。</div>
       </div></div>
 
       <div class="kitem"><div class="n">4</div><div class="bd">
         <b class="kt">考点四：星期问答</b>
         <p>What day is it today? 问星期几；回答 It's Monday.</p>
-        <div class="ex">—What day is it today? —It's Wednesday.</div>
+        <div class="ex">—What day is it today? —It's Wednesday.<br>——今天星期几？——星期三。</div>
       </div></div>
 
       <div class="kitem"><div class="n">5</div><div class="bd">
         <b class="kt">考点五：on / in 表日期</b>
         <p>具体日期前用 on：on May 1st；月份/年用 in：in May, in 2026。</p>
-        <div class="ex">My birthday is on 8th August.</div>
+        <div class="ex">My birthday is on 8th August.<br>我的生日在八月八日。</div>
       </div></div>
 
       <div class="kitem"><div class="n">6</div><div class="bd">
         <b class="kt">考点六：How old 问年龄</b>
         <p>How old are you? 回答 I'm + 数字（+ years old）。</p>
-        <div class="ex">—How old is your sister? —She's eight.</div>
+        <div class="ex">—How old is your sister? —She's eight.<br>——你妹妹多大了？——她八岁。</div>
       </div></div>
 
       <div class="kitem"><div class="n">7</div><div class="bd">
         <b class="kt">考点七：How much 问价格</b>
         <p>How much is...? 询问价格；可数复数 How much are...?。</p>
-        <div class="ex">—This birthday cake is so beautiful. How much is it? —It's 85 yuan.</div>
+        <div class="ex">—This birthday cake is so beautiful. How much is it? —It's 85 yuan.<br>——这个生日蛋糕真漂亮。多少钱？——85元。</div>
       </div></div>
 
       <div class="kitem"><div class="n">8</div><div class="bd">
         <b class="kt">考点八：How many 问数量</b>
         <p>How many + 可数名词复数 + are there...? 询问数量。</p>
-        <div class="ex">—How many balloons do you need? —Two, please.</div>
+        <div class="ex">—How many balloons do you need? —Two, please.<br>——你需要多少个气球？——两个。</div>
       </div></div>
 
       <div class="kitem"><div class="n">9</div><div class="bd">
         <b class="kt">考点九：buy sth. for sb.</b>
         <p>buy sth. for sb. = buy sb. sth. 为某人买某物。</p>
-        <div class="ex">I want to buy a gift for my friend's birthday.</div>
+        <div class="ex">I want to buy a gift for my friend's birthday.<br>我想为朋友的生日买一份礼物。</div>
       </div></div>
 
       <div class="kitem"><div class="n">10</div><div class="bd">
         <b class="kt">考点十：make a wish 与 blow out</b>
         <p>make a wish 许愿；blow out the candles 吹灭蜡烛。</p>
-        <div class="ex">Before eating the cake, let's blow out the candles on it.</div>
+        <div class="ex">Before eating the cake, let's blow out the candles on it.<br>在吃蛋糕之前，让我们先吹灭上面的蜡烛。</div>
       </div></div>
 
       <div class="kitem"><div class="n">11</div><div class="bd">
         <b class="kt">考点十一：购物情景交际</b>
         <p>Can I help you? 店员招呼；How much...? 问价；What's the total? 问总价。</p>
-        <div class="ex">—Can I help you? —Yes, please. How much is the cake?</div>
+        <div class="ex">—Can I help you? —Yes, please. How much is the cake?<br>——需要帮忙吗？——是的。这个蛋糕多少钱？</div>
       </div></div>
 
       <div class="kitem"><div class="n">12</div><div class="bd">
         <b class="kt">考点十二：Here is... for you.</b>
         <p>Here is a present for you. 这是给你的礼物（递物用语）。</p>
-        <div class="ex">Here is a small birthday gift for you.</div>
+        <div class="ex">Here is a small birthday gift for you.<br>这是给你的一份小小的生日礼物。</div>
       </div></div>
     </div>
   </section>
@@ -332,13 +324,13 @@
     <section class="block">
     <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
     <div class="slist">
-      <div class="sitem"><span class="n">1</span><div><div class="en">—When is your birthday? —It's on 2nd August.</div><div class="zh">具体日期前用 on。</div></div></div>
-      <div class="sitem"><span class="n">2</span><div><div class="en">Your wish will come true if you blow out all the candles in one go on your birthday.</div></div></div>
-      <div class="sitem"><span class="n">3</span><div><div class="en">What is the date today? It's 10 October.</div><div class="zh">问日期用 What's the date。</div></div></div>
-      <div class="sitem"><span class="n">4</span><div><div class="en">—How much is the birthday gift? —It's 50 yuan.</div></div></div>
-      <div class="sitem"><span class="n">5</span><div><div class="en">Tom is thirteen years old.</div><div class="zh">How old 问年龄。</div></div></div>
-      <div class="sitem"><span class="n">6</span><div><div class="en">I want to buy a gift for my friend's birthday.</div><div class="zh">buy sth. for sb.。</div></div></div>
-      <div class="sitem"><span class="n">7</span><div><div class="en">There are twelve months in a year. September is the ninth month.</div></div></div>
+      <div class="sitem"><span class="n">1</span><div><div class="en">—When is your birthday? —It's on 2nd August.</div><div class="zh">——你的生日是什么时候？——在八月二日。</div></div></div>
+      <div class="sitem"><span class="n">2</span><div><div class="en">Your wish will come true if you blow out all the candles in one go on your birthday.</div><div class="zh">如果你生日时一口气吹灭所有蜡烛，你的愿望就会实现。</div></div></div>
+      <div class="sitem"><span class="n">3</span><div><div class="en">What is the date today? It's 10 October.</div><div class="zh">今天几号？今天是十月十日。</div></div></div>
+      <div class="sitem"><span class="n">4</span><div><div class="en">—How much is the birthday gift? —It's 50 yuan.</div><div class="zh">——这份生日礼物多少钱？——50元。</div></div></div>
+      <div class="sitem"><span class="n">5</span><div><div class="en">Tom is thirteen years old.</div><div class="zh">汤姆十三岁。</div></div></div>
+      <div class="sitem"><span class="n">6</span><div><div class="en">I want to buy a gift for my friend's birthday.</div><div class="zh">我想为朋友的生日买一份礼物。</div></div></div>
+      <div class="sitem"><span class="n">7</span><div><div class="en">There are twelve months in a year. September is the ninth month.</div><div class="zh">一年有十二个月。九月是第九个月。</div></div></div>
     </div>
   </section>
 
@@ -374,4 +366,3 @@
 
 </body>
 </html>
-

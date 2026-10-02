@@ -23,7 +23,6 @@
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
   .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
 
-  /* hero —— 简洁浅蓝标题条 */
   .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
   .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
   .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
@@ -32,7 +31,6 @@
   .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
   .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
 
-  /* Key Point section header */
   section.block{margin-top:30px}
   .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
   .khead .kp{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1px;background:var(--blue-bg);border:1px solid var(--blue);padding:2px 9px;border-radius:6px;flex:none}
@@ -42,13 +40,11 @@
   .lead{font-size:13.5px;color:var(--ink-2);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
   .lead b{color:var(--blue-d)}
 
-  /* 语法要点块 */
   .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
   .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
   .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
   .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 词汇列表 —— 紧凑词条 */
   .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
   .witem:last-child{border-bottom:none}
@@ -63,7 +59,6 @@
 .witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber,#f59e0b);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
   .witem .notebox b{color:var(--accent-c,var(--amber-d,#b45309))}
 
-  /* 短语标签云 */
   .plist{margin-top:4px}
   .pgroup{margin-bottom:12px}
   .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
@@ -73,7 +68,6 @@
   .chip b{color:var(--blue-d);font-weight:700}
   .chip span{color:var(--ink-3);font-size:11px}
 
-  /* 考点列表 —— 编号清单 */
   .klist{margin-top:4px}
   .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
   .kitem:last-child{border-bottom:none}
@@ -84,7 +78,6 @@
   .kitem .bd p b{color:var(--blue-d)}
   .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 句型列表 */
   .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
   .sitem:last-child{border-bottom:none}
@@ -92,7 +85,6 @@
   .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
   .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 易错清单 —— 琥珀 */
   .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
   .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
   .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
@@ -135,19 +127,19 @@
     <div class="gram">
       <div class="gt">be 动词 am / is / are</div>
       <p>be 动词随主语变化：<b>I am</b>、<b>you / we / they</b> 用 <b>are</b>、<b>he / she / it</b> 及单数名词用 <b>is</b>。否定句在 be 后加 not，疑问句把 be 提到主语前。</p><p>be 动词还用于表达年龄、国籍、职业、所在位置等：I am twelve. / She is from China.</p>
-      <div class="ex">Tony is in Class 2, Grade 7.</div><div class="ex">—Are you a student? —Yes, I am.</div><div class="ex">—Are you in Class Two? —No, I'm not. I'm in Class Three.</div>
+      <div class="ex">Tony is in Class 2, Grade 7.<br>托尼在七年级二班。</div><div class="ex">—Are you a student? —Yes, I am.<br>——你是学生吗？——是的。</div><div class="ex">—Are you in Class Two? —No, I'm not. I'm in Class Three.<br>——你在二班吗？——不，我不在。我在三班。</div>
     </div>
 
     <div class="gram">
       <div class="gt">人称代词主格与形容词性物主代词</div>
       <p>主格作主语：<b>I / you / he / she / it / we / you / they</b>；形容词性物主代词后必须接名词：<b>my / your / his / her / its / our / your / their</b>。</p><p>易混配对：I→my、you→your、he→his、she→her、it→its、we→our、they→their。</p>
-      <div class="ex">This is my friend. His name is Alan.</div><div class="ex">Mike's aunt is our English teacher. We all like her.</div>
+      <div class="ex">This is my friend. His name is Alan.<br>这是我的朋友。他的名字叫艾伦。</div><div class="ex">Mike's aunt is our English teacher. We all like her.<br>迈克的姑姑是我们的英语老师。我们都喜欢她。</div>
     </div>
 
     <div class="gram">
       <div class="gt">姓名与国籍表达</div>
       <p>英文姓名<b>名在前姓在后</b>：first name 名、last name / family name 姓。询问姓名：What's your name?；询问来自哪里：Where are you from? 或 Where do you come from?</p><p>国籍表达：be + 形容词（Chinese / American / English...），如 She is Chinese.</p>
-      <div class="ex">—What's your name? —My name is Amy.</div><div class="ex">—Where is he from? —He is from the United States.</div>
+      <div class="ex">—What's your name? —My name is Amy.<br>——你叫什么名字？——我叫艾米。</div><div class="ex">—Where is he from? —He is from the United States.<br>——他来自哪里？——他来自美国。</div>
     </div>
   </section>
 
@@ -157,70 +149,70 @@
       <div class="witem">
         <div class="wh"><span class="word">name</span><span class="ph">/neɪm/</span><span class="pos">n. 名字；姓名</span></div>
         <p>What's your name? 询问姓名；full name 全名。</p>
-        <div class="sen">My name is Tom.</div>
+        <div class="sen">My name is Tom.<br>我的名字叫汤姆。</div>
         <div class="notebox"><b>常考</b>问句用 What's your name?，回答用 My name is... 或 I'm...。</div>
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">first</span><span class="ph">/fɜːst/</span><span class="pos">adj. 第一的；n. 第一个</span></div>
         <p>first name 名（名字），位于姓之前。</p>
-        <div class="sen">My new classmate's name is Mike Miller. Mike is his first name.</div>
+        <div class="sen">My new classmate's name is Mike Miller. Mike is his first name.<br>我新同学的名字叫迈克·米勒。迈克是他的名。</div>
         <div class="notebox"><b>易错</b>first name 是“名”，last name / family name 才是“姓”。</div>
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">last</span><span class="ph">/lɑːst/</span><span class="pos">adj. 最后的；上一个</span></div>
         <p>last name / family name 姓。</p>
-        <div class="sen">The girl is Helen Green. Green is her last name.</div>
+        <div class="sen">The girl is Helen Green. Green is her last name.<br>这个女孩叫海伦·格林。格林是她的姓。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">classmate</span><span class="ph">/ˈklɑːsmeɪt/</span><span class="pos">n. 同班同学</span></div>
         <p>class（班级）+ mate（同伴）= classmate。</p>
-        <div class="sen">—Who is he? —He is my new classmate.</div>
+        <div class="sen">—Who is he? —He is my new classmate.<br>——他是谁？——他是我的新同学。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">country</span><span class="ph">/ˈkʌntri/</span><span class="pos">n. 国家；乡村</span></div>
         <p>be from + 国家 表来自某国。</p>
-        <div class="sen">Canada is a beautiful country, I want to go there for a vacation.</div>
+        <div class="sen">Canada is a beautiful country. I want to go there for a vacation.<br>加拿大是一个美丽的国家。我想去那里度假。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">grade</span><span class="ph">/ɡreɪd/</span><span class="pos">n. 年级；等级</span></div>
         <p>Grade 7 七年级；in Class 2, Grade 7 在七年级二班。</p>
-        <div class="sen">My grade is Grade 7, Class 2. We have a kind class teacher.</div>
+        <div class="sen">My grade is Grade 7, Class 2. We have a kind class teacher.<br>我上七年级二班。我们有一位和蔼的班主任。</div>
         <div class="notebox"><b>常考</b>班级在前年级在后：Class 2, Grade 7。</div>
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">class</span><span class="ph">/klɑːs/</span><span class="pos">n. 班级；课</span></div>
         <p>in Class 2 在二班；have classes 上课。</p>
-        <div class="sen">We're in the same class.</div>
+        <div class="sen">We're in the same class.<br>我们在同一个班。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">friend</span><span class="ph">/frend/</span><span class="pos">n. 朋友</span></div>
         <p>make friends with sb. 与某人交朋友。</p>
-        <div class="sen">Bob and Mike are good friends.</div>
+        <div class="sen">Bob and Mike are good friends.<br>鲍勃和迈克是好朋友。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">hobby</span><span class="ph">/ˈhɒbi/</span><span class="pos">n. 业余爱好</span></div>
         <p>复数 hobbies。</p>
-        <div class="sen">—What's your hobby? —I like singing.</div>
+        <div class="sen">—What's your hobby? —I like singing.<br>——你的爱好是什么？——我喜欢唱歌。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">everyone</span><span class="ph">/ˈevriwʌn/</span><span class="pos">pron. 每人；人人</span></div>
         <p>作主语时谓语用单数。</p>
-        <div class="sen">Everyone in our class likes English very much.</div>
+        <div class="sen">Everyone in our class likes English very much.<br>我们班每个人都非常喜欢英语。</div>
         <div class="notebox"><b>易错</b>everyone 作主语谓语用单数，如 Everyone likes music.。</div>
       </div>
     </div>
@@ -258,73 +250,73 @@
 <div class="kitem"><div class="n">1</div><div class="bd">
         <b class="kt">考点一：be 动词与主语搭配</b>
         <p>I 用 am；you / we / they 用 are；he / she / it 及单数名词用 is。否定 be+not，疑问 be 提前。</p>
-        <div class="ex">I am a student. My name is Li Ming.</div><div class="ex">Those are my good friends.</div>
+        <div class="ex">I am a student. My name is Li Ming.<br>我是一名学生。我的名字叫李明。</div><div class="ex">Those are my good friends.<br>那些是我的好朋友。</div>
       </div></div>
 
       <div class="kitem"><div class="n">2</div><div class="bd">
         <b class="kt">考点二：一般疑问句的回答</b>
         <p>Are you...? 肯定 Yes, I am.，否定 No, I'm not.（不能简写 I'mn't）；Is he...? 回答 Yes, he is. / No, he isn't.</p>
-        <div class="ex">—Are you a student? —Yes, I am.</div><div class="ex">—Are you Emma? —No, I'm not. I'm Ella.</div>
+        <div class="ex">—Are you a student? —Yes, I am.<br>——你是学生吗？——是的。</div><div class="ex">—Are you Emma? —No, I'm not. I'm Ella.<br>——你是艾玛吗？——不，我不是。我是艾拉。</div>
       </div></div>
 
       <div class="kitem"><div class="n">3</div><div class="bd">
         <b class="kt">考点三：形容词性物主代词后接名词</b>
         <p>my / your / his / her / its / our / their 后必须接名词，不能单独使用。</p>
-        <div class="ex">—Is this your computer? —No, it's Lily's. Mine is on the table.</div>
+        <div class="ex">—Is this your computer? —No, it's Lily's. Mine is on the table.<br>——这是你的电脑吗？——不，是莉莉的。我的在桌子上。</div>
       </div></div>
 
       <div class="kitem"><div class="n">4</div><div class="bd">
         <b class="kt">考点四：询问姓名</b>
         <p>What's your name? 回答 My name is... 或 I'm...；问第三人称 What's his / her name?</p>
-        <div class="ex">—What's his name? —His name is Jack.</div>
+        <div class="ex">—What's his name? —His name is Jack.<br>——他叫什么名字？——他叫杰克。</div>
       </div></div>
 
       <div class="kitem"><div class="n">5</div><div class="bd">
         <b class="kt">考点五：询问国籍与来自哪里</b>
         <p>Where are you from? = Where do you come from? 回答 I'm from + 地点。</p>
-        <div class="ex">—Where is Mr Smith from? —He's from the US.</div>
+        <div class="ex">—Where is Mr Smith from? —He's from the US.<br>——史密斯先生来自哪里？——他来自美国。</div>
       </div></div>
 
       <div class="kitem"><div class="n">6</div><div class="bd">
         <b class="kt">考点六：be from 与 come from</b>
         <p>be from 后接地点名词；come from 中 come 为实义动词，疑问否定需借助助动词。</p>
-        <div class="ex">Betty is from the USA.</div><div class="ex">—Where do you come from? —I come from China.</div>
+        <div class="ex">Betty is from the USA.<br>贝蒂来自美国。</div><div class="ex">—Where do you come from? —I come from China.<br>——你来自哪里？——我来自中国。</div>
       </div></div>
 
       <div class="kitem"><div class="n">7</div><div class="bd">
         <b class="kt">考点七：年龄表达</b>
         <p>How old...? 询问年龄；be + 数字 + years old。</p>
-        <div class="ex">Emma is 13 years old.</div>
+        <div class="ex">Emma is 13 years old.<br>艾玛13岁。</div>
       </div></div>
 
       <div class="kitem"><div class="n">8</div><div class="bd">
         <b class="kt">考点八：电话号码的表达</b>
         <p>电话号码逐位读；询问 What's your telephone number?</p>
-        <div class="ex">—What's your phone number? —It's 139-0876-2345.</div>
+        <div class="ex">—What's your phone number? —It's 139-0876-2345.<br>——你的电话号码是多少？——是139-0876-2345。</div>
       </div></div>
 
       <div class="kitem"><div class="n">9</div><div class="bd">
         <b class="kt">考点九：班级年级与地点表达</b>
         <p>in Class 2, Grade 7（班级在前年级在后）；in 后接班级/年级/城市。</p>
-        <div class="ex">Tony is in Class 2, Grade 7.</div><div class="ex">Wang Yaming lives in Beijing with his big family.</div>
+        <div class="ex">Tony is in Class 2, Grade 7.<br>托尼在七年级二班。</div><div class="ex">Wang Yaming lives in Beijing with his big family.<br>王亚明和他的一大家子住在北京。</div>
       </div></div>
 
       <div class="kitem"><div class="n">10</div><div class="bd">
         <b class="kt">考点十：everyone / everybody 作主语</b>
         <p>复合不定代词作主语，谓语用单数。</p>
-        <div class="ex">Everyone is here today.</div>
+        <div class="ex">Everyone is here today.<br>今天每个人都到了。</div>
       </div></div>
 
       <div class="kitem"><div class="n">11</div><div class="bd">
         <b class="kt">考点十一：情景交际——初次见面</b>
         <p>Nice to meet you. 应答 Nice to meet you, too.；How do you do? 应答 How do you do?</p>
-        <div class="ex">—Nice to meet you! —Nice to meet you, too.</div>
+        <div class="ex">—Nice to meet you! —Nice to meet you, too.<br>——很高兴认识你！——也很高兴认识你。</div>
       </div></div>
 
       <div class="kitem"><div class="n">12</div><div class="bd">
         <b class="kt">考点十二：thank 与 thanks</b>
         <p>Thank you. = Thanks.；对感谢的应答 You're welcome. 不客气。</p>
-        <div class="ex">—Thank you very much. —You're welcome.</div>
+        <div class="ex">—Thank you very much. —You're welcome.<br>——非常感谢你。——不客气。</div>
       </div></div>
     </div>
   </section>
@@ -332,13 +324,13 @@
     <section class="block">
     <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
     <div class="slist">
-      <div class="sitem"><span class="n">1</span><div><div class="en">—What's your name? —I'm Tom.</div></div></div>
-      <div class="sitem"><span class="n">2</span><div><div class="en">—Nice to meet you, Ms. Zhang! —Nice to meet you, too.</div></div></div>
-      <div class="sitem"><span class="n">3</span><div><div class="en">—Where are you from? —I'm from China.</div></div></div>
-      <div class="sitem"><span class="n">4</span><div><div class="en">—What's her age? —She is 12 years old.</div></div></div>
-      <div class="sitem"><span class="n">5</span><div><div class="en">—Are you a student? —Yes, I am.</div></div></div>
-      <div class="sitem"><span class="n">6</span><div><div class="en">This is my new classmate. His name is Tom, and he is a good boy.</div><div class="zh">his 指代男性朋友，形容词性物主代词后接名词。</div></div></div>
-      <div class="sitem"><span class="n">7</span><div><div class="en">Everyone in our class has a new English book.</div><div class="zh">everyone 作主语，谓语用单数。</div></div></div>
+      <div class="sitem"><span class="n">1</span><div><div class="en">—What's your name? —I'm Tom.</div><div class="zh">——你叫什么名字？——我叫汤姆。</div></div></div>
+      <div class="sitem"><span class="n">2</span><div><div class="en">—Nice to meet you, Ms. Zhang! —Nice to meet you, too.</div><div class="zh">——张老师，很高兴认识你！——也很高兴认识你。</div></div></div>
+      <div class="sitem"><span class="n">3</span><div><div class="en">—Where are you from? —I'm from China.</div><div class="zh">——你来自哪里？——我来自中国。</div></div></div>
+      <div class="sitem"><span class="n">4</span><div><div class="en">—What's her age? —She is 12 years old.</div><div class="zh">——她多大了？——她12岁。</div></div></div>
+      <div class="sitem"><span class="n">5</span><div><div class="en">—Are you a student? —Yes, I am.</div><div class="zh">——你是学生吗？——是的。</div></div></div>
+      <div class="sitem"><span class="n">6</span><div><div class="en">This is my new classmate. His name is Tom, and he is a good boy.</div><div class="zh">这是我的新同学。他叫汤姆，是个好男孩。</div></div></div>
+      <div class="sitem"><span class="n">7</span><div><div class="en">Everyone in our class has a new English book.</div><div class="zh">我们班每个人都有一本新英语书。</div></div></div>
     </div>
   </section>
 
@@ -374,4 +366,3 @@
 
 </body>
 </html>
-

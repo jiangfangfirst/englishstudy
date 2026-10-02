@@ -23,7 +23,6 @@
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
   .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
 
-  /* hero —— 简洁浅蓝标题条 */
   .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #dbe7fd}
   .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
   .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
@@ -32,7 +31,6 @@
   .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
   .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
 
-  /* Key Point section header */
   section.block{margin-top:30px}
   .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
   .khead .kp{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1px;background:var(--blue-bg);border:1px solid var(--blue);padding:2px 9px;border-radius:6px;flex:none}
@@ -42,13 +40,11 @@
   .lead{font-size:13.5px;color:var(--ink-2);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
   .lead b{color:var(--blue-d)}
 
-  /* 语法要点块 */
   .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
   .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
   .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
   .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 词汇列表 —— 紧凑词条 */
   .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
   .witem:last-child{border-bottom:none}
@@ -63,7 +59,6 @@
 .witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber,#f59e0b);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
   .witem .notebox b{color:var(--accent-c,var(--amber-d,#b45309))}
 
-  /* 短语标签云 */
   .plist{margin-top:4px}
   .pgroup{margin-bottom:12px}
   .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
@@ -73,7 +68,6 @@
   .chip b{color:var(--blue-d);font-weight:700}
   .chip span{color:var(--ink-3);font-size:11px}
 
-  /* 考点列表 —— 编号清单 */
   .klist{margin-top:4px}
   .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
   .kitem:last-child{border-bottom:none}
@@ -84,7 +78,6 @@
   .kitem .bd p b{color:var(--blue-d)}
   .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 句型列表 */
   .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
   .sitem:last-child{border-bottom:none}
@@ -92,7 +85,6 @@
   .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
   .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 易错清单 —— 琥珀 */
   .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
   .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
   .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
@@ -135,19 +127,19 @@
     <div class="gram">
       <div class="gt">there be 句型</div>
       <p>there be 表示“某处有某物”，<b>be 动词由离它最近的主语决定（就近原则）</b>：There is a book and two pens. / There are two pens and a book.</p><p>否定：There isn't / aren't...；疑问：Is / Are there...? 回答 Yes, there is/are. / No, there isn't/aren't.</p>
-      <div class="ex">There is a library and two gyms in our school.</div><div class="ex">—Are there any computers in your classroom? —Yes. There is a computer on the teacher's desk.</div>
+      <div class="ex">There is a library and two gyms in our school.<br>我们学校有一个图书馆和两个体育馆。</div><div class="ex">—Are there any computers in your classroom? —Yes. There is a computer on the teacher's desk.<br>——你们教室里有电脑吗？——是的。讲台上有一台电脑。</div>
     </div>
 
     <div class="gram">
       <div class="gt">方位介词</div>
       <p><b>next to</b> 紧邻 · <b>across from</b> 在……对面 · <b>in front of</b> 在……前面 · <b>behind</b> 在……后面 · <b>between...and...</b> 在……和……之间 · <b>on the left/right of</b> 在……的左边/右边。</p>
-      <div class="ex">The library is across from the teaching building.</div><div class="ex">The library is between the classroom building and the gym.</div>
+      <div class="ex">The library is across from the teaching building.<br>图书馆在教学楼对面。</div><div class="ex">The library is between the classroom building and the gym.<br>图书馆在教学楼和体育馆之间。</div>
     </div>
 
     <div class="gram">
       <div class="gt">冠词 a / an / the</div>
       <p>a/an 表泛指（an 用于元音音素前：an office）；the 表特指。</p>
-      <div class="ex">There is a computer and some books on the teacher's desk.</div><div class="ex">The map is on the wall.</div>
+      <div class="ex">There is a computer and some books on the teacher's desk.<br>讲台上有一台电脑和一些书。</div><div class="ex">The map is on the wall.<br>地图在墙上。</div>
     </div>
   </section>
 
@@ -157,70 +149,70 @@
       <div class="witem">
         <div class="wh"><span class="word">library</span><span class="ph">/ˈlaɪbrəri/</span><span class="pos">n. 图书馆</span></div>
         <p>读书借书的地方；in the library。</p>
-        <div class="sen">We often read books in the library after class.</div>
+        <div class="sen">We often read books in the library after class.<br>我们经常课后在图书馆读书。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">classroom</span><span class="ph">/ˈklɑːsruːm/</span><span class="pos">n. 教室</span></div>
         <p>class + room。</p>
-        <div class="sen">The blackboard is in the front of the classroom.</div>
+        <div class="sen">The blackboard is in the front of the classroom.<br>黑板在教室的前部。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">office</span><span class="ph">/ˈɒfɪs/</span><span class="pos">n. 办公室</span></div>
         <p>教师办公室 teachers' office；an office（元音音素开头）。</p>
-        <div class="sen">The teachers' office is on the second floor.</div>
+        <div class="sen">The teachers' office is on the second floor.<br>教师办公室在二楼。</div>
         <div class="notebox"><b>常考</b>office 以元音音素开头，用 an：an office。</div>
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">gym</span><span class="ph">/dʒɪm/</span><span class="pos">n. 体育馆；健身房</span></div>
         <p>gymnasium 的缩写。</p>
-        <div class="sen">—Where does Lisa often go after school? —To the gym. She plays tennis in it.</div>
+        <div class="sen">—Where does Lisa often go after school? —To the gym. She plays tennis in it.<br>——丽莎放学后经常去哪里？——去体育馆。她在里面打网球。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">playground</span><span class="ph">/ˈpleɪɡraʊnd/</span><span class="pos">n. 操场</span></div>
         <p>play + ground。</p>
-        <div class="sen">We often play basketball on the playground after class.</div>
+        <div class="sen">We often play basketball on the playground after class.<br>我们经常课后在操场上打篮球。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">lab</span><span class="ph">/læb/</span><span class="pos">n. 实验室</span></div>
         <p>laboratory 的缩写；science lab 科学实验室。</p>
-        <div class="sen">The science lab is on the third floor. We do experiments there.</div>
+        <div class="sen">The science lab is on the third floor. We do experiments there.<br>科学实验室在三楼。我们在那里做实验。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">computer</span><span class="ph">/kəmˈpjuːtə(r)/</span><span class="pos">n. 计算机；电脑</span></div>
         <p>computer room 机房。</p>
-        <div class="sen">—Do you have a computer room in your school? —Yes, it's on the first floor.</div>
+        <div class="sen">—Do you have a computer room in your school? —Yes, it's on the first floor.<br>——你们学校有电脑房吗？——有，在一楼。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">map</span><span class="ph">/mæp/</span><span class="pos">n. 地图</span></div>
         <p>a map of China 中国地图。</p>
-        <div class="sen">This is a map of our school.</div>
+        <div class="sen">This is a map of our school.<br>这是一张我们学校的地图。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">wall</span><span class="ph">/wɔːl/</span><span class="pos">n. 墙</span></div>
         <p>on the wall 在墙上（表面）。</p>
-        <div class="sen">There is a clock and two pictures on the wall.</div>
+        <div class="sen">There is a clock and two pictures on the wall.<br>墙上有一个钟和两幅画。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">front</span><span class="ph">/frʌnt/</span><span class="pos">n. 前面</span></div>
         <p>in front of 在……前面；in the front of 在……的前部。</p>
-        <div class="sen">The teacher's desk is in front of the blackboard.</div>
+        <div class="sen">The teacher's desk is in front of the blackboard.<br>讲台在黑板前面。</div>
         <div class="notebox"><b>易错</b>in front of（外部前方）与 in the front of（内部前部）不同。</div>
       </div>
     </div>
@@ -258,73 +250,73 @@
 <div class="kitem"><div class="n">1</div><div class="bd">
         <b class="kt">考点一：there be 就近原则</b>
         <p>be 动词与最近的主语保持一致：There is a book and two pens.；There are two pens and a book.</p>
-        <div class="ex">There is a computer and some books on the teacher's desk.</div>
+        <div class="ex">There is a computer and some books on the teacher's desk.<br>讲台上有一台电脑和一些书。</div>
       </div></div>
 
       <div class="kitem"><div class="n">2</div><div class="bd">
         <b class="kt">考点二：there be 不与 have 连用</b>
         <p>there be 表示“存在”，have 表示“拥有”，不能同句连用。</p>
-        <div class="ex">There is a library and two classroom buildings in our school.</div>
+        <div class="ex">There is a library and two classroom buildings in our school.<br>我们学校有一个图书馆和两栋教学楼。</div>
       </div></div>
 
       <div class="kitem"><div class="n">3</div><div class="bd">
         <b class="kt">考点三：there be 的否定与疑问</b>
         <p>否定 There isn't/aren't...；疑问 Is/Are there...? 回答 Yes, there is/are. / No, there isn't/aren't.</p>
-        <div class="ex">—Is there a library in your school? —Yes, there is.</div>
+        <div class="ex">—Is there a library in your school? —Yes, there is.<br>——你们学校有图书馆吗？——是的，有。</div>
       </div></div>
 
       <div class="kitem"><div class="n">4</div><div class="bd">
         <b class="kt">考点四：some 与 any</b>
         <p>肯定句用 some，否定句和疑问句用 any：There are some books. / Are there any books?</p>
-        <div class="ex">There aren't any eggs in the fridge. I need to buy some.</div>
+        <div class="ex">There aren't any eggs in the fridge. I need to buy some.<br>冰箱里没有鸡蛋了。我需要买一些。</div>
       </div></div>
 
       <div class="kitem"><div class="n">5</div><div class="bd">
         <b class="kt">考点五：in front of 与 in the front of</b>
         <p>in front of 在（物体外部）前面；in the front of 在（物体内部）前部。</p>
-        <div class="ex">There is a big tree in front of the classroom building.</div><div class="ex">The blackboard is in the front of the classroom.</div>
+        <div class="ex">There is a big tree in front of the classroom building.<br>教学楼前面有一棵大树。</div><div class="ex">The blackboard is in the front of the classroom.<br>黑板在教室的前部。</div>
       </div></div>
 
       <div class="kitem"><div class="n">6</div><div class="bd">
         <b class="kt">考点六：next to / across from / between</b>
         <p>next to 紧邻；across from 对面；between...and... 在两者之间。</p>
-        <div class="ex">The teachers' office is next to the art room.</div><div class="ex">The dining hall is across from the gym. We can see it when we stand at the gate of the gym.</div>
+        <div class="ex">The teachers' office is next to the art room.<br>教师办公室紧邻美术教室。</div><div class="ex">The dining hall is across from the gym. We can see it when we stand at the gate of the gym.<br>食堂在体育馆对面。我们站在体育馆门口就能看到它。</div>
       </div></div>
 
       <div class="kitem"><div class="n">7</div><div class="bd">
         <b class="kt">考点七：介词 on / in / at 基础</b>
         <p>on 在……上（表面）；in 在……里；at 在具体地点。</p>
-        <div class="ex">The map is on the wall.</div><div class="ex">The students are having a party in the classroom. There is some juice and a lot of snacks on each desk.</div>
+        <div class="ex">The map is on the wall.<br>地图在墙上。</div><div class="ex">The students are having a party in the classroom. There is some juice and a lot of snacks on each desk.<br>学生们正在教室里举行聚会。每张桌子上都有一些果汁和许多零食。</div>
       </div></div>
 
       <div class="kitem"><div class="n">8</div><div class="bd">
         <b class="kt">考点八：冠词 a / an</b>
         <p>元音音素前用 an：an office / an art room；辅音音素前用 a：a library。</p>
-        <div class="ex">This is an office and the office is not big.</div>
+        <div class="ex">This is an office and the office is not big.<br>这是一间办公室，办公室不大。</div>
       </div></div>
 
       <div class="kitem"><div class="n">9</div><div class="bd">
         <b class="kt">考点九：there be 与 it is 区分</b>
         <p>there be 表存在；it is 表特指某物。</p>
-        <div class="ex">There is a computer and some books on the teacher's desk.</div><div class="ex">—Where is the art room? —It's on the second floor.</div>
+        <div class="ex">There is a computer and some books on the teacher's desk.<br>讲台上有一台电脑和一些书。</div><div class="ex">—Where is the art room? —It's on the second floor.<br>——美术教室在哪里？——在二楼。</div>
       </div></div>
 
       <div class="kitem"><div class="n">10</div><div class="bd">
         <b class="kt">考点十：指路情景交际</b>
         <p>Excuse me, where is...? 询问地点；Go straight and turn left/right. 指路。</p>
-        <div class="ex">—Where is the library? —It's on the second floor.</div>
+        <div class="ex">—Where is the library? —It's on the second floor.<br>——图书馆在哪里？——在二楼。</div>
       </div></div>
 
       <div class="kitem"><div class="n">11</div><div class="bd">
         <b class="kt">考点十一：询问数量</b>
         <p>How many + 复数名词 + are there...? 询问数量；回答 There are...。</p>
-        <div class="ex">—How many classrooms are there in your school? —Ten.</div>
+        <div class="ex">—How many classrooms are there in your school? —Ten.<br>——你们学校有多少间教室？——十间。</div>
       </div></div>
 
       <div class="kitem"><div class="n">12</div><div class="bd">
         <b class="kt">考点十二：描述位置的主谓一致</b>
         <p>There be 句型的疑问与否定中 be 同样遵循就近原则。</p>
-        <div class="ex">—Are there any computers in your classroom? —Yes. There is a computer on the teacher's desk.</div>
+        <div class="ex">—Are there any computers in your classroom? —Yes. There is a computer on the teacher's desk.<br>——你们教室里有电脑吗？——是的。讲台上有一台电脑。</div>
       </div></div>
     </div>
   </section>
@@ -332,13 +324,13 @@
     <section class="block">
     <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
     <div class="slist">
-      <div class="sitem"><span class="n">1</span><div><div class="en">There is some milk and apples on the table.</div><div class="zh">there be 就近原则：最近的主语 a library 单数用 is。</div></div></div>
-      <div class="sitem"><span class="n">2</span><div><div class="en">The library is across from the teaching building.</div><div class="zh">across from 在……对面。</div></div></div>
-      <div class="sitem"><span class="n">3</span><div><div class="en">The library is between the classroom building and the dining hall.</div><div class="zh">between...and... 在两者之间。</div></div></div>
-      <div class="sitem"><span class="n">4</span><div><div class="en">—Are there any computers in your classroom? —Yes. There is a computer on the teacher's desk.</div><div class="zh">疑问句用 any，there be 用复数 are。</div></div></div>
-      <div class="sitem"><span class="n">5</span><div><div class="en">—Where is your classroom? —It's on the second floor.</div></div></div>
-      <div class="sitem"><span class="n">6</span><div><div class="en">This is a map of our school.</div></div></div>
-      <div class="sitem"><span class="n">7</span><div><div class="en">Tom sits in the front of the classroom while John sits at the back of it.</div></div></div>
+      <div class="sitem"><span class="n">1</span><div><div class="en">There is some milk and apples on the table.</div><div class="zh">桌子上有一些牛奶和苹果。</div></div></div>
+      <div class="sitem"><span class="n">2</span><div><div class="en">The library is across from the teaching building.</div><div class="zh">图书馆在教学楼对面。</div></div></div>
+      <div class="sitem"><span class="n">3</span><div><div class="en">The library is between the classroom building and the dining hall.</div><div class="zh">图书馆在教学楼和食堂之间。</div></div></div>
+      <div class="sitem"><span class="n">4</span><div><div class="en">—Are there any computers in your classroom? —Yes. There is a computer on the teacher's desk.</div><div class="zh">——你们教室里有电脑吗？——是的。讲台上有一台电脑。</div></div></div>
+      <div class="sitem"><span class="n">5</span><div><div class="en">—Where is your classroom? —It's on the second floor.</div><div class="zh">——你的教室在哪里？——在二楼。</div></div></div>
+      <div class="sitem"><span class="n">6</span><div><div class="en">This is a map of our school.</div><div class="zh">这是一张我们学校的地图。</div></div></div>
+      <div class="sitem"><span class="n">7</span><div><div class="en">Tom sits in the front of the classroom while John sits at the back of it.</div><div class="zh">汤姆坐在教室的前部，而约翰坐在教室的后部。</div></div></div>
     </div>
   </section>
 
@@ -374,4 +366,3 @@
 
 </body>
 </html>
-

@@ -23,7 +23,6 @@
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
   .wrap{max-width:720px;margin:0 auto;padding:0 20px 40px}
 
-  /* hero —— 简洁浅蓝标题条 */
   .hero{margin-top:18px;background:var(--blue-bg);border-radius:16px;padding:22px 20px;border:1px solid #d1fae5}
   .hero .kicker{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px}
   .hero h1{font-size:24px;line-height:1.3;color:var(--blue-d);font-weight:800;letter-spacing:.5px}
@@ -32,7 +31,6 @@
   .hero .tagline .t{font-size:12px;color:var(--blue-d);background:#fff;border-radius:999px;padding:4px 12px;font-weight:600;box-shadow:0 1px 2px rgba(37,99,235,.08)}
   .hero .tip{margin-top:14px;font-size:12.5px;color:var(--blue-d)}
 
-  /* Key Point section header */
   section.block{margin-top:30px}
   .khead{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
   .khead .kp{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1px;background:var(--blue-bg);border:1px solid var(--blue);padding:2px 9px;border-radius:6px;flex:none}
@@ -42,13 +40,11 @@
   .lead{font-size:13.5px;color:var(--ink-2);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
   .lead b{color:var(--blue-d)}
 
-  /* 语法要点块 */
   .gram{background:var(--blue-bg);border-left:4px solid var(--blue);border-radius:10px;padding:12px 14px;margin-bottom:10px}
   .gram .gt{font-size:14px;font-weight:800;color:var(--blue-d);margin-bottom:6px}
   .gram p{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;overflow-wrap:break-word;word-break:break-word}
   .gram .ex{font-size:13px;color:var(--ink);font-weight:600;background:#fff;border-radius:7px;padding:6px 10px;margin-top:5px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 词汇列表 —— 紧凑词条 */
   .wlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .witem{padding:11px 14px;border-bottom:1px solid var(--line)}
   .witem:last-child{border-bottom:none}
@@ -63,7 +59,6 @@
 .witem .notebox::before{content:"姜老师提醒";display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--amber,#f59e0b);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
   .witem .notebox b{color:var(--accent-c,var(--amber-d,#b45309))}
 
-  /* 短语标签云 */
   .plist{margin-top:4px}
   .pgroup{margin-bottom:12px}
   .pgroup .pg{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
@@ -73,7 +68,6 @@
   .chip b{color:var(--blue-d);font-weight:700}
   .chip span{color:var(--ink-3);font-size:11px}
 
-  /* 考点列表 —— 编号清单 */
   .klist{margin-top:4px}
   .kitem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
   .kitem:last-child{border-bottom:none}
@@ -84,7 +78,6 @@
   .kitem .bd p b{color:var(--blue-d)}
   .kitem .bd .ex{font-size:12.5px;color:var(--ink);font-weight:600;background:var(--blue-bg);border-radius:7px;padding:5px 10px;margin-top:3px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 句型列表 */
   .slist{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
   .sitem{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px}
   .sitem:last-child{border-bottom:none}
@@ -92,7 +85,6 @@
   .sitem .en{font-size:13px;color:var(--ink);font-weight:600;overflow-wrap:break-word;word-break:break-word}
   .sitem .zh{font-size:11.5px;color:var(--ink-3);margin-top:2px;overflow-wrap:break-word;word-break:break-word}
 
-  /* 易错清单 —— 琥珀 */
   .warn{margin-top:4px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:13px 15px}
   .warn .whd{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#b45309;margin-bottom:6px}
   .warn .whd .dot{width:18px;height:18px;border-radius:5px;background:var(--amber);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
@@ -135,19 +127,19 @@
     <div class="gram">
       <div class="gt">主谓一致（一）：不定代词与并列主语</div>
       <p>everybody/everyone/each/neither of/either of 等不定代词作主语，谓语用单数：Everybody is ready...。</p><p>both...and... / both of 连接两个主语，谓语用复数：Both kung fu and boxing are popular。</p>
-      <div class="ex">Everyone in my group is ready for Sports Day.</div><div class="ex">Both kung fu and boxing are popular.</div>
+      <div class="ex">Everyone in my group is ready for Sports Day.<br>我们组每个人都为运动会做好了准备。</div><div class="ex">Both kung fu and boxing are popular.<br>武术和拳击都很受欢迎。</div>
     </div>
 
     <div class="gram">
       <div class="gt">主谓一致（二）：就近与就远原则</div>
       <p>either...or... / neither...nor... / not only...but also... / there be 遵循就近原则：Either you or I am going to attend...。</p><p>with / together with / as well as / except / besides 引出插入语遵循就远原则：The coach with two players is at the gate。</p>
-      <div class="ex">Either you or I am going to attend the opening ceremony.</div><div class="ex">The captain, together with two players, is at the gate now.</div>
+      <div class="ex">Either you or I am going to attend the opening ceremony.<br>要么你要么我将参加开幕式。</div><div class="ex">The captain, together with two players, is at the gate now.<br>队长和两名队员现在在门口。</div>
     </div>
 
     <div class="gram">
       <div class="gt">主谓一致（三）：特殊主语</div>
       <p>动名词短语作主语视为单数：Playing sports makes us strong。</p><p>the news、maths、时间/距离/金钱整体作单数：Ten years is a long time。</p><p>family/team/group/class 强调整体用单数、强调成员用复数；the old、police 表示一类人谓语用复数；a number of 用复数、the number of 用单数。</p>
-      <div class="ex">Playing sports makes us strong.</div><div class="ex">Ten years is a long time for everyone.</div>
+      <div class="ex">Playing sports makes us strong.<br>运动使我们强壮。</div><div class="ex">Ten years is a long time for everyone.<br>十年对每个人来说都是一段很长的时间。</div>
     </div>
   </section>
 
@@ -157,70 +149,70 @@
       <div class="witem">
         <div class="wh"><span class="word">relay</span><span class="ph">/ˈriːleɪ/</span><span class="pos">n. 接力赛</span></div>
         <p>relay race 接力赛；a relay baton 接力棒。</p>
-        <div class="sen">The relay race requires four runners.</div>
+        <div class="sen">The relay race requires four runners.<br>接力赛需要四名跑者。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">baton</span><span class="ph">/bəˈtɒn/</span><span class="pos">n. 接力棒</span></div>
         <p>a stick passed between runners。</p>
-        <div class="sen">A baton is a stick passed between runners in a relay.</div>
+        <div class="sen">A baton is a stick passed between runners in a relay.<br>接力棒是在接力赛中在跑者之间传递的一根棍子。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">judge</span><span class="ph">/dʒʌdʒ/</span><span class="pos">n. 裁判 · v. 评判</span></div>
         <p>judge 判定比赛胜负。</p>
-        <div class="sen">A judge is a person who finally decides the winner.</div>
+        <div class="sen">A judge is a person who finally decides the winner.<br>裁判是最终决定获胜者的人。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">champion</span><span class="ph">/ˈtʃæmpiən/</span><span class="pos">n. 冠军</span></div>
         <p>championship n. 锦标赛。</p>
-        <div class="sen">A champion is an athlete or team that has won first place.</div>
+        <div class="sen">A champion is an athlete or team that has won first place.<br>冠军是获得第一名的运动员或队伍。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">medal</span><span class="ph">/ˈmedl/</span><span class="pos">n. 奖牌；奖章</span></div>
         <p>win a gold/silver/bronze medal。</p>
-        <div class="sen">A gold medal is given to the winner.</div>
+        <div class="sen">A gold medal is given to the winner.<br>金牌颁发给获胜者。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">motto</span><span class="ph">/ˈmɒtəʊ/</span><span class="pos">n. 格言；座右铭</span></div>
         <p>the Olympic motto 奥运格言。</p>
-        <div class="sen">The Olympic mottoes touch my heart quite deeply.</div>
+        <div class="sen">The Olympic mottoes touch my heart quite deeply.<br>奥林匹克格言深深触动了我的心。</div>
         <div class="notebox"><b>易错</b>motto 复数是 mottoes/mottos。</div>
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">mascot</span><span class="ph">/ˈmæskət/</span><span class="pos">n. 吉祥物</span></div>
         <p>吉祥物代表赛事形象。</p>
-        <div class="sen">The mascot of the 2022 Winter Olympics is Bing Dwen Dwen.</div>
+        <div class="sen">The mascot of the 2022 Winter Olympics is Bing Dwen Dwen.<br>2022年冬奥会的吉祥物是冰墩墩。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">competition</span><span class="ph">/ˌkɒmpəˈtɪʃn/</span><span class="pos">n. 比赛；竞赛</span></div>
         <p>compete v. 竞争；competitor n. 参赛者。</p>
-        <div class="sen">She won first prize in the competition.</div>
+        <div class="sen">She won first prize in the competition.<br>她在比赛中获得了一等奖。</div>
         
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">pride</span><span class="ph">/praɪd/</span><span class="pos">n. 自豪；骄傲</span></div>
         <p>take pride in 以……为傲；proud adj.。</p>
-        <div class="sen">He took great pride in his achievement.</div>
+        <div class="sen">He took great pride in his achievement.<br>他为自己的成就感到非常自豪。</div>
         <div class="notebox"><b>易错</b>take pride in 中 pride 是名词；be proud of 中 proud 是形容词。</div>
       </div>
 
             <div class="witem">
         <div class="wh"><span class="word">tryout</span><span class="ph">/ˈtraɪaʊt/</span><span class="pos">n. 选拔赛；试演</span></div>
         <p>try out for 参加……选拔。</p>
-        <div class="sen">He signed up for the tryouts last week.</div>
+        <div class="sen">He signed up for the tryouts last week.<br>他上周报名参加了选拔赛。</div>
         
       </div>
     </div>
@@ -258,73 +250,73 @@
 <div class="kitem"><div class="n">1</div><div class="bd">
         <b class="kt">不定代词作主语用单数</b>
         <p>everybody/everyone/each/neither of/either of 作主语，谓语用单数。</p>
-        <div class="ex">Everybody has a chance to play.</div>
+        <div class="ex">Everybody has a chance to play.<br>每个人都有机会上场。</div>
       </div></div>
 
       <div class="kitem"><div class="n">2</div><div class="bd">
         <b class="kt">both...and... 用复数</b>
         <p>both A and B / both of 作主语，谓语用复数。</p>
-        <div class="ex">Both kung fu and boxing are popular sports among young people.</div>
+        <div class="ex">Both kung fu and boxing are popular sports among young people.<br>武术和拳击都是年轻人中受欢迎的运动。</div>
       </div></div>
 
       <div class="kitem"><div class="n">3</div><div class="bd">
         <b class="kt">就近原则：either...or / neither...nor / not only...but also</b>
         <p>谓语与离它最近的主语一致。</p>
-        <div class="ex">Either you or he is going to take part.</div>
+        <div class="ex">Either you or he is going to take part.<br>要么你要么他将参加。</div>
       </div></div>
 
       <div class="kitem"><div class="n">4</div><div class="bd">
         <b class="kt">就近原则：there be</b>
         <p>there be 中 be 由最近的主语决定。</p>
-        <div class="ex">There is a pen and some books on the desk.</div>
+        <div class="ex">There is a pen and some books on the desk.<br>桌子上有一支笔和一些书。</div>
       </div></div>
 
       <div class="kitem"><div class="n">5</div><div class="bd">
         <b class="kt">就远原则：with / as well as / together with</b>
         <p>真正主语在前，插入语不影响谓语。</p>
-        <div class="ex">The teacher with his students is going to visit the museum.</div>
+        <div class="ex">The teacher with his students is going to visit the museum.<br>老师和学生们要去参观博物馆。</div>
       </div></div>
 
       <div class="kitem"><div class="n">6</div><div class="bd">
         <b class="kt">动名词短语作主语用单数</b>
         <p>动名词作主语视为单数。</p>
-        <div class="ex">Exercising every day makes us stronger.</div>
+        <div class="ex">Exercising every day makes us stronger.<br>每天锻炼使我们更强壮。</div>
       </div></div>
 
       <div class="kitem"><div class="n">7</div><div class="bd">
         <b class="kt">形复实单：news / maths</b>
         <p>the news、maths 形式复数意义单数，谓语用单数。</p>
-        <div class="ex">The news about the games is exciting.</div>
+        <div class="ex">The news about the games is exciting.<br>关于比赛的消息令人兴奋。</div>
       </div></div>
 
       <div class="kitem"><div class="n">8</div><div class="bd">
         <b class="kt">时间/距离/金钱整体作单数</b>
         <p>Ten years / Fifteen seconds / Five hundred dollars 视为整体，谓语用单数。</p>
-        <div class="ex">Ten kilometres is not a long distance.</div>
+        <div class="ex">Ten kilometres is not a long distance.<br>十公里不算长距离。</div>
       </div></div>
 
       <div class="kitem"><div class="n">9</div><div class="bd">
         <b class="kt">family/team/class 主谓一致</b>
         <p>强调整体用单数，强调成员用复数。</p>
-        <div class="ex">My family are watching TV now.</div><div class="ex">His family is a big one. They are all very kind.</div>
+        <div class="ex">My family are watching TV now.<br>我家人现在正在看电视。</div><div class="ex">His family is a big one. They are all very kind.<br>他家是个大家庭。他们都很友善。</div>
       </div></div>
 
       <div class="kitem"><div class="n">10</div><div class="bd">
         <b class="kt">the + 形容词表一类人 / police</b>
         <p>the old、the young、police 等谓语用复数。</p>
-        <div class="ex">The police are looking for the lost child.</div>
+        <div class="ex">The police are looking for the lost child.<br>警察正在寻找走失的孩子。</div>
       </div></div>
 
       <div class="kitem"><div class="n">11</div><div class="bd">
         <b class="kt">a number of / the number of</b>
         <p>a number of 许多（+复数名词，谓语复数）；the number of ……的数量（谓语单数）。</p>
-        <div class="ex">A number of students are playing on the playground.</div>
+        <div class="ex">A number of students are playing on the playground.<br>许多学生正在操场上玩耍。</div>
       </div></div>
 
       <div class="kitem"><div class="n">12</div><div class="bd">
         <b class="kt">情景交际——祝贺与鼓励</b>
         <p>Congratulations! 祝贺；Well done! / Good luck! / Come on! 鼓励。</p>
-        <div class="ex">—I won the 100-metre race! —Congratulations!</div>
+        <div class="ex">—I won the 100-metre race! —Congratulations!<br>——我赢了百米赛跑！——恭喜！</div>
       </div></div>
     </div>
   </section>
@@ -332,10 +324,10 @@
     <section class="block">
     <div class="khead"><h2>重点句型</h2><span class="desc">经典句型</span></div>
     <div class="slist">
-      <div class="sitem"><span class="n">1</span><div><div class="en">Everyone is ready for the match now.</div><div class="zh">每个人都为接力赛做好了准备。</div></div></div>
-      <div class="sitem"><span class="n">2</span><div><div class="en">Both kung fu and boxing are popular.</div><div class="zh">武术和拳击在中国都很受欢迎。</div></div></div>
-      <div class="sitem"><span class="n">3</span><div><div class="en">Either you or I am going to attend the opening ceremony.</div><div class="zh">要么你要么我将参加运动会。</div></div></div>
-      <div class="sitem"><span class="n">4</span><div><div class="en">The captain, together with two players, is at the gate now.</div><div class="zh">教练和两名队员在门口。</div></div></div>
+      <div class="sitem"><span class="n">1</span><div><div class="en">Everyone is ready for the match now.</div><div class="zh">现在每个人都为比赛做好了准备。</div></div></div>
+      <div class="sitem"><span class="n">2</span><div><div class="en">Both kung fu and boxing are popular.</div><div class="zh">武术和拳击都很受欢迎。</div></div></div>
+      <div class="sitem"><span class="n">3</span><div><div class="en">Either you or I am going to attend the opening ceremony.</div><div class="zh">要么你要么我将参加开幕式。</div></div></div>
+      <div class="sitem"><span class="n">4</span><div><div class="en">The captain, together with two players, is at the gate now.</div><div class="zh">队长和两名队员现在在门口。</div></div></div>
       <div class="sitem"><span class="n">5</span><div><div class="en">Playing sports makes us strong.</div><div class="zh">运动使我们强壮。</div></div></div>
       <div class="sitem"><span class="n">6</span><div><div class="en">Ten years is a long time for everyone.</div><div class="zh">十年对每个人来说都是一段很长的时间。</div></div></div>
       <div class="sitem"><span class="n">7</span><div><div class="en">A baton is a stick passed between runners in a relay.</div><div class="zh">接力棒是在接力赛中在跑者之间传递的一根棍子。</div></div></div>
@@ -375,4 +367,3 @@
 
 </body>
 </html>
-
