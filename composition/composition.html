@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>初中英语范文库 · 人教版七至九年级</title>
+<style>
+  :root{
+    --bg:#f7f9fc;
+    --card:#ffffff;
+    --text:#0f172a;
+    --text-2:#475569;
+    --text-3:#94a3b8;
+    --line:#eef2f8;
+    --radius:16px;
+    --safe-b:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    color:var(--text);
+    font-size:15px;
+    line-height:1.5;
+    background:
+      radial-gradient(ellipse 700px 480px at 0% -5%, rgba(96,165,250,.07), transparent 55%),
+      radial-gradient(ellipse 600px 420px at 100% -5%, rgba(167,139,250,.07), transparent 55%),
+      var(--bg);
+    padding-bottom:calc(36px + var(--safe-b));
+  }
+
+  /* ============ 顶部深色渐变区 ============ */
+  .hero{
+    position:relative;overflow:hidden;
+    background:linear-gradient(165deg,#0b1220 0%,#131f38 42%,#2a2560 100%);
+    padding:26px 18px 24px;color:#fff;
+  }
+  .hero::before{
+    content:"";position:absolute;top:-80px;right:-60px;
+    width:230px;height:230px;border-radius:50%;
+    background:radial-gradient(circle,rgba(129,140,248,.55),transparent 72%);
+    filter:blur(12px);
+  }
+  .hero::after{
+    content:"";position:absolute;bottom:-100px;left:-60px;
+    width:210px;height:210px;border-radius:50%;
+    background:radial-gradient(circle,rgba(244,114,182,.32),transparent 72%);
+    filter:blur(12px);
+  }
+  .hero-inner{position:relative;z-index:1;}
+  .hero h1{
+    margin:0;font-size:20px;font-weight:800;letter-spacing:.5px;
+    background:linear-gradient(135deg,#fff 30%,#c7d2fe 75%,#fbcfe8);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .hero .sub{
+    margin:6px 0 0;font-size:12px;color:rgba(255,255,255,.5);
+    letter-spacing:.4px;display:flex;align-items:center;gap:7px;
+  }
+  .hero .sub::before{
+    content:"";width:5px;height:5px;border-radius:50%;
+    background:linear-gradient(135deg,#818cf8,#ec4899);
+    box-shadow:0 0 8px rgba(129,140,248,.8);
+  }
+
+  /* ---- 搜索 ---- */
+  .search{position:relative;margin-top:18px;}
+  .search input{
+    width:100%;height:42px;
+    border:1px solid rgba(255,255,255,.13);
+    border-radius:12px;
+    background:rgba(255,255,255,.07);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    color:#fff;padding:0 14px 0 38px;
+    font-size:14px;font-family:inherit;outline:none;
+    transition:.22s;
+  }
+  .search input::placeholder{color:rgba(255,255,255,.38);}
+  .search input:focus{
+    background:rgba(255,255,255,.13);
+    border-color:rgba(165,180,252,.5);
+    box-shadow:0 0 0 4px rgba(99,102,241,.18);
+  }
+  .search svg{
+    position:absolute;left:13px;top:50%;transform:translateY(-50%);
+    color:rgba(255,255,255,.45);pointer-events:none;
+  }
+
+  /* ============ 吸顶标签栏 ============ */
+  .tabs-wrap{
+    position:sticky;top:0;z-index:20;
+    background:rgba(247,249,252,.85);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(15,23,42,.05);
+    padding:10px 0 11px;
+  }
+  .tabs{
+    display:flex;gap:8px;
+    overflow-x:auto;overscroll-behavior-x:contain;
+    padding:0 18px;scrollbar-width:none;
+  }
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{
+    flex:0 0 auto;
+    padding:7px 15px;border-radius:999px;
+    background:#fff;color:var(--text-2);
+    font-size:13px;font-weight:600;letter-spacing:.2px;
+    text-decoration:none;white-space:nowrap;
+    border:1px solid #e8eef7;
+    box-shadow:0 1px 2px rgba(15,23,42,.04);
+    transition:.22s cubic-bezier(.4,0,.2,1);
+  }
+  .tab.active{
+    background:linear-gradient(135deg,#3b6ef6,#818cf8);
+    color:#fff;border-color:transparent;
+    box-shadow:0 6px 18px -4px rgba(59,110,246,.5);
+    transform:translateY(-1px);
+  }
+
+  /* ============ 内容 ============ */
+  main{padding:0 14px;}
+
+  /* ---------- 各年级配色 ---------- */
+  /* 七年级上册 · 浅蓝 */
+  #g7a{
+    --accent:#60a5fa;
+    --accent-deep:#3b82f6;
+    --accent-soft:#eff6ff;
+    --complement:#fb923c;
+  }
+  /* 七年级下册 · 深蓝 */
+  #g7b{
+    --accent:#3b82f6;
+    --accent-deep:#1d4ed8;
+    --accent-soft:#eff6ff;
+    --complement:#fbbf24;
+  }
+  /* 八年级上册 · 浅琥珀 */
+  #g8a{
+    --accent:#fbbf24;
+    --accent-deep:#f59e0b;
+    --accent-soft:#fffbeb;
+    --complement:#3b82f6;
+  }
+  /* 八年级下册 · 深橙 */
+  #g8b{
+    --accent:#fb923c;
+    --accent-deep:#ea580c;
+    --accent-soft:#fff7ed;
+    --complement:#2563eb;
+  }
+  /* 九年级上册 · 绿色 */
+  #g9a{
+    --accent:#34d399;
+    --accent-deep:#10b981;
+    --accent-soft:#ecfdf5;
+    --complement:#f43f5e;
+  }
+  /* 中考 · 紫色 */
+  #g9b{
+    --accent:#a78bfa;
+    --accent-deep:#7c3aed;
+    --accent-soft:#f5f3ff;
+    --complement:#fbbf24;
+  }
+
+  .grade{
+    margin-top:24px;
+    scroll-margin-top:74px;
+  }
+
+  .grade-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 4px 12px;
+  }
+  .grade-head h2{
+    margin:0;font-size:15.5px;font-weight:800;
+    letter-spacing:.3px;display:flex;align-items:center;gap:9px;
+  }
+  /* 左侧色条 */
+  .grade-head h2::before{
+    content:"";width:4px;height:17px;border-radius:3px;
+    background:linear-gradient(180deg,var(--accent),var(--accent-deep));
+    box-shadow:0 2px 8px -1px var(--accent);
+  }
+  /* 互补色小圆点 */
+  .grade-head h2::after{
+    content:"";width:5px;height:5px;border-radius:50%;
+    background:var(--complement);
+    opacity:.7;
+    margin-left:-2px;
+  }
+  .count{
+    font-size:11px;font-weight:700;
+    padding:3px 9px;border-radius:999px;
+    background:var(--accent-soft);
+    color:var(--accent-deep);
+    letter-spacing:.3px;
+    border:1px solid color-mix(in srgb,var(--accent) 20%,transparent);
+  }
+
+  .cards{
+    list-style:none;margin:0;padding:0;
+    display:grid;gap:9px;
+    grid-template-columns:1fr;
+  }
+  .cards li{display:block;min-width:0;}
+
+  /* ---- 卡片 ---- */
+  .card{
+    position:relative;
+    display:flex;align-items:center;gap:13px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:14px 14px 14px 17px;
+    text-decoration:none;color:inherit;
+    overflow:hidden;
+    min-width:0;
+    box-shadow:0 1px 2px rgba(15,23,42,.03),0 4px 14px -8px rgba(15,23,42,.07);
+    transition:transform .2s cubic-bezier(.4,0,.2,1),box-shadow .2s,border-color .2s;
+  }
+  /* 左侧主色条 */
+  .card::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:linear-gradient(180deg,var(--accent),var(--accent-deep));
+  }
+  @media (hover:hover){
+    .card:hover{
+      transform:translateY(-2px);
+      border-color:color-mix(in srgb,var(--accent) 35%,transparent);
+      box-shadow:0 8px 24px -8px color-mix(in srgb,var(--accent) 42%,transparent);
+    }
+    .card:hover .card-arrow{
+      transform:translateX(3px);
+      color:var(--accent-deep);
+    }
+  }
+  .card:active{transform:scale(.985);}
+
+  /* 单元徽章 */
+  .unit{
+    flex:0 0 auto;
+    width:42px;height:42px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;letter-spacing:.5px;
+    color:#fff;
+    background:linear-gradient(140deg,var(--accent),var(--accent-deep));
+    box-shadow:0 5px 14px -5px var(--accent-deep);
+  }
+
+  /* 卡片主体 */
+  .card-body{
+    flex:1 1 auto;min-width:0;
+    display:flex;flex-direction:column;
+  }
+  .card-title{
+    display:block;font-size:15px;font-weight:700;
+    letter-spacing:.2px;color:#0f172a;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    line-height:1.35;
+  }
+  .card-sub{
+    display:block;margin-top:3px;
+    font-size:12px;color:var(--text-3);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    line-height:1.4;
+  }
+  .tags{
+    display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;
+  }
+  .tag{
+    font-size:10.5px;line-height:1;padding:4px 8px;
+    border-radius:6px;font-weight:600;white-space:nowrap;
+    letter-spacing:.2px;
+  }
+  /* 语义标签 —— 各年级通用 */
+  .t-narr{background:#eff6ff;color:#2563eb;}
+  .t-exp {background:#ecfdf5;color:#059669;}
+  .t-arg {background:#fff7ed;color:#ea580c;}
+  .t-app {background:#f5f3ff;color:#7c3aed;}
+  .t-gram{background:#f1f5f9;color:#64748b;}
+
+  .card-arrow{
+    flex:0 0 auto;color:#cbd5e1;
+    transition:transform .2s,color .2s;
+  }
+
+  /* ---- 空状态 ---- */
+  .empty{
+    display:none;text-align:center;
+    padding:64px 24px 48px;color:var(--text-3);
+  }
+  .empty.show{display:block;}
+  .empty svg{margin-bottom:14px;color:#cbd5e1;}
+  .empty .et{font-size:14px;font-weight:600;color:#94a3b8;margin-bottom:6px;}
+  .empty .es{font-size:12px;color:#b0bccd;}
+
+  /* ---- 页脚 ---- */
+  .foot{
+    text-align:center;margin-top:44px;
+    font-size:11px;color:#b0bccd;letter-spacing:.5px;
+    line-height:1.9;
+  }
+  .foot b{color:#94a3b8;font-weight:600;}
+
+  /* ---- 回到顶部 ---- */
+  .to-top{
+    position:fixed;right:16px;bottom:calc(20px + var(--safe-b));
+    width:44px;height:44px;border-radius:50%;border:none;
+    background:linear-gradient(145deg,#fff,#f1f4fa);
+    color:#3b6ef6;
+    box-shadow:0 8px 24px -6px rgba(15,23,42,.28);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transform:translateY(10px);
+    transition:.26s cubic-bezier(.4,0,.2,1);
+    z-index:30;cursor:pointer;
+  }
+  .to-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+  .to-top:active{transform:scale(.92);}
+
+  /* ---- 平板 / 桌面 ---- */
+  @media (min-width:640px){
+    .hero-inner,main,.tabs-wrap{max-width:680px;margin-left:auto;margin-right:auto;}
+    .hero{padding:32px 24px 26px;}
+    .hero h1{font-size:22px;}
+    main{padding:0 24px;}
+    .cards{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+    }
+    /* 两列时单元徽章略小 */
+    .unit{width:40px;height:40px;font-size:12.5px;}
+    .card{padding:13px 13px 13px 16px;gap:12px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 顶部渐变区 ============ -->
+<header class="hero">
+  <div class="hero-inner">
+    <h1>初中英语范文库</h1>
+    <p class="sub">人教版 · 七至九年级 · 48篇单元范文</p>
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
+      <input type="search" placeholder="搜索单元 / 话题 / 文体…" autocomplete="off">
+    </div>
+  </div>
+</header>
+
+<!-- ============ 吸顶标签栏 ============ -->
+<div class="tabs-wrap">
+  <nav class="tabs">
+    <a class="tab" href="#g7a">七上</a>
+    <a class="tab" href="#g7b">七下</a>
+    <a class="tab" href="#g8a">八上</a>
+    <a class="tab" href="#g8b">八下</a>
+    <a class="tab" href="#g9a">九上</a>
+    <a class="tab" href="#g9b">中考</a>
+  </nav>
+</div>
+
+<main>
+
+  <!-- ========== 七年级上册（浅蓝） ========== -->
+  <section class="grade" id="g7a">
+    <div class="grade-head">
+      <h2>七年级上册</h2><span class="count">8 篇</span>
+    </div>
+    <ul class="cards">
+      <li><a class="card" href="essay/7a-su.html">
+        <span class="unit">SU</span>
+        <span class="card-body">
+          <span class="card-title">自我介绍</span>
+          <span class="card-sub">Starter Unit 1–3</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">一般现在时</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7a-u1.html">
+        <span class="unit">U1</span>
+        <span class="card-body">
+          <span class="card-title">交友帖子</span>
+          <span class="card-sub">You and Me</span>
+          <span class="tags"><span class="tag t-app">应用文</span><span class="tag t-gram">定语从句</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7a-u2.html">
+        <span class="unit">U2</span>
+        <span class="card-body">
+          <span class="card-title">家庭照片介绍</span>
+          <span class="card-sub">We're Family!</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">There be 句型</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7a-u3.html">
+        <span class="unit">U3</span>
+        <span class="card-body">
+          <span class="card-title">介绍我的学校</span>
+          <span class="card-sub">My School · 书信</span>
+          <span class="tags"><span class="tag t-app">应用文</span><span class="tag t-gram">定语从句</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7a-u4.html">
+        <span class="unit">U4</span>
+        <span class="card-body">
+          <span class="card-title">我最喜欢的学科</span>
+          <span class="card-sub">My Favourite Subject</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">原因状语从句</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7a-u5.html">
+        <span class="unit">U5</span>
+        <span class="card-body">
+          <span class="card-title">社团介绍</span>
+          <span class="card-sub">Fun Clubs</span>
+          <span class="tags"><span class="tag t-app">应用文</span><span class="tag t-gram">can 表能力</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7a-u6.html">
+        <span class="unit">U6</span>
+        <span class="card-body">
+          <span class="card-title">我的一天</span>
+          <span class="card-sub">A Day in the Life</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">一般现在时</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7a-u7.html">
+        <span class="unit">U7</span>
+        <span class="card-body">
+          <span class="card-title">生日庆祝</span>
+          <span class="card-sub">Happy Birthday!</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">日期表达</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+    </ul>
+  </section>
+
+  <!-- ========== 七年级下册（深蓝） ========== -->
+  <section class="grade" id="g7b">
+    <div class="grade-head">
+      <h2>七年级下册</h2><span class="count">8 篇</span>
+    </div>
+    <ul class="cards">
+      <li><a class="card" href="essay/7b-u1.html">
+        <span class="unit">U1</span>
+        <span class="card-body">
+          <span class="card-title">我最喜欢的动物</span>
+          <span class="card-sub">Animal Friends</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">非限制性定语从句</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7b-u2.html">
+        <span class="unit">U2</span>
+        <span class="card-body">
+          <span class="card-title">生活中的规则</span>
+          <span class="card-sub">No Rules, No Order</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">情态动词</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7b-u3.html">
+        <span class="unit">U3</span>
+        <span class="card-body">
+          <span class="card-title">如何保持健康</span>
+          <span class="card-sub">Keep Fit</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">动名词作主语</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7b-u4.html">
+        <span class="unit">U4</span>
+        <span class="card-body">
+          <span class="card-title">健康饮食</span>
+          <span class="card-sub">Eat Well</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">should / had better</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7b-u5.html">
+        <span class="unit">U5</span>
+        <span class="card-body">
+          <span class="card-title">此刻正在发生的事</span>
+          <span class="card-sub">Here and Now</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">现在进行时</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7b-u6.html">
+        <span class="unit">U6</span>
+        <span class="card-body">
+          <span class="card-title">天气与活动</span>
+          <span class="card-sub">Rain or Shine</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">现在进行时</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7b-u7.html">
+        <span class="unit">U7</span>
+        <span class="card-body">
+          <span class="card-title">难忘的一天（日记）</span>
+          <span class="card-sub">A Day to Remember</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">一般过去时</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/7b-u8.html">
+        <span class="unit">U8</span>
+        <span class="card-body">
+          <span class="card-title">讲一个故事</span>
+          <span class="card-sub">Once upon a Time</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">一般过去时</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+    </ul>
+  </section>
+
+  <!-- ========== 八年级上册（浅琥珀） ========== -->
+  <section class="grade" id="g8a">
+    <div class="grade-head">
+      <h2>八年级上册</h2><span class="count">8 篇</span>
+    </div>
+    <ul class="cards">
+      <li><a class="card" href="essay/8a-u1.html">
+        <span class="unit">U1</span>
+        <span class="card-body">
+          <span class="card-title">假期旅行</span>
+          <span class="card-sub">Happy Holiday · 邮件</span>
+          <span class="tags"><span class="tag t-app">应用文</span><span class="tag t-gram">一般过去时</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8a-u2.html">
+        <span class="unit">U2</span>
+        <span class="card-body">
+          <span class="card-title">我的家</span>
+          <span class="card-sub">Home Sweet Home</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">There be / 定语从句</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8a-u3.html">
+        <span class="unit">U3</span>
+        <span class="card-body">
+          <span class="card-title">朋友之间的异同</span>
+          <span class="card-sub">Same or Different</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">比较级</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8a-u4.html">
+        <span class="unit">U4</span>
+        <span class="card-body">
+          <span class="card-title">神奇的动植物</span>
+          <span class="card-sub">Amazing Plants and Animals</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">被动语态</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8a-u5.html">
+        <span class="unit">U5</span>
+        <span class="card-body">
+          <span class="card-title">美食制作</span>
+          <span class="card-sub">What a Delicious Meal!</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">祈使句 / 顺序词</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8a-u6.html">
+        <span class="unit">U6</span>
+        <span class="card-body">
+          <span class="card-title">保护地球</span>
+          <span class="card-sub">Earth First</span>
+          <span class="tags"><span class="tag t-arg">议论文</span><span class="tag t-gram">条件状语从句</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8a-u7.html">
+        <span class="unit">U7</span>
+        <span class="card-body">
+          <span class="card-title">理财建议</span>
+          <span class="card-sub">Be Wise with Money</span>
+          <span class="tags"><span class="tag t-arg">议论文</span><span class="tag t-gram">It's a good idea to</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8a-u8.html">
+        <span class="unit">U8</span>
+        <span class="card-body">
+          <span class="card-title">沟通交流</span>
+          <span class="card-sub">Let's Communicate!</span>
+          <span class="tags"><span class="tag t-arg">议论文</span><span class="tag t-gram">让步状语从句</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+    </ul>
+  </section>
+
+  <!-- ========== 八年级下册（深橙） ========== -->
+  <section class="grade" id="g8b">
+    <div class="grade-head">
+      <h2>八年级下册</h2><span class="count">8 篇</span>
+    </div>
+    <ul class="cards">
+      <li><a class="card" href="essay/8b-u1.html">
+        <span class="unit">U1</span>
+        <span class="card-body">
+          <span class="card-title">我的业余爱好</span>
+          <span class="card-sub">Time to Relax</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">过去时 / 现在时</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8b-u2.html">
+        <span class="unit">U2</span>
+        <span class="card-body">
+          <span class="card-title">健康生活</span>
+          <span class="card-sub">Stay Healthy</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">动名词作主语</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8b-u3.html">
+        <span class="unit">U3</span>
+        <span class="card-body">
+          <span class="card-title">感谢信</span>
+          <span class="card-sub">Growing Up · 书信</span>
+          <span class="tags"><span class="tag t-app">应用文</span><span class="tag t-gram">现在完成时 / 主语从句</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8b-u4.html">
+        <span class="unit">U4</span>
+        <span class="card-body">
+          <span class="card-title">自然奇观</span>
+          <span class="card-sub">The Wonders of Nature</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">最高级 / 数字表达</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8b-u5.html">
+        <span class="unit">U5</span>
+        <span class="card-body">
+          <span class="card-title">难忘的回忆</span>
+          <span class="card-sub">Memories</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">remember doing</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8b-u6.html">
+        <span class="unit">U6</span>
+        <span class="card-body">
+          <span class="card-title">环保行动</span>
+          <span class="card-sub">Earth First</span>
+          <span class="tags"><span class="tag t-arg">议论文</span><span class="tag t-gram">现在完成时 / It is high time</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8b-u7.html">
+        <span class="unit">U7</span>
+        <span class="card-body">
+          <span class="card-title">一个美丽的故事</span>
+          <span class="card-sub">A Beautiful Story</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">一般过去时</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/8b-u8.html">
+        <span class="unit">U8</span>
+        <span class="card-body">
+          <span class="card-title">志愿服务申请</span>
+          <span class="card-sub">Making a Difference · 申请信</span>
+          <span class="tags"><span class="tag t-app">应用文</span><span class="tag t-gram">be good at doing</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+    </ul>
+  </section>
+
+  <!-- ========== 九年级上册（绿色） ========== -->
+  <section class="grade" id="g9a">
+    <div class="grade-head">
+      <h2>九年级上册</h2><span class="count">8 篇</span>
+    </div>
+    <ul class="cards">
+      <li><a class="card" href="essay/9a-u1.html">
+        <span class="unit">U1</span>
+        <span class="card-body">
+          <span class="card-title">家乡的变化</span>
+          <span class="card-sub">The Changing World</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">used to / 现在完成时</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/9a-u2.html">
+        <span class="unit">U2</span>
+        <span class="card-body">
+          <span class="card-title">我最敬佩的人</span>
+          <span class="card-sub">Inspiring People</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">主语从句</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/9a-u3.html">
+        <span class="unit">U3</span>
+        <span class="card-body">
+          <span class="card-title">礼貌询问函</span>
+          <span class="card-sub">Could You Please Tell Me?</span>
+          <span class="tags"><span class="tag t-app">应用文</span><span class="tag t-gram">宾语从句</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/9a-u4.html">
+        <span class="unit">U4</span>
+        <span class="card-body">
+          <span class="card-title">我的变化</span>
+          <span class="card-sub">I Used to Be Afraid</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">used to 对比</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/9a-u5.html">
+        <span class="unit">U5</span>
+        <span class="card-body">
+          <span class="card-title">产品介绍</span>
+          <span class="card-sub">What Are the Shirts Made Of?</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">被动语态</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/9a-u6.html">
+        <span class="unit">U6</span>
+        <span class="card-body">
+          <span class="card-title">我的小发明</span>
+          <span class="card-sub">When Was It Invented?</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">被动语态 / 定语从句</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/9a-u7.html">
+        <span class="unit">U7</span>
+        <span class="card-body">
+          <span class="card-title">规则与选择</span>
+          <span class="card-sub">Should Be Allowed to Choose</span>
+          <span class="tags"><span class="tag t-arg">议论文</span><span class="tag t-gram">should be allowed to</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/9a-u8.html">
+        <span class="unit">U8</span>
+        <span class="card-body">
+          <span class="card-title">推测与判断</span>
+          <span class="card-sub">It Must Belong to Carla</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">情态动词表推测</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+    </ul>
+  </section>
+
+  <!-- ========== 中考专题（紫色） ========== -->
+  <section class="grade" id="g9b">
+    <div class="grade-head">
+      <h2>中考高频话题</h2><span class="count">8 篇</span>
+    </div>
+    <ul class="cards">
+      <li><a class="card" href="essay/topic-01.html">
+        <span class="unit">T1</span>
+        <span class="card-body">
+          <span class="card-title">如何学好英语</span>
+          <span class="card-sub">How to Learn English Well</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">the + 比较级</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/topic-02.html">
+        <span class="unit">T2</span>
+        <span class="card-body">
+          <span class="card-title">我最喜欢的传统节日</span>
+          <span class="card-sub">The Spring Festival</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">被动语态 / be used to</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/topic-03.html">
+        <span class="unit">T3</span>
+        <span class="card-body">
+          <span class="card-title">保护环境（演讲稿）</span>
+          <span class="card-sub">Protect the Environment</span>
+          <span class="tags"><span class="tag t-arg">议论文</span><span class="tag t-gram">现在完成时</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/topic-04.html">
+        <span class="unit">T4</span>
+        <span class="card-body">
+          <span class="card-title">如何保持健康</span>
+          <span class="card-sub">How to Keep Healthy</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">动名词作主语</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/topic-05.html">
+        <span class="unit">T5</span>
+        <span class="card-body">
+          <span class="card-title">成长与变化</span>
+          <span class="card-sub">Great Changes in My Life</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">used to / 现在完成时</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/topic-06.html">
+        <span class="unit">T6</span>
+        <span class="card-body">
+          <span class="card-title">我最敬佩的运动员</span>
+          <span class="card-sub">The Athlete I Admire Most</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">强调句 / the + 比较级</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/topic-07.html">
+        <span class="unit">T7</span>
+        <span class="card-body">
+          <span class="card-title">志愿服务经历</span>
+          <span class="card-sub">A Volunteer Activity</span>
+          <span class="tags"><span class="tag t-narr">记叙文</span><span class="tag t-gram">动名词作主语</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+
+      <li><a class="card" href="essay/topic-08.html">
+        <span class="unit">T8</span>
+        <span class="card-body">
+          <span class="card-title">中国制造</span>
+          <span class="card-sub">Made in China</span>
+          <span class="tags"><span class="tag t-exp">说明文</span><span class="tag t-gram">被动语态</span></span>
+        </span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a></li>
+    </ul>
+  </section>
+
+  <!-- ========== 空状态 ========== -->
+  <div class="empty">
+    <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
+    <div class="et">没有找到匹配的范文</div>
+    <div class="es">换个关键词再试试吧</div>
+  </div>
+
+  <!-- ========== 页脚 ========== -->
+  <div class="foot">
+    <b>人教版</b> 初中英语 · 范文索引<br>
+    覆盖七至九年级 · 共 48 篇
+  </div>
+
+</main>
+
+<!-- ========== 回到顶部 ========== -->
+<button class="to-top" aria-label="回到顶部">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function(){
+  const tabs     = Array.from(document.querySelectorAll('.tab'));
+  const sections = tabs.map(t => document.querySelector(t.getAttribute('href')));
+  const cards    = Array.from(document.querySelectorAll('.card'));
+  const grades   = Array.from(document.querySelectorAll('.grade'));
+  const input    = document.querySelector('.search input');
+  const empty    = document.querySelector('.empty');
+  const toTop    = document.querySelector('.to-top');
+  const tabBar   = document.querySelector('.tabs');
+
+  /* ---- 标签点击 → 平滑跳转 + 居中 ---- */
+  tabs.forEach(tab => {
+    tab.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(tab.getAttribute('href'));
+      if (!target) return;
+      target.scrollIntoView({ behavior:'smooth', block:'start' });
+      tabBar.scrollTo({
+        left: tab.offsetLeft - tabBar.clientWidth/2 + tab.offsetWidth/2,
+        behavior:'smooth'
+      });
+    });
+  });
+
+  /* ---- 滚动高亮当前年级 ---- */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const id = '#' + entry.target.id;
+      tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === id));
+    });
+  }, { rootMargin:'-80px 0px -55% 0px', threshold:0 });
+  sections.forEach(s => s && io.observe(s));
+
+  /* ---- 搜索过滤 ---- */
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let visible = 0;
+
+    cards.forEach(card => {
+      const li = card.parentElement;
+      const hit = !q || card.textContent.toLowerCase().includes(q);
+      li.style.display = hit ? '' : 'none';
+      if (hit) visible++;
+    });
+
+    grades.forEach(g => {
+      const has = Array.from(g.querySelectorAll('.card'))
+        .some(c => c.parentElement.style.display !== 'none');
+      g.style.display = has ? '' : 'none';
+    });
+
+    empty.classList.toggle('show', visible === 0);
+  });
+
+  /* ---- 回到顶部 ---- */
+  window.addEventListener('scroll', () => {
+    toTop.classList.toggle('show', window.scrollY > 480);
+  }, { passive:true });
+
+  toTop.addEventListener('click', () => {
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+})();
+</script>
+
+</body>
+</html>
