@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>现在完成时 Present Perfect · 初中英语语法专项</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F6F3EC; --paper-2:#EFEBE0; --ink:#2A2A26; --ink-soft:#6B665B;
+  --deep:#1F3B5E; --deep-2:#18304E; --line:#E3DDD0; --accent:#C08A3E;
+  --g:#35507E;
+  --bad:#A8483C; --good:#3E7A5E;
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+/* ===== 顶栏 ===== */
+.crumb{max-width:880px;margin:0 auto;padding:14px clamp(14px,4vw,28px) 0;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink-soft)}
+.crumb a.back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:#FBF9F3}
+.crumb a.back:hover{border-color:var(--deep);background:var(--paper-2)}
+.crumb .sep{opacity:.5}
+.crumb .cat{font-weight:600;color:var(--g)}
+
+/* ===== Hero ===== */
+.hero{
+  background:var(--deep);
+  background-image:
+    radial-gradient(1200px 500px at 85% -10%, rgba(192,138,62,.18), transparent 60%),
+    radial-gradient(900px 420px at -5% 110%, rgba(46,130,168,.22), transparent 55%);
+  color:#F3EFE3;padding:clamp(30px,5.5vw,52px) clamp(18px,5vw,60px) clamp(26px,3.6vw,36px);
+  position:relative;overflow:hidden;
+}
+.hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;letter-spacing:.06em;padding:5px 12px;border:1px solid rgba(243,239,227,.35);border-radius:20px;color:#E3A94F}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4.6vw,40px);font-weight:700;margin:14px 0 6px;line-height:1.2}
+.hero h1 .en{font-size:.62em;color:#E3A94F;font-weight:600;margin-left:10px}
+.hero-sub{font-size:clamp(13px,2.4vw,15px);color:rgba(243,239,227,.82);max-width:640px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero-tag{font-size:12px;padding:4px 11px;border-radius:20px;background:rgba(243,239,227,.1);border:1px solid rgba(243,239,227,.25);color:#F3EFE3}
+
+/* ===== 主体 ===== */
+main{max-width:880px;margin:0 auto;padding:24px clamp(14px,4vw,28px) 60px}
+.sec{margin-top:30px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-head .num{font-family:var(--serif);font-size:14px;font-weight:700;color:#fff;background:var(--g);border-radius:8px;padding:3px 11px;letter-spacing:.05em}
+.sec-head h2{font-family:var(--serif);font-size:clamp(19px,2.5vw,23px);font-weight:700}
+.sec-head .meta{font-size:12.5px;color:var(--ink-soft);margin-left:auto}
+
+.card{background:#FBF9F3;border:1px solid var(--line);border-radius:12px;padding:clamp(16px,2.6vw,22px)}
+.card + .card{margin-top:12px}
+.lead{font-size:14.5px;color:var(--ink)}
+.lead b{color:var(--deep)}
+.hl{color:var(--deep);font-weight:600}
+.kv{color:var(--g);font-weight:700}
+
+/* ===== 考点 ===== */
+.pt{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.pt + .pt{margin-top:14px}
+.pt-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:color-mix(in srgb, var(--g) 8%, #fff);border-bottom:1px solid var(--line)}
+.pt-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--g);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.pt-head h3{font-family:var(--serif);font-size:16.5px;font-weight:700;color:var(--deep)}
+.pt-body{padding:14px 16px 16px}
+.pt-body p{font-size:14.5px;margin-bottom:9px}
+.pt-body p:last-child{margin-bottom:0}
+.formula{background:var(--paper-2);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:14.5px;overflow-wrap:break-word}
+.formula .f{font-family:var(--serif);font-weight:600;color:var(--deep)}
+.mini{font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+
+/* ===== 规则网格 ===== */
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.rule{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:11px 13px}
+.rule .rt{font-size:13.5px;font-weight:700;color:var(--deep);margin-bottom:3px}
+.rule .rd{font-size:13px;color:var(--ink-soft);line-height:1.55}
+.rule .rd .eg{color:var(--g);font-weight:600}
+
+/* ===== 课本例句 ===== */
+.exlist{display:flex;flex-direction:column;gap:10px}
+.exrow{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 14px}
+.ex-main{flex:1;min-width:0}
+.exrow .en{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.5;overflow-wrap:break-word}
+.exrow .cn{font-size:13px;color:var(--ink-soft);margin-top:2px}
+.exrow .src{flex:0 0 auto;font-size:11px;font-weight:600;color:var(--g);background:color-mix(in srgb, var(--g) 12%, #fff);border:1px solid color-mix(in srgb, var(--g) 30%, var(--line));border-radius:20px;padding:3px 10px;white-space:nowrap}
+.exgroup{margin-top:14px}
+.exgroup:first-child{margin-top:0}
+.exgroup .egt{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--deep);margin-bottom:8px}
+.exgroup .egt::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g)}
+.srcnote{font-size:12.5px;color:var(--ink-soft);background:var(--paper-2);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;margin-top:12px}
+
+/* ===== 易错点 ===== */
+.err{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.err + .err{margin-top:14px}
+.err-head{display:flex;align-items:center;gap:10px;padding:11px 16px;background:color-mix(in srgb, var(--bad) 7%, #fff);border-bottom:1px solid var(--line)}
+.err-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--bad);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.err-head h3{font-size:15.5px;font-weight:700;color:#8C3A2E}
+.err-body{padding:13px 16px 15px}
+.pair{border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin-bottom:9px;background:#fffdf8}
+.pair:last-child{margin-bottom:0}
+.pair .lab{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;margin-bottom:3px}
+.pair.wrong .lab{color:var(--bad)}
+.pair.right .lab{color:var(--good)}
+.pair .s{font-size:14.5px;font-family:var(--serif);overflow-wrap:break-word}
+.pair.wrong .s{color:#7C3127}
+.pair.right .s{color:#2E5D45}
+.pair svg{width:13px;height:13px;stroke:currentColor;flex:0 0 auto}
+.why{font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+.why b{color:var(--ink)}
+
+/* ===== 速记 ===== */
+.tip{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:#FFF9EC;padding:13px 15px;margin-bottom:11px}
+.tip:last-child{margin-bottom:0}
+.tip .tt{font-size:14px;font-weight:700;color:#8A6424;margin-bottom:4px}
+.tip p{font-size:13.5px;color:var(--ink-soft)}
+.mnem{font-family:var(--serif);font-size:14px;color:var(--deep);background:var(--paper-2);border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;line-height:1.8}
+.sig{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.sig span{font-size:12px;font-weight:600;color:var(--deep);background:color-mix(in srgb, var(--g) 10%, #fff);border:1px solid color-mix(in srgb, var(--g) 28%, var(--line));border-radius:20px;padding:3px 10px}
+
+/* ===== 小练习 ===== */
+.q{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 15px;margin-bottom:10px}
+.q .qt{font-size:14.5px;margin-bottom:8px}
+.q .qt .qn{font-weight:700;color:var(--deep);margin-right:6px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.q .opt{font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:7px;padding:4px 10px;background:#FBF9F3}
+details.ans{margin-top:8px}
+details.ans summary{cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--g);list-style:none}
+details.ans summary::-webkit-details-marker{display:none}
+details.ans summary::before{content:"";width:0;height:0;border-left:5px solid var(--g);border-top:4px solid transparent;border-bottom:4px solid transparent;transition:transform .15s}
+details.ans[open] summary::before{transform:rotate(90deg)}
+.ans-box{background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-top:7px;font-size:13.5px}
+.ans-box b{color:var(--good)}
+
+/* ===== 页脚 ===== */
+footer{border-top:1px solid var(--line);padding:20px clamp(14px,4vw,28px) 34px;text-align:center;color:var(--ink-soft);font-size:13px}
+footer .back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:8px;padding:7px 16px;background:#FBF9F3;margin-bottom:10px}
+footer .back:hover{border-color:var(--deep)}
+
+@media (max-width:560px){
+  .rgrid{grid-template-columns:1fr}
+  .exrow{flex-direction:column;gap:6px}
+  .exrow .src{white-space:normal}
+  .crumb{gap:8px;flex-wrap:wrap}
+}
+@media (max-width:380px){
+  main{padding:18px 12px 44px}
+  .exrow .en{font-size:14.5px}
+  .formula{font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶栏 ===== -->
+<nav class="crumb">
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <span class="sep">/</span>
+  <span>初中英语 · 语法专项</span>
+  <span class="sep">/</span>
+  <span class="cat">时态</span>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">时态 · Tenses</span>
+    <h1>现在完成时 <span class="en">Present Perfect</span></h1>
+    <p class="hero-sub">have/has done · already/yet/since/for · 延续性动词转换</p>
+    <div class="hero-tags">
+      <span class="hero-tag">have/has done</span>
+      <span class="hero-tag">already/yet/since/for</span>
+      <span class="hero-tag">延续性动词转换</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== ① 核心考点概览 ===== -->
+<section class="sec" id="overview">
+  <div class="sec-head">
+    <span class="num">01</span>
+    <h2>核心考点概览</h2>
+    <span class="meta">考什么 · 怎么考</span>
+  </div>
+  <div class="card">
+    <p class="lead">现在完成时是初中语法的<b>头号难点与中考重中之重</b>，集中在<b>八年级下册 Unit 8、Unit 9、Unit 10</b>。中考<b>单选、语法填空、动词填空、句型转换、书面表达</b>几乎年年必考。它的两头都要抓：一是「动作对现在的<b>影响/结果</b>」（already/yet/ever），二是「动作从过去<b>持续到现在</b>」（since/for）——后者一旦搭配<b>短暂性动词</b>就必须转换成延续性动词，这是最容易丢分的地方。</p>
+    <div class="rgrid" style="margin-top:12px">
+      <div class="rule"><div class="rt">have/has done</div><div class="rd">助动词 have/has + 动词过去分词；三单用 has，其余用 have。</div></div>
+      <div class="rule"><div class="rt">already/yet/since/for</div><div class="rd">already 肯定句「已经」、yet 疑问/否定「还」；<span class="eg">for + 时间段，since + 时间点/从句</span>。</div></div>
+      <div class="rule"><div class="rt">延续性动词转换</div><div class="rd">与一段时间连用时，短暂性动词（buy/borrow/leave…）要换成延续性说法（have/keep/be away…）。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ② 考点精讲 ===== -->
+<section class="sec" id="points">
+  <div class="sec-head">
+    <span class="num">02</span>
+    <h2>考点逐一精讲</h2>
+    <span class="meta">规则 · 公式 · 变形</span>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 1</span><h3>have/has done：基本结构与两大用法</h3></div>
+    <div class="pt-body">
+      <p>现在完成时由「助动词 have / has + 动词的过去分词（done）」构成。主语是第三人称单数（he / she / it）用 has，其余用 have。它有两大核心用法，理解了用法结构就不会乱。</p>
+      <div class="formula"><span class="f">用法一（影响/结果）：</span>过去做的动作对<b>现在</b>留下结果。<span class="f">I have already finished reading the book.</span>（书已读完。）</div>
+      <div class="formula"><span class="f">用法二（持续）：</span>动作从过去开始<b>一直持续到现在</b>。<span class="f">I've had this bike for three years.</span>（自行车我已骑了三年。）</div>
+      <div class="formula"><span class="f">否定 / 疑问：</span>have/has + not + done；Have/Has + 主语 + done? — <span class="f">Have you read Little Women yet?</span></div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">过去分词构成</div><div class="rd">规则动词加 -ed（work→worked）；不规则须背：<span class="eg">do→done, go→gone, read→read, write→written, see→seen, buy→bought</span></div></div>
+        <div class="rule"><div class="rt">have been to vs have gone to</div><div class="rd"><span class="eg">have been to</span> 去过（已回）；<span class="eg">have gone to</span> 去了（未回，人在那儿）</div></div>
+        <div class="rule"><div class="rt">ever / never</div><div class="rd"><span class="eg">Have you ever been to a museum?</span> 你曾经去过博物馆吗？</div></div>
+        <div class="rule"><div class="rt">just / already</div><div class="rd">肯定句中表「刚刚 / 已经」：<span class="eg">He has just left.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 2</span><h3>already/yet/since/for：标志词用法</h3></div>
+    <div class="pt-body">
+      <p>这几个词是判断现在完成时的「信号」，位置和用法都有讲究，中考单选常考它们的搭配。</p>
+      <div class="formula"><span class="f">already（已经）</span> 多用于肯定句，放在 have/has 之后：I've <span class="f">already</span> finished it.（八下 U8）</div>
+      <div class="formula"><span class="f">yet（还）</span> 多用于否定句末、疑问句句末：I haven't finished it <span class="f">yet</span>. / Has she read it yet?</div>
+      <div class="formula"><span class="f">for + 时间段</span>：持续了多久。I've had it <span class="f">for three years</span>.（三年）</div>
+      <div class="formula"><span class="f">since + 时间点 / 从句</span>：自从何时起。He's owned it <span class="f">since his fourth birthday</span>. / since I was seven.</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">for + 时间段</div><div class="rd">for two days / for a long time / for 3 years</div></div>
+        <div class="rule"><div class="rt">since + 时间点</div><div class="rd">since 2020 / since last month / since three years ago</div></div>
+        <div class="rule"><div class="rt">since + 一般过去时从句</div><div class="rd"><span class="eg">I have lived here since I was born.</span></div></div>
+        <div class="rule"><div class="rt">提问用 How long</div><div class="rd"><span class="eg">How long have you had that bike?</span> — For three years.（八下 U10）</div></div>
+      </div>
+      <p class="mini">for 与 since 可互转：for three years = since three years ago。</p>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 3</span><h3>延续性动词转换（本单元最大重点）</h3></div>
+    <div class="pt-body">
+      <p>当现在完成时与 <b>for + 时间段 / since + 时间点 / how long</b> 连用时，谓语动词必须是<b>能延续的</b>。buy、borrow、leave、die、join、come 这类「一瞬间完成」的短暂性动词<b>不能</b>与一段时间连用，必须换成对应的延续性表达。</p>
+      <div class="formula"><span class="f">错：</span>I have bought the bike for a year.（buy 不能延续）　<span class="f">对：</span>I <span class="f">have had</span> the bike for a year.</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">buy → have</div><div class="rd">买 → 拥有：<span class="eg">I have had the book for a week.</span></div></div>
+        <div class="rule"><div class="rt">borrow/lend → keep</div><div class="rd">借（进）→ 保留：<span class="eg">I have kept the book for two weeks.</span></div></div>
+        <div class="rule"><div class="rt">leave → be away (from)</div><div class="rd">离开 → 不在：<span class="eg">He has been away from home for 2 days.</span></div></div>
+        <div class="rule"><div class="rt">join → be in / be a member of</div><div class="rd">加入 → 在……里：<span class="eg">He has been in the army since 2020.</span></div></div>
+        <div class="rule"><div class="rt">die → be dead</div><div class="rd">死 → 去世的状态：<span class="eg">His grandpa has been dead for 5 years.</span></div></div>
+        <div class="rule"><div class="rt">come/arrive → be here / be in</div><div class="rd">来到 → 在某地：<span class="eg">She has been in Beijing since Monday.</span></div></div>
+        <div class="rule"><div class="rt">begin/start → be on</div><div class="rd">开始 → 正在上演：<span class="eg">The film has been on for 10 minutes.</span></div></div>
+        <div class="rule"><div class="rt">marry → be married</div><div class="rd">结婚 → 已婚状态：<span class="eg">They have been married for 8 years.</span></div></div>
+      </div>
+      <p class="mini">口诀：短暂动词见「时间段」，就要换延续——buy→have、borrow→keep、leave→be away、join→be in、die→be dead、come→be here。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ③ 课本例句 ===== -->
+<section class="sec" id="textbook">
+  <div class="sec-head">
+    <span class="num">03</span>
+    <h2>课本例句</h2>
+    <span class="meta">人教版现行教材 · 中英对照</span>
+  </div>
+  <div class="card">
+    <div class="exgroup">
+      <div class="egt">have/has done + already / yet（八下 Unit 8）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">—Have you read Little Women yet? —Yes, I have. / No, I haven't.</div><div class="cn">——你读过《小妇人》吗？——是的，我读过了。/ 不，还没。</div></div><span class="src">八下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">—Has Tina read Treasure Island yet? —Yes, she has. She thinks it's fantastic.</div><div class="cn">——蒂娜读过《金银岛》了吗？——读过了，她觉得棒极了。</div></div><span class="src">八下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">—Have you decided which book to write about yet? —Yes, I have. I've already finished reading it.</div><div class="cn">——你决定写哪本书了吗？——决定了，我已经读完它了。</div></div><span class="src">八下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">I chose Treasure Island, but I haven't finished reading it yet. I'm only on page 25.</div><div class="cn">我选了《金银岛》，但还没读完，我才读到第 25 页。</div></div><span class="src">八下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">Have you at least read the back of the book to see what it's about?</div><div class="cn">你至少看过书的封底、了解它是讲什么的了吗？</div></div><span class="src">八下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">Sarah hasn't been to Nashville yet, but it is her dream to go there one day.</div><div class="cn">萨拉还没去过纳什维尔，但有朝一日去那儿是她的梦想。</div></div><span class="src">八下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">He's sold more than 120 million records.</div><div class="cn">他已经售出了超过 1.2 亿张唱片。</div></div><span class="src">八下 Unit 8</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">ever / never 与 have been to（八下 Unit 9）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">Have you ever been to a museum?</div><div class="cn">你曾经去过博物馆吗？</div></div><span class="src">八下 Unit 9</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">for / since 与延续性动词（八下 Unit 10）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">—How long have you had that bike over there? —I've had it for three years.</div><div class="cn">——那边那辆自行车你买（拥有）多久了？——我已经拥有它三年了。</div></div><span class="src">八下 Unit 10</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">—How long has his son owned the train and railway set? —He's owned it since his fourth birthday.</div><div class="cn">——他儿子那套轨道火车玩具拥有多久了？——他从四岁生日起就拥有它了。</div></div><span class="src">八下 Unit 10</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">Have you ever played football? —Yes, I did when I was little, but I haven't played for a while now.</div><div class="cn">——你踢过足球吗？——小时候踢过，但我已经有一阵子没踢了。</div></div><span class="src">八下 Unit 10</span></div>
+      </div>
+    </div>
+    <p class="srcnote">来源说明：以上例句均出自人教版现行八年级下册教材 Unit 8 / Unit 9 / Unit 10（现在完成时三个单元），册次单元已逐一标注，可与教材 Grammar Focus、课文及听力文本核对。考点精讲中未标注出处的延续性动词转换短例为语法讲解示例（按教材规则推导），非课本原句。</p>
+  </div>
+</section>
+
+<!-- ===== ④ 易错点 ===== -->
+<section class="sec" id="mistakes">
+  <div class="sec-head">
+    <span class="num">04</span>
+    <h2>易错点</h2>
+    <span class="meta">错在哪 · 怎么改</span>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 1</span><h3>短暂性动词与一段时间连用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I have bought this bike for a year.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I have had this bike for a year.</div></div>
+      <p class="why"><b>解析：</b>buy 是瞬间动作，不能与 for a year 连用；要换成延续性动词 have（had）。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 2</span><h3>borrow 与一段时间连用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I have borrowed the book for two weeks.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I have kept the book for two weeks.</div></div>
+      <p class="why"><b>解析：</b>borrow 是一次性动作，「借了多久」要用延续性动词 keep。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 3</span><h3>have been to 与 have gone to 混用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">—Where is your father? —He has been to Shanghai.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">—Where is your father? —He has gone to Shanghai.</div></div>
+      <p class="why"><b>解析：</b>人还在上海没回来，用 has gone to；have been to 表示「去过且已回来」。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 4</span><h3>already 与 yet 位置错误</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I have finished yet my homework.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I have already finished my homework. / I haven't finished my homework yet.</div></div>
+      <p class="why"><b>解析：</b>already 放在 have/has 后（肯定句）；yet 放句末（否定/疑问），不能插在中间。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 5</span><h3>for 与 since 混用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">He has lived here since ten years.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">He has lived here for ten years. / since ten years ago.</div></div>
+      <p class="why"><b>解析：</b>for 后接时间段（ten years），since 后接时间点（ten years ago / 2015）。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 6</span><h3>过去分词写错</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I have saw the film twice.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I have seen the film twice.</div></div>
+      <p class="why"><b>解析：</b>see 的过去分词是 seen（saw 是过去式）。不规则动词分词要逐个背熟。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 7</span><h3>与一般过去时混用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I have seen him yesterday.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I saw him yesterday.</div></div>
+      <p class="why"><b>解析：</b>有明确过去时间状语（yesterday）时，用一般过去时；现在完成时不能与具体过去时间连用。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 8</span><h3>leave 与一段时间连用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">He has left home for two days.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">He has been away from home for two days.</div></div>
+      <p class="why"><b>解析：</b>leave 是瞬间动作，要表达「离开多久」用 be away from。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 9</span><h3>die 与一段时间连用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">His dog has died for three years.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">His dog has been dead for three years.</div></div>
+      <p class="why"><b>解析：</b>die 是瞬间动作，延续状态用 be dead。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑤ 关键提醒 / 速记 ===== -->
+<section class="sec" id="tips">
+  <div class="sec-head">
+    <span class="num">05</span>
+    <h2>关键提醒 · 速记口诀</h2>
+    <span class="meta">口诀 · 信号词</span>
+  </div>
+
+  <div class="tip">
+    <div class="tt">结构口诀</div>
+    <div class="mnem">现在完成 have/has done，三单 has 其余 have；过去分词要记牢，否定疑问 have/has 提前跑。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">already / yet / for / since 口诀</div>
+    <div class="mnem">肯定 already 句中放，否定疑问 yet 句末荡；for 加一段时，since 加一时间点，how long 来把时长问。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">延续性动词转换口诀</div>
+    <div class="mnem">短暂动词怕「一段时」：买 buy 变 have，借 borrow 变 keep；离开 leave 变 be away，加入 join 变 be in；死 die 变 be dead，来 come 变 be here；开始 begin 变 be on，结婚 marry 变 be married。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">信号词</div>
+    <div class="sig">
+      <span>already</span><span>yet</span><span>just</span><span>ever</span><span>never</span><span>before</span><span>for + 时间段</span><span>since + 时间点</span><span>how long</span><span>so far</span><span>up to now</span><span>in the past few years</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑥ 小练习 ===== -->
+<section class="sec" id="quiz">
+  <div class="sec-head">
+    <span class="num">06</span>
+    <h2>小练习</h2>
+    <span class="meta">做完再点开答案</span>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">1.</span>I already ____ (finish) my homework.</div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>have finished。</b>already 提示现在完成时，主语 I 用 have + 过去分词 finished。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">2.</span>—____ you ever ____ (be) to a museum? —Yes, I have.</div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>Have; been。</b>ever 提示现在完成时，主语 you 用 Have，be 的过去分词是 been。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">3.</span>My uncle ____ (live) in Beijing for ten years.</div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>has lived / has been living。</b>for ten years 表持续到现在，主语 my uncle 是三单，用 has + 过去分词。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">4.</span>我买这支笔两年了。（用现在完成时翻译）</div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>I have had this pen for two years.</b>（不能说 have bought）buy 是短暂动词，与 for two years 连用要换成 have had。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">5.</span>—Where is Jim? —He ____ (go) to the library.</div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>has gone。</b>人不在这儿、去了图书馆还没回，用 has gone to；has been to 表示去过已回。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">6.</span>His grandpa ____ (die) for five years.</div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>has been dead。</b>die 是瞬间动词，与 for five years 连用要换成延续状态 be dead。</div></details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <p>新版人教版初中英语 · 语法专项（词性 · 句子 · 时态）</p>
+</footer>
+</body>
+</html>

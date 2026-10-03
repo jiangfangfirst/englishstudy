@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>There be 结构 There be Structure · 初中英语语法专项</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F6F3EC; --paper-2:#EFEBE0; --ink:#2A2A26; --ink-soft:#6B665B;
+  --deep:#1F3B5E; --deep-2:#18304E; --line:#E3DDD0; --accent:#C08A3E;
+  --g:#3A6B9E;
+  --bad:#A8483C; --good:#3E7A5E;
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+/* ===== 顶栏 ===== */
+.crumb{max-width:880px;margin:0 auto;padding:14px clamp(14px,4vw,28px) 0;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink-soft)}
+.crumb a.back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:#FBF9F3}
+.crumb a.back:hover{border-color:var(--deep);background:var(--paper-2)}
+.crumb .sep{opacity:.5}
+.crumb .cat{font-weight:600;color:var(--g)}
+
+/* ===== Hero ===== */
+.hero{
+  background:var(--deep);
+  background-image:
+    radial-gradient(1200px 500px at 85% -10%, rgba(192,138,62,.18), transparent 60%),
+    radial-gradient(900px 420px at -5% 110%, rgba(46,130,168,.22), transparent 55%);
+  color:#F3EFE3;padding:clamp(30px,5.5vw,52px) clamp(18px,5vw,60px) clamp(26px,3.6vw,36px);
+  position:relative;overflow:hidden;
+}
+.hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;letter-spacing:.06em;padding:5px 12px;border:1px solid rgba(243,239,227,.35);border-radius:20px;color:#E3A94F}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4.6vw,40px);font-weight:700;margin:14px 0 6px;line-height:1.2}
+.hero h1 .en{font-size:.62em;color:#E3A94F;font-weight:600;margin-left:10px}
+.hero-sub{font-size:clamp(13px,2.4vw,15px);color:rgba(243,239,227,.82);max-width:640px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero-tag{font-size:12px;padding:4px 11px;border-radius:20px;background:rgba(243,239,227,.1);border:1px solid rgba(243,239,227,.25);color:#F3EFE3}
+
+/* ===== 主体 ===== */
+main{max-width:880px;margin:0 auto;padding:24px clamp(14px,4vw,28px) 60px}
+.sec{margin-top:30px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-head .num{font-family:var(--serif);font-size:14px;font-weight:700;color:#fff;background:var(--g);border-radius:8px;padding:3px 11px;letter-spacing:.05em}
+.sec-head h2{font-family:var(--serif);font-size:clamp(19px,2.5vw,23px);font-weight:700}
+.sec-head .meta{font-size:12.5px;color:var(--ink-soft);margin-left:auto}
+
+.card{background:#FBF9F3;border:1px solid var(--line);border-radius:12px;padding:clamp(16px,2.6vw,22px)}
+.card + .card{margin-top:12px}
+.lead{font-size:14.5px;color:var(--ink)}
+.lead b{color:var(--deep)}
+.hl{color:var(--deep);font-weight:600}
+.kv{color:var(--g);font-weight:700}
+
+/* ===== 考点 ===== */
+.pt{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.pt + .pt{margin-top:14px}
+.pt-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:color-mix(in srgb, var(--g) 8%, #fff);border-bottom:1px solid var(--line)}
+.pt-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--g);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.pt-head h3{font-family:var(--serif);font-size:16.5px;font-weight:700;color:var(--deep)}
+.pt-body{padding:14px 16px 16px}
+.pt-body p{font-size:14.5px;margin-bottom:9px}
+.pt-body p:last-child{margin-bottom:0}
+.formula{background:var(--paper-2);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:14.5px;overflow-wrap:break-word}
+.formula .f{font-family:var(--serif);font-weight:600;color:var(--deep)}
+.mini{font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+
+/* ===== 规则网格 ===== */
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.rule{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:11px 13px}
+.rule .rt{font-size:13.5px;font-weight:700;color:var(--deep);margin-bottom:3px}
+.rule .rd{font-size:13px;color:var(--ink-soft);line-height:1.55}
+.rule .rd .eg{color:var(--g);font-weight:600}
+
+/* ===== 课本例句 ===== */
+.exlist{display:flex;flex-direction:column;gap:10px}
+.exrow{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 14px}
+.ex-main{flex:1;min-width:0}
+.exrow .en{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.5;overflow-wrap:break-word}
+.exrow .cn{font-size:13px;color:var(--ink-soft);margin-top:2px}
+.exrow .src{flex:0 0 auto;font-size:11px;font-weight:600;color:var(--g);background:color-mix(in srgb, var(--g) 12%, #fff);border:1px solid color-mix(in srgb, var(--g) 30%, var(--line));border-radius:20px;padding:3px 10px;white-space:nowrap}
+.exgroup{margin-top:14px}
+.exgroup:first-child{margin-top:0}
+.exgroup .egt{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--deep);margin-bottom:8px}
+.exgroup .egt::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g)}
+.srcnote{font-size:12.5px;color:var(--ink-soft);background:var(--paper-2);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;margin-top:12px}
+
+/* ===== 易错点 ===== */
+.err{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.err + .err{margin-top:14px}
+.err-head{display:flex;align-items:center;gap:10px;padding:11px 16px;background:color-mix(in srgb, var(--bad) 7%, #fff);border-bottom:1px solid var(--line)}
+.err-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--bad);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.err-head h3{font-size:15.5px;font-weight:700;color:#8C3A2E}
+.err-body{padding:13px 16px 15px}
+.pair{border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin-bottom:9px;background:#fffdf8}
+.pair:last-child{margin-bottom:0}
+.pair .lab{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;margin-bottom:3px}
+.pair.wrong .lab{color:var(--bad)}
+.pair.right .lab{color:var(--good)}
+.pair .s{font-size:14.5px;font-family:var(--serif);overflow-wrap:break-word}
+.pair.wrong .s{color:#7C3127}
+.pair.right .s{color:#2E5D45}
+.pair svg{width:13px;height:13px;stroke:currentColor;flex:0 0 auto}
+.why{font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+.why b{color:var(--ink)}
+
+/* ===== 速记 ===== */
+.tip{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:#FFF9EC;padding:13px 15px;margin-bottom:11px}
+.tip:last-child{margin-bottom:0}
+.tip .tt{font-size:14px;font-weight:700;color:#8A6424;margin-bottom:4px}
+.tip p{font-size:13.5px;color:var(--ink-soft)}
+.mnem{font-family:var(--serif);font-size:14px;color:var(--deep);background:var(--paper-2);border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;line-height:1.8}
+.sig{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.sig span{font-size:12px;font-weight:600;color:var(--deep);background:color-mix(in srgb, var(--g) 10%, #fff);border:1px solid color-mix(in srgb, var(--g) 28%, var(--line));border-radius:20px;padding:3px 10px}
+
+/* ===== 小练习 ===== */
+.q{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 15px;margin-bottom:10px}
+.q .qt{font-size:14.5px;margin-bottom:8px}
+.q .qt .qn{font-weight:700;color:var(--deep);margin-right:6px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.q .opt{font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:7px;padding:4px 10px;background:#FBF9F3}
+details.ans{margin-top:8px}
+details.ans summary{cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--g);list-style:none}
+details.ans summary::-webkit-details-marker{display:none}
+details.ans summary::before{content:"";width:0;height:0;border-left:5px solid var(--g);border-top:4px solid transparent;border-bottom:4px solid transparent;transition:transform .15s}
+details.ans[open] summary::before{transform:rotate(90deg)}
+.ans-box{background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-top:7px;font-size:13.5px}
+.ans-box b{color:var(--good)}
+
+/* ===== 页脚 ===== */
+footer{border-top:1px solid var(--line);padding:20px clamp(14px,4vw,28px) 34px;text-align:center;color:var(--ink-soft);font-size:13px}
+footer .back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:8px;padding:7px 16px;background:#FBF9F3;margin-bottom:10px}
+footer .back:hover{border-color:var(--deep)}
+
+@media (max-width:560px){
+  .rgrid{grid-template-columns:1fr}
+  .exrow{flex-direction:column;gap:6px}
+  .exrow .src{white-space:normal}
+  .crumb{gap:8px;flex-wrap:wrap}
+}
+@media (max-width:380px){
+  main{padding:18px 12px 44px}
+  .exrow .en{font-size:14.5px}
+  .formula{font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶栏 ===== -->
+<nav class="crumb">
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <span class="sep">/</span>
+  <span>初中英语 · 语法专项</span>
+  <span class="sep">/</span>
+  <span class="cat">句子</span>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">句子 · Sentences</span>
+    <h1>There be 结构 <span class="en">There be Structure</span></h1>
+    <p class="hero-sub">there be 句型肯定 / 否定 / 疑问 · 就近原则 · there be 和 have 的区别</p>
+    <div class="hero-tags">
+      <span class="hero-tag">there be 句型肯定/否定/疑问</span>
+      <span class="hero-tag">就近原则</span>
+      <span class="hero-tag">there be 和 have 区别</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== ① 核心考点概览 ===== -->
+<section class="sec" id="overview">
+  <div class="sec-head">
+    <span class="num">01</span>
+    <h2>核心考点概览</h2>
+    <span class="meta">考什么 · 怎么考</span>
+  </div>
+  <div class="card">
+    <p class="lead">There be 句型表示「某地 / 某时存在某人或某物」，是初中阶段描述方位、街区、点餐的核心句型，也是中考<b>单项选择、语法填空、句型转换</b>的常客。考查集中在三点：<b>be 动词的单复数由后面的名词决定（就近原则）</b>、否定与疑问的变法、以及 <span class="hl">there be 与 have 的汉语都译「有」但不能混用</span>。</p>
+    <div class="rgrid" style="margin-top:12px">
+      <div class="rule"><div class="rt">there be 句型肯定/否定/疑问</div><div class="rd">be 动词随主语变化；否定加 not，疑问把 be 提到句首。</div></div>
+      <div class="rule"><div class="rt">就近原则</div><div class="rd">be 动词与<b>最近的</b>主语保持一致，不管后面还跟多少名词。</div></div>
+      <div class="rule"><div class="rt">there be 和 have 区别</div><div class="rd">there be 表「存在有」；have 表「拥有」，主语是人。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ② 考点精讲 ===== -->
+<section class="sec" id="points">
+  <div class="sec-head">
+    <span class="num">02</span>
+    <h2>考点逐一精讲</h2>
+    <span class="meta">规则 · 公式 · 变形</span>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 1</span><h3>there be 句型肯定/否定/疑问</h3></div>
+    <div class="pt-body">
+      <p>There be 句型表示「某处有某物」，结构为 <span class="kv">There + be + 主语 + 地点 / 时间状语</span>。be 动词的单复数由后面的主语决定，时态可以是 is / are（现在）、was / were（过去）、will be（将来）等。</p>
+      <div class="formula"><span class="f">肯定：</span>There is + 单数名词 / 不可数名词 + 地点状语。　There are + 复数名词 + 地点状语。</div>
+      <div class="formula"><span class="f">否定：</span>be + not（is not / isn't，are not / aren't），some 变 any。</div>
+      <div class="formula"><span class="f">疑问：</span>Be + there + 主语 + ...? 肯定回答 Yes, there is/are. 否定回答 No, there isn't/aren't.</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">肯定句（单数 / 不可数）</div><div class="rd"><span class="eg">There is a zoo in my neighborhood.</span>（七下 Unit 8）</div></div>
+        <div class="rule"><div class="rt">肯定句（复数）</div><div class="rd"><span class="eg">There are some tomatoes.</span>（七下 Unit 10）</div></div>
+        <div class="rule"><div class="rt">一般疑问句</div><div class="rd"><span class="eg">Is there a post office near here? —Yes, there is.</span>（七下 Unit 8）</div></div>
+        <div class="rule"><div class="rt">复数一般疑问句</div><div class="rd"><span class="eg">Are there any vegetables in the beef noodles?</span>（七下 Unit 10）</div></div>
+        <div class="rule"><div class="rt">否定回答</div><div class="rd"><span class="eg">Is there a hospital on Bridge Street? —No, there isn't.</span>（七下 Unit 8）</div></div>
+        <div class="rule"><div class="rt">否定句中 some 变 any</div><div class="rd"><span class="eg">No, there isn't any meat. / No, there's no meat.</span>（七下 Unit 10）</div></div>
+      </div>
+      <p class="mini">中考提示：对主语提问用「What's + 地点状语?」，如 What's in the box?（盒子里有什么？），答语用 There is/are...。</p>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 2</span><h3>就近原则</h3></div>
+    <div class="pt-body">
+      <p>当 there be 后面有<b>两个或多个并列主语</b>时，be 动词的单复数由<b>离它最近的那个主语</b>决定——这就是就近原则。最近的主语是单数 / 不可数，be 用 is（was）；最近的主语是复数，be 用 are（were）。</p>
+      <div class="formula"><span class="f">There is + 单数名词 + and + 复数名词 + ...</span>　就近的单数决定 be 用 is</div>
+      <div class="formula"><span class="f">There are + 复数名词 + and + 单数名词 + ...</span>　就近的复数决定 be 用 are</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">就近单数 → is</div><div class="rd"><span class="eg">There's also a sweater and a dress.</span>（八下 Unit 10）最近的是 a sweater（单数），用 There's。</div></div>
+        <div class="rule"><div class="rt">同一结构换位 → are</div><div class="rd">若语序换成复数在前：<span class="eg">There are some books and a pen on the desk.</span>（教辅例句）</div></div>
+        <div class="rule"><div class="rt">不可数也算「就近单数」</div><div class="rd"><span class="eg">There is some milk and two eggs in the fridge.</span>（教辅例句）</div></div>
+        <div class="rule"><div class="rt">过去时同样就近</div><div class="rd"><span class="eg">There was a teacher and some students in the classroom.</span>（教辅例句）</div></div>
+      </div>
+      <p class="mini">口诀：be 动词像门卫，只认离自己最近的人；后面排多长的队，都不影响它的单复数。</p>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 3</span><h3>there be 和 have 区别</h3></div>
+    <div class="pt-body">
+      <p>汉语里「有」对应两个完全不同的句型：<span class="kv">there be 表「存在有」</span>（某地 / 某时有某物），<span class="kv">have / has 表「拥有」</span>（主语是人或有生命的主体，强调所属关系）。两者不能在同一个句子里混用。</p>
+      <div class="formula"><span class="f">there be：</span>某地有某物（强调存在，主语在 be 之后）</div>
+      <div class="formula"><span class="f">have / has：</span>某人有某物（强调拥有，主语在前）</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">存在有 → there be</div><div class="rd"><span class="eg">There is a big park behind the science museum.</span>（八下 Unit 10）博物馆后面「存在」一个公园。</div></div>
+        <div class="rule"><div class="rt">拥有 → have</div><div class="rd"><span class="eg">I've had this bike for three years.</span>（八下 Unit 10）我「拥有」这辆自行车三年了。</div></div>
+        <div class="rule"><div class="rt">「桌上有书」用 there be</div><div class="rd"><span class="eg">There are some books on the desk.</span>（教辅例句）</div></div>
+        <div class="rule"><div class="rt">「我有一本书」用 have</div><div class="rd"><span class="eg">I have a new book.</span>（教辅例句）</div></div>
+      </div>
+      <p class="mini">快速判断：把句子译成汉语，若能加「在……地方 / 时候」仍通顺，用 there be；若主语是「谁的东西」，用 have。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ③ 课本例句 ===== -->
+<section class="sec" id="textbook">
+  <div class="sec-head">
+    <span class="num">03</span>
+    <h2>课本例句</h2>
+    <span class="meta">人教版现行教材 · 中英对照</span>
+  </div>
+  <div class="card">
+    <div class="exgroup">
+      <div class="egt">肯定句 · 描述街区与场所</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">There is a zoo in my neighborhood.</div><div class="cn">在我的街区里有一个动物园。</div></div><span class="src">七下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">There is a big park behind the science museum.</div><div class="cn">在科学博物馆后面有一个大公园。</div></div><span class="src">八下 Unit 10</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">There are many things I've had since I was a child.</div><div class="cn">有许多东西是我从小就有的。</div></div><span class="src">八下 Unit 10</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">There's also a sweater and a dress.</div><div class="cn">还有一件毛衣和一条连衣裙。</div></div><span class="src">八下 Unit 10</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">一般疑问句与简略回答</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">Is there a post office near here? —Yes, there is. There's one on Bridge Street.</div><div class="cn">这附近有邮局吗？——是的，有。在大桥街上就有一家。</div></div><span class="src">七下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">Is there a restaurant on Bridge Street? —Yes, there is.</div><div class="cn">大桥街上有餐馆吗？——是的，有。</div></div><span class="src">七下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">Is there a hospital on Bridge Street? —No, there isn't.</div><div class="cn">大桥街上有医院吗？——不，没有。</div></div><span class="src">七下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">Are there any restaurants near here? —Yes, there's one in front of the post office.</div><div class="cn">这附近有餐馆吗？——有，邮局前面就有一家。</div></div><span class="src">七下 Unit 8</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">点餐与食物中的 there be</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">Are there any vegetables in the beef noodles? —Yes, there are some tomatoes.</div><div class="cn">牛肉面里有蔬菜吗？——有，有一些西红柿。</div></div><span class="src">七下 Unit 10</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">Is there any meat in the tomato and egg soup? —No, there isn't any. / No, there's no meat.</div><div class="cn">西红柿鸡蛋汤里有肉吗？——不，一点都没有。/ 没有肉。</div></div><span class="src">七下 Unit 10</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">there be 与 have 对照</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">There is a zoo in my neighborhood.（存在有）</div><div class="cn">我的街区里有一个动物园。</div></div><span class="src">七下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">I've had this bike for three years.（拥有）</div><div class="cn">这辆自行车我已经用了三年了。</div></div><span class="src">八下 Unit 10</span></div>
+      </div>
+    </div>
+    <p class="srcnote">来源说明：以上标注册次单元的例句均出自人教版现行初中教材（含 2024 新版七年级），可与对应单元课文、听力文本核对（七下 Unit 8 Section B 2b 阅读、七下 Unit 10 Section A 1b 听力、八下 Unit 10 Section A 2d 对话与 Section B 听力）。考点精讲与规则卡中未标注出处的短例为语法讲解示例；标注「教辅例句」的为教材配套资料中的常用表达，均未伪装成课本原句。</p>
+  </div>
+</section>
+
+<!-- ===== ④ 易错点 ===== -->
+<section class="sec" id="mistakes">
+  <div class="sec-head">
+    <span class="num">04</span>
+    <h2>易错点</h2>
+    <span class="meta">错在哪 · 怎么改</span>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 1</span><h3>there be 与 have 混用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">There has a book on the desk.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">There is a book on the desk.</div></div>
+      <p class="why"><b>解析：</b>there be 句型中只能用 be 动词，不能用 have；表示「存在有」必须用 There is/are。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 2</span><h3>忽略就近原则</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">There are a pen and two books on the desk.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">There is a pen and two books on the desk.</div></div>
+      <p class="why"><b>解析：</b>离 be 最近的主语是 a pen（单数），按就近原则用 There is；不能看到后面有 two books 就用 are。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 3</span><h3>疑问句中 some 不变 any</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">Are there some vegetables in the beef noodles?</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">Are there any vegetables in the beef noodles?</div></div>
+      <p class="why"><b>解析：</b>一般疑问句中表「一些」要用 any；some 多用于肯定句或表示请求、建议的疑问句。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 4</span><h3>否定句中 be 后漏 not</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">There isn't some meat in the soup.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">There isn't any meat in the soup.（= There's no meat in the soup.）</div></div>
+      <p class="why"><b>解析：</b>否定句中 some 要变 any；也可以用「no + 名词」直接表否定：There's no meat.。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 5</span><h3>不可数名词误用 are</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">There are some milk in the glass.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">There is some milk in the glass.</div></div>
+      <p class="why"><b>解析：</b>milk 是不可数名词，作主语时 be 动词用 is，不能用 are。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 6</span><h3>疑问句语序颠倒</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">There is a post office near here?</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">Is there a post office near here?</div></div>
+      <p class="why"><b>解析：</b>there be 的一般疑问句要把 be 动词提到 there 之前：Be + there + 主语 + 状语?</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 7</span><h3>简略回答错用 it</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">—Is there a hospital near here? —Yes, it is.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">—Is there a hospital near here? —Yes, there is.</div></div>
+      <p class="why"><b>解析：</b>there be 句型的简略回答必须保留 there：Yes, there is. / No, there isn't.，不能用 it。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 8</span><h3>「拥有」错用 there be</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">There is a new bike for me.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I have a new bike.</div></div>
+      <p class="why"><b>解析：</b>主语「我」拥有一辆自行车，强调所属关系，要用 have；there be 只用于「某地存在某物」。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 9</span><h3>过去时 be 动词错配</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">There were a zoo near my home ten years ago.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">There was a zoo near my home ten years ago.</div></div>
+      <p class="why"><b>解析：</b>a zoo 是单数，过去时 be 动词用 was；were 只搭配复数主语。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑤ 关键提醒 / 速记 ===== -->
+<section class="sec" id="tips">
+  <div class="sec-head">
+    <span class="num">05</span>
+    <h2>关键提醒 · 速记口诀</h2>
+    <span class="meta">口诀 · 信号词</span>
+  </div>
+
+  <div class="tip">
+    <div class="tt">there be 句型口诀</div>
+    <div class="mnem">there be 句型「某地有」，be 随主语来变化；单数不可数用 is，复数统一都用 are；否定 be 后加 not，some 要变 any 啊；疑问 be 提到 there 前，Yes / No 回答 there 不差。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">就近原则口诀</div>
+    <div class="mnem">be 动词很「势利」，只看近邻远的不理；近单近不数用 is，近复数才用 are。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">there be 与 have 分工</div>
+    <div class="mnem">there be 表「存在」，地点状语摆出来；have 表「拥有」，主语必须是「谁」才合拍。</div>
+    <div class="sig">
+      <span>存在有 → there be</span>
+      <span>拥有 → have / has</span>
+      <span>某地有 → there be</span>
+      <span>某人有 → have</span>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">常考信号</div>
+    <div class="sig">
+      <span>in my neighborhood（街区）</span>
+      <span>on the desk / wall（桌上/墙上）</span>
+      <span>near here（附近）</span>
+      <span>on Bridge Street（在某街）</span>
+      <span>in the beef noodles（在牛肉面里）</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑥ 小练习 ===== -->
+<section class="sec" id="quiz">
+  <div class="sec-head">
+    <span class="num">06</span>
+    <h2>小练习</h2>
+    <span class="meta">做完再点开答案</span>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">1.</span>There ____ a pen and two books on the desk.</div>
+    <div class="opts"><span class="opt">A. is</span><span class="opt">B. are</span><span class="opt">C. have</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>A。</b>就近原则：离 be 最近的主语是 a pen（单数），用 is。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">2.</span>—Is there a hospital near here? —____.</div>
+    <div class="opts"><span class="opt">A. Yes, it is</span><span class="opt">B. Yes, there is</span><span class="opt">C. No, there is</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>there be 句型的简略回答必须保留 there，不能用 it。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">3.</span>There ____ some milk and two eggs in the fridge.</div>
+    <div class="opts"><span class="opt">A. is</span><span class="opt">B. are</span><span class="opt">C. have</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>A。</b>就近原则：最近的主语 milk 不可数，按单数处理用 is。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">4.</span>____ any vegetables in the beef noodles?</div>
+    <div class="opts"><span class="opt">A. Is there</span><span class="opt">B. Are there</span><span class="opt">C. Have</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>主语 vegetables 是复数，疑问句 be 提到 there 前：Are there...?</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">5.</span>我有一辆新自行车。哪句正确？</div>
+    <div class="opts"><span class="opt">A. There is a new bike to me.</span><span class="opt">B. I have a new bike.</span><span class="opt">C. There has a new bike.</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>「我拥有一辆自行车」强调所属关系，用 have；there be 与 have 不能混用。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">6.</span>There isn't ____ meat in the tomato and egg soup.</div>
+    <div class="opts"><span class="opt">A. some</span><span class="opt">B. any</span><span class="opt">C. a</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>否定句中 some 变 any：There isn't any meat = There's no meat.</div></details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <p>新版人教版初中英语 · 语法专项（词性 · 句子 · 时态）</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>动词 Verbs · 初中英语语法专项</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F6F3EC; --paper-2:#EFEBE0; --ink:#2A2A26; --ink-soft:#6B665B;
+  --deep:#1F3B5E; --deep-2:#18304E; --line:#E3DDD0; --accent:#C08A3E;
+  --g:#2E82A8;
+  --bad:#A8483C; --good:#3E7A5E;
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+/* ===== 顶栏 ===== */
+.crumb{max-width:880px;margin:0 auto;padding:14px clamp(14px,4vw,28px) 0;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink-soft)}
+.crumb a.back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:#FBF9F3}
+.crumb a.back:hover{border-color:var(--deep);background:var(--paper-2)}
+.crumb .sep{opacity:.5}
+.crumb .cat{font-weight:600;color:var(--g)}
+
+/* ===== Hero ===== */
+.hero{
+  background:var(--deep);
+  background-image:
+    radial-gradient(1200px 500px at 85% -10%, rgba(192,138,62,.18), transparent 60%),
+    radial-gradient(900px 420px at -5% 110%, rgba(46,130,168,.22), transparent 55%);
+  color:#F3EFE3;padding:clamp(30px,5.5vw,52px) clamp(18px,5vw,60px) clamp(26px,3.6vw,36px);
+  position:relative;overflow:hidden;
+}
+.hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;letter-spacing:.06em;padding:5px 12px;border:1px solid rgba(243,239,227,.35);border-radius:20px;color:#E3A94F}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4.6vw,40px);font-weight:700;margin:14px 0 6px;line-height:1.2}
+.hero h1 .en{font-size:.62em;color:#E3A94F;font-weight:600;margin-left:10px}
+.hero-sub{font-size:clamp(13px,2.4vw,15px);color:rgba(243,239,227,.82);max-width:640px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero-tag{font-size:12px;padding:4px 11px;border-radius:20px;background:rgba(243,239,227,.1);border:1px solid rgba(243,239,227,.25);color:#F3EFE3}
+
+/* ===== 主体 ===== */
+main{max-width:880px;margin:0 auto;padding:24px clamp(14px,4vw,28px) 60px}
+.sec{margin-top:30px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-head .num{font-family:var(--serif);font-size:14px;font-weight:700;color:#fff;background:var(--g);border-radius:8px;padding:3px 11px;letter-spacing:.05em}
+.sec-head h2{font-family:var(--serif);font-size:clamp(19px,2.5vw,23px);font-weight:700}
+.sec-head .meta{font-size:12.5px;color:var(--ink-soft);margin-left:auto}
+
+.card{background:#FBF9F3;border:1px solid var(--line);border-radius:12px;padding:clamp(16px,2.6vw,22px)}
+.card + .card{margin-top:12px}
+.lead{font-size:14.5px;color:var(--ink)}
+.lead b{color:var(--deep)}
+.hl{color:var(--deep);font-weight:600}
+.kv{color:var(--g);font-weight:700}
+
+/* ===== 考点 ===== */
+.pt{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.pt + .pt{margin-top:14px}
+.pt-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:color-mix(in srgb, var(--g) 8%, #fff);border-bottom:1px solid var(--line)}
+.pt-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--g);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.pt-head h3{font-family:var(--serif);font-size:16.5px;font-weight:700;color:var(--deep)}
+.pt-body{padding:14px 16px 16px}
+.pt-body p{font-size:14.5px;margin-bottom:9px}
+.pt-body p:last-child{margin-bottom:0}
+.formula{background:var(--paper-2);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:14.5px;overflow-wrap:break-word}
+.formula .f{font-family:var(--serif);font-weight:600;color:var(--deep)}
+.mini{font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+
+/* ===== 规则网格 ===== */
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.rule{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:11px 13px}
+.rule .rt{font-size:13.5px;font-weight:700;color:var(--deep);margin-bottom:3px}
+.rule .rd{font-size:13px;color:var(--ink-soft);line-height:1.55}
+.rule .rd .eg{color:var(--g);font-weight:600}
+
+/* ===== 课本例句 ===== */
+.exlist{display:flex;flex-direction:column;gap:10px}
+.exrow{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 14px}
+.exrow .en{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.5;overflow-wrap:break-word}
+.exrow .cn{font-size:13px;color:var(--ink-soft);margin-top:2px}
+.exrow .src{flex:0 0 auto;font-size:11px;font-weight:600;color:var(--g);background:color-mix(in srgb, var(--g) 12%, #fff);border:1px solid color-mix(in srgb, var(--g) 30%, var(--line));border-radius:20px;padding:3px 10px;white-space:nowrap}
+.exgroup{margin-top:14px}
+.exgroup:first-child{margin-top:0}
+.exgroup .egt{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--deep);margin-bottom:8px}
+.exgroup .egt::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g)}
+.srcnote{font-size:12.5px;color:var(--ink-soft);background:var(--paper-2);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;margin-top:12px}
+
+/* ===== 易错点 ===== */
+.err{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.err + .err{margin-top:14px}
+.err-head{display:flex;align-items:center;gap:10px;padding:11px 16px;background:color-mix(in srgb, var(--bad) 7%, #fff);border-bottom:1px solid var(--line)}
+.err-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--bad);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.err-head h3{font-size:15.5px;font-weight:700;color:#8C3A2E}
+.err-body{padding:13px 16px 15px}
+.pair{border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin-bottom:9px;background:#fffdf8}
+.pair:last-child{margin-bottom:0}
+.pair .lab{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;margin-bottom:3px}
+.pair.wrong .lab{color:var(--bad)}
+.pair.right .lab{color:var(--good)}
+.pair .s{font-size:14.5px;font-family:var(--serif);overflow-wrap:break-word}
+.pair.wrong .s{color:#7C3127}
+.pair.right .s{color:#2E5D45}
+.pair svg{width:13px;height:13px;stroke:currentColor;flex:0 0 auto}
+.why{font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+.why b{color:var(--ink)}
+
+/* ===== 速记 ===== */
+.tip{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:#FFF9EC;padding:13px 15px;margin-bottom:11px}
+.tip:last-child{margin-bottom:0}
+.tip .tt{font-size:14px;font-weight:700;color:#8A6424;margin-bottom:4px}
+.tip p{font-size:13.5px;color:var(--ink-soft)}
+.mnem{font-family:var(--serif);font-size:14px;color:var(--deep);background:var(--paper-2);border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;line-height:1.8}
+.sig{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.sig span{font-size:12px;font-weight:600;color:var(--deep);background:color-mix(in srgb, var(--g) 10%, #fff);border:1px solid color-mix(in srgb, var(--g) 28%, var(--line));border-radius:20px;padding:3px 10px}
+
+/* ===== 小练习 ===== */
+.q{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 15px;margin-bottom:10px}
+.q .qt{font-size:14.5px;margin-bottom:8px}
+.q .qt .qn{font-weight:700;color:var(--deep);margin-right:6px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.q .opt{font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:7px;padding:4px 10px;background:#FBF9F3}
+details.ans{margin-top:8px}
+details.ans summary{cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--g);list-style:none}
+details.ans summary::-webkit-details-marker{display:none}
+details.ans summary::before{content:"";width:0;height:0;border-left:5px solid var(--g);border-top:4px solid transparent;border-bottom:4px solid transparent;transition:transform .15s}
+details.ans[open] summary::before{transform:rotate(90deg)}
+.ans-box{background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-top:7px;font-size:13.5px}
+.ans-box b{color:var(--good)}
+
+/* ===== 页脚 ===== */
+footer{border-top:1px solid var(--line);padding:20px clamp(14px,4vw,28px) 34px;text-align:center;color:var(--ink-soft);font-size:13px}
+footer .back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:8px;padding:7px 16px;background:#FBF9F3;margin-bottom:10px}
+footer .back:hover{border-color:var(--deep)}
+
+@media (max-width:560px){
+  .rgrid{grid-template-columns:1fr}
+  .exrow{flex-direction:column;gap:6px}
+  .exrow .src{white-space:normal}
+  .crumb{gap:8px;flex-wrap:wrap}
+}
+@media (max-width:380px){
+  main{padding:18px 12px 44px}
+  .exrow .en{font-size:14.5px}
+  .formula{font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶栏 ===== -->
+<nav class="crumb">
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <span class="sep">/</span>
+  <span>初中英语 · 语法专项</span>
+  <span class="sep">/</span>
+  <span class="cat">词性</span>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">词性 · Parts of Speech</span>
+    <h1>动词 <span class="en">Verbs</span></h1>
+    <p class="hero-sub">实义动词 · 系动词 · 动词词义辨析 · 动词过去式、过去分词变形——时态、语态、非谓语的根基</p>
+    <div class="hero-tags">
+      <span class="hero-tag">实义动词</span>
+      <span class="hero-tag">系动词</span>
+      <span class="hero-tag">动词词义辨析</span>
+      <span class="hero-tag">动词过去式、过去分词变形</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== ① 核心考点概览 ===== -->
+<section class="sec" id="overview">
+  <div class="sec-head">
+    <span class="num">01</span>
+    <h2>核心考点概览</h2>
+    <span class="meta">考什么 · 怎么考</span>
+  </div>
+  <div class="card">
+    <p class="lead">动词是英语句子的「发动机」，也是中考语法的第一大考点。<b>单项选择、完形填空</b>常考「动词词义辨析」与「实义 / 系动词的选用」；<b>语法填空、词汇运用、句型转换</b>几乎必考「动词过去式、过去分词变形」；<b>书面表达</b>中动词时态、主谓一致、及物不及物直接决定句子是否地道。可以说，动词不过关，整张卷子都站不稳。</p>
+    <div class="rgrid" style="margin-top:12px">
+      <div class="rule"><div class="rt">实义动词</div><div class="rd">有实在意义，能独立作谓语：<span class="eg">play, get, spend, begin, want, plan</span>。及物 / 不及物、肯定 / 否定 / 疑问句式是基础。</div></div>
+      <div class="rule"><div class="rt">系动词</div><div class="rd">本身有词义但不能独立作谓语，后接表语：<span class="eg">be, look, feel, sound, get, turn, become</span>。</div></div>
+      <div class="rule"><div class="rt">动词词义辨析</div><div class="rd"><span class="eg">spend / cost / take / pay、wear / put on / dress、bring / take / carry</span> 等中考高频易词组。</div></div>
+      <div class="rule"><div class="rt">动词过去式、过去分词变形</div><div class="rd">规则变化加 -ed；不规则变化逐个背熟，是时态、被动语态、现在完成时的「零件库」。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ② 考点精讲 ===== -->
+<section class="sec" id="points">
+  <div class="sec-head">
+    <span class="num">02</span>
+    <h2>考点逐一精讲</h2>
+    <span class="meta">规则 · 公式 · 变形</span>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 1</span><h3>实义动词</h3></div>
+    <div class="pt-body">
+      <p>实义动词（notional verb）又叫行为动词，表示动作或状态，有实在的词汇意义，能独立作谓语。按是否需要宾语，分为<span class="kv">及物动词（vt.）</span>与<span class="kv">不及物动词（vi.）</span>。</p>
+      <div class="formula"><span class="f">肯定句：</span>主语 + 实义动词（注意三单 / 过去式变形）+ 宾语 / 状语</div>
+      <div class="formula"><span class="f">否定 / 疑问：</span>主语 + <span class="kv">do / does / did</span> + not + 动词原形；　<span class="kv">Do / Does / Did</span> + 主语 + 动词原形…?</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">及物动词（后必须加宾语）</div><div class="rd"><span class="eg">play, like, want, plan, watch, spend, begin, meet, pour</span>。例：I want to join the music club.</div></div>
+        <div class="rule"><div class="rt">不及物动词（后不能直接加宾语）</div><div class="rd"><span class="eg">go, come, rise, happen, arrive, listen, look</span>。加宾语需借介词：listen to music, look at the blackboard。</div></div>
+        <div class="rule"><div class="rt">兼作及物 / 不及物</div><div class="rd">open, begin, start, read, play 等许多动词既可及物也可不及物：<span class="eg">The door opened. / He opened the door.</span></div></div>
+        <div class="rule"><div class="rt">一般现在时三单变化</div><div class="rd">he / she / it 作主语时动词加 -s / -es：<span class="eg">get→gets, watch→watches, go→goes, study→studies, have→has</span>。</div></div>
+        <div class="rule"><div class="rt">实义动词不能直接加 not</div><div class="rd">错误：I not like it. 正确：<span class="eg">I don't like it.</span>（必须借助助动词 do / does / did）。</div></div>
+        <div class="rule"><div class="rt">情态动词 / 助动词后用原形</div><div class="rd"><span class="eg">can / may / must / should / will / have to</span> 后一律接动词原形：I can play the guitar. / He doesn't like maths.</div></div>
+      </div>
+      <p class="mini">考点提示：语法填空给动词原形时，先判断时态（时间标志词）、再判断主谓（三单？复数？）、最后判断是谓语还是非谓语。</p>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 2</span><h3>系动词</h3></div>
+    <div class="pt-body">
+      <p>系动词（link verb / copula）本身有一定词义，但不能独立作谓语，必须和后面的<span class="kv">表语</span>（名词、形容词、介词短语等）一起构成「主系表」结构。初中最常考的是 be 动词和「感官 / 变化」类系动词。</p>
+      <div class="formula"><span class="f">主系表结构：</span>主语 + 系动词 + 表语（adj. / n. / 介词短语）　如：She is happy. / The song sounds beautiful.</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">be 动词（最基本）</div><div class="rd"><span class="eg">am / is / are / was / were</span>。例：What's your favourite subject? / It's my mother's piano.</div></div>
+        <div class="rule"><div class="rt">感官系动词</div><div class="rd"><span class="eg">look 看起来, sound 听起来, smell 闻起来, taste 尝起来, feel 摸起来 / 感觉</span>。后接形容词：That sounds like a good idea.</div></div>
+        <div class="rule"><div class="rt">变化系动词</div><div class="rd"><span class="eg">become 变成, get 变得, turn 变（颜色）, grow 渐渐变得</span>。例：He gets angry easily. / Leaves turn yellow in autumn.（教辅例句）</div></div>
+        <div class="rule"><div class="rt">保持 / 似乎类</div><div class="rd"><span class="eg">keep 保持, stay 保持, seem 似乎</span>。例：Keep quiet, please. / She seems happy.（教辅例句）</div></div>
+        <div class="rule"><div class="rt">系动词后接形容词，不接副词</div><div class="rd">错误：She looks happily. 正确：<span class="eg">She looks happy.</span>（系动词 + adj. 作表语）。</div></div>
+        <div class="rule"><div class="rt">系动词无被动、无进行时（感官动词除外）</div><div class="rd">不能说 is seemed / is become。<span class="eg">become, seem</span> 一般不用于进行时和被动语态。</div></div>
+      </div>
+      <p class="mini">考点提示：形容词作表语是单选高频点——「感官动词 + adj.」固定结构，看到 look / sound / smell / taste / feel 后，选项里出现形容词就优先考虑。</p>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 3</span><h3>动词词义辨析</h3></div>
+    <div class="pt-body">
+      <p>辨析题是中考单选、完形的常驻题型，核心是「语义 + 搭配 + 主语 / 宾语」三者一起看。下面六组是人教版教材反复出现、中考最常考的易混动词（例句为教辅例句，非课本原句）。</p>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">spend / cost / take / pay</div><div class="rd">spend 人 + 时间/钱 + on / (in) doing；cost 物 + 钱；take it takes sb 时间 to do；pay 人 + 钱 + for sth。<span class="eg">He spends lots of time fishing.</span>（七上 U2 教材句）</div></div>
+        <div class="rule"><div class="rt">wear / put on / dress / in</div><div class="rd">wear 穿着（状态）；put on 穿上（动作）；dress sb / oneself 给…穿衣服；in + 颜色 穿着。<span class="eg">He didn't wear enough warm clothes yesterday.</span>（八下 U1 教材句）</div></div>
+        <div class="rule"><div class="rt">bring / take / carry / fetch</div><div class="rd">bring 带来（朝说话人）；take 带走（离说话人）；carry 搬 / 扛（不强调方向）；fetch 去取并回来。<span class="eg">Take it to school.</span>（七上 U6 教材句）</div></div>
+        <div class="rule"><div class="rt">listen (to) / hear / sound</div><div class="rd">listen 听（动作，不及物加 to）；hear 听见（结果）；sound 听起来（系动词 + adj.）。<span class="eg">I often listen to music.</span>（教辅例句）</div></div>
+        <div class="rule"><div class="rt">speak / say / talk / tell</div><div class="rd">speak 说语言 / 演讲；say + 说话内容；talk 交谈（talk with / about）；tell 告诉 / 讲述（tell sb sth / tell stories）。<span class="eg">I'm good at telling stories.</span>（七上 U5 教材句）</div></div>
+        <div class="rule"><div class="rt">look / see / watch / read</div><div class="rd">look 看（动作，加 at）；see 看见（结果）；watch 观看（动态画面）；read 阅读（书报文字）。<span class="eg">Can you play ping-pong? — No, I can't.</span>（七上 U5 教材句，用于语境判断动词）</div></div>
+      </div>
+      <p class="mini">小技巧：辨析题先看「主语是谁」——spend / pay 的主语必须是人，cost 的主语必须是物，take 用 it 作形式主语。</p>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 4</span><h3>动词过去式、过去分词变形</h3></div>
+    <div class="pt-body">
+      <p>过去式用于一般过去时；过去分词用于现在完成时（have / has done）、过去完成时（had done）和被动语态（be done）。规则变化统一加 -ed，不规则变化必须逐个背熟——这是初中动词部分最硬的一块骨头。</p>
+      <div class="formula"><span class="f">规则变化四规则：</span>一般 +ed；e 结尾 +d；辅音 + y → ied；重读闭音节双写尾字母 + ed</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">① 一般情况 +ed</div><div class="rd"><span class="eg">play→played, watch→watched, clean→cleaned, want→wanted</span></div></div>
+        <div class="rule"><div class="rt">② 以 e 结尾 +d</div><div class="rd"><span class="eg">live→lived, like→liked, use→used, arrive→arrived</span></div></div>
+        <div class="rule"><div class="rt">③ 辅音 + y → 变 y 为 i + ed</div><div class="rd"><span class="eg">study→studied, carry→carried, cry→cried</span>；元音 + y 直接 +ed：play→played, enjoy→enjoyed</div></div>
+        <div class="rule"><div class="rt">④ 重读闭音节双写尾字母 +ed</div><div class="rd"><span class="eg">stop→stopped, plan→planned, trip→tripped, shop→shopped</span></div></div>
+      </div>
+      <p style="margin-top:10px"><b class="hl">初中高频不规则动词三态表（原形 — 过去式 — 过去分词）：</b></p>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">A—A—A（三态同形）</div><div class="rd"><span class="eg">cost—cost—cost, cut—cut—cut, put—put—put, read—read—read（读音变 /e/）, let—let—let, set—set—set</span></div></div>
+        <div class="rule"><div class="rt">A—A—B（过去式与原形同）</div><div class="rd"><span class="eg">come—came—come, become—became—become, run—ran—run</span></div></div>
+        <div class="rule"><div class="rt">A—B—B（过去式 = 过去分词）</div><div class="rd"><span class="eg">buy—bought—bought, bring—brought—brought, think—thought—thought, fight—fought—fought</span></div></div>
+        <div class="rule"><div class="rt">A—B—B（-ought / -aught 家族）</div><div class="rd"><span class="eg">catch—caught—caught, teach—taught—taught, seek—sought—sought, sleep—slept—slept</span></div></div>
+        <div class="rule"><div class="rt">A—B—B（-ept / -elt 家族）</div><div class="rd"><span class="eg">keep—kept—kept, feel—felt—felt, leave—left—left, lose—lost—lost, meet—met—met</span></div></div>
+        <div class="rule"><div class="rt">A—B—B（-ood / -ood）</div><div class="rd"><span class="eg">make—made—made, have—had—had, sit—sat—sat, stand—stood—stood, understand—understood—understood</span></div></div>
+        <div class="rule"><div class="rt">A—B—C（三态全不同 · 高频）</div><div class="rd"><span class="eg">go—went—gone, do—did—done, see—saw—seen, give—gave—given, take—took—taken</span></div></div>
+        <div class="rule"><div class="rt">A—B—C（-ow / -own 家族）</div><div class="rd"><span class="eg">know—knew—known, throw—threw—thrown, grow—grew—grown, fly—flew—flown</span></div></div>
+        <div class="rule"><div class="rt">A—B—C（-ake / -aken）</div><div class="rd"><span class="eg">wake—woke—woken, speak—spoke—spoken, break—broke—broken, choose—chose—chosen</span></div></div>
+        <div class="rule"><div class="rt">A—B—C（-i / -a / -u 变化）</div><div class="rd"><span class="eg">begin—began—begun, drink—drank—drunk, sing—sang—sung, swim—swam—swum, ring—rang—rung</span></div></div>
+        <div class="rule"><div class="rt">A—B—C（-ear / -orn / -orn）</div><div class="rd"><span class="eg">wear—wore—worn, bear—bore—born, forget—forgot—forgotten</span></div></div>
+        <div class="rule"><div class="rt">其他高频必背</div><div class="rd"><span class="eg">eat—ate—eaten, fall—fell—fallen, feel—felt—felt, find—found—found, hear—heard—heard, hide—hid—hidden, hold—held—held, hurt—hurt—hurt, pay—paid—paid, say—said—said, sell—sold—sold, send—sent—sent, tell—told—told, write—wrote—written</span></div></div>
+      </div>
+      <p class="mini">考点提示：一般过去时里用「过去式」；现在完成时 have / has + 「过去分词」；被动语态 be + 「过去分词」。别把 went 用在 have 后面（× have went → √ have gone / have been）。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ③ 课本例句 ===== -->
+<section class="sec" id="textbook">
+  <div class="sec-head">
+    <span class="num">03</span>
+    <h2>课本例句</h2>
+    <span class="meta">人教版现行教材 · 中英对照</span>
+  </div>
+  <div class="card">
+    <div class="exgroup">
+      <div class="egt">实义动词（及物 / 不及物、三单、否定疑问）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Can you play ping-pong?</div><div class="cn">你会打乒乓球吗？</div></div><span class="src">七上 Unit 5</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">I can't play any musical instruments.</div><div class="cn">我不会演奏任何乐器。</div></div><span class="src">七上 Unit 5</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">We meet at 5 o'clock every Tuesday.</div><div class="cn">我们每周二五点见面。</div></div><span class="src">七上 Unit 5</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">I usually get up at 7:40.</div><div class="cn">我通常七点四十起床。</div></div><span class="src">七上 Unit 6</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">What time do you usually have breakfast?</div><div class="cn">你通常几点吃早饭？</div></div><span class="src">七上 Unit 6</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">He spends lots of time fishing.</div><div class="cn">他花很多时间钓鱼。</div></div><span class="src">七上 Unit 2</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">He doesn't like maths because it's boring to him.</div><div class="cn">他不喜欢数学，因为对他来说很无聊。</div></div><span class="src">七上 Unit 4</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Pour the milk into the blender.</div><div class="cn">把牛奶倒入搅拌机里。</div></div><span class="src">八上 Unit 8</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">系动词（be / 感官 / 变化）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">What's your favourite subject, Meimei?</div><div class="cn">梅梅，你最喜欢的科目是什么？</div></div><span class="src">七上 Unit 4</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">It's my mother's piano.</div><div class="cn">那是我妈妈的钢琴。</div></div><span class="src">七上 Unit 2</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">That sounds like a good idea.</div><div class="cn">那听起来是个好主意。</div></div><span class="src">八下 Unit 1</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Peter's school begins at a quarter past eight in the morning.</div><div class="cn">彼得的学校早上八点一刻开始上课。</div></div><span class="src">七上 Unit 6</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">动词过去式、过去分词（一般过去时 / 被动语态）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">—Where did you go on vacation? —I went to New York City.</div><div class="cn">你去哪儿度假了？——我去了纽约。</div></div><span class="src">八上 Unit 1</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">—Did you buy anything special? —No, I bought nothing.</div><div class="cn">你买了什么特别的东西吗？——没有，我什么也没买。</div></div><span class="src">八上 Unit 1</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">We took quite a few photos there.</div><div class="cn">我们在那儿拍了不少照片。</div></div><span class="src">八上 Unit 1</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">She talked too much yesterday and didn't drink enough water.</div><div class="cn">她昨天说得太多，也没喝足够的水。</div></div><span class="src">八下 Unit 1</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">—When was the zipper invented? —It was invented in 1893.</div><div class="cn">拉链是什么时候发明的？——它是 1893 年发明的。</div></div><span class="src">九 Unit 6</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Some leaves from a tea plant fell into the water and remained there for some time.</div><div class="cn">茶树上的几片叶子掉进水里，在里面泡了一会儿。</div></div><span class="src">九 Unit 6</span></div>
+      </div>
+    </div>
+    <p class="srcnote">来源说明：以上例句均出自人教版现行初中教材（含 2024 新版七年级），册次单元已逐一标注，可与对应单元课文、听力文本核对（学科网、21 世纪教育网、英语朗读宝等）。考点精讲中未标注出处的短例为语法讲解示例；「动词词义辨析」一组内未单独标注的对比例句为教辅例句，均未伪装成课本原句。</p>
+  </div>
+</section>
+
+<!-- ===== ④ 易错点 ===== -->
+<section class="sec" id="mistakes">
+  <div class="sec-head">
+    <span class="num">04</span>
+    <h2>易错点</h2>
+    <span class="meta">错在哪 · 怎么改</span>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 1</span><h3>实义动词否定句漏加助动词</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I not like maths.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I don't like maths.</div></div>
+      <p class="why"><b>解析：</b>实义动词本身不能加 not，必须借助助动词 do / does / did；主语 I 用 don't，he / she / it 用 doesn't，过去时用 didn't。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 2</span><h3>三单动词漏加 -s</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">He spend lots of time fishing.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">He spends lots of time fishing.</div></div>
+      <p class="why"><b>解析：</b>一般现在时中，主语是第三人称单数（he / she / it / 单数名词）时，实义动词要加 -s / -es：spend→spends。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 3</span><h3>系动词后误用副词</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">That sounds nicely.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">That sounds nice.</div></div>
+      <p class="why"><b>解析：</b>sound / look / feel / taste / smell 是系动词，后面要接形容词作表语，不能接副词 nicely。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 4</span><h3>spend / cost 主语混用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">The book spent me 20 yuan.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">The book cost me 20 yuan.</div></div>
+      <p class="why"><b>解析：</b>spend 的主语必须是人（人花时间 / 钱）；cost 的主语是物（物花人钱）。「这本书花了我 20 元」用 cost。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 5</span><h3>过去式与过去分词混用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I have went to New York.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I have gone to New York. / I went to New York.</div></div>
+      <p class="why"><b>解析：</b>现在完成时 have / has 后面必须接过去分词：go—went—gone，have 后用 gone，不能用过去式 went。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 6</span><h3>重读闭音节过去式漏双写</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I stoped at the shop and buyed some water.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I stopped at the shop and bought some water.</div></div>
+      <p class="why"><b>解析：</b>stop 是「辅音 + 元音 + 辅音」重读闭音节，双写 p 再加 -ed：stopped；buy 是不规则变化：buy—bought—bought。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 7</span><h3>情态动词 / 助动词后加 s 或过去式</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">He can plays the guitar.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">He can play the guitar.</div></div>
+      <p class="why"><b>解析：</b>情态动词 can / may / must / should / will 以及助动词 do / does / did 后面一律接动词原形，不能加 -s 也不能用过去式。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 8</span><h3>listen 后漏加 to</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I often listen music after school.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I often listen to music after school.</div></div>
+      <p class="why"><b>解析：</b>listen 是不及物动词，宾语前必须加介词 to：listen to sb / sth。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 9</span><h3>被动语态误用过去式</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">The zipper invented in 1893.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">The zipper was invented in 1893.</div></div>
+      <p class="why"><b>解析：</b>「拉链被发明」是被动语态，结构是 be + 过去分词，必须加 be 动词 was，且 invent 的过去分词是 invented（规则变化）。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑤ 关键提醒 / 速记 ===== -->
+<section class="sec" id="tips">
+  <div class="sec-head">
+    <span class="num">05</span>
+    <h2>关键提醒 · 速记口诀</h2>
+    <span class="meta">口诀 · 信号词</span>
+  </div>
+
+  <div class="tip">
+    <div class="tt">规则动词过去式 / 过去分词口诀</div>
+    <div class="mnem">过去式，加 -ed，规则变化四句话：一般直接加 -ed，e 结尾只加 d；辅 y 结尾 y 变 ied；重读闭音节双写尾字母再加 ed。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">不规则动词「三态」分组速记</div>
+    <div class="mnem">AAA 型三态同：cost / cut / put / read / let；ABB 型过去等于过分：buy-bought、bring-brought、think-thought、catch-caught、teach-taught、keep-kept、feel-felt、leave-left；ABC 型三态全不同：go-went-gone、do-did-done、see-saw-seen、give-gave-given、take-took-taken、write-wrote-written、speak-spoke-spoken。（教辅口诀）</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">「花费」四剑客 spend / cost / take / pay 口诀</div>
+    <div class="mnem">主语人 spend / pay，主语物 cost；it 作形式主语 take；时间金钱各有路：on / doing / for / to do 要记住。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">系动词一眼认——后面必接形容词</div>
+    <div class="sig">
+      <span>be 动词（am / is / are / was / were）</span>
+      <span>感官：look / sound / smell / taste / feel</span>
+      <span>变化：get / turn / become / grow</span>
+      <span>保持：keep / stay</span>
+      <span>似乎：seem</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑥ 小练习 ===== -->
+<section class="sec" id="quiz">
+  <div class="sec-head">
+    <span class="num">06</span>
+    <h2>小练习</h2>
+    <span class="meta">做完再点开答案</span>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">1.</span>—What's your favourite subject? —I like English because it ____ fun.</div>
+    <div class="opts"><span class="opt">A. sounds</span><span class="opt">B. sound</span><span class="opt">C. sounding</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>A。</b>主语 it 是三单，感官系动词 sound 加 -s：it sounds fun（听起来有趣）。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">2.</span>He ____ lots of time ____ books every weekend.</div>
+    <div class="opts"><span class="opt">A. spend; read</span><span class="opt">B. spends; reading</span><span class="opt">C. takes; to read</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>主语 he 三单用 spends；固定搭配 spend time (in) doing sth，第二空用 reading。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">3.</span>—Where did you go on vacation? —I ____ to New York City.</div>
+    <div class="opts"><span class="opt">A. go</span><span class="opt">B. goes</span><span class="opt">C. went</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>C。</b>问句用 did（一般过去时），答句也要用过去式：go—went—gone。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">4.</span>The zipper ____ in 1893 by Whitcomb Judson.</div>
+    <div class="opts"><span class="opt">A. invented</span><span class="opt">B. was invented</span><span class="opt">C. invents</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>「拉链被发明」是被动语态：be + 过去分词，过去时用 was invented。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">5.</span>I have already ____ my homework, so I can watch TV now.</div>
+    <div class="opts"><span class="opt">A. finish</span><span class="opt">B. finished</span><span class="opt">C. finishing</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>现在完成时 have + 过去分词：finish—finished—finished（规则变化直接加 -ed）。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">6.</span>—Could you please ____ the rubbish? —Sure, Mom.</div>
+    <div class="opts"><span class="opt">A. take out</span><span class="opt">B. takes out</span><span class="opt">C. took out</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>A。</b>Could you please + 动词原形，表示礼貌请求：take out the rubbish 倒垃圾。</div></details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <p>新版人教版初中英语 · 语法专项（词性 · 句子 · 时态）</p>
+</footer>
+</body>
+</html>

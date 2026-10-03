@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>定语从句 Attributive Clauses · 初中英语语法专项</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F6F3EC; --paper-2:#EFEBE0; --ink:#2A2A26; --ink-soft:#6B665B;
+  --deep:#1F3B5E; --deep-2:#18304E; --line:#E3DDD0; --accent:#C08A3E;
+  --g:#3A6B9E;
+  --bad:#A8483C; --good:#3E7A5E;
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+/* ===== 顶栏 ===== */
+.crumb{max-width:880px;margin:0 auto;padding:14px clamp(14px,4vw,28px) 0;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink-soft)}
+.crumb a.back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:#FBF9F3}
+.crumb a.back:hover{border-color:var(--deep);background:var(--paper-2)}
+.crumb .sep{opacity:.5}
+.crumb .cat{font-weight:600;color:var(--g)}
+
+/* ===== Hero ===== */
+.hero{
+  background:var(--deep);
+  background-image:
+    radial-gradient(1200px 500px at 85% -10%, rgba(192,138,62,.18), transparent 60%),
+    radial-gradient(900px 420px at -5% 110%, rgba(46,130,168,.22), transparent 55%);
+  color:#F3EFE3;padding:clamp(30px,5.5vw,52px) clamp(18px,5vw,60px) clamp(26px,3.6vw,36px);
+  position:relative;overflow:hidden;
+}
+.hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;letter-spacing:.06em;padding:5px 12px;border:1px solid rgba(243,239,227,.35);border-radius:20px;color:#E3A94F}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4.6vw,40px);font-weight:700;margin:14px 0 6px;line-height:1.2}
+.hero h1 .en{font-size:.62em;color:#E3A94F;font-weight:600;margin-left:10px}
+.hero-sub{font-size:clamp(13px,2.4vw,15px);color:rgba(243,239,227,.82);max-width:640px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero-tag{font-size:12px;padding:4px 11px;border-radius:20px;background:rgba(243,239,227,.1);border:1px solid rgba(243,239,227,.25);color:#F3EFE3}
+
+/* ===== 主体 ===== */
+main{max-width:880px;margin:0 auto;padding:24px clamp(14px,4vw,28px) 60px}
+.sec{margin-top:30px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-head .num{font-family:var(--serif);font-size:14px;font-weight:700;color:#fff;background:var(--g);border-radius:8px;padding:3px 11px;letter-spacing:.05em}
+.sec-head h2{font-family:var(--serif);font-size:clamp(19px,2.5vw,23px);font-weight:700}
+.sec-head .meta{font-size:12.5px;color:var(--ink-soft);margin-left:auto}
+
+.card{background:#FBF9F3;border:1px solid var(--line);border-radius:12px;padding:clamp(16px,2.6vw,22px)}
+.card + .card{margin-top:12px}
+.lead{font-size:14.5px;color:var(--ink)}
+.lead b{color:var(--deep)}
+.hl{color:var(--deep);font-weight:600}
+.kv{color:var(--g);font-weight:700}
+
+/* ===== 考点 ===== */
+.pt{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.pt + .pt{margin-top:14px}
+.pt-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:color-mix(in srgb, var(--g) 8%, #fff);border-bottom:1px solid var(--line)}
+.pt-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--g);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.pt-head h3{font-family:var(--serif);font-size:16.5px;font-weight:700;color:var(--deep)}
+.pt-body{padding:14px 16px 16px}
+.pt-body p{font-size:14.5px;margin-bottom:9px}
+.pt-body p:last-child{margin-bottom:0}
+.formula{background:var(--paper-2);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:14.5px;overflow-wrap:break-word}
+.formula .f{font-family:var(--serif);font-weight:600;color:var(--deep)}
+.mini{font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+
+/* ===== 规则网格 ===== */
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.rule{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:11px 13px}
+.rule .rt{font-size:13.5px;font-weight:700;color:var(--deep);margin-bottom:3px}
+.rule .rd{font-size:13px;color:var(--ink-soft);line-height:1.55}
+.rule .rd .eg{color:var(--g);font-weight:600}
+
+/* ===== 课本例句 ===== */
+.exlist{display:flex;flex-direction:column;gap:10px}
+.exrow{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 14px}
+.ex-main{flex:1;min-width:0}
+.exrow .en{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.5;overflow-wrap:break-word}
+.exrow .cn{font-size:13px;color:var(--ink-soft);margin-top:2px}
+.exrow .src{flex:0 0 auto;font-size:11px;font-weight:600;color:var(--g);background:color-mix(in srgb, var(--g) 12%, #fff);border:1px solid color-mix(in srgb, var(--g) 30%, var(--line));border-radius:20px;padding:3px 10px;white-space:nowrap}
+.exgroup{margin-top:14px}
+.exgroup:first-child{margin-top:0}
+.exgroup .egt{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--deep);margin-bottom:8px}
+.exgroup .egt::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g)}
+.srcnote{font-size:12.5px;color:var(--ink-soft);background:var(--paper-2);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;margin-top:12px}
+
+/* ===== 易错点 ===== */
+.err{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.err + .err{margin-top:14px}
+.err-head{display:flex;align-items:center;gap:10px;padding:11px 16px;background:color-mix(in srgb, var(--bad) 7%, #fff);border-bottom:1px solid var(--line)}
+.err-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--bad);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.err-head h3{font-size:15.5px;font-weight:700;color:#8C3A2E}
+.err-body{padding:13px 16px 15px}
+.pair{border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin-bottom:9px;background:#fffdf8}
+.pair:last-child{margin-bottom:0}
+.pair .lab{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;margin-bottom:3px}
+.pair.wrong .lab{color:var(--bad)}
+.pair.right .lab{color:var(--good)}
+.pair .s{font-size:14.5px;font-family:var(--serif);overflow-wrap:break-word}
+.pair.wrong .s{color:#7C3127}
+.pair.right .s{color:#2E5D45}
+.pair svg{width:13px;height:13px;stroke:currentColor;flex:0 0 auto}
+.why{font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+.why b{color:var(--ink)}
+
+/* ===== 速记 ===== */
+.tip{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:#FFF9EC;padding:13px 15px;margin-bottom:11px}
+.tip:last-child{margin-bottom:0}
+.tip .tt{font-size:14px;font-weight:700;color:#8A6424;margin-bottom:4px}
+.tip p{font-size:13.5px;color:var(--ink-soft)}
+.mnem{font-family:var(--serif);font-size:14px;color:var(--deep);background:var(--paper-2);border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;line-height:1.8}
+.sig{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.sig span{font-size:12px;font-weight:600;color:var(--deep);background:color-mix(in srgb, var(--g) 10%, #fff);border:1px solid color-mix(in srgb, var(--g) 28%, var(--line));border-radius:20px;padding:3px 10px}
+
+/* ===== 小练习 ===== */
+.q{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 15px;margin-bottom:10px}
+.q .qt{font-size:14.5px;margin-bottom:8px}
+.q .qt .qn{font-weight:700;color:var(--deep);margin-right:6px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.q .opt{font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:7px;padding:4px 10px;background:#FBF9F3}
+details.ans{margin-top:8px}
+details.ans summary{cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--g);list-style:none}
+details.ans summary::-webkit-details-marker{display:none}
+details.ans summary::before{content:"";width:0;height:0;border-left:5px solid var(--g);border-top:4px solid transparent;border-bottom:4px solid transparent;transition:transform .15s}
+details.ans[open] summary::before{transform:rotate(90deg)}
+.ans-box{background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-top:7px;font-size:13.5px}
+.ans-box b{color:var(--good)}
+
+/* ===== 页脚 ===== */
+footer{border-top:1px solid var(--line);padding:20px clamp(14px,4vw,28px) 34px;text-align:center;color:var(--ink-soft);font-size:13px}
+footer .back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:8px;padding:7px 16px;background:#FBF9F3;margin-bottom:10px}
+footer .back:hover{border-color:var(--deep)}
+
+@media (max-width:560px){
+  .rgrid{grid-template-columns:1fr}
+  .exrow{flex-direction:column;gap:6px}
+  .exrow .src{white-space:normal}
+  .crumb{gap:8px;flex-wrap:wrap}
+}
+@media (max-width:380px){
+  main{padding:18px 12px 44px}
+  .exrow .en{font-size:14.5px}
+  .formula{font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶栏 ===== -->
+<nav class="crumb">
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <span class="sep">/</span>
+  <span>初中英语 · 语法专项</span>
+  <span class="sep">/</span>
+  <span class="cat">句子</span>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">句子 · Sentences</span>
+    <h1>定语从句 <span class="en">Attributive Clauses</span></h1>
+    <p class="hero-sub">先行词找对 · that / which / who 选准 · 中考限定性定语从句基础用法</p>
+    <div class="hero-tags">
+      <span class="hero-tag">that/which/who 关系代词</span>
+      <span class="hero-tag">中考限定性定语从句基础用法</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== ① 核心考点概览 ===== -->
+<section class="sec" id="overview">
+  <div class="sec-head">
+    <span class="num">01</span>
+    <h2>核心考点概览</h2>
+    <span class="meta">考什么 · 怎么考</span>
+  </div>
+  <div class="card">
+    <p class="lead">定语从句是初中复合句的<b>压轴考点</b>，也是高中语法的地基：<b>单项选择、完形填空、语法填空</b>常考「选关系代词 that / which / who」；<b>书面表达</b>里用定语从句合并简单句，能立刻提升句式档次。中考只考<b>限定性定语从句的基础用法</b>，把「先看人还是物、再看关系代词作什么成分」两步走熟即可。</p>
+    <div class="rgrid" style="margin-top:12px">
+      <div class="rule"><div class="rt">先行词 + 关系词 + 从句</div><div class="rd">被修饰的名词叫<b>先行词</b>；定语从句紧跟其后，起形容词作用。</div></div>
+      <div class="rule"><div class="rt">that</div><div class="rd">既可指人、又可指物，在从句中作<b>主语或宾语</b>。</div></div>
+      <div class="rule"><div class="rt">which</div><div class="rd">只指<b>物</b>，在从句中作主语或宾语，指物时常与 that 互换。</div></div>
+      <div class="rule"><div class="rt">who / whom</div><div class="rd">指<b>人</b>：who 作主语，whom 作宾语。</div></div>
+      <div class="rule"><div class="rt">作宾语可省略</div><div class="rd">关系代词在从句中作<b>宾语</b>时，可以省略；作主语不能省。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ② 考点精讲 ===== -->
+<section class="sec" id="points">
+  <div class="sec-head">
+    <span class="num">02</span>
+    <h2>考点逐一精讲</h2>
+    <span class="meta">规则 · 公式 · 变形</span>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 1</span><h3>that/which/who 关系代词</h3></div>
+    <div class="pt-body">
+      <p>定语从句由「关系代词」引导，它一头连着先行词，一头在从句里充当某个成分。选哪个关系代词，<b>先看先行词是人还是物，再看它在从句里作主语还是宾语</b>。</p>
+      <div class="formula"><span class="f">先行词(物) + that / which + 从句</span>：I like music <b>that I can dance to.</b></div>
+      <div class="formula"><span class="f">先行词(人) + who / that + 从句</span>：Mary is a girl <b>who has long hair.</b>（教辅例句）</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">that 指物</div><div class="rd">指物时 that = which：<span class="eg">I prefer music that has great lyrics.</span>（九 Unit 9）</div></div>
+        <div class="rule"><div class="rt">that 指人</div><div class="rd">指人时 that = who：<span class="eg">the boy that / who is running</span>（教辅例句）</div></div>
+        <div class="rule"><div class="rt">which 只指物</div><div class="rd">不能指人：<span class="eg">the book which tells about computers</span>（教辅例句）</div></div>
+        <div class="rule"><div class="rt">who 指人作主语</div><div class="rd">先行词是人、从句缺主语时用 who：<span class="eg">I like teachers who are kind.</span>（教辅例句）</div></div>
+        <div class="rule"><div class="rt">作主语：谓语单复数</div><div class="rd">关系代词作主语，从句谓语与<b>先行词</b>一致：groups that <span class="eg">play</span>…（复数用原形）</div></div>
+        <div class="rule"><div class="rt">作宾语：可省略</div><div class="rd">关系代词作从句宾语时能省：the book (that) I bought.（教辅例句）</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 2</span><h3>中考限定性定语从句基础用法</h3></div>
+    <div class="pt-body">
+      <p>限定性定语从句是先行词不可缺少的定语，去掉后主句意思就不完整，它和先行词之间<b>不用逗号</b>隔开。中考考的几乎都是这种，重点练「合并两个简单句」和「选关系代词」。</p>
+      <div class="formula"><span class="f">合并句：</span>I like music. + I can dance to the music. → I like music <b>(that / which) I can dance to.</b></div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">不用逗号</div><div class="rd">限定性从句紧跟先行词，中间无逗号，如 <span class="eg">the book that is on the desk</span>。</div></div>
+        <div class="rule"><div class="rt">that 与 which 指物常互换</div><div class="rd">普通指物，that / which 都对：<span class="eg">groups that / which play quiet songs</span>（九 Unit 9）</div></div>
+        <div class="rule"><div class="rt">只能用 that 的常见情况</div><div class="rd">先行词是不定代词（everything / all / nothing…）、被最高级 / the only 修饰时多用 that。<span class="eg">everything good that I do</span>（九 Unit 4）</div></div>
+        <div class="rule"><div class="rt">关系代词作宾语可省</div><div class="rd"><span class="eg">the movie (that) we saw last week</span>（教辅例句）——口语里常省掉。</div></div>
+        <div class="rule"><div class="rt">介词后置</div><div class="rd">介词常留在从句末尾：music that I can sing along <span class="eg">with</span>.（九 Unit 9）</div></div>
+        <div class="rule"><div class="rt">中考题型</div><div class="rd">单选选关系代词、两句合并为一句、写作中用定语从句升级句式。</div></div>
+      </div>
+      <p class="mini">注意：初中阶段不要求掌握 when / where / why 等关系副词，也不考非限定性（带逗号）定语从句，把 that / which / who 三者用熟即可。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ③ 课本例句 ===== -->
+<section class="sec" id="textbook">
+  <div class="sec-head">
+    <span class="num">03</span>
+    <h2>课本例句</h2>
+    <span class="meta">人教版现行教材 · 中英对照</span>
+  </div>
+  <div class="card">
+    <div class="exgroup">
+      <div class="egt">that / which 指物（先行词是物）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">I like music that I can dance to.</div><div class="cn">我喜欢能跟着跳舞的音乐。</div></div><span class="src">九 Unit 9</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">I prefer music that has great lyrics.</div><div class="cn">我更喜欢歌词优美的音乐。</div></div><span class="src">九 Unit 9</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">I love music that I can sing along with.</div><div class="cn">我喜欢能跟着一起唱的音乐。</div></div><span class="src">九 Unit 9</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">I like music that isn't too loud.</div><div class="cn">我喜欢不太吵闹的音乐。</div></div><span class="src">九 Unit 9</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">He prefers groups that play quiet and slow songs.</div><div class="cn">他更喜欢演奏安静、舒缓歌曲的乐队。</div></div><span class="src">九 Unit 9</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">that 用于不定代词后</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">They take pride in everything good that I do.</div><div class="cn">他们为我做的每一件好事都感到自豪。</div></div><span class="src">九 Unit 4</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">who 指人 / 教辅巩固句</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">Mary is a girl who has long hair.</div><div class="cn">玛丽是一个留着长发的女孩。</div></div><span class="src">教辅例句</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">The boy who is standing under the tree is my brother.</div><div class="cn">站在树下的那个男孩是我弟弟。</div></div><span class="src">教辅例句</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">The book that / which tells about computers is mine.</div><div class="cn">那本讲计算机的书是我的。</div></div><span class="src">教辅例句</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">I like teachers who are humorous and kind.</div><div class="cn">我喜欢幽默又亲切的老师。</div></div><span class="src">教辅例句</span></div>
+      </div>
+    </div>
+    <p class="srcnote">来源说明：标注「九 Unit 9 / 九 Unit 4」的例句均出自人教版现行教材对应单元（九年级全一册 Unit 9 即定语从句单元）的课文、对话或语法板块，可与原书核对；标注「教辅例句」的为教材配套资料中用于巩固定语从句的常见表达，非课本原句，均未伪装成课文原句。考点精讲中的结构短例为语法讲解示例，不标注来源。</p>
+  </div>
+</section>
+
+<!-- ===== ④ 易错点 ===== -->
+<section class="sec" id="mistakes">
+  <div class="sec-head">
+    <span class="num">04</span>
+    <h2>易错点</h2>
+    <span class="meta">错在哪 · 怎么改</span>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 1</span><h3>先行词是人，却用了 which</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">The man which is talking is my teacher.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">The man who / that is talking is my teacher.</div></div>
+      <p class="why"><b>解析：</b>先行词 the man 是人，关系代词指人要用 who 或 that；which 只能指物。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 2</span><h3>关系代词后又重复主语</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">The book that it is on the desk is mine.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">The book that is on the desk is mine.</div></div>
+      <p class="why"><b>解析：</b>关系代词 that 在从句中已经作主语，不能再加 it 这个多余主语。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 3</span><h3>关系代词作主语，谓语单复数错</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I like groups that plays quiet songs.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I like groups that play quiet songs.</div></div>
+      <p class="why"><b>解析：</b>先行词 groups 是复数，关系代词 that 指代 groups，从句谓语要用原形 play。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 4</span><h3>该用 that 时误用 which</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">Everything which he said is true.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">Everything that he said is true.</div></div>
+      <p class="why"><b>解析：</b>先行词是不定代词 everything 时，习惯上用 that 而不用 which。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 5</span><h3>关系代词作主语却把它省略</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">The girl speaks English well is my cousin.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">The girl who / that speaks English well is my cousin.</div></div>
+      <p class="why"><b>解析：</b>关系代词在从句中作主语时不能省略；只有作宾语时才能省。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 6</span><h3>介词位置放错</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I like the music which I can sing along.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I like the music which / that I can sing along with.</div></div>
+      <p class="why"><b>解析：</b>sing along with the music 是固定搭配，介词 with 不能丢，要留在从句末尾。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 7</span><h3>先行词是时间 / 地点，误选 when / where</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">This is the school where we visited last week.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">This is the school that / which we visited last week.</div></div>
+      <p class="why"><b>解析：</b>visit 是及物动词、从句缺宾语，要用 that / which（指物）；where 在从句中作地点状语，这里不缺状语。初中先掌握 that / which / who 即可。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 8</span><h3>先行词被 the only 修饰仍用 which</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">This is the only book which interests me.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">This is the only book that interests me.</div></div>
+      <p class="why"><b>解析：</b>先行词被 the only、最高级修饰时，习惯用 that 而不用 which。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑤ 关键提醒 / 速记 ===== -->
+<section class="sec" id="tips">
+  <div class="sec-head">
+    <span class="num">05</span>
+    <h2>关键提醒 · 速记口诀</h2>
+    <span class="meta">口诀 · 信号词</span>
+  </div>
+
+  <div class="tip">
+    <div class="tt">关系代词选择口诀</div>
+    <div class="mnem">定语从句跟先行，关系代词来领营；指人 who / that 用，指物 which / that 行；作主语时不能省，作宾语时可省略；从句谓语随先行，单复数要对应明。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">选代词两步走</div>
+    <div class="mnem">第一步看先行词：是人还是物？第二步看从句缺什么：缺主语 / 宾语就选关系代词，缺状语初中先不深究。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">只能用 that 的信号词</div>
+    <p>先行词出现下面这些情况，优先选 that：</p>
+    <div class="sig">
+      <span>不定代词 all / everything / nothing</span>
+      <span>被最高级修饰</span>
+      <span>被 the only / the very 修饰</span>
+      <span>先行词既有人又有物</span>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">that / which / who 分工速查</div>
+    <div class="sig">
+      <span>that 人 / 物通吃</span>
+      <span>which 只指物</span>
+      <span>who 只指人（作主语）</span>
+      <span>whom 指人（作宾语）</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑥ 小练习 ===== -->
+<section class="sec" id="quiz">
+  <div class="sec-head">
+    <span class="num">06</span>
+    <h2>小练习</h2>
+    <span class="meta">做完再点开答案</span>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">1.</span>I like music ______ I can dance to.</div>
+    <div class="opts"><span class="opt">A. who</span><span class="opt">B. that</span><span class="opt">C. whom</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>先行词 music 是物，用 that / which；关系代词在从句中作介词 to 的宾语。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">2.</span>The girl ______ is standing there is my sister.</div>
+    <div class="opts"><span class="opt">A. which</span><span class="opt">B. who</span><span class="opt">C. whom</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>先行词 the girl 是人，且关系代词在从句中作主语，用 who。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">3.</span>He prefers groups that ______ quiet and slow songs.</div>
+    <div class="opts"><span class="opt">A. plays</span><span class="opt">B. play</span><span class="opt">C. playing</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>先行词 groups 是复数，从句谓语与先行词一致，用原形 play。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">4.</span>Everything ______ he said is true.</div>
+    <div class="opts"><span class="opt">A. that</span><span class="opt">B. which</span><span class="opt">C. who</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>A。</b>先行词是不定代词 everything，习惯用 that 而不用 which。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">5.</span>The book ______ you bought yesterday is very interesting.（关系代词作宾语，可省略）</div>
+    <div class="opts"><span class="opt">A. who</span><span class="opt">B. that / 不填</span><span class="opt">C. whom</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>先行词 the book 是物，关系代词在从句中作 bought 的宾语，用 that / which，也可直接省略。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">6.</span>This is the best film ______ I have ever seen.</div>
+    <div class="opts"><span class="opt">A. which</span><span class="opt">B. who</span><span class="opt">C. that</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>C。</b>先行词被最高级 the best 修饰，习惯用 that 而不用 which。</div></details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <p>新版人教版初中英语 · 语法专项（词性 · 句子 · 时态）</p>
+</footer>
+</body>
+</html>

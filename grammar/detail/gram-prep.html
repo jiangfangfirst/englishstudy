@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>介词 Prepositions · 初中英语语法专项</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F6F3EC; --paper-2:#EFEBE0; --ink:#2A2A26; --ink-soft:#6B665B;
+  --deep:#1F3B5E; --deep-2:#18304E; --line:#E3DDD0; --accent:#C08A3E;
+  --g:#2E82A8;
+  --bad:#A8483C; --good:#3E7A5E;
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+/* ===== 顶栏 ===== */
+.crumb{max-width:880px;margin:0 auto;padding:14px clamp(14px,4vw,28px) 0;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink-soft)}
+.crumb a.back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:#FBF9F3}
+.crumb a.back:hover{border-color:var(--deep);background:var(--paper-2)}
+.crumb .sep{opacity:.5}
+.crumb .cat{font-weight:600;color:var(--g)}
+
+/* ===== Hero ===== */
+.hero{
+  background:var(--deep);
+  background-image:
+    radial-gradient(1200px 500px at 85% -10%, rgba(192,138,62,.18), transparent 60%),
+    radial-gradient(900px 420px at -5% 110%, rgba(46,130,168,.22), transparent 55%);
+  color:#F3EFE3;padding:clamp(30px,5.5vw,52px) clamp(18px,5vw,60px) clamp(26px,3.6vw,36px);
+  position:relative;overflow:hidden;
+}
+.hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;letter-spacing:.06em;padding:5px 12px;border:1px solid rgba(243,239,227,.35);border-radius:20px;color:#E3A94F}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4.6vw,40px);font-weight:700;margin:14px 0 6px;line-height:1.2}
+.hero h1 .en{font-size:.62em;color:#E3A94F;font-weight:600;margin-left:10px}
+.hero-sub{font-size:clamp(13px,2.4vw,15px);color:rgba(243,239,227,.82);max-width:640px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero-tag{font-size:12px;padding:4px 11px;border-radius:20px;background:rgba(243,239,227,.1);border:1px solid rgba(243,239,227,.25);color:#F3EFE3}
+
+/* ===== 主体 ===== */
+main{max-width:880px;margin:0 auto;padding:24px clamp(14px,4vw,28px) 60px}
+.sec{margin-top:30px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-head .num{font-family:var(--serif);font-size:14px;font-weight:700;color:#fff;background:var(--g);border-radius:8px;padding:3px 11px;letter-spacing:.05em}
+.sec-head h2{font-family:var(--serif);font-size:clamp(19px,2.5vw,23px);font-weight:700}
+.sec-head .meta{font-size:12.5px;color:var(--ink-soft);margin-left:auto}
+
+.card{background:#FBF9F3;border:1px solid var(--line);border-radius:12px;padding:clamp(16px,2.6vw,22px)}
+.card + .card{margin-top:12px}
+.lead{font-size:14.5px;color:var(--ink)}
+.lead b{color:var(--deep)}
+.hl{color:var(--deep);font-weight:600}
+.kv{color:var(--g);font-weight:700}
+
+/* ===== 考点 ===== */
+.pt{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.pt + .pt{margin-top:14px}
+.pt-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:color-mix(in srgb, var(--g) 8%, #fff);border-bottom:1px solid var(--line)}
+.pt-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--g);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.pt-head h3{font-family:var(--serif);font-size:16.5px;font-weight:700;color:var(--deep)}
+.pt-body{padding:14px 16px 16px}
+.pt-body p{font-size:14.5px;margin-bottom:9px}
+.pt-body p:last-child{margin-bottom:0}
+.formula{background:var(--paper-2);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:14.5px;overflow-wrap:break-word}
+.formula .f{font-family:var(--serif);font-weight:600;color:var(--deep)}
+.mini{font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+
+/* ===== 规则网格 ===== */
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.rule{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:11px 13px}
+.rule .rt{font-size:13.5px;font-weight:700;color:var(--deep);margin-bottom:3px}
+.rule .rd{font-size:13px;color:var(--ink-soft);line-height:1.55}
+.rule .rd .eg{color:var(--g);font-weight:600}
+
+/* ===== 课本例句 ===== */
+.exlist{display:flex;flex-direction:column;gap:10px}
+.exrow{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 14px}
+.exrow .en{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.5;overflow-wrap:break-word}
+.exrow .cn{font-size:13px;color:var(--ink-soft);margin-top:2px}
+.exrow .src{flex:0 0 auto;font-size:11px;font-weight:600;color:var(--g);background:color-mix(in srgb, var(--g) 12%, #fff);border:1px solid color-mix(in srgb, var(--g) 30%, var(--line));border-radius:20px;padding:3px 10px;white-space:nowrap}
+.exgroup{margin-top:14px}
+.exgroup:first-child{margin-top:0}
+.exgroup .egt{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--deep);margin-bottom:8px}
+.exgroup .egt::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g)}
+.srcnote{font-size:12.5px;color:var(--ink-soft);background:var(--paper-2);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;margin-top:12px}
+
+/* ===== 易错点 ===== */
+.err{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.err + .err{margin-top:14px}
+.err-head{display:flex;align-items:center;gap:10px;padding:11px 16px;background:color-mix(in srgb, var(--bad) 7%, #fff);border-bottom:1px solid var(--line)}
+.err-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--bad);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.err-head h3{font-size:15.5px;font-weight:700;color:#8C3A2E}
+.err-body{padding:13px 16px 15px}
+.pair{border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin-bottom:9px;background:#fffdf8}
+.pair:last-child{margin-bottom:0}
+.pair .lab{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;margin-bottom:3px}
+.pair.wrong .lab{color:var(--bad)}
+.pair.right .lab{color:var(--good)}
+.pair .s{font-size:14.5px;font-family:var(--serif);overflow-wrap:break-word}
+.pair.wrong .s{color:#7C3127}
+.pair.right .s{color:#2E5D45}
+.pair svg{width:13px;height:13px;stroke:currentColor;flex:0 0 auto}
+.why{font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+.why b{color:var(--ink)}
+
+/* ===== 速记 ===== */
+.tip{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:#FFF9EC;padding:13px 15px;margin-bottom:11px}
+.tip:last-child{margin-bottom:0}
+.tip .tt{font-size:14px;font-weight:700;color:#8A6424;margin-bottom:4px}
+.tip p{font-size:13.5px;color:var(--ink-soft)}
+.mnem{font-family:var(--serif);font-size:14px;color:var(--deep);background:var(--paper-2);border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;line-height:1.8}
+.sig{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.sig span{font-size:12px;font-weight:600;color:var(--deep);background:color-mix(in srgb, var(--g) 10%, #fff);border:1px solid color-mix(in srgb, var(--g) 28%, var(--line));border-radius:20px;padding:3px 10px}
+
+/* ===== 小练习 ===== */
+.q{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 15px;margin-bottom:10px}
+.q .qt{font-size:14.5px;margin-bottom:8px}
+.q .qt .qn{font-weight:700;color:var(--deep);margin-right:6px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.q .opt{font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:7px;padding:4px 10px;background:#FBF9F3}
+details.ans{margin-top:8px}
+details.ans summary{cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--g);list-style:none}
+details.ans summary::-webkit-details-marker{display:none}
+details.ans summary::before{content:"";width:0;height:0;border-left:5px solid var(--g);border-top:4px solid transparent;border-bottom:4px solid transparent;transition:transform .15s}
+details.ans[open] summary::before{transform:rotate(90deg)}
+.ans-box{background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-top:7px;font-size:13.5px}
+.ans-box b{color:var(--good)}
+
+/* ===== 页脚 ===== */
+footer{border-top:1px solid var(--line);padding:20px clamp(14px,4vw,28px) 34px;text-align:center;color:var(--ink-soft);font-size:13px}
+footer .back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:8px;padding:7px 16px;background:#FBF9F3;margin-bottom:10px}
+footer .back:hover{border-color:var(--deep)}
+
+@media (max-width:560px){
+  .rgrid{grid-template-columns:1fr}
+  .exrow{flex-direction:column;gap:6px}
+  .exrow .src{white-space:normal}
+  .crumb{gap:8px;flex-wrap:wrap}
+}
+@media (max-width:380px){
+  main{padding:18px 12px 44px}
+  .exrow .en{font-size:14.5px}
+  .formula{font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶栏 ===== -->
+<nav class="crumb">
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <span class="sep">/</span>
+  <span>初中英语 · 语法专项</span>
+  <span class="sep">/</span>
+  <span class="cat">词性</span>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">词性 · Parts of Speech</span>
+    <h1>介词 <span class="en">Prepositions</span></h1>
+    <p class="hero-sub">时间介词、地点介词 · 固定介词搭配 · 介词短语辨析——七下问路单元与日常表达的核心，单选、语法填空与书面表达的高频失分点</p>
+    <div class="hero-tags">
+      <span class="hero-tag">时间介词、地点介词</span>
+      <span class="hero-tag">固定介词搭配</span>
+      <span class="hero-tag">介词短语辨析</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== ① 核心考点概览 ===== -->
+<section class="sec" id="overview">
+  <div class="sec-head">
+    <span class="num">01</span>
+    <h2>核心考点概览</h2>
+    <span class="meta">考什么 · 怎么考</span>
+  </div>
+  <div class="card">
+    <p class="lead">介词是中考「看着小、丢分多」的一类词：<b>单项选择、完形填空</b>常考 <span class="kv">in / on / at</span> 的时间与地点区分、<span class="kv">by bus / on foot</span> 交通方式、<span class="kv">next to / across from / between</span> 方位；<b>语法填空</b>常给出空格要求填介词；<b>书面表达</b>中介词误用（如 in Monday、by a bus）是最常见的语法硬伤。人教版七下 Unit 8（Is there a post office near here）是地点介词与问路表达的主场。</p>
+    <div class="rgrid" style="margin-top:12px">
+      <div class="rule"><div class="rt">时间介词、地点介词</div><div class="rd">at 点、on 天、in 段（时间）；小地点用 at、大地点用 in、街上用 on。</div></div>
+      <div class="rule"><div class="rt">固定介词搭配</div><div class="rd">动词 + 介词：<span class="eg">listen to, look at, wait for, be good at, be interested in</span>；靠积累。</div></div>
+      <div class="rule"><div class="rt">介词短语辨析</div><div class="rd"><span class="eg">across from / next to / between...and / in front of / behind / near</span> 等方位短语的图上辨析。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ② 考点精讲 ===== -->
+<section class="sec" id="points">
+  <div class="sec-head">
+    <span class="num">02</span>
+    <h2>考点逐一精讲</h2>
+    <span class="meta">规则 · 公式 · 搭配</span>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 1</span><h3>时间介词、地点介词</h3></div>
+    <div class="pt-body">
+      <p>时间介词和地点介词都按「范围大小」选用：<span class="kv">at</span> 用于「点」，<span class="kv">on</span> 用于「具体某天或某天的上下午」，<span class="kv">in</span> 用于「较长的一段时间 / 较大的地方」。</p>
+      <div class="formula"><span class="f">时间：</span>at 7:40（点钟） / on Monday（星期） / on 28th July（具体某天） / in July（月份） / in 2008（年份） / in the morning（上午）</div>
+      <div class="formula"><span class="f">地点：</span>at home（小地点） / in Beijing（大地点） / on Center Street（街道） / in the box（在里面）</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">时间 at</div><div class="rd">具体时刻、夜晚、中午：<span class="eg">at 7:40, at 5 o'clock, at night, at noon, at Christmas</span>。</div></div>
+        <div class="rule"><div class="rt">时间 on</div><div class="rd">星期、日期、具体某天的上下午：<span class="eg">on Monday, on 28th July, on the morning of May 1st</span>。</div></div>
+        <div class="rule"><div class="rt">时间 in</div><div class="rd">月份、季节、年份、上下午晚上：<span class="eg">in July, in summer, in 2008, in the morning / afternoon / evening</span>。</div></div>
+        <div class="rule"><div class="rt">地点 at</div><div class="rd">小地点或「某一点」：<span class="eg">at home, at the bus stop, at the station, at the door</span>。</div></div>
+        <div class="rule"><div class="rt">地点 in</div><div class="rd">大地方、内部：<span class="eg">in Beijing, in the box, in the room, in the river</span>。</div></div>
+        <div class="rule"><div class="rt">地点 on</div><div class="rd">街道、路、表面：<span class="eg">on Center Street, on the wall, on the desk, on the floor</span>。</div></div>
+      </div>
+      <p class="mini">交通方式：<span class="kv">by + 交通工具（无冠词）</span>——by bus / by bike / by car；但「步行」是 on foot。on / in + 交通工具要加冠词：on the bus, in a car。</p>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 2</span><h3>固定介词搭配</h3></div>
+    <div class="pt-body">
+      <p>许多动词、形容词、名词后面要接固定的介词，不能按中文意思随意换。这部分主要靠积累，下列是中考最高频的几组。</p>
+      <div class="formula"><span class="f">动词 + 介词：</span>listen <span class="f">to</span> music / look <span class="f">at</span> the blackboard / wait <span class="f">for</span> you / arrive <span class="f">in</span> Beijing / arrive <span class="f">at</span> the station</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">动词 + to</div><div class="rd"><span class="eg">listen to, look forward to, get to, go to, talk to</span>。</div></div>
+        <div class="rule"><div class="rt">动词 + for</div><div class="rd"><span class="eg">wait for, look for, ask for, thank...for</span>。</div></div>
+        <div class="rule"><div class="rt">动词 + at</div><div class="rd"><span class="eg">look at, laugh at, arrive at（小地点）, smile at</span>。</div></div>
+        <div class="rule"><div class="rt">be + 形容词 + 介词</div><div class="rd"><span class="eg">be good at, be interested in, be afraid of, be late for, be friendly to, be good for</span>。</div></div>
+        <div class="rule"><div class="rt">be good at / for / with</div><div class="rd">at 擅长；for 对……有益；with 善于与……相处：<span class="eg">good at maths, good for health, good with kids</span>。</div></div>
+        <div class="rule"><div class="rt">arrive in / at</div><div class="rd">in + 大地方（城市、国家）；at + 小地方（车站、学校、村庄）。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 3</span><h3>介词短语辨析</h3></div>
+    <div class="pt-body">
+      <p>七下 Unit 8 问路单元的核心是方位介词短语，常以「看图选介词」或「根据描述选位置」的形式考查。</p>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">near / around here</div><div class="rd">在这附近：<span class="eg">Is there a bank near here?</span></div></div>
+        <div class="rule"><div class="rt">next to / beside</div><div class="rd">紧挨着、在旁边：<span class="eg">The pay phone is next to the library.</span></div></div>
+        <div class="rule"><div class="rt">between...and...</div><div class="rd">在（两者）之间：<span class="eg">It's between the post office and the library.</span></div></div>
+        <div class="rule"><div class="rt">across from</div><div class="rd">在……对面：<span class="eg">There is a bank across from the school.</span></div></div>
+        <div class="rule"><div class="rt">in front of</div><div class="rd">在（外部的）前面：<span class="eg">There's one in front of the post office.</span>（区别于 in the front of 在内部前面）。</div></div>
+        <div class="rule"><div class="rt">behind</div><div class="rd">在……后面：<span class="eg">It's behind the police station.</span></div></div>
+        <div class="rule"><div class="rt">on / along / turn</div><div class="rd"><span class="eg">on Center Street（在中心大街）；go along（沿着）；turn left / right（左 / 右转）；at the crossing（在十字路口）。</span></div></div>
+        <div class="rule"><div class="rt">from...to...</div><div class="rd">从……到……：<span class="eg">How far is it from your home to school?</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ③ 课本例句 ===== -->
+<section class="sec" id="textbook">
+  <div class="sec-head">
+    <span class="num">03</span>
+    <h2>课本例句</h2>
+    <span class="meta">人教版现行教材 · 中英对照</span>
+  </div>
+  <div class="card">
+    <div class="exgroup">
+      <div class="egt">方位介词短语（七下 Unit 8）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Is there a post office near here?</div><div class="cn">这附近有邮局吗？</div></div><span class="src">七下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Yes, there is. It's on Center Street.</div><div class="cn">有，它在中心大街上。</div></div><span class="src">七下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">The pay phone is next to the library.</div><div class="cn">付费电话紧挨着图书馆。</div></div><span class="src">七下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">The police station is between the restaurant and the hospital.</div><div class="cn">警察局在餐馆和医院之间。</div></div><span class="src">七下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">There is a bank across from the school.</div><div class="cn">在学校对面有一家银行。</div></div><span class="src">七下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">There's one in front of the post office.</div><div class="cn">邮局前面有一家。</div></div><span class="src">七下 Unit 8</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">It's behind the police station.</div><div class="cn">它在警察局后面。</div></div><span class="src">七下 Unit 8</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">交通方式与 from...to（七下 Unit 3）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">How do you get to school? I usually take the bus.</div><div class="cn">你怎么去上学？——我通常乘公交车。</div></div><span class="src">七下 Unit 3</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Fifteen students get to school by bus.</div><div class="cn">15 名学生乘公交车上学。</div></div><span class="src">七下 Unit 3</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">How far is it from your home to school?</div><div class="cn">从你家到学校有多远？</div></div><span class="src">七下 Unit 3</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">时间介词（七上）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">I usually get up at 7:40.</div><div class="cn">我通常 7 点 40 分起床。</div></div><span class="src">七上 Unit 6</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">We meet at 5 o'clock every Tuesday.</div><div class="cn">我们每周二 5 点碰面。</div></div><span class="src">七上 Unit 5</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">My birthday is on 28th July.</div><div class="cn">我的生日是 7 月 28 日。</div></div><span class="src">七上 Unit 7</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">动作介词（八上）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Pour the milk into the blender.</div><div class="cn">把牛奶倒入搅拌机里。</div></div><span class="src">八上 Unit 8</span></div>
+      </div>
+    </div>
+    <p class="srcnote">来源说明：以上方位、交通方式、时间与动作介词例句均出自人教版现行初中教材（七下 Unit 8 问路单元、七下 Unit 3 交通单元、七上 Unit 5 / 6 / 7、八上 Unit 8），册次单元已逐一标注，可与对应单元课文、听力文本及 Grammar Focus 核对。考点精讲中未标注出处的短例为语法讲解示例。</p>
+  </div>
+</section>
+
+<!-- ===== ④ 易错点 ===== -->
+<section class="sec" id="mistakes">
+  <div class="sec-head">
+    <span class="num">04</span>
+    <h2>易错点</h2>
+    <span class="meta">错在哪 · 怎么改</span>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 1</span><h3>星期前用 on 不用 in</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">We have maths in Monday.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">We have maths on Monday.</div></div>
+      <p class="why"><b>解析：</b>星期、具体某一天前用介词 on，不用 in。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 2</span><h3>点钟前用 at 不用 in</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I get up in 7:40 every morning.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I get up at 7:40 every morning.</div></div>
+      <p class="why"><b>解析：</b>具体时刻前用介词 at。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 3</span><h3>by + 交通工具不加冠词</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I go to school by a bus every day.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I go to school by bus every day.</div></div>
+      <p class="why"><b>解析：</b>「by + 交通工具」中间不加任何冠词：by bus / by bike / by car；若用 take，则是 take a bus。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 4</span><h3>步行是 on foot 不是 by foot</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I go to school by foot.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I go to school on foot.</div></div>
+      <p class="why"><b>解析：</b>「步行」固定搭配是 on foot，不能说 by foot。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 5</span><h3>arrive in 与 arrive at</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">We arrived at Beijing yesterday.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">We arrived in Beijing yesterday.</div></div>
+      <p class="why"><b>解析：</b>arrive in + 大地方（城市、国家）；arrive at + 小地方（车站、学校、村庄）。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 6</span><h3>be good at 搭配</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">She is good in maths.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">She is good at maths.</div></div>
+      <p class="why"><b>解析：</b>「擅长……」固定搭配 be good at，介词用 at 不用 in。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 7</span><h3>listen 后必须加 to</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I listen music every evening.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I listen to music every evening.</div></div>
+      <p class="why"><b>解析：</b>listen 是不及物动词，接宾语必须加 to：listen to music。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 8</span><h3>in front of 与 in the front of</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">There is a big tree in the front of the classroom.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">There is a big tree in front of the classroom.</div></div>
+      <p class="why"><b>解析：</b>in front of 指「在（物体外部的）前面」；in the front of 指「在（物体内部的）前部」。树在教室外面，用 in front of。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 9</span><h3>月份前用 in 不用 on</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">We usually go swimming on summer.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">We usually go swimming in summer.</div></div>
+      <p class="why"><b>解析：</b>月份、季节、年份前用 in；只有具体到某一天才用 on。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑤ 关键提醒 / 速记 ===== -->
+<section class="sec" id="tips">
+  <div class="sec-head">
+    <span class="num">05</span>
+    <h2>关键提醒 · 速记口诀</h2>
+    <span class="meta">口诀 · 信号词</span>
+  </div>
+
+  <div class="tip">
+    <div class="tt">时间介词口诀</div>
+    <div class="mnem">at 用在点钟前，on 用在某天前；in 用于月、季、年，上下午晚也用 in；具体某天的上下午，换成 on 才正确。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">交通方式口诀</div>
+    <div class="mnem">by 加交通工具，冠词统统不用；步行要用 on foot，on / in 坐车要加 the。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">方位介词速记</div>
+    <div class="mnem">里面 in，上面 on，挨着 next to，对面 across from；两者之间 between...and，外部前面 in front of，后面 behind，附近 near。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">信号词——介词题的判据</div>
+    <div class="sig">
+      <span>点钟 / at night → at</span>
+      <span>星期 / 日期 → on</span>
+      <span>月 / 季 / 年 / morning → in</span>
+      <span>by bus / bike / car → 无冠词</span>
+      <span>on foot → 步行</span>
+      <span>arrive in 大地 / arrive at 小地</span>
+      <span>be good at / interested in / afraid of / late for</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑥ 小练习 ===== -->
+<section class="sec" id="quiz">
+  <div class="sec-head">
+    <span class="num">06</span>
+    <h2>小练习</h2>
+    <span class="meta">做完再点开答案</span>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">1.</span>I usually get up ____ 7:40 ____ the morning.</div>
+    <div class="opts"><span class="opt">A. at; in</span><span class="opt">B. in; at</span><span class="opt">C. at; on</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>A。</b>具体时刻用 at；上下午用 in the morning。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">2.</span>We have a maths test ____ Monday.</div>
+    <div class="opts"><span class="opt">A. in</span><span class="opt">B. on</span><span class="opt">C. at</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>星期前用 on。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">3.</span>The pay phone is ____ the library and the post office.</div>
+    <div class="opts"><span class="opt">A. between</span><span class="opt">B. across</span><span class="opt">C. next</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>A。</b>「在两者之间」用 between...and...。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">4.</span>—How do you go to work? —I go to work ____.</div>
+    <div class="opts"><span class="opt">A. by a car</span><span class="opt">B. by car</span><span class="opt">C. in car</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>by + 交通工具中间不加冠词：by car。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">5.</span>My sister is good ____ playing the piano.</div>
+    <div class="opts"><span class="opt">A. in</span><span class="opt">B. at</span><span class="opt">C. for</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>「擅长」用 be good at。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">6.</span>The bank is ____ from the park. You can walk across the street.</div>
+    <div class="opts"><span class="opt">A. next</span><span class="opt">B. across</span><span class="opt">C. between</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>across from 表示「在……对面」，需过马路印证。</div></details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <p>新版人教版初中英语 · 语法专项（词性 · 句子 · 时态）</p>
+</footer>
+</body>
+</html>

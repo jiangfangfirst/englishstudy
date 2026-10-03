@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>形容词 &amp; 副词 Adjectives &amp; Adverbs · 初中英语语法专项</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F6F3EC; --paper-2:#EFEBE0; --ink:#2A2A26; --ink-soft:#6B665B;
+  --deep:#1F3B5E; --deep-2:#18304E; --line:#E3DDD0; --accent:#C08A3E;
+  --g:#2E82A8;
+  --bad:#A8483C; --good:#3E7A5E;
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+/* ===== 顶栏 ===== */
+.crumb{max-width:880px;margin:0 auto;padding:14px clamp(14px,4vw,28px) 0;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink-soft)}
+.crumb a.back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:#FBF9F3}
+.crumb a.back:hover{border-color:var(--deep);background:var(--paper-2)}
+.crumb .sep{opacity:.5}
+.crumb .cat{font-weight:600;color:var(--g)}
+
+/* ===== Hero ===== */
+.hero{
+  background:var(--deep);
+  background-image:
+    radial-gradient(1200px 500px at 85% -10%, rgba(192,138,62,.18), transparent 60%),
+    radial-gradient(900px 420px at -5% 110%, rgba(46,130,168,.22), transparent 55%);
+  color:#F3EFE3;padding:clamp(30px,5.5vw,52px) clamp(18px,5vw,60px) clamp(26px,3.6vw,36px);
+  position:relative;overflow:hidden;
+}
+.hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;letter-spacing:.06em;padding:5px 12px;border:1px solid rgba(243,239,227,.35);border-radius:20px;color:#E3A94F}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4.6vw,40px);font-weight:700;margin:14px 0 6px;line-height:1.2}
+.hero h1 .en{font-size:.62em;color:#E3A94F;font-weight:600;margin-left:10px}
+.hero-sub{font-size:clamp(13px,2.4vw,15px);color:rgba(243,239,227,.82);max-width:640px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero-tag{font-size:12px;padding:4px 11px;border-radius:20px;background:rgba(243,239,227,.1);border:1px solid rgba(243,239,227,.25);color:#F3EFE3}
+
+/* ===== 主体 ===== */
+main{max-width:880px;margin:0 auto;padding:24px clamp(14px,4vw,28px) 60px}
+.sec{margin-top:30px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-head .num{font-family:var(--serif);font-size:14px;font-weight:700;color:#fff;background:var(--g);border-radius:8px;padding:3px 11px;letter-spacing:.05em}
+.sec-head h2{font-family:var(--serif);font-size:clamp(19px,2.5vw,23px);font-weight:700}
+.sec-head .meta{font-size:12.5px;color:var(--ink-soft);margin-left:auto}
+
+.card{background:#FBF9F3;border:1px solid var(--line);border-radius:12px;padding:clamp(16px,2.6vw,22px)}
+.card + .card{margin-top:12px}
+.lead{font-size:14.5px;color:var(--ink)}
+.lead b{color:var(--deep)}
+.hl{color:var(--deep);font-weight:600}
+.kv{color:var(--g);font-weight:700}
+
+/* ===== 考点 ===== */
+.pt{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.pt + .pt{margin-top:14px}
+.pt-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:color-mix(in srgb, var(--g) 8%, #fff);border-bottom:1px solid var(--line)}
+.pt-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--g);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.pt-head h3{font-family:var(--serif);font-size:16.5px;font-weight:700;color:var(--deep)}
+.pt-body{padding:14px 16px 16px}
+.pt-body p{font-size:14.5px;margin-bottom:9px}
+.pt-body p:last-child{margin-bottom:0}
+.formula{background:var(--paper-2);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:14.5px;overflow-wrap:break-word}
+.formula .f{font-family:var(--serif);font-weight:600;color:var(--deep)}
+.mini{font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+
+/* ===== 规则网格 ===== */
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.rule{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:11px 13px}
+.rule .rt{font-size:13.5px;font-weight:700;color:var(--deep);margin-bottom:3px}
+.rule .rd{font-size:13px;color:var(--ink-soft);line-height:1.55}
+.rule .rd .eg{color:var(--g);font-weight:600}
+
+/* ===== 课本例句 ===== */
+.exlist{display:flex;flex-direction:column;gap:10px}
+.exrow{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 14px}
+.exrow .en{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.5;overflow-wrap:break-word}
+.exrow .cn{font-size:13px;color:var(--ink-soft);margin-top:2px}
+.exrow .src{flex:0 0 auto;font-size:11px;font-weight:600;color:var(--g);background:color-mix(in srgb, var(--g) 12%, #fff);border:1px solid color-mix(in srgb, var(--g) 30%, var(--line));border-radius:20px;padding:3px 10px;white-space:nowrap}
+.exgroup{margin-top:14px}
+.exgroup:first-child{margin-top:0}
+.exgroup .egt{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--deep);margin-bottom:8px}
+.exgroup .egt::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g)}
+.srcnote{font-size:12.5px;color:var(--ink-soft);background:var(--paper-2);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;margin-top:12px}
+
+/* ===== 易错点 ===== */
+.err{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.err + .err{margin-top:14px}
+.err-head{display:flex;align-items:center;gap:10px;padding:11px 16px;background:color-mix(in srgb, var(--bad) 7%, #fff);border-bottom:1px solid var(--line)}
+.err-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--bad);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.err-head h3{font-size:15.5px;font-weight:700;color:#8C3A2E}
+.err-body{padding:13px 16px 15px}
+.pair{border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin-bottom:9px;background:#fffdf8}
+.pair:last-child{margin-bottom:0}
+.pair .lab{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;margin-bottom:3px}
+.pair.wrong .lab{color:var(--bad)}
+.pair.right .lab{color:var(--good)}
+.pair .s{font-size:14.5px;font-family:var(--serif);overflow-wrap:break-word}
+.pair.wrong .s{color:#7C3127}
+.pair.right .s{color:#2E5D45}
+.pair svg{width:13px;height:13px;stroke:currentColor;flex:0 0 auto}
+.why{font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+.why b{color:var(--ink)}
+
+/* ===== 速记 ===== */
+.tip{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:#FFF9EC;padding:13px 15px;margin-bottom:11px}
+.tip:last-child{margin-bottom:0}
+.tip .tt{font-size:14px;font-weight:700;color:#8A6424;margin-bottom:4px}
+.tip p{font-size:13.5px;color:var(--ink-soft)}
+.mnem{font-family:var(--serif);font-size:14px;color:var(--deep);background:var(--paper-2);border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;line-height:1.8}
+.sig{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.sig span{font-size:12px;font-weight:600;color:var(--deep);background:color-mix(in srgb, var(--g) 10%, #fff);border:1px solid color-mix(in srgb, var(--g) 28%, var(--line));border-radius:20px;padding:3px 10px}
+
+/* ===== 小练习 ===== */
+.q{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 15px;margin-bottom:10px}
+.q .qt{font-size:14.5px;margin-bottom:8px}
+.q .qt .qn{font-weight:700;color:var(--deep);margin-right:6px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.q .opt{font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:7px;padding:4px 10px;background:#FBF9F3}
+details.ans{margin-top:8px}
+details.ans summary{cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--g);list-style:none}
+details.ans summary::-webkit-details-marker{display:none}
+details.ans summary::before{content:"";width:0;height:0;border-left:5px solid var(--g);border-top:4px solid transparent;border-bottom:4px solid transparent;transition:transform .15s}
+details.ans[open] summary::before{transform:rotate(90deg)}
+.ans-box{background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-top:7px;font-size:13.5px}
+.ans-box b{color:var(--good)}
+
+/* ===== 页脚 ===== */
+footer{border-top:1px solid var(--line);padding:20px clamp(14px,4vw,28px) 34px;text-align:center;color:var(--ink-soft);font-size:13px}
+footer .back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:8px;padding:7px 16px;background:#FBF9F3;margin-bottom:10px}
+footer .back:hover{border-color:var(--deep)}
+
+@media (max-width:560px){
+  .rgrid{grid-template-columns:1fr}
+  .exrow{flex-direction:column;gap:6px}
+  .exrow .src{white-space:normal}
+  .crumb{gap:8px;flex-wrap:wrap}
+}
+@media (max-width:380px){
+  main{padding:18px 12px 44px}
+  .exrow .en{font-size:14.5px}
+  .formula{font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶栏 ===== -->
+<nav class="crumb">
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <span class="sep">/</span>
+  <span>初中英语 · 语法专项</span>
+  <span class="sep">/</span>
+  <span class="cat">词性</span>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">词性 · Parts of Speech</span>
+    <h1>形容词 &amp; 副词 <span class="en">Adjectives &amp; Adverbs</span></h1>
+    <p class="hero-sub">形容词副词区别 · 比较级最高级规则变化 · 不规则变化 · 位置辨析——八上 Unit 3 / Unit 4 的核心语法，单选与语法填空的高频变形点</p>
+    <div class="hero-tags">
+      <span class="hero-tag">形容词副词区别</span>
+      <span class="hero-tag">比较级最高级规则变化</span>
+      <span class="hero-tag">不规则变化</span>
+      <span class="hero-tag">位置辨析</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== ① 核心考点概览 ===== -->
+<section class="sec" id="overview">
+  <div class="sec-head">
+    <span class="num">01</span>
+    <h2>核心考点概览</h2>
+    <span class="meta">考什么 · 怎么考</span>
+  </div>
+  <div class="card">
+    <p class="lead">形容词和副词是中考词性考查的「变形大户」：<b>单项选择、完形填空</b>常考「比较级 / 最高级」与「as...as」结构；<b>语法填空、词汇运用</b>常给出形容词或副词原级，要求根据语境改写为比较级、最高级或词性转换；<b>书面表达</b>中正确使用比较级能明显提升档次。人教版八上 Unit 3（I'm more outgoing than my sister）与 Unit 4（What's the best movie theater）正是这两个考点的主场。</p>
+    <div class="rgrid" style="margin-top:12px">
+      <div class="rule"><div class="rt">形容词副词区别</div><div class="rd">形容词修饰名词 / 代词，作定语、表语；副词修饰动词、形容词或全句，说明方式、程度、时间。</div></div>
+      <div class="rule"><div class="rt">比较级最高级规则变化</div><div class="rd">单音节加 -er / -est，多音节加 more / most；<span class="eg">taller, the tallest, more beautiful</span>。</div></div>
+      <div class="rule"><div class="rt">不规则变化</div><div class="rd"><span class="eg">good/well→better→best, bad/badly→worse→worst, many/much→more→most</span>，必须单独背。</div></div>
+      <div class="rule"><div class="rt">位置辨析</div><div class="rd">形容词多在名词前或系动词后；方式副词多在动词后，程度副词（very, quite）多在被修饰词前。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ② 考点精讲 ===== -->
+<section class="sec" id="points">
+  <div class="sec-head">
+    <span class="num">02</span>
+    <h2>考点逐一精讲</h2>
+    <span class="meta">规则 · 公式 · 变形</span>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 1</span><h3>形容词副词区别</h3></div>
+    <div class="pt-body">
+      <p><span class="kv">形容词</span>用来修饰名词或代词，说明人或事物的性质、状态、特征，常放在名词前作定语，或放在 be / look / feel / is 等系动词后作表语。<span class="kv">副词</span>用来修饰动词、形容词、其他副词或整个句子，说明动作「怎样」发生、程度「多深」、时间「何时」。</p>
+      <div class="formula"><span class="f">形容词：</span>a <span class="f">beautiful</span> flower（漂亮的花） / She is <span class="f">beautiful</span>.（她很漂亮。）</div>
+      <div class="formula"><span class="f">副词：</span>She sings <span class="f">beautifully</span>.（她唱得美。） / He runs <span class="f">fast</span>.（他跑得快。）</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">形容词作定语</div><div class="rd">放在名词前：<span class="eg">a boring movie, an outgoing girl, the closest store</span>。</div></div>
+        <div class="rule"><div class="rt">形容词作表语</div><div class="rd">放在系动词后：<span class="eg">The movie is boring. / She looks happy.</span></div></div>
+        <div class="rule"><div class="rt">副词修饰动词</div><div class="rd">说明动作方式：<span class="eg">plays the drums well, works hard, sings beautifully</span>。</div></div>
+        <div class="rule"><div class="rt">副词修饰形容词</div><div class="rd">程度副词在前：<span class="eg">very boring, quite different, really fun</span>。</div></div>
+        <div class="rule"><div class="rt">形容词 + ly → 副词</div><div class="rd"><span class="eg">quick→quickly, loud→loudly, hard→hard（形副同形）, fast→fast（同形）</span>。</div></div>
+        <div class="rule"><div class="rt">几个易错同形词</div><div class="rd"><span class="eg">hard（努力地）≠ hardly（几乎不）；late（晚）≠ lately（最近）；near 形副同形。</span></div></div>
+      </div>
+      <p class="mini">判断技巧：看它修饰的是谁——修饰名词用形容词，修饰动词 / 形容词用副词。</p>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 2</span><h3>比较级最高级规则变化</h3></div>
+    <div class="pt-body">
+      <p>比较级表示「更……」，用于两者之间比较，常与 <span class="kv">than</span> 连用；最高级表示「最……」，用于三者或以上，前面通常加 <span class="kv">the</span>，句末常接 <span class="kv">in / of</span> 短语表范围。变化分「规则」与「不规则」两类。</p>
+      <div class="formula"><span class="f">比较级：</span>A + be / 动词 + 比较级 + than + B　（A 比 B 更……）</div>
+      <div class="formula"><span class="f">最高级：</span>the + 最高级 + 名词 + in / of + 范围　（在……之中最……）</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">一般单音节加 -er / -est</div><div class="rd"><span class="eg">tall→taller→tallest, small→smaller→smallest, fast→faster→fastest</span></div></div>
+        <div class="rule"><div class="rt">以 e 结尾只加 -r / -st</div><div class="rd"><span class="eg">nice→nicer→nicest, close→closer→closest, large→larger→largest</span></div></div>
+        <div class="rule"><div class="rt">辅音 + y → 变 i 加 -er / -est</div><div class="rd"><span class="eg">easy→easier→easiest, funny→funnier→funniest, busy→busier→busiest</span></div></div>
+        <div class="rule"><div class="rt">重读闭音节双写尾字母</div><div class="rd"><span class="eg">big→bigger→biggest, hot→hotter→hottest, thin→thinner→thinnest</span></div></div>
+        <div class="rule"><div class="rt">多音节 / 部分双音节加 more / most</div><div class="rd"><span class="eg">outgoing→more outgoing→most outgoing, beautiful→more beautiful→most beautiful, comfortable→more comfortable</span></div></div>
+        <div class="rule"><div class="rt">副词最高级前 the 可省</div><div class="rd">形容词最高级必加 the；副词最高级前 the 常省：<span class="eg">(the) most quickly, (the) best</span>。</div></div>
+      </div>
+      <div class="formula"><span class="f">原级比较：</span>as + 原级 + as（和……一样）　/　not as(so) + 原级 + as（不如……）</div>
+      <p class="mini">常见修饰比较级的词：a little, a bit, much, even, still——<span class="eg">much taller, a little quieter</span>。</p>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 3</span><h3>不规则变化</h3></div>
+    <div class="pt-body">
+      <p>下列高频词的比较级、最高级不按规则加 -er / -est，必须逐个背诵，是中考单选与语法填空的必考点。</p>
+      <div class="formula"><span class="f">原级 → 比较级 → 最高级</span></div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">good / well</div><div class="rd">→ <span class="eg">better → best</span>（好的 / 好地）</div></div>
+        <div class="rule"><div class="rt">bad / badly / ill</div><div class="rd">→ <span class="eg">worse → worst</span>（坏的 / 差地 / 病的）</div></div>
+        <div class="rule"><div class="rt">many / much</div><div class="rd">→ <span class="eg">more → most</span>（多的 / 多地）</div></div>
+        <div class="rule"><div class="rt">little</div><div class="rd">→ <span class="eg">less → least</span>（少的 / 少地）</div></div>
+        <div class="rule"><div class="rt">far</div><div class="rd">→ <span class="eg">farther / further → farthest / furthest</span>（远的 / 进一步的）</div></div>
+        <div class="rule"><div class="rt">old</div><div class="rd">→ <span class="eg">older / elder → oldest / eldest</span>（年长的 / 年长的家人）</div></div>
+      </div>
+      <p class="mini">课本实例：It's <span class="kv">worse</span> than Blue Moon. It has the <span class="kv">worst</span> service.（worse / worst 来自 bad / badly）；he plays tennis <span class="kv">better</span>（better 来自 well）。</p>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 4</span><h3>位置辨析</h3></div>
+    <div class="pt-body">
+      <p>同一句里形容词和副词放哪、顺序如何，是单选与句型转换的常见陷阱。记住三条主线即可。</p>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">形容词位置 ①：名词前</div><div class="rd">多个形容词修饰同一名词时，顺序一般为「观点 + 大小 + 形状 + 颜色 + 出处 + 用途」：<span class="eg">a nice small round brown wooden table</span>。初中重点记住「好在前、颜色在后」。</div></div>
+        <div class="rule"><div class="rt">形容词位置 ②：系动词后</div><div class="rd">放在 be / look / sound / smell / taste / feel / get / become 后作表语：<span class="eg">You look happy. / It tastes good.</span>（这些系动词后用形容词，不用副词）。</div></div>
+        <div class="rule"><div class="rt">副词位置 ①：动词后</div><div class="rd">方式副词多放在动词（或宾语）之后：<span class="eg">plays tennis better, works hard, sings beautifully</span>。</div></div>
+        <div class="rule"><div class="rt">副词位置 ②：被修饰词前</div><div class="rd">程度副词 very / quite / really / so 放在形容词或副词前：<span class="eg">very boring, really fun, quite different</span>。</div></div>
+        <div class="rule"><div class="rt">频度副词位置</div><div class="rd">always / usually / often / sometimes / hardly ever / never 放在 be 动词后、实义动词前：<span class="eg">He is always late. / I usually get up at 7:40.</span></div></div>
+        <div class="rule"><div class="rt">enough 的位置</div><div class="rd">enough 修饰形容词 / 副词时放在其后：<span class="eg">tall enough, fast enough</span>；修饰名词时前置后置均可：<span class="eg">enough time / time enough</span>。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ③ 课本例句 ===== -->
+<section class="sec" id="textbook">
+  <div class="sec-head">
+    <span class="num">03</span>
+    <h2>课本例句</h2>
+    <span class="meta">人教版现行教材 · 中英对照</span>
+  </div>
+  <div class="card">
+    <div class="exgroup">
+      <div class="egt">比较级（八上 Unit 3）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">I'm more outgoing than my sister.</div><div class="cn">我比我姐姐更外向。</div></div><span class="src">八上 Unit 3</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Are you as friendly as your sister?</div><div class="cn">你和你妹妹一样友好吗？</div></div><span class="src">八上 Unit 3</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Both Sam and Tom can play the drums, but Sam plays them better than Tom.</div><div class="cn">萨姆和汤姆都会敲鼓，但萨姆比汤姆敲得更好。</div></div><span class="src">八上 Unit 3</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Tara works as hard as Tina.</div><div class="cn">塔拉和蒂娜一样努力。</div></div><span class="src">八上 Unit 3</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">He is taller and more outgoing than me.</div><div class="cn">他比我更高、更外向。</div></div><span class="src">八上 Unit 3 Section B</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">We both like sports, but he plays tennis better, so he always wins.</div><div class="cn">我们都喜欢运动，但他网球打得更好，所以他总是赢。</div></div><span class="src">八上 Unit 3 Section B</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">I always get better grades than he does.</div><div class="cn">我的成绩总是比他好。</div></div><span class="src">八上 Unit 3 Section B</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">最高级（八上 Unit 4）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">What's the best movie theater to go to?</div><div class="cn">可以去的最好的电影院是哪家？</div></div><span class="src">八上 Unit 4</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Town Cinema. It's the closest to home. And you can buy tickets the most quickly there.</div><div class="cn">城镇影院。它离家最近，而且你在那儿能最快地买到票。</div></div><span class="src">八上 Unit 4</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Which is the worst clothes store in town?</div><div class="cn">镇上最差的服装店是哪一家？</div></div><span class="src">八上 Unit 4</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Dream Clothes. It's worse than Blue Moon. It has the worst service.</div><div class="cn">梦之衣服装店。它比蓝月亮还差，服务也是最差的。</div></div><span class="src">八上 Unit 4</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">It has the most comfortable seats.</div><div class="cn">它有最舒适的座位。</div></div><span class="src">八上 Unit 4</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">You can buy clothes the most cheaply there.</div><div class="cn">你在那里能买到最便宜的衣服。</div></div><span class="src">八上 Unit 4</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">形容词作表语 / 定语（七上）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">He doesn't like maths because it's boring to him.</div><div class="cn">他不喜欢数学，因为数学对他来说很枯燥。</div></div><span class="src">七上 Unit 4</span></div>
+      </div>
+    </div>
+    <p class="srcnote">来源说明：以上例句均出自人教版现行初中教材（八上 Unit 3 / Unit 4 为比较级、最高级主场单元；七上 Unit 4 为形容词作表语），册次单元已逐一标注，可与对应单元课文、Grammar Focus 及听力文本核对。考点精讲中未标注出处的短例为语法讲解示例，非课本原句。</p>
+  </div>
+</section>
+
+<!-- ===== ④ 易错点 ===== -->
+<section class="sec" id="mistakes">
+  <div class="sec-head">
+    <span class="num">04</span>
+    <h2>易错点</h2>
+    <span class="meta">错在哪 · 怎么改</span>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 1</span><h3>than 前必须用比较级</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I am tall than my sister.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I am taller than my sister.</div></div>
+      <p class="why"><b>解析：</b>句中有 than「比」时，形容词 / 副词必须用比较级，tall→taller，不能用原级。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 2</span><h3>最高级前漏加 the</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">She is best student in our class.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">She is the best student in our class.</div></div>
+      <p class="why"><b>解析：</b>形容词最高级前通常必须加 the（副词最高级前 the 可省）；best 是形容词最高级，前要加 the。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 3</span><h3>多音节词误加 -er / -est</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">She is more outgoing than me, but Lily is outgoinger than her.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">She is more outgoing than me, but Lily is more outgoing than her.</div></div>
+      <p class="why"><b>解析：</b>outgoing 是多音节词，比较级要在前面加 more，不能加 -er。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 4</span><h3>as...as 中间用原级</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">Tara works as harder as Tina.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">Tara works as hard as Tina.</div></div>
+      <p class="why"><b>解析：</b>「as + 原级 + as」表示「和……一样」，中间必须用原级 hard，不能用比较级 harder。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 5</span><h3>系动词后误用副词</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">You look happily today.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">You look happy today.</div></div>
+      <p class="why"><b>解析：</b>look「看起来」是系动词，后面接形容词作表语，用 happy，不用副词 happily。同类还有 sound / smell / taste / feel。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 6</span><h3>不规则变化 good / well</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">He plays tennis gooder than me.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">He plays tennis better than me.</div></div>
+      <p class="why"><b>解析：</b>well（副词）的比较级是不规则变化 better，不是 gooder；good 的比较级也是 better。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 7</span><h3>修饰比较级用 much 而不是 very</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">This book is very cheaper than that one.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">This book is much cheaper than that one.</div></div>
+      <p class="why"><b>解析：</b>very 只能修饰原级；修饰比较级要用 much / a little / even / far——much cheaper（便宜得多）。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 8</span><h3>enough 位置放错</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">He is enough tall to reach the box.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">He is tall enough to reach the box.</div></div>
+      <p class="why"><b>解析：</b>enough 修饰形容词 / 副词时必须放在其后：tall enough（足够高），不能放前面。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 9</span><h3>hard 与 hardly 混淆</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">He studies hardly, so he gets good grades.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">He studies hard, so he gets good grades.</div></div>
+      <p class="why"><b>解析：</b>hard 作副词是「努力地」；hardly 是「几乎不」，意思完全相反。「努力学习」要用 study hard。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑤ 关键提醒 / 速记 ===== -->
+<section class="sec" id="tips">
+  <div class="sec-head">
+    <span class="num">05</span>
+    <h2>关键提醒 · 速记口诀</h2>
+    <span class="meta">口诀 · 信号词</span>
+  </div>
+
+  <div class="tip">
+    <div class="tt">比较级最高级规则变化口诀</div>
+    <div class="mnem">比较级，要加 er；最高级，est 前面加 the。末尾若有不发音 e，只加 r、st 就可以。辅音加 y 变 i 再加，重读闭音节双写尾。多音节别怕麻烦，前面 more、most 来帮忙。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">不规则变化口诀</div>
+    <div class="mnem">好 good / well，两个都变 better，最好 best；坏 bad / badly，比较 worse，最差 worst；多 many / much，比较 more，最多 most；少 little，比较 less，最少 least；远 far， farther 走远方，further 表「进一步」。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">形容词副词区别口诀</div>
+    <div class="mnem">形修饰名，副饰动；系动词后用形容；程度副词最在前，方式副词站后头。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">信号词——看到就要用比较级 / 最高级</div>
+    <div class="sig">
+      <span>than → 比较级</span>
+      <span>as...as → 原级</span>
+      <span>of the two → 比较级</span>
+      <span>in / of + 范围 → 最高级</span>
+      <span>much / a little / even / far → 修饰比较级</span>
+      <span>very / quite / really / so → 修饰原级</span>
+      <span>one of the + 最高级 + 复数</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑥ 小练习 ===== -->
+<section class="sec" id="quiz">
+  <div class="sec-head">
+    <span class="num">06</span>
+    <h2>小练习</h2>
+    <span class="meta">做完再点开答案</span>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">1.</span>My sister is ____ than me.</div>
+    <div class="opts"><span class="opt">A. outgoing</span><span class="opt">B. more outgoing</span><span class="opt">C. most outgoing</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>句中有 than，要用比较级；outgoing 是多音节词，加 more。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">2.</span>Town Cinema is ____ cinema in town.</div>
+    <div class="opts"><span class="opt">A. good</span><span class="opt">B. better</span><span class="opt">C. the best</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>C。</b>范围 in town 是三者以上，用最高级；形容词最高级前加 the。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">3.</span>Sam plays the drums ____ than Tom.</div>
+    <div class="opts"><span class="opt">A. good</span><span class="opt">B. well</span><span class="opt">C. better</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>C。</b>修饰动词 plays 用副词；than 提示比较级，well 的比较级是不规则变化 better。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">4.</span>—Is Tara as ____ as Tina? —Yes, she works hard.</div>
+    <div class="opts"><span class="opt">A. harder</span><span class="opt">B. hard</span><span class="opt">C. hardest</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>「as + 原级 + as」中间用原级 hard。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">5.</span>This shirt is ____ than that one. I can't afford it.</div>
+    <div class="opts"><span class="opt">A. very expensive</span><span class="opt">B. much expensive</span><span class="opt">C. much more expensive</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>C。</b>than 提示比较级；expensive 多音节加 more，且用 much 修饰比较级。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">6.</span>You look ____ today. Are you happy?</div>
+    <div class="opts"><span class="opt">A. happily</span><span class="opt">B. happy</span><span class="opt">C. more happily</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>look 是系动词，后面接形容词作表语，用 happy。</div></details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <p>新版人教版初中英语 · 语法专项（词性 · 句子 · 时态）</p>
+</footer>
+</body>
+</html>

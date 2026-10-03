@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>一般将来时 Simple Future · 初中英语语法专项</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F6F3EC; --paper-2:#EFEBE0; --ink:#2A2A26; --ink-soft:#6B665B;
+  --deep:#1F3B5E; --deep-2:#18304E; --line:#E3DDD0; --accent:#C08A3E;
+  --g:#35507E;
+  --bad:#A8483C; --good:#3E7A5E;
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+/* ===== 顶栏 ===== */
+.crumb{max-width:880px;margin:0 auto;padding:14px clamp(14px,4vw,28px) 0;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink-soft)}
+.crumb a.back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:#FBF9F3}
+.crumb a.back:hover{border-color:var(--deep);background:var(--paper-2)}
+.crumb .sep{opacity:.5}
+.crumb .cat{font-weight:600;color:var(--g)}
+
+/* ===== Hero ===== */
+.hero{
+  background:var(--deep);
+  background-image:
+    radial-gradient(1200px 500px at 85% -10%, rgba(192,138,62,.18), transparent 60%),
+    radial-gradient(900px 420px at -5% 110%, rgba(46,130,168,.22), transparent 55%);
+  color:#F3EFE3;padding:clamp(30px,5.5vw,52px) clamp(18px,5vw,60px) clamp(26px,3.6vw,36px);
+  position:relative;overflow:hidden;
+}
+.hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;letter-spacing:.06em;padding:5px 12px;border:1px solid rgba(243,239,227,.35);border-radius:20px;color:#E3A94F}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4.6vw,40px);font-weight:700;margin:14px 0 6px;line-height:1.2}
+.hero h1 .en{font-size:.62em;color:#E3A94F;font-weight:600;margin-left:10px}
+.hero-sub{font-size:clamp(13px,2.4vw,15px);color:rgba(243,239,227,.82);max-width:640px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero-tag{font-size:12px;padding:4px 11px;border-radius:20px;background:rgba(243,239,227,.1);border:1px solid rgba(243,239,227,.25);color:#F3EFE3}
+
+/* ===== 主体 ===== */
+main{max-width:880px;margin:0 auto;padding:24px clamp(14px,4vw,28px) 60px}
+.sec{margin-top:30px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-head .num{font-family:var(--serif);font-size:14px;font-weight:700;color:#fff;background:var(--g);border-radius:8px;padding:3px 11px;letter-spacing:.05em}
+.sec-head h2{font-family:var(--serif);font-size:clamp(19px,2.5vw,23px);font-weight:700}
+.sec-head .meta{font-size:12.5px;color:var(--ink-soft);margin-left:auto}
+
+.card{background:#FBF9F3;border:1px solid var(--line);border-radius:12px;padding:clamp(16px,2.6vw,22px)}
+.card + .card{margin-top:12px}
+.lead{font-size:14.5px;color:var(--ink)}
+.lead b{color:var(--deep)}
+.hl{color:var(--deep);font-weight:600}
+.kv{color:var(--g);font-weight:700}
+
+/* ===== 考点 ===== */
+.pt{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.pt + .pt{margin-top:14px}
+.pt-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:color-mix(in srgb, var(--g) 8%, #fff);border-bottom:1px solid var(--line)}
+.pt-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--g);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.pt-head h3{font-family:var(--serif);font-size:16.5px;font-weight:700;color:var(--deep)}
+.pt-body{padding:14px 16px 16px}
+.pt-body p{font-size:14.5px;margin-bottom:9px}
+.pt-body p:last-child{margin-bottom:0}
+.formula{background:var(--paper-2);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:14.5px;overflow-wrap:break-word}
+.formula .f{font-family:var(--serif);font-weight:600;color:var(--deep)}
+.mini{font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+
+/* ===== 规则网格 ===== */
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.rule{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:11px 13px}
+.rule .rt{font-size:13.5px;font-weight:700;color:var(--deep);margin-bottom:3px}
+.rule .rd{font-size:13px;color:var(--ink-soft);line-height:1.55}
+.rule .rd .eg{color:var(--g);font-weight:600}
+
+/* ===== 课本例句 ===== */
+.exlist{display:flex;flex-direction:column;gap:10px}
+.exrow{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 14px}
+.ex-main{flex:1;min-width:0}
+.exrow .en{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.5;overflow-wrap:break-word}
+.exrow .cn{font-size:13px;color:var(--ink-soft);margin-top:2px}
+.exrow .src{flex:0 0 auto;font-size:11px;font-weight:600;color:var(--g);background:color-mix(in srgb, var(--g) 12%, #fff);border:1px solid color-mix(in srgb, var(--g) 30%, var(--line));border-radius:20px;padding:3px 10px;white-space:nowrap}
+.exgroup{margin-top:14px}
+.exgroup:first-child{margin-top:0}
+.exgroup .egt{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--deep);margin-bottom:8px}
+.exgroup .egt::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g)}
+.srcnote{font-size:12.5px;color:var(--ink-soft);background:var(--paper-2);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;margin-top:12px}
+
+/* ===== 易错点 ===== */
+.err{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.err + .err{margin-top:14px}
+.err-head{display:flex;align-items:center;gap:10px;padding:11px 16px;background:color-mix(in srgb, var(--bad) 7%, #fff);border-bottom:1px solid var(--line)}
+.err-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--bad);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.err-head h3{font-size:15.5px;font-weight:700;color:#8C3A2E}
+.err-body{padding:13px 16px 15px}
+.pair{border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin-bottom:9px;background:#fffdf8}
+.pair:last-child{margin-bottom:0}
+.pair .lab{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;margin-bottom:3px}
+.pair.wrong .lab{color:var(--bad)}
+.pair.right .lab{color:var(--good)}
+.pair .s{font-size:14.5px;font-family:var(--serif);overflow-wrap:break-word}
+.pair.wrong .s{color:#7C3127}
+.pair.right .s{color:#2E5D45}
+.pair svg{width:13px;height:13px;stroke:currentColor;flex:0 0 auto}
+.why{font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+.why b{color:var(--ink)}
+
+/* ===== 速记 ===== */
+.tip{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:#FFF9EC;padding:13px 15px;margin-bottom:11px}
+.tip:last-child{margin-bottom:0}
+.tip .tt{font-size:14px;font-weight:700;color:#8A6424;margin-bottom:4px}
+.tip p{font-size:13.5px;color:var(--ink-soft)}
+.mnem{font-family:var(--serif);font-size:14px;color:var(--deep);background:var(--paper-2);border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;line-height:1.8}
+.sig{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.sig span{font-size:12px;font-weight:600;color:var(--deep);background:color-mix(in srgb, var(--g) 10%, #fff);border:1px solid color-mix(in srgb, var(--g) 28%, var(--line));border-radius:20px;padding:3px 10px}
+
+/* ===== 小练习 ===== */
+.q{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 15px;margin-bottom:10px}
+.q .qt{font-size:14.5px;margin-bottom:8px}
+.q .qt .qn{font-weight:700;color:var(--deep);margin-right:6px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.q .opt{font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:7px;padding:4px 10px;background:#FBF9F3}
+details.ans{margin-top:8px}
+details.ans summary{cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--g);list-style:none}
+details.ans summary::-webkit-details-marker{display:none}
+details.ans summary::before{content:"";width:0;height:0;border-left:5px solid var(--g);border-top:4px solid transparent;border-bottom:4px solid transparent;transition:transform .15s}
+details.ans[open] summary::before{transform:rotate(90deg)}
+.ans-box{background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-top:7px;font-size:13.5px}
+.ans-box b{color:var(--good)}
+
+/* ===== 页脚 ===== */
+footer{border-top:1px solid var(--line);padding:20px clamp(14px,4vw,28px) 34px;text-align:center;color:var(--ink-soft);font-size:13px}
+footer .back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:8px;padding:7px 16px;background:#FBF9F3;margin-bottom:10px}
+footer .back:hover{border-color:var(--deep)}
+
+@media (max-width:560px){
+  .rgrid{grid-template-columns:1fr}
+  .exrow{flex-direction:column;gap:6px}
+  .exrow .src{white-space:normal}
+  .crumb{gap:8px;flex-wrap:wrap}
+}
+@media (max-width:380px){
+  main{padding:18px 12px 44px}
+  .exrow .en{font-size:14.5px}
+  .formula{font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶栏 ===== -->
+<nav class="crumb">
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <span class="sep">/</span>
+  <span>初中英语 · 语法专项</span>
+  <span class="sep">/</span>
+  <span class="cat">时态</span>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">时态 · Tenses</span>
+    <h1>一般将来时 <span class="en">Simple Future</span></h1>
+    <p class="hero-sub">will / be going to · 将来时间标志 · 将来计划与预测</p>
+    <div class="hero-tags">
+      <span class="hero-tag">will/be going to</span>
+      <span class="hero-tag">将来时间标志</span>
+      <span class="hero-tag">将来计划与预测</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== ① 核心考点概览 ===== -->
+<section class="sec" id="overview">
+  <div class="sec-head">
+    <span class="num">01</span>
+    <h2>核心考点概览</h2>
+    <span class="meta">考什么 · 怎么考</span>
+  </div>
+  <div class="card">
+    <p class="lead">一般将来时集中出现在<b>八上 Unit 6（be going to 表计划）与 Unit 7（will 表预测）</b>，是中考<b>单选、语法填空、动词填空、书面表达（写未来计划 / 畅想未来）</b>的高频时态。它有两套主力结构：<b>will + 动词原形</b>和 <b>be going to + 动词原形</b>，用法上一个偏"预测、临时决定"，一个偏"打算、计划"，别混。</p>
+    <div class="rgrid" style="margin-top:12px">
+      <div class="rule"><div class="rt">will / be going to</div><div class="rd">两套结构都后接<b>动词原形</b>；will 无人称变化，be going to 的 be 随人称变 am/is/are。</div></div>
+      <div class="rule"><div class="rt">将来时间标志</div><div class="rd"><span class="eg">tomorrow、next week、in the future、in 100 years、soon</span> 是信号。</div></div>
+      <div class="rule"><div class="rt">将来计划与预测</div><div class="rd">be going to 表打算、计划；will 表预测、临时决定或客观将来。</div></div>
+      <div class="rule"><div class="rt">there be 将来时</div><div class="rd"><span class="eg">There will be... / There is going to be...</span>，注意不能说成 there will have。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ② 考点精讲 ===== -->
+<section class="sec" id="points">
+  <div class="sec-head">
+    <span class="num">02</span>
+    <h2>考点逐一精讲</h2>
+    <span class="meta">规则 · 公式 · 变形</span>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 1</span><h3>will / be going to</h3></div>
+    <div class="pt-body">
+      <p>一般将来时有两套最核心的结构，后面都必须接<b>动词原形</b>。will 没有人称变化；be going to 里的 be 要随主语变成 am / is / are。</p>
+      <div class="formula"><span class="f">will 句：</span>主语 + will + 动词原形 + ... People will have robots in their homes.</div>
+      <div class="formula"><span class="f">be going to 句：</span>主语 + am/is/are + going to + 动词原形 + ... I'm going to practice basketball every day.</div>
+      <div class="formula"><span class="f">否定：</span>will not = won't / be not going to；<span class="f">疑问：</span>Will + 主语...? / Be + 主语 + going to...?</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">will 的缩写</div><div class="rd"><span class="eg">I'll = I will, you'll, he'll, they'll</span>；否定 <span class="eg">won't = will not</span></div></div>
+        <div class="rule"><div class="rt">be going to 的 be</div><div class="rd">I am going to；he/she/it is going to；you/we/they are going to</div></div>
+        <div class="rule"><div class="rt">后接原形</div><div class="rd">will / be going to 后面永远是<span class="eg">动词原形</span>，不能加 -s / -ing / -ed。</div></div>
+        <div class="rule"><div class="rt">there be 将来时</div><div class="rd"><span class="eg">There will be... = There is going to be...</span>，不能说 there will have。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 2</span><h3>将来时间标志</h3></div>
+    <div class="pt-body">
+      <p>句子里出现下面这些时间状语，谓语通常要用一般将来时，这是语法填空和单选的直接判断依据。</p>
+      <div class="formula"><span class="f">... + 将来时间状语 + ...：</span>What will the future be like? / Cities will be more crowded in the future.</div>
+      <div class="sig">
+        <span>tomorrow</span><span>tomorrow morning</span><span>next week</span><span>next year</span><span>next month</span><span>soon</span><span>in the future</span><span>in 100 years</span><span>in 5 years</span><span>the day after tomorrow</span>
+      </div>
+      <p class="mini">注意：if / when 引导的时间、条件状语从句里，从句用一般现在时表将来（"主将从现"），详见「状语从句」专题。</p>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 3</span><h3>将来计划与预测</h3></div>
+    <div class="pt-body">
+      <p>will 与 be going to 在用法上有分工：be going to 侧重"已经计划好的打算、准备做的事"；will 侧重"对未来的预测、临时做出的决定或客观必然"。</p>
+      <div class="formula"><span class="f">表计划（be going to）：</span>How are you going to do that? —I'm going to practice basketball every day.</div>
+      <div class="formula"><span class="f">表预测（will）：</span>Do you think there will be robots in people's homes?</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">be going to：计划打算</div><div class="rd">已经想好、准备要做：<span class="eg">I'm going to move to Shanghai.</span></div></div>
+        <div class="rule"><div class="rt">be going to：有迹象预测</div><div class="rd">眼看就要发生：Look at the clouds! It's going to rain.</div></div>
+        <div class="rule"><div class="rt">will：客观预测</div><div class="rd">对未来的看法：<span class="eg">Robots will never be able to wake up.</span></div></div>
+        <div class="rule"><div class="rt">will：临时决定</div><div class="rd">当场做出的决定：—The phone is ringing. —I'll answer it.</div></div>
+      </div>
+      <p class="mini">中考考点：书面表达写"我的未来计划"时，主语 I 常用 I'm going to... / I will...；写"畅想未来世界"时常用 will。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ③ 课本例句 ===== -->
+<section class="sec" id="textbook">
+  <div class="sec-head">
+    <span class="num">03</span>
+    <h2>课本例句</h2>
+    <span class="meta">人教版现行教材 · 中英对照</span>
+  </div>
+  <div class="card">
+    <div class="exgroup">
+      <div class="egt">八上 Unit 6 我的未来计划（be going to）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">What do you want to be when you grow up? —I want to be a computer programmer.</div><div class="cn">你长大后想做什么？——我想成为一名电脑程序员。</div></div><span class="src">八上 Unit 6</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">How are you going to do that? —I'm going to practice basketball every day.</div><div class="cn">你打算怎么做？——我打算每天练习打篮球。</div></div><span class="src">八上 Unit 6</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">I'm going to keep on writing stories, of course.</div><div class="cn">当然，我会坚持写故事。</div></div><span class="src">八上 Unit 6</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">I'm going to write articles and send them to magazines and newspapers.</div><div class="cn">我打算写文章，把它们寄给杂志和报纸。</div></div><span class="src">八上 Unit 6</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">Where are you going to work? —I'm going to move to Shanghai.</div><div class="cn">你打算去哪里工作？——我打算搬到上海。</div></div><span class="src">八上 Unit 6</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">八上 Unit 7 畅想未来（will）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">Will people have robots in their homes?</div><div class="cn">人们家里会有机器人吗？</div></div><span class="src">八上 Unit 7</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">What will the future be like? —Cities will be more crowded and polluted.</div><div class="cn">未来会是什么样子？——城市会更拥挤、污染更严重。</div></div><span class="src">八上 Unit 7</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">There will be fewer trees and the environment will be in great danger.</div><div class="cn">树木会更少，环境将处于极大的危险之中。</div></div><span class="src">八上 Unit 7</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">Will we have to move to other planets?</div><div class="cn">我们不得不搬到其他星球上去吗？</div></div><span class="src">八上 Unit 7</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">Robots will never be able to wake up and know where they are.</div><div class="cn">机器人将永远无法醒来并知道自己身在何处。</div></div><span class="src">八上 Unit 7</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">Some will look like humans, and others might look like animals.</div><div class="cn">有些会看起来像人类，另一些可能看起来像动物。</div></div><span class="src">八上 Unit 7</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">No one knows what the future will be like.</div><div class="cn">没有人知道未来会是什么样子。</div></div><span class="src">八上 Unit 7</span></div>
+      </div>
+    </div>
+    <p class="srcnote">来源说明：以上例句均出自人教版现行初中教材（八上 Unit 6 I'm going to study computer science 与 Unit 7 Will people have robots?），册次单元已逐一标注，可与对应单元 Grammar Focus、对话和课文核对。考点精讲中未标注出处的短例为语法讲解示例。</p>
+  </div>
+</section>
+
+<!-- ===== ④ 易错点 ===== -->
+<section class="sec" id="mistakes">
+  <div class="sec-head">
+    <span class="num">04</span>
+    <h2>易错点</h2>
+    <span class="meta">错在哪 · 怎么改</span>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 1</span><h3>will 后面动词加 -s / -ed</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">He will goes to Beijing tomorrow.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">He will go to Beijing tomorrow.</div></div>
+      <p class="why"><b>解析：</b>will 是情态助动词，后面一律接动词原形 go，不能加 -s。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 2</span><h3>be going to 漏掉 be</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I going to study computer science.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I'm going to study computer science.</div></div>
+      <p class="why"><b>解析：</b>be going to 里的 be 不能丢，主语 I 配 am：I'm going to...。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 3</span><h3>be going to 的 be 与主语不一致</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">She are going to be a doctor.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">She is going to be a doctor.</div></div>
+      <p class="why"><b>解析：</b>be 随人称变：I am / he, she, it is / you, we, they are。主语 she 配 is。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 4</span><h3>there will have 混用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">There will have more robots in the future.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">There will be more robots in the future.</div></div>
+      <p class="why"><b>解析：</b>there be 句型的将来时是 There will be... / There is going to be...，不能与 have 混用。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 5</span><h3>will 否定形式写错</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">People will not to use paper books.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">People won't use paper books.</div></div>
+      <p class="why"><b>解析：</b>will not 缩写为 won't，后面直接加动词原形 use，不加 to。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 6</span><h3>一般现在时表将来混淆</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">Look at the clouds! It rains soon.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">Look at the clouds! It is going to rain soon.</div></div>
+      <p class="why"><b>解析：</b>有明显迹象眼看要发生，用 be going to；一般现在时 rains 只表经常性动作，不表即将发生。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 7</span><h3>be going to 后加 to do</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I'm going to playing basketball tomorrow.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I'm going to play basketball tomorrow.</div></div>
+      <p class="why"><b>解析：</b>be going to 里的 to 是不定式符号，后接动词原形 play，不是 -ing。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 8</span><h3>疑问句 will 位置错</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">People will have robots? 或 Will people has robots?</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">Will people have robots?</div></div>
+      <p class="why"><b>解析：</b>will 疑问句把 will 提到句首，后接"主语 + 动词原形"：Will people have robots?</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑤ 关键提醒 / 速记 ===== -->
+<section class="sec" id="tips">
+  <div class="sec-head">
+    <span class="num">05</span>
+    <h2>关键提醒 · 速记口诀</h2>
+    <span class="meta">口诀 · 信号词</span>
+  </div>
+
+  <div class="tip">
+    <div class="tt">结构口诀</div>
+    <div class="mnem">将来时，两伙计：will 加动原不分人；be going to 记三件，be 随人称变、to 后动原跟。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">will 与 be going to 分工</div>
+    <div class="mnem">打算计划 be going to，眼看就要也用它；预测未来、临时决定，will 出场最合适。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">there be 将来时提醒</div>
+    <div class="mnem">There will be 有（某物），There is going to be 也可以；there will have 是错句，be 与 have 不在一起。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">信号词</div>
+    <div class="sig">
+      <span>tomorrow</span>
+      <span>tomorrow morning</span>
+      <span>next week</span>
+      <span>next year</span>
+      <span>next month</span>
+      <span>soon</span>
+      <span>in the future</span>
+      <span>in 100 years</span>
+      <span>in 5 years</span>
+      <span>the day after tomorrow</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑥ 小练习 ===== -->
+<section class="sec" id="quiz">
+  <div class="sec-head">
+    <span class="num">06</span>
+    <h2>小练习</h2>
+    <span class="meta">做完再点开答案</span>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">1.</span>I ____ (be) going to be a pilot when I grow up.</div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>am。</b>主语 I 配 be 动词 am：I am going to be...。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">2.</span>Robots ____ (help) people do dangerous work in the future.</div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>will help。</b>in the future 表将来的预测，用 will + 动词原形。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">3.</span>There ____ (be) more trees in our city next year.</div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>will be / is going to be。</b>there be 句型的将来时，不能写成 will have。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">4.</span>Look at the dark clouds! It ____ (rain).</div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>is going to rain。</b>有明显迹象眼看要下雨，用 be going to。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">5.</span>—Will people live to be 200 years old? —No, they ____.</div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>won't。</b>will 开头的一般疑问句，否定回答用 No, they won't。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">6.</span>She is going to ____ (write) articles and send them to magazines.</div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>write。</b>be going to 后接动词原形 write。</div></details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <p>新版人教版初中英语 · 语法专项（词性 · 句子 · 时态）</p>
+</footer>
+</body>
+</html>

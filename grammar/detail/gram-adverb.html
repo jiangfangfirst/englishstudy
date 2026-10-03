@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>状语从句 Adverbial Clauses · 初中英语语法专项</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F6F3EC; --paper-2:#EFEBE0; --ink:#2A2A26; --ink-soft:#6B665B;
+  --deep:#1F3B5E; --deep-2:#18304E; --line:#E3DDD0; --accent:#C08A3E;
+  --g:#3A6B9E;
+  --bad:#A8483C; --good:#3E7A5E;
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+/* ===== 顶栏 ===== */
+.crumb{max-width:880px;margin:0 auto;padding:14px clamp(14px,4vw,28px) 0;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink-soft)}
+.crumb a.back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:#FBF9F3}
+.crumb a.back:hover{border-color:var(--deep);background:var(--paper-2)}
+.crumb .sep{opacity:.5}
+.crumb .cat{font-weight:600;color:var(--g)}
+
+/* ===== Hero ===== */
+.hero{
+  background:var(--deep);
+  background-image:
+    radial-gradient(1200px 500px at 85% -10%, rgba(192,138,62,.18), transparent 60%),
+    radial-gradient(900px 420px at -5% 110%, rgba(46,130,168,.22), transparent 55%);
+  color:#F3EFE3;padding:clamp(30px,5.5vw,52px) clamp(18px,5vw,60px) clamp(26px,3.6vw,36px);
+  position:relative;overflow:hidden;
+}
+.hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;letter-spacing:.06em;padding:5px 12px;border:1px solid rgba(243,239,227,.35);border-radius:20px;color:#E3A94F}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4.6vw,40px);font-weight:700;margin:14px 0 6px;line-height:1.2}
+.hero h1 .en{font-size:.62em;color:#E3A94F;font-weight:600;margin-left:10px}
+.hero-sub{font-size:clamp(13px,2.4vw,15px);color:rgba(243,239,227,.82);max-width:640px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero-tag{font-size:12px;padding:4px 11px;border-radius:20px;background:rgba(243,239,227,.1);border:1px solid rgba(243,239,227,.25);color:#F3EFE3}
+
+/* ===== 主体 ===== */
+main{max-width:880px;margin:0 auto;padding:24px clamp(14px,4vw,28px) 60px}
+.sec{margin-top:30px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-head .num{font-family:var(--serif);font-size:14px;font-weight:700;color:#fff;background:var(--g);border-radius:8px;padding:3px 11px;letter-spacing:.05em}
+.sec-head h2{font-family:var(--serif);font-size:clamp(19px,2.5vw,23px);font-weight:700}
+.sec-head .meta{font-size:12.5px;color:var(--ink-soft);margin-left:auto}
+
+.card{background:#FBF9F3;border:1px solid var(--line);border-radius:12px;padding:clamp(16px,2.6vw,22px)}
+.card + .card{margin-top:12px}
+.lead{font-size:14.5px;color:var(--ink)}
+.lead b{color:var(--deep)}
+.hl{color:var(--deep);font-weight:600}
+.kv{color:var(--g);font-weight:700}
+
+/* ===== 考点 ===== */
+.pt{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.pt + .pt{margin-top:14px}
+.pt-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:color-mix(in srgb, var(--g) 8%, #fff);border-bottom:1px solid var(--line)}
+.pt-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--g);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.pt-head h3{font-family:var(--serif);font-size:16.5px;font-weight:700;color:var(--deep)}
+.pt-body{padding:14px 16px 16px}
+.pt-body p{font-size:14.5px;margin-bottom:9px}
+.pt-body p:last-child{margin-bottom:0}
+.formula{background:var(--paper-2);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:14.5px;overflow-wrap:break-word}
+.formula .f{font-family:var(--serif);font-weight:600;color:var(--deep)}
+.mini{font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+
+/* ===== 规则网格 ===== */
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.rule{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:11px 13px}
+.rule .rt{font-size:13.5px;font-weight:700;color:var(--deep);margin-bottom:3px}
+.rule .rd{font-size:13px;color:var(--ink-soft);line-height:1.55}
+.rule .rd .eg{color:var(--g);font-weight:600}
+
+/* ===== 课本例句 ===== */
+.exlist{display:flex;flex-direction:column;gap:10px}
+.exrow{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 14px}
+.ex-main{flex:1;min-width:0}
+.exrow .en{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.5;overflow-wrap:break-word}
+.exrow .cn{font-size:13px;color:var(--ink-soft);margin-top:2px}
+.exrow .src{flex:0 0 auto;font-size:11px;font-weight:600;color:var(--g);background:color-mix(in srgb, var(--g) 12%, #fff);border:1px solid color-mix(in srgb, var(--g) 30%, var(--line));border-radius:20px;padding:3px 10px;white-space:nowrap}
+.exgroup{margin-top:14px}
+.exgroup:first-child{margin-top:0}
+.exgroup .egt{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--deep);margin-bottom:8px}
+.exgroup .egt::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g)}
+.srcnote{font-size:12.5px;color:var(--ink-soft);background:var(--paper-2);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;margin-top:12px}
+
+/* ===== 易错点 ===== */
+.err{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.err + .err{margin-top:14px}
+.err-head{display:flex;align-items:center;gap:10px;padding:11px 16px;background:color-mix(in srgb, var(--bad) 7%, #fff);border-bottom:1px solid var(--line)}
+.err-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--bad);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.err-head h3{font-size:15.5px;font-weight:700;color:#8C3A2E}
+.err-body{padding:13px 16px 15px}
+.pair{border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin-bottom:9px;background:#fffdf8}
+.pair:last-child{margin-bottom:0}
+.pair .lab{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;margin-bottom:3px}
+.pair.wrong .lab{color:var(--bad)}
+.pair.right .lab{color:var(--good)}
+.pair .s{font-size:14.5px;font-family:var(--serif);overflow-wrap:break-word}
+.pair.wrong .s{color:#7C3127}
+.pair.right .s{color:#2E5D45}
+.pair svg{width:13px;height:13px;stroke:currentColor;flex:0 0 auto}
+.why{font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+.why b{color:var(--ink)}
+
+/* ===== 速记 ===== */
+.tip{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:#FFF9EC;padding:13px 15px;margin-bottom:11px}
+.tip:last-child{margin-bottom:0}
+.tip .tt{font-size:14px;font-weight:700;color:#8A6424;margin-bottom:4px}
+.tip p{font-size:13.5px;color:var(--ink-soft)}
+.mnem{font-family:var(--serif);font-size:14px;color:var(--deep);background:var(--paper-2);border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;line-height:1.8}
+.sig{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.sig span{font-size:12px;font-weight:600;color:var(--deep);background:color-mix(in srgb, var(--g) 10%, #fff);border:1px solid color-mix(in srgb, var(--g) 28%, var(--line));border-radius:20px;padding:3px 10px}
+
+/* ===== 小练习 ===== */
+.q{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 15px;margin-bottom:10px}
+.q .qt{font-size:14.5px;margin-bottom:8px}
+.q .qt .qn{font-weight:700;color:var(--deep);margin-right:6px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.q .opt{font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:7px;padding:4px 10px;background:#FBF9F3}
+details.ans{margin-top:8px}
+details.ans summary{cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--g);list-style:none}
+details.ans summary::-webkit-details-marker{display:none}
+details.ans summary::before{content:"";width:0;height:0;border-left:5px solid var(--g);border-top:4px solid transparent;border-bottom:4px solid transparent;transition:transform .15s}
+details.ans[open] summary::before{transform:rotate(90deg)}
+.ans-box{background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-top:7px;font-size:13.5px}
+.ans-box b{color:var(--good)}
+
+/* ===== 页脚 ===== */
+footer{border-top:1px solid var(--line);padding:20px clamp(14px,4vw,28px) 34px;text-align:center;color:var(--ink-soft);font-size:13px}
+footer .back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:8px;padding:7px 16px;background:#FBF9F3;margin-bottom:10px}
+footer .back:hover{border-color:var(--deep)}
+
+@media (max-width:560px){
+  .rgrid{grid-template-columns:1fr}
+  .exrow{flex-direction:column;gap:6px}
+  .exrow .src{white-space:normal}
+  .crumb{gap:8px;flex-wrap:wrap}
+}
+@media (max-width:380px){
+  main{padding:18px 12px 44px}
+  .exrow .en{font-size:14.5px}
+  .formula{font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶栏 ===== -->
+<nav class="crumb">
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <span class="sep">/</span>
+  <span>初中英语 · 语法专项</span>
+  <span class="sep">/</span>
+  <span class="cat">句子</span>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">句子 · Sentences</span>
+    <h1>状语从句 <span class="en">Adverbial Clauses</span></h1>
+    <p class="hero-sub">时间 · 条件 · 原因 · 让步四类从句 · 主将从现规则</p>
+    <div class="hero-tags">
+      <span class="hero-tag">时间、条件、原因、让步状语从句</span>
+      <span class="hero-tag">主将从现规则</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== ① 核心考点概览 ===== -->
+<section class="sec" id="overview">
+  <div class="sec-head">
+    <span class="num">01</span>
+    <h2>核心考点概览</h2>
+    <span class="meta">考什么 · 怎么考</span>
+  </div>
+  <div class="card">
+    <p class="lead">状语从句用一个句子作状语，修饰主句的动作，说明「什么时候、在什么条件下、为什么、尽管有什么情况」。中考里它是<b>单选、语法填空、完成句子</b>的高频点：考<b>连词选择</b>（when / if / because / although…）和<b>时态</b>（尤其「主将从现」）。本专题先打通时间、条件、原因、让步四类，再死磕主将从现。</p>
+    <div class="rgrid" style="margin-top:12px">
+      <div class="rule"><div class="rt">时间状语从句</div><div class="rd"><span class="eg">when / while / as / as soon as / until</span> 表动作发生的时间。</div></div>
+      <div class="rule"><div class="rt">条件状语从句</div><div class="rd"><span class="eg">if / unless</span> 表假设条件，主句常是结果。</div></div>
+      <div class="rule"><div class="rt">原因状语从句</div><div class="rd"><span class="eg">because</span> 表原因，回答 why 的提问。</div></div>
+      <div class="rule"><div class="rt">让步状语从句</div><div class="rd"><span class="eg">although / though / even though</span> 「虽然 / 尽管」，不与 but 连用。</div></div>
+      <div class="rule"><div class="rt">主将从现规则</div><div class="rd">主句将来时，<b>时间 / 条件从句用一般现在时表将来</b>。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ② 考点精讲 ===== -->
+<section class="sec" id="points">
+  <div class="sec-head">
+    <span class="num">02</span>
+    <h2>考点逐一精讲</h2>
+    <span class="meta">规则 · 公式 · 变形</span>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 1</span><h3>时间、条件、原因、让步状语从句</h3></div>
+    <div class="pt-body">
+      <p>四类状语从句各由一组固定连词引导，先认连词、再记含义，从句位置可在主句前（用逗号隔开）或后。</p>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">时间 · when / while / as</div><div class="rd"><span class="eg">while</span> 「当……时」，从句常用进行时：I'll finish my homework <b>while you help me.</b>（八下 Unit 3）</div></div>
+        <div class="rule"><div class="rt">时间 · as soon as / until</div><div class="rd"><span class="eg">as soon as</span> 一……就；<span class="eg">until</span> 直到。The minute I sat down, my mom came over.（八下 Unit 3）</div></div>
+        <div class="rule"><div class="rt">条件 · if / unless</div><div class="rd"><span class="eg">if</span> 如果；<span class="eg">unless</span> 除非（= if not）。<b>If you go to the party, you'll have a great time.</b>（八上 Unit 10）</div></div>
+        <div class="rule"><div class="rt">原因 · because</div><div class="rd">表直接原因，回答 why：<b>He doesn't like maths because it's boring.</b>（七上 Unit 4）</div></div>
+        <div class="rule"><div class="rt">让步 · although / though</div><div class="rd">「虽然 / 尽管」：<b>Although it's old, it means a lot to me.</b>（八下 Unit 3）</div></div>
+        <div class="rule"><div class="rt">位置灵活</div><div class="rd">从句在前，主句前用逗号；从句在后通常不用逗号。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 2</span><h3>主将从现规则</h3></div>
+    <div class="pt-body">
+      <p>这是状语从句<b>最常考、最易错</b>的一条：当<b>主句是一般将来时</b>，由 <span class="kv">when / as soon as / until / if / unless</span> 引导的<b>时间、条件状语从句要用一般现在时来表示将来</b>，不能用 will。</p>
+      <div class="formula"><span class="f">If + 一般现在时, 主语 + will + 动词原形</span>：If it rains tomorrow, I <b>will stay</b> at home.</div>
+      <div class="formula"><span class="f">从句里不用 will</span>：误 If it will rain… → 正 If it <b>rains</b> tomorrow…</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">主句将来，从句现在</div><div class="rd"><span class="eg">If you take the bus, you will be late.</span>（八上 Unit 10）</div></div>
+        <div class="rule"><div class="rt">条件句同样适用</div><div class="rd"><span class="eg">If we ask people to bring food, they'll just bring potato chips.</span>（八上 Unit 10）</div></div>
+        <div class="rule"><div class="rt">时间句也适用</div><div class="rd">as soon as / when / until 引导时间句，将来时一样「从现」：I'll call you when he <span class="eg">comes</span>.（教辅例句）</div></div>
+        <div class="rule"><div class="rt">主句含情态动词也照用</div><div class="rd">主句 can / may / should + 动词原形时，从句仍用一般现在时。</div></div>
+      </div>
+      <p class="mini">注意：because / although 引导的原因、让步从句不适用「主将从现」，别一刀切；只有时间、条件两类从句才守这条规矩。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ③ 课本例句 ===== -->
+<section class="sec" id="textbook">
+  <div class="sec-head">
+    <span class="num">03</span>
+    <h2>课本例句</h2>
+    <span class="meta">人教版现行教材 · 中英对照</span>
+  </div>
+  <div class="card">
+    <div class="exgroup">
+      <div class="egt">时间状语从句</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">I'll finish my homework while you help me with the dishes.</div><div class="cn">你帮我洗碗的时候，我就把作业做完。</div></div><span class="src">八下 Unit 3</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">The minute I sat down in front of the TV, my mom came over.</div><div class="cn">我刚在电视机前坐下，妈妈就走了过来。</div></div><span class="src">八下 Unit 3</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">It's also very hard to take in air as you get near the top.</div><div class="cn">当你接近山顶时，呼吸空气也变得非常困难。</div></div><span class="src">八下 Unit 7</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">条件状语从句（主将从现）</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">If you go to the party, you'll have a great time.</div><div class="cn">如果你去参加聚会，你会玩得很开心。</div></div><span class="src">八上 Unit 10</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">If you take the bus to the party, you will be late.</div><div class="cn">如果你乘公交去聚会，你会迟到的。</div></div><span class="src">八上 Unit 10</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">If we ask people to bring food, they'll just bring potato chips and chocolate.</div><div class="cn">如果我们让大家带食物，他们就只会带薯片和巧克力来。</div></div><span class="src">八上 Unit 10</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">原因状语从句</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">He doesn't like maths because it's boring to him.</div><div class="cn">他不喜欢数学，因为数学对他来说很无聊。</div></div><span class="src">七上 Unit 4</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">I like Chinese because it's fun.</div><div class="cn">我喜欢语文，因为它很有趣。</div></div><span class="src">七上 Unit 4</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">I'm really tired because I studied until really late last night.</div><div class="cn">我真的很累，因为昨晚我学习到很晚。</div></div><span class="src">八下 Unit 4</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">让步状语从句</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main"><div class="en">Although you argue, you are still very close friends.</div><div class="cn">尽管你们吵过架，但你们仍然是很亲密的朋友。</div></div><span class="src">八下 Unit 3</span></div>
+        <div class="exrow"><div class="ex-main"><div class="en">Although it's old, it means a lot to me.</div><div class="cn">它虽然旧了，但对我意义重大。</div></div><span class="src">八下 Unit 3</span></div>
+      </div>
+    </div>
+    <p class="srcnote">来源说明：以上例句均出自人教版现行初中教材（含 2024 新版七年级）对应单元的课文、对话或语法练习板块，册次单元已逐一标注，可与原书核对。考点精讲中未标注出处的短例为语法讲解示例，不标注来源；本页未使用无法逐句定位的句子冒充课本原句。</p>
+  </div>
+</section>
+
+<!-- ===== ④ 易错点 ===== -->
+<section class="sec" id="mistakes">
+  <div class="sec-head">
+    <span class="num">04</span>
+    <h2>易错点</h2>
+    <span class="meta">错在哪 · 怎么改</span>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 1</span><h3>主将从现：从句里误用 will</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">If it will rain tomorrow, I will stay at home.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">If it rains tomorrow, I will stay at home.</div></div>
+      <p class="why"><b>解析：</b>if 引导条件状语从句，主句将来时，从句要用一般现在时表将来，rains 不能加 will。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 2</span><h3>although 与 but 同时用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">Although it's old, but it means a lot to me.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">Although it's old, it means a lot to me.</div></div>
+      <p class="why"><b>解析：</b>汉语「虽然……但是……」成对说，英语里 although / though 与 but 只能留一个，不能同句连用（可换 yet / still）。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 3</span><h3>because 与 so 同时用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">Because he was ill, so he didn't go to school.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">Because he was ill, he didn't go to school.</div></div>
+      <p class="why"><b>解析：</b>because 与 so 都是连词，一个句子里只留一个，不能既 because 又 so。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 4</span><h3>when 与 while 混用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">While I got home, my mother was cooking.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">When I got home, my mother was cooking.</div></div>
+      <p class="why"><b>解析：</b>get home 是短暂动作，when 可接短暂或延续动作；while 只接延续性、常用进行时。短暂动作用 when。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 5</span><h3>时间从句也忘了「主将从现」</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I will call you when he will arrive.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I will call you when he arrives.</div></div>
+      <p class="why"><b>解析：</b>when 引导时间状语从句，主句将来时，从句也要用一般现在时 arrives，不用 will arrive。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 6</span><h3>until 从句时态错</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">Wait here until the rain will stop.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">Wait here until the rain stops.</div></div>
+      <p class="why"><b>解析：</b>until 引导时间状语从句，同样遵守主将从现，从句用一般现在时 stops。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 7</span><h3>because 回答 why 的同时用 so</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">—Why do you like English? —Because it's fun, so I like it.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">—Why do you like English? —Because it's fun.</div></div>
+      <p class="why"><b>解析：</b>回答 why 只用 because 一句即可，不要再加 so；because 与 so 不同句。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 8</span><h3>条件从句主语三单忘加 s</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">If he study hard, he will pass the exam.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">If he studies hard, he will pass the exam.</div></div>
+      <p class="why"><b>解析：</b>「从现」是一般现在时，主语 he 是三单，动词要加 s：studies。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 9</span><h3>让步从句误套主将从现</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">Although it will rain tomorrow, I will go.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">Although it rains tomorrow, I will go.</div></div>
+      <p class="why"><b>解析：</b>让步状语从句（although / though）表将来时也按一般现在时处理，但根本上是「时间、条件」才强约束主将从现；别把 because / although 从句当成例外。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑤ 关键提醒 / 速记 ===== -->
+<section class="sec" id="tips">
+  <div class="sec-head">
+    <span class="num">05</span>
+    <h2>关键提醒 · 速记口诀</h2>
+    <span class="meta">口诀 · 信号词</span>
+  </div>
+
+  <div class="tip">
+    <div class="tt">主将从现口诀</div>
+    <div class="mnem">主将从现是个宝，时间条件少不了；主句将来 will 跑，从句现在就好；because 让步不随它，别把 will 往从句套。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">四类从句连词速记</div>
+    <div class="mnem">时间 when / while / as soon as / until；条件 if / unless；原因 because；让步 although / though / even though。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">连词信号词速查</div>
+    <div class="sig">
+      <span>when 当……时</span>
+      <span>while 与……同时（进行时）</span>
+      <span>as soon as 一……就</span>
+      <span>until 直到</span>
+      <span>if 如果</span>
+      <span>unless 除非</span>
+      <span>because 因为</span>
+      <span>although / though 虽然</span>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">「成双成对」禁区</div>
+    <div class="mnem">although / though 不与 but 同台，because 不与 so 同框；要用就二选一，多用反倒语法伤。</div>
+  </div>
+</section>
+
+<!-- ===== ⑥ 小练习 ===== -->
+<section class="sec" id="quiz">
+  <div class="sec-head">
+    <span class="num">06</span>
+    <h2>小练习</h2>
+    <span class="meta">做完再点开答案</span>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">1.</span>You'll have a great time ______ you go to the party.</div>
+    <div class="opts"><span class="opt">A. because</span><span class="opt">B. if</span><span class="opt">C. although</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>「去参加聚会」是「玩得开心」的条件，用 if 引导条件状语从句。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">2.</span>If it ______ tomorrow, we will stay at home.</div>
+    <div class="opts"><span class="opt">A. will rain</span><span class="opt">B. rains</span><span class="opt">C. rain</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>主将从现：主句将来时，if 从句用一般现在时；主语 it 三单，用 rains。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">3.</span>______ it's very old, the house means a lot to my family.</div>
+    <div class="opts"><span class="opt">A. Because</span><span class="opt">B. Although</span><span class="opt">C. If</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>「房子很旧」与「对家人意义重大」是让步关系，用 although（不与 but 连用）。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">4.</span>I like English ______ it's interesting and useful.</div>
+    <div class="opts"><span class="opt">A. because</span><span class="opt">B. although</span><span class="opt">C. until</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>A。</b>后面是喜欢英语的原因，用 because 引导原因状语从句。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">5.</span>I will tell him the news as soon as he ______ back.</div>
+    <div class="opts"><span class="opt">A. will come</span><span class="opt">B. comes</span><span class="opt">C. come</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>as soon as 引导时间状语从句，主将从现；主语 he 三单，用 comes。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">6.</span>______ I was doing my homework, my mother was cooking dinner.</div>
+    <div class="opts"><span class="opt">A. When</span><span class="opt">B. While</span><span class="opt">C. If</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>主从句两个动作同时进行、都用进行时，用 while「与……同时」最贴切。</div></details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <p>新版人教版初中英语 · 语法专项（词性 · 句子 · 时态）</p>
+</footer>
+</body>
+</html>

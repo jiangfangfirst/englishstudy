@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>代词 Pronouns · 初中英语语法专项</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F6F3EC; --paper-2:#EFEBE0; --ink:#2A2A26; --ink-soft:#6B665B;
+  --deep:#1F3B5E; --deep-2:#18304E; --line:#E3DDD0; --accent:#C08A3E;
+  --g:#2E82A8;
+  --bad:#A8483C; --good:#3E7A5E;
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+/* ===== 顶栏 ===== */
+.crumb{max-width:880px;margin:0 auto;padding:14px clamp(14px,4vw,28px) 0;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink-soft)}
+.crumb a.back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:#FBF9F3}
+.crumb a.back:hover{border-color:var(--deep);background:var(--paper-2)}
+.crumb .sep{opacity:.5}
+.crumb .cat{font-weight:600;color:var(--g)}
+
+/* ===== Hero ===== */
+.hero{
+  background:var(--deep);
+  background-image:
+    radial-gradient(1200px 500px at 85% -10%, rgba(192,138,62,.18), transparent 60%),
+    radial-gradient(900px 420px at -5% 110%, rgba(46,130,168,.22), transparent 55%);
+  color:#F3EFE3;padding:clamp(30px,5.5vw,52px) clamp(18px,5vw,60px) clamp(26px,3.6vw,36px);
+  position:relative;overflow:hidden;
+}
+.hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;letter-spacing:.06em;padding:5px 12px;border:1px solid rgba(243,239,227,.35);border-radius:20px;color:#E3A94F}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4.6vw,40px);font-weight:700;margin:14px 0 6px;line-height:1.2}
+.hero h1 .en{font-size:.62em;color:#E3A94F;font-weight:600;margin-left:10px}
+.hero-sub{font-size:clamp(13px,2.4vw,15px);color:rgba(243,239,227,.82);max-width:640px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero-tag{font-size:12px;padding:4px 11px;border-radius:20px;background:rgba(243,239,227,.1);border:1px solid rgba(243,239,227,.25);color:#F3EFE3}
+
+/* ===== 主体 ===== */
+main{max-width:880px;margin:0 auto;padding:24px clamp(14px,4vw,28px) 60px}
+.sec{margin-top:30px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-head .num{font-family:var(--serif);font-size:14px;font-weight:700;color:#fff;background:var(--g);border-radius:8px;padding:3px 11px;letter-spacing:.05em}
+.sec-head h2{font-family:var(--serif);font-size:clamp(19px,2.5vw,23px);font-weight:700}
+.sec-head .meta{font-size:12.5px;color:var(--ink-soft);margin-left:auto}
+
+.card{background:#FBF9F3;border:1px solid var(--line);border-radius:12px;padding:clamp(16px,2.6vw,22px)}
+.card + .card{margin-top:12px}
+.lead{font-size:14.5px;color:var(--ink)}
+.lead b{color:var(--deep)}
+.hl{color:var(--deep);font-weight:600}
+.kv{color:var(--g);font-weight:700}
+
+/* ===== 考点 ===== */
+.pt{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.pt + .pt{margin-top:14px}
+.pt-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:color-mix(in srgb, var(--g) 8%, #fff);border-bottom:1px solid var(--line)}
+.pt-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--g);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.pt-head h3{font-family:var(--serif);font-size:16.5px;font-weight:700;color:var(--deep)}
+.pt-body{padding:14px 16px 16px}
+.pt-body p{font-size:14.5px;margin-bottom:9px}
+.pt-body p:last-child{margin-bottom:0}
+.formula{background:var(--paper-2);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:14.5px;overflow-wrap:break-word}
+.formula .f{font-family:var(--serif);font-weight:600;color:var(--deep)}
+.mini{font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+
+/* ===== 规则网格 ===== */
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.rule{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:11px 13px}
+.rule .rt{font-size:13.5px;font-weight:700;color:var(--deep);margin-bottom:3px}
+.rule .rd{font-size:13px;color:var(--ink-soft);line-height:1.55}
+.rule .rd .eg{color:var(--g);font-weight:600}
+
+/* ===== 课本例句 ===== */
+.exlist{display:flex;flex-direction:column;gap:10px}
+.exrow{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 14px}
+.exrow .en{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.5;overflow-wrap:break-word}
+.exrow .cn{font-size:13px;color:var(--ink-soft);margin-top:2px}
+.exrow .src{flex:0 0 auto;font-size:11px;font-weight:600;color:var(--g);background:color-mix(in srgb, var(--g) 12%, #fff);border:1px solid color-mix(in srgb, var(--g) 30%, var(--line));border-radius:20px;padding:3px 10px;white-space:nowrap}
+.exgroup{margin-top:14px}
+.exgroup:first-child{margin-top:0}
+.exgroup .egt{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--deep);margin-bottom:8px}
+.exgroup .egt::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g)}
+.srcnote{font-size:12.5px;color:var(--ink-soft);background:var(--paper-2);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;margin-top:12px}
+
+/* ===== 易错点 ===== */
+.err{border:1px solid var(--line);border-radius:12px;background:#FBF9F3;overflow:hidden}
+.err + .err{margin-top:14px}
+.err-head{display:flex;align-items:center;gap:10px;padding:11px 16px;background:color-mix(in srgb, var(--bad) 7%, #fff);border-bottom:1px solid var(--line)}
+.err-no{font-family:var(--serif);font-size:13px;font-weight:700;color:#fff;background:var(--bad);border-radius:7px;padding:2px 9px;white-space:nowrap}
+.err-head h3{font-size:15.5px;font-weight:700;color:#8C3A2E}
+.err-body{padding:13px 16px 15px}
+.pair{border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin-bottom:9px;background:#fffdf8}
+.pair:last-child{margin-bottom:0}
+.pair .lab{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;margin-bottom:3px}
+.pair.wrong .lab{color:var(--bad)}
+.pair.right .lab{color:var(--good)}
+.pair .s{font-size:14.5px;font-family:var(--serif);overflow-wrap:break-word}
+.pair.wrong .s{color:#7C3127}
+.pair.right .s{color:#2E5D45}
+.pair svg{width:13px;height:13px;stroke:currentColor;flex:0 0 auto}
+.why{font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+.why b{color:var(--ink)}
+
+/* ===== 速记 ===== */
+.tip{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:#FFF9EC;padding:13px 15px;margin-bottom:11px}
+.tip:last-child{margin-bottom:0}
+.tip .tt{font-size:14px;font-weight:700;color:#8A6424;margin-bottom:4px}
+.tip p{font-size:13.5px;color:var(--ink-soft)}
+.mnem{font-family:var(--serif);font-size:14px;color:var(--deep);background:var(--paper-2);border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:8px 0;line-height:1.8}
+.sig{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.sig span{font-size:12px;font-weight:600;color:var(--deep);background:color-mix(in srgb, var(--g) 10%, #fff);border:1px solid color-mix(in srgb, var(--g) 28%, var(--line));border-radius:20px;padding:3px 10px}
+
+/* ===== 小练习 ===== */
+.q{border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:12px 15px;margin-bottom:10px}
+.q .qt{font-size:14.5px;margin-bottom:8px}
+.q .qt .qn{font-weight:700;color:var(--deep);margin-right:6px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.q .opt{font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:7px;padding:4px 10px;background:#FBF9F3}
+details.ans{margin-top:8px}
+details.ans summary{cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--g);list-style:none}
+details.ans summary::-webkit-details-marker{display:none}
+details.ans summary::before{content:"";width:0;height:0;border-left:5px solid var(--g);border-top:4px solid transparent;border-bottom:4px solid transparent;transition:transform .15s}
+details.ans[open] summary::before{transform:rotate(90deg)}
+.ans-box{background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-top:7px;font-size:13.5px}
+.ans-box b{color:var(--good)}
+
+/* ===== 页脚 ===== */
+footer{border-top:1px solid var(--line);padding:20px clamp(14px,4vw,28px) 34px;text-align:center;color:var(--ink-soft);font-size:13px}
+footer .back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:8px;padding:7px 16px;background:#FBF9F3;margin-bottom:10px}
+footer .back:hover{border-color:var(--deep)}
+
+@media (max-width:560px){
+  .rgrid{grid-template-columns:1fr}
+  .exrow{flex-direction:column;gap:6px}
+  .exrow .src{white-space:normal}
+  .crumb{gap:8px;flex-wrap:wrap}
+}
+@media (max-width:380px){
+  main{padding:18px 12px 44px}
+  .exrow .en{font-size:14.5px}
+  .formula{font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶栏 ===== -->
+<nav class="crumb">
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <span class="sep">/</span>
+  <span>初中英语 · 语法专项</span>
+  <span class="sep">/</span>
+  <span class="cat">词性</span>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">词性 · Parts of Speech</span>
+    <h1>代词 <span class="en">Pronouns</span></h1>
+    <p class="hero-sub">人称/物主/反身代词 · 不定代词 · 指示代词 · 疑问代词 · 代词 it 用法</p>
+    <div class="hero-tags">
+      <span class="hero-tag">人称/物主/反身代词</span>
+      <span class="hero-tag">不定代词</span>
+      <span class="hero-tag">指示代词</span>
+      <span class="hero-tag">疑问代词</span>
+      <span class="hero-tag">代词 it 用法</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== ① 核心考点概览 ===== -->
+<section class="sec" id="overview">
+  <div class="sec-head">
+    <span class="num">01</span>
+    <h2>核心考点概览</h2>
+    <span class="meta">考什么 · 怎么考</span>
+  </div>
+  <div class="card">
+    <p class="lead">代词是中考词性语法的高频考点，几乎每套试卷都会在<b>单项选择、完形填空</b>中直接考查代词辨析；<b>语法填空</b>常给人称代词主格要求变宾格/形容词性物主代词/名词性物主代词；<b>书面表达</b>中代词误用（主宾格混淆、物主代词混用、it 指代不清）是常见扣分点。中考最常考的五组代词是：人称/物主/反身代词、不定代词、指示代词、疑问代词，以及 it 的特殊用法。</p>
+    <div class="rgrid" style="margin-top:12px">
+      <div class="rule"><div class="rt">人称/物主/反身代词</div><div class="rd">主格、宾格、形容词性物主代词、名词性物主代词、反身代词五张表必须背熟，<span class="eg">I→me→my→mine→myself</span>。</div></div>
+      <div class="rule"><div class="rt">不定代词</div><div class="rd"><span class="eg">some/any、something/anything/nothing、everyone/anyone、both/all/either/neither</span> 的用法与辨析。</div></div>
+      <div class="rule"><div class="rt">指示代词</div><div class="rd"><span class="eg">this/that/these/those</span> 的远近单复数区别，以及电话用语中 that 的用法。</div></div>
+      <div class="rule"><div class="rt">疑问代词</div><div class="rd"><span class="eg">what/who/whose/which/whom</span> 的选择与疑问句结构，对人、对物、对所属提问。</div></div>
+      <div class="rule"><div class="rt">代词 it 用法</div><div class="rd">it 指代前文事物、指代天气/时间/距离、作形式主语/形式宾语，以及 <span class="eg">It's + adj. + to do</span> 句型。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ② 考点精讲 ===== -->
+<section class="sec" id="points">
+  <div class="sec-head">
+    <span class="num">02</span>
+    <h2>考点逐一精讲</h2>
+    <span class="meta">规则 · 公式 · 变形</span>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 1</span><h3>人称/物主/反身代词</h3></div>
+    <div class="pt-body">
+      <p>人称代词有主格（作主语）和宾格（作动词/介词宾语）之分；物主代词分形容词性（后面必须加名词）和名词性（独立使用，后面不加名词）；反身代词表示「某人自己」，常与动词构成固定搭配。</p>
+      <div class="formula"><span class="f">人称代词全家福（以第三人称男性为例）：</span>主格 he → 宾格 him → 形容词性物主 his → 名词性物主 his → 反身 himself</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">主格作主语（动词前）</div><div class="rd"><span class="eg">I / you / he / she / it / we / they</span> 放句首或动词前：He is from the US.</div></div>
+        <div class="rule"><div class="rt">宾格作宾语（动词/介词后）</div><div class="rd"><span class="eg">me / you / him / her / it / us / them</span>：Please help me. / Listen to her.</div></div>
+        <div class="rule"><div class="rt">形容词性物主代词 + 名词</div><div class="rd"><span class="eg">my / your / his / her / its / our / their</span>：This is my mother's piano.</div></div>
+        <div class="rule"><div class="rt">名词性物主代词 = 形物代 + 名词</div><div class="rd"><span class="eg">mine / yours / his / hers / ours / theirs</span>：The blue pen is his.（= his pen）</div></div>
+        <div class="rule"><div class="rt">反身代词固定搭配</div><div class="rd"><span class="eg">enjoy oneself 玩得开心 / teach oneself 自学 / help oneself to 随便吃 / by oneself 独自 / hurt oneself 伤到自己</span></div></div>
+        <div class="rule"><div class="rt">反身代词单复数</div><div class="rd">单数：<span class="eg">myself / yourself / himself / herself / itself</span>；复数：<span class="eg">ourselves / yourselves / themselves</span></div></div>
+      </div>
+      <p class="mini">中考考点提示：语法填空最常考「给 I 变形」——根据空格位置判断填 me / my / mine / myself。</p>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 2</span><h3>不定代词</h3></div>
+    <div class="pt-body">
+      <p>不定代词不明确指代某个特定名词，是中考辨析题的重灾区。最常考的几组是：some/any、something/anything/nothing、both/all/either/neither/none。</p>
+      <div class="formula"><span class="f">some 用于肯定句，any 用于否定句/疑问句：</span>I have some books. / Do you have any questions?</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">some 系列复合不定代词</div><div class="rd"><span class="eg">something / somebody / someone</span> 用于肯定句；表示请求建议的疑问句也用 some：Would you like some tea?</div></div>
+        <div class="rule"><div class="rt">any 系列复合不定代词</div><div class="rd"><span class="eg">anything / anybody / anyone</span> 用于否定句、疑问句：Is there anything in the box?</div></div>
+        <div class="rule"><div class="rt">复合不定代词作主语 → 谓语单数</div><div class="rd"><span class="eg">Everyone is here. / Something is wrong.</span>（不定代词作主语，谓语动词用三单）</div></div>
+        <div class="rule"><div class="rt">形容词修饰不定代词 → 后置</div><div class="rd"><span class="eg">something important / nothing difficult / anything else</span>（形容词放后面）</div></div>
+        <div class="rule"><div class="rt">both / all / either / neither / none</div><div class="rd">both 两者都；all 三者及以上都；either 两者任一；neither 两者都不；none 三者及以上都不。</div></div>
+        <div class="rule"><div class="rt">other / another / the other / others</div><div class="rd">another 另一个（不定）；the other 两者中的另一个；others 其他的人/物（泛指）；the others 其余全部（特指）。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 3</span><h3>指示代词</h3></div>
+    <div class="pt-body">
+      <p>指示代词用来指示或标识人或事物，分近指（this/these）和远指（that/those），单数与复数要对应。</p>
+      <div class="formula"><span class="f">近指：</span>this（这个，单数）→ these（这些，复数）　|　<span class="f">远指：</span>that（那个，单数）→ those（那些，复数）</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">介绍他人用 this</div><div class="rd">当着面对人介绍：<span class="eg">This is my friend Jane.</span>（不说 He is…）</div></div>
+        <div class="rule"><div class="rt">Is this/that…? 回答用 it</div><div class="rd"><span class="eg">Is this your pencil? — Yes, it is. / No, it isn't.</span>（不用 this/that 回答，用 it）</div></div>
+        <div class="rule"><div class="rt">Are these/those…? 回答用 they</div><div class="rd"><span class="eg">Are those your rulers? — Yes, they are. / No, they aren't.</span></div></div>
+        <div class="rule"><div class="rt">电话用语用 that 问对方</div><div class="rd">Who's that (speaking)? 你是谁？（不用 Who are you?）</div></div>
+        <div class="rule"><div class="rt">that 可指代上文提到的事</div><div class="rd"><span class="eg">He is ill. That is why he is absent.</span>（that 指代前面整句话）</div></div>
+        <div class="rule"><div class="rt">this 可指代下文要讲的事</div><div class="rd"><span class="eg">This is my plan: we will start at 8.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 4</span><h3>疑问代词</h3></div>
+    <div class="pt-body">
+      <p>疑问代词用于特殊疑问句的句首，对人、物、所属、选择等提问。中考常考 what / who / whose / which 的选择，以及疑问代词作主语时的语序。</p>
+      <div class="formula"><span class="f">疑问代词 + 一般疑问句语序？</span> What is your name? / Who is she? / Whose book is this?</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">what 对事物/职业/动作提问</div><div class="rd"><span class="eg">What's your favourite subject? / What do you do?</span></div></div>
+        <div class="rule"><div class="rt">who 对人提问（主格/宾格）</div><div class="rd"><span class="eg">Who's she? / Who is the boy over there?</span></div></div>
+        <div class="rule"><div class="rt">whose 对所属关系提问</div><div class="rd"><span class="eg">Whose fishing rods are those? — They're my father's.</span></div></div>
+        <div class="rule"><div class="rt">which 有范围选择</div><div class="rd"><span class="eg">Which club do you want to join, the chess club or the art club?</span></div></div>
+        <div class="rule"><div class="rt">whom 对人提问（宾格，正式）</div><div class="rd">口语中常用 who 代替：<span class="eg">Who/Whom are you waiting for?</span></div></div>
+        <div class="rule"><div class="rt">疑问代词作主语 → 陈述句语序</div><div class="rd"><span class="eg">What is in the box? / Who lives there?</span>（疑问代词本身就是主语，后面直接接谓语）</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt">
+    <div class="pt-head"><span class="pt-no">考点 5</span><h3>代词 it 用法</h3></div>
+    <div class="pt-body">
+      <p>it 是初中英语用法最灵活的代词，中考几乎每套卷都考。归纳起来有三大类：指代前文事物、指代时间/天气/距离/环境、作形式主语或形式宾语。</p>
+      <div class="formula"><span class="f">It's + 形容词 + to do sth.：</span>It's important to learn English well.（学好英语很重要。）</div>
+      <div class="rgrid">
+        <div class="rule"><div class="rt">指代前文提到的事物</div><div class="rd"><span class="eg">—Is this your pencil? —Yes, it is. It's mine.</span></div></div>
+        <div class="rule"><div class="rt">指天气/时间/距离/环境</div><div class="rd"><span class="eg">It's sunny today. / It's 7:40. / It's far from here.</span></div></div>
+        <div class="rule"><div class="rt">指不明身份的人（敲门/电话）</div><div class="rd"><span class="eg">Who is it? It's me.</span></div></div>
+        <div class="rule"><div class="rt">作形式主语（真正主语是 to do）</div><div class="rd"><span class="eg">It's + adj. + (for sb.) to do sth.</span>：It's boring to him.</div></div>
+        <div class="rule"><div class="rt">作形式宾语</div><div class="rd">主语 + find/think/make + it + adj. + to do：<span class="eg">I find it easy to learn English.</span></div></div>
+        <div class="rule"><div class="rt">强调句 It is/was…that/who…</div><div class="rd"><span class="eg">It was in the park that I met her.</span>（初三重点，中考阅读常遇）</div></div>
+      </div>
+      <p class="mini">注意：it 与 one 的区别——it 指同一个东西，one 指同类中的一个（a + 名词）。如 I lost my pen. I must buy one.（教辅例句）</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ③ 课本例句 ===== -->
+<section class="sec" id="textbook">
+  <div class="sec-head">
+    <span class="num">03</span>
+    <h2>课本例句</h2>
+    <span class="meta">人教版现行教材 · 中英对照</span>
+  </div>
+  <div class="card">
+    <div class="exgroup">
+      <div class="egt">人称代词与物主代词</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Mr Smith, this is my new friend, Peter.</div><div class="cn">史密斯老师，这是我的新朋友彼得。</div></div><span class="src">七上 Unit 1</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Peter, this is our English teacher, Mr Smith.</div><div class="cn">彼得，这是我们的英语老师史密斯老师。</div></div><span class="src">七上 Unit 1</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">He's from the US.</div><div class="cn">他来自美国。</div></div><span class="src">七上 Unit 1</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">Her name is Sally Wood. She is 13 years old.</div><div class="cn">她叫莎莉·伍德。她 13 岁。</div></div><span class="src">七上 Unit 1 Section B</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">These are my parents.</div><div class="cn">这些是我的父母。</div></div><span class="src">七上 Unit 2</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">It's my mother's piano.</div><div class="cn">那是我妈妈的钢琴。</div></div><span class="src">七上 Unit 2</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">指示代词与疑问代词</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">This is my friend Jane.</div><div class="cn">这是我的朋友简。</div></div><span class="src">七上 Unit 2</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">—Whose fishing rods are those? —They're my father's.</div><div class="cn">那些是谁的钓竿？——是我爸爸的。</div></div><span class="src">七上 Unit 2</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">What's your favourite subject, Meimei?</div><div class="cn">梅梅，你最喜欢的科目是什么？</div></div><span class="src">七上 Unit 4</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">—Why do you like it? —Because it's fun.</div><div class="cn">你为什么喜欢它？——因为它很有趣。</div></div><span class="src">七上 Unit 4</span></div>
+      </div>
+    </div>
+    <div class="exgroup">
+      <div class="egt">it 用法与不定代词</div>
+      <div class="exlist">
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">He doesn't like maths because it's boring to him.</div><div class="cn">他不喜欢数学，因为数学对他来说很枯燥。</div></div><span class="src">七上 Unit 4</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">I have no idea.</div><div class="cn">我不知道。</div></div><span class="src">七上 Unit 5</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">I usually get up at 7:40.</div><div class="cn">我通常七点四十起床。</div></div><span class="src">七上 Unit 6</span></div>
+        <div class="exrow"><div class="ex-main" style="flex:1;min-width:0"><div class="en">We'd also like gongbao chicken and some mapo tofu with rice.</div><div class="cn">我们还想要宫保鸡丁和麻婆豆腐配米饭。</div></div><span class="src">七下 Unit 10</span></div>
+      </div>
+    </div>
+    <p class="srcnote">来源说明：以上例句均出自人教版现行初中教材（含 2024 新版七年级），册次单元已逐一标注，可与对应单元课文、听力文本核对。考点精讲中未标注出处的短例为语法讲解示例；反身代词、both/all/either/neither 等辨析部分例句为教辅例句，均未伪装成课本原句。</p>
+  </div>
+</section>
+
+<!-- ===== ④ 易错点 ===== -->
+<section class="sec" id="mistakes">
+  <div class="sec-head">
+    <span class="num">04</span>
+    <h2>易错点</h2>
+    <span class="meta">错在哪 · 怎么改</span>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 1</span><h3>形容词性物主代词后必须加名词</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">This is she book.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">This is her book.</div></div>
+      <p class="why"><b>解析：</b>形容词性物主代词（my/your/his/her/its/our/their）后面必须接名词；she 是主格人称代词，不能修饰名词。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 2</span><h3>名词性物主代词后不加名词</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">This pen is my.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">This pen is mine.</div></div>
+      <p class="why"><b>解析：</b>mine = my + 名词，后面不能再加名词；my 是形容词性物主代词，必须放在名词前面。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 3</span><h3>动词/介词后用人称代词宾格</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">Please help I.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">Please help me.</div></div>
+      <p class="why"><b>解析：</b>动词 help 后面要接宾格 me，不能用主格 I。介词后面也用宾格：Listen to her.</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 4</span><h3>Is this/that…? 回答用 it</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">—Is this your pencil? —Yes, this is.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">—Is this your pencil? —Yes, it is.</div></div>
+      <p class="why"><b>解析：</b>Is this/that…? 的简略回答必须用 it 代替 this/that，不能说 Yes, this is。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 5</span><h3>复合不定代词作主语谓语用单数</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">Everyone are here.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">Everyone is here.</div></div>
+      <p class="why"><b>解析：</b>everyone / somebody / something / nobody 等复合不定代词作主语时，谓语动词用第三人称单数。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 6</span><h3>形容词修饰不定代词要后置</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">I have important something to tell you.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I have something important to tell you.</div></div>
+      <p class="why"><b>解析：</b>形容词修饰 something / anything / nothing / somebody 等不定代词时，必须放在不定代词后面。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 7</span><h3>反身代词不能单独作主语</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">Myself went to the park.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">I went to the park by myself.</div></div>
+      <p class="why"><b>解析：</b>反身代词不能作主语，只能作宾语或同位语；「我自己去」要说 I went…by myself 或 I myself went…</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 8</span><h3>some 与 any 的误用</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">There isn't some milk in the fridge.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">There isn't any milk in the fridge.</div></div>
+      <p class="why"><b>解析：</b>否定句和一般疑问句中表示「一些」要用 any，肯定句用 some。但 Would you like some tea? 这类表示请求建议的疑问句仍用 some。</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-head"><span class="err-no">易错点 9</span><h3>both 与 all 的范围混淆</h3></div>
+    <div class="err-body">
+      <div class="pair wrong"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>错误写法</div><div class="s">There are three books on the desk. Both are mine.</div></div>
+      <div class="pair right"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>正确写法</div><div class="s">There are three books on the desk. All are mine.</div></div>
+      <p class="why"><b>解析：</b>both 只用于「两者都」，三者及以上用 all。three books 是三者，要用 all。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑤ 关键提醒 / 速记 ===== -->
+<section class="sec" id="tips">
+  <div class="sec-head">
+    <span class="num">05</span>
+    <h2>关键提醒 · 速记口诀</h2>
+    <span class="meta">口诀 · 信号词</span>
+  </div>
+
+  <div class="tip">
+    <div class="tt">人称代词五张表速记口诀</div>
+    <div class="mnem">主格放动词前作主语，宾格放动介后作宾语；形物代后面跟名词，名物代独立用不跟名；反身代词表「自己」，固定搭配要牢记。我(I/me/my/mine/myself)，你(you/you/your/yours/yourself)，他(he/him/his/his/himself)，她(she/her/her/hers/herself)，它(it/it/its/its/itself)，我们(we/us/our/ours/ourselves)，你们(you/you/your/yours/yourselves)，他们(they/them/their/theirs/themselves)。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">不定代词用法口诀</div>
+    <div class="mnem">some 肯定 any 疑否，请求建议 some 留；复合不定代作主，谓语动词用三单；形容词来修饰它，往后放别往前站。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">指示代词远近单复数口诀</div>
+    <div class="mnem">this 近 these 复，that 远 those 复；介绍人用 this 代，Is this…? 回答 it；Are these…? 回答 they，电话问 that 别用 you。</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">信号词——判断填哪种代词的线索</div>
+    <div class="sig">
+      <span>动词前 → 主格</span>
+      <span>动词/介词后 → 宾格</span>
+      <span>空格后有名词 → 形容词性物主代</span>
+      <span>空格后无名词 → 名词性物主代</span>
+      <span>动作回到主语本身 → 反身代词</span>
+      <span>肯定句「一些」→ some</span>
+      <span>否定/疑问「一些」→ any</span>
+      <span>两者都 → both</span>
+      <span>三者及以上都 → all</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⑥ 小练习 ===== -->
+<section class="sec" id="quiz">
+  <div class="sec-head">
+    <span class="num">06</span>
+    <h2>小练习</h2>
+    <span class="meta">做完再点开答案</span>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">1.</span>—Is this your ruler? —Yes, ____ is.</div>
+    <div class="opts"><span class="opt">A. this</span><span class="opt">B. that</span><span class="opt">C. it</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>C。</b>Is this/that…? 的简略回答用 it 代替 this/that。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">2.</span>This isn't my book. ____ is in my schoolbag.</div>
+    <div class="opts"><span class="opt">A. My</span><span class="opt">B. Me</span><span class="opt">C. Mine</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>C。</b>空格后没有名词，用名词性物主代词 mine（= my book）作主语。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">3.</span>I have ____ important to tell you.</div>
+    <div class="opts"><span class="opt">A. something</span><span class="opt">B. anything</span><span class="opt">C. nothing</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>A。</b>肯定句用 something；形容词 important 要后置，放在 something 后面。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">4.</span>—____ fishing rods are those? —They're my father's.</div>
+    <div class="opts"><span class="opt">A. Who</span><span class="opt">B. Whose</span><span class="opt">C. What</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>答语是「我爸爸的」，对所属关系提问用 whose（谁的）。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">5.</span>Everyone in our class ____ English hard.</div>
+    <div class="opts"><span class="opt">A. study</span><span class="opt">B. studies</span><span class="opt">C. studying</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>everyone 是复合不定代词作主语，谓语动词用第三人称单数 studies。</div></details>
+  </div>
+
+  <div class="q">
+    <div class="qt"><span class="qn">6.</span>Help ____ to some fish, children.</div>
+    <div class="opts"><span class="opt">A. yourself</span><span class="opt">B. yourselves</span><span class="opt">C. you</span></div>
+    <details class="ans"><summary>查看答案</summary><div class="ans-box"><b>B。</b>children 是复数，反身代词用 yourselves；help oneself to… 随便吃/喝……</div></details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a class="back" href="../grammar.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回目录</a>
+  <p>新版人教版初中英语 · 语法专项（词性 · 句子 · 时态）</p>
+</footer>
+</body>
+</html>

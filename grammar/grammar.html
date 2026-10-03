@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -346,8 +345,7 @@ function render(){
 }
 
 function openDetail(it){
-  /* 详情页尚未生成：先提示，生成后改为跳转 detail/<id>.html */
-  showToast("《"+it.name+"》专项正在完善中");
+  location.href = 'detail/' + it.id + '.html';
 }
 
 function showToast(msg){
