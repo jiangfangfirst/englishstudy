@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>初中英语 · 语法专项目录</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3B5E'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23F6F3EC' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23C08A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F6F3EC;
+  --paper-2:#EFEBE0;
+  --ink:#2A2A26;
+  --ink-soft:#6B665B;
+  --deep:#1F3B5E;
+  --deep-2:#18304E;
+  --line:#E3DDD0;
+  --c1:#2E82A8; /* 词性 */
+  --c2:#3A6B9E; /* 句子 */
+  --c3:#35507E; /* 时态 */
+  --accent:#C08A3E;
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
+
+/* ===== Hero ===== */
+.hero{
+  background:var(--deep);
+  background-image:
+    radial-gradient(1200px 500px at 85% -10%, rgba(192,138,62,.18), transparent 60%),
+    radial-gradient(900px 420px at -5% 110%, rgba(46,130,168,.22), transparent 55%);
+  color:#F3EFE3;
+  padding:clamp(34px,6vw,60px) clamp(18px,5vw,60px) clamp(30px,4vw,40px);
+  position:relative;
+  overflow:hidden;
+}
+.hero-inner{max-width:1120px;margin:0 auto;position:relative;z-index:2}
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(28px,5.2vw,46px);
+  font-weight:700;line-height:1.2;
+  margin:0;letter-spacing:.01em;
+}
+.hero h1 .accent{color:#E3A94F}
+
+/* ===== 控制区：专项 tab ===== */
+.control{
+  max-width:1120px;margin:0 auto;
+  padding:26px clamp(18px,5vw,60px) 8px;
+  position:sticky;top:0;z-index:20;
+}
+.control-bar{
+  background:#FBF9F3;border:1px solid var(--line);border-radius:14px;
+  box-shadow:0 6px 20px rgba(31,59,94,.06);
+  padding:12px 14px;
+  display:flex;justify-content:center;align-items:center;
+}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.tab{
+  padding:9px 18px;border-radius:9px;font-size:14px;font-weight:600;
+  color:var(--ink-soft);transition:all .15s;white-space:nowrap;
+  border:1px solid transparent;
+}
+.tab:hover{color:var(--ink);background:var(--paper-2)}
+.tab.on{background:var(--deep);color:#F3EFE3;box-shadow:0 4px 12px rgba(31,59,94,.25)}
+.tab .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:1px}
+.tab.on .dot{background:#E3A94F}
+
+/* ===== 内容区 ===== */
+main{max-width:1120px;margin:0 auto;padding:18px clamp(18px,5vw,60px) 70px}
+
+.gram-section{margin-top:30px}
+.gram-head{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 6px 12px;
+  border-bottom:2px solid var(--deep);
+}
+.gram-head .num{
+  font-family:var(--serif);font-size:15px;font-weight:700;color:#fff;
+  background:var(--g,var(--c1));border-radius:8px;
+  padding:4px 12px;letter-spacing:.05em;
+}
+.gram-head h2{font-family:var(--serif);font-size:clamp(20px,2.6vw,25px);font-weight:700}
+.gram-head .meta{font-size:13px;color:var(--ink-soft);margin-left:auto;white-space:nowrap}
+
+.gram-list{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+
+.gram{
+  background:#FBF9F3;border:1px solid var(--line);border-radius:12px;
+  padding:15px 16px;display:flex;gap:15px;align-items:center;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .12s, box-shadow .15s, border-color .15s;
+  text-align:left;width:100%;
+}
+.gram:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(31,59,94,.09);border-color:#D3CCBB}
+.gram:active{transform:translateY(0)}
+.gram::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:var(--g,var(--c1));
+}
+.gram-badge{
+  flex:0 0 auto;width:52px;height:52px;border-radius:10px;
+  background:color-mix(in srgb, var(--g,var(--c1)) 14%, #fff);
+  color:var(--g,var(--c1));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:var(--serif);font-weight:700;line-height:1.1;
+}
+.gram-badge .u{font-size:10px;font-weight:600;letter-spacing:.02em;opacity:.85}
+.gram-badge .n{font-size:17px}
+.gram-body{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start}
+.gram-body .en{font-size:16px;font-weight:600;color:var(--ink);font-family:var(--serif);display:block;line-height:1.35}
+.gram-body .cn{font-size:13px;color:var(--ink-soft);margin-top:2px;display:block}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tag{
+  font-size:11px;padding:2px 9px;border-radius:20px;
+  background:var(--paper-2);color:var(--ink-soft);
+  border:1px solid var(--line);white-space:nowrap;
+}
+.gram-go{
+  flex:0 0 auto;width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+  color:var(--ink-soft);transition:all .15s;
+}
+.gram-go svg{width:16px;height:16px;stroke:currentColor}
+.gram:hover .gram-go{background:var(--g,var(--c1));color:#fff;border-color:var(--g,var(--c1))}
+
+.empty{
+  text-align:center;padding:60px 20px;color:var(--ink-soft);
+  border:1px dashed var(--line);border-radius:12px;margin-top:14px;
+}
+.empty .t{font-size:16px;font-weight:600;color:var(--ink)}
+
+footer{
+  border-top:1px solid var(--line);
+  padding:22px clamp(18px,5vw,60px) 40px;color:var(--ink-soft);
+  font-size:13px;text-align:center;
+}
+
+/* ===== Toast ===== */
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(16px);
+  background:var(--deep);color:#F3EFE3;
+  padding:12px 22px;border-radius:10px;font-size:14px;
+  box-shadow:0 10px 30px rgba(31,59,94,.35);
+  opacity:0;pointer-events:none;transition:all .25s;z-index:50;
+  display:flex;align-items:center;gap:10px;max-width:88vw;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast svg{width:17px;height:17px;stroke:#E3A94F;flex:0 0 auto}
+
+@media (max-width:720px){
+  .control{position:static}
+  .tabs{width:100%;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;justify-content:flex-start}
+  .tabs::-webkit-scrollbar{display:none}
+  .gram{flex-wrap:nowrap}
+}
+@media (max-width:430px){
+  .hero{padding:32px 16px 30px}
+  .control-bar{padding:10px}
+  .gram{gap:12px;padding:13px}
+  .gram-badge{width:46px;height:46px;border-radius:9px}
+  .gram-badge .n{font-size:15px}
+  .gram-badge .u{font-size:9px}
+  .gram-body .en{font-size:15px}
+  .gram-go{width:30px;height:30px}
+  .gram-section{margin-top:22px}
+}
+@media (max-width:360px){
+  .gram{gap:10px;padding:12px 11px}
+  .gram-badge{width:42px;height:42px}
+  .gram-badge .n{font-size:14px}
+  .gram-go{width:28px;height:28px}
+  .gram-body .en{font-size:14.5px}
+  .gram-head .meta{display:none}
+  .hero h1{font-size:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶部 Hero ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <h1>初中英语 <span class="accent">语法专项</span> 目录</h1>
+  </div>
+</header>
+
+<!-- ===== 专项 Tab ===== -->
+<div class="control">
+  <div class="control-bar">
+    <div class="tabs" id="tabs" role="tablist">
+      <button class="tab" data-grade="词性语法"><span class="dot" style="background:var(--c1)"></span>词性语法</button>
+      <button class="tab" data-grade="句子语法"><span class="dot" style="background:var(--c2)"></span>句子语法</button>
+      <button class="tab" data-grade="时态语法"><span class="dot" style="background:var(--c3)"></span>时态语法</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 内容区 ===== -->
+<main id="content"></main>
+
+<div class="empty" id="empty-state" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M8.5 11h5"/></svg>
+  <div class="t">没有匹配的语法专题</div>
+</div>
+
+<footer>新版人教版初中英语 · 语法专项（词性 · 句子 · 时态）</footer>
+
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+  <span id="toast-txt"></span>
+</div>
+
+<script>
+/* ===== 语法专项数据（id 预留详情页链接 detail/<id>.html） ===== */
+const DATA = [
+  /* --- 词性语法（9） --- */
+  {grade:"词性语法", cat:"词性", name:"名词", en:"Nouns",
+   points:["可数 / 不可数名词","名词复数","名词所有格","名词作主语宾语","中考高频名词辨析"], id:"gram-noun"},
+  {grade:"词性语法", cat:"词性", name:"代词", en:"Pronouns",
+   points:["人称 / 物主 / 反身代词","不定代词","指示代词","疑问代词","代词 it 用法"], id:"gram-pron"},
+  {grade:"词性语法", cat:"词性", name:"形容词 & 副词", en:"Adjectives & Adverbs",
+   points:["形容词副词区别","比较级最高级规则变化","不规则变化","位置辨析"], id:"gram-adjadv"},
+  {grade:"词性语法", cat:"词性", name:"数词", en:"Numerals",
+   points:["基数词、序数词","hundred / thousand 用法","分数表达","日期时间表达"], id:"gram-num"},
+  {grade:"词性语法", cat:"词性", name:"冠词", en:"Articles",
+   points:["a / an / the 用法","零冠词场景","冠词易混辨析"], id:"gram-art"},
+  {grade:"词性语法", cat:"词性", name:"介词", en:"Prepositions",
+   points:["时间介词、地点介词","固定介词搭配","介词短语辨析"], id:"gram-prep"},
+  {grade:"词性语法", cat:"词性", name:"动词", en:"Verbs",
+   points:["实义动词","系动词","动词词义辨析","动词过去式、过去分词变形"], id:"gram-verb"},
+  {grade:"词性语法", cat:"词性", name:"情态动词", en:"Modal Verbs",
+   points:["can / may / must / should 等","情态动词表推测","问答应答"], id:"gram-modal"},
+  {grade:"词性语法", cat:"词性", name:"非谓语动词", en:"Non-finite Verbs",
+   points:["to do / doing / do","固定搭配","非谓语作主语宾语定语状语"], id:"gram-nonfin"},
+
+  /* --- 句子语法（7） --- */
+  {grade:"句子语法", cat:"句子", name:"陈述句与疑问句", en:"Statements & Questions",
+   points:["肯定句、否定句","一般疑问句、特殊疑问句","疑问词用法"], id:"gram-stmt"},
+  {grade:"句子语法", cat:"句子", name:"There be 结构", en:"There be Structure",
+   points:["there be 句型肯定 / 否定 / 疑问","就近原则","there be 和 have 区别"], id:"gram-therebe"},
+  {grade:"句子语法", cat:"句子", name:"反意疑问句（反问句）", en:"Tag Questions",
+   points:["前肯后否、前否后肯","特殊情况的反问","回答规则"], id:"gram-tagq"},
+  {grade:"句子语法", cat:"句子", name:"感叹句", en:"Exclamatory Sentences",
+   points:["What / How 感叹句结构","感叹句变形转换"], id:"gram-excl"},
+  {grade:"句子语法", cat:"句子", name:"宾语从句", en:"Object Clauses",
+   points:["引导词","语序（陈述语序）","时态呼应","宾语从句否定转移"], id:"gram-object"},
+  {grade:"句子语法", cat:"句子", name:"定语从句", en:"Attributive Clauses",
+   points:["that / which / who 关系代词","中考限定性定语从句基础用法"], id:"gram-attrib"},
+  {grade:"句子语法", cat:"句子", name:"状语从句", en:"Adverbial Clauses",
+   points:["时间、条件、原因、让步状语从句","主将从现规则"], id:"gram-adverb"},
+
+  /* --- 时态语法（8） --- */
+  {grade:"时态语法", cat:"时态", name:"一般现在时", en:"Simple Present",
+   points:["结构","经常性动作","客观真理","标志词","动词三单变化"], id:"gram-pres"},
+  {grade:"时态语法", cat:"时态", name:"一般过去时", en:"Simple Past",
+   points:["过去发生动作","动词过去式","yesterday / last… 标志词"], id:"gram-past"},
+  {grade:"时态语法", cat:"时态", name:"一般将来时", en:"Simple Future",
+   points:["will / be going to","将来时间标志","将来计划与预测"], id:"gram-fut"},
+  {grade:"时态语法", cat:"时态", name:"现在进行时", en:"Present Continuous",
+   points:["am / is / are doing","now / look / listen","表现阶段正在发生"], id:"gram-prescont"},
+  {grade:"时态语法", cat:"时态", name:"过去进行时", en:"Past Continuous",
+   points:["was / were doing","过去某一时刻正在做","when / while"], id:"gram-pastcont"},
+  {grade:"时态语法", cat:"时态", name:"现在完成时", en:"Present Perfect",
+   points:["have / has done","already / yet / since / for","延续性动词转换"], id:"gram-perf"},
+  {grade:"时态语法", cat:"时态", name:"过去完成时", en:"Past Perfect",
+   points:["had done","过去的过去","宾语从句、时间状语从句场景"], id:"gram-pastperf"},
+  {grade:"时态语法", cat:"时态", name:"过去将来时", en:"Past Future",
+   points:["would do / was、were going to","主句为过去时的宾语从句"], id:"gram-pastfut"}
+];
+
+const GRADE_COLOR = {词性语法:"var(--c1)", 句子语法:"var(--c2)", 时态语法:"var(--c3)"};
+const GRADE_HASH = {词性语法:"p", 句子语法:"s", 时态语法:"t"};
+
+let currentGrade = "词性语法";
+
+const content = document.getElementById("content");
+const tabs = document.getElementById("tabs");
+const emptyState = document.getElementById("empty-state");
+const toast = document.getElementById("toast");
+const toastTxt = document.getElementById("toast-txt");
+let toastTimer = null;
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+/* 序号补零 */
+function pad(n){ return String(n).padStart(2,"0"); }
+
+function render(){
+  const list = DATA.filter(it=> it.grade===currentGrade);
+  content.innerHTML = "";
+  emptyState.hidden = list.length>0;
+  if(list.length===0) return;
+
+  const sec = document.createElement("section");
+  sec.className = "gram-section";
+  const gColor = GRADE_COLOR[currentGrade];
+
+  const head = document.createElement("div");
+  head.className = "gram-head";
+  head.style.setProperty("--g", gColor);
+  head.innerHTML =
+    '<div class="num">'+esc(currentGrade.slice(0,1))+'</div>'+
+    '<h2>'+esc(currentGrade)+'</h2>'+
+    '<div class="meta">'+list.length+' 个专题</div>';
+  sec.appendChild(head);
+
+  const ul = document.createElement("div");
+  ul.className = "gram-list";
+
+  list.forEach((it, idx)=>{
+    const tagHtml = it.points.map(p=>'<span class="tag">'+esc(p)+'</span>').join("");
+    const card = document.createElement("button");
+    card.className = "gram";
+    card.style.setProperty("--g", gColor);
+    card.setAttribute("aria-label","开始学习《"+it.name+"》");
+    card.innerHTML =
+      '<span class="gram-badge"><span class="u">'+esc(it.cat)+'</span><span class="n">'+pad(idx+1)+'</span></span>'+
+      '<span class="gram-body">'+
+        '<span class="en">'+esc(it.name)+'</span>'+
+        '<span class="cn">'+esc(it.en)+'</span>'+
+        '<span class="tags">'+tagHtml+'</span>'+
+      '</span>'+
+      '<span class="gram-go"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>';
+    card.addEventListener("click", ()=>openDetail(it));
+    ul.appendChild(card);
+  });
+
+  sec.appendChild(ul);
+  content.appendChild(sec);
+}
+
+function openDetail(it){
+  /* 详情页尚未生成：先提示，生成后改为跳转 detail/<id>.html */
+  showToast("《"+it.name+"》专项正在完善中");
+}
+
+function showToast(msg){
+  toastTxt.textContent = msg;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>toast.classList.remove("show"), 2600);
+}
+
+/* 专项 Tab */
+function setGrade(g, updateHash){
+  currentGrade = g;
+  tabs.querySelectorAll(".tab").forEach(t=>{
+    t.classList.toggle("on", t.dataset.grade===g);
+  });
+  if(updateHash!==false) history.replaceState(null,"","#"+GRADE_HASH[g]);
+  render();
+}
+tabs.addEventListener("click", e=>{
+  const b = e.target.closest(".tab");
+  if(b) setGrade(b.dataset.grade);
+});
+
+/* hash 路由 */
+function applyHash(){
+  const h = location.hash.replace("#","");
+  if(h==="s") setGrade("句子语法", false);
+  else if(h==="t") setGrade("时态语法", false);
+  else setGrade("词性语法", false);
+}
+
+/* 初始 */
+applyHash();
+</script>
+</body>
+</html>
