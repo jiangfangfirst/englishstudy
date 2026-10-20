@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>核心知识演练1 · 英语语法</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:#f5f7fb;
+    color:#2c3e50;
+    line-height:1.7;
+    padding-bottom:40px;
+}
+.header{
+    background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    color:#fff;
+    padding:30px 20px 40px;
+    border-radius:0 0 24px 24px;
+    box-shadow:0 8px 24px rgba(102,126,234,0.3);
+}
+.header h1{
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:1px;
+}
+.header .sub{
+    font-size:13px;
+    opacity:0.85;
+    margin-top:6px;
+}
+.container{
+    padding:0 14px;
+    margin-top:-20px;
+}
+.card{
+    background:#fff;
+    border-radius:16px;
+    margin-bottom:14px;
+    box-shadow:0 4px 16px rgba(0,0,0,0.06);
+    overflow:hidden;
+    transition:all 0.3s ease;
+}
+.card-header{
+    padding:16px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+    user-select:none;
+}
+.card-header .num{
+    width:32px;
+    height:32px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+    font-size:15px;
+    flex-shrink:0;
+}
+.card-header .title{
+    flex:1;
+    margin-left:12px;
+    font-size:16px;
+    font-weight:600;
+    color:#2c3e50;
+}
+.card-header .arrow{
+    color:#95a5a6;
+    font-size:18px;
+    transition:transform 0.3s;
+}
+.card.active .card-header .arrow{
+    transform:rotate(180deg);
+}
+.card-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.4s ease;
+}
+.card.active .card-body{
+    max-height:4000px;
+}
+.card-content{
+    padding:0 18px 18px;
+    border-top:1px solid #f0f2f5;
+}
+.section{
+    margin-top:14px;
+}
+.section-title{
+    font-size:13px;
+    font-weight:600;
+    color:#764ba2;
+    margin-bottom:6px;
+    display:flex;
+    align-items:center;
+}
+.section-title::before{
+    content:"";
+    width:3px;
+    height:13px;
+    background:#764ba2;
+    border-radius:2px;
+    margin-right:6px;
+}
+/* 翻译模块：四周1px蓝色边框 */
+.trans-text{
+    font-size:14px;
+    color:#555;
+    background:#f8f9fc;
+    padding:12px 14px;
+    border-radius:8px;
+    border:1px solid #667eea;
+}
+.example-btn{
+    display:inline-block;
+    margin-top:10px;
+    padding:5px 12px;
+    background:#eef2ff;
+    color:#4338ca;
+    border-radius:6px;
+    font-size:12px;
+    cursor:pointer;
+    user-select:none;
+    transition:background 0.2s;
+}
+.example-btn:active{
+    background:#e0e7ff;
+}
+.example-content{
+    display:none;
+    margin-top:10px;
+    padding:12px;
+    border:1px solid #667eea;
+    border-radius:8px;
+    background:#f0f4ff;
+}
+.trans-text.active .example-content{
+    display:block;
+}
+.example-en{
+    font-family:"Times New Roman",Georgia,serif;
+    font-size:14.5px;
+    color:#2c3e50;
+    font-weight:500;
+    margin-bottom:6px;
+}
+.example-en:last-child{
+    margin-bottom:0;
+}
+/* 可替换/补充例句统一橙色边框样式 */
+.alt-example{
+    background:#fff8f0;
+    border:1px solid #f39c12;
+    border-radius:6px;
+    padding:8px 10px;
+    margin-top:8px;
+    font-size:13px;
+    color:#92400e;
+}
+.analysis-list{
+    list-style:none;
+    font-size:14px;
+    color:#34495e;
+}
+.analysis-list li{
+    position:relative;
+    padding-left:16px;
+    margin-bottom:8px;
+}
+.analysis-list li::before{
+    content:"•";
+    position:absolute;
+    left:0;
+    color:#667eea;
+    font-weight:bold;
+}
+.highlight{
+    color:#e74c3c;
+    font-weight:600;
+}
+.keyword{
+    background:#eef2ff;
+    color:#4338ca;
+    padding:1px 6px;
+    border-radius:4px;
+    font-size:13px;
+    font-weight:500;
+}
+.footer-tip{
+    text-align:center;
+    color:#95a5a6;
+    font-size:12px;
+    margin-top:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>核心知识演练1</h1>
+    <div class="sub">高中英语 · 高频考点 · 精讲精练1-3</div>
+</div>
+
+<div class="container">
+
+    <!-- 第1题 -->
+    <div class="card active">
+        <div class="card-header" onclick="toggleCard(this)">
+            <div class="num">1</div>
+            <div class="title">询问“通过什么方式”</div>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-content">
+                <div class="section">
+                    <div class="section-title">翻译</div>
+                    <div class="trans-text">
+                        你是通过什么方式提高了你的英语发音的？大声朗读。
+                        <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="example-content">
+                            <div class="example-en">How did you improve your English pronunciation?</div>
+                            <div class="example-en">By reading aloud.</div>
+                            <div class="alt-example">
+                                <strong>可替换表达：</strong>
+                                <br>① How did you improve your English level? By reading aloud.
+                                <br>② How did you improve your English proficiency /prəˈfɪʃnsi/? By reading aloud.
+                                <br>⚠️ 注意：level 意为“水平”，不要写成 lever /ˈliːvə(r)/（杠杆）。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">解析</div>
+                    <ul class="analysis-list">
+                        <li><span class="keyword">how</span> 用来询问“方式、方法”；<span class="keyword">by doing sth</span> 是回答方式的常见结构，如 by reading aloud。注意：不宜讲成“用 how 提问只能用 by 回答”，by doing 最常见，也可用 through、with 等表达，只是 by doing 最稳妥；同时注意 <span class="keyword">through</span>（介词，通过）与 though（连词，尽管）拼写相近，不要混淆，though 的用法详见第2句解析。</li>
+                        <li><span class="keyword">improve one's English pronunciation</span>：提高英语发音水平；improve your English level 语法正确但偏中式表达，更地道的说法为 improve your English 或 improve your English proficiency。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第2题 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <div class="num">2</div>
+            <div class="title">Although 让步 + find out + wisdom</div>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-content">
+                <div class="section">
+                    <div class="section-title">翻译</div>
+                    <div class="trans-text">
+                        尽管她对护理知识很了解，但我们查明这位护士对待病人毫无耐心，从而判断她没有护理能力，所以开除她是明智的。
+                        <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="example-content">
+                            <div class="example-en">Although she knew a lot about nursing, we found out that she was impatient with patients. Therefore, we judged that she didn't have the ability to nurse patients, so it was wise to dismiss her.</div>
+                            <div class="alt-example">
+                                <strong>可替换表达：</strong>
+                                <br>① 替换“对护理知识很了解”：Although she had a good knowledge of nursing...
+                                <br>② 强化语气（无法容忍）：...we found out that she had no patience with patients...
+                                <br>③ 替换“没有护理能力”：...we judged that she was unqualified for nursing...（侧重“无资格、不胜任”）
+                                <br>④ 用上名词 wisdom：It was an act of wisdom to dismiss her.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">解析</div>
+                    <ul class="analysis-list">
+                        <li><span class="keyword">Although</span> 引导让步状语从句，<span class="highlight">绝对不能和 but 连用</span>。辨析：even if 侧重“即使、假设”；<span class="keyword">even though</span> 侧重“尽管、事实”（可译为“尽管”），本句是事实让步，用 Although / Even though 更合适。</li>
+                        <li>“对护理知识很了解”不宜写 knows a lot about nursing knowledge（语义冗余），更自然的表达为 know a lot about nursing 或 have a good knowledge of nursing。</li>
+                        <li>词汇辨析：discover 发现（原本存在但未知）；find out 查明（通过调查）；invent 发明；create 创造，本句“查明”用 find out 最贴切。</li>
+                        <li>“对待病人毫无耐心”：was impatient with patients 语气平和；had no patience with patients 语气更强烈，表“完全无法容忍”。</li>
+                        <li>表达辨析：didn't have the ability to nurse patients 表示“没有护理的能力”；<span class="highlight">注意：后面有定冠词 the 时，前面用 didn't have，不能写 had no the ability</span>（no 本身相当于 not a / not any，不能与冠词连用）；was unqualified for nursing 侧重“不具备资格、不胜任”。</li>
+                        <li>词汇辨析：dismiss sb = fire sb，均可表示“开除、解雇某人”；<span class="highlight">注意区分</span>：fire at sb 指向某人开火；burn sb 指烧伤、烧到某人，不要混淆。</li>
+                        <li>句式优化：therefore 和 so 都表结果，同一句连用略有冗余；<span class="highlight">正式写作建议二者择其一</span>，可将 therefore 后置，或去掉 so 直接用 therefore 衔接。</li>
+                        <li>wise 是形容词，wisdom 是名词，<span class="highlight">不能写 it was wisdom to dismiss her</span>，正确写法为 It was wise to do sth. 或 It was an act of wisdom to do sth.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第3题 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <div class="num">3</div>
+            <div class="title">connect 搭配 + bored 用法 + won't</div>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-content">
+                <div class="section">
+                    <div class="section-title">翻译</div>
+                    <div class="trans-text">
+                        如果你把音箱接到电脑上，那位善于和学生相处的老师就不会对网课感到无聊。
+                        <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="example-content">
+                            <div class="example-en">If you connect the speaker to the computer, the teacher who is good with students won't get bored with the online class.</div>
+                            <div class="alt-example">
+                                <strong>补充例句：</strong>Once you connect art with daily life, you will fall in love with it and never get bored with creating.
+                                <br><strong>可替换表达：</strong>
+                                <br>① 定语从句替换：...the teacher whom the students are good with...（语法成立，语义略有不同）
+                                <br>② 短语替换：...and never tire of creating.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">解析</div>
+                    <ul class="analysis-list">
+                        <li>搭配辨析：<span class="keyword">connect A to B</span> 侧重物理接通，把 A 接到 B 上；<span class="keyword">connect A with B</span> 侧重抽象关联，把 A 和 B 联系起来。</li>
+                        <li>定语从句考点：先行词是人且引导词在从句中作主语时，<span class="keyword">who 可以用 that 替换</span>，本句 the teacher who is good with students = the teacher that is good with students。</li>
+                        <li><span class="keyword">be good with sb</span>：善于和某人相处；替换为 whom 引导时，主语变为学生，语义由“老师擅长和学生相处”变为“学生善于和这位老师相处”，语法成立但含义有差别。</li>
+                        <li>短语辨析：<span class="keyword">get bored with sth / doing sth</span> 表示对某事感到无聊、厌倦，<span class="highlight">考试书面语优先用 with</span>；同义替换为 <span class="keyword">tire of doing sth</span>（tire 为动词，of 是介词，后接 doing）；be bored about / at 为错误表达。</li>
+                        <li>won't = will not，是标准缩写形式，<span class="highlight">注意不要写成 willn't</span>，正式书面语建议写完整形式 will not。</li>
+                        <li>bored 是单音节分词形容词，比较级和最高级为 <span class="keyword">more bored / most bored</span>，不能写 boreder。规律：以 -ed / -ing 结尾的形容词，通常用 more / most 构成比较级和最高级，如 more excited、more surprising。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第4题 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <div class="num">4</div>
+            <div class="title">afraid to do / of doing + succeed in + secret to</div>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-content">
+                <div class="section">
+                    <div class="section-title">翻译</div>
+                    <div class="trans-text">
+                        他不敢当众说话，因为他害怕说错话。一年以后，他成功地找到一种在交流中变得自信的方法。他成功的秘诀是积极参加英语角练习英语口语。
+                        <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="example-content">
+                            <div class="example-en">He was afraid to speak in public, because he was afraid of saying the wrong thing.</div>
+                            <div class="example-en">One year later, he succeeded in finding a way to become confident in communication.</div>
+                            <div class="example-en">The secret to his success was taking an active part in the English Corner to practise spoken English.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">解析</div>
+                    <ul class="analysis-list">
+                        <li>用法辨析：<span class="keyword">be afraid to do sth</span> 表示不敢做某事，强调缺乏勇气行动；<span class="keyword">be afraid of doing sth</span> 表示担心做某事，强调害怕产生不良后果。</li>
+                        <li>表达优化：saying something wrong 语法正确，saying the wrong thing 更自然地道。</li>
+                        <li><span class="keyword">succeed in doing sth</span>：成功做成某事，in 是介词，后接 doing，不能接 to do。词形拓展：success n. 成功；successful adj. 成功的。</li>
+                        <li><span class="keyword">the secret to …</span>：……的秘诀，to 是介词，后接名词或 doing。同类介词 to 结构还有 devote … to doing、stick to doing、the key to doing。</li>
+                        <li>短语补充：spoken English 英语口语；take an active part in 积极参加。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第5题 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <div class="num">5</div>
+            <div class="title">devote one's life to doing + It形式主语</div>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-content">
+                <div class="section">
+                    <div class="section-title">翻译</div>
+                    <div class="trans-text">
+                        她十年献身于地下党工作，真了不起。她的成就众所周知，我们非常钦佩这位勇敢的女英雄。
+                        <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="example-content">
+                            <div class="example-en">It is amazing that she devoted her life to underground Party work for ten years.</div>
+                            <div class="example-en">Her achievement is well-known, and we admire this courageous heroine very much.</div>
+                            <div class="alt-example">
+                                <strong>可替换表达：</strong>
+                                <br>① 不定式完成式：It is amazing for her to have devoted her life to doing underground Party work for ten years.
+                                <br>② 全身心投入：It is amazing that she devoted herself to doing underground Party work for ten years.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">解析</div>
+                    <ul class="analysis-list">
+                        <li>时态说明：over the past ten years / for ten years 常与现在完成时连用，但本句结合语境（地下党工作发生在过去、现已结束），<span class="highlight">用一般过去时 devoted 更贴合事实</span>；过去完成时需要明确的过去时间参照点（如 before liberation），本句无参照点，不建议使用。</li>
+                        <li><span class="keyword">devote one's life / oneself to sth / doing sth</span>：献身于某事/做某事，to 是介词，后可接名词或动名词 doing。
+                            <br>• <span class="keyword">devote one's life to doing</span>：更强调“毕生、一生奉献”；
+                            <br>• <span class="keyword">devote oneself to doing</span>：更侧重“全身心投入精力”；
+                            <br>• 本句 to underground Party work 为 to + 名词用法，同样正确。</li>
+                        <li><span class="keyword">It is amazing that …</span> 是最自然的 it 形式主语结构；It is amazing for sb to have done sth 中不定式完成式表示动作先发生，语法正确，但日常和考试中更常用 that 从句。</li>
+                        <li>词汇：achievement n. 成就；courageous adj. 勇敢的。</li>
+                        <li>词义辨析：admire 是及物动词，可接人或物，表“钦佩、欣赏”；<span class="keyword">look up to sb</span> 只能接人，表“敬仰、视作榜样”。宾语为人时二者可互换，宾语为事物时只能用 admire。</li>
+                        <li>短语拓展：<span class="keyword">look up</span> 本义为“向上看；查阅（单词、资料等）”，如 look up the new word in the dictionary；look up to sb 是固定搭配，表“敬仰、仰慕”，不要与 look up 本义混淆。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第6题 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <div class="num">6</div>
+            <div class="title">目的、努力、同意、利用、坚持</div>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-content">
+                <div class="section">
+                    <div class="section-title">翻译</div>
+                    <div class="trans-text">
+                        为了确保你们能考上一所好的高中，我不遗余力地教，你们努力地学，好吗？——我们再同意不过了。我们会利用校外课堂继续尽最大努力坚持学习。
+                        <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="example-content">
+                            <div class="example-en">In order to make sure you can get into a good high school, I spare no effort to teach, and you make an effort to study. Will you?</div>
+                            <div class="example-en">— We couldn't agree more.</div>
+                            <div class="example-en">We will take advantage of out-of-school classes to try our best and keep on studying.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">解析</div>
+                    <ul class="analysis-list">
+                        <li><span class="keyword">in order to</span>：为了，后接动词原形表目的；语法上可替换为不定式 to，但本句后半句已有 to study，不定式重复，<span class="highlight">不建议替换</span>。</li>
+                        <li><span class="keyword">make sure</span>：确保，后常接宾语从句。</li>
+                        <li><span class="keyword">spare no effort to do sth</span>：不遗余力做某事，固定搭配。
+                            <br>单词：spare /speə(r)/ v. 抽出，吝惜
+                            <br>同类拓展：make an effort / efforts to do sth 努力做某事；make every effort to do sth 尽一切努力做某事。</li>
+                        <li><span class="keyword">make an effort to do sth</span>：努力做某事。</li>
+                        <li><span class="keyword">couldn't agree more</span>：完全同意、再同意不过了。</li>
+                        <li><span class="keyword">take advantage of</span>：利用。</li>
+                        <li><span class="keyword">try one's best</span>：尽最大努力。</li>
+                        <li>用法辨析：keep on doing 侧重“动作持续”；stick to doing 侧重“坚持计划不放弃”。<span class="highlight">二者选其一即可，不建议叠加使用</span>，避免语义冗余。</li>
+                        <li>语气说明：前句是“I…you…”的师生对话，用 Will you? / OK? 更贴切；Shall we? 用于提议双方共同做某事。</li>
+                        <li>词汇说明：<span class="highlight">high school 意为“高中”，不是“高校”</span>；完整表达：senior high school 高中；junior high school 初中。</li>
+                        <li>表达辨析：after-school classes 意为“课后的”，可校内可校外；表示“校外的、非学校举办的”优先用 out-of-school classes / extra-curricular classes。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第7题 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <div class="num">7</div>
+            <div class="title">否定转移 + key to doing + only倒装</div>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-content">
+                <div class="section">
+                    <div class="section-title">翻译</div>
+                    <div class="trans-text">
+                        我认为学习策略和学习资源并不是提高成绩的关键。建立信心才是做好任何事情的最佳方法。只有拥有信心，我们才能高效利用资源，提升学习效率。
+                        <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="example-content">
+                            <div class="example-en">I don't think learning strategies and learning resources are the key to improving grades.</div>
+                            <div class="example-en">Building up confidence is the best way to do anything.</div>
+                            <div class="example-en">Only with confidence can we use resources efficiently and improve learning efficiency.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">解析</div>
+                    <ul class="analysis-list">
+                        <li><span class="keyword">I don't think …</span> 是否定转移结构：形式上否定主句动词 think，意义上否定后面的宾语从句。</li>
+                        <li>词汇：strategies /ˈstrætədʒiz/ n. 策略（strategy 的复数形式）；<span class="keyword">the key to doing sth</span>：做某事的关键，to 是介词，后接 doing；build up confidence 表示逐步建立信心。</li>
+                        <li>表达辨析：表示“做某事的方法”，<span class="keyword">the method of doing sth</span> 为标准常用结构，考试优先使用；the method to do sth 接受度较低，不推荐写作使用。</li>
+                        <li>倒装规则：<span class="keyword">Only + 状语置于句首</span>，主句要用<span class="highlight">部分倒装</span>，将助动词/情态动词/be动词提到主语前；only 修饰主语时不倒装。</li>
+                        <li>同根词：efficient adj. 高效的；efficiently adv. 高效地；efficiency n. 效率。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第8题 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <div class="num">8</div>
+            <div class="title">have trouble doing + 比较级 + whether/if</div>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-content">
+                <div class="section">
+                    <div class="section-title">翻译</div>
+                    <div class="trans-text">
+                        他很难完成这么大量的作业，作业越多越难认真思考，他不知道是否要向老师及时反馈这个情况。
+                        <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="example-content">
+                            <div class="example-en">He has trouble (in) finishing so much homework.</div>
+                            <div class="example-en">The more homework he has, the harder it is for him to think carefully.</div>
+                            <div class="example-en">He wonders whether he should give his teacher timely feedback on this situation.</div>
+                            <div class="alt-example">
+                                <strong>可替换表达：</strong>
+                                <br>① 替换“不知道是否”：He doesn't know whether he should give feedback to his teacher on this situation in time.
+                                <br>⚠️ 说明：wonders 侧重“纳闷、想知道”；doesn't know 侧重“不知道”，语义略有不同。
+                                <br>② whether 可替换为 if：He wonders if he should give his teacher timely feedback on this situation.
+                                <br>③ 替换及时的表达：...give feedback to his teacher on this situation in time.（in time 放句尾）
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">解析</div>
+                    <ul class="analysis-list">
+                        <li><span class="keyword">have trouble (in) doing sth</span>：做某事有困难，介词 in 可以省略。</li>
+                        <li><span class="keyword">The + 比较级…, the + 比较级…</span>：表示“越……，就越……”，本句后半句用 it 作形式主语。</li>
+                        <li>whether 与 if 辨析：动词后的宾语从句中二者常可互换，本句 whether 可换成 if。以下<span class="highlight">只能用 whether</span>：① 直接与 or not 连用；② 放在介词后面；③ 放在不定式前；④ 引导主语从句且放在句首。</li>
+                        <li>词汇辨析：timely adj. 及时的（作定语修饰名词，更书面、更推荐）；in time 介词短语作状语，常放句尾。两者都正确，写作优先用 timely 更地道。</li>
+                        <li>表达优化：give sb feedback on sth 双宾语结构更地道，优于 give feedback on sth to sb。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-tip">点击卡片标题展开/收起 · 点击「查看英文例句」对照译文</div>
+</div>
+
+<script>
+function toggleCard(header){
+    const card = header.parentElement;
+    card.classList.toggle('active');
+}
+
+function toggleExample(btn){
+    const transBox = btn.parentElement;
+    transBox.classList.toggle('active');
+    if(transBox.classList.contains('active')){
+        btn.innerHTML = "▾ 收起例句";
+    }else{
+        btn.innerHTML = "▸ 查看英文例句";
+    }
+}
+</script>
+
+</body>
+</html>
