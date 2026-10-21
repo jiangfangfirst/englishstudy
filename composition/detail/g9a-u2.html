@@ -34,8 +34,20 @@
   .khead h2{font-size:18px;font-weight:800;color:var(--ink);font-family:var(--serif);letter-spacing:.3px}
   .essay{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 20px 8px;box-shadow:0 4px 16px rgba(31,59,94,.05)}
   .essay p{font-size:15.5px;color:var(--ink);margin-bottom:16px;overflow-wrap:break-word;word-break:break-word}
-  .essay .en-label{display:inline-block;font-size:11px;font-weight:700;color:var(--g9);background:#EAF2F7;border-radius:999px;padding:2px 10px;margin-bottom:14px}
 
+  .essay span[data-start]{
+    transition: color 0.25s ease, background 0.25s ease;
+    cursor: pointer;
+    font-weight:inherit;
+  }
+  .essay span.active-line{
+    background:linear-gradient(90deg,#ff4444,#e02020);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .essay .en-label{display:inline-block;font-size:11px;font-weight:700;color:var(--g9);background:#EAF2F7;border-radius:999px;padding:2px 10px;margin-bottom:14px}
   /*=====音频按钮样式=====*/
   .audio-play-btn{
     display:inline-flex;
@@ -71,7 +83,6 @@
   .dot-item:nth-child(1){animation: bounceDot 0.4s infinite 0s;}
   .dot-item:nth-child(2){animation: bounceDot 0.4s infinite 0.13s;}
   .dot-item:nth-child(3){animation: bounceDot 0.4s infinite 0.26s;}
-
   .trans{background:#fff;border:1px solid var(--line);border-left:4px solid var(--g9);border-radius:14px;padding:18px 20px}
   .trans p{font-size:14px;color:var(--ink-soft);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
   .trans p:last-child{margin-bottom:0}
@@ -111,14 +122,30 @@
       <div class="en-label">Inspiring People
         <span class="audio-play-btn" data-audio="mp3/g9a-u2.mp3" onclick="playAudio(this)">▶ 播放</span>
       </div>
-      <p>The person I admire most is my grandmother. Now she is over seventy years old, but she is still full of energy and never seems to feel tired.</p><p>She used to be a primary school teacher and taught in a small mountain village for over forty years. What makes her so admirable is not just her devotion to teaching, but also her kindness to everyone. She always helped students in need, even using her own money to buy books for poor children.</p><p>Even now, she keeps reading newspapers and learning new things on her mobile phone every day. She often tells me, "It's never too late to learn." Her words encourage me to keep moving forward whenever I face difficulties. I hope that one day I can be as warm‑hearted and persistent as she is.</p>
+      <p>
+<span data-start="2.103" data-end="5.851" onclick="seekTo(this)">The person I admire most is my grandmother.</span>
+<span data-start="5.851" data-end="13.305" onclick="seekTo(this)">Now she is over seventy years old, but she is still full of energy and never seems to feel tired.</span>
+      </p>
+      <p>
+<span data-start="13.305" data-end="20.096" onclick="seekTo(this)">She used to be a primary school teacher and taught in a small mountain village for over forty years.</span>
+<span data-start="20.096" data-end="27.928" onclick="seekTo(this)">What makes her so admirable is not just her devotion to teaching, but also her kindness to everyone.</span>
+<span data-start="27.928" data-end="33.414" onclick="seekTo(this)">She always helped students in need, even using her own money to buy books for poor children.</span>
+      </p>
+      <p>
+<span data-start="33.414" data-end="40.669" onclick="seekTo(this)">Even now, she keeps reading newspapers and learning new things on her mobile phone every day.</span>
+<span data-start="40.669" data-end="45.474" onclick="seekTo(this)">She often tells me, "It's never too late to learn."</span>
+<span data-start="45.474" data-end="51.016" onclick="seekTo(this)">Her words encourage me to keep moving forward whenever I face difficulties.</span>
+<span data-start="51.016" data-end="55.988" onclick="seekTo(this)">I hope that one day I can be as warm‑hearted and persistent as she is.</span>
+      </p>
     </div>
   </section>
   <section class="block">
     <div class="khead"><span class="kp">CN</span><h2>中文翻译</h2></div>
     <div class="trans">
       <div class="zh-label">中文对照</div>
-      <p>我最敬佩的人是我的奶奶。她现在七十多岁了，但依然精力充沛，从不显得疲惫。</p><p>她过去是一名小学教师，在一座小山村教了四十多年书。让她令人敬佩的不仅是她对教学的奉献，还有她对每个人的善良。她总是帮助有困难的学生，甚至用自己的钱给贫困孩子买书。</p><p>即使现在，她每天还看报纸、在手机上学新东西。她经常告诉我：“学习永远不晚。”她的话鼓励我在面对困难时继续前进。我希望有一天能像她一样热心和坚持不懈。</p>
+      <p>我最敬佩的人是我的奶奶。她现在七十多岁了，但依然精力充沛，从不显得疲惫。</p>
+      <p>她过去是一名小学教师，在一座小山村教了四十多年书。让她令人敬佩的不仅是她对教学的奉献，还有她对每个人的善良。她总是帮助有困难的学生，甚至用自己的钱给贫困孩子买书。</p>
+      <p>即使现在，她每天还看报纸、在手机上学新东西。她经常告诉我：“学习永远不晚。”她的话鼓励我在面对困难时继续前进。我希望有一天能像她一样热心和坚持不懈。</p>
     </div>
   </section>
   <section class="block">
@@ -140,67 +167,77 @@
 <footer>多多好学 · 初中英语单元范文</footer>
 
 <script>
-// 全局音频，支持：同按钮暂停/续播；点别的按钮完全停止旧音频归零
 let globalAudio = null;
 let currentActiveBtn = null;
-
-// 设置按钮：播放中(跳动圆点) / 暂停 / 初始播放
 function setButtonState(btn, state){
   if(state === "playing"){
     btn.innerHTML = `<span class="dot-item"></span><span class="dot-item"></span><span class="dot-item"></span> 播放中`;
   }else if(state === "paused"){
-    btn.innerHTML = "⏸ 已暂停";
+    btn.innerHTML = "⏸ 暂停";
   }else{
     btn.innerHTML = "▶ 播放";
   }
 }
-
-// 全部按钮恢复初始
+function clearAllHighlight(){
+  document.querySelectorAll('.essay span.active-line').forEach(span=>{
+    span.classList.remove('active-line');
+  })
+}
+function updateHighlight(currentTime){
+  clearAllHighlight();
+  document.querySelectorAll('.essay span[data-start]').forEach(span=>{
+    const s = parseFloat(span.dataset.start);
+    const e = parseFloat(span.dataset.end);
+    if(!isNaN(s) && !isNaN(e)){
+      if(currentTime >= s && currentTime < e){
+        span.classList.add('active-line');
+      }
+    }
+  })
+}
 function resetAllAudioBtn(){
   document.querySelectorAll('.audio-play-btn').forEach(btn=>{
     setButtonState(btn,"idle");
   })
+  clearAllHighlight();
   currentActiveBtn = null;
 }
-
+function seekTo(el){
+  if(!globalAudio) return;
+  const t = parseFloat(el.dataset.start);
+  globalAudio.currentTime = t;
+  globalAudio.play().catch(e=>{});
+}
 function playAudio(btnEl){
   const audioSrc = btnEl.dataset.audio;
-
-  // 情况1：当前点击的是正在绑定的音频对象
   if(globalAudio && currentActiveBtn === btnEl){
     if(!globalAudio.paused){
-      // 正在播放 → 暂停，不重置时间
       globalAudio.pause();
       setButtonState(btnEl,"paused");
     }else{
-      // 已经暂停 → 继续从当前位置播放
-      globalAudio.play().catch(err=>console.warn(err));
+      globalAudio.play().catch(err=>{});
       setButtonState(btnEl,"playing");
     }
     return;
   }
-
-  // 情况2：点击别的按钮 → 旧音频彻底停止，时间归零
   if(globalAudio){
     globalAudio.pause();
     globalAudio.currentTime = 0;
   }
   resetAllAudioBtn();
-
-  // 创建新音频
   globalAudio = new Audio(audioSrc);
   currentActiveBtn = btnEl;
   setButtonState(btnEl,"playing");
-
-  globalAudio.play().catch(err=>{
-    console.warn("音频播放失败：",err);
-    resetAllAudioBtn();
-  });
-
-  // 音频自然播放结束，复原
+  globalAudio.ontimeupdate = function(){
+    updateHighlight(globalAudio.currentTime);
+  }
   globalAudio.onended = function(){
     resetAllAudioBtn();
   };
+  globalAudio.play().catch(err=>{
+    console.warn("播放失败：",err);
+    resetAllAudioBtn();
+  });
 }
 </script>
 </body>
