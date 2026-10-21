@@ -140,47 +140,67 @@
 <footer>多多好学 · 初中英语单元范文</footer>
 
 <script>
-// 全局音频对象，与讲义页面逻辑完全兼容
+// 全局音频，支持：同按钮暂停/续播；点别的按钮完全停止旧音频归零
 let globalAudio = null;
 let currentActiveBtn = null;
 
+// 设置按钮：播放中(跳动圆点) / 暂停 / 初始播放
+function setButtonState(btn, state){
+  if(state === "playing"){
+    btn.innerHTML = `<span class="dot-item"></span><span class="dot-item"></span><span class="dot-item"></span> 播放中`;
+  }else if(state === "paused"){
+    btn.innerHTML = "⏸ 已暂停";
+  }else{
+    btn.innerHTML = "▶ 播放";
+  }
+}
+
+// 全部按钮恢复初始
 function resetAllAudioBtn(){
-    document.querySelectorAll('.audio-play-btn').forEach(btn=>{
-        btn.innerHTML = "▶ 播放";
-    })
-    currentActiveBtn = null;
+  document.querySelectorAll('.audio-play-btn').forEach(btn=>{
+    setButtonState(btn,"idle");
+  })
+  currentActiveBtn = null;
 }
 
 function playAudio(btnEl){
-    const audioSrc = btnEl.dataset.audio;
+  const audioSrc = btnEl.dataset.audio;
 
-    // 点击正在播放的按钮：暂停、重置
-    if(globalAudio && currentActiveBtn === btnEl){
-        globalAudio.pause();
-        globalAudio.currentTime = 0;
-        resetAllAudioBtn();
-        return;
+  // 情况1：当前点击的是正在绑定的音频对象
+  if(globalAudio && currentActiveBtn === btnEl){
+    if(!globalAudio.paused){
+      // 正在播放 → 暂停，不重置时间
+      globalAudio.pause();
+      setButtonState(btnEl,"paused");
+    }else{
+      // 已经暂停 → 继续从当前位置播放
+      globalAudio.play().catch(err=>console.warn(err));
+      setButtonState(btnEl,"playing");
     }
+    return;
+  }
 
-    // 停止其他正在播放音频
-    if(globalAudio){
-        globalAudio.pause();
-        globalAudio.currentTime = 0;
-    }
+  // 情况2：点击别的按钮 → 旧音频彻底停止，时间归零
+  if(globalAudio){
+    globalAudio.pause();
+    globalAudio.currentTime = 0;
+  }
+  resetAllAudioBtn();
+
+  // 创建新音频
+  globalAudio = new Audio(audioSrc);
+  currentActiveBtn = btnEl;
+  setButtonState(btnEl,"playing");
+
+  globalAudio.play().catch(err=>{
+    console.warn("音频播放失败：",err);
     resetAllAudioBtn();
+  });
 
-    globalAudio = new Audio(audioSrc);
-    currentActiveBtn = btnEl;
-    btnEl.innerHTML = `<span class="dot-item"></span><span class="dot-item"></span><span class="dot-item"></span> 播放中`;
-
-    globalAudio.play().catch(err=>{
-        console.warn("音频播放失败：",err);
-        resetAllAudioBtn();
-    });
-
-    globalAudio.onended = function(){
-        resetAllAudioBtn();
-    }
+  // 音频自然播放结束，复原
+  globalAudio.onended = function(){
+    resetAllAudioBtn();
+  };
 }
 </script>
 </body>
