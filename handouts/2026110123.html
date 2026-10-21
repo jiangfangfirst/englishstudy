@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>核心知识演练1 · 英语语法</title>
+<title>多多好学|姜老师讲义</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{
@@ -133,6 +133,41 @@ body{
 .example-btn:active{
     background:#e0e7ff;
 }
+/* 音频播放按钮样式 */
+.audio-play-btn{
+    display:inline-block;
+    margin-top:10px;
+    margin-left:8px;
+    padding:5px 12px;
+    background:#eef2ff;
+    color:#4338ca;
+    border-radius:6px;
+    font-size:12px;
+    cursor:pointer;
+    user-select:none;
+    transition:background 0.2s;
+}
+.audio-play-btn:active{
+    background:#e0e7ff;
+}
+/* 播放跳动圆点动画 */
+@keyframes bounceDot {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+    100% { transform: translateY(0px); }
+}
+.dot-item{
+    display:inline-block;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background-color:#4338ca;
+    margin:0 1px;
+}
+.dot-item:nth-child(1){animation: bounceDot 0.4s infinite 0s;}
+.dot-item:nth-child(2){animation: bounceDot 0.4s infinite 0.13s;}
+.dot-item:nth-child(3){animation: bounceDot 0.4s infinite 0.26s;}
+
 .example-content{
     display:none;
     margin-top:10px;
@@ -202,14 +237,11 @@ body{
 </style>
 </head>
 <body>
-
 <div class="header">
     <h1>多多好学 英语讲义</h1>
     <div class="sub">九年级英语 · 高频考点 · 精讲精练1-3</div>
 </div>
-
 <div class="container">
-
     <!-- 第1题 -->
     <div class="card active">
         <div class="card-header" onclick="toggleCard(this)">
@@ -224,6 +256,7 @@ body{
                     <div class="trans-text">
                         你是通过什么方式提高了你的英语发音的？大声朗读。
                         <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="audio-play-btn" data-audio="/2026110123/1.mp3" onclick="playAudio(this)">▶ 播放</div>
                         <div class="example-content">
                             <div class="example-en">How did you improve your English pronunciation?</div>
                             <div class="example-en">By reading aloud.</div>
@@ -239,14 +272,13 @@ body{
                 <div class="section">
                     <div class="section-title">解析</div>
                     <ul class="analysis-list">
-                        <li><span class="keyword">how</span> 用来询问“方式、方法”；<span class="keyword">by doing sth</span> 是回答方式的常见结构，如 by reading aloud。注意：不宜讲成“用 how 提问只能用 by 回答”，by doing 最常见，也可用 through、with 等表达，只是 by doing 最稳妥；同时注意 <span class="keyword">through</span>（介词，通过）与 though（连词，尽管）拼写相近，不要混淆，though 的用法详见第2句解析。</li>
+                        <li><span class="keyword">how</span> 用来询问“方式、方法”；<span class="keyword">by doing sth</span> 是回答方式的常见结构，如 by reading aloud。注意：不是说“用 how 提问只能用 by 回答”，by doing 最常见，也可用 through、with 等表达，只是 by doing 最稳妥；同时注意 <span class="keyword">through</span>（介词，通过）与 though（连词，尽管）拼写相近，不要混淆，though 的用法详见第2句解析。</li>
                         <li><span class="keyword">improve one's English pronunciation</span>：提高英语发音水平；improve your English level 语法正确但偏中式表达，更地道的说法为 improve your English 或 improve your English proficiency。</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- 第2题 -->
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
@@ -261,6 +293,7 @@ body{
                     <div class="trans-text">
                         尽管她对护理知识很了解，但我们查明这位护士对待病人毫无耐心，从而判断她没有护理能力，所以开除她是明智的。
                         <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="audio-play-btn" data-audio="/2026110123/2.mp3" onclick="playAudio(this)">▶ 播放</div>
                         <div class="example-content">
                             <div class="example-en">Although she knew a lot about nursing, we found out that she was impatient with patients. Therefore, we judged that she didn't have the ability to nurse patients, so it was wise to dismiss her.</div>
                             <div class="alt-example">
@@ -289,7 +322,6 @@ body{
             </div>
         </div>
     </div>
-
     <!-- 第3题 -->
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
@@ -304,6 +336,7 @@ body{
                     <div class="trans-text">
                         如果你把音箱接到电脑上，那位善于和学生相处的老师就不会对网课感到无聊。
                         <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="audio-play-btn" data-audio="/2026110123/3.mp3" onclick="playAudio(this)">▶ 播放</div>
                         <div class="example-content">
                             <div class="example-en">If you connect the speaker to the computer, the teacher who is good with students won't get bored with the online class.</div>
                             <div class="alt-example">
@@ -329,7 +362,6 @@ body{
             </div>
         </div>
     </div>
-
     <!-- 第4题 -->
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
@@ -344,6 +376,7 @@ body{
                     <div class="trans-text">
                         他不敢当众说话，因为他害怕说错话。一年以后，他成功地找到一种在交流中变得自信的方法。他成功的秘诀是积极参加英语角练习英语口语。
                         <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="audio-play-btn" data-audio="/2026110123/4.mp3" onclick="playAudio(this)">▶ 播放</div>
                         <div class="example-content">
                             <div class="example-en">He was afraid to speak in public, because he was afraid of saying the wrong thing.</div>
                             <div class="example-en">One year later, he succeeded in finding a way to become confident in communication.</div>
@@ -364,7 +397,6 @@ body{
             </div>
         </div>
     </div>
-
     <!-- 第5题 -->
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
@@ -379,6 +411,7 @@ body{
                     <div class="trans-text">
                         她十年献身于地下党工作，真了不起。她的成就众所周知，我们非常钦佩这位勇敢的女英雄。
                         <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="audio-play-btn" data-audio="/2026110123/5.mp3" onclick="playAudio(this)">▶ 播放</div>
                         <div class="example-content">
                             <div class="example-en">It is amazing that she devoted her life to underground Party work for ten years.</div>
                             <div class="example-en">Her achievement is well-known, and we admire this courageous heroine very much.</div>
@@ -407,7 +440,6 @@ body{
             </div>
         </div>
     </div>
-
     <!-- 第6题 -->
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
@@ -422,6 +454,7 @@ body{
                     <div class="trans-text">
                         为了确保你们能考上一所好的高中，我不遗余力地教，你们努力地学，好吗？——我们再同意不过了。我们会利用校外课堂继续尽最大努力坚持学习。
                         <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="audio-play-btn" data-audio="/2026110123/6.mp3" onclick="playAudio(this)">▶ 播放</div>
                         <div class="example-content">
                             <div class="example-en">In order to make sure you can get into a good high school, I spare no effort to teach, and you make an effort to study. Will you?</div>
                             <div class="example-en">— We couldn't agree more.</div>
@@ -450,7 +483,6 @@ body{
             </div>
         </div>
     </div>
-
     <!-- 第7题 -->
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
@@ -465,6 +497,7 @@ body{
                     <div class="trans-text">
                         我认为学习策略和学习资源并不是提高成绩的关键。建立信心才是做好任何事情的最佳方法。只有拥有信心，我们才能高效利用资源，提升学习效率。
                         <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="audio-play-btn" data-audio="/2026110123/7.mp3" onclick="playAudio(this)">▶ 播放</div>
                         <div class="example-content">
                             <div class="example-en">I don't think learning strategies and learning resources are the key to improving grades.</div>
                             <div class="example-en">Building up confidence is the best way to do anything.</div>
@@ -485,7 +518,6 @@ body{
             </div>
         </div>
     </div>
-
     <!-- 第8题 -->
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
@@ -500,6 +532,7 @@ body{
                     <div class="trans-text">
                         他很难完成这么大量的作业，作业越多越难认真思考，他不知道是否要向老师及时反馈这个情况。
                         <div class="example-btn" onclick="toggleExample(this)">▸ 查看英文例句</div>
+                        <div class="audio-play-btn" data-audio="/2026110123/8.mp3" onclick="playAudio(this)">▶ 播放</div>
                         <div class="example-content">
                             <div class="example-en">He has trouble (in) finishing so much homework.</div>
                             <div class="example-en">The more homework he has, the harder it is for him to think carefully.</div>
@@ -527,16 +560,13 @@ body{
             </div>
         </div>
     </div>
-
-    <div class="footer-tip">更多讲义 | 请联系姜老师 180 1926 7856</div>
+    <div class="footer-tip">更多讲义 | + 微信：133 6181 4856</div>
 </div>
-
 <script>
 function toggleCard(header){
     const card = header.parentElement;
     card.classList.toggle('active');
 }
-
 function toggleExample(btn){
     const transBox = btn.parentElement;
     transBox.classList.toggle('active');
@@ -546,7 +576,53 @@ function toggleExample(btn){
         btn.innerHTML = "▸ 查看英文例句";
     }
 }
-</script>
 
+// 音频播放逻辑
+let globalAudio = null;
+let currentActiveBtn = null;
+
+// 重置所有播放按钮为初始状态
+function resetAllAudioBtn(){
+    document.querySelectorAll('.audio-play-btn').forEach(btn=>{
+        btn.innerHTML = "▶ 播放";
+    })
+    currentActiveBtn = null;
+}
+
+function playAudio(btnEl){
+    const audioSrc = btnEl.dataset.audio;
+
+    // 如果当前点击的就是正在播放的按钮：停止播放，复原
+    if(globalAudio && currentActiveBtn === btnEl){
+        globalAudio.pause();
+        globalAudio.currentTime = 0;
+        resetAllAudioBtn();
+        return;
+    }
+
+    // 停止其他正在播放音频
+    if(globalAudio){
+        globalAudio.pause();
+        globalAudio.currentTime = 0;
+    }
+    resetAllAudioBtn();
+
+    // 创建新音频
+    globalAudio = new Audio(audioSrc);
+    currentActiveBtn = btnEl;
+    // 设置播放中UI：跳动三个小圆点
+    btnEl.innerHTML = `<span class="dot-item"></span><span class="dot-item"></span><span class="dot-item"></span> 播放中`;
+
+    globalAudio.play().catch(err=>{
+        console.warn("音频播放失败：",err);
+        resetAllAudioBtn();
+    });
+
+    // 音频播放结束重置按钮
+    globalAudio.onended = function(){
+        resetAllAudioBtn();
+    }
+}
+</script>
 </body>
 </html>
