@@ -33,10 +33,23 @@
   .khead .kp{color:var(--g9);font-size:12px;font-weight:800;letter-spacing:1px;background:#EAF2F7;border:1px solid var(--g9);padding:2px 9px;border-radius:6px;flex:none}
   .khead h2{font-size:18px;font-weight:800;color:var(--ink);font-family:var(--serif);letter-spacing:.3px}
   .essay{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 20px 8px;box-shadow:0 4px 16px rgba(31,59,94,.05)}
-  .essay p{font-size:15.5px;color:var(--ink);margin-bottom:16px;overflow-wrap:break-word;word-break:break-word}
+  .essay p{
+    font-size:15.5px;
+    color:var(--ink);
+    margin-bottom:16px;
+    overflow-wrap:break-word;
+    word-break:break-word;
+  }
+  .essay span[data-start]{
+    transition: color 0.25s ease, font-weight 0.25s ease;
+    cursor: pointer;
+  }
+  .essay span.active-line{
+    color: var(--g9);
+    font-weight:700;
+  }
   .essay .en-label{display:inline-block;font-size:11px;font-weight:700;color:var(--g9);background:#EAF2F7;border-radius:999px;padding:2px 10px;margin-bottom:14px}
 
-  /*=====音频按钮样式=====*/
   .audio-play-btn{
     display:inline-flex;
     align-items:center;
@@ -73,7 +86,7 @@
   .dot-item:nth-child(3){animation: bounceDot 0.4s infinite 0.26s;}
 
   .trans{background:#fff;border:1px solid var(--line);border-left:4px solid var(--g9);border-radius:14px;padding:18px 20px}
-  .trans p{font-size:14px;color:var(--ink-soft);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
+  .trans p{font-size:14px;color:var(--ink-soft);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word;}
   .trans p:last-child{margin-bottom:0}
   .trans .zh-label{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--g9);border-radius:999px;padding:2px 10px;margin-bottom:12px}
   .chips{display:flex;flex-wrap:wrap;gap:10px}
@@ -99,26 +112,59 @@
     <h1>范文 35</h1>
     <div class="sub">上册 · Unit 3 · 礼貌询问</div>
     <div class="tagline">
-      <span class="t">多多好学范文</span>
+      <span class="t">定稿范文</span>
       <span class="t">中文翻译</span>
       <span class="t">考点</span>
       <span class="t">亮点</span>
     </div>
   </div>
   <section class="block">
-    <div class="khead"><span class="kp">EN</span><h2>范文</h2></div>
+    <div class="khead"><span class="kp">EN</span><h2>定稿范文</h2></div>
     <div class="essay">
       <div class="en-label">Could You Please Tell Me?
         <span class="audio-play-btn" data-audio="mp3/g9a-u3.mp3" onclick="playAudio(this)">▶ 播放</span>
       </div>
-      <p>Dear Sir or Madam,</p><p>My name is He Wei and I'm from Beijing, China. I'll be coming to your school soon for a short study vacation, and I will leave for your school on July 10th.</p><p>First, I'd like to know what course I will study in your school, and I also wonder when the course will start. Besides, I wonder where I will live during my study vacation, such as a school dormitory or a local family. Would you mind telling me what food is served in your school and where I can have meals?</p><p>I enjoy sports and reading as well. Could you please tell me what after‑school activities I can take part in during my stay? Finally, I wonder how I can get to your school from the airport when I arrive.</p><p>Thank you so much for your help, and I'm looking forward to your reply.</p><p>Yours,</p><p>He Wei</p>
+      <p>
+        <span data-start="1.870" data-end="3.760" onclick="seekTo(this)">Dear Sir or Madam,</span>
+      </p>
+      <p>
+        <span data-start="3.760" data-end="6.837" onclick="seekTo(this)">My name is He Wei and I'm from Beijing, China.</span>
+        <span data-start="6.837" data-end="10.586" onclick="seekTo(this)">I'll be coming to your school soon for a short study vacation,</span>
+        <span data-start="10.586" data-end="13.223" onclick="seekTo(this)">and I will leave for your school on July 10th.</span>
+      </p>
+      <p>
+        <span data-start="10.588" data-end="17.009" onclick="seekTo(this)">First, I'd like to know what course I will study in your school,</span>
+        <span data-start="17.010" data-end="19.629" onclick="seekTo(this)">and I also wonder when the course will start.</span>
+        <span data-start="19.630" data-end="26.495" onclick="seekTo(this)">Besides, I wonder where I will live during my study vacation, such as a school dormitory or a local family.</span>
+        <span data-start="26.500" data-end="31.892" onclick="seekTo(this)">Would you mind telling me what food is served in your school and where I can have meals?</span>
+      </p>
+      <p>
+        <span data-start="31.892" data-end="34.435" onclick="seekTo(this)">I enjoy sports and reading as well.</span>
+        <span data-start="34.435" data-end="39.303" onclick="seekTo(this)">Could you please tell me what after‑school activities I can take part in during my stay?</span>
+        <span data-start="39.303" data-end="43.599" onclick="seekTo(this)">Finally, I wonder how I can get to your school from the airport when I arrive.</span>
+      </p>
+      <p>
+        <span data-start="43.599" data-end="47.474" onclick="seekTo(this)">Thank you so much for your help, and I'm looking forward to your reply.</span>
+      </p>
+      <p>
+        <span data-start="47.474" data-end="48.913" onclick="seekTo(this)">Yours,</span>
+      </p>
+      <p>
+        <span data-start="48.913" data-end="49.913" onclick="seekTo(this)">He Wei</span>
+      </p>
     </div>
   </section>
   <section class="block">
     <div class="khead"><span class="kp">CN</span><h2>中文翻译</h2></div>
     <div class="trans">
       <div class="zh-label">中文对照</div>
-      <p>尊敬的先生/女士：</p><p>我叫何伟，来自中国北京。我很快要来贵校参加短期学习，7月10日出发。</p><p>首先，我想知道将在贵校学习什么课程，也想知道课程何时开始。此外，我想知道学习期间住在哪里，比如学校宿舍还是当地家庭。您介意告诉我学校提供什么食物、在哪里用餐吗？</p><p>我也喜欢运动和阅读。您能告诉我学习期间可以参加哪些课外活动吗？最后，我想知道到达后如何从机场到贵校。</p><p>非常感谢您的帮助，期待您的回复。</p><p>你的，</p><p>何伟</p>
+      <p>尊敬的先生/女士：</p>
+      <p>我叫何伟，来自中国北京。我很快要来贵校参加短期学习，7月10日出发。</p>
+      <p>首先，我想知道将在贵校学习什么课程，也想知道课程何时开始。此外，我想知道学习期间住在哪里，比如学校宿舍还是当地家庭。您介意告诉我学校提供什么食物、在哪里用餐吗？</p>
+      <p>我也喜欢运动和阅读。您能告诉我学习期间可以参加哪些课外活动吗？最后，我想知道到达后如何从机场到贵校。</p>
+      <p>非常感谢您的帮助，期待您的回复。</p>
+      <p>你的，</p>
+      <p>何伟</p>
     </div>
   </section>
   <section class="block">
@@ -131,76 +177,102 @@
     <div class="khead"><span class="kp">STAR</span><h2>范文亮点</h2></div>
     <div class="high">
       <ol>
-        <li>用 First / Besides / Finally 串联问题，条理清楚。</li><li>交替使用 I'd like to know / I wonder / Would you mind / Could you please，避免重复。</li><li>把住宿具体化为 dormitory or local family。</li><li>补 from the airport 使问题更具体。</li>
+        <li>用 First / Besides / Finally 串联问题，条理清楚。</li>
+        <li>交替使用 I'd like to know / I wonder / Would you mind / Could you please，避免重复。</li>
+        <li>把住宿具体化为 dormitory or local family。</li>
+        <li>补 from the airport 使问题更具体。</li>
       </ol>
     </div>
   </section>
   <div class="divider"></div>
+  <footer>多多好学 · 初中英语单元范文</footer>
 </div>
-<footer>多多好学 · 初中英语单元范文</footer>
 
 <script>
-// 全局音频，支持：同按钮暂停/续播；点别的按钮完全停止旧音频归零
 let globalAudio = null;
 let currentActiveBtn = null;
 
-// 设置按钮：播放中(跳动圆点) / 暂停 / 初始播放
 function setButtonState(btn, state){
   if(state === "playing"){
     btn.innerHTML = `<span class="dot-item"></span><span class="dot-item"></span><span class="dot-item"></span> 播放中`;
   }else if(state === "paused"){
-    btn.innerHTML = "⏸ 已暂停";
+    btn.innerHTML = "⏸ 暂停";
   }else{
     btn.innerHTML = "▶ 播放";
   }
 }
 
-// 全部按钮恢复初始
+function clearAllHighlight(){
+  document.querySelectorAll('.essay span.active-line').forEach(span=>{
+    span.classList.remove('active-line');
+  })
+}
+
+function updateHighlight(currentTime){
+  clearAllHighlight();
+  document.querySelectorAll('.essay span[data-start]').forEach(span=>{
+    const s = parseFloat(span.dataset.start);
+    const e = parseFloat(span.dataset.end);
+    if(!isNaN(s) && !isNaN(e)){
+      if(currentTime >= s && currentTime < e){
+        span.classList.add('active-line');
+      }
+    }
+  })
+}
+
 function resetAllAudioBtn(){
   document.querySelectorAll('.audio-play-btn').forEach(btn=>{
     setButtonState(btn,"idle");
   })
+  clearAllHighlight();
   currentActiveBtn = null;
+}
+
+// 修改后的：跳转并且自动播放
+function seekTo(el){
+  if(!globalAudio) return;
+  const t = parseFloat(el.dataset.start);
+  globalAudio.currentTime = t;
+  globalAudio.play().catch(e=>{});
 }
 
 function playAudio(btnEl){
   const audioSrc = btnEl.dataset.audio;
 
-  // 情况1：当前点击的是正在绑定的音频对象
   if(globalAudio && currentActiveBtn === btnEl){
     if(!globalAudio.paused){
-      // 正在播放 → 暂停，不重置时间
       globalAudio.pause();
       setButtonState(btnEl,"paused");
     }else{
-      // 已经暂停 → 继续从当前位置播放
-      globalAudio.play().catch(err=>console.warn(err));
+      globalAudio.play().catch(err=>{});
       setButtonState(btnEl,"playing");
     }
     return;
   }
 
-  // 情况2：点击别的按钮 → 旧音频彻底停止，时间归零
   if(globalAudio){
     globalAudio.pause();
     globalAudio.currentTime = 0;
   }
   resetAllAudioBtn();
 
-  // 创建新音频
   globalAudio = new Audio(audioSrc);
   currentActiveBtn = btnEl;
   setButtonState(btnEl,"playing");
 
-  globalAudio.play().catch(err=>{
-    console.warn("音频播放失败：",err);
-    resetAllAudioBtn();
-  });
+  globalAudio.ontimeupdate = function(){
+    updateHighlight(globalAudio.currentTime);
+  }
 
-  // 音频自然播放结束，复原
   globalAudio.onended = function(){
     resetAllAudioBtn();
   };
+
+  globalAudio.play().catch(err=>{
+    console.warn("播放失败：",err);
+    resetAllAudioBtn();
+  });
 }
 </script>
 </body>
