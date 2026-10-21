@@ -34,8 +34,20 @@
   .khead h2{font-size:18px;font-weight:800;color:var(--ink);font-family:var(--serif);letter-spacing:.3px}
   .essay{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 20px 8px;box-shadow:0 4px 16px rgba(31,59,94,.05)}
   .essay p{font-size:15.5px;color:var(--ink);margin-bottom:16px;overflow-wrap:break-word;word-break:break-word}
-  .essay .en-label{display:inline-block;font-size:11px;font-weight:700;color:var(--g9);background:#EAF2F7;border-radius:999px;padding:2px 10px;margin-bottom:14px}
 
+  .essay span[data-start]{
+    transition: color 0.25s ease, background 0.25s ease;
+    cursor: pointer;
+    font-weight:inherit;
+  }
+  .essay span.active-line{
+    background:linear-gradient(90deg,#ff4444,#e02020);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .essay .en-label{display:inline-block;font-size:11px;font-weight:700;color:var(--g9);background:#EAF2F7;border-radius:999px;padding:2px 10px;margin-bottom:14px}
   /*=====音频按钮样式=====*/
   .audio-play-btn{
     display:inline-flex;
@@ -71,7 +83,6 @@
   .dot-item:nth-child(1){animation: bounceDot 0.4s infinite 0s;}
   .dot-item:nth-child(2){animation: bounceDot 0.4s infinite 0.13s;}
   .dot-item:nth-child(3){animation: bounceDot 0.4s infinite 0.26s;}
-
   .trans{background:#fff;border:1px solid var(--line);border-left:4px solid var(--g9);border-radius:14px;padding:18px 20px}
   .trans p{font-size:14px;color:var(--ink-soft);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word}
   .trans p:last-child{margin-bottom:0}
@@ -111,14 +122,40 @@
       <div class="en-label">The Changing World
         <span class="audio-play-btn" data-audio="mp3/g9a-u1.mp3" onclick="playAudio(this)">▶ 播放</span>
       </div>
-      <p>I used to live in a small town in the south of China. The streets were narrow and crowded, and there were only a few small shops along them. People used to ride bicycles or walk to get around. The river behind our house was so clean that we could see fish swimming in it, and we children often played by it after school. Life was simple and peaceful.</p><p>But now, great changes have taken place. The government has built wide new roads and a modern railway station. Many tall buildings have taken the place of the old houses. More people have moved here from other places, and the town has become much busier. A new shopping mall has opened, and young people who used to work in big cities have returned to start their own businesses.</p><p>However, these changes have brought some problems as well. The river is no longer clean because of the waste from the new factories. The air is not as fresh as it used to be. Traffic jams have become common during rush hours.</p><p>In my opinion, development is necessary, but we should also protect the environment. Only by balancing progress with nature can our hometown become a better place for everyone.</p>
+      <p>
+<span data-start="1.540" data-end="6.063" onclick="seekTo(this)">I used to live in a small town in the south of China.</span>
+<span data-start="6.063" data-end="12.321" onclick="seekTo(this)">The streets were narrow and crowded, and there were only a few small shops along them.</span>
+<span data-start="12.321" data-end="16.756" onclick="seekTo(this)">People used to ride bicycles or walk to get around.</span>
+<span data-start="16.756" data-end="24.640" onclick="seekTo(this)">The river behind our house was so clean that we could see fish swimming in it, and we children often played by it after school.</span>
+<span data-start="24.640" data-end="27.570" onclick="seekTo(this)">Life was simple and peaceful.</span>
+      </p>
+      <p>
+<span data-start="27.571" data-end="30.635" onclick="seekTo(this)">But now, great changes have taken place.</span>
+<span data-start="30.635" data-end="35.323" onclick="seekTo(this)">The government has built wide new roads and a modern railway station.</span>
+<span data-start="35.323" data-end="39.223" onclick="seekTo(this)">Many tall buildings have taken the place of the old houses.</span>
+<span data-start="39.223" data-end="46.388" onclick="seekTo(this)">More people have moved here from other places, and the town has become much busier.</span>
+<span data-start="46.388" data-end="54.207" onclick="seekTo(this)">A new shopping mall has opened, and young people who used to work in big cities have returned to start their own businesses.</span>
+      </p>
+      <p>
+<span data-start="54.207" data-end="58.843" onclick="seekTo(this)">However, these changes have brought some problems as well.</span>
+<span data-start="58.843" data-end="64.240" onclick="seekTo(this)">The river is no longer clean because of the waste from the new factories.</span>
+<span data-start="64.240" data-end="67.740" onclick="seekTo(this)">The air is not as fresh as it used to be.</span>
+<span data-start="67.740" data-end="71.316" onclick="seekTo(this)">Traffic jams have become common during rush hours.</span>
+      </p>
+      <p>
+<span data-start="71.316" data-end="77.116" onclick="seekTo(this)">In my opinion, development is necessary, but we should also protect the environment.</span>
+<span data-start="77.116" data-end="83.063" onclick="seekTo(this)">Only by balancing progress with nature can our hometown become a better place for everyone.</span>
+      </p>
     </div>
   </section>
   <section class="block">
     <div class="khead"><span class="kp">CN</span><h2>中文翻译</h2></div>
     <div class="trans">
       <div class="zh-label">中文对照</div>
-      <p>我过去住在中国南方的一个小镇。街道又窄又挤，沿街只有几家小商店。人们过去骑自行车或步行出行。我们家后面的河很清澈，可以看到鱼儿游来游去，我们孩子放学后常在河边玩。生活简单而宁静。</p><p>但现在，巨大变化已经发生。政府建了宽阔的新路和现代化火车站。许多高楼取代了旧房子。更多人从外地搬来，小镇变得繁忙多了。一家新商场开业了，过去在大城市工作的年轻人也回来创业了。</p><p>然而，这些变化也带来了一些问题。由于新工厂的废物，河水不再清澈。空气也不像过去那么新鲜。交通拥堵在高峰期变得很常见。</p><p>在我看来，发展是必要的，但我们也应该保护环境。只有平衡进步与自然，我们的家乡才能成为每个人更好的地方。</p>
+      <p>我过去住在中国南方的一个小镇。街道又窄又挤，沿街只有几家小商店。人们过去骑自行车或步行出行。我们家后面的河很清澈，可以看到鱼儿游来游去，我们孩子放学后常在河边玩。生活简单而宁静。</p>
+      <p>但现在，巨大变化已经发生。政府建了宽阔的新路和现代化火车站。许多高楼取代了旧房子。更多人从外地搬来，小镇变得繁忙多了。一家新商场开业了，过去在大城市工作的年轻人也回来创业了。</p>
+      <p>然而，这些变化也带来了一些问题。由于新工厂的废物，河水不再清澈。空气也不像过去那么新鲜。交通拥堵在高峰期变得很常见。</p>
+      <p>在我看来，发展是必要的，但我们也应该保护环境。只有平衡进步与自然，我们的家乡才能成为每个人更好的地方。</p>
     </div>
   </section>
   <section class="block">
@@ -140,67 +177,77 @@
 <footer>多多好学 · 初中英语单元范文</footer>
 
 <script>
-// 全局音频，支持：同按钮暂停/续播；点别的按钮完全停止旧音频归零
 let globalAudio = null;
 let currentActiveBtn = null;
-
-// 设置按钮：播放中(跳动圆点) / 暂停 / 初始播放
 function setButtonState(btn, state){
   if(state === "playing"){
     btn.innerHTML = `<span class="dot-item"></span><span class="dot-item"></span><span class="dot-item"></span> 播放中`;
   }else if(state === "paused"){
-    btn.innerHTML = "⏸ 已暂停";
+    btn.innerHTML = "⏸ 暂停";
   }else{
     btn.innerHTML = "▶ 播放";
   }
 }
-
-// 全部按钮恢复初始
+function clearAllHighlight(){
+  document.querySelectorAll('.essay span.active-line').forEach(span=>{
+    span.classList.remove('active-line');
+  })
+}
+function updateHighlight(currentTime){
+  clearAllHighlight();
+  document.querySelectorAll('.essay span[data-start]').forEach(span=>{
+    const s = parseFloat(span.dataset.start);
+    const e = parseFloat(span.dataset.end);
+    if(!isNaN(s) && !isNaN(e)){
+      if(currentTime >= s && currentTime < e){
+        span.classList.add('active-line');
+      }
+    }
+  })
+}
 function resetAllAudioBtn(){
   document.querySelectorAll('.audio-play-btn').forEach(btn=>{
     setButtonState(btn,"idle");
   })
+  clearAllHighlight();
   currentActiveBtn = null;
 }
-
+function seekTo(el){
+  if(!globalAudio) return;
+  const t = parseFloat(el.dataset.start);
+  globalAudio.currentTime = t;
+  globalAudio.play().catch(e=>{});
+}
 function playAudio(btnEl){
   const audioSrc = btnEl.dataset.audio;
-
-  // 情况1：当前点击的是正在绑定的音频对象
   if(globalAudio && currentActiveBtn === btnEl){
     if(!globalAudio.paused){
-      // 正在播放 → 暂停，不重置时间
       globalAudio.pause();
       setButtonState(btnEl,"paused");
     }else{
-      // 已经暂停 → 继续从当前位置播放
-      globalAudio.play().catch(err=>console.warn(err));
+      globalAudio.play().catch(err=>{});
       setButtonState(btnEl,"playing");
     }
     return;
   }
-
-  // 情况2：点击别的按钮 → 旧音频彻底停止，时间归零
   if(globalAudio){
     globalAudio.pause();
     globalAudio.currentTime = 0;
   }
   resetAllAudioBtn();
-
-  // 创建新音频
   globalAudio = new Audio(audioSrc);
   currentActiveBtn = btnEl;
   setButtonState(btnEl,"playing");
-
-  globalAudio.play().catch(err=>{
-    console.warn("音频播放失败：",err);
-    resetAllAudioBtn();
-  });
-
-  // 音频自然播放结束，复原
+  globalAudio.ontimeupdate = function(){
+    updateHighlight(globalAudio.currentTime);
+  }
   globalAudio.onended = function(){
     resetAllAudioBtn();
   };
+  globalAudio.play().catch(err=>{
+    console.warn("播放失败：",err);
+    resetAllAudioBtn();
+  });
 }
 </script>
 </body>
