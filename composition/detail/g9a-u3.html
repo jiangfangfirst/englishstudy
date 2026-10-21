@@ -41,15 +41,19 @@
     word-break:break-word;
   }
   .essay span[data-start]{
-    transition: color 0.25s ease, font-weight 0.25s ease;
+    transition: color 0.25s ease, background 0.25s ease;
     cursor: pointer;
+    /* 字重保持原样，不会变粗，排版不会抖动 */
+    font-weight:inherit;
   }
+  /* 高亮：红渐变文字，去除加粗，不改变布局尺寸 */
   .essay span.active-line{
-    color: var(--g9);
-    font-weight:700;
+    background:linear-gradient(90deg,#ff4444,#e02020);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
   }
   .essay .en-label{display:inline-block;font-size:11px;font-weight:700;color:var(--g9);background:#EAF2F7;border-radius:999px;padding:2px 10px;margin-bottom:14px}
-
   .audio-play-btn{
     display:inline-flex;
     align-items:center;
@@ -84,7 +88,6 @@
   .dot-item:nth-child(1){animation: bounceDot 0.4s infinite 0s;}
   .dot-item:nth-child(2){animation: bounceDot 0.4s infinite 0.13s;}
   .dot-item:nth-child(3){animation: bounceDot 0.4s infinite 0.26s;}
-
   .trans{background:#fff;border:1px solid var(--line);border-left:4px solid var(--g9);border-radius:14px;padding:18px 20px}
   .trans p{font-size:14px;color:var(--ink-soft);margin-bottom:12px;overflow-wrap:break-word;word-break:break-word;}
   .trans p:last-child{margin-bottom:0}
@@ -187,11 +190,9 @@
   <div class="divider"></div>
   <footer>多多好学 · 初中英语单元范文</footer>
 </div>
-
 <script>
 let globalAudio = null;
 let currentActiveBtn = null;
-
 function setButtonState(btn, state){
   if(state === "playing"){
     btn.innerHTML = `<span class="dot-item"></span><span class="dot-item"></span><span class="dot-item"></span> 播放中`;
@@ -201,13 +202,11 @@ function setButtonState(btn, state){
     btn.innerHTML = "▶ 播放";
   }
 }
-
 function clearAllHighlight(){
   document.querySelectorAll('.essay span.active-line').forEach(span=>{
     span.classList.remove('active-line');
   })
 }
-
 function updateHighlight(currentTime){
   clearAllHighlight();
   document.querySelectorAll('.essay span[data-start]').forEach(span=>{
@@ -220,7 +219,6 @@ function updateHighlight(currentTime){
     }
   })
 }
-
 function resetAllAudioBtn(){
   document.querySelectorAll('.audio-play-btn').forEach(btn=>{
     setButtonState(btn,"idle");
@@ -228,7 +226,6 @@ function resetAllAudioBtn(){
   clearAllHighlight();
   currentActiveBtn = null;
 }
-
 // 修改后的：跳转并且自动播放
 function seekTo(el){
   if(!globalAudio) return;
@@ -236,10 +233,8 @@ function seekTo(el){
   globalAudio.currentTime = t;
   globalAudio.play().catch(e=>{});
 }
-
 function playAudio(btnEl){
   const audioSrc = btnEl.dataset.audio;
-
   if(globalAudio && currentActiveBtn === btnEl){
     if(!globalAudio.paused){
       globalAudio.pause();
@@ -250,25 +245,20 @@ function playAudio(btnEl){
     }
     return;
   }
-
   if(globalAudio){
     globalAudio.pause();
     globalAudio.currentTime = 0;
   }
   resetAllAudioBtn();
-
   globalAudio = new Audio(audioSrc);
   currentActiveBtn = btnEl;
   setButtonState(btnEl,"playing");
-
   globalAudio.ontimeupdate = function(){
     updateHighlight(globalAudio.currentTime);
   }
-
   globalAudio.onended = function(){
     resetAllAudioBtn();
   };
-
   globalAudio.play().catch(err=>{
     console.warn("播放失败：",err);
     resetAllAudioBtn();
