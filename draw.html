@@ -250,7 +250,7 @@ const gifQualitySlider = document.getElementById('gifQuality');
 const qualityVal = document.getElementById('qualityVal');
 
 let isExporting = false;
-let selectedEffectId = null; // 当前选中动作，微调框公用绑定这个
+let selectedEffectId = null;
 
 const vSrc = `
 attribute vec2 aPos;
@@ -831,6 +831,7 @@ exportBtn.onclick = async () => {
   exportGifBtn.disabled = false;
 };
 
+// ==========【修复后的GIF导出函数】==========
 exportGifBtn.onclick = async ()=>{
   if(isExporting) return;
   if (!sourceImg) { alert('先上传图片'); return; }
@@ -846,6 +847,11 @@ exportGifBtn.onclick = async ()=>{
   const quality = Number(gifQualitySlider.value);
   const width = canvas.width;
   const height = canvas.height;
+  // 离屏canvas用来读取像素（解决WebGL画布无法getImageData）
+  const offCanvas = document.createElement('canvas');
+  offCanvas.width = width;
+  offCanvas.height = height;
+  const offCtx = offCanvas.getContext('2d');
 
   try{
     log(`📸 阶段1：采集帧，共${totalFrames}帧`);
@@ -856,8 +862,14 @@ exportGifBtn.onclick = async ()=>{
       time = t;
       draw();
       await new Promise(r=>setTimeout(r,0));
-      const ctx2d = canvas.getContext('2d');
-      const imgData = ctx2d.getImageData(0,0,width,height);
+      // 先拿到图片url，绘制到离屏2d画布再读像素
+      const dataUrl = canvas.toDataURL('image/png');
+      const img = new Image();
+      img.src = dataUrl;
+      await img.decode();
+      offCtx.clearRect(0,0,width,height);
+      offCtx.drawImage(img,0,0);
+      const imgData = offCtx.getImageData(0,0,width,height);
       framesRgba.push(imgData.data);
       log(`📸 采集帧 ${i+1}/${totalFrames} 总进度 ${progress}%`);
     }
