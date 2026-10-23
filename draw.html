@@ -6,6 +6,7 @@
 <title>人物局部动画编辑器 WebGL版</title>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;-webkit-tap-highlight-color:transparent;}
 body{padding:12px;background:#111;color:#eee}
@@ -22,6 +23,18 @@ canvas{
   width:100%;
   height:auto;
   touch-action:none;
+  position:relative;
+  z-index:2;
+}
+/* 兜底预览图放到下层，默认隐藏 */
+#fallbackImg{
+  position:absolute;
+  top:0;left:0;
+  width:100%;
+  height:auto;
+  display:none;
+  pointer-events:none;
+  z-index:1;
 }
 .log{color:#888;font-size:12px;margin-top:6px}
 
@@ -47,6 +60,24 @@ canvas{
 .btn.active{background:#207839;border-color:#2fa552}
 .del-btn{background:#782b2b;border-color:#943838}
 .top-btn{background:#2b5f78;border-color:#387794}
+.clear-all-btn{background:#944028;border-color:#b95436}
+.gif-btn{background:#287874;border-color:#36948f}
+.export-setting-box{
+  border:1px solid #444;
+  border-radius:6px;
+  padding:10px;
+  margin:8px 0;
+  background:#242424;
+}
+.export-setting-box .row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:6px 0;
+  gap:6px;
+}
+.export-setting-box input[type=range]{flex:1;min-width:70px}
+.export-setting-box label{font-size:13px;color:#ccc;white-space:nowrap}
 .effect-item{background:#262626;border:1px solid #444;border-radius:6px;padding:10px;margin-bottom:8px}
 .item-head{display:flex;align-items:center;justify-content:space-between;gap:4px;flex-wrap:wrap}
 .item-name{font-weight:bold;font-size:14px}
@@ -115,6 +146,7 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
 <body>
   <div id="canvasWrap">
     <canvas id="mainCanvas"></canvas>
+    <img id="fallbackImg">
   </div>
 
 <button class="toggle-panel" id="togglePanel">显示面板</button>
@@ -129,7 +161,7 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
   </div>
   <div class="log" id="log">日志：等待操作</div>
 
-  <h3>选择效果（点击画面添加）</h3>
+  <h3>选择效果</h3>
   <button class="btn" data-add="shake">抖动</button>
   <button class="btn" data-add="breath">呼吸</button>
   <button class="btn" data-add="openclose">开合</button>
@@ -141,9 +173,32 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
     <div id="modeList"></div>
   </div>
 
-  <h3 style="margin-top:14px">效果列表</h3>
+  <div style="display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin-top:14px;justify-content:space-between">
+    <h3 style="margin:0">效果列表</h3>
+    <button id="clearAllBtn" class="btn clear-all-btn">全清除</button>
+  </div>
   <div id="effectList"></div>
-  <button id="exportBtn" class="btn" style="margin-top:10px;background:#207839">导出PNG序列帧</button>
+
+  <h3>导出设置（GIF默认无限循环）</h3>
+  <div class="export-setting-box">
+    <div class="row">
+      <label>总帧数：<span id="frameCountVal">30</span></label>
+      <input type="range" id="frameCount" min="8" max="60" value="30">
+    </div>
+    <div class="row">
+      <label>帧延迟(ms)：<span id="delayVal">100</span></label>
+      <input type="range" id="gifDelay" min="20" max="300" value="100">
+    </div>
+    <div class="row">
+      <label>GIF画质：<span id="qualityVal">10</span></label>
+      <input type="range" id="gifQuality" min="1" max="20" value="10">
+    </div>
+  </div>
+
+  <div style="margin-top:10px;display:flex;gap:4px;flex-wrap:wrap">
+    <button id="exportGifBtn" class="btn gif-btn">导出GIF动图</button>
+    <button id="exportBtn" class="btn" style="background:#207839">导出PNG序列帧</button>
+  </div>
 </div>
 
 <div class="floating-param" id="floatingParam">
@@ -151,20 +206,26 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
     <span id="fpTitle">微调</span>
     <button class="fp-close" id="fpClose">关闭</button>
   </div>
-  <div class="row"><label>强度</label><input type="range" id="fpStrength" min="0" max="400" value="150"></div>
-  <div class="row"><label>范围</label><input type="range" id="fpRange" min="10" max="500" value="110"></div>
+  <div class="row"><label>强度</label><input type="range" id="fpStrength" min="0" max="600" value="260"></div>
+  <div class="row"><label>范围</label><input type="range" id="fpRange" min="10" max="800" value="220"></div>
   <div class="row"><label>速度</label><input type="range" id="fpSpeed" min="1" max="120" value="24"></div>
 </div>
 
 <script>
 const canvas = document.getElementById('mainCanvas');
 const gl = canvas.getContext('webgl', {preserveDrawingBuffer:true, antialias:true});
-if(!gl) alert("浏览器不支持WebGL");
+const fallbackImg = document.getElementById('fallbackImg');
+if(!gl) {
+  alert("浏览器不支持WebGL");
+  fallbackImg.style.display = "block";
+}
 
 const logDom = document.getElementById('log');
 const upload = document.getElementById('imgUpload');
 const effectList = document.getElementById('effectList');
 const exportBtn = document.getElementById('exportBtn');
+const exportGifBtn = document.getElementById('exportGifBtn');
+const clearAllBtn = document.getElementById('clearAllBtn');
 const effectPanel = document.getElementById('effectPanel');
 const togglePanel = document.getElementById('togglePanel');
 const hidePanel = document.getElementById('hidePanel');
@@ -178,6 +239,14 @@ const fpClose = document.getElementById('fpClose');
 const fpStrength = document.getElementById('fpStrength');
 const fpRange = document.getElementById('fpRange');
 const fpSpeed = document.getElementById('fpSpeed');
+
+// 导出设置控件
+const frameCountSlider = document.getElementById('frameCount');
+const frameCountVal = document.getElementById('frameCountVal');
+const gifDelaySlider = document.getElementById('gifDelay');
+const delayVal = document.getElementById('delayVal');
+const gifQualitySlider = document.getElementById('gifQuality');
+const qualityVal = document.getElementById('qualityVal');
 
 // WebGL Shaders
 const vSrc = `
@@ -310,10 +379,10 @@ gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
 const tex = gl.createTexture();
 gl.bindTexture(gl.TEXTURE_2D,tex);
 gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
-gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
-gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
-gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
 let sourceImg = null;
 let originalW = 0, originalH = 0;
@@ -327,6 +396,14 @@ let pendingType = null;
 let pendingMode = null;
 let lastTs = 0;
 let editingId = null;
+
+const BASE_DEFAULT = {
+  strength: 260,
+  range: 220,
+  speed: 24
+};
+let lastParam = null;
+let fpJustOpened = false;
 
 const TYPE_MAP = {shake:0,breath:1,openclose:2,bounce:3,swing:4};
 const MODE_MAP = {
@@ -352,33 +429,81 @@ function isMobile(){
     || window.matchMedia('(max-width: 900px)').matches;
 }
 
+// 导出设置数值回显
+function bindExportSettingUI(){
+  function updateLabel(){
+    frameCountVal.textContent = frameCountSlider.value;
+    delayVal.textContent = gifDelaySlider.value;
+    qualityVal.textContent = gifQualitySlider.value;
+  }
+  frameCountSlider.oninput = updateLabel;
+  gifDelaySlider.oninput = updateLabel;
+  gifQualitySlider.oninput = updateLabel;
+  updateLabel();
+}
+bindExportSettingUI();
+
+// ========== 上传逻辑 ==========
 upload.onchange = async (e) => {
   const file = e.target.files[0];
+  upload.value = '';
   if (!file) return;
-  const url = URL.createObjectURL(file);
-  const img = new Image();
-  img.src = url;
-  await new Promise(r => img.onload = r);
-  sourceImg = img;
-  originalW = img.naturalWidth;
-  originalH = img.naturalHeight;
-  if (isMobile()) {
-    previewScale = isLowPerf() ? 0.6 : 0.85;
-    renderW = Math.round(originalW * previewScale);
-    renderH = Math.round(originalH * previewScale);
-  } else {
-    previewScale = 1;
-    renderW = originalW;
-    renderH = originalH;
+  log("正在读取文件...");
+
+  try{
+    const blobUrl = URL.createObjectURL(file);
+    const img = new Image();
+    img.src = blobUrl;
+    await img.decode();
+    log("图片解码成功，准备送入WebGL");
+
+    sourceImg = img;
+    originalW = img.naturalWidth;
+    originalH = img.naturalHeight;
+    if (isMobile()) {
+      previewScale = isLowPerf() ? 0.6 : 0.85;
+      renderW = Math.round(originalW * previewScale);
+      renderH = Math.round(originalH * previewScale);
+    } else {
+      previewScale = 1;
+      renderW = originalW;
+      renderH = originalH;
+    }
+    canvas.width = renderW;
+    canvas.height = renderH;
+    gl.viewport(0,0,renderW,renderH);
+
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+
+    // ✅ 正常渲染成功，隐藏兜底图，不再叠层！
+    fallbackImg.style.display = "none";
+
+    log(`✅图片加载完成，原图 ${originalW}×${originalH}，预览 ${renderW}×${renderH}`);
+
+    draw();
+    setTimeout(()=>draw(), 20);
+    startPreview();
+
+  }catch(err){
+    // 加载失败才打开兜底图
+    fallbackImg.style.display = "block";
+    log("❌图片加载失败："+err.message);
+    console.error(err);
   }
-  canvas.width = renderW;
-  canvas.height = renderH;
-  gl.viewport(0,0,renderW,renderH);
-  gl.bindTexture(gl.TEXTURE_2D,tex);
-  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
-  log(`图片加载完成，原图 ${originalW}×${originalH}，预览 ${renderW}×${renderH}`);
-  startPreview();
 };
+
+// 全清除
+clearAllBtn.onclick = ()=>{
+  effects.length = 0;
+  renderList();
+  log("✅已清空全部动作");
+}
 
 document.querySelectorAll('[data-add]').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -419,16 +544,12 @@ function showModes(type){
   modeBox.style.display = 'block';
 }
 
-// ========== 修复坐标换算，Y轴反向对齐UNPACK_FLIP_Y_WEBGL ==========
 function getCanvasPos(clientX, clientY){
   const rect = canvas.getBoundingClientRect();
-  // 画布显示尺寸
   const displayW = rect.width;
   const displayH = rect.height;
-  // 鼠标在画布内的相对比例 [0~1]
   const rx = (clientX - rect.left) / displayW;
   const ry = (clientY - rect.top) / displayH;
-  // 因为纹理翻转Y，图像像素Y = (1-ry)*原图高度
   const x = rx * originalW;
   const y = (1 - ry) * originalH;
   return {x,y};
@@ -438,6 +559,7 @@ function addEffectAtPos(x,y){
   if (!sourceImg) { alert('先上传图片！'); return; }
   if (!pendingType || !pendingMode) { alert('先选择效果！'); return; }
   const info = EFFECT_TYPES[pendingType];
+  const useParam = lastParam ? {...lastParam} : {...BASE_DEFAULT};
   const effect = {
     id: ++effectIdCounter,
     type: pendingType,
@@ -445,12 +567,12 @@ function addEffectAtPos(x,y){
     name: `${info.name}-${pendingMode}`,
     color: info.color,
     x, y,
-    strength: 150,
-    range: 110,
-    speed:24
+    strength: useParam.strength,
+    range: useParam.range,
+    speed: useParam.speed
   };
   effects.unshift(effect);
-  log(`✅ 添加：${effect.name} 坐标 x:${x.toFixed(1)}, y:${y.toFixed(1)}`);
+  log(`✅ 添加：${effect.name} 坐标 x:${x.toFixed(1)}, y:${y.toFixed(1)} | 继承参数 强度:${effect.strength} 范围:${effect.range}`);
   renderList();
 }
 canvas.addEventListener('touchstart', (e)=>{
@@ -486,17 +608,18 @@ function openFloatingParam(id){
   fpSpeed.value = ef.speed;
   floatingParam.classList.add('show');
   effectPanel.classList.add('collapsed');
+  fpJustOpened = true;
+  setTimeout(()=>{
+    fpJustOpened = false;
+  },300);
 }
 
 function closeFloatingParam(){
   floatingParam.classList.remove('show');
   editingId = null;
   effectPanel.classList.remove('collapsed');
-  effectPanel.style.display = 'none';
-  togglePanel.style.display = 'inline-block';
 }
 
-// ========== 修复弹窗：整个弹窗容器拦截事件，关闭按钮 stopImmediatePropagation ==========
 floatingParam.addEventListener('click', (ev)=>{
   ev.stopPropagation();
 });
@@ -505,9 +628,9 @@ fpClose.onclick = (ev)=>{
   closeFloatingParam();
 };
 
-// 外部点击关闭逻辑
 document.addEventListener('click', (e)=>{
   if (!floatingParam.classList.contains('show')) return;
+  if(fpJustOpened) return;
   if (floatingParam.contains(e.target)) return;
   if (effectPanel.contains(e.target)) return;
   closeFloatingParam();
@@ -614,6 +737,11 @@ function bindFloatingInputs(){
       ef.strength = Number(fpStrength.value);
       ef.range = Number(fpRange.value);
       ef.speed = Number(fpSpeed.value);
+      lastParam = {
+        strength: ef.strength,
+        range: ef.range,
+        speed: ef.speed
+      };
     };
   });
 }
@@ -661,13 +789,15 @@ togglePanel.onclick = ()=>{
   togglePanel.style.display = 'none';
 };
 
+// 导出PNG序列帧（带百分比进度）
 exportBtn.onclick = async () => {
   if (!sourceImg) { alert('先上传图片'); return; }
   if (effects.length === 0) { alert('至少添加一个效果'); return; }
   stopPreview();
-  const total = 30;
+  const total = Number(frameCountSlider.value);
   const zip = new JSZip();
   for (let i = 0; i < total; i++) {
+    const percent = Math.round(((i+1)/total)*100);
     const t = (i / total) * Math.PI * 2;
     time = t;
     draw();
@@ -675,13 +805,57 @@ exportBtn.onclick = async () => {
     const dataUrl = canvas.toDataURL('image/png');
     const b64 = dataUrl.split(',')[1];
     zip.file(`frame_${String(i).padStart(3,'0')}.png`, b64, {base64:true});
-    log(`导出帧 ${i+1}/${total}`);
+    log(`序列帧采集：${i+1}/${total} (${percent}%)`);
   }
+  log("正在打包ZIP...");
   const blob = await zip.generateAsync({type:'blob'});
   saveAs(blob, 'character_animation_frames.zip');
   log('✅ 序列帧打包完成，开始下载');
   startPreview();
 };
+
+// 导出GIF动图，分【采集帧】+【编码】两段进度
+exportGifBtn.onclick = async ()=>{
+  if (!sourceImg) { alert('先上传图片'); return; }
+  if (effects.length === 0) { alert('至少添加一个效果'); return; }
+  stopPreview();
+  const total = Number(frameCountSlider.value);
+  const delay = Number(gifDelaySlider.value);
+  const quality = Number(gifQualitySlider.value);
+  log(`开始采集GIF帧，共${total}帧`);
+
+  const gif = new GIF({
+    workers: 2,
+    quality: quality,
+    width: canvas.width,
+    height: canvas.height,
+    loop: 0
+  });
+
+  for(let i=0;i<total;i++){
+    const percent = Math.round(((i+1)/total)*100);
+    const t = (i / total) * Math.PI * 2;
+    time = t;
+    draw();
+    await new Promise(r=>setTimeout(r,10));
+    gif.addFrame(canvas, {delay: delay, copy:true});
+    log(`GIF采集帧：${i+1}/${total} (${percent}%)`);
+  }
+
+  log("🧩 GIF编码中 0%");
+  // gif.js progress 事件，拿到编码实时百分比
+  gif.on('progress', function(p){
+    const per = Math.round(p * 100);
+    log(`🧩 GIF编码中 ${per}%`);
+  })
+
+  gif.on('finished', function(blob){
+    saveAs(blob, 'animation.gif');
+    log("✅ GIF动图导出完成（无限循环）");
+    startPreview();
+  })
+  gif.render();
+}
 
 lowPerfCb.onchange = ()=>{
   if(sourceImg){
