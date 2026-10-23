@@ -6,8 +6,6 @@
 <title>人物局部动画编辑器 WebGL版</title>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
-<!-- ✅ 修复gifenc CDN地址 -->
-<script src="https://cdn.jsdelivr.net/npm/gifenc@1.0.3/dist/gifenc.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;-webkit-tap-highlight-color:transparent;}
 body{padding:12px;background:#111;color:#eee}
@@ -214,7 +212,8 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
   <div class="row"><label>速度</label><input type="range" id="fpSpeed" min="1" max="120" value="24"></div>
 </div>
 
-<script>
+<!-- 重点：脚本改成 type="module" -->
+<script type="module">
 const canvas = document.getElementById('mainCanvas');
 const gl = canvas.getContext('webgl', {preserveDrawingBuffer:true, antialias:true});
 const fallbackImg = document.getElementById('fallbackImg');
@@ -832,7 +831,7 @@ exportBtn.onclick = async () => {
   exportGifBtn.disabled = false;
 };
 
-// ==========【修复后的GIF导出函数】==========
+// ==========【ESM 方式导入 gifenc，修复gifenc未定义】==========
 exportGifBtn.onclick = async ()=>{
   if(isExporting) return;
   if (!sourceImg) { alert('先上传图片'); return; }
@@ -843,16 +842,19 @@ exportGifBtn.onclick = async ()=>{
   exportBtn.disabled = true;
   stopPreview();
 
+  // ESM 动态导入
+  const { GIFEncoder } = await import('https://cdn.jsdelivr.net/npm/gifenc@1.0.3/dist/gifenc.esm.js');
+
   const totalFrames = Number(frameCountSlider.value);
   const delayMs = Number(gifDelaySlider.value);
   const quality = Number(gifQualitySlider.value);
   const width = canvas.width;
   const height = canvas.height;
-  // 离屏canvas用来读取像素（解决WebGL画布无法getImageData）
+  // willReadFrequently:true 消除警告
   const offCanvas = document.createElement('canvas');
   offCanvas.width = width;
   offCanvas.height = height;
-  const offCtx = offCanvas.getContext('2d');
+  const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
 
   try{
     log(`📸 阶段1：采集帧，共${totalFrames}帧`);
@@ -876,7 +878,7 @@ exportGifBtn.onclick = async ()=>{
     }
 
     log(`🧩 阶段2：开始编码GIF`);
-    const gif = new gifenc.GIFEncoder();
+    const gif = new GIFEncoder();
     const q = Math.max(1, Math.min(30, quality * 1.5));
     const delayHundredths = Math.max(1, Math.round(delayMs / 10));
 
