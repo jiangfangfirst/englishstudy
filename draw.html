@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>人物局部动画编辑器 B优化版（修复黑点+自动隐藏面板）</title>
+<title>人物局部动画编辑器 WebGL版</title>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
 <style>
@@ -158,7 +158,9 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
 
 <script>
 const canvas = document.getElementById('mainCanvas');
-const ctx = canvas.getContext('2d', {willReadFrequently:true});
+const gl = canvas.getContext('webgl', {preserveDrawingBuffer:true, antialias:true});
+if(!gl) alert("浏览器不支持WebGL");
+
 const logDom = document.getElementById('log');
 const upload = document.getElementById('imgUpload');
 const effectList = document.getElementById('effectList');
@@ -177,15 +179,148 @@ const fpStrength = document.getElementById('fpStrength');
 const fpRange = document.getElementById('fpRange');
 const fpSpeed = document.getElementById('fpSpeed');
 
+// WebGL Shaders
+const vSrc = `
+attribute vec2 aPos;
+varying vec2 vUv;
+void main(){
+  vUv = aPos * 0.5 + 0.5;
+  gl_Position = vec4(aPos,0.,1.);
+}
+`;
+const fSrc = `
+precision highp float;
+uniform sampler2D uTex;
+uniform vec2 uImgSize;
+uniform float uTime;
+#define MAX_EF 12
+uniform int uCount;
+uniform vec2 uEFPos[MAX_EF];
+uniform float uEFStrength[MAX_EF];
+uniform float uEFRange[MAX_EF];
+uniform float uEFSpeed[MAX_EF];
+uniform int uEFType[MAX_EF];
+uniform int uEFMode[MAX_EF];
+varying vec2 vUv;
+
+float PI = 3.14159265;
+
+vec2 getOffset(vec2 p, vec2 c, float strength, float range, float speed, int typ, int m){
+  vec2 d = p - c;
+  float dist = length(d);
+  if(dist>range) return vec2(0.);
+  float fall = 1.0 - dist/range;
+  float s = strength * 0.016;
+  float v = pow(speed/24.,1.4)*2.4;
+  float t = uTime * v;
+  vec2 off = vec2(0.);
+
+  if(typ == 0){ // shake
+    if(m==0) off.y = sin(t*10.) * s * fall *4.;
+    else if(m==1) off.x = sin(t*10.) * s * fall *4.;
+    else {
+      off.x = cos(t*8.) * s * fall *3.5;
+      off.y = sin(t*8.) * s * fall *3.5;
+    }
+  }else if(typ ==1){ // breath
+    float wave;
+    if(m==0) wave = sin(t)*s*fall*2.4;
+    else wave = (sin(t*1.3)+sin(t*2.7)*0.4)*s*fall*2.2;
+    if(dist>0.) off = normalize(d)*wave;
+  }else if(typ ==2){ // openclose
+    float wave;
+    if(m==0) off.y = sin(t*2.)*s*fall*2.8;
+    else if(m==1) off.y = sin(t*2.+PI)*s*fall*2.8;
+    else{
+      if(m==2) wave = sin(t*2.)*s*fall*2.2;
+      else wave = sin(t*2.+PI)*s*fall*2.2;
+      if(dist>0.) off = normalize(d)*wave;
+    }
+  }else if(typ ==3){ // bounce
+    float ph = mod(t*3.,2.);
+    float b = ph<1.? 1.-ph : ph-1.;
+    if(m==1){
+      float ph2 = mod(t*5.,2.);
+      float b2 = ph2<1.?1.-ph2:ph2-1.;
+      b = b + b2*0.3;
+    }
+    off.y = b * s * fall *3.2;
+  }else if(typ ==4){ // swing
+    if(m==0){
+      off.x = cos(t*2.)*s*fall*3.;
+      off.y = sin(t*2.)*s*fall*3.;
+    }else if(m==1){
+      off.x = cos(-t*2.)*s*fall*3.;
+      off.y = sin(-t*2.)*s*fall*3.;
+    }else{
+      off.x = sin(t*3.+cos(t))*s*fall*2.8;
+      off.y = cos(t*2.5+sin(t))*s*fall*2.8;
+    }
+  }
+  return off;
+}
+
+void main(){
+  vec2 texUV = vUv;
+  vec2 imgP = texUV * uImgSize;
+  vec2 totalOff = vec2(0.);
+  for(int i=0;i<MAX_EF;i++){
+    if(i >= uCount) break;
+    vec2 of = getOffset(imgP, uEFPos[i], uEFStrength[i], uEFRange[i], uEFSpeed[i], uEFType[i], uEFMode[i]);
+    totalOff += of;
+  }
+  vec2 sampleP = (imgP + totalOff)/uImgSize;
+  gl_FragColor = texture2D(uTex, clamp(sampleP,0.,1.));
+}
+`;
+
+function compileShader(src,type){
+  const sh = gl.createShader(type);
+  gl.shaderSource(sh,src);
+  gl.compileShader(sh);
+  if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(sh);
+  return sh;
+}
+const vSh = compileShader(vSrc,gl.VERTEX_SHADER);
+const fSh = compileShader(fSrc,gl.FRAGMENT_SHADER);
+const prog = gl.createProgram();
+gl.attachShader(prog,vSh);
+gl.attachShader(prog,fSh);
+gl.linkProgram(prog);
+gl.useProgram(prog);
+
+const aPos = gl.getAttribLocation(prog,"aPos");
+const uTex = gl.getUniformLocation(prog,"uTex");
+const uImgSize = gl.getUniformLocation(prog,"uImgSize");
+const uTime = gl.getUniformLocation(prog,"uTime");
+const uCount = gl.getUniformLocation(prog,"uCount");
+const uEFPos = gl.getUniformLocation(prog,"uEFPos");
+const uEFStrength = gl.getUniformLocation(prog,"uEFStrength");
+const uEFRange = gl.getUniformLocation(prog,"uEFRange");
+const uEFSpeed = gl.getUniformLocation(prog,"uEFSpeed");
+const uEFType = gl.getUniformLocation(prog,"uEFType");
+const uEFMode = gl.getUniformLocation(prog,"uEFMode");
+
+const buf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1, 1,-1, -1,1, 1,-1,1,1,-1,1]),gl.STATIC_DRAW);
+gl.enableVertexAttribArray(aPos);
+gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
+
+const tex = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D,tex);
+gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+
 let sourceImg = null;
-let srcImageData = null;
 let originalW = 0, originalH = 0;
 let renderW = 0, renderH = 0;
 let previewScale = 1;
-let imgData = null;   // 复用的ImageData，不再每帧新建
-let out = null;       // 复用data数组
 let time = 0;
-const FIXED_STEP = 1 / 60; // 动画固定60步
+const FIXED_STEP = 1 / 60;
 let accumulator = 0;
 let animId = null;
 let pendingType = null;
@@ -193,40 +328,25 @@ let pendingMode = null;
 let lastTs = 0;
 let editingId = null;
 
-const EFFECT_TYPES = {
-  shake: {
-    name: '抖动',
-    color: '#e3c97e',
-    modes: ['上下抖动', '左右抖动', '圆形抖动']
-  },
-  breath: {
-    name: '呼吸',
-    color: '#7ee39a',
-    modes: ['规律', '不规律']
-  },
-  openclose: {
-    name: '开合',
-    color: '#e37e7e',
-    modes: ['开口', '闭口', '收缩', '膨胀']
-  },
-  bounce: {
-    name: '弹跳',
-    color: '#c27ee3',
-    modes: ['规律', '不规律']
-  },
-  swing: {
-    name: '甩动',
-    color: '#7ec8e3',
-    modes: ['顺时针', '逆时针', '无规律']
-  }
+const TYPE_MAP = {shake:0,breath:1,openclose:2,bounce:3,swing:4};
+const MODE_MAP = {
+  "上下抖动":0,"左右抖动":1,"圆形抖动":2,
+  "规律":0,"不规律":1,
+  "开口":0,"闭口":1,"收缩":2,"膨胀":3,
+  "顺时针":0,"逆时针":1,"无规律":2
 };
-
+const EFFECT_TYPES = {
+  shake: {name:'抖动',color:'#e3c97e',modes:['上下抖动','左右抖动','圆形抖动']},
+  breath: {name:'呼吸',color:'#7ee39a',modes:['规律','不规律']},
+  openclose: {name:'开合',color:'#e37e7e',modes:['开口','闭口','收缩','膨胀']},
+  bounce: {name:'弹跳',color:'#c27ee3',modes:['规律','不规律']},
+  swing: {name:'甩动',color:'#7ec8e3',modes:['顺时针','逆时针','无规律']}
+};
 let effects = [];
 let effectIdCounter = 0;
 
 function log(txt){ logDom.textContent = '日志：' + txt; }
 function isLowPerf(){ return lowPerfCb.checked; }
-
 function isMobile(){
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     || window.matchMedia('(max-width: 900px)').matches;
@@ -242,7 +362,6 @@ upload.onchange = async (e) => {
   sourceImg = img;
   originalW = img.naturalWidth;
   originalH = img.naturalHeight;
-
   if (isMobile()) {
     previewScale = isLowPerf() ? 0.6 : 0.85;
     renderW = Math.round(originalW * previewScale);
@@ -254,35 +373,12 @@ upload.onchange = async (e) => {
   }
   canvas.width = renderW;
   canvas.height = renderH;
-
-  const tmp = document.createElement('canvas');
-  tmp.width = originalW;
-  tmp.height = originalH;
-  const tctx = tmp.getContext('2d');
-  tctx.drawImage(img,0,0);
-  srcImageData = tctx.getImageData(0,0,originalW,originalH);
-
-  imgData = ctx.createImageData(renderW, renderH);
-  out = imgData.data;
-  // 初始化填充整张图，防止局部重绘残留黑点
-  fullCopyImageData();
-
+  gl.viewport(0,0,renderW,renderH);
+  gl.bindTexture(gl.TEXTURE_2D,tex);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
   log(`图片加载完成，原图 ${originalW}×${originalH}，预览 ${renderW}×${renderH}`);
   startPreview();
 };
-
-// 新增：完整复制原图到imgData，消除初始黑点
-function fullCopyImageData(){
-  for(let y=0;y<renderH;y++){
-    for(let x=0;x<renderW;x++){
-      const srcX = x / previewScale;
-      const srcY = y / previewScale;
-      const [r,g,b,a] = sampleBilinear(srcImageData.data, srcX, srcY, originalW, originalH);
-      const idx = (y * renderW + x) * 4;
-      out[idx]=r;out[idx+1]=g;out[idx+2]=b;out[idx+3]=a;
-    }
-  }
-}
 
 document.querySelectorAll('[data-add]').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -323,14 +419,18 @@ function showModes(type){
   modeBox.style.display = 'block';
 }
 
+// ========== 修复坐标换算，Y轴反向对齐UNPACK_FLIP_Y_WEBGL ==========
 function getCanvasPos(clientX, clientY){
   const rect = canvas.getBoundingClientRect();
-  const scaleX = canvas.width / rect.width;
-  const scaleY = canvas.height / rect.height;
-  const canvasX = (clientX - rect.left) * scaleX;
-  const canvasY = (clientY - rect.top) * scaleY;
-  const x = canvasX * (originalW / canvas.width);
-  const y = canvasY * (originalH / canvas.height);
+  // 画布显示尺寸
+  const displayW = rect.width;
+  const displayH = rect.height;
+  // 鼠标在画布内的相对比例 [0~1]
+  const rx = (clientX - rect.left) / displayW;
+  const ry = (clientY - rect.top) / displayH;
+  // 因为纹理翻转Y，图像像素Y = (1-ry)*原图高度
+  const x = rx * originalW;
+  const y = (1 - ry) * originalH;
   return {x,y};
 }
 
@@ -350,7 +450,7 @@ function addEffectAtPos(x,y){
     speed:24
   };
   effects.unshift(effect);
-  log(`✅ 添加：${effect.name}`);
+  log(`✅ 添加：${effect.name} 坐标 x:${x.toFixed(1)}, y:${y.toFixed(1)}`);
   renderList();
 }
 canvas.addEventListener('touchstart', (e)=>{
@@ -392,10 +492,26 @@ function closeFloatingParam(){
   floatingParam.classList.remove('show');
   editingId = null;
   effectPanel.classList.remove('collapsed');
-  // ✅ 修复：关闭微调窗，自动隐藏右侧面板，调出显示按钮
   effectPanel.style.display = 'none';
   togglePanel.style.display = 'inline-block';
 }
+
+// ========== 修复弹窗：整个弹窗容器拦截事件，关闭按钮 stopImmediatePropagation ==========
+floatingParam.addEventListener('click', (ev)=>{
+  ev.stopPropagation();
+});
+fpClose.onclick = (ev)=>{
+  ev.stopImmediatePropagation();
+  closeFloatingParam();
+};
+
+// 外部点击关闭逻辑
+document.addEventListener('click', (e)=>{
+  if (!floatingParam.classList.contains('show')) return;
+  if (floatingParam.contains(e.target)) return;
+  if (effectPanel.contains(e.target)) return;
+  closeFloatingParam();
+});
 
 function renderList(){
   effectList.innerHTML = '';
@@ -416,7 +532,6 @@ function renderList(){
     `;
     effectList.appendChild(div);
   });
-
   effectList.querySelectorAll('.del-btn').forEach(btn=>btn.onclick=()=>removeEffect(+btn.dataset.del));
   effectList.querySelectorAll('.top-btn').forEach(btn=>btn.onclick=()=>topEffect(+btn.dataset.id));
   effectList.querySelectorAll('.edit-btn').forEach(btn=>{
@@ -427,144 +542,45 @@ function renderList(){
   });
 }
 
-function sampleBilinear(srcData, sx, sy, w, h){
-  const x0 = Math.floor(sx);
-  const y0 = Math.floor(sy);
-  const x1 = Math.min(w-1, x0+1);
-  const y1 = Math.min(h-1, y0+1);
-  const fx = sx - x0;
-  const fy = sy - y0;
-  const i00 = (y0 * w + x0) * 4;
-  const i10 = (y0 * w + x1) * 4;
-  const i01 = (y1 * w + x0) * 4;
-  const i11 = (y1 * w + x1) * 4;
-  return [
-    srcData[i00]*(1-fx)*(1-fy) + srcData[i10]*fx*(1-fy) + srcData[i01]*(1-fx)*fy + srcData[i11]*fx*fy,
-    srcData[i00+1]*(1-fx)*(1-fy) + srcData[i10+1]*fx*(1-fy) + srcData[i01+1]*(1-fx)*fy + srcData[i11+1]*fx*fy,
-    srcData[i00+2]*(1-fx)*(1-fy) + srcData[i10+2]*fx*(1-fy) + srcData[i01+2]*(1-fx)*fy + srcData[i11+2]*fx*fy,
-    srcData[i00+3]*(1-fx)*(1-fy) + srcData[i10+3]*fx*(1-fy) + srcData[i01+3]*(1-fx)*fy + srcData[i11+3]*fx*fy
-  ];
-}
-
-function getEffectOffset(effect, x, y, t){
-  const dx = x - effect.x;
-  const dy = y - effect.y;
-  const distSq = dx*dx + dy*dy;
-  const r = effect.range;
-  const rSq = r*r;
-  if (distSq > rSq) return { ox:0, oy:0 };
-  const dist = Math.sqrt(distSq);
-  const falloff = 1 - dist / r;
-  const s = effect.strength * 0.016;
-  const v = Math.pow(effect.speed / 24, 1.4) * 2.4;
-  let ox=0, oy=0;
-
-  switch(effect.type){
-    case 'shake':
-      if (effect.mode === '上下抖动') oy = Math.sin(t * v * 10) * s * falloff * 4;
-      else if (effect.mode === '左右抖动') ox = Math.sin(t * v * 10) * s * falloff * 4;
-      else if (effect.mode === '圆形抖动') {
-        ox = Math.cos(t * v * 8) * s * falloff * 3.5;
-        oy = Math.sin(t * v * 8) * s * falloff * 3.5;
-      }
-      break;
-    case 'breath':
-      if (effect.mode === '规律') {
-        const wave = Math.sin(t * v) * s * falloff * 2.4;
-        const len = dist || 1;
-        ox = dx / len * wave;
-        oy = dy / len * wave;
-      } else {
-        const wave = (Math.sin(t * v * 1.3) + Math.sin(t * v * 2.7) * 0.4) * s * falloff * 2.2;
-        const len = dist || 1;
-        ox = dx / len * wave;
-        oy = dy / len * wave;
-      }
-      break;
-    case 'openclose':
-      if (effect.mode === '开口') oy = Math.sin(t * v * 2) * s * falloff * 2.8;
-      else if (effect.mode === '闭口') oy = Math.sin(t * v * 2 + Math.PI) * s * falloff * 2.8;
-      else if (effect.mode === '收缩') {
-        const wave = Math.sin(t * v * 2) * s * falloff * 2.2;
-        const len = dist || 1;
-        ox = dx / len * wave;
-        oy = dy / len * wave;
-      } else if (effect.mode === '膨胀') {
-        const wave = Math.sin(t * v * 2 + Math.PI) * s * falloff * 2.2;
-        const len = dist || 1;
-        ox = dx / len * wave;
-        oy = dy / len * wave;
-      }
-      break;
-    case 'bounce':
-      if (effect.mode === '规律') {
-        const phase = (t * v * 3) % 2;
-        const bounce = phase < 1 ? 1 - phase : phase - 1;
-        oy = bounce * s * falloff * 3.2;
-      } else {
-        const phase1 = (t * v * 3) % 2;
-        const phase2 = (t * v * 5) % 2;
-        const b1 = phase1 < 1 ? 1 - phase1 : phase1 - 1;
-        const b2 = phase2 < 1 ? 1 - phase2 : phase2 - 1;
-        oy = (b1 + b2 * 0.3) * s * falloff * 3;
-      }
-      break;
-    case 'swing':
-      if (effect.mode === '顺时针') {
-        ox = Math.cos(t * v * 2) * s * falloff * 3;
-        oy = Math.sin(t * v * 2) * s * falloff * 3;
-      } else if (effect.mode === '逆时针') {
-        ox = Math.cos(-t * v * 2) * s * falloff * 3;
-        oy = Math.sin(-t * v * 2) * s * falloff * 3;
-      } else {
-        ox = Math.sin(t * v * 3 + Math.cos(t * v)) * s * falloff * 2.8;
-        oy = Math.cos(t * v * 2.5 + Math.sin(t * v)) * s * falloff * 2.8;
-      }
-      break;
-  }
-  return {ox, oy};
-}
-
 function draw(){
-  if (!srcImageData || !imgData) return;
-
-  let minX = originalW, minY = originalH, maxX = 0, maxY = 0;
-  for(const e of effects){
-    const r = e.range;
-    minX = Math.min(minX, e.x - r);
-    minY = Math.min(minY, e.y - r);
-    maxX = Math.max(maxX, e.x + r);
-    maxY = Math.max(maxY, e.y + r);
-  }
-  if(effects.length === 0){
-    minX = 0; minY = 0; maxX = originalW; maxY = originalH;
-  }
-  minX = Math.max(0, minX);
-  minY = Math.max(0, minY);
-  maxX = Math.min(originalW, maxX);
-  maxY = Math.min(originalH, maxY);
-
-  const rMinX = Math.floor(minX * previewScale);
-  const rMinY = Math.floor(minY * previewScale);
-  const rMaxX = Math.ceil(maxX * previewScale);
-  const rMaxY = Math.ceil(maxY * previewScale);
-
-  for (let y = rMinY; y < rMaxY && y < renderH; y++) {
-    for (let x = rMinX; x < rMaxX && x < renderW; x++) {
-      const srcX = x / previewScale;
-      const srcY = y / previewScale;
-      let totalOx = 0, totalOy = 0;
-      for (const e of effects) {
-        const off = getEffectOffset(e, srcX, srcY, time);
-        totalOx += off.ox;
-        totalOy += off.oy;
-      }
-      const [r,g,b,a] = sampleBilinear(srcImageData.data, srcX+totalOx, srcY+totalOy, originalW, originalH);
-      const idx = (y * renderW + x) * 4;
-      out[idx]=r;out[idx+1]=g;out[idx+2]=b;out[idx+3]=a;
+  if(!sourceImg) return;
+  gl.useProgram(prog);
+  gl.uniform1i(uTex,0);
+  gl.uniform2f(uImgSize, originalW, originalH);
+  gl.uniform1f(uTime, time);
+  const N = Math.min(effects.length,12);
+  gl.uniform1i(uCount, N);
+  const posArr = [];
+  const strArr = [];
+  const rngArr = [];
+  const spdArr = [];
+  const typArr = [];
+  const modArr = [];
+  for(let i=0;i<12;i++){
+    if(i<effects.length){
+      const e = effects[i];
+      posArr.push(e.x, e.y);
+      strArr.push(e.strength);
+      rngArr.push(e.range);
+      spdArr.push(e.speed);
+      typArr.push(TYPE_MAP[e.type]);
+      modArr.push(MODE_MAP[e.mode]);
+    }else{
+      posArr.push(0,0);
+      strArr.push(0);
+      rngArr.push(0);
+      spdArr.push(0);
+      typArr.push(0);
+      modArr.push(0);
     }
   }
-  ctx.putImageData(imgData,0,0);
+  gl.uniform2fv(uEFPos, new Float32Array(posArr));
+  gl.uniform1fv(uEFStrength, new Float32Array(strArr));
+  gl.uniform1fv(uEFRange, new Float32Array(rngArr));
+  gl.uniform1fv(uEFSpeed, new Float32Array(spdArr));
+  gl.uniform1iv(uEFType, new Int32Array(typArr));
+  gl.uniform1iv(uEFMode, new Int32Array(modArr));
+  gl.drawArrays(gl.TRIANGLES,0,6);
 }
 
 function startPreview(){
@@ -603,23 +619,10 @@ function bindFloatingInputs(){
 }
 bindFloatingInputs();
 
-fpClose.onclick = (ev)=>{
-  ev.stopPropagation();
-  closeFloatingParam();
-};
-
-document.addEventListener('click', (e)=>{
-  if (!floatingParam.classList.contains('show')) return;
-  if (floatingParam.contains(e.target)) return;
-  if (effectPanel.contains(e.target)) return;
-  closeFloatingParam();
-});
-
 (function(){
   let dragging = false;
   let startX = 0, startY = 0;
   let startLeft = 0, startTop = 0;
-
   function onDown(clientX, clientY){
     dragging = true;
     startX = clientX;
@@ -629,7 +632,6 @@ document.addEventListener('click', (e)=>{
     startTop = rect.top;
     floatingParam.style.transform = 'none';
   }
-
   function onMove(clientX, clientY){
     if (!dragging) return;
     const dx = clientX - startX;
@@ -641,29 +643,11 @@ document.addEventListener('click', (e)=>{
     floatingParam.style.left = left + 'px';
     floatingParam.style.top = top + 'px';
   }
-
-  function onUp(){
-    dragging = false;
-  }
-
-  fpTitleBar.addEventListener('mousedown', e=>{
-    e.preventDefault();
-    onDown(e.clientX, e.clientY);
-  });
-  fpTitleBar.addEventListener('touchstart', e=>{
-    const t = e.touches[0];
-    onDown(t.clientX, t.clientY);
-  }, {passive:false});
-
-  window.addEventListener('mousemove', e=>{
-    onMove(e.clientX, e.clientY);
-  });
-  window.addEventListener('touchmove', e=>{
-    if (!dragging) return;
-    const t = e.touches[0];
-    onMove(t.clientX, t.clientY);
-  }, {passive:false});
-
+  function onUp(){ dragging = false; }
+  fpTitleBar.addEventListener('mousedown', e=>{ e.preventDefault(); onDown(e.clientX, e.clientY); });
+  fpTitleBar.addEventListener('touchstart', e=>{ const t = e.touches[0]; onDown(t.clientX, t.clientY); }, {passive:false});
+  window.addEventListener('mousemove', e=>onMove(e.clientX, e.clientY));
+  window.addEventListener('touchmove', e=>{ if(!dragging)return; const t=e.touches[0]; onMove(t.clientX,t.clientY); }, {passive:false});
   window.addEventListener('mouseup', onUp);
   window.addEventListener('touchend', onUp);
 })();
@@ -678,7 +662,7 @@ togglePanel.onclick = ()=>{
 };
 
 exportBtn.onclick = async () => {
-  if (!srcImageData) { alert('先上传图片'); return; }
+  if (!sourceImg) { alert('先上传图片'); return; }
   if (effects.length === 0) { alert('至少添加一个效果'); return; }
   stopPreview();
   const total = 30;
