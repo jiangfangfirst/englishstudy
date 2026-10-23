@@ -6,7 +6,7 @@
 <title>人物局部动画编辑器 WebGL版</title>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gifenc@1.0.1/dist/gifenc.umd.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;-webkit-tap-highlight-color:transparent;}
 body{padding:12px;background:#111;color:#eee}
@@ -26,7 +26,6 @@ canvas{
   position:relative;
   z-index:2;
 }
-/* 兜底预览图放到下层，默认隐藏 */
 #fallbackImg{
   position:absolute;
   top:0;left:0;
@@ -56,6 +55,10 @@ canvas{
 .btn{
   padding:8px 7px;margin:3px 2px;cursor:pointer;
   background:#333;color:#eee;border:1px solid #555;border-radius:4px;font-size:13px;
+}
+.btn:disabled{
+  opacity:0.4;
+  cursor:not-allowed;
 }
 .btn.active{background:#207839;border-color:#2fa552}
 .del-btn{background:#782b2b;border-color:#943838}
@@ -103,7 +106,6 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
 .perf-row{margin:6px 0;font-size:12px;color:#ccc}
 .upload-row{margin-bottom:8px}
 
-/* 浮动微调窗 */
 .floating-param{
   position:fixed;
   left:50%;
@@ -240,7 +242,6 @@ const fpStrength = document.getElementById('fpStrength');
 const fpRange = document.getElementById('fpRange');
 const fpSpeed = document.getElementById('fpSpeed');
 
-// 导出设置控件
 const frameCountSlider = document.getElementById('frameCount');
 const frameCountVal = document.getElementById('frameCountVal');
 const gifDelaySlider = document.getElementById('gifDelay');
@@ -248,7 +249,9 @@ const delayVal = document.getElementById('delayVal');
 const gifQualitySlider = document.getElementById('gifQuality');
 const qualityVal = document.getElementById('qualityVal');
 
-// WebGL Shaders
+let isExporting = false;
+let selectedEffectId = null; // 当前选中动作，微调框公用绑定这个
+
 const vSrc = `
 attribute vec2 aPos;
 varying vec2 vUv;
@@ -395,7 +398,6 @@ let animId = null;
 let pendingType = null;
 let pendingMode = null;
 let lastTs = 0;
-let editingId = null;
 
 const BASE_DEFAULT = {
   strength: 260,
@@ -429,7 +431,6 @@ function isMobile(){
     || window.matchMedia('(max-width: 900px)').matches;
 }
 
-// 导出设置数值回显
 function bindExportSettingUI(){
   function updateLabel(){
     frameCountVal.textContent = frameCountSlider.value;
@@ -443,7 +444,6 @@ function bindExportSettingUI(){
 }
 bindExportSettingUI();
 
-// ========== 上传逻辑 ==========
 upload.onchange = async (e) => {
   const file = e.target.files[0];
   upload.value = '';
@@ -481,7 +481,6 @@ upload.onchange = async (e) => {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
 
-    // ✅ 正常渲染成功，隐藏兜底图，不再叠层！
     fallbackImg.style.display = "none";
 
     log(`✅图片加载完成，原图 ${originalW}×${originalH}，预览 ${renderW}×${renderH}`);
@@ -491,16 +490,15 @@ upload.onchange = async (e) => {
     startPreview();
 
   }catch(err){
-    // 加载失败才打开兜底图
     fallbackImg.style.display = "block";
     log("❌图片加载失败："+err.message);
     console.error(err);
   }
 };
 
-// 全清除
 clearAllBtn.onclick = ()=>{
   effects.length = 0;
+  selectedEffectId = null;
   renderList();
   log("✅已清空全部动作");
 }
@@ -574,6 +572,11 @@ function addEffectAtPos(x,y){
   effects.unshift(effect);
   log(`✅ 添加：${effect.name} 坐标 x:${x.toFixed(1)}, y:${y.toFixed(1)} | 继承参数 强度:${effect.strength} 范围:${effect.range}`);
   renderList();
+
+  selectedEffectId = effect.id;
+  if(floatingParam.classList.contains('show')){
+    syncFloatPanelToSelected();
+  }
 }
 canvas.addEventListener('touchstart', (e)=>{
   e.preventDefault();
@@ -588,6 +591,7 @@ canvas.addEventListener('click', e=>{
 
 function removeEffect(id){
   effects = effects.filter(e => e.id !== id);
+  if(selectedEffectId === id) selectedEffectId = null;
   renderList();
 }
 function topEffect(id){
@@ -598,14 +602,22 @@ function topEffect(id){
   renderList();
 }
 
-function openFloatingParam(id){
-  const ef = effects.find(x => x.id === id);
-  if (!ef) return;
-  editingId = id;
+function syncFloatPanelToSelected(){
+  if(selectedEffectId === null) return;
+  const ef = effects.find(x => x.id === selectedEffectId);
+  if (!ef) {
+    selectedEffectId = null;
+    return;
+  }
   fpTitle.textContent = ef.name;
   fpStrength.value = ef.strength;
   fpRange.value = ef.range;
   fpSpeed.value = ef.speed;
+}
+
+function openFloatingParam(id){
+  selectedEffectId = id;
+  syncFloatPanelToSelected();
   floatingParam.classList.add('show');
   effectPanel.classList.add('collapsed');
   fpJustOpened = true;
@@ -616,7 +628,6 @@ function openFloatingParam(id){
 
 function closeFloatingParam(){
   floatingParam.classList.remove('show');
-  editingId = null;
   effectPanel.classList.remove('collapsed');
 }
 
@@ -656,7 +667,7 @@ function renderList(){
     effectList.appendChild(div);
   });
   effectList.querySelectorAll('.del-btn').forEach(btn=>btn.onclick=()=>removeEffect(+btn.dataset.del));
-  effectList.querySelectorAll('.top-btn').forEach(btn=>btn.onclick=()=>topEffect(+btn.dataset.id));
+  effectList.querySelectorAll('.top-btn').forEach(btn=>btn.onclick=()=>topEffect(+btn.dataset.top));
   effectList.querySelectorAll('.edit-btn').forEach(btn=>{
     btn.onclick = (ev)=>{
       ev.stopPropagation();
@@ -731,8 +742,8 @@ function stopPreview(){
 function bindFloatingInputs(){
   [fpStrength, fpRange, fpSpeed].forEach(input => {
     input.oninput = ()=>{
-      if (!editingId) return;
-      const ef = effects.find(x => x.id === editingId);
+      if (selectedEffectId === null) return;
+      const ef = effects.find(x => x.id === selectedEffectId);
       if (!ef) return;
       ef.strength = Number(fpStrength.value);
       ef.range = Number(fpRange.value);
@@ -789,10 +800,13 @@ togglePanel.onclick = ()=>{
   togglePanel.style.display = 'none';
 };
 
-// 导出PNG序列帧（带百分比进度）
 exportBtn.onclick = async () => {
+  if (isExporting) return;
   if (!sourceImg) { alert('先上传图片'); return; }
   if (effects.length === 0) { alert('至少添加一个效果'); return; }
+  isExporting = true;
+  exportBtn.disabled = true;
+  exportGifBtn.disabled = true;
   stopPreview();
   const total = Number(frameCountSlider.value);
   const zip = new JSZip();
@@ -812,49 +826,66 @@ exportBtn.onclick = async () => {
   saveAs(blob, 'character_animation_frames.zip');
   log('✅ 序列帧打包完成，开始下载');
   startPreview();
+  isExporting = false;
+  exportBtn.disabled = false;
+  exportGifBtn.disabled = false;
 };
 
-// 导出GIF动图，分【采集帧】+【编码】两段进度
 exportGifBtn.onclick = async ()=>{
+  if(isExporting) return;
   if (!sourceImg) { alert('先上传图片'); return; }
   if (effects.length === 0) { alert('至少添加一个效果'); return; }
+
+  isExporting = true;
+  exportGifBtn.disabled = true;
+  exportBtn.disabled = true;
   stopPreview();
-  const total = Number(frameCountSlider.value);
-  const delay = Number(gifDelaySlider.value);
+
+  const totalFrames = Number(frameCountSlider.value);
+  const delayMs = Number(gifDelaySlider.value);
   const quality = Number(gifQualitySlider.value);
-  log(`开始采集GIF帧，共${total}帧`);
+  const width = canvas.width;
+  const height = canvas.height;
 
-  const gif = new GIF({
-    workers: 2,
-    quality: quality,
-    width: canvas.width,
-    height: canvas.height,
-    loop: 0
-  });
+  try{
+    log(`📸 阶段1：采集帧，共${totalFrames}帧`);
+    const framesRgba = [];
+    for(let i=0;i<totalFrames;i++){
+      const progress = Math.round( (i+1)/totalFrames * 50 );
+      const t = (i / totalFrames) * Math.PI * 2;
+      time = t;
+      draw();
+      await new Promise(r=>setTimeout(r,0));
+      const ctx2d = canvas.getContext('2d');
+      const imgData = ctx2d.getImageData(0,0,width,height);
+      framesRgba.push(imgData.data);
+      log(`📸 采集帧 ${i+1}/${totalFrames} 总进度 ${progress}%`);
+    }
 
-  for(let i=0;i<total;i++){
-    const percent = Math.round(((i+1)/total)*100);
-    const t = (i / total) * Math.PI * 2;
-    time = t;
-    draw();
-    await new Promise(r=>setTimeout(r,10));
-    gif.addFrame(canvas, {delay: delay, copy:true});
-    log(`GIF采集帧：${i+1}/${total} (${percent}%)`);
+    log(`🧩 阶段2：开始编码GIF`);
+    const gif = new gifenc.GIFEncoder();
+    const q = Math.max(1, Math.min(30, quality * 1.5));
+    const delayHundredths = Math.max(1, Math.round(delayMs / 10));
+
+    for(let fIdx=0; fIdx < framesRgba.length; fIdx++){
+      const encodeProgress = 50 + Math.round( (fIdx+1)/framesRgba.length * 50 );
+      gif.addFrame(framesRgba[fIdx], {width, height, delay: delayHundredths, quality: q});
+      log(`🧩 编码帧 ${fIdx+1}/${totalFrames} 总进度 ${encodeProgress}%`);
+      await new Promise(r=>setTimeout(r, 5));
+    }
+    const uint8Gif = gif.finish();
+    const blob = new Blob([uint8Gif], {type:"image/gif"});
+    saveAs(blob, "animation.gif");
+    log("✅ GIF导出完成");
+  }catch(err){
+    log("❌ GIF编码失败：" + err.message);
+    console.error(err);
   }
 
-  log("🧩 GIF编码中 0%");
-  // gif.js progress 事件，拿到编码实时百分比
-  gif.on('progress', function(p){
-    const per = Math.round(p * 100);
-    log(`🧩 GIF编码中 ${per}%`);
-  })
-
-  gif.on('finished', function(blob){
-    saveAs(blob, 'animation.gif');
-    log("✅ GIF动图导出完成（无限循环）");
-    startPreview();
-  })
-  gif.render();
+  startPreview();
+  isExporting = false;
+  exportGifBtn.disabled = false;
+  exportBtn.disabled = false;
 }
 
 lowPerfCb.onchange = ()=>{
