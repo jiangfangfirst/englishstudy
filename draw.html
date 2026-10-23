@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>人物局部动画编辑器 画质修复版</title>
+<title>人物局部动画编辑器 V16</title>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
 <style>
@@ -32,11 +32,12 @@ canvas{
   width:min(360px, calc(100vw - 24px));
   max-height:70vh;
   overflow-y:auto;
-  background:rgba(28,28,28,0.7);
+  background:#1c1c1c;
   padding:12px;
   border-radius:8px;
   box-shadow:0 6px 24px rgba(0,0,0,.45);
   z-index:100;
+  transition:opacity .25s ease, transform .25s ease;
 }
 .panel h3{margin:10px 0 8px;font-size:15px}
 .btn{
@@ -46,7 +47,7 @@ canvas{
 .btn.active{background:#207839;border-color:#2fa552}
 .del-btn{background:#782b2b;border-color:#943838}
 .top-btn{background:#2b5f78;border-color:#387794}
-.effect-item{background:rgba(38,38,38,0.85);border:1px solid #444;border-radius:6px;padding:10px;margin-bottom:8px;transition:opacity .2s ease}
+.effect-item{background:#262626;border:1px solid #444;border-radius:6px;padding:10px;margin-bottom:8px}
 .item-head{display:flex;align-items:center;justify-content:space-between;gap:4px;flex-wrap:wrap}
 .item-name{font-weight:bold;font-size:14px}
 .param-wrap{margin-top:8px;padding-top:8px;border-top:1px solid #3a3a3a;display:none}
@@ -71,18 +72,44 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
 .perf-row{margin:6px 0;font-size:12px;color:#ccc}
 .upload-row{margin-bottom:8px}
 
-.panel.blur-others .effect-item:not(.focus-item),
-.panel.blur-others .upload-row,
-.panel.blur-others .perf-row,
-.panel.blur-others .log,
-.panel.blur-others h3,
-.panel.blur-others #modeBox,
-.panel.blur-others .btn[data-add],
-.panel.blur-others #exportBtn{
-  opacity:.06;
+/* 浮动微调窗 */
+.floating-param{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  width:min(340px, calc(100vw - 24px));
+  background:#1c1c1c;
+  border:1px solid #444;
+  border-radius:10px;
+  padding:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.55);
+  z-index:300;
+  display:none;
 }
-.panel.blur-others .effect-item.focus-item{
-  opacity:1;
+.floating-param.show{display:block}
+.floating-param .fp-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+  cursor:move;
+  user-select:none;
+}
+.floating-param .fp-title span{font-weight:bold;font-size:14px}
+.floating-param .fp-close{
+  background:#782b2b;border:1px solid #943838;color:#fff;border-radius:4px;
+  padding:6px 10px;font-size:13px;cursor:pointer;
+}
+.floating-param .row{display:flex;justify-content:space-between;align-items:center;margin:8px 0;gap:6px}
+.floating-param input[type=range]{flex:1}
+.floating-param label{font-size:13px;color:#ccc;white-space:nowrap}
+
+/* 面板收起状态 */
+.panel.collapsed{
+  opacity:0;
+  transform:translateY(-12px);
+  pointer-events:none;
 }
 </style>
 </head>
@@ -117,7 +144,18 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
 
   <h3 style="margin-top:14px">效果列表</h3>
   <div id="effectList"></div>
-  <button id="exportBtn" class="btn" style="margin-top:10px;background:#207839">导出PNG序列帧（原图画质）</button>
+  <button id="exportBtn" class="btn" style="margin-top:10px;background:#207839">导出PNG序列帧</button>
+</div>
+
+<!-- 浮动微调窗 -->
+<div class="floating-param" id="floatingParam">
+  <div class="fp-title" id="fpTitleBar">
+    <span id="fpTitle">微调</span>
+    <button class="fp-close" id="fpClose">关闭</button>
+  </div>
+  <div class="row"><label>强度</label><input type="range" id="fpStrength" min="0" max="400" value="150"></div>
+  <div class="row"><label>范围</label><input type="range" id="fpRange" min="10" max="500" value="110"></div>
+  <div class="row"><label>速度</label><input type="range" id="fpSpeed" min="1" max="120" value="24"></div>
 </div>
 
 <script>
@@ -133,16 +171,25 @@ const hidePanel = document.getElementById('hidePanel');
 const modeBox = document.getElementById('modeBox');
 const modeList = document.getElementById('modeList');
 const lowPerfCb = document.getElementById('lowPerf');
+const floatingParam = document.getElementById('floatingParam');
+const fpTitle = document.getElementById('fpTitle');
+const fpTitleBar = document.getElementById('fpTitleBar');
+const fpClose = document.getElementById('fpClose');
+const fpStrength = document.getElementById('fpStrength');
+const fpRange = document.getElementById('fpRange');
+const fpSpeed = document.getElementById('fpSpeed');
 
 let sourceImg = null;
 let srcImageData = null;
 let originalW = 0, originalH = 0;
 let renderW = 0, renderH = 0;
+let previewScale = 1;
 let time = 0;
 let animId = null;
 let pendingType = null;
 let pendingMode = null;
 let lastTs = 0;
+let editingId = null;
 
 const EFFECT_TYPES = {
   shake: {
@@ -178,6 +225,11 @@ let effectIdCounter = 0;
 function log(txt){ logDom.textContent = '日志：' + txt; }
 function isLowPerf(){ return lowPerfCb.checked; }
 
+function isMobile(){
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || window.matchMedia('(max-width: 900px)').matches;
+}
+
 upload.onchange = async (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -189,10 +241,16 @@ upload.onchange = async (e) => {
   originalW = img.naturalWidth;
   originalH = img.naturalHeight;
 
-  const maxSide = isLowPerf() ? 600 : 900;
-  const scale = Math.min(1, maxSide / Math.max(originalW, originalH));
-  renderW = Math.round(originalW * scale);
-  renderH = Math.round(originalH * scale);
+  // 手机端自适应清晰度：保持清楚但不卡死
+  if (isMobile()) {
+    previewScale = isLowPerf() ? 0.6 : 0.85;
+    renderW = Math.round(originalW * previewScale);
+    renderH = Math.round(originalH * previewScale);
+  } else {
+    previewScale = 1;
+    renderW = originalW;
+    renderH = originalH;
+  }
   canvas.width = renderW;
   canvas.height = renderH;
 
@@ -203,7 +261,7 @@ upload.onchange = async (e) => {
   tctx.drawImage(img,0,0);
   srcImageData = tctx.getImageData(0,0,originalW,originalH);
 
-  log(`图片加载完成，原图尺寸 ${originalW}×${originalH}，预览画布 ${renderW}×${renderH}`);
+  log(`图片加载完成，原图 ${originalW}×${originalH}，预览 ${renderW}×${renderH}`);
   startPreview();
 };
 
@@ -299,10 +357,22 @@ function topEffect(id){
   renderList();
 }
 
-function closeAllParams(){
-  document.querySelectorAll('.param-wrap').forEach(w => w.classList.remove('open'));
-  document.querySelectorAll('.effect-item').forEach(i => i.classList.remove('focus-item'));
-  effectPanel.classList.remove('blur-others');
+function openFloatingParam(id){
+  const ef = effects.find(x => x.id === id);
+  if (!ef) return;
+  editingId = id;
+  fpTitle.textContent = ef.name;
+  fpStrength.value = ef.strength;
+  fpRange.value = ef.range;
+  fpSpeed.value = ef.speed;
+  floatingParam.classList.add('show');
+  effectPanel.classList.add('collapsed');
+}
+
+function closeFloatingParam(){
+  floatingParam.classList.remove('show');
+  editingId = null;
+  effectPanel.classList.remove('collapsed');
 }
 
 function renderList(){
@@ -321,11 +391,6 @@ function renderList(){
           <button class="btn del-btn" data-del="${e.id}">删除</button>
         </div>
       </div>
-      <div class="param-wrap" data-param-id="${e.id}">
-        <div class="row"><label>强度</label><input type="range" data-key="strength" min="0" max="400" value="${e.strength}"></div>
-        <div class="row"><label>范围</label><input type="range" data-key="range" min="10" max="500" value="${e.range}"></div>
-        <div class="row"><label>速度</label><input type="range" data-key="speed" min="1" max="120" value="${e.speed}"></div>
-      </div>
     `;
     effectList.appendChild(div);
   });
@@ -335,28 +400,7 @@ function renderList(){
   effectList.querySelectorAll('.edit-btn').forEach(btn=>{
     btn.onclick = (ev)=>{
       ev.stopPropagation();
-      const pid = +btn.dataset.id;
-      const wrap = document.querySelector(`[data-param-id="${pid}"]`);
-      const item = document.querySelector(`.effect-item[data-id="${pid}"]`);
-
-      if(wrap.classList.contains('open')){
-        closeAllParams();
-      }else{
-        document.querySelectorAll('.param-wrap').forEach(w=>{ if(w!==wrap) w.classList.remove('open'); });
-        document.querySelectorAll('.effect-item').forEach(i=>{ if(i!==item) i.classList.remove('focus-item'); });
-        wrap.classList.add('open');
-        item.classList.add('focus-item');
-        effectPanel.classList.add('blur-others');
-      }
-    };
-  });
-  effectList.querySelectorAll('input[type=range]').forEach(input=>{
-    input.oninput = ()=>{
-      const wrap = input.closest('.param-wrap');
-      const id = +wrap.dataset.paramId;
-      const key = input.dataset.key;
-      const ef = effects.find(x=>x.id===id);
-      if(ef) ef[key] = Number(input.value);
+      openFloatingParam(+btn.dataset.id);
     };
   });
 }
@@ -388,7 +432,7 @@ function getEffectOffset(effect, x, y, t){
 
   const falloff = 1 - dist / effect.range;
   const s = effect.strength * 0.016;
-  const v = effect.speed * 0.16;
+  const v = Math.pow(effect.speed / 24, 1.4) * 2.4;
   let ox=0, oy=0;
 
   switch(effect.type){
@@ -425,8 +469,18 @@ function getEffectOffset(effect, x, y, t){
       }
       break;
     case 'bounce':
-      if (effect.mode === '规律') oy = Math.abs(Math.sin(t * v * 3)) * s * falloff * 3.2;
-      else oy = Math.abs(Math.sin(t * v * 3) + Math.sin(t * v * 5) * 0.3) * s * falloff * 3;
+      // 修复弹跳卡顿：改用更稳定的锯齿+正弦组合
+      if (effect.mode === '规律') {
+        const phase = (t * v * 3) % 2;
+        const bounce = phase < 1 ? 1 - phase : phase - 1;
+        oy = bounce * s * falloff * 3.2;
+      } else {
+        const phase1 = (t * v * 3) % 2;
+        const phase2 = (t * v * 5) % 2;
+        const b1 = phase1 < 1 ? 1 - phase1 : phase1 - 1;
+        const b2 = phase2 < 1 ? 1 - phase2 : phase2 - 1;
+        oy = (b1 + b2 * 0.3) * s * falloff * 3;
+      }
       break;
     case 'swing':
       if (effect.mode === '顺时针') {
@@ -444,18 +498,17 @@ function getEffectOffset(effect, x, y, t){
   return {ox, oy};
 }
 
-// 预览渲染：缩小画布 + step=2 保流畅
-function drawPreview(){
+function draw(){
   if (!srcImageData) return;
-  const step = 2;
+
   const imgData = ctx.createImageData(renderW, renderH);
   const out = imgData.data;
-  const scaleToSrc = originalW / renderW;
 
-  for (let y = 0; y < renderH; y += step) {
-    for (let x = 0; x < renderW; x += step) {
-      const srcX = x * scaleToSrc;
-      const srcY = y * scaleToSrc;
+  for (let y = 0; y < renderH; y++) {
+    for (let x = 0; x < renderW; x++) {
+      // 映射到原图坐标
+      const srcX = x / previewScale;
+      const srcY = y / previewScale;
       let totalOx = 0, totalOy = 0;
       for (const e of effects) {
         const off = getEffectOffset(e, srcX, srcY, time);
@@ -463,43 +516,12 @@ function drawPreview(){
         totalOy += off.oy;
       }
       const [r,g,b,a] = sampleBilinear(srcImageData.data, srcX+totalOx, srcY+totalOy, originalW, originalH);
-      for (let dy = 0; dy < step && y+dy < renderH; dy++) {
-        for (let dx = 0; dx < step && x+dx < renderW; dx++) {
-          const idx = ((y+dy)*renderW + (x+dx)) *4;
-          out[idx]=r;out[idx+1]=g;out[idx+2]=b;out[idx+3]=a;
-        }
-      }
-    }
-  }
-  ctx.putImageData(imgData,0,0);
-}
-
-// 导出渲染：原图尺寸，step=1，逐像素，无损画质
-function drawFullSize(t){
-  if (!srcImageData) return null;
-  const offCanvas = document.createElement('canvas');
-  offCanvas.width = originalW;
-  offCanvas.height = originalH;
-  const offCtx = offCanvas.getContext('2d',{willReadFrequently:true});
-  const imgData = offCtx.createImageData(originalW, originalH);
-  const out = imgData.data;
-  const step = 1;
-
-  for (let y = 0; y < originalH; y += step) {
-    for (let x = 0; x < originalW; x += step) {
-      let totalOx = 0, totalOy = 0;
-      for (const e of effects) {
-        const off = getEffectOffset(e, x, y, t);
-        totalOx += off.ox;
-        totalOy += off.oy;
-      }
-      const [r,g,b,a] = sampleBilinear(srcImageData.data, x+totalOx, y+totalOy, originalW, originalH);
-      const idx = (y * originalW + x) *4;
+      const idx = (y * renderW + x) * 4;
       out[idx]=r;out[idx+1]=g;out[idx+2]=b;out[idx+3]=a;
     }
   }
-  offCtx.putImageData(imgData,0,0);
-  return offCanvas;
+
+  ctx.putImageData(imgData,0,0);
 }
 
 function startPreview(){
@@ -510,7 +532,7 @@ function startPreview(){
     const dt = Math.min(0.05, (ts - lastTs)/1000);
     lastTs = ts;
     time += dt;
-    drawPreview();
+    draw();
   }
   animId = requestAnimationFrame(loop);
 }
@@ -519,11 +541,87 @@ function stopPreview(){
   animId=null;
 }
 
+// 浮动微调窗参数绑定
+function bindFloatingInputs(){
+  [fpStrength, fpRange, fpSpeed].forEach(input => {
+    input.oninput = ()=>{
+      if (!editingId) return;
+      const ef = effects.find(x => x.id === editingId);
+      if (!ef) return;
+      ef.strength = Number(fpStrength.value);
+      ef.range = Number(fpRange.value);
+      ef.speed = Number(fpSpeed.value);
+    };
+  });
+}
+bindFloatingInputs();
+
+fpClose.onclick = (ev)=>{
+  ev.stopPropagation();
+  closeFloatingParam();
+};
+
+// 点击空白处关闭微调窗
 document.addEventListener('click', (e)=>{
-  if (!effectPanel.contains(e.target)) {
-    closeAllParams();
-  }
+  if (!floatingParam.classList.contains('show')) return;
+  if (floatingParam.contains(e.target)) return;
+  if (effectPanel.contains(e.target)) return;
+  closeFloatingParam();
 });
+
+// 可拖动微调窗
+(function(){
+  let dragging = false;
+  let startX = 0, startY = 0;
+  let startLeft = 0, startTop = 0;
+
+  function onDown(clientX, clientY){
+    dragging = true;
+    startX = clientX;
+    startY = clientY;
+    const rect = floatingParam.getBoundingClientRect();
+    startLeft = rect.left;
+    startTop = rect.top;
+    floatingParam.style.transform = 'none';
+  }
+
+  function onMove(clientX, clientY){
+    if (!dragging) return;
+    const dx = clientX - startX;
+    const dy = clientY - startY;
+    let left = startLeft + dx;
+    let top = startTop + dy;
+    left = Math.max(0, Math.min(window.innerWidth - floatingParam.offsetWidth, left));
+    top = Math.max(0, Math.min(window.innerHeight - floatingParam.offsetHeight, top));
+    floatingParam.style.left = left + 'px';
+    floatingParam.style.top = top + 'px';
+  }
+
+  function onUp(){
+    dragging = false;
+  }
+
+  fpTitleBar.addEventListener('mousedown', e=>{
+    e.preventDefault();
+    onDown(e.clientX, e.clientY);
+  });
+  fpTitleBar.addEventListener('touchstart', e=>{
+    const t = e.touches[0];
+    onDown(t.clientX, t.clientY);
+  }, {passive:false});
+
+  window.addEventListener('mousemove', e=>{
+    onMove(e.clientX, e.clientY);
+  });
+  window.addEventListener('touchmove', e=>{
+    if (!dragging) return;
+    const t = e.touches[0];
+    onMove(t.clientX, t.clientY);
+  }, {passive:false});
+
+  window.addEventListener('mouseup', onUp);
+  window.addEventListener('touchend', onUp);
+})();
 
 hidePanel.onclick = ()=>{
   effectPanel.style.display = 'none';
@@ -542,16 +640,17 @@ exportBtn.onclick = async () => {
   const zip = new JSZip();
   for (let i = 0; i < total; i++) {
     const t = (i / total) * Math.PI * 2;
-    const fullCanvas = drawFullSize(t);
-    const dataUrl = fullCanvas.toDataURL('image/png');
+    time = t;
+    draw();
+    await new Promise(r=>setTimeout(r,0));
+    const dataUrl = canvas.toDataURL('image/png');
     const b64 = dataUrl.split(',')[1];
     zip.file(`frame_${String(i).padStart(3,'0')}.png`, b64, {base64:true});
     log(`导出帧 ${i+1}/${total}`);
-    await new Promise(r=>setTimeout(r,0));
   }
   const blob = await zip.generateAsync({type:'blob'});
-  saveAs(blob, 'character_animation_frames_highres.zip');
-  log('✅ 高清序列帧打包完成，开始下载');
+  saveAs(blob, 'character_animation_frames.zip');
+  log('✅ 序列帧打包完成，开始下载');
   startPreview();
 };
 
