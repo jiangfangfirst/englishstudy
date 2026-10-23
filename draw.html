@@ -6,6 +6,7 @@
 <title>人物局部动画编辑器 WebGL版</title>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@squoosh/lib@0.4.0/dist/webp_enc.js"></script>
 <link rel="icon" href="data:,">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;-webkit-tap-highlight-color:transparent;}
@@ -35,6 +36,11 @@ canvas{
   z-index:1;
 }
 .log{color:#888;font-size:12px;margin-top:6px}
+.tip-text{
+  font-size:12px;
+  color:#ffb86c;
+  margin:4px 0 8px;
+}
 
 .panel{
   position:fixed;
@@ -64,6 +70,7 @@ canvas{
 .top-btn{background:#2b5f78;border-color:#387794}
 .clear-all-btn{background:#944028;border-color:#b95436}
 .gif-btn{background:#287874;border-color:#36948f}
+.webp-btn{background:#742878;border-color:#8f3694}
 .export-setting-box{
   border:1px solid #444;
   border-radius:6px;
@@ -200,7 +207,7 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
   </div>
   <div id="effectList"></div>
 
-  <h3>导出设置（GIF默认无限循环）</h3>
+  <h3>导出设置</h3>
   <div class="export-setting-box">
     <div class="row">
       <label>总帧数：<span id="frameCountVal">30</span></label>
@@ -219,9 +226,11 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
       </div>
     </div>
   </div>
+  <div class="tip-text">💡 WebP提示：网页播放流畅体积小；iPhone相册、部分聊天软件不会播放动画</div>
 
   <div style="margin-top:10px;display:flex;gap:4px;flex-wrap:wrap">
     <button id="exportGifBtn" class="btn gif-btn">导出GIF动图</button>
+    <button id="exportWebpBtn" class="btn webp-btn">导出动画WebP(有损)</button>
     <button id="exportBtn" class="btn" style="background:#207839">导出PNG序列帧</button>
   </div>
 </div>
@@ -250,6 +259,7 @@ const upload = document.getElementById('imgUpload');
 const effectList = document.getElementById('effectList');
 const exportBtn = document.getElementById('exportBtn');
 const exportGifBtn = document.getElementById('exportGifBtn');
+const exportWebpBtn = document.getElementById('exportWebpBtn');
 const clearAllBtn = document.getElementById('clearAllBtn');
 const effectPanel = document.getElementById('effectPanel');
 const togglePanel = document.getElementById('togglePanel');
@@ -869,6 +879,7 @@ exportBtn.onclick = async () => {
   isExporting = true;
   exportBtn.disabled = true;
   exportGifBtn.disabled = true;
+  exportWebpBtn.disabled = true;
   stopPreview();
   const total = Number(frameCountSlider.value);
   const zip = new JSZip();
@@ -891,6 +902,7 @@ exportBtn.onclick = async () => {
   isExporting = false;
   exportBtn.disabled = false;
   exportGifBtn.disabled = false;
+  exportWebpBtn.disabled = false;
 };
 
 exportGifBtn.onclick = async ()=>{
@@ -901,6 +913,7 @@ exportGifBtn.onclick = async ()=>{
   isExporting = true;
   exportGifBtn.disabled = true;
   exportBtn.disabled = true;
+  exportWebpBtn.disabled = true;
   stopPreview();
 
   const { GIFEncoder, quantize, applyPalette } = await import('https://cdn.jsdelivr.net/npm/gifenc@1.0.3/dist/gifenc.esm.js');
@@ -962,7 +975,107 @@ exportGifBtn.onclick = async ()=>{
   isExporting = false;
   exportGifBtn.disabled = false;
   exportBtn.disabled = false;
-}
+  exportWebpBtn.disabled = false;
+};
+
+exportWebpBtn.onclick = async ()=>{
+  if(isExporting) return;
+  if (!sourceImg) { alert('先上传图片'); return; }
+  if (effects.length === 0) { alert('至少添加一个效果'); return; }
+  isExporting = true;
+  exportGifBtn.disabled = true;
+  exportBtn.disabled = true;
+  exportWebpBtn.disabled = true;
+  stopPreview();
+
+  const totalFrames = Number(frameCountSlider.value);
+  const delayMs = Number(gifDelaySlider.value);
+  const w = canvas.width;
+  const h = canvas.height;
+  const offCanvas = document.createElement('canvas');
+  offCanvas.width = w;
+  offCanvas.height = h;
+  const offCtx = offCanvas.getContext('2d',{willReadFrequently:true});
+
+  try{
+    log("📸 采集WebP动画帧");
+    const frameBlobs = [];
+    for(let i=0;i<totalFrames;i++){
+      const pct = Math.round(((i+1)/totalFrames)*100);
+      const t = (i / totalFrames) * Math.PI * 2;
+      time = t;
+      draw();
+      await new Promise(r=>setTimeout(r,0));
+      offCtx.drawImage(canvas,0,0);
+      const blob = await new Promise(resolve=>offCanvas.toBlob(resolve,'image/webp',0.85));
+      frameBlobs.push(blob);
+      log(`📸 采集帧 ${i+1}/${totalFrames} ${pct}%`);
+    }
+    // 简易Animated WebP拼接（使用libwebp方式，浏览器原生方案）
+    log("🧩 组装动画WebP");
+    const chunks = [];
+    // RIFF header
+    const riffSig = new TextEncoder().encode("RIFF");
+    const webpSig = new TextEncoder().encode("WEBP");
+    const animSig = new TextEncoder().encode("ANIM");
+    const anmfSig = new TextEncoder().encode("ANMF");
+    // ANIM chunk (loop forever)
+    const animChunk = new Uint8Array([0x00,0x00,0x00,0x00,0x00,0x00]);
+    chunks.push({sig:animSig,data:animChunk});
+    for(let fi=0;fi<frameBlobs.length;fi++){
+      const b = frameBlobs[fi];
+      const buf = await b.arrayBuffer();
+      const dv = new DataView(buf);
+      // skip RIFF+WEBP+VP8X
+      let ptr = 12;
+      while(ptr < buf.byteLength - 8){
+        const csig = new TextDecoder().decode(new Uint8Array(buf,ptr,4));
+        const csize = dv.getUint32(ptr+4,true);
+        if(csig === "VP8 " || csig === "VP8L"){
+          const framedata = new Uint8Array(buf, ptr, 8 + csize);
+          const anmf = new Uint8Array(16 + framedata.byteLength);
+          const adv = new DataView(anmf.buffer);
+          adv.setUint32(0,0,true); // x,y
+          adv.setUint32(4,0,true);
+          adv.setUint24(8,delayMs,true);
+          anmf.set(framedata,16);
+          chunks.push({sig:anmfSig, data:anmf});
+          break;
+        }
+        ptr += 8 + csize + (csize&1);
+      }
+    }
+    // 计算总大小
+    let totalSize = 4; // WEBP
+    for(const ck of chunks){
+      totalSize += 8 + ck.data.byteLength;
+    }
+    const outBuf = new ArrayBuffer(12 + totalSize);
+    const outView = new DataView(outBuf);
+    const outU8 = new Uint8Array(outBuf);
+    outU8.set(riffSig,0);
+    outView.setUint32(4, 4 + totalSize, true);
+    outU8.set(webpSig,8);
+    let writePtr = 12;
+    for(const ck of chunks){
+      outU8.set(ck.sig, writePtr);
+      outView.setUint32(writePtr+4, ck.data.byteLength, true);
+      outU8.set(ck.data, writePtr+8);
+      writePtr += 8 + ck.data.byteLength;
+    }
+    const finalBlob = new Blob([outBuf], {type:"image/webp"});
+    saveAs(finalBlob, "animation_animated.webp");
+    log("✅ 动画WebP导出完成");
+  }catch(err){
+    log("❌ WebP导出失败："+err.message);
+    console.error(err);
+  }
+  startPreview();
+  isExporting = false;
+  exportGifBtn.disabled = false;
+  exportBtn.disabled = false;
+  exportWebpBtn.disabled = false;
+};
 
 lowPerfCb.onchange = ()=>{
   if(sourceImg){
