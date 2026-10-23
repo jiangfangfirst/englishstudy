@@ -6,6 +6,7 @@
 <title>人物局部动画编辑器 WebGL版</title>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<link rel="icon" href="data:,">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;-webkit-tap-highlight-color:transparent;}
 body{padding:12px;background:#111;color:#eee}
@@ -212,7 +213,6 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
   <div class="row"><label>速度</label><input type="range" id="fpSpeed" min="1" max="120" value="24"></div>
 </div>
 
-<!-- 重点：脚本改成 type="module" -->
 <script type="module">
 const canvas = document.getElementById('mainCanvas');
 const gl = canvas.getContext('webgl', {preserveDrawingBuffer:true, antialias:true});
@@ -831,7 +831,6 @@ exportBtn.onclick = async () => {
   exportGifBtn.disabled = false;
 };
 
-// ==========【ESM 方式导入 gifenc，修复gifenc未定义】==========
 exportGifBtn.onclick = async ()=>{
   if(isExporting) return;
   if (!sourceImg) { alert('先上传图片'); return; }
@@ -842,15 +841,14 @@ exportGifBtn.onclick = async ()=>{
   exportBtn.disabled = true;
   stopPreview();
 
-  // ESM 动态导入
-  const { GIFEncoder } = await import('https://cdn.jsdelivr.net/npm/gifenc@1.0.3/dist/gifenc.esm.js');
+  const { GIFEncoder, quantize, applyPalette } = await import('https://cdn.jsdelivr.net/npm/gifenc@1.0.3/dist/gifenc.esm.js');
 
   const totalFrames = Number(frameCountSlider.value);
   const delayMs = Number(gifDelaySlider.value);
   const quality = Number(gifQualitySlider.value);
   const width = canvas.width;
   const height = canvas.height;
-  // willReadFrequently:true 消除警告
+
   const offCanvas = document.createElement('canvas');
   offCanvas.width = width;
   offCanvas.height = height;
@@ -865,30 +863,30 @@ exportGifBtn.onclick = async ()=>{
       time = t;
       draw();
       await new Promise(r=>setTimeout(r,0));
-      // 先拿到图片url，绘制到离屏2d画布再读像素
-      const dataUrl = canvas.toDataURL('image/png');
-      const img = new Image();
-      img.src = dataUrl;
-      await img.decode();
-      offCtx.clearRect(0,0,width,height);
-      offCtx.drawImage(img,0,0);
+      offCtx.drawImage(canvas,0,0);
       const imgData = offCtx.getImageData(0,0,width,height);
       framesRgba.push(imgData.data);
       log(`📸 采集帧 ${i+1}/${totalFrames} 总进度 ${progress}%`);
     }
 
     log(`🧩 阶段2：开始编码GIF`);
-    const gif = new GIFEncoder();
-    const q = Math.max(1, Math.min(30, quality * 1.5));
-    const delayHundredths = Math.max(1, Math.round(delayMs / 10));
+    const gif = GIFEncoder();
+    const maxColors = Math.max(8, Math.min(256, quality * 12));
 
     for(let fIdx=0; fIdx < framesRgba.length; fIdx++){
       const encodeProgress = 50 + Math.round( (fIdx+1)/framesRgba.length * 50 );
-      gif.addFrame(framesRgba[fIdx], {width, height, delay: delayHundredths, quality: q});
+      const rgba = framesRgba[fIdx];
+      const palette = quantize(rgba, maxColors);
+      const index = applyPalette(rgba, palette);
+      gif.writeFrame(index, width, height, {
+        palette,
+        delay: delayMs
+      });
       log(`🧩 编码帧 ${fIdx+1}/${totalFrames} 总进度 ${encodeProgress}%`);
       await new Promise(r=>setTimeout(r, 5));
     }
-    const uint8Gif = gif.finish();
+    gif.finish();
+    const uint8Gif = gif.bytes();
     const blob = new Blob([uint8Gif], {type:"image/gif"});
     saveAs(blob, "animation.gif");
     log("✅ GIF导出完成");
