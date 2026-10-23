@@ -2,29 +2,135 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>图片动画GIF生成工具</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>人物局部动画编辑器 WebGL版</title>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<link rel="icon" href="data:,">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif}
-body{background:#0f0f0f;color:#eee;overflow:hidden;height:100vh;display:flex}
-#mainWrap{display:flex;width:100%;height:100%}
-#canvasBox{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#070707;gap:10px}
-#cvs{border:1px solid #333;background:#fff}
-#uploadBtn{padding:8px 14px}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;-webkit-tap-highlight-color:transparent;}
+body{padding:0;background:#111;color:#eee}
+#canvasWrap{
+  position:relative;
+  border:2px solid #444;
+  background:#000;
+  display:block;
+  width:100%;
+}
+canvas{
+  display:block;
+  width:100%;
+  height:auto;
+  touch-action:none;
+  position:relative;
+  z-index:2;
+}
+#fallbackImg{
+  position:absolute;
+  top:0;left:0;
+  width:100%;
+  height:auto;
+  display:none;
+  pointer-events:none;
+  z-index:1;
+}
+.log{color:#888;font-size:12px;margin-top:6px}
+.tip-text{
+  font-size:12px;
+  color:#ffb86c;
+  margin:4px 0 8px;
+}
+.panel{
+  position:fixed;
+  top:12px;
+  right:12px;
+  width:min(360px, calc(100vw - 24px));
+  max-height:70vh;
+  overflow-y:auto;
+  background:#1c1c1c;
+  padding:12px;
+  border-radius:8px;
+  box-shadow:0 6px 24px rgba(0,0,0,.45);
+  z-index:200;
+  transition:opacity .25s ease, transform .25s ease;
+}
+.panel h3{margin:10px 0 8px;font-size:15px}
+.btn{
+  padding:8px 7px;margin:3px 2px;cursor:pointer;
+  background:#333;color:#eee;border:1px solid #555;border-radius:4px;font-size:13px;
+}
+.btn:disabled{
+  opacity:0.4;
+  cursor:not-allowed;
+}
+.btn.active{background:#207839;border-color:#2fa552}
+.del-btn{background:#782b2b;border-color:#943838}
+.top-btn{background:#2b5f78;border-color:#387794}
+.clear-all-btn{background:#944028;border-color:#b95436}
+.gif-btn{background:#287874;border-color:#36948f}
+.webp-lossy-btn{background:#742878;border-color:#8f3694}
+.webp-lossless-btn{background:#285a78;border-color:#387494}
+.export-setting-box{
+  border:1px solid #444;
+  border-radius:6px;
+  padding:10px;
+  margin:8px 0;
+  background:#242424;
+}
+.export-setting-box .row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:6px 0;
+  gap:6px;
+}
+.export-setting-box input[type=range]{flex:1;min-width:70px}
+.export-setting-box label{font-size:13px;color:#ccc;white-space:nowrap}
+.grade-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:8px 0;
+}
+.grade-item{
+  flex:1;
+  min-width:70px;
+  padding:6px 4px;
+  border:1px solid #555;
+  border-radius:4px;
+  text-align:center;
+  font-size:13px;
+  cursor:pointer;
+}
+.grade-item.selected{
+  border-color:#48b960;
+  background:#204429;
+}
+.effect-item{background:#262626;border:1px solid #444;border-radius:6px;padding:10px;margin-bottom:8px}
+.item-head{display:flex;align-items:center;justify-content:space-between;gap:4px;flex-wrap:wrap}
+.item-name{font-weight:bold;font-size:14px}
+.param-wrap{margin-top:8px;padding-top:8px;border-top:1px solid #3a3a3a;display:none}
+.param-wrap.open{display:block}
+.row{display:flex;justify-content:space-between;align-items:center;margin:6px 0;gap:6px}
+input[type=range]{flex:1;min-width:80px}
+label{font-size:13px;color:#ccc;white-space:nowrap}
+.toggle-panel{
+  position:fixed;
+  top:12px;
+  right:12px;
+  z-index:201;
+  background:#207839;
+  color:#fff;
+  border:none;
+  padding:8px 10px;
+  border-radius:4px;
+  cursor:pointer;
+  display:none;
+}
+.perf-row{margin:6px 0;font-size:12px;color:#ccc}
+.upload-row{margin-bottom:8px}
 
-#effectPanel{width:260px;background:#181818;border-left:1px solid #333;padding:12px;overflow-y:auto;transition:0.25s}
-#effectPanel.collapsed{transform:translateX(260px)}
-#effectPanel h3{margin-bottom:10px;font-size:16px;color:#fff}
-.effect-item{padding:8px 10px;margin:6px 0;background:#252525;border-radius:6px;cursor:pointer;font-size:14px}
-.effect-item:hover{background:#333}
-.effect-item.active{background:#2b5490}
-.ctrl-row{margin-top:12px}
-button{padding:8px 12px;border:none;border-radius:6px;background:#2b5490;color:#fff;cursor:pointer;margin:4px;font-size:14px}
-button:hover{background:#3867b0}
-button.sec{background:#333}
-button.sec:hover{background:#444}
-
-/* ===== 微调弹窗CSS【修复版】===== */
+/* 修复弹窗：移除bottom、transform，避免双向约束拉伸 */
 .floating-param{
   position:fixed;
   width:min(340px, calc(100vw - 24px));
@@ -38,69 +144,98 @@ button.sec:hover{background:#444}
   user-select:none;
 }
 .floating-param.show{display:block}
-.fp-titlebar{
+.floating-param .fp-title{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding-bottom:8px;
   margin-bottom:10px;
-  border-bottom:1px solid #333;
   cursor:move;
+  user-select:none;
 }
-.fp-close{
-  width:24px;height:24px;
-  display:grid;place-items:center;
-  border-radius:4px;background:#333;
-  cursor:pointer;font-weight:bold
+.floating-param .fp-title span{font-weight:bold;font-size:14px}
+.floating-param .fp-close{
+  background:#782b2b;border:1px solid #943838;color:#fff;border-radius:4px;
+  padding:6px 10px;font-size:13px;cursor:pointer;
 }
-.fp-line{margin:8px 0}
-.fp-line label{display:block;font-size:13px;margin-bottom:3px;color:#ccc}
-.fp-line input[type="range"]{width:100%}
+.floating-param .row{display:flex;justify-content:space-between;align-items:center;margin:8px 0;gap:6px}
+.floating-param input[type=range]{flex:1}
+.floating-param label{font-size:13px;color:#ccc;white-space:nowrap}
+
+.panel.collapsed{
+  opacity:0;
+  transform:translateY(-12px);
+  pointer-events:none;
+}
 </style>
 </head>
 <body>
-<div id="mainWrap">
-  <div id="canvasBox">
-    <button id="uploadBtn">点击上传图片</button>
-    <canvas id="cvs" width="800" height="450"></canvas>
-    <input type="file" id="fileInput" accept="image/*" style="display:none">
+  <div id="canvasWrap">
+    <canvas id="mainCanvas"></canvas>
+    <img id="fallbackImg">
   </div>
-  <div id="effectPanel">
-    <h3>效果列表</h3>
-    <div id="listWrap"></div>
-    <div class="ctrl-row">
-      <button id="btnPlay">播放/暂停</button>
-      <button id="btnReset" class="sec">重置</button>
+<button class="toggle-panel" id="togglePanel">显示面板</button>
+<div class="panel" id="effectPanel">
+  <button class="btn" id="hidePanel" style="float:right">隐藏</button>
+  <div class="upload-row">
+    <input type="file" id="imgUpload" accept="image/*">
+  </div>
+  <div class="perf-row">
+    <label><input type="checkbox" id="lowPerf">低性能模式（手机建议勾选）</label>
+  </div>
+  <div class="log" id="log">日志：等待操作</div>
+  <h3>选择效果</h3>
+  <button class="btn" data-add="shake">抖动</button>
+  <button class="btn" data-add="breath">呼吸</button>
+  <button class="btn" data-add="openclose">开合</button>
+  <button class="btn" data-add="bounce">弹跳</button>
+  <button class="btn" data-add="swing">甩动</button>
+  <div id="modeBox" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid #3a3a3a">
+    <div style="margin-bottom:6px;color:#ccc;font-size:13px">请选择动作模式：</div>
+    <div id="modeList"></div>
+  </div>
+  <div style="display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin-top:14px;justify-content:space-between">
+    <h3 style="margin:0">效果列表</h3>
+    <button id="clearAllBtn" class="btn clear-all-btn">全清除</button>
+  </div>
+  <div id="effectList"></div>
+  <h3>导出设置</h3>
+  <div class="export-setting-box">
+    <div class="row">
+      <label>总帧数：<span id="frameCountVal">30</span></label>
+      <input type="range" id="frameCount" min="8" max="60" value="30">
     </div>
-    <div class="ctrl-row">
-      <button id="btnExportWebp">导出无损WebP动图</button>
-      <button id="btnExportGif" class="sec">导出GIF</button>
+    <div class="row">
+      <label>帧延迟(ms)：<span id="delayVal">100</span></label>
+      <input type="range" id="gifDelay" min="20" max="300" value="100">
     </div>
+    <div style="margin-top:8px;">
+      <label>GIF画质档位：</label>
+      <div class="grade-row">
+        <div class="grade-item selected" data-grade="best">极好</div>
+        <div class="grade-item" data-grade="good">好</div>
+        <div class="grade-item" data-grade="fast">中等</div>
+      </div>
+    </div>
+  </div>
+  <div class="tip-text">💡 WebP提示：网页播放流畅；无损WebP画质无损失、体积更大；iPhone相册、部分聊天软件不会播放动画</div>
+  <div style="margin-top:10px;display:flex;gap:4px;flex-wrap:wrap">
+    <button id="exportGifBtn" class="btn gif-btn">导出GIF动图</button>
+    <button id="exportWebpLosslessBtn" class="btn webp-lossless-btn">导出动画WebP(无损)</button>
+    <button id="exportWebpLossyBtn" class="btn webp-lossy-btn">导出动画WebP(有损)</button>
+    <button id="exportBtn" class="btn" style="background:#207839">导出PNG序列帧</button>
   </div>
 </div>
-
-<!-- 微调弹窗 -->
 <div class="floating-param" id="floatingParam">
-  <div class="fp-titlebar" id="fpTitleBar">
-    <span id="fpTitle">效果</span>
-    <span class="fp-close" id="fpClose">×</span>
+  <div class="fp-title" id="fpTitleBar">
+    <span id="fpTitle">微调</span>
+    <button class="fp-close" id="fpClose">关闭</button>
   </div>
-  <div class="fp-line">
-    <label>强度</label>
-    <input type="range" min="0" max="100" value="50" id="fpStrength">
-  </div>
-  <div class="fp-line">
-    <label>范围</label>
-    <input type="range" min="0" max="100" value="30" id="fpRange">
-  </div>
-  <div class="fp-line">
-    <label>速度</label>
-    <input type="range" min="1" max="100" value="20" id="fpSpeed">
-  </div>
+  <div class="row"><label>强度</label><input type="range" id="fpStrength" min="0" max="600" value="260"></div>
+  <div class="row"><label>范围</label><input type="range" id="fpRange" min="10" max="800" value="220"></div>
+  <div class="row"><label>速度</label><input type="range" id="fpSpeed" min="1" max="120" value="24"></div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.min.js"></script>
-<script>
+<script type="module">
+// 修复缺失的DataView方法
 DataView.prototype.setUint24 = function(offset, value, littleEndian = false) {
   if (littleEndian) {
     this.setUint8(offset, value & 0xff);
@@ -113,67 +248,402 @@ DataView.prototype.setUint24 = function(offset, value, littleEndian = false) {
   }
 };
 
-const cvs = document.getElementById('cvs');
-const ctx = cvs.getContext('2d');
+const canvas = document.getElementById('mainCanvas');
+const gl = canvas.getContext('webgl', {preserveDrawingBuffer:true, antialias:true});
+const fallbackImg = document.getElementById('fallbackImg');
+if(!gl) {
+  alert("浏览器不支持WebGL");
+  fallbackImg.style.display = "block";
+}
+const logDom = document.getElementById('log');
+const upload = document.getElementById('imgUpload');
+const effectList = document.getElementById('effectList');
+const exportBtn = document.getElementById('exportBtn');
+const exportGifBtn = document.getElementById('exportGifBtn');
+const exportWebpLosslessBtn = document.getElementById('exportWebpLosslessBtn');
+const exportWebpLossyBtn = document.getElementById('exportWebpLossyBtn');
+const clearAllBtn = document.getElementById('clearAllBtn');
 const effectPanel = document.getElementById('effectPanel');
-const listWrap = document.getElementById('listWrap');
-const uploadBtn = document.getElementById('uploadBtn');
-const fileInput = document.getElementById('fileInput');
-
+const togglePanel = document.getElementById('togglePanel');
+const hidePanel = document.getElementById('hidePanel');
+const modeBox = document.getElementById('modeBox');
+const modeList = document.getElementById('modeList');
+const lowPerfCb = document.getElementById('lowPerf');
 const floatingParam = document.getElementById('floatingParam');
-const fpTitleBar = document.getElementById('fpTitleBar');
 const fpTitle = document.getElementById('fpTitle');
+const fpTitleBar = document.getElementById('fpTitleBar');
 const fpClose = document.getElementById('fpClose');
 const fpStrength = document.getElementById('fpStrength');
 const fpRange = document.getElementById('fpRange');
 const fpSpeed = document.getElementById('fpSpeed');
+const frameCountSlider = document.getElementById('frameCount');
+const frameCountVal = document.getElementById('frameCountVal');
+const gifDelaySlider = document.getElementById('gifDelay');
+const delayVal = document.getElementById('delayVal');
+const gradeItems = document.querySelectorAll('.grade-item');
+let currentGrade = 'best';
 
-const btnPlay = document.getElementById('btnPlay');
-const btnReset = document.getElementById('btnReset');
-const btnExportWebp = document.getElementById('btnExportWebp');
-const btnExportGif = document.getElementById('btnExportGif');
-
-let selectedEffectId = null;
-let fpJustOpened = false;
-let playing = true;
-let frame = 0;
-const fps = 24;
-let img = null;
-
-const effects = [
-  {id:"shake",name:"抖动",strength:40,range:20,speed:25},
-  {id:"zoom",name:"缩放脉动",strength:35,range:15,speed:18},
-  {id:"flash",name:"闪烁",strength:50,range:40,speed:30}
-];
-
-uploadBtn.onclick = ()=>fileInput.click();
-fileInput.onchange = e=>{
-  const f = e.target.files[0];
-  if(!f) return;
-  const reader = new FileReader();
-  reader.onload = ev=>{
-    const i = new Image();
-    i.onload = ()=>{img = i;};
-    i.src = ev.target.result;
-  };
-  reader.readAsDataURL(f);
+// 三档画质预设
+const GRADE_SETTING = {
+  best: {maxColors:256, dither:true, ditherType:2, note:"极好｜256色全开，高质量调色板+抖动，追求最高保真，体积大、慢"},
+  good: {maxColors:192, dither:true, ditherType:1, note:"好｜192色，柔和抖动，画质均衡，导出稳定"},
+  fast: {maxColors:128, dither:false, ditherType:0, note:"中等｜128色，关闭抖动，优先速度，画质让步"}
 };
 
-function renderList(){
-  listWrap.innerHTML = '';
-  effects.forEach(ef=>{
-    const div = document.createElement('div');
-    div.className = 'effect-item' + (selectedEffectId === ef.id ? ' active':'');
-    div.textContent = ef.name;
-    div.onclick = ()=> openFloatingParam(ef.id);
-    listWrap.appendChild(div);
-  })
+let isExporting = false;
+let selectedEffectId = null;
+const vSrc = `
+attribute vec2 aPos;
+varying vec2 vUv;
+void main(){
+  vUv = aPos * 0.5 + 0.5;
+  gl_Position = vec4(aPos,0.,1.);
 }
-
+`;
+const fSrc = `
+precision highp float;
+uniform sampler2D uTex;
+uniform vec2 uImgSize;
+uniform float uTime;
+#define MAX_EF 12
+uniform int uCount;
+uniform vec2 uEFPos[MAX_EF];
+uniform float uEFStrength[MAX_EF];
+uniform float uEFRange[MAX_EF];
+uniform float uEFSpeed[MAX_EF];
+uniform int uEFType[MAX_EF];
+uniform int uEFMode[MAX_EF];
+varying vec2 vUv;
+float PI = 3.14159265;
+vec2 getOffset(vec2 p, vec2 c, float strength, float range, float speed, int typ, int m){
+  vec2 d = p - c;
+  float dist = length(d);
+  if(dist>range) return vec2(0.);
+  float fall = 1.0 - dist/range;
+  float s = strength * 0.016;
+  float v = pow(speed/24.,1.4)*2.4;
+  float t = uTime * v;
+  vec2 off = vec2(0.);
+  if(typ == 0){
+    if(m==0) off.y = sin(t*10.) * s * fall *4.;
+    else if(m==1) off.x = sin(t*10.) * s * fall *4.;
+    else {
+      off.x = cos(t*8.) * s * fall *3.5;
+      off.y = sin(t*8.) * s * fall *3.5;
+    }
+  }else if(typ ==1){
+    float wave;
+    if(m==0) wave = sin(t)*s*fall*2.4;
+    else wave = (sin(t*1.3)+sin(t*2.7)*0.4)*s*fall*2.2;
+    if(dist>0.) off = normalize(d)*wave;
+  }else if(typ ==2){
+    float wave;
+    if(m==0) off.y = sin(t*2.)*s*fall*2.8;
+    else if(m==1) off.y = sin(t*2.+PI)*s*fall*2.8;
+    else{
+      if(m==2) wave = sin(t*2.)*s*fall*2.2;
+      else wave = sin(t*2.+PI)*s*fall*2.2;
+      if(dist>0.) off = normalize(d)*wave;
+    }
+  }else if(typ ==3){
+    float ph = mod(t*3.,2.);
+    float b = ph<1.? 1.-ph : ph-1.;
+    if(m==1){
+      float ph2 = mod(t*5.,2.);
+      float b2 = ph2<1.?1.-ph2:ph2-1.;
+      b = b + b2*0.3;
+    }
+    off.y = b * s * fall *3.2;
+  }else if(typ ==4){
+    if(m==0){
+      off.x = cos(t*2.)*s*fall*3.;
+      off.y = sin(t*2.)*s*fall*3.;
+    }else if(m==1){
+      off.x = cos(-t*2.)*s*fall*3.;
+      off.y = sin(-t*2.)*s*fall*3.;
+    }else{
+      off.x = sin(t*3.+cos(t))*s*fall*2.8;
+      off.y = cos(t*2.5+sin(t))*s*fall*2.8;
+    }
+  }
+  return off;
+}
+void main(){
+  vec2 texUV = vUv;
+  vec2 imgP = texUV * uImgSize;
+  vec2 totalOff = vec2(0.);
+  for(int i=0;i<MAX_EF;i++){
+    if(i >= uCount) break;
+    vec2 of = getOffset(imgP, uEFPos[i], uEFStrength[i], uEFRange[i], uEFSpeed[i], uEFType[i], uEFMode[i]);
+    totalOff += of;
+  }
+  vec2 sampleP = (imgP + totalOff)/uImgSize;
+  gl_FragColor = texture2D(uTex, clamp(sampleP,0.,1.));
+}
+`;
+function compileShader(src,type){
+  const sh = gl.createShader(type);
+  gl.shaderSource(sh,src);
+  gl.compileShader(sh);
+  if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(sh);
+  return sh;
+}
+const vSh = compileShader(vSrc,gl.VERTEX_SHADER);
+const fSh = compileShader(fSrc,gl.FRAGMENT_SHADER);
+const prog = gl.createProgram();
+gl.attachShader(prog,vSh);
+gl.attachShader(prog,fSh);
+gl.linkProgram(prog);
+gl.useProgram(prog);
+const aPos = gl.getAttribLocation(prog,"aPos");
+const uTex = gl.getUniformLocation(prog,"uTex");
+const uImgSize = gl.getUniformLocation(prog,"uImgSize");
+const uTime = gl.getUniformLocation(prog,"uTime");
+const uCount = gl.getUniformLocation(prog,"uCount");
+const uEFPos = gl.getUniformLocation(prog,"uEFPos");
+const uEFStrength = gl.getUniformLocation(prog,"uEFStrength");
+const uEFRange = gl.getUniformLocation(prog,"uEFRange");
+const uEFSpeed = gl.getUniformLocation(prog,"uEFSpeed");
+const uEFType = gl.getUniformLocation(prog,"uEFType");
+const uEFMode = gl.getUniformLocation(prog,"uEFMode");
+const buf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1, 1,-1, -1,1, 1,-1,1,1,-1,1]),gl.STATIC_DRAW);
+gl.enableVertexAttribArray(aPos);
+gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
+const tex = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D,tex);
+gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+let sourceImg = null;
+let originalW = 0, originalH = 0;
+let renderW = 0, renderH = 0;
+let previewScale = 1;
+let time = 0;
+const FIXED_STEP = 1 / 60;
+let accumulator = 0;
+let animId = null;
+let pendingType = null;
+let pendingMode = null;
+let lastTs = 0;
+const BASE_DEFAULT = {
+  strength: 260,
+  range: 220,
+  speed: 24
+};
+let lastParam = null;
+let fpJustOpened = false;
+const TYPE_MAP = {shake:0,breath:1,openclose:2,bounce:3,swing:4};
+const MODE_MAP = {
+  "上下抖动":0,"左右抖动":1,"圆形抖动":2,
+  "规律":0,"不规律":1,
+  "开口":0,"闭口":1,"收缩":2,"膨胀":3,
+  "顺时针":0,"逆时针":1,"无规律":2
+};
+const EFFECT_TYPES = {
+  shake: {name:'抖动',color:'#e3c97e',modes:['上下抖动','左右抖动','圆形抖动']},
+  breath: {name:'呼吸',color:'#7ee39a',modes:['规律','不规律']},
+  openclose: {name:'开合',color:'#e37e7e',modes:['开口','闭口','收缩','膨胀']},
+  bounce: {name:'弹跳',color:'#c27ee3',modes:['规律','不规律']},
+  swing: {name:'甩动',color:'#7ec8e3',modes:['顺时针','逆时针','无规律']}
+};
+let effects = [];
+let effectIdCounter = 0;
+function log(txt){ logDom.textContent = '日志：' + txt; }
+function isLowPerf(){ return lowPerfCb.checked; }
+function isMobile(){
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || window.matchMedia('(max-width: 900px)').matches;
+}
+gradeItems.forEach(item=>{
+  item.onclick = ()=>{
+    gradeItems.forEach(i=>i.classList.remove('selected'));
+    item.classList.add('selected');
+    currentGrade = item.dataset.grade;
+    log(GRADE_SETTING[currentGrade].note);
+  }
+})
+function bindExportSettingUI(){
+  function updateLabel(){
+    frameCountVal.textContent = frameCountSlider.value;
+    delayVal.textContent = gifDelaySlider.value;
+  }
+  frameCountSlider.oninput = updateLabel;
+  gifDelaySlider.oninput = updateLabel;
+  updateLabel();
+}
+bindExportSettingUI();
+upload.onchange = async (e) => {
+  const file = e.target.files[0];
+  upload.value = '';
+  if (!file) return;
+  log("正在读取文件...");
+  try{
+    const blobUrl = URL.createObjectURL(file);
+    const img = new Image();
+    img.src = blobUrl;
+    await img.decode();
+    log("图片解码成功，准备送入WebGL");
+    sourceImg = img;
+    originalW = img.naturalWidth;
+    originalH = img.naturalHeight;
+    if (isMobile()) {
+      previewScale = isLowPerf() ? 0.6 : 0.85;
+      renderW = Math.round(originalW * previewScale);
+      renderH = Math.round(originalH * previewScale);
+    } else {
+      previewScale = 1;
+      renderW = originalW;
+      renderH = originalH;
+    }
+    canvas.width = renderW;
+    canvas.height = renderH;
+    gl.viewport(0,0,renderW,renderH);
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+    fallbackImg.style.display = "none";
+    log(`✅图片加载完成，原图 ${originalW}×${originalH}，预览 ${renderW}×${renderH}`);
+    draw();
+    setTimeout(()=>draw(), 20);
+    startPreview();
+  }catch(err){
+    fallbackImg.style.display = "block";
+    log("❌图片加载失败："+err.message);
+    console.error(err);
+  }
+};
+clearAllBtn.onclick = ()=>{
+  effects.length = 0;
+  selectedEffectId = null;
+  renderList();
+  log("✅已清空全部动作");
+}
+document.querySelectorAll('[data-add]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const type = btn.dataset.add;
+    if (pendingType === type) {
+      pendingType = null;
+      pendingMode = null;
+      document.querySelectorAll('[data-add]').forEach(b => b.classList.remove('active'));
+      modeBox.style.display = 'none';
+      log('已取消添加模式');
+    } else {
+      pendingType = type;
+      document.querySelectorAll('[data-add]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      showModes(type);
+      pendingMode = EFFECT_TYPES[type].modes[0];
+      log(`已开启【${EFFECT_TYPES[type].name}】，默认：${pendingMode}`);
+    }
+  });
+});
+function showModes(type){
+  const modes = EFFECT_TYPES[type].modes;
+  modeList.innerHTML = '';
+  modes.forEach((mode, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'btn' + (idx===0 ? ' active' : '');
+    btn.textContent = mode;
+    btn.dataset.mode = mode;
+    btn.onclick = function(){
+      pendingMode = mode;
+      modeList.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      log(`选定模式：${pendingMode}`);
+    }
+    modeList.appendChild(btn);
+  });
+  modeBox.style.display = 'block';
+}
+function getCanvasPos(clientX, clientY){
+  const rect = canvas.getBoundingClientRect();
+  const displayW = rect.width;
+  const displayH = rect.height;
+  const rx = (clientX - rect.left) / displayW;
+  const ry = (clientY - rect.top) / displayH;
+  const x = rx * originalW;
+  const y = (1 - ry) * originalH;
+  return {x,y};
+}
+function hitTestEffect(x, y){
+  for (let i = 0; i < effects.length; i++) {
+    const e = effects[i];
+    const dx = x - e.x;
+    const dy = y - e.y;
+    if (Math.hypot(dx, dy) <= Math.max(40, e.range * 0.12)) {
+      return e;
+    }
+  }
+  return null;
+}
+function addEffectAtPos(x,y){
+  if (!sourceImg) { alert('先上传图片！'); return; }
+  if (!pendingType || !pendingMode) { alert('先选择效果！'); return; }
+  const info = EFFECT_TYPES[pendingType];
+  const useParam = lastParam ? {...lastParam} : {...BASE_DEFAULT};
+  const effect = {
+    id: ++effectIdCounter,
+    type: pendingType,
+    mode: pendingMode,
+    name: `${info.name}-${pendingMode}`,
+    color: info.color,
+    x, y,
+    strength: useParam.strength,
+    range: useParam.range,
+    speed: useParam.speed
+  };
+  effects.unshift(effect);
+  log(`✅ 添加：${effect.name} 坐标 x:${x.toFixed(1)}, y:${y.toFixed(1)} | 继承参数 强度:${effect.strength} 范围:${effect.range}`);
+  renderList();
+  selectedEffectId = effect.id;
+  openFloatingParam(effect.id);
+}
+canvas.addEventListener('touchstart', (e)=>{
+  e.preventDefault();
+  const touch = e.touches[0];
+  const p = getCanvasPos(touch.clientX, touch.clientY);
+  const hit = hitTestEffect(p.x, p.y);
+  if (hit) {
+    selectedEffectId = hit.id;
+    openFloatingParam(hit.id);
+  } else {
+    addEffectAtPos(p.x, p.y);
+  }
+},{passive:false});
+canvas.addEventListener('click', e=>{
+  const p = getCanvasPos(e.clientX, e.clientY);
+  const hit = hitTestEffect(p.x, p.y);
+  if (hit) {
+    selectedEffectId = hit.id;
+    openFloatingParam(hit.id);
+  } else {
+    addEffectAtPos(p.x, p.y);
+  }
+});
+function removeEffect(id){
+  effects = effects.filter(e => e.id !== id);
+  if(selectedEffectId === id) selectedEffectId = null;
+  renderList();
+}
+function topEffect(id){
+  const index = effects.findIndex(e => e.id === id);
+  if (index <= 0) return;
+  const [item] = effects.splice(index, 1);
+  effects.unshift(item);
+  renderList();
+}
 function syncFloatPanelToSelected(){
   if(selectedEffectId === null) return;
-  const ef = effects.find(x=>x.id === selectedEffectId);
-  if(!ef){
+  const ef = effects.find(x => x.id === selectedEffectId);
+  if (!ef) {
     selectedEffectId = null;
     return;
   }
@@ -183,37 +653,39 @@ function syncFloatPanelToSelected(){
   fpSpeed.value = ef.speed;
 }
 
+// 打开弹窗：计算屏幕居中位置，只设置left/top
 function openFloatingParam(id){
   selectedEffectId = id;
   syncFloatPanelToSelected();
   const boxW = floatingParam.offsetWidth || Math.min(340, window.innerWidth - 24);
-  const boxH = floatingParam.offsetHeight || 160;
-  const initLeft = (window.innerWidth - boxW)/2;
-  const initTop  = (window.innerHeight - boxH)/2;
+  const boxH = floatingParam.offsetHeight || 180;
+  const initLeft = Math.max(0,(window.innerWidth - boxW)/2);
+  const initTop = Math.max(0,(window.innerHeight - boxH)/2);
   floatingParam.style.left = initLeft + "px";
-  floatingParam.style.top  = initTop + "px";
+  floatingParam.style.top = initTop + "px";
   floatingParam.style.bottom = "";
   floatingParam.style.transform = "";
   floatingParam.classList.add('show');
   effectPanel.classList.add('collapsed');
   fpJustOpened = true;
-  setTimeout(()=> fpJustOpened = false, 300);
-  renderList();
+  setTimeout(()=>{fpJustOpened = false;},300);
 }
 
+// 统一关闭入口，强制恢复面板状态，修复collapsed残留bug
 function closeFloatingParam(){
   floatingParam.classList.remove('show');
   floatingParam.style.left = "";
   floatingParam.style.top = "";
   effectPanel.classList.remove('collapsed');
-  renderList();
 }
 
+floatingParam.addEventListener('click', (ev)=>{
+  ev.stopPropagation();
+});
 fpClose.onclick = (ev)=>{
   ev.stopImmediatePropagation();
   closeFloatingParam();
 };
-
 document.addEventListener('click', (e)=>{
   if (!floatingParam.classList.contains('show')) return;
   if(fpJustOpened) return;
@@ -222,6 +694,115 @@ document.addEventListener('click', (e)=>{
   closeFloatingParam();
 });
 
+function renderList(){
+  effectList.innerHTML = '';
+  effects.forEach(e => {
+    const div = document.createElement('div');
+    div.className = 'effect-item';
+    div.style.borderColor = e.color;
+    div.dataset.id = e.id;
+    div.innerHTML = `
+      <div class="item-head">
+        <span class="item-name">${e.name}</span>
+        <div>
+          <button class="btn top-btn" data-top="${e.id}" title="置顶">↑</button>
+          <button class="btn edit-btn" data-id="${e.id}">微调</button>
+          <button class="btn del-btn" data-del="${e.id}">删除</button>
+        </div>
+      </div>
+    `;
+    effectList.appendChild(div);
+  });
+  effectList.querySelectorAll('.del-btn').forEach(btn=>btn.onclick=()=>removeEffect(+btn.dataset.del));
+  effectList.querySelectorAll('.top-btn').forEach(btn=>btn.onclick=()=>topEffect(+btn.dataset.top));
+  effectList.querySelectorAll('.edit-btn').forEach(btn=>{
+    btn.onclick = (ev)=>{
+      ev.stopPropagation();
+      openFloatingParam(+btn.dataset.id);
+    };
+  });
+}
+function draw(){
+  if(!sourceImg) return;
+  gl.useProgram(prog);
+  gl.uniform1i(uTex,0);
+  gl.uniform2f(uImgSize, originalW, originalH);
+  gl.uniform1f(uTime, time);
+  const N = Math.min(effects.length,12);
+  gl.uniform1i(uCount, N);
+  const posArr = [];
+  const strArr = [];
+  const rngArr = [];
+  const spdArr = [];
+  const typArr = [];
+  const modArr = [];
+  for(let i=0;i<12;i++){
+    if(i<effects.length){
+      const e = effects[i];
+      posArr.push(e.x, e.y);
+      strArr.push(e.strength);
+      rngArr.push(e.range);
+      spdArr.push(e.speed);
+      typArr.push(TYPE_MAP[e.type]);
+      modArr.push(MODE_MAP[e.mode]);
+    }else{
+      posArr.push(0,0);
+      strArr.push(0);
+      rngArr.push(0);
+      spdArr.push(0);
+      typArr.push(0);
+      modArr.push(0);
+    }
+  }
+  gl.uniform2fv(uEFPos, new Float32Array(posArr));
+  gl.uniform1fv(uEFStrength, new Float32Array(strArr));
+  gl.uniform1fv(uEFRange, new Float32Array(rngArr));
+  gl.uniform1fv(uEFSpeed, new Float32Array(spdArr));
+  gl.uniform1iv(uEFType, new Int32Array(typArr));
+  gl.uniform1iv(uEFMode, new Int32Array(modArr));
+  gl.drawArrays(gl.TRIANGLES,0,6);
+}
+function startPreview(){
+  stopPreview();
+  lastTs = performance.now();
+  accumulator = 0;
+  function loop(ts){
+    animId = requestAnimationFrame(loop);
+    const realDt = Math.min(0.05, (ts - lastTs)/1000);
+    lastTs = ts;
+    accumulator += realDt;
+    while(accumulator >= FIXED_STEP){
+      time += FIXED_STEP;
+      accumulator -= FIXED_STEP;
+    }
+    draw();
+  }
+  animId = requestAnimationFrame(loop);
+}
+function stopPreview(){
+  if(animId) cancelAnimationFrame(animId);
+  animId=null;
+}
+function bindFloatingInputs(){
+  [fpStrength, fpRange, fpSpeed].forEach(input => {
+    input.oninput = ()=>{
+      if (selectedEffectId === null) return;
+      const ef = effects.find(x => x.id === selectedEffectId);
+      if (!ef) return;
+      ef.strength = Number(fpStrength.value);
+      ef.range = Number(fpRange.value);
+      ef.speed = Number(fpSpeed.value);
+      lastParam = {
+        strength: ef.strength,
+        range: ef.range,
+        speed: ef.speed
+      };
+    };
+  });
+}
+bindFloatingInputs();
+
+// 修复拖动：只修改left/top，不操作bottom/transform，限制左上边界
 (function(){
   let dragging = false;
   let startX = 0, startY = 0;
@@ -261,60 +842,118 @@ document.addEventListener('click', (e)=>{
   window.addEventListener('touchend', onUp);
 })();
 
-fpStrength.oninput = ()=>{
-  const ef = effects.find(x=>x.id === selectedEffectId);
-  if(ef) ef.strength = +fpStrength.value;
-}
-fpRange.oninput = ()=>{
-  const ef = effects.find(x=>x.id === selectedEffectId);
-  if(ef) ef.range = +fpRange.value;
-}
-fpSpeed.oninput = ()=>{
-  const ef = effects.find(x=>x.id === selectedEffectId);
-  if(ef) ef.speed = +fpSpeed.value;
-}
+hidePanel.onclick = ()=>{
+  effectPanel.style.display = 'none';
+  togglePanel.style.display = 'inline-block';
+};
+togglePanel.onclick = ()=>{
+  effectPanel.style.display = 'block';
+  togglePanel.style.display = 'none';
+};
 
-function draw(){
-  ctx.fillStyle="#fff";
-  ctx.fillRect(0,0,cvs.width,cvs.height);
-  if(!img) return;
-  const ef = effects.find(x=>x.id === selectedEffectId);
-  let ox=0,oy=0,scale=1;
-  let globalAlpha = 1;
-  if(ef){
-    const t = frame / fps * ef.speed;
-    if(ef.id === "shake"){
-      ox = Math.sin(t)*ef.range;
-      oy = Math.cos(t*1.3)*ef.range;
-    }else if(ef.id === "zoom"){
-      scale = 1 + Math.sin(t)*ef.range/100;
-    }else if(ef.id === "flash"){
-      const v = (Math.sin(t)+1)/2;
-      globalAlpha = 0.3 + v*0.7;
-    }
+exportBtn.onclick = async () => {
+  if (isExporting) return;
+  if (!sourceImg) { alert('先上传图片'); return; }
+  if (effects.length === 0) { alert('至少添加一个效果'); return; }
+  isExporting = true;
+  exportBtn.disabled = true;
+  exportGifBtn.disabled = true;
+  exportWebpLosslessBtn.disabled = true;
+  exportWebpLossyBtn.disabled = true;
+  stopPreview();
+  const total = Number(frameCountSlider.value);
+  const zip = new JSZip();
+  for (let i = 0; i < total; i++) {
+    const percent = Math.round(((i+1)/total)*100);
+    const t = (i / total) * Math.PI * 2;
+    time = t;
+    draw();
+    await new Promise(r=>setTimeout(r,0));
+    const dataUrl = canvas.toDataURL('image/png');
+    const b64 = dataUrl.split(',')[1];
+    zip.file(`frame_${String(i).padStart(3,'0')}.png`, b64, {base64:true});
+    log(`序列帧采集：${i+1}/${total} (${percent}%)`);
   }
-  ctx.save();
-  ctx.globalAlpha = globalAlpha;
-  ctx.translate(cvs.width/2 + ox, cvs.height/2 + oy);
-  ctx.scale(scale,scale);
-  // 图片居中绘制
-  const iw = img.width;
-  const ih = img.height;
-  ctx.drawImage(img, -iw/2, -ih/2);
-  ctx.restore();
-  ctx.globalAlpha = 1;
-}
+  log("正在打包ZIP...");
+  const blob = await zip.generateAsync({type:'blob'});
+  saveAs(blob, 'character_animation_frames.zip');
+  log('✅ 序列帧打包完成，开始下载');
+  startPreview();
+  isExporting = false;
+  exportBtn.disabled = false;
+  exportGifBtn.disabled = false;
+  exportWebpLosslessBtn.disabled = false;
+  exportWebpLossyBtn.disabled = false;
+};
 
-function loop(){
-  if(playing) frame++;
-  draw();
-  requestAnimationFrame(loop);
-}
+exportGifBtn.onclick = async ()=>{
+  if(isExporting) return;
+  if (!sourceImg) { alert('先上传图片'); return; }
+  if (effects.length === 0) { alert('至少添加一个效果'); return; }
+  isExporting = true;
+  exportGifBtn.disabled = true;
+  exportBtn.disabled = true;
+  exportWebpLosslessBtn.disabled = true;
+  exportWebpLossyBtn.disabled = true;
+  stopPreview();
+  const { GIFEncoder, quantize, applyPalette } = await import('https://cdn.jsdelivr.net/npm/gifenc@1.0.3/dist/gifenc.esm.js');
+  const gradeOpt = GRADE_SETTING[currentGrade];
+  const totalFrames = Number(frameCountSlider.value);
+  const delayMs = Number(gifDelaySlider.value);
+  const width = canvas.width;
+  const height = canvas.height;
+  const offCanvas = document.createElement('canvas');
+  offCanvas.width = width;
+  offCanvas.height = height;
+  const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
+  try{
+    log(`📸【${currentGrade}档】采集帧，共${totalFrames}帧`);
+    const framesRgba = [];
+    for(let i=0;i<totalFrames;i++){
+      const progress = Math.round( (i+1)/totalFrames * 50 );
+      const t = (i / totalFrames) * Math.PI * 2;
+      time = t;
+      draw();
+      await new Promise(r=>setTimeout(r,0));
+      offCtx.drawImage(canvas,0,0);
+      const imgData = offCtx.getImageData(0,0,width,height);
+      framesRgba.push(imgData.data);
+      log(`📸 采集帧 ${i+1}/${totalFrames} 总进度 ${progress}%`);
+    }
+    log(`🧩【${currentGrade}档】开始编码GIF，最大色数:${gradeOpt.maxColors},抖动:${gradeOpt.dither}`);
+    const gif = GIFEncoder();
+    for(let fIdx=0; fIdx < framesRgba.length; fIdx++){
+      const encodeProgress = 50 + Math.round( (fIdx+1)/framesRgba.length * 50 );
+      const rgba = framesRgba[fIdx];
+      const palette = quantize(rgba, gradeOpt.maxColors);
+      const index = applyPalette(rgba, palette, gradeOpt.dither ? 1 : 0);
+      gif.writeFrame(index, width, height, {
+        palette,
+        delay: delayMs
+      });
+      log(`🧩 编码帧 ${fIdx+1}/${totalFrames} 总进度 ${encodeProgress}%`);
+      const wait = currentGrade === 'best' ? 18 : 5;
+      await new Promise(r=>setTimeout(r, wait));
+    }
+    gif.finish();
+    const uint8Gif = gif.bytes();
+    const blob = new Blob([uint8Gif], {type:"image/gif"});
+    saveAs(blob, `animation_${currentGrade}.gif`);
+    log(`✅【${currentGrade}档】GIF导出完成`);
+  }catch(err){
+    log("❌ GIF编码失败：" + err.message);
+    console.error(err);
+  }
+  startPreview();
+  isExporting = false;
+  exportGifBtn.disabled = false;
+  exportBtn.disabled = false;
+  exportWebpLosslessBtn.disabled = false;
+  exportWebpLossyBtn.disabled = false;
+};
 
-btnPlay.onclick = ()=> playing = !playing;
-btnReset.onclick = ()=> frame = 0;
-
-async function encodeSingleLosslessWebp(canvasEl) {
+// 单帧WebP导出，浏览器原生toBlob
+async function encodeSingleWebp(canvasEl, lossless){
   return new Promise((resolve, reject) => {
     canvasEl.toBlob(
       b => {
@@ -325,128 +964,131 @@ async function encodeSingleLosslessWebp(canvasEl) {
         r.readAsArrayBuffer(b);
       },
       "image/webp",
-      { lossless: true }
+      lossless ? {lossless:true} : {quality:0.85}
     );
   });
 }
-async function encodeSingleLossyWebp(canvasEl) {
-  return new Promise((res, rej)=>{
-    canvasEl.toBlob(b=>{
-      const r = new FileReader();
-      r.onload=()=>res(new Uint8Array(r.result));
-      r.onerror=rej;
-      r.readAsArrayBuffer(b);
-    },"image/webp",{quality:0.85});
-  })
-}
-async function buildAnimatedWebP(frames, delays, width, height) {
+
+// 手写拼接 Animated WebP RIFF/ANIM/ANMF，不依赖外部wasm
+async function buildAnimatedWebP(framesBin, delays, width, height){
   const chunks = [];
+  // ANIM块：无限循环
   const animBuf = new ArrayBuffer(6);
   const animView = new DataView(animBuf);
-  animView.setUint32(0, 0, true);
-  animView.setUint16(4, 0, true);
-  chunks.push({fourcc: "ANIM", data: new Uint8Array(animBuf)});
-  for (let i = 0; i < frames.length; i++) {
-    const frameBin = frames[i];
+  animView.setUint32(0,0,true);
+  animView.setUint16(4,0,true);
+  chunks.push({fourcc:"ANIM", data:new Uint8Array(animBuf)});
+
+  for(let i=0;i<framesBin.length;i++){
+    const frameBin = framesBin[i];
     const dms = delays[i];
+    // ANMF帧头
     const anmfBuf = new ArrayBuffer(16);
     const anmfView = new DataView(anmfBuf);
-    anmfView.setUint24(0, 0, true);
-    anmfView.setUint24(3, 0, true);
-    anmfView.setUint24(6, width, true);
-    anmfView.setUint24(9, height, true);
-    anmfView.setUint32(12, dms, true);
-    chunks.push({fourcc: "ANMF", data: new Uint8Array(anmfBuf)});
-    const webpMagic = new TextDecoder().decode(frameBin.slice(8,12));
-    if (webpMagic !== "WEBP") throw new Error(`第${i}帧不是webp`);
+    anmfView.setUint24(0,0,true);
+    anmfView.setUint24(3,0,true);
+    anmfView.setUint24(6,width,true);
+    anmfView.setUint24(9,height,true);
+    anmfView.setUint32(12,dms,true);
+    chunks.push({fourcc:"ANMF", data:new Uint8Array(anmfBuf)});
+
+    // 剥离外层RIFF头，取出内部子chunk
+    const checkMagic = new TextDecoder().decode(frameBin.slice(8,12));
+    if(checkMagic !== "WEBP") throw new Error(`第${i}帧不是webp`);
     let ptr = 12;
-    while(ptr < frameBin.length) {
-      const fourcc = new TextDecoder().decode(frameBin.slice(ptr, ptr+4));
-      const sz = new DataView(frameBin.buffer, frameBin.byteOffset + ptr +4).getUint32(0, true);
-      const chunkData = frameBin.slice(ptr+8, ptr+8+sz);
-      chunks.push({fourcc, data:chunkData});
-      ptr += 8 + sz + (sz & 1 ? 1 : 0);
+    while(ptr < frameBin.length){
+      const fourcc = new TextDecoder().decode(frameBin.slice(ptr,ptr+4));
+      const sz = new DataView(frameBin.buffer, frameBin.byteOffset+ptr+4).getUint32(0,true);
+      const subData = frameBin.slice(ptr+8, ptr+8+sz);
+      chunks.push({fourcc, data:subData});
+      ptr += 8 + sz + ((sz &1) ?1:0);
     }
   }
-  let totalPayloadLen = 0;
-  for(const c of chunks) {
-    totalPayloadLen += 8 + c.data.length + (c.data.length & 1 ? 1 : 0);
+
+  // 计算总长度，组装外层RIFF
+  let payloadTotal = 0;
+  for(const ck of chunks){
+    payloadTotal += 8 + ck.data.length + ((ck.data.length &1) ?1:0);
   }
-  const riffBuf = new ArrayBuffer(12 + totalPayloadLen);
+  const riffBuf = new ArrayBuffer(12 + payloadTotal);
   const riffView = new DataView(riffBuf);
   const enc = new TextEncoder();
-  enc.encodeInto("RIFF", new Uint8Array(riffBuf, 0,4));
-  riffView.setUint32(4, totalPayloadLen, true);
-  enc.encodeInto("WEBP", new Uint8Array(riffBuf, 8,4));
-  let writePtr = 12;
-  for(const ck of chunks) {
-    enc.encodeInto(ck.fourcc, new Uint8Array(riffBuf, writePtr,4));
-    riffView.setUint32(writePtr+4, ck.data.length, true);
-    new Uint8Array(riffBuf, writePtr+8, ck.data.length).set(ck.data);
-    writePtr += 8 + ck.data.length;
-    if(ck.data.length & 1) {
-      riffView.setUint8(writePtr, 0);
-      writePtr += 1;
+  enc.encodeInto("RIFF", new Uint8Array(riffBuf,0,4));
+  riffView.setUint32(4, payloadTotal, true);
+  enc.encodeInto("WEBP", new Uint8Array(riffBuf,8,4));
+  let wPtr =12;
+  for(const ck of chunks){
+    enc.encodeInto(ck.fourcc, new Uint8Array(riffBuf, wPtr,4));
+    riffView.setUint32(wPtr+4, ck.data.length, true);
+    new Uint8Array(riffBuf,wPtr+8, ck.data.length).set(ck.data);
+    wPtr += 8 + ck.data.length;
+    if(ck.data.length &1){
+      riffView.setUint8(wPtr,0);
+      wPtr +=1;
     }
   }
   return new Uint8Array(riffBuf);
 }
-btnExportWebp.onclick = async ()=>{
-  if(!img){alert("请先上传图片");return;}
-  alert("开始采集无损WebP帧...");
-  const total = 24;
-  const frameList = [];
-  const delayList = [];
-  const saveFrame = frame;
-  for(let i=0;i<total;i++){
-    frame = i;
-    draw();
-    const bin = await encodeSingleLosslessWebp(cvs);
-    frameList.push(bin);
-    delayList.push(1000/fps);
+
+async function exportAnimatedWebp(lossless = true){
+  if(isExporting) return;
+  if (!sourceImg) { alert('先上传图片'); return; }
+  if (effects.length === 0) { alert('至少添加一个效果'); return; }
+  isExporting = true;
+  exportGifBtn.disabled = true;
+  exportBtn.disabled = true;
+  exportWebpLosslessBtn.disabled = true;
+  exportWebpLossyBtn.disabled = true;
+  stopPreview();
+  const totalFrames = Number(frameCountSlider.value);
+  const delayMs = Number(gifDelaySlider.value);
+  const w = canvas.width;
+  const h = canvas.height;
+  const offCanvas = document.createElement('canvas');
+  offCanvas.width = w;
+  offCanvas.height = h;
+  const offCtx = offCanvas.getContext('2d',{willReadFrequently:true});
+  try{
+    log(`📸 采集帧，共${totalFrames}帧，模式：${lossless ? "无损" : "有损"}`);
+    const frameBinList = [];
+    const delayList = [];
+    for(let i=0;i<totalFrames;i++){
+      const pct = Math.round(((i+1)/totalFrames)*100);
+      const t = (i / totalFrames) * Math.PI * 2;
+      time = t;
+      draw();
+      await new Promise(r=>setTimeout(r,0));
+      offCtx.drawImage(canvas,0,0);
+      const bin = await encodeSingleWebp(offCanvas, lossless);
+      frameBinList.push(bin);
+      delayList.push(delayMs);
+      log(`📸 采集帧 ${i+1}/${totalFrames} ${pct}%`);
+    }
+    log("🧩 组装Animated WebP二进制");
+    const animResult = await buildAnimatedWebP(frameBinList, delayList, w, h);
+    const blob = new Blob([animResult], {type:"image/webp"});
+    saveAs(blob, lossless ? "animation_lossless.webp" : "animation_lossy.webp");
+    log(`✅ ${lossless?"无损":"有损"}动画WebP导出完成`);
+  }catch(err){
+    log("❌ WebP导出失败："+err.message);
+    console.error(err);
   }
-  frame = saveFrame;
-  draw();
-  const animBin = await buildAnimatedWebP(frameList, delayList, cvs.width, cvs.height);
-  const blob = new Blob([animBin], {type:"image/webp"});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = "anim_lossless.webp";
-  a.click();
-  URL.revokeObjectURL(a.href);
-  alert("无损WebP导出完成（Chrome/Edge可播放）");
+  startPreview();
+  isExporting = false;
+  exportGifBtn.disabled = false;
+  exportBtn.disabled = false;
+  exportWebpLosslessBtn.disabled = false;
+  exportWebpLossyBtn.disabled = false;
 }
-btnExportGif.onclick = async ()=>{
-  if(!img){alert("请先上传图片");return;}
-  alert("开始生成GIF，稍等...");
-  const totalFrames = 24;
-  const delayMs = 1000/fps;
-  const saveFrame = frame;
-  const gif = new GIF({
-    workers: 2,
-    quality: 10,
-    width: cvs.width,
-    height: cvs.height
-  });
-  for(let i=0;i<totalFrames;i++){
-    frame = i;
-    draw();
-    gif.addFrame(cvs, {copy:true, delay:delayMs});
+
+exportWebpLosslessBtn.onclick = ()=> exportAnimatedWebp(true);
+exportWebpLossyBtn.onclick = ()=> exportAnimatedWebp(false);
+
+lowPerfCb.onchange = ()=>{
+  if(sourceImg){
+    log('切换性能模式，重新上传图片生效');
   }
-  frame = saveFrame;
-  draw();
-  gif.on('finished', function(blob) {
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = "anim.gif";
-    a.click();
-    URL.revokeObjectURL(a.href);
-    alert("GIF导出完成！");
-  });
-  gif.render();
-};
-renderList();
-loop();
+}
 </script>
 </body>
 </html>
