@@ -15,7 +15,7 @@ body{padding:12px;background:#111;color:#eee}
   border:2px solid #444;
   background:#000;
   display:block;
-  width:80%;
+  width:100%;
   max-width:100%;
 }
 canvas{
@@ -81,6 +81,26 @@ canvas{
 }
 .export-setting-box input[type=range]{flex:1;min-width:70px}
 .export-setting-box label{font-size:13px;color:#ccc;white-space:nowrap}
+.grade-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:8px 0;
+}
+.grade-item{
+  flex:1;
+  min-width:70px;
+  padding:6px 4px;
+  border:1px solid #555;
+  border-radius:4px;
+  text-align:center;
+  font-size:13px;
+  cursor:pointer;
+}
+.grade-item.selected{
+  border-color:#48b960;
+  background:#204429;
+}
 .effect-item{background:#262626;border:1px solid #444;border-radius:6px;padding:10px;margin-bottom:8px}
 .item-head{display:flex;align-items:center;justify-content:space-between;gap:4px;flex-wrap:wrap}
 .item-name{font-weight:bold;font-size:14px}
@@ -191,9 +211,13 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
       <label>帧延迟(ms)：<span id="delayVal">100</span></label>
       <input type="range" id="gifDelay" min="20" max="300" value="100">
     </div>
-    <div class="row">
-      <label>GIF画质：<span id="qualityVal">10</span></label>
-      <input type="range" id="gifQuality" min="1" max="20" value="10">
+    <div style="margin-top:8px;">
+      <label>GIF画质档位：</label>
+      <div class="grade-row">
+        <div class="grade-item selected" data-grade="best">极好</div>
+        <div class="grade-item" data-grade="good">好</div>
+        <div class="grade-item" data-grade="fast">中等</div>
+      </div>
     </div>
   </div>
 
@@ -246,8 +270,15 @@ const frameCountSlider = document.getElementById('frameCount');
 const frameCountVal = document.getElementById('frameCountVal');
 const gifDelaySlider = document.getElementById('gifDelay');
 const delayVal = document.getElementById('delayVal');
-const gifQualitySlider = document.getElementById('gifQuality');
-const qualityVal = document.getElementById('qualityVal');
+const gradeItems = document.querySelectorAll('.grade-item');
+let currentGrade = 'best';
+
+// 三档画质预设
+const GRADE_SETTING = {
+  best: {maxColors:256, dither:true, ditherType:2, note:"极好｜256色全开，高质量调色板+抖动，追求最高保真，体积大、慢"},
+  good: {maxColors:192, dither:true, ditherType:1, note:"好｜192色，柔和抖动，画质均衡，导出稳定"},
+  fast: {maxColors:128, dither:false, ditherType:0, note:"中等｜128色，关闭抖动，优先速度，画质让步"}
+};
 
 let isExporting = false;
 let selectedEffectId = null;
@@ -287,19 +318,19 @@ vec2 getOffset(vec2 p, vec2 c, float strength, float range, float speed, int typ
   float t = uTime * v;
   vec2 off = vec2(0.);
 
-  if(typ == 0){ // shake
+  if(typ == 0){
     if(m==0) off.y = sin(t*10.) * s * fall *4.;
     else if(m==1) off.x = sin(t*10.) * s * fall *4.;
     else {
       off.x = cos(t*8.) * s * fall *3.5;
       off.y = sin(t*8.) * s * fall *3.5;
     }
-  }else if(typ ==1){ // breath
+  }else if(typ ==1){
     float wave;
     if(m==0) wave = sin(t)*s*fall*2.4;
     else wave = (sin(t*1.3)+sin(t*2.7)*0.4)*s*fall*2.2;
     if(dist>0.) off = normalize(d)*wave;
-  }else if(typ ==2){ // openclose
+  }else if(typ ==2){
     float wave;
     if(m==0) off.y = sin(t*2.)*s*fall*2.8;
     else if(m==1) off.y = sin(t*2.+PI)*s*fall*2.8;
@@ -308,7 +339,7 @@ vec2 getOffset(vec2 p, vec2 c, float strength, float range, float speed, int typ
       else wave = sin(t*2.+PI)*s*fall*2.2;
       if(dist>0.) off = normalize(d)*wave;
     }
-  }else if(typ ==3){ // bounce
+  }else if(typ ==3){
     float ph = mod(t*3.,2.);
     float b = ph<1.? 1.-ph : ph-1.;
     if(m==1){
@@ -317,7 +348,7 @@ vec2 getOffset(vec2 p, vec2 c, float strength, float range, float speed, int typ
       b = b + b2*0.3;
     }
     off.y = b * s * fall *3.2;
-  }else if(typ ==4){ // swing
+  }else if(typ ==4){
     if(m==0){
       off.x = cos(t*2.)*s*fall*3.;
       off.y = sin(t*2.)*s*fall*3.;
@@ -431,15 +462,23 @@ function isMobile(){
     || window.matchMedia('(max-width: 900px)').matches;
 }
 
+// 画质档位选择
+gradeItems.forEach(item=>{
+  item.onclick = ()=>{
+    gradeItems.forEach(i=>i.classList.remove('selected'));
+    item.classList.add('selected');
+    currentGrade = item.dataset.grade;
+    log(GRADE_SETTING[currentGrade].note);
+  }
+})
+
 function bindExportSettingUI(){
   function updateLabel(){
     frameCountVal.textContent = frameCountSlider.value;
     delayVal.textContent = gifDelaySlider.value;
-    qualityVal.textContent = gifQualitySlider.value;
   }
   frameCountSlider.oninput = updateLabel;
   gifDelaySlider.oninput = updateLabel;
-  gifQualitySlider.oninput = updateLabel;
   updateLabel();
 }
 bindExportSettingUI();
@@ -553,6 +592,18 @@ function getCanvasPos(clientX, clientY){
   return {x,y};
 }
 
+function hitTestEffect(x, y){
+  for (let i = 0; i < effects.length; i++) {
+    const e = effects[i];
+    const dx = x - e.x;
+    const dy = y - e.y;
+    if (Math.hypot(dx, dy) <= Math.max(40, e.range * 0.12)) {
+      return e;
+    }
+  }
+  return null;
+}
+
 function addEffectAtPos(x,y){
   if (!sourceImg) { alert('先上传图片！'); return; }
   if (!pendingType || !pendingMode) { alert('先选择效果！'); return; }
@@ -574,19 +625,31 @@ function addEffectAtPos(x,y){
   renderList();
 
   selectedEffectId = effect.id;
-  if(floatingParam.classList.contains('show')){
-    syncFloatPanelToSelected();
-  }
+  openFloatingParam(effect.id);
 }
+
 canvas.addEventListener('touchstart', (e)=>{
   e.preventDefault();
   const touch = e.touches[0];
   const p = getCanvasPos(touch.clientX, touch.clientY);
-  addEffectAtPos(p.x,p.y);
+  const hit = hitTestEffect(p.x, p.y);
+  if (hit) {
+    selectedEffectId = hit.id;
+    openFloatingParam(hit.id);
+  } else {
+    addEffectAtPos(p.x, p.y);
+  }
 },{passive:false});
+
 canvas.addEventListener('click', e=>{
   const p = getCanvasPos(e.clientX, e.clientY);
-  addEffectAtPos(p.x,p.y);
+  const hit = hitTestEffect(p.x, p.y);
+  if (hit) {
+    selectedEffectId = hit.id;
+    openFloatingParam(hit.id);
+  } else {
+    addEffectAtPos(p.x, p.y);
+  }
 });
 
 function removeEffect(id){
@@ -842,10 +905,10 @@ exportGifBtn.onclick = async ()=>{
   stopPreview();
 
   const { GIFEncoder, quantize, applyPalette } = await import('https://cdn.jsdelivr.net/npm/gifenc@1.0.3/dist/gifenc.esm.js');
+  const gradeOpt = GRADE_SETTING[currentGrade];
 
   const totalFrames = Number(frameCountSlider.value);
   const delayMs = Number(gifDelaySlider.value);
-  const quality = Number(gifQualitySlider.value);
   const width = canvas.width;
   const height = canvas.height;
 
@@ -855,7 +918,7 @@ exportGifBtn.onclick = async ()=>{
   const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
 
   try{
-    log(`📸 阶段1：采集帧，共${totalFrames}帧`);
+    log(`📸【${currentGrade}档】采集帧，共${totalFrames}帧`);
     const framesRgba = [];
     for(let i=0;i<totalFrames;i++){
       const progress = Math.round( (i+1)/totalFrames * 50 );
@@ -869,27 +932,28 @@ exportGifBtn.onclick = async ()=>{
       log(`📸 采集帧 ${i+1}/${totalFrames} 总进度 ${progress}%`);
     }
 
-    log(`🧩 阶段2：开始编码GIF`);
+    log(`🧩【${currentGrade}档】开始编码GIF，最大色数:${gradeOpt.maxColors},抖动:${gradeOpt.dither}`);
     const gif = GIFEncoder();
-    const maxColors = Math.max(8, Math.min(256, quality * 12));
 
     for(let fIdx=0; fIdx < framesRgba.length; fIdx++){
       const encodeProgress = 50 + Math.round( (fIdx+1)/framesRgba.length * 50 );
       const rgba = framesRgba[fIdx];
-      const palette = quantize(rgba, maxColors);
-      const index = applyPalette(rgba, palette);
+      const palette = quantize(rgba, gradeOpt.maxColors);
+      const index = applyPalette(rgba, palette, gradeOpt.dither ? 1 : 0);
       gif.writeFrame(index, width, height, {
         palette,
         delay: delayMs
       });
       log(`🧩 编码帧 ${fIdx+1}/${totalFrames} 总进度 ${encodeProgress}%`);
-      await new Promise(r=>setTimeout(r, 5));
+      // 极好档加长等待，防止浏览器卡死
+      const wait = currentGrade === 'best' ? 18 : 5;
+      await new Promise(r=>setTimeout(r, wait));
     }
     gif.finish();
     const uint8Gif = gif.bytes();
     const blob = new Blob([uint8Gif], {type:"image/gif"});
-    saveAs(blob, "animation.gif");
-    log("✅ GIF导出完成");
+    saveAs(blob, `animation_${currentGrade}.gif`);
+    log(`✅【${currentGrade}档】GIF导出完成`);
   }catch(err){
     log("❌ GIF编码失败：" + err.message);
     console.error(err);
