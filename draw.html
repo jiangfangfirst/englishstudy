@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>多多动画</title>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;-webkit-tap-highlight-color:transparent;}
+body{padding:12px;background:#111;color:#eee}
+#canvasWrap{
+  position:relative;
+  border:2px solid #444;
+  background:#000;
+  display:block;
+  width:80%;
+  max-width:100%;
+}
+canvas{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.log{color:#888;font-size:12px;margin-top:6px}
+
+.panel{
+  position:fixed;
+  top:12px;
+  right:12px;
+  width:min(360px, calc(100vw - 24px));
+  max-height:70vh;
+  overflow-y:auto;
+  background:rgba(28,28,28,0.7);
+  padding:12px;
+  border-radius:8px;
+  box-shadow:0 6px 24px rgba(0,0,0,.45);
+  z-index:100;
+}
+.panel h3{margin:10px 0 8px;font-size:15px}
+.btn{
+  padding:8px 7px;margin:3px 2px;cursor:pointer;
+  background:#333;color:#eee;border:1px solid #555;border-radius:4px;font-size:13px;
+}
+.btn.active{background:#207839;border-color:#2fa552}
+.del-btn{background:#782b2b;border-color:#943838}
+.top-btn{background:#2b5f78;border-color:#387794}
+.effect-item{background:rgba(38,38,38,0.85);border:1px solid #444;border-radius:6px;padding:10px;margin-bottom:8px}
+.item-head{display:flex;align-items:center;justify-content:space-between;gap:4px;flex-wrap:wrap}
+.item-name{font-weight:bold;font-size:14px}
+.param-wrap{margin-top:8px;padding-top:8px;border-top:1px solid #3a3a3a;display:none}
+.param-wrap.open{display:block}
+.row{display:flex;justify-content:space-between;align-items:center;margin:6px 0;gap:6px}
+input[type=range]{flex:1;min-width:80px}
+label{font-size:13px;color:#ccc;white-space:nowrap}
+
+.toggle-panel{
+  position:fixed;
+  top:12px;
+  right:12px;
+  z-index:200;
+  background:#207839;
+  color:#fff;
+  border:none;
+  padding:8px 10px;
+  border-radius:4px;
+  cursor:pointer;
+  display:none;
+}
+.perf-row{margin:6px 0;font-size:12px;color:#ccc}
+.upload-row{margin-bottom:8px}
+</style>
+</head>
+<body>
+  <div id="canvasWrap">
+    <canvas id="mainCanvas"></canvas>
+  </div>
+
+<button class="toggle-panel" id="togglePanel">显示面板</button>
+<div class="panel" id="effectPanel">
+  <button class="btn" id="hidePanel" style="float:right">隐藏</button>
+
+  <!-- 文件、性能、日志移到面板最顶部 -->
+  <div class="upload-row">
+    <input type="file" id="imgUpload" accept="image/*">
+  </div>
+  <div class="perf-row">
+    <label><input type="checkbox" id="lowPerf">低性能模式（手机建议勾选）</label>
+  </div>
+  <div class="log" id="log">日志：等待操作</div>
+
+  <h3>选择效果</h3>
+  <button class="btn" data-add="shake">抖动</button>
+  <button class="btn" data-add="breath">呼吸</button>
+  <button class="btn" data-add="openclose">收缩</button>
+  <button class="btn" data-add="bounce">弹跳</button>
+  <button class="btn" data-add="swing">甩动</button>
+
+  <div id="modeBox" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid #3a3a3a">
+    <div style="margin-bottom:6px;color:#ccc;font-size:13px">模式：</div>
+    <div id="modeList"></div>
+  </div>
+
+  <h3 style="margin-top:14px">效果列表</h3>
+  <div id="effectList"></div>
+  <button id="exportBtn" class="btn" style="margin-top:10px;background:#207839">导出PNG序列帧</button>
+</div>
+
+<script>
+const canvas = document.getElementById('mainCanvas');
+const ctx = canvas.getContext('2d', {willReadFrequently:true});
+const logDom = document.getElementById('log');
+const upload = document.getElementById('imgUpload');
+const effectList = document.getElementById('effectList');
+const exportBtn = document.getElementById('exportBtn');
+const effectPanel = document.getElementById('effectPanel');
+const togglePanel = document.getElementById('togglePanel');
+const hidePanel = document.getElementById('hidePanel');
+const modeBox = document.getElementById('modeBox');
+const modeList = document.getElementById('modeList');
+const lowPerfCb = document.getElementById('lowPerf');
+
+let sourceImg = null;
+let srcImageData = null; // 原图数据只读取一次
+let originalW = 0, originalH = 0;
+let renderW = 0, renderH = 0;
+let time = 0;
+let animId = null;
+let pendingType = null;
+let pendingMode = null;
+let lastTs = 0;
+const targetDt = 1/60;
+
+const EFFECT_TYPES = {
+  shake: {
+    name: '抖动',
+    color: '#e3c97e',
+    modes: ['上下抖动', '左右抖动', '圆形抖动']
+  },
+  breath: {
+    name: '呼吸',
+    color: '#7ee39a',
+    modes: ['规律', '不规律']
+  },
+  openclose: {
+    name: '开合',
+    color: '#e37e7e',
+    modes: ['开口', '闭口', '收缩', '膨胀']
+  },
+  bounce: {
+    name: '弹跳',
+    color: '#c27ee3',
+    modes: ['规律', '不规律']
+  },
+  swing: {
+    name: '甩动',
+    color: '#7ec8e3',
+    modes: ['顺时针', '逆时针', '无规律']
+  }
+};
+
+let effects = [];
+let effectIdCounter = 0;
+
+function log(txt){ logDom.textContent = '日志：' + txt; }
+function isLowPerf(){ return lowPerfCb.checked; }
+
+upload.onchange = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.src = url;
+  await new Promise(r => img.onload = r);
+  sourceImg = img;
+  originalW = img.naturalWidth;
+  originalH = img.naturalHeight;
+
+  // 限制渲染画布最大边长，移动端降分辨率，交互坐标映射回原图
+  const maxSide = isLowPerf() ? 600 : 900;
+  const scale = Math.min(1, maxSide / Math.max(originalW, originalH));
+  renderW = Math.round(originalW * scale);
+  renderH = Math.round(originalH * scale);
+  canvas.width = renderW;
+  canvas.height = renderH;
+
+  // 一次性缓存原图ImageData，不再每帧getImageData
+  const tmp = document.createElement('canvas');
+  tmp.width = originalW;
+  tmp.height = originalH;
+  const tctx = tmp.getContext('2d');
+  tctx.drawImage(img,0,0);
+  srcImageData = tctx.getImageData(0,0,originalW,originalH);
+
+  log('图片加载完成。点效果，再点画面添加');
+  startPreview();
+};
+
+document.querySelectorAll('[data-add]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const type = btn.dataset.add;
+    if (pendingType === type) {
+      pendingType = null;
+      pendingMode = null;
+      document.querySelectorAll('[data-add]').forEach(b => b.classList.remove('active'));
+      modeBox.style.display = 'none';
+      log('已取消添加模式');
+    } else {
+      pendingType = type;
+      document.querySelectorAll('[data-add]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      showModes(type);
+      pendingMode = EFFECT_TYPES[type].modes[0];
+      log(`已开启【${EFFECT_TYPES[type].name}】，默认：${pendingMode}`);
+    }
+  });
+});
+
+function showModes(type){
+  const modes = EFFECT_TYPES[type].modes;
+  modeList.innerHTML = '';
+  modes.forEach((mode, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'btn' + (idx===0 ? ' active' : '');
+    btn.textContent = mode;
+    btn.dataset.mode = mode;
+    btn.onclick = function(){
+      pendingMode = mode;
+      modeList.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      log(`选定模式：${pendingMode}`);
+    }
+    modeList.appendChild(btn);
+  });
+  modeBox.style.display = 'block';
+}
+
+// 统一获取坐标（兼容鼠标+触屏）
+function getCanvasPos(ev){
+  const rect = canvas.getBoundingClientRect();
+  const clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
+  const clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+  // 显示画布缩放比例
+  const dispScaleX = canvas.width / rect.width;
+  const dispScaleY = canvas.height / rect.height;
+  // 映射回原图坐标（效果坐标是原图坐标，保证范围强度参数统一）
+  const x = (clientX - rect.left) * dispScaleX / (renderW/originalW);
+  const y = (clientY - rect.top) * dispScaleY / (renderH/originalH);
+  return {x,y};
+}
+
+function addEffectAtPos(x,y){
+  if (!sourceImg) { alert('先上传图片！'); return; }
+  if (!pendingType || !pendingMode) { alert('先选择效果！'); return; }
+  const info = EFFECT_TYPES[pendingType];
+  const effect = {
+    id: ++effectIdCounter,
+    type: pendingType,
+    mode: pendingMode,
+    name: `${info.name}-${pendingMode}`,
+    color: info.color,
+    x, y,
+    strength: 150,
+    range: 110,
+    speed: 24
+  };
+  // ✅ 新增效果放到列表最上面
+  effects.unshift(effect);
+  log(`✅ 添加：${effect.name}`);
+  renderList();
+}
+canvas.addEventListener('click', e=>{
+  const p = getCanvasPos(e);
+  addEffectAtPos(p.x,p.y);
+});
+canvas.addEventListener('touchend', e=>{
+  e.preventDefault();
+  const p = getCanvasPos(e);
+  addEffectAtPos(p.x,p.y);
+});
+
+function removeEffect(id){
+  effects = effects.filter(e => e.id !== id);
+  renderList();
+}
+function topEffect(id){
+  const index = effects.findIndex(e => e.id === id);
+  if (index <= 0) return;
+  const [item] = effects.splice(index, 1);
+  effects.unshift(item);
+  renderList();
+}
+
+function renderList(){
+  effectList.innerHTML = '';
+  effects.forEach(e => {
+    const div = document.createElement('div');
+    div.className = 'effect-item';
+    div.style.borderColor = e.color;
+    div.innerHTML = `
+      <div class="item-head">
+        <span class="item-name">${e.name}</span>
+        <div>
+          <button class="btn top-btn" data-top="${e.id}" title="置顶">↑</button>
+          <button class="btn edit-btn" data-id="${e.id}">微调</button>
+          <button class="btn del-btn" data-del="${e.id}">删除</button>
+        </div>
+      </div>
+      <div class="param-wrap" data-param-id="${e.id}">
+        <div class="row"><label>强度</label><input type="range" data-key="strength" min="0" max="400" value="${e.strength}"></div>
+        <div class="row"><label>范围</label><input type="range" data-key="range" min="10" max="500" value="${e.range}"></div>
+        <div class="row"><label>速度</label><input type="range" data-key="speed" min="1" max="120" value="${e.speed}"></div>
+      </div>
+    `;
+    effectList.appendChild(div);
+  });
+
+  effectList.querySelectorAll('.del-btn').forEach(btn=>btn.onclick=()=>removeEffect(+btn.dataset.del));
+  effectList.querySelectorAll('.top-btn').forEach(btn=>btn.onclick=()=>topEffect(+btn.dataset.top));
+  effectList.querySelectorAll('.edit-btn').forEach(btn=>{
+    btn.onclick = ()=>{
+      const pid = +btn.dataset.id;
+      document.querySelector(`[data-param-id="${pid}"]`).classList.toggle('open');
+    };
+  });
+  // ========== 修复滑块参数绑定bug ==========
+  effectList.querySelectorAll('input[type=range]').forEach(input=>{
+    input.oninput = ()=>{
+      const wrap = input.closest('.param-wrap');
+      const id = +wrap.dataset.paramId;
+      const key = input.dataset.key;
+      const ef = effects.find(x=>x.id===id);
+      if(ef) ef[key] = Number(input.value);
+    };
+  });
+}
+
+function sampleBilinear(srcData, sx, sy, w, h){
+  const x0 = Math.floor(sx);
+  const y0 = Math.floor(sy);
+  const x1 = Math.min(w-1, x0+1);
+  const y1 = Math.min(h-1, y0+1);
+  const fx = sx - x0;
+  const fy = sy - y0;
+  const i00 = (y0 * w + x0) * 4;
+  const i10 = (y0 * w + x1) * 4;
+  const i01 = (y1 * w + x0) * 4;
+  const i11 = (y1 * w + x1) * 4;
+  return [
+    srcData[i00]*(1-fx)*(1-fy) + srcData[i10]*fx*(1-fy) + srcData[i01]*(1-fx)*fy + srcData[i11]*fx*fy,
+    srcData[i00+1]*(1-fx)*(1-fy) + srcData[i10+1]*fx*(1-fy) + srcData[i01+1]*(1-fx)*fy + srcData[i11+1]*fx*fy,
+    srcData[i00+2]*(1-fx)*(1-fy) + srcData[i10+2]*fx*(1-fy) + srcData[i01+2]*(1-fx)*fy + srcData[i11+2]*fx*fy,
+    srcData[i00+3]*(1-fx)*(1-fy) + srcData[i10+3]*fx*(1-fy) + srcData[i01+3]*(1-fx)*fy + srcData[i11+3]*fx*fy
+  ];
+}
+
+function getEffectOffset(effect, x, y, t){
+  const dx = x - effect.x;
+  const dy = y - effect.y;
+  const dist = Math.hypot(dx, dy);
+  if (dist > effect.range) return { ox:0, oy:0 };
+
+  const falloff = 1 - dist / effect.range;
+  const s = effect.strength * 0.016;
+  const v = effect.speed * 0.16;
+  let ox=0, oy=0;
+
+  switch(effect.type){
+    case 'shake':
+      if (effect.mode === '上下抖动') oy = Math.sin(t * v * 10) * s * falloff * 4;
+      else if (effect.mode === '左右抖动') ox = Math.sin(t * v * 10) * s * falloff * 4;
+      else if (effect.mode === '圆形抖动') {
+        ox = Math.cos(t * v * 8) * s * falloff * 3.5;
+        oy = Math.sin(t * v * 8) * s * falloff * 3.5;
+      }
+      break;
+    case 'breath':
+      if (effect.mode === '规律') {
+        const wave = Math.sin(t * v) * s * falloff * 2.4;
+        ox = dx / Math.max(1, dist) * wave;
+        oy = dy / Math.max(1, dist) * wave;
+      } else {
+        const wave = (Math.sin(t * v * 1.3) + Math.sin(t * v * 2.7) * 0.4) * s * falloff * 2.2;
+        ox = dx / Math.max(1, dist) * wave;
+        oy = dy / Math.max(1, dist) * wave;
+      }
+      break;
+    case 'openclose':
+      if (effect.mode === '开口') oy = Math.sin(t * v * 2) * s * falloff * 2.8;
+      else if (effect.mode === '闭口') oy = Math.sin(t * v * 2 + Math.PI) * s * falloff * 2.8;
+      else if (effect.mode === '收缩') {
+        const wave = Math.sin(t * v * 2) * s * falloff * 2.2;
+        ox = dx / Math.max(1, dist) * wave;
+        oy = dy / Math.max(1, dist) * wave;
+      } else if (effect.mode === '膨胀') {
+        const wave = Math.sin(t * v * 2 + Math.PI) * s * falloff * 2.2;
+        ox = dx / Math.max(1, dist) * wave;
+        oy = dy / Math.max(1, dist) * wave;
+      }
+      break;
+    case 'bounce':
+      if (effect.mode === '规律') oy = Math.abs(Math.sin(t * v * 3)) * s * falloff * 3.2;
+      else oy = Math.abs(Math.sin(t * v * 3) + Math.sin(t * v * 5) * 0.3) * s * falloff * 3;
+      break;
+    case 'swing':
+      if (effect.mode === '顺时针') {
+        ox = Math.cos(t * v * 2) * s * falloff * 3;
+        oy = Math.sin(t * v * 2) * s * falloff * 3;
+      } else if (effect.mode === '逆时针') {
+        ox = Math.cos(-t * v * 2) * s * falloff * 3;
+        oy = Math.sin(-t * v * 2) * s * falloff * 3;
+      } else {
+        ox = Math.sin(t * v * 3 + Math.cos(t * v)) * s * falloff * 2.8;
+        oy = Math.cos(t * v * 2.5 + Math.sin(t * v)) * s * falloff * 2.8;
+      }
+      break;
+  }
+  return {ox, oy};
+}
+
+function draw(){
+  if (!srcImageData) return;
+  const step = isLowPerf() ? 3 : 2;
+  const imgData = ctx.createImageData(renderW, renderH);
+  const out = imgData.data;
+  const scaleToSrc = originalW / renderW;
+
+  for (let y = 0; y < renderH; y += step) {
+    for (let x = 0; x < renderW; x += step) {
+      // 映射到原图坐标再算偏移
+      const srcX = x * scaleToSrc;
+      const srcY = y * scaleToSrc;
+      let totalOx = 0, totalOy = 0;
+      for (const e of effects) {
+        const off = getEffectOffset(e, srcX, srcY, time);
+        totalOx += off.ox;
+        totalOy += off.oy;
+      }
+      const [r,g,b,a] = sampleBilinear(srcImageData.data, srcX+totalOx, srcY+totalOy, originalW, originalH);
+      for (let dy = 0; dy < step && y+dy < renderH; dy++) {
+        for (let dx = 0; dx < step && x+dx < renderW; dx++) {
+          const idx = ((y+dy)*renderW + (x+dx)) *4;
+          out[idx]=r;out[idx+1]=g;out[idx+2]=b;out[idx+3]=a;
+        }
+      }
+    }
+  }
+  ctx.putImageData(imgData,0,0);
+}
+
+function startPreview(){
+  stopPreview();
+  lastTs = performance.now();
+  function loop(ts){
+    animId = requestAnimationFrame(loop);
+    const dt = Math.min(0.05, (ts - lastTs)/1000);
+    lastTs = ts;
+    time += dt;
+    draw();
+  }
+  animId = requestAnimationFrame(loop);
+}
+function stopPreview(){
+  if(animId) cancelAnimationFrame(animId);
+  animId=null;
+}
+
+hidePanel.onclick = ()=>{
+  effectPanel.style.display = 'none';
+  togglePanel.style.display = 'inline-block';
+};
+togglePanel.onclick = ()=>{
+  effectPanel.style.display = 'block';
+  togglePanel.style.display = 'none';
+};
+
+// 异步导出，防止卡死
+exportBtn.onclick = async () => {
+  if (!srcImageData) { alert('先上传图片'); return; }
+  if (effects.length === 0) { alert('至少添加一个效果'); return; }
+  stopPreview();
+  const total = 30;
+  const zip = new JSZip();
+  for (let i = 0; i < total; i++) {
+    const t = (i / total) * Math.PI * 2;
+    time = t;
+    draw();
+    await new Promise(r=>setTimeout(r,0));
+    const dataUrl = canvas.toDataURL('image/png');
+    const b64 = dataUrl.split(',')[1];
+    zip.file(`frame_${String(i).padStart(3,'0')}.png`, b64, {base64:true});
+    log(`导出帧 ${i+1}/${total}`);
+  }
+  const blob = await zip.generateAsync({type:'blob'});
+  saveAs(blob, 'character_animation_frames.zip');
+  log('✅ 序列帧打包完成，开始下载');
+  startPreview();
+};
+
+lowPerfCb.onchange = ()=>{
+  if(sourceImg){
+    log('切换性能模式，重新加载图片生效');
+  }
+}
+</script>
+</body>
+</html>
