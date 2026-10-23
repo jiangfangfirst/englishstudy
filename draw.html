@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>多多好学 动画导出工具</title>
+<title>图片动画GIF生成工具</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif}
 body{background:#0f0f0f;color:#eee;overflow:hidden;height:100vh;display:flex}
 #mainWrap{display:flex;width:100%;height:100%}
-#canvasBox{flex:1;position:relative;display:flex;align-items:center;justify-content:center;background:#070707}
+#canvasBox{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#070707;gap:10px}
 #cvs{border:1px solid #333;background:#fff}
+#uploadBtn{padding:8px 14px}
 
 #effectPanel{width:260px;background:#181818;border-left:1px solid #333;padding:12px;overflow-y:auto;transition:0.25s}
 #effectPanel.collapsed{transform:translateX(260px)}
@@ -60,7 +61,9 @@ button.sec:hover{background:#444}
 <body>
 <div id="mainWrap">
   <div id="canvasBox">
+    <button id="uploadBtn">点击上传图片</button>
     <canvas id="cvs" width="800" height="450"></canvas>
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
   </div>
   <div id="effectPanel">
     <h3>效果列表</h3>
@@ -96,8 +99,8 @@ button.sec:hover{background:#444}
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.min.js"></script>
 <script>
-// ========== 内置 setUint24 【解决最初报错】 ==========
 DataView.prototype.setUint24 = function(offset, value, littleEndian = false) {
   if (littleEndian) {
     this.setUint8(offset, value & 0xff);
@@ -114,6 +117,8 @@ const cvs = document.getElementById('cvs');
 const ctx = cvs.getContext('2d');
 const effectPanel = document.getElementById('effectPanel');
 const listWrap = document.getElementById('listWrap');
+const uploadBtn = document.getElementById('uploadBtn');
+const fileInput = document.getElementById('fileInput');
 
 const floatingParam = document.getElementById('floatingParam');
 const fpTitleBar = document.getElementById('fpTitleBar');
@@ -133,13 +138,26 @@ let fpJustOpened = false;
 let playing = true;
 let frame = 0;
 const fps = 24;
+let img = null;
 
-// 示例效果，你后续自行扩充
 const effects = [
   {id:"shake",name:"抖动",strength:40,range:20,speed:25},
   {id:"zoom",name:"缩放脉动",strength:35,range:15,speed:18},
   {id:"flash",name:"闪烁",strength:50,range:40,speed:30}
 ];
+
+uploadBtn.onclick = ()=>fileInput.click();
+fileInput.onchange = e=>{
+  const f = e.target.files[0];
+  if(!f) return;
+  const reader = new FileReader();
+  reader.onload = ev=>{
+    const i = new Image();
+    i.onload = ()=>{img = i;};
+    i.src = ev.target.result;
+  };
+  reader.readAsDataURL(f);
+};
 
 function renderList(){
   listWrap.innerHTML = '';
@@ -165,21 +183,17 @@ function syncFloatPanelToSelected(){
   fpSpeed.value = ef.speed;
 }
 
-// ========== 弹窗打开（修复版） ==========
 function openFloatingParam(id){
   selectedEffectId = id;
   syncFloatPanelToSelected();
-
   const boxW = floatingParam.offsetWidth || Math.min(340, window.innerWidth - 24);
   const boxH = floatingParam.offsetHeight || 160;
   const initLeft = (window.innerWidth - boxW)/2;
   const initTop  = (window.innerHeight - boxH)/2;
-
   floatingParam.style.left = initLeft + "px";
   floatingParam.style.top  = initTop + "px";
   floatingParam.style.bottom = "";
   floatingParam.style.transform = "";
-
   floatingParam.classList.add('show');
   effectPanel.classList.add('collapsed');
   fpJustOpened = true;
@@ -187,7 +201,6 @@ function openFloatingParam(id){
   renderList();
 }
 
-// ========== 统一关闭入口【核心修复：清除collapsed残留】 ==========
 function closeFloatingParam(){
   floatingParam.classList.remove('show');
   floatingParam.style.left = "";
@@ -201,7 +214,6 @@ fpClose.onclick = (ev)=>{
   closeFloatingParam();
 };
 
-// 点击空白关闭
 document.addEventListener('click', (e)=>{
   if (!floatingParam.classList.contains('show')) return;
   if(fpJustOpened) return;
@@ -210,12 +222,10 @@ document.addEventListener('click', (e)=>{
   closeFloatingParam();
 });
 
-// ========== 拖动逻辑【纯left+top，不会拉伸】 ==========
 (function(){
   let dragging = false;
   let startX = 0, startY = 0;
   let boxStartLeft = 0, boxStartTop = 0;
-
   function onDown(clientX, clientY){
     dragging = true;
     startX = clientX;
@@ -236,13 +246,11 @@ document.addEventListener('click', (e)=>{
     floatingParam.style.top  = newT + 'px';
   }
   function onUp(){ dragging = false; }
-
   fpTitleBar.addEventListener('mousedown', e=>{ e.preventDefault(); onDown(e.clientX, e.clientY); });
   fpTitleBar.addEventListener('touchstart', e=>{
     const t = e.touches[0];
     onDown(t.clientX, t.clientY);
   }, {passive:false});
-
   window.addEventListener('mousemove', e=>onMove(e.clientX, e.clientY));
   window.addEventListener('touchmove', e=>{
     if(!dragging) return;
@@ -253,7 +261,6 @@ document.addEventListener('click', (e)=>{
   window.addEventListener('touchend', onUp);
 })();
 
-// 滑块实时回写数据
 fpStrength.oninput = ()=>{
   const ef = effects.find(x=>x.id === selectedEffectId);
   if(ef) ef.strength = +fpStrength.value;
@@ -267,15 +274,13 @@ fpSpeed.oninput = ()=>{
   if(ef) ef.speed = +fpSpeed.value;
 }
 
-// 简单渲染逻辑
 function draw(){
   ctx.fillStyle="#fff";
   ctx.fillRect(0,0,cvs.width,cvs.height);
-  ctx.fillStyle="#222";
-  ctx.font="28px sans-serif";
-  ctx.textAlign="center";
+  if(!img) return;
   const ef = effects.find(x=>x.id === selectedEffectId);
   let ox=0,oy=0,scale=1;
+  let globalAlpha = 1;
   if(ef){
     const t = frame / fps * ef.speed;
     if(ef.id === "shake"){
@@ -285,13 +290,17 @@ function draw(){
       scale = 1 + Math.sin(t)*ef.range/100;
     }else if(ef.id === "flash"){
       const v = (Math.sin(t)+1)/2;
-      ctx.globalAlpha = 0.3 + v*0.7;
+      globalAlpha = 0.3 + v*0.7;
     }
   }
   ctx.save();
+  ctx.globalAlpha = globalAlpha;
   ctx.translate(cvs.width/2 + ox, cvs.height/2 + oy);
   ctx.scale(scale,scale);
-  ctx.fillText("Demo Text",0,0);
+  // 图片居中绘制
+  const iw = img.width;
+  const ih = img.height;
+  ctx.drawImage(img, -iw/2, -ih/2);
   ctx.restore();
   ctx.globalAlpha = 1;
 }
@@ -305,7 +314,6 @@ function loop(){
 btnPlay.onclick = ()=> playing = !playing;
 btnReset.onclick = ()=> frame = 0;
 
-// ========== 单帧WebP编码 ==========
 async function encodeSingleLosslessWebp(canvasEl) {
   return new Promise((resolve, reject) => {
     canvasEl.toBlob(
@@ -321,7 +329,6 @@ async function encodeSingleLosslessWebp(canvasEl) {
     );
   });
 }
-
 async function encodeSingleLossyWebp(canvasEl) {
   return new Promise((res, rej)=>{
     canvasEl.toBlob(b=>{
@@ -332,8 +339,6 @@ async function encodeSingleLossyWebp(canvasEl) {
     },"image/webp",{quality:0.85});
   })
 }
-
-// ========== 组装 ANIM 动图WebP ==========
 async function buildAnimatedWebP(frames, delays, width, height) {
   const chunks = [];
   const animBuf = new ArrayBuffer(6);
@@ -341,7 +346,6 @@ async function buildAnimatedWebP(frames, delays, width, height) {
   animView.setUint32(0, 0, true);
   animView.setUint16(4, 0, true);
   chunks.push({fourcc: "ANIM", data: new Uint8Array(animBuf)});
-
   for (let i = 0; i < frames.length; i++) {
     const frameBin = frames[i];
     const dms = delays[i];
@@ -353,7 +357,6 @@ async function buildAnimatedWebP(frames, delays, width, height) {
     anmfView.setUint24(9, height, true);
     anmfView.setUint32(12, dms, true);
     chunks.push({fourcc: "ANMF", data: new Uint8Array(anmfBuf)});
-
     const webpMagic = new TextDecoder().decode(frameBin.slice(8,12));
     if (webpMagic !== "WEBP") throw new Error(`第${i}帧不是webp`);
     let ptr = 12;
@@ -365,7 +368,6 @@ async function buildAnimatedWebP(frames, delays, width, height) {
       ptr += 8 + sz + (sz & 1 ? 1 : 0);
     }
   }
-
   let totalPayloadLen = 0;
   for(const c of chunks) {
     totalPayloadLen += 8 + c.data.length + (c.data.length & 1 ? 1 : 0);
@@ -389,9 +391,8 @@ async function buildAnimatedWebP(frames, delays, width, height) {
   }
   return new Uint8Array(riffBuf);
 }
-
-// 导出WebP
 btnExportWebp.onclick = async ()=>{
+  if(!img){alert("请先上传图片");return;}
   alert("开始采集无损WebP帧...");
   const total = 24;
   const frameList = [];
@@ -415,10 +416,35 @@ btnExportWebp.onclick = async ()=>{
   URL.revokeObjectURL(a.href);
   alert("无损WebP导出完成（Chrome/Edge可播放）");
 }
-
-// 导出GIF（简易，如需高质量gif可以引入gif.js，这里只是占位）
-btnExportGif.onclick = ()=> alert("GIF导出入口，你后续接入gif.js");
-
+btnExportGif.onclick = async ()=>{
+  if(!img){alert("请先上传图片");return;}
+  alert("开始生成GIF，稍等...");
+  const totalFrames = 24;
+  const delayMs = 1000/fps;
+  const saveFrame = frame;
+  const gif = new GIF({
+    workers: 2,
+    quality: 10,
+    width: cvs.width,
+    height: cvs.height
+  });
+  for(let i=0;i<totalFrames;i++){
+    frame = i;
+    draw();
+    gif.addFrame(cvs, {copy:true, delay:delayMs});
+  }
+  frame = saveFrame;
+  draw();
+  gif.on('finished', function(blob) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = "anim.gif";
+    a.click();
+    URL.revokeObjectURL(a.href);
+    alert("GIF导出完成！");
+  });
+  gif.render();
+};
 renderList();
 loop();
 </script>
