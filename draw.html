@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>多多动画</title>
+<title>人物局部动画编辑器 V12</title>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
 <style>
@@ -46,7 +46,7 @@ canvas{
 .btn.active{background:#207839;border-color:#2fa552}
 .del-btn{background:#782b2b;border-color:#943838}
 .top-btn{background:#2b5f78;border-color:#387794}
-.effect-item{background:rgba(38,38,38,0.85);border:1px solid #444;border-radius:6px;padding:10px;margin-bottom:8px}
+.effect-item{background:rgba(38,38,38,0.85);border:1px solid #444;border-radius:6px;padding:10px;margin-bottom:8px;transition:opacity .2s ease}
 .item-head{display:flex;align-items:center;justify-content:space-between;gap:4px;flex-wrap:wrap}
 .item-name{font-weight:bold;font-size:14px}
 .param-wrap{margin-top:8px;padding-top:8px;border-top:1px solid #3a3a3a;display:none}
@@ -70,6 +70,22 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
 }
 .perf-row{margin:6px 0;font-size:12px;color:#ccc}
 .upload-row{margin-bottom:8px}
+
+/* 微调时淡化其他元素 */
+.panel.blur-others .effect-item:not(.focus-item),
+.panel.blur-others .upload-row,
+.panel.blur-others .perf-row,
+.panel.blur-others .log,
+.panel.blur-others h3,
+.panel.blur-others #modeBox,
+.panel.blur-others .btn[data-add],
+.panel.blur-others #exportBtn{
+  opacity:.25;
+  pointer-events:none;
+}
+.panel.blur-others .effect-item.focus-item{
+  opacity:1;
+}
 </style>
 </head>
 <body>
@@ -81,7 +97,6 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
 <div class="panel" id="effectPanel">
   <button class="btn" id="hidePanel" style="float:right">隐藏</button>
 
-  <!-- 文件、性能、日志移到面板最顶部 -->
   <div class="upload-row">
     <input type="file" id="imgUpload" accept="image/*">
   </div>
@@ -130,7 +145,6 @@ let animId = null;
 let pendingType = null;
 let pendingMode = null;
 let lastTs = 0;
-const targetDt = 1/60;
 
 const EFFECT_TYPES = {
   shake: {
@@ -234,17 +248,15 @@ function showModes(type){
   modeBox.style.display = 'block';
 }
 
-// ✅ 修复移动端坐标计算
 function getCanvasPos(clientX, clientY){
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;
   const scaleY = canvas.height / rect.height;
   const canvasX = (clientX - rect.left) * scaleX;
   const canvasY = (clientY - rect.top) * scaleY;
-  // 映射原图坐标
-  const srcX = canvasX * (originalW / canvas.width);
-  const srcY = canvasY * (originalH / canvas.height);
-  return {x: srcX, y: srcY};
+  const x = canvasX * (originalW / canvas.width);
+  const y = canvasY * (originalH / canvas.height);
+  return {x,y};
 }
 
 function addEffectAtPos(x,y){
@@ -266,15 +278,12 @@ function addEffectAtPos(x,y){
   log(`✅ 添加：${effect.name}`);
   renderList();
 }
-
-// ✅ 同时绑定 touchstart + click，移动端优先触摸
 canvas.addEventListener('touchstart', (e)=>{
   e.preventDefault();
   const touch = e.touches[0];
   const p = getCanvasPos(touch.clientX, touch.clientY);
   addEffectAtPos(p.x,p.y);
 },{passive:false});
-
 canvas.addEventListener('click', e=>{
   const p = getCanvasPos(e.clientX, e.clientY);
   addEffectAtPos(p.x,p.y);
@@ -298,6 +307,7 @@ function renderList(){
     const div = document.createElement('div');
     div.className = 'effect-item';
     div.style.borderColor = e.color;
+    div.dataset.id = e.id;
     div.innerHTML = `
       <div class="item-head">
         <span class="item-name">${e.name}</span>
@@ -321,7 +331,19 @@ function renderList(){
   effectList.querySelectorAll('.edit-btn').forEach(btn=>{
     btn.onclick = ()=>{
       const pid = +btn.dataset.id;
-      document.querySelector(`[data-param-id="${pid}"]`).classList.toggle('open');
+      const wrap = document.querySelector(`[data-param-id="${pid}"]`);
+      const item = document.querySelector(`.effect-item[data-id="${pid}"]`);
+      document.querySelectorAll('.param-wrap').forEach(w=>{ if(w!==wrap) w.classList.remove('open'); });
+      document.querySelectorAll('.effect-item').forEach(i=>i.classList.remove('focus-item'));
+
+      if(wrap.classList.contains('open')){
+        wrap.classList.remove('open');
+        effectPanel.classList.remove('blur-others');
+      }else{
+        wrap.classList.add('open');
+        item.classList.add('focus-item');
+        effectPanel.classList.add('blur-others');
+      }
     };
   });
   effectList.querySelectorAll('input[type=range]').forEach(input=>{
@@ -420,7 +442,8 @@ function getEffectOffset(effect, x, y, t){
 
 function draw(){
   if (!srcImageData) return;
-  const step = isLowPerf() ? 3 : 2;
+
+  const step = 2;
   const imgData = ctx.createImageData(renderW, renderH);
   const out = imgData.data;
   const scaleToSrc = originalW / renderW;
@@ -436,6 +459,7 @@ function draw(){
         totalOy += off.oy;
       }
       const [r,g,b,a] = sampleBilinear(srcImageData.data, srcX+totalOx, srcY+totalOy, originalW, originalH);
+
       for (let dy = 0; dy < step && y+dy < renderH; dy++) {
         for (let dx = 0; dx < step && x+dx < renderW; dx++) {
           const idx = ((y+dy)*renderW + (x+dx)) *4;
@@ -444,6 +468,7 @@ function draw(){
       }
     }
   }
+
   ctx.putImageData(imgData,0,0);
 }
 
