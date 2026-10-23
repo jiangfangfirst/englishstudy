@@ -21,6 +21,7 @@ canvas{
   display:block;
   width:100%;
   height:auto;
+  touch-action:none;
 }
 .log{color:#888;font-size:12px;margin-top:6px}
 
@@ -89,15 +90,15 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
   </div>
   <div class="log" id="log">日志：等待操作</div>
 
-  <h3>选择效果</h3>
+  <h3>选择效果（点击画面添加）</h3>
   <button class="btn" data-add="shake">抖动</button>
   <button class="btn" data-add="breath">呼吸</button>
-  <button class="btn" data-add="openclose">收缩</button>
+  <button class="btn" data-add="openclose">开合</button>
   <button class="btn" data-add="bounce">弹跳</button>
   <button class="btn" data-add="swing">甩动</button>
 
   <div id="modeBox" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid #3a3a3a">
-    <div style="margin-bottom:6px;color:#ccc;font-size:13px">模式：</div>
+    <div style="margin-bottom:6px;color:#ccc;font-size:13px">请选择动作模式：</div>
     <div id="modeList"></div>
   </div>
 
@@ -121,7 +122,7 @@ const modeList = document.getElementById('modeList');
 const lowPerfCb = document.getElementById('lowPerf');
 
 let sourceImg = null;
-let srcImageData = null; // 原图数据只读取一次
+let srcImageData = null;
 let originalW = 0, originalH = 0;
 let renderW = 0, renderH = 0;
 let time = 0;
@@ -176,7 +177,6 @@ upload.onchange = async (e) => {
   originalW = img.naturalWidth;
   originalH = img.naturalHeight;
 
-  // 限制渲染画布最大边长，移动端降分辨率，交互坐标映射回原图
   const maxSide = isLowPerf() ? 600 : 900;
   const scale = Math.min(1, maxSide / Math.max(originalW, originalH));
   renderW = Math.round(originalW * scale);
@@ -184,7 +184,6 @@ upload.onchange = async (e) => {
   canvas.width = renderW;
   canvas.height = renderH;
 
-  // 一次性缓存原图ImageData，不再每帧getImageData
   const tmp = document.createElement('canvas');
   tmp.width = originalW;
   tmp.height = originalH;
@@ -235,18 +234,17 @@ function showModes(type){
   modeBox.style.display = 'block';
 }
 
-// 统一获取坐标（兼容鼠标+触屏）
-function getCanvasPos(ev){
+// ✅ 修复移动端坐标计算
+function getCanvasPos(clientX, clientY){
   const rect = canvas.getBoundingClientRect();
-  const clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
-  const clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
-  // 显示画布缩放比例
-  const dispScaleX = canvas.width / rect.width;
-  const dispScaleY = canvas.height / rect.height;
-  // 映射回原图坐标（效果坐标是原图坐标，保证范围强度参数统一）
-  const x = (clientX - rect.left) * dispScaleX / (renderW/originalW);
-  const y = (clientY - rect.top) * dispScaleY / (renderH/originalH);
-  return {x,y};
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const canvasX = (clientX - rect.left) * scaleX;
+  const canvasY = (clientY - rect.top) * scaleY;
+  // 映射原图坐标
+  const srcX = canvasX * (originalW / canvas.width);
+  const srcY = canvasY * (originalH / canvas.height);
+  return {x: srcX, y: srcY};
 }
 
 function addEffectAtPos(x,y){
@@ -264,18 +262,21 @@ function addEffectAtPos(x,y){
     range: 110,
     speed: 24
   };
-  // ✅ 新增效果放到列表最上面
   effects.unshift(effect);
   log(`✅ 添加：${effect.name}`);
   renderList();
 }
-canvas.addEventListener('click', e=>{
-  const p = getCanvasPos(e);
-  addEffectAtPos(p.x,p.y);
-});
-canvas.addEventListener('touchend', e=>{
+
+// ✅ 同时绑定 touchstart + click，移动端优先触摸
+canvas.addEventListener('touchstart', (e)=>{
   e.preventDefault();
-  const p = getCanvasPos(e);
+  const touch = e.touches[0];
+  const p = getCanvasPos(touch.clientX, touch.clientY);
+  addEffectAtPos(p.x,p.y);
+},{passive:false});
+
+canvas.addEventListener('click', e=>{
+  const p = getCanvasPos(e.clientX, e.clientY);
   addEffectAtPos(p.x,p.y);
 });
 
@@ -323,7 +324,6 @@ function renderList(){
       document.querySelector(`[data-param-id="${pid}"]`).classList.toggle('open');
     };
   });
-  // ========== 修复滑块参数绑定bug ==========
   effectList.querySelectorAll('input[type=range]').forEach(input=>{
     input.oninput = ()=>{
       const wrap = input.closest('.param-wrap');
@@ -427,7 +427,6 @@ function draw(){
 
   for (let y = 0; y < renderH; y += step) {
     for (let x = 0; x < renderW; x += step) {
-      // 映射到原图坐标再算偏移
       const srcX = x * scaleToSrc;
       const srcY = y * scaleToSrc;
       let totalOx = 0, totalOy = 0;
@@ -474,7 +473,6 @@ togglePanel.onclick = ()=>{
   togglePanel.style.display = 'none';
 };
 
-// 异步导出，防止卡死
 exportBtn.onclick = async () => {
   if (!srcImageData) { alert('先上传图片'); return; }
   if (effects.length === 0) { alert('至少添加一个效果'); return; }
