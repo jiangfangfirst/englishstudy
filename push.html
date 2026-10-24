@@ -3,33 +3,34 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>人像按压 · 修复图片空白</title>
+<title>按压｜完全复用参考draw.html渲染底座</title>
 <link rel="icon" href="data:,">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;}
 body{padding:0;background:#111;color:#eee}
 #canvasWrap{
   position:relative;
+  border:2px solid #444;
   background:#000;
-  width:100vw;
-  height:100vh;
+  display:block;
+  width:100%;
 }
 canvas{
   display:block;
   width:100%;
-  height:100%;
+  height:auto;
   touch-action:none;
+  position:relative;
   z-index:2;
 }
 #fallbackImg{
   position:absolute;
   top:0;left:0;
   width:100%;
-  height:100%;
+  height:auto;
   display:none;
   pointer-events:none;
   z-index:1;
-  object-fit:contain;
 }
 .log{color:#888;font-size:12px;margin-top:6px}
 .upload-row{margin-bottom:8px}
@@ -39,8 +40,8 @@ canvas{
   right:12px;
   width:min(340px, calc(100vw - 24px));
   background:#1c1c1c;
-  padding:14px;
-  border-radius:10px;
+  padding:12px;
+  border-radius:8px;
   box-shadow:0 6px 24px rgba(0,0,0,.45);
   z-index:200;
   transition:opacity .25s ease, transform .25s ease;
@@ -67,7 +68,7 @@ canvas{
   cursor:pointer;
   display:none;
 }
-.row{display:flex;justify-content:space-between;align-items:center;margin:8px 0;gap:6px}
+.row{display:flex;justify-content:space-between;align-items:center;margin:6px 0;gap:6px}
 label{font-size:13px;color:#ccc;white-space:nowrap}
 input[type=range]{flex:1;min-width:80px}
 .perf-row{margin:6px 0;font-size:12px;color:#ccc}
@@ -85,30 +86,27 @@ input[type=range]{flex:1;min-width:80px}
     <input type="file" id="imgUpload" accept="image/*">
   </div>
   <div class="perf-row">
-    <label><input type="checkbox" id="lowPerf">低性能模式</label>
+    <label><input type="checkbox" id="lowPerf">低性能模式（手机建议勾选）</label>
   </div>
   <div class="log" id="log">日志：等待上传图片</div>
 
   <div class="row">
-    <label>按压范围 <span id="rVal">160</span></label>
-    <input type="range" id="rSlider" min="40" max="300" value="160">
+    <label>按压范围 <span id="rVal">180</span></label>
+    <input type="range" id="rSlider" min="40" max="300" value="180">
   </div>
   <div class="row">
-    <label>最大力度 <span id="sVal">0.55</span></label>
-    <input type="range" id="sSlider" min="0.10" max="0.85" step="0.01" value="0.55">
+    <label>最大力度 <span id="sVal">0.60</span></label>
+    <input type="range" id="sSlider" min="0.1" max="0.85" step="0.01" value="0.60">
   </div>
   <div class="row">
-    <label>皮肤刚度 <span id="kVal">12.0</span></label>
+    <label>皮肤刚度 <span id="kVal">12</span></label>
     <input type="range" id="kSlider" min="4" max="30" step="0.5" value="12">
   </div>
-  <div style="margin-top:8px;font-size:12px;color:#aaa">按住图片按压，松开弹性回弹</div>
+  <div style="margin-top:6px;font-size:12px;color:#aaa">按住图片按压，松开弹性回弹</div>
 </div>
 
 <script type="module">
 const canvas = document.getElementById('mainCanvas');
-// 画布像素等于屏幕设备像素
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 const gl = canvas.getContext('webgl', {preserveDrawingBuffer:true, antialias:true});
 const fallbackImg = document.getElementById('fallbackImg');
 if(!gl) {
@@ -129,9 +127,9 @@ const rVal = document.getElementById('rVal');
 const sVal = document.getElementById('sVal');
 const kVal = document.getElementById('kVal');
 
-let pressRange = 160;
-let maxStrength = 0.55;
-let stiffness = 12.0;
+let pressRange = 180;
+let maxStrength = 0.60;
+let stiffness = 12;
 
 rSlider.oninput = ()=>{ pressRange=Number(rSlider.value); rVal.textContent=pressRange; };
 sSlider.oninput = ()=>{ maxStrength=Number(sSlider.value); sVal.textContent=maxStrength.toFixed(2); };
@@ -139,8 +137,12 @@ kSlider.oninput = ()=>{ stiffness=Number(kSlider.value); kVal.textContent=stiffn
 
 function log(txt){ logDom.textContent = '日志：' + txt; }
 function isLowPerf(){ return lowPerfCb.checked; }
+function isMobile(){
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || window.matchMedia('(max-width: 900px)').matches;
+}
 
-// vertex shader
+// ========== 【完全照搬参考draw.html的顶点shader不变】 ==========
 const vSrc = `
 attribute vec2 aPos;
 varying vec2 vUv;
@@ -149,51 +151,37 @@ void main(){
   gl_Position = vec4(aPos,0.,1.);
 }
 `;
-// fragment shader：UV等比居中适配屏幕 + 按压形变
+// ========== 修改片元shader：单点按压形变，删掉多效果数组 ==========
 const fSrc = `
 precision highp float;
 uniform sampler2D uTex;
-uniform vec2 uImgOriginalSize;
-uniform vec4 uScreenImageUV;
-uniform vec2 uPressPosScreen;
-uniform float uPressRangePx;
+uniform vec2 uImgSize;
+uniform vec2 uPressPos;
+uniform float uPressRange;
 uniform float uCurrentDeform;
 varying vec2 vUv;
 
 void main(){
-  // 把片元uv限制到实际图片显示区域，黑边直接输出黑色
-  if(vUv.x < uScreenImageUV.x || vUv.x>uScreenImageUV.z
-     || vUv.y < uScreenImageUV.y || vUv.y>uScreenImageUV.w){
-    gl_FragColor = vec4(0.0);
-    return;
-  }
+  vec2 imgP = vUv * uImgSize;
+  vec2 delta = imgP - uPressPos;
+  float dist = length(delta);
 
-  // 当前片元屏幕css像素
-  float scrX = vUv.x * gl.drawingBufferWidth;
-  float scrY = vUv.y * gl.drawingBufferHeight;
-
-  vec2 deltaScreen = vec2(scrX,scrY) - uPressPosScreen;
-  float distPx = length(deltaScreen);
-
-  vec2 uvOffset = vec2(0.0);
-  if(distPx < uPressRangePx){
-    float fall = 1.0 - distPx / uPressRangePx;
+  vec2 off = vec2(0.0);
+  if(dist < uPressRange){
+    float fall = 1.0 - dist / uPressRange;
     fall = fall * fall;
-    float scaleX = uScreenImageUV.z - uScreenImageUV.x;
-    float scaleY = uScreenImageUV.w - uScreenImageUV.y;
-    uvOffset.x = -deltaScreen.x * fall * uCurrentDeform / gl.drawingBufferWidth / scaleX;
-    uvOffset.y =  deltaScreen.y * fall * uCurrentDeform / gl.drawingBufferHeight / scaleY;
+    off = delta * fall * (-uCurrentDeform);
   }
 
-  vec2 sampleUv = clamp(vUv + uvOffset, 0.0, 1.0);
-  vec4 col = texture2D(uTex, sampleUv);
+  vec2 sampleP = clamp((imgP + off)/uImgSize, 0.0, 1.0);
+  vec4 col = texture2D(uTex, sampleP);
 
-  if(distPx < uPressRangePx){
-    float fall = 1.0 - distPx / uPressRangePx;
+  if(dist < uPressRange){
+    float fall = 1.0 - dist/uPressRange;
     fall = fall*fall;
     float shadow = uCurrentDeform * fall * 0.35;
-    float highlight = uCurrentDeform * fall * fall * 0.15;
-    col.rgb = col.rgb*(1.0‑shadow) + vec3(highlight);
+    float highlight = uCurrentDeform * fall * fall * 0.14;
+    col.rgb = col.rgb*(1.0-shadow) + vec3(highlight);
   }
   gl_FragColor = col;
 }
@@ -216,10 +204,9 @@ gl.useProgram(prog);
 
 const aPos = gl.getAttribLocation(prog,"aPos");
 const uTex = gl.getUniformLocation(prog,"uTex");
-const uImgOriginalSize = gl.getUniformLocation(prog,"uImgOriginalSize");
-const uScreenImageUV = gl.getUniformLocation(prog,"uScreenImageUV");
-const uPressPosScreen = gl.getUniformLocation(prog,"uPressPosScreen");
-const uPressRangePx = gl.getUniformLocation(prog,"uPressRangePx");
+const uImgSize = gl.getUniformLocation(prog,"uImgSize");
+const uPressPos = gl.getUniformLocation(prog,"uPressPos");
+const uPressRange = gl.getUniformLocation(prog,"uPressRange");
 const uCurrentDeform = gl.getUniformLocation(prog,"uCurrentDeform");
 
 const buf = gl.createBuffer();
@@ -236,45 +223,39 @@ gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
+// ========= 【100%原样复制参考draw.html的变量定义】 =========
 let sourceImg = null;
 let originalW = 0, originalH = 0;
-// 图片在屏幕UV的 [x0,y0,x1,y1]
-let imgUvRect = [0,0,1,1];
+let renderW = 0, renderH = 0;
+let previewScale = 1;
 
-//按压状态
+// 按压状态
 let pressing = false;
-let pressScrX = 0;
-let pressScrY = 0;
+let pressX = 0;
+let pressY = 0;
 let targetDeform = 0.0;
 let currentDeform = 0.0;
 let deformVel = 0.0;
 
-let animId = null;
-let lastTs = 0;
+let time = 0;
 const FIXED_STEP = 1 / 60;
 let accumulator = 0;
+let animId = null;
+let lastTs = 0;
 
-// 计算图片等比居中，输出UV矩形
-function calcImageUvRect(){
-  const sw = canvas.width;
-  const sh = canvas.height;
-  const imgRatio = originalW / originalH;
-  const screenRatio = sw / sh;
-  let dispW, dispH;
-  if(imgRatio > screenRatio){
-    dispW = sw;
-    dispH = sw / imgRatio;
-  }else{
-    dispH = sh;
-    dispW = sh * imgRatio;
-  }
-  const u0 = (sw - dispW)*0.5 / sw;
-  const v0 = (sh - dispH)*0.5 / sh;
-  const u1 = u0 + dispW/sw;
-  const v1 = v0 + dispH/sh;
-  imgUvRect = [u0, v0, u1, v1];
+// ========== 【完全照搬参考页面 getCanvasPos 坐标转换，一字不改！】 =========
+function getCanvasPos(clientX, clientY){
+  const rect = canvas.getBoundingClientRect();
+  const displayW = rect.width;
+  const displayH = rect.height;
+  const rx = (clientX - rect.left) / displayW;
+  const ry = (clientY - rect.top) / displayH;
+  const x = rx * originalW;
+  const y = (1 - ry) * originalH;
+  return {x,y};
 }
 
+// ========== 【上传逻辑：完全复制draw.html原版，一行不改动！】 =========
 upload.onchange = async (e) => {
   const file = e.target.files[0];
   upload.value = '';
@@ -285,19 +266,33 @@ upload.onchange = async (e) => {
     const img = new Image();
     img.src = blobUrl;
     await img.decode();
-    log("图片解码成功");
+    log("图片解码成功，准备送入WebGL");
     sourceImg = img;
     originalW = img.naturalWidth;
     originalH = img.naturalHeight;
-
-    calcImageUvRect();
-
+    if (isMobile()) {
+      previewScale = isLowPerf() ? 0.6 : 0.85;
+      renderW = Math.round(originalW * previewScale);
+      renderH = Math.round(originalH * previewScale);
+    } else {
+      previewScale = 1;
+      renderW = originalW;
+      renderH = originalH;
+    }
+    canvas.width = renderW;
+    canvas.height = renderH;
+    gl.viewport(0,0,renderW,renderH);
     gl.bindTexture(gl.TEXTURE_2D, tex);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
-
     fallbackImg.style.display = "none";
-    log(`✅图片加载完成 ${originalW}×${originalH}`);
+    log(`✅图片加载完成，原图 ${originalW}×${originalH}，预览 ${renderW}×${renderH}`);
+    draw();
+    setTimeout(()=>draw(), 20);
     startPreview();
   }catch(err){
     fallbackImg.style.display = "block";
@@ -306,66 +301,19 @@ upload.onchange = async (e) => {
   }
 };
 
-// 鼠标触摸事件
-canvas.addEventListener('mousedown',e=>{
-  if(!sourceImg) return;
-  pressing = true;
-  pressScrX = e.clientX - canvas.getBoundingClientRect().left;
-  pressScrY = e.clientY - canvas.getBoundingClientRect().top;
-  targetDeform = maxStrength;
-});
-canvas.addEventListener('mousemove',e=>{
-  if(!pressing||!sourceImg) return;
-  pressScrX = e.clientX - canvas.getBoundingClientRect().left;
-  pressScrY = e.clientY - canvas.getBoundingClientRect().top;
-  targetDeform = maxStrength;
-});
-canvas.addEventListener('mouseup',()=>{ pressing=false; targetDeform=0; });
-canvas.addEventListener('mouseleave',()=>{ pressing=false; targetDeform=0; });
-
-canvas.addEventListener('touchstart', (e)=>{
-  e.preventDefault();
-  if(!sourceImg) return;
-  const t = e.touches[0];
-  pressing = true;
-  const rect = canvas.getBoundingClientRect();
-  pressScrX = t.clientX - rect.left;
-  pressScrY = t.clientY - rect.top;
-  targetDeform = maxStrength;
-},{passive:false});
-
-canvas.addEventListener('touchmove', (e)=>{
-  e.preventDefault();
-  if(!pressing||!sourceImg) return;
-  const t = e.touches[0];
-  const rect = canvas.getBoundingClientRect();
-  pressScrX = t.clientX - rect.left;
-  pressScrY = t.clientY - rect.top;
-  targetDeform = maxStrength;
-},{passive:false});
-
-canvas.addEventListener('touchend',()=>{ pressing=false; targetDeform=0; });
-canvas.addEventListener('touchcancel',()=>{ pressing=false; targetDeform=0; });
-
-window.addEventListener('resize',()=>{
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  gl.viewport(0,0,canvas.width,canvas.height);
-  if(sourceImg) calcImageUvRect();
-});
-
+// ========= draw() 照搬参考页框架，只替换uniform变量 =========
 function draw(){
   if(!sourceImg) return;
   gl.useProgram(prog);
   gl.uniform1i(uTex,0);
-  gl.uniform2f(uImgOriginalSize, originalW, originalH);
-  gl.uniform4f(uScreenImageUV, imgUvRect[0], imgUvRect[1], imgUvRect[2], imgUvRect[3]);
-  gl.uniform2f(uPressPosScreen, pressScrX, pressScrY);
-  gl.uniform1f(uPressRangePx, pressRange);
+  gl.uniform2f(uImgSize, originalW, originalH);
+  gl.uniform2f(uPressPos, pressX, pressY);
+  gl.uniform1f(uPressRange, pressRange);
   gl.uniform1f(uCurrentDeform, currentDeform);
   gl.drawArrays(gl.TRIANGLES,0,6);
 }
 
+// ========== 【时间循环 startPreview 完全复制参考draw.html原版】 =========
 function startPreview(){
   stopPreview();
   lastTs = performance.now();
@@ -377,11 +325,14 @@ function startPreview(){
     accumulator += realDt;
     while(accumulator >= FIXED_STEP){
       const dt = FIXED_STEP;
+      // 弹簧‑阻尼物理
       const springK = stiffness;
       const damping = 6.0;
       const acc = -springK*(currentDeform - targetDeform) - damping * deformVel;
       deformVel += acc * dt;
       currentDeform += deformVel * dt;
+
+      time += FIXED_STEP;
       accumulator -= FIXED_STEP;
     }
     draw();
@@ -393,6 +344,49 @@ function stopPreview(){
   animId=null;
 }
 
+// ========== 鼠标触摸事件，复用getCanvasPos =========
+canvas.addEventListener('mousedown',e=>{
+  if(!sourceImg) return;
+  const p = getCanvasPos(e.clientX, e.clientY);
+  pressing = true;
+  pressX = p.x;
+  pressY = p.y;
+  targetDeform = maxStrength;
+});
+canvas.addEventListener('mousemove',e=>{
+  if(!pressing || !sourceImg) return;
+  const p = getCanvasPos(e.clientX, e.clientY);
+  pressX = p.x;
+  pressY = p.y;
+  targetDeform = maxStrength;
+});
+canvas.addEventListener('mouseup',()=>{ pressing=false; targetDeform=0; });
+canvas.addEventListener('mouseleave',()=>{ pressing=false; targetDeform=0; });
+
+canvas.addEventListener('touchstart', (e)=>{
+  e.preventDefault();
+  if(!sourceImg) return;
+  const t = e.touches[0];
+  const p = getCanvasPos(t.clientX, t.clientY);
+  pressing = true;
+  pressX = p.x;
+  pressY = p.y;
+  targetDeform = maxStrength;
+},{passive:false});
+
+canvas.addEventListener('touchmove', (e)=>{
+  e.preventDefault();
+  if(!pressing || !sourceImg) return;
+  const t = e.touches[0];
+  const p = getCanvasPos(t.clientX, t.clientY);
+  pressX = p.x;
+  pressY = p.y;
+  targetDeform = maxStrength;
+},{passive:false});
+
+canvas.addEventListener('touchend',()=>{ pressing=false; targetDeform=0; });
+canvas.addEventListener('touchcancel',()=>{ pressing=false; targetDeform=0; });
+
 hidePanel.onclick = ()=>{
   effectPanel.classList.add('collapsed');
   togglePanel.style.display = 'inline-block';
@@ -401,8 +395,11 @@ togglePanel.onclick = ()=>{
   effectPanel.classList.remove('collapsed');
   togglePanel.style.display = 'none';
 };
+
 lowPerfCb.onchange = ()=>{
-  if(sourceImg) log('切换性能模式，重新上传图片生效');
+  if(sourceImg){
+    log('切换性能模式，重新上传图片生效');
+  }
 }
 </script>
 </body>
