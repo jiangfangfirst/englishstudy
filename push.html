@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>按压｜完全复用参考draw.html渲染底座</title>
+<title>软组织按压｜塌陷隆起 + 松手弹跳衰减</title>
 <link rel="icon" href="data:,">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;}
@@ -91,18 +91,22 @@ input[type=range]{flex:1;min-width:80px}
   <div class="log" id="log">日志：等待上传图片</div>
 
   <div class="row">
-    <label>按压范围 <span id="rVal">180</span></label>
-    <input type="range" id="rSlider" min="40" max="300" value="180">
+    <label>按压半径 <span id="rVal">170</span></label>
+    <input type="range" id="rSlider" min="50" max="320" value="170">
   </div>
   <div class="row">
-    <label>最大力度 <span id="sVal">0.60</span></label>
-    <input type="range" id="sSlider" min="0.1" max="0.85" step="0.01" value="0.60">
+    <label>最大塌陷深度 <span id="depthVal">0.65</span></label>
+    <input type="range" id="depthSlider" min="0.15" max="0.95" step="0.01" value="0.65">
   </div>
   <div class="row">
-    <label>皮肤刚度 <span id="kVal">12</span></label>
-    <input type="range" id="kSlider" min="4" max="30" step="0.5" value="12">
+    <label>弹簧刚度(弹跳) <span id="stiffVal">9.0</span></label>
+    <input type="range" id="stiffSlider" min="4" max="22" step="0.5" value="9.0">
   </div>
-  <div style="margin-top:6px;font-size:12px;color:#aaa">按住图片按压，松开弹性回弹</div>
+  <div class="row">
+    <label>阻尼(衰减快慢) <span id="dampVal">4.5</span></label>
+    <input type="range" id="dampSlider" min="1.5" max="10" step="0.25" value="4.5">
+  </div>
+  <div style="margin-top:6px;font-size:12px;color:#aaa">按住：点塌陷、周围隆起；松手弹跳震荡逐步衰减</div>
 </div>
 
 <script type="module">
@@ -121,19 +125,23 @@ const hidePanel = document.getElementById('hidePanel');
 const lowPerfCb = document.getElementById('lowPerf');
 
 const rSlider = document.getElementById('rSlider');
-const sSlider = document.getElementById('sSlider');
-const kSlider = document.getElementById('kSlider');
+const depthSlider = document.getElementById('depthSlider');
+const stiffSlider = document.getElementById('stiffSlider');
+const dampSlider = document.getElementById('dampSlider');
 const rVal = document.getElementById('rVal');
-const sVal = document.getElementById('sVal');
-const kVal = document.getElementById('kVal');
+const depthVal = document.getElementById('depthVal');
+const stiffVal = document.getElementById('stiffVal');
+const dampVal = document.getElementById('dampVal');
 
-let pressRange = 180;
-let maxStrength = 0.60;
-let stiffness = 12;
+let pressRange = 170;
+let maxDepth = 0.65;
+let stiffness = 9.0;
+let damping = 4.5;
 
 rSlider.oninput = ()=>{ pressRange=Number(rSlider.value); rVal.textContent=pressRange; };
-sSlider.oninput = ()=>{ maxStrength=Number(sSlider.value); sVal.textContent=maxStrength.toFixed(2); };
-kSlider.oninput = ()=>{ stiffness=Number(kSlider.value); kVal.textContent=stiffness; };
+depthSlider.oninput = ()=>{ maxDepth=Number(depthSlider.value); depthVal.textContent=maxDepth.toFixed(2); };
+stiffSlider.oninput = ()=>{ stiffness=Number(stiffSlider.value); stiffVal.textContent=stiffSlider.value; };
+dampSlider.oninput = ()=>{ damping=Number(dampSlider.value); dampVal.textContent=dampSlider.value; };
 
 function log(txt){ logDom.textContent = '日志：' + txt; }
 function isLowPerf(){ return lowPerfCb.checked; }
@@ -142,7 +150,6 @@ function isMobile(){
     || window.matchMedia('(max-width: 900px)').matches;
 }
 
-// ========== 【完全照搬参考draw.html的顶点shader不变】 ==========
 const vSrc = `
 attribute vec2 aPos;
 varying vec2 vUv;
@@ -151,37 +158,42 @@ void main(){
   gl_Position = vec4(aPos,0.,1.);
 }
 `;
-// ========== 修改片元shader：单点按压形变，删掉多效果数组 ==========
+
+// 片元shader：软组织形变 —— 中心塌陷，周边隆起
 const fSrc = `
 precision highp float;
 uniform sampler2D uTex;
 uniform vec2 uImgSize;
 uniform vec2 uPressPos;
 uniform float uPressRange;
-uniform float uCurrentDeform;
+uniform float uDepth;
 varying vec2 vUv;
 
 void main(){
   vec2 imgP = vUv * uImgSize;
   vec2 delta = imgP - uPressPos;
   float dist = length(delta);
+  float R = uPressRange;
 
-  vec2 off = vec2(0.0);
-  if(dist < uPressRange){
-    float fall = 1.0 - dist / uPressRange;
-    fall = fall * fall;
-    off = delta * fall * (-uCurrentDeform);
+  vec2 uvOffset = vec2(0.0);
+  if(dist < R){
+    float t = dist / R;
+    // 径向函数：中心向内凹陷，中间环向外隆起，边缘归零，模拟软组织挤压
+    // t=0(中心点): 负(向内塌陷)；t≈0.5：正值(向外隆起)；t=1归零
+    float curve = (-1.0 + 3.0*t*t) * (1.0‑t)*(1.0‑t);
+    float displace = curve * uDepth;
+    uvOffset = delta * displace;
   }
 
-  vec2 sampleP = clamp((imgP + off)/uImgSize, 0.0, 1.0);
-  vec4 col = texture2D(uTex, sampleP);
+  vec2 sampleUV = clamp((imgP + uvOffset)/uImgSize, 0.0, 1.0);
+  vec4 col = texture2D(uTex, sampleUV);
 
-  if(dist < uPressRange){
-    float fall = 1.0 - dist/uPressRange;
-    fall = fall*fall;
-    float shadow = uCurrentDeform * fall * 0.35;
-    float highlight = uCurrentDeform * fall * fall * 0.14;
-    col.rgb = col.rgb*(1.0-shadow) + vec3(highlight);
+  // 光影：中心凹陷变暗，隆起区域提亮
+  if(dist < R){
+    float t = dist/R;
+    float curve = (-1.0 + 3.0*t*t) * (1.0‑t)*(1.0‑t);
+    float light = curve * 0.32;
+    col.rgb = col.rgb * (1.0‑light) + vec3(‑light, light*0.75, light*0.75);
   }
   gl_FragColor = col;
 }
@@ -207,7 +219,7 @@ const uTex = gl.getUniformLocation(prog,"uTex");
 const uImgSize = gl.getUniformLocation(prog,"uImgSize");
 const uPressPos = gl.getUniformLocation(prog,"uPressPos");
 const uPressRange = gl.getUniformLocation(prog,"uPressRange");
-const uCurrentDeform = gl.getUniformLocation(prog,"uCurrentDeform");
+const uDepth = gl.getUniformLocation(prog,"uDepth");
 
 const buf = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER,buf);
@@ -223,27 +235,25 @@ gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
-// ========= 【100%原样复制参考draw.html的变量定义】 =========
 let sourceImg = null;
 let originalW = 0, originalH = 0;
 let renderW = 0, renderH = 0;
 let previewScale = 1;
 
-// 按压状态
+//交互物理
 let pressing = false;
-let pressX = 0;
-let pressY = 0;
-let targetDeform = 0.0;
-let currentDeform = 0.0;
-let deformVel = 0.0;
+let pressImgX = 0;
+let pressImgY = 0;
+let targetDepth = 0.0;
+let currentDepth = 0.0;
+let depthVel = 0.0;
 
-let time = 0;
-const FIXED_STEP = 1 / 60;
-let accumulator = 0;
 let animId = null;
 let lastTs = 0;
+const FIXED_STEP = 1 / 60;
+let accumulator = 0;
 
-// ========== 【完全照搬参考页面 getCanvasPos 坐标转换，一字不改！】 =========
+// 完全沿用参考工程坐标转换
 function getCanvasPos(clientX, clientY){
   const rect = canvas.getBoundingClientRect();
   const displayW = rect.width;
@@ -255,7 +265,6 @@ function getCanvasPos(clientX, clientY){
   return {x,y};
 }
 
-// ========== 【上传逻辑：完全复制draw.html原版，一行不改动！】 =========
 upload.onchange = async (e) => {
   const file = e.target.files[0];
   upload.value = '';
@@ -266,7 +275,7 @@ upload.onchange = async (e) => {
     const img = new Image();
     img.src = blobUrl;
     await img.decode();
-    log("图片解码成功，准备送入WebGL");
+    log("图片解码成功，送入WebGL");
     sourceImg = img;
     originalW = img.naturalWidth;
     originalH = img.naturalHeight;
@@ -290,9 +299,7 @@ upload.onchange = async (e) => {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
     fallbackImg.style.display = "none";
-    log(`✅图片加载完成，原图 ${originalW}×${originalH}，预览 ${renderW}×${renderH}`);
-    draw();
-    setTimeout(()=>draw(), 20);
+    log(`✅加载完成 ${originalW}×${originalH}`);
     startPreview();
   }catch(err){
     fallbackImg.style.display = "block";
@@ -301,19 +308,59 @@ upload.onchange = async (e) => {
   }
 };
 
-// ========= draw() 照搬参考页框架，只替换uniform变量 =========
+canvas.addEventListener('mousedown',e=>{
+  if(!sourceImg) return;
+  const p = getCanvasPos(e.clientX, e.clientY);
+  pressing = true;
+  pressImgX = p.x;
+  pressImgY = p.y;
+  targetDepth = maxDepth;
+});
+canvas.addEventListener('mousemove',e=>{
+  if(!pressing || !sourceImg) return;
+  const p = getCanvasPos(e.clientX, e.clientY);
+  pressImgX = p.x;
+  pressImgY = p.y;
+  targetDepth = maxDepth;
+});
+canvas.addEventListener('mouseup',()=>{ pressing=false; targetDepth=0.0; });
+canvas.addEventListener('mouseleave',()=>{ pressing=false; targetDepth=0.0; });
+
+canvas.addEventListener('touchstart', (e)=>{
+  e.preventDefault();
+  if(!sourceImg) return;
+  const t = e.touches[0];
+  const p = getCanvasPos(t.clientX, t.clientY);
+  pressing = true;
+  pressImgX = p.x;
+  pressImgY = p.y;
+  targetDepth = maxDepth;
+},{passive:false});
+
+canvas.addEventListener('touchmove', (e)=>{
+  e.preventDefault();
+  if(!pressing || !sourceImg) return;
+  const t = e.touches[0];
+  const p = getCanvasPos(t.clientX, t.clientY);
+  pressImgX = p.x;
+  pressImgY = p.y;
+  targetDepth = maxDepth;
+},{passive:false});
+
+canvas.addEventListener('touchend',()=>{ pressing=false; targetDepth=0.0; });
+canvas.addEventListener('touchcancel',()=>{ pressing=false; targetDepth=0.0; });
+
 function draw(){
   if(!sourceImg) return;
   gl.useProgram(prog);
   gl.uniform1i(uTex,0);
   gl.uniform2f(uImgSize, originalW, originalH);
-  gl.uniform2f(uPressPos, pressX, pressY);
+  gl.uniform2f(uPressPos, pressImgX, pressImgY);
   gl.uniform1f(uPressRange, pressRange);
-  gl.uniform1f(uCurrentDeform, currentDeform);
+  gl.uniform1f(uDepth, currentDepth);
   gl.drawArrays(gl.TRIANGLES,0,6);
 }
 
-// ========== 【时间循环 startPreview 完全复制参考draw.html原版】 =========
 function startPreview(){
   stopPreview();
   lastTs = performance.now();
@@ -325,14 +372,10 @@ function startPreview(){
     accumulator += realDt;
     while(accumulator >= FIXED_STEP){
       const dt = FIXED_STEP;
-      // 弹簧‑阻尼物理
-      const springK = stiffness;
-      const damping = 6.0;
-      const acc = -springK*(currentDeform - targetDeform) - damping * deformVel;
-      deformVel += acc * dt;
-      currentDeform += deformVel * dt;
-
-      time += FIXED_STEP;
+      // 弹簧‑阻尼振荡系统：松手产生弹跳、逐步衰减
+      const acc = -stiffness*(currentDepth‑targetDepth) - damping * depthVel;
+      depthVel += acc * dt;
+      currentDepth += depthVel * dt;
       accumulator -= FIXED_STEP;
     }
     draw();
@@ -344,49 +387,6 @@ function stopPreview(){
   animId=null;
 }
 
-// ========== 鼠标触摸事件，复用getCanvasPos =========
-canvas.addEventListener('mousedown',e=>{
-  if(!sourceImg) return;
-  const p = getCanvasPos(e.clientX, e.clientY);
-  pressing = true;
-  pressX = p.x;
-  pressY = p.y;
-  targetDeform = maxStrength;
-});
-canvas.addEventListener('mousemove',e=>{
-  if(!pressing || !sourceImg) return;
-  const p = getCanvasPos(e.clientX, e.clientY);
-  pressX = p.x;
-  pressY = p.y;
-  targetDeform = maxStrength;
-});
-canvas.addEventListener('mouseup',()=>{ pressing=false; targetDeform=0; });
-canvas.addEventListener('mouseleave',()=>{ pressing=false; targetDeform=0; });
-
-canvas.addEventListener('touchstart', (e)=>{
-  e.preventDefault();
-  if(!sourceImg) return;
-  const t = e.touches[0];
-  const p = getCanvasPos(t.clientX, t.clientY);
-  pressing = true;
-  pressX = p.x;
-  pressY = p.y;
-  targetDeform = maxStrength;
-},{passive:false});
-
-canvas.addEventListener('touchmove', (e)=>{
-  e.preventDefault();
-  if(!pressing || !sourceImg) return;
-  const t = e.touches[0];
-  const p = getCanvasPos(t.clientX, t.clientY);
-  pressX = p.x;
-  pressY = p.y;
-  targetDeform = maxStrength;
-},{passive:false});
-
-canvas.addEventListener('touchend',()=>{ pressing=false; targetDeform=0; });
-canvas.addEventListener('touchcancel',()=>{ pressing=false; targetDeform=0; });
-
 hidePanel.onclick = ()=>{
   effectPanel.classList.add('collapsed');
   togglePanel.style.display = 'inline-block';
@@ -395,10 +395,9 @@ togglePanel.onclick = ()=>{
   effectPanel.classList.remove('collapsed');
   togglePanel.style.display = 'none';
 };
-
 lowPerfCb.onchange = ()=>{
   if(sourceImg){
-    log('切换性能模式，重新上传图片生效');
+    log('切换性能模式，请重新上传图片生效');
   }
 }
 </script>
