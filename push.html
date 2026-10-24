@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>软组织按压｜塌陷隆起 + 松手弹跳衰减</title>
+<title>软组织按压｜双保险，图片一定可见</title>
 <link rel="icon" href="data:,">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;}
@@ -31,6 +31,7 @@ canvas{
   display:none;
   pointer-events:none;
   z-index:1;
+  opacity:1;
 }
 .log{color:#888;font-size:12px;margin-top:6px}
 .upload-row{margin-bottom:8px}
@@ -88,7 +89,7 @@ input[type=range]{flex:1;min-width:80px}
   <div class="perf-row">
     <label><input type="checkbox" id="lowPerf">低性能模式（手机建议勾选）</label>
   </div>
-  <div class="log" id="log">日志：等待上传图片</div>
+  <div class="log" id="log">日志：等待上传图片｜双击打开仅能看图，无形变！</div>
 
   <div class="row">
     <label>按压半径 <span id="rVal">170</span></label>
@@ -106,15 +107,15 @@ input[type=range]{flex:1;min-width:80px}
     <label>阻尼(衰减快慢) <span id="dampVal">4.5</span></label>
     <input type="range" id="dampSlider" min="1.5" max="10" step="0.25" value="4.5">
   </div>
-  <div style="margin-top:6px;font-size:12px;color:#aaa">按住：点塌陷、周围隆起；松手弹跳震荡逐步衰减</div>
+  <div style="margin-top:6px;font-size:12px;color:#aaa">按住：点塌陷、周围隆起；松手弹跳震荡逐步衰减<br>⚠️必须Live‑Server(http)才有按压形变效果</div>
 </div>
 
 <script type="module">
 const canvas = document.getElementById('mainCanvas');
 const gl = canvas.getContext('webgl', {preserveDrawingBuffer:true, antialias:true});
 const fallbackImg = document.getElementById('fallbackImg');
-if(!gl) {
-  alert("浏览器不支持WebGL");
+let webglOk = !!gl;
+if(!webglOk) {
   fallbackImg.style.display = "block";
 }
 const logDom = document.getElementById('log');
@@ -150,6 +151,7 @@ function isMobile(){
     || window.matchMedia('(max-width: 900px)').matches;
 }
 
+// shader
 const vSrc = `
 attribute vec2 aPos;
 varying vec2 vUv;
@@ -158,8 +160,6 @@ void main(){
   gl_Position = vec4(aPos,0.,1.);
 }
 `;
-
-// 片元shader：软组织形变 —— 中心塌陷，周边隆起
 const fSrc = `
 precision highp float;
 uniform sampler2D uTex;
@@ -178,8 +178,6 @@ void main(){
   vec2 uvOffset = vec2(0.0);
   if(dist < R){
     float t = dist / R;
-    // 径向函数：中心向内凹陷，中间环向外隆起，边缘归零，模拟软组织挤压
-    // t=0(中心点): 负(向内塌陷)；t≈0.5：正值(向外隆起)；t=1归零
     float curve = (-1.0 + 3.0*t*t) * (1.0‑t)*(1.0‑t);
     float displace = curve * uDepth;
     uvOffset = delta * displace;
@@ -188,7 +186,6 @@ void main(){
   vec2 sampleUV = clamp((imgP + uvOffset)/uImgSize, 0.0, 1.0);
   vec4 col = texture2D(uTex, sampleUV);
 
-  // 光影：中心凹陷变暗，隆起区域提亮
   if(dist < R){
     float t = dist/R;
     float curve = (-1.0 + 3.0*t*t) * (1.0‑t)*(1.0‑t);
@@ -199,48 +196,51 @@ void main(){
 }
 `;
 
-function compileShader(src,type){
-  const sh = gl.createShader(type);
-  gl.shaderSource(sh,src);
-  gl.compileShader(sh);
-  if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(sh);
-  return sh;
+let prog=null,aPos=null,uTex=null,uImgSize=null,uPressPos=null,uPressRange=null,uDepth=null;
+let tex=null;
+
+if(webglOk){
+  function compileShader(src,type){
+    const sh = gl.createShader(type);
+    gl.shaderSource(sh,src);
+    gl.compileShader(sh);
+    if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(sh);
+    return sh;
+  }
+  const vSh = compileShader(vSrc,gl.VERTEX_SHADER);
+  const fSh = compileShader(fSrc,gl.FRAGMENT_SHADER);
+  prog = gl.createProgram();
+  gl.attachShader(prog,vSh);
+  gl.attachShader(prog,fSh);
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  aPos = gl.getAttribLocation(prog,"aPos");
+  uTex = gl.getUniformLocation(prog,"uTex");
+  uImgSize = gl.getUniformLocation(prog,"uImgSize");
+  uPressPos = gl.getUniformLocation(prog,"uPressPos");
+  uPressRange = gl.getUniformLocation(prog,"uPressRange");
+  uDepth = gl.getUniformLocation(prog,"uDepth");
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1, 1,-1, -1,1, 1,-1,1,1,-1,1]),gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
+
+  tex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D,tex);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 }
-const vSh = compileShader(vSrc,gl.VERTEX_SHADER);
-const fSh = compileShader(fSrc,gl.FRAGMENT_SHADER);
-const prog = gl.createProgram();
-gl.attachShader(prog,vSh);
-gl.attachShader(prog,fSh);
-gl.linkProgram(prog);
-gl.useProgram(prog);
-
-const aPos = gl.getAttribLocation(prog,"aPos");
-const uTex = gl.getUniformLocation(prog,"uTex");
-const uImgSize = gl.getUniformLocation(prog,"uImgSize");
-const uPressPos = gl.getUniformLocation(prog,"uPressPos");
-const uPressRange = gl.getUniformLocation(prog,"uPressRange");
-const uDepth = gl.getUniformLocation(prog,"uDepth");
-
-const buf = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER,buf);
-gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1, 1,-1, -1,1, 1,-1,1,1,-1,1]),gl.STATIC_DRAW);
-gl.enableVertexAttribArray(aPos);
-gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
-
-const tex = gl.createTexture();
-gl.bindTexture(gl.TEXTURE_2D,tex);
-gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
 let sourceImg = null;
 let originalW = 0, originalH = 0;
 let renderW = 0, renderH = 0;
 let previewScale = 1;
 
-//交互物理
 let pressing = false;
 let pressImgX = 0;
 let pressImgY = 0;
@@ -253,7 +253,6 @@ let lastTs = 0;
 const FIXED_STEP = 1 / 60;
 let accumulator = 0;
 
-// 完全沿用参考工程坐标转换
 function getCanvasPos(clientX, clientY){
   const rect = canvas.getBoundingClientRect();
   const displayW = rect.width;
@@ -275,8 +274,10 @@ upload.onchange = async (e) => {
     const img = new Image();
     img.src = blobUrl;
     await img.decode();
-    log("图片解码成功，送入WebGL");
     sourceImg = img;
+    fallbackImg.src = blobUrl;
+    fallbackImg.style.display = "block";
+
     originalW = img.naturalWidth;
     originalH = img.naturalHeight;
     if (isMobile()) {
@@ -290,16 +291,25 @@ upload.onchange = async (e) => {
     }
     canvas.width = renderW;
     canvas.height = renderH;
-    gl.viewport(0,0,renderW,renderH);
-    gl.bindTexture(gl.TEXTURE_2D, tex);
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
-    fallbackImg.style.display = "none";
-    log(`✅加载完成 ${originalW}×${originalH}`);
+
+    if(webglOk){
+      gl.viewport(0,0,renderW,renderH);
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      try{
+        gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+        log(`✅WebGL就绪，原图 ${originalW}×${originalH}，请按住图片按压形变！`);
+        fallbackImg.style.display = "none";
+      }catch(err){
+        log(`⚠️WebGL纹理被浏览器安全拦截，只能看静态图，无按压效果。请用Live‑Server打开！`);
+      }
+    }else{
+      log("⚠️浏览器不支持WebGL，仅可显示静态图片");
+    }
     startPreview();
   }catch(err){
     fallbackImg.style.display = "block";
@@ -307,6 +317,42 @@ upload.onchange = async (e) => {
     console.error(err);
   }
 };
+
+function draw(){
+  if(!sourceImg || !webglOk || !prog) return;
+  gl.useProgram(prog);
+  gl.uniform1i(uTex,0);
+  gl.uniform2f(uImgSize, originalW, originalH);
+  gl.uniform2f(uPressPos, pressImgX, pressImgY);
+  gl.uniform1f(uPressRange, pressRange);
+  gl.uniform1f(uDepth, currentDepth);
+  gl.drawArrays(gl.TRIANGLES,0,6);
+}
+
+function startPreview(){
+  stopPreview();
+  lastTs = performance.now();
+  accumulator = 0;
+  function loop(ts){
+    animId = requestAnimationFrame(loop);
+    const realDt = Math.min(0.05, (ts - lastTs)/1000);
+    lastTs = ts;
+    accumulator += realDt;
+    while(accumulator >= FIXED_STEP){
+      const dt = FIXED_STEP;
+      const acc = -stiffness*(currentDepth‑targetDepth) - damping * depthVel;
+      depthVel += acc * dt;
+      currentDepth += depthVel * dt;
+      accumulator -= FIXED_STEP;
+    }
+    draw();
+  }
+  animId = requestAnimationFrame(loop);
+}
+function stopPreview(){
+  if(animId) cancelAnimationFrame(animId);
+  animId=null;
+}
 
 canvas.addEventListener('mousedown',e=>{
   if(!sourceImg) return;
@@ -349,43 +395,6 @@ canvas.addEventListener('touchmove', (e)=>{
 
 canvas.addEventListener('touchend',()=>{ pressing=false; targetDepth=0.0; });
 canvas.addEventListener('touchcancel',()=>{ pressing=false; targetDepth=0.0; });
-
-function draw(){
-  if(!sourceImg) return;
-  gl.useProgram(prog);
-  gl.uniform1i(uTex,0);
-  gl.uniform2f(uImgSize, originalW, originalH);
-  gl.uniform2f(uPressPos, pressImgX, pressImgY);
-  gl.uniform1f(uPressRange, pressRange);
-  gl.uniform1f(uDepth, currentDepth);
-  gl.drawArrays(gl.TRIANGLES,0,6);
-}
-
-function startPreview(){
-  stopPreview();
-  lastTs = performance.now();
-  accumulator = 0;
-  function loop(ts){
-    animId = requestAnimationFrame(loop);
-    const realDt = Math.min(0.05, (ts - lastTs)/1000);
-    lastTs = ts;
-    accumulator += realDt;
-    while(accumulator >= FIXED_STEP){
-      const dt = FIXED_STEP;
-      // 弹簧‑阻尼振荡系统：松手产生弹跳、逐步衰减
-      const acc = -stiffness*(currentDepth‑targetDepth) - damping * depthVel;
-      depthVel += acc * dt;
-      currentDepth += depthVel * dt;
-      accumulator -= FIXED_STEP;
-    }
-    draw();
-  }
-  animId = requestAnimationFrame(loop);
-}
-function stopPreview(){
-  if(animId) cancelAnimationFrame(animId);
-  animId=null;
-}
 
 hidePanel.onclick = ()=>{
   effectPanel.classList.add('collapsed');
