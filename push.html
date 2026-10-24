@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>软组织按压｜强弹跳大半径</title>
+<title>软组织按压｜修复橙色亮斑溢出</title>
+<meta http-equiv="Cache‑Control" content="no‑cache, no‑store, must‑revalidate">
+<meta http‑equiv="Pragma" content="no‑cache">
+<meta http‑equiv="Expires" content="0">
 <link rel="icon" href="data:,">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;}
+*{box‑sizing:border‑box;margin:0;padding:0;font‑family:system‑ui, sans‑serif;‑webkit‑tap‑highlight‑color:transparent;user‑select:none;}
 body{padding:0;background:#111;color:#eee}
 #canvasWrap{
   position:relative;
@@ -19,9 +22,9 @@ canvas{
   display:block;
   width:100%;
   height:auto;
-  touch-action:none;
+  touch‑action:none;
   position:relative;
-  z-index:2;
+  z‑index:2;
 }
 #fallbackImg{
   position:absolute;
@@ -29,50 +32,50 @@ canvas{
   width:100%;
   height:auto;
   display:none;
-  pointer-events:none;
-  z-index:1;
+  pointer‑events:none;
+  z‑index:1;
   opacity:1;
 }
-.log{color:#888;font-size:12px;margin-top:6px}
-.upload-row{margin-bottom:8px}
+.log{color:#888;font‑size:12px;margin‑top:6px}
+.upload‑row{margin‑bottom:8px}
 .panel{
   position:fixed;
   top:12px;
   right:12px;
-  width:min(340px, calc(100vw - 24px));
+  width:min(340px, calc(100vw ‑ 24px));
   background:#1c1c1c;
   padding:12px;
-  border-radius:8px;
-  box-shadow:0 6px 24px rgba(0,0,0,.45);
-  z-index:200;
+  border‑radius:8px;
+  box‑shadow:0 6px 24px rgba(0,0,0,.45);
+  z‑index:200;
   transition:opacity .25s ease, transform .25s ease;
 }
 .panel.collapsed{
   opacity:0;
-  transform:translateY(-12px);
-  pointer-events:none;
+  transform:translateY(‑12px);
+  pointer‑events:none;
 }
 .btn{
   padding:8px 7px;margin:3px 2px;cursor:pointer;
-  background:#333;color:#eee;border:1px solid #555;border-radius:4px;font-size:13px;
+  background:#333;color:#eee;border:1px solid #555;border‑radius:4px;font‑size:13px;
 }
-.toggle-panel{
+.toggle‑panel{
   position:fixed;
   top:12px;
   right:12px;
-  z-index:201;
+  z‑index:201;
   background:#207839;
   color:#fff;
   border:none;
   padding:8px 10px;
-  border-radius:4px;
+  border‑radius:4px;
   cursor:pointer;
   display:none;
 }
-.row{display:flex;justify-content:space-between;align-items:center;margin:6px 0;gap:6px}
-label{font-size:13px;color:#ccc;white-space:nowrap}
-input[type=range]{flex:1;min-width:80px}
-.perf-row{margin:6px 0;font-size:12px;color:#ccc}
+.row{display:flex;justify‑content:space‑between;align‑items:center;margin:6px 0;gap:6px}
+label{font‑size:13px;color:#ccc;white‑space:nowrap}
+input[type=range]{flex:1;min‑width:80px}
+.perf‑row{margin:6px 0;font‑size:12px;color:#ccc}
 </style>
 </head>
 <body>
@@ -80,16 +83,16 @@ input[type=range]{flex:1;min-width:80px}
     <canvas id="mainCanvas"></canvas>
     <img id="fallbackImg">
   </div>
-<button class="toggle-panel" id="togglePanel">显示面板</button>
+<button class="toggle‑panel" id="togglePanel">显示面板</button>
 <div class="panel" id="effectPanel">
   <button class="btn" id="hidePanel" style="float:right">隐藏</button>
-  <div class="upload-row">
+  <div class="upload‑row">
     <input type="file" id="imgUpload" accept="image/*">
   </div>
-  <div class="perf-row">
+  <div class="perf‑row">
     <label><input type="checkbox" id="lowPerf">低性能模式（手机建议勾选）</label>
   </div>
-  <div class="log" id="log">日志：等待上传图片｜Live-Server才有形变</div>
+  <div class="log" id="log">日志：等待上传图片｜Live‑Server才有形变</div>
 
   <div class="row">
     <label>按压半径 <span id="rVal">260</span></label>
@@ -107,7 +110,7 @@ input[type=range]{flex:1;min-width:80px}
     <label>阻尼(衰减快慢) <span id="dampVal">2.0</span></label>
     <input type="range" id="dampSlider" min="1.2" max="8.0" step="0.1" value="2.0">
   </div>
-  <div style="margin-top:6px;font-size:12px;color:#aaa">无红点；默认大半径、深塌陷、强弹跳、低阻尼</div>
+  <div style="margin‑top:6px;font‑size:12px;color:#aaa">已修复橙色溢出斑点｜无红点｜松手强弹跳震荡</div>
 </div>
 
 <script type="module">
@@ -147,7 +150,7 @@ function log(txt){ logDom.textContent = '日志：' + txt; }
 function isLowPerf(){ return lowPerfCb.checked; }
 function isMobile(){
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    || window.matchMedia('(max-width: 900px)').matches;
+    || window.matchMedia('(max‑width: 900px)').matches;
 }
 
 const vSrc = `
@@ -159,6 +162,7 @@ void main(){
 }
 `;
 
+// 关键修复：颜色全部clamp锁定0‑1，彻底消除负数值导致橙色斑点
 const fSrc = `
 precision highp float;
 uniform sampler2D uTex;
@@ -177,7 +181,7 @@ void main(){
   vec2 uvOffset = vec2(0.0);
   if(dist < R){
     float t = dist / R;
-    float curve = (-1.0 + 3.0*t*t) * (1.0-t)*(1.0-t);
+    float curve = (-1.0 + 3.0*t*t) * (1.0‑t)*(1.0‑t);
     float displace = curve * uDepth;
     uvOffset = delta * displace;
   }
@@ -187,9 +191,10 @@ void main(){
 
   if(dist < R){
     float t = dist/R;
-    float curve = (-1.0 + 3.0*t*t) * (1.0-t)*(1.0-t);
+    float curve = (-1.0 + 3.0*t*t) * (1.0‑t)*(1.0‑t);
     float light = curve * 0.32;
-    col.rgb = col.rgb * (1.0-light) + vec3(-light, light*0.75, light*0.75);
+    // clamp把RGB锁死0‑1，消除负数造成橙色亮斑
+    col.rgb = clamp(col.rgb * (1.0‑light) + vec3(‑light, light*0.75, light*0.75),0.0,1.0);
   }
   gl_FragColor = col;
 }
@@ -223,7 +228,7 @@ if(webglOk){
 
   const buf = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER,buf);
-  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1, 1,-1, -1,1, 1,-1,1,1,-1,1]),gl.STATIC_DRAW);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([‑1,‑1, 1,‑1, ‑1,1, 1,‑1,1,1,‑1,1]),gl.STATIC_DRAW);
   gl.enableVertexAttribArray(aPos);
   gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
 
@@ -301,10 +306,10 @@ upload.onchange = async (e) => {
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       try{
         gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
-        log("✅WebGL就绪，大半径强弹跳模式");
+        log("✅WebGL就绪｜修复橙色斑点，无红点");
         fallbackImg.style.display = "none";
       }catch(err){
-        log("⚠️安全拦截，仅静态看图，请用Live-Server");
+        log("⚠️安全拦截，仅静态看图，请Live‑Server");
       }
     }else{
       log("⚠️浏览器不支持WebGL");
@@ -381,7 +386,7 @@ function startPreview(){
     accumulator += realDt;
     while(accumulator >= FIXED_STEP){
       const dt = FIXED_STEP;
-      const acc = -stiffness*(currentDepth-targetDepth) - damping * depthVel;
+      const acc = -stiffness*(currentDepth‑targetDepth) - damping * depthVel;
       depthVel += acc * dt;
       currentDepth += depthVel * dt;
       accumulator -= FIXED_STEP;
@@ -397,7 +402,7 @@ function stopPreview(){
 
 hidePanel.onclick = ()=>{
   effectPanel.classList.add('collapsed');
-  togglePanel.style.display = 'inline-block';
+  togglePanel.style.display = 'inline‑block';
 };
 togglePanel.onclick = ()=>{
   effectPanel.classList.remove('collapsed');
