@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>人像按压 · 修复图片空白</title>
+<link rel="icon" href="data:,">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;}
+body{padding:0;background:#111;color:#eee}
+#canvasWrap{
+  position:relative;
+  background:#000;
+  width:100vw;
+  height:100vh;
+}
+canvas{
+  display:block;
+  width:100%;
+  height:100%;
+  touch-action:none;
+  z-index:2;
+}
+#fallbackImg{
+  position:absolute;
+  top:0;left:0;
+  width:100%;
+  height:100%;
+  display:none;
+  pointer-events:none;
+  z-index:1;
+  object-fit:contain;
+}
+.log{color:#888;font-size:12px;margin-top:6px}
+.upload-row{margin-bottom:8px}
+.panel{
+  position:fixed;
+  top:12px;
+  right:12px;
+  width:min(340px, calc(100vw - 24px));
+  background:#1c1c1c;
+  padding:14px;
+  border-radius:10px;
+  box-shadow:0 6px 24px rgba(0,0,0,.45);
+  z-index:200;
+  transition:opacity .25s ease, transform .25s ease;
+}
+.panel.collapsed{
+  opacity:0;
+  transform:translateY(-12px);
+  pointer-events:none;
+}
+.btn{
+  padding:8px 7px;margin:3px 2px;cursor:pointer;
+  background:#333;color:#eee;border:1px solid #555;border-radius:4px;font-size:13px;
+}
+.toggle-panel{
+  position:fixed;
+  top:12px;
+  right:12px;
+  z-index:201;
+  background:#207839;
+  color:#fff;
+  border:none;
+  padding:8px 10px;
+  border-radius:4px;
+  cursor:pointer;
+  display:none;
+}
+.row{display:flex;justify-content:space-between;align-items:center;margin:8px 0;gap:6px}
+label{font-size:13px;color:#ccc;white-space:nowrap}
+input[type=range]{flex:1;min-width:80px}
+.perf-row{margin:6px 0;font-size:12px;color:#ccc}
+</style>
+</head>
+<body>
+  <div id="canvasWrap">
+    <canvas id="mainCanvas"></canvas>
+    <img id="fallbackImg">
+  </div>
+<button class="toggle-panel" id="togglePanel">显示面板</button>
+<div class="panel" id="effectPanel">
+  <button class="btn" id="hidePanel" style="float:right">隐藏</button>
+  <div class="upload-row">
+    <input type="file" id="imgUpload" accept="image/*">
+  </div>
+  <div class="perf-row">
+    <label><input type="checkbox" id="lowPerf">低性能模式</label>
+  </div>
+  <div class="log" id="log">日志：等待上传图片</div>
+
+  <div class="row">
+    <label>按压范围 <span id="rVal">160</span></label>
+    <input type="range" id="rSlider" min="40" max="300" value="160">
+  </div>
+  <div class="row">
+    <label>最大力度 <span id="sVal">0.55</span></label>
+    <input type="range" id="sSlider" min="0.10" max="0.85" step="0.01" value="0.55">
+  </div>
+  <div class="row">
+    <label>皮肤刚度 <span id="kVal">12.0</span></label>
+    <input type="range" id="kSlider" min="4" max="30" step="0.5" value="12">
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:#aaa">按住图片按压，松开弹性回弹</div>
+</div>
+
+<script type="module">
+const canvas = document.getElementById('mainCanvas');
+// 画布像素等于屏幕设备像素
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const gl = canvas.getContext('webgl', {preserveDrawingBuffer:true, antialias:true});
+const fallbackImg = document.getElementById('fallbackImg');
+if(!gl) {
+  alert("浏览器不支持WebGL");
+  fallbackImg.style.display = "block";
+}
+const logDom = document.getElementById('log');
+const upload = document.getElementById('imgUpload');
+const effectPanel = document.getElementById('effectPanel');
+const togglePanel = document.getElementById('togglePanel');
+const hidePanel = document.getElementById('hidePanel');
+const lowPerfCb = document.getElementById('lowPerf');
+
+const rSlider = document.getElementById('rSlider');
+const sSlider = document.getElementById('sSlider');
+const kSlider = document.getElementById('kSlider');
+const rVal = document.getElementById('rVal');
+const sVal = document.getElementById('sVal');
+const kVal = document.getElementById('kVal');
+
+let pressRange = 160;
+let maxStrength = 0.55;
+let stiffness = 12.0;
+
+rSlider.oninput = ()=>{ pressRange=Number(rSlider.value); rVal.textContent=pressRange; };
+sSlider.oninput = ()=>{ maxStrength=Number(sSlider.value); sVal.textContent=maxStrength.toFixed(2); };
+kSlider.oninput = ()=>{ stiffness=Number(kSlider.value); kVal.textContent=stiffness; };
+
+function log(txt){ logDom.textContent = '日志：' + txt; }
+function isLowPerf(){ return lowPerfCb.checked; }
+
+// vertex shader
+const vSrc = `
+attribute vec2 aPos;
+varying vec2 vUv;
+void main(){
+  vUv = aPos * 0.5 + 0.5;
+  gl_Position = vec4(aPos,0.,1.);
+}
+`;
+// fragment shader：UV等比居中适配屏幕 + 按压形变
+const fSrc = `
+precision highp float;
+uniform sampler2D uTex;
+uniform vec2 uImgOriginalSize;
+uniform vec4 uScreenImageUV;
+uniform vec2 uPressPosScreen;
+uniform float uPressRangePx;
+uniform float uCurrentDeform;
+varying vec2 vUv;
+
+void main(){
+  // 把片元uv限制到实际图片显示区域，黑边直接输出黑色
+  if(vUv.x < uScreenImageUV.x || vUv.x>uScreenImageUV.z
+     || vUv.y < uScreenImageUV.y || vUv.y>uScreenImageUV.w){
+    gl_FragColor = vec4(0.0);
+    return;
+  }
+
+  // 当前片元屏幕css像素
+  float scrX = vUv.x * gl.drawingBufferWidth;
+  float scrY = vUv.y * gl.drawingBufferHeight;
+
+  vec2 deltaScreen = vec2(scrX,scrY) - uPressPosScreen;
+  float distPx = length(deltaScreen);
+
+  vec2 uvOffset = vec2(0.0);
+  if(distPx < uPressRangePx){
+    float fall = 1.0 - distPx / uPressRangePx;
+    fall = fall * fall;
+    float scaleX = uScreenImageUV.z - uScreenImageUV.x;
+    float scaleY = uScreenImageUV.w - uScreenImageUV.y;
+    uvOffset.x = -deltaScreen.x * fall * uCurrentDeform / gl.drawingBufferWidth / scaleX;
+    uvOffset.y =  deltaScreen.y * fall * uCurrentDeform / gl.drawingBufferHeight / scaleY;
+  }
+
+  vec2 sampleUv = clamp(vUv + uvOffset, 0.0, 1.0);
+  vec4 col = texture2D(uTex, sampleUv);
+
+  if(distPx < uPressRangePx){
+    float fall = 1.0 - distPx / uPressRangePx;
+    fall = fall*fall;
+    float shadow = uCurrentDeform * fall * 0.35;
+    float highlight = uCurrentDeform * fall * fall * 0.15;
+    col.rgb = col.rgb*(1.0‑shadow) + vec3(highlight);
+  }
+  gl_FragColor = col;
+}
+`;
+
+function compileShader(src,type){
+  const sh = gl.createShader(type);
+  gl.shaderSource(sh,src);
+  gl.compileShader(sh);
+  if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(sh);
+  return sh;
+}
+const vSh = compileShader(vSrc,gl.VERTEX_SHADER);
+const fSh = compileShader(fSrc,gl.FRAGMENT_SHADER);
+const prog = gl.createProgram();
+gl.attachShader(prog,vSh);
+gl.attachShader(prog,fSh);
+gl.linkProgram(prog);
+gl.useProgram(prog);
+
+const aPos = gl.getAttribLocation(prog,"aPos");
+const uTex = gl.getUniformLocation(prog,"uTex");
+const uImgOriginalSize = gl.getUniformLocation(prog,"uImgOriginalSize");
+const uScreenImageUV = gl.getUniformLocation(prog,"uScreenImageUV");
+const uPressPosScreen = gl.getUniformLocation(prog,"uPressPosScreen");
+const uPressRangePx = gl.getUniformLocation(prog,"uPressRangePx");
+const uCurrentDeform = gl.getUniformLocation(prog,"uCurrentDeform");
+
+const buf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1, 1,-1, -1,1, 1,-1,1,1,-1,1]),gl.STATIC_DRAW);
+gl.enableVertexAttribArray(aPos);
+gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
+
+const tex = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D,tex);
+gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+
+let sourceImg = null;
+let originalW = 0, originalH = 0;
+// 图片在屏幕UV的 [x0,y0,x1,y1]
+let imgUvRect = [0,0,1,1];
+
+//按压状态
+let pressing = false;
+let pressScrX = 0;
+let pressScrY = 0;
+let targetDeform = 0.0;
+let currentDeform = 0.0;
+let deformVel = 0.0;
+
+let animId = null;
+let lastTs = 0;
+const FIXED_STEP = 1 / 60;
+let accumulator = 0;
+
+// 计算图片等比居中，输出UV矩形
+function calcImageUvRect(){
+  const sw = canvas.width;
+  const sh = canvas.height;
+  const imgRatio = originalW / originalH;
+  const screenRatio = sw / sh;
+  let dispW, dispH;
+  if(imgRatio > screenRatio){
+    dispW = sw;
+    dispH = sw / imgRatio;
+  }else{
+    dispH = sh;
+    dispW = sh * imgRatio;
+  }
+  const u0 = (sw - dispW)*0.5 / sw;
+  const v0 = (sh - dispH)*0.5 / sh;
+  const u1 = u0 + dispW/sw;
+  const v1 = v0 + dispH/sh;
+  imgUvRect = [u0, v0, u1, v1];
+}
+
+upload.onchange = async (e) => {
+  const file = e.target.files[0];
+  upload.value = '';
+  if (!file) return;
+  log("正在读取文件...");
+  try{
+    const blobUrl = URL.createObjectURL(file);
+    const img = new Image();
+    img.src = blobUrl;
+    await img.decode();
+    log("图片解码成功");
+    sourceImg = img;
+    originalW = img.naturalWidth;
+    originalH = img.naturalHeight;
+
+    calcImageUvRect();
+
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+
+    fallbackImg.style.display = "none";
+    log(`✅图片加载完成 ${originalW}×${originalH}`);
+    startPreview();
+  }catch(err){
+    fallbackImg.style.display = "block";
+    log("❌图片加载失败："+err.message);
+    console.error(err);
+  }
+};
+
+// 鼠标触摸事件
+canvas.addEventListener('mousedown',e=>{
+  if(!sourceImg) return;
+  pressing = true;
+  pressScrX = e.clientX - canvas.getBoundingClientRect().left;
+  pressScrY = e.clientY - canvas.getBoundingClientRect().top;
+  targetDeform = maxStrength;
+});
+canvas.addEventListener('mousemove',e=>{
+  if(!pressing||!sourceImg) return;
+  pressScrX = e.clientX - canvas.getBoundingClientRect().left;
+  pressScrY = e.clientY - canvas.getBoundingClientRect().top;
+  targetDeform = maxStrength;
+});
+canvas.addEventListener('mouseup',()=>{ pressing=false; targetDeform=0; });
+canvas.addEventListener('mouseleave',()=>{ pressing=false; targetDeform=0; });
+
+canvas.addEventListener('touchstart', (e)=>{
+  e.preventDefault();
+  if(!sourceImg) return;
+  const t = e.touches[0];
+  pressing = true;
+  const rect = canvas.getBoundingClientRect();
+  pressScrX = t.clientX - rect.left;
+  pressScrY = t.clientY - rect.top;
+  targetDeform = maxStrength;
+},{passive:false});
+
+canvas.addEventListener('touchmove', (e)=>{
+  e.preventDefault();
+  if(!pressing||!sourceImg) return;
+  const t = e.touches[0];
+  const rect = canvas.getBoundingClientRect();
+  pressScrX = t.clientX - rect.left;
+  pressScrY = t.clientY - rect.top;
+  targetDeform = maxStrength;
+},{passive:false});
+
+canvas.addEventListener('touchend',()=>{ pressing=false; targetDeform=0; });
+canvas.addEventListener('touchcancel',()=>{ pressing=false; targetDeform=0; });
+
+window.addEventListener('resize',()=>{
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  gl.viewport(0,0,canvas.width,canvas.height);
+  if(sourceImg) calcImageUvRect();
+});
+
+function draw(){
+  if(!sourceImg) return;
+  gl.useProgram(prog);
+  gl.uniform1i(uTex,0);
+  gl.uniform2f(uImgOriginalSize, originalW, originalH);
+  gl.uniform4f(uScreenImageUV, imgUvRect[0], imgUvRect[1], imgUvRect[2], imgUvRect[3]);
+  gl.uniform2f(uPressPosScreen, pressScrX, pressScrY);
+  gl.uniform1f(uPressRangePx, pressRange);
+  gl.uniform1f(uCurrentDeform, currentDeform);
+  gl.drawArrays(gl.TRIANGLES,0,6);
+}
+
+function startPreview(){
+  stopPreview();
+  lastTs = performance.now();
+  accumulator = 0;
+  function loop(ts){
+    animId = requestAnimationFrame(loop);
+    const realDt = Math.min(0.05, (ts - lastTs)/1000);
+    lastTs = ts;
+    accumulator += realDt;
+    while(accumulator >= FIXED_STEP){
+      const dt = FIXED_STEP;
+      const springK = stiffness;
+      const damping = 6.0;
+      const acc = -springK*(currentDeform - targetDeform) - damping * deformVel;
+      deformVel += acc * dt;
+      currentDeform += deformVel * dt;
+      accumulator -= FIXED_STEP;
+    }
+    draw();
+  }
+  animId = requestAnimationFrame(loop);
+}
+function stopPreview(){
+  if(animId) cancelAnimationFrame(animId);
+  animId=null;
+}
+
+hidePanel.onclick = ()=>{
+  effectPanel.classList.add('collapsed');
+  togglePanel.style.display = 'inline-block';
+};
+togglePanel.onclick = ()=>{
+  effectPanel.classList.remove('collapsed');
+  togglePanel.style.display = 'none';
+};
+lowPerfCb.onchange = ()=>{
+  if(sourceImg) log('切换性能模式，重新上传图片生效');
+}
+</script>
+</body>
+</html>
