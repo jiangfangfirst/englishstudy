@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>人物局部动画编辑器 WebGL版</title>
+<title>多多好学|照片动起来</title>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
 <link rel="icon" href="data:,">
@@ -126,15 +126,18 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
   border-radius:4px;
   cursor:pointer;
   display:none;
+  user-select:none;
+  -webkit-user-select:none;
 }
 .perf-row{margin:6px 0;font-size:12px;color:#ccc}
 .upload-row{margin-bottom:8px}
-
-/* 修复弹窗：移除bottom、transform，避免双向约束拉伸 */
+/* 修改floating‑param：5%透明度，固定左下角，禁止拖动 */
 .floating-param{
   position:fixed;
+  left:12px;
+  bottom:12px;
   width:min(340px, calc(100vw - 24px));
-  background:#1c1c1c;
+  background:rgba(28,28,28,0.05);
   border:1px solid #444;
   border-radius:10px;
   padding:14px;
@@ -149,7 +152,8 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
   justify-content:space-between;
   align-items:center;
   margin-bottom:10px;
-  cursor:move;
+  /* 移除拖动光标 */
+  cursor:default;
   user-select:none;
 }
 .floating-param .fp-title span{font-weight:bold;font-size:14px}
@@ -160,7 +164,6 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
 .floating-param .row{display:flex;justify-content:space-between;align-items:center;margin:8px 0;gap:6px}
 .floating-param input[type=range]{flex:1}
 .floating-param label{font-size:13px;color:#ccc;white-space:nowrap}
-
 .panel.collapsed{
   opacity:0;
   transform:translateY(-12px);
@@ -247,7 +250,6 @@ DataView.prototype.setUint24 = function(offset, value, littleEndian = false) {
     this.setUint8(offset + 2, value & 0xff);
   }
 };
-
 const canvas = document.getElementById('mainCanvas');
 const gl = canvas.getContext('webgl', {preserveDrawingBuffer:true, antialias:true});
 const fallbackImg = document.getElementById('fallbackImg');
@@ -282,14 +284,12 @@ const gifDelaySlider = document.getElementById('gifDelay');
 const delayVal = document.getElementById('delayVal');
 const gradeItems = document.querySelectorAll('.grade-item');
 let currentGrade = 'best';
-
 // 三档画质预设
 const GRADE_SETTING = {
   best: {maxColors:256, dither:true, ditherType:2, note:"极好｜256色全开，高质量调色板+抖动，追求最高保真，体积大、慢"},
   good: {maxColors:192, dither:true, ditherType:1, note:"好｜192色，柔和抖动，画质均衡，导出稳定"},
   fast: {maxColors:128, dither:false, ditherType:0, note:"中等｜128色，关闭抖动，优先速度，画质让步"}
 };
-
 let isExporting = false;
 let selectedEffectId = null;
 const vSrc = `
@@ -652,33 +652,20 @@ function syncFloatPanelToSelected(){
   fpRange.value = ef.range;
   fpSpeed.value = ef.speed;
 }
-
-// 打开弹窗：计算屏幕居中位置，只设置left/top
+// 打开弹窗：不再设置left/top，css已经固定左下角
 function openFloatingParam(id){
   selectedEffectId = id;
   syncFloatPanelToSelected();
-  const boxW = floatingParam.offsetWidth || Math.min(340, window.innerWidth - 24);
-  const boxH = floatingParam.offsetHeight || 180;
-  const initLeft = Math.max(0,(window.innerWidth - boxW)/2);
-  const initTop = Math.max(0,(window.innerHeight - boxH)/2);
-  floatingParam.style.left = initLeft + "px";
-  floatingParam.style.top = initTop + "px";
-  floatingParam.style.bottom = "";
-  floatingParam.style.transform = "";
   floatingParam.classList.add('show');
   effectPanel.classList.add('collapsed');
   fpJustOpened = true;
   setTimeout(()=>{fpJustOpened = false;},300);
 }
-
 // 统一关闭入口，强制恢复面板状态，修复collapsed残留bug
 function closeFloatingParam(){
   floatingParam.classList.remove('show');
-  floatingParam.style.left = "";
-  floatingParam.style.top = "";
   effectPanel.classList.remove('collapsed');
 }
-
 floatingParam.addEventListener('click', (ev)=>{
   ev.stopPropagation();
 });
@@ -693,7 +680,6 @@ document.addEventListener('click', (e)=>{
   if (effectPanel.contains(e.target)) return;
   closeFloatingParam();
 });
-
 function renderList(){
   effectList.innerHTML = '';
   effects.forEach(e => {
@@ -801,47 +787,7 @@ function bindFloatingInputs(){
   });
 }
 bindFloatingInputs();
-
-// 修复拖动：只修改left/top，不操作bottom/transform，限制左上边界
-(function(){
-  let dragging = false;
-  let startX = 0, startY = 0;
-  let boxStartLeft = 0, boxStartTop = 0;
-  function onDown(clientX, clientY){
-    dragging = true;
-    startX = clientX;
-    startY = clientY;
-    const rect = floatingParam.getBoundingClientRect();
-    boxStartLeft = rect.left;
-    boxStartTop  = rect.top;
-  }
-  function onMove(clientX, clientY){
-    if (!dragging) return;
-    const dx = clientX - startX;
-    const dy = clientY - startY;
-    let newL = boxStartLeft + dx;
-    let newT = boxStartTop + dy;
-    newL = Math.max(0, newL);
-    newT = Math.max(0, newT);
-    floatingParam.style.left = newL + 'px';
-    floatingParam.style.top  = newT + 'px';
-  }
-  function onUp(){ dragging = false; }
-  fpTitleBar.addEventListener('mousedown', e=>{ e.preventDefault(); onDown(e.clientX, e.clientY); });
-  fpTitleBar.addEventListener('touchstart', e=>{
-    const t = e.touches[0];
-    onDown(t.clientX, t.clientY);
-  }, {passive:false});
-  window.addEventListener('mousemove', e=>onMove(e.clientX, e.clientY));
-  window.addEventListener('touchmove', e=>{
-    if(!dragging) return;
-    const t=e.touches[0];
-    onMove(t.clientX,t.clientY);
-  }, {passive:false});
-  window.addEventListener('mouseup', onUp);
-  window.addEventListener('touchend', onUp);
-})();
-
+// ========== 移除原来的拖动全部JS代码 ==========
 hidePanel.onclick = ()=>{
   effectPanel.style.display = 'none';
   togglePanel.style.display = 'inline-block';
@@ -850,7 +796,6 @@ togglePanel.onclick = ()=>{
   effectPanel.style.display = 'block';
   togglePanel.style.display = 'none';
 };
-
 exportBtn.onclick = async () => {
   if (isExporting) return;
   if (!sourceImg) { alert('先上传图片'); return; }
@@ -885,7 +830,6 @@ exportBtn.onclick = async () => {
   exportWebpLosslessBtn.disabled = false;
   exportWebpLossyBtn.disabled = false;
 };
-
 exportGifBtn.onclick = async ()=>{
   if(isExporting) return;
   if (!sourceImg) { alert('先上传图片'); return; }
@@ -951,7 +895,6 @@ exportGifBtn.onclick = async ()=>{
   exportWebpLosslessBtn.disabled = false;
   exportWebpLossyBtn.disabled = false;
 };
-
 // 单帧WebP导出，浏览器原生toBlob
 async function encodeSingleWebp(canvasEl, lossless){
   return new Promise((resolve, reject) => {
@@ -968,7 +911,6 @@ async function encodeSingleWebp(canvasEl, lossless){
     );
   });
 }
-
 // 手写拼接 Animated WebP RIFF/ANIM/ANMF，不依赖外部wasm
 async function buildAnimatedWebP(framesBin, delays, width, height){
   const chunks = [];
@@ -978,7 +920,6 @@ async function buildAnimatedWebP(framesBin, delays, width, height){
   animView.setUint32(0,0,true);
   animView.setUint16(4,0,true);
   chunks.push({fourcc:"ANIM", data:new Uint8Array(animBuf)});
-
   for(let i=0;i<framesBin.length;i++){
     const frameBin = framesBin[i];
     const dms = delays[i];
@@ -991,7 +932,6 @@ async function buildAnimatedWebP(framesBin, delays, width, height){
     anmfView.setUint24(9,height,true);
     anmfView.setUint32(12,dms,true);
     chunks.push({fourcc:"ANMF", data:new Uint8Array(anmfBuf)});
-
     // 剥离外层RIFF头，取出内部子chunk
     const checkMagic = new TextDecoder().decode(frameBin.slice(8,12));
     if(checkMagic !== "WEBP") throw new Error(`第${i}帧不是webp`);
@@ -1004,7 +944,6 @@ async function buildAnimatedWebP(framesBin, delays, width, height){
       ptr += 8 + sz + ((sz &1) ?1:0);
     }
   }
-
   // 计算总长度，组装外层RIFF
   let payloadTotal = 0;
   for(const ck of chunks){
@@ -1029,7 +968,6 @@ async function buildAnimatedWebP(framesBin, delays, width, height){
   }
   return new Uint8Array(riffBuf);
 }
-
 async function exportAnimatedWebp(lossless = true){
   if(isExporting) return;
   if (!sourceImg) { alert('先上传图片'); return; }
@@ -1080,10 +1018,8 @@ async function exportAnimatedWebp(lossless = true){
   exportWebpLosslessBtn.disabled = false;
   exportWebpLossyBtn.disabled = false;
 }
-
 exportWebpLosslessBtn.onclick = ()=> exportAnimatedWebp(true);
 exportWebpLossyBtn.onclick = ()=> exportAnimatedWebp(false);
-
 lowPerfCb.onchange = ()=>{
   if(sourceImg){
     log('切换性能模式，重新上传图片生效');

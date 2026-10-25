@@ -131,7 +131,6 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
 }
 .perf-row{margin:6px 0;font-size:12px;color:#ccc}
 .upload-row{margin-bottom:8px}
-/* 修改floating‑param：5%透明度，固定左下角，禁止拖动 */
 .floating-param{
   position:fixed;
   left:12px;
@@ -152,7 +151,6 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
   justify-content:space-between;
   align-items:center;
   margin-bottom:10px;
-  /* 移除拖动光标 */
   cursor:default;
   user-select:none;
 }
@@ -220,8 +218,10 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
       </div>
     </div>
   </div>
-  <div class="tip-text">💡 WebP提示：网页播放流畅；无损WebP画质无损失、体积更大；iPhone相册、部分聊天软件不会播放动画</div>
+  <div class="tip-text">💡 WebP提示：网页播放流畅；无损WebP画质无损失、体积更大；iPhone相册、部分聊天软件不会播放动画<br>💾本地存储：刷新页面数据保留；清除浏览器网站数据才丢失；重要效果请导出json备份；按图片文件名自动匹配效果</div>
   <div style="margin-top:10px;display:flex;gap:4px;flex-wrap:wrap">
+    <button id="saveToCacheBtn" class="btn">保存效果到本地存储</button>
+    <button id="clearCacheBtn" class="btn del-btn">清空全部本地存储</button>
     <button id="exportGifBtn" class="btn gif-btn">导出GIF动图</button>
     <button id="exportWebpLosslessBtn" class="btn webp-lossless-btn">导出动画WebP(无损)</button>
     <button id="exportWebpLossyBtn" class="btn webp-lossy-btn">导出动画WebP(有损)</button>
@@ -238,6 +238,28 @@ label{font-size:13px;color:#ccc;white-space:nowrap}
   <div class="row"><label>速度</label><input type="range" id="fpSpeed" min="1" max="120" value="24"></div>
 </div>
 <script type="module">
+//localStorage存储key常量
+const STORAGE_KEY = "photoAnimEditorCache";
+//读取持久化存储到内存对象
+function loadStorage(){
+  const str = localStorage.getItem(STORAGE_KEY);
+  if(str){
+    try{
+      return JSON.parse(str);
+    }catch(e){
+      return {};
+    }
+  }
+  return {};
+}
+//把内存对象写入localStorage
+function saveStorage(cacheObj){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cacheObj));
+}
+//内存缓存，启动时从localStorage加载
+let imageEffectCache = loadStorage();
+let currentUploadFileName = "";
+
 // 修复缺失的DataView方法
 DataView.prototype.setUint24 = function(offset, value, littleEndian = false) {
   if (littleEndian) {
@@ -283,8 +305,10 @@ const frameCountVal = document.getElementById('frameCountVal');
 const gifDelaySlider = document.getElementById('gifDelay');
 const delayVal = document.getElementById('delayVal');
 const gradeItems = document.querySelectorAll('.grade-item');
+const saveToCacheBtn = document.getElementById('saveToCacheBtn');
+const clearCacheBtn = document.getElementById('clearCacheBtn');
+
 let currentGrade = 'best';
-// 三档画质预设
 const GRADE_SETTING = {
   best: {maxColors:256, dither:true, ditherType:2, note:"极好｜256色全开，高质量调色板+抖动，追求最高保真，体积大、慢"},
   good: {maxColors:192, dither:true, ditherType:1, note:"好｜192色，柔和抖动，画质均衡，导出稳定"},
@@ -458,6 +482,39 @@ function isMobile(){
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     || window.matchMedia('(max-width: 900px)').matches;
 }
+
+// --------缓存按钮事件----------
+saveToCacheBtn.onclick = ()=>{
+  if(!sourceImg){
+    alert("请先上传图片");
+    return;
+  }
+  if(!currentUploadFileName){
+    alert("没有识别到上传文件名");
+    return;
+  }
+  const cacheItem = {
+    originalW,
+    originalH,
+    effects: JSON.parse(JSON.stringify(effects)),
+    exportSetting:{
+      frameCount: frameCountSlider.value,
+      gifDelay: gifDelaySlider.value,
+      grade: currentGrade
+    }
+  };
+  imageEffectCache[currentUploadFileName] = cacheItem;
+  saveStorage(imageEffectCache);
+  log(`✅已保存到本地存储，文件名：${currentUploadFileName}，刷新页面数据仍然保留！`);
+};
+
+clearCacheBtn.onclick = ()=>{
+  if(!confirm("确定清空浏览器全部存储的动画配置？清除后刷新也无法恢复！")) return;
+  imageEffectCache = {};
+  saveStorage(imageEffectCache);
+  log("✅浏览器本地存储全部清空");
+};
+
 gradeItems.forEach(item=>{
   item.onclick = ()=>{
     gradeItems.forEach(i=>i.classList.remove('selected'));
@@ -476,11 +533,13 @@ function bindExportSettingUI(){
   updateLabel();
 }
 bindExportSettingUI();
+
 upload.onchange = async (e) => {
   const file = e.target.files[0];
   upload.value = '';
   if (!file) return;
   log("正在读取文件...");
+  currentUploadFileName = file.name;
   try{
     const blobUrl = URL.createObjectURL(file);
     const img = new Image();
@@ -510,7 +569,27 @@ upload.onchange = async (e) => {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
     fallbackImg.style.display = "none";
-    log(`✅图片加载完成，原图 ${originalW}×${originalH}，预览 ${renderW}×${renderH}`);
+
+    // 【核心】如果本地存储存在这个文件名，自动加载动画配置
+    if(imageEffectCache[currentUploadFileName]){
+      const cacheData = imageEffectCache[currentUploadFileName];
+      effects = JSON.parse(JSON.stringify(cacheData.effects));
+      frameCountSlider.value = cacheData.exportSetting.frameCount;
+      gifDelaySlider.value = cacheData.exportSetting.gifDelay;
+      currentGrade = cacheData.exportSetting.grade;
+      frameCountVal.textContent = frameCountSlider.value;
+      delayVal.textContent = gifDelaySlider.value;
+      gradeItems.forEach(i=>i.classList.remove('selected'));
+      const selGrade = document.querySelector(`.grade-item[data-grade="${currentGrade}"]`);
+      if(selGrade) selGrade.classList.add('selected');
+      renderList();
+      log(`✅匹配本地存储【${currentUploadFileName}】自动加载保存的动画效果`);
+    }else{
+      effects = [];
+      renderList();
+      log(`✅图片加载完成，原图 ${originalW}×${originalH}，预览 ${renderW}×${renderH}，无本地存储记录`);
+    }
+
     draw();
     setTimeout(()=>draw(), 20);
     startPreview();
@@ -652,7 +731,6 @@ function syncFloatPanelToSelected(){
   fpRange.value = ef.range;
   fpSpeed.value = ef.speed;
 }
-// 打开弹窗：不再设置left/top，css已经固定左下角
 function openFloatingParam(id){
   selectedEffectId = id;
   syncFloatPanelToSelected();
@@ -661,7 +739,6 @@ function openFloatingParam(id){
   fpJustOpened = true;
   setTimeout(()=>{fpJustOpened = false;},300);
 }
-// 统一关闭入口，强制恢复面板状态，修复collapsed残留bug
 function closeFloatingParam(){
   floatingParam.classList.remove('show');
   effectPanel.classList.remove('collapsed');
@@ -787,7 +864,7 @@ function bindFloatingInputs(){
   });
 }
 bindFloatingInputs();
-// ========== 移除原来的拖动全部JS代码 ==========
+
 hidePanel.onclick = ()=>{
   effectPanel.style.display = 'none';
   togglePanel.style.display = 'inline-block';
@@ -895,7 +972,6 @@ exportGifBtn.onclick = async ()=>{
   exportWebpLosslessBtn.disabled = false;
   exportWebpLossyBtn.disabled = false;
 };
-// 单帧WebP导出，浏览器原生toBlob
 async function encodeSingleWebp(canvasEl, lossless){
   return new Promise((resolve, reject) => {
     canvasEl.toBlob(
@@ -911,10 +987,8 @@ async function encodeSingleWebp(canvasEl, lossless){
     );
   });
 }
-// 手写拼接 Animated WebP RIFF/ANIM/ANMF，不依赖外部wasm
 async function buildAnimatedWebP(framesBin, delays, width, height){
   const chunks = [];
-  // ANIM块：无限循环
   const animBuf = new ArrayBuffer(6);
   const animView = new DataView(animBuf);
   animView.setUint32(0,0,true);
@@ -923,7 +997,6 @@ async function buildAnimatedWebP(framesBin, delays, width, height){
   for(let i=0;i<framesBin.length;i++){
     const frameBin = framesBin[i];
     const dms = delays[i];
-    // ANMF帧头
     const anmfBuf = new ArrayBuffer(16);
     const anmfView = new DataView(anmfBuf);
     anmfView.setUint24(0,0,true);
@@ -932,7 +1005,6 @@ async function buildAnimatedWebP(framesBin, delays, width, height){
     anmfView.setUint24(9,height,true);
     anmfView.setUint32(12,dms,true);
     chunks.push({fourcc:"ANMF", data:new Uint8Array(anmfBuf)});
-    // 剥离外层RIFF头，取出内部子chunk
     const checkMagic = new TextDecoder().decode(frameBin.slice(8,12));
     if(checkMagic !== "WEBP") throw new Error(`第${i}帧不是webp`);
     let ptr = 12;
@@ -944,7 +1016,6 @@ async function buildAnimatedWebP(framesBin, delays, width, height){
       ptr += 8 + sz + ((sz &1) ?1:0);
     }
   }
-  // 计算总长度，组装外层RIFF
   let payloadTotal = 0;
   for(const ck of chunks){
     payloadTotal += 8 + ck.data.length + ((ck.data.length &1) ?1:0);
