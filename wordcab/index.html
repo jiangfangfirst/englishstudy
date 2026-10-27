@@ -211,7 +211,7 @@ body {
   100% { transform: scale(1.05); opacity: 1; }
 }
 
-/* ================= 规则面板（在敌人下方、玩家上方的空白处） ================= */
+/* ================= 规则面板 ================= */
 .rules-panel {
   position: absolute;
   left: 50%;
@@ -372,7 +372,6 @@ body {
   100% { transform: scale(2.8); opacity: 0; filter: brightness(3.2); }
 }
 
-/* 宝箱爆出的彩星 */
 .burst-star {
   position: fixed;
   pointer-events: none;
@@ -1809,6 +1808,28 @@ body {
   transition: color .2s;
 }
 .splash-reset:hover { color: var(--txt-dim); }
+
+/* 退出登录 */
+.splash-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: .3px;
+  transition: color .2s, transform .2s;
+}
+.splash-logout span {
+  font-size: 10px;
+  opacity: .75;
+}
+.splash-logout:hover { color: #f87171; }
+.splash-logout:active { transform: scale(.96); }
 </style>
 </head>
 <body>
@@ -1916,6 +1937,9 @@ body {
 
     <button class="splash-start" onclick="startGame()">开始闯关</button>
     <button class="splash-reset" onclick="resetProgress()">重置进度</button>
+    <button class="splash-logout" onclick="logout()">
+      <span>⏻</span> 退出登录
+    </button>
   </div>
 </div>
 
@@ -2347,10 +2371,8 @@ function sfxChestDrop() {
   beep(330, .12, 'triangle', .05, .35);
 }
 function sfxChestOpen() {
-  // 升调琶音
   const notes = [523.25, 659.25, 783.99, 1046.5, 1318.5, 1568];
   notes.forEach((f, i) => beep(f, .11, 'triangle', .09, i * .055));
-  // 高音闪光
   beep(2093, .18, 'sine', .06, .34);
   beep(2637, .22, 'sine', .05, .4);
 }
@@ -3046,7 +3068,6 @@ function triggerMystery(enemy) {
    10. 宝箱系统（随机掉落）
    ========================================================= */
 function scheduleNextChest() {
-  /* 15-28 秒随机，不要太密 */
   const delay = 15000 + Math.random() * 13000;
   G.nextChestTime = performance.now() + delay;
   G.chestActive = false;
@@ -3059,7 +3080,6 @@ function spawnChest() {
   const chest = document.createElement('div');
   chest.className = 'chest';
 
-  /* 水平位置：避开玩家正上方，25%-75% 之间 */
   const leftPct = 22 + Math.random() * 56;
 
   chest.innerHTML =
@@ -3074,28 +3094,24 @@ function spawnChest() {
 
   sfxChestDrop();
 
-  /* 落定位置：屏幕 55% 高度处，位于敌人下方、玩家上方 */
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       chest.style.top = '56%';
     });
   });
 
-  /* 落定后进入浮动状态 */
   chest.addEventListener('transitionend', function onLand(e) {
     if (e.propertyName !== 'top') return;
     chest.removeEventListener('transitionend', onLand);
     chest.classList.add('landed');
   });
 
-  /* 用户点击开箱 */
   chest.addEventListener('click', (e) => {
     e.stopPropagation();
     if (chest.classList.contains('opened')) return;
     openChest(chest);
   });
 
-  /* 停留 7 秒后未点击则失效 */
   setTimeout(() => {
     if (chest.parentNode && !chest.classList.contains('opened') && !chest.classList.contains('burst')) {
       chest.classList.add('fadeout');
@@ -3119,17 +3135,14 @@ function openChest(chest) {
   sfxChestOpen();
 
   setTimeout(() => {
-    /* 爆彩星 */
     const rect = chest.getBoundingClientRect();
     burstStars(rect.left + rect.width / 2, rect.top + rect.height / 2);
 
-    /* 宝箱本体爆散 */
     chest.classList.add('burst');
     setTimeout(() => {
       if (chest.parentNode) chest.remove();
     }, 520);
 
-    /* 给宝物 */
     grantChestTreasure();
 
     G.chestActive = false;
@@ -3164,7 +3177,6 @@ function grantChestTreasure() {
   const r = Math.random();
 
   if (r < 0.4) {
-    /* 防护罩：即时使用 */
     G.shieldUntil = Math.max(G.shieldUntil, performance.now()) + 30000;
     showToast('🛡️', '护盾激活！', '30 秒内免疫所有攻击', '#38bdf8');
   } else if (r < 0.75) {
@@ -3213,7 +3225,6 @@ function showRules() {
 
   function showBatch() {
     if (batchIndex >= RULE_BATCHES.length) {
-      /* 最后一批结束，整体淡出 */
       panel.classList.remove('show');
       const t = setTimeout(() => {
         panel.innerHTML = '';
@@ -3229,7 +3240,6 @@ function showRules() {
     ).join('');
     panel.classList.add('show');
 
-    /* 每句约 1.4 秒 + 淡入 + 停 1.6 秒 */
     const stayMs = Math.max(2400, batch.length * 1300 + 1200);
 
     const t1 = setTimeout(() => {
@@ -3243,7 +3253,6 @@ function showRules() {
     _rulesTimers.push(t1);
   }
 
-  /* Ready/Go 结束后稍等再开始第一条 */
   const t0 = setTimeout(showBatch, 200);
   _rulesTimers.push(t0);
 }
@@ -3668,16 +3677,13 @@ function startLevel(levelNum, isReview) {
     G.elapsed = 0;
     _lastTimerSec = -1;
 
-    /* Ready/Go 结束后展示规则，展示期间敌人不开火 */
     G.rulePhase = true;
     showRules();
 
-    /* 规则展示完成后，再初始化宝箱计时 */
     const ruleDelay = 12000;
     setTimeout(() => {
       if (G.running && !G.over) {
         scheduleNextChest();
-        /* 首次宝箱稍快一点，给用户惊喜 */
         G.nextChestTime = performance.now() + 6000 + Math.random() * 8000;
       }
     }, ruleDelay);
@@ -3887,6 +3893,8 @@ function startGame() {
 }
 
 function startReview() {
+  if (!localStorage.getItem('dd_auth')) { location.href = 'login.html'; return; }
+
   ac();
   sfxClick();
 
@@ -3942,6 +3950,21 @@ function resetProgress() {
   updateRankHUD();
   updateReviewCount();
   updateItemBag();
+}
+
+/* 退出登录：清登录态，保留学习进度与设备 ID */
+function logout() {
+  const ok = confirm('确定要退出登录吗？\n学习进度会保留，下次用同一学习码登录即可继续。');
+  if (!ok) return;
+
+  sfxClick();
+
+  /* 只清登录态，进度 dd_vg10_* 与设备号 dd_device_id 保留 */
+  localStorage.removeItem('dd_auth');
+  localStorage.removeItem('dd_login_time');
+  localStorage.removeItem('dd_name');
+
+  location.href = 'login.html';
 }
 
 document.addEventListener('keydown', ev => {
