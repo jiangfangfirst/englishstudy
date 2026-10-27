@@ -143,6 +143,30 @@ body {
   0%,100% { transform: translateY(0); opacity: .55; }
   50% { transform: translateY(-6px); opacity: 1; }
 }
+
+/* 用时标签 */
+.timer-badge {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 2px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  color: #7dd3fc;
+  background: rgba(15,23,42,.9);
+  border: 1px solid rgba(56,189,248,.4);
+  border-radius: 999px;
+  padding: 4px 9px;
+  white-space: nowrap;
+  letter-spacing: .3px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+  font-family: inherit;
+}
+
 .treasure {
   position: absolute;
   left: 50%; bottom: 88%;
@@ -183,6 +207,46 @@ body {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
+
+/* 敌人身上极小中文释义角标 */
+.enemy-tag {
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  transform: translateX(-50%);
+  font-size: clamp(8px, 2.2vw, 10px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .1px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+  max-width: 76px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  animation: none;
+}
+.enemy.blue .enemy-tag {
+  color: #dff3ff;
+  background: rgba(7,89,133,.88);
+  border: 1px solid rgba(125,211,252,.55);
+  box-shadow: 0 1px 4px rgba(0,0,0,.45);
+}
+.enemy.orange .enemy-tag {
+  color: #ffe9d4;
+  background: rgba(154,52,18,.9);
+  border: 1px solid rgba(253,186,116,.55);
+  box-shadow: 0 1px 4px rgba(0,0,0,.45);
+}
+.enemy.red .enemy-tag {
+  color: #ffe0e0;
+  background: rgba(127,29,29,.92);
+  border: 1px solid rgba(252,165,165,.55);
+  box-shadow: 0 1px 4px rgba(0,0,0,.45);
+}
+
 .enemy.blue .enemy-orb {
   background: radial-gradient(circle at 34% 30%, #7dd3fc, #0ea5e9 55%, #075985);
   box-shadow: 0 0 18px rgba(56,189,248,.75), inset 0 -5px 10px rgba(0,0,0,.35);
@@ -243,7 +307,7 @@ body {
   75% { transform: translateX(6px); }
 }
 
-/* 瞄准线 · 按敌人类型配色 */
+/* 瞄准线 */
 .aim-line {
   position: absolute;
   height: 2px;
@@ -261,7 +325,7 @@ body {
   50% { opacity: .7; }
 }
 
-/* 投射物 · 按敌人类型配色 */
+/* 投射物 */
 .proj {
   position: absolute;
   width: 13px; height: 13px;
@@ -401,7 +465,7 @@ body {
   box-shadow: inset 0 1px 2px rgba(0,0,0,.5);
 }
 
-/* 弹窗顶部：敌人头像 + 释义 + 音标 + 关闭 */
+/* 弹窗顶部 */
 .modal-top {
   display: flex;
   align-items: center;
@@ -500,6 +564,16 @@ body {
 }
 .word-phon:empty { display: none; }
 
+/* 暂停提示小字 */
+.word-pause-hint {
+  font-size: 10px;
+  color: rgba(148,163,184,.5);
+  letter-spacing: .2px;
+  line-height: 1.3;
+  margin-top: 3px;
+  font-weight: 400;
+}
+
 .modal-close {
   width: 32px; height: 32px;
   border-radius: 50%;
@@ -556,7 +630,6 @@ body {
   margin-bottom: 2px;
 }
 
-/* 填空格 */
 .blank {
   display: inline-block;
   border-bottom: 2px solid var(--green);
@@ -582,7 +655,6 @@ body {
 }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* 反馈条 */
 .feedback {
   margin-top: 14px;
   padding: 11px 15px;
@@ -613,7 +685,6 @@ body {
 }
 .feedback b { color: #fff; font-size: 14px; letter-spacing: .3px; }
 
-/* 键盘 */
 .keyboard {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -1076,11 +1147,14 @@ body {
   <div class="ground"></div>
   <div id="entityLayer"></div>
   <div class="treasure" id="treasure">🏆</div>
-  <div class="player" id="player">🧑‍🚀</div>
+  <div class="player" id="player">
+    🧑‍🚀
+    <span class="timer-badge" id="timerBadge">用时0秒</span>
+  </div>
 </div>
 
 <div class="footer">
-  三种敌人都在放冷箭 · 点击敌人破解单词 · <b>答对破敌回血</b> · 答题时全场暂停
+  点击敌人破解单词 · <b>答对破敌回血</b> · 答题时全场暂停
 </div>
 
 <!-- ============ 挑战弹窗 ============ -->
@@ -1098,6 +1172,7 @@ body {
           <button class="speak-btn" id="speakBtn" onclick="speakCurrent()" aria-label="播放读音">🔊</button>
         </div>
         <div class="word-phon" id="wordPhon"></div>
+        <div class="word-pause-hint">敌人暂停攻击中，请放心填单词</div>
       </div>
       <button class="modal-close" onclick="closeChallenge()" aria-label="关闭">✕</button>
     </div>
@@ -1119,15 +1194,15 @@ body {
     <div class="enemy-legend">
       <div class="legend-item">
         <div class="legend-orb blue">👾</div>
-        <div class="legend-text"><b>蓝色 · 基础</b><span>快箭骚扰 · 伤害最低（4）　击破回血 +6</span></div>
+        <div class="legend-text"><b>蓝色 · 基础单词</b><span>快箭骚扰 · 伤害最低（4）　击破回血 +6</span></div>
       </div>
       <div class="legend-item">
         <div class="legend-orb orange">👹</div>
-        <div class="legend-text"><b>橙色 · 核心</b><span>中速火球 · 伤害中等（6）　击破回血 +10</span></div>
+        <div class="legend-text"><b>橙色 · 核心单词</b><span>中速火球 · 伤害中等（6）　击破回血 +10</span></div>
       </div>
       <div class="legend-item">
         <div class="legend-orb red">💀</div>
-        <div class="legend-text"><b>红色 · 拓展</b><span>慢箭狙击 · 伤害最高（8）　击破回血 +14</span></div>
+        <div class="legend-text"><b>红色 · 拓展单词</b><span>慢箭狙击 · 伤害最高（8）　击破回血 +14</span></div>
       </div>
     </div>
 
@@ -1405,12 +1480,6 @@ const PLAYER_X = 50;
 const PLAYER_Y = 9;
 const TREASURE_Y = 88;
 
-/*
-  敌人配置（三种敌人都放冷箭）：
-  - blue   快箭 · 低伤：速度最快、冷却最短、伤害最低
-  - orange 中速 · 中伤
-  - red    慢箭 · 高伤：速度最慢、冷却最长、伤害最高
-*/
 const ENEMY_CFG = {
   blue:   { speed: 3.5, yMin: 56, yMax: 82, wanderR: 7,
             fireMin: 9,  fireMax: 15, aimProb: 0.40,
@@ -1435,13 +1504,17 @@ const G = {
   killCount: 0,
   answerCount: 0,
   correctCount: 0,
-  over: false
+  over: false,
+  startTime: 0,
+  elapsed: 0
 };
 
 const TOTAL_PER_LEVEL = 20;
 const COMPOSITION = { blue: 10, orange: 6, red: 4 };
 const HEAL = { blue: 6, orange: 10, red: 14 };
 const EMOJI = { blue: '👾', orange: '👹', red: '💀' };
+
+let _lastTimerSec = -1;
 
 /* =========================================================
    5. 抽词 / 关卡生成
@@ -1508,7 +1581,6 @@ function buildLevel(levelNum) {
     e.ty = e.y;
     e.wanderTimer = 0;
 
-    /* 三种敌人均配置射击 */
     e.fireTimer = cfg.fireMin * (0.5 + Math.random() * 0.8);
     e.nextAimed = Math.random() < cfg.aimProb;
     e.aimingPlayer = false;
@@ -1523,12 +1595,25 @@ function buildLevel(levelNum) {
 const entityLayer = document.getElementById('entityLayer');
 const arena = document.getElementById('arena');
 
+function escapeHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 function createEnemyEl(e) {
   const div = document.createElement('div');
   div.className = 'enemy ' + e.type;
   div.style.left = e.x + '%';
   div.style.bottom = e.y + '%';
-  div.innerHTML = '<div class="enemy-orb">' + EMOJI[e.type] + '</div>';
+
+  const meaning = e.word.m || e.word.cn || '';
+  div.innerHTML =
+    '<div class="enemy-orb">' + EMOJI[e.type] +
+    '<span class="enemy-tag">' + escapeHtml(meaning) + '</span>' +
+    '</div>';
+
   div.addEventListener('click', ev => {
     ev.stopPropagation();
     if (G.paused || !G.running || !e.alive) return;
@@ -1537,7 +1622,6 @@ function createEnemyEl(e) {
   entityLayer.appendChild(div);
   e.el = div;
 
-  /* 所有敌人都有瞄准线 */
   const line = document.createElement('div');
   line.className = 'aim-line aim-' + e.type;
   line.style.display = 'none';
@@ -1597,9 +1681,29 @@ function syncEntities() {
 /* =========================================================
    7. 主循环
    ========================================================= */
+function formatTime(ms) {
+  const total = Math.floor(ms / 1000);
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  return m > 0 ? ('用时' + m + '分' + s + '秒') : ('用时' + s + '秒');
+}
+
+function updateTimerDisplay() {
+  const sec = Math.floor(G.elapsed / 1000);
+  if (sec === _lastTimerSec) return;
+  _lastTimerSec = sec;
+  const el = document.getElementById('timerBadge');
+  if (el) el.textContent = formatTime(G.elapsed);
+}
+
 function loop(ts) {
   const dt = Math.min((ts - (G.lastTs || ts)) / 1000, 0.05);
   G.lastTs = ts;
+
+  if (G.running && !G.over) {
+    G.elapsed = performance.now() - G.startTime;
+    updateTimerDisplay();
+  }
 
   if (G.running && !G.paused && !G.over) {
     update(dt);
@@ -1711,7 +1815,6 @@ function spawnProjectile(fromEnemy, aimed, speed, dmg, type) {
   p.el = el;
   G.projectiles.push(p);
 
-  /* 射击音：伤害越高音越沉 */
   beep(type === 'red' ? 480 : type === 'orange' ? 700 : 950, .05, 'square', .03);
 }
 
@@ -1821,7 +1924,6 @@ function openChallenge(enemy) {
   C.segFirst = false;
   C.answered = false;
 
-  /* 顶部：头像 + 释义 + 音标 */
   wordAvatar.className = 'word-avatar ' + enemy.type;
   avatarEmoji.textContent = EMOJI[enemy.type];
   wordMeaning.textContent = enemy.word.m || '';
@@ -1924,10 +2026,6 @@ function updateBlank() {
   b.style.color = ok ? '#10b981' : '#e8edf5';
 }
 
-function escapeHtml(s) {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
 function submitAnswer() {
   const e = C.enemy;
   if (!e || !e.alive) return;
@@ -1981,7 +2079,6 @@ function submitAnswer() {
   }
 }
 
-/* 喇叭：播放单词读音 */
 let _speakAudio = null;
 function speakCurrent() {
   if (!C.enemy) return;
@@ -2014,6 +2111,13 @@ function startLevel(levelNum) {
   G.answerCount = 0;
   G.correctCount = 0;
 
+  /* 计时初始化 */
+  G.startTime = performance.now();
+  G.elapsed = 0;
+  _lastTimerSec = -1;
+  const tEl = document.getElementById('timerBadge');
+  if (tEl) tEl.textContent = '用时0秒';
+
   clearEntities();
 
   const enemies = buildLevel(levelNum);
@@ -2043,6 +2147,8 @@ function checkLevelClear() {
   if (G.over) return;
   if (G.enemies.every(e => !e.alive)) {
     G.running = false;
+    G.elapsed = performance.now() - G.startTime;
+    updateTimerDisplay();
     const p = document.getElementById('player');
     p.style.bottom = (TREASURE_Y - 10) + '%';
     setTimeout(() => showResult(true), 850);
@@ -2053,6 +2159,7 @@ function gameOver() {
   if (G.over) return;
   G.over = true;
   G.running = false;
+  G.elapsed = performance.now() - G.startTime;
   setTimeout(() => showResult(false), 450);
 }
 
