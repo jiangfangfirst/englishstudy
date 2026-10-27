@@ -207,6 +207,53 @@ body {
   100% { transform: scale(1.05); opacity: 1; }
 }
 
+/* ================= 规则面板 ================= */
+.rules-panel {
+  position: absolute;
+  left: 50%;
+  bottom: 28%;
+  transform: translateX(-50%);
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .45s ease;
+  max-width: 90%;
+}
+.rules-panel.show { opacity: 1; }
+.rule-line {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: rgba(226,232,240,.9);
+  background: rgba(15,23,42,.78);
+  border: 1px solid rgba(148,163,184,.22);
+  border-radius: 8px;
+  padding: 4px 12px;
+  white-space: nowrap;
+  letter-spacing: .2px;
+  opacity: 0;
+  animation: ruleIn .42s ease-out forwards;
+  box-shadow: 0 2px 10px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.05);
+  line-height: 1.4;
+}
+.rule-line.gold {
+  color: rgba(251,191,36,.95);
+  border-color: rgba(251,191,36,.34);
+  background: rgba(30,24,10,.78);
+}
+.rule-line.blue {
+  color: rgba(125,211,252,.95);
+  border-color: rgba(56,189,248,.34);
+  background: rgba(8,25,42,.78);
+}
+@keyframes ruleIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ================= 玩家 ================= */
 .player {
   position: absolute;
@@ -288,7 +335,7 @@ body {
 }
 .player.shielded .shield-timer { display: block; }
 
-/* 道具背包：玩家右侧 */
+/* 道具背包 */
 .item-bag {
   position: absolute;
   left: calc(100% - 2px);
@@ -730,8 +777,6 @@ body {
   gap: 10px;
   flex-wrap: wrap;
 }
-.footer-tip { color: var(--txt-mute); }
-.footer-tip b { color: var(--txt-dim); }
 
 .review-btn {
   display: inline-flex;
@@ -761,6 +806,29 @@ body {
   font-weight: 900;
   font-variant-numeric: tabular-nums;
 }
+
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(56,189,248,.42);
+  background: rgba(56,189,248,.12);
+  color: #7dd3fc;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .18s var(--ease-out);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.home-btn:hover {
+  background: rgba(56,189,248,.22);
+  border-color: rgba(56,189,248,.68);
+  color: #bae6fd;
+}
+.home-btn:active { transform: scale(.95); }
 
 /* =========================================================
    挑战弹窗
@@ -818,7 +886,6 @@ body {
   box-shadow: inset 0 1px 2px rgba(0,0,0,.5);
 }
 
-/* 单行顶部布局 */
 .modal-top {
   display: flex;
   align-items: center;
@@ -871,7 +938,6 @@ body {
   -webkit-box-orient: vertical;
 }
 
-/* 道具按钮（喇叭、键盘高亮） */
 .item-btn {
   position: relative;
   width: 32px; height: 32px;
@@ -951,7 +1017,6 @@ body {
 }
 .modal-close:active { transform: rotate(90deg) scale(.9); }
 
-/* 音标气泡 */
 .phon-bubble {
   position: absolute;
   top: 88px;
@@ -978,7 +1043,6 @@ body {
   transform: translateX(-50%) translateY(0);
 }
 
-/* 题目区 */
 .q-area {
   margin-top: 2px;
   background: rgba(2,6,23,.42);
@@ -1067,7 +1131,6 @@ body {
 }
 .feedback b { color: #fff; font-size: 14px; letter-spacing: .3px; }
 
-/* ===== 键盘 ===== */
 .keyboard {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -1107,7 +1170,6 @@ body {
   border-color: rgba(56,189,248,.35);
 }
 
-/* 键盘高亮提示 */
 .key.hint {
   background: linear-gradient(180deg, rgba(251,191,36,.55), rgba(180,83,9,.85));
   color: #fff;
@@ -1157,7 +1219,6 @@ body {
   background: linear-gradient(180deg, rgba(41,54,73,.85), rgba(24,33,48,.95));
 }
 
-/* 确认键：蓝调 */
 .key.confirm {
   grid-column: span 6;
   background: linear-gradient(180deg, #38bdf8 0%, #0ea5e9 52%, #0369a1 100%);
@@ -1640,6 +1701,7 @@ body {
   <div class="buff-bar" id="buffBar"></div>
   <div class="toast-wrap" id="toastWrap"></div>
   <div class="ready-overlay" id="readyOverlay"></div>
+  <div class="rules-panel" id="rulesPanel"></div>
 
   <div class="treasure" id="treasure">🏆</div>
 
@@ -1656,7 +1718,9 @@ body {
 </div>
 
 <div class="footer">
-  <span class="footer-tip">点击敌人破解单词 · <b>答对破敌回血</b></span>
+  <button class="home-btn" onclick="backHome()" aria-label="返回首页">
+    <span>🏠 返回首页</span>
+  </button>
   <button class="review-btn" onclick="startReview()" aria-label="打开复习仓">
     <span>📚 复习仓</span>
     <b id="reviewCount">0</b>
@@ -1765,7 +1829,7 @@ const GRADE_MAP = {
   extra: { data: (typeof WORDS_EXTRA !== 'undefined' ? WORDS_EXTRA : []), label: '拓展', type: 'red' }
 };
 
-const STORE_KEY = 'dd_vg8_' + _auth;
+const STORE_KEY = 'dd_vg9_' + _auth;
 
 function defaultStore() {
   return {
@@ -1773,6 +1837,7 @@ function defaultStore() {
     mastered: { basic: [], core: [], extra: [] },
     review: { basic: [], core: [], extra: [] },
     items: { speaker: 0, highlight: 0 },
+    speakerMilestone: 0,
     bestHp: 100,
     totalKills: 0
   };
@@ -1788,6 +1853,7 @@ function loadStore() {
         mastered: j.mastered || { basic: [], core: [], extra: [] },
         review: j.review || { basic: [], core: [], extra: [] },
         items: j.items || { speaker: 0, highlight: 0 },
+        speakerMilestone: j.speakerMilestone || 0,
         bestHp: j.bestHp || 100,
         totalKills: j.totalKills || 0
       };
@@ -1857,9 +1923,25 @@ function updateReviewCount() {
   if (el) el.textContent = total;
 }
 
+/* 击杀累计：每满 5 个自动发一个喇叭 */
 function addKillCount() {
   const s = loadStore();
   s.totalKills = (s.totalKills || 0) + 1;
+
+  if (s.speakerMilestone == null) s.speakerMilestone = 0;
+  const diff = s.totalKills - s.speakerMilestone;
+  if (diff >= 5) {
+    const gain = Math.floor(diff / 5);
+    if (!s.items) s.items = { speaker: 0, highlight: 0 };
+    s.items.speaker = (s.items.speaker || 0) + gain;
+    s.speakerMilestone += gain * 5;
+    setTimeout(() => {
+      showToast('🎺', '获得喇叭 ×' + gain, '每击败 5 个单词自动获得', '#38bdf8');
+      updateItemBag();
+      updateItemButtons();
+    }, 420);
+  }
+
   STORE = s;
   saveStore(s);
 }
@@ -1871,10 +1953,10 @@ function getRank(total) {
   return { sun: sun, moon: moon, star: star };
 }
 
-function addItem(type) {
+function addItem(type, n) {
   const s = loadStore();
   if (!s.items) s.items = { speaker: 0, highlight: 0 };
-  s.items[type] = (s.items[type] || 0) + 1;
+  s.items[type] = (s.items[type] || 0) + (n || 1);
   STORE = s;
   saveStore(s);
   updateItemBag();
@@ -2152,6 +2234,8 @@ const G = {
   running: false,
   paused: false,
   preparing: false,
+  rulePhase: false,
+  streak: 0,
   hp: 100,
   maxHp: 100,
   enemies: [],
@@ -2173,7 +2257,6 @@ const G = {
 };
 
 const TOTAL_PER_LEVEL = 20;
-/* 红色最少，蓝色最多 */
 const COMPOSITION = { blue: 12, orange: 6, red: 2 };
 const HEAL = { blue: 6, orange: 10, red: 14 };
 const EMOJI = { blue: '👾', orange: '👹', red: '💀' };
@@ -2199,6 +2282,7 @@ let _lastTimerSec = -1;
 let _lastBuffKey = '';
 let _lastRankKey = '';
 let _phonTimer = null;
+let _rulesTimer = null;
 
 /* =========================================================
    5. 抽词 / 关卡生成
@@ -2212,7 +2296,6 @@ function shuffle(arr) {
   return a;
 }
 
-/* 只从 fresh（未掌握）中抽，不再补已掌握的词；若全掌握则兜底 */
 function pickWords(pool, tier, n) {
   const mastered = (loadStore().mastered[tier] || []);
   const fresh = pool.filter(w => !mastered.includes((w.w || '').toLowerCase()));
@@ -2220,7 +2303,6 @@ function pickWords(pool, tier, n) {
   const result = [];
   while (result.length < n && a.length) result.push(a.pop());
 
-  /* 兜底：当前类型全部掌握时，允许从已掌握中抽取，避免关卡空白 */
   if (!result.length) {
     const b = shuffle(pool);
     while (result.length < n && b.length) result.push(b.pop());
@@ -2300,7 +2382,6 @@ function buildReviewLevel(levelNum, items) {
   return mixed;
 }
 
-/* 普通关答错换词：从同 tier 未掌握且未使用的词中取 */
 function pickReplacementWord(tier, oldWord) {
   const pool = (GRADE_MAP[tier] && GRADE_MAP[tier].data) || [];
   if (!pool.length) return null;
@@ -2321,7 +2402,6 @@ function pickReplacementWord(tier, oldWord) {
     return candidates[Math.floor(Math.random() * candidates.length)];
   }
 
-  /* 兜底：允许已掌握，但排除本关正在用的 */
   const fallback = pool.filter(w => !used.has((w.w || '').toLowerCase()));
   if (fallback.length) {
     return fallback[Math.floor(Math.random() * fallback.length)];
@@ -2329,7 +2409,6 @@ function pickReplacementWord(tier, oldWord) {
   return null;
 }
 
-/* 复习关答错换词：从复习仓取一个非当前词的词 */
 function pickReplacementWordReview(currentWord) {
   const items = getReviewItems();
   const cur = (currentWord || '').toLowerCase();
@@ -2461,7 +2540,6 @@ function updateBuffBar() {
   const playerEl = document.getElementById('player');
   if (playerEl) playerEl.classList.toggle('shielded', now < G.shieldUntil);
 
-  /* 护盾倒计时小标 */
   const st = document.getElementById('shieldTimer');
   if (st) {
     if (now < G.shieldUntil) {
@@ -2541,6 +2619,9 @@ function update(dt) {
     if (!e.alive) continue;
 
     wanderEnemy(e, dt);
+
+    /* 规则展示期间敌人只游走不开火 */
+    if (G.rulePhase) continue;
 
     const cfg = ENEMY_CFG[e.type];
     e.fireTimer -= dt * fireFactor;
@@ -2795,10 +2876,10 @@ function triggerMystery(enemy) {
       reviveEnemies(enemy);
       break;
     case 'speaker':
-      addItem('speaker');
+      addItem('speaker', 1);
       break;
     case 'highlight':
-      addItem('highlight');
+      addItem('highlight', 1);
       break;
   }
 
@@ -2807,7 +2888,49 @@ function triggerMystery(enemy) {
 }
 
 /* =========================================================
-   10. 挑战流程
+   10. 规则面板
+   ========================================================= */
+function showRules() {
+  const panel = document.getElementById('rulesPanel');
+  if (!panel) return;
+
+  const rules = [
+    { text: '点击敌人 → 破解单词 → 答对击破', cls: '' },
+    { text: '答错自动放入复习仓，可点底部复习', cls: '' },
+    { text: '金圈敌人藏惊喜或意外', cls: 'gold' },
+    { text: '每击败 5 个单词，获得 1 个喇叭', cls: 'blue' },
+    { text: '连续答对 5 个，获得 1 次键盘高亮', cls: 'blue' }
+  ];
+
+  const step = 280;
+  panel.innerHTML = rules.map((r, i) =>
+    '<div class="rule-line ' + r.cls + '" style="animation-delay:' + (i * step / 1000) + 's">' + r.text + '</div>'
+  ).join('');
+  panel.classList.add('show');
+
+  clearTimeout(_rulesTimer);
+  _rulesTimer = setTimeout(() => {
+    panel.classList.remove('show');
+    setTimeout(() => {
+      panel.innerHTML = '';
+      G.rulePhase = false;
+    }, 500);
+  }, rules.length * step + 850);
+}
+
+function hideRules() {
+  clearTimeout(_rulesTimer);
+  const panel = document.getElementById('rulesPanel');
+  if (!panel) return;
+  panel.classList.remove('show');
+  G.rulePhase = false;
+  setTimeout(() => {
+    if (!panel.classList.contains('show')) panel.innerHTML = '';
+  }, 500);
+}
+
+/* =========================================================
+   11. 挑战流程
    ========================================================= */
 const modalMask = document.getElementById('modalMask');
 const qArea = document.getElementById('qArea');
@@ -2950,7 +3073,6 @@ function updateBlank() {
   b.style.color = ok ? '#10b981' : '#e8edf5';
 }
 
-/* 喇叭：消耗一个喇叭，播放读音并短暂显示音标 */
 function useSpeaker() {
   if (!C.enemy) return;
   if (!useItem('speaker')) return;
@@ -2958,7 +3080,6 @@ function useSpeaker() {
   showPhonBubble(C.enemy.word.p || '');
 }
 
-/* 键盘高亮：消耗一个高亮，对应字母键发光 */
 function useHighlight() {
   if (!C.enemy) return;
   if (!useItem('highlight')) return;
@@ -2986,37 +3107,29 @@ function speakCurrent() {
   } catch (e) {}
 }
 
-/* 答错：显示正确答案 + 复习仓加入/保留 + 换词 */
 function handleWrongAnswer(e) {
   const correctWord = e.word.w;
   const isReview = G.isReview;
 
+  /* 连续答对中断 */
+  G.streak = 0;
+
   if (isReview) {
-    /* 复习关：词保留在复习仓，尝试换其他复习词 */
     const newWord = pickReplacementWordReview(correctWord);
-    if (newWord) {
-      e.word = newWord;
-    }
-    /* 如果没有其他复习词，保持当前词继续打 */
+    if (newWord) e.word = newWord;
   } else {
-    /* 普通关：加入复习仓，换新词 */
     addToReview(e.tier, correctWord);
     const newWord = pickReplacementWord(e.tier, correctWord);
-    if (newWord) {
-      e.word = newWord;
-    }
+    if (newWord) e.word = newWord;
   }
 
-  /* 更新敌人身上的角标 */
   if (e.el) {
     const tag = e.el.querySelector('.enemy-tag');
     if (tag) tag.textContent = e.word.m || e.word.cn || '';
   }
 
-  /* 更新弹窗顶部信息 */
   wordMeaning.textContent = e.word.m || '';
 
-  /* 重置输入、清除高亮、重新渲染 */
   C.typed = '';
   C.seg = '';
   C.segFirst = false;
@@ -3025,13 +3138,11 @@ function handleWrongAnswer(e) {
   renderQuestion();
   updateBlank();
 
-  /* 抖动 */
   if (e.el) {
     e.el.classList.add('hit');
     setTimeout(() => e.el && e.el.classList.remove('hit'), 320);
   }
 
-  /* 提示：显示正确答案 */
   fbEl.className = 'feedback err';
   fbEl.innerHTML =
     '✗ 正确答案：<b>' + escapeHtml(correctWord) + '</b><br>' +
@@ -3065,11 +3176,21 @@ function submitAnswer() {
     const color = e.type === 'blue' ? '#38bdf8' : e.type === 'orange' ? '#fb923c' : '#f87171';
     spawnParticles(e.x, e.y, color, 14);
 
-    /* 移出复习仓（如果是复习关），并标记掌握 */
     if (G.isReview) {
       removeFromReview(e.tier, e.word.w);
     }
     markMastered(e.tier, e.word.w.toLowerCase());
+
+    /* 连击计数：连续答对 5 个给 1 次键盘高亮 */
+    G.streak = (G.streak || 0) + 1;
+    if (G.streak >= 5) {
+      G.streak = 0;
+      setTimeout(() => {
+        addItem('highlight', 1);
+        showToast('⌨️', '连击奖励！', '连续答对 5 个 · 键盘高亮 +1', '#fbbf24');
+      }, 520);
+    }
+
     addKillCount();
     G.killCount++;
     updateHUD();
@@ -3098,7 +3219,7 @@ function submitAnswer() {
 }
 
 /* =========================================================
-   11. Ready / Go 动画
+   12. Ready / Go
    ========================================================= */
 function showReadyGo(cb) {
   const overlay = document.getElementById('readyOverlay');
@@ -3120,7 +3241,7 @@ function showReadyGo(cb) {
 }
 
 /* =========================================================
-   12. 关卡管理
+   13. 关卡管理
    ========================================================= */
 function startLevel(levelNum, isReview) {
   G.isReview = !!isReview;
@@ -3129,6 +3250,8 @@ function startLevel(levelNum, isReview) {
   G.running = true;
   G.paused = true;
   G.preparing = true;
+  G.rulePhase = false;
+  G.streak = 0;
   G.over = false;
   G.hp = G.maxHp;
   G.enemies = [];
@@ -3150,6 +3273,7 @@ function startLevel(levelNum, isReview) {
   if (playerEl) playerEl.classList.remove('shielded');
 
   clearEntities();
+  hideRules();
 
   let enemies;
 
@@ -3158,7 +3282,6 @@ function startLevel(levelNum, isReview) {
     G.reviewTotalLevels = Math.max(1, Math.ceil(items.length / TOTAL_PER_LEVEL));
 
     if (!items.length) {
-      /* 复习仓已空，返回普通关 */
       G.isReview = false;
       G.running = false;
       updateHUD();
@@ -3182,7 +3305,6 @@ function startLevel(levelNum, isReview) {
   G.enemies = enemies;
   enemies.forEach(createEnemyEl);
 
-  /* HUD 更新 */
   const prefixEl = document.getElementById('levelPrefix');
   const levelNumEl = document.getElementById('levelNum');
   const totalEl = document.getElementById('totalLevels');
@@ -3215,6 +3337,10 @@ function startLevel(levelNum, isReview) {
     G.startTime = performance.now();
     G.elapsed = 0;
     _lastTimerSec = -1;
+
+    /* Ready/Go 结束后展示规则，展示期间敌人不开火 */
+    G.rulePhase = true;
+    showRules();
   });
 }
 
@@ -3259,6 +3385,8 @@ function checkLevelClear() {
   if (G.over) return;
   if (G.enemies.every(e => !e.alive)) {
     G.running = false;
+    G.rulePhase = false;
+    hideRules();
     G.elapsed = performance.now() - G.startTime;
     updateTimerDisplay();
     const p = document.getElementById('player');
@@ -3271,6 +3399,8 @@ function gameOver() {
   if (G.over) return;
   G.over = true;
   G.running = false;
+  G.rulePhase = false;
+  hideRules();
   G.elapsed = performance.now() - G.startTime;
   setTimeout(() => showResult(false), 450);
 }
@@ -3319,7 +3449,6 @@ function showResult(win) {
 
   if (win) {
     if (G.isReview) {
-      /* 复习关结算 */
       const remaining = getReviewItems();
 
       if (remaining.length > 0) {
@@ -3354,7 +3483,6 @@ function showResult(win) {
         subBtn.onclick = () => { sfxClick(); startLevel(G.reviewLevel, true); };
       }
     } else {
-      /* 普通关结算 */
       icon.textContent = '🏆';
       badge.textContent = starCount === 3 ? '完美通关' : starCount === 2 ? '顺利通关' : '险胜通关';
       title.textContent = '第 ' + G.level + ' 关 · 夺宝成功';
@@ -3409,7 +3537,7 @@ function showResult(win) {
 }
 
 /* =========================================================
-   13. 入口
+   14. 入口
    ========================================================= */
 function startGame() {
   ac();
@@ -3430,6 +3558,36 @@ function startReview() {
 
   document.getElementById('splashMask').classList.add('hide');
   startLevel(1, true);
+}
+
+/* 返回首页：中断当前游戏，回到开始画面 */
+function backHome() {
+  sfxClick();
+
+  G.running = false;
+  G.paused = true;
+  G.preparing = false;
+  G.rulePhase = false;
+  G.over = true;
+
+  hideRules();
+
+  if (modalMask.classList.contains('show')) {
+    modalMask.classList.remove('show');
+  }
+  if (C.enemy) {
+    clearKeyboardHint();
+    showPhonBubble('');
+    C.enemy = null;
+  }
+
+  document.getElementById('resultMask').classList.remove('show');
+
+  clearEntities();
+  document.getElementById('readyOverlay').classList.remove('show');
+  document.getElementById('readyOverlay').innerHTML = '';
+
+  document.getElementById('splashMask').classList.remove('hide');
 }
 
 function resetProgress() {
