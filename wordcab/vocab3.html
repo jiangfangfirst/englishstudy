@@ -46,6 +46,7 @@ body {
   background: linear-gradient(180deg, rgba(30,41,59,.98), rgba(15,23,42,.94));
   border-bottom: 1px solid var(--line);
   z-index: 20;
+  min-height: 46px;
 }
 .level-badge {
   font-size: 13px; font-weight: 800; color: var(--gold);
@@ -54,29 +55,71 @@ body {
   border-radius: 8px; padding: 5px 10px; white-space: nowrap;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
 }
-.hp-wrap { flex: 1; max-width: 210px; }
-.hp-bar {
-  height: 12px; background: rgba(255,255,255,.08);
-  border-radius: 6px; overflow: hidden;
-  border: 1px solid rgba(255,255,255,.12);
-  box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+.lv-total {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(251,191,36,.6);
+  margin-left: 2px;
+  letter-spacing: .1px;
 }
-.hp-fill {
-  height: 100%; width: 100%;
-  background: linear-gradient(90deg, #ef4444, #f97316, #22c55e);
-  background-size: 210px 100%;
-  transition: width .28s var(--ease-out);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.3);
+
+.rank-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto;
+  margin-right: 4px;
+  min-height: 22px;
 }
-.hp-text { font-size: 10px; color: var(--txt-dim); text-align: center; margin-top: 2px; font-variant-numeric: tabular-nums; }
-.enemy-count { font-size: 12px; color: var(--txt-dim); margin-left: auto; white-space: nowrap; }
-.enemy-count b { color: #f87171; font-size: 14px; font-variant-numeric: tabular-nums; }
+.rank-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  line-height: 1;
+  animation: rankIn .45s var(--ease-spring) both;
+}
+@keyframes rankIn {
+  from { transform: scale(.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.rank-item i {
+  font-style: normal;
+  font-size: 13px;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(251,191,36,.4));
+}
+.rank-item .rank-num {
+  font-size: 10px;
+  font-weight: 800;
+  color: #cbd5e1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.2px;
+}
+.rank-item.sun .rank-num { color: #fde68a; }
+.rank-item.moon .rank-num { color: #bae6fd; }
+.rank-item.star .rank-num { color: #fcd34d; }
+
+.enemy-count {
+  font-size: 11px;
+  color: var(--txt-dim);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.enemy-count b { color: #f87171; font-size: 13px; }
 
 /* ================= 竞技场 ================= */
 .arena {
   flex: 1 1 auto; position: relative; overflow: hidden;
   background: linear-gradient(180deg, #1e1b4b 0%, #312e81 34%, #3b0764 68%, #0f172a 100%);
+  transition: background .5s ease;
 }
+/* 幻境背景变体 */
+.arena.bg-1 { background: linear-gradient(180deg, #042f2e 0%, #134e4a 34%, #0f766e 66%, #021716 100%); }
+.arena.bg-2 { background: linear-gradient(180deg, #2e1065 0%, #4c1d95 34%, #7e22ce 66%, #1a0b33 100%); }
+.arena.bg-3 { background: linear-gradient(180deg, #450a0a 0%, #7f1d1d 34%, #9a3412 66%, #1c0a0a 100%); }
+.arena.bg-4 { background: linear-gradient(180deg, #082f49 0%, #0c4a6e 34%, #0369a1 66%, #041a29 100%); }
+.arena.bg-5 { background: linear-gradient(180deg, #1a2e05 0%, #365314 34%, #4d7c0f 66%, #0b1503 100%); }
+
 .arena::before {
   content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .85;
   background-image:
@@ -112,21 +155,30 @@ body {
   from { background-position-y: 0; }
   to { background-position-y: -14px; }
 }
+
+/* ================= 玩家 ================= */
 .player {
   position: absolute;
-  left: 50%; bottom: 8%;
+  left: 50%; bottom: 12%;
   margin-left: calc(clamp(26px, 7vw, 42px) / -2);
-  font-size: clamp(26px, 7vw, 42px);
   line-height: 1;
   z-index: 12;
   filter: drop-shadow(0 0 14px rgba(56,189,248,.6));
   transition: bottom .75s var(--ease-spring);
   animation: playerIdle 1.8s ease-in-out infinite;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 @keyframes playerIdle {
   0%,100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-5px) scale(1.04); }
+}
+.player-emoji {
+  font-size: clamp(26px, 7vw, 42px);
+  line-height: 1;
+  display: block;
 }
 .player::after {
   content: '';
@@ -144,27 +196,69 @@ body {
   50% { transform: translateY(-6px); opacity: 1; }
 }
 
-/* 用时标签 */
-.timer-badge {
+/* 护盾光环 */
+.shield-aura {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 78px; height: 78px;
+  margin: -39px 0 0 -39px;
+  border-radius: 50%;
+  border: 2px solid rgba(56,189,248,.85);
+  box-shadow: 0 0 26px rgba(56,189,248,.9), inset 0 0 20px rgba(56,189,248,.5);
+  display: none;
+  pointer-events: none;
+  animation: auraPulse 1.2s ease-in-out infinite;
+}
+.player.shielded .shield-aura { display: block; }
+@keyframes auraPulse {
+  0%,100% { transform: scale(1); opacity: .72; }
+  50% { transform: scale(1.14); opacity: 1; }
+}
+
+/* 玩家下方状态：用时 + 血条 */
+.player-status {
   position: absolute;
   left: 50%;
   top: 100%;
   transform: translateX(-50%);
-  margin-top: 2px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  z-index: 2;
+}
+.timer-badge {
   font-size: 10px;
   font-weight: 800;
-  line-height: 1;
   color: #7dd3fc;
-  background: rgba(15,23,42,.9);
-  border: 1px solid rgba(56,189,248,.4);
+  background: rgba(15,23,42,.92);
+  border: 1px solid rgba(56,189,248,.42);
   border-radius: 999px;
-  padding: 4px 9px;
+  padding: 3px 9px;
   white-space: nowrap;
   letter-spacing: .3px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
-  pointer-events: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.08);
   font-variant-numeric: tabular-nums;
-  font-family: inherit;
+  line-height: 1;
+}
+.player-hp {
+  width: 108px;
+  height: 9px;
+  border-radius: 5px;
+  background: rgba(2,6,23,.8);
+  border: 1px solid rgba(148,163,184,.34);
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.7), 0 2px 8px rgba(0,0,0,.5);
+}
+.player-hp-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #ef4444, #f97316, #22c55e);
+  background-size: 108px 100%;
+  transition: width .28s var(--ease-out);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3);
 }
 
 .treasure {
@@ -208,6 +302,23 @@ body {
   50% { transform: translateY(-6px); }
 }
 
+/* 神秘虚线圈 */
+.enemy.mystery::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px dashed rgba(251,191,36,.8);
+  animation: spinRing 2.6s linear infinite, mysteryGlow 1.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes spinRing { to { transform: rotate(360deg); } }
+@keyframes mysteryGlow {
+  0%,100% { box-shadow: 0 0 0 0 rgba(251,191,36,0); opacity: .68; }
+  50% { box-shadow: 0 0 16px 2px rgba(251,191,36,.5); opacity: 1; }
+}
+
 /* 敌人身上极小中文释义角标 */
 .enemy-tag {
   position: absolute;
@@ -226,7 +337,6 @@ body {
   text-overflow: ellipsis;
   pointer-events: none;
   font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-  animation: none;
 }
 .enemy.blue .enemy-tag {
   color: #dff3ff;
@@ -267,15 +377,6 @@ body {
   0%,100% { box-shadow: 0 0 20px rgba(249,115,22,.8), inset 0 -5px 10px rgba(0,0,0,.35); }
   50% { box-shadow: 0 0 32px rgba(249,115,22,1), inset 0 -5px 10px rgba(0,0,0,.35); }
 }
-.enemy.orange::after {
-  content: '';
-  position: absolute; inset: -9px;
-  border-radius: 50%;
-  border: 2px dashed rgba(251,146,60,.5);
-  animation: spinRing 1.2s linear infinite;
-  pointer-events: none;
-}
-@keyframes spinRing { to { transform: rotate(360deg); } }
 .enemy.red .enemy-orb {
   background: radial-gradient(circle at 34% 30%, #fca5a5, #ef4444 55%, #7f1d1d);
   box-shadow: 0 0 22px rgba(239,68,68,.85), inset 0 -5px 10px rgba(0,0,0,.35);
@@ -365,7 +466,7 @@ body {
   50% { transform: scale(1.4); opacity: 1; }
 }
 
-.dmg-pop, .heal-pop {
+.dmg-pop, .heal-pop, .shield-pop {
   position: absolute; font-size: 15px; font-weight: 800;
   pointer-events: none; z-index: 30;
   text-shadow: 0 2px 6px rgba(0,0,0,.85);
@@ -374,6 +475,7 @@ body {
 }
 .dmg-pop { color: #f87171; }
 .heal-pop { color: #4ade80; }
+.shield-pop { color: #7dd3fc; font-size: 13px; }
 @keyframes popRise {
   0% { transform: translateY(0) scale(.6); opacity: 0; }
   25% { transform: translateY(-14px) scale(1.15); opacity: 1; }
@@ -397,6 +499,104 @@ body {
   100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
 }
 
+/* ================= Buff 状态条 ================= */
+.buff-bar {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+.buff-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  background: rgba(15,23,42,.92);
+  border: 1px solid rgba(56,189,248,.45);
+  color: #7dd3fc;
+  box-shadow: 0 3px 12px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.08);
+  white-space: nowrap;
+  animation: chipIn .3s var(--ease-spring);
+  font-variant-numeric: tabular-nums;
+}
+.buff-chip.slow {
+  border-color: rgba(167,139,250,.5);
+  color: #c4b5fd;
+}
+.buff-chip i {
+  font-style: normal;
+  font-size: 12px;
+  line-height: 1;
+}
+@keyframes chipIn {
+  from { transform: translateX(-14px) scale(.85); opacity: 0; }
+  to { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+/* ================= Toast ================= */
+.toast-wrap {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translateX(-50%);
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  width: max-content;
+  max-width: 92%;
+}
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 15px;
+  border-radius: 13px;
+  background: linear-gradient(180deg, rgba(30,41,59,.98), rgba(15,23,42,.98));
+  border: 1px solid rgba(251,191,36,.5);
+  box-shadow: 0 10px 30px rgba(0,0,0,.62), 0 0 26px rgba(251,191,36,.22), inset 0 1px 0 rgba(255,255,255,.1);
+  animation: toastIn .42s var(--ease-spring), toastOut .42s ease-in 1.85s forwards;
+  white-space: nowrap;
+}
+@keyframes toastIn {
+  0% { transform: translateY(-14px) scale(.8); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+@keyframes toastOut {
+  to { transform: translateY(-12px) scale(.92); opacity: 0; }
+}
+.toast-icon {
+  font-size: 18px;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(251,191,36,.55));
+}
+.toast-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.toast-text b {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .3px;
+  line-height: 1.2;
+}
+.toast-text span {
+  font-size: 10px;
+  color: var(--txt-dim);
+  line-height: 1.2;
+}
+
 /* ================= 底部提示 ================= */
 .footer {
   flex: 0 0 auto;
@@ -408,6 +608,7 @@ body {
   border-top: 1px solid var(--line);
 }
 .footer b { color: var(--txt-dim); }
+.footer .gold { color: #fbbf24; }
 
 /* =========================================================
    挑战弹窗
@@ -465,7 +666,6 @@ body {
   box-shadow: inset 0 1px 2px rgba(0,0,0,.5);
 }
 
-/* 弹窗顶部 */
 .modal-top {
   display: flex;
   align-items: center;
@@ -547,30 +747,36 @@ body {
   transform: scale(1.08);
 }
 .speak-btn:active { transform: scale(.9); }
-.speak-btn.playing {
-  animation: speakPulse .6s ease-out;
-}
+.speak-btn.playing { animation: speakPulse .6s ease-out; }
 @keyframes speakPulse {
   0% { box-shadow: 0 0 0 0 rgba(56,189,248,.6); }
   100% { box-shadow: 0 0 0 14px rgba(56,189,248,0); }
 }
 
+/* 音标行 + 暂停提示（同一行，提示靠右贴近关闭按钮） */
+.word-sub-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
 .word-phon {
   font-size: 12px;
   color: #7dd3fc;
   font-family: "Lucida Sans Unicode", "Segoe UI", sans-serif;
   letter-spacing: .3px;
   line-height: 1.3;
+  flex: 0 0 auto;
 }
 .word-phon:empty { display: none; }
-
-/* 暂停提示小字 */
 .word-pause-hint {
-  font-size: 10px;
-  color: rgba(148,163,184,.5);
-  letter-spacing: .2px;
-  line-height: 1.3;
-  margin-top: 3px;
+  font-size: 9.5px;
+  color: rgba(148,163,184,.46);
+  letter-spacing: .1px;
+  line-height: 1.35;
+  margin-left: auto;
+  white-space: nowrap;
   font-weight: 400;
 }
 
@@ -1068,6 +1274,7 @@ body {
   display: flex; align-items: center; justify-content: center;
   font-size: 16px;
   flex: 0 0 auto;
+  position: relative;
 }
 .legend-orb.blue   { background: radial-gradient(circle at 34% 30%, #7dd3fc, #0ea5e9 55%, #075985); box-shadow: 0 0 12px rgba(56,189,248,.7); }
 .legend-orb.orange { background: radial-gradient(circle at 34% 30%, #fdba74, #f97316 55%, #9a3412); box-shadow: 0 0 12px rgba(249,115,22,.7); }
@@ -1080,6 +1287,30 @@ body {
   font-weight: 800;
 }
 .legend-text span { font-size: 11px; color: var(--txt-mute); }
+
+.splash-tip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(251,191,36,.07);
+  border: 1px solid rgba(251,191,36,.26);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 22px;
+  text-align: left;
+}
+.splash-tip-ring {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 2px dashed rgba(251,191,36,.8);
+  flex: 0 0 auto;
+  animation: spinRing 3s linear infinite;
+}
+.splash-tip span {
+  font-size: 11px;
+  color: rgba(251,191,36,.88);
+  line-height: 1.5;
+}
 
 .splash-start {
   position: relative;
@@ -1133,12 +1364,12 @@ body {
 
 <!-- ============ HUD ============ -->
 <div class="hud">
-  <div class="level-badge">第 <span id="levelNum">1</span> 关</div>
-  <div class="hp-wrap">
-    <div class="hp-bar"><div class="hp-fill" id="hpFill"></div></div>
-    <div class="hp-text"><span id="hpText">100</span> / 100</div>
+  <div class="level-badge">
+    第 <span id="levelNum">1</span> 关
+    <span class="lv-total">/ 共 <span id="totalLevels">20</span> 关</span>
   </div>
-  <div class="enemy-count">剩余敌人 <b id="enemyLeft">20</b></div>
+  <div class="rank-badge" id="rankBadge"></div>
+  <div class="enemy-count">剩 <b id="enemyLeft">20</b></div>
 </div>
 
 <!-- ============ 竞技场 ============ -->
@@ -1146,15 +1377,24 @@ body {
   <div class="path-line"></div>
   <div class="ground"></div>
   <div id="entityLayer"></div>
+
+  <div class="buff-bar" id="buffBar"></div>
+  <div class="toast-wrap" id="toastWrap"></div>
+
   <div class="treasure" id="treasure">🏆</div>
+
   <div class="player" id="player">
-    🧑‍🚀
-    <span class="timer-badge" id="timerBadge">用时0秒</span>
+    <div class="shield-aura"></div>
+    <span class="player-emoji">🧑‍🚀</span>
+    <div class="player-status">
+      <span class="timer-badge" id="timerBadge">用时0秒</span>
+      <div class="player-hp"><div class="player-hp-fill" id="playerHpFill"></div></div>
+    </div>
   </div>
 </div>
 
 <div class="footer">
-  点击敌人破解单词 · <b>答对破敌回血</b> · 答题时全场暂停
+  点击敌人破解单词 · <b>答对破敌回血</b> · <span class="gold">金圈敌人藏惊喜</span>
 </div>
 
 <!-- ============ 挑战弹窗 ============ -->
@@ -1171,8 +1411,10 @@ body {
           <span class="word-meaning" id="wordMeaning">保护</span>
           <button class="speak-btn" id="speakBtn" onclick="speakCurrent()" aria-label="播放读音">🔊</button>
         </div>
-        <div class="word-phon" id="wordPhon"></div>
-        <div class="word-pause-hint">敌人暂停攻击中，请放心填单词</div>
+        <div class="word-sub-row">
+          <div class="word-phon" id="wordPhon"></div>
+          <div class="word-pause-hint">敌人暂停攻击中，请放心填单词</div>
+        </div>
       </div>
       <button class="modal-close" onclick="closeChallenge()" aria-label="关闭">✕</button>
     </div>
@@ -1204,6 +1446,11 @@ body {
         <div class="legend-orb red">💀</div>
         <div class="legend-text"><b>红色 · 拓展单词</b><span>慢箭狙击 · 伤害最高（8）　击破回血 +14</span></div>
       </div>
+    </div>
+
+    <div class="splash-tip">
+      <div class="splash-tip-ring"></div>
+      <span>带金色虚线圈的单词藏有惊喜：护盾、敌缓、幻境背景或复活已破敌人。</span>
     </div>
 
     <button class="splash-start" onclick="startGame()">开始闯关</button>
@@ -1252,7 +1499,7 @@ const GRADE_MAP = {
   extra: { data: (typeof WORDS_EXTRA !== 'undefined' ? WORDS_EXTRA : []), label: '拓展', type: 'red' }
 };
 
-const STORE_KEY = 'dd_vg4_' + _auth;
+const STORE_KEY = 'dd_vg5_' + _auth;
 
 function loadStore() {
   try {
@@ -1262,11 +1509,12 @@ function loadStore() {
       return {
         level: j.level || 1,
         mastered: j.mastered || { basic: [], core: [], extra: [] },
-        bestHp: j.bestHp || 100
+        bestHp: j.bestHp || 100,
+        totalKills: j.totalKills || 0
       };
     }
   } catch (e) {}
-  return { level: 1, mastered: { basic: [], core: [], extra: [] }, bestHp: 100 };
+  return { level: 1, mastered: { basic: [], core: [], extra: [] }, bestHp: 100, totalKills: 0 };
 }
 function saveStore(s) {
   try { localStorage.setItem(STORE_KEY, JSON.stringify(s)); } catch (e) {}
@@ -1279,6 +1527,21 @@ function markMastered(tier, word) {
   if (!s.mastered[tier].includes(word)) s.mastered[tier].push(word);
   STORE = s;
   saveStore(s);
+}
+
+function addKillCount() {
+  const s = loadStore();
+  s.totalKills = (s.totalKills || 0) + 1;
+  STORE = s;
+  saveStore(s);
+}
+
+/* 等级：每 20 词 1 星，每 5 星 = 1 月亮（100），每 10 月亮 = 1 太阳（1000） */
+function getRank(total) {
+  const sun  = Math.floor(total / 1000);
+  const moon = Math.floor((total % 1000) / 100);
+  const star = Math.floor((total % 100) / 20);
+  return { sun: sun, moon: moon, star: star };
 }
 
 /* =========================================================
@@ -1462,6 +1725,12 @@ function sfxHeal()  { beep(700, .09, 'sine', .08); beep(1050, .14, 'sine', .08, 
 function sfxOpen()  { sweep(300, 900, .16, 'sine', .055); }
 function sfxClose() { sweep(700, 260, .14, 'sine', .045); }
 function sfxClick() { beep(1150, .03, 'triangle', .06); }
+function sfxMystery() {
+  beep(880, .1, 'sine', .08);
+  beep(1174, .12, 'sine', .08, .08);
+  beep(1568, .18, 'sine', .07, .16);
+}
+function sfxShield() { beep(1200, .07, 'sine', .05); }
 function sfxWinFanfare() {
   const notes = [523.25, 659.25, 783.99, 1046.5, 1318.5];
   notes.forEach((f, i) => beep(f, .22, 'triangle', .085, i * .105));
@@ -1477,7 +1746,7 @@ function sfxStar()  { beep(1560, .06, 'sine', .07); beep(2080, .1, 'sine', .05, 
    4. 游戏状态与配置
    ========================================================= */
 const PLAYER_X = 50;
-const PLAYER_Y = 9;
+const PLAYER_Y = 12;
 const TREASURE_Y = 88;
 
 const ENEMY_CFG = {
@@ -1506,7 +1775,10 @@ const G = {
   correctCount: 0,
   over: false,
   startTime: 0,
-  elapsed: 0
+  elapsed: 0,
+  shieldUntil: 0,
+  slowUntil: 0,
+  currentBg: ''
 };
 
 const TOTAL_PER_LEVEL = 20;
@@ -1514,7 +1786,25 @@ const COMPOSITION = { blue: 10, orange: 6, red: 4 };
 const HEAL = { blue: 6, orange: 10, red: 14 };
 const EMOJI = { blue: '👾', orange: '👹', red: '💀' };
 
+const MYSTERY_RATE = 0.22;
+
+const BG_LIST = ['bg-1', 'bg-2', 'bg-3', 'bg-4', 'bg-5'];
+
+const MYSTERY_EFFECTS = [
+  { id: 'shield', emoji: '🛡️', name: '获得护盾', desc: '30 秒内免疫所有攻击', color: '#38bdf8' },
+  { id: 'slow',   emoji: '🐢', name: '敌人变慢', desc: '全体攻击频率下降，持续 20 秒', color: '#a78bfa' },
+  { id: 'bg',     emoji: '🌈', name: '幻境切换', desc: '战场背景被重新渲染', color: '#f472b6' },
+  { id: 'revive', emoji: '♻️', name: '亡魂复苏', desc: '已击败的单词重新出现', color: '#f59e0b' }
+];
+
+/* 总关数 */
+const TOTAL_LEVELS = (() => {
+  const n = GRADE_MAP.basic.data.length + GRADE_MAP.core.data.length + GRADE_MAP.extra.data.length;
+  return n > 0 ? Math.ceil(n / TOTAL_PER_LEVEL) : 20;
+})();
+
 let _lastTimerSec = -1;
+let _lastBuffKey = '';
 
 /* =========================================================
    5. 抽词 / 关卡生成
@@ -1561,6 +1851,13 @@ function buildLevel(levelNum) {
   const cols = [12, 31, 50, 69, 88];
   const rows = [78, 66, 54, 42];
 
+  /* 随机的神秘敌人（约 22%，最多 6 个） */
+  const mysteryCount = Math.min(6, Math.max(3, Math.round(mixed.length * MYSTERY_RATE)));
+  const mysteryIdx = new Set();
+  while (mysteryIdx.size < mysteryCount) {
+    mysteryIdx.add(Math.floor(Math.random() * mixed.length));
+  }
+
   mixed.forEach((e, i) => {
     const r = Math.floor(i / 5);
     const c = i % 5;
@@ -1575,6 +1872,7 @@ function buildLevel(levelNum) {
     e.alive = true;
     e.el = null;
     e.aimLine = null;
+    e.mystery = mysteryIdx.has(i);
 
     e.speed = cfg.speed * (0.85 + Math.random() * 0.35);
     e.tx = e.x;
@@ -1604,7 +1902,7 @@ function escapeHtml(s) {
 
 function createEnemyEl(e) {
   const div = document.createElement('div');
-  div.className = 'enemy ' + e.type;
+  div.className = 'enemy ' + e.type + (e.mystery ? ' mystery' : '');
   div.style.left = e.x + '%';
   div.style.bottom = e.y + '%';
 
@@ -1633,6 +1931,8 @@ function clearEntities() {
   entityLayer.innerHTML = '';
   document.querySelectorAll('.aim-line').forEach(l => l.remove());
   document.querySelectorAll('.proj').forEach(p => p.remove());
+  document.getElementById('buffBar').innerHTML = '';
+  document.getElementById('toastWrap').innerHTML = '';
 }
 
 function syncEntities() {
@@ -1696,6 +1996,30 @@ function updateTimerDisplay() {
   if (el) el.textContent = formatTime(G.elapsed);
 }
 
+function updateBuffBar() {
+  const now = performance.now();
+  const items = [];
+  if (now < G.shieldUntil) {
+    items.push({ cls: '', icon: '🛡️', text: '护盾 ' + Math.ceil((G.shieldUntil - now) / 1000) + 's' });
+  }
+  if (now < G.slowUntil) {
+    items.push({ cls: 'slow', icon: '🐢', text: '敌缓 ' + Math.ceil((G.slowUntil - now) / 1000) + 's' });
+  }
+
+  const playerEl = document.getElementById('player');
+  if (playerEl) playerEl.classList.toggle('shielded', now < G.shieldUntil);
+
+  const key = items.map(i => i.text).join('|');
+  if (key === _lastBuffKey) return;
+  _lastBuffKey = key;
+
+  const bar = document.getElementById('buffBar');
+  if (!bar) return;
+  bar.innerHTML = items.map(i =>
+    '<div class="buff-chip ' + i.cls + '"><i>' + i.icon + '</i>' + i.text + '</div>'
+  ).join('');
+}
+
 function loop(ts) {
   const dt = Math.min((ts - (G.lastTs || ts)) / 1000, 0.05);
   G.lastTs = ts;
@@ -1703,6 +2027,7 @@ function loop(ts) {
   if (G.running && !G.over) {
     G.elapsed = performance.now() - G.startTime;
     updateTimerDisplay();
+    updateBuffBar();
   }
 
   if (G.running && !G.paused && !G.over) {
@@ -1745,13 +2070,16 @@ function wanderEnemy(e, dt) {
 }
 
 function update(dt) {
+  const slowOn = performance.now() < G.slowUntil;
+  const fireFactor = slowOn ? 0.42 : 1;
+
   for (const e of G.enemies) {
     if (!e.alive) continue;
 
     wanderEnemy(e, dt);
 
     const cfg = ENEMY_CFG[e.type];
-    e.fireTimer -= dt;
+    e.fireTimer -= dt * fireFactor;
     e.aimingPlayer = e.nextAimed && e.fireTimer < 0.8 && e.fireTimer > 0;
 
     if (e.fireTimer <= 0) {
@@ -1820,6 +2148,14 @@ function spawnProjectile(fromEnemy, aimed, speed, dmg, type) {
 
 function damagePlayer(n, src) {
   if (G.over) return;
+
+  /* 护盾吸收 */
+  if (performance.now() < G.shieldUntil) {
+    popShieldAbsorb();
+    sfxShield();
+    return;
+  }
+
   G.hp = Math.max(0, G.hp - n);
   updateHUD();
   sfxHit();
@@ -1844,7 +2180,7 @@ function popDamage(n) {
   el.className = 'dmg-pop';
   el.textContent = '-' + n;
   el.style.left = PLAYER_X + '%';
-  el.style.bottom = (PLAYER_Y + 9) + '%';
+  el.style.bottom = (PLAYER_Y + 11) + '%';
   arena.appendChild(el);
   setTimeout(() => el.remove(), 950);
 }
@@ -1854,7 +2190,17 @@ function popHeal(n) {
   el.className = 'heal-pop';
   el.textContent = '+' + n;
   el.style.left = PLAYER_X + '%';
-  el.style.bottom = (PLAYER_Y + 9) + '%';
+  el.style.bottom = (PLAYER_Y + 11) + '%';
+  arena.appendChild(el);
+  setTimeout(() => el.remove(), 950);
+}
+
+function popShieldAbsorb() {
+  const el = document.createElement('div');
+  el.className = 'shield-pop';
+  el.textContent = '🛡️ 吸收';
+  el.style.left = PLAYER_X + '%';
+  el.style.bottom = (PLAYER_Y + 11) + '%';
   arena.appendChild(el);
   setTimeout(() => el.remove(), 950);
 }
@@ -1895,7 +2241,100 @@ function spawnParticles(xPct, yPct, color, count) {
 }
 
 /* =========================================================
-   9. 挑战流程
+   9. 神秘宝物 / 障碍
+   ========================================================= */
+function showToast(emoji, name, desc, color) {
+  const wrap = document.getElementById('toastWrap');
+  if (!wrap) return;
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.style.borderColor = color + '80';
+  el.innerHTML =
+    '<span class="toast-icon">' + emoji + '</span>' +
+    '<span class="toast-text">' +
+      '<b style="color:' + color + '">' + name + '</b>' +
+      '<span>' + desc + '</span>' +
+    '</span>';
+  wrap.appendChild(el);
+  setTimeout(() => el.remove(), 2500);
+}
+
+function randomBg() {
+  let next = G.currentBg;
+  let guard = 0;
+  while (next === G.currentBg && guard++ < 20) {
+    next = BG_LIST[Math.floor(Math.random() * BG_LIST.length)];
+  }
+  arena.classList.remove.apply(arena.classList, BG_LIST);
+  arena.classList.add(next);
+  G.currentBg = next;
+}
+
+function reviveEnemies(exclude) {
+  const dead = G.enemies.filter(e => !e.alive && e !== exclude);
+  if (!dead.length) return 0;
+
+  const n = Math.min(dead.length, 2 + Math.floor(Math.random() * 2));
+  const picked = shuffle(dead).slice(0, n);
+
+  picked.forEach(e => {
+    e.alive = true;
+    e.mystery = false;
+    e.x = clamp(10 + Math.random() * 80, 10, 90);
+    e.y = clamp(42 + Math.random() * 36, 42, 78);
+    e.tx = e.x;
+    e.ty = e.y;
+    e.wanderTimer = 0;
+    e.aimingPlayer = false;
+    e.fireTimer = ENEMY_CFG[e.type].fireMin * (0.7 + Math.random() * 0.6);
+
+    if (e.el) {
+      e.el.classList.remove('die', 'mystery', 'hit');
+      e.el.style.display = '';
+      e.el.style.left = e.x + '%';
+      e.el.style.bottom = e.y + '%';
+      void e.el.offsetWidth;
+    }
+    if (e.aimLine) e.aimLine.style.display = 'none';
+
+    spawnParticles(e.x, e.y, '#f59e0b', 10);
+  });
+
+  updateHUD();
+  return picked.length;
+}
+
+function triggerMystery(enemy) {
+  /* 若没有可复活的敌人，则排除复活选项 */
+  let pool = MYSTERY_EFFECTS.slice();
+  if (!G.enemies.some(e => !e.alive && e !== enemy)) {
+    pool = pool.filter(x => x.id !== 'revive');
+  }
+
+  const eff = pool[Math.floor(Math.random() * pool.length)];
+  const now = performance.now();
+
+  switch (eff.id) {
+    case 'shield':
+      G.shieldUntil = Math.max(G.shieldUntil, now) + 30000;
+      break;
+    case 'slow':
+      G.slowUntil = Math.max(G.slowUntil, now) + 20000;
+      break;
+    case 'bg':
+      randomBg();
+      break;
+    case 'revive':
+      reviveEnemies(enemy);
+      break;
+  }
+
+  showToast(eff.emoji, eff.name, eff.desc, eff.color);
+  sfxMystery();
+}
+
+/* =========================================================
+   10. 挑战流程
    ========================================================= */
 const modalMask = document.getElementById('modalMask');
 const qArea = document.getElementById('qArea');
@@ -2050,6 +2489,7 @@ function submitAnswer() {
     spawnParticles(e.x, e.y, color, 14);
 
     markMastered(e.tier, e.word.w.toLowerCase());
+    addKillCount();
     G.killCount++;
     updateHUD();
 
@@ -2057,13 +2497,19 @@ function submitAnswer() {
     healPlayer(healAmt);
     setTimeout(() => spawnParticles(e.x, e.y, '#4ade80', 8), 120);
 
+    /* 神秘宝物 / 障碍 */
+    if (e.mystery) {
+      setTimeout(() => triggerMystery(e), 220);
+    }
+
     fbEl.className = 'feedback ok';
-    fbEl.innerHTML = '✓ 正确！敌人已击破　<span style="color:#4ade80;font-weight:800">+' + healAmt + ' HP</span>';
+    fbEl.innerHTML = '✓ 正确！敌人已击破　<span style="color:#4ade80;font-weight:800">+' + healAmt + ' HP</span>' +
+      (e.mystery ? '　<span style="color:#fbbf24;font-weight:800">✦ 神秘掉落</span>' : '');
 
     setTimeout(() => {
       closeChallenge(true);
       checkLevelClear();
-    }, 460);
+    }, 520);
 
   } else {
     sfxBad();
@@ -2097,7 +2543,7 @@ function speakCurrent() {
 }
 
 /* =========================================================
-   10. 关卡管理
+   11. 关卡管理
    ========================================================= */
 function startLevel(levelNum) {
   G.level = levelNum;
@@ -2110,6 +2556,9 @@ function startLevel(levelNum) {
   G.killCount = 0;
   G.answerCount = 0;
   G.correctCount = 0;
+  G.shieldUntil = 0;
+  G.slowUntil = 0;
+  _lastBuffKey = '';
 
   /* 计时初始化 */
   G.startTime = performance.now();
@@ -2117,6 +2566,9 @@ function startLevel(levelNum) {
   _lastTimerSec = -1;
   const tEl = document.getElementById('timerBadge');
   if (tEl) tEl.textContent = '用时0秒';
+
+  const playerEl = document.getElementById('player');
+  if (playerEl) playerEl.classList.remove('shielded');
 
   clearEntities();
 
@@ -2137,10 +2589,33 @@ function startLevel(levelNum) {
 
 function updateHUD() {
   const pct = Math.max(0, G.hp / G.maxHp * 100);
-  document.getElementById('hpFill').style.width = pct + '%';
-  document.getElementById('hpText').textContent = Math.round(G.hp);
+  const fill = document.getElementById('playerHpFill');
+  if (fill) fill.style.width = pct + '%';
+
   const left = G.enemies.filter(e => e.alive).length;
-  document.getElementById('enemyLeft').textContent = left;
+  const el = document.getElementById('enemyLeft');
+  if (el) el.textContent = left;
+
+  updateRankHUD();
+}
+
+function updateRankHUD() {
+  const total = STORE.totalKills || 0;
+  const r = getRank(total);
+  const box = document.getElementById('rankBadge');
+  if (!box) return;
+
+  let html = '';
+  if (r.sun > 0) {
+    html += '<span class="rank-item sun"><i>☀️</i><span class="rank-num">' + r.sun + '</span></span>';
+  }
+  if (r.moon > 0) {
+    html += '<span class="rank-item moon"><i>🌙</i><span class="rank-num">' + r.moon + '</span></span>';
+  }
+  if (r.star > 0 || html === '') {
+    html += '<span class="rank-item star"><i>⭐</i><span class="rank-num">' + r.star + '</span></span>';
+  }
+  box.innerHTML = html;
 }
 
 function checkLevelClear() {
@@ -2251,7 +2726,7 @@ function showResult(win) {
 }
 
 /* =========================================================
-   11. 入口
+   12. 入口
    ========================================================= */
 function startGame() {
   ac();
@@ -2263,10 +2738,11 @@ function startGame() {
 function resetProgress() {
   sfxClick();
   if (!confirm('确定要重置全部闯关进度吗？')) return;
-  STORE = { level: 1, mastered: { basic: [], core: [], extra: [] }, bestHp: 100 };
+  STORE = { level: 1, mastered: { basic: [], core: [], extra: [] }, bestHp: 100, totalKills: 0 };
   saveStore(STORE);
   alert('已重置，将从第 1 关开始');
   document.getElementById('levelNum').textContent = '1';
+  updateRankHUD();
 }
 
 document.addEventListener('keydown', ev => {
@@ -2297,9 +2773,11 @@ requestAnimationFrame(loop);
 
 (function init() {
   document.getElementById('levelNum').textContent = STORE.level || 1;
-  document.getElementById('hpFill').style.width = '100%';
-  document.getElementById('hpText').textContent = '100';
+  document.getElementById('totalLevels').textContent = TOTAL_LEVELS;
   document.getElementById('enemyLeft').textContent = TOTAL_PER_LEVEL;
+  const fill = document.getElementById('playerHpFill');
+  if (fill) fill.style.width = '100%';
+  updateRankHUD();
 })();
 </script>
 </body>
