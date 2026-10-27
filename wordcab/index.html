@@ -82,8 +82,23 @@ body {
   align-items: center;
   gap: 7px;
   margin-left: auto;
-  margin-right: 4px;
+  margin-right: 6px;
   min-height: 22px;
+}
+.rank-badge .user-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #e2e8f0;
+  letter-spacing: .3px;
+  line-height: 1;
+  padding-right: 8px;
+  margin-right: 2px;
+  border-right: 1px solid rgba(148,163,184,.24);
+  white-space: nowrap;
+  max-width: 96px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
 }
 .rank-item {
   display: inline-flex;
@@ -1841,7 +1856,7 @@ body {
     <span class="lv-total">/ 共 <span id="totalLevels">20</span> 关</span>
   </div>
   <div class="rank-badge" id="rankBadge"></div>
-  <div class="enemy-count">剩 <b id="enemyLeft">20</b></div>
+  <div class="enemy-count">本关剩 <b id="enemyLeft">20</b></div>
 </div>
 
 <!-- ============ 竞技场 ============ -->
@@ -1977,6 +1992,7 @@ body {
    1. 数据与存储
    ========================================================= */
 const _auth = localStorage.getItem('dd_auth') || 'guest';
+const _userName = (localStorage.getItem('dd_name') || '同学').trim();
 
 const GRADE_MAP = {
   basic: { data: (typeof WORDS_BASIC !== 'undefined' ? WORDS_BASIC : []), label: '基础', type: 'blue' },
@@ -2831,7 +2847,6 @@ function update(dt) {
     return true;
   });
 
-  /* 宝箱调度 */
   if (!G.rulePhase && !G.chestActive && G.nextChestTime > 0 && now > G.nextChestTime) {
     spawnChest();
   }
@@ -3065,7 +3080,7 @@ function triggerMystery(enemy) {
 }
 
 /* =========================================================
-   10. 宝箱系统（随机掉落）
+   10. 宝箱系统
    ========================================================= */
 function scheduleNextChest() {
   const delay = 15000 + Math.random() * 13000;
@@ -3191,7 +3206,7 @@ function grantChestTreasure() {
 }
 
 /* =========================================================
-   11. 规则面板（分三批逐句展示）
+   11. 规则面板
    ========================================================= */
 const RULE_BATCHES = [
   [
@@ -3706,7 +3721,7 @@ function updateHUD() {
 function updateRankHUD() {
   const total = STORE.totalKills || 0;
   const r = getRank(total);
-  const key = r.sun + '|' + r.moon + '|' + r.star;
+  const key = r.sun + '|' + r.moon + '|' + r.star + '|' + _userName;
 
   const box = document.getElementById('rankBadge');
   if (!box) return;
@@ -3714,14 +3729,20 @@ function updateRankHUD() {
   if (key === _lastRankKey) return;
   _lastRankKey = key;
 
-  let html = '';
+  const userNameHtml =
+    '<span class="user-name" title="' + escapeHtml(_userName) + '">' +
+    escapeHtml(_userName) +
+    '</span>';
+
+  let html = userNameHtml;
+
   if (r.sun > 0) {
     html += '<span class="rank-item sun"><i>☀️</i><span class="rank-num">' + r.sun + '</span></span>';
   }
   if (r.moon > 0) {
     html += '<span class="rank-item moon"><i>🌙</i><span class="rank-num">' + r.moon + '</span></span>';
   }
-  if (r.star > 0 || html === '') {
+  if (r.star > 0 || html === userNameHtml) {
     html += '<span class="rank-item star"><i>⭐</i><span class="rank-num">' + r.star + '</span></span>';
   }
   box.innerHTML = html;
@@ -3959,7 +3980,6 @@ function logout() {
 
   sfxClick();
 
-  /* 只清登录态，进度 dd_vg10_* 与设备号 dd_device_id 保留 */
   localStorage.removeItem('dd_auth');
   localStorage.removeItem('dd_login_time');
   localStorage.removeItem('dd_name');
