@@ -1,0 +1,1108 @@
+﻿﻿﻿﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script>
+if(!localStorage.getItem('dd_auth')){ location.href='../login.html'; }
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<title>单词一扫光</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%238A2BE2'/%3E%3Cpath d='M8 10h16v12H8z' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Cpath d='M12 14h8M12 17h5' stroke='%23FF5CA8' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  /* 核心色彩 */
+  --bg-base: #5B3FE6;
+  --bg-gradient: linear-gradient(135deg, #6B4CFF 0%, #8A2BE2 50%, #4B27C9 100%);
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-shadow: 0 10px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  
+  /* 强调色 */
+  --pink: #FF5CA8;
+  --cyan: #00E5FF;
+  --yellow: #FFD54F;
+  --white: #FFFFFF;
+  --text-main: rgba(255, 255, 255, 0.95);
+  --text-sub: rgba(255, 255, 255, 0.6);
+  
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  --sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+  height:100%;
+  overflow:hidden;
+}
+body{
+  font-family:var(--sans);
+  background: var(--bg-base);
+  background-image: var(--bg-gradient);
+  color:var(--text-main);
+  height:100vh;
+  height:100dvh;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+
+/* ========= 背景光晕与线条装饰 ========= */
+.bg-effects {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.glow-orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(70px);
+  animation: floatOrb 12s ease-in-out infinite alternate;
+}
+.orb-1 { width: 300px; height: 300px; background: rgba(255, 92, 168, 0.4); top: -80px; right: -50px; }
+.orb-2 { width: 280px; height: 280px; background: rgba(0, 229, 255, 0.3); bottom: -60px; left: -60px; animation-delay: -5s; }
+.orb-3 { width: 200px; height: 200px; background: rgba(255, 213, 79, 0.2); top: 40%; left: 30%; animation-delay: -8s; }
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, -40px) scale(1.15); }
+}
+
+/* 模拟设计稿中的引导连线 */
+.design-line {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-dasharray: 4 4;
+  animation: dashMove 20s linear infinite;
+}
+@keyframes dashMove {
+  to { stroke-dashoffset: -200; }
+}
+.design-line-path {
+  position: absolute; width: 100%; height: 100%;
+}
+
+/* ========= 布局容器 ========= */
+.app {
+  position: relative; z-index: 5;
+  display: flex; flex-direction: column;
+  height: 100%; width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 12px;
+  gap: 12px;
+}
+
+/* ========= 顶部 Header (玻璃拟态) ========= */
+.header {
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  position: relative;
+}
+/* 高光边缘 */
+.header::before {
+  content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+}
+.logo {
+  font-size: 16px; font-weight: 800; letter-spacing: 1px;
+  display: flex; align-items: center; gap: 8px;
+}
+.logo-icon {
+  width: 24px; height: 24px;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(255, 92, 168, 0.5);
+}
+
+/* 新增：风格切换器 (玻璃拟态) */
+.header-right {
+  display: flex; align-items: center; gap: 8px;
+  margin-left: auto;
+}
+.style-select {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 20px 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  /* 自定义下拉箭头 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6' viewBox='0 0 8 6'%3E%3Cpath fill='%23fff' d='M0 0l4 6 4-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  transition: all 0.2s;
+}
+.style-select:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+.style-select option {
+  color: #333;
+  background: #fff;
+}
+
+.user-badge {
+  font-size: 11px; font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex; align-items: center; gap: 4px;
+}
+
+/* ========= 控制区（模式与词库切换） ========= */
+.controls {
+  flex-shrink: 0;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.segmented-control {
+  display: flex;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 999px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+.segmented-btn {
+  flex: 1; text-align: center;
+  padding: 8px 0;
+  font-size: 12px; font-weight: 600;
+  color: var(--text-sub);
+  border-radius: 999px;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative; z-index: 1;
+}
+.segmented-btn.active {
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+/* 滑动背景块 */
+.segmented-highlight {
+  position: absolute; top: 4px; bottom: 4px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.1));
+  border-radius: 999px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255,255,255,0.4);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+/* ========= 主卡片 ========= */
+.main-card {
+  flex: 1;
+  position: relative;
+  border-radius: 28px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), 
+              0 20px 40px rgba(0, 0, 0, 0.2);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+.main-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+  background: linear-gradient(to top, rgba(255,255,255,0.05), transparent);
+  pointer-events: none;
+}
+
+/* 内容区 */
+.content {
+  flex: 1; display: flex; flex-direction: column;
+  padding: 16px 16px 0; /* 键盘在这里独立出去 */
+  position: relative;
+  min-height: 0;
+}
+
+/* 开始页 */
+.start-view {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding-bottom: 20px;
+}
+.start-graphic {
+  position: relative;
+  width: 80px; height: 80px;
+  margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center;
+}
+.start-graphic::before {
+  content: ''; position: absolute; inset: 0;
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  transform: rotate(15deg);
+  animation: morph 4s ease-in-out infinite;
+  box-shadow: 0 10px 30px rgba(255, 92, 168, 0.4);
+}
+.start-graphic::after {
+  content: ''; position: absolute; inset: 4px;
+  border-radius: 26px;
+  background: rgba(30, 20, 60, 0.6);
+  backdrop-filter: blur(10px);
+}
+.start-graphic span {
+  position: relative; z-index: 1;
+  font-size: 32px;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
+}
+@keyframes morph {
+  0%, 100% { border-radius: 30px; transform: rotate(15deg) scale(1); }
+  50% { border-radius: 50%; transform: rotate(0deg) scale(1.1); }
+}
+
+.mode-desc {
+  font-size: 18px; font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(to right, #fff, var(--cyan));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.tip-msg {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  padding: 4px 12px; border-radius: 999px;
+  background: rgba(255, 213, 79, 0.15);
+  border: 1px solid rgba(255, 213, 79, 0.3);
+  color: var(--yellow);
+  box-shadow: 0 0 10px rgba(255, 213, 79, 0.1);
+}
+
+/* 学习页 */
+.learn-view {
+  flex: 1; display: flex; flex-direction: column; min-height: 0;
+}
+.progress-track {
+  height: 4px; background: rgba(0,0,0,0.3); border-radius: 4px; margin-bottom: 12px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--pink), var(--cyan));
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.question-area {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  text-align: center;
+  padding: 0 4px;
+}
+.example-en {
+  font-size: 18px; font-weight: 500; line-height: 1.7;
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+.example-cn {
+  font-size: 13px; color: var(--text-sub); line-height: 1.5;
+  margin-bottom: 16px;
+}
+.blank {
+  display: inline-block;
+  min-width: 70px; padding: 0 8px;
+  color: var(--yellow);
+  border-bottom: 2px solid var(--yellow);
+  background: linear-gradient(180deg, transparent 50%, rgba(255, 213, 79, 0.15) 100%);
+  font-family: var(--mono); font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 213, 79, 0.5);
+  position: relative;
+}
+/* 闪烁光标 */
+.blank::after {
+  content: '|'; color: var(--yellow); opacity: 0;
+  position: absolute; right: -4px; bottom: 0;
+  animation: blink 1s infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+
+.sound-row {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 8px;
+}
+.sound-btn {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.sound-btn:active { transform: scale(0.9); background: rgba(255, 255, 255, 0.2); }
+.sound-btn svg { width: 14px; height: 14px; }
+.phonetic { font-family: var(--mono); font-size: 12px; color: var(--cyan); }
+
+/* 虚拟键盘区 */
+.keyboard-container {
+  padding: 12px 12px 16px;
+  background: rgba(0, 0, 0, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.keyboard {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
+}
+.key {
+  height: 42px; line-height: 40px;
+  text-align: center;
+  font-family: var(--mono); font-size: 16px; font-weight: 600;
+  color: var(--white);
+  background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  cursor: pointer; user-select: none;
+  transition: all 0.1s;
+}
+.key:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.25);
+}
+.key.del {
+  background: linear-gradient(180deg, rgba(255, 92, 168, 0.3), rgba(255, 92, 168, 0.1));
+  border-color: rgba(255, 92, 168, 0.4);
+  color: var(--pink);
+}
+.key.confirm {
+  grid-column: span 7;
+  background: linear-gradient(135deg, var(--cyan), #0090A8);
+  border: none;
+  color: #000;
+  font-size: 14px; letter-spacing: 4px;
+  box-shadow: 0 4px 0 #006E82, 0 0 15px rgba(0, 229, 255, 0.4);
+  height: 46px; line-height: 44px;
+}
+.key.confirm:active {
+  box-shadow: 0 0 0 #006E82, 0 0 25px rgba(0, 229, 255, 0.6);
+  transform: translateY(4px);
+}
+
+/* 反馈弹窗 (覆盖在键盘上) */
+.feedback-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 16px;
+  background: rgba(20, 10, 40, 0.85);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0 0 28px 28px;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.feedback-overlay.show { transform: translateY(0); }
+.feedback-msg {
+  font-size: 15px; text-align: center; font-weight: 600;
+}
+.feedback-msg.ok { color: var(--cyan); }
+.feedback-msg.err { color: var(--pink); }
+.fb-actions { display: flex; gap: 10px; }
+.fb-btn {
+  flex: 1; padding: 12px 0;
+  border-radius: 12px; border: none;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+}
+.fb-btn.primary {
+  background: linear-gradient(135deg, var(--cyan), #00A6C8);
+  color: #000;
+  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+}
+.fb-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.fb-btn:active { transform: scale(0.96); }
+
+/* 底部主按钮 (开始/继续) */
+.bottom-action {
+  flex-shrink: 0;
+  padding: 0 16px 16px;
+}
+.act-btn {
+  width: 100%; padding: 16px 0;
+  border-radius: 16px; border: none;
+  font-size: 16px; font-weight: 800; letter-spacing: 2px;
+  cursor: pointer; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--pink), #D12E79);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(255, 92, 168, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition: all 0.2s;
+}
+.act-btn:active { transform: translateY(2px); box-shadow: 0 4px 12px rgba(255, 92, 168, 0.3); }
+/* 扫光动效 */
+.act-btn::after {
+  content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-20deg);
+  animation: btnShine 3s infinite;
+}
+@keyframes btnShine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
+
+/* 完成页 */
+.done-view {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.done-title { font-size: 12px; color: var(--text-sub); letter-spacing: 2px; margin-bottom: 12px; }
+.done-msg { font-size: 20px; font-weight: 700; line-height: 1.8; }
+
+/* ========= 动效补充 ========= */
+.flash-red {
+  animation: flashRed 0.4s 2;
+}
+@keyframes flashRed {
+  0%, 100% { box-shadow: 0 0 0 rgba(255, 92, 168, 0); }
+  50% { box-shadow: 0 0 40px rgba(255, 92, 168, 0.5); background: rgba(255, 92, 168, 0.1); }
+}
+
+.celebrate-particle {
+  position: fixed; pointer-events: none; z-index: 999;
+  font-size: 24px;
+  animation: particleRise 1.2s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+@keyframes particleRise {
+  0% { transform: translateY(0) scale(0.5); opacity: 1; }
+  100% { transform: translateY(-150px) scale(1.2); opacity: 0; }
+}
+
+.hide { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- 背景层 -->
+<div class="bg-effects">
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+  
+  <!-- 设计感装饰线条 (SVG) -->
+  <svg class="design-line" width="100%" height="100%">
+    <path d="M-20,100 Q 150,100 200,200 T 350,300" />
+    <path d="M480,120 Q 350,150 300,300 T 150,500" />
+    <circle cx="200" cy="200" r="4" fill="rgba(255,255,255,0.4)" />
+    <circle cx="300" cy="300" r="4" fill="rgba(255,255,255,0.4)" />
+  </svg>
+</div>
+
+<div class="app">
+
+  <!-- 顶部用户状态 -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">🎵</div>
+      Pixo Vocab
+    </div>
+    
+    <div class="header-right">
+      <!-- 风格切换器 -->
+      <select class="style-select" onchange="location.href=this.value">
+        <option value="vocab.html">原版</option>
+        <option value="science.html">科技风</option>
+        <option value="zd.html" selected>紫格调</option>
+        <option value="zgf.html">中国风</option>
+        <option value="game.html">游戏风</option>
+        <option value="cjx.html">机械风</option>
+      </select>
+      <!-- 用户信息 -->
+      <div class="user-badge" id="headerInfo"></div>
+    </div>
+  </header>
+
+  <!-- 控制区 -->
+  <div class="controls">
+    <div class="segmented-control" id="gradeTabs">
+      <div class="segmented-highlight" id="gradeHighlight" style="width: 33.33%; left: 0;"></div>
+      <div class="segmented-btn active" data-grade="basic" onclick="setGrade('basic')">基础</div>
+      <div class="segmented-btn" data-grade="core" onclick="setGrade('core')">核心</div>
+      <div class="segmented-btn" data-grade="extra" onclick="setGrade('extra')">拓展</div>
+    </div>
+    <div class="segmented-control" id="modeTabs">
+      <div class="segmented-highlight" id="modeHighlight" style="width: 50%; left: 0;"></div>
+      <div class="segmented-btn active" data-mode="learn" onclick="setMode('learn')">学新词 <span id="learnCount" style="opacity:0.6;font-size:10px;margin-left:4px">0</span></div>
+      <div class="segmented-btn" data-mode="review" onclick="setMode('review')">待复习 <span id="reviewCount" style="opacity:0.6;font-size:10px;margin-left:4px">0</span></div>
+    </div>
+  </div>
+
+  <!-- 主内容区 -->
+  <main class="main-card" id="mainCard">
+    
+    <!-- 开始页 -->
+    <div id="startPage" class="start-view hide">
+      <div class="start-graphic"><span>🎧</span></div>
+      <div class="mode-desc" id="modeDesc">基础词汇 · 开始学习</div>
+      <div id="tipMsg" class="tip-msg hide"></div>
+    </div>
+
+    <!-- 学习页 -->
+    <div id="learnPage" class="learn-view hide">
+      <div class="content">
+        <div class="progress-track"><div class="progress-fill" id="progFill"></div></div>
+        <div class="question-area">
+          <div class="example-en" id="exEn"></div>
+          <div class="example-cn" id="exCn"></div>
+          <div class="sound-row">
+            <button class="sound-btn" onclick="playCurrentWord()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h3l4-4v14l-4-4H4z" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 010 7"/><path d="M18.5 5.5a9 9 0 010 13"/></svg>
+            </button>
+            <span class="phonetic" id="phon" style="display:none"></span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 键盘区 -->
+      <div class="keyboard-container" id="keyboardContainer">
+        <div class="keyboard" id="keyboard"></div>
+      </div>
+    </div>
+
+    <!-- 完成页 -->
+    <div id="donePage" class="done-view hide">
+      <div class="done-title" id="doneTitle">本轮完成</div>
+      <div class="done-msg" id="doneMsg"></div>
+    </div>
+
+    <!-- 答题反馈浮层 -->
+    <div class="feedback-overlay" id="feedbackOverlay">
+      <div class="feedback-msg" id="feedbackMsg"></div>
+      <div class="fb-actions" id="fbActions"></div>
+    </div>
+
+  </main>
+
+  <!-- 底部主按钮 -->
+  <div class="bottom-action" id="bottomAction">
+    <button class="act-btn" id="startBtn" onclick="onBottomBtn('sentence')">开 始 记 单 词</button>
+  </div>
+
+</div>
+
+<script src="gradewords.js?v=20261001"></script>
+<script>
+/* ========== 数据与状态 ========== */
+const GRADE_MAP = {
+  'basic': { data: WORDS_BASIC, label: '基础词汇' },
+  'core':  { data: WORDS_CORE,  label: '核心词汇' },
+  'extra': { data: WORDS_EXTRA, label: '拓展词汇' },
+};
+
+let grade = 'basic';
+let WORDS = [];
+let mode = 'learn';
+let sessionMode = 'sentence';
+let queue = [];
+let current = null;
+let typed = '';
+let sessionAnswered = 0, sessionCorrect = 0, sessionReviewed = 0;
+let learnedCount = 0, reviewSet = [], masteredSet = [];
+
+let _auth = localStorage.getItem('dd_auth') || 'guest';
+const STUDENT_MAP = {
+  'duoduo2026': '多多', 'abc123': '测试同学', '10001090': '周卫', 'jf': '姜老师', 'jiang2026': '姜仿'
+};
+function storageKey(){ return 'dd_'+_auth+'_'+grade; }
+const UP_URL = 'https://fitting-ostrich-312589.upstash.io';
+const UP_TOKEN = 'gQAAAAAABMUNAAIgcDFiZDU2MDM2YWJkYzg0YTgyOTRlOTUzMjM1MWY1ZGJhNg';
+
+async function cloudGet(k){
+  try{
+    const r = await fetch(UP_URL + '/get/' + encodeURIComponent(k), { headers: { 'Authorization': 'Bearer ' + UP_TOKEN } });
+    const j = await r.json();
+    return j.result;
+  }catch(e){ return null; }
+}
+async function cloudSet(k, v){
+  try{
+    await fetch(UP_URL + '/set/' + encodeURIComponent(k) + '/' + encodeURIComponent(v), { headers: { 'Authorization': 'Bearer ' + UP_TOKEN } });
+  }catch(e){}
+}
+function saveState(){
+  const data = JSON.stringify({ learned: learnedCount, review: reviewSet, mastered: masteredSet });
+  localStorage.setItem(storageKey(), data);
+  cloudSet(storageKey(), data);
+}
+
+/* ========== 核心逻辑 (部分适配UI) ========== */
+async function setGrade(g){
+  grade = g;
+  WORDS = GRADE_MAP[g].data;
+  
+  // UI 高亮
+  document.querySelectorAll('#gradeTabs .segmented-btn').forEach(t=>{
+    t.classList.toggle('active', t.dataset.grade===g);
+  });
+  const idx = ['basic','core','extra'].indexOf(g);
+  document.getElementById('gradeHighlight').style.transform = `translateX(${idx * 100}%)`;
+
+  // 读数据
+  try{
+    const local = localStorage.getItem(storageKey());
+    if(local){
+      const j = JSON.parse(local);
+      learnedCount = j.learned || 0;
+      reviewSet = j.review || [];
+      masteredSet = j.mastered || [];
+    } else {
+      learnedCount = 0; reviewSet = []; masteredSet = [];
+    }
+  }catch(e){ learnedCount = 0; reviewSet = []; masteredSet = []; }
+  
+  setMode('learn');
+  refreshStats();
+  refreshAllGradeStats();
+  
+  // 云端拉取
+  try{
+    const cloud = await cloudGet(storageKey());
+    if(cloud){
+      const j = JSON.parse(cloud);
+      learnedCount = j.learned || 0;
+      reviewSet = j.review || [];
+      masteredSet = j.mastered || [];
+      localStorage.setItem(storageKey(), cloud);
+      setMode('learn');
+      refreshStats();
+      refreshAllGradeStats();
+    }
+  }catch(e){}
+}
+
+function remainNew(){
+  return WORDS.filter(w => !masteredSet.includes(w.w.toLowerCase()) && !reviewSet.includes(w.w.toLowerCase())).length;
+}
+
+function refreshAllGradeStats(){
+  let masteredTotal = 0;
+  ['basic','core','extra'].forEach(g=>{
+    try{
+      let local = localStorage.getItem('dd_'+_auth+'_'+g);
+      if(local){
+        const j = JSON.parse(local);
+        masteredTotal += (j.mastered || []).length;
+      }
+    }catch(e){}
+  });
+  const name = STUDENT_MAP[_auth] || localStorage.getItem('dd_name') || '同学';
+  const el = document.getElementById('headerInfo');
+  if(el) el.innerHTML = name + '<span style="color:var(--cyan);margin-left:4px;font-weight:800">'+masteredTotal+'</span>';
+}
+
+function refreshStats(){
+  refreshAllGradeStats();
+  document.getElementById('reviewCount').textContent = reviewSet.length;
+  document.getElementById('learnCount').textContent = remainNew();
+  
+  const learnBtn = document.querySelector('#modeTabs [data-mode="learn"]');
+  const reviewBtn = document.querySelector('#modeTabs [data-mode="review"]');
+  learnBtn.style.opacity = remainNew()===0 ? '0.3' : '1';
+  reviewBtn.style.opacity = reviewSet.length===0 ? '0.3' : '1';
+
+  const tip = document.getElementById('tipMsg');
+  if(remainNew()===0 && reviewSet.length===0){
+    tip.classList.remove('hide'); tip.textContent = 'ALL CLEAR · 全部完成';
+  } else if(remainNew()===0 && reviewSet.length>0){
+    tip.classList.remove('hide'); tip.textContent = 'NEW DONE · 请去复习';
+  } else { tip.classList.add('hide'); }
+
+  if(remainNew()===0 && reviewSet.length===0){
+    setBottomBtn('全部重学一遍', resetAll, true);
+  } else if(mode==='learn' && remainNew()===0){
+    setBottomBtn('去复习', function(){ setMode('review'); startSession(); }, true);
+  }
+}
+
+function setMode(m){
+  mode = m;
+  document.querySelectorAll('#modeTabs .segmented-btn').forEach(t=>{
+    t.classList.toggle('active', t.dataset.mode===m);
+  });
+  const idx = ['learn','review'].indexOf(m);
+  document.getElementById('modeHighlight').style.transform = `translateX(${idx * 100}%)`;
+
+  document.getElementById('modeDesc').textContent = m==='learn'
+    ? GRADE_MAP[grade].label + ' · 开始学习'
+    : GRADE_MAP[grade].label + ' · 巩固复习';
+  
+  document.getElementById('learnPage').classList.add('hide');
+  document.getElementById('donePage').classList.add('hide');
+  document.getElementById('startPage').classList.remove('hide');
+  document.getElementById('bottomAction').classList.remove('hide');
+  document.getElementById('feedbackOverlay').classList.remove('show');
+
+  if(m==='learn' && remainNew()===0){
+    setBottomBtn(reviewSet.length>0 ? '去复习' : '全部重学一遍',
+      reviewSet.length>0 ? function(){ setMode('review'); startSession(); } : resetAll, true);
+  } else {
+    setBottomBtn(m==='learn' ? '开 始 记 单 词' : '开 始 复 习', onBottomBtn, false);
+  }
+  refreshStats();
+}
+
+function setBottomBtn(label, fn, single){
+  const btn = document.getElementById('startBtn');
+  btn.textContent = label;
+  btn.onclick = fn;
+}
+
+function startSession(){
+  sessionAnswered = 0; sessionCorrect = 0; sessionReviewed = 0;
+  if(mode==='learn'){
+    queue = WORDS.filter(w => !masteredSet.includes(w.w.toLowerCase()) && !reviewSet.includes(w.w.toLowerCase()));
+    if(queue.length===0){ refreshStats(); return; }
+  } else {
+    queue = WORDS.filter(w => reviewSet.includes(w.w.toLowerCase()));
+    if(queue.length===0){ document.getElementById('modeDesc').textContent='没有待复习的单词'; return; }
+  }
+  
+  for(let i=queue.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[queue[i],queue[j]]=[queue[j],queue[i]];}
+  
+  document.getElementById('startPage').classList.add('hide');
+  document.getElementById('donePage').classList.add('hide');
+  document.getElementById('learnPage').classList.remove('hide');
+  document.getElementById('bottomAction').classList.add('hide');
+  
+  refreshStats();
+  nextCard();
+}
+
+function nextCard(){
+  if(queue.length===0){ showDone(); return; }
+  current = queue.shift();
+  typed = '';
+  
+  if(sessionMode === 'meaning'){
+    const bw = (current.w.length + 2) * 14 + 20;
+    const isPh = (current.w.trim().indexOf(' ') >= 0);
+    const phTag = isPh ? '<span style="font-size:10px;color:var(--yellow);margin-left:6px">[短语]</span>' : '';
+    document.getElementById('exEn').innerHTML = '<div style="font-size:20px;font-weight:700;margin-bottom:6px">'+current.m+phTag+'</div><div style="font-size:14px;color:var(--text-sub)">（<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>）</div>';
+    document.getElementById('exCn').textContent = '';
+    current.seg = current.w;
+    current.segFirst = false;
+  } else {
+    document.getElementById('exEn').innerHTML = makeBlank(current.en, current.w);
+    current.seg = _lastSeg;
+    current.segFirst = _lastSegFirst;
+    document.getElementById('exCn').textContent = current.cn;
+  }
+  
+  document.getElementById('phon').textContent = current.p;
+  document.getElementById('phon').style.display = 'none';
+  document.getElementById('feedbackOverlay').classList.remove('show');
+  
+  renderKeyboard();
+  document.getElementById('progFill').style.width = ((1-(queue.length+1)/WORDS.length)*100)+'%';
+}
+
+/* ========== 辅助函数 (makeBlank, isCorrect 等) ========== */
+const IRREG = {found:'find',sent:'send',bought:'buy',became:'become',won:'win',stole:'steal',caught:'catch',fought:'fight',paid:'pay',overslept:'oversleep',got:'get',fell:'fall',made:'make',took:'take',gave:'give',did:'do',went:'go',was:'be',were:'be',am:'be',is:'be',are:'be',bled:'bleed',cancelled:'cancel',clapped:'clap',nodded:'nod',led:'lead',built:'build',held:'hold',kept:'keep',left:'leave',met:'meet',read:'read',said:'say',saw:'see',spoke:'speak',stood:'stand',taught:'teach',thought:'think',came:'come',ran:'run',sang:'sing',sat:'sit',swam:'swim',wrote:'write',ate:'eat',drank:'drink',drove:'drive',rode:'ride',threw:'throw',wore:'wear',broke:'break',chose:'choose',drew:'draw',flew:'fly',grew:'grow',knew:'know',showed:'show',told:'tell',understood:'understand',woke:'wake',spent:'spend',felt:'feel',lost:'lose',heard:'hear',hurt:'hurt',cut:'cut',put:'put',let:'let',sold:'sell',teeth:'tooth',feet:'foot',men:'man',women:'woman',children:'child',leaves:'leaf'};
+
+function wordVariants(w){
+  w = w.toLowerCase();
+  const vs = [w];
+  if(w.endsWith('y') && w.length>1 && !'aeiou'.includes(w[w.length-2])){ vs.push(w.slice(0,-1)+'ies'); vs.push(w.slice(0,-1)+'ied'); }
+  else if(w.endsWith('e')){ vs.push(w+'d'); vs.push(w.slice(0,-1)+'ing'); vs.push(w+'s'); }
+  else { vs.push(w+'s'); vs.push(w+'es'); vs.push(w+'ed'); vs.push(w+'ing'); }
+  if(w.length>=3 && 'bcdfghjklmnpqrstvwxz'.includes(w[w.length-1]) && 'aeiou'.includes(w[w.length-2]) && !'aeiou'.includes(w[w.length-3])){ vs.push(w+w[w.length-1]+'ed'); vs.push(w+w[w.length-1]+'ing'); }
+  for(const ir in IRREG){ if(IRREG[ir]===w) vs.push(ir); }
+  return [...new Set(vs)];
+}
+function wordPat(w){
+  const wl = w.toLowerCase();
+  if(wl==="sb's" || wl==="one's") return ["\\S+'s", '\\S+'];
+  if(wl==='sb' || wl==='sb.') return ['\\S+'];
+  if(wl==='doing') return ['\\w+ing', '\\b'+w+'\\b'];
+  return wordVariants(w).map(v=>'\\b'+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b');
+}
+function cartesian(arrays){
+  if(!arrays.length) return [[]];
+  const f = arrays[0], rest = arrays.slice(1), rc = cartesian(rest), out = [];
+  for(const x of f) for(const r of rc) out.push([x].concat(r));
+  return out;
+}
+function phrasePats(w){
+  if(w.indexOf('...')>=0){
+    const parts = w.split('...').map(s=>s.trim()).filter(Boolean);
+    const fp = parts[0].split(' ').map(wordPat);
+    const lp = parts[parts.length-1].split(' ').map(wordPat);
+    const out = [];
+    for(const fc of cartesian(fp)) for(const lc of cartesian(lp)){
+      out.push('\\b'+fc.join('\\s+')+'\\b(?:\\s+\\S+){0,2}\\s+\\b'+lc.join('\\s+')+'\\b');
+    }
+    return out;
+  }
+  const words = w.split(' ');
+  if(words.length===1) return wordPat(words[0]);
+  const out = [];
+  for(const combo of cartesian(words.map(wordPat))){
+    out.push('\\b'+combo.join('\\s+')+'\\b');
+  }
+  return out;
+}
+let _lastSeg = '';
+let _lastSegFirst = false;
+function makeBlank(en, word){
+  _lastSeg = '';
+  _lastSegFirst = false;
+  const pats = phrasePats(word);
+  for(const p of pats){
+    const re = new RegExp(p, 'i');
+    const m = re.exec(en);
+    if(m){
+      _lastSeg = m[0];
+      _lastSegFirst = /^[\s"'()]*$/.test(en.slice(0, m.index));
+      const bw = (m[0].length + 2) * 14 + 20;
+      return en.slice(0, m.index) + '<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>' + en.slice(m.index + m[0].length);
+    }
+  }
+  const bw2 = (word.length + 2) * 14 + 20;
+  return en + ' <span class="blank" id="blankSpace" style="min-width:'+bw2+'px">&nbsp;</span>';
+}
+function stripW(w){
+  if(w.length<=4) return w;
+  if(w.endsWith('ying')) return w.slice(0,-3)+'y';
+  if(w.endsWith('ies')) return w.slice(0,-3)+'y';
+  if(w.endsWith('es')) return w.slice(0,-2);
+  if(w.endsWith('ed')) return w.slice(0,-2);
+  if(w.endsWith('ing')) return w.slice(0,-3);
+  if(w.endsWith('s')) return w.slice(0,-1);
+  return w;
+}
+function canonical(s){
+  return (s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(Boolean).map(w=>IRREG[w]||stripW(w)).join(' ');
+}
+function isCorrect(typed, w, seg){
+  const tn = (typed||'').toLowerCase().replace(/\s+/g,' ').trim();
+  if(!tn) return false;
+  const wn = (w||'').toLowerCase().replace(/\s+/g,' ').trim();
+  const sn = (seg||'').toLowerCase().replace(/\s+/g,' ').trim();
+  if(tn===wn || tn===sn) return true;
+  return canonical(tn)===canonical(wn) || canonical(tn)===canonical(sn);
+}
+
+/* ========== 键盘与输入逻辑 ========== */
+function renderKeyboard(){
+  let html = '';
+  const row1 = 'abcdefg'.split('');
+  const row2 = 'hijklmn'.split('');
+  const row3 = 'opqrstu'.split('');
+  const row4 = 'vwxyz'.split('');
+  row1.forEach(l=> html += `<div class="key" onclick="pressKey('${l}')">${l}</div>`);
+  row2.forEach(l=> html += `<div class="key" onclick="pressKey('${l}')">${l}</div>`);
+  row3.forEach(l=> html += `<div class="key" onclick="pressKey('${l}')">${l}</div>`);
+  row4.forEach(l=> html += `<div class="key" onclick="pressKey('${l}')">${l}</div>`);
+  html += `<div class="key" onclick="pressSpace()">空格</div>`;
+  html += `<div class="key del" onclick="delKey()">⌫</div>`;
+  html += `<div class="key confirm" onclick="check()">确 认</div>`;
+  document.getElementById('keyboard').innerHTML = html;
+  updateBlank();
+}
+
+function pressKey(l){
+  if(typed.length >= current.w.length + 2) return;
+  if(!typed && current.segFirst) typed += l.toUpperCase();
+  else typed += l.toLowerCase();
+  updateBlank();
+  playKeySound();
+}
+function pressSpace(){
+  if(typed.length >= current.w.length + 2) return;
+  typed += ' ';
+  updateBlank();
+  playKeySound();
+}
+function delKey(){
+  typed = typed.slice(0,-1);
+  updateBlank();
+  playKeySound();
+}
+function updateBlank(){
+  const b = document.getElementById('blankSpace');
+  if(!b) return;
+  if(!typed){ b.innerHTML='&nbsp;'; b.style.color=''; return; }
+  b.innerHTML = typed;
+  b.style.color = isCorrect(typed, current.w, current.seg) ? 'var(--cyan)' : 'var(--white)';
+}
+
+/* ========== 答题检查 ========== */
+function check(){
+  if(!current) return;
+  const target = current.w.toLowerCase();
+  sessionAnswered++;
+  
+  const overlay = document.getElementById('feedbackOverlay');
+  const msg = document.getElementById('feedbackMsg');
+  const actions = document.getElementById('fbActions');
+  
+  const mainCard = document.getElementById('mainCard');
+  mainCard.classList.remove('flash-red');
+
+  if(isCorrect(typed, current.w, current.seg)){
+    sessionCorrect++;
+    playOkSound();
+    if(mode==='review'){
+      const idx = reviewSet.indexOf(target);
+      if(idx>-1) reviewSet.splice(idx,1);
+    }
+    if(!masteredSet.includes(target)){ masteredSet.push(target); learnedCount++; }
+    saveState();
+    
+    msg.className = 'feedback-msg ok';
+    msg.innerHTML = `✨ Perfect!`;
+    actions.innerHTML = `
+      <button class="fb-btn primary" onclick="passCard()">${queue.length===0 ? '完成' : '下 一 题'}</button>
+      <button class="fb-btn secondary" onclick="reviewCard()">加入复习</button>
+    `;
+    celebrate();
+  } else {
+    sessionReviewed++;
+    playErrSound();
+    if(!reviewSet.includes(target)){ reviewSet.push(target); saveState(); }
+    
+    msg.className = 'feedback-msg err';
+    msg.innerHTML = `❌ 正确答案：<span style="color:var(--yellow);font-size:18px;">${current.w}</span><br><span style="font-size:12px;font-weight:400;color:var(--text-sub)">${current.m}</span>`;
+    actions.innerHTML = `
+      <button class="fb-btn primary" onclick="nextCard()" style="width:100%;">${queue.length===0 ? '完成' : '下 一 题'}</button>
+    `;
+    
+    void mainCard.offsetWidth; // 触发重绘
+    mainCard.classList.add('flash-red');
+  }
+  
+  overlay.classList.add('show');
+  refreshStats();
+}
+
+function passCard(){ nextCard(); }
+function reviewCard(){
+  sessionReviewed++;
+  const target = current.w.toLowerCase();
+  if(mode==='review'){
+    if(!reviewSet.includes(target)){ reviewSet.push(target); }
+    const idx = masteredSet.indexOf(target);
+    if(idx>-1){ masteredSet.splice(idx,1); learnedCount--; }
+  } else {
+    const idx = masteredSet.indexOf(target);
+    if(idx>-1){ masteredSet.splice(idx,1); learnedCount--; }
+    if(!reviewSet.includes(target)){ reviewSet.push(target); }
+  }
+  saveState(); refreshStats(); nextCard();
+}
+
+function showDone(){
+  document.getElementById('learnPage').classList.add('hide');
+  document.getElementById('startPage').classList.add('hide');
+  document.getElementById('donePage').classList.remove('hide');
+  document.getElementById('bottomAction').classList.remove('hide');
+  
+  const acc = sessionAnswered>0 ? Math.round(sessionCorrect/sessionAnswered*100)+'%' : '0%';
+  
+  if(mode==='review'){
+    document.getElementById('doneTitle').textContent = 'SECTOR CLEAR / 已复习一次';
+    document.getElementById('doneMsg').innerHTML = reviewSet.length>0
+      ? `还剩 <b style="color:var(--yellow)">${reviewSet.length}</b> 个待巩固`
+      : '恭喜！全部掌握了！';
+    setBottomBtn(reviewSet.length>0 ? '重 新 复 习' : '返 回',
+      reviewSet.length>0 ? function(){ setMode('review'); startSession(); } : function(){ setMode('learn'); }, true);
+  } else if(remainNew()===0 && reviewSet.length===0){
+    document.getElementById('doneTitle').textContent = 'ALL CLEAR / 恭喜！';
+    document.getElementById('doneMsg').innerHTML = `全部完成！正确率 <b style="color:var(--cyan)">${acc}</b>`;
+    setBottomBtn('全 部 重 学 一 遍', resetAll, true);
+  } else {
+    document.getElementById('doneTitle').textContent = 'SECTOR CLEAR / 本轮完成';
+    document.getElementById('doneMsg').innerHTML = `正确率 <b style="color:var(--cyan)">${acc}</b>`;
+    setBottomBtn('继 续 学 习', function(){ setMode('learn'); }, true);
+  }
+}
+
+function resetAll(){
+  localStorage.removeItem(storageKey());
+  cloudSet(storageKey(), JSON.stringify({learned:0,review:[],mastered:[]}));
+  learnedCount=0; reviewSet=[]; masteredSet=[];
+  setMode('learn');
+}
+
+function onBottomBtn(sMode){
+  if(sMode && typeof sMode === 'string') sessionMode = sMode;
+  startSession();
+}
+
+/* ========== 音效与动效 ========== */
+let _audio = null;
+function playCurrentWord(){
+  if(current && current.w) speakWord(current.w);
+  document.getElementById('phon').style.display = 'block';
+}
+function speakWord(w){
+  try{
+    if(!_audio) _audio = new Audio();
+    _audio.src = 'https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(w) + '&type=1';
+    _audio.play().catch(e=>console.log('play fail',e));
+  }catch(e){ console.log(e); }
+}
+let _keyAudio = null;
+function playKeySound(){
+  try{
+    if(!_keyAudio) _keyAudio = new Audio('sounds/key.wav');
+    _keyAudio.currentTime = 0;
+    _keyAudio.play().catch(()=>{});
+  }catch(e){}
+}
+let _okAudio = null, _errAudio = null;
+function playOkSound(){
+  try{
+    if(!_okAudio) _okAudio = new Audio('sounds/ok.mp3');
+    _okAudio.currentTime = 0; _okAudio.play().catch(()=>{});
+  }catch(e){}
+}
+function playErrSound(){
+  try{
+    if(!_errAudio) _errAudio = new Audio('sounds/err.wav');
+    _errAudio.currentTime = 0; _errAudio.play().catch(()=>{});
+  }catch(e){}
+}
+
+function celebrate(){
+  const colors = ['var(--pink)', 'var(--cyan)', 'var(--yellow)'];
+  for(let i=0; i<5; i++){
+    const el = document.createElement('div');
+    el.className = 'celebrate-particle';
+    el.textContent = ['✨', '⭐', '💫'][Math.floor(Math.random()*3)];
+    el.style.color = colors[Math.floor(Math.random()*colors.length)];
+    el.style.left = `calc(50% + ${(Math.random()-0.5)*100}px)`;
+    el.style.top = `60%`;
+    el.style.animationDelay = `${Math.random()*0.2}s`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(), 1500);
+  }
+}
+
+// 初始化
+window.addEventListener('load', function(){ 
+  setGrade('basic'); 
+});
+</script>
+</body>
+</html>

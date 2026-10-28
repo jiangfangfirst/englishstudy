@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <!-- 登录检查已注释（本地预览用）-->
@@ -23,6 +23,33 @@ body { font-family: "Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif; b
 .stats b { color: rgba(255,255,255,.72); font-size: 12px; font-weight: 400; }
 .container { max-width: 600px; margin: 10px auto; padding: 0 12px; }
 .card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,.08); }
+
+/* 新增：风格切换器 */
+.style-select {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6' viewBox='0 0 8 6'%3E%3Cpath fill='%23fff' d='M0 0l4 6 4-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  padding-right: 20px;
+  transition: all 0.2s;
+}
+.style-select:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+.style-select option {
+  color: #333;
+  background: #fff;
+}
 
 /* 下划线式选项卡（学习/复习用） */
 .tabs { display: flex; border-bottom: 1px solid #e5e7eb; margin-bottom: 16px; }
@@ -101,7 +128,21 @@ body { font-family: "Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif; b
 <body>
 <div class="header">
   <h1>单词一扫光</h1>
-  <div style="margin-left:auto;font-size:12px;color:#f0fdf4" id="headerInfo"></div>
+  
+  <!-- 右侧区域 -->
+  <div style="margin-left:auto; display:flex; align-items:center; gap:10px;">
+    <!-- 风格选择器 -->
+    <select class="style-select" onchange="location.href=this.value">
+      <option value="vocab.html" selected>原版</option>
+      <option value="science.html">科技风</option>
+      <option value="zd.html">紫格调</option>
+      <option value="zgf.html">中国风</option>
+      <option value="game.html">游戏风</option>
+      <option value="cjx.html">机械风</option>
+    </select>
+    <!-- 数据 -->
+    <div style="font-size:12px;color:#f0fdf4" id="headerInfo"></div>
+  </div>
 </div>
 <div class="tabs grade-tabs" id="gradeTabs">
   <div class="tab active" data-grade="basic" onclick="setGrade('basic')"><span class="dot"></span>基础<span class="tab-count">0</span></div>
@@ -665,7 +706,6 @@ function showPhonetic(){
 
 function check(){
   if(!current) return;
-  const v = typed.toLowerCase();
   const target = current.w.toLowerCase();
   sessionAnswered++;
   document.querySelector('.keyboard') && (document.querySelector('.keyboard').style.display='none');

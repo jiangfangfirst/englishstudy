@@ -1,0 +1,1128 @@
+﻿﻿﻿﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script>
+if(!localStorage.getItem('dd_auth')){ location.href='../login.html'; }
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<title>DUODUOHAOXUE // 单词一扫光</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23050B14'/%3E%3Cpath d='M8 10h16v12H8z' fill='none' stroke='%2300F0FF' stroke-width='2'/%3E%3Cpath d='M12 14h8M12 17h5' stroke='%23A222FF' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Share+Tech+Mono&display=swap">
+<style>
+:root{
+  /* 核心色彩 */
+  --bg-dark: #050814;
+  --bg-panel: rgba(11, 18, 40, 0.7);
+  
+  --neon-cyan: #00F0FF;
+  --neon-purple: #A222FF;
+  --neon-pink: #FF007F;
+  --neon-blue: #0055FF;
+  
+  --text-main: #E2F1FF;
+  --text-sub: #6A85A8;
+  
+  /* 材质 */
+  --glass-border: rgba(0, 240, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --glow-cyan: 0 0 12px rgba(0, 240, 255, 0.4);
+  --glow-purple: 0 0 15px rgba(162, 34, 255, 0.4);
+  
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-sans: 'Noto Sans SC', sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+
+html,body{
+  height:100%; overflow:hidden;
+  font-family:var(--font-sans);
+  background-color:var(--bg-dark);
+  color:var(--text-main);
+  user-select:none;
+}
+
+/* ================= 背景层 ================= */
+.bg-layer {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(0, 85, 255, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(162, 34, 255, 0.15) 0%, transparent 40%);
+}
+/* 网格 */
+.bg-grid {
+  position: absolute; inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 80%);
+}
+/* 扫描线 */
+.bg-scan {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(0, 240, 255, 0.02) 0 1px, transparent 1px 4px);
+  pointer-events: none;
+}
+/* 动态流光 */
+.bg-glow {
+  position: absolute; width: 60vw; height: 60vw;
+  border-radius: 50%; filter: blur(80px);
+  animation: drift 15s infinite alternate;
+}
+.glow-1 { top: -20%; left: -10%; background: rgba(0, 240, 255, 0.12); }
+.glow-2 { bottom: -20%; right: -10%; background: rgba(162, 34, 255, 0.12); animation-delay: -5s; }
+@keyframes drift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(10%, 10%) scale(1.2); }
+}
+
+/* ================= 布局框架 ================= */
+.app-container {
+  position: relative; z-index: 10;
+  display: flex; flex-direction: column;
+  height: 100vh; height: 100dvh;
+  max-width: 480px; margin: 0 auto;
+  padding: 16px 16px 20px;
+}
+
+/* ================= 顶部 HUD ================= */
+.hud-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+  padding-bottom: 8px; margin-bottom: 12px;
+  flex-shrink: 0;
+}
+.hud-left { display: flex; flex-direction: column; gap: 4px; }
+.hud-title {
+  font-family: var(--font-mono); font-size: 18px; font-weight: 700;
+  color: #FFF; letter-spacing: 2px; text-shadow: var(--glow-cyan);
+  display: flex; align-items: center; gap: 6px;
+}
+.hud-title::before {
+  content: ''; display: block; width: 6px; height: 16px;
+  background: var(--neon-cyan); box-shadow: var(--glow-cyan);
+}
+.hud-subtitle {
+  font-family: var(--font-mono); font-size: 9px; color: var(--text-sub);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+
+/* 右侧区域：包含风格切换和状态 */
+.hud-right {
+  display: flex; align-items: center; gap: 12px;
+}
+.hud-stats-col {
+  font-family: var(--font-mono); font-size: 11px; color: var(--neon-cyan);
+  display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+}
+.xp-track {
+  width: 60px; height: 4px; background: rgba(0, 240, 255, 0.1); border-radius: 2px;
+  overflow: hidden;
+}
+.xp-fill {
+  height: 100%; width: 0%; background: var(--neon-cyan);
+  box-shadow: var(--glow-cyan); transition: width 0.3s;
+}
+
+/* 风格切换器 (科技风) */
+.style-switcher select {
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--neon-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 4px;
+  padding: 4px 20px 4px 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  /* 自定义下拉箭头 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6' viewBox='0 0 8 6'%3E%3Cpath fill='%2300F0FF' d='M0 0l4 6 4-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
+  transition: all 0.2s;
+}
+.style-switcher select:hover,
+.style-switcher select:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.3), 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+/* ================= 六边形控制区 ================= */
+.hex-controls {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px; flex-shrink: 0;
+  position: relative;
+}
+/* 连线 */
+.hex-controls::before {
+  content: ''; position: absolute; top: 50%; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+  opacity: 0.3; z-index: 0;
+}
+.hex-group { display: flex; gap: 12px; position: relative; z-index: 1; }
+.hex-btn {
+  width: 54px; height: 60px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: rgba(11, 18, 40, 0.8);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.3s;
+  position: relative;
+}
+.hex-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0, 240, 255, 0.1), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.hex-btn span { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--text-sub); z-index: 1; transition: color 0.3s; }
+.hex-btn small { font-family: var(--font-mono); font-size: 9px; color: var(--text-sub); z-index: 1; }
+.hex-btn.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--neon-cyan);
+  box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.3), 0 0 15px rgba(0, 240, 255, 0.2);
+}
+.hex-btn.active::before { opacity: 1; }
+.hex-btn.active span { color: #FFF; text-shadow: var(--glow-cyan); }
+
+/* 模式切换条 */
+.mode-switch {
+  display: flex; background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 4px; overflow: hidden;
+  position: relative; z-index: 1;
+}
+.mode-btn {
+  padding: 6px 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  color: var(--text-sub); cursor: pointer; transition: all 0.3s;
+  display: flex; align-items: center; gap: 4px;
+}
+.mode-btn.active {
+  background: rgba(0, 240, 255, 0.15);
+  color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+/* ================= 主数据面板 ================= */
+.main-panel {
+  flex: 1; display: flex; flex-direction: column;
+  background: var(--bg-panel);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  position: relative; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-radius: 4px; min-height: 0;
+}
+/* 科技感四角装饰 */
+.tech-corners { position: absolute; inset: 0; pointer-events: none; }
+.tech-corners::before, .tech-corners::after,
+.tech-corners > div::before, .tech-corners > div::after {
+  content: ''; position: absolute; width: 12px; height: 12px;
+  border-color: var(--neon-cyan); border-style: solid;
+}
+.tech-corners::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.tech-corners::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+.tech-corners > div::before { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+.tech-corners > div::after { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+
+/* 波形装饰 */
+.waveform {
+  height: 20px; margin: 12px 16px 0; display: flex; align-items: center; gap: 2px;
+  opacity: 0.6;
+}
+.wave-bar {
+  flex: 1; background: var(--neon-cyan); border-radius: 1px;
+  animation: wave 1.5s infinite ease-in-out alternate;
+}
+@keyframes wave { 0% { height: 20%; } 100% { height: 100%; } }
+
+/* 内容区 */
+.panel-content {
+  flex: 1; display: flex; flex-direction: column;
+  padding: 16px; position: relative; min-height: 0;
+}
+
+/* 开始页 */
+.start-screen {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+}
+.tech-orb {
+  width: 80px; height: 80px; border-radius: 50%;
+  border: 2px dashed rgba(0, 240, 255, 0.4);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; margin-bottom: 20px;
+  animation: spin 10s linear infinite;
+}
+.tech-orb::before {
+  content: ''; position: absolute; inset: 6px; border-radius: 50%;
+  border: 1px solid var(--neon-purple);
+  animation: spin 8s linear infinite reverse;
+}
+.tech-orb::after {
+  content: 'CORE'; font-family: var(--font-mono); font-size: 12px; color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.start-title {
+  font-family: var(--font-mono); font-size: 20px; font-weight: 700;
+  letter-spacing: 2px; margin-bottom: 8px; color: #FFF;
+}
+.start-desc {
+  font-size: 12px; color: var(--text-sub); margin-bottom: 20px;
+}
+.status-badge {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--neon-cyan); border: 1px solid var(--neon-cyan);
+  padding: 4px 12px; box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+/* 学习页 */
+.quiz-screen {
+  flex: 1; display: flex; flex-direction: column; min-height: 0;
+}
+.progress-track {
+  height: 2px; background: rgba(0, 240, 255, 0.1); margin-bottom: 20px;
+  position: relative;
+}
+.progress-fill {
+  height: 100%; width: 0%; background: var(--neon-cyan);
+  box-shadow: var(--glow-cyan); transition: width 0.4s;
+}
+.progress-fill::after {
+  content: ''; position: absolute; right: 0; top: -2px; width: 6px; height: 6px;
+  background: #FFF; border-radius: 50%; box-shadow: 0 0 10px #FFF;
+}
+.q-text-en {
+  font-size: 17px; font-weight: 500; line-height: 1.8;
+  color: var(--text-main); text-align: center; margin-bottom: 8px;
+}
+.q-text-cn {
+  font-size: 12px; color: var(--text-sub); text-align: center; margin-bottom: 16px;
+}
+.blank {
+  display: inline-block; min-width: 60px; padding: 0 8px;
+  color: var(--neon-cyan); border-bottom: 2px solid var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.05);
+  font-family: var(--font-mono); font-weight: 700;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+.sound-action {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: auto; padding-bottom: 16px;
+}
+.sound-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(0, 240, 255, 0.1); border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan); font-size: 16px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; box-shadow: var(--glow-cyan); transition: all 0.2s;
+}
+.sound-btn:active { transform: scale(0.9); background: rgba(0, 240, 255, 0.3); }
+.phonetic-text {
+  font-family: var(--font-mono); font-size: 13px; color: var(--text-sub);
+}
+
+/* 完成页 */
+.done-screen {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+}
+.done-title {
+  font-family: var(--font-mono); font-size: 24px; color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan); margin-bottom: 12px; letter-spacing: 4px;
+}
+.done-msg { font-size: 14px; color: #FFF; line-height: 1.8; }
+
+/* ================= 键盘操作区 ================= */
+.keyboard-panel {
+  flex-shrink: 0; display: flex; flex-direction: column;
+  background: var(--bg-panel); border: 1px solid var(--glass-border);
+  border-radius: 4px; padding: 12px; margin-top: 12px;
+  backdrop-filter: blur(10px);
+}
+.kb-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
+}
+.key {
+  height: 40px; line-height: 36px; text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-radius: 3px; color: var(--text-main);
+  font-family: var(--font-mono); font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: all 0.1s;
+  position: relative; overflow: hidden;
+}
+.key::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent, rgba(0, 240, 255, 0.2));
+  opacity: 0; transition: opacity 0.1s;
+}
+.key:active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--neon-cyan);
+  box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.3);
+}
+.key:active::before { opacity: 1; }
+.key.del {
+  border-color: rgba(255, 0, 127, 0.4);
+  color: var(--neon-pink);
+}
+.key.del:active { background: rgba(255, 0, 127, 0.15); box-shadow: inset 0 0 10px rgba(255,0,127,0.3); }
+.key.confirm {
+  grid-column: span 7; height: 44px; line-height: 42px;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan); font-size: 14px; letter-spacing: 4px;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+.key.confirm:active {
+  background: var(--neon-cyan); color: #000;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
+}
+
+/* 底部主按钮 */
+.main-action-wrap { margin-top: 12px; flex-shrink: 0; }
+.tech-mega-btn {
+  width: 100%; padding: 16px 0;
+  background: transparent;
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan); font-family: var(--font-mono);
+  font-size: 16px; font-weight: 700; letter-spacing: 4px;
+  border-radius: 4px; cursor: pointer;
+  position: relative; overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.1), 0 0 15px rgba(0, 240, 255, 0.2);
+  transition: all 0.3s;
+}
+.tech-mega-btn::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.4), transparent);
+  transform: skewX(-30deg); animation: sweep 3s infinite;
+}
+@keyframes sweep { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
+.tech-mega-btn:active {
+  background: var(--neon-cyan); color: #000;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+}
+
+/* ================= 反馈浮层 ================= */
+.overlay {
+  position: absolute; inset: 0; z-index: 100;
+  background: rgba(5, 8, 20, 0.9); backdrop-filter: blur(8px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.overlay.show { opacity: 1; pointer-events: auto; }
+.fb-box {
+  width: 80%; max-width: 300px; padding: 24px;
+  background: var(--bg-panel); border: 1px solid var(--glass-border);
+  position: relative; text-align: center;
+}
+.fb-box::before, .fb-box::after {
+  content: ''; position: absolute; width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+  left: 0;
+}
+.fb-box::before { top: 0; }
+.fb-box::after { bottom: 0; }
+.fb-title {
+  font-family: var(--font-mono); font-size: 20px; font-weight: 700;
+  margin-bottom: 12px; letter-spacing: 2px;
+}
+.fb-title.ok { color: var(--neon-cyan); text-shadow: var(--glow-cyan); }
+.fb-title.err { color: var(--neon-pink); text-shadow: 0 0 12px rgba(255,0,127,0.4); }
+.fb-answer {
+  font-size: 14px; color: #FFF; margin-bottom: 24px;
+}
+.fb-answer b { color: var(--neon-cyan); font-size: 18px; font-family: var(--font-mono); }
+.fb-actions { display: flex; flex-direction: column; gap: 10px; }
+.fb-btn {
+  padding: 12px 0; background: transparent;
+  border: 1px solid var(--neon-cyan); color: var(--neon-cyan);
+  font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+}
+.fb-btn:active { background: rgba(0, 240, 255, 0.2); }
+.fb-btn.secondary { border-color: var(--neon-purple); color: var(--neon-purple); }
+.fb-btn.secondary:active { background: rgba(162, 34, 255, 0.2); }
+
+/* 动效辅助 */
+.hide { display: none !important; }
+.shake { animation: shake 0.4s; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+.particle {
+  position: fixed; pointer-events: none; z-index: 999;
+  font-family: var(--font-mono); font-size: 16px; font-weight: 700;
+  animation: floatUp 1s ease-out forwards;
+}
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-100px) scale(1.2); }
+}
+
+/* 响应式调整 */
+@media (max-height: 650px) {
+  .tech-orb { width: 60px; height: 60px; margin-bottom: 12px; }
+  .hex-btn { width: 48px; height: 54px; }
+  .key { height: 34px; line-height: 30px; font-size: 14px; }
+  .key.confirm { height: 38px; line-height: 36px; }
+  .main-action-wrap { margin-top: 8px; }
+  .tech-mega-btn { padding: 12px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- 背景层 -->
+<div class="bg-layer">
+  <div class="bg-grid"></div>
+  <div class="bg-scan"></div>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+</div>
+
+<div class="app-container">
+
+  <!-- 顶部 HUD -->
+  <header class="hud-header">
+    <div class="hud-left">
+      <div class="hud-title">DUODUOHAOXUE</div>
+      <div class="hud-subtitle">多多好学|单词一扫光</div>
+    </div>
+    
+    <div class="hud-right">
+      <!-- 风格切换器 -->
+      <div class="style-switcher">
+        <select onchange="location.href=this.value">
+          <option value="vocab.html">原版</option>
+          <option value="science.html" selected>科技风</option>
+          <option value="zd.html">紫格调</option>
+          <option value="zgf.html">中国风</option>
+          <option value="game.html">游戏风</option>
+          <option value="cjx.html">机械风</option>
+        </select>
+      </div>
+      <!-- 数据面板 -->
+      <div class="hud-stats-col">
+        <div id="headerInfo">0 DATA</div>
+        <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 六边形控制阵列 -->
+  <div class="hex-controls">
+    <div class="hex-group" id="gradeTabs">
+      <div class="hex-btn active" data-grade="basic" onclick="setGrade('basic')">
+        <span>Q1</span><small>基础</small>
+      </div>
+      <div class="hex-btn" data-grade="core" onclick="setGrade('core')">
+        <span>Q2</span><small>核心</small>
+      </div>
+      <div class="hex-btn" data-grade="extra" onclick="setGrade('extra')">
+        <span>Q3</span><small>拓展</small>
+      </div>
+    </div>
+    
+    <div class="mode-switch" id="modeTabs">
+      <div class="mode-btn active" data-mode="learn" onclick="setMode('learn')">LEARN <span id="learnCount">0</span></div>
+      <div class="mode-btn" data-mode="review" onclick="setMode('review')">REVIEW <span id="reviewCount">0</span></div>
+    </div>
+  </div>
+
+  <!-- 主数据面板 -->
+  <main class="main-panel" id="mainPanel">
+    <div class="tech-corners"><div></div></div>
+    
+    <!-- 装饰波形 -->
+    <div class="waveform" id="waveform">
+      <!-- JS 动态生成柱状条 -->
+    </div>
+
+    <div class="panel-content">
+      <!-- 开始页 -->
+      <div id="startPage" class="start-screen hide">
+        <div class="tech-orb"></div>
+        <div class="start-title" id="modeDesc">SYSTEM READY</div>
+        <div class="start-desc" id="startDesc">准备接入数据流</div>
+        <div class="status-badge hide" id="tipMsg">ALL CLEAR</div>
+      </div>
+
+      <!-- 学习页 -->
+      <div id="learnPage" class="quiz-screen hide">
+        <div class="progress-track"><div class="progress-fill" id="progFill"></div></div>
+        
+        <div class="q-text-en" id="exEn"></div>
+        <div class="q-text-cn" id="exCn"></div>
+        
+        <div class="sound-action">
+          <button class="sound-btn" onclick="playCurrentWord()">▶</button>
+          <div class="phonetic-text" id="phon" style="display:none"></div>
+        </div>
+      </div>
+
+      <!-- 完成页 -->
+      <div id="donePage" class="done-screen hide">
+        <div class="done-title" id="doneTitle">COMPLETE</div>
+        <div class="done-msg" id="doneMsg"></div>
+      </div>
+    </div>
+
+    <!-- 答题反馈 -->
+    <div class="overlay" id="feedbackOverlay">
+      <div class="fb-box">
+        <div class="fb-title" id="fbTitle"></div>
+        <div class="fb-answer" id="fbAnswer"></div>
+        <div class="fb-actions" id="fbActions"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 键盘面板 -->
+  <div class="keyboard-panel" id="keyboardPanel">
+    <div class="kb-grid" id="keyboard"></div>
+  </div>
+
+  <!-- 底部主按钮 -->
+  <div class="main-action-wrap" id="bottomAction">
+    <button class="tech-mega-btn" id="startBtn" onclick="onBottomBtn('sentence')">开始测试</button>
+  </div>
+
+</div>
+
+<script src="gradewords.js?v=20261001"></script>
+<script>
+/* ========== 核心逻辑与状态 ========== */
+const GRADE_MAP = {
+  'basic': { data: WORDS_BASIC, label: '基础词汇' },
+  'core':  { data: WORDS_CORE,  label: '核心词汇' },
+  'extra': { data: WORDS_EXTRA, label: '拓展词汇' },
+};
+
+let grade = 'basic';
+let WORDS = [];
+let mode = 'learn';
+let sessionMode = 'sentence';
+let queue = [];
+let current = null;
+let typed = '';
+let sessionAnswered = 0, sessionCorrect = 0, sessionReviewed = 0;
+let learnedCount = 0, reviewSet = [], masteredSet = [];
+
+let _auth = localStorage.getItem('dd_auth') || 'guest';
+const STUDENT_MAP = {
+  'duoduo2026': '多多', 'abc123': '测试同学', '10001090': '周卫', 'jf': '姜老师', 'jiang2026': '姜仿'
+};
+function storageKey(){ return 'dd_'+_auth+'_'+grade; }
+const UP_URL = 'https://fitting-ostrich-312589.upstash.io';
+const UP_TOKEN = 'gQAAAAAABMUNAAIgcDFiZDU2MDM2YWJkYzg0YTgyOTRlOTUzMjM1MWY1ZGJhNg';
+
+async function cloudGet(k){
+  try{
+    const r = await fetch(UP_URL + '/get/' + encodeURIComponent(k), { headers: { 'Authorization': 'Bearer ' + UP_TOKEN } });
+    const j = await r.json();
+    return j.result;
+  }catch(e){ return null; }
+}
+async function cloudSet(k, v){
+  try{
+    await fetch(UP_URL + '/set/' + encodeURIComponent(k) + '/' + encodeURIComponent(v), { headers: { 'Authorization': 'Bearer ' + UP_TOKEN } });
+  }catch(e){}
+}
+function saveState(){
+  const data = JSON.stringify({ learned: learnedCount, review: reviewSet, mastered: masteredSet });
+  localStorage.setItem(storageKey(), data);
+  cloudSet(storageKey(), data);
+}
+
+async function setGrade(g){
+  grade = g;
+  WORDS = GRADE_MAP[g].data;
+  
+  document.querySelectorAll('#gradeTabs .hex-btn').forEach(t=>{
+    t.classList.toggle('active', t.dataset.grade===g);
+  });
+
+  try{
+    const local = localStorage.getItem(storageKey());
+    if(local){
+      const j = JSON.parse(local);
+      learnedCount = j.learned || 0;
+      reviewSet = j.review || [];
+      masteredSet = j.mastered || [];
+    } else {
+      learnedCount = 0; reviewSet = []; masteredSet = [];
+    }
+  }catch(e){ learnedCount = 0; reviewSet = []; masteredSet = []; }
+  
+  setMode('learn');
+  refreshStats();
+  refreshAllGradeStats();
+  
+  try{
+    const cloud = await cloudGet(storageKey());
+    if(cloud){
+      const j = JSON.parse(cloud);
+      learnedCount = j.learned || 0;
+      reviewSet = j.review || [];
+      masteredSet = j.mastered || [];
+      localStorage.setItem(storageKey(), cloud);
+      setMode('learn');
+      refreshStats();
+      refreshAllGradeStats();
+    }
+  }catch(e){}
+}
+
+function remainNew(){
+  return WORDS.filter(w => !masteredSet.includes(w.w.toLowerCase()) && !reviewSet.includes(w.w.toLowerCase())).length;
+}
+
+function refreshAllGradeStats(){
+  let masteredTotal = 0;
+  ['basic','core','extra'].forEach(g=>{
+    try{
+      let local = localStorage.getItem('dd_'+_auth+'_'+g);
+      if(local){
+        const j = JSON.parse(local);
+        masteredTotal += (j.mastered || []).length;
+      }
+    }catch(e){}
+  });
+  const name = STUDENT_MAP[_auth] || localStorage.getItem('dd_name') || 'OPERATOR';
+  const el = document.getElementById('headerInfo');
+  if(el) el.textContent = name + ' // ' + masteredTotal + ' XP';
+  
+  const xpFill = document.getElementById('xpFill');
+  let pct = (masteredTotal % 100) / 100 * 100;
+  if(pct === 0 && masteredTotal > 0) pct = 100;
+  xpFill.style.width = pct + '%';
+}
+
+function refreshStats(){
+  refreshAllGradeStats();
+  document.getElementById('reviewCount').textContent = reviewSet.length;
+  document.getElementById('learnCount').textContent = remainNew();
+  
+  const learnBtn = document.querySelector('#modeTabs [data-mode="learn"]');
+  const reviewBtn = document.querySelector('#modeTabs [data-mode="review"]');
+  learnBtn.style.opacity = remainNew()===0 ? '0.4' : '1';
+  reviewBtn.style.opacity = reviewSet.length===0 ? '0.4' : '1';
+
+  const tip = document.getElementById('tipMsg');
+  if(remainNew()===0 && reviewSet.length===0){
+    tip.classList.remove('hide'); tip.textContent = 'ALL CLEAR';
+  } else if(remainNew()===0 && reviewSet.length>0){
+    tip.classList.remove('hide'); tip.textContent = 'REVIEW PENDING';
+  } else { tip.classList.add('hide'); }
+
+  if(remainNew()===0 && reviewSet.length===0){
+    setBottomBtn('REBOOT ALL', resetAll, true);
+  } else if(mode==='learn' && remainNew()===0){
+    setBottomBtn('GO TO REVIEW', function(){ setMode('review'); startSession(); }, true);
+  }
+}
+
+function setMode(m){
+  mode = m;
+  document.querySelectorAll('#modeTabs .mode-btn').forEach(t=>{
+    t.classList.toggle('active', t.dataset.mode===m);
+  });
+
+  document.getElementById('modeDesc').textContent = m==='learn' ? '请开始测试' : 'MEMORY CACHE';
+  document.getElementById('startDesc').textContent = m==='learn' 
+    ? GRADE_MAP[grade].label + ' · 接入新词汇' 
+    : GRADE_MAP[grade].label + ' · 巩固错词';
+  
+  document.getElementById('learnPage').classList.add('hide');
+  document.getElementById('donePage').classList.add('hide');
+  document.getElementById('startPage').classList.remove('hide');
+  
+  // 隐藏键盘面板
+  document.getElementById('keyboardPanel').classList.add('hide');
+  document.getElementById('bottomAction').classList.remove('hide');
+  document.getElementById('feedbackOverlay').classList.remove('show');
+
+  if(m==='learn' && remainNew()===0){
+    setBottomBtn(reviewSet.length>0 ? 'GO TO REVIEW' : 'REBOOT ALL',
+      reviewSet.length>0 ? function(){ setMode('review'); startSession(); } : resetAll, true);
+  } else {
+    setBottomBtn(m==='learn' ? '开始测试' : 'RESTORE DATA', onBottomBtn, false);
+  }
+  refreshStats();
+}
+
+function setBottomBtn(label, fn, single){
+  const btn = document.getElementById('startBtn');
+  btn.textContent = label;
+  btn.onclick = fn;
+}
+
+function startSession(){
+  sessionAnswered = 0; sessionCorrect = 0; sessionReviewed = 0;
+  if(mode==='learn'){
+    queue = WORDS.filter(w => !masteredSet.includes(w.w.toLowerCase()) && !reviewSet.includes(w.w.toLowerCase()));
+    if(queue.length===0){ refreshStats(); return; }
+  } else {
+    queue = WORDS.filter(w => reviewSet.includes(w.w.toLowerCase()));
+    if(queue.length===0){ document.getElementById('modeDesc').textContent='NO DATA'; return; }
+  }
+  
+  for(let i=queue.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[queue[i],queue[j]]=[queue[j],queue[i]];}
+  
+  document.getElementById('startPage').classList.add('hide');
+  document.getElementById('donePage').classList.add('hide');
+  document.getElementById('learnPage').classList.remove('hide');
+  
+  document.getElementById('keyboardPanel').classList.remove('hide');
+  document.getElementById('bottomAction').classList.add('hide');
+  
+  refreshStats();
+  nextCard();
+}
+
+function nextCard(){
+  if(queue.length===0){ showDone(); return; }
+  current = queue.shift();
+  typed = '';
+  
+  if(sessionMode === 'meaning'){
+    const bw = (current.w.length + 2) * 14 + 20;
+    const isPh = (current.w.trim().indexOf(' ') >= 0);
+    const phTag = isPh ? '<span style="font-size:10px;color:var(--neon-purple);margin-left:6px">[PHRASE]</span>' : '';
+    document.getElementById('exEn').innerHTML = '<div style="font-size:20px;font-weight:700;margin-bottom:6px">'+current.m+phTag+'</div><div style="font-size:14px;color:var(--text-sub)">（<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>）</div>';
+    document.getElementById('exCn').textContent = '';
+    current.seg = current.w;
+    current.segFirst = false;
+  } else {
+    document.getElementById('exEn').innerHTML = makeBlank(current.en, current.w);
+    current.seg = _lastSeg;
+    current.segFirst = _lastSegFirst;
+    document.getElementById('exCn').textContent = current.cn;
+  }
+  
+  document.getElementById('phon').textContent = current.p;
+  document.getElementById('phon').style.display = 'none';
+  document.getElementById('feedbackOverlay').classList.remove('show');
+  
+  renderKeyboard();
+  document.getElementById('progFill').style.width = ((1-(queue.length+1)/WORDS.length)*100)+'%';
+}
+
+/* ========== 辅助匹配逻辑 ========== */
+const IRREG = {found:'find',sent:'send',bought:'buy',became:'become',won:'win',stole:'steal',caught:'catch',fought:'fight',paid:'pay',overslept:'oversleep',got:'get',fell:'fall',made:'make',took:'take',gave:'give',did:'do',went:'go',was:'be',were:'be',am:'be',is:'be',are:'be',bled:'bleed',cancelled:'cancel',clapped:'clap',nodded:'nod',led:'lead',built:'build',held:'hold',kept:'keep',left:'leave',met:'meet',read:'read',said:'say',saw:'see',spoke:'speak',stood:'stand',taught:'teach',thought:'think',came:'come',ran:'run',sang:'sing',sat:'sit',swam:'swim',wrote:'write',ate:'eat',drank:'drink',drove:'drive',rode:'ride',threw:'throw',wore:'wear',broke:'break',chose:'choose',drew:'draw',flew:'fly',grew:'grow',knew:'know',showed:'show',told:'tell',understood:'understand',woke:'wake',spent:'spend',felt:'feel',lost:'lose',heard:'hear',hurt:'hurt',cut:'cut',put:'put',let:'let',sold:'sell',teeth:'tooth',feet:'foot',men:'man',women:'woman',children:'child',leaves:'leaf'};
+
+function wordVariants(w){
+  w = w.toLowerCase();
+  const vs = [w];
+  if(w.endsWith('y') && w.length>1 && !'aeiou'.includes(w[w.length-2])){ vs.push(w.slice(0,-1)+'ies'); vs.push(w.slice(0,-1)+'ied'); }
+  else if(w.endsWith('e')){ vs.push(w+'d'); vs.push(w.slice(0,-1)+'ing'); vs.push(w+'s'); }
+  else { vs.push(w+'s'); vs.push(w+'es'); vs.push(w+'ed'); vs.push(w+'ing'); }
+  if(w.length>=3 && 'bcdfghjklmnpqrstvwxz'.includes(w[w.length-1]) && 'aeiou'.includes(w[w.length-2]) && !'aeiou'.includes(w[w.length-3])){ vs.push(w+w[w.length-1]+'ed'); vs.push(w+w[w.length-1]+'ing'); }
+  for(const ir in IRREG){ if(IRREG[ir]===w) vs.push(ir); }
+  return [...new Set(vs)];
+}
+function wordPat(w){
+  const wl = w.toLowerCase();
+  if(wl==="sb's" || wl==="one's") return ["\\S+'s", '\\S+'];
+  if(wl==='sb' || wl==='sb.') return ['\\S+'];
+  if(wl==='doing') return ['\\w+ing', '\\b'+w+'\\b'];
+  return wordVariants(w).map(v=>'\\b'+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b');
+}
+function cartesian(arrays){
+  if(!arrays.length) return [[]];
+  const f = arrays[0], rest = arrays.slice(1), rc = cartesian(rest), out = [];
+  for(const x of f) for(const r of rc) out.push([x].concat(r));
+  return out;
+}
+function phrasePats(w){
+  if(w.indexOf('...')>=0){
+    const parts = w.split('...').map(s=>s.trim()).filter(Boolean);
+    const fp = parts[0].split(' ').map(wordPat);
+    const lp = parts[parts.length-1].split(' ').map(wordPat);
+    const out = [];
+    for(const fc of cartesian(fp)) for(const lc of cartesian(lp)){
+      out.push('\\b'+fc.join('\\s+')+'\\b(?:\\s+\\S+){0,2}\\s+\\b'+lc.join('\\s+')+'\\b');
+    }
+    return out;
+  }
+  const words = w.split(' ');
+  if(words.length===1) return wordPat(words[0]);
+  const out = [];
+  for(const combo of cartesian(words.map(wordPat))){
+    out.push('\\b'+combo.join('\\s+')+'\\b');
+  }
+  return out;
+}
+let _lastSeg = '';
+let _lastSegFirst = false;
+function makeBlank(en, word){
+  _lastSeg = '';
+  _lastSegFirst = false;
+  const pats = phrasePats(word);
+  for(const p of pats){
+    const re = new RegExp(p, 'i');
+    const m = re.exec(en);
+    if(m){
+      _lastSeg = m[0];
+      _lastSegFirst = /^[\s"'()]*$/.test(en.slice(0, m.index));
+      const bw = (m[0].length + 2) * 14 + 20;
+      return en.slice(0, m.index) + '<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>' + en.slice(m.index + m[0].length);
+    }
+  }
+  const bw2 = (word.length + 2) * 14 + 20;
+  return en + ' <span class="blank" id="blankSpace" style="min-width:'+bw2+'px">&nbsp;</span>';
+}
+function stripW(w){
+  if(w.length<=4) return w;
+  if(w.endsWith('ying')) return w.slice(0,-3)+'y';
+  if(w.endsWith('ies')) return w.slice(0,-3)+'y';
+  if(w.endsWith('es')) return w.slice(0,-2);
+  if(w.endsWith('ed')) return w.slice(0,-2);
+  if(w.endsWith('ing')) return w.slice(0,-3);
+  if(w.endsWith('s')) return w.slice(0,-1);
+  return w;
+}
+function canonical(s){
+  return (s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(Boolean).map(w=>IRREG[w]||stripW(w)).join(' ');
+}
+function isCorrect(typed, w, seg){
+  const tn = (typed||'').toLowerCase().replace(/\s+/g,' ').trim();
+  if(!tn) return false;
+  const wn = (w||'').toLowerCase().replace(/\s+/g,' ').trim();
+  const sn = (seg||'').toLowerCase().replace(/\s+/g,' ').trim();
+  if(tn===wn || tn===sn) return true;
+  return canonical(tn)===canonical(wn) || canonical(tn)===canonical(sn);
+}
+
+/* ========== 键盘与输入 ========== */
+function renderKeyboard(){
+  let html = '';
+  const row1 = 'abcdefg'.split('');
+  const row2 = 'hijklmn'.split('');
+  const row3 = 'opqrstu'.split('');
+  const row4 = 'vwxyz'.split('');
+  row1.forEach(l=> html += `<div class="key" onclick="pressKey('${l}')">${l}</div>`);
+  row2.forEach(l=> html += `<div class="key" onclick="pressKey('${l}')">${l}</div>`);
+  row3.forEach(l=> html += `<div class="key" onclick="pressKey('${l}')">${l}</div>`);
+  row4.forEach(l=> html += `<div class="key" onclick="pressKey('${l}')">${l}</div>`);
+  html += `<div class="key" onclick="pressSpace()">SPACE</div>`;
+  html += `<div class="key del" onclick="delKey()">DEL</div>`;
+  html += `<div class="key confirm" onclick="check()">确定</div>`;
+  document.getElementById('keyboard').innerHTML = html;
+  updateBlank();
+}
+
+function pressKey(l){
+  if(typed.length >= current.w.length + 2) return;
+  if(!typed && current.segFirst) typed += l.toUpperCase();
+  else typed += l.toLowerCase();
+  updateBlank();
+  playKeySound();
+}
+function pressSpace(){
+  if(typed.length >= current.w.length + 2) return;
+  typed += ' ';
+  updateBlank();
+  playKeySound();
+}
+function delKey(){
+  typed = typed.slice(0,-1);
+  updateBlank();
+  playKeySound();
+}
+function updateBlank(){
+  const b = document.getElementById('blankSpace');
+  if(!b) return;
+  if(!typed){ b.innerHTML='&nbsp;'; b.style.color=''; return; }
+  b.innerHTML = typed;
+  b.style.color = isCorrect(typed, current.w, current.seg) ? 'var(--neon-cyan)' : '#fff';
+}
+
+/* ========== 答题检查 ========== */
+function check(){
+  if(!current) return;
+  const target = current.w.toLowerCase();
+  sessionAnswered++;
+  
+  const overlay = document.getElementById('feedbackOverlay');
+  const title = document.getElementById('fbTitle');
+  const answer = document.getElementById('fbAnswer');
+  const actions = document.getElementById('fbActions');
+  
+  const mainPanel = document.getElementById('mainPanel');
+  mainPanel.classList.remove('shake');
+
+  if(isCorrect(typed, current.w, current.seg)){
+    sessionCorrect++;
+    playOkSound();
+    if(mode==='review'){
+      const idx = reviewSet.indexOf(target);
+      if(idx>-1) reviewSet.splice(idx,1);
+    }
+    if(!masteredSet.includes(target)){ masteredSet.push(target); learnedCount++; }
+    saveState();
+    
+    title.className = 'fb-title ok';
+    title.textContent = '答对了';
+    answer.innerHTML = `数据匹配成功`;
+    actions.innerHTML = `
+      <button class="fb-btn" onclick="passCard()">${queue.length===0 ? 'COMPLETE' : '下一个'}</button>
+      <button class="fb-btn secondary" onclick="reviewCard()">加入复习仓</button>
+    `;
+    celebrate();
+  } else {
+    sessionReviewed++;
+    playErrSound();
+    if(!reviewSet.includes(target)){ reviewSet.push(target); saveState(); }
+    
+    title.className = 'fb-title err';
+    title.textContent = '错误';
+    answer.innerHTML = `正确答案<br><b>${current.w}</b>`;
+    actions.innerHTML = `
+      <button class="fb-btn" onclick="nextCard()" style="width:100%;">${queue.length===0 ? 'COMPLETE' : '下一个'}</button>
+    `;
+    
+    void mainPanel.offsetWidth;
+    mainPanel.classList.add('shake');
+  }
+  
+  overlay.classList.add('show');
+  refreshStats();
+}
+
+function passCard(){ nextCard(); }
+function reviewCard(){
+  sessionReviewed++;
+  const target = current.w.toLowerCase();
+  if(mode==='review'){
+    if(!reviewSet.includes(target)){ reviewSet.push(target); }
+    const idx = masteredSet.indexOf(target);
+    if(idx>-1){ masteredSet.splice(idx,1); learnedCount--; }
+  } else {
+    const idx = masteredSet.indexOf(target);
+    if(idx>-1){ masteredSet.splice(idx,1); learnedCount--; }
+    if(!reviewSet.includes(target)){ reviewSet.push(target); }
+  }
+  saveState(); refreshStats(); nextCard();
+}
+
+function showDone(){
+  document.getElementById('learnPage').classList.add('hide');
+  document.getElementById('startPage').classList.add('hide');
+  document.getElementById('donePage').classList.remove('hide');
+  
+  document.getElementById('keyboardPanel').classList.add('hide');
+  document.getElementById('bottomAction').classList.remove('hide');
+  
+  const acc = sessionAnswered>0 ? Math.round(sessionCorrect/sessionAnswered*100)+'%' : '0%';
+  
+  if(mode==='review'){
+    document.getElementById('doneTitle').textContent = 'CACHE CLEAR';
+    document.getElementById('doneMsg').innerHTML = reviewSet.length>0
+      ? `仍需处理 <b style="color:var(--neon-cyan)">${reviewSet.length}</b> 项数据`
+      : '所有数据已同步';
+    setBottomBtn(reviewSet.length>0 ? 'RESTORE AGAIN' : 'RETURN',
+      reviewSet.length>0 ? function(){ setMode('review'); startSession(); } : function(){ setMode('learn'); }, true);
+  } else if(remainNew()===0 && reviewSet.length===0){
+    document.getElementById('doneTitle').textContent = 'ALL CLEAR';
+    document.getElementById('doneMsg').innerHTML = `系统升级完成<br>同步率 <b style="color:var(--neon-cyan)">${acc}</b>`;
+    setBottomBtn('REBOOT ALL', resetAll, true);
+  } else {
+    document.getElementById('doneTitle').textContent = 'SECTOR CLEAR';
+    document.getElementById('doneMsg').innerHTML = `同步率 <b style="color:var(--neon-cyan)">${acc}</b>`;
+    setBottomBtn('CONTINUE', function(){ setMode('learn'); }, true);
+  }
+}
+
+function resetAll(){
+  localStorage.removeItem(storageKey());
+  cloudSet(storageKey(), JSON.stringify({learned:0,review:[],mastered:[]}));
+  learnedCount=0; reviewSet=[]; masteredSet=[];
+  setMode('learn');
+}
+
+function onBottomBtn(sMode){
+  if(sMode && typeof sMode === 'string') sessionMode = sMode;
+  startSession();
+}
+
+/* ========== 音效与动效 ========== */
+let _audio = null;
+function playCurrentWord(){
+  if(current && current.w) speakWord(current.w);
+  document.getElementById('phon').style.display = 'block';
+}
+function speakWord(w){
+  try{
+    if(!_audio) _audio = new Audio();
+    _audio.src = 'https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(w) + '&type=1';
+    _audio.play().catch(e=>console.log('play fail',e));
+  }catch(e){ console.log(e); }
+}
+let _keyAudio = null;
+function playKeySound(){
+  try{
+    if(!_keyAudio) _keyAudio = new Audio('sounds/key.wav');
+    _keyAudio.currentTime = 0;
+    _keyAudio.play().catch(()=>{});
+  }catch(e){}
+}
+let _okAudio = null, _errAudio = null;
+function playOkSound(){
+  try{
+    if(!_okAudio) _okAudio = new Audio('sounds/ok.mp3');
+    _okAudio.currentTime = 0; _okAudio.play().catch(()=>{});
+  }catch(e){}
+}
+function playErrSound(){
+  try{
+    if(!_errAudio) _errAudio = new Audio('sounds/err.wav');
+    _errAudio.currentTime = 0; _errAudio.play().catch(()=>{});
+  }catch(e){}
+}
+
+function celebrate(){
+  for(let i=0; i<12; i++){
+    const el = document.createElement('div');
+    el.className = 'particle';
+    el.textContent = '+';
+    el.style.color = '#00F0FF';
+    el.style.left = `calc(50% + ${(Math.random()-0.5)*100}px)`;
+    el.style.top = `40%`;
+    el.style.fontSize = `${Math.random()*10+10}px`;
+    el.style.textShadow = '0 0 10px #00F0FF';
+    el.style.animationDelay = `${Math.random()*0.2}s`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(), 1200);
+  }
+}
+
+// 初始化波形图
+function initWaveform() {
+  const wf = document.getElementById('waveform');
+  for (let i = 0; i < 30; i++) {
+    const bar = document.createElement('div');
+    bar.className = 'wave-bar';
+    bar.style.animationDelay = `${Math.random()}s`;
+    bar.style.animationDuration = `${Math.random()*0.5 + 0.8}s`;
+    wf.appendChild(bar);
+  }
+}
+
+window.addEventListener('load', function(){ 
+  initWaveform();
+  setGrade('basic'); 
+});
+</script>
+</body>
+</html>

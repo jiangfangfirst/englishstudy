@@ -1,0 +1,1157 @@
+﻿﻿﻿﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!-- 登录检查已注释（本地预览用）-->
+<script>
+// 登录检查：未登录跳回login.html
+if(!localStorage.getItem('dd_auth')){ location.href='../login.html'; }
+</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>单词一扫光</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%2314171A'/%3E%3Cpath d='M9 8h14v16H9z' fill='none' stroke='%23FFB300' stroke-width='2'/%3E%3Cpath d='M13 12h6M13 15h6M13 18h4' stroke='%23FFB300' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Consolas, "Courier New", monospace;
+  --amber: #FFB300;
+  --amber-lt: #FFD54F;
+  --orange: #FF8F00;
+  --steel-0: #0B0D0F;
+  --steel-1: #101417;
+  --steel-2: #171C20;
+  --steel-3: #1E2429;
+  --steel-4: #2A3238;
+  --steel-5: #3A444B;
+  --line: #333C43;
+  --line-hi: #4A555D;
+  --txt: #C9D3DA;
+  --txt-dim: #7A868E;
+  --ok: #00E676;
+  --err: #FF3D3D;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  background:
+    linear-gradient(rgba(255,179,0,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,179,0,.028) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% -10%, #232B31 0%, #12161A 45%, #0A0C0E 100%);
+  background-size: 44px 44px, 44px 44px, 100% 100%;
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--txt);
+  -webkit-tap-highlight-color: transparent;
+}
+/* 暗角 */
+body::before {
+  content:''; position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+  background: radial-gradient(ellipse at center, transparent 52%, rgba(0,0,0,.55) 100%);
+}
+
+/* ===== 顶部金属板 ===== */
+.header {
+  position: sticky; top: 0; z-index: 10;
+  background: linear-gradient(180deg,#2C343A 0%,#1B2126 58%,#14181B 100%);
+  padding: 16px 20px 14px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: nowrap; gap: 8px;
+  border-bottom: 1px solid #0B0D0F;
+  box-shadow: 0 4px 26px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.header::after {
+  content:''; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+  background: repeating-linear-gradient(45deg, var(--amber) 0 6px, #14181B 6px 12px);
+  opacity: .92;
+}
+.header h1 {
+  font-family: var(--mono);
+  font-size: 20px; font-weight: 800; color: #F0F4F7;
+  letter-spacing: 2px; display: flex; align-items: center; gap: 6px;
+  text-shadow: 0 0 18px rgba(255,179,0,.28);
+  flex-shrink: 0;
+}
+.header h1::before {
+  content: '▣'; color: var(--amber); font-size: 16px; letter-spacing: 0;
+  text-shadow: 0 0 10px rgba(255,179,0,.8);
+}
+
+.header-right {
+  display: flex; align-items: center; gap: 10px;
+  margin-left: auto;
+}
+
+/* 风格选择器 */
+.style-switcher select {
+  background: var(--steel-3);
+  color: var(--amber-lt);
+  border: 1px solid var(--line-hi);
+  border-radius: 3px;
+  padding: 4px 22px 4px 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%23FFB300' d='M0 2l4 4 4-4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 2px 4px rgba(0,0,0,.4);
+  transition: all .2s;
+}
+.style-switcher select:hover,
+.style-switcher select:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 8px rgba(255,179,0,.3);
+}
+
+.header-info {
+  font-size: 11px; color: var(--txt);
+  font-family: var(--mono); letter-spacing: .5px;
+  display: flex; align-items: center;
+  white-space: nowrap;
+}
+
+.container { max-width: 600px; margin: 14px auto 0; padding: 0 12px; }
+
+/* ===== 主面板 ===== */
+.card {
+  position: relative;
+  background: linear-gradient(180deg, var(--steel-3) 0%, var(--steel-2) 55%, #13181C 100%);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 20px 18px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.55),
+    0 20px 50px rgba(0,0,0,.7),
+    inset 0 1px 0 rgba(255,255,255,.055);
+}
+.card::before, .card::after {
+  content:''; position: absolute; width: 16px; height: 16px;
+  border: 2px solid var(--amber); pointer-events: none; opacity: .85;
+}
+.card::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.card::after  { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+/* ===== 选项卡（工业下划线） ===== */
+.tabs { display: flex; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.tab {
+  flex: 1; text-align: center; padding: 12px 4px; cursor: pointer;
+  font-family: var(--mono);
+  font-size: 12.5px; letter-spacing: .8px; color: var(--txt-dim);
+  position: relative; transition: color .18s, background .18s;
+  border-radius: 3px 3px 0 0;
+}
+.tab:hover { color: #AEB9C0; }
+.tab.active { color: var(--amber); font-weight: 700; }
+#modeTabs .tab.active::after {
+  content:''; position: absolute; bottom: -1px; left: 0;
+  width: 100%; height: 2px; background: var(--amber);
+  box-shadow: 0 0 10px rgba(255,179,0,.85);
+}
+.tab.disabled { opacity: .32; pointer-events: none; }
+
+/* ===== 等级选择 ===== */
+.grade-tabs {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 8px;
+  margin: 0; padding: 12px 14px 14px;
+  background: linear-gradient(180deg,#1B2126,#0F1316);
+  border-top: 1px solid #0B0D0F;
+  border-bottom: 1px solid #0B0D0F;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,.03);
+}
+.grade-tabs .tab {
+  padding: 9px 4px; font-size: 12.5px; margin-bottom: 0;
+  color: var(--txt-dim); font-family: var(--mono);
+  background:
+    radial-gradient(circle at 6px 6px, #4A555D 0 1.5px, transparent 2px),
+    radial-gradient(circle at calc(100% - 6px) 6px, #4A555D 0 1.5px, transparent 2px),
+    radial-gradient(circle at 6px calc(100% - 6px), #4A555D 0 1.5px, transparent 2px),
+    radial-gradient(circle at calc(100% - 6px) calc(100% - 6px), #4A555D 0 1.5px, transparent 2px),
+    linear-gradient(180deg,#2A3238,#1A2025);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 2px 6px rgba(0,0,0,.5);
+  transition: all .18s;
+}
+.grade-tabs .tab .dot {
+  display: inline-block; width: 7px; height: 7px; border-radius: 1px;
+  background: currentColor; margin-right: 5px; vertical-align: middle; opacity: .55;
+}
+.grade-tabs .tab.active {
+  color: #14181B; font-weight: 700; font-size: 13.5px;
+  background: linear-gradient(180deg, var(--amber-lt) 0%, var(--amber) 55%, var(--orange) 100%);
+  border-color: var(--amber-lt);
+  box-shadow:
+    0 0 16px rgba(255,179,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.55),
+    0 2px 0 #9A6A00;
+}
+.grade-tabs .tab.active .dot {
+  opacity: 1; background: #14181B;
+  animation: breathe 1.8s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%,100% { box-shadow: 0 0 0 0 rgba(20,24,27,.55); }
+  50% { box-shadow: 0 0 0 5px rgba(20,24,27,0); }
+}
+.grade-tabs .tab .tab-count {
+  display: block; font-size: 10px; font-weight: 400;
+  color: #6B767D; margin-top: 2px;
+}
+.grade-tabs .tab.active .tab-count { color: #5C4200; }
+
+/* ===== 内容区（HUD 屏） ===== */
+.content-area {
+  min-height: 280px; display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,229,255,.028) 0 1px, transparent 1px 4px),
+    radial-gradient(ellipse at 50% 0%, rgba(255,179,0,.07) 0%, transparent 62%),
+    #0F1316;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 16px 14px;
+  box-shadow: inset 0 0 46px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.03);
+  transition: background .3s;
+  animation: bgFadeIn 1.1s ease forwards;
+}
+.content-area::before {
+  content:''; position: absolute; inset: 5px; pointer-events: none;
+  border: 1px solid rgba(255,179,0,.07); border-radius: 2px;
+}
+.content-area.no-bg { animation: none; }
+@keyframes bgFadeIn {
+  from { opacity: 0; filter: saturate(.3); }
+  to { opacity: 1; filter: saturate(1); }
+}
+
+/* ===== 例句 ===== */
+.example-en {
+  font-size: 19px; line-height: 1.9; color: #E8EFF4;
+  font-family: var(--mono); letter-spacing: .3px;
+  margin-bottom: 12px; word-break: break-word;
+}
+.example-cn { font-size: 14px; color: var(--txt-dim); margin-bottom: 16px; line-height: 1.75; }
+
+.blank {
+  display: inline-block; text-align: center; font-weight: 700;
+  padding: 1px 10px; min-width: 80px;
+  color: var(--amber-lt);
+  background: linear-gradient(180deg,#2A3238,#151A1E);
+  border: 1px solid var(--line-hi);
+  border-bottom: 2px solid var(--amber);
+  border-radius: 3px;
+  box-shadow: inset 0 2px 7px rgba(0,0,0,.8), 0 0 10px rgba(255,179,0,.1);
+}
+
+/* ===== 音标 ===== */
+.phonetic {
+  font-size: 14px; color: #4DD0E1; margin: 6px 0 16px;
+  font-family: var(--mono); letter-spacing: .5px;
+}
+#phon { color: #5C6B75; font-size: 13px; margin: 6px 0; user-select: none; font-family: var(--mono); }
+#phon:active { color: var(--amber); }
+#phonBtn {
+  display: inline-block; background: linear-gradient(180deg,#2A3238,#1A2025);
+  color: var(--txt-dim); border: 1px solid var(--line-hi);
+  padding: 7px 16px; border-radius: 3px;
+  font-size: 11.5px; font-weight: 600; letter-spacing: 1px;
+  font-family: var(--mono);
+  cursor: pointer; user-select: none;
+  box-shadow: 0 2px 0 #0B0D0F, inset 0 1px 0 rgba(255,255,255,.07);
+  transition: all .12s;
+}
+#phonBtn:active {
+  transform: translateY(2px); box-shadow: 0 0 0 #0B0D0F;
+  color: var(--amber); border-color: var(--amber);
+}
+
+/* ===== 反馈 ===== */
+.feedback {
+  margin-top: 12px; padding: 12px 14px; border-radius: 3px;
+  font-size: 13.5px; display: none;
+  font-family: var(--mono); letter-spacing: .3px;
+}
+.feedback.ok {
+  background: rgba(0,230,118,.07);
+  border-left: 3px solid var(--ok);
+  color: #7CFFC4;
+  box-shadow: inset 0 0 24px rgba(0,230,118,.06);
+  display: block;
+}
+.feedback.err {
+  background: rgba(255,61,61,.07);
+  border-left: 3px solid var(--err);
+  color: #FF9A9A;
+  box-shadow: inset 0 0 24px rgba(255,61,61,.06);
+  display: block;
+}
+
+/* ===== 进度条（能量条） ===== */
+.progress-bar {
+  height: 10px; background: #0B0D0F;
+  border: 1px solid var(--line); border-radius: 2px;
+  margin: 0 auto 16px; overflow: hidden; width: 72%;
+  box-shadow: inset 0 2px 7px rgba(0,0,0,.9);
+}
+.progress-fill {
+  height: 100%;
+  background: repeating-linear-gradient(90deg, var(--amber) 0 7px, var(--orange) 7px 10px);
+  box-shadow: 0 0 12px rgba(255,179,0,.7);
+  transition: width .3s;
+}
+
+/* ===== 迷你统计 ===== */
+.mini-stats {
+  display: flex; justify-content: space-around;
+  font-size: 10.5px; color: var(--txt-dim);
+  font-family: var(--mono); letter-spacing: .8px;
+  margin-bottom: 10px;
+}
+.mini-stats b { font-size: 13px; font-weight: 700; color: var(--amber); }
+
+/* ===== 底部双按钮 ===== */
+.start-split {
+  display: flex; position: relative; margin-top: 16px;
+  border-radius: 4px; overflow: hidden;
+  background: linear-gradient(180deg, var(--steel-5) 0%, #232B31 100%);
+  border: 1px solid var(--line-hi);
+  box-shadow: 0 6px 22px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.start-split::after {
+  content:''; position: absolute; left: 50%; top: 7px; bottom: 7px; width: 1px;
+  background: var(--line-hi); pointer-events: none;
+}
+.start-half {
+  flex: 1; padding: 15px 0; color: #DDE5EB; border: none;
+  font-size: 14.5px; font-weight: 700; letter-spacing: 2.5px;
+  font-family: var(--mono);
+  cursor: pointer; transition: all .15s; background: transparent;
+}
+.start-half:hover { background: rgba(255,179,0,.1); color: var(--amber-lt); }
+.start-half:active { background: rgba(255,179,0,.2); }
+.start-split.single { background: linear-gradient(180deg,#2C343A,#1B2126); }
+.start-split.single::after { display: none; }
+.start-split.single .start-half.right { display: none; }
+.start-split.single .start-half.left {
+  width: 100%;
+  background: linear-gradient(180deg, var(--amber-lt) 0%, var(--amber) 50%, var(--orange) 100%);
+  color: #14181B;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55);
+}
+.start-split.single .start-half.left:hover { filter: brightness(1.06); color: #14181B; }
+.hide { display: none !important; }
+
+/* ===== 答错红光 ===== */
+#redOverlay { position: fixed; inset: 0; pointer-events: none; z-index: 998; background: rgba(255,61,61,0); }
+#redOverlay.flashing { animation: redFlash .55s ease-in-out 2; }
+@keyframes redFlash {
+  0%,55%,100% { background: rgba(255,61,61,0); }
+  25%,80% { background: rgba(255,61,61,.3); }
+}
+/* 答对粒子 */
+.celebrate {
+  position: fixed; pointer-events: none; z-index: 999; font-size: 22px;
+  animation: riseUp 1.35s ease-out forwards;
+  filter: drop-shadow(0 0 14px rgba(255,179,0,.9));
+}
+@keyframes riseUp {
+  0% { transform: translateY(0) scale(.5); opacity: 1; }
+  100% { transform: translateY(-170px) scale(1.2); opacity: 0; }
+}
+
+/* ===== 机械键盘 ===== */
+.keyboard { display: grid; grid-template-columns: repeat(7,1fr); gap: 7px; margin-top: 16px; }
+.key {
+  height: 44px; line-height: 44px; text-align: center;
+  background: linear-gradient(180deg,#3A444B 0%,#242B31 62%,#1A2025 100%);
+  border: 1px solid var(--line-hi);
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 17px; font-weight: 700; color: #D5DEE4;
+  cursor: pointer; user-select: none; padding: 0; width: 100%;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 3px 0 #0B0D0F,
+    0 6px 12px rgba(0,0,0,.65);
+  transition: transform .06s, box-shadow .06s, background .12s;
+}
+.key:active {
+  transform: translateY(3px);
+  background: linear-gradient(180deg,#1A2025,#2A3238);
+  box-shadow: inset 0 2px 7px rgba(0,0,0,.8), 0 0 0 #0B0D0F;
+}
+.key.del {
+  background: linear-gradient(180deg,#5A2A2A 0%,#3A1A1A 100%);
+  border-color: #7A3A3A; color: #FF9A9A; font-size: 19px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 3px 0 #1A0A0A, 0 6px 12px rgba(0,0,0,.65);
+}
+.key.del:active { box-shadow: inset 0 2px 7px rgba(0,0,0,.8), 0 0 0 #1A0A0A; }
+.key.confirm {
+  background: linear-gradient(180deg, var(--amber-lt) 0%, var(--amber) 48%, var(--orange) 100%);
+  border-color: var(--amber-lt);
+  color: #14181B; font-size: 14px; font-weight: 800; letter-spacing: 4px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 3px 0 #9A6A00, 0 6px 16px rgba(255,143,0,.35);
+}
+.key.confirm:active { box-shadow: inset 0 2px 7px rgba(0,0,0,.35), 0 0 0 #9A6A00; }
+
+/* ===== 开始页 ===== */
+#modeDesc {
+  font-family: var(--mono);
+  font-size: 14px; font-weight: 700; letter-spacing: 2px;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg,#FFB300,#FF8F00,#FFD54F,#FFB300);
+  background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: flowText 5s linear infinite;
+}
+@keyframes flowText { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
+
+.start-halo {
+  position: absolute; left: 50%; top: 50%;
+  width: 300px; height: 300px; margin: -150px 0 0 -150px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255,179,0,.14);
+  background:
+    conic-gradient(from 0deg, transparent 0deg, rgba(255,179,0,.16) 45deg, transparent 100deg, transparent 360deg);
+  animation: haloSpin 7s linear infinite;
+  pointer-events: none;
+}
+.start-halo::before {
+  content:''; position: absolute; inset: 34px; border-radius: 50%;
+  border: 1px solid rgba(0,229,255,.1);
+  background: radial-gradient(circle at 50% 50%, rgba(255,179,0,.05) 0%, transparent 62%);
+}
+@keyframes haloSpin { to { transform: rotate(360deg); } }
+
+.float-letters { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.float-letters span {
+  position: absolute; bottom: -30px;
+  font-family: var(--mono);
+  font-size: 20px; font-weight: 700;
+  color: rgba(255,179,0,.26);
+  animation: floatUp 8s linear infinite;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  12% { opacity: .9; }
+  85% { opacity: .45; }
+  100% { transform: translateY(-280px) rotate(14deg); opacity: 0; }
+}
+
+/* ===== 页脚 ===== */
+.footer {
+  text-align: center; padding: 22px 16px 34px;
+  font-family: var(--mono);
+  font-size: 10.5px; color: #4E5A62; line-height: 2; letter-spacing: 1px;
+}
+.footer::before {
+  content: '/// SYS.OK ///'; display: block;
+  font-size: 9.5px; color: #3A444B; margin-bottom: 4px; letter-spacing: 2px;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>单词一扫光</h1>
+  <div class="header-right">
+    <div class="style-switcher">
+      <select onchange="location.href=this.value">
+        <option value="vocab.html">原版</option>
+        <option value="science.html">科技风</option>
+        <option value="zd.html">紫格调</option>
+        <option value="zgf.html">中国风</option>
+        <option value="game.html">游戏风</option>
+        <option value="cjx.html" selected>机械风</option>
+      </select>
+    </div>
+    <div class="header-info" id="headerInfo"></div>
+  </div>
+</div>
+<div class="tabs grade-tabs" id="gradeTabs">
+  <div class="tab active" data-grade="basic" onclick="setGrade('basic')"><span class="dot"></span>基础<span class="tab-count">0</span></div>
+  <div class="tab" data-grade="core" onclick="setGrade('core')"><span class="dot"></span>核心<span class="tab-count">0</span></div>
+  <div class="tab" data-grade="extra" onclick="setGrade('extra')"><span class="dot"></span>拓展<span class="tab-count">0</span></div>
+</div>
+<div class="container">
+
+  <div class="card">
+    <div class="tabs" id="modeTabs">
+      <div class="tab active" id="learnTab" onclick="setMode('learn')">学新词（剩余<span id="learnCount">0</span>）</div>
+      <div class="tab" id="reviewTab" onclick="setMode('review')">待复习（<span id="reviewCount">0</span>）</div>
+    </div>
+
+    <div class="content-area" id="contentArea">
+      <div id="startPage" class="hide" style="padding:24px 0;text-align:center;position:relative;overflow:hidden">
+        <div class="start-halo"></div>
+        <div class="float-letters"><span style="left:8%;animation-delay:0s">A</span><span style="left:26%;animation-delay:1.6s">01</span><span style="left:44%;animation-delay:3s">C</span><span style="left:60%;animation-delay:.8s">7</span><span style="left:78%;animation-delay:2.4s">E</span><span style="left:90%;animation-delay:3.8s">FF</span></div>
+        <p id="modeDesc">基础词汇 · 开始学习</p>
+        <p id="tipMsg" style="color:#FFB300;font-size:12px;display:none;font-family:var(--mono);letter-spacing:1px"></p>
+      </div>
+
+      <div id="learnPage" class="hide">
+        <div class="mini-stats">
+          <span>通过 <b id="statN">0</b></span>
+          <span>待复 <b id="statM">0</b></span>
+          <span>命中 <b id="statT">0%</b></span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+        <div class="example-en" id="exEn"></div>
+        <div class="example-cn" id="exCn"></div>
+        <div style="margin-bottom:12px">
+          <button onclick="showPhonetic()" id="phonBtn">显示音标</button>
+          <div class="phonetic" id="phon" style="display:none"></div>
+        </div>
+        <div id="actionArea"></div>
+      </div>
+
+      <div id="donePage" class="hide" style="padding:20px 0;text-align:center">
+        <p style="color:#7A868E;font-size:12px;margin-bottom:12px;font-family:var(--mono);letter-spacing:2px" id="doneTitle">本轮完成！</p>
+        <p style="font-size:20px;color:#E8EFF4;line-height:1.9;font-family:var(--mono)" id="doneMsg"></p>
+      </div>
+    </div>
+
+    <div class="start-split" id="startBtn">
+      <button class="start-half left" id="halfL" onclick="onBottomBtn('sentence')">句中记</button>
+      <button class="start-half right" id="halfR" onclick="onBottomBtn('meaning')">释义记</button>
+    </div>
+  </div>
+</div>
+
+<script src="gradewords.js?v=20261001"></script>
+<script>
+const GRADE_MAP = {
+  'basic': { data: WORDS_BASIC, label: '基础词汇' },
+  'core':  { data: WORDS_CORE,  label: '核心词汇' },
+  'extra': { data: WORDS_EXTRA, label: '拓展词汇' },
+};
+
+let grade = 'basic';
+let WORDS = [];
+let mode = 'learn';
+let sessionMode = 'sentence'; // 'sentence' 句中记 / 'meaning' 释义记
+let queue = [];
+let current = null;
+let typed = '';
+let sessionAnswered = 0, sessionCorrect = 0, sessionReviewed = 0;
+let learnedCount = 0, reviewSet = [], masteredSet = [];
+
+let _auth = localStorage.getItem('dd_auth') || 'guest';
+const STUDENT_MAP = {
+  'duoduo2026': '多多',
+  'abc123': '测试同学',
+  '10001090': '周卫',
+  'jf': '姜老师',
+  'jiang2026': '姜仿'
+};
+function storageKey(){ return 'dd_'+_auth+'_'+grade; }
+const UP_URL = 'https://fitting-ostrich-312589.upstash.io';
+const UP_TOKEN = 'gQAAAAAABMUNAAIgcDFiZDU2MDM2YWJkYzg0YTgyOTRlOTUzMjM1MWY1ZGJhNg';
+async function cloudGet(k){
+  try{
+    const r = await fetch(UP_URL + '/get/' + encodeURIComponent(k), { headers: { 'Authorization': 'Bearer ' + UP_TOKEN } });
+    const j = await r.json();
+    return j.result;
+  }catch(e){ return null; }
+}
+async function cloudSet(k, v){
+  try{
+    await fetch(UP_URL + '/set/' + encodeURIComponent(k) + '/' + encodeURIComponent(v), { headers: { 'Authorization': 'Bearer ' + UP_TOKEN } });
+  }catch(e){}
+}
+async function loadState(){
+  let found = false;
+  try{
+    const local = localStorage.getItem(storageKey());
+    if(local){
+      const j = JSON.parse(local);
+      learnedCount = j.learned || 0;
+      reviewSet = j.review || [];
+      masteredSet = j.mastered || [];
+      found = true;
+    }
+  }catch(e){}
+  if(!found){ learnedCount=0; reviewSet=[]; masteredSet=[]; }
+  const cloud = await cloudGet(storageKey());
+  if(cloud){
+    try{
+      const j = JSON.parse(cloud);
+      learnedCount = j.learned || 0;
+      reviewSet = j.review || [];
+      masteredSet = j.mastered || [];
+      localStorage.setItem(storageKey(), cloud);
+    }catch(e){}
+  }
+}
+function saveState(){
+  const data = JSON.stringify({ learned: learnedCount, review: reviewSet, mastered: masteredSet });
+  localStorage.setItem(storageKey(), data);
+  cloudSet(storageKey(), data);
+}
+
+async function setGrade(g){
+  grade = g;
+  WORDS = GRADE_MAP[g].data;
+  fillLevelCounts();
+  document.querySelectorAll('#gradeTabs .tab').forEach(t=>{
+    t.classList.toggle('active', t.dataset.grade===g);
+  });
+  try{
+    const local = localStorage.getItem(storageKey());
+    if(local){
+      const j = JSON.parse(local);
+      learnedCount = j.learned || 0;
+      reviewSet = j.review || [];
+      masteredSet = j.mastered || [];
+    } else {
+      learnedCount = 0; reviewSet = []; masteredSet = [];
+    }
+  }catch(e){ learnedCount = 0; reviewSet = []; masteredSet = []; }
+  setMode('learn');
+  refreshStats();
+  refreshAllGradeStats();
+  try{
+    const cloud = await cloudGet(storageKey());
+    if(cloud){
+      const j = JSON.parse(cloud);
+      learnedCount = j.learned || 0;
+      reviewSet = j.review || [];
+      masteredSet = j.mastered || [];
+      localStorage.setItem(storageKey(), cloud);
+      setMode('learn');
+      refreshStats();
+      refreshAllGradeStats();
+    }
+  }catch(e){}
+}
+function refreshLocalNow(){
+  setMode('learn');
+  refreshStats();
+  refreshAllGradeStats();
+}
+
+function fillLevelCounts(){
+  document.querySelectorAll('#gradeTabs .tab').forEach(t=>{
+    const g = t.dataset.grade;
+    const el = t.querySelector('.tab-count');
+    if(el && GRADE_MAP[g]) el.textContent = GRADE_MAP[g].data.length;
+  });
+}
+
+function remainNew(){
+  return WORDS.filter(w => !masteredSet.includes(w.w.toLowerCase()) && !reviewSet.includes(w.w.toLowerCase())).length;
+}
+
+const IRREG = {found:'find',sent:'send',bought:'buy',became:'become',won:'win',stole:'steal',caught:'catch',fought:'fight',paid:'pay',overslept:'oversleep',got:'get',fell:'fall',made:'make',took:'take',gave:'give',did:'do',went:'go',was:'be',were:'be',am:'be',is:'be',are:'be',bled:'bleed',cancelled:'cancel',clapped:'clap',nodded:'nod',led:'lead',built:'build',held:'hold',kept:'keep',left:'leave',met:'meet',read:'read',said:'say',saw:'see',spoke:'speak',stood:'stand',taught:'teach',thought:'think',came:'come',ran:'run',sang:'sing',sat:'sit',swam:'swim',wrote:'write',ate:'eat',drank:'drink',drove:'drive',rode:'ride',threw:'throw',wore:'wear',broke:'break',chose:'choose',drew:'draw',flew:'fly',grew:'grow',knew:'know',showed:'show',told:'tell',understood:'understand',woke:'wake',spent:'spend',felt:'feel',lost:'lose',heard:'hear',hurt:'hurt',cut:'cut',put:'put',let:'let',sold:'sell',teeth:'tooth',feet:'foot',men:'man',women:'woman',children:'child',leaves:'leaf'};
+
+function wordVariants(w){
+  w = w.toLowerCase();
+  const vs = [w];
+  if(w.endsWith('y') && w.length>1 && !'aeiou'.includes(w[w.length-2])){ vs.push(w.slice(0,-1)+'ies'); vs.push(w.slice(0,-1)+'ied'); }
+  else if(w.endsWith('e')){ vs.push(w+'d'); vs.push(w.slice(0,-1)+'ing'); vs.push(w+'s'); }
+  else { vs.push(w+'s'); vs.push(w+'es'); vs.push(w+'ed'); vs.push(w+'ing'); }
+  if(w.length>=3 && 'bcdfghjklmnpqrstvwxz'.includes(w[w.length-1]) && 'aeiou'.includes(w[w.length-2]) && !'aeiou'.includes(w[w.length-3])){ vs.push(w+w[w.length-1]+'ed'); vs.push(w+w[w.length-1]+'ing'); }
+  for(const ir in IRREG){ if(IRREG[ir]===w) vs.push(ir); }
+  return [...new Set(vs)];
+}
+function wordPat(w){
+  const wl = w.toLowerCase();
+  if(wl==="sb's" || wl==="one's") return ["\\S+'s", '\\S+'];
+  if(wl==='sb' || wl==='sb.') return ['\\S+'];
+  if(wl==='doing') return ['\\w+ing', '\\b'+w+'\\b'];
+  return wordVariants(w).map(v=>'\\b'+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b');
+}
+function cartesian(arrays){
+  if(!arrays.length) return [[]];
+  const f = arrays[0], rest = arrays.slice(1), rc = cartesian(rest), out = [];
+  for(const x of f) for(const r of rc) out.push([x].concat(r));
+  return out;
+}
+function phrasePats(w){
+  if(w.indexOf('...')>=0){
+    const parts = w.split('...').map(s=>s.trim()).filter(Boolean);
+    const fp = parts[0].split(' ').map(wordPat);
+    const lp = parts[parts.length-1].split(' ').map(wordPat);
+    const out = [];
+    for(const fc of cartesian(fp)) for(const lc of cartesian(lp)){
+      out.push('\\b'+fc.join('\\s+')+'\\b(?:\\s+\\S+){0,2}\\s+\\b'+lc.join('\\s+')+'\\b');
+    }
+    return out;
+  }
+  const words = w.split(' ');
+  if(words.length===1) return wordPat(words[0]);
+  const out = [];
+  for(const combo of cartesian(words.map(wordPat))){
+    out.push('\\b'+combo.join('\\s+')+'\\b');
+  }
+  return out;
+}
+let _lastSeg = '';
+let _lastSegFirst = false;
+function makeBlank(en, word){
+  _lastSeg = '';
+  _lastSegFirst = false;
+  const pats = phrasePats(word);
+  for(const p of pats){
+    const re = new RegExp(p, 'i');
+    const m = re.exec(en);
+    if(m){
+      _lastSeg = m[0];
+      _lastSegFirst = /^[\s"'()]*$/.test(en.slice(0, m.index));
+      const bw = (m[0].length + 2) * 14 + 20;
+      const reG = new RegExp(p, 'gi');
+      return en.replace(reG, '<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>');
+    }
+  }
+  const bw2 = (word.length + 2) * 14 + 20;
+  return en + ' <span class="blank" id="blankSpace" style="min-width:'+bw2+'px">&nbsp;</span>';
+}
+function stripW(w){
+  if(w.length<=4) return w;
+  if(w.endsWith('ying')) return w.slice(0,-3)+'y';
+  if(w.endsWith('ies')) return w.slice(0,-3)+'y';
+  if(w.endsWith('es')) return w.slice(0,-2);
+  if(w.endsWith('ed')) return w.slice(0,-2);
+  if(w.endsWith('ing')) return w.slice(0,-3);
+  if(w.endsWith('s')) return w.slice(0,-1);
+  return w;
+}
+function canonical(s){
+  return (s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(Boolean).map(w=>IRREG[w]||stripW(w)).join(' ');
+}
+function isCorrect(typed, w, seg){
+  const tn = (typed||'').toLowerCase().replace(/\s+/g,' ').trim();
+  if(!tn) return false;
+  const wn = (w||'').toLowerCase().replace(/\s+/g,' ').trim();
+  const sn = (seg||'').toLowerCase().replace(/\s+/g,' ').trim();
+  if(tn===wn || tn===sn) return true;
+  return canonical(tn)===canonical(wn) || canonical(tn)===canonical(sn);
+}
+
+function refreshAllGradeStats(){
+  let masteredTotal = 0, totalAll = 0;
+  ['basic','core','extra'].forEach(g=>{
+    try{
+      const data = GRADE_MAP[g].data;
+      totalAll += data.length;
+      let mastered = [], review = [];
+      let k = 'dd_'+_auth+'_'+g;
+      let local = localStorage.getItem(k);
+      if(local){
+        const j = JSON.parse(local);
+        mastered = j.mastered || [];
+        review = j.review || [];
+      }
+      masteredTotal += mastered.length;
+    }catch(e){}
+  });
+  const name = STUDENT_MAP[_auth] || localStorage.getItem('dd_name') || '同学';
+  const el = document.getElementById('headerInfo');
+  if(el) el.innerHTML = name + buildAchievements(masteredTotal) + '<span style="margin-left:6px;font-size:12px;color:#FFB300;font-weight:700">'+masteredTotal+'</span>';
+}
+function buildAchievements(m){
+  const sun = Math.floor(m/500);
+  const moon = Math.floor((m%500)/100);
+  const star = Math.floor((m%100)/20);
+  const icons = [];
+  if(sun>0) icons.push('☀️'+(sun>1?'×'+sun:''));
+  if(moon>0) icons.push('🌙'+(moon>1?'×'+moon:''));
+  if(star>0){
+    if(icons.length + star <= 5){ for(let i=0;i<star;i++) icons.push('⭐'); }
+    else icons.push('⭐×'+star);
+  }
+  const ti = s => s.indexOf('☀️')>=0 ? '太阳 · 500词' : s.indexOf('🌙')>=0 ? '蓝月亮 · 100词' : '小黄星 · 20词';
+  return '<span style="display:inline-flex;gap:3px;margin-left:6px;font-size:12px;vertical-align:middle">'+
+    icons.map(s => '<span style="line-height:1" title="'+ti(s)+'">'+s+'</span>').join('') +
+    '</span>';
+}
+function refreshStats(){
+  refreshAllGradeStats();
+  document.getElementById('reviewCount').textContent = reviewSet.length;
+  const sn = document.getElementById('statN');
+  const sm = document.getElementById('statM');
+  const st = document.getElementById('statT');
+  if(sn) sn.textContent = sessionCorrect;
+  if(sm) sm.textContent = sessionReviewed;
+  if(document.getElementById('learnCount')) document.getElementById('learnCount').textContent = remainNew();
+  if(st) st.textContent = sessionAnswered>0 ? Math.round(sessionCorrect/sessionAnswered*100)+'%' : '0%';
+
+  const learnTab = document.getElementById('learnTab');
+  learnTab.classList.toggle('disabled', remainNew()===0);
+  const reviewTab = document.getElementById('reviewTab');
+  reviewTab.classList.toggle('disabled', reviewSet.length===0);
+
+  const tip = document.getElementById('tipMsg');
+  if(remainNew()===0 && reviewSet.length===0){
+    tip.style.display='block'; tip.textContent = '// 全部完成单词记忆';
+  } else if(remainNew()===0 && reviewSet.length>0){
+    tip.style.display='block'; tip.textContent = '// 新词已学完，请去复习';
+  } else { tip.style.display='none'; }
+
+  const btn = document.getElementById('startBtn');
+  if(remainNew()===0 && reviewSet.length===0){
+    setBottomBtn('全部重学一遍', resetAll, true);
+  } else if(mode==='learn' && remainNew()===0){
+    setBottomBtn('去复习', function(){ setMode('review'); startSession(); }, true);
+  }
+}
+
+function setMode(m){
+  mode = m;
+  document.getElementById('learnTab').classList.toggle('active', m==='learn');
+  document.getElementById('reviewTab').classList.toggle('active', m==='review');
+  document.getElementById('modeDesc').textContent = m==='learn'
+    ? GRADE_MAP[grade].label + ' · 开始学习'
+    : GRADE_MAP[grade].label + ' · 答错的单词复习巩固';
+  document.getElementById('learnPage').classList.add('hide');
+  document.getElementById('donePage').classList.add('hide');
+  document.getElementById('startPage').classList.add('hide');
+  document.getElementById('contentArea').classList.remove('no-bg');
+  if(m==='learn' && remainNew()===0){
+    setBottomBtn(reviewSet.length>0 ? '去复习' : '全部重学一遍',
+      reviewSet.length>0 ? function(){ setMode('review'); startSession(); } : resetAll, true);
+  } else {
+    setBottomBtn(m==='learn' ? '开始记单词' : '开始复习', onBottomBtn, false);
+  }
+  refreshStats();
+}
+
+function setBottomBtn(label, fn, single){
+  const btn = document.getElementById('startBtn');
+  const L = document.getElementById('halfL'), R = document.getElementById('halfR');
+  btn.classList.remove('hide');
+  if(single){
+    btn.classList.add('single');
+    L.textContent = label;
+    L.onclick = fn;
+  } else {
+    btn.classList.remove('single');
+    L.textContent = '句中记';
+    L.onclick = function(){ onBottomBtn('sentence'); };
+    R.textContent = '释义记';
+    R.onclick = function(){ onBottomBtn('meaning'); };
+  }
+}
+function hideBottomBtn(){ document.getElementById('startBtn').classList.add('hide'); }
+
+function startSession(){
+  sessionAnswered = 0; sessionCorrect = 0; sessionReviewed = 0;
+  if(mode==='learn'){
+    queue = WORDS.filter(w => !masteredSet.includes(w.w.toLowerCase()) && !reviewSet.includes(w.w.toLowerCase()));
+    if(queue.length===0){ refreshStats(); return; }
+  } else {
+    queue = WORDS.filter(w => reviewSet.includes(w.w.toLowerCase()));
+    if(queue.length===0){ document.getElementById('modeDesc').textContent='没有待复习的单词'; return; }
+  }
+  for(let i=queue.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[queue[i],queue[j]]=[queue[j],queue[i]];}
+  document.getElementById('startPage').classList.add('hide');
+  document.getElementById('donePage').classList.add('hide');
+  document.getElementById('learnPage').classList.remove('hide');
+  hideBottomBtn();
+  document.getElementById('contentArea').classList.add('no-bg');
+  refreshStats();
+  nextCard();
+}
+
+function nextCard(){
+  if(queue.length===0){ showDone(); return; }
+  current = queue.shift();
+  typed = '';
+  if(sessionMode === 'meaning'){
+    const bw = (current.w.length + 2) * 14 + 20;
+    const isPh = (current.w.trim().indexOf(' ') >= 0);
+    const phTag = isPh ? '<span style="display:inline-block;font-size:10px;color:#FFB300;background:rgba(255,179,0,.1);border:1px solid rgba(255,179,0,.5);border-radius:2px;padding:1px 7px;margin-left:8px;vertical-align:middle;font-weight:600;letter-spacing:1px">短语</span>' : '';
+    document.getElementById('exEn').innerHTML = '<div style="font-size:23px;font-weight:700;color:#E8EFF4;line-height:1.7;margin-bottom:6px">'+current.m+phTag+'</div><div style="font-size:16px;color:#7A868E">（<span class="blank" id="blankSpace" style="min-width:'+bw+'px">&nbsp;</span>）</div>';
+    document.getElementById('exCn').textContent = '';
+    current.seg = current.w;
+    current.segFirst = false;
+  } else {
+    document.getElementById('exEn').innerHTML = makeBlank(current.en, current.w);
+    current.seg = _lastSeg;
+    current.segFirst = _lastSegFirst;
+    document.getElementById('exCn').textContent = current.cn;
+  }
+  document.getElementById('phon').textContent = current.p;
+  document.getElementById('phon').style.display = 'none';
+  document.getElementById('phon').style.cursor = 'pointer';
+  document.getElementById('phon').onclick = function(){ speakWord(current.w); };
+  document.getElementById('phonBtn') && (document.getElementById('phonBtn').style.display = 'inline-block');
+  document.getElementById('phonBtn').onclick = function(){
+    document.getElementById('phon').style.display = (document.getElementById('phon').style.display==='none')?'inline-block':'none';
+    speakWord(current.w);
+  };
+  document.getElementById('fb') && (document.getElementById('fb').className='feedback');
+  renderKeyboard();
+  document.getElementById('progFill').style.width = ((1-(queue.length+1)/WORDS.length)*100)+'%';
+}
+
+
+let _audio = null;
+function speakWord(w){
+  try{
+    if(!_audio) _audio = new Audio();
+    _audio.src = 'https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(w) + '&type=1';
+    _audio.play().catch(e=>console.log('play fail',e));
+  }catch(e){ console.log(e); }
+}
+document.addEventListener('click', function once(){
+  try{
+    var u = new Audio('https://dict.youdao.com/dictvoice?audio=test&type=1');
+    u.play().then(()=>u.pause()).catch(()=>{});
+  }catch(e){}
+  document.removeEventListener('click', once);
+});
+let _keyAudio = null;
+let _kctx = null;
+function synthKey(){
+  try{
+    if(!_kctx) _kctx = new (window.AudioContext || window.webkitAudioContext)();
+    if(_kctx.state === 'suspended'){ _kctx.resume(); }
+    var t = _kctx.currentTime, o = _kctx.createOscillator(), g = _kctx.createGain();
+    o.type = 'square';
+    o.frequency.value = 1700;
+    g.gain.setValueAtTime(0.10, t);
+    g.gain.exponentialRampToValueAtTime(0.0008, t + 0.05);
+    o.connect(g); g.connect(_kctx.destination);
+    o.start(t); o.stop(t + 0.06);
+  }catch(e){}
+}
+let _okAudio = null, _errAudio = null;
+function playOkSound(){
+  try{
+    if(!_okAudio){ _okAudio = new Audio('sounds/ok.mp3'); _okAudio.preload = 'auto'; }
+    _okAudio.currentTime = 0;
+    var p = _okAudio.play();
+    if(p && p.catch) p.catch(function(){});
+  }catch(e){}
+}
+function playErrSound(){
+  try{
+    if(!_errAudio){ _errAudio = new Audio('sounds/err.wav'); _errAudio.preload = 'auto'; }
+    _errAudio.currentTime = 0;
+    var p = _errAudio.play();
+    if(p && p.catch) p.catch(function(){});
+  }catch(e){}
+}
+function playKeySound(){
+  try{
+    if(!_keyAudio){
+      _keyAudio = new Audio('sounds/key.wav');
+      _keyAudio.preload = 'auto';
+    }
+    if(_keyAudio.readyState >= 1){
+      _keyAudio.currentTime = 0;
+      var p = _keyAudio.play();
+      if(p && p.catch) p.catch(function(){ synthKey(); });
+    } else {
+      synthKey();
+    }
+  }catch(e){ synthKey(); }
+}
+try{ _keyAudio = new Audio('sounds/key.wav'); _keyAudio.preload = 'auto'; }catch(e){}
+
+function renderKeyboard(){
+  let html = '<div class="keyboard">';
+  const row1 = 'abcdefg'.split('');
+  const row2 = 'hijklmn'.split('');
+  const row3 = 'opqrstu'.split('');
+  const row4 = 'vwxyz'.split('');
+  row1.forEach(l=> html += `<button class="key" onclick="pressKey('${l}')">${l}</button>`);
+  row2.forEach(l=> html += `<button class="key" onclick="pressKey('${l}')">${l}</button>`);
+  row3.forEach(l=> html += `<button class="key" onclick="pressKey('${l}')">${l}</button>`);
+  row4.forEach(l=> html += `<button class="key" onclick="pressKey('${l}')">${l}</button>`);
+  html += `<button class="key" onclick="pressSpace()">空格</button>`;
+  html += `<button class="key del" onclick="delKey()">⌫</button>`;
+  html += `<button class="key confirm" onclick="check()" style="grid-column:1/-1">确认</button>`;
+  html += '</div>';
+  document.getElementById('actionArea').innerHTML = html;
+  updateBlank();
+}
+
+function pressKey(l){
+  if(typed.length >= current.w.length + 2) return;
+  if(!typed && current.segFirst) typed += l.toUpperCase();
+  else typed += l.toLowerCase();
+  updateBlank();
+  playKeySound();
+}
+function pressSpace(){
+  if(typed.length >= current.w.length + 2) return;
+  typed += ' ';
+  updateBlank();
+  playKeySound();
+}
+function delKey(){
+  typed = typed.slice(0,-1);
+  updateBlank();
+  playKeySound();
+}
+function playKeySound(){
+  try{
+    if(!_audio) _audio = new Audio();
+    _audio.src = 'sounds/key.wav';
+    _audio.currentTime = 0;
+    _audio.play().catch(function(e){ console.log('play fail',e); });
+  }catch(e){ console.log(e); }
+}
+function updateBlank(){
+  const b = document.getElementById('blankSpace');
+  if(!b) return;
+  if(!typed){ b.innerHTML='&nbsp;'; b.style.color=''; return; }
+  b.innerHTML = typed;
+  b.style.color = isCorrect(typed, current.w, current.seg) ? '#FFD54F' : '#6B767D';
+}
+
+function showPhonetic(){
+  document.getElementById('phon').style.display='block';
+  document.getElementById('phonBtn').style.display='none';
+}
+
+function check(){
+  if(!current) return;
+  const target = current.w.toLowerCase();
+  sessionAnswered++;
+  document.querySelector('.keyboard') && (document.querySelector('.keyboard').style.display='none');
+
+  let fb = document.getElementById('fb');
+  if(!fb){
+    fb = document.createElement('div');
+    fb.className = 'feedback';
+    fb.id = 'fb';
+    document.getElementById('actionArea').appendChild(fb);
+  }
+
+  if(isCorrect(typed, current.w, current.seg)){
+    sessionCorrect++;
+    playOkSound();
+    if(mode==='review'){
+      const idx = reviewSet.indexOf(target);
+      if(idx>-1) reviewSet.splice(idx,1);
+    }
+    if(!masteredSet.includes(target)){ masteredSet.push(target); learnedCount++; }
+    saveState();
+    fb.className = 'feedback ok';
+    fb.innerHTML = '✓ CORRECT <span style="font-size:11px;color:#4EC49A;font-weight:400;margin-left:8px">未记牢可加入复习仓</span>';
+    celebrate();
+    var btnText = queue.length===0 ? '完成' : '下一题';
+    document.getElementById('actionArea').innerHTML += '<div style="display:flex;gap:10px;margin-top:12px"><button onclick="passCard()" style="flex:1;padding:13px;background:linear-gradient(180deg,#FFD54F,#FFB300 50%,#FF8F00);color:#14181B;border:1px solid #FFD54F;border-radius:4px;font-size:13px;font-weight:800;letter-spacing:2px;font-family:var(--mono);cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 3px 0 #9A6A00">'+btnText+'</button><button onclick="reviewCard()" style="flex:1;padding:13px;background:linear-gradient(180deg,#2A3238,#1A2025);color:#FFB300;border:1px solid #FFB300;border-radius:4px;font-size:13px;font-weight:700;letter-spacing:2px;font-family:var(--mono);cursor:pointer;box-shadow:0 3px 0 #0B0D0F,inset 0 1px 0 rgba(255,255,255,.07)">加入复习</button></div>';
+  } else {
+    sessionReviewed++;
+    playErrSound();
+    if(!reviewSet.includes(target)){ reviewSet.push(target); saveState(); }
+    fb.className = 'feedback err';
+    fb.innerHTML = '✗ FAILED / 正确答案：<b>'+current.w+'</b>（'+current.m+'）';
+    flashRed();
+    var btnText2 = queue.length===0 ? '完成' : '下一题';
+    document.getElementById('actionArea').innerHTML += '<button onclick="nextCard()" style="width:100%;padding:13px;background:linear-gradient(180deg,#2A3238,#1A2025);color:#FFB300;border:1px solid #FFB300;border-radius:4px;font-size:13px;font-weight:700;letter-spacing:2px;font-family:var(--mono);cursor:pointer;margin-top:12px;box-shadow:0 3px 0 #0B0D0F,inset 0 1px 0 rgba(255,255,255,.07)">'+btnText2+'</button>';
+  }
+  refreshStats();
+}
+
+function passCard(){ nextCard(); }
+function reviewCard(){
+  sessionReviewed++;
+  const target = current.w.toLowerCase();
+  if(mode==='review'){
+    if(!reviewSet.includes(target)){ reviewSet.push(target); }
+    const idx = masteredSet.indexOf(target);
+    if(idx>-1){ masteredSet.splice(idx,1); learnedCount--; }
+  } else {
+    const idx = masteredSet.indexOf(target);
+    if(idx>-1){ masteredSet.splice(idx,1); learnedCount--; }
+    if(!reviewSet.includes(target)){ reviewSet.push(target); }
+  }
+  saveState(); refreshStats(); nextCard();
+}
+
+function showDone(){
+  document.getElementById('learnPage').classList.add('hide');
+  document.getElementById('startPage').classList.add('hide');
+  document.getElementById('donePage').classList.remove('hide');
+  document.getElementById('contentArea').classList.remove('no-bg');
+  const acc = sessionAnswered>0 ? Math.round(sessionCorrect/sessionAnswered*100)+'%' : '0%';
+  const accNum = sessionAnswered>0 ? Math.round(sessionCorrect/sessionAnswered*100) : 0;
+  const accColor = accNum>80 ? '#FFB300' : '#FF8F00';
+  if(mode==='review'){
+    document.getElementById('doneTitle').textContent = 'SECTOR CLEAR / 已全部复习一次';
+    document.getElementById('doneMsg').innerHTML = reviewSet.length>0
+      ? '还剩 <b style="color:#FF8F00">'+reviewSet.length+'</b> 个待巩固，是否重新复习？'
+      : '恭喜！全部掌握了！';
+    setBottomBtn(reviewSet.length>0 ? '重新复习' : '返回',
+      reviewSet.length>0 ? function(){ setMode('review'); startSession(); } : function(){ setMode('learn'); }, true);
+  } else if(remainNew()===0 && reviewSet.length===0){
+    document.getElementById('doneTitle').textContent = 'ALL CLEAR / 恭喜！';
+    document.getElementById('doneMsg').innerHTML = '全部单词记忆完成！正确率 <b style="color:#FFB300">'+acc+'</b>';
+    setBottomBtn('全部重新一遍', resetAll, true);
+  } else if(remainNew()===0 && reviewSet.length>0){
+    document.getElementById('doneTitle').textContent = 'SECTOR CLEAR / 本轮完成！';
+    document.getElementById('doneMsg').innerHTML = '掌握 <b style="color:#FFB300">'+sessionCorrect+'</b> 个，待复习 <b style="color:#FF8F00">'+sessionReviewed+'</b> 个，正确率 <b style="color:'+accColor+'">'+acc+'</b>';
+    setBottomBtn('去复习', function(){ setMode('review'); startSession(); }, true);
+  } else {
+    document.getElementById('doneTitle').textContent = 'SECTOR CLEAR / 本轮完成！';
+    document.getElementById('doneMsg').innerHTML = '掌握 <b style="color:#FFB300">'+sessionCorrect+'</b> 个，待复习 <b style="color:#FF8F00">'+sessionReviewed+'</b> 个，正确率 <b style="color:'+accColor+'">'+acc+'</b>';
+    setBottomBtn('继续学新词', onBottomBtn, false);
+  }
+}
+
+function resetAll(){
+  localStorage.removeItem(storageKey());
+  cloudSet(storageKey(), JSON.stringify({learned:0,review:[],mastered:[]}));
+  learnedCount=0; reviewSet=[]; masteredSet=[];
+  setMode('learn');
+}
+
+function onBottomBtn(mode2){
+  if(mode2) sessionMode = mode2;
+  if(!document.getElementById('donePage').classList.contains('hide')){
+    document.getElementById('donePage').classList.add('hide');
+    document.getElementById('startPage').classList.add('hide');
+    document.getElementById('contentArea').classList.remove('no-bg');
+    setBottomBtn(mode==='learn' ? '开始记单词' : '开始复习', onBottomBtn, false);
+    if(mode==='review' && reviewSet.length>0) startSession();
+    refreshStats();
+  } else {
+    startSession();
+  }
+}
+
+let _ov = null;
+function flashRed(){
+  try{
+    if(!_ov){ _ov = document.createElement('div'); _ov.id = 'redOverlay'; document.body.appendChild(_ov); }
+    _ov.classList.remove('flashing'); void _ov.offsetWidth; _ov.classList.add('flashing');
+    setTimeout(()=>{ if(_ov) _ov.classList.remove('flashing'); }, 1250);
+  }catch(e){}
+}
+function celebrate(){
+  try{
+    const ref = document.getElementById('exEn') || document.body;
+    const rect = ref.getBoundingClientRect();
+    const x = rect.left + rect.width/2, y = rect.top + 10;
+    const el = document.createElement('div');
+    el.className = 'celebrate';
+    el.textContent = '⚡';
+    el.style.left = (x - 40) + 'px';
+    el.style.top = y + 'px';
+    el.style.fontSize = '80px';
+    document.body.appendChild(el);
+    setTimeout(()=>{ try{ el.remove(); }catch(e){} }, 1800);
+  }catch(e){}
+}
+
+window.addEventListener('load', function(){ setGrade('basic'); });
+setTimeout(function(){ setGrade('basic'); }, 100);
+</script>
+<div class="footer">
+  <div>@多多好学 版权所有</div>
+</div>
+</body>
+</html>
