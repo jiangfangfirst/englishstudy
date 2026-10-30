@@ -5,10 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>多多好学九年级英语过关检测试卷</title>
 <style>
-  /* 全局背景 */
-  body { background: #e5e7eb; margin: 0; padding: 30px 0; font-family: "Times New Roman", "SimSun", "宋体", serif; color: #000; }
+  /* ===== 基础 ===== */
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #e5e7eb;
+    padding: 30px 0;
+    font-family: "Times New Roman", "SimSun", "宋体", serif;
+    color: #000;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
 
-  /* A4 纸张容器 */
+  /* ===== A4 纸张（始终 210mm × 297mm，保证分页与打印一致） ===== */
   .paper {
     width: 210mm;
     height: 297mm;
@@ -17,13 +25,12 @@
     padding: 15mm 18mm;
     box-sizing: border-box;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    position: relative;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
   }
 
-  /* 内容区：flex 自动占满剩余高度，overflow:hidden 用于测量是否溢出 */
   .page-content {
     flex: 1 1 auto;
     min-height: 0;
@@ -31,7 +38,6 @@
     position: relative;
   }
 
-  /* 页脚页码 */
   .page-footer {
     height: 10mm;
     flex: 0 0 10mm;
@@ -44,13 +50,13 @@
     font-family: "Microsoft YaHei", sans-serif;
   }
 
-  /* 试卷头部 */
+  /* ===== 试卷头部 ===== */
   .header { text-align: center; margin-bottom: 10px; }
   .header h1 { font-size: 22px; margin: 0 0 6px 0; font-family: "Microsoft YaHei", sans-serif; }
   .header .subtitle { font-size: 12px; color: #555; border-bottom: 1px solid #000; padding-bottom: 6px; margin-bottom: 10px; }
   .tips { font-size: 12px; color: #333; margin-bottom: 10px; line-height: 1.5; font-family: "Microsoft YaHei", sans-serif; }
 
-  /* 题目紧凑排版 */
+  /* ===== 题目紧凑排版 ===== */
   .q-item { display: flex; margin-bottom: 5px; line-height: 1.38; font-size: 12.5px; page-break-inside: avoid; }
   .q-num { width: 20px; flex-shrink: 0; font-weight: bold; }
   .q-body { flex: 1; min-width: 0; }
@@ -62,8 +68,15 @@
   }
   .opt { min-width: 0; word-break: break-word; }
 
-  /* 答案和解析区域 */
-  .answer-box { display: none; margin-top: 6px; padding: 6px 10px; background: #f8fafc; border-left: 3px solid #3b82f6; border-radius: 0 4px 4px 0; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 1.5; color: #333; page-break-inside: avoid; }
+  /* ===== 答案与解析 ===== */
+  .answer-box {
+    display: none; margin-top: 6px; padding: 6px 10px;
+    background: #f8fafc; border-left: 3px solid #3b82f6;
+    border-radius: 0 4px 4px 0;
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 12px; line-height: 1.5; color: #333;
+    page-break-inside: avoid;
+  }
   .answer-box.show { display: block; }
   .ans-row { margin-bottom: 4px; }
   .ans-row:last-child { margin-bottom: 0; }
@@ -71,32 +84,156 @@
   .ans-trans { color: #059669; font-style: italic; margin-left: 15px; }
   .ans-point { color: #2563eb; }
 
-  /* 顶部控制面板 */
-  .control-panel { position: fixed; top: 20px; right: 20px; background: #fff; padding: 15px 20px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.12); display: flex; flex-direction: column; gap: 12px; z-index: 1000; font-family: "Microsoft YaHei", sans-serif; font-size: 14px; }
+  /* ===== 控制面板（PC 默认固定右上角） ===== */
+  .control-panel {
+    position: fixed; top: 20px; right: 20px;
+    background: #fff; padding: 15px 20px; border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    display: flex; flex-direction: column; gap: 12px;
+    z-index: 1000;
+    font-family: "Microsoft YaHei", sans-serif; font-size: 14px;
+  }
   .control-row { display: flex; align-items: center; gap: 10px; }
-  .control-panel input { width: 60px; padding: 6px; border: 1px solid #d1d5db; border-radius: 6px; text-align: center; font-size: 14px; }
-  .btn { padding: 9px 16px; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+  .control-panel input {
+    width: 60px; padding: 6px; border: 1px solid #d1d5db;
+    border-radius: 6px; text-align: center; font-size: 14px;
+  }
+  .btn {
+    padding: 9px 16px; border: none; border-radius: 8px;
+    font-size: 14px; font-weight: bold; cursor: pointer;
+    transition: all 0.2s; font-family: inherit;
+  }
   .btn-blue { background: #3b82f6; color: #fff; }
   .btn-blue:hover { background: #2563eb; }
-  .btn-green { background: #10b981; color: #fff; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+  .btn-green { background: #10b981; color: #fff; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
   .btn-green:hover { background: #059669; transform: translateY(-1px); }
   .btn-purple { background: #8b5cf6; color: #fff; }
   .btn-purple:hover { background: #7c3aed; }
 
-  /* ===== 打印专用媒体查询 ===== */
+  /* ===== 移动端专用：面板开关、遮罩 ===== */
+  .panel-toggle,
+  .panel-close,
+  .panel-backdrop { display: none; }
+
+  /* ===== 移动端 / 窄屏：纸张整体缩放，保证打印与 PC 一致 ===== */
+  /* 纸张尺寸始终是 210mm × 297mm，通过 JS 设置 zoom 来适配屏幕 */
+
+  /* ===== 打印 ===== */
   @media print {
     @page { size: A4; margin: 0; }
-    body { background: #fff; padding: 0; }
-    .paper { width: 100%; height: 297mm; margin: 0; box-shadow: none; page-break-after: always; }
+    body { background: #fff; padding: 0 !important; overflow: visible !important; }
+    .paper {
+      zoom: 1 !important;           /* 强制恢复 1:1，覆盖 JS 设置的 zoom */
+      width: 210mm !important;
+      height: 297mm !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      page-break-after: always;
+    }
     .paper:last-child { page-break-after: auto; }
-    .control-panel { display: none !important; }
+    .control-panel,
+    .panel-toggle,
+    .panel-close,
+    .panel-backdrop { display: none !important; }
     .answer-box.show { display: block; }
+  }
+
+  /* ===== 移动端（仅屏幕，不影响打印） ===== */
+  @media screen and (max-width: 900px) {
+    body { padding: 8px 0 !important; }
+
+    /* 右上角设置按钮 */
+    .panel-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 50%;
+      background: #3b82f6;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 1001;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+
+    /* 遮罩 */
+    .panel-backdrop {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 1001;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .panel-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* 面板：全屏浮层 */
+    .control-panel {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: auto;
+      border-radius: 0;
+      padding: 70px 22px 22px;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+      z-index: 1002;
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .control-panel.active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .panel-close {
+      display: block;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 50%;
+      background: #f3f4f6;
+      color: #333;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+
+    .control-row { flex-wrap: wrap; }
+    .control-panel input { width: 72px; padding: 8px; }
+    .btn { padding: 12px 18px; font-size: 15px; }
   }
 </style>
 </head>
 <body>
 
-<div class="control-panel">
+<!-- 移动端设置按钮 -->
+<button class="panel-toggle" id="panelToggle" aria-label="打开设置">⚙</button>
+<div class="panel-backdrop" id="panelBackdrop"></div>
+
+<div class="control-panel" id="controlPanel">
+  <button class="panel-close" id="panelClose" aria-label="关闭">✕</button>
   <div class="control-row">
     <span>从第</span>
     <input type="number" id="startQ" value="1" min="1">
@@ -116,7 +253,9 @@
 <div id="papersContainer"></div>
 
 <script>
-/* ====== 题库数据（保持你原来的内容，这里原样保留） ====== */
+/* =========================================================
+   题库数据
+   ========================================================= */
 const BANK = [
 {q:"I don't know ___ he was late this morning.", o:["what", "where", "when", "why"], a:3, e:"why 为什么，不知道他今天早上为什么迟到。", source:"Unit 4同步提优训练(改写)", trans:"我不知道他今天早上为什么迟到。", point:"考查宾语从句引导词。根据句意“为什么迟到”，选 why。"},
 {q:"I'm looking forward to ___ from my pen pal.", o:["hear", "hearing", "heard", "hears"], a:1, e:"look forward to doing sth 期待做某事。", source:"Unit 4基础通关卷(15)", trans:"我正期待收到笔友的来信。", point:"考查固定搭配。look forward to 中的 to 是介词，后接动名词 doing。"},
@@ -359,11 +498,16 @@ const REMAINING_BANK = [
 {q:"The old photo ___ me of my happy days in the countryside.", o:["makes", "reminds", "tells", "shows"], a:1, e:"remind sb of sth。", source:"Unit 4单元测试(10)", trans:"这张老照片让我想起了在乡下的快乐时光。", point:"考查动词短语。remind sb of sth 意为“使某人想起某事”。"}
 ];
 
-/* ====== 合并题库 ====== */
+/* =========================================================
+   合并题库
+   ========================================================= */
 const FULL_BANK = BANK.concat(REMAINING_BANK);
 const TOTAL_QUESTIONS = FULL_BANK.length;
 let showAnswer = false;
 
+/* =========================================================
+   工具
+   ========================================================= */
 function formatDialog(str) {
   return str.replace(/ —/g, '<br>—');
 }
@@ -406,6 +550,31 @@ function createQItem(item, index) {
   return div;
 }
 
+/* =========================================================
+   移动端自适应缩放（使用 CSS zoom，保证分页与打印一致）
+   ========================================================= */
+function isMobileScreen() {
+  return window.innerWidth <= 900;
+}
+
+function updatePaperZoom() {
+  const paperPxW = 210 * 96 / 25.4; // 210mm 约等于 793.7 CSS px
+  const mobile = isMobileScreen();
+  let scale = 1;
+  if (mobile) {
+    const avail = window.innerWidth - 16;
+    scale = Math.min(1, avail / paperPxW);
+    // 最小不低于 0.2，避免异常小屏
+    if (scale < 0.2) scale = 0.2;
+  }
+  document.querySelectorAll('.paper').forEach(p => {
+    p.style.zoom = (mobile && scale !== 1) ? scale : '';
+  });
+}
+
+/* =========================================================
+   渲染试卷
+   ========================================================= */
 function renderExam() {
   const startInput = document.getElementById('startQ');
   const countInput = document.getElementById('qCount');
@@ -470,7 +639,7 @@ function renderExam() {
   `;
   currentContent.appendChild(tipsDiv);
 
-  /* ---- 溢出检测：用 scrollHeight / clientHeight，不再用固定像素 ---- */
+  /* ---- 溢出检测：基于布局尺寸（不受 zoom 影响） ---- */
   function isOverflow() {
     return currentContent.scrollHeight > currentContent.clientHeight + 2;
   }
@@ -480,18 +649,17 @@ function renderExam() {
       const beforeCount = currentContent.childNodes.length;
       currentContent.appendChild(node);
 
-      if (!isOverflow()) return;      // 放得下，结束
+      if (!isOverflow()) return;
 
-      currentContent.removeChild(node); // 放不下，撤回
+      currentContent.removeChild(node);
 
       if (beforeCount === 0) {
-        // 空页都放不下（题目本身过高），强行放置，避免死循环
         currentContent.appendChild(node);
         newPage();
         return;
       }
 
-      newPage(); // 换新页，循环重试
+      newPage();
     }
   }
 
@@ -499,30 +667,90 @@ function renderExam() {
     placeItem(createQItem(item, index));
   });
 
-  /* 清理末尾可能出现的空白页 */
   while (pages.length > 1 && pages[pages.length - 1].content.childNodes.length === 0) {
     const last = pages.pop();
     last.paper.remove();
   }
 
-  /* 填页码 */
   const totalPages = pages.length;
   pages.forEach((p, i) => {
     p.footer.textContent = `第 ${i + 1} 页 共 ${totalPages} 页`;
   });
 
+  // 渲染完成后应用移动端缩放
+  updatePaperZoom();
+
   window.scrollTo(0, 0);
 }
 
-document.getElementById('btnUpdate').addEventListener('click', renderExam);
+/* =========================================================
+   控制面板逻辑
+   ========================================================= */
+const controlPanel = document.getElementById('controlPanel');
+const panelBackdrop = document.getElementById('panelBackdrop');
+const panelToggle = document.getElementById('panelToggle');
+const panelClose = document.getElementById('panelClose');
+
+function openPanel() {
+  controlPanel.classList.add('active');
+  panelBackdrop.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePanel() {
+  controlPanel.classList.remove('active');
+  panelBackdrop.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+panelToggle.addEventListener('click', openPanel);
+panelClose.addEventListener('click', closePanel);
+panelBackdrop.addEventListener('click', closePanel);
+
+/* ---- 生成试卷 ---- */
+document.getElementById('btnUpdate').addEventListener('click', function () {
+  renderExam();
+  if (isMobileScreen()) closePanel();
+});
+
+/* ---- 显示 / 隐藏答案 ---- */
 document.getElementById('btnToggleAnswer').addEventListener('click', function () {
   showAnswer = !showAnswer;
   this.textContent = showAnswer ? '隐藏答案' : '显示答案';
   renderExam();
+  if (isMobileScreen()) closePanel();
 });
 
+/* ---- 初始化 ---- */
 document.getElementById('qCount').setAttribute('max', TOTAL_QUESTIONS);
 document.getElementById('qCount').value = TOTAL_QUESTIONS;
+
+/* ---- 窗口尺寸变化：重新计算缩放（移动端横竖屏切换、PC 缩放窗口） ---- */
+let resizeTimer;
+window.addEventListener('resize', function () {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function () {
+    updatePaperZoom();
+    // 若从移动端切到 PC，且面板处于打开状态，则关闭
+    if (!isMobileScreen() && controlPanel.classList.contains('active')) {
+      closePanel();
+    }
+  }, 150);
+});
+
+window.addEventListener('orientationchange', function () {
+  setTimeout(updatePaperZoom, 300);
+});
+
+/* ---- 打印前确保缩放恢复 ---- */
+window.addEventListener('beforeprint', function () {
+  document.querySelectorAll('.paper').forEach(p => p.style.zoom = '');
+});
+window.addEventListener('afterprint', function () {
+  updatePaperZoom();
+});
+
+/* ---- 首次渲染 ---- */
 renderExam();
 </script>
 </body>
