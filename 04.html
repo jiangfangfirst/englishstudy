@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学九年级英语过关检测试卷</title>
+<style>
+  /* ===== 基础 ===== */
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #e5e7eb;
+    padding: 30px 0;
+    font-family: "Times New Roman", "SimSun", "宋体", serif;
+    color: #000;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ===== A4 纸张（始终 210mm × 297mm，保证分页与打印一致） ===== */
+  .paper {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto 30px auto;
+    background: #fff;
+    padding: 15mm 18mm;
+    box-sizing: border-box;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .page-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .page-footer {
+    height: 10mm;
+    flex: 0 0 10mm;
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+    padding-top: 4mm;
+    border-top: 1px solid #ddd;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", sans-serif;
+  }
+
+  /* ===== 离屏测量纸张（仅用于 JS 分页计算，永远不可见） ===== */
+  .measure-paper {
+    position: absolute !important;
+    left: -9999px !important;
+    top: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    margin: 0 !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    overflow: hidden !important;
+  }
+  .measure-paper .page-content {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: hidden !important;
+  }
+
+  /* ===== 试卷头部 ===== */
+  .header { text-align: center; margin-bottom: 10px; }
+  .header h1 { font-size: 22px; margin: 0 0 6px 0; font-family: "Microsoft YaHei", sans-serif; }
+  .header .subtitle { font-size: 12px; color: #555; border-bottom: 1px solid #000; padding-bottom: 6px; margin-bottom: 10px; }
+  .tips { font-size: 12px; color: #333; margin-bottom: 10px; line-height: 1.5; font-family: "Microsoft YaHei", sans-serif; }
+
+  /* ===== 题目紧凑排版 ===== */
+  .q-item { display: flex; margin-bottom: 5px; line-height: 1.38; font-size: 12.5px; page-break-inside: avoid; }
+  .q-num { width: 20px; flex-shrink: 0; font-weight: bold; }
+  .q-body { flex: 1; min-width: 0; }
+  .q-stem { margin-bottom: 1px; word-break: break-word; }
+  .q-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px 12px;
+  }
+  .opt { min-width: 0; word-break: break-word; }
+
+  /* ===== 答案与解析 ===== */
+  .answer-box {
+    display: none; margin-top: 6px; padding: 6px 10px;
+    background: #f8fafc; border-left: 3px solid #3b82f6;
+    border-radius: 0 4px 4px 0;
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 12px; line-height: 1.5; color: #333;
+    page-break-inside: avoid;
+  }
+  .answer-box.show { display: block; }
+  .ans-row { margin-bottom: 4px; }
+  .ans-row:last-child { margin-bottom: 0; }
+  .ans-key { font-weight: bold; color: #dc2626; }
+  .ans-trans { color: #059669; font-style: italic; margin-left: 15px; }
+  .ans-point { color: #2563eb; }
+
+  /* ===== 控制面板（PC 默认固定右上角） ===== */
+  .control-panel {
+    position: fixed; top: 20px; right: 20px;
+    background: #fff; padding: 15px 20px; border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    display: flex; flex-direction: column; gap: 12px;
+    z-index: 1000;
+    font-family: "Microsoft YaHei", sans-serif; font-size: 14px;
+  }
+  .control-row { display: flex; align-items: center; gap: 10px; }
+  .control-panel input {
+    width: 60px; padding: 6px; border: 1px solid #d1d5db;
+    border-radius: 6px; text-align: center; font-size: 14px;
+  }
+  .btn {
+    padding: 9px 16px; border: none; border-radius: 8px;
+    font-size: 14px; font-weight: bold; cursor: pointer;
+    transition: all 0.2s; font-family: inherit;
+  }
+  .btn-blue { background: #3b82f6; color: #fff; }
+  .btn-blue:hover { background: #2563eb; }
+  .btn-green { background: #10b981; color: #fff; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
+  .btn-green:hover { background: #059669; transform: translateY(-1px); }
+  .btn-purple { background: #8b5cf6; color: #fff; }
+  .btn-purple:hover { background: #7c3aed; }
+
+  /* ===== 移动端专用：面板开关、遮罩 ===== */
+  .panel-toggle,
+  .panel-close,
+  .panel-backdrop { display: none; }
+
+  /* ===== 打印：保持 PC 端 A4 分页效果 ===== */
+  @media print {
+    @page { size: A4; margin: 0; }
+    body {
+      background: #fff;
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+    #papersContainer { padding-top: 0 !important; }
+    .paper {
+      zoom: 1 !important;
+      width: 210mm !important;
+      height: 297mm !important;
+      margin: 0 !important;
+      padding: 15mm 18mm !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      overflow: hidden !important;
+      page-break-after: always;
+    }
+    .paper:last-child { page-break-after: auto; }
+    .page-content { overflow: hidden !important; }
+    .page-footer { display: block !important; }
+    .control-panel,
+    .panel-toggle,
+    .panel-close,
+    .panel-backdrop,
+    .measure-paper { display: none !important; }
+    .answer-box.show { display: block; }
+  }
+
+  /* ===== 移动端（仅屏幕，不影响打印） ===== */
+  @media screen and (max-width: 900px) {
+    body { padding: 8px 0 !important; }
+
+    /* 右上角设置按钮 */
+    .panel-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 50%;
+      background: #3b82f6;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 1001;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+
+    /* 遮罩 */
+    .panel-backdrop {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 1001;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .panel-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* 面板：全屏浮层 */
+    .control-panel {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: auto;
+      border-radius: 0;
+      padding: 70px 22px 22px;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+      z-index: 1002;
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .control-panel.active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .panel-close {
+      display: block;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 50%;
+      background: #f3f4f6;
+      color: #333;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+
+    .control-row { flex-wrap: wrap; }
+    .control-panel input { width: 72px; padding: 8px; }
+    .btn { padding: 12px 18px; font-size: 15px; }
+
+    /* =====================================================
+       流式显示模式（body.flow-mode）
+       手机/平板：整份试卷连续铺满屏宽，字号放大，单列选项
+       打印时本节规则自动失效，恢复 A4 分页
+       ===================================================== */
+    body.flow-mode {
+      padding: 0 !important;
+      background: #eef1f5;
+    }
+    body.flow-mode #papersContainer {
+      padding-top: 66px;
+    }
+    body.flow-mode .paper {
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      margin: 0 auto !important;
+      padding: 14px 14px 20px !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      overflow: visible !important;
+    }
+    body.flow-mode .page-content {
+      flex: none !important;
+      min-height: 0 !important;
+      overflow: visible !important;
+    }
+    body.flow-mode .page-footer { display: none !important; }
+
+    /* 字号放大，手机上可正常阅读 */
+    body.flow-mode .header h1 { font-size: 18px; line-height: 1.35; }
+    body.flow-mode .header .subtitle { font-size: 13px; }
+    body.flow-mode .tips { font-size: 13px; line-height: 1.6; }
+
+    body.flow-mode .q-item {
+      font-size: 15px;
+      line-height: 1.65;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #e2e8f0;
+      page-break-inside: auto;
+    }
+    body.flow-mode .q-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    body.flow-mode .q-num { width: 24px; }
+    body.flow-mode .q-stem { margin-bottom: 3px; }
+    body.flow-mode .q-options {
+      grid-template-columns: 1fr;
+      gap: 2px 0;
+      margin-top: 2px;
+    }
+    body.flow-mode .opt { padding-left: 2px; }
+
+    body.flow-mode .answer-box {
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 9px 11px;
+      margin-top: 8px;
+    }
+    body.flow-mode .ans-trans {
+      display: block;
+      margin-left: 0;
+      margin-top: 3px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- 移动端设置按钮 -->
+<button class="panel-toggle" id="panelToggle" aria-label="打开设置">⚙</button>
+<div class="panel-backdrop" id="panelBackdrop"></div>
+
+<div class="control-panel" id="controlPanel">
+  <button class="panel-close" id="panelClose" aria-label="关闭">✕</button>
+  <div class="control-row">
+    <span>从第</span>
+    <input type="number" id="startQ" value="1" min="1">
+    <span>题开始，生成</span>
+    <input type="number" id="qCount" value="236" min="1">
+    <span>题</span>
+  </div>
+  <div class="control-row" style="justify-content: space-between;">
+    <button class="btn btn-blue" id="btnUpdate" style="flex:1;">生成试卷</button>
+    <button class="btn btn-purple" id="btnToggleAnswer" style="flex:1;">显示答案</button>
+  </div>
+  <div class="control-row">
+    <button class="btn btn-green" onclick="window.print()" style="width: 100%;">🖨️ 打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div id="papersContainer"></div>
+<script>
+/* =========================================================
+   题库数据（精简：仅保留渲染所需的 q / o / a / trans / point）
+   ========================================================= */
+const BANK = [
+{q:"I don't know ___ he was late this morning.", o:["what", "where", "when", "why"], a:3, trans:"我不知道他今天早上为什么迟到。", point:"考查宾语从句引导词。根据句意“为什么迟到”，选 why。"},
+{q:"I'm looking forward to ___ from my pen pal.", o:["hear", "hearing", "heard", "hears"], a:1, trans:"我正期待收到笔友的来信。", point:"考查固定搭配。look forward to 中的 to 是介词，后接动名词 doing。"},
+{q:"___ dolphins can recognize their old partners with good memory.", o:["Wildly", "Wildness", "Wilder", "Wild"], a:3, trans:"野生海豚能凭良好的记忆力认出它们的老伙伴。", point:"考查词性。修饰名词 dolphins 需要用形容词 Wild（野生的）。"},
+{q:"We ___ games together after class, like hide-and-seek and football.", o:["play", "plays", "playing", "played"], a:3, trans:"放学后我们一起玩游戏，比如捉迷藏和足球。", point:"考查时态。根据语境回忆过去的时光，用一般过去时 played。"},
+{q:"Please ___ the sentence after me so you can remember it better.", o:["review", "recall", "react", "repeat"], a:3, trans:"请跟我重复这个句子，这样你能记得更牢。", point:"考查动词辨析。repeat 意为“重复”，符合跟读的语境。"},
+{q:"___ your notes after class to make the knowledge last longer.", o:["Repeat", "Review", "Recall", "React"], a:1, trans:"课后复习你的笔记，让知识保留得更久。", point:"考查动词辨析及祈使句。review 意为“复习”，用动词原形开头。"},
+{q:"—___ do you keep your old photos? —I put them in a box under my bed.", o:["Where", "When", "Why", "How"], a:0, trans:"——你把你的老照片保存在哪里？——我把它们放在床底下的一个盒子里。", point:"考查疑问词。根据答语“在床底下的盒子里”可知询问地点，用 Where。"},
+{q:"My grandfather and I ___ time there every weekend.", o:["spend", "spends", "spending", "spent"], a:3, trans:"我和我的祖父每个周末都在那里度过时光。", point:"考查时态。描述过去经常发生的动作，应用一般过去时 spent。"},
+{q:"I still remember ___ to the beach with my parents when I was a child.", o:["go", "going", "to go", "gone"], a:1, trans:"我仍然记得小时候和父母去海滩的事情。", point:"考查非谓语动词。remember doing sth 表示“记得做过某事”（已发生），选 going。"},
+{q:"—Do you know what ___ Tom on his way to the library? —He fell off his bike.", o:["happened with", "happened at", "happened for", "happened to"], a:3, trans:"——你知道汤姆在去图书馆的路上发生了什么吗？——他从自行车上摔下来了。", point:"考查固定搭配。happen to sb 意为“某人发生了什么事”。"},
+{q:"Please ___ these new words ___ because they are helpful for memorization.", o:["take; in mind", "put; in mind", "make; in mind", "keep; in mind"], a:3, trans:"请把这些新单词牢记在心，因为它们有助于记忆。", point:"考查固定短语。keep...in mind 意为“把……牢记在心”。"},
+{q:"I ___ in a small village when I was a child.", o:["live", "lives", "living", "lived"], a:3, trans:"我小时候住在一个小村庄里。", point:"考查时态。根据 when I was a child 可知主句用一般过去时 lived。"},
+{q:"It ___ me that I forgot to bring my wallet to school today.", o:["happened to", "looked for", "waited for", "turned to"], a:0, trans:"我今天碰巧忘带钱包去学校了。", point:"考查固定句型。It happens to sb that... 意为“某人碰巧发生了……”。"},
+{q:"After two years of hard work, the new library in our city was ___ open to the public last month.", o:["widely", "fully", "nearly", "hardly"], a:1, trans:"经过两年的努力，我们市的新图书馆上个月向公众全面开放。", point:"考查副词辨析。fully 意为“完全地、全面地”，fully open 全面开放。"},
+{q:"—I can't finish the essay. I've ___ all my ideas. —Don't worry.", o:["looked back at", "run out of", "taken advantage of", "come up with"], a:1, trans:"——我完成不了这篇论文了。我已经用尽了所有的想法。——别担心。", point:"考查动词短语。run out of 意为“用完，耗尽”，符合用尽想法的语境。"},
+{q:"Too much ___ makes memory worse, so we should reduce it and stay confident.", o:["sadness", "hunger", "laziness", "stress"], a:3, trans:"过多的压力会让记忆力变差，所以我们应该减轻压力并保持自信。", point:"考查名词辨析。由 reduce it（减轻它）和记忆变差可知，此处指压力 stress。"},
+{q:"Don't be under too much ___. Take it easy.", o:["press", "stress", "sadness", "pleasure"], a:1, trans:"不要承受太多压力。放轻松。", point:"考查固定搭配。under too much stress 意为“承受太多压力”。"},
+{q:"Can you tell me ___ the train leaves?", o:["when", "that", "if", "what"], a:0, trans:"你能告诉我火车什么时候出发吗？", point:"考查宾语从句。根据句意询问时间，用 when 引导。"},
+{q:"Could you tell me ___ it is easy to forget a word?", o:["that", "why", "what", "who"], a:1, trans:"你能告诉我为什么单词容易忘吗？", point:"考查宾语从句。根据句意询问原因，用 why 引导。"},
+{q:"We should keep in ___ the happy time we spent with family.", o:["mood", "heart", "brain", "mind"], a:3, trans:"我们应该把与家人度过的快乐时光牢记在心。", point:"考查固定搭配。keep...in mind 意为“把……记在心里”。"},
+{q:"You should ___ all the important points in your mind when learning new knowledge.", o:["mix up", "keep in mind", "give up", "cheer up"], a:1, trans:"学习新知识时，你应该把所有要点牢记在心。", point:"考查短语辨析。keep in mind 意为“牢记”。"},
+{q:"___, we should try our best to use these memory methods.", o:["First of all", "In the end", "At present", "Last but not least"], a:3, trans:"最后但同样重要的是，我们应该尽力使用这些记忆方法。", point:"考查连接词。Last but not least 意为“最后但同样重要的是”。"},
+{q:"Before the group discussion, our teacher usually ___ the whole class into eight groups.", o:["develops", "divides", "creates", "turns"], a:1, trans:"在小组讨论之前，我们的老师通常把全班分成八个小组。", point:"考查动词短语。divide...into... 意为“把……分成……”。"},
+{q:"___ with memorizing abstract words, remembering pictures is much easier.", o:["Compare", "Comparing", "To compare", "Compared"], a:3, trans:"与记忆抽象单词相比，记住图片要容易得多。", point:"考查非谓语动词作状语。Compared with 意为“与……相比”。"},
+{q:"Start with a small place and place five ___ in it.", o:["item", "thing", "piece", "items"], a:3, trans:"从一个小地方开始，在里面放五件物品。", point:"考查名词复数。five 后面跟可数名词复数 items。"},
+{q:"The teacher asked us to ___ the key points in class.", o:["put up", "turn on", "write down", "take off"], a:2, trans:"老师让我们在课堂上写下要点。", point:"考查动词短语。write down 意为“写下”。"},
+{q:"Please ___ what your teacher says in class.", o:["pay a visit to", "take part in", "look forward to", "pay attention to"], a:3, trans:"请注意听老师在课上说的话。", point:"考查动词短语。pay attention to 意为“注意”。"},
+{q:"Don't get the two similar words ___ up.", o:["mixing", "mix", "mixed", "mixes"], a:2, trans:"不要把这两个相似的词弄混了。", point:"考查非谓语动词。get sth mixed up 意为“把某事弄混”，过去分词作宾补。"},
+{q:"Instead of ___ every word, you should remember the key points.", o:["memorize", "memorized", "to memorize", "memorizing"], a:3, trans:"与其记住每一个单词，不如记住要点。", point:"考查介词后的非谓语动词。instead of 中的 of 是介词，后接动名词 doing。"},
+{q:"We should stay ___ and keep exercising every day.", o:["act", "action", "actively", "active"], a:3, trans:"我们应该保持活跃，每天坚持锻炼。", point:"考查词性。stay 是系动词，后接形容词作表语，故选 active。"},
+{q:"The more you ___ knowledge, the better you remember it.", o:["reviewing", "review", "reviewed", "reviews"], a:1, trans:"你复习的知识越多，就记得越牢。", point:"考查句型。the + 比较级..., the + 比较级... 前半句为祈使句，用动词原形 review。"},
+{q:"Why ___ this method work so well?", o:["do", "did", "is", "does"], a:3, trans:"为什么这种方法如此有效？", point:"考查助动词。主语 this method 是第三人称单数，用助动词 does。"},
+{q:"The saying use it or lose it means you will forget knowledge if you don't use it.", o:["practice makes perfect", "no pains no gains", "all work and no play", "use it or lose it"], a:3, trans:"谚语“不用则废”的意思是如果你不使用知识，你就会忘记它。", point:"考查谚语。Use it or lose it 意为“用进废退”。"},
+{q:"—I wonder ___ I can remember so many chemical formulas. —Practice makes perfect.", o:["why", "when", "how", "what"], a:2, trans:"——我想知道我怎样才能记住这么多化学公式。——熟能生巧。", point:"考查宾语从句。结合答语“熟能生巧”可知，询问的是方式，用 how。"},
+{q:"I don't know when he will ___ back.", o:["coming", "came", "comes", "come"], a:3, trans:"我不知道他什么时候回来。", point:"考查时态。will 是情态动词，后接动词原形 come。"},
+{q:"Bob does not know ___ took his wallet.", o:["where", "when", "who", "why"], a:2, trans:"鲍勃不知道谁拿走了他的钱包。", point:"考查宾语从句引导词。从句缺主语且指人，用 who。"},
+{q:"She wrote down the phone number so that she wouldn't ___ it.", o:["remember", "keep", "review", "forget"], a:3, trans:"她写下了电话号码，以免忘记。", point:"考查动词辨析。写下来是为了“不忘记”，用 forget。"},
+{q:"___ every day's accumulation in ___, and your grades will increase gradually.", o:["Keep; heart", "Put; mind", "Take; mind", "Keep; mind"], a:3, trans:"把每天的积累牢记在心，你的成绩会逐渐提高。", point:"考查固定搭配。keep...in mind 意为“牢记”。"},
+{q:"Another useful way is to ___ connections between new and old information.", o:["close", "cover", "cancel", "create"], a:3, trans:"另一个有用的方法是建立新旧信息之间的联系。", point:"考查动词辨析。create connections 意为“建立联系”。"},
+{q:"It's important to stay ___ if you want a good memory.", o:["health", "healthy", "healthily", "unhealth"], a:1, trans:"如果你想拥有好记性，保持健康很重要。", point:"考查词性。stay 是系动词，后接形容词 healthy 作表语。"},
+{q:"She asked me ___ I had been to Beijing.", o:["that", "what", "which", "whether"], a:3, trans:"她问我是否去过北京。", point:"考查宾语从句。根据句意“是否去过”，用 whether 引导。"},
+{q:"I can't remember ___ things you asked me to buy.", o:["which", "who", "that", "if"], a:0, trans:"我记不清你让我买哪些东西了。", point:"考查宾语从句。根据句意“哪些东西”，用 which 限定 things。"},
+{q:"Do you know ___ she is from?", o:["why", "when", "how", "where"], a:3, trans:"你知道她来自哪里吗？", point:"考查宾语从句。根据 is from 可知询问地点，用 where。"},
+{q:"The old man is ___ a hard time after his wife passed away.", o:["going over", "going on", "going out", "going through"], a:3, trans:"妻子去世后，这位老人正经历一段艰难的时光。", point:"考查动词短语。go through 意为“经历（困难）”。"},
+{q:"I wonder ___ he bought the gift for.", o:["that", "which", "who", "whose"], a:2, trans:"我想知道他是给谁买的礼物。", point:"考查宾语从句。介词 for 后缺宾语且指人，用 who。"},
+{q:"Do you know ___ the library is?", o:["that", "if", "what", "where"], a:3, trans:"你知道图书馆在哪里吗？", point:"考查宾语从句。根据句意询问地点，用 where。"},
+{q:"She asked me why I ___ finished my homework.", o:["don't", "didn't", "won't", "hadn't"], a:3, trans:"她问我为什么还没完成作业。", point:"考查时态。主句是过去时 asked，从句表示“过去的过去”，用过去完成时 hadn't。"},
+{q:"She cannot remember ___ she put the opera ticket.", o:["what", "where", "why", "how"], a:1, trans:"她不记得把歌剧票放在哪里了。", point:"考查宾语从句。根据句意询问地点，用 where。"},
+{q:"—What's your favorite memory from childhood? —___ my grandmother taught me to make dumplings.", o:["That", "What", "When", "Which"], a:0, trans:"——你童年最美好的记忆是什么？——（那是）我奶奶教我包饺子。", point:"考查表语从句。用 That 引导，指代前面提到的记忆。"},
+{q:"The twin sisters look so similar that many people often ___ them ___.", o:["mix; up", "put; up", "take; up", "give; up"], a:0, trans:"这对双胞胎姐妹长得太像了，以至于很多人经常把她们弄混。", point:"考查动词短语。mix up 意为“混淆”。"},
+{q:"How did she ___ to the news about the accident?", o:["react", "retell", "memorize", "mix"], a:0, trans:"她对那起事故的消息作何反应？", point:"考查动词短语。react to 意为“对……作出反应”。"},
+{q:"The teacher explained ___ group discussions can help us understand difficult ideas better.", o:["that", "how", "what", "whether"], a:1, trans:"老师解释了小组讨论如何能帮助我们更好地理解难点。", point:"考查宾语从句。根据句意“如何帮助”，用 how 引导。"},
+{q:"My grandfather likes to ___ his old experiences when we chat together.", o:["recall", "discuss", "view", "divide"], a:0, trans:"我们一起聊天时，我祖父喜欢回忆他过去的经历。", point:"考查动词辨析。recall 意为“回忆起”。"},
+{q:"The film was so ___ that I will never forget it.", o:["forgetful", "forgettable", "forgotten", "unforgettable"], a:3, trans:"这部电影如此令人难忘，我将永远不会忘记。", point:"考查形容词辨析。unforgettable 意为“令人难忘的”。"},
+{q:"With practice, your memory palace ___ larger and more detailed.", o:["becomes", "became", "has become", "will become"], a:3, trans:"通过练习，你的记忆宫殿将会变得更大、更详细。", point:"考查时态。With practice 表示条件，主句用一般将来时 will become。"},
+{q:"You should ___ attention to your pronunciation.", o:["take", "make", "pay", "give"], a:2, trans:"你应该注意你的发音。", point:"考查固定搭配。pay attention to 意为“注意”。"},
+{q:"Enough sleep helps your brain ___ memories.", o:["organizing", "organized", "organizes", "organize"], a:3, trans:"充足的睡眠有助于你的大脑组织记忆。", point:"考查非谓语动词。help sb (to) do sth 意为“帮助某人做某事”，用动词原形。"},
+{q:"Most people will ___ differently to the same thing in different moods.", o:["recall", "react", "recognize", "retell"], a:1, trans:"大多数人在不同的情绪下对同一件事会有不同的反应。", point:"考查动词辨析。react to 意为“对……作出反应”。"},
+{q:"Many animals can remember the ___ places where they store food.", o:["hide", "hiding", "hides", "hidden"], a:3, trans:"许多动物能记住它们储存食物的隐蔽地点。", point:"考查非谓语动词作定语。hidden 意为“隐藏的”，修饰 places。"},
+{q:"Please ___ that honesty is the best policy in your life.", o:["keep it in mind", "make up your mind", "change your mind", "lose your mind"], a:0, trans:"请牢记，诚实是你生活中最好的策略。", point:"考查固定短语。keep it in mind 意为“把它牢记在心”。"},
+{q:"I don't understand ___ she's going through.", o:["that", "what", "if", "whether"], a:1, trans:"我不明白她正在经历什么。", point:"考查宾语从句。go through 缺宾语，用连接代词 what 引导。"},
+{q:"—I plan to put them to ___ by setting up a small “book sharing corner” in my community.", o:["good use", "great value", "small steps", "large stages"], a:0, trans:"——我计划在我的社区里建立一个小型的“图书分享角”，把它们充分利用起来。", point:"考查固定搭配。put sth to good use 意为“充分利用某物”。"},
+{q:"—I can't find my key. Did you see it? —Sorry, I ___ it.", o:["don't see", "didn't see", "haven't seen", "won't see"], a:1, trans:"——我找不到我的钥匙了。你看见了吗？——对不起，我没看见。", point:"考查时态。根据 Did you see it 可知，回答过去发生的动作，用一般过去时 didn't see。"},
+{q:"The doctor ___ knows how to treat this kind of wound effectively.", o:["hardly", "nearly", "partly", "fully"], a:3, trans:"这位医生完全知道如何有效地治疗这种伤口。", point:"考查副词辨析。fully 意为“完全地”。"},
+{q:"A good ___ is important for remembering new information.", o:["technique", "technology", "television", "temperature"], a:0, trans:"好的技巧对于记住新信息很重要。", point:"考查名词辨析。technique 意为“技巧，方法”。"},
+{q:"The bridge is very ___, so heavy trucks can pass through it safely.", o:["wild", "stable", "short-term", "likely"], a:1, trans:"这座桥非常稳固，所以重型卡车可以安全通过。", point:"考查形容词辨析。stable 意为“稳固的”。"},
+{q:"We plan to have a ___ in the park this sunny weekend.", o:["opera", "picnic", "gunshot", "mall"], a:1, trans:"我们计划在这个阳光明媚的周末去公园野餐。", point:"考查名词辨析。have a picnic 意为“去野餐”。"},
+{q:"Can you tell me the ___ between the two similar words?", o:["differ", "different", "differently", "difference"], a:3, trans:"你能告诉我这两个相似单词之间的区别吗？", point:"考查词性。the difference between 意为“两者之间的区别”，用名词形式。"},
+{q:"Doing brain training games can help ___ your memory.", o:["impress", "imagine", "invite", "improve"], a:3, trans:"做大脑训练游戏有助于提高你的记忆力。", point:"考查动词辨析。improve 意为“提高，改善”。"},
+{q:"Our ___ memory keeps information only for a short time.", o:["long-term", "strong", "weak", "short-term"], a:3, trans:"我们的短期记忆只能将信息保留很短的时间。", point:"考查复合形容词。根据 only for a short time 可知，此处指“短期”记忆。"},
+{q:"Please ___ the safety rules ___ when you are at school.", o:["run; out of", "happen; to", "take; place", "keep; in mind"], a:3, trans:"在学校时，请牢记安全规则。", point:"考查固定搭配。keep...in mind 意为“牢记”。"},
+{q:"I tried to ___ the name of the old classmate, but I couldn't remember it at all.", o:["recall", "receive", "realize", "record"], a:0, trans:"我试图回忆起那位老同学的名字，但我完全想不起来了。", point:"考查动词辨析。recall 意为“回忆起”。"},
+{q:"We should put our spare time ___ to improve our English skills.", o:["to good use", "in trouble", "on duty", "in danger"], a:0, trans:"我们应该充分利用业余时间来提升我们的英语技能。", point:"考查固定搭配。put...to good use 意为“充分利用”。"},
+{q:"I ___ up with my grandparents, who loved me very much.", o:["grow", "grows", "grown", "grew"], a:3, trans:"我和祖父母一起长大，他们非常爱我。", point:"考查时态。回忆过去的事情，用一般过去时 grew。"},
+{q:"I wonder ___ she can help me with my memory problem.", o:["that", "if", "what", "who"], a:1, trans:"我想知道她是否能帮我解决记忆问题。", point:"考查宾语从句。wonder 后表“是否”，用 if/whether。"},
+{q:"Some bad habits will stop us ___ having a good memory.", o:["from", "to", "of", "with"], a:0, trans:"一些坏习惯会阻碍我们拥有好记性。", point:"考查固定搭配。stop sb from doing sth 意为“阻止某人做某事”。"},
+{q:"Can you tell me ___ the school library is open on Sundays?", o:["that", "whether", "which", "what"], a:1, trans:"你能告诉我学校图书馆星期天是否开放吗？", point:"考查宾语从句。询问“是否开放”，用 whether。"},
+{q:"She wondered what ___ to her grandma years ago.", o:["happen", "happening", "happens", "happened"], a:3, trans:"她想知道多年前她祖母发生了什么事。", point:"考查时态。根据 years ago 可知，从句用一般过去时 happened。"},
+{q:"When the teacher told the students about the sudden test, most of them didn't know how to ___ at first.", o:["react", "forget", "prepare", "imagine"], a:0, trans:"当老师告诉学生们突然要考试时，起初大多数人不知道该如何反应。", point:"考查动词辨析。react 意为“作出反应”。"},
+{q:"___ people should learn to view different opinions rationally.", o:["Grown-ups", "Growing", "Grown", "Grown-up"], a:3, trans:"成年人应该学会理性地看待不同的意见。", point:"考查复合形容词作定语。Grown-up 意为“成年的”，修饰 people。"},
+{q:"Please tell us where you ___ yesterday.", o:["go", "gone", "goes", "went"], a:3, trans:"请告诉我们你昨天去了哪里。", point:"考查时态。根据 yesterday 可知，用一般过去时 went。"},
+{q:"Your memory technique is simple but ___.", o:["effectively", "effect", "affected", "effective"], a:3, trans:"你的记忆技巧简单但有效。", point:"考查词性。but 连接两个并列的形容词，作表语，用 effective。"},
+{q:"We should ___ the problem into three small parts to solve it easily.", o:["wear out", "divide", "pass", "view"], a:1, trans:"我们应该把问题分成三个小部分，以便轻松解决。", point:"考查动词短语。divide...into... 意为“把……分成……”。"},
+{q:"___ is not always a bad thing; sometimes it helps us move on.", o:["Forgetful", "Forgetting", "Forget", "Forgetfulness"], a:3, trans:"遗忘并不总是坏事；有时它能帮助我们继续前进。", point:"考查动名词作主语。Forgetting 意为“遗忘”，谓语动词用单数 is。"},
+{q:"Our teacher will give a ___ on English reading skills this Friday afternoon.", o:["passage", "lecture", "password", "graph"], a:1, trans:"我们老师这个周五下午将做一个关于英语阅读技巧的讲座。", point:"考查名词辨析。give a lecture 意为“做讲座”。"},
+{q:"—Yes! The guide explained it so clearly that I could ___ get it.", o:["bravely", "fully", "quietly", "slowly"], a:1, trans:"——是的！导游解释得如此清楚，以至于我完全理解了。", point:"考查副词辨析。fully 意为“完全地”。"},
+{q:"Either reading or listening ___ helpful for improving our memory.", o:["is", "are", "was", "were"], a:0, trans:"阅读或听力对提高我们的记忆力都有帮助。", point:"考查主谓一致。either...or... 遵循就近原则，谓语动词与 listening 保持一致，用单数 is。"},
+{q:"Remembering pictures is much ___ than memorizing abstract words.", o:["easy", "easiest", "more easily", "easier"], a:3, trans:"记住图片比记抽象的单词要容易得多。", point:"考查比较级。much 修饰比较级 easier，表示“容易得多”。"},
+{q:"After watching the short film, our teacher asked us to ___ the ways to save water in groups.", o:["discuss", "draw", "count", "select"], a:0, trans:"看完短片后，老师让我们分组讨论节约用水的方法。", point:"考查动词辨析。discuss 意为“讨论”。"},
+{q:"When Lisa heard that her favourite pet cat was lost, she couldn't hide her ___ and even cried a little.", o:["happiness", "sadness", "excitement", "kindness"], a:1, trans:"当丽莎听说她最喜欢的宠物猫丢了时，她无法掩饰自己的悲伤，甚至哭了一点。", point:"考查名词辨析。根据 lost（丢失）和 cried（哭泣）可知是悲伤 sadness。"},
+{q:"—___ does the song remind you ___? —My childhood.", o:["What; about", "Which; of", "How; of", "What; of"], a:3, trans:"——这首歌让你想起了什么？——我的童年。", point:"考查固定句型。remind sb of sth 意为“让某人想起某事”，疑问词用 What。"},
+{q:"Have you ever walked into a room and forgotten ___ you came in for?", o:["what", "which", "that", "whether"], a:0, trans:"你有没有走进一个房间，却忘记自己进来是为了做什么？", point:"考查宾语从句。介词 for 缺宾语，用连接代词 what。"},
+{q:"Pay attention to small ___ when you learn new words.", o:["dreams", "degrees", "details", "dates"], a:2, trans:"学习新单词时要注意细节。", point:"考查名词辨析。details 意为“细节”。"},
+{q:"Reviewing regularly can help ___ up your memory.", o:["break", "cut", "put", "build"], a:3, trans:"定期复习有助于增强你的记忆力。", point:"考查动词短语。build up 意为“增强，逐步建立”。"},
+{q:"The government has taken action to ___ the old temples in our city.", o:["produce", "provide", "prevent", "protect"], a:3, trans:"政府已经采取行动保护我们城市的古庙。", point:"考查动词辨析。protect 意为“保护”。"},
+{q:"The memory palace ___ as one of the oldest memory techniques.", o:["is called", "is used", "is made", "is known"], a:3, trans:"记忆宫殿作为最古老的记忆技巧之一而闻名。", point:"考查固定搭配。be known as 意为“作为……而闻名”。"},
+{q:"Many people enjoy watching traditional ___ with beautiful music.", o:["operators", "operations", "opening", "operas"], a:3, trans:"许多人喜欢看带有优美音乐的传统歌剧。", point:"考查名词辨析。opera 意为“歌剧”，此处用复数 operas。"},
+{q:"To keep your personal information safe online, never tell strangers your bank ___ or password.", o:["address", "account", "name", "number"], a:1, trans:"为了确保你的个人信息在网上安全，永远不要告诉陌生人你的银行账户或密码。", point:"考查名词辨析。bank account 意为“银行账户”。"},
+{q:"Use it or ___ it. Remember to review knowledge often.", o:["leave", "lack", "lose", "learn"], a:2, trans:"不用则废。记住要经常复习知识。", point:"考查谚语。Use it or lose it 意为“用进废退”。"},
+{q:"Sleep is necessary for our brain to ___ and store information.", o:["process", "produce", "protect", "prepare"], a:0, trans:"睡眠对于我们的大脑处理和储存信息是必要的。", point:"考查动词辨析。process 意为“处理（信息）”。"},
+{q:"—It helps ___ the use of shared bikes and reduce air pollution.", o:["change", "control", "stop", "increase"], a:3, trans:"——它有助于增加共享单车的使用并减少空气污染。", point:"考查动词辨析。increase 意为“增加”。"},
+{q:"Every morning I ___ to the village school with my friends.", o:["walks", "walk", "walking", "walked"], a:3, trans:"每天早上我和朋友们一起步行去乡村学校。", point:"考查时态。语境为过去发生的事，用一般过去时 walked。"},
+{q:"The more you review what you have learned, ___ better grades you will get.", o:["the", "a", "an", "/"], a:0, trans:"你复习所学知识的次数越多，你得到的成绩就越好。", point:"考查比较级句型。the + 比较级，the + 比较级，意为“越……，越……”。"},
+{q:"___ taking notes is a very effective learning way.", o:["In my opinion", "At first", "On the way", "In my case"], a:3, trans:"就我而言，做笔记是一种非常有效的学习方式。", point:"考查短语辨析。In my case 意为“就我的情况而言”。"},
+{q:"I don't know ___ car it is.", o:["whose", "that", "what", "if"], a:0, trans:"我不知道这是谁的车。", point:"考查疑问词。根据句意询问所属，用 whose。"},
+{q:"The new teaching method has ___ to be very effective.", o:["promised", "prepared", "provided", "proved"], a:3, trans:"新的教学方法已被证明是非常有效的。", point:"考查动词辨析。prove to be 意为“被证明是”。"},
+{q:"—Do you still ___ your first day at middle school? —Of course!", o:["remind", "remember", "recall", "forget"], a:1, trans:"——你还记得你上初中的第一天吗？——当然记得！", point:"考查动词辨析。remember 意为“记得”，符合句意。"},
+{q:"Those days ___ the happiest in my life.", o:["was", "are", "is", "were"], a:3, trans:"那些日子是我一生中最快乐的时光。", point:"考查主谓一致和时态。主语 Those days 是复数，且指代过去，用 were。"},
+{q:"The teacher asked us ___ we had any questions about the lecture.", o:["that", "what", "whether", "which"], a:2, trans:"老师问我们对讲座是否有任何问题。", point:"考查宾语从句。询问“是否”有问题，用 whether。"},
+{q:"—She said ___.", o:["we will have it next Monday", "we would have it the next Monday", "we have it next Monday", "we had had it next Monday"], a:1, trans:"——她说我们下周一考。", point:"考查时态。主句 said 是过去时，从句要用过去的某种时态，next Monday 对应 the next Monday，用 would。"},
+{q:"We should take the initiative to discuss and ___ the main content of this activity.", o:["outlook", "output", "outside", "outline"], a:3, trans:"我们应该主动讨论并概述这次活动的主要内容。", point:"考查动词辨析。outline 意为“概述”。"},
+{q:"Can you tell me what you are ___ through?", o:["running", "looking", "getting", "going"], a:3, trans:"你能告诉我你正在经历什么吗？", point:"考查动词短语。go through 意为“经历”。"},
+{q:"She has lived in this city ___ she was five years old.", o:["for", "since", "when", "until"], a:1, trans:"自从五岁起，她就一直住在这个城市。", point:"考查介词。since + 过去的时间点，与现在完成时连用。"},
+{q:"Could you tell me ___ you organize your study notes?", o:["how", "that", "whether", "what"], a:0, trans:"你能告诉我你是如何整理学习笔记的吗？", point:"考查宾语从句。询问方式，用 how。"},
+{q:"Draw ___ maps to organize information clearly.", o:["moon", "music", "mind", "math"], a:2, trans:"画思维导图来清晰地组织信息。", point:"考查固定搭配。mind maps 意为“思维导图”。"},
+{q:"You should ___ all the important points when learning new knowledge.", o:["mix up", "keep in mind", "give up", "cheer up"], a:1, trans:"学习新知识时，你应该牢记所有重要观点。", point:"考查动词短语。keep in mind 意为“牢记”。"},
+{q:"Don't ___ the two similar words, or you will make mistakes in exams.", o:["mix up", "put up", "take up", "pick up"], a:0, trans:"不要把这两个相似的单词弄混，否则你在考试中会犯错。", point:"考查动词短语。mix up 意为“混淆”。"},
+{q:"She has a clear ___ of the day when she first met her best friend.", o:["memory", "sadness", "position", "detail"], a:0, trans:"对于第一次见到最好朋友的那一天，她有着清晰的记忆。", point:"考查名词辨析。have a clear memory of 意为“对……有清晰的记忆”。"},
+{q:"We can ___ our senses to build mental pictures to remember knowledge.", o:["make fun of", "take care of", "get rid of", "make use of"], a:3, trans:"我们可以利用我们的感官在脑海中构建画面来记忆知识。", point:"考查动词短语。make use of 意为“利用”。"},
+{q:"You can make flashcards and go ___ them often.", o:["after", "against", "off", "through"], a:3, trans:"你可以制作抽认卡，并经常翻阅它们。", point:"考查动词短语。go through 意为“浏览，翻阅”。"},
+{q:"This learning method is only for short-term use, not ___ study.", o:["long-term", "one-size-fits-all", "short-term", "grown-up"], a:0, trans:"这种学习方法只适合短期使用，不适合长期学习。", point:"考查形容词辨析。根据 not 可知，此处填 short-term 的反义词 long-term。"},
+{q:"She asked ___ had taken her notebook.", o:["whom", "whose", "what", "who"], a:3, trans:"她问谁拿走了她的笔记本。", point:"考查宾语从句。从句缺主语且指人，用 who。"},
+{q:"Before you pay online, make sure you keep your ___ safe.", o:["address", "password", "graph", "image"], a:1, trans:"在你网上支付之前，请确保保护好你的密码。", point:"考查名词辨析。password 意为“密码”。"},
+{q:"We should ___ the main points ___ the details when we listen.", o:["link; to", "put; with", "take; with", "link; with"], a:3, trans:"我们听的时候应该把要点和细节联系起来。", point:"考查动词短语。link...with... 意为“把……和……联系起来”。"},
+{q:"I'm not sure ___ come to the party.", o:["if he will that", "what he will", "that he will", "whether he will"], a:3, trans:"我不确定他是否会来参加聚会。", point:"考查宾语从句。表示“是否”，且从句要用陈述语序，选 whether he will。"},
+{q:"Long-term tiredness will ___ your body and make you exhausted.", o:["wear off", "wear up", "wear away", "wear out"], a:3, trans:"长期的疲劳会损耗你的身体，让你筋疲力尽。", point:"考查动词短语。wear out 意为“磨损，使疲惫”。"},
+{q:"The number of wild animals in this area has ___ in recent years.", o:["increased", "divided", "recalled", "reacted"], a:0, trans:"近年来，这个地区野生动物的数量增加了。", point:"考查动词辨析。increase 意为“增加”。"},
+{q:"I don't know ___ book you like best.", o:["who", "whose", "that", "which"], a:3, trans:"我不知道你最喜欢哪本书。", point:"考查宾语从句。限定 book 选哪一本，用 which。"},
+{q:"The old man is so ___ that he often forgets his way home.", o:["friendly", "funny", "foolish", "forgetful"], a:3, trans:"这位老人如此健忘，以至于经常忘记回家的路。", point:"考查形容词辨析。根据 forgets his way home 可知，他很“健忘”。"},
+{q:"I need to ___ these new words before the English test.", o:["memorize", "retell", "react", "shake"], a:0, trans:"在英语考试前我需要记住这些新单词。", point:"考查动词辨析。memorize 意为“记住”。"},
+{q:"Eating more vegetables can ___ our brain power.", o:["increase", "include", "invite", "invent"], a:0, trans:"多吃蔬菜可以增强我们的脑力。", point:"考查动词辨析。increase 意为“增加，增强”。"},
+{q:"She often ___ her happy school days.", o:["reminds", "repeats", "reduces", "recalls"], a:3, trans:"她经常回忆快乐的学校时光。", point:"考查动词辨析。recall 意为“回忆起”。"},
+{q:"If you don't save water, it will ___ soon in some dry areas.", o:["go through", "run out", "wear out", "divide up"], a:1, trans:"如果你不节约用水，在一些干旱地区水很快就会用完。", point:"考查动词短语。run out 意为“用完，耗尽”。"},
+{q:"The ___ of the accident are still under investigation.", o:["details", "memories", "positions", "abilities"], a:0, trans:"事故的细节仍在调查中。", point:"考查名词辨析。details 意为“细节”。"},
+{q:"—___, you can learn the story behind the dragon dance first.", o:["In fact", "At last", "For example", "To start with"], a:3, trans:"——首先，你可以先了解一下舞龙背后的故事。", point:"考查短语辨析。To start with 意为“首先”。"},
+{q:"___: don't panic. Just recall the key words and continue your speech.", o:["Keep on", "Keep up", "Keep off", "Keep in mind"], a:3, trans:"记住：不要慌张。只要回忆起关键词然后继续你的演讲即可。", point:"考查动词短语。keep in mind 意为“记住”。"},
+{q:"Don't ___ similar words; study the small details between them carefully.", o:["give up", "put up", "pick up", "mix up"], a:3, trans:"不要把相似的单词弄混；仔细研究它们之间的小细节。", point:"考查动词短语。mix up 意为“混淆”。"},
+{q:"With a quiet place to study, you can learn more ___ than before.", o:["effectively", "hard", "carefully", "slowly"], a:0, trans:"有了安静的学习环境，你可以比以前更有效地学习。", point:"考查副词辨析。effectively 意为“有效地”。"},
+{q:"Could you please ___ me for my careless mistake just now?", o:["pardon", "recognize", "address", "increase"], a:0, trans:"你能原谅我刚才粗心的错误吗？", point:"考查动词辨析。pardon 意为“原谅”。"},
+{q:"When you're focused, your brain can take in new information more ___.", o:["quietly", "suddenly", "nearly", "effectively"], a:3, trans:"当你专注时，你的大脑可以更有效地吸收新信息。", point:"考查副词辨析。effectively 意为“有效地”。"},
+{q:"I believe ___ everyone can become a good learner if they find the right method.", o:["that", "if", "whether", "what"], a:0, trans:"我相信只要找到正确的方法，每个人都能成为好的学习者。", point:"考查宾语从句。believe 后接陈述句，用 that 引导。"},
+{q:"Keeping a ___ is a good way to record your daily memories.", o:["dictionary", "diagram", "dialogue", "diary"], a:3, trans:"记日记是记录日常记忆的好方法。", point:"考查名词辨析。diary 意为“日记”。"},
+{q:"I'm not sure ___ he can pass the exam or not.", o:["that", "if", "whether", "what"], a:2, trans:"我不确定他是否能通过考试。", point:"考查固定搭配。whether...or not 意为“是否”。"},
+{q:"Sometimes our memory seems to ___ us when we need it most.", o:["succeed", "help", "serve", "fail"], a:3, trans:"有时我们最需要记忆力的时候，它却似乎辜负了我们。", point:"考查动词辨析。fail sb 意为“辜负某人”。"},
+{q:"___ what he has lost, he always tries to remember the happy times.", o:["Because of", "As for", "Instead of", "Thanks to"], a:2, trans:"他没有去想失去了什么，而是总是努力记住快乐的时光。", point:"考查短语辨析。Instead of 意为“而不是”。"},
+{q:"—Tom cut his finger while cooking. —___, you should clean the wound with running water first.", o:["In that case", "By the way", "To my surprise", "As a result"], a:0, trans:"——汤姆做饭时切到了手指。——既然那样，你应该先用自来水清洗伤口。", point:"考查短语辨析。In that case 意为“既然那样”。"},
+{q:"My grandmother always forgets ___ she puts her glasses.", o:["where", "that", "if", "how"], a:0, trans:"我奶奶总是忘记她把眼镜放在哪里了。", point:"考查宾语从句。询问地点，用 where。"},
+{q:"When you forget words, you should stay ___ and don't panic.", o:["cold", "calm", "careful", "clever"], a:1, trans:"当你忘记单词时，你应该保持冷静，不要慌张。", point:"考查形容词辨析。stay calm 意为“保持冷静”。"},
+{q:"Enough ___ can make the engine run stably all the time.", o:["food", "fog", "fun", "fuel"], a:3, trans:"足够的燃料能让发动机一直稳定运转。", point:"考查名词辨析。engine（发动机）需要 fuel（燃料）。"},
+{q:"We can use our ___ to create mental images in the brain.", o:["sensing", "sensed", "senses", "sense"], a:2, trans:"我们可以利用我们的感官在大脑中创造心理图像。", point:"考查名词复数。我们的感官（五感）用复数 senses。"},
+{q:"The old house ___ me of my grandmother who used to live there.", o:["remembers", "reminds", "connects", "describes"], a:1, trans:"这座老房子让我想起了曾经住在那里的祖母。", point:"考查动词短语。remind sb of sth 意为“使某人想起某事”。"},
+{q:"Physical activity ___ blood move to the brain.", o:["help", "helped", "helping", "helps"], a:3, trans:"体育活动有助于血液流向大脑。", point:"考查主谓一致。主语 Physical activity 是不可数名词，谓语动词用单三形式 helps。"},
+{q:"I will keep these ___ in my heart forever.", o:["memos", "memorials", "minds", "memories"], a:3, trans:"我会把这些记忆永远留在心里。", point:"考查名词辨析。memories 意为“记忆”。"},
+{q:"I ___ to be shy, but now I'm more outgoing.", o:["use", "used", "am used", "was used"], a:1, trans:"我过去很害羞，但现在我更外向了。", point:"考查固定句型。used to do sth 意为“过去常常做某事”。"},
+{q:"Our memory improves greatly ___ we get enough sleep and do regular exercise.", o:["though", "until", "as", "unless"], a:2, trans:"因为我们的睡眠充足并且经常锻炼，所以我们的记忆力大大提高了。", point:"考查连词。as 引导原因状语从句，意为“因为”。"},
+{q:"The little girl cried with ___ when she lost her favorite toy.", o:["sadness", "happiness", "excitement", "kindness"], a:0, trans:"小女孩丢了最喜欢的玩具，伤心得哭了。", point:"考查名词辨析。根据 lost（丢失）和 cried（哭泣）可知是悲伤 sadness。"},
+{q:"He has a good memory, so he can ___ what he learnt last year.", o:["refuse", "recall", "reduce", "relax"], a:1, trans:"他记忆力很好，所以他能回忆起去年学的内容。", point:"考查动词辨析。recall 意为“回忆起”。"},
+{q:"—Don't hide your ___. Talk to your friends.", o:["sickness", "kindness", "shyness", "sadness"], a:3, trans:"——不要隐藏你的悲伤。和你的朋友们谈谈。", point:"考查名词辨析。考试失败（failed）会带来悲伤（sadness）。"},
+{q:"When the little boy saw the big dog running towards him, he ___ by crying loudly.", o:["recalled", "reacted", "retold", "reviewed"], a:1, trans:"当小男孩看到大狗朝他跑来时，他的反应是大哭。", point:"考查动词辨析。react 意为“作出反应”。"},
+{q:"We had a ___ time in the beautiful town.", o:["happily", "happiness", "unhappy", "happy"], a:3, trans:"我们在那个美丽的城镇度过了一段快乐的时光。", point:"考查词性。修饰名词 time 用形容词 happy。"},
+{q:"My ___ of childhood is very warm.", o:["mood", "meaning", "method", "memory"], a:3, trans:"我对童年的记忆非常温暖。", point:"考查名词辨析。memory 意为“记忆”。"},
+{q:"I remember ___ the door before I left, but I'm not sure.", o:["lock", "to lock", "locking", "locked"], a:2, trans:"我记得我离开前锁了门，但我不确定。", point:"考查非谓语动词。remember doing sth 意为“记得做过某事”（已发生），选 locking。"},
+{q:"Good learners often ___ what they need to learn ___ something interesting.", o:["link; with", "come; with", "mix; with", "put; with"], a:0, trans:"优秀的学习者经常把他们需要学习的东西与一些有趣的事情联系起来。", point:"考查动词短语。link...with... 意为“把……和……联系起来”。"},
+{q:"I'm not sure ___ he will come to the party or not.", o:["that", "if", "whether", "what"], a:2, trans:"我不确定他是否会来参加聚会。", point:"考查固定搭配。whether...or not 意为“是否”。"},
+{q:"Even a 20-minute walk a day can make a ___.", o:["decision", "mistake", "plan", "difference"], a:3, trans:"即使每天散步20分钟也能产生影响（有作用）。", point:"考查固定搭配。make a difference 意为“产生影响”。"},
+{q:"___ English words every day is a good way to improve your memory.", o:["Memorize", "Memorizing", "Memorized", "Memorizes"], a:1, trans:"每天背英语单词是提高记忆力的好方法。", point:"考查非谓语动词。动名词 Memorizing 作主语，谓语动词用单数 is。"},
+{q:"You can write down your plans in your ___.", o:["notices", "notion", "notebook", "notebooks"], a:2, trans:"你可以把计划写在你的笔记本上。", point:"考查名词辨析。notebook 意为“笔记本”。"},
+{q:"My grandfather promised that he ___ take me to visit the Science Museum the next weekend.", o:["will", "may", "can", "would"], a:3, trans:"我祖父承诺下周末带我去参观科技馆。", point:"考查时态。主句 promised 是过去时，从句用过去将来时 would。"},
+{q:"You just take a mental walk through your house ___ pick up each item.", o:["but", "or", "so", "and"], a:3, trans:"你只要在脑海中走过你的房子，然后捡起每一件物品。", point:"考查连词。walk（走）和 pick up（捡起）是顺承的并列动作，用 and。"},
+{q:"Review what you learn often, but ___ after studying for forty minutes.", o:["take a rest", "take a walk", "take a break", "take a note"], a:2, trans:"经常复习你所学的内容，但在学习了四十分钟后要休息一下。", point:"考查短语辨析。take a break 意为“休息一下”。"},
+{q:"She felt a deep sense of ___ when she heard the bad news.", o:["sickness", "kindness", "weakness", "sadness"], a:3, trans:"当她听到这个坏消息时，她感到深深的悲伤。", point:"考查名词辨析。bad news（坏消息）带来 sadness（悲伤）。"},
+{q:"Writing down key points is a useful memory ___.", o:["technology", "television", "temperature", "technique"], a:3, trans:"写下关键点是一种有用的记忆技巧。", point:"考查名词辨析。memory technique 意为“记忆技巧”。"},
+{q:"___ new knowledge with old knowledge is a good way to learn.", o:["Connect", "Connected", "Connecting", "To connect"], a:2, trans:"把新知识与旧知识联系起来是一种很好的学习方法。", point:"考查非谓语动词。Connecting 作主语，谓语动词用单数 is。"},
+{q:"Please tell me how the machine ___.", o:["work", "working", "worked", "works"], a:3, trans:"请告诉我这台机器是如何运转的。", point:"考查主谓一致。主语 the machine 是单数，谓语动词用单三形式 works。"},
+{q:"You must ___ all the difficulties if you want to achieve your dream.", o:["go through", "put through", "run through", "get through"], a:0, trans:"如果你想实现你的梦想，你必须经历所有的困难。", point:"考查动词短语。go through 意为“经历”。"},
+{q:"The teacher told us that good memory ___ lots of practice.", o:["requires", "repeats", "refuses", "relaxes"], a:0, trans:"老师告诉我们好记性需要大量的练习。", point:"考查主谓一致。主语 good memory 是不可数名词，谓语动词用单三形式 requires。"},
+{q:"A river ___ the small village into two parts, so people there have to cross a bridge every day.", o:["separates", "increases", "divides", "reduces"], a:2, trans:"一条河把那个小村庄分成了两部分，所以那里的人们每天都要过桥。", point:"考查动词短语。divide...into... 意为“把……分成……”。"},
+{q:"Study ___ they are different from each other.", o:["that", "if", "how", "what"], a:2, trans:"研究它们是如何彼此不同的。", point:"考查宾语从句。根据句意“如何不同”，用 how 引导。"},
+{q:"I forgot to buy sugar, and now we are ___ it.", o:["running away from", "running after", "running into", "running out of"], a:3, trans:"我忘记买糖了，现在我们快用完了。", point:"考查动词短语。run out of 意为“用完，耗尽”。"},
+{q:"You can ___ your memory by sleeping and exercising well.", o:["begin", "boost", "build", "borrow"], a:1, trans:"你可以通过良好的睡眠和锻炼来提升你的记忆力。", point:"考查动词辨析。boost 意为“提升，增强”。"},
+{q:"Taking morning exercise can ___ your physical health greatly.", o:["wear", "boost", "divide", "discuss"], a:1, trans:"晨练可以大大增强你的身体健康。", point:"考查动词辨析。boost 意为“增强”。"},
+{q:"Too much ___ makes people forget things easily.", o:["sugar", "snow", "smoke", "stress"], a:3, trans:"压力过大会使人容易忘记事情。", point:"考查名词辨析。stress 意为“压力”。"},
+{q:"Can you tell me ___ the library opens?", o:["who", "whose", "which", "when"], a:3, trans:"你能告诉我图书馆什么时候开门吗？", point:"考查宾语从句。询问时间，用 when。"},
+{q:"—Could you please repeat the key point of the lecture? —___. I was taking notes just now.", o:["No problem", "Pardon me", "Never mind", "Good idea"], a:1, trans:"——你能重复一下讲座的要点吗？——请再说一遍（我刚才在记笔记没听清）。", point:"考查交际用语。没听清请求对方重复，用 Pardon me。"},
+{q:"Please tell me ___ I can improve my memory.", o:["that", "how", "what", "if"], a:1, trans:"请告诉我怎样才能提高我的记忆力。", point:"考查宾语从句。询问方式，用 how。"},
+{q:"Please show me ___ you organized the information.", o:["that", "if", "what", "how"], a:3, trans:"请给我看看你是如何整理信息的。", point:"考查宾语从句。询问方式，用 how。"},
+{q:"Last week the teacher ___ us ___ four groups to memorize words.", o:["divided; by", "put; into", "kept; in", "divided; into"], a:3, trans:"上周老师把我们分成四个小组来记单词。", point:"考查时态和搭配。Last week 提示用过去时，divide...into... 意为“分成”。"},
+{q:"Our money is ___. We need to borrow some from our parents.", o:["running out", "running away", "running after", "running into"], a:0, trans:"我们的钱快用完了。我们需要向父母借一些。", point:"考查动词短语。run out 意为“耗尽”，be running out 表示即将耗尽。"},
+{q:"Please ___ to turn off the lights before you leave.", o:["remember", "remind", "review", "repeat"], a:0, trans:"离开前请记得关灯。", point:"考查动词辨析。remember to do sth 意为“记得去做某事”。"},
+{q:"Don't ___ up these two similar English words.", o:["mark", "mend", "make", "mix"], a:3, trans:"不要把这两个相似的英语单词弄混了。", point:"考查动词短语。mix up 意为“混淆”。"},
+{q:"His ___ to the bad news surprised everyone.", o:["react", "reacting", "reacted", "reaction"], a:3, trans:"他对这个坏消息的反应让所有人都感到惊讶。", point:"考查词性。形容词 His 后接名词 reaction（反应）。"},
+{q:"The story he told us was so ___ that everyone felt touched.", o:["forgettable", "unforgettable", "usual", "common"], a:1, trans:"他给我们讲的故事如此令人难忘，以至于每个人都感动了。", point:"考查形容词辨析。unforgettable 意为“令人难忘的”。"},
+{q:"—Do you know ___? —By making mind maps and reviewing them regularly.", o:["how I can study more effectively", "how can I study more effectively", "what I can study", "where can I study"], a:0, trans:"——你知道我怎样才能更有效地学习吗？——通过制作思维导图并定期复习它们。", point:"考查宾语从句。从句必须用陈述语序（主语在前谓语在后），且根据答语确定用 how。"},
+{q:"The old lady becomes more ___ as she grows old.", o:["forget", "forgetfully", "forgetfulness", "forgetful"], a:3, trans:"这位老太太随着年龄的增长变得越来越健忘了。", point:"考查词性。become 是系动词，后接形容词作表语，故选 forgetful。"},
+{q:"My grandma has a poor ___, so she often forgets things.", o:["memory", "condition", "ability", "difficulty"], a:0, trans:"我奶奶记性不好，所以她经常忘事。", point:"考查名词辨析。a poor memory 意为“记性差”。"},
+{q:"Teachers encourage students to use ___ learning methods, such as mind maps.", o:["effective", "expensive", "natural", "common"], a:0, trans:"老师鼓励学生使用有效的学习方法，比如思维导图。", point:"考查形容词辨析。effective 意为“有效的”。"},
+{q:"—Of course! I can ___ the words of Cui Hao's poem even from far away.", o:["write", "copy", "recognize", "read"], a:2, trans:"——当然！即使从很远的地方，我也能辨认出崔颢诗中的字。", point:"考查动词辨析。recognize 意为“辨认出”。"},
+{q:"When I look at those photos, I can ___ the happy days we spent there.", o:["record", "reduce", "refuse", "recall"], a:3, trans:"当我看着那些照片时，我能回忆起我们在那里度过的快乐时光。", point:"考查动词辨析。recall 意为“回忆起”。"},
+{q:"—Yeah! The ___ birds look so beautiful flying over the water.", o:["wild", "small", "funny", "shy"], a:0, trans:"——是啊！那些野生鸟类在水面上飞翔看起来真美。", point:"考查形容词辨析。湿地公园的白鹭是 wild（野生的）鸟类。"},
+{q:"Please remember ___ the windows when you leave the room.", o:["close", "to close", "closing", "closed"], a:1, trans:"离开房间时请记得关窗户。", point:"考查非谓语动词。remember to do sth 意为“记得去做某事”（未发生），选 to close。"},
+{q:"My grandmother ___ me stories every night before I went to bed.", o:["tells", "tell", "telling", "told"], a:3, trans:"我祖母每晚在我上床睡觉前都会给我讲故事。", point:"考查时态。由从句 before I went to bed 可知，主句应用一般过去时 told。"},
+{q:"You need to ___ the key points of the text before the final exam.", o:["memorize", "tick", "outline", "boost"], a:0, trans:"在期末考试前你需要记住课文的重点。", point:"考查动词辨析。memorize 意为“记住”。"},
+{q:"—I'm wondering ___ our team members can reach an agreement.", o:["when", "whether", "where", "how"], a:1, trans:"——我想知道我们的队员是否能达成一致。", point:"考查宾语从句。根据句意“是否达成一致”，用 whether。"},
+{q:"She couldn't help ___ when she heard the funny story.", o:["laugh", "to laugh", "laughing", "laughed"], a:2, trans:"听到那个有趣的故事，她忍不住笑了起来。", point:"考查固定搭配。can't/couldn't help doing sth 意为“忍不住做某事”。"},
+{q:"Please take ___ in class to write down all the key points.", o:["numbers", "notices", "notes", "notebooks"], a:2, trans:"请在课上记笔记，把所有关键点都写下来。", point:"考查固定搭配。take notes 意为“记笔记”。"},
+{q:"Please write these words on the paper ___.", o:["in a hurry", "in the end", "in silence", "in the correct order"], a:3, trans:"请按正确的顺序把这些词写在纸上。", point:"考查介词短语。in the correct order 意为“按正确顺序”。"},
+{q:"Most students say it's more ___ than the old one.", o:["interesting", "expensive", "difficult", "effective"], a:3, trans:"大多数学生说它比旧的更有效。", point:"考查形容词辨析。由前文“helps students remember knowledge faster”可知是 more effective（更有效）。"},
+{q:"Many students find it hard to ___ all the new words in a short time.", o:["divide", "memorize", "increase", "recognize"], a:1, trans:"许多学生发现很难在短时间内记住所有生词。", point:"考查动词辨析。memorize 意为“记住”。"},
+{q:"He felt ___ because he always forgot things.", o:["stress", "stressed", "stressing", "stressful"], a:1, trans:"他感到有压力，因为他总是忘事。", point:"考查词性及主语。人（He）作主语感到有压力，用 -ed 结尾的形容词 stressed。"},
+{q:"Many students ___ the same feelings before the competition.", o:["give up", "care about", "go through", "look for"], a:2, trans:"许多学生在比赛前都会经历同样的感受。", point:"考查动词短语。go through 意为“经历”。"},
+{q:"I want to know where she ___.", o:["live", "living", "lived", "lives"], a:3, trans:"我想知道她住在哪里。", point:"考查主谓一致及宾语从句的时态。主句是一般现在时，从句描述客观现状，主语 she 是单数，用 lives。"},
+{q:"—___ doing more daily memory exercises.", o:["By", "With", "In", "For"], a:0, trans:"——通过做更多的日常记忆练习。", point:"考查介词。表示方式方法，用 by doing sth。"},
+{q:"This ___ teaching method can suit all students in different situations.", o:["effective", "wild", "one-size-fits-all", "stable"], a:2, trans:"这种一刀切的教学方法能在不同情况下适合所有学生。", point:"考查复合形容词。one-size-fits-all 意为“通用的，一刀切的”。"},
+{q:"My grandma is getting old and forgetful, and she always ___ me my dad's name.", o:["tells", "says", "speaks", "calls"], a:3, trans:"我奶奶越来越老、越来越健忘，她总是把我叫成我爸爸的名字。", point:"考查动词辨析。call sb sth 意为“把某人叫做某物”。"},
+{q:"___ you need to master basic learning techniques to study efficiently.", o:["In the end", "By the way", "At last", "To start with"], a:3, trans:"首先，你需要掌握基本的学习技巧才能高效学习。", point:"考查短语辨析。To start with 意为“首先”。"},
+{q:"We ___ a lot of new friends during our summer camp last year.", o:["made", "make", "were making", "have made"], a:0, trans:"去年夏令营期间我们交了许多新朋友。", point:"考查时态。由 last year 可知用一般过去时 made。"},
+{q:"I wonder ___ this memory technique really works.", o:["that", "if", "which", "what"], a:1, trans:"我想知道这种记忆技巧是否真的有效。", point:"考查宾语从句。wonder 后接“是否”，用 if。"},
+{q:"We can ___ the whole class ___ six groups to finish the task.", o:["divide; by", "put; into", "make; into", "divide; into"], a:3, trans:"我们可以把全班分成六个小组来完成任务。", point:"考查动词短语。divide...into... 意为“把……分成……”。"},
+{q:"A healthy diet is ___ for a strong memory, too.", o:["impossible", "impolite", "improper", "important"], a:3, trans:"健康的饮食对于良好的记忆力也很重要。", point:"考查形容词辨析。be important for 意为“对……重要”。"},
+{q:"To improve our memory, we can ___ new knowledge ___ old knowledge.", o:["connect; to", "link; with", "mix; with", "put; with"], a:1, trans:"为了改善我们的记忆力，我们可以把新知识和旧知识联系起来。", point:"考查动词短语。link...with... 意为“把……和……联系起来”。"},
+{q:"—Don't worry. You can talk about doupi and mianwo as well. —My ideas are ___.", o:["running out", "coming out", "turning out", "working out"], a:0, trans:"——别担心。你也可以谈谈豆皮和面窝。——我的想法快用完了。", point:"考查动词短语。run out 意为“耗尽”，be running out 表示即将耗尽。"},
+{q:"None of the students ___ able to solve the difficult memory training problem just now.", o:["is", "are", "was", "were"], a:2, trans:"刚才没有一个学生能解决那个困难的记忆训练问题。", point:"考查主谓一致和时态。just now 提示用过去时；none of + 复数名词作主语时，谓语动词单复数均可，但强调个体时常用单数，故选 was。"},
+{q:"He asked why the shop ___.", o:["is closed", "close", "closes", "was closed"], a:3, trans:"他问那家商店为什么关门了。", point:"考查时态和语态。主句是过去时 asked，从句也用过去的某种时态；商店是被关门的，用过去时的被动语态 was closed。"},
+{q:"It is ___ to rain this afternoon, so take an umbrella with you.", o:["stable", "effective", "likely", "fully"], a:2, trans:"今天下午可能会下雨，所以带把伞。", point:"考查形容词辨析。be likely to do sth 意为“有可能做某事”。"},
+{q:"Please remember ___ off the lights when you leave.", o:["not turning", "to not turn", "don't turn", "not to turn"], a:3, trans:"请记得离开时不要关灯（记得别关灯）。", point:"考查非谓语动词的否定形式。remember not to do sth 意为“记得不要做某事”。"},
+{q:"If you need ___ a shopping list, you can imagine a loaf of bread on the sofa.", o:["remember", "remembering", "remembered", "to remember"], a:3, trans:"如果你需要记住购物清单，你可以想象沙发上有一块面包。", point:"考查固定搭配。need to do sth 意为“需要做某事”。"},
+{q:"Being short of sleep can be harmful to ___ memory.", o:["you", "yours", "yourselves", "your"], a:3, trans:"睡眠不足对你的记忆力有害。", point:"考查物主代词。修饰名词 memory 用形容词性物主代词 your。"},
+{q:"You should be ___ in yourself when you give a speech.", o:["confidence", "confident", "confidently", "confidential"], a:1, trans:"发表演讲时你应该对自己有信心。", point:"考查词性。be 动词后接形容词作表语，be confident in oneself 意为“对自己有信心”。"},
+{q:"I remember ___ door before I left home.", o:["to lock a", "lock the", "locked the", "locking the"], a:3, trans:"我记得我离开家之前锁了门。", point:"考查非谓语动词及冠词。remember doing sth 意为“记得做过某事”（已发生）；特指家里的门，用 the door。"},
+{q:"I don't understand ___ some classmates can finish their homework so quickly while I spend hours on it.", o:["that", "why", "whether", "how"], a:1, trans:"我不明白为什么一些同学能这么快完成作业，而我要花好几个小时。", point:"考查宾语从句。根据句意“为什么”，用 why 引导。"},
+{q:"We have two main kinds of memory: short-term and ___ memory.", o:["long-term", "long-last", "longer", "long"], a:0, trans:"我们有两种主要的记忆：短期记忆和长期记忆。", point:"考查复合形容词。short-term（短期的）对应 long-term（长期的）。"},
+{q:"It's going to rain heavily this afternoon, so it's ___ that our outdoor PE class will be canceled.", o:["likely", "lucky", "lonely", "lively"], a:0, trans:"今天下午将有大雨，所以我们户外的体育课很可能会被取消。", point:"考查形容词辨析。It is likely that... 意为“很有可能……”。"},
+{q:"This technique ___ by ancient Greek and Roman speakers to remember long speeches.", o:["is used", "uses", "used", "was used"], a:3, trans:"这种技巧被古希腊和古罗马的演讲者用来记住长篇演讲。", point:"考查被动语态和时态。technique 是被使用的，且描述过去的事情，用一般过去时的被动语态 was used。"},
+{q:"She ___ crying when she heard the news.", o:["couldn't help to", "couldn't stop to", "couldn't begin", "couldn't stop"], a:3, trans:"听到这个消息时，她忍不住哭了起来。", point:"考查固定搭配。couldn't stop doing sth 意为“忍不住做某事”，相当于 couldn't help doing sth。"},
+{q:"In my ___, taking exercise every day is better than staying up late.", o:["case", "opinion", "image", "technique"], a:1, trans:"在我看来，每天锻炼比熬夜好。", point:"考查固定短语。in my opinion 意为“在我看来”。"},
+{q:"The old photo ___ me of my happy days in the countryside.", o:["makes", "reminds", "tells", "shows"], a:1, trans:"这张老照片让我想起了在乡下的快乐时光。", point:"考查动词短语。remind sb of sth 意为“使某人想起某事”。"}
+];
+
+
+/* =========================================================
+   题库合并（BANK 中已包含全部 236 题）
+   ========================================================= */
+const FULL_BANK = BANK;
+const TOTAL_QUESTIONS = FULL_BANK.length;
+let showAnswer = false;
+
+/* =========================================================
+   工具
+   ========================================================= */
+function formatDialog(str) {
+  return str.replace(/ —/g, '<br>—');
+}
+
+function createQItem(item, index) {
+  const letters = ['A', 'B', 'C', 'D', 'E'];
+  const num = index + 1;
+  const stem = formatDialog(item.q);
+
+  let optionsHtml = '';
+  item.o.forEach((opt, i) => {
+    optionsHtml += `<span class="opt">${letters[i]}. ${opt}</span>`;
+  });
+
+  const transText = item.trans || '暂无翻译';
+  const pointText = item.point || '暂无考点解析';
+
+  const answerBoxHtml = `
+    <div class="answer-box ${showAnswer ? 'show' : ''}">
+      <div class="ans-row">
+        <span class="ans-key">【答案】${letters[item.a]}</span>
+        <span class="ans-trans">【翻译】${transText}</span>
+      </div>
+      <div class="ans-row">
+        <span class="ans-key">【解析】</span><span class="ans-point">${pointText}</span>
+      </div>
+    </div>
+  `;
+
+  const div = document.createElement('div');
+  div.className = 'q-item';
+  div.innerHTML = `
+    <div class="q-num">${num}.</div>
+    <div class="q-body">
+      <div class="q-stem">${stem}</div>
+      <div class="q-options">${optionsHtml}</div>
+      ${answerBoxHtml}
+    </div>
+  `;
+  return div;
+}
+
+function isMobileScreen() {
+  return window.innerWidth <= 900;
+}
+
+function updateFlowMode() {
+  if (isMobileScreen()) {
+    document.body.classList.add('flow-mode');
+  } else {
+    document.body.classList.remove('flow-mode');
+  }
+}
+
+/* =========================================================
+   渲染试卷（离屏 A4 测量 → 分页渲染）
+   说明：
+   - 无论 PC 还是手机，都先用“离屏 A4 测量纸张”按 A4 尺寸分页，
+     保证打印结果与 PC 一致。
+   - 手机上只需给 body 加 .flow-mode，CSS 会把多页 paper 连续拼接显示，
+     字号放大、选项改单列，阅读体验好，且不破坏打印。
+   ========================================================= */
+function renderExam() {
+  const startInput = document.getElementById('startQ');
+  const countInput = document.getElementById('qCount');
+
+  let start = parseInt(startInput.value, 10);
+  let count = parseInt(countInput.value, 10);
+
+  if (isNaN(start) || start < 1) start = 1;
+  if (start > TOTAL_QUESTIONS) start = TOTAL_QUESTIONS;
+
+  if (isNaN(count) || count < 1) count = 1;
+  if (start + count - 1 > TOTAL_QUESTIONS) {
+    count = TOTAL_QUESTIONS - start + 1;
+  }
+
+  startInput.value = start;
+  countInput.value = count;
+
+  const examItems = FULL_BANK.slice(start - 1, start - 1 + count);
+
+  /* ---------- 阶段 1：离屏测量分页 ---------- */
+  const measurePaper = document.createElement('div');
+  measurePaper.className = 'paper measure-paper';
+  const measureContent = document.createElement('div');
+  measureContent.className = 'page-content';
+  measurePaper.appendChild(measureContent);
+  document.body.appendChild(measurePaper);
+
+  function buildHeader() {
+    const d = document.createElement('div');
+    d.className = 'header';
+    d.innerHTML = `
+      <h1>多多好学九年级英语过关检测试卷</h1>
+      <div class="subtitle">姓名：_______________　班级：_______________　得分：_______________</div>
+    `;
+    return d;
+  }
+  function buildTips() {
+    const d = document.createElement('div');
+    d.className = 'tips';
+    d.innerHTML = `
+      <strong>注意事项：</strong><br>
+      1. 本试卷共 <strong>${count}</strong> 题，均为单项选择题。<br>
+      2. 请在试卷相应位置作答，保持卷面整洁。<br>
+      3. 涵盖考点：宾语从句、过去将来时、动名词作主语、used to 结构、记忆主题词汇、高频短语辨析及情景交际。
+    `;
+    return d;
+  }
+
+  function isOverflow(el) {
+    return el.scrollHeight > el.clientHeight + 2;
+  }
+
+  const pagesItems = [];   // 每页的题目索引数组
+  let currentPage = [];
+  let isFirstPage = true;
+
+  function startPageMeasure() {
+    measureContent.innerHTML = '';
+    if (isFirstPage) {
+      measureContent.appendChild(buildHeader());
+      measureContent.appendChild(buildTips());
+    }
+  }
+
+  startPageMeasure();
+
+  examItems.forEach((item, index) => {
+    const node = createQItem(item, index);
+    measureContent.appendChild(node);
+
+    if (isOverflow(measureContent)) {
+      measureContent.removeChild(node);
+      if (currentPage.length === 0) {
+        // 极端情况：一题都放不下，强制放入
+        measureContent.appendChild(node);
+        currentPage.push(index);
+      } else {
+        pagesItems.push(currentPage);
+        currentPage = [];
+        isFirstPage = false;
+        startPageMeasure();
+        measureContent.appendChild(node);
+        currentPage.push(index);
+      }
+    } else {
+      currentPage.push(index);
+    }
+  });
+
+  if (currentPage.length > 0) {
+    pagesItems.push(currentPage);
+  }
+
+  document.body.removeChild(measurePaper);
+
+  /* ---------- 阶段 2：按分页结果渲染 ---------- */
+  const container = document.getElementById('papersContainer');
+  container.innerHTML = '';
+
+  pagesItems.forEach((itemIndices, pageIdx) => {
+    const paper = document.createElement('div');
+    paper.className = 'paper';
+
+    const content = document.createElement('div');
+    content.className = 'page-content';
+
+    const footer = document.createElement('div');
+    footer.className = 'page-footer';
+
+    if (pageIdx === 0) {
+      content.appendChild(buildHeader());
+      content.appendChild(buildTips());
+    }
+
+    itemIndices.forEach(idx => {
+      content.appendChild(createQItem(examItems[idx], idx));
+    });
+
+    paper.appendChild(content);
+    paper.appendChild(footer);
+    container.appendChild(paper);
+  });
+
+  const totalPages = pagesItems.length;
+  container.querySelectorAll('.page-footer').forEach((f, i) => {
+    f.textContent = `第 ${i + 1} 页 共 ${totalPages} 页`;
+  });
+
+  // 根据屏幕宽度切换流式/分页显示
+  updateFlowMode();
+
+  window.scrollTo(0, 0);
+}
+
+/* =========================================================
+   控制面板
+   ========================================================= */
+const controlPanel = document.getElementById('controlPanel');
+const panelBackdrop = document.getElementById('panelBackdrop');
+const panelToggle = document.getElementById('panelToggle');
+const panelClose = document.getElementById('panelClose');
+
+function openPanel() {
+  controlPanel.classList.add('active');
+  panelBackdrop.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closePanel() {
+  controlPanel.classList.remove('active');
+  panelBackdrop.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+panelToggle.addEventListener('click', openPanel);
+panelClose.addEventListener('click', closePanel);
+panelBackdrop.addEventListener('click', closePanel);
+
+document.getElementById('btnUpdate').addEventListener('click', function () {
+  renderExam();
+  if (isMobileScreen()) closePanel();
+});
+
+document.getElementById('btnToggleAnswer').addEventListener('click', function () {
+  showAnswer = !showAnswer;
+  this.textContent = showAnswer ? '隐藏答案' : '显示答案';
+  renderExam();
+  if (isMobileScreen()) closePanel();
+});
+
+/* =========================================================
+   初始化
+   ========================================================= */
+document.getElementById('qCount').setAttribute('max', TOTAL_QUESTIONS);
+document.getElementById('qCount').value = TOTAL_QUESTIONS;
+
+let resizeTimer;
+window.addEventListener('resize', function () {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function () {
+    updateFlowMode();
+    if (!isMobileScreen() && controlPanel.classList.contains('active')) {
+      closePanel();
+    }
+  }, 150);
+});
+
+window.addEventListener('orientationchange', function () {
+  setTimeout(updateFlowMode, 300);
+});
+
+/* ---- 打印前：确保去掉 flow-mode，打印 A4 分页；打印后恢复 ---- */
+window.addEventListener('beforeprint', function () {
+  document.body.classList.remove('flow-mode');
+});
+window.addEventListener('afterprint', function () {
+  updateFlowMode();
+});
+
+/* ---- 首次渲染 ---- */
+renderExam();
+</script>
+</body>
+</html>
