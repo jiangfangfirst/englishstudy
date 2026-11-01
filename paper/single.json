@@ -1,0 +1,402 @@
+[
+  {
+    "stem": "— Where is your brother?\n— He ______ in the garden.",
+    "stemZh": "——你哥哥在哪里？\n——他正在花园里浇水。",
+    "options": ["waters", "is watering", "watered", "has watered"],
+    "optionsZh": ["浇水（一般现在时）", "正在浇水（现在进行时）", "浇过水（一般过去时）", "已经浇过水（现在完成时）"],
+    "answer": 1,
+    "explanation": "根据问句 Where is your brother? 可知动作正在进行，用现在进行时，结构为 be + doing。"
+  },
+  {
+    "stem": "I ______ my homework already, so I can go out to play.",
+    "stemZh": "我已经完成作业了，所以我可以出去玩。",
+    "options": ["finish", "finished", "have finished", "will finish"],
+    "optionsZh": ["完成（一般现在时）", "完成了（一般过去时）", "已经完成（现在完成时）", "将要完成（一般将来时）"],
+    "answer": 2,
+    "explanation": "already 是现在完成时的标志词，且动作对现在有影响（可以出去玩），用 have finished。"
+  },
+  {
+    "stem": "If it ______ tomorrow, we will stay at home.",
+    "stemZh": "如果明天下雨，我们就待在家里。",
+    "options": ["rains", "will rain", "rained", "is raining"],
+    "optionsZh": ["下雨（一般现在时）", "将下雨（一般将来时）", "下过雨（一般过去时）", "正在下雨（现在进行时）"],
+    "answer": 0,
+    "explanation": "if 引导的条件状语从句遵循“主将从现”原则，主句用一般将来时，从句用一般现在时。"
+  },
+  {
+    "stem": "My father ______ to Beijing twice.",
+    "stemZh": "我爸爸去过北京两次。",
+    "options": ["has been", "has gone", "went", "goes"],
+    "optionsZh": ["去过（人已回来）", "去了（人还没回来）", "去了（一般过去时）", "去（一般现在时）"],
+    "answer": 0,
+    "explanation": "have/has been to 表示“去过某地（已回来）”，twice 表示次数，用现在完成时。"
+  },
+  {
+    "stem": "— How long have you ______ this bike?\n— For two years.",
+    "stemZh": "——你拥有这辆自行车多久了？\n——两年了。",
+    "options": ["bought", "had", "borrowed", "lent"],
+    "optionsZh": ["买（短暂性动词）", "拥有（延续性动词）", "借入（短暂性动词）", "借出（短暂性动词）"],
+    "answer": 1,
+    "explanation": "How long 提问一段时间，需用延续性动词。buy 是短暂性动词，其延续性形式为 have。"
+  },
+  {
+    "stem": "The Great Wall ______ by millions of people every year.",
+    "stemZh": "长城每年被数百万人参观。",
+    "options": ["visits", "is visited", "visited", "will visit"],
+    "optionsZh": ["参观（主动）", "被参观（被动）", "参观过（主动）", "将参观（主动）"],
+    "answer": 1,
+    "explanation": "The Great Wall 是动作的承受者，且 every year 表示一般现在时，故用一般现在时的被动语态 is visited。"
+  },
+  {
+    "stem": "Trees ______ every spring in our city.",
+    "stemZh": "我们城市每年春天都种树。",
+    "options": ["plant", "are planted", "planted", "planting"],
+    "optionsZh": ["种植（主动）", "被种植（被动）", "种植过（主动）", "正在种植（主动）"],
+    "answer": 1,
+    "explanation": "Trees 是 plant 的承受者，every spring 表示一般现在时，用一般现在时被动语态 are planted。"
+  },
+  {
+    "stem": "He is the boy ______ won the first prize.",
+    "stemZh": "他就是那个获得一等奖的男孩。",
+    "options": ["which", "who", "whom", "whose"],
+    "optionsZh": ["指物/关系代词", "指人，作主语", "指人，作宾语", "指人，作定语"],
+    "answer": 1,
+    "explanation": "先行词 the boy 指人，且在定语从句中作主语，用关系代词 who。"
+  },
+  {
+    "stem": "This is the book ______ I bought yesterday.",
+    "stemZh": "这就是我昨天买的那本书。",
+    "options": ["who", "whose", "which", "what"],
+    "optionsZh": ["指人，作主语", "指人，作定语", "指物，作宾语", "不能引导定语从句"],
+    "answer": 2,
+    "explanation": "先行词 the book 指物，在从句中作 bought 的宾语，用 which（或 that）。"
+  },
+  {
+    "stem": "Could you tell me ______?",
+    "stemZh": "你能告诉我邮局在哪里吗？",
+    "options": ["where is the post office", "where the post office is", "where was the post office", "the post office where is"],
+    "optionsZh": ["语序错误（疑问语序）", "正确（陈述语序）", "时态和语序都错误", "语序完全错误"],
+    "answer": 1,
+    "explanation": "宾语从句要用陈述语序，即“引导词 + 主语 + 谓语”，故选 where the post office is。"
+  },
+  {
+    "stem": "I don't know ______ he will come or not.",
+    "stemZh": "我不知道他是否会来。",
+    "options": ["if", "whether", "that", "what"],
+    "optionsZh": ["是否（不能与 or not 直接连用）", "是否（可与 or not 连用）", "无实义", "什么"],
+    "answer": 1,
+    "explanation": "与 or not 连用时只能用 whether，不能用 if。"
+  },
+  {
+    "stem": "— ______ beautiful the flowers are!",
+    "stemZh": "——这些花多美啊！",
+    "options": ["What", "What a", "How", "How a"],
+    "optionsZh": ["What（修饰名词）", "What a（修饰单数可数名词）", "How（修饰形容词/副词）", "How a（错误搭配）"],
+    "answer": 2,
+    "explanation": "感叹句中心词是形容词 beautiful，用 How 引导：How + 形容词/副词 + 主语 + 谓语！"
+  },
+  {
+    "stem": "— ______ nice weather it is!",
+    "stemZh": "——多好的天气啊！",
+    "options": ["What", "What a", "How", "How a"],
+    "optionsZh": ["What（修饰不可数名词）", "What a（修饰单数可数名词）", "How（修饰形容词/副词）", "How a（错误搭配）"],
+    "answer": 0,
+    "explanation": "weather 是不可数名词，感叹句用 What + 形容词 + 不可数名词 + 主语 + 谓语！"
+  },
+  {
+    "stem": "— Must I finish it now?\n— No, you ______.",
+    "stemZh": "——我必须现在完成它吗？\n——不，你不必。",
+    "options": ["mustn't", "needn't", "can't", "shouldn't"],
+    "optionsZh": ["禁止", "不必", "不能", "不应该"],
+    "answer": 1,
+    "explanation": "Must 引导的一般疑问句，否定回答用 needn't（不必），不用 mustn't（禁止）。"
+  },
+  {
+    "stem": "— Could I use your pen?\n— Yes, you ______.",
+    "stemZh": "——我可以用你的钢笔吗？\n——可以。",
+    "options": ["could", "can", "must", "need"],
+    "optionsZh": ["能（过去式/委婉）", "可以（表许可）", "必须", "需要"],
+    "answer": 1,
+    "explanation": "Could 在此表示委婉请求，回答时用 can 表示许可。"
+  },
+  {
+    "stem": "Lucy is ______ than her sister.",
+    "stemZh": "露西比她姐姐高。",
+    "options": ["tall", "taller", "tallest", "the tallest"],
+    "optionsZh": ["高的（原级）", "更高的（比较级）", "最高的（最高级）", "最高的（最高级）"],
+    "answer": 1,
+    "explanation": "than 是比较级的标志词，tall 的比较级是 taller。"
+  },
+  {
+    "stem": "This is ______ film I have ever seen.",
+    "stemZh": "这是我看过的最好的电影。",
+    "options": ["good", "better", "best", "the best"],
+    "optionsZh": ["好的（原级）", "更好的（比较级）", "最好的（最高级，缺 the）", "最好的（最高级）"],
+    "answer": 3,
+    "explanation": "I have ever seen 表示范围，用最高级；形容词最高级前要加定冠词 the。"
+  },
+  {
+    "stem": "The population of China is ______ than that of Japan.",
+    "stemZh": "中国的人口比日本多。",
+    "options": ["large", "larger", "largest", "the largest"],
+    "optionsZh": ["大的（原级）", "更大的（比较级）", "最大的（最高级）", "最大的（最高级）"],
+    "answer": 1,
+    "explanation": "than 提示用比较级；表示人口多少用 large 的比较级 larger。"
+  },
+  {
+    "stem": "He ______ to school by bike when he was young.",
+    "stemZh": "他小时候骑自行车上学。",
+    "options": ["goes", "went", "has gone", "is going"],
+    "optionsZh": ["去（一般现在时）", "去（一般过去时）", "已经去了（现在完成时）", "正要去（现在进行时）"],
+    "answer": 1,
+    "explanation": "when he was young 表示过去的时间，用一般过去时 went。"
+  },
+  {
+    "stem": "— What were you doing at eight last night?\n— I ______ TV.",
+    "stemZh": "——昨晚八点你在做什么？\n——我在看电视。",
+    "options": ["watch", "watched", "was watching", "am watching"],
+    "optionsZh": ["看（一般现在时）", "看了（一般过去时）", "正在看（过去进行时）", "正在看（现在进行时）"],
+    "answer": 2,
+    "explanation": "at eight last night 表示过去某一时刻正在进行的动作，用过去进行时 was watching。"
+  },
+  {
+    "stem": "Mr. Green ______ in this school since 2000.",
+    "stemZh": "格林先生自2000年以来一直在这所学校教书。",
+    "options": ["teaches", "taught", "has taught", "is teaching"],
+    "optionsZh": ["教（一般现在时）", "教过（一般过去时）", "一直在教（现在完成时）", "正在教（现在进行时）"],
+    "answer": 2,
+    "explanation": "since 2000 是现在完成时的标志，表示从过去持续到现在的动作，用 has taught。"
+  },
+  {
+    "stem": "Don't ______ in the library.",
+    "stemZh": "不要在图书馆里说话。",
+    "options": ["talk", "talks", "talking", "talked"],
+    "optionsZh": ["说（动词原形）", "说（第三人称单数）", "说（现在分词）", "说（过去式）"],
+    "answer": 0,
+    "explanation": "否定祈使句结构为 Don't + 动词原形，故选 talk。"
+  },
+  {
+    "stem": "It's important ______ English well.",
+    "stemZh": "学好英语很重要。",
+    "options": ["learn", "learns", "to learn", "learning"],
+    "optionsZh": ["学（动词原形）", "学（第三人称单数）", "学（不定式）", "学（动名词）"],
+    "answer": 2,
+    "explanation": "It is + 形容词 + to do sth. 是固定句型，it 作形式主语，真正主语是不定式。"
+  },
+  {
+    "stem": "Would you mind ______ the window?",
+    "stemZh": "你介意打开窗户吗？",
+    "options": ["open", "to open", "opening", "opened"],
+    "optionsZh": ["打开（动词原形）", "打开（不定式）", "打开（动名词）", "打开（过去式）"],
+    "answer": 2,
+    "explanation": "mind doing sth. 是固定搭配，mind 后接动名词，故选 opening。"
+  },
+  {
+    "stem": "The boy is old enough ______ himself.",
+    "stemZh": "这个男孩年龄够大，能自己穿衣服了。",
+    "options": ["dress", "to dress", "dressing", "dressed"],
+    "optionsZh": ["穿衣（动词原形）", "穿衣（不定式）", "穿衣（动名词）", "穿衣（过去式）"],
+    "answer": 1,
+    "explanation": "形容词 + enough + to do sth. 表示“足够……做某事”，用不定式 to dress。"
+  },
+  {
+    "stem": "He hardly goes to bed before eleven, ______?",
+    "stemZh": "他很少在十一点前睡觉，是吗？",
+    "options": ["does he", "doesn't he", "is he", "isn't he"],
+    "optionsZh": ["是吗（肯定形式）", "是吗（否定形式）", "是吗（be动词肯定）", "是吗（be动词否定）"],
+    "answer": 0,
+    "explanation": "hardly 是否定词，陈述部分含否定意义，反义疑问部分用肯定形式；主句动词 goes 是实义动词，助动词用 does。"
+  },
+  {
+    "stem": "Neither Tom nor his parents ______ to the party.",
+    "stemZh": "汤姆和他的父母都没被邀请参加聚会。",
+    "options": ["has been invited", "have been invited", "was invited", "is invited"],
+    "optionsZh": ["已被邀请（单数）", "已被邀请（复数）", "被邀请（单数过去）", "被邀请（单数现在）"],
+    "answer": 1,
+    "explanation": "neither...nor... 连接主语时遵循就近原则，靠近谓语的是 his parents（复数），故用 have been invited。"
+  },
+  {
+    "stem": "There ______ a pen and two books on the desk.",
+    "stemZh": "桌子上有一支钢笔和两本书。",
+    "options": ["is", "are", "have", "has"],
+    "optionsZh": ["是（单数）", "是（复数）", "有（动词原形）", "有（第三人称单数）"],
+    "answer": 0,
+    "explanation": "There be 句型遵循就近原则，靠近 be 的是 a pen（单数），故用 is。"
+  },
+  {
+    "stem": "He speaks English ______ than before.",
+    "stemZh": "他说英语比以前流利多了。",
+    "options": ["fluent", "more fluent", "more fluently", "most fluently"],
+    "optionsZh": ["流利的（形容词原级）", "更流利的（形容词比较级）", "更流利地（副词比较级）", "最流利地（副词最高级）"],
+    "answer": 2,
+    "explanation": "修饰动词 speaks 要用副词 fluently；than 提示比较级，用 more fluently。"
+  },
+  {
+    "stem": "— Have you ever been to Shanghai?\n— Yes, I ______ there last year.",
+    "stemZh": "——你去过上海吗？\n——是的，我去年去过那里。",
+    "options": ["have been", "went", "have gone", "go"],
+    "optionsZh": ["去过（现在完成时）", "去了（一般过去时）", "去了（现在完成时）", "去（一般现在时）"],
+    "answer": 1,
+    "explanation": "last year 是明确的一般过去时时间状语，不能用现在完成时，用 went。"
+  },
+  {
+    "stem": "I'll call you as soon as I ______ home.",
+    "stemZh": "我一到家就给你打电话。",
+    "options": ["get", "will get", "got", "am getting"],
+    "optionsZh": ["到达（一般现在时）", "将到达（一般将来时）", "到达（一般过去时）", "正到达（现在进行时）"],
+    "answer": 0,
+    "explanation": "as soon as 引导时间状语从句，遵循“主将从现”原则，从句用一般现在时 get。"
+  },
+  {
+    "stem": "He ______ be at home. The light is on.",
+    "stemZh": "他一定在家，灯亮着。",
+    "options": ["must", "can't", "may", "need"],
+    "optionsZh": ["一定（肯定推测）", "不可能（否定推测）", "可能（把握不大）", "需要"],
+    "answer": 0,
+    "explanation": "根据“灯亮着”可作肯定推测，用 must be 表示“一定是”。"
+  },
+  {
+    "stem": "The book ______ by Lu Xun.",
+    "stemZh": "这本书是鲁迅写的。",
+    "options": ["wrote", "was written", "is writing", "writes"],
+    "optionsZh": ["写（主动过去式）", "被写（被动过去式）", "正在写（主动）", "写（主动现在时）"],
+    "answer": 1,
+    "explanation": "The book 是 write 的承受者，且为过去发生的事，用一般过去时的被动语态 was written。"
+  },
+  {
+    "stem": "My hometown has changed a lot ______ the past ten years.",
+    "stemZh": "我的家乡在过去的十年里变化很大。",
+    "options": ["in", "for", "since", "at"],
+    "optionsZh": ["在……里（用于一段时间）", "持续（后接时间段）", "自从（后接时间点）", "在（某时刻）"],
+    "answer": 0,
+    "explanation": "in the past ten years 表示“在过去的十年里”，是现在完成时的常用时间状语。"
+  },
+  {
+    "stem": "— What's wrong with you?\n— I have a ______. I can't eat anything.",
+    "stemZh": "——你怎么了？\n——我牙疼，什么也吃不了。",
+    "options": ["cold", "headache", "toothache", "fever"],
+    "optionsZh": ["感冒", "头痛", "牙痛", "发烧"],
+    "answer": 2,
+    "explanation": "由 I can't eat anything（什么也吃不了）可知是牙痛 toothache。"
+  },
+  {
+    "stem": "It's very hot. Why don't you ______ your coat?",
+    "stemZh": "天气很热，你为什么不脱下外套呢？",
+    "options": ["put on", "take off", "put off", "take away"],
+    "optionsZh": ["穿上", "脱下", "推迟", "拿走"],
+    "answer": 1,
+    "explanation": "天气热，应“脱下”外套，take off 意为“脱下”。"
+  },
+  {
+    "stem": "— Would you like some tea?\n— ______.",
+    "stemZh": "——你想喝点茶吗？\n——好的，谢谢。",
+    "options": ["Yes, please", "Yes, I would", "No, I wouldn't", "No, please"],
+    "optionsZh": ["好的，谢谢（接受邀请）", "是的，我想（回答不地道）", "不，我不想（不礼貌）", "不，请（矛盾）"],
+    "answer": 0,
+    "explanation": "Would you like...? 表示邀请，接受时常用 Yes, please.；拒绝时用 No, thanks."
+  },
+  {
+    "stem": "— How often do you exercise?\n— ______.",
+    "stemZh": "——你多久锻炼一次？\n——一周两次。",
+    "options": ["Twice a week", "Two weeks", "For two weeks", "In two weeks"],
+    "optionsZh": ["一周两次（频率）", "两周（时长）", "持续两周", "两周后"],
+    "answer": 0,
+    "explanation": "How often 提问频率，回答用 Twice a week（一周两次）。"
+  },
+  {
+    "stem": "— I'm sorry I'm late.\n— ______.",
+    "stemZh": "——对不起，我迟到了。\n——没关系。",
+    "options": ["That's right", "You're welcome", "It doesn't matter", "That's all"],
+    "optionsZh": ["对的", "不客气", "没关系", "就这些"],
+    "answer": 2,
+    "explanation": "对方道歉时，应回答 It doesn't matter.（没关系）。"
+  },
+  {
+    "stem": "— Thanks for your help.\n— ______.",
+    "stemZh": "——谢谢你的帮助。\n——不客气。",
+    "options": ["That's right", "You're welcome", "Never mind", "All right"],
+    "optionsZh": ["对的", "不客气", "没关系", "好吧"],
+    "answer": 1,
+    "explanation": "对方表示感谢时，回答 You're welcome.（不客气）。"
+  },
+  {
+    "stem": "He ______ his homework when his mother came in.",
+    "stemZh": "他妈妈进来时，他正在做作业。",
+    "options": ["does", "did", "was doing", "is doing"],
+    "optionsZh": ["做（一般现在时）", "做了（一般过去时）", "正在做（过去进行时）", "正在做（现在进行时）"],
+    "answer": 2,
+    "explanation": "when 引导的从句用一般过去时，主句表示当时正在进行的动作，用过去进行时 was doing。"
+  },
+  {
+    "stem": "The teacher asked us ______ quiet in class.",
+    "stemZh": "老师要求我们上课保持安静。",
+    "options": ["keep", "to keep", "keeping", "kept"],
+    "optionsZh": ["保持（动词原形）", "保持（不定式）", "保持（动名词）", "保持（过去式）"],
+    "answer": 1,
+    "explanation": "ask sb. to do sth. 是固定搭配，意为“要求某人做某事”。"
+  },
+  {
+    "stem": "I prefer reading books ______ watching TV.",
+    "stemZh": "我更喜欢读书而不是看电视。",
+    "options": ["to", "than", "and", "with"],
+    "optionsZh": ["与……相比（固定搭配）", "比（用于比较级）", "和", "与……一起"],
+    "answer": 0,
+    "explanation": "prefer doing A to doing B 表示“比起 B 更喜欢 A”，是固定搭配。"
+  },
+  {
+    "stem": "She ______ to visit her grandparents tomorrow.",
+    "stemZh": "她明天要去看望她的祖父母。",
+    "options": ["will go", "goes", "went", "has gone"],
+    "optionsZh": ["将去（一般将来时）", "去（一般现在时）", "去了（一般过去时）", "已经去了（现在完成时）"],
+    "answer": 0,
+    "explanation": "tomorrow 表示将来，用一般将来时 will go。"
+  },
+  {
+    "stem": "— Whose bag is this?\n— It ______ be Lucy's. Her name is on it.",
+    "stemZh": "——这是谁的书包？\n——一定是露西的，上面有她的名字。",
+    "options": ["can", "must", "might", "can't"],
+    "optionsZh": ["能够", "一定（肯定推测）", "可能（把握不大）", "不可能"],
+    "answer": 1,
+    "explanation": "根据“上面有她的名字”可作肯定推测，用 must be 表示“一定是”。"
+  },
+  {
+    "stem": "— Do you know the girl ______ long hair?\n— Yes. She is my cousin.",
+    "stemZh": "——你认识那个留长发的女孩吗？\n——认识，她是我表妹。",
+    "options": ["with", "in", "on", "of"],
+    "optionsZh": ["有（表特征）", "在……里", "在……上", "……的"],
+    "answer": 0,
+    "explanation": "with long hair 表示“留着长发的”，with 用于表示人或物的特征。"
+  },
+  {
+    "stem": "— Have you finished your homework ______?\n— Not yet.",
+    "stemZh": "——你完成作业了吗？\n——还没有。",
+    "options": ["already", "yet", "just", "ever"],
+    "optionsZh": ["已经（用于肯定句）", "还（用于疑问句和否定句）", "刚刚", "曾经"],
+    "answer": 1,
+    "explanation": "yet 常用于疑问句和否定句句末，表示“已经/还”。"
+  },
+  {
+    "stem": "It took me two hours ______ the work.",
+    "stemZh": "完成这项工作花了我两个小时。",
+    "options": ["finish", "to finish", "finishing", "finished"],
+    "optionsZh": ["完成（动词原形）", "完成（不定式）", "完成（动名词）", "完成（过去式）"],
+    "answer": 1,
+    "explanation": "It takes sb. some time to do sth. 是固定句型，用不定式 to finish。"
+  },
+  {
+    "stem": "— What can we do to protect the earth?\n— We should ______ water and paper.",
+    "stemZh": "——我们能做什么来保护地球？\n——我们应该节约用水和纸。",
+    "options": ["save", "waste", "use", "buy"],
+    "optionsZh": ["节约", "浪费", "使用", "购买"],
+    "answer": 0,
+    "explanation": "保护地球应“节约”资源，save 意为“节约”。"
+  },
+  {
+    "stem": "— Could you please tell me how to get to the station?\n— Sorry, I'm new here.\n— ______.",
+    "stemZh": "——你能告诉我怎样去车站吗？\n——抱歉，我是新来的。\n——还是谢谢你。",
+    "options": ["You're welcome", "Thank you all the same", "That's right", "Never mind"],
+    "optionsZh": ["不客气", "还是谢谢你", "对的", "没关系"],
+    "answer": 1,
+    "explanation": "问路未得到帮助时，常用 Thank you all the same.（仍然谢谢你）表示感谢。"
+  }
+]

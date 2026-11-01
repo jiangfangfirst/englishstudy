@@ -1,0 +1,360 @@
+[
+  {
+    "type": "应用文/广告",
+    "text": "English Club Wants You!\nDo you like English? Do you want to improve your English? Come and join our English Club! We meet every Friday afternoon from 4:00 to 5:30 in Room 302. In the club, you can watch English films, sing English songs and play English games. You can also make friends with other students. If you are interested, please call Mary at 6789-1234 before next Wednesday. Don't miss the chance!",
+    "translation": "英语俱乐部招募啦！你喜欢英语吗？你想提高英语水平吗？来加入我们的英语俱乐部吧！我们每周五下午4:00到5:30在302室活动。在俱乐部里，你可以看英文电影、唱英文歌、玩英语游戏。你还可以和其他同学交朋友。如果你感兴趣，请在下周三之前拨打6789-1234联系玛丽。不要错过机会！",
+    "questions": [
+      {
+        "stem": "When does the English Club meet?",
+        "stemZh": "英语俱乐部什么时候活动？",
+        "options": ["Every Monday afternoon.", "Every Friday afternoon.", "Every Saturday morning.", "Every Sunday evening."],
+        "optionsZh": ["每周一下午。", "每周五下午。", "每周六上午。", "每周日晚上。"],
+        "answer": 1,
+        "answerText": "It meets every Friday afternoon.",
+        "explanation": "根据文中“We meet every Friday afternoon...”可知。"
+      },
+      {
+        "stem": "What can students do in the club?",
+        "stemZh": "学生们在俱乐部里能做什么？",
+        "options": ["Play football.", "Watch English films.", "Do homework.", "Cook food."],
+        "optionsZh": ["踢足球。", "看英文电影。", "做作业。", "做饭。"],
+        "answer": 1,
+        "answerText": "They can watch English films, sing English songs and play English games.",
+        "explanation": "根据文中“you can watch English films...”可知。"
+      },
+      {
+        "stem": "How can you join the club?",
+        "stemZh": "你怎样加入俱乐部？",
+        "options": ["By calling Mary.", "By writing a letter.", "By sending an email.", "By visiting Room 302 on Monday."],
+        "optionsZh": ["打电话给玛丽。", "写信。", "发电子邮件。", "周一去302室。"],
+        "answer": 0,
+        "answerText": "You can call Mary at 6789-1234.",
+        "explanation": "根据最后一句“please call Mary at 6789-1234”可知。"
+      }
+    ]
+  },
+  {
+    "type": "应用文/广告",
+    "text": "City Library Weekend Activities\nWelcome to the City Library! This weekend we have some interesting activities for you. On Saturday morning, there is a story time for children aged 5-10. It starts at 10:00. On Saturday afternoon, you can join a free English corner from 2:00 to 4:00. On Sunday, we will show a science film at 3:00. All the activities are free. You just need to bring your library card. For more information, please visit our website or call 1234-5678.",
+    "translation": "市图书馆周末活动。欢迎来到市图书馆！这个周末我们为你准备了一些有趣的活动。周六上午10:00有一场面向5-10岁儿童的故事会。周六下午2:00到4:00可以参加免费英语角。周日下午3:00我们将放映一部科学电影。所有活动均免费，只需带上你的借书证。更多信息请访问我们的网站或致电1234-5678。",
+    "questions": [
+      {
+        "stem": "Who is the story time for?",
+        "stemZh": "故事会是给谁准备的？",
+        "options": ["Children aged 5-10.", "All students.", "Parents only.", "Teachers."],
+        "optionsZh": ["5-10岁的儿童。", "所有学生。", "只有家长。", "老师。"],
+        "answer": 0,
+        "answerText": "It is for children aged 5-10.",
+        "explanation": "根据“a story time for children aged 5-10”可知。"
+      },
+      {
+        "stem": "When is the English corner?",
+        "stemZh": "英语角在什么时候？",
+        "options": ["Saturday morning.", "Saturday afternoon.", "Sunday morning.", "Sunday afternoon."],
+        "optionsZh": ["周六上午。", "周六下午。", "周日上午。", "周日下午。"],
+        "answer": 1,
+        "answerText": "It is on Saturday afternoon from 2:00 to 4:00.",
+        "explanation": "根据“On Saturday afternoon, you can join a free English corner from 2:00 to 4:00.”可知。"
+      },
+      {
+        "stem": "What do people need to bring?",
+        "stemZh": "人们需要带什么？",
+        "options": ["A book.", "A library card.", "A pen.", "A computer."],
+        "optionsZh": ["一本书。", "一张借书证。", "一支笔。", "一台电脑。"],
+        "answer": 1,
+        "answerText": "They need to bring their library cards.",
+        "explanation": "根据“You just need to bring your library card.”可知。"
+      }
+    ]
+  },
+  {
+    "type": "记叙文",
+    "text": "Last Sunday, Li Ming was on his way home. He saw an old man standing by the road. The old man looked worried. Li Ming went up and asked, 'Can I help you?' The old man said he wanted to go to the hospital, but he didn't know the way. Li Ming decided to take him there. They walked for about twenty minutes. The old man thanked Li Ming and said he was very kind. Li Ming felt happy. He thought helping others is a good thing.",
+    "translation": "上周日，李明在回家的路上。他看见一位老人站在路边。老人看起来很着急。李明走上前问：“我能帮您吗？”老人说他想去医院，但不知道路。李明决定带他去。他们走了大约二十分钟。老人感谢李明，说他非常善良。李明感到很开心。他认为帮助别人是一件好事。",
+    "questions": [
+      {
+        "stem": "Where did Li Ming see the old man?",
+        "stemZh": "李明在哪里看见那位老人？",
+        "options": ["Near a hospital.", "By the road.", "In a park.", "At school."],
+        "optionsZh": ["在医院附近。", "在路边。", "在公园里。", "在学校。"],
+        "answer": 1,
+        "answerText": "He saw him by the road.",
+        "explanation": "根据“He saw an old man standing by the road.”可知。"
+      },
+      {
+        "stem": "Where did the old man want to go?",
+        "stemZh": "老人想去哪里？",
+        "options": ["To the school.", "To the hospital.", "To the park.", "To the shop."],
+        "optionsZh": ["去学校。", "去医院。", "去公园。", "去商店。"],
+        "answer": 1,
+        "answerText": "He wanted to go to the hospital.",
+        "explanation": "根据“he wanted to go to the hospital”可知。"
+      },
+      {
+        "stem": "How did Li Ming feel after helping the old man?",
+        "stemZh": "帮助老人后李明感觉怎样？",
+        "options": ["Tired.", "Happy.", "Sad.", "Angry."],
+        "optionsZh": ["疲惫的。", "开心的。", "难过的。", "生气的。"],
+        "answer": 1,
+        "answerText": "He felt happy.",
+        "explanation": "根据“Li Ming felt happy.”可知。"
+      }
+    ]
+  },
+  {
+    "type": "记叙文",
+    "text": "Our school sports meeting was held last Friday. It was a sunny day. All the students were excited. There were many events, such as running, jumping and throwing. I took part in the 100-meter race. I ran as fast as I could, but I didn't win. However, I didn't feel sad. My classmates cheered for me and said I did a good job. In the afternoon, our class won the relay race. We were all very happy. The sports meeting was tiring but fun.",
+    "translation": "我们学校的运动会上周五举行。那天阳光明媚，所有学生都很兴奋。运动会有许多项目，如跑步、跳远和投掷。我参加了100米赛跑。我尽力跑得很快，但没有赢。不过，我并不难过。同学们为我加油，说我做得很好。下午，我们班赢得了接力赛。我们都很高兴。运动会很累但很有趣。",
+    "questions": [
+      {
+        "stem": "When was the school sports meeting?",
+        "stemZh": "学校运动会什么时候举行？",
+        "options": ["Last Monday.", "Last Friday.", "Last Saturday.", "Last Sunday."],
+        "optionsZh": ["上周一。", "上周五。", "上周六。", "上周日。"],
+        "answer": 1,
+        "answerText": "It was last Friday.",
+        "explanation": "根据“Our school sports meeting was held last Friday.”可知。"
+      },
+      {
+        "stem": "What event did the writer take part in?",
+        "stemZh": "作者参加了什么项目？",
+        "options": ["The long jump.", "The 100-meter race.", "The relay race.", "The high jump."],
+        "optionsZh": ["跳远。", "100米赛跑。", "接力赛。", "跳高。"],
+        "answer": 1,
+        "answerText": "The writer took part in the 100-meter race.",
+        "explanation": "根据“I took part in the 100-meter race.”可知。"
+      },
+      {
+        "stem": "How did the writer feel at last?",
+        "stemZh": "作者最后感觉怎样？",
+        "options": ["Sad.", "Tired but happy.", "Angry.", "Bored."],
+        "optionsZh": ["难过。", "累但开心。", "生气。", "无聊。"],
+        "answer": 1,
+        "answerText": "The writer felt tired but happy.",
+        "explanation": "根据“The sports meeting was tiring but fun.”可知。"
+      }
+    ]
+  },
+  {
+    "type": "科普文",
+    "text": "Sleep is very important for our health. When we sleep, our body can rest and our brain can work better. Most students need about nine hours of sleep every night. But many students stay up late to do homework or play games. This is bad for their health. If you don't get enough sleep, you may feel tired in class. You may also find it hard to remember things. So we should go to bed early and get up early. A good sleep makes us healthy and happy.",
+    "translation": "睡眠对我们的健康非常重要。当我们睡觉时，身体可以休息，大脑可以更好地工作。大多数学生每晚需要大约九小时的睡眠。但许多学生熬夜做作业或玩游戏。这对他们的健康有害。如果你睡眠不足，上课可能会感到疲倦，也可能发现很难记住东西。所以我们应该早睡早起。良好的睡眠使我们健康快乐。",
+    "questions": [
+      {
+        "stem": "Why is sleep important?",
+        "stemZh": "为什么睡眠重要？",
+        "options": ["It makes us rich.", "It helps our body rest and brain work better.", "It makes us tall.", "It helps us eat more."],
+        "optionsZh": ["它使我们富有。", "它帮助身体休息、大脑更好地工作。", "它使我们长高。", "它帮助我们吃得更多。"],
+        "answer": 1,
+        "answerText": "It helps our body rest and our brain work better.",
+        "explanation": "根据第一句“When we sleep, our body can rest and our brain can work better.”可知。"
+      },
+      {
+        "stem": "How many hours of sleep do most students need?",
+        "stemZh": "大多数学生需要多少小时睡眠？",
+        "options": ["About 6 hours.", "About 7 hours.", "About 9 hours.", "About 12 hours."],
+        "optionsZh": ["大约6小时。", "大约7小时。", "大约9小时。", "大约12小时。"],
+        "answer": 2,
+        "answerText": "They need about nine hours.",
+        "explanation": "根据“Most students need about nine hours of sleep every night.”可知。"
+      },
+      {
+        "stem": "What may happen if students don't get enough sleep?",
+        "stemZh": "如果学生睡眠不足可能会怎样？",
+        "options": ["They may feel tired in class.", "They may become stronger.", "They may eat more.", "They may run faster."],
+        "optionsZh": ["他们上课可能会感到疲倦。", "他们可能变得更强壮。", "他们可能吃得更多。", "他们可能跑得更快。"],
+        "answer": 0,
+        "answerText": "They may feel tired in class and find it hard to remember things.",
+        "explanation": "根据“you may feel tired in class... hard to remember things.”可知。"
+      }
+    ]
+  },
+  {
+    "type": "科普文",
+    "text": "Bees are very important to us. They help plants grow. When bees fly from flower to flower, they carry pollen. This helps plants make fruits and seeds. Without bees, many plants cannot grow well. But the number of bees is becoming smaller and smaller. Why? Because people use too many chemicals and cut down trees. We should protect bees. We can plant more flowers and stop using harmful chemicals. Let's do something to save the bees.",
+    "translation": "蜜蜂对我们非常重要。它们帮助植物生长。当蜜蜂从一朵花飞到另一朵花时，它们携带花粉。这帮助植物结出果实和种子。没有蜜蜂，许多植物无法很好地生长。但蜜蜂的数量正变得越来越少。为什么？因为人们使用太多化学品并砍伐树木。我们应该保护蜜蜂。我们可以种植更多花朵，停止使用有害化学品。让我们做点事情来拯救蜜蜂。",
+    "questions": [
+      {
+        "stem": "What do bees help plants do?",
+        "stemZh": "蜜蜂帮助植物做什么？",
+        "options": ["Grow.", "Sleep.", "Move.", "Speak."],
+        "optionsZh": ["生长。", "睡觉。", "移动。", "说话。"],
+        "answer": 0,
+        "answerText": "They help plants grow.",
+        "explanation": "根据“They help plants grow.”可知。"
+      },
+      {
+        "stem": "Why are bees becoming fewer?",
+        "stemZh": "为什么蜜蜂越来越少？",
+        "options": ["Because they eat too much.", "Because people use too many chemicals and cut down trees.", "Because they are ill.", "Because they fly away."],
+        "optionsZh": ["因为它们吃太多。", "因为人们使用太多化学品并砍伐树木。", "因为它们生病了。", "因为它们飞走了。"],
+        "answer": 1,
+        "answerText": "Because people use too many chemicals and cut down trees.",
+        "explanation": "根据“Because people use too many chemicals and cut down trees.”可知。"
+      },
+      {
+        "stem": "What can we do to protect bees?",
+        "stemZh": "我们能做什么来保护蜜蜂？",
+        "options": ["Plant more flowers.", "Use more chemicals.", "Cut down trees.", "Keep bees in cages."],
+        "optionsZh": ["种更多花。", "使用更多化学品。", "砍伐树木。", "把蜜蜂关在笼子里。"],
+        "answer": 0,
+        "answerText": "We can plant more flowers and stop using harmful chemicals.",
+        "explanation": "根据“We can plant more flowers and stop using harmful chemicals.”可知。"
+      }
+    ]
+  },
+  {
+    "type": "人文说明文",
+    "text": "Tea is a traditional drink in China. It has a long history of thousands of years. Chinese people like drinking tea very much. There are many kinds of tea, such as green tea, black tea and white tea. People in different places have different ways of making tea. In some places, people drink tea with milk or sugar. In China, many people drink tea without anything. Tea is not only a drink but also a part of Chinese culture. When friends come, we often make tea for them. Drinking tea can also help us relax.",
+    "translation": "茶是中国的传统饮品，有几千年的悠久历史。中国人非常喜欢喝茶。茶有许多种类，如绿茶、红茶和白茶。不同地方的人有不同的泡茶方式。在一些地方，人们喝茶加牛奶或糖。在中国，很多人喝茶什么都不加。茶不仅是一种饮品，也是中国文化的一部分。朋友来访时，我们常为他们泡茶。喝茶还能帮助我们放松。",
+    "questions": [
+      {
+        "stem": "How long is the history of Chinese tea?",
+        "stemZh": "中国茶有多久的历史？",
+        "options": ["Hundreds of years.", "Thousands of years.", "A few years.", "Fifty years."],
+        "optionsZh": ["几百年。", "几千年。", "几年。", "五十年。"],
+        "answer": 1,
+        "answerText": "It has a history of thousands of years.",
+        "explanation": "根据“It has a long history of thousands of years.”可知。"
+      },
+      {
+        "stem": "What kinds of tea are mentioned?",
+        "stemZh": "文中提到了哪些种类的茶？",
+        "options": ["Green tea, black tea and white tea.", "Only green tea.", "Coffee and milk.", "Juice and water."],
+        "optionsZh": ["绿茶、红茶和白茶。", "只有绿茶。", "咖啡和牛奶。", "果汁和水。"],
+        "answer": 0,
+        "answerText": "Green tea, black tea and white tea are mentioned.",
+        "explanation": "根据“such as green tea, black tea and white tea”可知。"
+      },
+      {
+        "stem": "What do Chinese people often do when friends come?",
+        "stemZh": "朋友来访时中国人常做什么？",
+        "options": ["Make tea for them.", "Cook noodles.", "Play football.", "Watch TV."],
+        "optionsZh": ["为他们泡茶。", "煮面条。", "踢足球。", "看电视。"],
+        "answer": 0,
+        "answerText": "They often make tea for them.",
+        "explanation": "根据“When friends come, we often make tea for them.”可知。"
+      }
+    ]
+  },
+  {
+    "type": "人文说明文",
+    "text": "The Lantern Festival is a traditional Chinese festival. It comes on the 15th day of the first lunar month. On this day, people eat yuanxiao, a kind of sweet food. They also watch lanterns and guess lantern riddles. In the evening, there are dragon dances and lion dances in many places. Children carry beautiful lanterns and play with their friends. The Lantern Festival is a time for family to get together. It marks the end of the Spring Festival celebrations.",
+    "translation": "元宵节是中国的传统节日，在农历正月十五。这一天，人们吃元宵——一种甜食。他们还赏花灯、猜灯谜。晚上，许多地方有舞龙舞狮。孩子们提着漂亮的花灯和朋友们玩耍。元宵节是家人团聚的时刻，它标志着春节庆祝活动的结束。",
+    "questions": [
+      {
+        "stem": "When is the Lantern Festival?",
+        "stemZh": "元宵节在什么时候？",
+        "options": ["On the 1st day of the first lunar month.", "On the 15th day of the first lunar month.", "On the 15th day of the eighth lunar month.", "On January 1st."],
+        "optionsZh": ["农历正月初一。", "农历正月十五。", "农历八月十五。", "1月1日。"],
+        "answer": 1,
+        "answerText": "It comes on the 15th day of the first lunar month.",
+        "explanation": "根据“It comes on the 15th day of the first lunar month.”可知。"
+      },
+      {
+        "stem": "What do people eat on this day?",
+        "stemZh": "人们在这一天吃什么？",
+        "options": ["Mooncakes.", "Yuanxiao.", "Dumplings.", "Zongzi."],
+        "optionsZh": ["月饼。", "元宵。", "饺子。", "粽子。"],
+        "answer": 1,
+        "answerText": "They eat yuanxiao.",
+        "explanation": "根据“people eat yuanxiao”可知。"
+      },
+      {
+        "stem": "What does the Lantern Festival mark?",
+        "stemZh": "元宵节标志着什么？",
+        "options": ["The beginning of the Spring Festival.", "The end of the Spring Festival celebrations.", "The start of school.", "The end of summer."],
+        "optionsZh": ["春节的开始。", "春节庆祝活动的结束。", "开学。", "夏天的结束。"],
+        "answer": 1,
+        "answerText": "It marks the end of the Spring Festival celebrations.",
+        "explanation": "根据最后一句可知。"
+      }
+    ]
+  },
+  {
+    "type": "人物/故事",
+    "text": "Mr. Wang is an English teacher in our school. He is over fifty years old, but he is always full of energy. He has taught English for more than thirty years. His classes are very interesting. He often tells us stories and plays games with us. He is strict with us, but he is also very kind. Once, I was ill and missed his class. He came to my home after school and helped me with my lessons. I was deeply moved. I will never forget him.",
+    "translation": "王老师是我们学校的一位英语老师。他五十多岁了，但总是精力充沛。他教英语三十多年了。他的课非常有趣，经常给我们讲故事、和我们做游戏。他对我们很严格，但也非常和善。有一次我生病缺了他的课，他放学后到我家帮我补课。我深受感动。我永远不会忘记他。",
+    "questions": [
+      {
+        "stem": "What does Mr. Wang teach?",
+        "stemZh": "王老师教什么？",
+        "options": ["Math.", "English.", "Chinese.", "History."],
+        "optionsZh": ["数学。", "英语。", "语文。", "历史。"],
+        "answer": 1,
+        "answerText": "He teaches English.",
+        "explanation": "根据“Mr. Wang is an English teacher”可知。"
+      },
+      {
+        "stem": "How long has he taught English?",
+        "stemZh": "他教英语多久了？",
+        "options": ["For 10 years.", "For over 30 years.", "For 5 years.", "For 20 years."],
+        "optionsZh": ["10年。", "30多年。", "5年。", "20年。"],
+        "answer": 1,
+        "answerText": "He has taught English for more than thirty years.",
+        "explanation": "根据“He has taught English for more than thirty years.”可知。"
+      },
+      {
+        "stem": "What did Mr. Wang do when the writer was ill?",
+        "stemZh": "作者生病时王老师做了什么？",
+        "options": ["He visited and helped with lessons.", "He called the writer.", "He gave the writer a gift.", "He did nothing."],
+        "optionsZh": ["他去看望并帮忙补课。", "他给作者打电话。", "他送给作者一份礼物。", "他什么也没做。"],
+        "answer": 0,
+        "answerText": "He came to the writer's home and helped with lessons.",
+        "explanation": "根据“He came to my home after school and helped me with my lessons.”可知。"
+      }
+    ]
+  },
+  {
+    "type": "任务型阅读",
+    "text": "Our environment is getting worse and worse. People cut down too many trees and use too many plastic bags. Rivers are polluted. The air is not clean. We must do something to protect the environment. First, we can plant more trees. Trees can make the air clean. Second, we should use cloth bags instead of plastic bags. Third, we can save water and electricity. For example, turn off the lights when we leave a room. Fourth, we can ride bikes or walk to school. These small actions can make a big difference. Let's start from now on.",
+    "translation": "我们的环境正变得越来越糟。人们砍伐太多树木，使用太多塑料袋。河流被污染，空气不干净。我们必须做点什么来保护环境。首先，我们可以种更多树，树木能使空气清洁。其次，我们应该用布袋代替塑料袋。第三，我们可以节约用水用电，比如离开房间时关灯。第四，我们可以骑自行车或步行上学。这些小行动能带来大改变。让我们从现在开始。",
+    "questions": [
+      {
+        "stem": "What problems does the environment have?",
+        "stemZh": "环境存在哪些问题？",
+        "options": ["The air is clean and rivers are clear.", "People cut down too many trees and use too many plastic bags.", "People plant too many trees.", "There are too many cloth bags."],
+        "optionsZh": ["空气干净、河流清澈。", "人们砍伐太多树木并使用太多塑料袋。", "人们种了太多树。", "有太多布袋。"],
+        "answer": 1,
+        "answerText": "People cut down too many trees, use too many plastic bags, rivers are polluted and the air is not clean.",
+        "explanation": "根据短文第一、二句可知：人们砍伐树木、使用塑料袋，河流被污染，空气不干净。"
+      },
+      {
+        "stem": "What can trees do?",
+        "stemZh": "树木能做什么？",
+        "options": ["They can make the air clean.", "They can make rivers dirty.", "They can make people ill.", "They can make water clean."],
+        "optionsZh": ["它们能使空气清洁。", "它们能使河流变脏。", "它们能使人得病。", "它们能使水变干净。"],
+        "answer": 0,
+        "answerText": "They can make the air clean.",
+        "explanation": "根据“Trees can make the air clean.”可知。"
+      },
+      {
+        "stem": "What should we use instead of plastic bags?",
+        "stemZh": "我们应该用什么代替塑料袋？",
+        "options": ["Paper bags.", "Cloth bags.", "Glass bottles.", "Wooden boxes."],
+        "optionsZh": ["纸袋。", "布袋。", "玻璃瓶。", "木箱。"],
+        "answer": 1,
+        "answerText": "We should use cloth bags.",
+        "explanation": "根据“we should use cloth bags instead of plastic bags.”可知。"
+      },
+      {
+        "stem": "How can we save electricity?",
+        "stemZh": "我们怎样节约用电？",
+        "options": ["By turning off the lights when we leave a room.", "By using more lights.", "By keeping the lights on all day.", "By using more water."],
+        "optionsZh": ["离开房间时关灯。", "使用更多灯。", "整天开着灯。", "使用更多水。"],
+        "answer": 0,
+        "answerText": "We can turn off the lights when we leave a room.",
+        "explanation": "根据“For example, turn off the lights when we leave a room.”可知。"
+      },
+      {
+        "stem": "How can students go to school to protect the environment?",
+        "stemZh": "学生怎样上学来保护环境？",
+        "options": ["By taking a taxi.", "By riding bikes or walking.", "By driving cars.", "By taking a plane."],
+        "optionsZh": ["打车。", "骑自行车或步行。", "开汽车。", "坐飞机。"],
+        "answer": 1,
+        "answerText": "They can ride bikes or walk to school.",
+        "explanation": "根据“we can ride bikes or walk to school.”可知。"
+      }
+    ]
+  }
+]

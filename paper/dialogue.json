@@ -1,0 +1,178 @@
+[
+  {
+    "label": "A",
+    "text": "A: Hello, Tony. Lingling and I went to Lao She Teahouse last night.\nB: ___\nA: It was great! You know, I always wanted to go there.\nB: ___\nA: We drank tea and watched an opera.\nB: ___\nA: No, it was difficult to understand the words. But the actors and actresses were excellent.\nB: ___\nA: We only planned to watch for an hour, but in the end, we stayed for three hours.\nB: Did you enjoy it?\nA: Well, it was interesting. ___\nB: So do I. I'm also interested in traditional Chinese culture.",
+    "translation": "A：你好，托尼。昨晚我和玲玲去了老舍茶馆。\nB：___\nA：太棒了！你知道，我一直想去那里。\nB：___\nA：我们喝了茶，还看了一场歌剧。\nB：___\nA：不，台词很难听懂。但是男女演员都非常出色。\nB：___\nA：我们原本只打算看一个小时，但最后待了三个小时。\nB：你们喜欢吗？\nA：嗯，挺有意思的。___\nB：我也是。我也对中国传统文化感兴趣。",
+    "options": [
+      "How was it?",
+      "What did you do in Lao She Teahouse?",
+      "Did you understand the opera?",
+      "How long did you stay?",
+      "I hope to see more operas next time.",
+      "Who is Lao She?",
+      "I've no idea."
+    ],
+    "questions": [
+      {
+        "answer": 0,
+        "explanation": "根据答语“It was great!”可知，此处是在询问对方对老舍茶馆之行的看法。How was it?（怎么样？）符合语境，故选 A。"
+      },
+      {
+        "answer": 1,
+        "explanation": "根据答语“We drank tea and watched an opera.”可知，此处是在询问在老舍茶馆做了什么。What did you do in Lao She Teahouse? 符合逻辑，故选 B。"
+      },
+      {
+        "answer": 2,
+        "explanation": "根据答语“No, it was difficult to understand the words.”可知，此处是一个一般疑问句，且与“能否听懂”有关。Did you understand the opera? 符合语境，故选 C。"
+      },
+      {
+        "answer": 3,
+        "explanation": "根据答语“We only planned to watch for an hour, but in the end, we stayed for three hours.”可知，此处是在询问待了多长时间。How long did you stay? 符合题意，故选 D。"
+      },
+      {
+        "answer": 4,
+        "explanation": "根据答语“So do I. I'm also interested in traditional Chinese culture.”可知，此处表达的是“希望下次能看更多歌剧”之类的意愿。I hope to see more operas next time. 符合语境，故选 E。"
+      }
+    ]
+  },
+  {
+    "label": "B",
+    "text": "A: Are there any activities to do after class in our school, Liu Yan?\nB: Yes, we can join many clubs.\nA: Which club do you join?\nB: The English Club.\nA: ___\nB: We do many things, such as watching English films, listening to English songs and reading English stories.\nA: ___\nB: That's right. I have improved my listening and speaking. I have got to know a lot about the world through reading as well.\nA: Excellent! ___\nB: There are twenty students.\nA: ___\nB: We go there once a week.\nA: ___\nB: Of course. Welcome!",
+    "translation": "A：刘燕，我们学校课后有什么活动吗？\nB：有，我们可以参加很多俱乐部。\nA：你参加了哪个俱乐部？\nB：英语俱乐部。\nA：___\nB：我们做很多事情，比如看英语电影、听英语歌曲和读英语故事。\nA：___\nB：没错。我的听力和口语都提高了。通过阅读，我也了解了很多关于世界的知识。\nA：太棒了！___\nB：有二十个学生。\nA：___\nB：我们每周去一次。\nA：___\nB：当然。欢迎！",
+    "options": [
+      "What do you do in it?",
+      "These are good ways to learn English.",
+      "How many students are there in the club?",
+      "How often do you go to the club?",
+      "Can I join you?",
+      "Who else is going to be there?",
+      "How long have you been in the club?"
+    ],
+    "questions": [
+      {
+        "answer": 0,
+        "explanation": "根据答语“We do many things, such as watching English films...”可知，此处是在询问在俱乐部里做什么。What do you do in it? 符合语境，故选 A。"
+      },
+      {
+        "answer": 1,
+        "explanation": "上文 B 介绍了看电影、听歌、读故事等活动，下文 B 又说这些活动提高了听力和口语、增长了见识，说明 A 在肯定这些是好的学习方式。These are good ways to learn English. 符合逻辑，故选 B。"
+      },
+      {
+        "answer": 2,
+        "explanation": "根据答语“There are twenty students.”可知，此处是在询问俱乐部里学生的人数。How many students are there in the club? 符合语境，故选 C。"
+      },
+      {
+        "answer": 3,
+        "explanation": "根据答语“We go there once a week.”可知，此处是在询问去俱乐部的频率。How often do you go to the club? 符合语境，故选 D。"
+      },
+      {
+        "answer": 4,
+        "explanation": "根据答语“Of course. Welcome!”可知，A 在询问是否可以加入俱乐部。Can I join you? 符合语境，故选 E。"
+      }
+    ]
+  },
+  {
+    "label": "C",
+    "text": "A: Hi, Jack! Where are you going?\nB: ___\nA: But we don't have any lessons on Saturdays. ___\nB: Because I'm going to practise playing football.\nA: ___\nB: At 10 am. We all arrive as early as we can so that we have time to warm up.\nA: How about your training?\nB: We're training harder than usual, and we want to do better.\nA: Great! By the way, I hear you're going to have a big match next week. ___\nB: New Stars.\nA: It's also my favourite team. They always try hard to win.\nB: Yes, I agree with you. But we're playing better as a team now.\nA: Good luck! ___\nB: Thank you very much.",
+    "translation": "A：嗨，杰克！你要去哪里？\nB：___\nA：但是我们周六不上课啊。___\nB：因为我要去练习踢足球。\nA：___\nB：上午10点。我们都尽量早到，这样就有时间热身。\nA：训练怎么样？\nB：我们比平时训练得更努力，我们想做得更好。\nA：太棒了！顺便问一下，我听说你们下周有一场大赛。___\nB：新星队。\nA：那也是我最喜欢的球队。他们总是努力争取胜利。\nB：是的，我同意。不过我们现在作为一个团队配合得更好了。\nA：祝你好运！___\nB：非常感谢。",
+    "options": [
+      "I'm going to school.",
+      "Why are you going there?",
+      "When do you start the practice?",
+      "Who are you playing against?",
+      "I do hope you will win!",
+      "What's the score?",
+      "Will Mr White come to watch your match?"
+    ],
+    "questions": [
+      {
+        "answer": 0,
+        "explanation": "上文 A 问“Where are you going?”，B 回答要去的地方。I'm going to school. 符合语境，故选 A。"
+      },
+      {
+        "answer": 1,
+        "explanation": "下文 B 回答“Because I'm going to practise playing football.”，说明 A 问的是去学校的原因。Why are you going there? 符合逻辑，故选 B。"
+      },
+      {
+        "answer": 2,
+        "explanation": "下文 B 回答“At 10 am.”，这是时间，所以 A 问的是练习开始的时间。When do you start the practice? 符合语境，故选 C。"
+      },
+      {
+        "answer": 3,
+        "explanation": "下文 B 回答“New Stars.”，这是一个队伍名称，所以 A 问的是和谁比赛。Who are you playing against? 符合语境，故选 D。"
+      },
+      {
+        "answer": 4,
+        "explanation": "上文 A 说“Good luck!”，接着表达希望对方赢的愿望。I do hope you will win! 符合语境，故选 E。"
+      }
+    ]
+  },
+  {
+    "label": "D",
+    "text": "A: Can I help you?\nB: Yes, please. I want to buy a schoolbag for my son.\nA: ___ does he like?\nB: He likes black. ___ is this one?\nA: It's 150 yuan.\nB: Oh, it's a little expensive. ___ you ___ a cheaper one?\nA: Sure. ___ this black one? It's only 90 yuan.\nB: It looks nice. ___ I ___ a look at it?\nA: Of course. Here you are.\nB: It's good. I'll take it.\nA: Thank you.",
+    "translation": "A：需要我帮忙吗？\nB：是的，我想给我儿子买一个书包。\nA：他喜欢什么颜色？\nB：他喜欢黑色。这个多少钱？\nA：150 元。\nB：哦，有点贵。有便宜一点的吗？\nA：当然。这个黑色的怎么样？只要 90 元。\nB：看起来不错。我可以看一看吗？\nA：当然，给您。\nB：很不错，我买了。\nA：谢谢。",
+    "options": [
+      "What colour",
+      "How much",
+      "Do, have",
+      "What about",
+      "Can, have",
+      "How many",
+      "Would, like"
+    ],
+    "questions": [
+      {
+        "answer": 0,
+        "explanation": "根据答语“He likes black.”可知，售货员问的是颜色。What colour 符合语境，故选 A。"
+      },
+      {
+        "answer": 1,
+        "explanation": "根据答语“It's 150 yuan.”可知，顾客问的是价格。How much 符合语境，故选 B。"
+      },
+      {
+        "answer": 2,
+        "explanation": "顾客觉得贵，想找更便宜的，且该空由两个词构成。Do you have a cheaper one? 是购物场景中询问“有没有更便宜的”的固定表达，故选 C。"
+      },
+      {
+        "answer": 3,
+        "explanation": "售货员推荐另一款黑色书包，What about this black one? 用于提出建议，符合语境，故选 D。"
+      },
+      {
+        "answer": 4,
+        "explanation": "顾客想仔细看看书包，Can I have a look at it? 是请求试看的固定表达，故选 E。"
+      }
+    ]
+  },
+  {
+    "label": "E",
+    "text": "A: Excuse me. Could you tell me the way to the city library?\nB: Sure. Go along this street and ___ at the second crossing.\nA: ___ is it from here?\nB: It's about twenty minutes' walk. You can take the No.7 bus.\nA: ___ the bus stop?\nB: It's over there, next to the supermarket.\nA: Thanks a lot.\nB: ___.",
+    "translation": "A：打扰一下，你能告诉我去市图书馆的路吗？\nB：当然。沿着这条街走，在第二个十字路口左转。\nA：离这儿有多远？\nB：步行大约 20 分钟。你可以乘坐 7 路公交车。\nA：公交车站在哪里？\nB：就在那边，超市旁边。\nA：非常感谢。\nB：不客气。",
+    "options": [
+      "turn left",
+      "How far",
+      "Where is",
+      "You're welcome",
+      "How long",
+      "turn right",
+      "Is there"
+    ],
+    "questions": [
+      {
+        "answer": 0,
+        "explanation": "指路时与“at the second crossing”搭配的是“在第二个十字路口左转/右转”。turn left 符合问路对话的常见走向，也与下文“沿着这条街走”衔接自然，故选 A。"
+      },
+      {
+        "answer": 1,
+        "explanation": "根据答语“It's about twenty minutes' walk.”可知，A 问的是距离。How far 符合语境，故选 B。"
+      },
+      {
+        "answer": 2,
+        "explanation": "根据答语“It's over there, next to the supermarket.”可知，A 问的是公交车站在哪里。Where is the bus stop? 符合逻辑，故选 C。"
+      },
+      {
+        "answer": 3,
+        "explanation": "上文 A 说“Thanks a lot.”，B 应回答“不客气”。You're welcome. 是固定应答，故选 D。"
+      }
+    ]
+  }
+]

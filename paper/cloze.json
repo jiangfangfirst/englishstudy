@@ -1,0 +1,699 @@
+[
+  {
+    "label": "来源1",
+    "text": "When I was at school, I didn't think I was good at anything. The other children learned things ___, but I didn't. The only thing that ___ me were cars. I spent ages looking at how my grandpa's old car worked. But my mom wasn't interested in cars at all, and she was ___ me going on about them all the time. One day, there was a school trip. I woke up early to ___ the bus. We were going down the road when the bus suddenly ___. I thought we had run out of petrol, but the driver told us there was something ___ with the engine and he would have to call the garage. I ___ to see for myself and soon worked out what to do: I just needed to put back a cable. After ten minutes, the bus was on the road again. And everyone in the bus ___ me. After that, I realized there was something I could ___. When I left school, I ___ my own car repair business. Now, I'm doing really well.",
+    "translation": "我上学时，觉得自己什么都不擅长。别的孩子学东西很___，但我不是。唯一使我感兴趣的是汽车。我花很长时间看爷爷那辆旧车是怎么工作的。但我妈妈对汽车一点也不感兴趣，她___我总在说车的事。有一天，学校组织了一次旅行。我早早起床去___公交车。我们正沿路行驶，公交车突然___。我以为我们没油了，但司机告诉我们引擎出了___，他得打电话叫修理厂。我___亲自去看看，很快就弄明白该怎么做了：我只需要把一根线接回去。十分钟后，公交车又上路了。车上的每个人都___我。从那以后，我意识到有一件事是我能___的。离开学校后，我___了自己的汽车修理店。现在，我过得很好。",
+    "questions": [
+      { "options": ["carelessly", "openly", "nervously", "quickly"], "optionsZh": ["粗心地", "公开地", "紧张地", "快速地"], "answer": 3, "explanation": "其他孩子学得很快，“我”不是，形成对比，选 quickly。" },
+      { "options": ["feared", "interested", "broke", "trembled"], "optionsZh": ["害怕", "使感兴趣", "打破", "颤抖"], "answer": 1, "explanation": "后文说“我”长时间看爷爷的旧车，说明汽车让“我”感兴趣，选 interested。" },
+      { "options": ["tired of", "proud of", "patient with", "pleased with"], "optionsZh": ["厌倦", "为……骄傲", "对……有耐心", "对……满意"], "answer": 0, "explanation": "妈妈对车不感兴趣，厌倦“我”总谈车，选 tired of。" },
+      { "options": ["park", "repair", "drive", "catch"], "optionsZh": ["停放", "修理", "驾驶", "赶上"], "answer": 3, "explanation": "赶公交车，catch the bus 是固定搭配。" },
+      { "options": ["arrived", "left", "stopped", "appeared"], "optionsZh": ["到达", "离开", "停下", "出现"], "answer": 2, "explanation": "公交车突然“停下”，才有后面检查引擎，选 stopped。" },
+      { "options": ["common", "wrong", "new", "similar"], "optionsZh": ["常见的", "错的", "新的", "相似的"], "answer": 1, "explanation": "引擎“出了问题”，something wrong with 是固定表达。" },
+      { "options": ["offered", "failed", "forgot", "refused"], "optionsZh": ["主动提出", "失败", "忘记", "拒绝"], "answer": 0, "explanation": "“我”主动提出去看看，offer to do sth 意为“主动提出做某事”。" },
+      { "options": ["collected", "guarded", "praised", "controlled"], "optionsZh": ["收集", "守卫", "表扬", "控制"], "answer": 2, "explanation": "“我”修好车，大家“表扬”了“我”，选 praised。" },
+      { "options": ["mix", "do", "add", "dry"], "optionsZh": ["混合", "做", "添加", "使干燥"], "answer": 1, "explanation": "“我”意识到有自己能“做”的事，指修车。" },
+      { "options": ["set up", "heard of", "called at", "gave away"], "optionsZh": ["建立、创办", "听说", "拜访", "赠送"], "answer": 0, "explanation": "毕业后“我”创办了汽车修理店，set up 意为“建立、创办”。" }
+    ]
+  },
+  {
+    "label": "来源2",
+    "text": "Last spring, our class planned a play for the school music festival. I was ___ to be a princess in the play. I was really glad because I had always dreamed of standing on the stage. I valued the ___ and practiced my lines every day. But during the rehearsal, I was so nervous that every word disappeared from my head. Because of this, I was changed to play a small role, which made me really upset. ___ I didn't tell my mother what had happened that day, she noticed my unhappiness and asked me if I wanted to take a walk in the garden. It was a lovely spring day. I walked slowly with my mother in the garden. I saw many flowers. ___ roses, there were also some small, unknown but beautiful flowers. My mother pointed at the small flowers and said, \"I think I'll ___ all these small flowers. In this way, we'll only have beautiful roses in this garden.\" \"But I also like the small flowers,\" I said. \"All the flowers are beautiful, even the unknown ones! Each of them plays an important role in making a ___ garden.\" My mother looked at me and said ___, \"Yes, every flower gives people pleasure in its own way, doesn't it?\" I nodded. \"And the same goes for people, too,\" she added. I realized that my mother had ___ why I was upset. \"I can't play a princess any more. I can only play a small role in the play.\" I cried and told her the ___. \"But I believe you will be a good performer,\" she said. Her words cheered me up. When the play finally came, everyone was amazed at my perfect performance. Thanks to my mother's encouragement, I understood that ___ had his or her own value in the world. I was proud of my role in the play.",
+    "translation": "去年春天，我们班为学校音乐节策划了一出戏。我被___在戏里演公主。我真的很高兴，因为我一直梦想站在舞台上。我珍视这次___，每天练习台词。但在排练时，我紧张得每个字都从脑子里消失了。因为这个，我被换去演一个小角色，这让我真的很沮丧。___那天我没告诉妈妈发生了什么，她还是注意到了我的不开心，问我愿不愿意去花园里散散步。那是一个美好的春日。我和妈妈在花园里慢慢走着。我看见许多花。___玫瑰，还有一些不知名的但美丽的小花。妈妈指着那些小花说：“我想我要把这些小花都___。这样，我们花园里就只有美丽的玫瑰了。”“可我也喜欢那些小花，”我说。“所有的花都很美，即使是那些不知名的！每一朵都在让花园变得___中起着重要作用。”妈妈看着我，___地说：“是的，每一朵花都以自己的方式给人快乐，不是吗？”我点点头。“人也一样，”她补充道。我意识到妈妈已经___我为什么难过了。“我不能再演公主了，我只能在戏里演一个小角色。”我哭着告诉了她___。“但我相信你会成为一个好演员，”她说。她的话让我振作起来。当演出终于到来时，每个人都惊叹于我完美的表演。多亏妈妈的鼓励，我明白了世界上___都有自己的价值。我为我在戏里的角色感到骄傲。",
+    "questions": [
+      { "options": ["refused", "chosen", "warned", "punished"], "optionsZh": ["拒绝", "选中", "警告", "惩罚"], "answer": 1, "explanation": "“我”被“选中”演公主，且一直梦想登台，选 chosen。" },
+      { "options": ["memory", "promise", "chance", "friendship"], "optionsZh": ["记忆", "承诺", "机会", "友谊"], "answer": 2, "explanation": "“我”珍视这次“机会”，每天练台词，选 chance。" },
+      { "options": ["Until", "Unless", "Since", "Although"], "optionsZh": ["直到", "除非", "既然", "尽管"], "answer": 3, "explanation": "“尽管”没告诉妈妈，妈妈仍察觉了，表让步，选 Although。" },
+      { "options": ["Besides", "Above", "Without", "Through"], "optionsZh": ["除……之外", "在上方", "没有", "穿过"], "answer": 0, "explanation": "“除了”玫瑰，还有一些不知名的小花，选 Besides。" },
+      { "options": ["give out", "cut out", "find out", "clear out"], "optionsZh": ["分发", "剪下", "找出", "清理掉"], "answer": 3, "explanation": "妈妈假意说要“清理掉”小花只留玫瑰，选 clear out。" },
+      { "options": ["colorful", "clean", "common", "comfortable"], "optionsZh": ["多彩的", "干净的", "普通的", "舒适的"], "answer": 0, "explanation": "每朵花都在打造“多彩的”花园中起作用，选 colorful。" },
+      { "options": ["sadly", "seriously", "angrily", "politely"], "optionsZh": ["伤心地", "认真地", "愤怒地", "礼貌地"], "answer": 1, "explanation": "妈妈“认真地”借花讲道理，选 seriously。" },
+      { "options": ["accepted", "explained", "guessed", "forgotten"], "optionsZh": ["接受", "解释", "猜到", "忘记"], "answer": 2, "explanation": "妈妈已“猜到”女儿沮丧的原因，选 guessed。" },
+      { "options": ["standard", "theme", "victory", "reason"], "optionsZh": ["标准", "主题", "胜利", "原因"], "answer": 3, "explanation": "女儿哭着告诉妈妈“原因”，选 reason。" },
+      { "options": ["somebody", "everybody", "anybody", "nobody"], "optionsZh": ["某人", "每个人", "任何人", "没有人"], "answer": 1, "explanation": "妈妈的话让女儿明白“每个人”都有自己的价值，选 everybody。" }
+    ]
+  },
+  {
+    "label": "来源3",
+    "text": "A forest ranger was walking home through the forest. He had gone there to pick up some wood as ___ was coming. Suddenly, he heard a little cry coming from the woods. He went near and ___ a baby bear. It was shivering with cold. \"Poor little ___, you must have lost your way,\" said the ranger. The ranger brought it home. He kept the baby bear warm and gave it food and water. Two days passed. The little bear got much better. On the ___ day, the ranger opened the door of his house. The bear ran off ___ into the forest. The long winter came. There was snow everywhere. ___, there was no more wood to keep the ranger warm. One night, he heard a sound ___ his house. He opened the door. And he was very ___ to see a pile of wood on the ground. He raised his head and saw a big bear going off into the forest. Beside the bear was the baby bear he had ___. \"Thank you, little bear,\" the ranger said thankfully as he watched the mother bear and its baby ___ slowly. You never know what you will get in return when you offer a little help.",
+    "translation": "一位护林员穿过森林走回家。他去那里捡些木柴，因为___要来了。突然，他听到树林里传来一声微弱的叫声。他走近，___一只小熊。它冻得直发抖。“可怜的小___，你一定是迷路了，”护林员说。护林员把它带回了家。他让小熊保持温暖，给它食物和水。两天过去了。小熊好多了。在___天，护林员打开了家门。小熊___地跑进了森林。漫长的冬天来了。到处都是雪。___，再也没有木柴让护林员取暖了。一天夜里，他听到屋___有声音。他打开门。他非常___地看到地上有一堆木柴。他抬起头，看见一只大熊正走进森林。熊的旁边是他曾___的那只小熊。“谢谢你，小熊，”护林员感激地说，看着母熊和它的宝宝慢慢___。当你献出一点帮助时，你永远不知道会得到什么回报。",
+    "questions": [
+      { "options": ["spring", "summer", "winter", "autumn"], "optionsZh": ["春天", "夏天", "冬天", "秋天"], "answer": 2, "explanation": "后文“漫长的冬天来了”，且捡木柴取暖，说明冬天将至，选 winter。" },
+      { "options": ["saw", "drew", "caught", "heard"], "optionsZh": ["看见", "画", "抓住", "听见"], "answer": 0, "explanation": "走近后“看见”幼熊，选 saw。" },
+      { "options": ["boy", "bear", "rabbit", "dog"], "optionsZh": ["男孩", "熊", "兔子", "狗"], "answer": 1, "explanation": "前文已明确是 baby bear，选 bear。" },
+      { "options": ["first", "second", "third", "fourth"], "optionsZh": ["第一", "第二", "第三", "第四"], "answer": 2, "explanation": "“两天过去”，幼熊好转离开是“第三天”，选 third。" },
+      { "options": ["nervously", "happily", "carefully", "sadly"], "optionsZh": ["紧张地", "开心地", "小心地", "伤心地"], "answer": 1, "explanation": "幼熊恢复健康，离开时“开心地”，选 happily。" },
+      { "options": ["Soon", "Also", "Still", "However"], "optionsZh": ["很快", "也", "仍然", "然而"], "answer": 0, "explanation": "冬天来临，“很快”没有柴取暖了，选 Soon。" },
+      { "options": ["above", "under", "outside", "inside"], "optionsZh": ["在……上方", "在……下方", "在……外面", "在……里面"], "answer": 2, "explanation": "开门才看到，声音来自“屋外”，选 outside。" },
+      { "options": ["surprised", "worried", "angry", "afraid"], "optionsZh": ["惊讶的", "担心的", "生气的", "害怕的"], "answer": 0, "explanation": "寒冬缺柴时突然出现一堆柴，感到“惊讶”，选 surprised。" },
+      { "options": ["bought", "trained", "saved", "found"], "optionsZh": ["买", "训练", "救助", "找到"], "answer": 2, "explanation": "指他“救助过”的幼熊，选 saved。" },
+      { "options": ["running", "walking", "jumping", "flying"], "optionsZh": ["跑", "走", "跳", "飞"], "answer": 1, "explanation": "母熊带幼熊慢慢“走”开，选 walking。" }
+    ]
+  },
+  {
+    "label": "来源4",
+    "text": "What's the most important thing in life? The answer keeps ___ as we grow up. When I was a little boy, I thought my ___ were the most important. My father and mother were always with me. They gave me much love and taught me a lot. I thought I couldn't live ___ them. When I got ___ and went to school, I had a lot of classmates. I enjoyed studying and playing with them. They helped me a lot ___ I had a problem. We always had fun together. Also, I worked hard to get good grades because I thought ___ was very important for my future. So friendship and study were the two most important things for me. As time ___, I changed my mind again. I thought the most important thing was art. It made me happy. I often drew pictures ___ in my room. I also liked watching art programs on TV. My life ___ fun because of art. Now I realize that family, friendship and art are all very important. Many important things that are changing make ___ life unexpected and interesting.",
+    "translation": "人生中最重要的是什么？这个答案随着我们长大不断___。我小时候，觉得我的___最重要。爸爸妈妈总在我身边。他们给了我很多爱，教了我很多。我觉得没有他们我活___。我___了，去上学，有了很多同学。我喜欢和他们一起学习和玩耍。我遇到问题时，他们给了我很多___。我们在一起总是很开心。另外，我努力学习取得好成绩，因为我觉得___对我的未来非常重要。所以友谊和学习对我来说是最重要的两件事。随着时间___，我又改变了主意。我觉得最重要的是艺术。它让我快乐。我经常在房间里___画画。我也喜欢在电视上看艺术节目。因为艺术，我的生活___快乐。现在我意识到，家庭、友谊和艺术都很重要。许多不断变化的重要事物让___生活充满意外和趣味。",
+    "questions": [
+      { "options": ["staying", "changing", "planning", "ending"], "optionsZh": ["保持", "变化", "计划", "结束"], "answer": 1, "explanation": "下文列举不同阶段的看法，说明答案在“变化”，选 changing。" },
+      { "options": ["parents", "friends", "teachers", "classmates"], "optionsZh": ["父母", "朋友", "老师", "同学"], "answer": 0, "explanation": "后文说父母总在身边，小时候认为“父母”最重要，选 parents。" },
+      { "options": ["about", "of", "without", "with"], "optionsZh": ["关于", "……的", "没有", "和……一起"], "answer": 2, "explanation": "不能“没有”他们，couldn't live without。" },
+      { "options": ["taller", "older", "stronger", "cleverer"], "optionsZh": ["更高", "更年长", "更强壮", "更聪明"], "answer": 1, "explanation": "“长大”去上学，got older。" },
+      { "options": ["why", "where", "when", "how"], "optionsZh": ["为什么", "哪里", "什么时候", "怎样"], "answer": 2, "explanation": "“当”遇到问题他们帮助我，选 when。" },
+      { "options": ["knowledge", "health", "wealth", "friendship"], "optionsZh": ["知识", "健康", "财富", "友谊"], "answer": 0, "explanation": "努力取得好成绩，认为“知识”重要，选 knowledge。" },
+      { "options": ["went by", "went back", "went out", "went on"], "optionsZh": ["流逝", "回去", "出去", "继续"], "answer": 0, "explanation": "“随着时间流逝”，as time went by。" },
+      { "options": ["politely", "sadly", "quietly", "loudly"], "optionsZh": ["礼貌地", "伤心地", "安静地", "大声地"], "answer": 2, "explanation": "在房间里“安静地”画画，选 quietly。" },
+      { "options": ["was busy with", "was interested in", "was full of", "was afraid of"], "optionsZh": ["忙于", "对……感兴趣", "充满", "害怕"], "answer": 2, "explanation": "生活“充满”乐趣，be full of。" },
+      { "options": ["your", "our", "their", "his"], "optionsZh": ["你的", "我们的", "他们的", "他的"], "answer": 1, "explanation": "让“我们”的生活充满意外和趣味，选 our。" }
+    ]
+  },
+  {
+    "label": "来源5",
+    "text": "Light rain continued to fall as I arrived at the mountain village. With a heavy bag on my back, I was excited to teach at a small school here, but a little ___. What would these students be like? The school had only 18 students. Most were quiet, ___ they ran and laughed at break. One girl, Wen, always sat alone in the corner, seldom saying anything. On my first day in the classroom, I shared with them a ___ with the words \"You are seen\" on it and put it up on the wall. Some smiled shyly and some spoke quietly. \"That's why I'm here,\" I said. However, Wen didn't ___. She was just drawing circles on the desk with her finger. Days passed quickly. The lessons were ___ planned. The children were kind. But my effort seemed to make little difference. I was not sure if I was doing anything ___. One night, a heavy storm caused a power cut, leaving the classroom in darkness. As everyone was frozen, a soft light appeared. It was Wen who was holding a ___ in her hand. \"We can still read,\" she whispered. That was the first time I heard her voice. The next day, she sat ___. In the following days, she began to talk more. In my last class, she came up and gave me the lantern. \"So you will always have some ___,\" she smiled gently. I came to give light but found it was quietly ___. Volunteering isn't always loud or big. Sometimes, it's a quiet lantern—shared between the two, and shining in both directions.",
+    "translation": "小雨一直下着，我来到这个山村。背着沉重的包，我很兴奋能在这里的一所小学校教书，但也有一点___。这些学生会是什么样呢？学校只有18个学生。大多数都很安静，___课间他们会跑会笑。一个叫文的女孩总是独自坐在角落里，很少说话。在我第一天的课堂上，我和他们分享了一张写有“你被看见”字样的___，把它贴在墙上。有些人害羞地笑了，有些人轻声说着话。“这就是我在这里的原因，”我说。然而，文没有___。她只是用手指在桌上画圈。日子过得很快。课备得很___。孩子们很善良。但我的努力似乎没什么效果。我不确定自己做的到底有没有___。一天夜里，一场大暴雨导致停电，教室陷入黑暗。当所有人都愣住了，一道柔和的光出现了。是文，她手里拿着一___。“我们还可以读书，”她轻声说。那是我第一次听到她的声音。第二天，她坐得___了。接下来的日子里，她开始说得更多。在我最后一堂课上，她走上来，把灯笼给了我。“这样你就总会有一点___，”她温柔地笑了。我来给予光，却发现光被悄悄地___了。志愿服务并不总是响亮或宏大。有时，它就是一只安静的灯笼——在两人之间分享，并照亮两个方向。",
+    "questions": [
+      { "options": ["bored", "relaxed", "nervous", "surprised"], "optionsZh": ["无聊的", "放松的", "紧张的", "惊讶的"], "answer": 2, "explanation": "初到山村不知学生如何，有点“紧张”，选 nervous。" },
+      { "options": ["though", "so", "since", "when"], "optionsZh": ["不过", "所以", "既然", "当……时"], "answer": 0, "explanation": "多数安静，“不过”课间会跑会笑，表转折，选 though。" },
+      { "options": ["dictionary", "poster", "cake", "cup"], "optionsZh": ["字典", "海报", "蛋糕", "杯子"], "answer": 1, "explanation": "把写有标语的“海报”贴墙上，选 poster。" },
+      { "options": ["stand up", "give up", "wake up", "look up"], "optionsZh": ["站起来", "放弃", "醒来", "抬头看"], "answer": 3, "explanation": "Wen 没有“抬头看”，只是画圈，选 look up。" },
+      { "options": ["slowly", "carefully", "directly", "finally"], "optionsZh": ["缓慢地", "细心地", "直接地", "最终"], "answer": 1, "explanation": "课程是“精心”准备的，选 carefully。" },
+      { "options": ["simple", "interesting", "popular", "meaningful"], "optionsZh": ["简单的", "有趣的", "受欢迎的", "有意义的"], "answer": 3, "explanation": "不确定自己做的是否有“意义”，选 meaningful。" },
+      { "options": ["book", "lantern", "candle", "lamp"], "optionsZh": ["书", "灯笼", "蜡烛", "台灯"], "answer": 1, "explanation": "后文反复提到 lantern，Wen 手里是“灯笼”，选 lantern。" },
+      { "options": ["farther", "lower", "closer", "longer"], "optionsZh": ["更远", "更低", "更近", "更长"], "answer": 2, "explanation": "第二天坐得“更近”，表明开始接纳，选 closer。" },
+      { "options": ["fun", "time", "light", "hope"], "optionsZh": ["乐趣", "时间", "光", "希望"], "answer": 2, "explanation": "送灯笼说“你总会有一点‘光’”，选 light。" },
+      { "options": ["returned", "collected", "connected", "accepted"], "optionsZh": ["回馈", "收集", "连接", "接受"], "answer": 0, "explanation": "来给予光，却发现光被悄悄“回馈”，选 returned。" }
+    ]
+  },
+  {
+    "label": "来源6",
+    "text": "Last year, my family moved to a new city. I felt lonely because I had no friends there. One day, my mother suggested that I join a community club. I was not sure at first, but I decided to give it a ___. On the first day, I met some children who were learning paper-cutting. The teacher showed us how to ___ a piece of red paper into a beautiful flower. I thought it was ___, so I tried my best. At first, my work was not good at all. I made many ___. But the teacher encouraged me and said, \"Don't be ___. Practice makes perfect.\" I kept practicing every week. Slowly, I got better. I also made good ___ with the other children. We helped each other and shared our ideas. Now, I can cut many beautiful patterns. Last month, I even ___ a prize in a paper-cutting competition. My parents were very ___ of me. Looking back, I'm glad I joined the club. It not only taught me a traditional ___ but also helped me become more ___. I learned that trying new things can change your life.",
+    "translation": "去年，我家搬到了一个新城市。我感到孤独，因为在那里没有朋友。一天，妈妈建议我加入一个社区俱乐部。起初我不确定，但我决定___。第一天，我遇到了一些正在学剪纸的孩子。老师给我们展示怎样把一张红纸___成一朵美丽的花。我觉得这很___，所以尽力去做。起初，我的作品一点也不好。我犯了很多___。但老师鼓励我，说：“别___。熟能生巧。”我每周都坚持练习。慢慢地，我变得更好了。我还和其他孩子交了好___。我们互相帮助，分享想法。现在，我能剪出许多美丽的图案。上个月，我甚至在一次剪纸比赛中___了一个奖。我父母为我感到非常___。回头看，我很高兴自己加入了俱乐部。它不仅教会我一门传统的___，还帮助我变得更___。我学到，尝试新事物能改变你的生活。",
+    "questions": [
+      { "options": ["look", "try", "rest", "talk"], "optionsZh": ["看", "尝试", "休息", "谈话"], "answer": 1, "explanation": "决定“试一试”，give it a try 是固定搭配，选 try。" },
+      { "options": ["cut", "draw", "fold", "turn"], "optionsZh": ["剪", "画", "折叠", "转"], "answer": 0, "explanation": "剪纸是把红纸“剪”成花，选 cut。" },
+      { "options": ["boring", "easy", "interesting", "dangerous"], "optionsZh": ["无聊的", "容易的", "有趣的", "危险的"], "answer": 2, "explanation": "觉得剪纸很“有趣”，所以尽力去做，选 interesting。" },
+      { "options": ["friends", "mistakes", "cakes", "plans"], "optionsZh": ["朋友", "错误", "蛋糕", "计划"], "answer": 1, "explanation": "起初做得不好，犯了 many “错误”，选 mistakes。" },
+      { "options": ["happy", "excited", "sad", "angry"], "optionsZh": ["开心的", "兴奋的", "难过的", "生气的"], "answer": 2, "explanation": "老师鼓励“别难过”，选 sad。" },
+      { "options": ["friends", "money", "decisions", "rules"], "optionsZh": ["朋友", "钱", "决定", "规则"], "answer": 0, "explanation": "和其他孩子交了好“朋友”，make friends，选 friends。" },
+      { "options": ["lost", "won", "bought", "found"], "optionsZh": ["丢失", "赢得", "买", "找到"], "answer": 1, "explanation": "在比赛中“获得”奖项，win a prize，选 won。" },
+      { "options": ["tired", "afraid", "proud", "bored"], "optionsZh": ["疲惫的", "害怕的", "骄傲的", "无聊的"], "answer": 2, "explanation": "父母为“我”感到“骄傲”，be proud of，选 proud。" },
+      { "options": ["sport", "song", "game", "art"], "optionsZh": ["运动", "歌曲", "游戏", "艺术"], "answer": 3, "explanation": "剪纸是一门传统“艺术”，选 art。" },
+      { "options": ["lazy", "quiet", "confident", "careless"], "optionsZh": ["懒惰的", "安静的", "自信的", "粗心的"], "answer": 2, "explanation": "不仅学到艺术，还变得更“自信”，选 confident。" }
+    ]
+  },
+  {
+    "label": "小马过河",
+    "text": "One day, a little horse was asked to carry a bag of grain to a village across the river. When he came to the river, he looked at the rushing water and felt ___. He did not know how ___ the river was or whether he could cross it ___. He asked Uncle Ox, \"Is the river deep?\" The ox answered, \"Not deep. You can walk across it easily.\" But a little squirrel ___ him and said, \"Don't go into the river! It's very deep!\" The little horse did not know whom to ___. He decided to go back home to ask his ___. His mother listened to him and said, \"My child, you should not just ___ to others. You need to try it yourself.\" So the little horse returned to the river. This time, he was not ___. He stepped into the water carefully. The water was neither deep nor shallow. He crossed the river ___ and delivered the grain. From then on, he understood that ___ is the best way to learn the truth.",
+    "translation": "一天，一匹小马被要求把一袋谷物送到河对岸的村庄。来到河边时，他看着湍急的河水，感到___。他不知道河水有多___，也不知道自己能否___过河。他问牛叔叔：“河水深吗？”牛回答说：“不深，你很容易就能走过去。”但一只小松鼠___了他，说：“别下河！水很深！”小马不知道该___谁。他决定回家去问他的___。妈妈听了他的话后说：“孩子，你不应该只是___别人的话。你需要自己去尝试。”于是小马回到了河边。这一次，他不再___。他小心地踏入水中。河水既不深也不浅。他___过了河，把谷物送到了。从那以后，他明白了___是了解真相的最好方式。",
+    "questions": [
+      { "options": ["afraid", "excited", "bored", "angry"], "optionsZh": ["害怕的", "兴奋的", "无聊的", "生气的"], "answer": 0, "explanation": "后文写他不知道自己能否安全过河，面对急流感到“害怕”，选 afraid。" },
+      { "options": ["wide", "deep", "long", "clean"], "optionsZh": ["宽的", "深的", "长的", "干净的"], "answer": 1, "explanation": "牛叔叔回答“Not deep”，说明小马问的是“多深”，选 deep。" },
+      { "options": ["politely", "quietly", "safely", "slowly"], "optionsZh": ["礼貌地", "安静地", "安全地", "缓慢地"], "answer": 2, "explanation": "小马担心的是能否“安全地”过河，选 safely。" },
+      { "options": ["thanked", "stopped", "helped", "remembered"], "optionsZh": ["感谢", "阻止", "帮助", "记得"], "answer": 1, "explanation": "松鼠说“别下河”，是在“阻止”小马，选 stopped。" },
+      { "options": ["believe", "help", "protect", "change"], "optionsZh": ["相信", "帮助", "保护", "改变"], "answer": 0, "explanation": "牛说水浅，松鼠说水深，小马不知道该“相信”谁，选 believe。" },
+      { "options": ["brother", "sister", "friend", "mother"], "optionsZh": ["兄弟", "姐妹", "朋友", "妈妈"], "answer": 3, "explanation": "后文明确写“His mother listened to him”，小马回去问的是妈妈，选 mother。" },
+      { "options": ["listen", "point", "write", "turn"], "optionsZh": ["听", "指", "写", "转"], "answer": 0, "explanation": "妈妈的意思是不要只是“听”别人的话，要亲自尝试，选 listen。" },
+      { "options": ["tired", "afraid", "busy", "shy"], "optionsZh": ["累的", "害怕的", "忙的", "害羞的"], "answer": 1, "explanation": "上文小马曾经 felt afraid，这一次他不再害怕，选 afraid。" },
+      { "options": ["successfully", "suddenly", "luckily", "quietly"], "optionsZh": ["成功地", "突然地", "幸运地", "安静地"], "answer": 0, "explanation": "小马顺利过河并把谷物送到，选 successfully。" },
+      { "options": ["listening", "thinking", "trying", "reading"], "optionsZh": ["听", "思考", "尝试", "阅读"], "answer": 2, "explanation": "故事寓意是“实践出真知”，亲自“尝试”是了解真相的最好方式，选 trying。" }
+    ]
+  },
+  {
+    "label": "Terry 姐弟遇险",
+    "text": "When their dad walked into a shop, four-year-old Terry Hill and her little brother Mikey were left alone in the car. Mikey was not wearing a seat belt. He moved to the driver's seat and somehow hit the gear shift. Because the car was parked on a hill, it started moving backward slowly. Terry tried to open the door, but it was too ___ for a four-year-old girl. She didn't know what to ___. Just then, a young man saw the car moving. He ran to the car ___, got the door open, moved Mikey over and put the brake on. He ___ Terry and her brother just in time. Terry never forgot that young man. Over 50 years later, she still ___ how ___ he was. Everything happened so ___. He ___ saw what needed to be done and acted immediately. Terry said, \"I want to thank him for what he did. He saved our lives, and I will never forget his ___ and his brave ___.",
+    "translation": "爸爸走进一家商店时，四岁的特里·希尔和她的小弟弟米奇被独自留在车里。米奇没有系安全带。他爬到驾驶座上，不知怎么碰了换挡器。因为车停在山坡上，它开始慢慢向后溜。特里试着打开车门，但对一个四岁女孩来说，门太___了。她不知道该怎么___。就在这时，一个年轻人看到车在移动。他___跑向汽车，打开车门，把米奇挪开，踩下刹车。他及时___了特里和她的弟弟。特里从未忘记那个年轻人。50多年后，她仍然___他多么___。一切发生得太___。他___看到了需要做的事，并立即行动。特里说：“我想感谢他所做的一切。他救了我们的命，我永远不会忘记他的___和他勇敢的___。”",
+    "questions": [
+      { "options": ["easy", "small", "heavy", "far"], "optionsZh": ["容易的", "小的", "重的", "远的"], "answer": 2, "explanation": "对四岁女孩来说，车门太“重”了，选 heavy。" },
+      { "options": ["say", "do", "buy", "eat"], "optionsZh": ["说", "做", "买", "吃"], "answer": 1, "explanation": "小特里不知道该怎么“做”，选 do。" },
+      { "options": ["slowly", "quietly", "bravely", "rudely"], "optionsZh": ["缓慢地", "安静地", "勇敢地", "粗鲁地"], "answer": 2, "explanation": "年轻人冲过去救孩子，行为“勇敢”，选 bravely。" },
+      { "options": ["saved", "stopped", "left", "found"], "optionsZh": ["救了", "阻止了", "离开了", "发现了"], "answer": 0, "explanation": "年轻人及时“救了”姐弟俩，选 saved。" },
+      { "options": ["forgot", "remembered", "lost", "changed"], "optionsZh": ["忘记", "记得", "丢失", "改变"], "answer": 1, "explanation": "50多年后她仍“记得”他，选 remembered。" },
+      { "options": ["brave", "shy", "quiet", "funny"], "optionsZh": ["勇敢的", "害羞的", "安静的", "有趣的"], "answer": 0, "explanation": "她记得他多么“勇敢”，选 brave。" },
+      { "options": ["slowly", "quickly", "sadly", "angrily"], "optionsZh": ["缓慢地", "快速地", "伤心地", "生气地"], "answer": 1, "explanation": "一切发生得“很快”，选 quickly。" },
+      { "options": ["only", "never", "hardly", "still"], "optionsZh": ["仅仅", "从不", "几乎不", "仍然"], "answer": 0, "explanation": "他“仅仅”看到需要做的事就立即行动，选 only。" },
+      { "options": ["kindness", "sadness", "tiredness", "darkness"], "optionsZh": ["善良", "悲伤", "疲惫", "黑暗"], "answer": 0, "explanation": "永远不会忘记他的“善良”，选 kindness。" },
+      { "options": ["story", "lesson", "action", "dream"], "optionsZh": ["故事", "教训", "行动", "梦想"], "answer": 2, "explanation": "他的勇敢“行动”救了姐弟俩，选 action。" }
+    ]
+  },
+  {
+    "label": "农场野餐",
+    "text": "My family had never done anything different before. So when Aunt Jen invited us to her ___ spring farm party, I was really excited. I decided to make the day special, so I baked cupcakes for the party and decorated them to look like soft sheep by using some ___. \"Yummy!\" My sister Indi said with a laugh, quickly stealing a candy. Soon, Indi and my brother Tex joined in. They ___ so many candies that their cupcakes looked more like strange animals than my sheep. \"Time to go now,\" Dad announced. But things didn't go ___ as usual. First, Tex couldn't find his shoes. Then Mom realized she'd ___ her wallet at home. Halfway to Aunt Jen's, Indi suddenly needed a bathroom. Dad then ___ a new back road, but it only led us farther away. As we were in the middle of nowhere, our car started making a strange noise and ___. \"Help won't come for at least an hour,\" Mom said, sounding ___. \"Now we'll ___ the whole party!\" Tex complained. Dad smiled and pointed to a field full of colorful flowers. \"Why not have our own picnic here \" At first, we weren't excited about it, but as we ___ the blanket and started eating, something amazing happened. A huge butterfly gently landed on Indi's knee. Nearby, two small rabbits hopped across the grass, happily eating. Suddenly, we heard a loud rustling, and hundreds of birds shot up from the trees, flying into the sky in huge circles above us. \"Wow!\" I cried. \"It's like magic!\" \"Migration season,\" Dad said. \"These birds travel through California every spring—millions of them!\" We never made it to Aunt Jen's farm, but that didn't matter. Sitting in that field, enjoying my cupcakes under the open sky, I understood something important: when things don't work out, disappointments may hide unexpected wonders.",
+    "translation": "我们家以前从没做过什么不一样的事。所以当珍姨邀请我们参加她___春季农场派对时，我真的非常兴奋。我决定让这一天与众不同，于是为派对烤了纸杯蛋糕，并用一些___把它们装饰成软绵绵的绵羊。“真好吃！”妹妹因迪笑着说，飞快地偷了一颗糖。很快，因迪和弟弟特克斯也加入了。他们___了太多糖果，以至于他们的纸杯蛋糕看起来更像奇怪的动物，而不是我的绵羊。“该走了，”爸爸宣布。但事情并不像往常那样___。先是特克斯找不到鞋子。接着妈妈意识到她把钱包___在了家里。去珍姨家的半路上，因迪突然要上厕所。爸爸又___了一条新的小路，但那只是把我们带得更远。当我们身处偏僻之地时，车子开始发出奇怪的声音，然后___。“救援至少要一个小时才能到，”妈妈说，听起来很___。“现在我们要___整个派对了！”特克斯抱怨道。爸爸微笑着指向一片开满鲜花的田野。“为什么我们不在这里野餐呢？”起初，我们并不兴奋，但当我们___毯子开始吃东西时，神奇的事情发生了。一只巨大的蝴蝶轻轻落在因迪的膝盖上。不远处，两只小兔子跳过草地，开心地吃着东西。突然，我们听到一阵响亮的沙沙声，数百只鸟从树上飞起，在天空中绕成大圈。“哇！”我喊道。“简直像魔法一样！”“迁徙季节，”爸爸说。“这些鸟每年春天都会经过加利福尼亚——数百万只！”我们最终没能到达珍姨的农场，但那并不重要。坐在那片田野里，在开阔的天空下享用我的纸杯蛋糕，我明白了一件重要的事：当事情不顺利时，失望也许隐藏着意想不到的奇迹。",
+    "questions": [
+      { "options": ["daily", "weekly", "monthly", "yearly"], "optionsZh": ["每日的", "每周的", "每月的", "每年的"], "answer": 3, "explanation": "根据“spring farm party”和常识，春季农场派对是“一年一度”的，选 yearly。" },
+      { "options": ["candies", "bananas", "tomatoes", "flowers"], "optionsZh": ["糖果", "香蕉", "西红柿", "花"], "answer": 0, "explanation": "后文说妹妹偷了一颗 candy，且用糖果装饰蛋糕，选 candies。" },
+      { "options": ["bought", "made", "added", "ordered"], "optionsZh": ["买", "制作", "添加", "订购"], "answer": 2, "explanation": "他们往纸杯蛋糕上“添加”了太多糖果，add 符合语境。" },
+      { "options": ["badly", "freely", "quietly", "smoothly"], "optionsZh": ["糟糕地", "自由地", "安静地", "顺利地"], "answer": 3, "explanation": "下文列举了一系列不顺利的事，说明事情不像往常那样“顺利”，选 smoothly。" },
+      { "options": ["found", "left", "brought", "checked"], "optionsZh": ["找到", "落下", "带来", "检查"], "answer": 1, "explanation": "妈妈把钱包“落在”了家里，leave sth at home 是固定搭配。" },
+      { "options": ["tried", "marked", "mentioned", "repaired"], "optionsZh": ["尝试", "标记", "提到", "修理"], "answer": 0, "explanation": "爸爸“尝试”走一条新的小路，选 tried。" },
+      { "options": ["appeared", "arrived", "stopped", "dropped"], "optionsZh": ["出现", "到达", "停止", "掉落"], "answer": 2, "explanation": "车发出奇怪的声音，然后“停了下来”，选 stopped。" },
+      { "options": ["excited", "tired", "relaxed", "surprised"], "optionsZh": ["兴奋的", "疲惫的", "放松的", "惊讶的"], "answer": 1, "explanation": "经历一连串不顺，车又坏了，妈妈听起来很“疲惫”，选 tired。" },
+      { "options": ["change", "organize", "share", "miss"], "optionsZh": ["改变", "组织", "分享", "错过"], "answer": 3, "explanation": "救援至少一小时后才来，所以会“错过”整个派对，选 miss。" },
+      { "options": ["spread out", "handed out", "cut out", "carried out"], "optionsZh": ["铺开", "分发", "剪下", "执行"], "answer": 0, "explanation": "“铺开”毯子准备野餐，spread out the blanket 符合语境。" }
+    ]
+  },
+  {
+    "label": "凉山·人生重要之事",
+    "text": "What's the most important thing in life? The answer keeps ___ as we grow up. When I was a little boy, I thought my ___ were the most important. My father and mother were always with me. They gave me much love and taught me a lot. I thought I couldn't live ___ them. When I got ___ and went to school, I had a lot of classmates. I enjoyed studying and playing with them. They helped me a lot ___ I had a problem. We always had fun together. Also, I worked hard to get good grades because I thought ___ was very important for my future. So friendship and study were the two most important things for me. As time ___, I changed my mind again. I thought the most important thing was art. It made me happy. I often drew pictures ___ in my room. I also liked watching art programs on TV. My life ___ fun because of art. Now I realize that family, friendship and art are all very important. Many important things that are changing make ___ life unexpected and interesting.",
+    "translation": "人生中最重要的是什么？这个答案随着我们长大不断___。我小时候，觉得我的___最重要。爸爸妈妈总在我身边。他们给了我很多爱，教了我很多。我觉得没有他们我活___。我___了，去上学，有了很多同学。我喜欢和他们一起学习和玩耍。___我遇到问题时，他们帮了我很多。我们在一起总是很开心。另外，我努力学习取得好成绩，因为我觉得___对我的未来非常重要。所以友谊和学习对我来说是最重要的两件事。随着时间___，我又改变了主意。我觉得最重要的是艺术。它让我快乐。我经常在房间里___画画。我也喜欢在电视上看艺术节目。因为艺术，我的生活___快乐。现在我意识到，家庭、友谊和艺术都很重要。许多不断变化的重要事物让___生活充满意外和趣味。",
+    "questions": [
+      { "options": ["staying", "changing", "planning"], "optionsZh": ["保持", "变化", "计划"], "answer": 1, "explanation": "下文列举不同阶段的不同答案，说明答案在“变化”，选 changing。" },
+      { "options": ["parents", "friends", "teachers"], "optionsZh": ["父母", "朋友", "老师"], "answer": 0, "explanation": "后文紧接着说父母总在身边，小时候认为“父母”最重要，选 parents。" },
+      { "options": ["about", "of", "without"], "optionsZh": ["关于", "……的", "没有"], "answer": 2, "explanation": "不能“没有”他们，couldn't live without 是固定表达。" },
+      { "options": ["taller", "older", "stronger"], "optionsZh": ["更高", "更年长", "更强壮"], "answer": 1, "explanation": "“长大”去上学，got older 符合语境。" },
+      { "options": ["why", "where", "when"], "optionsZh": ["为什么", "哪里", "什么时候"], "answer": 2, "explanation": "“当”遇到问题时他们帮助我，选 when 引导时间状语从句。" },
+      { "options": ["knowledge", "health", "wealth"], "optionsZh": ["知识", "健康", "财富"], "answer": 0, "explanation": "努力取得好成绩，认为“知识”对未来重要，选 knowledge。" },
+      { "options": ["went by", "went back", "went out"], "optionsZh": ["流逝", "回去", "出去"], "answer": 0, "explanation": "“随着时间流逝”，as time went by 是固定搭配。" },
+      { "options": ["politely", "sadly", "quietly"], "optionsZh": ["礼貌地", "伤心地", "安静地"], "answer": 2, "explanation": "在房间里“安静地”画画，选 quietly。" },
+      { "options": ["was busy with", "was interested in", "was full of"], "optionsZh": ["忙于", "对……感兴趣", "充满"], "answer": 2, "explanation": "生活“充满”乐趣，be full of 符合语境。" },
+      { "options": ["your", "our", "their"], "optionsZh": ["你的", "我们的", "他们的"], "answer": 1, "explanation": "让“我们”的生活充满意外和趣味，选 our。" }
+    ]
+  },
+  {
+    "label": "大庆·艾米与草莓",
+    "text": "Amy is a 15-year-old girl. When she was young, she was always wasting ___ getting prepared to do her tasks, instead of doing them at once. One morning, Amy was playing in the village and met Mr Thornton. Mr Thornton had a ___ where he sold fruits of all kinds. He said to Amy, \"Well, Amy, I ___ some fine ripe strawberries on Mr Green's farm today. He said that anybody was welcome to pick them. I will ___ 13 cents a kilogram for all you pick for me.\" Amy was ___ about the thought of making some money to help her mom. So she quickly ran home to get a basket. When she got back home, she would like to know how much money she would get if she picked five kilograms. ___ she found out that she would get 65 cents, she started to dream big. It took her some time to dream ___. And then it was so near lunchtime that she had to stay at home until the afternoon. As soon as lunch was over, she took her basket and hurried to the farm. She could not find half a kilogram to ___ her basket because some boys had been there before lunch, and all the ripe strawberries were picked. Then she ___ what her teacher often told her: \"Do your task at once; then think about it. One doer is worth 100 dreamers.\"",
+    "translation": "艾米是一个15岁的女孩。小时候，她总是浪费___做准备，而不是立刻去做。一天早晨，艾米在村里玩，遇到了桑顿先生。桑顿先生有一个___，卖各种水果。他对艾米说：“艾米，我今天在格林先生的农场看到一些上好的熟草莓。他说欢迎任何人去摘。你为我摘的，我每公斤___13美分。”艾米想到能挣些钱帮妈妈，感到很___。于是她赶紧跑回家拿篮子。回到家后，她想知道如果摘五公斤能挣多少钱。___她算出能挣65美分，她开始做大梦。她花了一些时间把梦做得更___。然后快到午饭时间了，她只好待在家里直到下午。午饭一结束，她拿起篮子赶往农场。她连半公斤都找不到来___篮子，因为一些男孩午饭前已经去过，所有熟草莓都被摘光了。这时她___老师常对她说的话：“立刻去做你的任务；然后再想。一个实干者胜过一百个空想家。”",
+    "questions": [
+      { "options": ["money", "time", "food", "paper"], "optionsZh": ["钱", "时间", "食物", "纸"], "answer": 1, "explanation": "她总是“浪费时间”做准备，而不是立刻行动，选 time。" },
+      { "options": ["kitchen", "factory", "store", "theatre"], "optionsZh": ["厨房", "工厂", "商店", "剧院"], "answer": 2, "explanation": "桑顿先生有一个卖水果的“商店”，选 store。" },
+      { "options": ["hid", "broke", "swept", "saw"], "optionsZh": ["藏", "打破", "扫", "看见"], "answer": 3, "explanation": "他在农场“看见”了一些熟草莓，选 saw。" },
+      { "options": ["lend", "pay", "lay", "waste"], "optionsZh": ["借出", "支付", "放置", "浪费"], "answer": 1, "explanation": "桑顿先生会“支付”每公斤13美分，选 pay。" },
+      { "options": ["calm", "excited", "patient", "polite"], "optionsZh": ["平静的", "兴奋的", "有耐心的", "礼貌的"], "answer": 1, "explanation": "想到能挣钱帮妈妈，艾米很“兴奋”，选 excited。" },
+      { "options": ["Though", "Unless", "After", "Before"], "optionsZh": ["虽然", "除非", "在……之后", "在……之前"], "answer": 2, "explanation": "“在”算出能挣65美分“之后”，她开始做大梦，选 After。" },
+      { "options": ["longer", "harder", "faster", "bigger"], "optionsZh": ["更长", "更努力", "更快", "更大"], "answer": 0, "explanation": "她花了一些时间“做更长的梦”，dream longer 符合语境，选 longer。" },
+      { "options": ["fill", "repair", "drop", "control"], "optionsZh": ["装满", "修理", "掉落", "控制"], "answer": 0, "explanation": "她找不到足够的草莓来“装满”篮子，选 fill。" },
+      { "options": ["threw away", "depended on", "thought of", "looked for"], "optionsZh": ["扔掉", "依靠", "想起", "寻找"], "answer": 2, "explanation": "她“想起”了老师常说的话，选 thought of。" },
+      { "options": ["task", "dream", "lesson", "plan"], "optionsZh": ["任务", "梦想", "教训", "计划"], "answer": 0, "explanation": "老师的话是关于“任务”要立刻去做，选 task。" }
+    ]
+  },
+  {
+    "label": "手表的价值",
+    "text": "A father was seriously ill and dying. He called his son to his bed and said, \"My son, this is a watch your grandfather gave me. It is almost 50 years old. I want you to take it to the pawn shop and tell them I want to ___ it, and see how much they offer you.\" The son went to the pawn shop and came back. \"They offered me $100 because it is too ___,\" he said. \"Now take it to the watch shop and see how much they can offer,\" the father said. The son did so and returned. \"The watchmaker offered me $500 because it is a rare antique,\" he said. \"Now take it to the antique shop,\" the father said. The son went to the antique shop and came back. \"The manager offered $375,000,\" he said ___. The father smiled and said, \"I wanted you to know that the right place will ___ your value in the right way. Don't be ___ because you are not valued in the wrong place. Just find the place where you truly belong.\" The son asked the ___ why his father had done this. His father said, \"This is my ___ lesson to you.\" The son was ___ at the huge difference. He could hardly hide his ___ when he heard these words. He finally understood the ___ value of the watch.",
+    "translation": "一位父亲病得很重，奄奄一息。他把儿子叫到床边说：“儿子，这是你祖父给我的手表。它快50年了。我想让你把它拿到当铺，告诉他们我想___它，看看他们出多少钱。”儿子去了当铺，回到父亲身边。“他们出100美元，因为它太___了，”他说。“现在把它拿到手表店，看看他们能出多少，”父亲说。儿子照做了，回来了。“修表匠出500美元，因为这是一块罕见的古董，”他说。“现在把它拿到古董店，”父亲说。儿子去了古董店，回来了。“古董店经理出37.5万美元，”他___地说。父亲笑着说：“我想让你知道，对的地方会以对的方式___你的价值。不要因为你在错的地方不被重视而___。只要找到真正属于你的地方。”儿子问父亲这样做的___。父亲说：“这是我给你的___一课。”儿子对这个巨大的差异感到___。听到这些话，他几乎无法掩饰自己的___。他终于明白了这块手表的___价值。",
+    "questions": [
+      { "options": ["make", "fix", "collect", "sell"], "optionsZh": ["制作", "修理", "收集", "卖"], "answer": 3, "explanation": "父亲让儿子去当铺“卖”表，选 sell。" },
+      { "options": ["modern", "broken", "old", "nice"], "optionsZh": ["现代的", "破损的", "老的", "好看的"], "answer": 2, "explanation": "当铺只出100美元，因为表太“老”了，选 old。" },
+      { "options": ["sadly", "quietly", "excitedly", "coldly"], "optionsZh": ["伤心地", "安静地", "激动地", "冷淡地"], "answer": 2, "explanation": "古董店出价37.5万美元，儿子非常“激动”，选 excitedly。" },
+      { "options": ["teach", "encourage", "direct", "value"], "optionsZh": ["教", "鼓励", "指导", "重视"], "answer": 3, "explanation": "对的地方会“重视/体现”你的价值，选 value。" },
+      { "options": ["nervous", "tired", "angry", "bored"], "optionsZh": ["紧张的", "累的", "愤怒的", "无聊的"], "answer": 2, "explanation": "父亲劝儿子不要因为暂时不被重视而“愤怒”，选 angry。" },
+      { "options": ["reason", "order", "suggestion", "plan"], "optionsZh": ["原因", "顺序", "建议", "计划"], "answer": 0, "explanation": "儿子问父亲这样做的“原因”，选 reason。" },
+      { "options": ["last", "first", "best", "worst"], "optionsZh": ["最后的", "第一的", "最好的", "最坏的"], "answer": 0, "explanation": "父亲病重，这是“最后”的一课，选 last。" },
+      { "options": ["surprised", "moved", "troubled", "worried"], "optionsZh": ["惊讶的", "感动的", "烦恼的", "焦虑的"], "answer": 0, "explanation": "从100美元到37.5万美元，儿子感到“惊讶”，选 surprised。" },
+      { "options": ["excitement", "anger", "pain", "respect"], "optionsZh": ["兴奋", "愤怒", "痛苦", "尊敬"], "answer": 0, "explanation": "儿子难以掩饰“兴奋”，选 excitement。" },
+      { "options": ["cheap", "common", "real", "small"], "optionsZh": ["便宜的", "普通的", "真正的", "小的"], "answer": 2, "explanation": "他终于明白手表的“真正”价值，选 real。" }
+    ]
+  },
+  {
+    "label": "Cathy 的志愿服务",
+    "text": "I'm Cathy, a middle school student. Last summer vacation, I became a volunteer. I volunteered in a children's center. There were about 50 children there. I ___ some babies and elder children. I liked helping out in the baby rooms. Those babies were so small and lovely. At first, I felt a little ___ to see those babies because their parents left them there and had to work. But after I ___ that they were cared for well, I felt much better. One of the ___ was special. She was only one year old, but she was very smart. She smiled as soon as she saw me. She liked to be with me and I was ___ every time she was pleased and smiled at me. The elder children were smart, too. Every day they liked to ___ with me and wanted more attention. I noticed a 5-year-old girl on the first day. She seemed very lonely and often sat ___ at the table. I tried to give her confidence to join other children in different activities. By the end of my ___ there, she had made some friends and looked much happier than before. I loved every minute there and ___ to see the look of pleasure on every child's face. The children were upset when I was ___, but I thought I was even sadder.",
+    "translation": "我叫凯西，是一名中学生。去年暑假，我成了一名志愿者。我在一个儿童中心做志愿服务。那里大约有50个孩子。我___一些婴儿和大一点的孩子。我喜欢在婴儿室帮忙。那些婴儿又小又可爱。起初，看到那些婴儿我有点___，因为他们的父母把他们留在那里去工作了。但在我___他们得到了很好的照顾之后，我感觉好多了。其中一个___很特别。她只有一岁，但非常聪明。她一看到我就笑。她喜欢和我在一起，每次她开心地对我笑，我都很___。大一点的孩子也很聪明。每天他们都喜欢和我___，想要更多关注。第一天我注意到一个5岁的女孩。她看起来很孤独，经常___坐在桌边。我试着给她信心，让她加入其他孩子的各种活动。到我在那里的___结束时，她已经交了一些朋友，看起来比以前开心多了。我爱那里的每一分钟，并___看到每个孩子脸上愉快的表情。我___时孩子们很难过，但我觉得我更难过。",
+    "questions": [
+      { "options": ["waited for", "looked after", "listened to", "talked about"], "optionsZh": ["等待", "照顾", "听", "谈论"], "answer": 1, "explanation": "“照顾”一些婴儿和大孩子，look after 符合志愿者的工作内容。" },
+      { "options": ["hungry", "sad", "excited", "relaxed"], "optionsZh": ["饿的", "难过的", "兴奋的", "放松的"], "answer": 1, "explanation": "看到婴儿被留在中心，起初有点“难过”，选 sad。" },
+      { "options": ["said", "saw", "decided", "explained"], "optionsZh": ["说", "看到", "决定", "解释"], "answer": 1, "explanation": "“看到”他们被照顾得很好，感觉好多了，选 saw。" },
+      { "options": ["students", "volunteers", "parents", "babies"], "optionsZh": ["学生", "志愿者", "父母", "婴儿"], "answer": 3, "explanation": "其中一个“婴儿”很特别，后文说她只有一岁，选 babies。" },
+      { "options": ["happy", "kind", "polite", "lucky"], "optionsZh": ["开心的", "善良的", "礼貌的", "幸运的"], "answer": 0, "explanation": "每次她对我笑，我都很“开心”，选 happy。" },
+      { "options": ["fight", "work", "play", "travel"], "optionsZh": ["打架", "工作", "玩", "旅行"], "answer": 2, "explanation": "大孩子喜欢和我“玩”，选 play。" },
+      { "options": ["politely", "quietly", "hopefully", "carefully"], "optionsZh": ["礼貌地", "安静地", "充满希望地", "小心地"], "answer": 1, "explanation": "那个女孩很孤独，经常“安静地”坐在桌边，选 quietly。" },
+      { "options": ["trip", "lesson", "meeting", "stay"], "optionsZh": ["旅行", "课程", "会议", "停留"], "answer": 3, "explanation": "到我在那里的“停留”结束时，她已交到朋友，选 stay。" },
+      { "options": ["hoped", "refused", "went", "failed"], "optionsZh": ["希望", "拒绝", "去", "失败"], "answer": 0, "explanation": "我“希望”看到每个孩子脸上愉快的表情，选 hoped。" },
+      { "options": ["arriving", "smiling", "leaving", "sleeping"], "optionsZh": ["到达", "微笑", "离开", "睡觉"], "answer": 2, "explanation": "我“离开”时孩子们很难过，选 leaving。" }
+    ]
+  },
+  {
+    "label": "独自在家",
+    "text": "As a boy, like all other boys, I wanted to be a man. But my parents did everything for me. Although they loved me, I felt a bit unhappy with them. \"Tom, do your homework!\" \"Turn off the TV!\" I became so ___ with their orders that I wished they would leave me alone. Well, my wish ___! Although my parents were anxious about leaving me, they had to go away on business for a few days. Now was my ___! As soon as I got home from school the first day, I ___ threw down my schoolbag and ate lots of snacks. Then I played computer games. I liked the games so much that I played till midnight. The next morning I woke up late. I had to hurry to the ___ without breakfast, but I was still late. The teacher asked me for my homework, but I could not hand it in. With a(n) ___ stomach, I was unable to play basketball with my classmates! I felt tired and ___ at school all day long. When I got home, I tried to cook some rice, ___ I burnt it. I found myself so bad at simple cooking tasks. I ___ Mum and Dad to come home soon. Then I ___ being home alone was not always perfect.",
+    "translation": "作为一个男孩，和所有其他男孩一样，我想成为一个男子汉。但我的父母为我做了一切。虽然他们爱我，但我对他们有点不满。“汤姆，做作业！”“关掉电视！”我对他们的命令变得如此___，以至于我希望他们别管我。好吧，我的愿望___了！虽然父母担心把我一个人留下，但他们不得不出差几天。现在是我的___了！第一天放学回家，我___扔下书包，吃了很多零食。然后我玩电脑游戏。我太喜欢那些游戏了，一直玩到半夜。第二天早上我起晚了。我不得不没吃早饭就赶去___，但还是迟到了。老师问我要作业，但我交不出来。带着一个___的肚子，我无法和同学们打篮球！一整天在学校我都感到累和___。回到家，我试着煮点米饭，___我把它烧焦了。我发现自己对简单的做饭任务如此不擅长。我___妈妈和爸爸快点回家。这时我___独自在家并不总是完美的。",
+    "questions": [
+      { "options": ["busy", "patient", "satisfied", "bored"], "optionsZh": ["忙的", "有耐心的", "满意的", "无聊的"], "answer": 3, "explanation": "对父母的命令感到“厌烦”，bored 符合语境。" },
+      { "options": ["came out", "came true", "came up", "came on"], "optionsZh": ["出来", "实现", "出现", "加油"], "answer": 1, "explanation": "“我的愿望实现了”，come true 是固定搭配。" },
+      { "options": ["trouble", "decision", "chance", "choice"], "optionsZh": ["麻烦", "决定", "机会", "选择"], "answer": 2, "explanation": "父母不在家，现在是“我的机会”了，选 chance。" },
+      { "options": ["bravely", "angrily", "carefully", "happily"], "optionsZh": ["勇敢地", "生气地", "小心地", "开心地"], "answer": 3, "explanation": "终于自由了，他“开心地”扔下书包，选 happily。" },
+      { "options": ["school", "playground", "office", "hospital"], "optionsZh": ["学校", "操场", "办公室", "医院"], "answer": 0, "explanation": "没吃早饭就赶去“学校”，选 school。" },
+      { "options": ["full", "empty", "sick", "round"], "optionsZh": ["饱的", "空的", "生病的", "圆的"], "answer": 1, "explanation": "没吃早饭，肚子是“空的”，选 empty。" },
+      { "options": ["scared", "sleepy", "unfriendly", "cold"], "optionsZh": ["害怕的", "困倦的", "不友好的", "冷的"], "answer": 1, "explanation": "前一晚玩到半夜，一整天都感到累和“困倦”，选 sleepy。" },
+      { "options": ["and", "so", "or", "but"], "optionsZh": ["和", "所以", "或者", "但是"], "answer": 3, "explanation": "想煮饭，“但是”烧焦了，表转折，选 but。" },
+      { "options": ["invited", "encouraged", "expected", "allowed"], "optionsZh": ["邀请", "鼓励", "期望", "允许"], "answer": 2, "explanation": "他“期望”父母快点回家，选 expected。" },
+      { "options": ["realized", "suggested", "supposed", "imagined"], "optionsZh": ["意识到", "建议", "假设", "想象"], "answer": 0, "explanation": "他“意识到”独自在家并不总是完美的，选 realized。" }
+    ]
+  },
+  {
+    "label": "Jenny 的绘画天赋",
+    "text": "Jenny's parents were musicians. They hoped that their daughter would become a great ___ one day. So they started to teach her to play the piano when she was only three. Jenny was a good girl and she didn't want to make her parents ___. She practiced hard, but she didn't really enjoy it. Instead of playing the instrument, Jenny enjoyed ___ in her spare time. Her paintings ___ how much her parents loved music. The paintings also revealed the things Jenny was skilled at. But her family didn't discover her ___ for art. Things began to change when a teacher of Jenny's saw her gift for art. Jenny was encouraged to take part in different art activities and competitions. As a result, she got many awards and medals for her excellent art works. When her parents saw her achievements, they didn't ___ pushing Jenny to play music any more. Jenny ___ discovered her own style. Being ___ doesn't mean that you don't have any talent, but it means that you have something ___ to share with the world. Don't try to be the same as others. Just be yourself! You will ___ the differences and make yourself unique.",
+    "translation": "珍妮的父母是音乐家。他们希望女儿有一天能成为一名伟大的___。所以她三岁时他们就开始教她弹钢琴。珍妮是个乖女孩，她不想让父母___。她努力练习，但并不真正享受。除了弹乐器，珍妮在业余时间喜欢___。她的画___了她父母多么热爱音乐。这些画也显露了珍妮擅长的东西。但她的家人没有发现她的___。当珍妮的一位老师看到她的艺术天赋时，事情开始改变。珍妮被鼓励参加各种艺术活动和比赛。结果，她因出色的艺术作品获得许多奖项和奖牌。当父母看到她的成就时，他们不再___逼珍妮弹音乐。珍妮___发现了自己的风格。___并不意味着你没有天赋，而是意味着你有___的东西可以与世界分享。不要试图和别人一样。做你自己！你会___这些差异，让自己独一无二。",
+    "questions": [
+      { "options": ["astronaut", "artist", "dancer", "composer"], "optionsZh": ["宇航员", "艺术家", "舞蹈家", "作曲家"], "answer": 3, "explanation": "父母是音乐家，希望女儿成为“作曲家”，选 composer。" },
+      { "options": ["excited", "disappointed", "surprised", "interested"], "optionsZh": ["兴奋的", "失望的", "惊讶的", "感兴趣的"], "answer": 1, "explanation": "她不想让父母“失望”，选 disappointed。" },
+      { "options": ["drawing", "dancing", "singing", "writing"], "optionsZh": ["画画", "跳舞", "唱歌", "写作"], "answer": 0, "explanation": "后文说她的“画”，选 drawing。" },
+      { "options": ["realized", "showed", "included", "told"], "optionsZh": ["意识到", "展示", "包括", "告诉"], "answer": 1, "explanation": "画“展示”了父母多么热爱音乐，选 showed。" },
+      { "options": ["talent", "problem", "habit", "chance"], "optionsZh": ["天赋", "问题", "习惯", "机会"], "answer": 0, "explanation": "家人没有发现她的艺术“天赋”，选 talent。" },
+      { "options": ["prepare", "stop", "keep", "regret"], "optionsZh": ["准备", "停止", "保持", "后悔"], "answer": 1, "explanation": "不再“停止”逼她弹琴，stop doing，选 stop。" },
+      { "options": ["hardly", "especially", "exactly", "finally"], "optionsZh": ["几乎不", "尤其", "确切地", "最终"], "answer": 3, "explanation": "珍妮“最终”发现了自己的风格，选 finally。" },
+      { "options": ["same", "different", "easy", "hard"], "optionsZh": ["相同的", "不同的", "容易的", "困难的"], "answer": 1, "explanation": "“与众不同”并不意味着没有天赋，选 different。" },
+      { "options": ["strange", "difficult", "important", "special"], "optionsZh": ["奇怪的", "困难的", "重要的", "特别的"], "answer": 3, "explanation": "你有“特别的”东西可以分享，选 special。" },
+      { "options": ["refuse", "become", "create", "receive"], "optionsZh": ["拒绝", "成为", "创造", "收到"], "answer": 2, "explanation": "你会“创造”差异，让自己独一无二，选 create。" }
+    ]
+  },
+  {
+    "label": "Kevin 的环保游泳",
+    "text": "Kevin is a special swimmer. He took risks to ___ in very cold places because he wanted people to pay attention to environmental problems. As a boy, Kevin visited national parks and he learned the Earth is in ___ condition. He felt worried, and he wanted to ___ the Earth. In 2009, he went to swim in water near North Pole to draw people's attention to the melting glaciers. Kevin said that the swim was so painful that it would be his ___ time swimming in cold water. In 2016, he heard about a lake in the Himalayas. It was formed by melting glaciers. He ___ to swim in cold water again. It was difficult to swim in the lake. The air was so ___ that it was hard to breathe. He told people about his experiences on TV. He wanted people to know that glaciers in the Himalayas are disappearing ___ global warming and that there's less water for people in nearby ___. From Kevin's story, we learn two ___. We learn that people can do a lot of harm to the Earth without realizing it. Also, we learn that if we ___ the way we think, we can do something to protect our environment.",
+    "translation": "凯文是一位特殊的游泳者。他冒险在非常寒冷的地方___，因为他想让人们关注环境问题。小时候，凯文参观国家公园，了解到地球处于___状况。他感到担忧，想要___地球。2009年，他去北极附近游泳，以引起人们对融化冰川的关注。凯文说那次游泳非常痛苦，将是他___在冷水中游泳。2016年，他听说喜马拉雅山脉有一个湖。它是由融化的冰川形成的。他___再次在冷水中游泳。在那个湖里游泳很困难。空气如此___，以至于很难呼吸。他在电视上讲述了自己的经历。他想让人们知道喜马拉雅山脉的冰川正___全球变暖而消失，附近___的人们可获得的水更少了。从凯文的故事中，我们学到两个___。我们学到人们可能在不知不觉中对地球造成很大伤害。我们还学到，如果我们___思考方式，我们就能为保护环境做些什么。",
+    "questions": [
+      { "options": ["fly", "swim", "run", "skate"], "optionsZh": ["飞", "游泳", "跑", "滑冰"], "answer": 1, "explanation": "凯文是游泳者，在寒冷的地方“游泳”，选 swim。" },
+      { "options": ["right", "safe", "poor", "natural"], "optionsZh": ["正确的", "安全的", "糟糕的", "自然的"], "answer": 2, "explanation": "地球处于“糟糕的”状况，所以他感到担忧，选 poor。" },
+      { "options": ["protect", "leave", "find", "share"], "optionsZh": ["保护", "离开", "找到", "分享"], "answer": 0, "explanation": "他想“保护”地球，选 protect。" },
+      { "options": ["last", "great", "free", "long"], "optionsZh": ["最后的", "很棒的", "免费的", "长的"], "answer": 0, "explanation": "那次游泳太痛苦，将是“最后一次”在冷水中游泳，选 last。" },
+      { "options": ["hated", "agreed", "learned", "decided"], "optionsZh": ["讨厌", "同意", "学习", "决定"], "answer": 3, "explanation": "他“决定”再次在冷水中游泳，选 decided。" },
+      { "options": ["fresh", "thin", "clear", "cool"], "optionsZh": ["新鲜的", "稀薄的", "清澈的", "凉爽的"], "answer": 1, "explanation": "空气“稀薄”，所以难以呼吸，选 thin。" },
+      { "options": ["because of", "opposite to", "according to", "instead of"], "optionsZh": ["因为", "与……相反", "根据", "而不是"], "answer": 0, "explanation": "冰川“因为”全球变暖而消失，选 because of。" },
+      { "options": ["cities", "countries", "towns", "villages"], "optionsZh": ["城市", "国家", "城镇", "村庄"], "answer": 1, "explanation": "附近“国家”如中国、印度、巴基斯坦，选 countries。" },
+      { "options": ["choices", "reports", "reasons", "lessons"], "optionsZh": ["选择", "报告", "原因", "教训"], "answer": 3, "explanation": "从故事中学到两个“教训”，选 lessons。" },
+      { "options": ["change", "keep", "forget", "accept"], "optionsZh": ["改变", "保持", "忘记", "接受"], "answer": 0, "explanation": "如果我们“改变”思考方式，就能保护环境，选 change。" }
+    ]
+  },
+  {
+    "label": "Emma 与 Kit",
+    "text": "Emma's pain started when all the students were gathered on the track, ready to run. She didn't mind the tiredness, but the ___ others gave her. On the outside, Emma looked stronger than others of her age; ___ on the inside, she felt small. And PE class was when she felt at her smallest. A group of loud and outspoken classmates made her feel ___. Although they could run faster than Emma, they ___ to jog a bit behind her, laughing suddenly and commenting on how Emma jogged. \"Just one more year,\" Emma kept telling herself. She just wanted to ___ it. But everything changed when a new girl called Kit ___ the class. She had bright eyes and a long scar across the left side of her face. Her appearance in the classroom that day was met by many ___ eyes. Their teacher didn't ask Kit for a personal ___. But, as soon as she put her bag down, Kit stood up, saying, \"Hi, everyone. I love sports and fashion. You must be wondering about my scar. I ___ it when I was young when I fell off my bike. ___, I didn't get hurt more seriously. It's now like a cool reminder of all the unusual experiences I had as a kid.\" On Kit's words, Emma's heart began beating fast, with her mouth wide open. How could someone be so confident? \"Why couldn't I act like her?\" Emma said to herself.",
+    "translation": "艾玛的痛苦始于所有学生聚集在跑道上准备跑步的时候。她不在意疲惫，但在意别人投来的___。外表上，艾玛看起来比同龄人更强壮；___内心深处，她觉得自己很渺小。体育课是她感到最渺小的时候。一群嗓门大且直言不讳的同学让她感到___。虽然他们跑得比艾玛快，但他们___慢跑在她后面，突然大笑，评论艾玛跑步的样子。“再一年，”艾玛不断告诉自己。她只想___它。但当一个叫基特的新女孩___班级时，一切都变了。她有一双明亮的眼睛，左脸有一道长长的疤痕。那天她出现在教室里，迎接她的是许多___的目光。老师没有要求基特做个人___。但是，她一放下书包，基特就站起来说：“大家好。我喜欢运动和时尚。你们一定想知道我的疤。我小时候从自行车上摔下来时___的。___，我没有受更严重的伤。它现在就像一个酷酷的提醒，记录了我小时候所有不寻常的经历。”听到基特的话，艾玛的心开始快速跳动，嘴巴张得大大的。一个人怎么能如此自信？“为什么我不能像她那样？”艾玛对自己说。",
+    "questions": [
+      { "options": ["looks", "orders", "smiles", "tasks"], "optionsZh": ["目光", "命令", "微笑", "任务"], "answer": 0, "explanation": "她不在意疲惫，但在意别人投来的“目光”，选 looks。" },
+      { "options": ["or", "so", "but", "because"], "optionsZh": ["或者", "所以", "但是", "因为"], "answer": 2, "explanation": "外表强壮，“但是”内心渺小，表转折，选 but。" },
+      { "options": ["impatient", "relaxed", "guilty", "uncomfortable"], "optionsZh": ["不耐烦的", "放松的", "内疚的", "不自在的"], "answer": 3, "explanation": "那些同学让她感到“不自在”，选 uncomfortable。" },
+      { "options": ["dreamed", "preferred", "happened", "promised"], "optionsZh": ["梦想", "更喜欢", "碰巧", "承诺"], "answer": 1, "explanation": "他们“更喜欢”慢跑在她后面嘲笑她，选 preferred。" },
+      { "options": ["survive", "remember", "explore", "experience"], "optionsZh": ["挺过", "记得", "探索", "经历"], "answer": 0, "explanation": "她只想“挺过”体育课，选 survive。" },
+      { "options": ["taught", "directed", "protected", "joined"], "optionsZh": ["教", "指导", "保护", "加入"], "answer": 3, "explanation": "一个新女孩“加入”了班级，选 joined。" },
+      { "options": ["calm", "careful", "curious", "bored"], "optionsZh": ["平静的", "小心的", "好奇的", "无聊的"], "answer": 2, "explanation": "她的疤痕引来了许多“好奇的”目光，选 curious。" },
+      { "options": ["duty", "activity", "question", "introduction"], "optionsZh": ["责任", "活动", "问题", "介绍"], "answer": 3, "explanation": "老师没有要求她做个人“介绍”，她自己主动说了，选 introduction。" },
+      { "options": ["found", "got", "accepted", "made"], "optionsZh": ["发现", "得到", "接受", "制作"], "answer": 1, "explanation": "疤是小时候摔下自行车时“弄到”的，选 got。" },
+      { "options": ["Luckily", "Hopefully", "Sadly", "Probably"], "optionsZh": ["幸运地", "有希望地", "伤心地", "可能"], "answer": 0, "explanation": "“幸运地”没有受更严重的伤，选 Luckily。" }
+    ]
+  },
+  {
+    "label": "宿迁·向日葵种子",
+    "text": "One spring morning, 8-year-old Amy received a small box from her grandma. Inside was only a seed. \"Plant it ___, and you'll understand its secret.\" Grandma said with a smile. Amy was very curious about what would happen to the seed. She thought planting it must be ___. She decided to plant it in the soil carefully at once. Every day she ___ it three times, singing to it like Grandma taught her. But after four days, only bare soil greeted her. She felt a little ___. \"Maybe something is wrong with the seed.\" Amy complained to Mr. Green, her elderly neighbour. Mr. Green was good at growing plants. Hearing her ___, he said, \"Nature works on its own clock. I have spent a long time growing these plants. And you have just spent several days on the seed. ___ you need to be patient.\" Amy didn't believe ___ he said. She still watered the soil three times a day. She even used plant food which she bought from the shop. Another three days passed, the soil turned into a muddy mess. ___, a heavy rain poured down that weekend. Amy rushed out of the house and saw Mr. Green covering the soil with a piece of cloth. \"I've killed the seed, haven't I \" she said unhappily, pointing at the flooded soil. Mr. Green ___ the soil carefully and said, \"You've paid too much attention. Be patient! Plants need ___ to grow.\"",
+    "translation": "一个春天的早晨，8岁的艾米收到奶奶给的一个小盒子。里面只有一颗种子。“___种下它，你就会明白它的秘密。”奶奶笑着说。艾米对种子会发生什么非常好奇。她觉得种下它一定很___。她决定立刻小心地把它种在土里。每天她给它___三次，像奶奶教她的那样对它唱歌。但四天过去了，迎接她的只有光秃秃的泥土。她感到有点___。“也许种子有问题。”艾米向她年长的邻居格林先生抱怨。格林先生擅长种植植物。听了她的___，他说：“大自然有自己的节奏。我花了很长时间种这些植物。而你才在种子上花了几天。___你需要有耐心。”艾米不相信___说的话。她仍然每天浇三次水。她甚至用了从商店买来的植物营养液。又三天过去了，土壤变成了一片泥泞。___，那个周末下了一场大雨。艾米冲出房子，看到格林先生在用一块布盖住土壤。“我把种子弄死了，是不是？”她指着被淹的土壤不高兴地说。格林先生___土壤仔细看了看，说：“你关注得太多了。要有耐心！植物需要___才能生长。”",
+    "questions": [
+      { "options": ["carefully", "happily", "carelessly", "quietly"], "optionsZh": ["小心地", "开心地", "粗心地", "安静地"], "answer": 0, "explanation": "奶奶让她“小心地”种下种子，选 carefully。" },
+      { "options": ["boring", "clear", "terrible", "interesting"], "optionsZh": ["无聊的", "清楚的", "可怕的", "有趣的"], "answer": 3, "explanation": "艾米觉得种种子一定很“有趣”，选 interesting。" },
+      { "options": ["touched", "watered", "smelt", "sent"], "optionsZh": ["触摸", "浇水", "闻", "送"], "answer": 1, "explanation": "她每天给种子“浇水”三次，选 watered。" },
+      { "options": ["warm", "lazy", "glad", "sad"], "optionsZh": ["温暖的", "懒惰的", "高兴的", "难过的"], "answer": 3, "explanation": "四天过去什么也没长出来，她有点“难过”，选 sad。" },
+      { "options": ["words", "wish", "story", "lie"], "optionsZh": ["话", "愿望", "故事", "谎言"], "answer": 0, "explanation": "格林先生听了她的“话”，选 words。" },
+      { "options": ["Or", "But", "So", "Yet"], "optionsZh": ["或者", "但是", "所以", "然而"], "answer": 2, "explanation": "“所以”你需要有耐心，选 So。" },
+      { "options": ["how", "when", "what", "where"], "optionsZh": ["怎样", "什么时候", "什么", "哪里"], "answer": 2, "explanation": "她不相信他说的“话”（what he said），选 what。" },
+      { "options": ["Suddenly", "Quietly", "Slowly", "Finally"], "optionsZh": ["突然", "安静地", "缓慢地", "最终"], "answer": 0, "explanation": "“突然”下了一场大雨，选 Suddenly。" },
+      { "options": ["looked over", "looked after", "looked for", "looked up"], "optionsZh": ["查看", "照顾", "寻找", "向上看"], "answer": 0, "explanation": "格林先生“查看”了土壤，选 looked over。" },
+      { "options": ["time", "money", "food", "water"], "optionsZh": ["时间", "钱", "食物", "水"], "answer": 0, "explanation": "植物需要“时间”生长，呼应耐心的主题，选 time。" }
+    ]
+  },
+  {
+    "label": "Joe 与海豚 Fonzie",
+    "text": "This is a story of Joe and Fonzie. Joe was a boy and Fonzie was a dolphin. Joe was three years old when the story began. When Joe was born, he had a problem with his ___ and doctors had to operate on him. When he was three, he had a second heart operation. This operation didn't go well. As a result, he couldn't move the ___ side of his body. The doctors thought that he couldn't get better. But Joe's mother didn't ___. She took him to different places to see doctors. However, it wasn't very successful. Joe liked to stay in water and his mum thought ___ could help him. One day they went to a place called Dolphin Plus, where people swam with dolphins. Joe met Fonzie there and the ___ really began. Joe went to see Fonzie every day. He loved playing with Fonzie and ___ it. Joe's mother told him always to feed Fonzie using his left hand. ___ Joe exercised his left side more and more. ___, he got better and better. At the same time, Joe and Fonzie became good friends. When Joe's mother saw that Joe's ___ with Fonzie helped him a lot, she and her family wanted to help people like Joe. So they worked hard to ___ a place called Island Dolphin Care.",
+    "translation": "这是乔和方齐的故事。乔是一个男孩，方齐是一只海豚。故事开始时乔三岁。乔出生时，他的___有问题，医生不得不给他做手术。三岁时，他做了第二次心脏手术。这次手术不顺利。结果，他身体的___侧不能动了。医生认为他好不了了。但乔的妈妈没有___。她带他去不同的地方看医生。然而，并不是很成功。乔喜欢待在水里，他妈妈认为___可以帮助他。一天，他们去了一个叫“海豚加”的地方，人们在那里和海豚一起游泳。乔在那里遇到了方齐，___真正开始了。乔每天都去看方齐。他喜欢和方齐玩，并___它。乔的妈妈告诉他总是用左手喂方齐。___乔越来越多地锻炼他的左侧。___，他变得越来越好。与此同时，乔和方齐成了好朋友。当乔的妈妈看到乔和方齐的___对他帮助很大时，她和家人想帮助像乔一样的人。于是他们努力___了一个叫“岛屿海豚关怀”的地方。",
+    "questions": [
+      { "options": ["head", "heart", "stomach"], "optionsZh": ["头", "心脏", "胃"], "answer": 1, "explanation": "后文提到“second heart operation”，说明他出生时“心脏”有问题，选 heart。" },
+      { "options": ["left", "back", "soft"], "optionsZh": ["左侧", "背部", "柔软的"], "answer": 0, "explanation": "后文说妈妈让他用左手喂海豚，锻炼“左侧”，选 left。" },
+      { "options": ["come in", "look out", "give up"], "optionsZh": ["进来", "小心", "放弃"], "answer": 2, "explanation": "医生认为他好不了，但妈妈没有“放弃”，选 give up。" },
+      { "options": ["jumping", "swimming", "running"], "optionsZh": ["跳", "游泳", "跑"], "answer": 1, "explanation": "乔喜欢待在水里，妈妈认为“游泳”可以帮助他，选 swimming。" },
+      { "options": ["story", "trip", "game"], "optionsZh": ["故事", "旅行", "游戏"], "answer": 0, "explanation": "乔遇到方齐后，“故事”真正开始了，选 story。" },
+      { "options": ["carrying", "drawing", "feeding"], "optionsZh": ["携带", "画", "喂食"], "answer": 2, "explanation": "他喜欢和方齐玩，并“喂”它，后文也提到喂食，选 feeding。" },
+      { "options": ["So", "But", "Or"], "optionsZh": ["所以", "但是", "或者"], "answer": 0, "explanation": "妈妈让他用左手喂食，“所以”他越来越多地锻炼左侧，选 So。" },
+      { "options": ["Quietly", "Slowly", "Carefully"], "optionsZh": ["安静地", "缓慢地", "小心地"], "answer": 1, "explanation": "他“慢慢地”变得越来越好，选 Slowly。" },
+      { "options": ["problem", "friendship", "competition"], "optionsZh": ["问题", "友谊", "竞争"], "answer": 1, "explanation": "乔和方齐的“友谊”对他帮助很大，选 friendship。" },
+      { "options": ["find", "visit", "open"], "optionsZh": ["找到", "参观", "开设"], "answer": 2, "explanation": "他们努力“开设”了一个叫“岛屿海豚关怀”的地方，选 open。" }
+    ]
+  },
+  {
+    "label": "Mark 与花田",
+    "text": "Mark is a very clever boy who dreams of being a scientist. However, it's hard for him to keep working hard. His mother hopes that he will make a change. One rainy day, his mother decided to ___ to a special place with him. Though it was a little ___ to make a trip along the highway in such bad weather, his mother still advised that they should make the trip. After an hour's driving, they arrived at the foot of a mountain. When they stopped the car and ___, the day cleared up. Suddenly, Mark saw several fields full of flowers, shining like a carpet before him. The peace and silence of the place began to fill ___ mind. No words could express his surprise at the beautiful scenery. Mark asked his mother questions one after another. \"___ created such beauty, a man or a woman How did that happen When did it start \" His mother smiled and pointed at a sign along the path that read, \"___ Answers to the Questions I Know You Are Asking\". The first answer was, \"One Woman—Two Hands, Two Feet and A Little Brain\". The second was, \"One at a Time\". The third was, \"Started in 1972, Ended in 2023\". On their way home, his mother ___ this trip because she found her son began to make a change. Feeling excited, Mark said, \"She created a wonderful world ___. She started more than 50 years ago, one ___ at a time, and kept on doing it for such a long time to create a sea of flowers. Imagine, if I had a dream and worked hard at it, just a little bit every day, what might I achieve \" His mother looked at him, smiling. \"___ is impossible if you keep on doing it.",
+    "translation": "马克是一个非常聪明的男孩，梦想成为科学家。然而，他很难坚持努力。他妈妈希望他能有所改变。一个雨天，妈妈决定带他去一个特别的地方。虽然在如此恶劣的天气里沿高速公路旅行有点___，但妈妈仍然建议他们应该去。开车一小时后，他们到达了一座山脚下。当他们停下车___时，天放晴了。突然，马克看到几片开满鲜花的田野，像地毯一样在面前闪耀。这个地方的宁静开始充满___的心。没有语言能表达他对美景的惊讶。马克一个接一个地问妈妈问题。“___创造了这样的美，男人还是女人？那是怎么发生的？什么时候开始的？”妈妈微笑着指着路边的一块牌子，上面写着：“___我知道你在问的问题的答案”。第一个答案是：“一个女人——两只手、两只脚和一个小大脑”。第二个是：“一次一个”。第三个是：“始于1972年，止于2023年”。在回家的路上，妈妈___这次旅行，因为她发现儿子开始改变了。马克兴奋地说：“她___创造了一个美妙的世界。她50多年前开始，一次___，坚持了这么久，创造了一片花海。想象一下，如果我有一个梦想并为之努力，每天一点点，我能实现什么？”妈妈看着他，微笑着。“如果你坚持做下去，___是不可能的。”",
+    "questions": [
+      { "options": ["drive", "ride", "walk", "fly"], "optionsZh": ["开车", "骑", "走", "飞"], "answer": 0, "explanation": "后文说“After an hour's driving”，妈妈决定“开车”带他去，选 drive。" },
+      { "options": ["easy", "hard", "boring", "dangerous"], "optionsZh": ["容易的", "困难的", "无聊的", "危险的"], "answer": 1, "explanation": "恶劣天气下沿高速公路旅行有点“困难”，选 hard。" },
+      { "options": ["got up", "got off", "got on", "got out"], "optionsZh": ["起床", "下车", "上车", "出去"], "answer": 3, "explanation": "他们停下车“出来”，选 got out。" },
+      { "options": ["her", "his", "their", "your"], "optionsZh": ["她的", "他的", "他们的", "你的"], "answer": 1, "explanation": "宁静开始充满“他的”（马克的）心，选 his。" },
+      { "options": ["What", "Who", "When", "Where"], "optionsZh": ["什么", "谁", "什么时候", "哪里"], "answer": 1, "explanation": "后文回答“一个女人”，所以问的是“谁”创造了美，选 Who。" },
+      { "options": ["Simple", "Funny", "Serious", "Strange"], "optionsZh": ["简单的", "有趣的", "严肃的", "奇怪的"], "answer": 0, "explanation": "牌子上的答案很“简单”，选 Simple。" },
+      { "options": ["regretted", "forgot", "enjoyed", "hated"], "optionsZh": ["后悔", "忘记", "享受", "讨厌"], "answer": 2, "explanation": "妈妈“享受”这次旅行，因为儿子开始改变，选 enjoyed。" },
+      { "options": ["herself", "himself", "itself", "themselves"], "optionsZh": ["她自己", "他自己", "它自己", "他们自己"], "answer": 0, "explanation": "那个女人“她自己”创造了一个世界，选 herself。" },
+      { "options": ["flower", "step", "day", "year"], "optionsZh": ["花", "步", "天", "年"], "answer": 1, "explanation": "她一次一“步”地坚持，选 step。" },
+      { "options": ["Something", "Anything", "Nothing", "Everything"], "optionsZh": ["某事", "任何事", "没有什么", "一切"], "answer": 2, "explanation": "只要坚持，“没有什么”是不可能的，选 Nothing。" }
+    ]
+  },
+  {
+    "label": "广东·胡同图书馆",
+    "text": "In a narrow hutong in Beijing lies a small library. It is only 7 square metres, but it has ___ thousands of books. The library was opened by a man named Ding. Ding loved reading very much. When he was young, he often ___ books from libraries. Later, he had a dream of ___ his own library. He wanted to share his books with others, ___ he decided to open the small library in his own house. At first, only a few people came. But Ding didn't ___. He kept the library open every day. Slowly, more and more people began to ___ the library. Some came to borrow books, and some just came to sit and read. Ding was happy to see that. He said, \"Books are like ___. They can open a new world for people.\" The library is free. Ding doesn't make money from it. He just wants to do something ___ for the community. Now the small library has become a ___ place in the hutong. People love it. Ding's story tells us that even a small action can make a big ___.",
+    "translation": "在北京一条狭窄的胡同里，有一个小图书馆。它只有7平方米，却有___数千本书。图书馆是一个叫丁的人开的。丁非常热爱阅读。年轻时，他经常从图书馆___书。后来，他有了一个梦想，要___自己的图书馆。他想和别人分享他的书，___他决定在自己家里开这个小图书馆。起初，只有几个人来。但丁没有___。他每天坚持开放图书馆。慢慢地，越来越多的人开始___这个图书馆。有些人是来借书的，有些人只是来坐着看书。丁很高兴看到这些。他说：“书就像___。它们能为人们打开一个新世界。”图书馆是免费的。丁不从中赚钱。他只是想为社区做点___的事。现在这个小图书馆已经成为胡同里的一个___地方。人们喜欢它。丁的故事告诉我们，即使是一个小小的行动也能产生很大的___。",
+    "questions": [
+      { "options": ["over", "under", "only", "about"], "optionsZh": ["超过", "在……下", "仅仅", "大约"], "answer": 0, "explanation": "只有7平方米，却有“超过”数千本书，选 over。" },
+      { "options": ["bought", "borrowed", "lent", "sold"], "optionsZh": ["买", "借入", "借出", "卖"], "answer": 1, "explanation": "他经常从图书馆“借”书，borrow...from 是固定搭配。" },
+      { "options": ["closing", "visiting", "opening", "finding"], "optionsZh": ["关闭", "参观", "开设", "找到"], "answer": 2, "explanation": "他梦想“开设”自己的图书馆，选 opening。" },
+      { "options": ["but", "so", "or", "because"], "optionsZh": ["但是", "所以", "或者", "因为"], "answer": 1, "explanation": "他想分享书，“所以”决定开图书馆，选 so。" },
+      { "options": ["give up", "give out", "give away", "give back"], "optionsZh": ["放弃", "分发", "赠送", "归还"], "answer": 0, "explanation": "起初人很少，但丁没有“放弃”，选 give up。" },
+      { "options": ["leave", "visit", "forget", "close"], "optionsZh": ["离开", "参观", "忘记", "关闭"], "answer": 1, "explanation": "越来越多的人开始“参观/光顾”图书馆，选 visit。" },
+      { "options": ["windows", "doors", "walls", "floors"], "optionsZh": ["窗户", "门", "墙", "地板"], "answer": 0, "explanation": "书像“窗户”，能打开新世界，选 windows。" },
+      { "options": ["bad", "hard", "good", "easy"], "optionsZh": ["坏的", "困难的", "好的", "容易的"], "answer": 2, "explanation": "他想为社区做点“好的”事，选 good。" },
+      { "options": ["noisy", "popular", "dangerous", "quiet"], "optionsZh": ["吵闹的", "受欢迎的", "危险的", "安静的"], "answer": 1, "explanation": "小图书馆成了胡同里“受欢迎的”地方，选 popular。" },
+      { "options": ["mistake", "difference", "plan", "decision"], "optionsZh": ["错误", "影响", "计划", "决定"], "answer": 1, "explanation": "小小的行动也能产生很大的“影响”，make a big difference 是固定短语。" }
+    ]
+  },
+  {
+    "label": "宁夏·裁缝母亲",
+    "text": "My mother is a tailor. She makes ___ for people. She always tries to make people's clothes ___. She works hard every day. When I was young, I often watched her working. She would measure, cut and sew for hours. Sometimes I asked her, \"Mum, aren't you ___?\" She would smile and say, \"No, I love my job.\" My mother also taught us an important ___. She said, \"If you want your dreams to come true, you must ___ hard.\" She herself is a good example. She started with a small shop, and little by little, her business grew. Now she has a bigger shop and many customers. People like her clothes because they are made with ___. My mother is not only a good tailor but also a loving mother. She always ___ time to be with us. She helps us with our homework and listens to our problems. She tells us that ___ is more important than money. I am proud of my mother. She shows me that with hard work and love, you can ___ anything. I want to be like her when I grow up: a person who works hard and ___ others.",
+    "translation": "我妈妈是一名裁缝。她为人们做___。她总是努力让人们穿的衣服___。她每天努力工作。小时候，我经常看她工作。她会量尺寸、裁剪、缝纫好几个小时。有时我问她：“妈妈，你不___吗？”她会笑着说：“不，我热爱我的工作。”我妈妈还教给我们一个重要___。她说：“如果你想让梦想成真，你必须___努力。”她自己就是一个好榜样。她从一个小店开始，渐渐地，生意越做越大。现在她有一个更大的店和许多顾客。人们喜欢她做的衣服，因为它们是用___做的。我妈妈不仅是一个好裁缝，也是一个充满爱的母亲。她总是___时间陪我们。她帮助我们做作业，倾听我们的问题。她告诉我们___比金钱更重要。我为妈妈感到骄傲。她向我展示，有了努力和爱，你可以___任何事情。我长大后想成为她那样的人：一个努力工作并___他人的人。",
+    "questions": [
+      { "options": ["clothes", "shoes", "hats", "bags"], "optionsZh": ["衣服", "鞋子", "帽子", "包"], "answer": 0, "explanation": "妈妈是裁缝，为人们做“衣服”，选 clothes。" },
+      { "options": ["cheap", "beautiful", "old", "long"], "optionsZh": ["便宜的", "美丽的", "旧的", "长的"], "answer": 1, "explanation": "她努力让人们穿得“漂亮”，选 beautiful。" },
+      { "options": ["tired", "bored", "angry", "sad"], "optionsZh": ["累的", "无聊的", "生气的", "伤心的"], "answer": 0, "explanation": "我问她“不累吗”，选 tired。" },
+      { "options": ["song", "lesson", "story", "game"], "optionsZh": ["歌曲", "教训", "故事", "游戏"], "answer": 1, "explanation": "妈妈教给我们一个重要的“道理/教训”，选 lesson。" },
+      { "options": ["play", "work", "sleep", "study"], "optionsZh": ["玩", "工作", "睡觉", "学习"], "answer": 1, "explanation": "想让梦想成真，必须“努力”，work hard 是固定搭配。" },
+      { "options": ["love", "money", "time", "paper"], "optionsZh": ["爱", "钱", "时间", "纸"], "answer": 0, "explanation": "衣服是用“爱”做的，后文也强调爱比钱重要，选 love。" },
+      { "options": ["wastes", "spends", "forgets", "loses"], "optionsZh": ["浪费", "花费", "忘记", "丢失"], "answer": 1, "explanation": "她总是“花”时间陪我们，spend time 是固定搭配。" },
+      { "options": ["family", "money", "work", "study"], "optionsZh": ["家庭", "金钱", "工作", "学习"], "answer": 0, "explanation": "妈妈告诉我们“家庭”比金钱更重要，选 family。" },
+      { "options": ["achieve", "avoid", "refuse", "forget"], "optionsZh": ["实现", "避免", "拒绝", "忘记"], "answer": 0, "explanation": "有了努力和爱，你可以“实现”任何事情，选 achieve。" },
+      { "options": ["helps", "leaves", "forgets", "hurts"], "optionsZh": ["帮助", "离开", "忘记", "伤害"], "answer": 0, "explanation": "成为一个努力且“帮助”他人的人，选 helps。" }
+    ]
+  },
+  {
+    "label": "天津·爬进房子的人",
+    "text": "One day, as I was walking home from school, I noticed a man climbing into a house. My heart started to beat ___. I stopped and watched. The man looked around carefully, and then he ___ through the window. I thought he must be a thief. I was ___ and didn't know what to do. Should I call the police? I decided to ___ him. I stood behind a tree and watched. A few minutes later, a woman came out of the house. She was ___ and thanked the man. I was confused. Then I saw that the man was a ___ in a uniform. He was not a thief at all. He had come to fix the window. I felt so ___ of myself for thinking badly of him. I learned that we should not judge people by their ___. We should find out the truth before making a ___. Later, I said ___ to the worker in my heart.",
+    "translation": "一天，放学回家时，我注意到一个男人正爬进一栋房子。我的心开始___跳。我停下来看着。那个人小心地环顾四周，然后他___窗户。我想他一定是个小偷。我很___，不知道该怎么办。我应该报警吗？我决定___他。我站在一棵树后面看着。几分钟后，一个女人从房子里出来。她很___，并感谢了那个男人。我很困惑。然后我看到那个男人是一个穿制服的___。他根本不是小偷。他是来修窗户的。我为自己把他想得那么坏而感到很___。我学到了，我们不应该以___来判断人。在做出___之前，我们应该先弄清真相。后来，我在心里向那位工人说了___。",
+    "questions": [
+      { "options": ["slowly", "quietly", "fast", "softly"], "optionsZh": ["缓慢地", "安静地", "快速地", "轻柔地"], "answer": 2, "explanation": "看到有人爬进房子，心跳“加快”，选 fast。" },
+      { "options": ["looked", "jumped", "ran", "climbed"], "optionsZh": ["看", "跳", "跑", "爬"], "answer": 3, "explanation": "那个人“爬”进了窗户，选 climbed。" },
+      { "options": ["excited", "scared", "happy", "bored"], "optionsZh": ["兴奋的", "害怕的", "开心的", "无聊的"], "answer": 1, "explanation": "以为是小偷，感到“害怕”，选 scared。" },
+      { "options": ["help", "stop", "follow", "call"], "optionsZh": ["帮助", "阻止", "跟随", "打电话"], "answer": 2, "explanation": "决定“跟随/观察”他，选 follow。" },
+      { "options": ["angry", "sad", "smiling", "crying"], "optionsZh": ["生气的", "伤心的", "微笑的", "哭泣的"], "answer": 2, "explanation": "女人“微笑着”感谢他，选 smiling。" },
+      { "options": ["thief", "worker", "teacher", "doctor"], "optionsZh": ["小偷", "工人", "老师", "医生"], "answer": 1, "explanation": "他其实是穿制服的“工人”，来修窗户的，选 worker。" },
+      { "options": ["proud", "afraid", "tired", "ashamed"], "optionsZh": ["骄傲的", "害怕的", "累的", "羞愧的"], "answer": 3, "explanation": "为自己把他想成小偷而感到“羞愧”，选 ashamed。" },
+      { "options": ["looks", "words", "actions", "clothes"], "optionsZh": ["外表", "话语", "行动", "衣服"], "answer": 0, "explanation": "不要以“外表”来判断人，选 looks。" },
+      { "options": ["mistake", "decision", "plan", "promise"], "optionsZh": ["错误", "决定", "计划", "承诺"], "answer": 1, "explanation": "在做出“决定”之前要先弄清真相，选 decision。" },
+      { "options": ["sad", "glad", "sorry", "angry"], "optionsZh": ["伤心的", "高兴的", "抱歉的", "生气的"], "answer": 2, "explanation": "了解真相后，他在心里向工人说“抱歉”，选 sorry。" }
+    ]
+  },
+  {
+    "label": "重庆·少年发明家李良",
+    "text": "Li Liang is a 15-year-old student. He is very interested in science. He has invented many useful things. One of his inventions is a special ___ that can help old people. His grandfather is old and sometimes forgets things. Li Liang wanted to help him, ___ he started to work on the invention. He spent many hours ___ and testing. Sometimes he failed, but he never ___. Finally, he succeeded. His invention can ___ people when they forget important things. Many people like his invention. Li Liang says he will keep on ___ new things. He hopes to become a ___ in the future. His story tells us that young people can also make a big ___ to the world. If you have a dream, just ___ it and work hard. You will ___ your dream one day.",
+    "translation": "李良是一名15岁的学生。他对科学非常感兴趣。他发明了许多有用的东西。他的发明之一是一种特殊的___，可以帮助老年人。他的祖父年纪大了，有时会忘记事情。李良想帮助他，___他开始着手这项发明。他花了很多时间___和测试。有时他失败了，但他从不___。最终，他成功了。他的发明可以在人们忘记重要事情时___他们。很多人喜欢他的发明。李良说他会继续___新事物。他希望将来成为一名___。他的故事告诉我们，年轻人也能对世界产生很大___。如果你有梦想，就___它并努力。总有一天你会___你的梦想。",
+    "questions": [
+      { "options": ["machine", "book", "game", "toy"], "optionsZh": ["机器", "书", "游戏", "玩具"], "answer": 0, "explanation": "他发明了一种特殊的“机器”来帮助老人，选 machine。" },
+      { "options": ["but", "so", "or", "because"], "optionsZh": ["但是", "所以", "或者", "因为"], "answer": 1, "explanation": "他想帮助祖父，“所以”开始着手发明，选 so。" },
+      { "options": ["playing", "thinking", "reading", "writing"], "optionsZh": ["玩", "思考", "阅读", "写作"], "answer": 1, "explanation": "他花很多时间“思考”和测试，选 thinking。" },
+      { "options": ["gave up", "gave out", "gave away", "gave back"], "optionsZh": ["放弃", "分发", "赠送", "归还"], "answer": 0, "explanation": "他从不“放弃”，选 gave up。" },
+      { "options": ["remind", "forget", "ignore", "leave"], "optionsZh": ["提醒", "忘记", "忽视", "离开"], "answer": 0, "explanation": "发明可以“提醒”人们忘记的事情，选 remind。" },
+      { "options": ["buying", "selling", "inventing", "finding"], "optionsZh": ["买", "卖", "发明", "找到"], "answer": 2, "explanation": "他会继续“发明”新东西，选 inventing。" },
+      { "options": ["teacher", "doctor", "scientist", "worker"], "optionsZh": ["老师", "医生", "科学家", "工人"], "answer": 2, "explanation": "他希望成为“科学家”，选 scientist。" },
+      { "options": ["mistake", "difference", "plan", "decision"], "optionsZh": ["错误", "影响", "计划", "决定"], "answer": 1, "explanation": "年轻人也能产生很大“影响”，make a big difference 是固定搭配。" },
+      { "options": ["forget", "lose", "have", "change"], "optionsZh": ["忘记", "丢失", "拥有", "改变"], "answer": 2, "explanation": "如果你有梦想，就“拥有”它并努力，选 have。" },
+      { "options": ["achieve", "miss", "break", "drop"], "optionsZh": ["实现", "错过", "打破", "掉落"], "answer": 0, "explanation": "总有一天你会“实现”梦想，选 achieve。" }
+    ]
+  },
+  {
+    "label": "筷子",
+    "text": "Have you ever got such a question in your mind? Although there have been so many new inventions and tools today, why are Chinese people still using chopsticks after they were invented about 3,000 ___ ago? Chopsticks were invented and used by the ___ during the Zhou Dynasty. They are ___ made of bamboo, plastic, wood or steel. They are very useful. You can use them to ___ food easily. They are also good for your health because you have to use your ___ and fingers together. In China, chopsticks are not just tools for eating. They are also a ___ of Chinese culture. When you use chopsticks, you should remember some ___. For example, you should not ___ them into your food. You should not use them to ___ others. Learning to use chopsticks well takes time, but it is ___ trying.",
+    "translation": "你脑海中是否曾有过这样的问题？尽管今天有那么多新发明和工具，为什么中国人仍然在使用筷子，尽管它们大约在3000___前就被发明了？筷子是在周朝由___发明和使用的。它们通常由竹子、塑料、木头或钢___。它们非常有用。你可以用它们轻松地___食物。它们对你的健康也有好处，因为你必须同时使用___和手指。在中国，筷子不仅仅是吃饭的工具。它们也是中国文化的___。使用筷子时，你应该记住一些___。例如，你不应该把它们___食物里。你不应该用它们来___别人。学会熟练使用筷子需要时间，但值得___。",
+    "questions": [
+      { "options": ["days", "months", "years", "weeks"], "optionsZh": ["天", "月", "年", "周"], "answer": 2, "explanation": "筷子大约在3000“年”前发明，选 years。" },
+      { "options": ["Chinese", "Americans", "British", "French"], "optionsZh": ["中国人", "美国人", "英国人", "法国人"], "answer": 0, "explanation": "筷子由“中国人”在周朝发明和使用，选 Chinese。" },
+      { "options": ["hardly", "usually", "never", "seldom"], "optionsZh": ["几乎不", "通常", "从不", "很少"], "answer": 1, "explanation": "它们“通常”由竹子、塑料等制成，选 usually。" },
+      { "options": ["pick up", "put down", "throw away", "give back"], "optionsZh": ["夹起", "放下", "扔掉", "归还"], "answer": 0, "explanation": "用筷子“夹起”食物，pick up 符合语境。" },
+      { "options": ["eyes", "ears", "hands", "feet"], "optionsZh": ["眼睛", "耳朵", "手", "脚"], "answer": 2, "explanation": "使用筷子需要同时用“手”和手指，选 hands。" },
+      { "options": ["symbol", "problem", "reason", "danger"], "optionsZh": ["象征", "问题", "原因", "危险"], "answer": 0, "explanation": "筷子是中国文化的“象征”，选 symbol。" },
+      { "options": ["rules", "songs", "games", "stories"], "optionsZh": ["规则", "歌曲", "游戏", "故事"], "answer": 0, "explanation": "使用筷子要记住一些“规则/礼仪”，选 rules。" },
+      { "options": ["put", "stick", "drop", "throw"], "optionsZh": ["放", "插", "掉落", "扔"], "answer": 1, "explanation": "不要把筷子“插”进食物里，这是餐桌礼仪，选 stick。" },
+      { "options": ["point at", "smile at", "look at", "laugh at"], "optionsZh": ["指向", "对……微笑", "看", "嘲笑"], "answer": 0, "explanation": "不要用筷子“指向”别人，选 point at。" },
+      { "options": ["worth", "busy", "afraid", "full"], "optionsZh": ["值得", "忙的", "害怕的", "满的"], "answer": 0, "explanation": "学会用筷子值得“尝试”，be worth doing 是固定搭配。" }
+    ]
+  },
+  {
+    "label": "塑料回收",
+    "text": "There are over fifty different types of plastics. Many of them are used ___ packaging. Most plastics do not break down and a lot of them are not recyclable. When they are ___, they can pollute the air and make it very dangerous. One of the most popular plastics used in making bottles is called PET. This can be recycled. Plastics ___ PET need to be labeled so they can be collected easily for recycling. In America, PET is recycled and used to make ___ things, such as flowerpots and milk crates. In Germany some bottles are made from a type of plastic which breaks down in strong ___ or when buried. ___ this is expensive and the bottles might break while they are being used. Nearly all the things you buy from the supermarket are wrapped in something. ___ fruit and vegetables are wrapped in plastic or in plastic bags. When we use these things, we usually ___ the packaging. Packaging keeps food ___. It protects the food and also gives us information about the product. But is it all necessary? Try not to buy things that use a lot of plastic. You'd better ___ your old plastic containers for keeping things.",
+    "translation": "塑料有五十多种不同类型。许多用于___包装。大多数塑料不能降解，而且很多不可回收。当它们被___时，会污染空气，使其非常危险。用于制造瓶子的最受欢迎的塑料之一叫PET。这种塑料可以回收。___PET的塑料需要贴标签，以便容易收集回收。在美国，PET被回收并用来制造___东西，比如花盆和牛奶箱。在德国，有些瓶子由一种塑料制成，这种塑料在强___中或埋在地下时会降解。___这很昂贵，而且瓶子在使用时可能会破裂。你从超市买的东西几乎都用某种东西包裹着。___水果和蔬菜用塑料或塑料袋包裹。当我们使用这些东西时，我们通常会___包装。包装保持食物___。它保护食物，也给我们关于产品的信息。但这一切都必要吗？尽量不要买使用大量塑料的东西。你最好___旧的塑料容器来装东西。",
+    "questions": [
+      { "options": ["at", "on", "to", "for"], "optionsZh": ["在", "在……上", "到", "用于"], "answer": 3, "explanation": "许多塑料“用于”包装，be used for 是固定搭配。" },
+      { "options": ["burnt", "heated", "bought", "used"], "optionsZh": ["燃烧", "加热", "买", "使用"], "answer": 0, "explanation": "塑料被“燃烧”时会污染空气，选 burnt。" },
+      { "options": ["as", "by", "like", "with"], "optionsZh": ["像", "被", "像……一样", "和"], "answer": 2, "explanation": "“像”PET这样的塑料需要贴标签，like 表示举例。" },
+      { "options": ["dry", "new", "heavy", "natural"], "optionsZh": ["干的", "新的", "重的", "自然的"], "answer": 1, "explanation": "PET被回收用来制造“新的”东西，选 new。" },
+      { "options": ["wind", "smell", "storm", "sunlight"], "optionsZh": ["风", "气味", "暴风雨", "阳光"], "answer": 3, "explanation": "在强“阳光”下或埋在地下会降解，选 sunlight。" },
+      { "options": ["Or", "So", "But", "And"], "optionsZh": ["或者", "所以", "但是", "和"], "answer": 2, "explanation": "“但是”这很昂贵，表转折，选 But。" },
+      { "options": ["Yet", "Even", "Still", "Always"], "optionsZh": ["然而", "甚至", "仍然", "总是"], "answer": 1, "explanation": "“甚至”水果和蔬菜也用塑料包裹，选 Even。" },
+      { "options": ["put up", "pick up", "give away", "throw away"], "optionsZh": ["搭建", "捡起", "赠送", "扔掉"], "answer": 3, "explanation": "我们通常“扔掉”包装，选 throw away。" },
+      { "options": ["warm", "clear", "fresh", "delicious"], "optionsZh": ["温暖的", "清澈的", "新鲜的", "美味的"], "answer": 2, "explanation": "包装保持食物“新鲜”，选 fresh。" },
+      { "options": ["reuse", "return", "repair", "reduce"], "optionsZh": ["重复使用", "归还", "修理", "减少"], "answer": 0, "explanation": "最好“重复使用”旧塑料容器，选 reuse。" }
+    ]
+  },
+  {
+    "label": "重庆·药店排队",
+    "text": "The sunlight came through the windows, bringing in the hot summer air. I saw a long line of people at the medicine pickup counter. I took a deep breath to cool ___ down. I joined the line to ___ for my turn. The weight of my coming baby made it ___ for me to stand straight, and my legs felt heavy. I raised my head and saw there were still quite a few people ahead. Some were playing with their phones and some were talking quietly. The line moved so ___. I began to feel weaker in my ___. I couldn't stand for long. \"Should I ask the one at the front for help? What if he ___? He's been waiting for a long time, too. Will the other people agree?\" I thought to myself. My forehead was starting to sweat. I knew I couldn't wait. I walked up to the ___ person in the line and asked in a low voice, \"Excuse me, could I go first? I am not feeling so well.\" The young man looked at me in surprise ___ he saw my belly. He agreed. Almost no one noticed what happened. I thought he would remain behind me. Instead, he moved straight to the end. The second person ___ her phone. She looked at me and looked back at the young man. Then she moved to the back, too. Then the third one, then the fourth… until the young man came right ___ me. I felt a gentle wind blowing across my face, and the summer heat was gone with the wind.",
+    "translation": "阳光透过窗户照进来，带来夏日的热气。我看到取药处排着长队。我深吸一口气让自己___冷静下来。我加入队伍___轮到我。腹中即将出生的宝宝的重量让我___站直，双腿感到沉重。我抬头看到前面还有好几个人。有些人在玩手机，有些人在轻声交谈。队伍移动得如此___。我开始感到___越来越虚弱。我站不了多久。“我该不该向前面的那个人求助？万一他___呢？他也等了很久了。其他人会同意吗？”我心里想。我的额头开始冒汗。我知道我等不了了。我走到队伍___那个人面前，低声问：“打扰一下，我能先来吗？我不太舒服。”年轻人惊讶地看着我，___他看到了我的肚子。他同意了。几乎没有人注意到发生了什么。我以为他会留在我后面。相反，他径直走到了队尾。第二个人___她的手机。她看了看我，又回头看了看那个年轻人。然后她也走到了后面。接着是第三个，第四个……直到那个年轻人来到我___。我感到一阵微风拂过脸庞，夏日的炎热随风而去。",
+    "questions": [
+      { "options": ["myself", "yourself", "himself", "herself"], "optionsZh": ["我自己", "你自己", "他自己", "她自己"], "answer": 0, "explanation": "“我”深吸一口气让自己冷静，反身代词用 myself。" },
+      { "options": ["fight", "wait", "call", "ask"], "optionsZh": ["战斗", "等待", "打电话", "询问"], "answer": 1, "explanation": "加入队伍“等待”轮到自己，选 wait。" },
+      { "options": ["easy", "possible", "difficult", "important"], "optionsZh": ["容易的", "可能的", "困难的", "重要的"], "answer": 2, "explanation": "怀着宝宝，站直很“困难”，选 difficult。" },
+      { "options": ["carefully", "successfully", "quickly", "slowly"], "optionsZh": ["小心地", "成功地", "快速地", "缓慢地"], "answer": 3, "explanation": "队伍移动得很“慢”，选 slowly。" },
+      { "options": ["stomach", "legs", "arms", "head"], "optionsZh": ["胃", "腿", "手臂", "头"], "answer": 1, "explanation": "前文说 legs felt heavy，此处感到“腿”越来越虚弱，选 legs。" },
+      { "options": ["agrees", "smiles", "refuses", "cries"], "optionsZh": ["同意", "微笑", "拒绝", "哭泣"], "answer": 2, "explanation": "担心前面的人“拒绝”，选 refuses。" },
+      { "options": ["first", "second", "third", "fourth"], "optionsZh": ["第一", "第二", "第三", "第四"], "answer": 0, "explanation": "走向队伍“最前面”的那个人，选 first。" },
+      { "options": ["if", "unless", "until", "though"], "optionsZh": ["如果/当……时", "除非", "直到", "尽管"], "answer": 0, "explanation": "“if he saw my belly”在此处表示“当他看到我的肚子时”，if 在此语境中可理解为“当……时”，选 if。" },
+      { "options": ["looked out at", "looked up from", "looked down on", "looked around for"], "optionsZh": ["向外看", "从……抬起头", "俯视", "环顾寻找"], "answer": 1, "explanation": "第二个人从手机上“抬起头”，选 looked up from。" },
+      { "options": ["far from", "before", "across from", "behind"], "optionsZh": ["远离", "在……前面", "在……对面", "在……后面"], "answer": 3, "explanation": "年轻人最后来到“我后面”，选 behind。" }
+    ]
+  },
+  {
+    "label": "河北·约翰逊老师的数学课",
+    "text": "Mr. Johnson was an excellent maths teacher. His students would never ___ their first class he gave them. He always wrote the numbers 2 and 4 on the blackboard in the first class to his ___ students, and asked them, \"What is the answer?\" Whenever he asked this question, some of his students said 6 was the ___. Some others thought that 2 was more proper and some of them ___ 8 as the answer. Moreover, there were still others who were just ___ on their seats without a word. While the students were discussing what the answer was, Mr. Johnson always ___ their reply patiently. Finally, he sighed and said, \"Your ___ is useless because none of you focused your attention on the point: What ___ the question is asked about. Did I ask you to do anything about the two ___? Were they asked to be added, subtracted or to do some other calculations? If you don't know the question exactly, how can you give a ___ answer? So let that be a lesson to all of us: It is important to know what the question is before we try to find out the key.\"",
+    "translation": "约翰逊先生是一位优秀的数学老师。他的学生们永远不会___他给他们上的第一堂课。第一堂课上，他总是把数字2和4写在黑板上，给他___的学生看，然后问他们：“答案是什么？”每当他问这个问题时，有些学生说6是___。另一些人认为2更合适，还有一些人___8作为答案。此外，还有一些人只是___在座位上一言不发。当学生们讨论答案是什么时，约翰逊先生总是___他们的回答。最后，他叹了口气说：“你们的___是没有用的，因为你们没有人把注意力集中在关键点上：这个问题___是问什么的。我让你们对这两个___做什么了吗？是要求把它们相加、相减还是做其他计算？如果你们不确切知道问题是什么，怎么能给出___答案？所以让这成为我们所有人的教训：在试图找出答案之前，弄清楚问题是什么很重要。”",
+    "questions": [
+      { "options": ["face", "accept", "forget", "cancel"], "optionsZh": ["面对", "接受", "忘记", "取消"], "answer": 2, "explanation": "学生永远不会“忘记”第一堂课，选 forget。" },
+      { "options": ["new", "wise", "famous", "honest"], "optionsZh": ["新的", "聪明的", "著名的", "诚实的"], "answer": 0, "explanation": "第一堂课面对的是“新”学生，选 new。" },
+      { "options": ["age", "key", "time", "score"], "optionsZh": ["年龄", "关键/答案", "时间", "分数"], "answer": 1, "explanation": "有些学生说6是“答案/关键”，选 key。" },
+      { "options": ["caught", "chose", "covered", "corrected"], "optionsZh": ["抓住", "选择", "覆盖", "纠正"], "answer": 1, "explanation": "有些人“选择”8作为答案，选 chose。" },
+      { "options": ["jumping", "landing", "sitting", "walking"], "optionsZh": ["跳", "着陆", "坐着", "走"], "answer": 2, "explanation": "其他人只是“坐着”一言不发，选 sitting。" },
+      { "options": ["learned from", "dreamed of", "believed in", "waited for"], "optionsZh": ["向……学习", "梦想", "相信", "等待"], "answer": 3, "explanation": "老师“等待”学生回答，选 waited for。" },
+      { "options": ["invention", "translation", "collection", "discussion"], "optionsZh": ["发明", "翻译", "收集", "讨论"], "answer": 3, "explanation": "老师说的“讨论”没有用，选 discussion。" },
+      { "options": ["usually", "exactly", "directly", "suddenly"], "optionsZh": ["通常", "确切地", "直接地", "突然"], "answer": 1, "explanation": "问题“确切地”是问什么的，选 exactly。" },
+      { "options": ["numbers", "lines", "letters", "shapes"], "optionsZh": ["数字", "线条", "字母", "形状"], "answer": 0, "explanation": "黑板上写的是两个“数字”，选 numbers。" },
+      { "options": ["quick", "short", "right", "ready"], "optionsZh": ["快的", "短的", "正确的", "准备好的"], "answer": 2, "explanation": "不知道问题就无法给出“正确”答案，选 right。" }
+    ]
+  },
+  {
+    "label": "绥化·玉米与分享",
+    "text": "Do you expect to be successful in everything you do? If so, then how? Here is an example. There was a farmer who grew corn all his life. Each year he ___ his corn to the market. Then each time his corn was chosen as the ___ and won the first prize. One year a newspaper reporter interviewed him and learned ___ surprising about how he grew it. The farmer offered his seed corn to his neighbors. \"How can you share your best seed corn with your neighbors?\" the reporter asked. \"You know they are taking part in the competition ___ you every year.\" \"Didn't you know?\" said the farmer. \"The wind picks up pollen from the corn and moves it ___ from field to field. If my neighbors grow bad corn, cross-pollination will affect the quality of my corn. So if I want to grow good corn, I must help my neighbors to grow good corn.\" The farmer knows much about the connection of life. His corn can't improve ___ his neighbors' corn improves. As a great man says, \"We ___ by what we grow; we make a life by what we give.\" We can't live without food, and many other things. But a meaningful life is not decided by how much we can get, but by how much we can give others. Giving instead of ___ makes us different from other animals. So if you choose to live well, you must help others to live well; if you choose to be happy, you must help others to find happiness in their life. Remember, we should ___ more time helping others.",
+    "translation": "你期望你所做的一切都成功吗？如果是，那怎么做？这里有一个例子。有一个农民一辈子种玉米。每年他把玉米___市场。每次他的玉米都被选为___，赢得一等奖。有一年，一名报纸记者采访了他，了解到一些关于他如何种植的___令人惊讶的事。农民把种子玉米送给邻居。“你怎么能把最好的种子玉米分享给邻居呢？”记者问。“你知道他们每年都在___你参加比赛。”农民说：“你不知道吗？风把玉米花粉从一块地___吹到另一块地。如果我的邻居种劣质玉米，异花授粉会影响我的玉米质量。所以如果我想种好玉米，就必须帮助邻居种好玉米。”农民很了解生命的联系。他邻居的玉米不改善，他的玉米___改善。正如一位伟人所说：“我们靠所种植的___；我们靠所给予的创造生活。”没有食物和许多其他东西我们无法生存。但有意义的生活不在于我们能得到多少，而在于我们能给予别人多少。给予而不是___使我们不同于其他动物。所以如果你选择生活得好，就必须帮助别人生活得好；如果你选择快乐，就必须帮助别人在生活中找到快乐。记住，我们应该花更多时间帮助别人。",
+    "questions": [
+      { "options": ["takes", "took", "taken"], "optionsZh": ["带（三单）", "带（过去式）", "带（过去分词）"], "answer": 1, "explanation": "每年他把玉米“带”到市场，叙述过去用 took。" },
+      { "options": ["good", "better", "best"], "optionsZh": ["好的", "更好的", "最好的"], "answer": 2, "explanation": "他的玉米被选为“最好的”，选 best。" },
+      { "options": ["anything", "nothing", "something"], "optionsZh": ["任何事", "没有事", "某事"], "answer": 2, "explanation": "记者了解到“一些”令人惊讶的事，选 something。" },
+      { "options": ["with", "on", "at"], "optionsZh": ["和……一起", "在……上", "在"], "answer": 0, "explanation": "邻居“和”他一起参加比赛，选 with。" },
+      { "options": ["quick", "quickly", "more quick"], "optionsZh": ["快的", "快速地", "更快"], "answer": 1, "explanation": "风把花粉“快速地”吹到另一块地，修饰动词用 quickly。" },
+      { "options": ["if", "unless", "when"], "optionsZh": ["如果", "除非", "当……时"], "answer": 1, "explanation": "“除非”邻居的玉米改善，他的玉米无法改善，选 unless。" },
+      { "options": ["make a living", "make living", "makes a living"], "optionsZh": ["谋生", "谋生（错误形式）", "谋生（三单）"], "answer": 0, "explanation": "“我们靠所种植的谋生”，主语 We 后用 make a living。" },
+      { "options": ["giving", "taking", "receiving"], "optionsZh": ["给予", "拿取", "接受"], "answer": 1, "explanation": "与 giving 相对的是“拿取”，选 taking。" },
+      { "options": ["happy", "happier", "happiness"], "optionsZh": ["快乐的", "更快乐的", "幸福"], "answer": 2, "explanation": "帮助别人找到生活中的“幸福”，选 happiness。" },
+      { "options": ["take", "spend", "cost"], "optionsZh": ["花费（时间）", "花费（时间）", "花费（金钱）"], "answer": 1, "explanation": "主语 we，花时间帮助别人用 spend，选 spend。" }
+    ]
+  },
+  {
+    "label": "夏洛特阿姨的派",
+    "text": "I spent a week ___ my Aunt Charlotte in Tennessee. One day, I noticed a boy about my age ___ outside an old house on Aunt Charlotte's street. I talked to him and we built up a friendship, and we ___ outside together in the following days. One day, we felt ___ and went inside his house to get a drink of water. I noticed the shelves were ___ and the fridge was empty, too. When I asked my new friend about it, he said it was the end of the month and when his mom got paid in a few days, all the shelves would be full of ___ again. I told my Aunt Charlotte about it that evening. Without saying a word, she took a pie she was cooking and disappeared out the back door. I later learned that she had ___ the \"extra\" pie to my friend's mom. And for the rest of my visit there, Aunt Charlotte would have a BIG lunch ready for me and my new ___ each day. I didn't realize then what a shining ___ my Aunt Charlotte was being to me. She was actually showing me how to live, how to give and how to ___.",
+    "translation": "我花了一个星期去田纳西州___我的夏洛特阿姨。有一天，我注意到一个和我年龄相仿的男孩在夏洛特阿姨那条街上一栋旧房子外面___。我和他聊了聊，我们建立了友谊，在接下来的几天里我们一起在外面___。一天，我们感到___，就走进他的房子喝水。我注意到架子是___的，冰箱也是空的。当我问我的新朋友这件事时，他说现在是月底，等他妈妈几天后拿到工资，所有的架子上又会摆满___。那天晚上我把这件事告诉了夏洛特阿姨。她一言不发，拿起正在烤的派，从后门消失了。我后来才知道，她把那个“额外的”派___了我朋友的妈妈。在接下来的日子里，夏洛特阿姨每天都会为我和我的新___准备一顿丰盛的午餐。我当时没有意识到夏洛特阿姨对我来说是一个多么光辉的___。她实际上是在教我如何生活，如何给予，如何___。",
+    "questions": [
+      { "options": ["visiting", "missing", "protecting"], "optionsZh": ["看望", "错过", "保护"], "answer": 0, "explanation": "“看望”夏洛特阿姨，选 visiting。" },
+      { "options": ["girl", "boy", "teenager"], "optionsZh": ["女孩", "男孩", "青少年"], "answer": 1, "explanation": "后文说“I talked to him”，是“男孩”，选 boy。" },
+      { "options": ["dreamed", "argued", "played"], "optionsZh": ["梦想", "争论", "玩耍"], "answer": 2, "explanation": "和男孩成了朋友，一起“玩耍”，选 played。" },
+      { "options": ["hungry", "thirsty", "sleepy"], "optionsZh": ["饥饿的", "口渴的", "困倦的"], "answer": 1, "explanation": "进屋喝水，说明“口渴”，选 thirsty。" },
+      { "options": ["dirty", "noisy", "empty"], "optionsZh": ["脏的", "吵闹的", "空的"], "answer": 2, "explanation": "架子和冰箱都是“空的”，选 empty。" },
+      { "options": ["food", "ice", "wood"], "optionsZh": ["食物", "冰", "木头"], "answer": 0, "explanation": "妈妈发工资后架子上会摆满“食物”，选 food。" },
+      { "options": ["sold", "given", "shown"], "optionsZh": ["卖", "给予", "展示"], "answer": 1, "explanation": "阿姨把派“给”了朋友的妈妈，选 given。" },
+      { "options": ["relative", "teacher", "friend"], "optionsZh": ["亲戚", "老师", "朋友"], "answer": 2, "explanation": "男孩是作者的“新朋友”，选 friend。" },
+      { "options": ["example", "chance", "stage"], "optionsZh": ["榜样", "机会", "舞台"], "answer": 0, "explanation": "阿姨是一个光辉的“榜样”，选 example。" },
+      { "options": ["cook", "share", "accept"], "optionsZh": ["烹饪", "分享", "接受"], "answer": 1, "explanation": "阿姨教作者如何“分享”，选 share。" }
+    ]
+  },
+  {
+    "label": "淄博·善良的艾玛",
+    "text": "Emma was a young girl with kindness. She always tried her best to help others. Every day after school, she would visit the old people in her neighborhood and ___ them with their housework. She also helped younger children with their homework. One winter, a heavy snow hit her village. Many old people could not go out to buy food. Emma decided to ___ them. She asked her parents for help and they prepared some food bags. Emma and her friends ___ the bags to the old people's homes. The old people were very ___ and thanked them again and again. Emma's story spread quickly. More and more people ___ to help. They formed a volunteer group and did many good things for the village. Emma's parents were ___ of her. They said, \"We are happy that our daughter has such a kind ___.\" Emma smiled and said, \"I just want to make the world a ___ place. If everyone helps a little, the world will become much ___.\" Her words touched everyone. The village became warmer and ___ because of her.",
+    "translation": "艾玛是一个善良的小女孩。她总是尽力帮助别人。每天放学后，她都会去看望邻居家的老人，___他们做家务。她还帮助较小的孩子做作业。一个冬天，一场大雪袭击了她的村庄。许多老人无法出门买食物。艾玛决定___他们。她向父母求助，他们准备了一些食物袋。艾玛和朋友们把袋子___到老人家里。老人们非常___，一再感谢他们。艾玛的故事迅速传开。越来越多的人___来帮忙。他们成立了一个志愿者团体，为村庄做了许多好事。艾玛的父母为她感到___。他们说：“我们很高兴我们的女儿有这样一颗善良的___。”艾玛笑着说：“我只是想让世界变成一个___的地方。如果每个人都帮一点忙，世界会变得更___。”她的话感动了每个人。因为她，村庄变得更温暖、更___。",
+    "questions": [
+      { "options": ["help", "leave", "call", "find"], "optionsZh": ["帮助", "离开", "打电话", "找到"], "answer": 0, "explanation": "艾玛帮助老人做家务，选 help。" },
+      { "options": ["visit", "ignore", "forget", "stop"], "optionsZh": ["拜访/帮助", "忽视", "忘记", "停止"], "answer": 0, "explanation": "老人无法出门买食物，艾玛决定去看望/帮助他们，visit 符合语境。" },
+      { "options": ["sold", "delivered", "threw", "hid"], "optionsZh": ["卖", "递送", "扔", "藏"], "answer": 1, "explanation": "把食物袋“递送”到老人家里，选 delivered。" },
+      { "options": ["angry", "sad", "grateful", "tired"], "optionsZh": ["生气的", "伤心的", "感激的", "累的"], "answer": 2, "explanation": "老人非常“感激”，选 grateful。" },
+      { "options": ["refused", "volunteered", "happened", "failed"], "optionsZh": ["拒绝", "自愿", "碰巧", "失败"], "answer": 1, "explanation": "越来越多的人“自愿”来帮忙，选 volunteered。" },
+      { "options": ["afraid", "tired", "proud", "full"], "optionsZh": ["害怕的", "累的", "骄傲的", "满的"], "answer": 2, "explanation": "父母为她感到“骄傲”，be proud of，选 proud。" },
+      { "options": ["face", "heart", "hand", "voice"], "optionsZh": ["脸", "心", "手", "声音"], "answer": 1, "explanation": "女儿有一颗善良的“心”，选 heart。" },
+      { "options": ["colder", "worse", "better", "busier"], "optionsZh": ["更冷", "更糟", "更好", "更忙"], "answer": 2, "explanation": "让世界变成“更好”的地方，选 better。" },
+      { "options": ["smaller", "warmer", "darker", "quieter"], "optionsZh": ["更小", "更温暖", "更黑暗", "更安静"], "answer": 1, "explanation": "世界会变得更“温暖”，选 warmer。" },
+      { "options": ["happier", "poorer", "slower", "noisier"], "optionsZh": ["更快乐", "更穷", "更慢", "更吵"], "answer": 0, "explanation": "村庄变得更温暖、更“快乐”，选 happier。" }
+    ]
+  },
+ {
+    "label": "雪豹摄影师",
+    "text": "When I was ten, I saw a photo of a snow leopard in a magazine and read its photographer's story. The photographer waited for weeks in the ___ to get that one perfect shot. Today, I'm lucky to work as a wildlife ___ . I decided at ten, and I made it happen. For anyone thinking about a dream, I would say: Never give up and stick to your goals. You don't have to be ___ or rich to start. I ___ books and learned from other photographers. I saved money and bought my ___ camera. I sent my photos to magazines, but they were often ___. I didn't stop. I kept ___ and improving. Finally, my ___ photo was published. That moment made me ___ . Looking back, I understand that the ___ is not the goal itself, but the person you become while chasing it.",
+    "translation": "我十岁时，在杂志上看到一张雪豹的照片，并读了那位摄影师的故事。那位摄影师在___中等了好几周，只为拍到那一张完美的照片。今天，我很幸运地成为一名野生动物___。我十岁就下定了决心，并且做到了。对于任何正在考虑一个梦想的人，我想说：永不放弃，坚持你的目标。你不需要___或富有才能开始。我___书籍，向其他摄影师学习。我攒钱买了我的___相机。我把照片寄给杂志社，但它们经常被___。我没有停下。我不断___并进步。最终，我的___照片被发表了。那一刻让我感到___。回头看，我明白___并不是目标本身，而是你在追逐它的过程中成为的那个人。",
+    "questions": [
+      { "options": ["cold", "dark", "rain", "noise"], "optionsZh": ["寒冷", "黑暗", "雨", "噪音"], "answer": 0, "explanation": "雪豹生活在高寒地区，摄影师在“寒冷”中等待数周，选 cold。" },
+      { "options": ["researcher", "keeper", "photographer", "writer"], "optionsZh": ["研究者", "饲养员", "摄影师", "作家"], "answer": 2, "explanation": "作者被雪豹照片和摄影师的故事打动，最终成为野生动物“摄影师”，选 photographer。" },
+      { "options": ["famous", "young", "strong", "lucky"], "optionsZh": ["著名的", "年轻的", "强壮的", "幸运的"], "answer": 0, "explanation": "后文说“你不需要出名或富有才能开始”，与 famous 对应，选 famous。" },
+      { "options": ["bought", "borrowed", "read", "wrote"], "optionsZh": ["买", "借", "读", "写"], "answer": 2, "explanation": "向其他摄影师学习的方式是“读”书，选 read。" },
+      { "options": ["first", "last", "old", "cheap"], "optionsZh": ["第一台", "最后一台", "旧的", "便宜的"], "answer": 0, "explanation": "攒钱买“第一台”相机，符合起步阶段的语境，选 first。" },
+      { "options": ["accepted", "rejected", "printed", "sold"], "optionsZh": ["接受", "拒绝", "印刷", "卖"], "answer": 1, "explanation": "后文说他没有停止，说明照片常被“拒绝”，选 rejected。" },
+      { "options": ["trying", "resting", "waiting", "travelling"], "optionsZh": ["尝试", "休息", "等待", "旅行"], "answer": 0, "explanation": "被拒后继续“尝试”并进步，选 trying。" },
+      { "options": ["first", "next", "last", "only"], "optionsZh": ["第一张", "下一张", "最后一张", "唯一一张"], "answer": 0, "explanation": "“第一张”照片被发表，具有里程碑意义，选 first。" },
+      { "options": ["proud", "tired", "nervous", "sorry"], "optionsZh": ["自豪的", "疲惫的", "紧张的", "抱歉的"], "answer": 0, "explanation": "照片被发表，作者感到“自豪”，选 proud。" },
+      { "options": ["prize", "journey", "photo", "magazine"], "optionsZh": ["奖品", "旅程/过程", "照片", "杂志"], "answer": 1, "explanation": "全文强调追梦过程中的成长，目标本身不是“旅程”，选 journey。" }
+    ]
+  },
+  {
+    "label": "贪婪的巧克力",
+    "text": "One day, a boy asked his teacher Miss Smith, \"What is greed?\" The teacher didn't answer his ___ directly. She asked him to go to a chocolate factory and ___ the largest chocolate bar he could find. The boy went to the factory. As he walked, he saw a large chocolate bar. He liked it, but thought he might be able to find a ___ one. He kept walking. He saw another bar, but again he thought there might be a better one ahead. He looked and looked, but ___ seemed good enough. Finally, he gave up. He went back to his teacher with ___ hands. The teacher told him, \"You liked the first chocolate bar, but you kept ___ for something better. In the end, you got ___. That is greed: always expecting something better, and missing the best.\" The boy learned an important ___. Greed can make us ___ what we already have. Sometimes, the best choice is to ___ what is right in front of us.",
+    "translation": "一天，一个男孩问他的老师史密斯小姐：“什么是贪婪？”老师没有直接回答他的___。她让他去一家巧克力工厂，___他能找到的最大的巧克力棒。男孩去了工厂。他走着，看到一大块巧克力棒。他喜欢它，但觉得也许能找到一块更___的。他继续走。他又看到一块，但再次觉得前面可能有更好的。他找了又找，但___似乎都不够好。最后，他放弃了。他两手___地回到老师那里。老师告诉他：“你喜欢第一块巧克力棒，但你一直___更好的。最后，你得到了___。这就是贪婪：总是期待更好的，却错过了最好的。”男孩学到了一个重要的___。贪婪会让我们___已经拥有的东西。有时候，最好的选择就是___眼前的东西。",
+    "questions": [
+      { "options": ["call", "question", "door", "need"], "optionsZh": ["电话", "问题", "门", "需要"], "answer": 1, "explanation": "男孩问的是“问题”，老师没有直接回答他的问题，选 question。" },
+      { "options": ["pick out", "eat up", "throw away", "sell out"], "optionsZh": ["挑选出", "吃光", "扔掉", "卖光"], "answer": 0, "explanation": "老师让男孩去“挑选”最大的巧克力棒，选 pick out。" },
+      { "options": ["longer", "stronger", "higher", "bigger"], "optionsZh": ["更长的", "更强的", "更高的", "更大的"], "answer": 3, "explanation": "前文说的是“largest”，男孩想找“更大的”，选 bigger。" },
+      { "options": ["none", "some", "any", "many"], "optionsZh": ["没有一个", "一些", "任何", "许多"], "answer": 0, "explanation": "他找了又找，“没有一个”似乎足够好，选 none。" },
+      { "options": ["busy", "soft", "dirty", "empty"], "optionsZh": ["忙的", "软的", "脏的", "空的"], "answer": 3, "explanation": "他最终放弃了，两手“空空”地回去，选 empty。" },
+      { "options": ["looking after", "looking for", "looking up", "looking over"], "optionsZh": ["照顾", "寻找", "向上看", "检查"], "answer": 1, "explanation": "他一直在“寻找”更好的，选 looking for。" },
+      { "options": ["everything", "something", "nothing", "anything"], "optionsZh": ["一切", "某物", "没有什么", "任何东西"], "answer": 2, "explanation": "一直在找更好的，最后“什么也没得到”，选 nothing。" },
+      { "options": ["advice", "decision", "promise", "lesson"], "optionsZh": ["建议", "决定", "承诺", "教训/道理"], "answer": 3, "explanation": "男孩学到了一个重要的“道理/教训”，选 lesson。" },
+      { "options": ["forget", "miss", "change", "lose"], "optionsZh": ["忘记", "错过", "改变", "丢失"], "answer": 1, "explanation": "贪婪会让我们“错过”已经拥有的东西，选 miss。" },
+      { "options": ["refuse", "choose", "ignore", "leave"], "optionsZh": ["拒绝", "选择", "忽视", "离开"], "answer": 1, "explanation": "最好的选择是“选择”眼前的东西，选 choose。" }
+    ]
+  },
+  {
+    "label": "乡村英语教学",
+    "text": "It was my first day teaching English at a remote school. When I asked a simple question, no one ___. The students were shy and afraid of making mistakes. I tried different ways to encourage them. Months passed, and slowly they began to ___. Then I received a better job offer from a city school. I told my class I might ___. A student stood up and said, \"Please ___. We need you.\" I was deeply moved. I decided to ___. A week later, there was a speech competition in the school hall. That shy boy walked onto the stage and spoke ___. He won the first prize. I realized that my ___ was not just a job. It was a ___ to make a difference. Sometimes, what ___ most is only shown when you choose to ___.",
+    "translation": "那是我在一所偏远学校教英语的第一天。当我问一个简单的问题时，没有人___。学生们很害羞，害怕犯错。我尝试了不同的方法来鼓励他们。几个月过去了，慢慢地他们开始___。后来我收到了一份来自城市学校的更好的工作邀请。我告诉班上的学生我可能会___。一个学生站起来说：“请___。我们需要你。”我深受感动。我决定___。一周后，学校礼堂举行了一场演讲比赛。那个害羞的男孩走上舞台，___地演讲。他获得了一等奖。我意识到我的___不仅仅是一份工作。它是一个___去产生影响的机会。有时候，最___的东西只在你选择___时才会显现。",
+    "questions": [
+      { "options": ["read", "forgot", "avoided", "answered"], "optionsZh": ["读", "忘记", "避免", "回答"], "answer": 3, "explanation": "老师问了一个简单的问题，没有人“回答”，选 answered。" },
+      { "options": ["change", "cry", "fight", "hide"], "optionsZh": ["改变", "哭", "打架", "躲藏"], "answer": 0, "explanation": "几个月过去，学生们慢慢开始“改变”，选 change。" },
+      { "options": ["leave", "appear", "matter", "double"], "optionsZh": ["离开", "出现", "重要", "加倍"], "answer": 0, "explanation": "作者收到城市学校邀请，告诉学生自己可能“离开”，选 leave。" },
+      { "options": ["leave", "stay", "go", "return"], "optionsZh": ["离开", "留下", "走", "返回"], "answer": 1, "explanation": "学生恳求老师“留下”，选 stay。" },
+      { "options": ["hide", "mark", "push", "remain"], "optionsZh": ["躲藏", "标记", "推", "留下"], "answer": 3, "explanation": "作者被感动，决定“留下”，选 remain。" },
+      { "options": ["clean", "empty", "dark", "bravely"], "optionsZh": ["干净的", "空的", "黑暗的", "勇敢地"], "answer": 3, "explanation": "害羞的男孩“勇敢地”演讲，选 bravely。" },
+      { "options": ["job", "gift", "smile", "speech"], "optionsZh": ["工作", "礼物", "微笑", "演讲"], "answer": 0, "explanation": "作者意识到这不仅仅是一份“工作”，选 job。" },
+      { "options": ["rest", "chance", "rise", "travel"], "optionsZh": ["休息", "机会", "上升", "旅行"], "answer": 1, "explanation": "这是一个“机会”去产生影响，选 chance。" },
+      { "options": ["sadly", "blindly", "matters", "repeatedly"], "optionsZh": ["伤心地", "盲目地", "重要", "反复地"], "answer": 2, "explanation": "最“重要”的东西只在选择留下时显现，选 matters。" },
+      { "options": ["come up", "give up", "get up", "stay"], "optionsZh": ["出现", "放弃", "起床", "留下"], "answer": 3, "explanation": "选择“留下”时才会显现，选 stay。" }
+    ]
+  },
+  {
+    "label": "虎头帽手工艺",
+    "text": "Fan Min is a craftswoman who lives in a village in Anhui. She works with other villagers to make tiger-head hats. This hand-made craft is a special Spring Festival ___. Fan learned the ___ from her grandmother. Making tiger-head hats needs great ___. Every hat is made by hand, step by step. Young visitors come here to ___ how the hats are made. Fan ___ the young people patiently. With hard work of Fan and other villagers, the old craft becomes ___ again. Some young people even want to ___ the hats. Fan is happy to see that this tradition is not lost. She believes that traditional ___ should be ___ down from generation to generation. The tiger-head hat is not just a hat; it is a piece of cultural ___. It carries people's best wishes for children and family.",
+    "translation": "范敏是一位住在安徽一个村庄的手工艺人。她和其他村民一起制作虎头帽。这种手工制作的工艺品是一种特殊的春节___。范敏从祖母那里学到了这门___。制作虎头帽需要极大的___。每一顶帽子都是手工一步步做成的。年轻的游客来这里___帽子是如何制作的。范敏耐心地___年轻人。在范敏和其他村民的努力下，这门古老的手艺再次___起来。一些年轻人甚至想___这些帽子。范敏很高兴看到这项传统没有失传。她相信传统的___应该代代___。虎头帽不仅仅是一顶帽子；它是一件文化___。它承载着人们对孩子和家庭的美好祝愿。",
+    "questions": [
+      { "options": ["record", "tradition", "dinner", "party"], "optionsZh": ["记录", "传统", "晚餐", "派对"], "answer": 1, "explanation": "虎头帽是春节的“传统”，选 tradition。" },
+      { "options": ["skill", "fact", "dance", "poem"], "optionsZh": ["技艺", "事实", "舞蹈", "诗歌"], "answer": 0, "explanation": "范敏从祖母那里学到了制作虎头帽的“技艺”，选 skill。" },
+      { "options": ["humor", "praise", "patience", "truth"], "optionsZh": ["幽默", "表扬", "耐心", "真相"], "answer": 2, "explanation": "手工制作帽子需要极大的“耐心”，选 patience。" },
+      { "options": ["learn", "book", "describe", "complete"], "optionsZh": ["学习/了解", "预订", "描述", "完成"], "answer": 0, "explanation": "游客来“学习/了解”帽子是如何制作的，选 learn。" },
+      { "options": ["warns", "guards", "refuses", "teaches"], "optionsZh": ["警告", "守卫", "拒绝", "教"], "answer": 3, "explanation": "范敏耐心地“教”年轻人，选 teaches。" },
+      { "options": ["cheap", "difficult", "private", "popular"], "optionsZh": ["便宜的", "困难的", "私人的", "受欢迎的"], "answer": 3, "explanation": "老手艺再次“受欢迎”，选 popular。" },
+      { "options": ["try on", "cut up", "sell out", "hand in"], "optionsZh": ["试戴", "切碎", "卖光", "上交"], "answer": 0, "explanation": "年轻人想“试戴”虎头帽，选 try on。" },
+      { "options": ["skills", "beauty", "movie", "concert"], "optionsZh": ["技艺", "美", "电影", "音乐会"], "answer": 0, "explanation": "传统的“技艺”应该代代相传，选 skills。" },
+      { "options": ["forgotten", "passed", "changed", "stopped"], "optionsZh": ["被遗忘", "被传递", "被改变", "被停止"], "answer": 1, "explanation": "传统技艺应该代代“传递”下去，passed down，选 passed。" },
+      { "options": ["memory", "difference", "warning", "treasure"], "optionsZh": ["记忆", "差异", "警告", "珍宝"], "answer": 3, "explanation": "虎头帽是一件文化“珍宝”，选 treasure。" }
+    ]
+  },
+  {
+    "label": "Marta 的艺术天赋",
+    "text": "Marta was born in Los Angeles and grew up in a Spanish-speaking home. When she started primary school, she had a ___ with English. She could not understand the teacher or make friends easily. She felt ___ and lonely. One day, her teacher saw her ___ on a piece of paper. The teacher was surprised by her ___ . She told Marta, \"You have a gift for art.\" From then on, Marta spent more time ___ . She became more confident. She went to an art college and became an artist and art teacher. She also painted murals in her community so that art could reach more people. Marta learned that a language barrier does not mean you have no ___ . It just means your talent may be in a ___ place. Everyone has something ___ to share with the world. Don't let one ___ stop you from finding your true ___.",
+    "translation": "玛塔出生在洛杉矶，在一个说西班牙语的家庭长大。开始上小学时，她在英语方面有___。她听不懂老师的话，也不容易交到朋友。她感到___和孤独。一天，老师看到她在一张纸上___。老师对她的___感到惊讶。她告诉玛塔：“你有艺术天赋。”从那以后，玛塔花更多时间___。她变得更加自信。她上了艺术学院，成为一名艺术家和美术老师。她还在社区画壁画，让艺术触及更多人。玛塔明白，语言障碍并不意味着你没有___。它只是意味着你的天赋可能在一个___的地方。每个人都有___的东西可以与世界分享。不要让一个___阻止你找到真正的___。",
+    "questions": [
+      { "options": ["problem", "party", "picture", "friend"], "optionsZh": ["问题", "派对", "图片", "朋友"], "answer": 0, "explanation": "玛塔在英语方面有“困难/问题”，选 problem。" },
+      { "options": ["excited", "sad", "angry", "bored"], "optionsZh": ["兴奋的", "难过的", "生气的", "无聊的"], "answer": 1, "explanation": "语言不通，她感到“难过”和孤独，选 sad。" },
+      { "options": ["drawing", "singing", "dancing", "writing"], "optionsZh": ["画画", "唱歌", "跳舞", "写字"], "answer": 0, "explanation": "后文说老师看到她的艺术天赋，她在纸上“画画”，选 drawing。" },
+      { "options": ["voice", "talent", "height", "speed"], "optionsZh": ["嗓音", "天赋", "身高", "速度"], "answer": 1, "explanation": "老师惊讶于她的“天赋”，选 talent。" },
+      { "options": ["reading", "drawing", "running", "talking"], "optionsZh": ["阅读", "画画", "跑步", "说话"], "answer": 1, "explanation": "玛塔花更多时间“画画”，选 drawing。" },
+      { "options": ["money", "talent", "time", "friends"], "optionsZh": ["钱", "天赋", "时间", "朋友"], "answer": 1, "explanation": "语言障碍并不意味着没有“天赋”，选 talent。" },
+      { "options": ["wrong", "right", "different", "same"], "optionsZh": ["错误的", "正确的", "不同的", "相同的"], "answer": 2, "explanation": "天赋可能在“不同的”地方，选 different。" },
+      { "options": ["strange", "special", "common", "easy"], "optionsZh": ["奇怪的", "特别的", "普通的", "容易的"], "answer": 1, "explanation": "每个人都有“特别的”东西可以分享，选 special。" },
+      { "options": ["barrier", "gift", "story", "dream"], "optionsZh": ["障碍", "礼物", "故事", "梦想"], "answer": 0, "explanation": "不要让一个“障碍”阻止你，选 barrier。" },
+      { "options": ["style", "talent", "friend", "job"], "optionsZh": ["风格", "天赋", "朋友", "工作"], "answer": 1, "explanation": "找到真正的“天赋”，选 talent。" }
+    ]
+  },
+  {
+    "label": "南极洲变绿",
+    "text": "In recent years, the icy areas of Antarctica have been changing a lot. Some parts covered in ice are turning green because plants are growing ___ . A study showed that between 1986 and 2021, the number of plants on the Antarctic Peninsula ___ quickly. Antarctica is one of the ___ places on Earth, but it is warming faster than many other places. Scientists are studying this change to understand its ___ . They are also trying to find ways to ___ Antarctica and slow down global warming. In a word, Antarctica's turning green is a clear ___ that climate change is affecting even the most remote places on Earth. We must take action ___ it is too late. Everyone can help by using less energy and ___ more. If we don't act now, the ___ may be serious for the whole planet. The future of Antarctica depends on the ___ we make today.",
+    "translation": "近年来，南极洲的冰层区域一直在发生很大变化。一些被冰覆盖的部分正在变绿，因为植物在___生长。一项研究显示，1986 年到 2021 年间，南极半岛上的植物数量___。南极洲是地球上最___的地方之一，但它变暖的速度比许多其他地方都快。科学家正在研究这种变化，以了解其___。他们也在努力寻找___南极洲并减缓全球变暖的方法。总之，南极洲变绿是一个明确的___：气候变化正在影响地球上最偏远的地方。我们必须___为时已晚之前采取行动。每个人都可以通过减少能源消耗和___更多来帮忙。如果我们现在不行动，对整个星球来说___可能会很严重。南极洲的未来取决于我们今天所做的___。",
+    "questions": [
+      { "options": ["badly", "quickly", "hardly"], "optionsZh": ["糟糕地", "快速地", "几乎不"], "answer": 1, "explanation": "植物在“快速地”生长，选 quickly。" },
+      { "options": ["grew", "reduced", "needed"], "optionsZh": ["增长", "减少", "需要"], "answer": 0, "explanation": "植物数量“增长”得很快，选 grew。" },
+      { "options": ["hottest", "coldest", "driest"], "optionsZh": ["最热的", "最冷的", "最干燥的"], "answer": 1, "explanation": "南极洲是地球上“最冷的”地方之一，选 coldest。" },
+      { "options": ["effects", "reasons", "choices"], "optionsZh": ["影响", "原因", "选择"], "answer": 0, "explanation": "科学家研究这种变化的“影响”，选 effects。" },
+      { "options": ["accept", "support", "protect"], "optionsZh": ["接受", "支持", "保护"], "answer": 2, "explanation": "寻找方法“保护”南极洲并减缓全球变暖，选 protect。" },
+      { "options": ["warning", "memory", "difference"], "optionsZh": ["警告", "记忆", "差异"], "answer": 0, "explanation": "南极洲变绿是一个明确的“警告”，选 warning。" },
+      { "options": ["after", "before", "until"], "optionsZh": ["在……之后", "在……之前", "直到"], "answer": 1, "explanation": "在“为时已晚之前”采取行动，选 before。" },
+      { "options": ["recycling", "wasting", "hiding"], "optionsZh": ["回收", "浪费", "隐藏"], "answer": 0, "explanation": "通过减少能源消耗和“回收”更多来帮忙，选 recycling。" },
+      { "options": ["results", "stories", "games"], "optionsZh": ["结果/后果", "故事", "游戏"], "answer": 0, "explanation": "如果不行动，“后果”可能很严重，选 results。" },
+      { "options": ["mistakes", "choices", "promises"], "optionsZh": ["错误", "选择", "承诺"], "answer": 1, "explanation": "未来取决于我们今天所做的“选择”，选 choices。" }
+    ]
+  },
+  {
+    "label": "孙颖莎的乒乓球之路",
+    "text": "Do you know Sun Yingsha? When she was just 5 years old, her mother took her to a table tennis class to get more ___ . At first, she was very small and could ___ reach the table. But she loved the game and practiced ___ every day. Her coach saw her ___ and helped her improve. She learned to focus and never ___ . In 2017, she won her first ___ title. Since then, she has won many championships. She achieved her dream through her love and hard work. Sun Yingsha is now a ___ for many young people. She shows us that success does not come ___. It comes from ___ practice and a strong will. If you have a dream, believe in yourself and keep ___ .",
+    "translation": "你认识孙颖莎吗？她只有 5 岁时，妈妈带她去上乒乓球课，为了得到更多___。起初，她很小，___够不到球台。但她热爱这项运动，每天___地练习。教练看到了她的___，帮助她进步。她学会了专注，从不___。2017 年，她赢得了第一个___冠军。从那以后，她赢得了许多冠军。她通过热爱和努力实现了梦想。孙颖莎现在是许多年轻人的___。她向我们展示，成功不会___到来。它来自___的练习和坚强的意志。如果你有梦想，相信自己，继续___。",
+    "questions": [
+      { "options": ["surprise", "attention", "exercise"], "optionsZh": ["惊喜", "关注", "锻炼"], "answer": 2, "explanation": "妈妈带她去乒乓球课是为了得到更多“锻炼”，选 exercise。" },
+      { "options": ["always", "hardly", "usually"], "optionsZh": ["总是", "几乎不", "通常"], "answer": 1, "explanation": "她很小，“几乎不”够得到球台，选 hardly。" },
+      { "options": ["lazily", "badly", "actively"], "optionsZh": ["懒惰地", "糟糕地", "积极地"], "answer": 2, "explanation": "她“积极地”每天练习，选 actively。" },
+      { "options": ["talent", "height", "voice"], "optionsZh": ["天赋", "身高", "嗓音"], "answer": 0, "explanation": "教练看到了她的“天赋”，选 talent。" },
+      { "options": ["gave up", "stood up", "got up"], "optionsZh": ["放弃", "站起来", "起床"], "answer": 0, "explanation": "她从不“放弃”，选 gave up。" },
+      { "options": ["Women's", "Men's", "Woman"], "optionsZh": ["女子的", "男子的", "女子（单数）"], "answer": 0, "explanation": "孙颖莎是女子乒乓球运动员，赢得“女子”冠军，选 Women's。" },
+      { "options": ["symbol", "example", "problem"], "optionsZh": ["象征", "榜样", "问题"], "answer": 1, "explanation": "她是许多年轻人的“榜样”，选 example。" },
+      { "options": ["easily", "slowly", "sadly"], "optionsZh": ["容易地", "缓慢地", "伤心地"], "answer": 0, "explanation": "成功不会“轻易”到来，选 easily。" },
+      { "options": ["little", "hard", "free"], "optionsZh": ["很少的", "艰苦的", "免费的"], "answer": 1, "explanation": "成功来自“艰苦的”练习，选 hard。" },
+      { "options": ["trying", "crying", "resting"], "optionsZh": ["尝试/努力", "哭泣", "休息"], "answer": 0, "explanation": "继续“努力/尝试”，选 trying。" }
+    ]
+  },
+  {
+    "label": "10 岁男孩的 3D 打印生意",
+    "text": "While most 10-year-olds are spending their free time playing video games, Ernesto is busy running his own 3D printing business. He spends his days ___ new things in a small workshop at home. The ___ came to him when he saw a 3D printer for the first time. He was ___ by how it worked. He started ___ money to buy his own printer. His parents ___ him and helped him set up a small shop. At first, he only made small ___ for friends. But business grew fast, and he got more and more ___ . Now he makes all kinds of things, from toys to tools. For Ernesto, the business is not just about making money. It is a ___ experience that teaches him responsibility and creativity. He dreams of buying his mom a house someday. His story shows that age is not a ___ to starting something great. All you need is an ___ and the courage to try.",
+    "translation": "当大多数 10 岁孩子把空闲时间花在玩电子游戏上时，埃内斯托正忙着经营自己的 3D 打印生意。他每天在家里的一个小工作室里___新东西。这个___是在他第一次看到 3D 打印机时产生的。他对它的工作原理感到___。他开始___钱买自己的打印机。他的父母___他，帮他开了一个小商店。起初，他只给朋友做小___。但生意增长很快，他收到了越来越多的___。现在他制作各种各样的东西，从玩具到工具。对埃内斯托来说，生意不仅仅是赚钱。它是一段___的经历，教会他责任感和创造力。他梦想有一天给妈妈买一栋房子。他的故事表明，年龄不是开始做伟大事情的___。你所需要的只是一个___和尝试的勇气。",
+    "questions": [
+      { "options": ["finding", "writing", "designing"], "optionsZh": ["寻找", "写", "设计"], "answer": 2, "explanation": "他在工作室里“设计”新东西，选 designing。" },
+      { "options": ["idea", "habit", "rule"], "optionsZh": ["想法", "习惯", "规则"], "answer": 0, "explanation": "这个“想法”在他第一次看到打印机时产生，选 idea。" },
+      { "options": ["generally", "simply", "amazed"], "optionsZh": ["一般地", "仅仅", "惊叹的"], "answer": 2, "explanation": "他对它的工作原理感到“惊叹”，选 amazed。" },
+      { "options": ["saving", "donating", "borrowing"], "optionsZh": ["存钱", "捐赠", "借"], "answer": 0, "explanation": "他开始“存钱”买打印机，选 saving。" },
+      { "options": ["explained", "realised", "supported"], "optionsZh": ["解释", "意识到", "支持"], "answer": 2, "explanation": "父母“支持”他，选 supported。" },
+      { "options": ["printers", "courses", "creations"], "optionsZh": ["打印机", "课程", "作品"], "answer": 2, "explanation": "起初他给朋友做小“作品”，选 creations。" },
+      { "options": ["partnered", "compared", "orders"], "optionsZh": ["合作", "比较", "订单"], "answer": 2, "explanation": "生意增长，他得到越来越多“订单”，选 orders。" },
+      { "options": ["normal", "dangerous", "valuable"], "optionsZh": ["正常的", "危险的", "宝贵的"], "answer": 2, "explanation": "这是一段“宝贵的”经历，选 valuable。" },
+      { "options": ["barrier", "gift", "game"], "optionsZh": ["障碍", "礼物", "游戏"], "answer": 0, "explanation": "年龄不是“障碍”，选 barrier。" },
+      { "options": ["idea", "order", "printer"], "optionsZh": ["想法", "订单", "打印机"], "answer": 0, "explanation": "你所需要的只是一个“想法”，选 idea。" }
+    ]
+  },
+  {
+    "label": "漏水的篮子",
+    "text": "Once, a king showed two men a large basket in the garden. He told them to fill it with water from a well. The basket was full of holes, so the water ran out as fast as they poured it in. At last, one of them said, \"What's the use of doing this foolish work? We can never ___ the basket.\" He ___ and walked away. The other man said nothing and kept ___. He poured bucket after bucket of water into the basket. Hours passed. He was tired, but he did not ___. As he poured the last bucket of water into the basket, he saw a bright thing in the well. He picked it up. It was a beautiful gold ___. Just then the king came. He said to the man, \"You have ___ . The other man gave up too early. The basket could not hold water, but your effort was not ___. Sometimes, what we do seems useless, but it may lead us to something ___ . Never give up too ___. Keep trying, and you may find a ___ you never expected.\"",
+    "translation": "从前，一位国王在花园里给两个人看了一个大篮子。他让他们从井里打水把篮子装满。篮子满是洞，所以水一边倒进去一边流出来。最后，其中一个人说：“做这种蠢事有什么用？我们永远无法___篮子。”他___，走开了。另一个人什么也没说，继续___。他一桶接一桶地把水倒进篮子。几个小时过去了。他累了，但他没有___。当他把最后一桶水倒进篮子时，他看到井里有一个亮晶晶的东西。他把它捡起来。是一枚美丽的金___。就在这时，国王来了。他对那个人说：“你___了。另一个人太早放弃了。篮子不能盛水，但你的努力并非___。有时候，我们做的事看起来没用，但它可能引领我们找到___的东西。永远不要太___放弃。继续尝试，你可能会发现一个你从未预料到的___。”",
+    "questions": [
+      { "options": ["fill", "empty", "clean"], "optionsZh": ["装满", "倒空", "清洁"], "answer": 0, "explanation": "第一个人说永远无法“装满”篮子，选 fill。" },
+      { "options": ["gave up", "stood up", "got up"], "optionsZh": ["放弃", "站起来", "起床"], "answer": 0, "explanation": "他“放弃”并走开了，选 gave up。" },
+      { "options": ["trying", "crying", "resting"], "optionsZh": ["尝试/坚持", "哭泣", "休息"], "answer": 0, "explanation": "另一个人继续“坚持/尝试”，选 trying。" },
+      { "options": ["stop", "start", "laugh"], "optionsZh": ["停止", "开始", "笑"], "answer": 0, "explanation": "他累了，但没有“停止”，选 stop。" },
+      { "options": ["failed", "won", "left"], "optionsZh": ["失败", "赢", "离开"], "answer": 1, "explanation": "国王说“你赢了”，选 won。" },
+      { "options": ["useless", "easy", "short"], "optionsZh": ["无用的", "容易的", "短的"], "answer": 0, "explanation": "努力并非“无用”，选 useless。" },
+      { "options": ["terrible", "unexpected", "common"], "optionsZh": ["可怕的", "意想不到的", "常见的"], "answer": 1, "explanation": "可能引领我们找到“意想不到的”东西，选 unexpected。" },
+      { "options": ["early", "late", "fast"], "optionsZh": ["早", "晚", "快"], "answer": 0, "explanation": "永远不要太“早”放弃，选 early。" },
+      { "options": ["problem", "treasure", "lesson"], "optionsZh": ["问题", "宝藏", "教训"], "answer": 1, "explanation": "你可能会发现一个“宝藏”，选 treasure。" },
+      { "options": ["way", "ring", "king"], "optionsZh": ["方式", "戒指", "国王"], "answer": 1, "explanation": "他发现了金“戒指”，选 ring。" }
+    ]
+  },
+  {
+    "label": "学校园艺课",
+    "text": "Students go to school to get an education. They learn different ___ , such as maths, English and science. But at some schools, students can also learn something practical. In the gardening class, students can go ___ and get their hands dirty. They learn how to grow plants and vegetables. Keeping a school garden is ___ , but teachers are trying to make it work. Some schools can have gardens inside, but other schools are small, so teachers turn to gardens and parks near the school. The school garden doesn't have to be very big. Students can have a lot of ___ in it. At first, teachers ___ students how to plant seeds and water them. Students also learn to ___ the plants and keep the garden clean. Gardening is as ___ as other subjects. It teaches students ___, responsibility and teamwork. Many students say gardening makes them feel ___ and happy. It is a ___ way to learn about nature.",
+    "translation": "学生去学校接受教育。他们学习不同的___，比如数学、英语和科学。但在一些学校，学生也可以学到一些实用的东西。在园艺课上，学生可以走到___，把手弄脏。他们学习如何种植植物和蔬菜。维护学校花园是___的，但老师们正在努力让它可行。有些学校可以在室内有花园，但其他学校很小，所以老师们转向学校附近的花园和公园。学校花园不必很大。学生可以在其中获得很多___。起初，老师___学生如何播种和浇水。学生也学习___植物并保持花园清洁。园艺和其他科目一样___。它教学生___、责任感和团队合作。许多学生说园艺让他们感到___和快乐。这是一种___的了解自然的方式。",
+    "questions": [
+      { "options": ["sports", "languages", "hobbies", "subjects"], "optionsZh": ["运动", "语言", "爱好", "科目"], "answer": 3, "explanation": "数学、英语、科学是不同的“科目”，选 subjects。" },
+      { "options": ["opposite", "inside", "outside", "behind"], "optionsZh": ["对面", "里面", "外面", "后面"], "answer": 2, "explanation": "园艺课学生走到“外面”，选 outside。" },
+      { "options": ["thin", "dirty", "warm", "difficult"], "optionsZh": ["瘦的", "脏的", "温暖的", "困难的"], "answer": 3, "explanation": "维护学校花园是“困难的”，选 difficult。" },
+      { "options": ["fun", "money", "homework", "trouble"], "optionsZh": ["乐趣", "钱", "作业", "麻烦"], "answer": 0, "explanation": "学生可以在花园里获得很多“乐趣”，选 fun。" },
+      { "options": ["ask", "answer", "show", "teach"], "optionsZh": ["问", "回答", "展示", "教"], "answer": 3, "explanation": "老师“教”学生如何播种，选 teach。" },
+      { "options": ["run after", "look for", "care about", "worry about"], "optionsZh": ["追赶", "寻找", "照顾/关心", "担心"], "answer": 2, "explanation": "学生学会“照顾”植物，选 care about。" },
+      { "options": ["easy", "difficult", "colorful", "important"], "optionsZh": ["容易的", "困难的", "多彩的", "重要的"], "answer": 3, "explanation": "园艺和其他科目一样“重要”，选 important。" },
+      { "options": ["patience", "money", "fear", "anger"], "optionsZh": ["耐心", "金钱", "恐惧", "愤怒"], "answer": 0, "explanation": "园艺教学生“耐心”、责任感和团队合作，选 patience。" },
+      { "options": ["tired", "relaxed", "nervous", "sad"], "optionsZh": ["疲惫的", "放松的", "紧张的", "伤心的"], "answer": 1, "explanation": "园艺让学生感到“放松”和快乐，选 relaxed。" },
+      { "options": ["boring", "slow", "great", "hard"], "optionsZh": ["无聊的", "缓慢的", "很棒的", "困难的"], "answer": 2, "explanation": "这是一种“很棒的”了解自然的方式，选 great。" }
+    ]
+  }
+]
