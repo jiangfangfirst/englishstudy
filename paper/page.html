@@ -24,7 +24,7 @@
     border-top: 1px solid #ccc; box-sizing: border-box;
     font-family: "Microsoft YaHei", sans-serif;
   }
-  /* ★ 测量页：用 .paper.measure-paper 提高特异性，避免被窄屏媒体查询里的 .paper 覆盖 */
+  /* 测量页：提高特异性，避免被窄屏 .paper 覆盖 */
   .paper.measure-paper {
     position: absolute !important; left: -9999px !important; top: 0 !important;
     visibility: hidden !important; pointer-events: none !important;
@@ -38,9 +38,41 @@
     flex: 1 1 auto !important; min-height: 0 !important;
     height: auto !important; overflow: hidden !important;
   }
-  /* ★ 窄屏媒体查询会隐藏 .page-footer，但测量页的页脚占位必须保留，
-     否则测量页可用高度比真实页多出 9mm，出现“判定放得下却渲染被裁” */
   .paper.measure-paper .page-footer { display: block !important; }
+
+  /* ★ 试卷 Logo */
+  .exam-logo-wrap {
+    display: flex; justify-content: center; align-items: center;
+    margin: 0 0 7px;
+  }
+  .exam-logo {
+    display: block;
+    height: 16mm;
+    max-width: 62mm;
+    object-fit: contain;
+  }
+
+  /* ★ 全页水印（文字色，打印必出，不依赖“背景图形”） */
+  .paper > .watermark {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.12em;
+    transform: rotate(-24deg);
+    pointer-events: none; user-select: none;
+    z-index: 0; overflow: hidden;
+  }
+  .paper > .watermark span {
+    font-family: "Microsoft YaHei", "黑体", sans-serif;
+    font-weight: 900;
+    font-size: 150px;
+    line-height: 1;
+    color: rgba(37, 99, 235, 0.055);
+    white-space: nowrap;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .paper > .page-content,
+  .paper > .page-footer { position: relative; z-index: 1; }
 
   .exam-header { text-align: center; margin-bottom: 8px; }
   .exam-header h1 {
@@ -249,23 +281,91 @@
     margin: 0 0 8px; font-size: 12px; font-weight: bold;
     color: #374151; letter-spacing: .3px;
   }
-  .type-item { padding: 6px 0; border-bottom: 1px dashed #eee; }
-  .type-item:last-child { border-bottom: none; }
+
+  /* ★ 六图标工具栏 + 单行状态 */
+  .icon-toolbar {
+    display: flex; gap: 6px; margin: 0 0 6px;
+  }
+  .icon-toolbar .tool-btn {
+    flex: 1 1 0; min-width: 0; height: 32px; padding: 0;
+    border: 1px solid #e5e7eb; background: #fff; color: #475569;
+    border-radius: 6px; font-size: 15px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .15s; font-family: inherit;
+  }
+  .icon-toolbar .tool-btn:hover:not(:disabled) {
+    border-color: #93c5fd; background: #eff6ff; color: #1d4ed8;
+  }
+  .icon-toolbar .tool-btn:disabled { opacity: .4; cursor: not-allowed; }
+  .icon-toolbar .tool-btn.on {
+    background: #2563eb; border-color: #2563eb; color: #fff;
+  }
+  .status-line {
+    font-size: 11.5px; color: #6b7280; line-height: 1.6;
+    margin: 0 0 10px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* ★ 隐藏指定按钮：DOM 保留，功能仍可被脚本调用 */
+  #btnLoadAll,
+  #btnGenerate { display: none !important; }
+  .btn-file { display: none !important; }
+
+  /* ★ 题型列表卡片化 */
+  #typeList { display: flex; flex-direction: column; gap: 8px; }
+  .type-item {
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .type-item:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 1px 6px rgba(15,23,42,.06);
+  }
   .type-item-head {
     display: flex; align-items: center; gap: 6px;
-    margin-bottom: 4px; min-width: 0;
+    margin-bottom: 8px; min-width: 0;
   }
   .type-name {
-    flex-shrink: 0; font-size: 12.5px; font-weight: bold; color: #1f2937;
+    flex-shrink: 0; font-size: 13px; font-weight: 600; color: #1f2937;
+    font-family: "Microsoft YaHei", sans-serif;
   }
   .type-status {
-    flex: 1; min-width: 0;
-    font-size: 10.5px; color: #9ca3af;
+    flex: 0 1 auto; min-width: 0;
+    max-width: 220px;
+    margin-right: auto;
+    font-size: 10.5px;
     font-family: Consolas, Monaco, monospace;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    color: #9ca3af;
   }
-  .type-status.ok { color: #059669; }
-  .type-status.warn { color: #d97706; }
+  .type-status.ok { color: #047857; background: #ecfdf5; border-color: #a7f3d0; }
+  .type-status.warn { color: #b45309; background: #fffbeb; border-color: #fde68a; }
+
+  .type-item-controls {
+    display: flex; align-items: center; gap: 8px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+    border-top: 1px dashed #f0f0f0;
+  }
+  .type-qty {
+    width: 52px; padding: 4px 6px; border: 1px solid #d1d5db;
+    border-radius: 5px; font-size: 12px; text-align: center; font-family: inherit;
+    background: #fff; color: #1f2937;
+  }
+  .type-qty:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+  .type-unit { font-size: 11px; color: #6b7280; flex-shrink: 0; }
+  .type-meta {
+    margin-left: auto;
+    font-size: 10.5px; color: #9ca3af; font-weight: normal;
+    flex-shrink: 0; white-space: nowrap;
+  }
 
   .btn-mini {
     flex-shrink: 0;
@@ -282,127 +382,26 @@
     white-space: nowrap;
     line-height: 1.4;
   }
-  .btn-mini:disabled {
-    opacity: .4;
-    cursor: not-allowed;
-  }
+  .btn-mini:disabled { opacity: .4; cursor: not-allowed; }
   .btn-refresh:hover:not(:disabled) {
-    border-color: #93c5fd;
-    color: #2563eb;
-    background: #eff6ff;
+    border-color: #93c5fd; color: #2563eb; background: #eff6ff;
   }
   .btn-mode {
-    border-color: #cbd5e1;
-    color: #475569;
-    background: #f8fafc;
+    border-color: #cbd5e1; color: #475569; background: #f8fafc;
   }
   .btn-mode:hover:not(:disabled) {
-    border-color: #60a5fa;
-    color: #1d4ed8;
-    background: #eff6ff;
+    border-color: #60a5fa; color: #1d4ed8; background: #eff6ff;
   }
   .btn-clear:hover:not(:disabled) {
-    border-color: #cbd5e1;
-    color: #334155;
-    background: #f8fafc;
+    border-color: #cbd5e1; color: #334155; background: #f8fafc;
   }
   .btn-clear.cleared {
-    border-color: #93c5fd;
-    color: #2563eb;
-    background: #eff6ff;
+    border-color: #93c5fd; color: #2563eb; background: #eff6ff;
   }
   .btn-clear.cleared:hover {
-    border-color: #60a5fa;
-    background: #dbeafe;
+    border-color: #60a5fa; background: #dbeafe;
   }
 
-  .type-item-controls {
-    display: flex; align-items: center; gap: 6px;
-    flex-wrap: wrap;
-  }
-  .type-qty {
-    width: 52px; padding: 4px 6px; border: 1px solid #d1d5db;
-    border-radius: 5px; font-size: 12px; text-align: center; font-family: inherit;
-    background: #fff; color: #1f2937;
-  }
-  .type-qty:focus { outline: none; border-color: #3b82f6; }
-  .type-unit { font-size: 11px; color: #6b7280; flex-shrink: 0; }
-  .type-meta {
-    margin-left: auto;
-    font-size: 10.5px; color: #9ca3af; font-weight: normal;
-    flex-shrink: 0; white-space: nowrap;
-  }
-  .btn-file {
-    flex: 1; min-width: 0; padding: 5px 8px;
-    border: 1px solid #d1d5db; background: #fff; color: #1f2937;
-    border-radius: 5px; font-size: 11px; cursor: pointer;
-    font-family: Consolas, Monaco, monospace;
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    text-align: left; transition: all .15s;
-  }
-  .btn-file:hover { background: #f9fafb; border-color: #9ca3af; }
-  .btn-file.loaded { background: #ecfdf5; border-color: #10b981; color: #059669; }
-
-  /* ★ 六图标工具栏 + 单行状态 */
-  .icon-toolbar {
-    display: flex; gap: 6px; margin: 0 0 6px;
-  }
-  .icon-toolbar .tool-btn {
-    flex: 1 1 0; min-width: 0; height: 32px; padding: 0;
-    border: 1px solid #e5e7eb; background: #fff; color: #475569;
-    border-radius: 6px; font-size: 15px; line-height: 1; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all .15s; font-family: inherit;
-  }
-  .icon-toolbar .tool-btn:hover:not(:disabled) {
-    border-color: #93c5fd; background: #eff6ff; color: #1d4ed8;
-  }
-  .icon-toolbar .tool-btn:disabled {
-    opacity: .4; cursor: not-allowed;
-  }
-  .icon-toolbar .tool-btn.on {
-    background: #2563eb; border-color: #2563eb; color: #fff;
-  }
-  .status-line {
-    font-size: 11.5px; color: #6b7280; line-height: 1.6;
-    margin: 0 0 10px;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  /* ★ 试卷 Logo（首页标题上方居中） */
-  .exam-logo-wrap {
-    display: flex; justify-content: center; align-items: center;
-    margin: 0 0 7px;
-  }
-  .exam-logo {
-    display: block;
-    height: 16mm;          /* 主尺寸：16mm 高，显档次又不抢标题 */
-    max-width: 62mm;       /* 防止横版 logo 过宽 */
-    object-fit: contain;
-  }
-
-  /* ★ 全页水印：大块“多多好学”，斜放、极淡 */
-  .paper > .watermark {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    gap: 0.12em;
-    transform: rotate(-24deg);
-    pointer-events: none; user-select: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .paper > .watermark span {
-    font-family: "Microsoft YaHei", "黑体", sans-serif;
-    font-weight: 900;
-    font-size: 150px;                 /* 大块头字号，可按需 120–170 */
-    line-height: 1;
-    color: rgba(37, 99, 235, 0.055);  /* 极淡蓝灰，不干扰阅读 */
-    white-space: nowrap;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;        /* 打印时保留水印 */
-  }
-  /* 内容与页脚浮在水印之上 */
-  .paper > .page-content,
-  .paper > .page-footer { position: relative; z-index: 1; }
   @media print {
     @page { size: A4; margin: 0; }
     body { background: #fff; padding: 0 !important; }
@@ -417,6 +416,13 @@
     .panel, .panel-toggle, .guide-card, .measure-paper { display: none !important; }
     .answer-box.show { display: block; }
     .stem-translation.show { display: block; }
+    /* 水印强制打印，不依赖“背景图形”设置 */
+    .paper > .watermark { display: flex !important; }
+    .paper > .watermark span {
+      color: rgba(37, 99, 235, 0.09) !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
   }
   @media screen and (max-width: 700px) {
     body { padding: 12px 0 40px; }
@@ -441,6 +447,8 @@
     .answer-box { font-size: 12.5px; line-height: 1.6; padding: 8px 10px; }
     .stem-translation { font-size: 12px; }
     .passage-translation { font-size: 12px; line-height: 1.7; }
+    .exam-logo { height: 12mm; max-width: 50mm; }
+    .paper > .watermark span { font-size: 96px; }
   }
 </style>
 </head>
@@ -457,20 +465,21 @@
     <div class="panel-section">
       <h4>题型题库（可只选部分题型）</h4>
       <div class="icon-toolbar">
-        <button class="tool-btn" id="btnResetStandard" title="重置标准卷：标准题型题量，刷新试题">↺</button>
-        <button class="tool-btn" id="btnRefreshAll" title="整体刷新：按当前题型题量，重新抽题">🔄</button>
-        <button class="tool-btn" id="btnLoadAll" title="一键加载全部题库">⚡</button>
-        <button class="tool-btn" id="btnGenerate" disabled title="生成试卷：按设置自动排版">📝</button>
+        <button class="tool-btn" id="btnResetStandard" title="重置标准卷：全卷所有题型题量恢复为中考标准值（单选10、完形2篇、对话1篇、阅读6篇、拼写5、写作1），取消全部清除，阅读模式回到“自动”（前5篇单选 + 第6篇任务型问答），并立即重新生成整卷">↺</button>
+        <button class="tool-btn" id="btnRefreshAll" title="整体刷新：按当前题量设置，全卷所有题型重新随机抽题">🔄</button>
+        <button class="tool-btn" id="btnLoadAll" title="一键加载全部题库（需本地服务器环境）">⚡</button>
+        <button class="tool-btn" id="btnGenerate" disabled title="生成试卷：按当前设置抽取题目并自动排版">📝</button>
         <button class="tool-btn" id="btnToggleAnswer" title="显示全卷翻译与答案">👁</button>
         <button class="tool-btn" onclick="window.print()" title="打印或导出 PDF">🖨️</button>
       </div>
-      <div class="status-line" id="panelStatus">请为至少一种题型选择题库。</div>
+      <div class="status-line" id="panelStatus">正在初始化…</div>
       <div id="typeList"></div>
     </div>
   </div>
 </aside>
 
 <div id="papersContainer"></div>
+
 <script>
 /* =========================================================
    零、全局状态
@@ -518,7 +527,6 @@ function pickReading(data, want) {
 
 /* =========================================================
    一、题型配置（无听力，满分 100 分）
-   单选 10 + 完形 20 + 对话 5 + 阅读 40 + 拼写 5 + 写作 20 = 100
    ========================================================= */
 const TYPES = [
   {
@@ -615,8 +623,6 @@ function makeOptions(options, cls) {
   });
   return wrap;
 }
-/* ★ 第三参数 extra：{ showStemZh: true } 时，答案区额外显示题干翻译；
-   若提供 optionsZh，则逐项列出每个选项原文 + 翻译（包括错误选项） */
 function makeAnswerBox(item, sharedOptions, extra) {
   if (!item || item.answer === undefined || item.answer === null) return null;
   extra = extra || {};
@@ -644,13 +650,11 @@ function makeAnswerBox(item, sharedOptions, extra) {
   html += '<div class="answer-line"><span class="answer-label">答案</span>' +
           '<span class="answer-key">' + escapeHtml(keyText + keyZh) + '</span></div>';
 
-  /* 题干翻译（按需显示，用于单项填空） */
   if (extra.showStemZh && item.stemZh) {
     html += '<div class="answer-line"><span class="answer-label">题干翻译</span>' +
             '<span class="answer-opts">' + escapeHtml(item.stemZh) + '</span></div>';
   }
 
-  /* 选项翻译：逐项显示（含三个错误选项） */
   if (typeof answer === 'number' && options && options.length && optionsZh && optionsZh.length) {
     options.forEach(function (opt, i) {
       const zh = optionsZh[i];
@@ -692,10 +696,10 @@ function renderBlanksWithNums(text, startNum) {
   });
 }
 
-/* ★ 阅读/完形统一渲染：
-   auto 模式下 type === '任务型阅读' 强制问答；
-   choice 模式下所有篇目一律按选择题渲染；
-   qa 模式下所有篇目一律按问答（填句子）渲染 */
+/* 阅读/完形统一渲染：
+   auto 模式下任务型阅读强制问答；
+   choice 模式下全部按单选；
+   qa 模式下全部按问答 */
 function renderArticleGroup(items, num, forceLabels, mode) {
   mode = mode || 'auto';
   const nodes = [];
@@ -776,7 +780,6 @@ function renderArticleGroup(items, num, forceLabels, mode) {
   return nodes;
 }
 
-/* ---- 补全对话：一篇对话 = 5 个空，共享选项方框，不显示篇号 ---- */
 function renderDialogueGroup(items, num) {
   const nodes = [];
   let qNum = num;
@@ -857,7 +860,6 @@ function renderDialogueGroup(items, num) {
   return nodes;
 }
 
-/* ★ 单词拼写：按顺序渲染，横线替换为可填写的宽横线 */
 function renderSpelling(items, num) {
   return (items || []).map(function (it, i) {
     const qNum = num + i;
@@ -953,7 +955,7 @@ function makeScoreText(type, stats) {
 }
 
 /* =========================================================
-   四、试卷分页渲染
+   四、试卷分页渲染（含 logo 与水印）
    ========================================================= */
 function makeHeaderBlock(meta) {
   let title, subtitle, metaLine, notice;
@@ -979,7 +981,7 @@ function makeHeaderBlock(meta) {
     notice = `1. 本试卷为组合练习，满分 ${meta.totalScore} 分，共 ${meta.totalQuestions} 题。<br>
               2. 请认真作答，完成后对照答案自查。`;
   }
-    const wrap = document.createElement('div');
+  const wrap = document.createElement('div');
   wrap.innerHTML = `
     <div class="exam-logo-wrap">
       <img class="exam-logo" src="img/logo.jpg" alt="多多好学"
@@ -1024,7 +1026,6 @@ function paginate(blocks) {
   const mc = document.createElement('div');
   mc.className = 'page-content';
   measure.appendChild(mc);
-  /* ★ 测量页补一个与真实页等高的页脚占位，避免可用高度多算 9mm */
   const mf = document.createElement('div');
   mf.className = 'page-footer';
   measure.appendChild(mf);
@@ -1055,7 +1056,8 @@ function paginate(blocks) {
   pages.forEach(function (pbs, i) {
     const paper = document.createElement('div');
     paper.className = 'paper';
-        /* ★ 每页插入水印 */
+
+    /* ★ 每页水印 */
     const wm = document.createElement('div');
     wm.className = 'watermark';
     wm.setAttribute('aria-hidden', 'true');
@@ -1065,6 +1067,7 @@ function paginate(blocks) {
       wm.appendChild(s);
     });
     paper.appendChild(wm);
+
     const content = document.createElement('div');
     content.className = 'page-content';
     pbs.forEach(function (b) { content.appendChild(b); });
@@ -1126,7 +1129,6 @@ function setPanel(open) {
 panelToggle.addEventListener('click', function () { setPanel(true); });
 document.getElementById('panelClose').addEventListener('click', function () { setPanel(false); });
 
-/* 同步阅读模式按钮文字 */
 function syncReadingModeBtn() {
   const modeBtn = document.querySelector('.btn-mode[data-type="reading"]');
   if (!modeBtn) return;
@@ -1143,9 +1145,11 @@ function syncReadingModeBtn() {
 
     const head = document.createElement('div');
     head.className = 'type-item-head';
+
     const nameEl = document.createElement('span');
     nameEl.className = 'type-name';
     nameEl.textContent = type.name;
+
     const statusEl = document.createElement('span');
     statusEl.className = 'type-status';
     statusEl.dataset.status = type.id;
@@ -1263,7 +1267,7 @@ function refreshType(typeId) {
   const status = document.getElementById('panelStatus');
   let msg = type.name.replace(/^[Ⅰ-Ⅹ]+\.\s*/, '') + ' 已重新抽题（' + picked.length + ' ' + type.unit + '）✓';
   if (picked.length < want) {
-    msg += '\n注意：题库仅有 ' + picked.length + ' ' + type.unit + '，不足 ' + want + ' ' + type.unit;
+    msg += '　注意：题库仅有 ' + picked.length + ' ' + type.unit + '，不足 ' + want + ' ' + type.unit;
   }
   status.textContent = msg;
 }
@@ -1380,25 +1384,40 @@ function checkAtLeastOne() {
       status.textContent = '所有已加载题型都被清除了，请点击“取消清除”恢复至少一种。';
     }
   } else {
-    status.textContent = '可生成 ' + usableTypes.length + ' 种题型，点击“生成试卷”。';
+    status.textContent = '可生成 ' + usableTypes.length + ' 种题型。';
   }
 }
 
 /* =========================================================
-   六、一键加载全部
+   六、加载全部题库（带进度） + 自动加载
    ========================================================= */
-document.getElementById('btnLoadAll').addEventListener('click', async function () {
+async function loadAllBanks(opts) {
+  opts = opts || {};
+  const silent = !!opts.silent;
+  const status = document.getElementById('panelStatus');
+
   if (location.protocol === 'file:') {
-    if (!confirm('⚠ 当前为 file:// 协议，浏览器会阻止自动读取本地 JSON。\n\n' +
-      '建议启动本地服务器（如 python -m http.server 8000）。\n\n仍要继续尝试吗？')) return;
+    if (!silent) {
+      if (!confirm('⚠ 当前为 file:// 协议，浏览器会阻止自动读取本地 JSON。\n\n' +
+        '建议启动本地服务器（如 python -m http.server 8000）。\n\n仍要继续尝试吗？')) {
+        return { loaded: 0, failed: [], cancelled: true };
+      }
+    } else {
+      return { loaded: 0, failed: [], cancelled: true, skipped: true };
+    }
   }
-  const btn = this;
-  const oldTitle = btn.title;
-  btn.disabled = true;
-  btn.title = '自动加载中…';
+
+  const btn = document.getElementById('btnLoadAll');
+  const oldTitle = btn ? btn.title : '';
+  if (btn) { btn.disabled = true; btn.title = '自动加载中…'; }
+
   let loaded = 0;
   const failed = [];
-  for (const type of TYPES) {
+  const total = TYPES.length;
+
+  for (let i = 0; i < total; i++) {
+    const type = TYPES[i];
+    status.textContent = '正在加载 ' + (i + 1) + '/' + total + '：' + type.file + ' …';
     try {
       const res = await fetch('./' + type.file, { cache: 'no-store' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -1414,14 +1433,21 @@ document.getElementById('btnLoadAll').addEventListener('click', async function (
       failed.push(type.file);
     }
   }
+
   checkAtLeastOne();
-  btn.disabled = false;
-  btn.title = oldTitle;
-  if (failed.length === 0) {
+  if (btn) { btn.disabled = false; btn.title = oldTitle; }
+  return { loaded: loaded, failed: failed, cancelled: false, total: total };
+}
+
+/* ⚡ 按钮虽被隐藏，但保留事件，供内部/手动调用 */
+document.getElementById('btnLoadAll').addEventListener('click', async function () {
+  const r = await loadAllBanks({ silent: false });
+  if (r.cancelled) return;
+  if (r.failed.length === 0) {
     document.getElementById('panelStatus').textContent = '全部题库已加载完毕。';
   } else {
-    alert('自动加载完成\n\n成功：' + loaded + ' 个\n失败：' + failed.length + ' 个\n\n失败文件：\n' +
-      failed.join('\n') + '\n\n请确认这些文件与 page.html 同目录，或逐个手动选择。');
+    alert('自动加载完成\n\n成功：' + r.loaded + ' 个\n失败：' + r.failed.length + ' 个\n\n失败文件：\n' +
+      r.failed.join('\n') + '\n\n请确认这些文件与 page.html 同目录，或逐个手动选择。');
   }
 });
 
@@ -1484,10 +1510,11 @@ function generateExam() {
 function setStatus(msg, warnings) {
   const status = document.getElementById('panelStatus');
   let text = msg;
-  if (warnings && warnings.length) text += '\n' + warnings.join('\n');
+  if (warnings && warnings.length) text += '　' + warnings.join('；');
   status.textContent = text;
 }
 
+/* 📝 按钮虽被隐藏，但保留事件（内部 .click() 仍可用） */
 document.getElementById('btnGenerate').addEventListener('click', function () {
   const warnings = generateExam();
   if (warnings === false) return;
@@ -1505,7 +1532,6 @@ document.getElementById('btnRefreshAll').addEventListener('click', function () {
   setStatus('整卷已按当前题量重新乱序抽题 ✓', warnings);
 });
 
-/* ★ 重置标准卷：题量恢复默认，阅读模式强制回到“自动” */
 document.getElementById('btnResetStandard').addEventListener('click', function () {
   const loaded = TYPES.some(function (t) { return bankData[t.id] && bankData[t.id].length > 0; });
   if (!loaded) {
@@ -1543,44 +1569,67 @@ document.getElementById('btnToggleAnswer').addEventListener('click', function ()
 });
 
 /* =========================================================
-   九、初始状态（引导卡片：无听力 100 分版本）
+   九、初始状态 + 自动加载
    ========================================================= */
 (function init() {
   setPanel(panelOpen);
+
   const fileRows = TYPES.map(function (t) {
     return '<div class="file-row"><span>' + t.file + '</span><span>' + t.name + '</span></div>';
   }).join('');
+
   document.getElementById('papersContainer').innerHTML = `
     <div class="guide-card">
-      <h2>准备生成试卷（无听力 · 满分 100 分）</h2>
+      <h2>正在准备试卷（无听力 · 满分 100 分）</h2>
       <p>本页面为<strong>无听力版</strong>，共六大题：单选 10 + 完形 20 + 对话 5 + 阅读 40 + 拼写 5 + 写作 20 = <strong>100 分</strong>。</p>
+      <p>页面会自动加载题库并生成整卷。若长时间没有试卷，请检查：</p>
       <ol>
-        <li>打开选题面板（宽屏默认显示，窄屏点右上角 <strong>☰</strong>）。</li>
-        <li>选择一种或多种题型，点击右侧按钮选择题库 JSON。</li>
-        <li>如需自定义题量，修改每种题型左侧的题量输入框（篇类题型填的是“篇数”）。</li>
-        <li>暂时不想用的题型，点击 <strong>「清除」</strong> 从试卷中移除；再点 <strong>「取消清除」</strong> 恢复。</li>
-        <li>点击 <strong>📝</strong> 生成试卷。未加载或被清除的题型自动跳过，题号连续、分数与标题自动调整。</li>
-        <li>点击 <strong>↺</strong> 重置标准卷：所有题量恢复为无听力标准值（单选 10、完形 2 篇、对话 1 篇、阅读 6 篇、拼写 5、写作 1），取消全部清除，阅读模式强制回到“自动”（前 5 篇单选 + 第 6 篇任务型问答），并立即生成整卷。</li>
-        <li>点击 <strong>🔄</strong> 整体刷新：按当前设置的题量，把全卷各题型重新乱序抽一遍。</li>
-        <li>阅读理解默认 6 篇：应用文/广告、记叙文、科普文、人文说明文、人物/故事各 1 篇（各 3 小题，每题 2 分），第六篇为任务型阅读（5 小题，每题 2 分）。刷新时按类型各抽一篇，不会全部变成同一类。</li>
-        <li>阅读题型右侧的 <strong>「阅读：自动 / 全单选 / 全问答」</strong> 按钮可手动切换所有阅读篇目的展示方式；重置标准卷时会自动回到“自动”。</li>
-        <li>单词拼写按连续题号呈现，横线为可填写位置，括号内为中文提示；显示答案时展示单词、中文翻译与解析。</li>
-        <li>单项填空显示答案时，答案区会依次展示「题干翻译 → 答案 → 每个选项（含错误选项）的原文与翻译 → 解析」。</li>
-        <li>点击 <strong>👁</strong> 显示翻译与答案，每道题下方会出现「题干翻译 → 答案/选项翻译/解析」；再点一次隐藏，恢复为空白卷。</li>
-        <li>点击 <strong>🖨️</strong> 打印或导出 PDF。</li>
+        <li>6 个 JSON 文件是否与 <code>page.html</code> 在同一目录；</li>
+        <li>文件名大小写是否与下表完全一致；</li>
+        <li>是否通过 http/https 访问（<code>file://</code> 无法自动加载）。</li>
       </ol>
       <div class="guide-file-list">${fileRows}</div>
-      <p class="guide-tip" style="display:none;">
-        数据结构：短文字段 <code>translation</code>（中文翻译）；题干中文字段 <code>stemZh</code>；选项中文字段 <code>optionsZh</code>。
-        这三个字段都是可选的，没有时页面自动跳过。<br>
-        <strong>阅读理解（reading.json）</strong> 每篇需带 <code>type</code> 字段（应用文/广告、记叙文、科普文、人文说明文、人物/故事、任务型阅读）。<br>
-        选择题示例：<code>{ "stem": "...", "options": ["...","...","...","..."], "optionsZh": ["...","...","...","..."], "answer": 0, "explanation": "..." }</code><br>
-        问答题示例：<code>{ "stem": "What can students do?", "answerText": "They can join clubs.", "explanation": "..." }</code><br>
-        <strong>标准卷</strong>下：前 5 类按选择题显示；<code>type === "任务型阅读"</code> 的篇目以问答题（填空/简答）形式显示。<br>
-        <strong>单词拼写（spelling.json）</strong> 每条：<code>{ "stem": "…… ___ (中文提示) ……", "stemZh": "……", "answer": "honest", "explanation": "……" }</code>
+      <p class="guide-tip">
+        可用操作：<strong>↺</strong> 重置标准卷 · <strong>🔄</strong> 整体刷新 · <strong>👁</strong> 显隐答案 · <strong>🖨️</strong> 打印 / 导出 PDF。<br>
+        每个题型右侧可单独「刷新」「清除」，也可调整题量后点 🔄 整卷重抽。<br>
+        数据结构：<code>translation</code>（短文翻译）、<code>stemZh</code>（题干翻译）、<code>optionsZh</code>（选项翻译）均可选；
+        阅读每篇需带 <code>type</code> 字段；标准卷下第 6 篇（任务型阅读）以问答形式显示。
       </p>
     </div>
   `;
+
+  /* ★ 打开页面即自动加载全部题库；全部成功则直接生成整卷 */
+  loadAllBanks({ silent: true }).then(function (r) {
+    if (r.cancelled) {
+      const status = document.getElementById('panelStatus');
+      if (status && r.skipped) {
+        status.textContent = '本地文件打开，自动加载不可用，请用 http/https 访问。';
+      }
+      return;
+    }
+
+    if (r.loaded === 0) {
+      document.getElementById('panelStatus').textContent =
+        '自动加载失败（文件缺失或服务器配置问题），请检查 JSON 是否与 page.html 同目录。';
+      return;
+    }
+
+    if (r.failed.length > 0) {
+      document.getElementById('panelStatus').textContent =
+        '已自动加载 ' + r.loaded + '/' + r.total + ' 种题型（' + r.failed.length + ' 个失败）。';
+      /* 已成功加载的部分也先生成，至少能看到内容 */
+      const warnings = generateExam();
+      if (warnings !== false) setStatus('部分题库已加载并生成 ✓', warnings);
+      return;
+    }
+
+    /* 全部成功：直接按标准题量生成整卷 */
+    document.getElementById('panelStatus').textContent = '已自动加载全部题库，正在生成试卷…';
+    const warnings = generateExam();
+    if (warnings !== false) {
+      setStatus('已自动加载并生成整卷 ✓（阅读：前 5 篇单选 + 第 6 篇任务型问答）', warnings);
+    }
+  });
 })();
 </script>
 </body>
