@@ -1350,10 +1350,12 @@ function updateTypeStatus(type, len, fileName) {
   const def = type.defaultCount;
   let text;
   if (len < def) {
-    text = '已加载 ' + len + ' ' + type.unit + '（< 标准 ' + def + ' ' + type.unit + '） · ' + fileName;
+    //text = '已加载 ' + len + ' ' + type.unit + '（< 标准 ' + def + ' ' + type.unit + '） · ' + fileName;
+    text = '共 ' + len + ' ' + type.unit;
     el.className = 'type-status warn';
   } else {
-    text = '已加载 ' + len + ' ' + type.unit + ' · ' + fileName;
+    //text = '已加载 ' + len + ' ' + type.unit + ' · ' + fileName;
+    text = '共 ' + len + ' ' + type.unit;
     el.className = 'type-status ok';
   }
   el.textContent = text;
