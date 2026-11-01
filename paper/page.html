@@ -897,22 +897,36 @@ function renderSpelling(items, num) {
 }
 
 function renderWriting(items, num) {
-  const data = items[0];
-  if (!data) return [];
-  const wrap = document.createElement('div');
-  if (data.prompt) {
-    const desc = document.createElement('div');
-    desc.className = 'section-desc';
-    desc.innerHTML = formatStem(data.prompt);
-    wrap.appendChild(desc);
-  }
-  const box = document.createElement('div');
-  box.className = 'writing-box';
-  box.textContent = data.note || '（此处为书面表达答题区，约 80–100 词）';
-  wrap.appendChild(box);
-  const ans = makeWritingAnswerBox(data.sampleAnswer, data.explanation);
-  if (ans) wrap.appendChild(ans);
-  return [wrap];
+  const nodes = [];
+  (items || []).forEach(function (data, idx) {
+    if (!data) return;
+    const wrap = document.createElement('div');
+
+    /* 多篇时给出小标题，单篇时不显示，保持原样 */
+    if (items.length > 1) {
+      const label = document.createElement('div');
+      label.className = 'passage-label';
+      label.textContent = '第 ' + (idx + 1) + ' 篇（满分 20 分）';
+      wrap.appendChild(label);
+    }
+
+    if (data.prompt) {
+      const desc = document.createElement('div');
+      desc.className = 'section-desc';
+      desc.innerHTML = formatStem(data.prompt);
+      wrap.appendChild(desc);
+    }
+    const box = document.createElement('div');
+    box.className = 'writing-box';
+    box.textContent = data.note || '（此处为书面表达答题区，约 80–100 词）';
+    wrap.appendChild(box);
+
+    const ans = makeWritingAnswerBox(data.sampleAnswer, data.explanation);
+    if (ans) wrap.appendChild(ans);
+
+    nodes.push(wrap);
+  });
+  return nodes;
 }
 
 /* =========================================================
