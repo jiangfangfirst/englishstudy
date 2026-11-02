@@ -5,8 +5,13 @@
     "answer": "honest",
     "explanation": "考查形容词拼写。be honest with sb. 意为“对某人诚实”，空处作表语，需填形容词 honest。",
     "grade": 8,
-    "points": ["形容词", "固定搭配"],
-    "keywords": ["honest"]
+    "points": [
+      "形容词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "honest"
+    ]
   },
   {
     "stem": "The ___ (天气) in spring is warm.",
@@ -14,8 +19,13 @@
     "answer": "weather",
     "explanation": "考查名词拼写。根据汉语提示“天气”可知填 weather。weather 为不可数名词，故用原形。",
     "grade": 7,
-    "points": ["名词", "词汇辨析"],
-    "keywords": ["weather"]
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "weather"
+    ]
   },
   {
     "stem": "Today is my ___ (第十二) birthday.",
@@ -23,8 +33,12 @@
     "answer": "twelfth",
     "explanation": "考查序数词拼写。表示“第十二”用序数词 twelfth，注意 twelve 变序数词时要去 ve 改 f 再加 th。",
     "grade": 7,
-    "points": ["数词"],
-    "keywords": ["twelfth"]
+    "points": [
+      "数词"
+    ],
+    "keywords": [
+      "twelfth"
+    ]
   },
   {
     "stem": "He is a very ___ (有耐心的) teacher.",
@@ -32,8 +46,13 @@
     "answer": "patient",
     "explanation": "考查形容词拼写。根据汉语提示“有耐心的”可知填 patient，作形容词修饰名词 teacher。",
     "grade": 8,
-    "points": ["形容词", "词汇辨析"],
-    "keywords": ["patient"]
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "patient"
+    ]
   },
   {
     "stem": "She spoke so ___ (轻轻地) that I could hardly hear her.",
@@ -41,8 +60,13 @@
     "answer": "softly",
     "explanation": "考查副词拼写。修饰动词 spoke 要用副词，soft 的副词形式为 softly，意为“轻轻地”。",
     "grade": 8,
-    "points": ["副词", "词汇辨析"],
-    "keywords": ["softly"]
+    "points": [
+      "副词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "softly"
+    ]
   },
   {
     "stem": "There are twelve ___ (月份) in a year.",
@@ -50,8 +74,13 @@
     "answer": "months",
     "explanation": "考查名词复数拼写。twelve 后接可数名词复数，month 的复数形式直接加 s，为 months。",
     "grade": 7,
-    "points": ["名词", "数词"],
-    "keywords": ["months"]
+    "points": [
+      "名词",
+      "数词"
+    ],
+    "keywords": [
+      "months"
+    ]
   },
   {
     "stem": "It is ___ (必要的) for us to learn English well.",
@@ -59,8 +88,13 @@
     "answer": "necessary",
     "explanation": "考查形容词拼写。It is + adj. + for sb. to do sth. 句型中，空处需填形容词，necessary 意为“必要的”。",
     "grade": 8,
-    "points": ["形容词", "非谓语动词（不定式）"],
-    "keywords": ["necessary"]
+    "points": [
+      "形容词",
+      "非谓语动词（不定式）"
+    ],
+    "keywords": [
+      "necessary"
+    ]
   },
   {
     "stem": "My brother is good at ___ (游泳).",
@@ -68,8 +102,14 @@
     "answer": "swimming",
     "explanation": "考查动名词拼写。be good at 后接动名词，swim 变 swimming 时需双写 m 再加 ing。",
     "grade": 7,
-    "points": ["非谓语动词（动名词）", "固定搭配"],
-    "keywords": ["swimming", "be good at"]
+    "points": [
+      "非谓语动词（动名词）",
+      "固定搭配"
+    ],
+    "keywords": [
+      "swimming",
+      "be good at"
+    ]
   },
   {
     "stem": "They visited many places of ___ (名胜) in Beijing.",
@@ -77,8 +117,13 @@
     "answer": "interest",
     "explanation": "考查固定搭配。places of interest 意为“名胜古迹”，空处填名词 interest。",
     "grade": 8,
-    "points": ["名词", "固定搭配"],
-    "keywords": ["places of interest"]
+    "points": [
+      "名词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "places of interest"
+    ]
   },
   {
     "stem": "The old man has three ___ (孙子).",
@@ -86,8 +131,13 @@
     "answer": "grandsons",
     "explanation": "考查名词复数拼写。three 后接可数名词复数，grandson 的复数为 grandsons。",
     "grade": 7,
-    "points": ["名词", "数词"],
-    "keywords": ["grandsons"]
+    "points": [
+      "名词",
+      "数词"
+    ],
+    "keywords": [
+      "grandsons"
+    ]
   },
   {
     "stem": "The young man is ___ (勇敢的) enough to save the girl from the river.",
@@ -95,8 +145,13 @@
     "answer": "brave",
     "explanation": "考查形容词拼写。be + adj. + enough to do sth. 结构中，空处填形容词 brave，意为“勇敢的”。",
     "grade": 8,
-    "points": ["形容词", "非谓语动词（不定式）"],
-    "keywords": ["brave"]
+    "points": [
+      "形容词",
+      "非谓语动词（不定式）"
+    ],
+    "keywords": [
+      "brave"
+    ]
   },
   {
     "stem": "It's ___ (危险的) to play on the road.",
@@ -104,8 +159,13 @@
     "answer": "dangerous",
     "explanation": "考查形容词拼写。It's + adj. + to do sth. 句型中，空处填形容词 dangerous，意为“危险的”。",
     "grade": 8,
-    "points": ["形容词", "非谓语动词（不定式）"],
-    "keywords": ["dangerous"]
+    "points": [
+      "形容词",
+      "非谓语动词（不定式）"
+    ],
+    "keywords": [
+      "dangerous"
+    ]
   },
   {
     "stem": "Please speak more ___ (慢地), I can't follow you.",
@@ -113,8 +173,13 @@
     "answer": "slowly",
     "explanation": "考查副词比较级拼写。修饰动词 speak 用副词，slow 的副词为 slowly，此处含比较意味，用 more slowly，答案填 slowly。",
     "grade": 8,
-    "points": ["副词", "比较级与最高级"],
-    "keywords": ["slowly"]
+    "points": [
+      "副词",
+      "比较级与最高级"
+    ],
+    "keywords": [
+      "slowly"
+    ]
   },
   {
     "stem": "Thank you for ___ (邀请) me to your party.",
@@ -122,8 +187,13 @@
     "answer": "inviting",
     "explanation": "考查动名词拼写。thank you for 后接动名词，invite 变 inviting 时去 e 再加 ing。",
     "grade": 8,
-    "points": ["非谓语动词（动名词）", "固定搭配"],
-    "keywords": ["inviting"]
+    "points": [
+      "非谓语动词（动名词）",
+      "固定搭配"
+    ],
+    "keywords": [
+      "inviting"
+    ]
   },
   {
     "stem": "The children were very ___ (兴奋的) when they saw the pandas.",
@@ -131,8 +201,13 @@
     "answer": "excited",
     "explanation": "考查形容词拼写。excited 表示“感到兴奋的”，主语通常是人，此处修饰 the children，符合语境。",
     "grade": 8,
-    "points": ["形容词", "词汇辨析"],
-    "keywords": ["excited"]
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "excited"
+    ]
   },
   {
     "stem": "Tom is the ___ (最友好的) boy in our class.",
@@ -140,8 +215,13 @@
     "answer": "friendliest",
     "explanation": "考查形容词最高级拼写。friendly 的最高级为 friendliest，注意变 y 为 i 再加 est。",
     "grade": 8,
-    "points": ["比较级与最高级", "形容词"],
-    "keywords": ["friendliest"]
+    "points": [
+      "比较级与最高级",
+      "形容词"
+    ],
+    "keywords": [
+      "friendliest"
+    ]
   },
   {
     "stem": "I hope you will ___ (成功).",
@@ -149,8 +229,13 @@
     "answer": "succeed",
     "explanation": "考查动词拼写。will 后接动词原形，succeed 作动词，意为“成功”，符合语境。",
     "grade": 9,
-    "points": ["一般将来时", "词汇辨析"],
-    "keywords": ["succeed"]
+    "points": [
+      "一般将来时",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "succeed"
+    ]
   },
   {
     "stem": "It's important to protect the ___ (环境).",
@@ -158,8 +243,13 @@
     "answer": "environment",
     "explanation": "考查名词拼写。根据汉语提示“环境”可知填 environment，通常用作不可数名词。",
     "grade": 8,
-    "points": ["名词", "词汇辨析"],
-    "keywords": ["environment"]
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "environment"
+    ]
   },
   {
     "stem": "We should eat more ___ (水果) and vegetables.",
@@ -167,8 +257,13 @@
     "answer": "fruit",
     "explanation": "考查名词拼写。fruit 作“水果”讲时通常为不可数名词，故用原形 fruit。",
     "grade": 7,
-    "points": ["名词", "词汇辨析"],
-    "keywords": ["fruit"]
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "fruit"
+    ]
   },
   {
     "stem": "There are many ___ (国家) in the world.",
@@ -176,8 +271,13 @@
     "answer": "countries",
     "explanation": "考查名词复数拼写。many 后接可数名词复数，country 变复数时把 y 改成 i 再加 es，为 countries。",
     "grade": 7,
-    "points": ["名词", "词汇辨析"],
-    "keywords": ["countries"]
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "countries"
+    ]
   },
   {
     "stem": "The Great Wall is one of the most famous ___ (奇迹) in the world.",
@@ -185,8 +285,13 @@
     "answer": "wonders",
     "explanation": "考查名词复数拼写。one of the + 最高级 + 名词复数结构，wonder 的复数为 wonders，意为“奇迹”。",
     "grade": 9,
-    "points": ["名词", "比较级与最高级"],
-    "keywords": ["wonders"]
+    "points": [
+      "名词",
+      "比较级与最高级"
+    ],
+    "keywords": [
+      "wonders"
+    ]
   },
   {
     "stem": "We should try to ___ (避免) making the same mistake.",
@@ -194,8 +299,13 @@
     "answer": "avoid",
     "explanation": "考查动词拼写。avoid doing sth. 意为“避免做某事”，avoid 后接动名词，此处填原形 avoid。",
     "grade": 9,
-    "points": ["非谓语动词（动名词）", "固定搭配"],
-    "keywords": ["avoid"]
+    "points": [
+      "非谓语动词（动名词）",
+      "固定搭配"
+    ],
+    "keywords": [
+      "avoid"
+    ]
   },
   {
     "stem": "The little girl is very ___ (害羞的).",
@@ -203,8 +313,13 @@
     "answer": "shy",
     "explanation": "考查形容词拼写。shy 作形容词，意为“害羞的”，此处修饰 the little girl。",
     "grade": 7,
-    "points": ["形容词", "词汇辨析"],
-    "keywords": ["shy"]
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "shy"
+    ]
   },
   {
     "stem": "Have you ___ (曾经) been to Beijing?",
@@ -212,8 +327,13 @@
     "answer": "ever",
     "explanation": "考查副词拼写。ever 意为“曾经”，常与现在完成时连用，用于疑问句中。",
     "grade": 8,
-    "points": ["副词", "现在完成时"],
-    "keywords": ["ever"]
+    "points": [
+      "副词",
+      "现在完成时"
+    ],
+    "keywords": [
+      "ever"
+    ]
   },
   {
     "stem": "She is ___ (骄傲) of her son.",
@@ -221,8 +341,14 @@
     "answer": "proud",
     "explanation": "考查形容词拼写。be proud of 意为“为……感到骄傲”，故填 proud。",
     "grade": 8,
-    "points": ["形容词", "固定搭配"],
-    "keywords": ["proud", "be proud of"]
+    "points": [
+      "形容词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "proud",
+      "be proud of"
+    ]
   },
   {
     "stem": "My mother is busy ___ (准备) for the dinner.",
@@ -230,8 +356,14 @@
     "answer": "preparing",
     "explanation": "考查动名词拼写。be busy doing sth. 意为“忙于做某事”，prepare 变 preparing 时去 e 再加 ing。",
     "grade": 8,
-    "points": ["非谓语动词（动名词）", "固定搭配"],
-    "keywords": ["preparing", "be busy doing"]
+    "points": [
+      "非谓语动词（动名词）",
+      "固定搭配"
+    ],
+    "keywords": [
+      "preparing",
+      "be busy doing"
+    ]
   },
   {
     "stem": "He ___ (决定) to study hard from then on.",
@@ -239,8 +371,13 @@
     "answer": "decided",
     "explanation": "考查动词过去式拼写。from then on 表示过去时间，句子用一般过去时，decide 的过去式为 decided。",
     "grade": 8,
-    "points": ["一般过去时", "词汇辨析"],
-    "keywords": ["decided"]
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "decided"
+    ]
   },
   {
     "stem": "Please be ___ (安静的) in the library.",
@@ -248,8 +385,13 @@
     "answer": "quiet",
     "explanation": "考查形容词拼写。quiet 作形容词，意为“安静的”，用于 be quiet 结构。",
     "grade": 7,
-    "points": ["形容词", "祈使句"],
-    "keywords": ["quiet"]
+    "points": [
+      "形容词",
+      "祈使句"
+    ],
+    "keywords": [
+      "quiet"
+    ]
   },
   {
     "stem": "It's polite to say \"thank you\" when others ___ (帮助) you.",
@@ -257,8 +399,15 @@
     "answer": "help",
     "explanation": "考查一般现在时与主谓一致。others 作主语视为复数，when 引导的时间状语从句用一般现在时，动词用原形 help。",
     "grade": 8,
-    "points": ["一般现在时", "主谓一致", "状语从句"],
-    "keywords": ["help", "others"]
+    "points": [
+      "一般现在时",
+      "主谓一致",
+      "状语从句"
+    ],
+    "keywords": [
+      "help",
+      "others"
+    ]
   },
   {
     "stem": "We had a ___ (美妙的) time at the party.",
@@ -266,7 +415,1123 @@
     "answer": "wonderful",
     "explanation": "考查形容词拼写。have a wonderful time 为固定搭配，意为“玩得开心”，空处填 wonderful。",
     "grade": 7,
-    "points": ["形容词", "固定搭配"],
-    "keywords": ["wonderful", "have a good time"]
+    "points": [
+      "形容词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "wonderful",
+      "have a good time"
+    ]
+  },
+  {
+    "stem": "As the saying goes, don't put all your ___ (鸡蛋) in one basket.",
+    "stemZh": "俗话说，不要把所有的鸡蛋放在一个篮子里。",
+    "answer": "eggs",
+    "explanation": "考查名词复数拼写。根据汉语提示“鸡蛋”可知填 egg。all your 后接可数名词复数，故用 eggs。",
+    "grade": 7,
+    "points": [
+      "名词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "eggs",
+      "all your"
+    ]
+  },
+  {
+    "stem": "You can take a ___ (马) to water, but you can't make him drink.",
+    "stemZh": "你可以牵马到水边，但不能强迫它喝水。",
+    "answer": "horse",
+    "explanation": "考查名词拼写。根据汉语提示“马”可知填 horse。a 后接可数名词单数，故用原形。",
+    "grade": 7,
+    "points": [
+      "名词",
+      "冠词"
+    ],
+    "keywords": [
+      "horse"
+    ]
+  },
+  {
+    "stem": "Students are reading English in the nice ___ (阳光充足的) classroom.",
+    "stemZh": "学生们正在那间阳光充足的漂亮教室里读英语。",
+    "answer": "sunny",
+    "explanation": "考查形容词拼写。根据汉语提示“阳光充足的”可知填 sunny，作形容词修饰名词 classroom。",
+    "grade": 7,
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "sunny"
+    ]
+  },
+  {
+    "stem": "I watch TV ___ (一次) a week to know what's going on all over the world.",
+    "stemZh": "我每周看一次电视来了解世界各地发生了什么。",
+    "answer": "once",
+    "explanation": "考查频度副词拼写。根据汉语提示“一次”可知填 once。once a week 意为“每周一次”，表示频率。",
+    "grade": 7,
+    "points": [
+      "副词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "once",
+      "once a week"
+    ]
+  },
+  {
+    "stem": "Mary gets up early every day, and ___ (训练) very hard for the ping-pong match.",
+    "stemZh": "玛丽每天起得很早，并为乒乓球比赛刻苦训练。",
+    "answer": "trains",
+    "explanation": "考查一般现在时与主谓一致。根据汉语提示“训练”可知填 train。主语 Mary 为第三人称单数，and 连接并列谓语，前后时态一致用一般现在时，故 train 变为 trains。",
+    "grade": 8,
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ],
+    "keywords": [
+      "trains"
+    ]
+  },
+  {
+    "stem": "Qi Qi has always loved science since she was a little ___ (孩子).",
+    "stemZh": "齐齐从小就一直热爱科学。",
+    "answer": "kid",
+    "explanation": "考查名词拼写。根据汉语提示“孩子”可知填 kid。a little kid 意为“一个小孩子”，a 后接名词单数。",
+    "grade": 7,
+    "points": [
+      "名词",
+      "冠词"
+    ],
+    "keywords": [
+      "kid"
+    ]
+  },
+  {
+    "stem": "I often rest under the trees and my pet dog ___ (睡觉) beside me.",
+    "stemZh": "我经常在树下休息，我的宠物狗睡在我旁边。",
+    "answer": "sleeps",
+    "explanation": "考查一般现在时与主谓一致。根据汉语提示“睡觉”可知填 sleep。often 提示一般现在时，主语 my pet dog 为第三人称单数，故用 sleeps。",
+    "grade": 7,
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ],
+    "keywords": [
+      "sleeps"
+    ]
+  },
+  {
+    "stem": "The foreign students sang a Chinese ___ (歌曲) at the end of the party.",
+    "stemZh": "外国学生们在聚会结束时唱了一首中文歌曲。",
+    "answer": "song",
+    "explanation": "考查名词拼写。根据汉语提示“歌曲”可知填 song。a 后接可数名词单数，故用原形。",
+    "grade": 7,
+    "points": [
+      "名词",
+      "冠词"
+    ],
+    "keywords": [
+      "song"
+    ]
+  },
+  {
+    "stem": "The scientist uses his knowledge to help factories ___ (生产) better cars.",
+    "stemZh": "这位科学家运用他的知识帮助工厂生产更好的汽车。",
+    "answer": "produce",
+    "explanation": "考查动词拼写。根据汉语提示“生产”可知填 produce。help sb./sth. do sth. 为固定搭配，help 后接动词原形，故用 produce。",
+    "grade": 8,
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ],
+    "keywords": [
+      "produce",
+      "help do"
+    ]
+  },
+  {
+    "stem": "Our hometown is developing fast and becoming more and more ___ (美丽的).",
+    "stemZh": "我们的家乡发展很快，变得越来越美丽。",
+    "answer": "beautiful",
+    "explanation": "考查形容词拼写。根据汉语提示“美丽的”可知填 beautiful。more and more + 形容词原级，意为“越来越……”，故用 beautiful。",
+    "grade": 8,
+    "points": [
+      "形容词",
+      "比较级与最高级"
+    ],
+    "keywords": [
+      "beautiful",
+      "more and more"
+    ]
+  },
+  {
+    "stem": "I'm always full of ___ (能量) after jogging every morning.",
+    "stemZh": "每天早上慢跑后，我总是充满能量。",
+    "answer": "energy",
+    "explanation": "考查名词拼写。根据汉语提示“能量”可知填 energy。energy 作“精力；能量”讲时为不可数名词，故用原形。",
+    "grade": 8,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "energy"
+    ]
+  },
+  {
+    "stem": "Even a short daily bike ride is good for your health and ___ (weigh).",
+    "stemZh": "即使每天短时间骑自行车，对你的健康和体重也有好处。",
+    "answer": "weight",
+    "explanation": "考查名词拼写。空处与 health 并列，需填名词。weigh 的名词形式为 weight，意为“体重”。",
+    "grade": 8,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "weight"
+    ]
+  },
+  {
+    "stem": "Reading is a good way that ___ (open) our eyes to the world.",
+    "stemZh": "阅读是一种让我们开阔眼界看世界的好方法。",
+    "answer": "opens",
+    "explanation": "考查一般现在时与主谓一致。that 引导定语从句修饰 a good way，先行词为单数，从句谓语动词应用第三人称单数形式，故填 opens。",
+    "grade": 8,
+    "points": [
+      "一般现在时",
+      "主谓一致",
+      "定语从句"
+    ],
+    "keywords": [
+      "opens"
+    ]
+  },
+  {
+    "stem": "Do you know that many popular ___ (movie) are based on books?",
+    "stemZh": "你知道许多受欢迎的电影是根据书籍改编的吗？",
+    "answer": "movies",
+    "explanation": "考查名词复数拼写。many 后接可数名词复数，movie 的复数形式直接加 s，为 movies。",
+    "grade": 8,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "movies"
+    ]
+  },
+  {
+    "stem": "A pair of ___ (comfort) shoes and a bicycle provide simple ways to connect with nature.",
+    "stemZh": "一双舒适的鞋和一辆自行车提供了与自然接触的简单方式。",
+    "answer": "comfortable",
+    "explanation": "考查形容词拼写。空处修饰名词 shoes，需用形容词。comfort 的形容词形式为 comfortable，意为“舒适的”。",
+    "grade": 8,
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "comfortable"
+    ]
+  },
+  {
+    "stem": "For those with sleeping problems, biking is a good ___ (choose).",
+    "stemZh": "对于那些有睡眠问题的人来说，骑自行车是一个好选择。",
+    "answer": "choice",
+    "explanation": "考查名词拼写。a good 后需接可数名词单数，choose 的名词形式为 choice，意为“选择”。",
+    "grade": 8,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "choice"
+    ]
+  },
+  {
+    "stem": "Welcome to join the reading theatre, which will be held ___ (two) a day in the school hall.",
+    "stemZh": "欢迎加入阅读剧场，它将在学校礼堂每天举行两次。",
+    "answer": "twice",
+    "explanation": "考查频度副词。根据“a day”可知表示频率，two 对应的频度表达为 twice，意为“两次”。",
+    "grade": 7,
+    "points": [
+      "副词",
+      "数词"
+    ],
+    "keywords": [
+      "twice"
+    ]
+  },
+  {
+    "stem": "If we want to learn more about the world, we should read ___ (often).",
+    "stemZh": "如果我们想更多地了解世界，我们应该更经常地阅读。",
+    "answer": "more often",
+    "explanation": "考查副词比较级。根据语境“想更多地了解世界”可知，阅读频率应更高，often 的比较级为 more often。",
+    "grade": 8,
+    "points": [
+      "比较级与最高级",
+      "副词"
+    ],
+    "keywords": [
+      "more often"
+    ]
+  },
+  {
+    "stem": "Let's understand and learn different ___ (write) styles by reading!",
+    "stemZh": "让我们通过阅读来理解和学习不同的写作风格吧！",
+    "answer": "writing",
+    "explanation": "考查名词作定语。空处修饰 styles，表示“写作风格”，write 的动名词 writing 可作定语。",
+    "grade": 8,
+    "points": [
+      "非谓语动词（动名词）",
+      "名词"
+    ],
+    "keywords": [
+      "writing"
+    ]
+  },
+  {
+    "stem": "Books allow ___ (we) to experience different lives.",
+    "stemZh": "书籍让我们体验不同的人生。",
+    "answer": "us",
+    "explanation": "考查代词。allow sb. to do sth. 意为“允许某人做某事”，空处在 allow 后作宾语，人称代词 we 的宾格形式为 us。",
+    "grade": 7,
+    "points": [
+      "代词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "us"
+    ]
+  },
+  {
+    "stem": "You're happier when you're ___ (ride) with your friends.",
+    "stemZh": "当你和朋友们一起骑车时，你会更快乐。",
+    "answer": "riding",
+    "explanation": "考查现在进行时。when 引导的时间状语从句中需用现在进行时，结构为 be + doing，故填 riding。",
+    "grade": 8,
+    "points": [
+      "现在进行时"
+    ],
+    "keywords": [
+      "riding"
+    ]
+  },
+  {
+    "stem": "It is ___ (relax) to enjoy “a slow life” in Yunnan along the Ancient Tea Horse Road.",
+    "stemZh": "沿着茶马古道在云南享受“慢生活”是令人放松的。",
+    "answer": "relaxing",
+    "explanation": "考查形容词。It is + adj. + to do sth. 结构中，空处需填形容词作表语。relax 的形容词 relaxing 意为“令人放松的”，修饰事物。",
+    "grade": 8,
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "relaxing"
+    ]
+  },
+  {
+    "stem": "Don't talk so loudly. You're supposed to mind your ___ (manner) to keep your voice down in public.",
+    "stemZh": "不要这么大声说话。在公共场合你应该注意你的举止，把声音压低。",
+    "answer": "manners",
+    "explanation": "考查名词复数。manner 作“举止；礼貌”讲时常用复数形式 manners。mind one's manners 意为“注意举止”。",
+    "grade": 8,
+    "points": [
+      "名词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "manners"
+    ]
+  },
+  {
+    "stem": "My little brother couldn't ___ (control) his excitement when he got a toy.",
+    "stemZh": "我弟弟拿到玩具时控制不住自己的兴奋。",
+    "answer": "control",
+    "explanation": "考查动词拼写。couldn't 后接动词原形，control 意为“控制”，符合语境。",
+    "grade": 8,
+    "points": [
+      "情态动词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "control"
+    ]
+  },
+  {
+    "stem": "The scientist uses his knowledge to help factories ___ (produce) better cars.",
+    "stemZh": "这位科学家运用他的知识帮助工厂生产更好的汽车。",
+    "answer": "produce",
+    "explanation": "考查动词拼写。help sb./sth. do sth. 为固定搭配，help 后接动词原形，故填 produce。",
+    "grade": 8,
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ],
+    "keywords": [
+      "produce",
+      "help do"
+    ]
+  },
+  {
+    "stem": "Nobody is ___ (完美的) but everybody is special in the world.",
+    "stemZh": "没有人是完美的，但在这个世界上每个人都是独一无二的。",
+    "answer": "perfect",
+    "explanation": "考查形容词拼写。根据汉语提示“完美的”可知填 perfect，在句中作表语。",
+    "grade": 8,
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "perfect"
+    ]
+  },
+  {
+    "stem": "Mr. Lee is an animal lover. He does everything he can ___ (protect) animals.",
+    "stemZh": "李先生是一个动物爱好者。他尽一切努力来保护动物。",
+    "answer": "to protect",
+    "explanation": "考查非谓语动词（不定式）。he can 为定语从句修饰 everything，空处表示目的，需用动词不定式 to protect。",
+    "grade": 9,
+    "points": [
+      "非谓语动词（不定式）",
+      "定语从句"
+    ],
+    "keywords": [
+      "to protect"
+    ]
+  },
+  {
+    "stem": "The man in blue is my maths teacher, and he is more ___ (严肃的) in class than after class.",
+    "stemZh": "穿蓝衣服的人是我的数学老师，他在课堂上比课后更严肃。",
+    "answer": "serious",
+    "explanation": "考查形容词拼写。more 后接形容词原级构成比较级，serious 意为“严肃的”。",
+    "grade": 8,
+    "points": [
+      "形容词",
+      "比较级与最高级"
+    ],
+    "keywords": [
+      "serious"
+    ]
+  },
+  {
+    "stem": "We all ___ (期待) that our hometown can be the best place to live in.",
+    "stemZh": "我们都期望我们的家乡能成为最适合居住的地方。",
+    "answer": "expect",
+    "explanation": "考查动词拼写。expect 意为“期望；期待”，主语 We 为复数，一般现在时用原形。",
+    "grade": 8,
+    "points": [
+      "一般现在时",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "expect"
+    ]
+  },
+  {
+    "stem": "In summer, the houses ___ (变热) up like the oven.",
+    "stemZh": "夏天，房子变得像烤箱一样热。",
+    "answer": "heat",
+    "explanation": "考查动词拼写。heat up 意为“变热；加热”，主语 houses 为复数，一般现在时用原形 heat。",
+    "grade": 8,
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ],
+    "keywords": [
+      "heat up"
+    ]
+  },
+  {
+    "stem": "The old artist makes wooden ___ (木偶) with moving arms, and children in the village love his little shows.",
+    "stemZh": "这位老艺人制作手臂会动的木偶，村里的孩子们喜欢他的小表演。",
+    "answer": "puppets",
+    "explanation": "考查名词复数拼写。puppet 意为“木偶”，此处泛指，用复数形式 puppets。",
+    "grade": 8,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "puppets"
+    ]
+  },
+  {
+    "stem": "Each ___ (表演者) must practise for years before standing on a big stage.",
+    "stemZh": "每位表演者都必须练习多年才能站在大舞台上。",
+    "answer": "performer",
+    "explanation": "考查名词拼写。each 后接可数名词单数，perform 的名词形式 performer 意为“表演者”。",
+    "grade": 9,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "performer"
+    ]
+  },
+  {
+    "stem": "Unless we protect the forests now, many beautiful animals will have ___ (无处) to live in the near future.",
+    "stemZh": "除非我们现在保护森林，否则许多美丽的动物在不久的将来将无处可住。",
+    "answer": "nowhere",
+    "explanation": "考查不定副词拼写。nowhere 意为“无处”，have nowhere to live 意为“无处可住”。",
+    "grade": 8,
+    "points": [
+      "副词",
+      "状语从句"
+    ],
+    "keywords": [
+      "nowhere"
+    ]
+  },
+  {
+    "stem": "The giant paper-cuttings at the art show never fail to ___ (使惊奇) visitors who see them for the first time.",
+    "stemZh": "艺术展上巨大的剪纸总是让第一次看到的参观者惊叹。",
+    "answer": "amaze",
+    "explanation": "考查动词拼写。fail to do sth. 后接动词原形，amaze 意为“使惊奇”，符合语境。",
+    "grade": 9,
+    "points": [
+      "非谓语动词（不定式）",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "amaze"
+    ]
+  },
+  {
+    "stem": "Doctors say donating ___ (血) is safe and helps save the lives of people who have serious accidents.",
+    "stemZh": "医生说献血是安全的，能帮助挽救严重事故中人们的生命。",
+    "answer": "blood",
+    "explanation": "考查名词拼写。blood 意为“血”，为不可数名词，故用原形。",
+    "grade": 8,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "blood"
+    ]
+  },
+  {
+    "stem": "Many foreign friends are ___ (感兴趣) in Chinese history, so they visit the old museums again and again.",
+    "stemZh": "许多外国朋友对中国历史感兴趣，所以他们一次又一次地参观那些古老的博物馆。",
+    "answer": "interested",
+    "explanation": "考查形容词拼写。be interested in 意为“对……感兴趣”，故填 interested。",
+    "grade": 8,
+    "points": [
+      "形容词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "interested",
+      "be interested in"
+    ]
+  },
+  {
+    "stem": "It is ___ (令人惊奇的) how quickly the little girl learned to swim; she needed only five lessons in all.",
+    "stemZh": "这个小女孩学会游泳的速度如此之快，真是令人惊奇；她总共只上了五节课。",
+    "answer": "surprising",
+    "explanation": "考查形容词拼写。It is + adj. + how... 句型中，surprising 意为“令人惊奇的”，修饰事情。",
+    "grade": 9,
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "surprising"
+    ]
+  },
+  {
+    "stem": "Please turn off your phones and give the speaker your full ___ (注意) during the safety talk this afternoon.",
+    "stemZh": "请关掉手机，在今天下午的安全讲座中全神贯注地听讲。",
+    "answer": "attention",
+    "explanation": "考查名词拼写。attention 意为“注意”，give one's full attention 意为“全神贯注”。",
+    "grade": 8,
+    "points": [
+      "名词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "attention"
+    ]
+  },
+  {
+    "stem": "The club offers weekend activities for ___ (青少年) members, such as rock climbing, camping and bird watching.",
+    "stemZh": "俱乐部为青少年会员提供周末活动，如攀岩、露营和观鸟。",
+    "answer": "teenage",
+    "explanation": "考查形容词拼写。teenage 意为“青少年的”，修饰名词 members。",
+    "grade": 9,
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "teenage"
+    ]
+  },
+  {
+    "stem": "Every Saturday morning, a young ___ (志愿者) comes to the nursing home and reads newspapers to the old people there.",
+    "stemZh": "每个星期六上午，一位年轻志愿者来到养老院，给那里的老人读报纸。",
+    "answer": "volunteer",
+    "explanation": "考查名词拼写。a young 后接可数名词单数，volunteer 意为“志愿者”。",
+    "grade": 8,
+    "points": [
+      "名词",
+      "冠词"
+    ],
+    "keywords": [
+      "volunteer"
+    ]
+  },
+  {
+    "stem": "The journalist wrote a long ___ (报道) about the flood in the south, and many readers were moved to help.",
+    "stemZh": "记者写了一篇关于南方洪水的长篇报道，许多读者被感动而伸出援手。",
+    "answer": "report",
+    "explanation": "考查名词拼写。a long 后接可数名词单数，report 意为“报道”。",
+    "grade": 8,
+    "points": [
+      "名词",
+      "冠词"
+    ],
+    "keywords": [
+      "report"
+    ]
+  },
+  {
+    "stem": "The sign near the river warns visitors that swimming there could ___ (杀死) because the water runs very fast.",
+    "stemZh": "河边的警示牌提醒游客，在那里游泳可能致命，因为水流非常急。",
+    "answer": "kill",
+    "explanation": "考查动词拼写。could 后接动词原形，kill 意为“杀死”，此处表示“可能致死”。",
+    "grade": 8,
+    "points": [
+      "情态动词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "kill"
+    ]
+  },
+  {
+    "stem": "The famous ___ (教育家) believes that every child learns best when the lessons are full of fun and real life.",
+    "stemZh": "这位著名教育家认为，当课程充满乐趣和真实生活时，每个孩子都能学得最好。",
+    "answer": "educator",
+    "explanation": "考查名词拼写。the famous 后接名词，educator 意为“教育家”。",
+    "grade": 9,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "educator"
+    ]
+  },
+  {
+    "stem": "Japan is an island ___ (国家), and most of its people live in the crowded cities along the shore.",
+    "stemZh": "日本是一个岛国，大多数人口住在沿海拥挤的城市里。",
+    "answer": "country",
+    "explanation": "考查名词拼写。an island 后接可数名词单数，country 意为“国家”。",
+    "grade": 8,
+    "points": [
+      "名词",
+      "冠词"
+    ],
+    "keywords": [
+      "country"
+    ]
+  },
+  {
+    "stem": "After a short rest and some fruit, the children had enough ___ (能量) to climb the rest of the hill.",
+    "stemZh": "短暂休息并吃了些水果后，孩子们有足够的能量爬完剩下的山。",
+    "answer": "energy",
+    "explanation": "考查名词拼写。enough 后接名词，energy 意为“能量；精力”，为不可数名词。",
+    "grade": 8,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "energy"
+    ]
+  },
+  {
+    "stem": "The sports centre offers free training to local ___ (年轻人) every summer holiday, from swimming to basketball.",
+    "stemZh": "体育中心每个暑假为当地年轻人提供免费培训，从游泳到篮球。",
+    "answer": "youth",
+    "explanation": "考查名词拼写。the young 可指年轻人，但此处 local 后需名词，youth 作“年轻人（总称）”讲时可用作名词。",
+    "grade": 9,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "youth"
+    ]
+  },
+  {
+    "stem": "Travelling alone taught the shy boy to be more ___ (独立的), and now he can plan a trip by himself.",
+    "stemZh": "独自旅行教会了这个害羞的男孩变得更加独立，现在他能自己规划旅行了。",
+    "answer": "independent",
+    "explanation": "考查形容词拼写。be more + adj. 构成比较级，independent 意为“独立的”。",
+    "grade": 9,
+    "points": [
+      "形容词",
+      "比较级与最高级"
+    ],
+    "keywords": [
+      "independent"
+    ]
+  },
+  {
+    "stem": "I have an English-Chinese ___ (字典), and it is very useful.",
+    "stemZh": "我有一本英汉词典，它非常有用。",
+    "answer": "dictionary",
+    "explanation": "考查名词拼写。an 后接可数名词单数，dictionary 意为“字典；词典”。",
+    "grade": 7,
+    "points": [
+      "名词",
+      "冠词"
+    ],
+    "keywords": [
+      "dictionary"
+    ]
+  },
+  {
+    "stem": "Mum, where is my school card? Can you help me ___ (找到) it?",
+    "stemZh": "妈妈，我的校园卡在哪？你能帮我找到它吗？",
+    "answer": "find",
+    "explanation": "考查动词拼写。help sb. (to) do sth. 中 to 可省略，故填动词原形 find。",
+    "grade": 7,
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ],
+    "keywords": [
+      "find",
+      "help do"
+    ]
+  },
+  {
+    "stem": "I have a ___ (时钟), and it tells me the time.",
+    "stemZh": "我有一个时钟，它告诉我时间。",
+    "answer": "clock",
+    "explanation": "考查名词拼写。a 后接可数名词单数，clock 意为“时钟”。",
+    "grade": 7,
+    "points": [
+      "名词",
+      "冠词"
+    ],
+    "keywords": [
+      "clock"
+    ]
+  },
+  {
+    "stem": "Today I cook food for an ___ (小时).",
+    "stemZh": "今天我煮了一个小时的食物。",
+    "answer": "hour",
+    "explanation": "考查名词拼写。an 后接以元音音素开头的可数名词单数，hour 发音以元音音素开头，故用 an hour。",
+    "grade": 7,
+    "points": [
+      "名词",
+      "冠词"
+    ],
+    "keywords": [
+      "hour"
+    ]
+  },
+  {
+    "stem": "Mike's room isn't tidy. His things are here and ___ (在那里).",
+    "stemZh": "迈克的房间不整洁。他的东西到处都是。",
+    "answer": "there",
+    "explanation": "考查副词拼写。here and there 为固定搭配，意为“到处”，故填 there。",
+    "grade": 7,
+    "points": [
+      "副词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "there",
+      "here and there"
+    ]
+  },
+  {
+    "stem": "The ___ (第二) class is a Chinese class this morning.",
+    "stemZh": "今天上午第二节课是语文课。",
+    "answer": "second",
+    "explanation": "考查序数词拼写。表示“第二”用序数词 second。",
+    "grade": 7,
+    "points": [
+      "数词"
+    ],
+    "keywords": [
+      "second"
+    ]
+  },
+  {
+    "stem": "Betty, hurry up! We are ___ (迟到的) for class!",
+    "stemZh": "贝蒂，快点！我们上课要迟到了！",
+    "answer": "late",
+    "explanation": "考查形容词拼写。be late for 意为“迟到”，故填 late。",
+    "grade": 7,
+    "points": [
+      "形容词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "late",
+      "be late for"
+    ]
+  },
+  {
+    "stem": "Sunday is the ___ (第一) day in a week.",
+    "stemZh": "星期日是一周的第一天。",
+    "answer": "first",
+    "explanation": "考查序数词拼写。表示“第一”用序数词 first。",
+    "grade": 7,
+    "points": [
+      "数词"
+    ],
+    "keywords": [
+      "first"
+    ]
+  },
+  {
+    "stem": "There are 28 days in ___ (二月).",
+    "stemZh": "二月有28天。",
+    "answer": "February",
+    "explanation": "考查专有名词拼写。表示“二月”用 February，注意首字母大写。",
+    "grade": 7,
+    "points": [
+      "名词"
+    ],
+    "keywords": [
+      "February"
+    ]
+  },
+  {
+    "stem": "Sally ___ (真正地) likes ice-cream. She eats it every day.",
+    "stemZh": "莎莉真地很喜欢吃冰激凌。她每天都吃。",
+    "answer": "really",
+    "explanation": "考查副词拼写。修饰动词 likes 用副词，really 意为“真正地”。",
+    "grade": 7,
+    "points": [
+      "副词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "really"
+    ]
+  },
+  {
+    "stem": "Dictionaries can help us ___ (拼写) the words correctly.",
+    "stemZh": "词典可以帮助我们正确拼写单词。",
+    "answer": "spell",
+    "explanation": "考查动词拼写。help sb. do sth. 中 help 后接动词原形，spell 意为“拼写”。",
+    "grade": 7,
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ],
+    "keywords": [
+      "spell"
+    ]
+  },
+  {
+    "stem": "He ___ (似乎) very happy when he got the result of the exam.",
+    "stemZh": "当他得到考试结果时，他看起来很高兴。",
+    "answer": "seemed",
+    "explanation": "考查一般过去时。got 提示过去时，seem 的过去式为 seemed。",
+    "grade": 8,
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "seemed"
+    ]
+  },
+  {
+    "stem": "On Friday I want to visit my cousin because it is his ___ (第二十) birthday.",
+    "stemZh": "周五我想去拜访我的表弟，因为这是他的二十岁生日。",
+    "answer": "twentieth",
+    "explanation": "考查序数词拼写。表示“第二十”用序数词 twentieth。",
+    "grade": 8,
+    "points": [
+      "数词"
+    ],
+    "keywords": [
+      "twentieth"
+    ]
+  },
+  {
+    "stem": "The new pair of ___ (长裤) looks very cool.",
+    "stemZh": "这条新裤子看起来很酷。",
+    "answer": "trousers",
+    "explanation": "考查名词拼写。trousers 意为“长裤”，通常以复数形式出现。",
+    "grade": 7,
+    "points": [
+      "名词",
+      "主谓一致"
+    ],
+    "keywords": [
+      "trousers"
+    ]
+  },
+  {
+    "stem": "You can listen to some ___ (令人放松的) music on weekends.",
+    "stemZh": "在周末你可以听一些令人放松的音乐。",
+    "answer": "relaxing",
+    "explanation": "考查形容词拼写。修饰 music 用 relaxing，意为“令人放松的”。",
+    "grade": 8,
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "relaxing"
+    ]
+  },
+  {
+    "stem": "City walk is a ___ (受欢迎的) way to learn about cities for visitors.",
+    "stemZh": "城市漫步是游客了解城市的一种受欢迎的方式。",
+    "answer": "popular",
+    "explanation": "考查形容词拼写。a 后接形容词修饰 way，popular 意为“受欢迎的”。",
+    "grade": 8,
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "popular"
+    ]
+  },
+  {
+    "stem": "Washing hands before meals is a good ___ (习惯).",
+    "stemZh": "饭前洗手是个好习惯。",
+    "answer": "habit",
+    "explanation": "考查名词拼写。a good 后接可数名词单数，habit 意为“习惯”。",
+    "grade": 7,
+    "points": [
+      "名词",
+      "冠词"
+    ],
+    "keywords": [
+      "habit"
+    ]
+  },
+  {
+    "stem": "On ___ (星期一), the store sells all the clothes at very good prices.",
+    "stemZh": "这周一，商店所有衣服都促销。",
+    "answer": "Monday",
+    "explanation": "考查专有名词拼写。表示“星期一”用 Monday，首字母大写。",
+    "grade": 7,
+    "points": [
+      "名词"
+    ],
+    "keywords": [
+      "Monday"
+    ]
+  },
+  {
+    "stem": "The Green family have two ___ (女儿) and one son. They are all teachers.",
+    "stemZh": "格林一家有两个女儿和一个儿子。他们都是老师。",
+    "answer": "daughters",
+    "explanation": "考查名词复数拼写。two 后接可数名词复数，daughter 的复数为 daughters。",
+    "grade": 7,
+    "points": [
+      "名词",
+      "数词"
+    ],
+    "keywords": [
+      "daughters"
+    ]
+  },
+  {
+    "stem": "She usually ___ (完成) doing her homework before 8:30 every day.",
+    "stemZh": "她通常在每天八点半之前完成家庭作业。",
+    "answer": "finishes",
+    "explanation": "考查一般现在时与主谓一致。usually 提示一般现在时，主语 She 为第三人称单数，finish 变为 finishes。",
+    "grade": 7,
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ],
+    "keywords": [
+      "finishes"
+    ]
+  },
+  {
+    "stem": "I ___ (猜想) the new film will come out soon.",
+    "stemZh": "我猜想这部新电影很快就会上映。",
+    "answer": "suppose",
+    "explanation": "考查动词拼写。suppose 意为“猜想；认为”，主语 I 后用原形。",
+    "grade": 9,
+    "points": [
+      "宾语从句",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "suppose"
+    ]
+  },
+  {
+    "stem": "___ (无论哪里) we go, our family will always be waiting for us.",
+    "stemZh": "无论我们去哪里，我们的家人都会一直等着我们。",
+    "answer": "Wherever",
+    "explanation": "考查连词拼写。Wherever 意为“无论哪里”，引导让步状语从句，句首首字母大写。",
+    "grade": 9,
+    "points": [
+      "状语从句",
+      "连词"
+    ],
+    "keywords": [
+      "Wherever"
+    ]
+  },
+  {
+    "stem": "To our surprise, the robot can ___ (交流) with us in our local language.",
+    "stemZh": "令我们惊讶的是，这个机器人能用当地方言与我们交流。",
+    "answer": "communicate",
+    "explanation": "考查动词拼写。情态动词 can 后接动词原形，communicate 意为“交流”。",
+    "grade": 8,
+    "points": [
+      "情态动词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "communicate"
+    ]
+  },
+  {
+    "stem": "Wu Binbin ___ (邀请) me to his birthday party last Saturday afternoon.",
+    "stemZh": "上周六下午，吴彬彬邀请我参加他的生日聚会。",
+    "answer": "invited",
+    "explanation": "考查一般过去时。last Saturday afternoon 提示过去时，invite 的过去式为 invited。",
+    "grade": 8,
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "invited"
+    ]
+  },
+  {
+    "stem": "The local ___ (政府) agreed to build a new library beside the park last month.",
+    "stemZh": "上个月当地政府同意在公园旁边建一座新图书馆。",
+    "answer": "government",
+    "explanation": "考查名词拼写。the local 后接名词，government 意为“政府”。",
+    "grade": 9,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "government"
+    ]
+  },
+  {
+    "stem": "Because of the long dry summer, the town faced a serious water ___ (短缺).",
+    "stemZh": "由于漫长的干旱夏季，这个小镇面临严重的水资源短缺。",
+    "answer": "shortage",
+    "explanation": "考查名词拼写。a serious water 后接名词，shortage 意为“短缺”。",
+    "grade": 9,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "shortage"
+    ]
+  },
+  {
+    "stem": "Speaking against the whole crowd certainly takes a lot of ___ (勇气).",
+    "stemZh": "在众人面前发言当然需要很大的勇气。",
+    "answer": "courage",
+    "explanation": "考查名词拼写。take courage 意为“需要勇气”，courage 为不可数名词。",
+    "grade": 9,
+    "points": [
+      "名词",
+      "固定搭配"
+    ],
+    "keywords": [
+      "courage"
+    ]
+  },
+  {
+    "stem": "The old water town has become a popular ___ (景点) for families on summer holidays.",
+    "stemZh": "这座古老的水乡已成为家庭暑假的热门景点。",
+    "answer": "attraction",
+    "explanation": "考查名词拼写。a popular 后接可数名词单数，attraction 意为“景点”。",
+    "grade": 9,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "attraction"
+    ]
+  },
+  {
+    "stem": "Years of teaching gave the headmaster a quiet ___ (智慧) that young teachers often turned to.",
+    "stemZh": "多年的教学给了校长一种安静的智慧，年轻老师们常常求助于它。",
+    "answer": "wisdom",
+    "explanation": "考查名词拼写。a quiet 后接名词，wisdom 意为“智慧”，为不可数名词。",
+    "grade": 9,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "wisdom"
+    ]
+  },
+  {
+    "stem": "Reading aloud every morning is a simple ___ (策略) that many top students share.",
+    "stemZh": "每天早上大声朗读是许多优秀学生共有的一个简单策略。",
+    "answer": "strategy",
+    "explanation": "考查名词拼写。a simple 后接可数名词单数，strategy 意为“策略”。",
+    "grade": 9,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "strategy"
+    ]
+  },
+  {
+    "stem": "The ___ (发现) of a new plant in the rainforest excited the whole team.",
+    "stemZh": "在雨林中发现一种新植物让整个团队兴奋不已。",
+    "answer": "discovery",
+    "explanation": "考查名词拼写。the 后接名词，discover 的名词形式 discovery 意为“发现”。",
+    "grade": 9,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "discovery"
+    ]
+  },
+  {
+    "stem": "One clear ___ (优势) of cycling to school is that it keeps you fit and saves money.",
+    "stemZh": "骑自行车上学的一个明显优势是它让你保持健康并省钱。",
+    "answer": "advantage",
+    "explanation": "考查名词拼写。one clear 后接可数名词单数，advantage 意为“优势”。",
+    "grade": 9,
+    "points": [
+      "名词",
+      "词汇辨析"
+    ],
+    "keywords": [
+      "advantage"
+    ]
   }
 ]
