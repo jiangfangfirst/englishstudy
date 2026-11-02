@@ -2,401 +2,7548 @@
   {
     "stem": "— Where is your brother?\n— He ______ in the garden.",
     "stemZh": "——你哥哥在哪里？\n——他正在花园里浇水。",
-    "options": ["waters", "is watering", "watered", "has watered"],
-    "optionsZh": ["浇水（一般现在时）", "正在浇水（现在进行时）", "浇过水（一般过去时）", "已经浇过水（现在完成时）"],
+    "options": [
+      "waters",
+      "is watering",
+      "watered",
+      "has watered"
+    ],
+    "optionsZh": [
+      "浇水（一般现在时）",
+      "正在浇水（现在进行时）",
+      "浇过水（一般过去时）",
+      "已经浇过水（现在完成时）"
+    ],
     "answer": 1,
     "explanation": "根据问句 Where is your brother? 可知动作正在进行，用现在进行时，结构为 be + doing。"
   },
   {
     "stem": "I ______ my homework already, so I can go out to play.",
     "stemZh": "我已经完成作业了，所以我可以出去玩。",
-    "options": ["finish", "finished", "have finished", "will finish"],
-    "optionsZh": ["完成（一般现在时）", "完成了（一般过去时）", "已经完成（现在完成时）", "将要完成（一般将来时）"],
+    "options": [
+      "finish",
+      "finished",
+      "have finished",
+      "will finish"
+    ],
+    "optionsZh": [
+      "完成（一般现在时）",
+      "完成了（一般过去时）",
+      "已经完成（现在完成时）",
+      "将要完成（一般将来时）"
+    ],
     "answer": 2,
     "explanation": "already 是现在完成时的标志词，且动作对现在有影响（可以出去玩），用 have finished。"
   },
   {
     "stem": "If it ______ tomorrow, we will stay at home.",
     "stemZh": "如果明天下雨，我们就待在家里。",
-    "options": ["rains", "will rain", "rained", "is raining"],
-    "optionsZh": ["下雨（一般现在时）", "将下雨（一般将来时）", "下过雨（一般过去时）", "正在下雨（现在进行时）"],
+    "options": [
+      "rains",
+      "will rain",
+      "rained",
+      "is raining"
+    ],
+    "optionsZh": [
+      "下雨（一般现在时）",
+      "将下雨（一般将来时）",
+      "下过雨（一般过去时）",
+      "正在下雨（现在进行时）"
+    ],
     "answer": 0,
     "explanation": "if 引导的条件状语从句遵循“主将从现”原则，主句用一般将来时，从句用一般现在时。"
   },
   {
     "stem": "My father ______ to Beijing twice.",
     "stemZh": "我爸爸去过北京两次。",
-    "options": ["has been", "has gone", "went", "goes"],
-    "optionsZh": ["去过（人已回来）", "去了（人还没回来）", "去了（一般过去时）", "去（一般现在时）"],
+    "options": [
+      "has been",
+      "has gone",
+      "went",
+      "goes"
+    ],
+    "optionsZh": [
+      "去过（人已回来）",
+      "去了（人还没回来）",
+      "去了（一般过去时）",
+      "去（一般现在时）"
+    ],
     "answer": 0,
     "explanation": "have/has been to 表示“去过某地（已回来）”，twice 表示次数，用现在完成时。"
   },
   {
     "stem": "— How long have you ______ this bike?\n— For two years.",
     "stemZh": "——你拥有这辆自行车多久了？\n——两年了。",
-    "options": ["bought", "had", "borrowed", "lent"],
-    "optionsZh": ["买（短暂性动词）", "拥有（延续性动词）", "借入（短暂性动词）", "借出（短暂性动词）"],
+    "options": [
+      "bought",
+      "had",
+      "borrowed",
+      "lent"
+    ],
+    "optionsZh": [
+      "买（短暂性动词）",
+      "拥有（延续性动词）",
+      "借入（短暂性动词）",
+      "借出（短暂性动词）"
+    ],
     "answer": 1,
     "explanation": "How long 提问一段时间，需用延续性动词。buy 是短暂性动词，其延续性形式为 have。"
   },
   {
     "stem": "The Great Wall ______ by millions of people every year.",
     "stemZh": "长城每年被数百万人参观。",
-    "options": ["visits", "is visited", "visited", "will visit"],
-    "optionsZh": ["参观（主动）", "被参观（被动）", "参观过（主动）", "将参观（主动）"],
+    "options": [
+      "visits",
+      "is visited",
+      "visited",
+      "will visit"
+    ],
+    "optionsZh": [
+      "参观（主动）",
+      "被参观（被动）",
+      "参观过（主动）",
+      "将参观（主动）"
+    ],
     "answer": 1,
     "explanation": "The Great Wall 是动作的承受者，且 every year 表示一般现在时，故用一般现在时的被动语态 is visited。"
   },
   {
     "stem": "Trees ______ every spring in our city.",
     "stemZh": "我们城市每年春天都种树。",
-    "options": ["plant", "are planted", "planted", "planting"],
-    "optionsZh": ["种植（主动）", "被种植（被动）", "种植过（主动）", "正在种植（主动）"],
+    "options": [
+      "plant",
+      "are planted",
+      "planted",
+      "planting"
+    ],
+    "optionsZh": [
+      "种植（主动）",
+      "被种植（被动）",
+      "种植过（主动）",
+      "正在种植（主动）"
+    ],
     "answer": 1,
     "explanation": "Trees 是 plant 的承受者，every spring 表示一般现在时，用一般现在时被动语态 are planted。"
   },
   {
     "stem": "He is the boy ______ won the first prize.",
     "stemZh": "他就是那个获得一等奖的男孩。",
-    "options": ["which", "who", "whom", "whose"],
-    "optionsZh": ["指物/关系代词", "指人，作主语", "指人，作宾语", "指人，作定语"],
+    "options": [
+      "which",
+      "who",
+      "whom",
+      "whose"
+    ],
+    "optionsZh": [
+      "指物/关系代词",
+      "指人，作主语",
+      "指人，作宾语",
+      "指人，作定语"
+    ],
     "answer": 1,
     "explanation": "先行词 the boy 指人，且在定语从句中作主语，用关系代词 who。"
   },
   {
     "stem": "This is the book ______ I bought yesterday.",
     "stemZh": "这就是我昨天买的那本书。",
-    "options": ["who", "whose", "which", "what"],
-    "optionsZh": ["指人，作主语", "指人，作定语", "指物，作宾语", "不能引导定语从句"],
+    "options": [
+      "who",
+      "whose",
+      "which",
+      "what"
+    ],
+    "optionsZh": [
+      "指人，作主语",
+      "指人，作定语",
+      "指物，作宾语",
+      "不能引导定语从句"
+    ],
     "answer": 2,
     "explanation": "先行词 the book 指物，在从句中作 bought 的宾语，用 which（或 that）。"
   },
   {
     "stem": "Could you tell me ______?",
     "stemZh": "你能告诉我邮局在哪里吗？",
-    "options": ["where is the post office", "where the post office is", "where was the post office", "the post office where is"],
-    "optionsZh": ["语序错误（疑问语序）", "正确（陈述语序）", "时态和语序都错误", "语序完全错误"],
+    "options": [
+      "where is the post office",
+      "where the post office is",
+      "where was the post office",
+      "the post office where is"
+    ],
+    "optionsZh": [
+      "语序错误（疑问语序）",
+      "正确（陈述语序）",
+      "时态和语序都错误",
+      "语序完全错误"
+    ],
     "answer": 1,
     "explanation": "宾语从句要用陈述语序，即“引导词 + 主语 + 谓语”，故选 where the post office is。"
   },
   {
     "stem": "I don't know ______ he will come or not.",
     "stemZh": "我不知道他是否会来。",
-    "options": ["if", "whether", "that", "what"],
-    "optionsZh": ["是否（不能与 or not 直接连用）", "是否（可与 or not 连用）", "无实义", "什么"],
+    "options": [
+      "if",
+      "whether",
+      "that",
+      "what"
+    ],
+    "optionsZh": [
+      "是否（不能与 or not 直接连用）",
+      "是否（可与 or not 连用）",
+      "无实义",
+      "什么"
+    ],
     "answer": 1,
     "explanation": "与 or not 连用时只能用 whether，不能用 if。"
   },
   {
     "stem": "— ______ beautiful the flowers are!",
     "stemZh": "——这些花多美啊！",
-    "options": ["What", "What a", "How", "How a"],
-    "optionsZh": ["What（修饰名词）", "What a（修饰单数可数名词）", "How（修饰形容词/副词）", "How a（错误搭配）"],
+    "options": [
+      "What",
+      "What a",
+      "How",
+      "How a"
+    ],
+    "optionsZh": [
+      "What（修饰名词）",
+      "What a（修饰单数可数名词）",
+      "How（修饰形容词/副词）",
+      "How a（错误搭配）"
+    ],
     "answer": 2,
     "explanation": "感叹句中心词是形容词 beautiful，用 How 引导：How + 形容词/副词 + 主语 + 谓语！"
   },
   {
     "stem": "— ______ nice weather it is!",
     "stemZh": "——多好的天气啊！",
-    "options": ["What", "What a", "How", "How a"],
-    "optionsZh": ["What（修饰不可数名词）", "What a（修饰单数可数名词）", "How（修饰形容词/副词）", "How a（错误搭配）"],
+    "options": [
+      "What",
+      "What a",
+      "How",
+      "How a"
+    ],
+    "optionsZh": [
+      "What（修饰不可数名词）",
+      "What a（修饰单数可数名词）",
+      "How（修饰形容词/副词）",
+      "How a（错误搭配）"
+    ],
     "answer": 0,
     "explanation": "weather 是不可数名词，感叹句用 What + 形容词 + 不可数名词 + 主语 + 谓语！"
   },
   {
     "stem": "— Must I finish it now?\n— No, you ______.",
     "stemZh": "——我必须现在完成它吗？\n——不，你不必。",
-    "options": ["mustn't", "needn't", "can't", "shouldn't"],
-    "optionsZh": ["禁止", "不必", "不能", "不应该"],
+    "options": [
+      "mustn't",
+      "needn't",
+      "can't",
+      "shouldn't"
+    ],
+    "optionsZh": [
+      "禁止",
+      "不必",
+      "不能",
+      "不应该"
+    ],
     "answer": 1,
     "explanation": "Must 引导的一般疑问句，否定回答用 needn't（不必），不用 mustn't（禁止）。"
   },
   {
     "stem": "— Could I use your pen?\n— Yes, you ______.",
     "stemZh": "——我可以用你的钢笔吗？\n——可以。",
-    "options": ["could", "can", "must", "need"],
-    "optionsZh": ["能（过去式/委婉）", "可以（表许可）", "必须", "需要"],
+    "options": [
+      "could",
+      "can",
+      "must",
+      "need"
+    ],
+    "optionsZh": [
+      "能（过去式/委婉）",
+      "可以（表许可）",
+      "必须",
+      "需要"
+    ],
     "answer": 1,
     "explanation": "Could 在此表示委婉请求，回答时用 can 表示许可。"
   },
   {
     "stem": "Lucy is ______ than her sister.",
     "stemZh": "露西比她姐姐高。",
-    "options": ["tall", "taller", "tallest", "the tallest"],
-    "optionsZh": ["高的（原级）", "更高的（比较级）", "最高的（最高级）", "最高的（最高级）"],
+    "options": [
+      "tall",
+      "taller",
+      "tallest",
+      "the tallest"
+    ],
+    "optionsZh": [
+      "高的（原级）",
+      "更高的（比较级）",
+      "最高的（最高级）",
+      "最高的（最高级）"
+    ],
     "answer": 1,
     "explanation": "than 是比较级的标志词，tall 的比较级是 taller。"
   },
   {
     "stem": "This is ______ film I have ever seen.",
     "stemZh": "这是我看过的最好的电影。",
-    "options": ["good", "better", "best", "the best"],
-    "optionsZh": ["好的（原级）", "更好的（比较级）", "最好的（最高级，缺 the）", "最好的（最高级）"],
+    "options": [
+      "good",
+      "better",
+      "best",
+      "the best"
+    ],
+    "optionsZh": [
+      "好的（原级）",
+      "更好的（比较级）",
+      "最好的（最高级，缺 the）",
+      "最好的（最高级）"
+    ],
     "answer": 3,
     "explanation": "I have ever seen 表示范围，用最高级；形容词最高级前要加定冠词 the。"
   },
   {
     "stem": "The population of China is ______ than that of Japan.",
     "stemZh": "中国的人口比日本多。",
-    "options": ["large", "larger", "largest", "the largest"],
-    "optionsZh": ["大的（原级）", "更大的（比较级）", "最大的（最高级）", "最大的（最高级）"],
+    "options": [
+      "large",
+      "larger",
+      "largest",
+      "the largest"
+    ],
+    "optionsZh": [
+      "大的（原级）",
+      "更大的（比较级）",
+      "最大的（最高级）",
+      "最大的（最高级）"
+    ],
     "answer": 1,
     "explanation": "than 提示用比较级；表示人口多少用 large 的比较级 larger。"
   },
   {
     "stem": "He ______ to school by bike when he was young.",
     "stemZh": "他小时候骑自行车上学。",
-    "options": ["goes", "went", "has gone", "is going"],
-    "optionsZh": ["去（一般现在时）", "去（一般过去时）", "已经去了（现在完成时）", "正要去（现在进行时）"],
+    "options": [
+      "goes",
+      "went",
+      "has gone",
+      "is going"
+    ],
+    "optionsZh": [
+      "去（一般现在时）",
+      "去（一般过去时）",
+      "已经去了（现在完成时）",
+      "正要去（现在进行时）"
+    ],
     "answer": 1,
     "explanation": "when he was young 表示过去的时间，用一般过去时 went。"
   },
   {
     "stem": "— What were you doing at eight last night?\n— I ______ TV.",
     "stemZh": "——昨晚八点你在做什么？\n——我在看电视。",
-    "options": ["watch", "watched", "was watching", "am watching"],
-    "optionsZh": ["看（一般现在时）", "看了（一般过去时）", "正在看（过去进行时）", "正在看（现在进行时）"],
+    "options": [
+      "watch",
+      "watched",
+      "was watching",
+      "am watching"
+    ],
+    "optionsZh": [
+      "看（一般现在时）",
+      "看了（一般过去时）",
+      "正在看（过去进行时）",
+      "正在看（现在进行时）"
+    ],
     "answer": 2,
     "explanation": "at eight last night 表示过去某一时刻正在进行的动作，用过去进行时 was watching。"
   },
   {
     "stem": "Mr. Green ______ in this school since 2000.",
     "stemZh": "格林先生自2000年以来一直在这所学校教书。",
-    "options": ["teaches", "taught", "has taught", "is teaching"],
-    "optionsZh": ["教（一般现在时）", "教过（一般过去时）", "一直在教（现在完成时）", "正在教（现在进行时）"],
+    "options": [
+      "teaches",
+      "taught",
+      "has taught",
+      "is teaching"
+    ],
+    "optionsZh": [
+      "教（一般现在时）",
+      "教过（一般过去时）",
+      "一直在教（现在完成时）",
+      "正在教（现在进行时）"
+    ],
     "answer": 2,
     "explanation": "since 2000 是现在完成时的标志，表示从过去持续到现在的动作，用 has taught。"
   },
   {
     "stem": "Don't ______ in the library.",
     "stemZh": "不要在图书馆里说话。",
-    "options": ["talk", "talks", "talking", "talked"],
-    "optionsZh": ["说（动词原形）", "说（第三人称单数）", "说（现在分词）", "说（过去式）"],
+    "options": [
+      "talk",
+      "talks",
+      "talking",
+      "talked"
+    ],
+    "optionsZh": [
+      "说（动词原形）",
+      "说（第三人称单数）",
+      "说（现在分词）",
+      "说（过去式）"
+    ],
     "answer": 0,
     "explanation": "否定祈使句结构为 Don't + 动词原形，故选 talk。"
   },
   {
     "stem": "It's important ______ English well.",
     "stemZh": "学好英语很重要。",
-    "options": ["learn", "learns", "to learn", "learning"],
-    "optionsZh": ["学（动词原形）", "学（第三人称单数）", "学（不定式）", "学（动名词）"],
+    "options": [
+      "learn",
+      "learns",
+      "to learn",
+      "learning"
+    ],
+    "optionsZh": [
+      "学（动词原形）",
+      "学（第三人称单数）",
+      "学（不定式）",
+      "学（动名词）"
+    ],
     "answer": 2,
     "explanation": "It is + 形容词 + to do sth. 是固定句型，it 作形式主语，真正主语是不定式。"
   },
   {
     "stem": "Would you mind ______ the window?",
     "stemZh": "你介意打开窗户吗？",
-    "options": ["open", "to open", "opening", "opened"],
-    "optionsZh": ["打开（动词原形）", "打开（不定式）", "打开（动名词）", "打开（过去式）"],
+    "options": [
+      "open",
+      "to open",
+      "opening",
+      "opened"
+    ],
+    "optionsZh": [
+      "打开（动词原形）",
+      "打开（不定式）",
+      "打开（动名词）",
+      "打开（过去式）"
+    ],
     "answer": 2,
     "explanation": "mind doing sth. 是固定搭配，mind 后接动名词，故选 opening。"
   },
   {
     "stem": "The boy is old enough ______ himself.",
     "stemZh": "这个男孩年龄够大，能自己穿衣服了。",
-    "options": ["dress", "to dress", "dressing", "dressed"],
-    "optionsZh": ["穿衣（动词原形）", "穿衣（不定式）", "穿衣（动名词）", "穿衣（过去式）"],
+    "options": [
+      "dress",
+      "to dress",
+      "dressing",
+      "dressed"
+    ],
+    "optionsZh": [
+      "穿衣（动词原形）",
+      "穿衣（不定式）",
+      "穿衣（动名词）",
+      "穿衣（过去式）"
+    ],
     "answer": 1,
     "explanation": "形容词 + enough + to do sth. 表示“足够……做某事”，用不定式 to dress。"
   },
   {
     "stem": "He hardly goes to bed before eleven, ______?",
     "stemZh": "他很少在十一点前睡觉，是吗？",
-    "options": ["does he", "doesn't he", "is he", "isn't he"],
-    "optionsZh": ["是吗（肯定形式）", "是吗（否定形式）", "是吗（be动词肯定）", "是吗（be动词否定）"],
+    "options": [
+      "does he",
+      "doesn't he",
+      "is he",
+      "isn't he"
+    ],
+    "optionsZh": [
+      "是吗（肯定形式）",
+      "是吗（否定形式）",
+      "是吗（be动词肯定）",
+      "是吗（be动词否定）"
+    ],
     "answer": 0,
     "explanation": "hardly 是否定词，陈述部分含否定意义，反义疑问部分用肯定形式；主句动词 goes 是实义动词，助动词用 does。"
   },
   {
     "stem": "Neither Tom nor his parents ______ to the party.",
     "stemZh": "汤姆和他的父母都没被邀请参加聚会。",
-    "options": ["has been invited", "have been invited", "was invited", "is invited"],
-    "optionsZh": ["已被邀请（单数）", "已被邀请（复数）", "被邀请（单数过去）", "被邀请（单数现在）"],
+    "options": [
+      "has been invited",
+      "have been invited",
+      "was invited",
+      "is invited"
+    ],
+    "optionsZh": [
+      "已被邀请（单数）",
+      "已被邀请（复数）",
+      "被邀请（单数过去）",
+      "被邀请（单数现在）"
+    ],
     "answer": 1,
     "explanation": "neither...nor... 连接主语时遵循就近原则，靠近谓语的是 his parents（复数），故用 have been invited。"
   },
   {
     "stem": "There ______ a pen and two books on the desk.",
     "stemZh": "桌子上有一支钢笔和两本书。",
-    "options": ["is", "are", "have", "has"],
-    "optionsZh": ["是（单数）", "是（复数）", "有（动词原形）", "有（第三人称单数）"],
+    "options": [
+      "is",
+      "are",
+      "have",
+      "has"
+    ],
+    "optionsZh": [
+      "是（单数）",
+      "是（复数）",
+      "有（动词原形）",
+      "有（第三人称单数）"
+    ],
     "answer": 0,
     "explanation": "There be 句型遵循就近原则，靠近 be 的是 a pen（单数），故用 is。"
   },
   {
     "stem": "He speaks English ______ than before.",
     "stemZh": "他说英语比以前流利多了。",
-    "options": ["fluent", "more fluent", "more fluently", "most fluently"],
-    "optionsZh": ["流利的（形容词原级）", "更流利的（形容词比较级）", "更流利地（副词比较级）", "最流利地（副词最高级）"],
+    "options": [
+      "fluent",
+      "more fluent",
+      "more fluently",
+      "most fluently"
+    ],
+    "optionsZh": [
+      "流利的（形容词原级）",
+      "更流利的（形容词比较级）",
+      "更流利地（副词比较级）",
+      "最流利地（副词最高级）"
+    ],
     "answer": 2,
     "explanation": "修饰动词 speaks 要用副词 fluently；than 提示比较级，用 more fluently。"
   },
   {
     "stem": "— Have you ever been to Shanghai?\n— Yes, I ______ there last year.",
     "stemZh": "——你去过上海吗？\n——是的，我去年去过那里。",
-    "options": ["have been", "went", "have gone", "go"],
-    "optionsZh": ["去过（现在完成时）", "去了（一般过去时）", "去了（现在完成时）", "去（一般现在时）"],
+    "options": [
+      "have been",
+      "went",
+      "have gone",
+      "go"
+    ],
+    "optionsZh": [
+      "去过（现在完成时）",
+      "去了（一般过去时）",
+      "去了（现在完成时）",
+      "去（一般现在时）"
+    ],
     "answer": 1,
     "explanation": "last year 是明确的一般过去时时间状语，不能用现在完成时，用 went。"
   },
   {
     "stem": "I'll call you as soon as I ______ home.",
     "stemZh": "我一到家就给你打电话。",
-    "options": ["get", "will get", "got", "am getting"],
-    "optionsZh": ["到达（一般现在时）", "将到达（一般将来时）", "到达（一般过去时）", "正到达（现在进行时）"],
+    "options": [
+      "get",
+      "will get",
+      "got",
+      "am getting"
+    ],
+    "optionsZh": [
+      "到达（一般现在时）",
+      "将到达（一般将来时）",
+      "到达（一般过去时）",
+      "正到达（现在进行时）"
+    ],
     "answer": 0,
     "explanation": "as soon as 引导时间状语从句，遵循“主将从现”原则，从句用一般现在时 get。"
   },
   {
     "stem": "He ______ be at home. The light is on.",
     "stemZh": "他一定在家，灯亮着。",
-    "options": ["must", "can't", "may", "need"],
-    "optionsZh": ["一定（肯定推测）", "不可能（否定推测）", "可能（把握不大）", "需要"],
+    "options": [
+      "must",
+      "can't",
+      "may",
+      "need"
+    ],
+    "optionsZh": [
+      "一定（肯定推测）",
+      "不可能（否定推测）",
+      "可能（把握不大）",
+      "需要"
+    ],
     "answer": 0,
     "explanation": "根据“灯亮着”可作肯定推测，用 must be 表示“一定是”。"
   },
   {
     "stem": "The book ______ by Lu Xun.",
     "stemZh": "这本书是鲁迅写的。",
-    "options": ["wrote", "was written", "is writing", "writes"],
-    "optionsZh": ["写（主动过去式）", "被写（被动过去式）", "正在写（主动）", "写（主动现在时）"],
+    "options": [
+      "wrote",
+      "was written",
+      "is writing",
+      "writes"
+    ],
+    "optionsZh": [
+      "写（主动过去式）",
+      "被写（被动过去式）",
+      "正在写（主动）",
+      "写（主动现在时）"
+    ],
     "answer": 1,
     "explanation": "The book 是 write 的承受者，且为过去发生的事，用一般过去时的被动语态 was written。"
   },
   {
     "stem": "My hometown has changed a lot ______ the past ten years.",
     "stemZh": "我的家乡在过去的十年里变化很大。",
-    "options": ["in", "for", "since", "at"],
-    "optionsZh": ["在……里（用于一段时间）", "持续（后接时间段）", "自从（后接时间点）", "在（某时刻）"],
+    "options": [
+      "in",
+      "for",
+      "since",
+      "at"
+    ],
+    "optionsZh": [
+      "在……里（用于一段时间）",
+      "持续（后接时间段）",
+      "自从（后接时间点）",
+      "在（某时刻）"
+    ],
     "answer": 0,
     "explanation": "in the past ten years 表示“在过去的十年里”，是现在完成时的常用时间状语。"
   },
   {
     "stem": "— What's wrong with you?\n— I have a ______. I can't eat anything.",
     "stemZh": "——你怎么了？\n——我牙疼，什么也吃不了。",
-    "options": ["cold", "headache", "toothache", "fever"],
-    "optionsZh": ["感冒", "头痛", "牙痛", "发烧"],
+    "options": [
+      "cold",
+      "headache",
+      "toothache",
+      "fever"
+    ],
+    "optionsZh": [
+      "感冒",
+      "头痛",
+      "牙痛",
+      "发烧"
+    ],
     "answer": 2,
     "explanation": "由 I can't eat anything（什么也吃不了）可知是牙痛 toothache。"
   },
   {
     "stem": "It's very hot. Why don't you ______ your coat?",
     "stemZh": "天气很热，你为什么不脱下外套呢？",
-    "options": ["put on", "take off", "put off", "take away"],
-    "optionsZh": ["穿上", "脱下", "推迟", "拿走"],
+    "options": [
+      "put on",
+      "take off",
+      "put off",
+      "take away"
+    ],
+    "optionsZh": [
+      "穿上",
+      "脱下",
+      "推迟",
+      "拿走"
+    ],
     "answer": 1,
     "explanation": "天气热，应“脱下”外套，take off 意为“脱下”。"
   },
   {
     "stem": "— Would you like some tea?\n— ______.",
     "stemZh": "——你想喝点茶吗？\n——好的，谢谢。",
-    "options": ["Yes, please", "Yes, I would", "No, I wouldn't", "No, please"],
-    "optionsZh": ["好的，谢谢（接受邀请）", "是的，我想（回答不地道）", "不，我不想（不礼貌）", "不，请（矛盾）"],
+    "options": [
+      "Yes, please",
+      "Yes, I would",
+      "No, I wouldn't",
+      "No, please"
+    ],
+    "optionsZh": [
+      "好的，谢谢（接受邀请）",
+      "是的，我想（回答不地道）",
+      "不，我不想（不礼貌）",
+      "不，请（矛盾）"
+    ],
     "answer": 0,
     "explanation": "Would you like...? 表示邀请，接受时常用 Yes, please.；拒绝时用 No, thanks."
   },
   {
     "stem": "— How often do you exercise?\n— ______.",
     "stemZh": "——你多久锻炼一次？\n——一周两次。",
-    "options": ["Twice a week", "Two weeks", "For two weeks", "In two weeks"],
-    "optionsZh": ["一周两次（频率）", "两周（时长）", "持续两周", "两周后"],
+    "options": [
+      "Twice a week",
+      "Two weeks",
+      "For two weeks",
+      "In two weeks"
+    ],
+    "optionsZh": [
+      "一周两次（频率）",
+      "两周（时长）",
+      "持续两周",
+      "两周后"
+    ],
     "answer": 0,
     "explanation": "How often 提问频率，回答用 Twice a week（一周两次）。"
   },
   {
     "stem": "— I'm sorry I'm late.\n— ______.",
     "stemZh": "——对不起，我迟到了。\n——没关系。",
-    "options": ["That's right", "You're welcome", "It doesn't matter", "That's all"],
-    "optionsZh": ["对的", "不客气", "没关系", "就这些"],
+    "options": [
+      "That's right",
+      "You're welcome",
+      "It doesn't matter",
+      "That's all"
+    ],
+    "optionsZh": [
+      "对的",
+      "不客气",
+      "没关系",
+      "就这些"
+    ],
     "answer": 2,
     "explanation": "对方道歉时，应回答 It doesn't matter.（没关系）。"
   },
   {
     "stem": "— Thanks for your help.\n— ______.",
     "stemZh": "——谢谢你的帮助。\n——不客气。",
-    "options": ["That's right", "You're welcome", "Never mind", "All right"],
-    "optionsZh": ["对的", "不客气", "没关系", "好吧"],
+    "options": [
+      "That's right",
+      "You're welcome",
+      "Never mind",
+      "All right"
+    ],
+    "optionsZh": [
+      "对的",
+      "不客气",
+      "没关系",
+      "好吧"
+    ],
     "answer": 1,
     "explanation": "对方表示感谢时，回答 You're welcome.（不客气）。"
   },
   {
     "stem": "He ______ his homework when his mother came in.",
     "stemZh": "他妈妈进来时，他正在做作业。",
-    "options": ["does", "did", "was doing", "is doing"],
-    "optionsZh": ["做（一般现在时）", "做了（一般过去时）", "正在做（过去进行时）", "正在做（现在进行时）"],
+    "options": [
+      "does",
+      "did",
+      "was doing",
+      "is doing"
+    ],
+    "optionsZh": [
+      "做（一般现在时）",
+      "做了（一般过去时）",
+      "正在做（过去进行时）",
+      "正在做（现在进行时）"
+    ],
     "answer": 2,
     "explanation": "when 引导的从句用一般过去时，主句表示当时正在进行的动作，用过去进行时 was doing。"
   },
   {
     "stem": "The teacher asked us ______ quiet in class.",
     "stemZh": "老师要求我们上课保持安静。",
-    "options": ["keep", "to keep", "keeping", "kept"],
-    "optionsZh": ["保持（动词原形）", "保持（不定式）", "保持（动名词）", "保持（过去式）"],
+    "options": [
+      "keep",
+      "to keep",
+      "keeping",
+      "kept"
+    ],
+    "optionsZh": [
+      "保持（动词原形）",
+      "保持（不定式）",
+      "保持（动名词）",
+      "保持（过去式）"
+    ],
     "answer": 1,
     "explanation": "ask sb. to do sth. 是固定搭配，意为“要求某人做某事”。"
   },
   {
     "stem": "I prefer reading books ______ watching TV.",
     "stemZh": "我更喜欢读书而不是看电视。",
-    "options": ["to", "than", "and", "with"],
-    "optionsZh": ["与……相比（固定搭配）", "比（用于比较级）", "和", "与……一起"],
+    "options": [
+      "to",
+      "than",
+      "and",
+      "with"
+    ],
+    "optionsZh": [
+      "与……相比（固定搭配）",
+      "比（用于比较级）",
+      "和",
+      "与……一起"
+    ],
     "answer": 0,
     "explanation": "prefer doing A to doing B 表示“比起 B 更喜欢 A”，是固定搭配。"
   },
   {
     "stem": "She ______ to visit her grandparents tomorrow.",
     "stemZh": "她明天要去看望她的祖父母。",
-    "options": ["will go", "goes", "went", "has gone"],
-    "optionsZh": ["将去（一般将来时）", "去（一般现在时）", "去了（一般过去时）", "已经去了（现在完成时）"],
+    "options": [
+      "will go",
+      "goes",
+      "went",
+      "has gone"
+    ],
+    "optionsZh": [
+      "将去（一般将来时）",
+      "去（一般现在时）",
+      "去了（一般过去时）",
+      "已经去了（现在完成时）"
+    ],
     "answer": 0,
     "explanation": "tomorrow 表示将来，用一般将来时 will go。"
   },
   {
     "stem": "— Whose bag is this?\n— It ______ be Lucy's. Her name is on it.",
     "stemZh": "——这是谁的书包？\n——一定是露西的，上面有她的名字。",
-    "options": ["can", "must", "might", "can't"],
-    "optionsZh": ["能够", "一定（肯定推测）", "可能（把握不大）", "不可能"],
+    "options": [
+      "can",
+      "must",
+      "might",
+      "can't"
+    ],
+    "optionsZh": [
+      "能够",
+      "一定（肯定推测）",
+      "可能（把握不大）",
+      "不可能"
+    ],
     "answer": 1,
     "explanation": "根据“上面有她的名字”可作肯定推测，用 must be 表示“一定是”。"
   },
   {
     "stem": "— Do you know the girl ______ long hair?\n— Yes. She is my cousin.",
     "stemZh": "——你认识那个留长发的女孩吗？\n——认识，她是我表妹。",
-    "options": ["with", "in", "on", "of"],
-    "optionsZh": ["有（表特征）", "在……里", "在……上", "……的"],
+    "options": [
+      "with",
+      "in",
+      "on",
+      "of"
+    ],
+    "optionsZh": [
+      "有（表特征）",
+      "在……里",
+      "在……上",
+      "……的"
+    ],
     "answer": 0,
     "explanation": "with long hair 表示“留着长发的”，with 用于表示人或物的特征。"
   },
   {
     "stem": "— Have you finished your homework ______?\n— Not yet.",
     "stemZh": "——你完成作业了吗？\n——还没有。",
-    "options": ["already", "yet", "just", "ever"],
-    "optionsZh": ["已经（用于肯定句）", "还（用于疑问句和否定句）", "刚刚", "曾经"],
+    "options": [
+      "already",
+      "yet",
+      "just",
+      "ever"
+    ],
+    "optionsZh": [
+      "已经（用于肯定句）",
+      "还（用于疑问句和否定句）",
+      "刚刚",
+      "曾经"
+    ],
     "answer": 1,
     "explanation": "yet 常用于疑问句和否定句句末，表示“已经/还”。"
   },
   {
     "stem": "It took me two hours ______ the work.",
     "stemZh": "完成这项工作花了我两个小时。",
-    "options": ["finish", "to finish", "finishing", "finished"],
-    "optionsZh": ["完成（动词原形）", "完成（不定式）", "完成（动名词）", "完成（过去式）"],
+    "options": [
+      "finish",
+      "to finish",
+      "finishing",
+      "finished"
+    ],
+    "optionsZh": [
+      "完成（动词原形）",
+      "完成（不定式）",
+      "完成（动名词）",
+      "完成（过去式）"
+    ],
     "answer": 1,
     "explanation": "It takes sb. some time to do sth. 是固定句型，用不定式 to finish。"
   },
   {
     "stem": "— What can we do to protect the earth?\n— We should ______ water and paper.",
     "stemZh": "——我们能做什么来保护地球？\n——我们应该节约用水和纸。",
-    "options": ["save", "waste", "use", "buy"],
-    "optionsZh": ["节约", "浪费", "使用", "购买"],
+    "options": [
+      "save",
+      "waste",
+      "use",
+      "buy"
+    ],
+    "optionsZh": [
+      "节约",
+      "浪费",
+      "使用",
+      "购买"
+    ],
     "answer": 0,
     "explanation": "保护地球应“节约”资源，save 意为“节约”。"
   },
   {
     "stem": "— Could you please tell me how to get to the station?\n— Sorry, I'm new here.\n— ______.",
     "stemZh": "——你能告诉我怎样去车站吗？\n——抱歉，我是新来的。\n——还是谢谢你。",
-    "options": ["You're welcome", "Thank you all the same", "That's right", "Never mind"],
-    "optionsZh": ["不客气", "还是谢谢你", "对的", "没关系"],
+    "options": [
+      "You're welcome",
+      "Thank you all the same",
+      "That's right",
+      "Never mind"
+    ],
+    "optionsZh": [
+      "不客气",
+      "还是谢谢你",
+      "对的",
+      "没关系"
+    ],
     "answer": 1,
     "explanation": "问路未得到帮助时，常用 Thank you all the same.（仍然谢谢你）表示感谢。"
+  },
+  {
+    "stem": "—Is this your ruler?\n—Yes, ___ is.",
+    "stemZh": "——这是你的尺子吗？\n——是的，它是。",
+    "options": [
+      "this",
+      "that",
+      "it",
+      "they"
+    ],
+    "optionsZh": [
+      "这个",
+      "那个",
+      "它",
+      "它们"
+    ],
+    "answer": 2,
+    "answerText": "it",
+    "explanation": "指代前文的 this 用 it，回答 Yes, it is.",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Is this ___ computer?\n—No, it's Lily's. Mine is on the table.",
+    "stemZh": "——这是你的电脑吗？\n——不，是莉莉的。我的在桌子上。",
+    "options": [
+      "your",
+      "his",
+      "her",
+      "its"
+    ],
+    "optionsZh": [
+      "你的",
+      "他的",
+      "她的",
+      "它的"
+    ],
+    "answer": 0,
+    "answerText": "your",
+    "explanation": "修饰名词 computer 用形容词性物主代词 your。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "I ___ a student. My name ___ Li Ming.",
+    "stemZh": "我是一名学生。我的名字叫李明。",
+    "options": [
+      "is; is",
+      "am; is",
+      "are; am",
+      "am; are"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 1,
+    "answerText": "am; is",
+    "explanation": "主语 I 用 am；name 是第三人称单数，用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "___ name is Mary.",
+    "stemZh": "她的名字叫玛丽。",
+    "options": [
+      "She",
+      "Her",
+      "He",
+      "His"
+    ],
+    "optionsZh": [
+      "她",
+      "她的",
+      "他",
+      "他的"
+    ],
+    "answer": 1,
+    "answerText": "Her",
+    "explanation": "修饰名词 name 用形容词性物主代词 Her。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "Don't worry. Tom and I are ___ safe here.",
+    "stemZh": "别担心。汤姆和我在这里都很安全。",
+    "options": [
+      "both",
+      "all",
+      "either",
+      "neither"
+    ],
+    "optionsZh": [
+      "两者都",
+      "全都",
+      "任一",
+      "两者都不"
+    ],
+    "answer": 0,
+    "answerText": "both",
+    "explanation": "Tom and I 指两个人，用 both 表示“两者都”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Hello! What's ___ name?\n—My name is Tom.",
+    "stemZh": "——你好！你叫什么名字？\n——我叫汤姆。",
+    "options": [
+      "your",
+      "you",
+      "my",
+      "me"
+    ],
+    "optionsZh": [
+      "你的",
+      "你",
+      "我的",
+      "我"
+    ],
+    "answer": 0,
+    "answerText": "your",
+    "explanation": "修饰名词 name 用形容词性物主代词 your。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Who is that?\n—___ my cousin.",
+    "stemZh": "——那是谁？\n——那是我的表兄弟。",
+    "options": [
+      "That's",
+      "This are",
+      "Those is",
+      "These are"
+    ],
+    "optionsZh": [
+      "那是",
+      "这是",
+      "那些是",
+      "这些是"
+    ],
+    "answer": 0,
+    "answerText": "That's",
+    "explanation": "回答 Who is that? 用 That's my cousin。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—___ he your brother?\n—Yes, he is.",
+    "stemZh": "——他是你哥哥吗？\n——是的，他是。",
+    "options": [
+      "Are",
+      "Is",
+      "Am",
+      "Be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 1,
+    "answerText": "Is",
+    "explanation": "主语 he 是第三人称单数，be 动词用 Is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "My new classmate's name is Mike Miller. Mike is his ___ name.",
+    "stemZh": "我的新同学叫迈克·米勒。迈克是他的名。",
+    "options": [
+      "last",
+      "first",
+      "full",
+      "family"
+    ],
+    "optionsZh": [
+      "姓",
+      "名",
+      "全名",
+      "姓"
+    ],
+    "answer": 1,
+    "answerText": "first",
+    "explanation": "Mike 在姓名中位于前面，是名（first name），Miller 是姓。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Let's ___ new classmates by introducing our favourite food.",
+    "stemZh": "让我们通过介绍自己最喜欢的食物来认识新同学吧。",
+    "options": [
+      "make friends",
+      "get to know",
+      "play the guitar",
+      "full of"
+    ],
+    "optionsZh": [
+      "交朋友",
+      "了解、认识",
+      "弹吉他",
+      "充满"
+    ],
+    "answer": 1,
+    "answerText": "get to know",
+    "explanation": "get to know 表示“了解、认识”，符合句意。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My mother is a doctor. ___ works in a hospital.",
+    "stemZh": "我妈妈是一名医生。她在一家医院工作。",
+    "options": [
+      "He",
+      "His",
+      "She",
+      "Her"
+    ],
+    "optionsZh": [
+      "他",
+      "他的",
+      "她",
+      "她的"
+    ],
+    "answer": 2,
+    "answerText": "She",
+    "explanation": "指代 my mother（女性）作主语，用主格 She。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "Miss Black is a kind teacher. We all like ___.",
+    "stemZh": "布莱克老师是一位和善的老师。我们都喜欢她。",
+    "options": [
+      "she",
+      "her",
+      "he",
+      "him"
+    ],
+    "optionsZh": [
+      "她",
+      "她",
+      "他",
+      "他"
+    ],
+    "answer": 1,
+    "answerText": "her",
+    "explanation": "动词 like 后用宾格；Miss Black 是女性，用 her。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "I have ___ rulers. Two are yellow and three are black.",
+    "stemZh": "我有五把尺子。两把是黄色的，三把是黑色的。",
+    "options": [
+      "two",
+      "three",
+      "five",
+      "six"
+    ],
+    "optionsZh": [
+      "二",
+      "三",
+      "五",
+      "六"
+    ],
+    "answer": 2,
+    "answerText": "five",
+    "explanation": "2 + 3 = 5，共五把尺子，用数词 five。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "数词"
+    ]
+  },
+  {
+    "stem": "—___ your hobby?\n—I like singing.",
+    "stemZh": "——你的爱好是什么？\n——我喜欢唱歌。",
+    "options": [
+      "What",
+      "What's",
+      "How",
+      "How's"
+    ],
+    "optionsZh": [
+      "什么",
+      "是什么",
+      "怎样",
+      "怎样"
+    ],
+    "answer": 1,
+    "answerText": "What's",
+    "explanation": "询问爱好用 What's your hobby? What's 是 What is 的缩写。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—___ is he?\n—He is my new classmate.",
+    "stemZh": "——他是谁？\n——他是我的新同学。",
+    "options": [
+      "What",
+      "Who",
+      "Where",
+      "How"
+    ],
+    "optionsZh": [
+      "什么",
+      "谁",
+      "哪里",
+      "怎样"
+    ],
+    "answer": 1,
+    "answerText": "Who",
+    "explanation": "询问人物身份用 Who。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "These students ___ from my class. They are my friends.",
+    "stemZh": "这些学生来自我的班级。他们是我的朋友。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "/"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "不填"
+    ],
+    "answer": 2,
+    "answerText": "are",
+    "explanation": "主语 students 是复数，be 动词用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Mary's birthday is coming. We've decided to make a cake for ___.",
+    "stemZh": "玛丽的生日快到了。我们决定为她做一个蛋糕。",
+    "options": [
+      "him",
+      "her",
+      "you",
+      "them"
+    ],
+    "optionsZh": [
+      "他",
+      "她",
+      "你",
+      "他们"
+    ],
+    "answer": 1,
+    "answerText": "her",
+    "explanation": "介词 for 后用宾格；指代 Mary（女性）用 her。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "She ___ a student.",
+    "stemZh": "她是一名学生。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 1,
+    "answerText": "is",
+    "explanation": "She 是第三人称单数，be 动词用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Hi, my name is Tim. It's my first time to be here.\n—___.",
+    "stemZh": "——嗨，我叫蒂姆。这是我第一次来这里。\n——很高兴见到你。",
+    "options": [
+      "It's all right",
+      "Nice to meet you",
+      "Very well, thank you",
+      "That would be very nice"
+    ],
+    "optionsZh": [
+      "没关系",
+      "很高兴见到你",
+      "很好，谢谢",
+      "那太好了"
+    ],
+    "answer": 1,
+    "answerText": "Nice to meet you",
+    "explanation": "初次见面打招呼用 Nice to meet you，符合情景。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "My English teacher is Mary Smith and we call her ___.",
+    "stemZh": "我的英语老师是玛丽·史密斯，我们叫她史密斯女士。",
+    "options": [
+      "Ms Mary",
+      "Ms Smith",
+      "Mr Smith",
+      "Smith"
+    ],
+    "optionsZh": [
+      "玛丽女士",
+      "史密斯女士",
+      "史密斯先生",
+      "史密斯"
+    ],
+    "answer": 1,
+    "answerText": "Ms Smith",
+    "explanation": "称呼语 Ms/Mr 后接姓氏，Smith 是姓，故用 Ms Smith。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "Mr. Liu teaches ___ English. We like ___ class very much.",
+    "stemZh": "刘老师教我们英语。我们非常喜欢他的课。",
+    "options": [
+      "me; he",
+      "me; her",
+      "us; his",
+      "us; her"
+    ],
+    "optionsZh": [
+      "我；他",
+      "我；她的",
+      "我们；他的",
+      "我们；她的"
+    ],
+    "answer": 2,
+    "answerText": "us; his",
+    "explanation": "teach sb. sth. 中 sb. 用宾格 us；修饰 class 用形容词性物主代词 his。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Nice to meet you, Tom.\n—___.",
+    "stemZh": "——很高兴见到你，汤姆。\n——我也很高兴见到你。",
+    "options": [
+      "Thank you",
+      "Goodbye",
+      "Nice to meet you too",
+      "You're welcome"
+    ],
+    "optionsZh": [
+      "谢谢",
+      "再见",
+      "我也很高兴见到你",
+      "不客气"
+    ],
+    "answer": 2,
+    "answerText": "Nice to meet you too",
+    "explanation": "Nice to meet you 的固定应答是 Nice to meet you too。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "以下单词中划线部分发音不同的是",
+    "stemZh": "以下单词中划线部分发音不同的是",
+    "options": [
+      "hat",
+      "Kate",
+      "game",
+      "cake"
+    ],
+    "optionsZh": [
+      "hat",
+      "Kate",
+      "game",
+      "cake"
+    ],
+    "answer": 0,
+    "answerText": "hat",
+    "explanation": "hat 中 a 发 /æ/，Kate、game、cake 中 a 发 /eɪ/。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "___ are my good friends.",
+    "stemZh": "那些是我的好朋友。",
+    "options": [
+      "That",
+      "This",
+      "Those",
+      "It"
+    ],
+    "optionsZh": [
+      "那个",
+      "这个",
+      "那些",
+      "它"
+    ],
+    "answer": 2,
+    "answerText": "Those",
+    "explanation": "friends 是复数，指示代词用 Those。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—How ___ you?\n—I ___ fine, thank you.",
+    "stemZh": "——你好吗？\n——我很好，谢谢。",
+    "options": [
+      "is; am",
+      "are; am",
+      "am; are",
+      "are; is"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 1,
+    "answerText": "are; am",
+    "explanation": "How are you? 是固定问候；回答 I am fine。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—___\n—Her name is Candy.",
+    "stemZh": "——她叫什么名字？\n——她叫坎迪。",
+    "options": [
+      "What's her name?",
+      "Are you Linda?",
+      "Who is he?",
+      "May I know your name?"
+    ],
+    "optionsZh": [
+      "她叫什么名字？",
+      "你是琳达吗？",
+      "他是谁？",
+      "我可以知道你的名字吗？"
+    ],
+    "answer": 0,
+    "answerText": "What's her name?",
+    "explanation": "答语 Her name is Candy 对应提问 What's her name?",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—___ your father a teacher?\n—Yes, he ___.",
+    "stemZh": "——你爸爸是老师吗？\n——是的，他是。",
+    "options": [
+      "Is; is",
+      "Are; is",
+      "Am; are",
+      "Is; are"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 0,
+    "answerText": "Is; is",
+    "explanation": "your father 是第三人称单数，用 Is；肯定回答 he is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The girl is Helen Green. Green is her ___.",
+    "stemZh": "这个女孩是海伦·格林。格林是她的姓。",
+    "options": [
+      "first name",
+      "last name",
+      "full name",
+      "middle name"
+    ],
+    "optionsZh": [
+      "名",
+      "姓",
+      "全名",
+      "中间名"
+    ],
+    "answer": 1,
+    "answerText": "last name",
+    "explanation": "英文姓名中姓在后，Green 是姓（last name）。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "—Is that ___ jacket?\n—No, it's not ___. It's Tom's.",
+    "stemZh": "——那是你的夹克吗？\n——不，不是我的。是汤姆的。",
+    "options": [
+      "your, my",
+      "you, mine",
+      "yours, mine",
+      "your, mine"
+    ],
+    "optionsZh": [
+      "你的，我的",
+      "你，我的",
+      "你的，我的",
+      "你的，我的"
+    ],
+    "answer": 3,
+    "answerText": "your, mine",
+    "explanation": "第一空修饰 jacket 用形容词性物主代词 your；第二空作表语用名词性物主代词 mine。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "My ___ is Grade 7, Class 2. We have a kind class teacher.",
+    "stemZh": "我所在的年级班级是七年级二班。我们有一位和善的班主任。",
+    "options": [
+      "name",
+      "grade",
+      "country",
+      "band"
+    ],
+    "optionsZh": [
+      "名字",
+      "年级",
+      "国家",
+      "乐队"
+    ],
+    "answer": 1,
+    "answerText": "grade",
+    "explanation": "Grade 7, Class 2 表示年级班级，故用 grade。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Tony is in ___.",
+    "stemZh": "托尼在七年级二班。",
+    "options": [
+      "Class 2, Grade 7",
+      "class 1, Grade 7",
+      "class 1, grade 7",
+      "grade 7, Class 2"
+    ],
+    "optionsZh": [
+      "七年级二班",
+      "七年级一班",
+      "七年级一班",
+      "七年级二班"
+    ],
+    "answer": 0,
+    "answerText": "Class 2, Grade 7",
+    "explanation": "班级表达为 Class + 数字，Grade + 数字，且首字母大写。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—___ your name Mark?\n—___.",
+    "stemZh": "——你叫马克吗？\n——是的。",
+    "options": [
+      "Is; Yes, I am",
+      "Is; Yes, it is",
+      "Are; Yes, I am",
+      "Are; Yes, it is"
+    ],
+    "optionsZh": [
+      "是；是的，我是",
+      "是；是的，它是",
+      "是；是的，我是",
+      "是；是的，它是"
+    ],
+    "answer": 1,
+    "answerText": "Is; Yes, it is",
+    "explanation": "your name 是单数，用 Is；回答 Yes, it is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Frank would like ___ this weekend.",
+    "stemZh": "弗兰克这个周末想去滑冰。",
+    "options": [
+      "skating",
+      "skate",
+      "skates",
+      "to skate"
+    ],
+    "optionsZh": [
+      "滑冰",
+      "滑冰",
+      "滑冰",
+      "去滑冰"
+    ],
+    "answer": 3,
+    "answerText": "to skate",
+    "explanation": "would like to do sth. 表示“想要做某事”，用不定式 to skate。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "—___ the book interesting?\n—Yes, it ___.",
+    "stemZh": "——这本书有趣吗？\n——是的，它有趣。",
+    "options": [
+      "Is; are",
+      "Are; are",
+      "Is; is",
+      "Are; is"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 2,
+    "answerText": "Is; is",
+    "explanation": "the book 是单数，用 Is；回答 it is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Are you a student?\n—Yes, ___.",
+    "stemZh": "——你是学生吗？\n——是的，我是。",
+    "options": [
+      "I'm",
+      "I am",
+      "you are",
+      "we are"
+    ],
+    "optionsZh": [
+      "我是",
+      "我是",
+      "你是",
+      "我们是"
+    ],
+    "answer": 1,
+    "answerText": "I am",
+    "explanation": "肯定简答用 I am，此处不用缩写 I'm。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "I like Zheng Qinwen very much. Her favourite ___ is tennis.",
+    "stemZh": "我非常喜欢郑钦文。她最喜欢的运动是网球。",
+    "options": [
+      "food",
+      "place",
+      "sport",
+      "colour"
+    ],
+    "optionsZh": [
+      "食物",
+      "地方",
+      "运动",
+      "颜色"
+    ],
+    "answer": 2,
+    "answerText": "sport",
+    "explanation": "tennis（网球）属于运动，故用 sport。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "This is Wang Fang. ___ is twelve.",
+    "stemZh": "这是王芳。她十二岁。",
+    "options": [
+      "His",
+      "She",
+      "Her",
+      "Its"
+    ],
+    "optionsZh": [
+      "他的",
+      "她",
+      "她的",
+      "它的"
+    ],
+    "answer": 1,
+    "answerText": "She",
+    "explanation": "指代 Wang Fang（女性）作主语，用主格 She。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Is he Jack?\n—___ He is Bob.",
+    "stemZh": "——他是杰克吗？\n——不，他不是。他是鲍勃。",
+    "options": [
+      "Yes, he is.",
+      "Yes, she is.",
+      "No, he isn't.",
+      "No, she isn't."
+    ],
+    "optionsZh": [
+      "是的，他是。",
+      "是的，她是。",
+      "不，他不是。",
+      "不，她不是。"
+    ],
+    "answer": 2,
+    "answerText": "No, he isn't.",
+    "explanation": "后句 He is Bob 说明他不是杰克，作否定回答 No, he isn't.",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "This is my bag. ___ is very good.",
+    "stemZh": "这是我的包。它非常好。",
+    "options": [
+      "It",
+      "He",
+      "She",
+      "They"
+    ],
+    "optionsZh": [
+      "它",
+      "他",
+      "她",
+      "它们"
+    ],
+    "answer": 0,
+    "answerText": "It",
+    "explanation": "指代 my bag（单数事物）作主语，用 It。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "Please sit between Lucy and ___.",
+    "stemZh": "请坐在露西和我之间。",
+    "options": [
+      "she",
+      "I",
+      "he",
+      "me"
+    ],
+    "optionsZh": [
+      "她",
+      "我",
+      "他",
+      "我"
+    ],
+    "answer": 3,
+    "answerText": "me",
+    "explanation": "between...and... 后接宾格，I 的宾格是 me。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Hello! I'm John.\n—Hi! I'm Henry White. Henry is my ___ name.",
+    "stemZh": "——你好！我是约翰。\n——嗨！我是亨利·怀特。亨利是我的名。",
+    "options": [
+      "last",
+      "first",
+      "middle",
+      "family"
+    ],
+    "optionsZh": [
+      "姓",
+      "名",
+      "中间名",
+      "姓"
+    ],
+    "answer": 1,
+    "answerText": "first",
+    "explanation": "Henry White 中 Henry 在前，是名（first name）。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "—What's this?\n—___ a rabbit.",
+    "stemZh": "——这是什么？\n——它是一只兔子。",
+    "options": [
+      "It's",
+      "This",
+      "Its",
+      "They're"
+    ],
+    "optionsZh": [
+      "它是",
+      "这个",
+      "它的",
+      "它们是"
+    ],
+    "answer": 0,
+    "answerText": "It's",
+    "explanation": "指代 this 用 It，加 be 动词为 It's（It is）。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "In our class, ___ Tom and Jim like playing tennis after school.",
+    "stemZh": "在我们班，汤姆和吉姆两人放学后都喜欢打网球。",
+    "options": [
+      "both",
+      "all",
+      "every",
+      "each"
+    ],
+    "optionsZh": [
+      "两者都",
+      "全都",
+      "每个",
+      "每个"
+    ],
+    "answer": 0,
+    "answerText": "both",
+    "explanation": "Tom and Jim 指两个人，用 both 表示“两者都”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—What class ___ your sister in?\n—She ___ in Class 5, Grade 7.",
+    "stemZh": "——你妹妹在哪个班？\n——她在七年级五班。",
+    "options": [
+      "is; is",
+      "are; is",
+      "is; are",
+      "are; are"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 0,
+    "answerText": "is; is",
+    "explanation": "your sister 是第三人称单数，两空均用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—What's your ___?\n—It's Smith. You can call me John Smith.",
+    "stemZh": "——你姓什么？\n——姓史密斯。你可以叫我约翰·史密斯。",
+    "options": [
+      "first name",
+      "last name",
+      "grade",
+      "hobby"
+    ],
+    "optionsZh": [
+      "名",
+      "姓",
+      "年级",
+      "爱好"
+    ],
+    "answer": 1,
+    "answerText": "last name",
+    "explanation": "Smith 是姓，英文中姓为 last name。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "—How ___ you?\n—I ___ fine, thanks.",
+    "stemZh": "——你好吗？\n——我很好，谢谢。",
+    "options": [
+      "am; are",
+      "am; am",
+      "are; am",
+      "are; are"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 2,
+    "answerText": "are; am",
+    "explanation": "How are you? 是固定问候；回答 I am fine。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I have two ___.",
+    "stemZh": "我有两个盒子。",
+    "options": [
+      "box",
+      "boxs",
+      "boxes",
+      "boxies"
+    ],
+    "optionsZh": [
+      "盒子",
+      "盒子",
+      "盒子",
+      "盒子"
+    ],
+    "answer": 2,
+    "answerText": "boxes",
+    "explanation": "box 以 x 结尾，复数加 -es，变为 boxes。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "—___ you want to be my friend?\n—Yes, I do.",
+    "stemZh": "——你想成为我的朋友吗？\n——是的，我想。",
+    "options": [
+      "Do",
+      "Does",
+      "Are",
+      "Is"
+    ],
+    "optionsZh": [
+      "助动词",
+      "助动词",
+      "是",
+      "是"
+    ],
+    "answer": 0,
+    "answerText": "Do",
+    "explanation": "主语 you 的一般现在时疑问句，助动词用 Do。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "—Hello! How are you?\n—___.",
+    "stemZh": "——你好！你好吗？\n——我很好，谢谢。你呢？",
+    "options": [
+      "Who are you?",
+      "I am fine, thank you. And you?",
+      "How do you do?",
+      "Nice to meet you"
+    ],
+    "optionsZh": [
+      "你是谁？",
+      "我很好，谢谢。你呢？",
+      "你好。",
+      "很高兴见到你"
+    ],
+    "answer": 1,
+    "answerText": "I am fine, thank you. And you?",
+    "explanation": "How are you? 的常用回答是 I am fine, thank you. And you?",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "This photo of my family is very ___. I love it very much.",
+    "stemZh": "这张我家人的照片非常好看。我非常喜欢它。",
+    "options": [
+      "boring",
+      "tidy",
+      "nice",
+      "difficult"
+    ],
+    "optionsZh": [
+      "无聊的",
+      "整洁的",
+      "好看的",
+      "困难的"
+    ],
+    "answer": 2,
+    "answerText": "nice",
+    "explanation": "nice 表示“好的、好看的”，符合语境。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "—Is this ___ ruler?\n—Yes, it is.",
+    "stemZh": "——这是她的尺子吗？\n——是的，它是。",
+    "options": [
+      "her",
+      "she",
+      "hers",
+      "he"
+    ],
+    "optionsZh": [
+      "她的",
+      "她",
+      "她的",
+      "他"
+    ],
+    "answer": 0,
+    "answerText": "her",
+    "explanation": "修饰名词 ruler 用形容词性物主代词 her。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "Mum, this is my best friend Amy. ___ are in the same class.",
+    "stemZh": "妈妈，这是我最好的朋友艾米。我们在同一个班。",
+    "options": [
+      "You",
+      "Ours",
+      "We",
+      "They"
+    ],
+    "optionsZh": [
+      "你",
+      "我们的",
+      "我们",
+      "他们"
+    ],
+    "answer": 2,
+    "answerText": "We",
+    "explanation": "指代“我和艾米”作主语，用主格 We。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Who's that girl ___ a red skirt?\n—She's my sister, Lily.",
+    "stemZh": "——那个穿红裙子的女孩是谁？\n——她是我妹妹莉莉。",
+    "options": [
+      "on",
+      "with",
+      "in",
+      "at"
+    ],
+    "optionsZh": [
+      "在……上",
+      "和……一起",
+      "穿着",
+      "在"
+    ],
+    "answer": 2,
+    "answerText": "in",
+    "explanation": "介词 in 表示穿着（衣物），in a red skirt 意为“穿着红裙子”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "—Is ___ your pen?\n—No, ___ isn't. It's Lucy's.",
+    "stemZh": "——那是你的钢笔吗？\n——不，它不是。是露西的。",
+    "options": [
+      "this; this",
+      "that; it",
+      "it; that",
+      "these; they"
+    ],
+    "optionsZh": [
+      "这个；这个",
+      "那个；它",
+      "它；那个",
+      "这些；它们"
+    ],
+    "answer": 1,
+    "answerText": "that; it",
+    "explanation": "第一空用 that 指远处事物；第二空指代前文的 pen 用 it。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Nice to meet you, Ms. Zhang!\n—___.",
+    "stemZh": "——很高兴见到你，张老师！\n——我也很高兴见到你。",
+    "options": [
+      "Hello",
+      "Goodbye",
+      "Fine, thanks",
+      "Nice to meet you, too"
+    ],
+    "optionsZh": [
+      "你好",
+      "再见",
+      "很好，谢谢",
+      "我也很高兴见到你"
+    ],
+    "answer": 3,
+    "answerText": "Nice to meet you, too",
+    "explanation": "Nice to meet you 的固定应答是 Nice to meet you, too。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Is that your book?\n—No, ___ isn't.",
+    "stemZh": "——那是你的书吗？\n——不，它不是。",
+    "options": [
+      "it",
+      "this",
+      "that",
+      "he"
+    ],
+    "optionsZh": [
+      "它",
+      "这个",
+      "那个",
+      "他"
+    ],
+    "answer": 0,
+    "answerText": "it",
+    "explanation": "指代 your book 作主语，用 it。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Where are Lily and Lucy from?\n—___ are from the USA.",
+    "stemZh": "——莉莉和露西来自哪里？\n——她们来自美国。",
+    "options": [
+      "Ours",
+      "We",
+      "Theirs",
+      "They"
+    ],
+    "optionsZh": [
+      "我们的",
+      "我们",
+      "他们的",
+      "她们"
+    ],
+    "answer": 3,
+    "answerText": "They",
+    "explanation": "指代 Lily and Lucy（复数）作主语，用 They。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—What ___ you like to do?\n—I like reading books.",
+    "stemZh": "——你喜欢做什么？\n——我喜欢读书。",
+    "options": [
+      "do",
+      "are",
+      "is",
+      "does"
+    ],
+    "optionsZh": [
+      "助动词",
+      "是",
+      "是",
+      "助动词"
+    ],
+    "answer": 0,
+    "answerText": "do",
+    "explanation": "主语 you 的一般现在时疑问句，助动词用 do。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "This isn't my dictionary. ___ is over there, on the desk.",
+    "stemZh": "这不是我的字典。我的在那边桌子上。",
+    "options": [
+      "His",
+      "Mine",
+      "Hers",
+      "Yours"
+    ],
+    "optionsZh": [
+      "他的",
+      "我的",
+      "她的",
+      "你的"
+    ],
+    "answer": 1,
+    "answerText": "Mine",
+    "explanation": "作主语用名词性物主代词 Mine，相当于 My dictionary。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "We're in ___ same class.",
+    "stemZh": "我们在同一个班。",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "one"
+    ],
+    "optionsZh": [
+      "一个",
+      "一个",
+      "同一个",
+      "一个"
+    ],
+    "answer": 2,
+    "answerText": "the",
+    "explanation": "the same 是固定搭配，意为“同一个”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "冠词"
+    ]
+  },
+  {
+    "stem": "—Where ___ pandas from?\n—___ from China.",
+    "stemZh": "——熊猫来自哪里？\n——它们来自中国。",
+    "options": [
+      "are; It's",
+      "is; It's",
+      "are; They're",
+      "is; They're"
+    ],
+    "optionsZh": [
+      "是；它是",
+      "是；它是",
+      "是；它们是",
+      "是；它们是"
+    ],
+    "answer": 2,
+    "answerText": "are; They're",
+    "explanation": "pandas 是复数用 are；答语指代复数用 They're（They are）。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—___ is your favourite food?\n—Dumplings.",
+    "stemZh": "——你最喜欢的食物是什么？\n——饺子。",
+    "options": [
+      "Which",
+      "What",
+      "Whose",
+      "When"
+    ],
+    "optionsZh": [
+      "哪一个",
+      "什么",
+      "谁的",
+      "什么时候"
+    ],
+    "answer": 1,
+    "answerText": "What",
+    "explanation": "询问事物用 What。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "Li Mei is my friend. ___ is 11 and ___ English name is Alice.",
+    "stemZh": "李梅是我的朋友。她十一岁，她的英文名叫爱丽丝。",
+    "options": [
+      "Her; she",
+      "She; her",
+      "Her; her",
+      "She; she"
+    ],
+    "optionsZh": [
+      "她的；她",
+      "她；她的",
+      "她的；她的",
+      "她；她"
+    ],
+    "answer": 1,
+    "answerText": "She; her",
+    "explanation": "第一空作主语用主格 She；第二空修饰 name 用 her。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "Jane and I go to the same school. ___ are classmates.",
+    "stemZh": "简和我上同一所学校。我们是同学。",
+    "options": [
+      "We",
+      "You",
+      "They",
+      "She"
+    ],
+    "optionsZh": [
+      "我们",
+      "你们",
+      "他们",
+      "她"
+    ],
+    "answer": 0,
+    "answerText": "We",
+    "explanation": "指代 Jane and I 作主语，用主格 We。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "These books ___ very interesting. I'll share them with my friends.",
+    "stemZh": "这些书非常有趣。我要和朋友们分享它们。",
+    "options": [
+      "is",
+      "are",
+      "was",
+      "were"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 1,
+    "answerText": "are",
+    "explanation": "主语 These books 是复数，一般现在时用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Hi, Eric! ___?\n—I'm fine, thanks.",
+    "stemZh": "——嗨，埃里克！你好吗？\n——我很好，谢谢。",
+    "options": [
+      "How old are you",
+      "How are you",
+      "What are you",
+      "Where are you"
+    ],
+    "optionsZh": [
+      "你多大了",
+      "你好吗",
+      "你是做什么的",
+      "你在哪里"
+    ],
+    "answer": 1,
+    "answerText": "How are you",
+    "explanation": "答语 I'm fine, thanks. 对应问候语 How are you?",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "选出划线部分读音与其他三个不同的一项：go, no, hello, not",
+    "stemZh": "选出划线部分读音与其他三个不同的一项：go, no, hello, not",
+    "options": [
+      "go",
+      "no",
+      "hello",
+      "not"
+    ],
+    "optionsZh": [
+      "go",
+      "no",
+      "hello",
+      "not"
+    ],
+    "answer": 3,
+    "answerText": "not",
+    "explanation": "not 中 o 发 /ɒ/，go、no、hello 中 o 发 /əʊ/。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "This is my friend. ___ name is Lisa.",
+    "stemZh": "这是我的朋友。她的名字叫丽莎。",
+    "options": [
+      "He",
+      "Her",
+      "His",
+      "Hers"
+    ],
+    "optionsZh": [
+      "他",
+      "她的",
+      "他的",
+      "她的"
+    ],
+    "answer": 1,
+    "answerText": "Her",
+    "explanation": "Lisa 是女孩，修饰 name 用形容词性物主代词 Her。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Is that boy Tom?\n—No, ___ isn't.",
+    "stemZh": "——那个男孩是汤姆吗？\n——不，他不是。",
+    "options": [
+      "he",
+      "she",
+      "it",
+      "that"
+    ],
+    "optionsZh": [
+      "他",
+      "她",
+      "它",
+      "那个"
+    ],
+    "answer": 0,
+    "answerText": "he",
+    "explanation": "指代 that boy 作主语，用主格 he。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Who is the boy in the picture?\n—He is my ___, my mother's brother's son.",
+    "stemZh": "——照片里的男孩是谁？\n——他是我的表兄弟，我舅舅的儿子。",
+    "options": [
+      "cousin",
+      "brother",
+      "uncle",
+      "father"
+    ],
+    "optionsZh": [
+      "堂（表）兄弟姐妹",
+      "兄弟",
+      "叔叔",
+      "父亲"
+    ],
+    "answer": 0,
+    "answerText": "cousin",
+    "explanation": "母亲兄弟的儿子是堂（表）兄弟姐妹，用 cousin。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "—___ is that girl?\n—She's my sister.",
+    "stemZh": "——那个女孩是谁？\n——她是我妹妹。",
+    "options": [
+      "What",
+      "Where",
+      "Who",
+      "How"
+    ],
+    "optionsZh": [
+      "什么",
+      "哪里",
+      "谁",
+      "怎样"
+    ],
+    "answer": 2,
+    "answerText": "Who",
+    "explanation": "询问人物身份用 Who。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Morning! ___ you Alice?\n—No. That girl ___ Alice.",
+    "stemZh": "——早上好！你是爱丽丝吗？\n——不是。那个女孩才是爱丽丝。",
+    "options": [
+      "Are, am",
+      "Is, am",
+      "Are, is",
+      "Is, is"
+    ],
+    "optionsZh": [
+      "是，是",
+      "是，是",
+      "是，是",
+      "是，是"
+    ],
+    "answer": 2,
+    "answerText": "Are, is",
+    "explanation": "主语 you 用 Are；That girl 是第三人称单数用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "选出与字母“i”有相同音素的单词",
+    "stemZh": "选出与字母“i”有相同音素的单词",
+    "options": [
+      "eat",
+      "his",
+      "evening",
+      "hi"
+    ],
+    "optionsZh": [
+      "eat",
+      "his",
+      "evening",
+      "hi"
+    ],
+    "answer": 3,
+    "answerText": "hi",
+    "explanation": "字母 i 的读音是 /aɪ/，hi 中 i 发 /aɪ/，其余发 /iː/ 或 /ɪ/。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "My parents ___ from Shanghai, and I ___ from Beijing.",
+    "stemZh": "我父母来自上海，我来自北京。",
+    "options": [
+      "is; am",
+      "are; am",
+      "are; is",
+      "is; are"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 1,
+    "answerText": "are; am",
+    "explanation": "My parents 是复数用 are；主语 I 用 am。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Bob and Mike ___ good friends.",
+    "stemZh": "鲍勃和迈克是好朋友。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 2,
+    "answerText": "are",
+    "explanation": "Bob and Mike 是复数主语，be 动词用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I ___ a boy. My friend, Jim, ___ a boy too.",
+    "stemZh": "我是一个男孩。我的朋友吉姆也是一个男孩。",
+    "options": [
+      "am; is",
+      "is; am",
+      "are; is",
+      "am; are"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 0,
+    "answerText": "am; is",
+    "explanation": "主语 I 用 am；Jim 是第三人称单数用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "There ___ a lot of interesting books in the reading club.",
+    "stemZh": "阅读俱乐部里有很多有趣的书。",
+    "options": [
+      "is",
+      "are",
+      "has",
+      "have"
+    ],
+    "optionsZh": [
+      "有",
+      "有",
+      "有",
+      "有"
+    ],
+    "answer": 1,
+    "answerText": "are",
+    "explanation": "there be 句型中 books 是复数，用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Rose is ___ English girl. She is ___ China now.",
+    "stemZh": "罗斯是一个英国女孩。她现在在中国。",
+    "options": [
+      "a; in",
+      "an; on",
+      "the; on",
+      "an; in"
+    ],
+    "optionsZh": [
+      "一个；在……里",
+      "一个；在……上",
+      "这个；在……上",
+      "一个；在……里"
+    ],
+    "answer": 3,
+    "answerText": "an; in",
+    "explanation": "English 以元音音素开头，用 an；表示“在中国”用 in China。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "冠词"
+    ]
+  },
+  {
+    "stem": "My sister is good at singing. ___ can even sing some French songs.",
+    "stemZh": "我妹妹擅长唱歌。她甚至会唱一些法语歌。",
+    "options": [
+      "I",
+      "He",
+      "You",
+      "She"
+    ],
+    "optionsZh": [
+      "我",
+      "他",
+      "你",
+      "她"
+    ],
+    "answer": 3,
+    "answerText": "She",
+    "explanation": "指代 my sister（女性）作主语，用主格 She。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Hello, I'm new here.\n—Hi, ___. If you need help, you can ask me.",
+    "stemZh": "——你好，我是新来的。\n——嗨，欢迎。如果你需要帮助，可以问我。",
+    "options": [
+      "That's OK.",
+      "Welcome",
+      "You're welcome",
+      "Fine"
+    ],
+    "optionsZh": [
+      "没关系。",
+      "欢迎",
+      "不客气",
+      "很好"
+    ],
+    "answer": 1,
+    "answerText": "Welcome",
+    "explanation": "对方说自己是新来的，回答 Welcome 表示欢迎。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "Lily and Lucy are ___. They look the same and are in the same class.",
+    "stemZh": "莉莉和露西是双胞胎。她们长得一样，还在同一个班。",
+    "options": [
+      "twins",
+      "classmates",
+      "bands",
+      "parrots"
+    ],
+    "optionsZh": [
+      "双胞胎",
+      "同学",
+      "乐队",
+      "鹦鹉"
+    ],
+    "answer": 0,
+    "answerText": "twins",
+    "explanation": "长得一样且在同一个班，说明是双胞胎 twins。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "Which one is a full name?",
+    "stemZh": "哪一个是一个全名？",
+    "options": [
+      "Peter",
+      "Ella Miller",
+      "Meimei",
+      "Jack"
+    ],
+    "optionsZh": [
+      "彼得",
+      "埃拉·米勒",
+      "梅梅",
+      "杰克"
+    ],
+    "answer": 1,
+    "answerText": "Ella Miller",
+    "explanation": "full name 是全名，Ella Miller 由名和姓组成，是完整姓名。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The ruler and the pen ___ yellow.",
+    "stemZh": "尺子和钢笔是黄色的。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 2,
+    "answerText": "are",
+    "explanation": "主语 The ruler and the pen 是复数，用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Hello! I'm Simon.\n—___.",
+    "stemZh": "——你好！我是西蒙。\n——你好！我是艾米。",
+    "options": [
+      "This is Amy",
+      "Hello! I'm Amy",
+      "Nice to meet you",
+      "Fine, thank you"
+    ],
+    "optionsZh": [
+      "这是艾米",
+      "你好！我是艾米",
+      "很高兴见到你",
+      "很好，谢谢"
+    ],
+    "answer": 1,
+    "answerText": "Hello! I'm Amy",
+    "explanation": "对方自我介绍后，用 Hello! I'm... 回应并自我介绍。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "This is my new classmate. ___ name is Tom, and ___ is a good boy.",
+    "stemZh": "这是我的新同学。他的名字叫汤姆，他是个好男孩。",
+    "options": [
+      "His; he",
+      "He; his",
+      "Her; she",
+      "She; her"
+    ],
+    "optionsZh": [
+      "他的；他",
+      "他；他的",
+      "她的；她",
+      "她；她的"
+    ],
+    "answer": 0,
+    "answerText": "His; he",
+    "explanation": "修饰 name 用 His；第二空作主语用主格 he。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Where ___ you from?\n—I'm from China.",
+    "stemZh": "——你来自哪里？\n——我来自中国。",
+    "options": [
+      "is",
+      "are",
+      "am",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 1,
+    "answerText": "are",
+    "explanation": "主语 you 对应的 be 动词是 are：Where are you from?",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Lily and I ___ good friends.",
+    "stemZh": "莉莉和我是好朋友。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 2,
+    "answerText": "are",
+    "explanation": "Lily and I 是复数主语，be 动词用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—What are these?\n—___ are apple trees.",
+    "stemZh": "——这些是什么？\n——它们是苹果树。",
+    "options": [
+      "These",
+      "They",
+      "This",
+      "That"
+    ],
+    "optionsZh": [
+      "这些",
+      "它们",
+      "这个",
+      "那个"
+    ],
+    "answer": 1,
+    "answerText": "They",
+    "explanation": "疑问句用 these，答语用 they 指代。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "Her phone number ___ 568-9012.",
+    "stemZh": "她的电话号码是 568-9012。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 1,
+    "answerText": "is",
+    "explanation": "phone number 是单数概念，be 动词用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Two ___ are in the classroom.",
+    "stemZh": "两个女孩在教室里。",
+    "options": [
+      "girl",
+      "girls",
+      "a girl",
+      "girl's"
+    ],
+    "optionsZh": [
+      "女孩",
+      "女孩们",
+      "一个女孩",
+      "女孩的"
+    ],
+    "answer": 1,
+    "answerText": "girls",
+    "explanation": "Two 后接可数名词复数，girl 的复数为 girls。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "This is my schoolbag. ___ are over there.",
+    "stemZh": "这是我的书包。你的在那边。",
+    "options": [
+      "Your",
+      "Yours",
+      "You",
+      "Mine"
+    ],
+    "optionsZh": [
+      "你的",
+      "你的",
+      "你",
+      "我的"
+    ],
+    "answer": 1,
+    "answerText": "Yours",
+    "explanation": "作主语用名词性物主代词 Yours，相当于 Your schoolbags。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—___ is Mr Smith from?\n—He's from the US.",
+    "stemZh": "——史密斯先生来自哪里？\n——他来自美国。",
+    "options": [
+      "What",
+      "Where",
+      "Who",
+      "How"
+    ],
+    "optionsZh": [
+      "什么",
+      "哪里",
+      "谁",
+      "怎样"
+    ],
+    "answer": 1,
+    "answerText": "Where",
+    "explanation": "答语 the US 表示地点，用 Where 提问。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Hello, are you Mr. Green?\n—Yes. That's ___.",
+    "stemZh": "——你好，你是格林先生吗？\n——是的。就是我。",
+    "options": [
+      "Him",
+      "me",
+      "you",
+      "us"
+    ],
+    "optionsZh": [
+      "他",
+      "我",
+      "你",
+      "我们"
+    ],
+    "answer": 1,
+    "answerText": "me",
+    "explanation": "That's me. 表示“就是我”，系动词后用宾格 me。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Hi, I'm Tom Brown. Tom is my given name. Can you tell me your full name?\n—Sure. ___.",
+    "stemZh": "——嗨，我是汤姆·布朗。汤姆是我的名。你能告诉我你的全名吗？\n——当然。我叫李明，李是我的姓。",
+    "options": [
+      "Li Ming",
+      "My name's Li Ming, Li is my family name.",
+      "I'm fine, thank you.",
+      "It's 358-4629"
+    ],
+    "optionsZh": [
+      "李明",
+      "我叫李明，李是我的姓。",
+      "我很好，谢谢。",
+      "是 358-4629"
+    ],
+    "answer": 1,
+    "answerText": "My name's Li Ming, Li is my family name.",
+    "explanation": "对方询问全名，应给出完整姓名并说明姓氏，故选此项。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Nice to meet you!\n—___.",
+    "stemZh": "——很高兴见到你！\n——我也很高兴见到你！",
+    "options": [
+      "Good morning!",
+      "Nice to meet you, too!",
+      "Thank you.",
+      "I'm fine."
+    ],
+    "optionsZh": [
+      "早上好！",
+      "我也很高兴见到你！",
+      "谢谢。",
+      "我很好。"
+    ],
+    "answer": 1,
+    "answerText": "Nice to meet you, too!",
+    "explanation": "回应 Nice to meet you 用 Nice to meet you, too。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—___ is the boy in a blue jacket?\n—He's my brother, Jack.",
+    "stemZh": "——穿蓝色夹克的那个男孩是谁？\n——他是我哥哥杰克。",
+    "options": [
+      "What",
+      "Where",
+      "Who",
+      "How"
+    ],
+    "optionsZh": [
+      "什么",
+      "哪里",
+      "谁",
+      "怎样"
+    ],
+    "answer": 2,
+    "answerText": "Who",
+    "explanation": "答语 He's my brother 说明询问人物身份，用 Who 提问。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—How ___ your mother?\n—She's fine.",
+    "stemZh": "——你妈妈好吗？\n——她很好。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 1,
+    "answerText": "is",
+    "explanation": "your mother 是第三人称单数，be 动词用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "My parents ___ doctors. They ___ very busy.",
+    "stemZh": "我父母是医生。他们非常忙。",
+    "options": [
+      "is; is",
+      "are; are",
+      "am; are",
+      "are; is"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 1,
+    "answerText": "are; are",
+    "explanation": "My parents 是复数用 are；They 是复数用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—What's ___ name?\n—___ name is Amy.",
+    "stemZh": "——你叫什么名字？\n——我叫艾米。",
+    "options": [
+      "you; My",
+      "your; My",
+      "your; I",
+      "you; I"
+    ],
+    "optionsZh": [
+      "你；我的",
+      "你的；我的",
+      "你的；我",
+      "你；我"
+    ],
+    "answer": 1,
+    "answerText": "your; My",
+    "explanation": "两空修饰 name，均用形容词性物主代词 your 和 My。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "Her mother ___ a teacher.",
+    "stemZh": "她妈妈是一名老师。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 1,
+    "answerText": "is",
+    "explanation": "Her mother 是第三人称单数，be 动词用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—What's your ___ name?\n—Yingsha. My full name is Sun Yingsha.",
+    "stemZh": "——你的名是什么？\n——颖莎。我的全名是孙颖莎。",
+    "options": [
+      "Chinese",
+      "English",
+      "first",
+      "last"
+    ],
+    "optionsZh": [
+      "中文",
+      "英文",
+      "名",
+      "姓"
+    ],
+    "answer": 2,
+    "answerText": "first",
+    "explanation": "Yingsha 在孙颖莎中是名（first name）。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "—Nice to meet you!\n—Nice to meet you, ___.",
+    "stemZh": "——很高兴见到你！\n——我也很高兴见到你。",
+    "options": [
+      "to",
+      "too",
+      "two",
+      "either"
+    ],
+    "optionsZh": [
+      "到",
+      "也",
+      "二",
+      "也（用于否定）"
+    ],
+    "answer": 1,
+    "answerText": "too",
+    "explanation": "too 表示“也”，用于肯定句末。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "副词"
+    ]
+  },
+  {
+    "stem": "It's time ___ our self-introduction. Let's begin.",
+    "stemZh": "该我们自我介绍了。开始吧。",
+    "options": [
+      "to",
+      "for",
+      "of",
+      "with"
+    ],
+    "optionsZh": [
+      "到",
+      "为",
+      "的",
+      "和"
+    ],
+    "answer": 1,
+    "answerText": "for",
+    "explanation": "It's time for sth. 是固定搭配，表示“该做某事了”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—___ your parents in the first photo?\n—Yes, ___ are. I love them.",
+    "stemZh": "——第一张照片里是你的父母吗？\n——是的。我爱他们。",
+    "options": [
+      "Are; They",
+      "Is; They",
+      "Are; they",
+      "Is; they"
+    ],
+    "optionsZh": [
+      "是；他们",
+      "是；他们",
+      "是；他们",
+      "是；他们"
+    ],
+    "answer": 0,
+    "answerText": "Are; They",
+    "explanation": "parents 是复数用 Are；肯定回答 They are，句首大写。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "___ am Linda. ___ phone number is 345-7890.",
+    "stemZh": "我是琳达。我的电话号码是 345-7890。",
+    "options": [
+      "I; My",
+      "Me; I",
+      "I; Me",
+      "Me; My"
+    ],
+    "optionsZh": [
+      "我；我的",
+      "我；我",
+      "我；我",
+      "我；我的"
+    ],
+    "answer": 0,
+    "answerText": "I; My",
+    "explanation": "作主语用主格 I；修饰 phone number 用形容词性物主代词 My。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "I like my new classmates, ___ I don't know their phone numbers.",
+    "stemZh": "我喜欢我的新同学，但我不知道他们的电话号码。",
+    "options": [
+      "and",
+      "but",
+      "because",
+      "so"
+    ],
+    "optionsZh": [
+      "和",
+      "但是",
+      "因为",
+      "所以"
+    ],
+    "answer": 1,
+    "answerText": "but",
+    "explanation": "前后句意转折，用连词 but。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "Wang Yaming lives in Beijing ___ his big family.",
+    "stemZh": "王亚明和他的一大家人住在北京。",
+    "options": [
+      "at",
+      "for",
+      "from",
+      "with"
+    ],
+    "optionsZh": [
+      "在",
+      "为",
+      "来自",
+      "和……一起"
+    ],
+    "answer": 3,
+    "answerText": "with",
+    "explanation": "with 表示“和……一起”，live with sb. 意为“和某人一起住”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "—What do you like to do?\n—I like to ___ books.",
+    "stemZh": "——你喜欢做什么？\n——我喜欢读书。",
+    "options": [
+      "read",
+      "reading",
+      "reads",
+      "to read"
+    ],
+    "optionsZh": [
+      "读",
+      "读",
+      "读",
+      "读"
+    ],
+    "answer": 0,
+    "answerText": "read",
+    "explanation": "like to do sth. 中用动词原形，read books 表示“读书”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "—Thank you very much.\n—___.",
+    "stemZh": "——非常感谢。\n——不客气。",
+    "options": [
+      "OK",
+      "You're welcome",
+      "That's right",
+      "Goodbye"
+    ],
+    "optionsZh": [
+      "好的",
+      "不客气",
+      "对的",
+      "再见"
+    ],
+    "answer": 1,
+    "answerText": "You're welcome",
+    "explanation": "回应感谢用 You're welcome，意为“不客气”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "These ___ my new classmates.",
+    "stemZh": "这些是我的新同学。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 2,
+    "answerText": "are",
+    "explanation": "These 是复数指示代词，be 动词用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—What's your favourite ___?\n—I like playing the guitar.",
+    "stemZh": "——你最喜欢的爱好是什么？\n——我喜欢弹吉他。",
+    "options": [
+      "sport",
+      "food",
+      "hobby",
+      "pet"
+    ],
+    "optionsZh": [
+      "运动",
+      "食物",
+      "爱好",
+      "宠物"
+    ],
+    "answer": 2,
+    "answerText": "hobby",
+    "explanation": "弹吉他是爱好 hobby。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "There ___ a teacher and some students waiting for the school bus outside.",
+    "stemZh": "外面有一位老师和一些学生在等校车。",
+    "options": [
+      "are",
+      "is",
+      "be",
+      "am"
+    ],
+    "optionsZh": [
+      "有",
+      "有",
+      "有",
+      "有"
+    ],
+    "answer": 1,
+    "answerText": "is",
+    "explanation": "there be 句型遵循就近原则，a teacher 是单数，用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "She is my friend. ___ name is Lucy.",
+    "stemZh": "她是我的朋友。她的名字叫露西。",
+    "options": [
+      "She",
+      "Her",
+      "He",
+      "His"
+    ],
+    "optionsZh": [
+      "她",
+      "她的",
+      "他",
+      "他的"
+    ],
+    "answer": 1,
+    "answerText": "Her",
+    "explanation": "修饰 name 用形容词性物主代词 Her。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "The girl is Grace Brown. Grace is her ___ name and her ___ name is Brown.",
+    "stemZh": "这个女孩是格蕾丝·布朗。格蕾丝是她的名，布朗是她的姓。",
+    "options": [
+      "first; last",
+      "last; first",
+      "first; first",
+      "last; last"
+    ],
+    "optionsZh": [
+      "名；姓",
+      "姓；名",
+      "名；名",
+      "姓；姓"
+    ],
+    "answer": 0,
+    "answerText": "first; last",
+    "explanation": "Grace 在前是名（first name），Brown 在后是姓（last name）。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Emma is ___.",
+    "stemZh": "艾玛十三岁。",
+    "options": [
+      "12 year old",
+      "13 years old",
+      "14 years",
+      "13-year-old"
+    ],
+    "optionsZh": [
+      "12岁",
+      "13岁",
+      "14年",
+      "13岁的"
+    ],
+    "answer": 1,
+    "answerText": "13 years old",
+    "explanation": "年龄表达为“数字 + years old”，作表语用 13 years old。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I don't know these words. Let me look ___ up in this book.",
+    "stemZh": "我不认识这些单词。让我在这本书里查一下它们。",
+    "options": [
+      "they",
+      "it",
+      "them",
+      "their"
+    ],
+    "optionsZh": [
+      "它们",
+      "它",
+      "它们",
+      "它们的"
+    ],
+    "answer": 2,
+    "answerText": "them",
+    "explanation": "look sth. up 意为“查阅”，宾语 words 是复数，用宾格 them。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Are you in Class Two?\n—___. I'm in Class Three.",
+    "stemZh": "——你在二班吗？\n——不，我不是。我在三班。",
+    "options": [
+      "Yes, I am",
+      "No, I'm not",
+      "No, he isn't",
+      "Yes, he is"
+    ],
+    "optionsZh": [
+      "是的，我是",
+      "不，我不是",
+      "不，他不是",
+      "是的，他是"
+    ],
+    "answer": 1,
+    "answerText": "No, I'm not",
+    "explanation": "后句 I'm in Class Three 说明不在二班，作否定回答 No, I'm not。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—What's your name?\n—My name is Tom Black. Black is my family name and Tom is my ___.",
+    "stemZh": "——你叫什么名字？\n——我叫汤姆·布莱克。布莱克是我的姓，汤姆是我的名。",
+    "options": [
+      "middle name",
+      "last name",
+      "full name",
+      "first name"
+    ],
+    "optionsZh": [
+      "中间名",
+      "姓",
+      "全名",
+      "名"
+    ],
+    "answer": 3,
+    "answerText": "first name",
+    "explanation": "Tom 在姓名中位于前面，是名（first name）。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "—Who ___ that boy?\n—He ___ my brother.",
+    "stemZh": "——那个男孩是谁？\n——他是我哥哥。",
+    "options": [
+      "is; is",
+      "are; is",
+      "is; are",
+      "are; are"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 0,
+    "answerText": "is; is",
+    "explanation": "that boy 是单数用 is；He 是单数用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—___ class are you in?\n—I'm in Class One.",
+    "stemZh": "——你在哪个班？\n——我在一班。",
+    "options": [
+      "What",
+      "Who",
+      "How",
+      "Where"
+    ],
+    "optionsZh": [
+      "什么",
+      "谁",
+      "怎样",
+      "哪里"
+    ],
+    "answer": 0,
+    "answerText": "What",
+    "explanation": "询问班级用 What class。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "She ___ a new student. Let's say hello to her.",
+    "stemZh": "她是一名新生。我们去跟她打个招呼吧。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 1,
+    "answerText": "is",
+    "explanation": "She 是第三人称单数，be 动词用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "We often play games ___ our teachers.",
+    "stemZh": "我们经常和老师们一起玩游戏。",
+    "options": [
+      "and",
+      "with",
+      "for",
+      "of"
+    ],
+    "optionsZh": [
+      "和",
+      "和……一起",
+      "为",
+      "的"
+    ],
+    "answer": 1,
+    "answerText": "with",
+    "explanation": "play with sb. 意为“和某人一起玩”，用介词 with。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "This is a bird. I don't know ___ name.",
+    "stemZh": "这是一只鸟。我不知道它的名字。",
+    "options": [
+      "its'",
+      "it's",
+      "it",
+      "its"
+    ],
+    "optionsZh": [
+      "它的",
+      "它是",
+      "它",
+      "它的"
+    ],
+    "answer": 3,
+    "answerText": "its",
+    "explanation": "修饰 name 用形容词性物主代词 its，表示“它的”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "There ___ any oranges in the fridge now. But there ___ some orange juice.",
+    "stemZh": "现在冰箱里没有橙子了。但有一些橙汁。",
+    "options": [
+      "are; isn't",
+      "aren't; are",
+      "is; isn't",
+      "aren't; is"
+    ],
+    "optionsZh": [
+      "有；不是",
+      "没有；有",
+      "有；不是",
+      "没有；有"
+    ],
+    "answer": 3,
+    "answerText": "aren't; is",
+    "explanation": "oranges 是复数，否定用 aren't；orange juice 是不可数名词，用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—___ are you from?\n—I'm from China.",
+    "stemZh": "——你来自哪里？\n——我来自中国。",
+    "options": [
+      "What",
+      "Where",
+      "Who",
+      "How"
+    ],
+    "optionsZh": [
+      "什么",
+      "哪里",
+      "谁",
+      "怎样"
+    ],
+    "answer": 1,
+    "answerText": "Where",
+    "explanation": "询问来自哪里用 Where。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—What's her ___?\n—She is 12 years old.",
+    "stemZh": "——她多大了？\n——她十二岁。",
+    "options": [
+      "name",
+      "age",
+      "class",
+      "job"
+    ],
+    "optionsZh": [
+      "名字",
+      "年龄",
+      "班级",
+      "工作"
+    ],
+    "answer": 1,
+    "answerText": "age",
+    "explanation": "答语 12 years old 是年龄，故用 age。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I want to make ___ with the new student.",
+    "stemZh": "我想和那位新同学交朋友。",
+    "options": [
+      "friend",
+      "friends",
+      "a friend",
+      "friend's"
+    ],
+    "optionsZh": [
+      "朋友",
+      "朋友（复数）",
+      "一个朋友",
+      "朋友的"
+    ],
+    "answer": 1,
+    "answerText": "friends",
+    "explanation": "make friends 是固定搭配，意为“交朋友”，friend 用复数。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—Where are you from?\n—I'm from Sydney, which is a city in ___.",
+    "stemZh": "——你来自哪里？\n——我来自悉尼，它是澳大利亚的一个城市。",
+    "options": [
+      "the UK",
+      "the US",
+      "Australia",
+      "Singapore"
+    ],
+    "optionsZh": [
+      "英国",
+      "美国",
+      "澳大利亚",
+      "新加坡"
+    ],
+    "answer": 2,
+    "answerText": "Australia",
+    "explanation": "悉尼是澳大利亚的城市，Australia 意为“澳大利亚”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "He and I ___ in Class 1. We are classmates.",
+    "stemZh": "他和我在一班。我们是同学。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 2,
+    "answerText": "are",
+    "explanation": "He and I 是复数主语，be 动词用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—___ you Kate Green?\n—No, I ___ Alice Green.",
+    "stemZh": "——你是凯特·格林吗？\n——不，我是爱丽丝·格林。",
+    "options": [
+      "Is; am",
+      "Are; is",
+      "Are; am",
+      "Is; is"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 2,
+    "answerText": "Are; am",
+    "explanation": "主语 you 用 Are；主语 I 用 am。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Are these ___ books?",
+    "stemZh": "这些是你的书吗？",
+    "options": [
+      "you",
+      "your",
+      "yours",
+      "me"
+    ],
+    "optionsZh": [
+      "你",
+      "你的",
+      "你的",
+      "我"
+    ],
+    "answer": 1,
+    "answerText": "your",
+    "explanation": "修饰名词 books 用形容词性物主代词 your。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—___ is your father?\n—He is fine.",
+    "stemZh": "——你爸爸好吗？\n——他很好。",
+    "options": [
+      "What",
+      "Where",
+      "Who",
+      "How"
+    ],
+    "optionsZh": [
+      "什么",
+      "哪里",
+      "谁",
+      "怎样"
+    ],
+    "answer": 3,
+    "answerText": "How",
+    "explanation": "答语 He is fine 对应 How is your father? 提问。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—What's ___ name?\n—___ name is Jack.",
+    "stemZh": "——他叫什么名字？\n——他叫杰克。",
+    "options": [
+      "his; His",
+      "he; His",
+      "him; He",
+      "his; He"
+    ],
+    "optionsZh": [
+      "他的；他的",
+      "他；他的",
+      "他；他",
+      "他的；他"
+    ],
+    "answer": 0,
+    "answerText": "his; His",
+    "explanation": "两空均修饰 name，用形容词性物主代词 his。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "I like sports, because I think it's good for ___.",
+    "stemZh": "我喜欢运动，因为我认为它对我有好处。",
+    "options": [
+      "me",
+      "I",
+      "my",
+      "mine"
+    ],
+    "optionsZh": [
+      "我",
+      "我",
+      "我的",
+      "我的"
+    ],
+    "answer": 0,
+    "answerText": "me",
+    "explanation": "介词 for 后用宾格，I 的宾格是 me。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—What's your full name?\n—___ Gina Brown.",
+    "stemZh": "——你的全名是什么？\n——我叫吉娜·布朗。",
+    "options": [
+      "I'm",
+      "I am's",
+      "My name",
+      "Me is"
+    ],
+    "optionsZh": [
+      "我是",
+      "我是",
+      "我的名字",
+      "我是"
+    ],
+    "answer": 0,
+    "answerText": "I'm",
+    "explanation": "回答全名可用 I'm + 姓名，即 I'm Gina Brown。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—What's your ___ name?\n—It's Green. You can call me Mr. Green.",
+    "stemZh": "——你姓什么？\n——姓格林。你可以叫我格林先生。",
+    "options": [
+      "first",
+      "last",
+      "middle",
+      "full"
+    ],
+    "optionsZh": [
+      "名",
+      "姓",
+      "中间名",
+      "全名"
+    ],
+    "answer": 1,
+    "answerText": "last",
+    "explanation": "答语 Green 是姓，问的是 last name。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Nice ___ you, Mr. Wang.",
+    "stemZh": "很高兴见到你，王老师。",
+    "options": [
+      "meet",
+      "to meet",
+      "meeting",
+      "meets"
+    ],
+    "optionsZh": [
+      "见到",
+      "见到",
+      "见到",
+      "见到"
+    ],
+    "answer": 1,
+    "answerText": "to meet",
+    "explanation": "Nice to meet you 是固定搭配，意为“很高兴见到你”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—Where ___ he from?\n—He is from the United States.",
+    "stemZh": "——他来自哪里？\n——他来自美国。",
+    "options": [
+      "was",
+      "are",
+      "am",
+      "is"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 3,
+    "answerText": "is",
+    "explanation": "主语 he 是第三人称单数，一般现在时 be 动词用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "___ is a student, and ___ name is Lucy.",
+    "stemZh": "她是一名学生，她的名字叫露西。",
+    "options": [
+      "She; her",
+      "He; his",
+      "Her; hers",
+      "Hers; his"
+    ],
+    "optionsZh": [
+      "她；她的",
+      "他；他的",
+      "她的；她的",
+      "她的；他的"
+    ],
+    "answer": 0,
+    "answerText": "She; her",
+    "explanation": "第一空作主语用主格 She；第二空修饰 name 用 her。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—___ is that girl over there?\n—She is my new friend, Amy.",
+    "stemZh": "——那边那个女孩是谁？\n——她是我的新朋友艾米。",
+    "options": [
+      "What day",
+      "What time",
+      "Who",
+      "What subject"
+    ],
+    "optionsZh": [
+      "星期几",
+      "几点",
+      "谁",
+      "什么科目"
+    ],
+    "answer": 2,
+    "answerText": "Who",
+    "explanation": "询问人物身份用 Who。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Good morning, Mr. Wu!\n—___, Simon. Let's start the class.",
+    "stemZh": "——早上好，吴老师！\n——早上好，西蒙。我们开始上课吧。",
+    "options": [
+      "Good luck",
+      "Morning",
+      "Stay healthy",
+      "Glad to meet you"
+    ],
+    "optionsZh": [
+      "祝你好运",
+      "早上好",
+      "保持健康",
+      "很高兴见到你"
+    ],
+    "answer": 1,
+    "answerText": "Morning",
+    "explanation": "回应 Good morning 可用 Morning，是省略说法。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "“___” and “bed” have the same vowel(相同元音).",
+    "stemZh": "“Desk”和“bed”有相同的元音。",
+    "options": [
+      "Jacket",
+      "Desk",
+      "Feet",
+      "Cake"
+    ],
+    "optionsZh": [
+      "Jacket",
+      "Desk",
+      "Feet",
+      "Cake"
+    ],
+    "answer": 1,
+    "answerText": "Desk",
+    "explanation": "bed 中 e 发 /e/，Desk 中 e 也发 /e/，读音相同。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "This pen isn't mine. It is ___.",
+    "stemZh": "这支钢笔不是我的。是他的。",
+    "options": [
+      "he",
+      "him",
+      "his",
+      "he's"
+    ],
+    "optionsZh": [
+      "他",
+      "他",
+      "他的",
+      "他是"
+    ],
+    "answer": 2,
+    "answerText": "his",
+    "explanation": "作表语用名词性物主代词 his，相当于 his pen。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "My name ___ Lily. What about yours?",
+    "stemZh": "我的名字叫莉莉。你的呢？",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 1,
+    "answerText": "is",
+    "explanation": "name 是第三人称单数，be 动词用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Let ___ help you with your English.",
+    "stemZh": "让我帮你学英语吧。",
+    "options": [
+      "I",
+      "me",
+      "my",
+      "mine"
+    ],
+    "optionsZh": [
+      "我",
+      "我",
+      "我的",
+      "我的"
+    ],
+    "answer": 1,
+    "answerText": "me",
+    "explanation": "Let 后接宾语，用宾格 me。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "There is a school ___ in our school. They often play music at school parties.",
+    "stemZh": "我们学校有一个学校乐队。他们经常在学校聚会上演奏音乐。",
+    "options": [
+      "band",
+      "classmate",
+      "twin",
+      "pot"
+    ],
+    "optionsZh": [
+      "乐队",
+      "同学",
+      "双胞胎",
+      "锅"
+    ],
+    "answer": 0,
+    "answerText": "band",
+    "explanation": "演奏音乐的乐队是 band，符合句意。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "My sister and I ___ in the same school.",
+    "stemZh": "我妹妹和我在同一所学校。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 2,
+    "answerText": "are",
+    "explanation": "My sister and I 是复数主语，be 动词用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Is the black watch ___?\n—Yes, it's ___.",
+    "stemZh": "——这块黑色的手表是你的吗？\n——是的，它是我的。",
+    "options": [
+      "you, me",
+      "yours, mine",
+      "your, my",
+      "your, mine"
+    ],
+    "optionsZh": [
+      "你，我",
+      "你的，我的",
+      "你的，我的",
+      "你的，我的"
+    ],
+    "answer": 1,
+    "answerText": "yours, mine",
+    "explanation": "两空均作表语，用名词性物主代词 yours 和 mine。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Let's play basketball after class.\n—___!",
+    "stemZh": "——放学后我们去打篮球吧。\n——听起来不错！",
+    "options": [
+      "That's right",
+      "That sounds good",
+      "You're welcome",
+      "Thank you"
+    ],
+    "optionsZh": [
+      "对的",
+      "听起来不错",
+      "不客气",
+      "谢谢"
+    ],
+    "answer": 1,
+    "answerText": "That sounds good",
+    "explanation": "That sounds good 表示赞同对方的建议。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Who is the lady in red?\n—Miss Gao. She teaches ___ English.",
+    "stemZh": "——穿红衣服的那位女士是谁？\n——高老师。她教我们英语。",
+    "options": [
+      "we",
+      "us",
+      "our",
+      "ours"
+    ],
+    "optionsZh": [
+      "我们",
+      "我们",
+      "我们的",
+      "我们的"
+    ],
+    "answer": 1,
+    "answerText": "us",
+    "explanation": "teach sb. sth. 意为“教某人某物”，动词后用宾格 us。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "Mrs. Li is our English teacher. ___ always encourages us to speak English in class.",
+    "stemZh": "李老师是我们的英语老师。她总是鼓励我们在课堂上说英语。",
+    "options": [
+      "He",
+      "She",
+      "His",
+      "Her"
+    ],
+    "optionsZh": [
+      "他",
+      "她",
+      "他的",
+      "她的"
+    ],
+    "answer": 1,
+    "answerText": "She",
+    "explanation": "Mrs. Li 是女性且作主语，用主格 She。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—___ these your pencils?\n—No, they ___.",
+    "stemZh": "——这些是你的铅笔吗？\n——不，它们不是。",
+    "options": [
+      "Are; aren't",
+      "Is; isn't",
+      "Are; isn't",
+      "Is; aren't"
+    ],
+    "optionsZh": [
+      "是；不是",
+      "是；不是",
+      "是；不是",
+      "是；不是"
+    ],
+    "answer": 0,
+    "answerText": "Are; aren't",
+    "explanation": "these 是复数用 Are；否定回答用 they aren't。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Tom and I ___ in the school band. We ___ like playing the guitar.",
+    "stemZh": "汤姆和我在学校乐队。我们都喜欢弹吉他。",
+    "options": [
+      "am; both",
+      "are; both",
+      "am; same",
+      "are; same"
+    ],
+    "optionsZh": [
+      "是；两者都",
+      "是；两者都",
+      "是；相同",
+      "是；相同"
+    ],
+    "answer": 1,
+    "answerText": "are; both",
+    "explanation": "Tom and I 是复数用 are；both 表示“两者都”，用于肯定。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—What are these in English?\n—___ are dumplings.",
+    "stemZh": "——这些用英语怎么说？\n——它们是饺子。",
+    "options": [
+      "There",
+      "Those",
+      "They",
+      "These"
+    ],
+    "optionsZh": [
+      "那里",
+      "那些",
+      "它们",
+      "这些"
+    ],
+    "answer": 2,
+    "answerText": "They",
+    "explanation": "指代前文的 these 作主语，用主格 They。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Let's introduce ourselves!\n—OK. I ___ Li Hua.",
+    "stemZh": "——让我们自我介绍一下吧！\n——好的。我是李华。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 0,
+    "answerText": "am",
+    "explanation": "主语 I 对应的 be 动词是 am。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Her phone number ___ 123-4567. My phone number ___ 765-4321.",
+    "stemZh": "她的电话号码是 123-4567。我的电话号码是 765-4321。",
+    "options": [
+      "is; is",
+      "are; are",
+      "is; are",
+      "are; is"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 0,
+    "answerText": "is; is",
+    "explanation": "phone number 是单数概念，两空均用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "We are in the same class. Let's ___ friends.",
+    "stemZh": "我们在同一个班。让我们成为朋友吧。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "成为"
+    ],
+    "answer": 3,
+    "answerText": "be",
+    "explanation": "Let's 后接动词原形，be friends 意为“成为朋友”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "祈使句"
+    ]
+  },
+  {
+    "stem": "This is ___ brother. ___ is ten.",
+    "stemZh": "这是我的弟弟。他十岁。",
+    "options": [
+      "my; He",
+      "I; His",
+      "me; He",
+      "my; His"
+    ],
+    "optionsZh": [
+      "我的；他",
+      "我；他的",
+      "我；他",
+      "我的；他的"
+    ],
+    "answer": 0,
+    "answerText": "my; He",
+    "explanation": "修饰 brother 用 my；第二空作主语用主格 He。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—What's your ___ number?\n—It's 139-0876-2345.",
+    "stemZh": "——你的电话号码是多少？\n——是 139-0876-2345。",
+    "options": [
+      "school",
+      "phone",
+      "pen",
+      "map"
+    ],
+    "optionsZh": [
+      "学校",
+      "电话",
+      "钢笔",
+      "地图"
+    ],
+    "answer": 1,
+    "answerText": "phone",
+    "explanation": "答句给出电话号码，提问的是 phone number。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I ___ make friends with you. You seem very friendly.",
+    "stemZh": "我想和你交朋友。你看起来很友好。",
+    "options": [
+      "would like to",
+      "get to know",
+      "full of",
+      "play the"
+    ],
+    "optionsZh": [
+      "想要",
+      "了解、认识",
+      "充满",
+      "演奏"
+    ],
+    "answer": 0,
+    "answerText": "would like to",
+    "explanation": "would like to do sth. 表示“想要做某事”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "___ often plays ping-pong with her friends at school.",
+    "stemZh": "她经常在学校和朋友们打乒乓球。",
+    "options": [
+      "She",
+      "Her",
+      "His",
+      "Hers"
+    ],
+    "optionsZh": [
+      "她",
+      "她的",
+      "他的",
+      "她的"
+    ],
+    "answer": 0,
+    "answerText": "She",
+    "explanation": "缺主语，指代女性作主语用主格 She。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "This is my friend. ___ name is Alan.",
+    "stemZh": "这是我的朋友。他的名字叫艾伦。",
+    "options": [
+      "He",
+      "Him",
+      "His",
+      "He's"
+    ],
+    "optionsZh": [
+      "他",
+      "他",
+      "他的",
+      "他是"
+    ],
+    "answer": 2,
+    "answerText": "His",
+    "explanation": "修饰 name 用形容词性物主代词 His。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—What ___ four and five?\n—___ nine.",
+    "stemZh": "——四加五等于几？\n——等于九。",
+    "options": [
+      "are; They are",
+      "is; It's",
+      "is; Its",
+      "are; It's"
+    ],
+    "optionsZh": [
+      "是；它们是",
+      "是；它是",
+      "是；它的",
+      "是；它是"
+    ],
+    "answer": 1,
+    "answerText": "is; It's",
+    "explanation": "What is four and five? 算数视作单数用 is；回答 It's nine。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "This is Kate. ___ is my friend.",
+    "stemZh": "这是凯特。她是我的朋友。",
+    "options": [
+      "Her",
+      "She",
+      "Hers",
+      "She's"
+    ],
+    "optionsZh": [
+      "她的",
+      "她",
+      "她的",
+      "她是"
+    ],
+    "answer": 1,
+    "answerText": "She",
+    "explanation": "指代 Kate（女性）作主语，用主格 She。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—What is your mother's job?\n—___.",
+    "stemZh": "——你妈妈的工作是什么？\n——她是一名老师。",
+    "options": [
+      "She is fine",
+      "She is at home",
+      "She is a teacher",
+      "She is 40"
+    ],
+    "optionsZh": [
+      "她很好",
+      "她在家",
+      "她是一名老师",
+      "她四十岁"
+    ],
+    "answer": 2,
+    "answerText": "She is a teacher",
+    "explanation": "问职业，答 She is a teacher。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Are the two boys your brothers?\n—Yes, ___ are.",
+    "stemZh": "——那两个男孩是你的兄弟吗？\n——是的。",
+    "options": [
+      "they",
+      "we",
+      "you",
+      "their"
+    ],
+    "optionsZh": [
+      "他们",
+      "我们",
+      "你们",
+      "他们的"
+    ],
+    "answer": 0,
+    "answerText": "they",
+    "explanation": "指代 the two boys 作主语，用主格 they。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "This is my sister. ___ is a nurse.",
+    "stemZh": "这是我妹妹。她是一名护士。",
+    "options": [
+      "He",
+      "She",
+      "Her",
+      "His"
+    ],
+    "optionsZh": [
+      "他",
+      "她",
+      "她的",
+      "他的"
+    ],
+    "answer": 1,
+    "answerText": "She",
+    "explanation": "指代 sister（女性）作主语，用主格 She。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "My name is Anna Smith. Anna is my ___ name and Smith is my ___ name.",
+    "stemZh": "我叫安娜·史密斯。安娜是我的名，史密斯是我的姓。",
+    "options": [
+      "first; last",
+      "last; first",
+      "family; last",
+      "full; nice"
+    ],
+    "optionsZh": [
+      "名；姓",
+      "姓；名",
+      "姓；姓",
+      "全名；好的"
+    ],
+    "answer": 0,
+    "answerText": "first; last",
+    "explanation": "英文姓名名在前姓在后：Anna 是 first name，Smith 是 last name。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "—Where ___ my books?\n—They ___ on the desk.",
+    "stemZh": "——我的书在哪里？\n——它们在桌子上。",
+    "options": [
+      "is; is",
+      "are; are",
+      "is; are",
+      "are; is"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 1,
+    "answerText": "are; are",
+    "explanation": "my books 是复数用 are；They 是复数用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Mike's aunt is ___ English teacher. We all like ___.",
+    "stemZh": "迈克的姑姑是一名英语老师。我们都喜欢她。",
+    "options": [
+      "our; she",
+      "our; her",
+      "we; she",
+      "we; her"
+    ],
+    "optionsZh": [
+      "我们的；她",
+      "我们的；她",
+      "我们；她",
+      "我们；她"
+    ],
+    "answer": 1,
+    "answerText": "our; her",
+    "explanation": "修饰 teacher 用形容词性物主代词 our；like 后用宾格 her。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Is this your new friend?\n—Yes, ___.",
+    "stemZh": "——这是你的新朋友吗？\n——是的，他是。",
+    "options": [
+      "he is",
+      "he's",
+      "it's",
+      "she are"
+    ],
+    "optionsZh": [
+      "他是",
+      "他是",
+      "它是",
+      "她是"
+    ],
+    "answer": 0,
+    "answerText": "he is",
+    "explanation": "指代 your new friend 用 he，肯定简答用 he is，不用缩写。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "Li Ping and Peter are in the ___ school this term.",
+    "stemZh": "李平和彼得这学期在同一所学校。",
+    "options": [
+      "same",
+      "full",
+      "cute",
+      "different"
+    ],
+    "optionsZh": [
+      "相同的",
+      "全的",
+      "可爱的",
+      "不同的"
+    ],
+    "answer": 0,
+    "answerText": "same",
+    "explanation": "the same school 是固定搭配，意为“同一所学校”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "They ___ from England.",
+    "stemZh": "他们来自英国。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 2,
+    "answerText": "are",
+    "explanation": "主语 They 是复数，be 动词用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—___ your classmates and you happy in English class?\n—Yes, we are.",
+    "stemZh": "——你和你的同学们在英语课上开心吗？\n——是的，我们很开心。",
+    "options": [
+      "Is",
+      "Am",
+      "Are",
+      "Be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 2,
+    "answerText": "Are",
+    "explanation": "classmates and you 是复数主语，be 动词用 Are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Canada is a beautiful ___, I want to go there for a vacation.",
+    "stemZh": "加拿大是一个美丽的国家，我想去那里度假。",
+    "options": [
+      "symbol",
+      "country",
+      "house",
+      "village"
+    ],
+    "optionsZh": [
+      "象征",
+      "国家",
+      "房子",
+      "村庄"
+    ],
+    "answer": 1,
+    "answerText": "country",
+    "explanation": "Canada 是一个国家，用 country。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Li Lei ___ an English boy. ___ is in class 13.",
+    "stemZh": "李雷是一个英国男孩。他在十三班。",
+    "options": [
+      "am; He",
+      "is; Her",
+      "are; His",
+      "is; He"
+    ],
+    "optionsZh": [
+      "是；他",
+      "是；她的",
+      "是；他的",
+      "是；他"
+    ],
+    "answer": 3,
+    "answerText": "is; He",
+    "explanation": "Li Lei 是单数用 is；作主语用主格 He。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "This ___ my friend. Her name ___ Wang Fang.",
+    "stemZh": "这是我的朋友。她的名字叫王芳。",
+    "options": [
+      "is; is",
+      "are; is",
+      "is; are",
+      "are; are"
+    ],
+    "optionsZh": [
+      "是；是",
+      "是；是",
+      "是；是",
+      "是；是"
+    ],
+    "answer": 0,
+    "answerText": "is; is",
+    "explanation": "This 是单数用 is；Her name 是单数用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "One of my classmates ___ from America. He can't speak Chinese very well.",
+    "stemZh": "我的一个同学来自美国。他不太会说中文。",
+    "options": [
+      "are",
+      "am",
+      "is",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 2,
+    "answerText": "is",
+    "explanation": "One of + 复数名词作主语，谓语动词用单数 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—What's your phone number?\n—___ 123-4567.",
+    "stemZh": "——你的电话号码是多少？\n——是 123-4567。",
+    "options": [
+      "It's",
+      "I'm",
+      "My",
+      "Its"
+    ],
+    "optionsZh": [
+      "它是",
+      "我是",
+      "我的",
+      "它的"
+    ],
+    "answer": 0,
+    "answerText": "It's",
+    "explanation": "指代 phone number 用 It's。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "Betty is from ___.",
+    "stemZh": "贝蒂来自美国。",
+    "options": [
+      "the us",
+      "UK",
+      "the USA",
+      "the China"
+    ],
+    "optionsZh": [
+      "美国",
+      "英国",
+      "美国",
+      "中国"
+    ],
+    "answer": 2,
+    "answerText": "the USA",
+    "explanation": "国家名称正确表达是 the USA；the us 大小写错误，UK 前需加 the。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "A lot of water ___ in this cup.",
+    "stemZh": "这个杯子里有很多水。",
+    "options": [
+      "are",
+      "am",
+      "be",
+      "is"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 3,
+    "answerText": "is",
+    "explanation": "water 是不可数名词，be 动词用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "We are thirsty. Can you give ___ some juice?",
+    "stemZh": "我们渴了。你能给我们一些果汁吗？",
+    "options": [
+      "him",
+      "her",
+      "us",
+      "them"
+    ],
+    "optionsZh": [
+      "他",
+      "她",
+      "我们",
+      "他们"
+    ],
+    "answer": 2,
+    "answerText": "us",
+    "explanation": "give sb. sth. 意为“给某人某物”，根据 We are thirsty 用宾格 us。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Hi, Peter. Would you like ___ to the Great Wall with me?\n—Yes, I'd love to.",
+    "stemZh": "——嗨，彼得。你想和我一起去长城吗？\n——是的，我想去。",
+    "options": [
+      "go",
+      "to go",
+      "going",
+      "goes"
+    ],
+    "optionsZh": [
+      "去",
+      "去",
+      "去",
+      "去"
+    ],
+    "answer": 1,
+    "answerText": "to go",
+    "explanation": "would like to do sth. 意为“想要做某事”，用不定式 to go。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "—What ___ your brother's name?\n—___ name is Tony.",
+    "stemZh": "——你哥哥叫什么名字？\n——他叫托尼。",
+    "options": [
+      "is; He",
+      "are; His",
+      "is; His",
+      "are; Her"
+    ],
+    "optionsZh": [
+      "是；他",
+      "是；他的",
+      "是；他的",
+      "是；她的"
+    ],
+    "answer": 2,
+    "answerText": "is; His",
+    "explanation": "your brother's name 是单数用 is；修饰 name 用 His。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "选出划线部分读音与其他三个不同的一项：nice, fine, this, five",
+    "stemZh": "选出划线部分读音与其他三个不同的一项：nice, fine, this, five",
+    "options": [
+      "nice",
+      "fine",
+      "this",
+      "five"
+    ],
+    "optionsZh": [
+      "nice",
+      "fine",
+      "this",
+      "five"
+    ],
+    "answer": 2,
+    "answerText": "this",
+    "explanation": "this 中 i 发 /ɪ/，nice、fine、five 中 i 发 /aɪ/。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "—Are you Emma?\n—___. I'm Ella.",
+    "stemZh": "——你是艾玛吗？\n——不，我不是。我是艾拉。",
+    "options": [
+      "Yes, I am",
+      "Yes, he is",
+      "No, I'm not",
+      "No, he isn't"
+    ],
+    "optionsZh": [
+      "是的，我是",
+      "是的，他是",
+      "不，我不是",
+      "不，他不是"
+    ],
+    "answer": 2,
+    "answerText": "No, I'm not",
+    "explanation": "后句 I'm Ella 说明不是艾玛，作否定回答 No, I'm not。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Where ___ you from, Eric?\n—I'm from China.",
+    "stemZh": "——埃里克，你来自哪里？\n——我来自中国。",
+    "options": [
+      "Is",
+      "am",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 2,
+    "answerText": "are",
+    "explanation": "主语 you 对应的 be 动词是 are：Where are you from?",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Mom, I lost my Chinese book at home. Can you help bring ___ to me?\n—OK.",
+    "stemZh": "——妈妈，我在家里把语文书弄丢了。你能帮我把它带给我吗？\n——好的。",
+    "options": [
+      "it",
+      "them",
+      "its",
+      "they"
+    ],
+    "optionsZh": [
+      "它",
+      "它们",
+      "它的",
+      "它们"
+    ],
+    "answer": 0,
+    "answerText": "it",
+    "explanation": "指代 book（单数事物）作宾语，用宾格 it。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Is this ___ ruler, Anna?\n—No, it isn't. ___ is over there.",
+    "stemZh": "——安娜，这是你的尺子吗？\n——不，不是。我的在那边。",
+    "options": [
+      "my; My",
+      "your; Yours",
+      "my; Mine",
+      "your; My"
+    ],
+    "optionsZh": [
+      "我的；我的",
+      "你的；你的",
+      "我的；我的",
+      "你的；我的"
+    ],
+    "answer": 1,
+    "answerText": "your; Yours",
+    "explanation": "第一空修饰名词 ruler 用 your；第二空作主语用名词性物主代词 Yours。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "Don't worry about making ___ when speaking English. It's normal for beginners.",
+    "stemZh": "说英语时不要担心犯错误。对初学者来说这很正常。",
+    "options": [
+      "friends",
+      "mistakes",
+      "grades",
+      "hobbies"
+    ],
+    "optionsZh": [
+      "朋友",
+      "错误",
+      "成绩",
+      "爱好"
+    ],
+    "answer": 1,
+    "answerText": "mistakes",
+    "explanation": "make mistakes 是固定搭配，意为“犯错误”，mistake 用复数。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My brother and I like sports. ___ often play football together after school.",
+    "stemZh": "我哥哥和我喜欢运动。我们放学后经常一起踢足球。",
+    "options": [
+      "They",
+      "We",
+      "You",
+      "I"
+    ],
+    "optionsZh": [
+      "他们",
+      "我们",
+      "你们",
+      "我"
+    ],
+    "answer": 1,
+    "answerText": "We",
+    "explanation": "指代 my brother and I 作主语，用主格 We。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—___ your name?\n—I'm Tom.",
+    "stemZh": "——你叫什么名字？\n——我是汤姆。",
+    "options": [
+      "What",
+      "What's",
+      "Who",
+      "Who's"
+    ],
+    "optionsZh": [
+      "什么",
+      "是什么",
+      "谁",
+      "是谁"
+    ],
+    "answer": 1,
+    "answerText": "What's",
+    "explanation": "问名字用 What's your name? What's 是 What is 的缩写。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—What's your ___?\n—I like playing the guitar and reading books.",
+    "stemZh": "——你的爱好是什么？\n——我喜欢弹吉他和看书。",
+    "options": [
+      "grade",
+      "country",
+      "hobby",
+      "information"
+    ],
+    "optionsZh": [
+      "年级",
+      "国家",
+      "爱好",
+      "信息"
+    ],
+    "answer": 2,
+    "answerText": "hobby",
+    "explanation": "弹吉他、看书是爱好 hobby。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "My name ___ Tom.",
+    "stemZh": "我的名字叫汤姆。",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 1,
+    "answerText": "is",
+    "explanation": "name 是第三人称单数，be 动词用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "My brother loves music, and ___ guitar sounds amazing.",
+    "stemZh": "我哥哥热爱音乐，他的吉他听起来很棒。",
+    "options": [
+      "your",
+      "their",
+      "her",
+      "his"
+    ],
+    "optionsZh": [
+      "你的",
+      "他们的",
+      "她的",
+      "他的"
+    ],
+    "answer": 3,
+    "answerText": "his",
+    "explanation": "指代 my brother（男性）修饰 guitar，用形容词性物主代词 his。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "We can share our stories ___ each other in this unit.",
+    "stemZh": "在这个单元里我们可以彼此分享我们的故事。",
+    "options": [
+      "to",
+      "with",
+      "for",
+      "of"
+    ],
+    "optionsZh": [
+      "到",
+      "和",
+      "为",
+      "的"
+    ],
+    "answer": 1,
+    "answerText": "with",
+    "explanation": "share...with... 是固定搭配，意为“与某人分享……”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I have a pet bird. ___ name is Coco.",
+    "stemZh": "我有一只宠物鸟。它的名字叫可可。",
+    "options": [
+      "It",
+      "It's",
+      "Its",
+      "Is"
+    ],
+    "optionsZh": [
+      "它",
+      "它是",
+      "它的",
+      "是"
+    ],
+    "answer": 2,
+    "answerText": "Its",
+    "explanation": "修饰 name 用形容词性物主代词 Its，表示“它的”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U1",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "My grandfather ___ (喜欢) reading after supper every day.",
+    "stemZh": "我爷爷每天晚饭后喜欢读书。",
+    "options": [
+      "like",
+      "likes",
+      "liking",
+      "to like"
+    ],
+    "optionsZh": [
+      "喜欢",
+      "喜欢",
+      "喜欢",
+      "喜欢"
+    ],
+    "answer": 1,
+    "answerText": "likes",
+    "explanation": "主语 My grandfather 是第三人称单数，一般现在时实义动词加 -s，like 变为 likes。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—___ Judy have a hat?\n—Yes, she does. Her hat is yellow.",
+    "stemZh": "——朱迪有一顶帽子吗？\n——是的，她有。她的帽子是黄色的。",
+    "options": [
+      "Do",
+      "Does",
+      "Is",
+      "Are"
+    ],
+    "optionsZh": [
+      "助动词",
+      "助动词",
+      "是",
+      "是"
+    ],
+    "answer": 1,
+    "answerText": "Does",
+    "explanation": "主语 Judy 是第三人称单数，一般现在时疑问句用助动词 Does，后接动词原形 have。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "This is ___ ruler. And that is my schoolbag.",
+    "stemZh": "这是安娜的尺子。那是我的书包。",
+    "options": [
+      "Anna",
+      "Anna's",
+      "Annas",
+      "Annas'"
+    ],
+    "optionsZh": [
+      "安娜",
+      "安娜的",
+      "安娜们",
+      "安娜们的"
+    ],
+    "answer": 1,
+    "answerText": "Anna's",
+    "explanation": "表示有生命名词的所属关系用名词所有格，Anna 加 's 变为 Anna's，意为“安娜的”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The ___ room is very clean. They like reading there.",
+    "stemZh": "学生们的房间非常干净。他们喜欢在那里读书。",
+    "options": [
+      "student",
+      "students",
+      "students'",
+      "student's"
+    ],
+    "optionsZh": [
+      "学生",
+      "学生们",
+      "学生们的",
+      "学生的"
+    ],
+    "answer": 2,
+    "answerText": "students'",
+    "explanation": "以 s 结尾的复数名词所有格只加 '，故用 students'，表示“学生们的”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "—Who are these?\n—___ are my brothers.",
+    "stemZh": "——这些是谁？\n——他们是我的兄弟。",
+    "options": [
+      "These",
+      "Those",
+      "They",
+      "Them"
+    ],
+    "optionsZh": [
+      "这些",
+      "那些",
+      "他们",
+      "他们"
+    ],
+    "answer": 2,
+    "answerText": "They",
+    "explanation": "指代前文的 these 作主语，用主格 They。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Who's that boy?\n—___ is my brother.",
+    "stemZh": "——那个男孩是谁？\n——他是我哥哥。",
+    "options": [
+      "He",
+      "She",
+      "It",
+      "This"
+    ],
+    "optionsZh": [
+      "他",
+      "她",
+      "它",
+      "这个"
+    ],
+    "answer": 0,
+    "answerText": "He",
+    "explanation": "指代 that boy 作主语，用主格 He。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "She has a big ___ (家庭).",
+    "stemZh": "她有一个大家庭。",
+    "options": [
+      "family",
+      "familys",
+      "families",
+      "family's"
+    ],
+    "optionsZh": [
+      "家庭",
+      "家庭",
+      "家庭",
+      "家庭的"
+    ],
+    "answer": 0,
+    "answerText": "family",
+    "explanation": "a big family 意为“一个大家庭”，此处用单数名词 family。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "My family ___ watching TV now.",
+    "stemZh": "我的家人现在正在看电视。",
+    "options": [
+      "is",
+      "are",
+      "am",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 1,
+    "answerText": "are",
+    "explanation": "family 指“家人”时谓语用复数，此处指家人正在看电视，用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Those are my ___ (父母). They are teachers.",
+    "stemZh": "那些是我的父母。他们是老师。",
+    "options": [
+      "parent",
+      "parents",
+      "parent's",
+      "parents'"
+    ],
+    "optionsZh": [
+      "父（母）亲",
+      "父母",
+      "父（母）亲的",
+      "父母的"
+    ],
+    "answer": 1,
+    "answerText": "parents",
+    "explanation": "表示父母双亲用复数 parents。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "My ___ (祖父母) are in a small village. They are very happy.",
+    "stemZh": "我的祖父母在一个小村庄里。他们非常幸福。",
+    "options": [
+      "grandparent",
+      "grandparents",
+      "grandparent's",
+      "grandparents'"
+    ],
+    "optionsZh": [
+      "祖父（母）",
+      "祖父母",
+      "祖父（母）的",
+      "祖父母的"
+    ],
+    "answer": 1,
+    "answerText": "grandparents",
+    "explanation": "表示祖父母两人用复数 grandparents。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The girl in red is my ___ (堂/表兄弟姐妹). Her name is Lily.",
+    "stemZh": "穿红衣服的女孩是我的表妹。她叫莉莉。",
+    "options": [
+      "cousin",
+      "cousins",
+      "aunt",
+      "sister"
+    ],
+    "optionsZh": [
+      "堂（表）兄弟姐妹",
+      "堂（表）兄弟姐妹",
+      "姑母",
+      "姐妹"
+    ],
+    "answer": 0,
+    "answerText": "cousin",
+    "explanation": "uncle/aunt 的孩子是 cousin，意为“堂（表）兄弟姐妹”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "—Who is the man in the blue jacket?\n—He's my ___ (叔叔).",
+    "stemZh": "——穿蓝色夹克的男人是谁？\n——他是我叔叔。",
+    "options": [
+      "uncle",
+      "aunt",
+      "cousin",
+      "brother"
+    ],
+    "optionsZh": [
+      "叔叔",
+      "姑母",
+      "堂（表）兄弟姐妹",
+      "兄弟"
+    ],
+    "answer": 0,
+    "answerText": "uncle",
+    "explanation": "家庭男性成员称谓用 uncle，意为“叔、伯、舅、姑父”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "My mother's sister is my ___ (姨妈).",
+    "stemZh": "我妈妈的姐姐是我的姨妈。",
+    "options": [
+      "uncle",
+      "aunt",
+      "cousin",
+      "sister"
+    ],
+    "optionsZh": [
+      "叔叔",
+      "姨妈",
+      "堂（表）兄弟姐妹",
+      "姐妹"
+    ],
+    "answer": 1,
+    "answerText": "aunt",
+    "explanation": "家庭女性成员称谓用 aunt，意为“姑母、姨母、婶母”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "—Who is the girl with long hair over there?\n—She is my ___ (妹妹), Gina.",
+    "stemZh": "——那边那个长头发的女孩是谁？\n——她是我妹妹吉娜。",
+    "options": [
+      "sister",
+      "brother",
+      "cousin",
+      "aunt"
+    ],
+    "optionsZh": [
+      "姐妹",
+      "兄弟",
+      "堂（表）兄弟姐妹",
+      "姑母"
+    ],
+    "answer": 0,
+    "answerText": "sister",
+    "explanation": "女性同辈亲属用 sister，意为“姐、妹”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "This is a ___ (照片) of my family.",
+    "stemZh": "这是一张我的全家福。",
+    "options": [
+      "photo",
+      "photoes",
+      "photos",
+      "photo's"
+    ],
+    "optionsZh": [
+      "照片",
+      "照片",
+      "照片",
+      "照片的"
+    ],
+    "answer": 0,
+    "answerText": "photo",
+    "explanation": "a photo of my family 意为“一张我的全家福”，此处用单数 photo。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "I have two ___ (照片) of my family.",
+    "stemZh": "我有两张我的全家福。",
+    "options": [
+      "photo",
+      "photoes",
+      "photos",
+      "photo's"
+    ],
+    "optionsZh": [
+      "照片",
+      "照片",
+      "照片",
+      "照片的"
+    ],
+    "answer": 2,
+    "answerText": "photos",
+    "explanation": "photo 的复数直接加 s，变为 photos，不是 photoes。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "This is a ___ (图画) of our classroom.",
+    "stemZh": "这是一张我们教室的照片。",
+    "options": [
+      "picture",
+      "pictures",
+      "photoes",
+      "picture's"
+    ],
+    "optionsZh": [
+      "图画",
+      "图画",
+      "照片",
+      "图画的"
+    ],
+    "answer": 0,
+    "answerText": "picture",
+    "explanation": "picture 可指图画或照片，此处用单数 picture。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "See you ___ (下一个) week.",
+    "stemZh": "下周见。",
+    "options": [
+      "next",
+      "last",
+      "this",
+      "that"
+    ],
+    "optionsZh": [
+      "下一个",
+      "上一个",
+      "这个",
+      "那个"
+    ],
+    "answer": 0,
+    "answerText": "next",
+    "explanation": "next week 意为“下周”，next 表示“下一个的”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "My home is ___ (紧邻) the school.",
+    "stemZh": "我家紧邻学校。",
+    "options": [
+      "next to",
+      "next",
+      "next for",
+      "next at"
+    ],
+    "optionsZh": [
+      "紧邻",
+      "下一个",
+      "下一个为",
+      "下一个在"
+    ],
+    "answer": 0,
+    "answerText": "next to",
+    "explanation": "next to 是固定搭配，意为“紧邻、在……旁边”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My father ___ (观看) TV every evening. He loves sports shows.",
+    "stemZh": "我爸爸每天晚上看电视。他喜欢体育节目。",
+    "options": [
+      "watch",
+      "watches",
+      "watching",
+      "to watch"
+    ],
+    "optionsZh": [
+      "观看",
+      "观看",
+      "观看",
+      "观看"
+    ],
+    "answer": 1,
+    "answerText": "watches",
+    "explanation": "主语 My father 是第三人称单数，以 ch 结尾的动词加 -es，watch 变为 watches。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Does Anna ___ (去) to school by bus every day?\n—No, she usually walks to school.",
+    "stemZh": "——安娜每天坐公交车上学吗？\n——不，她通常步行上学。",
+    "options": [
+      "go",
+      "goes",
+      "going",
+      "to go"
+    ],
+    "optionsZh": [
+      "去",
+      "去",
+      "去",
+      "去"
+    ],
+    "answer": 0,
+    "answerText": "go",
+    "explanation": "Does 引导的一般现在时疑问句中，动词用原形 go。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "My sister ___ (不喜欢) watching TV. She likes reading books.",
+    "stemZh": "我姐姐不喜欢看电视。她喜欢读书。",
+    "options": [
+      "doesn't like",
+      "don't like",
+      "doesn't likes",
+      "not like"
+    ],
+    "optionsZh": [
+      "不喜欢",
+      "不喜欢",
+      "不喜欢",
+      "不喜欢"
+    ],
+    "answer": 0,
+    "answerText": "doesn't like",
+    "explanation": "主语 My sister 是第三人称单数，否定句用 doesn't + 动词原形，即 doesn't like。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "—Does he like playing ping-pong?\n—Yes, he ___. He likes playing badminton, too.",
+    "stemZh": "——他喜欢打乒乓球吗？\n——是的，他喜欢。他也喜欢打羽毛球。",
+    "options": [
+      "is",
+      "does",
+      "do",
+      "likes"
+    ],
+    "optionsZh": [
+      "是",
+      "助动词",
+      "助动词",
+      "喜欢"
+    ],
+    "answer": 1,
+    "answerText": "does",
+    "explanation": "Does 引导的一般现在时疑问句，肯定简答用 Yes, he does.",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "Tom's father spends a lot of time reading newspapers every evening. 句中 Tom's 属于：",
+    "stemZh": "汤姆的爸爸每天晚上花很多时间看报纸。句中 Tom's 属于：",
+    "options": [
+      "名词所有格",
+      "动词三单",
+      "名词复数",
+      "形容词性物主代词"
+    ],
+    "optionsZh": [
+      "名词所有格",
+      "动词三单",
+      "名词复数",
+      "形容词性物主代词"
+    ],
+    "answer": 0,
+    "answerText": "名词所有格",
+    "explanation": "Tom's 是名词所有格，单数名词加 's 表示“汤姆的”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "This is a photo ___ (……的) my family.",
+    "stemZh": "这是一张我的全家福。",
+    "options": [
+      "of",
+      "for",
+      "to",
+      "with"
+    ],
+    "optionsZh": [
+      "……的",
+      "为",
+      "到",
+      "和"
+    ],
+    "answer": 0,
+    "answerText": "of",
+    "explanation": "无生命名词的所属关系常用 of 结构，a photo of my family 意为“一张我的全家福”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "介词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—Are those your grandparents?\n—Yes, ___ are.",
+    "stemZh": "——那些是你的祖父母吗？\n——是的。",
+    "options": [
+      "they",
+      "we",
+      "you",
+      "those"
+    ],
+    "optionsZh": [
+      "他们",
+      "我们",
+      "你们",
+      "那些"
+    ],
+    "answer": 0,
+    "answerText": "they",
+    "explanation": "指代 those 作主语，用主格 they。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "___ are my friends, Bob and Dale.",
+    "stemZh": "这些是我的朋友，鲍勃和戴尔。",
+    "options": [
+      "This",
+      "That",
+      "These",
+      "It"
+    ],
+    "optionsZh": [
+      "这个",
+      "那个",
+      "这些",
+      "它"
+    ],
+    "answer": 2,
+    "answerText": "These",
+    "explanation": "后接复数 friends，用复数指示代词 These。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Who is that girl in the photo?\n—___ my cousin, Lily.",
+    "stemZh": "——照片里那个女孩是谁？\n——她是我表妹莉莉。",
+    "options": [
+      "She's",
+      "He's",
+      "It's",
+      "They're"
+    ],
+    "optionsZh": [
+      "她是",
+      "他是",
+      "它是",
+      "她们是"
+    ],
+    "answer": 0,
+    "answerText": "She's",
+    "explanation": "Who is that girl? 询问女性身份，回答 She's my cousin。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "Bob ___ (有) a basketball, but his brother doesn't have one.",
+    "stemZh": "鲍勃有一个篮球，但他弟弟没有。",
+    "options": [
+      "have",
+      "has",
+      "haves",
+      "having"
+    ],
+    "optionsZh": [
+      "有",
+      "有",
+      "有",
+      "有"
+    ],
+    "answer": 1,
+    "answerText": "has",
+    "explanation": "主语 Bob 是第三人称单数，have 的第三人称单数形式是 has，不能写 haves。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Does he ___ (有) a basketball?\n—No, he doesn't.",
+    "stemZh": "——他有一个篮球吗？\n——不，他没有。",
+    "options": [
+      "have",
+      "has",
+      "haves",
+      "having"
+    ],
+    "optionsZh": [
+      "有",
+      "有",
+      "有",
+      "有"
+    ],
+    "answer": 0,
+    "answerText": "have",
+    "explanation": "Does 引导的疑问句中，动词用原形 have。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "My brother likes ___ (打) basketball.",
+    "stemZh": "我弟弟喜欢打篮球。",
+    "options": [
+      "play",
+      "playing",
+      "plays",
+      "to playing"
+    ],
+    "optionsZh": [
+      "打",
+      "打",
+      "打",
+      "打"
+    ],
+    "answer": 1,
+    "answerText": "playing",
+    "explanation": "like doing sth. 表示“喜欢做某事”，用动名词 playing。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "非谓语动词（动名词）"
+    ]
+  },
+  {
+    "stem": "___ are my cousins Bill and Alan. Their father is my uncle.",
+    "stemZh": "这些是我的表兄弟比尔和艾伦。他们的父亲是我的叔叔。",
+    "options": [
+      "This",
+      "That",
+      "These",
+      "It"
+    ],
+    "optionsZh": [
+      "这个",
+      "那个",
+      "这些",
+      "它"
+    ],
+    "answer": 2,
+    "answerText": "These",
+    "explanation": "介绍复数人物用 These are...，不用 He is... 开头。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "She ___ (经常) helps her mother with housework.",
+    "stemZh": "她经常帮妈妈做家务。",
+    "options": [
+      "often",
+      "very",
+      "much",
+      "too"
+    ],
+    "optionsZh": [
+      "经常",
+      "非常",
+      "很多",
+      "也"
+    ],
+    "answer": 0,
+    "answerText": "often",
+    "explanation": "频度副词 often 放在实义动词 helps 之前，表示“经常”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "副词"
+    ]
+  },
+  {
+    "stem": "—Do you often do housework at home?\n—Yes. I help my mother with it every day. 句中 often 的位置说明：",
+    "stemZh": "——你在家经常做家务吗？\n——是的。我每天帮妈妈做。句中 often 的位置说明：",
+    "options": [
+      "频度副词放在实义动词前",
+      "频度副词放在句末",
+      "频度副词放在 be 动词后",
+      "频度副词只能放句首"
+    ],
+    "optionsZh": [
+      "频度副词放在实义动词前",
+      "频度副词放在句末",
+      "频度副词放在 be 动词后",
+      "频度副词只能放句首"
+    ],
+    "answer": 0,
+    "answerText": "频度副词放在实义动词前",
+    "explanation": "often 等频度副词放在实义动词之前、be 动词之后。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "副词"
+    ]
+  },
+  {
+    "stem": "—Look! This is my family photo.\n—Wow, ___ nice!",
+    "stemZh": "——看！这是我的全家福。\n——哇，真好看！",
+    "options": [
+      "it's",
+      "its",
+      "they're",
+      "this"
+    ],
+    "optionsZh": [
+      "它是",
+      "它的",
+      "它们是",
+      "这个"
+    ],
+    "answer": 0,
+    "answerText": "it's",
+    "explanation": "指代 family photo 用 it，加 be 动词为 it's（it is）。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Is this your photo?\n—Yes, ___ is.",
+    "stemZh": "——这是你的照片吗？\n——是的，它是。",
+    "options": [
+      "this",
+      "it",
+      "that",
+      "he"
+    ],
+    "optionsZh": [
+      "这个",
+      "它",
+      "那个",
+      "他"
+    ],
+    "answer": 1,
+    "answerText": "it",
+    "explanation": "Is this your...? 的回答用 it 指代 this，即 Yes, it is.",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "This is a photo of my family. It is a nice ___ (照片).",
+    "stemZh": "这是一张我的全家福。它是一张漂亮的照片。",
+    "options": [
+      "photo",
+      "picture",
+      "photos",
+      "pictures"
+    ],
+    "optionsZh": [
+      "照片",
+      "照片",
+      "照片",
+      "照片"
+    ],
+    "answer": 1,
+    "answerText": "picture",
+    "explanation": "picture 可指图画和照片，此处 a nice picture 指一张漂亮的照片，用单数。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "This is his brother and ___ are his parents.",
+    "stemZh": "这是他的哥哥，那些是他的父母。",
+    "options": [
+      "this",
+      "that",
+      "these",
+      "those"
+    ],
+    "optionsZh": [
+      "这个",
+      "那个",
+      "这些",
+      "那些"
+    ],
+    "answer": 3,
+    "answerText": "those",
+    "explanation": "与 this 对应、指代远处的复数 parents，用 those，谓语用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Are those your sisters?\n—Yes, ___ are.",
+    "stemZh": "——那些是你的姐妹吗？\n——是的。",
+    "options": [
+      "they",
+      "we",
+      "you",
+      "those"
+    ],
+    "optionsZh": [
+      "她们",
+      "我们",
+      "你们",
+      "那些"
+    ],
+    "answer": 0,
+    "answerText": "they",
+    "explanation": "指代 those 作主语，用主格 they。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Who is the boy under the tree?\n—___ my cousin, Jim.",
+    "stemZh": "——树下的那个男孩是谁？\n——他是我的表弟吉姆。",
+    "options": [
+      "He's",
+      "She's",
+      "It's",
+      "They're"
+    ],
+    "optionsZh": [
+      "他是",
+      "她是",
+      "它是",
+      "他们是"
+    ],
+    "answer": 0,
+    "answerText": "He's",
+    "explanation": "Who is the boy? 询问男性身份，回答 He's my cousin。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—What does your father like ___?\n—He likes reading books in the evening.",
+    "stemZh": "——你爸爸喜欢做什么？\n——他喜欢晚上读书。",
+    "options": [
+      "do",
+      "doing",
+      "does",
+      "to doing"
+    ],
+    "optionsZh": [
+      "做",
+      "做",
+      "做",
+      "做"
+    ],
+    "answer": 1,
+    "answerText": "doing",
+    "explanation": "What does sb. like doing? 询问爱好，like 后接动名词 doing。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "非谓语动词（动名词）"
+    ]
+  },
+  {
+    "stem": "—What does your father ___?\n—He is a doctor.",
+    "stemZh": "——你爸爸是做什么的？\n——他是一名医生。",
+    "options": [
+      "do",
+      "does",
+      "doing",
+      "is"
+    ],
+    "optionsZh": [
+      "做",
+      "做",
+      "做",
+      "是"
+    ],
+    "answer": 0,
+    "answerText": "do",
+    "explanation": "What does sb. do? 询问职业，Does 后接动词原形 do。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "My grandparents are old, ___ they are very kind.",
+    "stemZh": "我的祖父母年纪大了，但他们非常和蔼。",
+    "options": [
+      "and",
+      "but",
+      "because",
+      "so"
+    ],
+    "optionsZh": [
+      "和",
+      "但是",
+      "因为",
+      "所以"
+    ],
+    "answer": 1,
+    "answerText": "but",
+    "explanation": "前后句意转折，用连词 but。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "My home is next ___ the school.",
+    "stemZh": "我家紧邻学校。",
+    "options": [
+      "to",
+      "for",
+      "at",
+      "of"
+    ],
+    "optionsZh": [
+      "到",
+      "为",
+      "在",
+      "的"
+    ],
+    "answer": 0,
+    "answerText": "to",
+    "explanation": "next to 是固定搭配，意为“紧邻、在……旁边”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My father ___ (去) to work by car every day.",
+    "stemZh": "我爸爸每天开车去上班。",
+    "options": [
+      "go",
+      "goes",
+      "going",
+      "to go"
+    ],
+    "optionsZh": [
+      "去",
+      "去",
+      "去",
+      "去"
+    ],
+    "answer": 1,
+    "answerText": "goes",
+    "explanation": "主语 My father 是第三人称单数，以 o 结尾的 go 加 -es 变为 goes。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "My brother ___ (学习) English very hard.",
+    "stemZh": "我弟弟学习英语非常努力。",
+    "options": [
+      "study",
+      "studys",
+      "studies",
+      "studying"
+    ],
+    "optionsZh": [
+      "学习",
+      "学习",
+      "学习",
+      "学习"
+    ],
+    "answer": 2,
+    "answerText": "studies",
+    "explanation": "主语 My brother 是第三人称单数，辅音字母+y 结尾的 study 变 y 为 i 加 -es，变为 studies。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "My brother ___ (不喜欢) to play basketball today because he's tired.",
+    "stemZh": "我弟弟今天不想打篮球，因为他累了。",
+    "options": [
+      "doesn't like",
+      "don't like",
+      "doesn't likes",
+      "not like"
+    ],
+    "optionsZh": [
+      "不喜欢",
+      "不喜欢",
+      "不喜欢",
+      "不喜欢"
+    ],
+    "answer": 0,
+    "answerText": "doesn't like",
+    "explanation": "主语 My brother 是第三人称单数，否定句用 doesn't + 动词原形，即 doesn't like。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "The ___ (儿童) toys are in the box.",
+    "stemZh": "孩子们的玩具在盒子里。",
+    "options": [
+      "children",
+      "childrens",
+      "children's",
+      "childrens'"
+    ],
+    "optionsZh": [
+      "儿童",
+      "儿童",
+      "儿童的",
+      "儿童的"
+    ],
+    "answer": 2,
+    "answerText": "children's",
+    "explanation": "不以 s 结尾的复数名词所有格加 's，children 的所有格为 children's。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "Tom's book is on the desk. 句中 's 表示：",
+    "stemZh": "汤姆的书在桌子上。句中 's 表示：",
+    "options": [
+      "所有格“的”",
+      "is 的缩写",
+      "has 的缩写",
+      "复数"
+    ],
+    "optionsZh": [
+      "所有格“的”",
+      "is 的缩写",
+      "has 的缩写",
+      "复数"
+    ],
+    "answer": 0,
+    "answerText": "所有格“的”",
+    "explanation": "Tom's 中 's 是名词所有格，表示“汤姆的”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "—Who is this?\n—___ my sister.",
+    "stemZh": "——这是谁？\n——她是我妹妹。",
+    "options": [
+      "This is",
+      "These are",
+      "Those are",
+      "They are"
+    ],
+    "optionsZh": [
+      "这是",
+      "这些是",
+      "那些是",
+      "他们是"
+    ],
+    "answer": 0,
+    "answerText": "This is",
+    "explanation": "Who is this? 回答用 This is...。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Is this your brother?\n—No, ___ isn't.",
+    "stemZh": "——这是你哥哥吗？\n——不，他不是。",
+    "options": [
+      "it",
+      "he",
+      "this",
+      "that"
+    ],
+    "optionsZh": [
+      "它",
+      "他",
+      "这个",
+      "那个"
+    ],
+    "answer": 1,
+    "answerText": "he",
+    "explanation": "指代 your brother（男性）用 he，否定回答 No, he isn't.",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Is this your sister?\n—Yes, ___ is.",
+    "stemZh": "——这是你妹妹吗？\n——是的，她是。",
+    "options": [
+      "it",
+      "she",
+      "he",
+      "this"
+    ],
+    "optionsZh": [
+      "它",
+      "她",
+      "他",
+      "这个"
+    ],
+    "answer": 1,
+    "answerText": "she",
+    "explanation": "指代 your sister（女性）用 she，肯定回答 Yes, she is.",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "My parents ___ (工作) in a hospital.",
+    "stemZh": "我父母在一家医院工作。",
+    "options": [
+      "work",
+      "works",
+      "working",
+      "to work"
+    ],
+    "optionsZh": [
+      "工作",
+      "工作",
+      "工作",
+      "工作"
+    ],
+    "answer": 0,
+    "answerText": "work",
+    "explanation": "主语 My parents 是复数，一般现在时实义动词用原形 work。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "My mother ___ (工作) in a hospital.",
+    "stemZh": "我妈妈在一家医院工作。",
+    "options": [
+      "work",
+      "works",
+      "working",
+      "to work"
+    ],
+    "optionsZh": [
+      "工作",
+      "工作",
+      "工作",
+      "工作"
+    ],
+    "answer": 1,
+    "answerText": "works",
+    "explanation": "主语 My mother 是第三人称单数，一般现在时实义动词加 -s，work 变为 works。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Does Judy have a hat?\n—Yes, she does. ___ hat is yellow.",
+    "stemZh": "——朱迪有一顶帽子吗？\n——是的，她有。她的帽子是黄色的。",
+    "options": [
+      "She",
+      "Her",
+      "His",
+      "Hers"
+    ],
+    "optionsZh": [
+      "她",
+      "她的",
+      "他的",
+      "她的"
+    ],
+    "answer": 1,
+    "answerText": "Her",
+    "explanation": "修饰名词 hat 用形容词性物主代词 Her。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "I often help my mother ___ housework at home.",
+    "stemZh": "我经常在家帮妈妈做家务。",
+    "options": [
+      "do",
+      "does",
+      "doing",
+      "to doing"
+    ],
+    "optionsZh": [
+      "做",
+      "做",
+      "做",
+      "做"
+    ],
+    "answer": 0,
+    "answerText": "do",
+    "explanation": "help sb. do sth. 是固定搭配，意为“帮某人做某事”，用动词原形 do。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "固定搭配",
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "They like ___ (读书) there.",
+    "stemZh": "他们喜欢在那里读书。",
+    "options": [
+      "read",
+      "reading",
+      "reads",
+      "to reading"
+    ],
+    "optionsZh": [
+      "读",
+      "读",
+      "读",
+      "读"
+    ],
+    "answer": 1,
+    "answerText": "reading",
+    "explanation": "like doing sth. 表示“喜欢做某事”，用动名词 reading。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "非谓语动词（动名词）"
+    ]
+  },
+  {
+    "stem": "The man ___ the blue jacket is my uncle.",
+    "stemZh": "穿蓝色夹克的男人是我叔叔。",
+    "options": [
+      "on",
+      "with",
+      "in",
+      "at"
+    ],
+    "optionsZh": [
+      "在……上",
+      "和……一起",
+      "穿着",
+      "在"
+    ],
+    "answer": 2,
+    "answerText": "in",
+    "explanation": "介词 in 表示穿着（衣物），in the blue jacket 意为“穿着蓝色夹克”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "The girl ___ long hair is my sister.",
+    "stemZh": "长头发的那个女孩是我妹妹。",
+    "options": [
+      "on",
+      "with",
+      "in",
+      "at"
+    ],
+    "optionsZh": [
+      "在……上",
+      "有……的",
+      "穿着",
+      "在"
+    ],
+    "answer": 1,
+    "answerText": "with",
+    "explanation": "介词 with 表示“带有、具有”，with long hair 意为“长头发的”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "My family ___ (有) a big family.",
+    "stemZh": "我的家庭是一个大家庭。",
+    "options": [
+      "have",
+      "has",
+      "haves",
+      "having"
+    ],
+    "optionsZh": [
+      "有",
+      "有",
+      "有",
+      "有"
+    ],
+    "answer": 1,
+    "answerText": "has",
+    "explanation": "family 指整体时视为单数，have 的第三人称单数形式是 has。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Are those your parents?\n—No, ___ aren't.",
+    "stemZh": "——那些是你的父母吗？\n——不，他们不是。",
+    "options": [
+      "they",
+      "we",
+      "you",
+      "those"
+    ],
+    "optionsZh": [
+      "他们",
+      "我们",
+      "你们",
+      "那些"
+    ],
+    "answer": 0,
+    "answerText": "they",
+    "explanation": "指代 those 作主语，用主格 they，否定回答 No, they aren't.",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "代词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—What does your father do?\n—___ a doctor.",
+    "stemZh": "——你爸爸是做什么的？\n——他是一名医生。",
+    "options": [
+      "He's",
+      "She's",
+      "It's",
+      "He"
+    ],
+    "optionsZh": [
+      "他是",
+      "她是",
+      "它是",
+      "他"
+    ],
+    "answer": 0,
+    "answerText": "He's",
+    "explanation": "回答职业用 He's a doctor，即 He is a doctor 的缩写。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "This is a photo of my family. 句中 of 表示：",
+    "stemZh": "这是一张我的全家福。句中 of 表示：",
+    "options": [
+      "所属关系",
+      "方向",
+      "时间",
+      "原因"
+    ],
+    "optionsZh": [
+      "所属关系",
+      "方向",
+      "时间",
+      "原因"
+    ],
+    "answer": 0,
+    "answerText": "所属关系",
+    "explanation": "of 结构表示所属关系，a photo of my family 意为“一张我家的全家福”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "—Who is the man in the blue jacket?\n—He's my ___.",
+    "stemZh": "——穿蓝色夹克的男人是谁？\n——他是我叔叔。",
+    "options": [
+      "uncle",
+      "aunt",
+      "cousin",
+      "sister"
+    ],
+    "optionsZh": [
+      "叔叔",
+      "姑母",
+      "堂（表）兄弟姐妹",
+      "姐妹"
+    ],
+    "answer": 0,
+    "answerText": "uncle",
+    "explanation": "the man 是男性，家庭男性长辈称谓用 uncle。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "These are my ___ Bill and Alan. Their father is my uncle.",
+    "stemZh": "这些是我的表兄弟比尔和艾伦。他们的父亲是我的叔叔。",
+    "options": [
+      "cousins",
+      "cousin",
+      "sisters",
+      "brothers"
+    ],
+    "optionsZh": [
+      "表兄弟",
+      "表兄弟",
+      "姐妹",
+      "兄弟"
+    ],
+    "answer": 0,
+    "answerText": "cousins",
+    "explanation": "Bill and Alan 是两人，且 Their father is my uncle 说明是表兄弟，用复数 cousins。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "My brother ___ (喜欢) playing basketball.",
+    "stemZh": "我弟弟喜欢打篮球。",
+    "options": [
+      "like",
+      "likes",
+      "liking",
+      "to like"
+    ],
+    "optionsZh": [
+      "喜欢",
+      "喜欢",
+      "喜欢",
+      "喜欢"
+    ],
+    "answer": 1,
+    "answerText": "likes",
+    "explanation": "主语 My brother 是第三人称单数，一般现在时实义动词加 -s，like 变为 likes。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Do you often do housework at home?\n—Yes. I help my mother with it ___ day.",
+    "stemZh": "——你在家经常做家务吗？\n——是的。我每天帮妈妈做。",
+    "options": [
+      "every",
+      "each",
+      "all",
+      "both"
+    ],
+    "optionsZh": [
+      "每一",
+      "每一",
+      "全部",
+      "两者都"
+    ],
+    "answer": 0,
+    "answerText": "every",
+    "explanation": "every day 是固定搭配，意为“每天”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "This is a photo of my family. It is a nice ___.",
+    "stemZh": "这是一张我的全家福。它是一张漂亮的照片。",
+    "options": [
+      "picture",
+      "photoes",
+      "photos",
+      "picture's"
+    ],
+    "optionsZh": [
+      "图画/照片",
+      "照片",
+      "照片",
+      "图画的"
+    ],
+    "answer": 0,
+    "answerText": "picture",
+    "explanation": "picture 可指图画和照片，a nice picture 意为“一张漂亮的照片”，用单数。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U2",
+    "points": [
+      "词汇辨析"
+    ]
   }
 ]
