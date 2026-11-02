@@ -3,180 +3,270 @@
     "stem": "My parents often tell me to be ___ (诚实) with others.",
     "stemZh": "我父母经常告诉我要对别人诚实。",
     "answer": "honest",
-    "explanation": "be honest with sb. 意为“对某人诚实”，honest 为形容词，故填 honest。"
+    "explanation": "考查形容词拼写。be honest with sb. 意为“对某人诚实”，空处作表语，需填形容词 honest。",
+    "grade": 8,
+    "points": ["形容词", "固定搭配"],
+    "keywords": ["honest"]
   },
   {
     "stem": "The ___ (天气) in spring is warm.",
     "stemZh": "春天天气温暖。",
     "answer": "weather",
-    "explanation": "weather 意为“天气”，是不可数名词，故填 weather。"
+    "explanation": "考查名词拼写。根据汉语提示“天气”可知填 weather。weather 为不可数名词，故用原形。",
+    "grade": 7,
+    "points": ["名词", "词汇辨析"],
+    "keywords": ["weather"]
   },
   {
     "stem": "Today is my ___ (第十二) birthday.",
     "stemZh": "今天是我的十二岁生日。",
     "answer": "twelfth",
-    "explanation": "表示“第十二”用序数词 twelfth，注意 twelve 变序数词时要去 ve 改 f 再加 th。"
+    "explanation": "考查序数词拼写。表示“第十二”用序数词 twelfth，注意 twelve 变序数词时要去 ve 改 f 再加 th。",
+    "grade": 7,
+    "points": ["数词"],
+    "keywords": ["twelfth"]
   },
   {
     "stem": "He is a very ___ (有耐心的) teacher.",
     "stemZh": "他是一位非常有耐心的老师。",
     "answer": "patient",
-    "explanation": "patient 作形容词，意为“有耐心的”，修饰名词 teacher。"
+    "explanation": "考查形容词拼写。根据汉语提示“有耐心的”可知填 patient，作形容词修饰名词 teacher。",
+    "grade": 8,
+    "points": ["形容词", "词汇辨析"],
+    "keywords": ["patient"]
   },
   {
     "stem": "She spoke so ___ (轻轻地) that I could hardly hear her.",
     "stemZh": "她说话如此轻，我几乎听不见。",
     "answer": "softly",
-    "explanation": "修饰动词 spoke 要用副词，soft 的副词形式为 softly。"
+    "explanation": "考查副词拼写。修饰动词 spoke 要用副词，soft 的副词形式为 softly，意为“轻轻地”。",
+    "grade": 8,
+    "points": ["副词", "词汇辨析"],
+    "keywords": ["softly"]
   },
   {
     "stem": "There are twelve ___ (月份) in a year.",
     "stemZh": "一年有十二个月份。",
     "answer": "months",
-    "explanation": "twelve 后接可数名词复数，month 的复数形式为 months。"
+    "explanation": "考查名词复数拼写。twelve 后接可数名词复数，month 的复数形式直接加 s，为 months。",
+    "grade": 7,
+    "points": ["名词", "数词"],
+    "keywords": ["months"]
   },
   {
     "stem": "It is ___ (必要的) for us to learn English well.",
     "stemZh": "对我们来说学好英语是必要的。",
     "answer": "necessary",
-    "explanation": "It is + adj. + for sb. to do sth. 句型，necessary 意为“必要的”。"
+    "explanation": "考查形容词拼写。It is + adj. + for sb. to do sth. 句型中，空处需填形容词，necessary 意为“必要的”。",
+    "grade": 8,
+    "points": ["形容词", "非谓语动词（不定式）"],
+    "keywords": ["necessary"]
   },
   {
     "stem": "My brother is good at ___ (游泳).",
     "stemZh": "我弟弟擅长游泳。",
     "answer": "swimming",
-    "explanation": "be good at 后接动名词，swim 变 swimming 时双写 m 再加 ing。"
+    "explanation": "考查动名词拼写。be good at 后接动名词，swim 变 swimming 时需双写 m 再加 ing。",
+    "grade": 7,
+    "points": ["非谓语动词（动名词）", "固定搭配"],
+    "keywords": ["swimming", "be good at"]
   },
   {
     "stem": "They visited many places of ___ (名胜) in Beijing.",
     "stemZh": "他们参观了北京的许多名胜。",
     "answer": "interest",
-    "explanation": "places of interest 为固定搭配，意为“名胜古迹”。"
+    "explanation": "考查固定搭配。places of interest 意为“名胜古迹”，空处填名词 interest。",
+    "grade": 8,
+    "points": ["名词", "固定搭配"],
+    "keywords": ["places of interest"]
   },
   {
     "stem": "The old man has three ___ (孙子).",
     "stemZh": "这位老人有三个孙子。",
     "answer": "grandsons",
-    "explanation": "three 后接可数名词复数，grandson 的复数为 grandsons。"
+    "explanation": "考查名词复数拼写。three 后接可数名词复数，grandson 的复数为 grandsons。",
+    "grade": 7,
+    "points": ["名词", "数词"],
+    "keywords": ["grandsons"]
   },
   {
     "stem": "The young man is ___ (勇敢的) enough to save the girl from the river.",
     "stemZh": "这个年轻人足够勇敢，从河里救起了女孩。",
     "answer": "brave",
-    "explanation": "brave 作形容词，意为“勇敢的”，常用于 be + adj. + enough to do 结构。"
+    "explanation": "考查形容词拼写。be + adj. + enough to do sth. 结构中，空处填形容词 brave，意为“勇敢的”。",
+    "grade": 8,
+    "points": ["形容词", "非谓语动词（不定式）"],
+    "keywords": ["brave"]
   },
   {
     "stem": "It's ___ (危险的) to play on the road.",
     "stemZh": "在马路上玩耍是危险的。",
     "answer": "dangerous",
-    "explanation": "It's + adj. + to do sth. 句型，dangerous 意为“危险的”。"
+    "explanation": "考查形容词拼写。It's + adj. + to do sth. 句型中，空处填形容词 dangerous，意为“危险的”。",
+    "grade": 8,
+    "points": ["形容词", "非谓语动词（不定式）"],
+    "keywords": ["dangerous"]
   },
   {
     "stem": "Please speak more ___ (慢地), I can't follow you.",
     "stemZh": "请说得更慢一些，我跟不上你。",
     "answer": "slowly",
-    "explanation": "修饰动词 speak 用副词，slow 的副词为 slowly，此处用比较级 more slowly。"
+    "explanation": "考查副词比较级拼写。修饰动词 speak 用副词，slow 的副词为 slowly，此处含比较意味，用 more slowly，答案填 slowly。",
+    "grade": 8,
+    "points": ["副词", "比较级与最高级"],
+    "keywords": ["slowly"]
   },
   {
     "stem": "Thank you for ___ (邀请) me to your party.",
     "stemZh": "谢谢你邀请我参加你的聚会。",
     "answer": "inviting",
-    "explanation": "thank you for 后接动名词，invite 变 inviting 时去 e 再加 ing。"
+    "explanation": "考查动名词拼写。thank you for 后接动名词，invite 变 inviting 时去 e 再加 ing。",
+    "grade": 8,
+    "points": ["非谓语动词（动名词）", "固定搭配"],
+    "keywords": ["inviting"]
   },
   {
     "stem": "The children were very ___ (兴奋的) when they saw the pandas.",
     "stemZh": "孩子们看到熊猫时非常兴奋。",
     "answer": "excited",
-    "explanation": "excited 表示“感到兴奋的”，主语通常是人，此处修饰 the children。"
+    "explanation": "考查形容词拼写。excited 表示“感到兴奋的”，主语通常是人，此处修饰 the children，符合语境。",
+    "grade": 8,
+    "points": ["形容词", "词汇辨析"],
+    "keywords": ["excited"]
   },
   {
     "stem": "Tom is the ___ (最友好的) boy in our class.",
     "stemZh": "汤姆是我们班上最友好的男孩。",
     "answer": "friendliest",
-    "explanation": "friendly 的最高级为 friendliest，注意变 y 为 i 再加 est。"
+    "explanation": "考查形容词最高级拼写。friendly 的最高级为 friendliest，注意变 y 为 i 再加 est。",
+    "grade": 8,
+    "points": ["比较级与最高级", "形容词"],
+    "keywords": ["friendliest"]
   },
   {
     "stem": "I hope you will ___ (成功).",
     "stemZh": "我希望你会成功。",
     "answer": "succeed",
-    "explanation": "succeed 作动词，意为“成功”，此处 will 后接动词原形。"
+    "explanation": "考查动词拼写。will 后接动词原形，succeed 作动词，意为“成功”，符合语境。",
+    "grade": 9,
+    "points": ["一般将来时", "词汇辨析"],
+    "keywords": ["succeed"]
   },
   {
     "stem": "It's important to protect the ___ (环境).",
     "stemZh": "保护环境很重要。",
     "answer": "environment",
-    "explanation": "environment 意为“环境”，通常用作不可数名词。"
+    "explanation": "考查名词拼写。根据汉语提示“环境”可知填 environment，通常用作不可数名词。",
+    "grade": 8,
+    "points": ["名词", "词汇辨析"],
+    "keywords": ["environment"]
   },
   {
     "stem": "We should eat more ___ (水果) and vegetables.",
     "stemZh": "我们应该多吃水果和蔬菜。",
     "answer": "fruit",
-    "explanation": "fruit 作“水果”讲时通常为不可数名词，故填 fruit。"
+    "explanation": "考查名词拼写。fruit 作“水果”讲时通常为不可数名词，故用原形 fruit。",
+    "grade": 7,
+    "points": ["名词", "词汇辨析"],
+    "keywords": ["fruit"]
   },
   {
     "stem": "There are many ___ (国家) in the world.",
     "stemZh": "世界上有许多国家。",
     "answer": "countries",
-    "explanation": "many 后接可数名词复数，country 变复数时把 y 改成 i 再加 es。"
+    "explanation": "考查名词复数拼写。many 后接可数名词复数，country 变复数时把 y 改成 i 再加 es，为 countries。",
+    "grade": 7,
+    "points": ["名词", "词汇辨析"],
+    "keywords": ["countries"]
   },
   {
     "stem": "The Great Wall is one of the most famous ___ (奇迹) in the world.",
     "stemZh": "长城是世界上最著名的奇迹之一。",
     "answer": "wonders",
-    "explanation": "one of the + 最高级 + 名词复数，wonder 的复数为 wonders。"
+    "explanation": "考查名词复数拼写。one of the + 最高级 + 名词复数结构，wonder 的复数为 wonders，意为“奇迹”。",
+    "grade": 9,
+    "points": ["名词", "比较级与最高级"],
+    "keywords": ["wonders"]
   },
   {
     "stem": "We should try to ___ (避免) making the same mistake.",
     "stemZh": "我们应该尽量避免犯同样的错误。",
     "answer": "avoid",
-    "explanation": "avoid doing sth. 意为“避免做某事”，avoid 后接动名词。"
+    "explanation": "考查动词拼写。avoid doing sth. 意为“避免做某事”，avoid 后接动名词，此处填原形 avoid。",
+    "grade": 9,
+    "points": ["非谓语动词（动名词）", "固定搭配"],
+    "keywords": ["avoid"]
   },
   {
     "stem": "The little girl is very ___ (害羞的).",
     "stemZh": "这个小女孩非常害羞。",
     "answer": "shy",
-    "explanation": "shy 作形容词，意为“害羞的”，此处修饰 the little girl。"
+    "explanation": "考查形容词拼写。shy 作形容词，意为“害羞的”，此处修饰 the little girl。",
+    "grade": 7,
+    "points": ["形容词", "词汇辨析"],
+    "keywords": ["shy"]
   },
   {
     "stem": "Have you ___ (曾经) been to Beijing?",
     "stemZh": "你曾经去过北京吗？",
     "answer": "ever",
-    "explanation": "ever 意为“曾经”，常与现在完成时连用。"
+    "explanation": "考查副词拼写。ever 意为“曾经”，常与现在完成时连用，用于疑问句中。",
+    "grade": 8,
+    "points": ["副词", "现在完成时"],
+    "keywords": ["ever"]
   },
   {
     "stem": "She is ___ (骄傲) of her son.",
     "stemZh": "她为她的儿子感到骄傲。",
     "answer": "proud",
-    "explanation": "be proud of 意为“为……感到骄傲”，故填 proud。"
+    "explanation": "考查形容词拼写。be proud of 意为“为……感到骄傲”，故填 proud。",
+    "grade": 8,
+    "points": ["形容词", "固定搭配"],
+    "keywords": ["proud", "be proud of"]
   },
   {
     "stem": "My mother is busy ___ (准备) for the dinner.",
     "stemZh": "我妈妈正忙着准备晚餐。",
     "answer": "preparing",
-    "explanation": "be busy doing sth. 意为“忙于做某事”，prepare 变 preparing 时去 e 再加 ing。"
+    "explanation": "考查动名词拼写。be busy doing sth. 意为“忙于做某事”，prepare 变 preparing 时去 e 再加 ing。",
+    "grade": 8,
+    "points": ["非谓语动词（动名词）", "固定搭配"],
+    "keywords": ["preparing", "be busy doing"]
   },
   {
     "stem": "He ___ (决定) to study hard from then on.",
     "stemZh": "从那时起他决定努力学习。",
     "answer": "decided",
-    "explanation": "from then on 表示过去时间，句子用一般过去时，decide 的过去式为 decided。"
+    "explanation": "考查动词过去式拼写。from then on 表示过去时间，句子用一般过去时，decide 的过去式为 decided。",
+    "grade": 8,
+    "points": ["一般过去时", "词汇辨析"],
+    "keywords": ["decided"]
   },
   {
     "stem": "Please be ___ (安静的) in the library.",
     "stemZh": "在图书馆里请保持安静。",
     "answer": "quiet",
-    "explanation": "quiet 作形容词，意为“安静的”，用于 be quiet 结构。"
+    "explanation": "考查形容词拼写。quiet 作形容词，意为“安静的”，用于 be quiet 结构。",
+    "grade": 7,
+    "points": ["形容词", "祈使句"],
+    "keywords": ["quiet"]
   },
   {
     "stem": "It's polite to say \"thank you\" when others ___ (帮助) you.",
     "stemZh": "当别人帮助你时说“谢谢”是有礼貌的。",
     "answer": "help",
-    "explanation": "others 作主语视为复数，句子用一般现在时，动词用原形 help。"
+    "explanation": "考查一般现在时与主谓一致。others 作主语视为复数，when 引导的时间状语从句用一般现在时，动词用原形 help。",
+    "grade": 8,
+    "points": ["一般现在时", "主谓一致", "状语从句"],
+    "keywords": ["help", "others"]
   },
   {
     "stem": "We had a ___ (美妙的) time at the party.",
     "stemZh": "我们在聚会上玩得很开心。",
     "answer": "wonderful",
-    "explanation": "have a wonderful time 为固定搭配，意为“玩得开心”，wonderful 意为“美妙的”。"
+    "explanation": "考查形容词拼写。have a wonderful time 为固定搭配，意为“玩得开心”，空处填 wonderful。",
+    "grade": 7,
+    "points": ["形容词", "固定搭配"],
+    "keywords": ["wonderful", "have a good time"]
   }
 ]
