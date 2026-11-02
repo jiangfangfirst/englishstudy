@@ -1036,8 +1036,17 @@ function makeScoreText(type, stats) {
 function makeHeaderBlock(meta) {
   let title, subtitle, metaLine, notice;
   if (meta.isFullStandard) {
-    title = '多多好学英语试卷（安徽中考模拟·无听力）';
-    subtitle = '九年级英语学业水平模拟检测';
+    title = '多多好学英语试卷（无听力）';
+    
+    // ★ 动态判断年级副标题：没选年级默认“初中”，选了就对应显示
+    let gradeText = '初中';
+    if (window._examFilterParams && window._examFilterParams.grade) {
+      if (window._examFilterParams.grade === 7) gradeText = '七年级';
+      else if (window._examFilterParams.grade === 8) gradeText = '八年级';
+      else if (window._examFilterParams.grade === 9) gradeText = '九年级';
+    }
+    subtitle = gradeText + '英语学业水平模拟检测';
+    
     metaLine = `<span>满分：${meta.totalScore} 分</span><span>考试时间：120 分钟</span><span>共 ${meta.activeTypes.length} 大题</span>`;
     notice = `1. 本试卷共三部分，${meta.activeTypes.length} 大题，满分 ${meta.totalScore} 分，考试时间为 120 分钟。<br>
               2. 全卷包括“试题卷”和“答题卡”两部分，请务必在答题卡上作答。<br>
@@ -1058,19 +1067,6 @@ function makeHeaderBlock(meta) {
               2. 请认真作答，完成后对照答案自查。`;
   }
 
-  // ★ 新增：读取筛选条件并显示在标题下方
-  let filterHtml = '';
-  if (window._examFilterParams) {
-    const p = window._examFilterParams;
-    const parts = [];
-    if (p.grade) parts.push(p.grade + '年级');
-    if (p.unit) parts.push('单元: ' + p.unit);
-    if (p.points && p.points.length > 0) parts.push('重点考查: ' + p.points.join('、'));
-    if (parts.length > 0) {
-      filterHtml = ' <span style="color:#2563eb; font-size: 11.5px; font-weight: 600; margin-left: 8px;">[' + parts.join(' | ') + ']</span>';
-    }
-  }
-
   const wrap = document.createElement('div');
   wrap.innerHTML = `
     <div class="exam-logo-wrap">
@@ -1079,7 +1075,7 @@ function makeHeaderBlock(meta) {
     </div>
     <div class="exam-header">
       <h1>${title}</h1>
-      <div class="exam-type">${subtitle}${filterHtml}</div>
+      <div class="exam-type">${subtitle}</div>
       <div class="exam-meta">${metaLine}</div>
     </div>
     <div class="notice"><strong>注意事项：</strong>${notice}</div>
