@@ -1470,7 +1470,6 @@ function clearUsedFlags() {
 function pullItems(data, want, grade, unit, targetPoint) {
   if (!data || data.length === 0 || want <= 0) return [];
   
-  // 过滤掉已用的
   let pool = data.filter(function (item) { return !item._used; });
   if (targetPoint) {
     pool = pool.filter(function (item) {
@@ -1486,10 +1485,10 @@ function pullItems(data, want, grade, unit, targetPoint) {
     return picked;
   }
 
-  // 2. 分层
-  const l1 = pool.filter(function (i) { return i.grade === grade && unit && i.unit === unit; });
-  const l2 = pool.filter(function (i) { return i.grade === grade && (!unit || i.unit !== unit); });
-  const l3 = pool.filter(function (i) { return i.grade && i.grade < grade; });
+  // 2. 分层（用 Number 强转，防止字符串 "9" 与数字 9 匹配失败）
+  const l1 = pool.filter(function (i) { return Number(i.grade) === Number(grade) && unit && i.unit === unit; });
+  const l2 = pool.filter(function (i) { return Number(i.grade) === Number(grade) && (!unit || i.unit !== unit); });
+  const l3 = pool.filter(function (i) { return i.grade && Number(i.grade) < Number(grade); });
   const l4 = pool.filter(function (i) { return !i.grade; });
 
   shuffle(l1); shuffle(l2); shuffle(l3); shuffle(l4);
@@ -1508,14 +1507,16 @@ function pullItems(data, want, grade, unit, targetPoint) {
 }
 
 /* 单选/拼写：按知识点平均分配 */
+/* 单选/拼写：按知识点平均分配 */
 function pickByKnowledge(data, want, grade, unit, points) {
   if (!data || data.length === 0) return [];
+  clearUsedFlags(); // ★ 强制清空之前的残留标记
+
   // 没选年级或没选知识点，直接走普通分层
   if (!grade || points.length === 0) {
     return pullItems(data, want, grade, unit, null);
   }
 
-  clearUsedFlags();
   const base = Math.floor(want / points.length);
   let extra = want % points.length;
   const quotas = {};
@@ -1546,10 +1547,11 @@ function pickByKnowledge(data, want, grade, unit, points) {
 /* 整篇题型：仅按年级回退 */
 function pickByGrade(data, want, grade) {
   if (!data || data.length === 0) return [];
+  clearUsedFlags(); // ★ 强制清空之前的残留标记
+  
   if (!grade) {
     return shuffle(data.slice()).slice(0, want);
   }
-  clearUsedFlags();
   return pullItems(data, want, grade, null, null);
 }
 
