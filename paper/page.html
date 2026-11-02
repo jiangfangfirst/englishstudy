@@ -1242,20 +1242,30 @@ document.getElementById('panelClose').addEventListener('click', function () { se
     });
   };
 
-  ptInput.addEventListener('input', function () {
+    ptInput.addEventListener('input', function () {
     const val = this.value.trim().toLowerCase();
     ptDropdown.innerHTML = '';
     if (!val) { ptDropdown.classList.remove('show'); return; }
+
+    // ★ 防呆提示 1：整个题库都没有 points 字段
+    if (allAvailablePoints.size === 0) {
+      ptDropdown.innerHTML = '<div class="pt-option" style="color:#ef4444;cursor:default;font-size:12px;">题库中没有知识点数据，请先在 JSON 中添加 points 字段</div>';
+      ptDropdown.classList.add('show');
+      return;
+    }
 
     const matches = Array.from(allAvailablePoints).filter(function (p) {
       return p.toLowerCase().indexOf(val) !== -1 && selectedPointsArr.indexOf(p) === -1;
     }).slice(0, 20);
 
+    // ★ 防呆提示 2：有数据，但没搜到
     if (matches.length === 0) {
-      ptDropdown.classList.remove('show');
+      ptDropdown.innerHTML = '<div class="pt-option" style="color:#94a3b8;cursor:default;font-size:12px;">无匹配知识点</div>';
+      ptDropdown.classList.add('show');
       return;
     }
 
+    // 正常渲染匹配项（这段保持不变）
     matches.forEach(function (pt) {
       const div = document.createElement('div');
       div.className = 'pt-option';
