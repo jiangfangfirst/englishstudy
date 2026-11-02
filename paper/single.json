@@ -7545,5 +7545,1330 @@
     "points": [
       "词汇辨析"
     ]
+  },
+  {
+    "stem": "There ___ a library and two gyms in our school.",
+    "stemZh": "我们学校有一个图书馆和两个体育馆。",
+    "options": [
+      "is",
+      "are",
+      "have",
+      "has"
+    ],
+    "optionsZh": [
+      "有",
+      "有",
+      "有",
+      "有"
+    ],
+    "answer": 0,
+    "answerText": "is",
+    "explanation": "there be 句型遵循就近原则，离 be 动词最近的主语 a library 是单数，用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "There ___ two pens and a book on the desk.",
+    "stemZh": "桌子上有两支钢笔和一本书。",
+    "options": [
+      "is",
+      "are",
+      "have",
+      "has"
+    ],
+    "optionsZh": [
+      "有",
+      "有",
+      "有",
+      "有"
+    ],
+    "answer": 1,
+    "answerText": "are",
+    "explanation": "there be 句型遵循就近原则，离 be 动词最近的主语 two pens 是复数，用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "There ___ a computer and some books on the teacher's desk.",
+    "stemZh": "讲台上有一台电脑和一些书。",
+    "options": [
+      "is",
+      "are",
+      "have",
+      "has"
+    ],
+    "optionsZh": [
+      "有",
+      "有",
+      "有",
+      "有"
+    ],
+    "answer": 0,
+    "answerText": "is",
+    "explanation": "就近原则：离 be 动词最近的主语 a computer 是单数，用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—___ there any computers in your classroom?\n—Yes. There is a computer on the teacher's desk.",
+    "stemZh": "——你们教室里有电脑吗？\n——是的。讲台上有一台电脑。",
+    "options": [
+      "Is",
+      "Are",
+      "Do",
+      "Does"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "助动词",
+      "助动词"
+    ],
+    "answer": 1,
+    "answerText": "Are",
+    "explanation": "主语 any computers 是复数，there be 疑问句用 Are there...?",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Is there a library in your school?\n—Yes, there ___.",
+    "stemZh": "——你们学校有图书馆吗？\n——是的，有。",
+    "options": [
+      "is",
+      "are",
+      "has",
+      "have"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "有",
+      "有"
+    ],
+    "answer": 0,
+    "answerText": "is",
+    "explanation": "Is there...? 的肯定回答是 Yes, there is.",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "There ___ some milk and apples on the table.",
+    "stemZh": "桌子上有一些牛奶和苹果。",
+    "options": [
+      "is",
+      "are",
+      "have",
+      "has"
+    ],
+    "optionsZh": [
+      "有",
+      "有",
+      "有",
+      "有"
+    ],
+    "answer": 0,
+    "answerText": "is",
+    "explanation": "就近原则：离 be 动词最近的主语 some milk 是不可数名词，用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "There aren't ___ eggs in the fridge. I need to buy some.",
+    "stemZh": "冰箱里没有鸡蛋了。我需要买一些。",
+    "options": [
+      "some",
+      "any",
+      "a",
+      "an"
+    ],
+    "optionsZh": [
+      "一些",
+      "任何",
+      "一个",
+      "一个"
+    ],
+    "answer": 1,
+    "answerText": "any",
+    "explanation": "否定句中表示“一些”用 any，不用 some。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "There are ___ books on the desk. You can read them.",
+    "stemZh": "桌子上有一些书。你可以读它们。",
+    "options": [
+      "some",
+      "any",
+      "a",
+      "an"
+    ],
+    "optionsZh": [
+      "一些",
+      "任何",
+      "一个",
+      "一个"
+    ],
+    "answer": 0,
+    "answerText": "some",
+    "explanation": "肯定句中表示“一些”用 some，不用 any。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "There is a big tree ___ front of the classroom building.",
+    "stemZh": "教学楼前面有一棵大树。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在……上",
+      "在",
+      "到"
+    ],
+    "answer": 0,
+    "answerText": "in",
+    "explanation": "in front of 是固定搭配，意为“在……（外部）前面”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "The blackboard is in the front ___ the classroom.",
+    "stemZh": "黑板在教室的前部。",
+    "options": [
+      "of",
+      "to",
+      "for",
+      "with"
+    ],
+    "optionsZh": [
+      "的",
+      "到",
+      "为",
+      "和"
+    ],
+    "answer": 0,
+    "answerText": "of",
+    "explanation": "in the front of 表示“在（物体内部）前部”，故用 of。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "There is a big tree in front of the classroom building. 句中 in front of 表示：",
+    "stemZh": "教学楼前面有一棵大树。句中 in front of 表示：",
+    "options": [
+      "在（物体外部）前面",
+      "在（物体内部）前部",
+      "在……后面",
+      "在……对面"
+    ],
+    "optionsZh": [
+      "在（物体外部）前面",
+      "在（物体内部）前部",
+      "在……后面",
+      "在……对面"
+    ],
+    "answer": 0,
+    "answerText": "在（物体外部）前面",
+    "explanation": "in front of 表示在物体外部的前面；in the front of 才表示内部前部。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "The teachers' office is ___ to the art room.",
+    "stemZh": "教师办公室紧邻美术教室。",
+    "options": [
+      "next",
+      "across",
+      "front",
+      "between"
+    ],
+    "optionsZh": [
+      "紧邻",
+      "对面",
+      "前面",
+      "之间"
+    ],
+    "answer": 0,
+    "answerText": "next",
+    "explanation": "next to 是固定搭配，意为“紧邻、在……旁边”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The dining hall is across ___ the gym. We can see it when we stand at the gate of the gym.",
+    "stemZh": "食堂在体育馆对面。我们站在体育馆门口就能看到它。",
+    "options": [
+      "from",
+      "to",
+      "of",
+      "at"
+    ],
+    "optionsZh": [
+      "从",
+      "到",
+      "的",
+      "在"
+    ],
+    "answer": 0,
+    "answerText": "from",
+    "explanation": "across from 是固定搭配，意为“在……对面”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The library is ___ the classroom building and the gym.",
+    "stemZh": "图书馆在教学楼和体育馆之间。",
+    "options": [
+      "between",
+      "among",
+      "next",
+      "across"
+    ],
+    "optionsZh": [
+      "在……之间",
+      "在……之中",
+      "紧邻",
+      "对面"
+    ],
+    "answer": 0,
+    "answerText": "between",
+    "explanation": "between...and... 表示“在……和……之间”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "The library is across from the teaching building. 句意为：",
+    "stemZh": "The library is across from the teaching building. 句意为：",
+    "options": [
+      "图书馆在教学楼对面。",
+      "图书馆紧邻教学楼。",
+      "图书馆在教学楼后面。",
+      "图书馆在教学楼里面。"
+    ],
+    "optionsZh": [
+      "图书馆在教学楼对面。",
+      "图书馆紧邻教学楼。",
+      "图书馆在教学楼后面。",
+      "图书馆在教学楼里面。"
+    ],
+    "answer": 0,
+    "answerText": "图书馆在教学楼对面。",
+    "explanation": "across from 表示“在……对面”，整句意为“图书馆在教学楼对面”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "This is ___ office and the office is not big.",
+    "stemZh": "这是一间办公室，办公室不大。",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "/"
+    ],
+    "optionsZh": [
+      "一个",
+      "一个",
+      "这个",
+      "不填"
+    ],
+    "answer": 1,
+    "answerText": "an",
+    "explanation": "office 以元音音素开头，表示“一间办公室”用 an。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "冠词"
+    ]
+  },
+  {
+    "stem": "This is ___ library and the library is very big.",
+    "stemZh": "这是一个图书馆，图书馆非常大。",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "/"
+    ],
+    "optionsZh": [
+      "一个",
+      "一个",
+      "这个",
+      "不填"
+    ],
+    "answer": 0,
+    "answerText": "a",
+    "explanation": "library 以辅音音素开头，表示“一个图书馆”用 a。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "冠词"
+    ]
+  },
+  {
+    "stem": "The map is ___ the wall.",
+    "stemZh": "地图在墙上。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在……上",
+      "在",
+      "到"
+    ],
+    "answer": 1,
+    "answerText": "on",
+    "explanation": "地图在墙的表面，用介词 on；on the wall 意为“在墙上”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "There is a clock and two pictures ___ the wall.",
+    "stemZh": "墙上有一个钟和两幅画。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在……上",
+      "在",
+      "到"
+    ],
+    "answer": 1,
+    "answerText": "on",
+    "explanation": "钟和画挂在墙面表面，用 on the wall。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "—Where is the art room?\n—___ on the second floor.",
+    "stemZh": "——美术教室在哪里？\n——在二楼。",
+    "options": [
+      "It's",
+      "There is",
+      "They're",
+      "There are"
+    ],
+    "optionsZh": [
+      "它在",
+      "有",
+      "它们在",
+      "有"
+    ],
+    "answer": 0,
+    "answerText": "It's",
+    "explanation": "询问特定地点在哪里，用 It's on... 回答，不用 there be 句型。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—___ is the library?\n—It's on the second floor.",
+    "stemZh": "——图书馆在哪里？\n——在二楼。",
+    "options": [
+      "What",
+      "Where",
+      "Who",
+      "How"
+    ],
+    "optionsZh": [
+      "什么",
+      "哪里",
+      "谁",
+      "怎样"
+    ],
+    "answer": 1,
+    "answerText": "Where",
+    "explanation": "答语表示地点，用 Where 提问。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—How many classrooms ___ there in your school?\n—Ten.",
+    "stemZh": "——你们学校有多少间教室？\n——十间。",
+    "options": [
+      "is",
+      "are",
+      "have",
+      "has"
+    ],
+    "optionsZh": [
+      "有",
+      "有",
+      "有",
+      "有"
+    ],
+    "answer": 1,
+    "answerText": "are",
+    "explanation": "How many + 复数名词 + are there...? 是询问数量的固定句型，用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—How many classrooms are there in your school?\n—___.",
+    "stemZh": "——你们学校有多少间教室？\n——十间。",
+    "options": [
+      "Ten",
+      "Tenth",
+      "The ten",
+      "A ten"
+    ],
+    "optionsZh": [
+      "十",
+      "第十",
+      "那十",
+      "一个十"
+    ],
+    "answer": 0,
+    "answerText": "Ten",
+    "explanation": "回答数量直接用数词 Ten。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "数词"
+    ]
+  },
+  {
+    "stem": "We often read books in the ___ (图书馆) after class.",
+    "stemZh": "我们经常课后在图书馆读书。",
+    "options": [
+      "library",
+      "libraries",
+      "library's",
+      "a library"
+    ],
+    "optionsZh": [
+      "图书馆",
+      "图书馆",
+      "图书馆的",
+      "一个图书馆"
+    ],
+    "answer": 0,
+    "answerText": "library",
+    "explanation": "in the library 意为“在图书馆”，此处用单数 library。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The teachers' office is on the ___ (第二) floor.",
+    "stemZh": "教师办公室在二楼。",
+    "options": [
+      "two",
+      "second",
+      "twice",
+      "secondly"
+    ],
+    "optionsZh": [
+      "二",
+      "第二",
+      "两次",
+      "其次"
+    ],
+    "answer": 1,
+    "answerText": "second",
+    "explanation": "表示楼层用序数词，第二层为 the second floor。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "数词"
+    ]
+  },
+  {
+    "stem": "The blackboard is in the front of the ___. (教室)",
+    "stemZh": "黑板在教室的前部。",
+    "options": [
+      "classroom",
+      "classrooms",
+      "classroom's",
+      "a classroom"
+    ],
+    "optionsZh": [
+      "教室",
+      "教室",
+      "教室的",
+      "一间教室"
+    ],
+    "answer": 0,
+    "answerText": "classroom",
+    "explanation": "in the front of the classroom 意为“在教室的前部”，此处用单数 classroom。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "We often play basketball on the ___ (操场) after class.",
+    "stemZh": "我们经常课后在操场上打篮球。",
+    "options": [
+      "playground",
+      "playgrounds",
+      "playground's",
+      "a playground"
+    ],
+    "optionsZh": [
+      "操场",
+      "操场",
+      "操场的",
+      "一个操场"
+    ],
+    "answer": 0,
+    "answerText": "playground",
+    "explanation": "on the playground 意为“在操场上”，此处用单数 playground。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The science ___ (实验室) is on the third floor. We do experiments there.",
+    "stemZh": "科学实验室在三楼。我们在那里做实验。",
+    "options": [
+      "lab",
+      "labs",
+      "lab's",
+      "a lab"
+    ],
+    "optionsZh": [
+      "实验室",
+      "实验室",
+      "实验室的",
+      "一个实验室"
+    ],
+    "answer": 0,
+    "answerText": "lab",
+    "explanation": "science lab 意为“科学实验室”，此处用单数 lab。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "—Do you have a computer room in your school?\n—Yes, it's on the ___ (第一) floor.",
+    "stemZh": "——你们学校有电脑房吗？\n——有，在一楼。",
+    "options": [
+      "one",
+      "first",
+      "once",
+      "firstly"
+    ],
+    "optionsZh": [
+      "一",
+      "第一",
+      "一次",
+      "首先"
+    ],
+    "answer": 1,
+    "answerText": "first",
+    "explanation": "表示楼层用序数词，第一层为 the first floor。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "数词"
+    ]
+  },
+  {
+    "stem": "This is a ___ (地图) of our school.",
+    "stemZh": "这是一张我们学校的地图。",
+    "options": [
+      "map",
+      "maps",
+      "map's",
+      "a map"
+    ],
+    "optionsZh": [
+      "地图",
+      "地图",
+      "地图的",
+      "一张地图"
+    ],
+    "answer": 0,
+    "answerText": "map",
+    "explanation": "a map of our school 意为“一张我们学校的地图”，此处用单数 map。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "This is a map ___ our school.",
+    "stemZh": "这是一张我们学校的地图。",
+    "options": [
+      "of",
+      "for",
+      "to",
+      "with"
+    ],
+    "optionsZh": [
+      "……的",
+      "为",
+      "到",
+      "和"
+    ],
+    "answer": 0,
+    "answerText": "of",
+    "explanation": "of 结构表所属，a map of our school 意为“一张我们学校的地图”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "There is a big tree ___ front of the classroom building. (填介词)",
+    "stemZh": "教学楼前面有一棵大树。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在……上",
+      "在",
+      "到"
+    ],
+    "answer": 0,
+    "answerText": "in",
+    "explanation": "in front of 意为“在……（外部）前面”，填 in。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "The teachers' office is next ___ the art room.",
+    "stemZh": "教师办公室紧邻美术教室。",
+    "options": [
+      "to",
+      "for",
+      "at",
+      "of"
+    ],
+    "optionsZh": [
+      "到",
+      "为",
+      "在",
+      "的"
+    ],
+    "answer": 0,
+    "answerText": "to",
+    "explanation": "next to 是固定搭配，意为“紧邻、在……旁边”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The dining hall is ___ from the gym.",
+    "stemZh": "食堂在体育馆对面。",
+    "options": [
+      "across",
+      "next",
+      "front",
+      "between"
+    ],
+    "optionsZh": [
+      "对面",
+      "紧邻",
+      "前面",
+      "之间"
+    ],
+    "answer": 0,
+    "answerText": "across",
+    "explanation": "across from 是固定搭配，意为“在……对面”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The library is between the classroom building ___ the dining hall.",
+    "stemZh": "图书馆在教学楼和食堂之间。",
+    "options": [
+      "and",
+      "or",
+      "but",
+      "with"
+    ],
+    "optionsZh": [
+      "和",
+      "或者",
+      "但是",
+      "和……一起"
+    ],
+    "answer": 0,
+    "answerText": "and",
+    "explanation": "between...and... 是固定结构，表示“在……和……之间”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "There is a computer and some books on the teacher's desk. 该句谓语用 is 是因为：",
+    "stemZh": "讲台上有一台电脑和一些书。该句谓语用 is 是因为：",
+    "options": [
+      "就近原则，离 be 动词最近的主语 a computer 是单数",
+      "teacher's desk 是单数",
+      "books 是不可数名词",
+      "there be 句型永远用 is"
+    ],
+    "optionsZh": [
+      "就近原则，离 be 动词最近的主语 a computer 是单数",
+      "teacher's desk 是单数",
+      "books 是不可数名词",
+      "there be 句型永远用 is"
+    ],
+    "answer": 0,
+    "answerText": "就近原则，离 be 动词最近的主语 a computer 是单数",
+    "explanation": "there be 句型遵循就近原则，be 动词由离它最近的主语决定，a computer 是单数，故用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "There is a library and two classroom buildings in our school. 关于 there be 与 have 的说法正确的是：",
+    "stemZh": "我们学校有一个图书馆和两栋教学楼。关于 there be 与 have 的说法正确的是：",
+    "options": [
+      "there be 表示“存在”，不能与 have 连用",
+      "there be 可与 have 连用",
+      "there be 表示“拥有”",
+      "there be 只能用于过去时"
+    ],
+    "optionsZh": [
+      "there be 表示“存在”，不能与 have 连用",
+      "there be 可与 have 连用",
+      "there be 表示“拥有”",
+      "there be 只能用于过去时"
+    ],
+    "answer": 0,
+    "answerText": "there be 表示“存在”，不能与 have 连用",
+    "explanation": "there be 表示“某处存在某物”，have 表示“拥有”，二者不能在同一句中连用。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The students are having a party in the classroom. There is some juice and a lot of snacks ___ each desk.",
+    "stemZh": "学生们正在教室里举行聚会。每张桌子上都有一些果汁和许多零食。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在……上",
+      "在",
+      "到"
+    ],
+    "answer": 1,
+    "answerText": "on",
+    "explanation": "果汁和零食放在桌子表面，用介词 on，on each desk 意为“在每张桌子上”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "The teachers' office is ___ the second floor.",
+    "stemZh": "教师办公室在二楼。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在……上",
+      "在",
+      "到"
+    ],
+    "answer": 1,
+    "answerText": "on",
+    "explanation": "表示在某一楼层用介词 on，on the second floor 意为“在二楼”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "—Where does Lisa often go after school?\n—To the ___. She plays tennis in it.",
+    "stemZh": "——丽莎放学后经常去哪里？\n——去体育馆。她在里面打网球。",
+    "options": [
+      "gym",
+      "library",
+      "office",
+      "lab"
+    ],
+    "optionsZh": [
+      "体育馆",
+      "图书馆",
+      "办公室",
+      "实验室"
+    ],
+    "answer": 0,
+    "answerText": "gym",
+    "explanation": "打网球的地方是体育馆 gym。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Tom sits in the front of the classroom while John sits at the ___ of it.",
+    "stemZh": "汤姆坐在教室的前部，而约翰坐在教室的后部。",
+    "options": [
+      "back",
+      "front",
+      "left",
+      "right"
+    ],
+    "optionsZh": [
+      "后部",
+      "前部",
+      "左边",
+      "右边"
+    ],
+    "answer": 0,
+    "answerText": "back",
+    "explanation": "与 in the front of 相对，at the back of 意为“在……的后部”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—Is there a gym in your school?\n—No, there ___.",
+    "stemZh": "——你们学校有体育馆吗？\n——不，没有。",
+    "options": [
+      "isn't",
+      "aren't",
+      "hasn't",
+      "haven't"
+    ],
+    "optionsZh": [
+      "不是",
+      "不是",
+      "没有",
+      "没有"
+    ],
+    "answer": 0,
+    "answerText": "isn't",
+    "explanation": "Is there...? 的否定回答是 No, there isn't.",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Are there ___ books in the library?\n—Yes, there are.",
+    "stemZh": "——图书馆里有一些书吗？\n——是的，有。",
+    "options": [
+      "some",
+      "any",
+      "a",
+      "an"
+    ],
+    "optionsZh": [
+      "一些",
+      "任何",
+      "一个",
+      "一个"
+    ],
+    "answer": 1,
+    "answerText": "any",
+    "explanation": "一般疑问句中表示“一些”用 any。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "There is a clock and two pictures on the wall. 句中 on the wall 与 in the wall 的区别是：",
+    "stemZh": "墙上有一个钟和两幅画。句中 on the wall 与 in the wall 的区别是：",
+    "options": [
+      "on the wall 指在墙面表面，in the wall 指在墙里面",
+      "两者完全相同",
+      "on the wall 指在墙里面",
+      "in the wall 指在墙面表面"
+    ],
+    "optionsZh": [
+      "on the wall 指在墙面表面，in the wall 指在墙里面",
+      "两者完全相同",
+      "on the wall 指在墙里面",
+      "in the wall 指在墙面表面"
+    ],
+    "answer": 0,
+    "answerText": "on the wall 指在墙面表面，in the wall 指在墙里面",
+    "explanation": "on the wall 表示物体挂在墙面表面，in the wall 表示嵌在墙体内部。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "—Excuse me, ___ is the school library?\n—Go straight and turn left. It's on your right.",
+    "stemZh": "——打扰一下，学校图书馆在哪里？\n——直走然后左转。它在你的右边。",
+    "options": [
+      "what",
+      "where",
+      "who",
+      "how"
+    ],
+    "optionsZh": [
+      "什么",
+      "哪里",
+      "谁",
+      "怎样"
+    ],
+    "answer": 1,
+    "answerText": "where",
+    "explanation": "询问地点用 where，Excuse me, where is...? 是问路常用句型。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Excuse me, where is the school library?\n—Go straight and turn left. It's ___ your right.",
+    "stemZh": "——打扰一下，学校图书馆在哪里？\n——直走然后左转。它在你的右边。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在……上",
+      "在",
+      "到"
+    ],
+    "answer": 1,
+    "answerText": "on",
+    "explanation": "on your right 是固定搭配，意为“在你的右边”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The teachers' office is on the second floor. 句中 teachers' 的正确形式是：",
+    "stemZh": "教师办公室在二楼。句中 teachers' 的正确形式是：",
+    "options": [
+      "复数名词所有格，只加 '",
+      "单数名词所有格，加 's",
+      "名词复数，加 s",
+      "形容词性物主代词"
+    ],
+    "optionsZh": [
+      "复数名词所有格，只加 '",
+      "单数名词所有格，加 's",
+      "名词复数，加 s",
+      "形容词性物主代词"
+    ],
+    "answer": 0,
+    "answerText": "复数名词所有格，只加 '",
+    "explanation": "teachers 是以 s 结尾的复数名词，其所有格只加 '，即 teachers'。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "There ___ any milk in the glass.",
+    "stemZh": "杯子里没有牛奶。",
+    "options": [
+      "isn't",
+      "aren't",
+      "hasn't",
+      "haven't"
+    ],
+    "optionsZh": [
+      "不是",
+      "不是",
+      "没有",
+      "没有"
+    ],
+    "answer": 0,
+    "answerText": "isn't",
+    "explanation": "milk 是不可数名词，there be 否定句用 isn't。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "There ___ some books and a pen on the desk.",
+    "stemZh": "桌子上有一些书和一支钢笔。",
+    "options": [
+      "is",
+      "are",
+      "have",
+      "has"
+    ],
+    "optionsZh": [
+      "有",
+      "有",
+      "有",
+      "有"
+    ],
+    "answer": 1,
+    "answerText": "are",
+    "explanation": "就近原则：离 be 动词最近的主语 some books 是复数，用 are。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Are there any computers in your classroom?\n—Yes. There ___ a computer on the teacher's desk.",
+    "stemZh": "——你们教室里有电脑吗？\n——是的。讲台上有一台电脑。",
+    "options": [
+      "is",
+      "are",
+      "have",
+      "has"
+    ],
+    "optionsZh": [
+      "有",
+      "有",
+      "有",
+      "有"
+    ],
+    "answer": 0,
+    "answerText": "is",
+    "explanation": "主语 a computer 是单数，there be 句型用 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The dining hall is across from the gym. We can see it when we stand at the gate of the gym. 句中 across from 意为：",
+    "stemZh": "食堂在体育馆对面。我们站在体育馆门口就能看到它。句中 across from 意为：",
+    "options": [
+      "在……对面",
+      "紧邻",
+      "在……前面",
+      "在……之间"
+    ],
+    "optionsZh": [
+      "在……对面",
+      "紧邻",
+      "在……前面",
+      "在……之间"
+    ],
+    "answer": 0,
+    "answerText": "在……对面",
+    "explanation": "across from 表示“在……对面”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "This is ___ art room and the art room is very big.",
+    "stemZh": "这是一间美术教室，美术教室非常大。",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "/"
+    ],
+    "optionsZh": [
+      "一个",
+      "一个",
+      "这个",
+      "不填"
+    ],
+    "answer": 1,
+    "answerText": "an",
+    "explanation": "art 以元音音素开头，表示“一间美术教室”用 an。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "冠词"
+    ]
+  },
+  {
+    "stem": "There is a library and two classroom buildings in our school. 句意为：",
+    "stemZh": "There is a library and two classroom buildings in our school. 句意为：",
+    "options": [
+      "我们学校有一个图书馆和两栋教学楼。",
+      "我们学校有两个图书馆和一栋教学楼。",
+      "图书馆里有两栋教学楼。",
+      "我们学校没有图书馆。"
+    ],
+    "optionsZh": [
+      "我们学校有一个图书馆和两栋教学楼。",
+      "我们学校有两个图书馆和一栋教学楼。",
+      "图书馆里有两栋教学楼。",
+      "我们学校没有图书馆。"
+    ],
+    "answer": 0,
+    "answerText": "我们学校有一个图书馆和两栋教学楼。",
+    "explanation": "a library 是一个图书馆，two classroom buildings 是两栋教学楼，整句意为“我们学校有一个图书馆和两栋教学楼”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U3",
+    "points": [
+      "词汇辨析"
+    ]
   }
 ]
