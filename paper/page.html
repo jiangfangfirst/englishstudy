@@ -1327,38 +1327,67 @@ document.getElementById('panelClose').addEventListener('click', function () { se
 
 /* 提取所有题库中的 points 并刷新下拉选项 */
 /* 提取所有题库中的 points 和 unit，刷新下拉选项 */
+/* 提取所有题库中的 points 和 unit，刷新下拉选项（根据当前年级过滤） */
+/* 提取所有题库中的 points 和 unit，刷新下拉选项（根据当前年级过滤） */
 function extractAllPoints() {
   allAvailablePoints.clear();
   const allUnits = new Set();
   
+  // 获取当前选中的年级
+  const gradeSelect = document.getElementById('filterGrade');
+  const selectedGrade = gradeSelect ? parseInt(gradeSelect.value, 10) : NaN;
+
   ['single', 'cloze', 'dialogue', 'reading', 'spelling'].forEach(function (typeId) {
     const data = bankData[typeId];
     if (Array.isArray(data)) {
       data.forEach(function (item) {
-        // 提取知识点
+        // 提取知识点（知识点不按年级过滤，全量提供）
         if (Array.isArray(item.points)) {
           item.points.forEach(function (p) { if (p) allAvailablePoints.add(p); });
         }
-        // 提取单元
+        // 提取单元（如果选了年级，只提取该年级的单元）
         if (item.unit && typeof item.unit === 'string' && item.unit.trim()) {
-          allUnits.add(item.unit.trim());
+          if (!isNaN(selectedGrade)) {
+            // 选了特定年级，只保留该年级的单元
+            if (Number(item.grade) === selectedGrade) {
+              allUnits.add(item.unit.trim());
+            }
+          } else {
+            // 没选年级（全量），显示所有单元
+            allUnits.add(item.unit.trim());
+          }
         }
       });
     }
   });
   
-  // 渲染 unit 的 datalist
-  const unitList = document.getElementById('unitList');
-  if (unitList) {
-    unitList.innerHTML = '';
+  // 渲染单元下拉框
+  const unitSelect = document.getElementById('filterUnit');
+  if (unitSelect) {
+    const currentVal = unitSelect.value; // 记住当前选中的值
+    unitSelect.innerHTML = '<option value="">不限单元</option>'; // 重置
+    
     // 按字母顺序排序
     Array.from(allUnits).sort().forEach(function(u) {
       const opt = document.createElement('option');
       opt.value = u;
-      unitList.appendChild(opt);
+      opt.textContent = u;
+      unitSelect.appendChild(opt);
     });
+    
+    // 如果之前选的值在这个年级里依然存在，就恢复它；否则重置为空（不限单元）
+    if (currentVal && allUnits.has(currentVal)) {
+      unitSelect.value = currentVal;
+    } else {
+      unitSelect.value = '';
+    }
   }
 }
+
+// ★ 监听年级变化，动态刷新单元下拉框
+document.getElementById('filterGrade').addEventListener('change', function () {
+  extractAllPoints();
+});
 
 function syncReadingModeBtn() {
   const modeBtn = document.querySelector('.btn-mode[data-type="reading"]');
