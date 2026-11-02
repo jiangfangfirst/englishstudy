@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>题库去重工具</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Microsoft YaHei", sans-serif; background: #f1f5f9; color: #1e293b; padding: 24px 16px 60px; }
+  .wrap { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 6px; }
+  .sub { color: #64748b; font-size: 13px; margin-bottom: 16px; line-height: 1.6; }
+  .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+  .card h2 { font-size: 15px; margin: 0 0 12px; }
+
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .row label { font-size: 13px; color: #475569; font-weight: 600; }
+  select, input[type="text"] {
+    padding: 7px 10px; border: 1px solid #cbd5e1; border-radius: 6px;
+    font-size: 13px; font-family: inherit; color: #1e293b; background: #fff; outline: none;
+  }
+  select:focus, input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+
+  .drop {
+    border: 2px dashed #cbd5e1; border-radius: 10px; padding: 28px 16px;
+    text-align: center; color: #64748b; font-size: 13px; cursor: pointer;
+    transition: all .15s; background: #f8fafc;
+  }
+  .drop:hover, .drop.over { border-color: #60a5fa; background: #eff6ff; color: #1d4ed8; }
+  .drop strong { display: block; font-size: 14px; color: #334155; margin-bottom: 4px; }
+
+  textarea {
+    width: 100%; min-height: 200px; resize: vertical;
+    font-family: Consolas, Monaco, monospace; font-size: 13px; line-height: 1.6;
+    padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; outline: none;
+  }
+  textarea:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+
+  button.btn {
+    padding: 8px 16px; border-radius: 6px; border: 1px solid #cbd5e1;
+    background: #fff; color: #334155; font-size: 13px; cursor: pointer;
+    font-weight: 600; font-family: inherit;
+  }
+  button.btn:hover:not(:disabled) { border-color: #94a3b8; background: #f8fafc; }
+  button.btn.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+  button.btn.primary:hover:not(:disabled) { background: #1d4ed8; border-color: #1d4ed8; }
+  button.btn:disabled { opacity: .45; cursor: not-allowed; }
+
+  .mode-tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+  .mode-tabs button {
+    padding: 7px 14px; border: 1px solid #cbd5e1; background: #fff;
+    border-radius: 6px; cursor: pointer; font-size: 13px; color: #475569;
+    font-family: inherit;
+  }
+  .mode-tabs button.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+  .file-result {
+    border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px;
+    margin-bottom: 12px; background: #fafafa;
+  }
+  .file-result-head {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    margin-bottom: 10px;
+  }
+  .file-name { font-weight: 700; font-size: 14px; color: #1f2937; font-family: Consolas, monospace; }
+  .badge {
+    font-size: 11.5px; padding: 2px 9px; border-radius: 999px;
+    border: 1px solid #e5e7eb; background: #fff; color: #475569;
+  }
+  .badge.ok { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+  .badge.warn { background: #fffbeb; color: #b45309; border-color: #fde68a; }
+  .badge.bad { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
+  .file-result-head .btn { margin-left: auto; }
+
+  .dup-list { margin: 0; padding: 0; list-style: none; }
+  .dup-list li {
+    padding: 8px 10px; margin-bottom: 6px; background: #fff;
+    border: 1px solid #fecaca; border-radius: 6px;
+    font-size: 12.5px; line-height: 1.6;
+  }
+  .dup-list .dup-meta { color: #b91c1c; font-weight: 600; margin-bottom: 2px; }
+  .dup-list .dup-text { color: #334155; word-break: break-word; }
+  .dup-list .dup-text code {
+    background: #f3f4f6; padding: 0 4px; border-radius: 3px;
+    font-family: Consolas, monospace; font-size: 11.5px;
+  }
+  .clean-tip { color: #047857; font-size: 12.5px; padding: 6px 0; }
+
+  .summary-bar {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;
+    font-size: 13px; color: #334155;
+  }
+  .summary-bar span {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 6px;
+    padding: 6px 12px;
+  }
+  .hidden { display: none !important; }
+  .hint { font-size: 12px; color: #64748b; line-height: 1.7; margin-top: 8px; }
+  .hint code { background: #f3f4f6; padding: 1px 5px; border-radius: 3px; font-family: Consolas, monospace; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+    <h1 style="margin:0;">题库去重工具</h1>
+    <a href="page.html" style="text-decoration:none;padding:7px 14px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;color:#334155;font-size:13px;font-weight:600;">← 返回制卷页</a>
+  </div>
+  <p class="sub">
+    检查 JSON 里是否有重复数据，保留第一条、剔除其余，并下载去重后的文件。<br>
+    重复判定：标准模式按题型主键（题干 / 短文开头等，忽略大小写与多余空格）；严格模式要求两条数据完全相同。
+  </p>
+
+  <div class="card">
+    <div class="mode-tabs">
+      <button id="tabFiles" class="active">📁 选择 / 拖入文件</button>
+      <button id="tabPaste">📋 粘贴 JSON</button>
+    </div>
+
+    <div class="row">
+      <label>重复判定</label>
+      <select id="matchMode">
+        <option value="standard">标准（按题型主键，忽略大小写与多余空白）</option>
+        <option value="strict">严格（完整 JSON 完全一致才算重复）</option>
+      </select>
+    </div>
+
+    <div id="paneFiles">
+      <div class="drop" id="dropZone">
+        <strong>点击选择 JSON 文件，或把文件拖到这里</strong>
+        支持一次选 6 个（single / cloze / dialogue / reading / spelling / writing）
+        <input type="file" id="fileInput" accept=".json,application/json" multiple class="hidden">
+      </div>
+      <div class="hint">
+        文件名需与题型对应（如 <code>single.json</code>）。文件名无法识别时，会按 <code>reading</code> 以外的通用规则处理。
+      </div>
+    </div>
+
+    <div id="panePaste" class="hidden">
+      <div class="row">
+        <label>题型</label>
+        <select id="pasteType">
+          <option value="single">单项填空 single.json</option>
+          <option value="cloze">完形填空 cloze.json</option>
+          <option value="dialogue">补全对话 dialogue.json</option>
+          <option value="reading">阅读理解 reading.json</option>
+          <option value="spelling">单词拼写 spelling.json</option>
+          <option value="writing">书面表达 writing.json</option>
+        </select>
+      </div>
+      <textarea id="pasteArea" spellcheck="false" placeholder="在此粘贴 JSON 数组或单个对象"></textarea>
+      <div class="row" style="margin-top:10px;">
+        <button class="btn primary" id="btnPasteRun">开始检查</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="summaryBar" class="summary-bar hidden"></div>
+  <div id="results"></div>
+
+  <div class="row hidden" id="downloadAllRow" style="margin-top:4px;">
+    <button class="btn primary" id="btnDownloadAll">⬇ 下载全部去重后的文件</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  const FILE_TYPE_MAP = {
+    'single.json': 'single',
+    'cloze.json': 'cloze',
+    'dialogue.json': 'dialogue',
+    'reading.json': 'reading',
+    'spelling.json': 'spelling',
+    'writing.json': 'writing'
+  };
+
+  const TYPE_LABEL = {
+    single: '单项填空', cloze: '完形填空', dialogue: '补全对话',
+    reading: '阅读理解', spelling: '单词拼写', writing: '书面表达', unknown: '未知题型'
+  };
+
+  let results = []; // 每个文件的结果
+
+  const els = {
+    tabFiles: document.getElementById('tabFiles'),
+    tabPaste: document.getElementById('tabPaste'),
+    paneFiles: document.getElementById('paneFiles'),
+    panePaste: document.getElementById('panePaste'),
+    dropZone: document.getElementById('dropZone'),
+    fileInput: document.getElementById('fileInput'),
+    pasteType: document.getElementById('pasteType'),
+    pasteArea: document.getElementById('pasteArea'),
+    btnPasteRun: document.getElementById('btnPasteRun'),
+    matchMode: document.getElementById('matchMode'),
+    results: document.getElementById('results'),
+    summaryBar: document.getElementById('summaryBar'),
+    downloadAllRow: document.getElementById('downloadAllRow'),
+    btnDownloadAll: document.getElementById('btnDownloadAll')
+  };
+
+  /* ---------------- 模式切换 ---------------- */
+  els.tabFiles.addEventListener('click', function () {
+    els.tabFiles.classList.add('active');
+    els.tabPaste.classList.remove('active');
+    els.paneFiles.classList.remove('hidden');
+    els.panePaste.classList.add('hidden');
+  });
+  els.tabPaste.addEventListener('click', function () {
+    els.tabPaste.classList.add('active');
+    els.tabFiles.classList.remove('active');
+    els.panePaste.classList.remove('hidden');
+    els.paneFiles.classList.add('hidden');
+  });
+
+  /* ---------------- 文件选择 / 拖拽 ---------------- */
+  els.dropZone.addEventListener('click', function () { els.fileInput.click(); });
+  els.fileInput.addEventListener('change', function () {
+    handleFiles(this.files);
+    this.value = '';
+  });
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    els.dropZone.addEventListener(ev, function (e) {
+      e.preventDefault();
+      els.dropZone.classList.add('over');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    els.dropZone.addEventListener(ev, function (e) {
+      e.preventDefault();
+      els.dropZone.classList.remove('over');
+    });
+  });
+  els.dropZone.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files) handleFiles(e.dataTransfer.files);
+  });
+
+  async function handleFiles(fileList) {
+    const files = Array.prototype.slice.call(fileList || []);
+    if (!files.length) return;
+    results = [];
+    renderAll();
+
+    for (const f of files) {
+      const type = FILE_TYPE_MAP[f.name.toLowerCase()] || guessType(f.name);
+      let text;
+      try {
+        text = await f.text();
+      } catch (e) {
+        results.push({ fileName: f.name, type: type, error: '读取失败：' + e.message });
+        continue;
+      }
+      results.push(analyze(text, f.name, type));
+    }
+    renderAll();
+  }
+
+  function guessType(name) {
+    const n = name.toLowerCase();
+    if (n.indexOf('single') !== -1) return 'single';
+    if (n.indexOf('cloze') !== -1) return 'cloze';
+    if (n.indexOf('dialogue') !== -1) return 'dialogue';
+    if (n.indexOf('reading') !== -1) return 'reading';
+    if (n.indexOf('spelling') !== -1) return 'spelling';
+    if (n.indexOf('writing') !== -1) return 'writing';
+    return 'unknown';
+  }
+
+  /* ---------------- 粘贴 ---------------- */
+  els.btnPasteRun.addEventListener('click', function () {
+    const raw = els.pasteArea.value.trim();
+    if (!raw) { alert('请先粘贴 JSON'); return; }
+    const type = els.pasteType.value;
+    const fileName = type + '.json';
+    results = [analyze(raw, fileName, type)];
+    renderAll();
+  });
+
+  /* ---------------- 核心：解析 + 去重 ---------------- */
+  function analyze(rawText, fileName, type) {
+    let data;
+    try {
+      data = JSON.parse(rawText);
+    } catch (e) {
+      return { fileName: fileName, type: type, error: 'JSON 解析失败：' + e.message };
+    }
+
+    let note = '';
+    if (data && !Array.isArray(data) && typeof data === 'object') {
+      data = [data];
+      note = '输入为单个对象，已按 1 条数组处理';
+    }
+    if (!Array.isArray(data)) {
+      return { fileName: fileName, type: type, error: '根节点必须是数组或对象' };
+    }
+    if (data.length === 0) {
+      return { fileName: fileName, type: type, error: '数组为空' };
+    }
+
+    const mode = els.matchMode.value;
+    const seen = new Map(); // key -> 首次出现的索引
+    const unique = [];
+    const duplicates = [];
+
+    data.forEach(function (item, idx) {
+      const key = makeKey(item, type, mode);
+      if (seen.has(key)) {
+        duplicates.push({
+          index: idx,
+          keptIndex: seen.get(key),
+          summary: summarize(item, type)
+        });
+      } else {
+        seen.set(key, idx);
+        unique.push(item);
+      }
+    });
+
+    return {
+      fileName: fileName,
+      type: type,
+      note: note,
+      total: data.length,
+      uniqueCount: unique.length,
+      dupCount: duplicates.length,
+      duplicates: duplicates,
+      uniqueData: unique
+    };
+  }
+
+  /* 标准化：去首尾空白、合并连续空白、统一小写 */
+  function norm(s) {
+    return String(s == null ? '' : s).replace(/\s+/g, ' ').trim().toLowerCase();
+  }
+
+  function makeKey(item, type, mode) {
+    if (mode === 'strict') {
+      return JSON.stringify(item);
+    }
+    switch (type) {
+      case 'single':
+      case 'spelling':
+        return type + '|' + norm(item && item.stem);
+      case 'cloze':
+        return 'cloze|' + norm(item && item.text).slice(0, 120);
+      case 'reading':
+        return 'reading|' + norm(item && item.type) + '|' + norm(item && item.text).slice(0, 120);
+      case 'dialogue':
+        return 'dialogue|' + norm(item && item.text).slice(0, 120);
+      case 'writing':
+        return 'writing|' + norm(item && item.prompt).slice(0, 120);
+      default:
+        return JSON.stringify(item);
+    }
+  }
+
+  function summarize(item, type) {
+    let s = '';
+    if (type === 'single' || type === 'spelling') s = item.stem || '';
+    else if (type === 'writing') s = item.prompt || '';
+    else s = item.text || '';
+    s = String(s).replace(/\s+/g, ' ').trim();
+    return s.length > 110 ? s.slice(0, 110) + '…' : s;
+  }
+
+  /* ---------------- 渲染 ---------------- */
+  function renderAll() {
+    els.results.innerHTML = '';
+
+    if (!results.length) {
+      els.summaryBar.classList.add('hidden');
+      els.downloadAllRow.classList.add('hidden');
+      return;
+    }
+
+    let totalItems = 0, totalDup = 0, okFiles = 0, errFiles = 0;
+
+    results.forEach(function (r, ri) {
+      if (r.error) {
+        errFiles++;
+        els.results.appendChild(renderError(r, ri));
+        return;
+      }
+      okFiles++;
+      totalItems += r.total;
+      totalDup += r.dupCount;
+      els.results.appendChild(renderFileResult(r, ri));
+    });
+
+    els.summaryBar.innerHTML =
+      '<span>文件 ' + results.length + ' 个</span>' +
+      '<span>成功 ' + okFiles + ' 个</span>' +
+      '<span>失败 ' + errFiles + ' 个</span>' +
+      '<span>总条目 ' + totalItems + ' 条</span>' +
+      '<span>重复 ' + totalDup + ' 条</span>';
+    els.summaryBar.classList.remove('hidden');
+
+    const downloadable = results.filter(function (r) { return !r.error && r.dupCount > 0; });
+    if (downloadable.length > 0) {
+      els.downloadAllRow.classList.remove('hidden');
+    } else {
+      els.downloadAllRow.classList.add('hidden');
+    }
+  }
+
+  function renderError(r, ri) {
+    const box = document.createElement('div');
+    box.className = 'file-result';
+    box.innerHTML =
+      '<div class="file-result-head">' +
+        '<span class="file-name">' + escapeHtml(r.fileName) + '</span>' +
+        '<span class="badge bad">解析失败</span>' +
+      '</div>' +
+      '<div class="dup-list"><li><div class="dup-text" style="color:#b91c1c;">' + escapeHtml(r.error) + '</div></li></div>';
+    return box;
+  }
+
+  function renderFileResult(r, ri) {
+    const box = document.createElement('div');
+    box.className = 'file-result';
+
+    const head = document.createElement('div');
+    head.className = 'file-result-head';
+
+    const name = document.createElement('span');
+    name.className = 'file-name';
+    name.textContent = r.fileName;
+    head.appendChild(name);
+
+    const typeBadge = document.createElement('span');
+    typeBadge.className = 'badge';
+    typeBadge.textContent = TYPE_LABEL[r.type] || r.type;
+    head.appendChild(typeBadge);
+
+    const totalBadge = document.createElement('span');
+    totalBadge.className = 'badge';
+    totalBadge.textContent = '共 ' + r.total + ' 条';
+    head.appendChild(totalBadge);
+
+    const dupBadge = document.createElement('span');
+    if (r.dupCount > 0) {
+      dupBadge.className = 'badge warn';
+      dupBadge.textContent = '重复 ' + r.dupCount + ' 条';
+    } else {
+      dupBadge.className = 'badge ok';
+      dupBadge.textContent = '无重复';
+    }
+    head.appendChild(dupBadge);
+
+    if (r.dupCount > 0) {
+      const dl = document.createElement('button');
+      dl.className = 'btn';
+      dl.textContent = '⬇ 下载去重后 ' + r.fileName;
+      dl.addEventListener('click', function () { downloadFile(r); });
+      head.appendChild(dl);
+    }
+
+    box.appendChild(head);
+
+    if (r.note) {
+      const note = document.createElement('div');
+      note.className = 'hint';
+      note.textContent = '⚠ ' + r.note;
+      box.appendChild(note);
+    }
+
+    if (r.dupCount === 0) {
+      const tip = document.createElement('div');
+      tip.className = 'clean-tip';
+      tip.textContent = '✓ 未发现重复数据，无需处理。';
+      box.appendChild(tip);
+      return box;
+    }
+
+    const ul = document.createElement('ul');
+    ul.className = 'dup-list';
+    r.duplicates.forEach(function (d) {
+      const li = document.createElement('li');
+      const meta = document.createElement('div');
+      meta.className = 'dup-meta';
+      meta.textContent = '第 ' + (d.index + 1) + ' 条 与 第 ' + (d.keptIndex + 1) + ' 条 重复（保留第 ' + (d.keptIndex + 1) + ' 条，剔除本条）';
+      const text = document.createElement('div');
+      text.className = 'dup-text';
+      text.textContent = d.summary || '（无文本摘要）';
+      li.appendChild(meta);
+      li.appendChild(text);
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+
+    const after = document.createElement('div');
+    after.className = 'hint';
+    after.textContent = '去重后共 ' + r.uniqueCount + ' 条（原 ' + r.total + ' 条，剔除 ' + r.dupCount + ' 条）。';
+    box.appendChild(after);
+
+    return box;
+  }
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  /* ---------------- 下载 ---------------- */
+  function downloadFile(r) {
+    const json = JSON.stringify(r.uniqueData, null, 2);
+    const blob = new Blob([json], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = r.fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  els.btnDownloadAll.addEventListener('click', function () {
+    const list = results.filter(function (r) { return !r.error && r.dupCount > 0; });
+    list.forEach(function (r, i) {
+      setTimeout(function () { downloadFile(r); }, i * 400);
+    });
+  });
+})();
+</script>
+</body>
+</html>
