@@ -1533,5 +1533,315 @@
     "keywords": [
       "advantage"
     ]
+  },
+  {
+    "stem": "Books are always ___ (fill) with fun and interesting facts.",
+    "stemZh": "书籍总是充满趣味和有趣的事实。",
+    "answer": "filled",
+    "explanation": "be filled with 是固定搭配，意为“充满……”。fill 的过去分词为 filled，此处构成被动结构作表语。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U1",
+    "points": [
+      "被动语态",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "In Nakeli ancient town, the tea shop owners warmly invite ___ to taste Pu'er tea. (travel)",
+    "stemZh": "在那柯里古镇，茶馆老板热情地邀请游客品尝普洱茶。",
+    "answer": "travelers",
+    "explanation": "根据句意“邀请……品尝普洱茶”可知，此处指游客。travel 的名词形式 travel(l)er 意为“游客”，此处用复数 travelers 表示泛指。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U3",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Let's start ___ trip from Xishuangbanna, one of the key production areas of tea. (we)",
+    "stemZh": "让我们从西双版纳——茶叶的关键产区之一——开始我们的旅程吧。",
+    "answer": "our",
+    "explanation": "trip 为名词，前面需要用形容词性物主代词修饰。we 的形容词性物主代词为 our，our trip 意为“我们的旅程”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "You're happier when you're ___ with your friends. (ride)",
+    "stemZh": "当你和朋友们一起骑车时，你会更快乐。",
+    "answer": "riding",
+    "explanation": "when 引导的时间状语从句中，主语 you 与 ride 是主动关系，且表示正在进行的动作，故用现在进行时 are riding。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U1",
+    "points": [
+      "现在进行时",
+      "状语从句"
+    ]
+  },
+  {
+    "stem": "Want to become happier, stronger and ___? Why not go biking? (healthy)",
+    "stemZh": "想变得更快乐、更强壮、更健康吗？为什么不骑自行车呢？",
+    "answer": "healthier",
+    "explanation": "and 连接三个并列的比较级，happier 和 stronger 均为比较级，healthy 也应用比较级形式 healthier，表示“更健康”。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U2",
+    "points": [
+      "形容词",
+      "比较级与最高级"
+    ]
+  },
+  {
+    "stem": "It is ___ to enjoy \"a slow life\" in Yunnan along the Ancient Tea Horse Road. (relax)",
+    "stemZh": "沿着茶马古道在云南享受“慢生活”是令人放松的。",
+    "answer": "relaxing",
+    "explanation": "It is + adj. + to do sth. 句型中，需要用形容词作表语。relax 的形容词形式 relaxing 意为“令人放松的”，修饰事物“享受慢生活”这件事。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U3",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Dukezong ancient town, the ___ station of the trip, tells stories connecting Yunnan to the world. (six)",
+    "stemZh": "独克宗古城——旅程的第六站——讲述着连接云南与世界的故事。",
+    "answer": "sixth",
+    "explanation": "根据 the 和 station 可知，此处需要序数词表示“第几站”。six 的序数词为 sixth，the sixth station 意为“第六站”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U8",
+    "points": [
+      "数词"
+    ]
+  },
+  {
+    "stem": "Visitors ___ ride a horse around Shaxi ancient town to enjoy its beauty. (usual)",
+    "stemZh": "游客们通常会骑马环游沙溪古镇，欣赏它的美景。",
+    "answer": "usually",
+    "explanation": "此处需要一个副词修饰动词 ride，表示频率。usual 的副词形式 usually 意为“通常”，符合语境。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U2",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The Chinese table tennis team won great prizes! They achieved their dreams by working for them, not by hoping for them ___ (simple).",
+    "stemZh": "中国乒乓球队赢得了大奖！他们是通过努力奋斗而非仅仅空想来实现梦想的。",
+    "answer": "simply",
+    "explanation": "修饰动词 hoping 需要用副词。simple 的副词形式 simply 意为“仅仅；只是”，not simply... 表示“并非只是……”。",
+    "grade": 9,
+    "term": 1,
+    "unit": "9A-U3",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I plan to ___ (改善) my reading habit this summer.",
+    "stemZh": "我计划今年夏天改善我的阅读习惯。",
+    "answer": "improve",
+    "explanation": "根据汉语提示“改善”可知填 improve。plan to do sth. 意为“计划做某事”，to 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U2",
+    "points": [
+      "词汇辨析",
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "Reading can open up our eyes and ___ (丰富) our mind.",
+    "stemZh": "阅读可以开阔我们的眼界，丰富我们的头脑。",
+    "answer": "enrich",
+    "explanation": "根据汉语提示“丰富”可知填 enrich。and 连接两个并列的动词原形 open 和 enrich，情态动词 can 后接动词原形。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U1",
+    "points": [
+      "词汇辨析",
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "We can learn a lot from different ___ (种类) of books.",
+    "stemZh": "我们可以从不同种类的书中学到很多东西。",
+    "answer": "kinds",
+    "explanation": "根据汉语提示“种类”可知填 kind。different 后接可数名词复数，kind 的复数形式为 kinds。different kinds of 意为“不同种类的”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "It's necessary to take ___ (笔记) while reading.",
+    "stemZh": "阅读时做笔记是有必要的。",
+    "answer": "notes",
+    "explanation": "根据汉语提示“笔记”可知填 note。take notes 是固定搭配，意为“做笔记”，此处用复数形式 notes。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U1",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I believe I will make great ___ (进步) through hard work.",
+    "stemZh": "我相信通过努力我会取得很大进步。",
+    "answer": "progress",
+    "explanation": "根据汉语提示“进步”可知填 progress。make progress 是固定搭配，意为“取得进步”，progress 为不可数名词，用原形。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U2",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Both books and movies have their own ___ (优势). (首字母提示：a)",
+    "stemZh": "书籍和电影都有各自的优势。",
+    "answer": "advantages",
+    "explanation": "根据汉语提示“优势”及首字母 a 可知填 advantage。their own 后接可数名词复数，advantages 意为“优势；优点”。",
+    "grade": 9,
+    "term": 1,
+    "unit": "9A-U1",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Movies have ___ (声音) and vivid pictures to make stories exciting. (首字母提示：s)",
+    "stemZh": "电影有声音和生动的画面，使故事激动人心。",
+    "answer": "sound",
+    "explanation": "根据汉语提示“声音”及首字母 s 可知填 sound。sound 在此处作名词，意为“声音”，与 pictures 并列。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U4",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Reading helps to develop our ___ (想象力). (首字母提示：i)",
+    "stemZh": "阅读有助于培养我们的想象力。",
+    "answer": "imagination",
+    "explanation": "根据汉语提示“想象力”及首字母 i 可知填 imagination。our 后接名词，imagination 意为“想象力”，不可数。",
+    "grade": 9,
+    "term": 1,
+    "unit": "9A-U4",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We can get ___ (快乐) and knowledge from both books and movies. (首字母提示：j)",
+    "stemZh": "我们可以从书籍和电影中获得快乐和知识。",
+    "answer": "joy",
+    "explanation": "根据汉语提示“快乐”及首字母 j 可知填 joy。joy 意为“快乐；喜悦”，与 knowledge 并列作 get 的宾语。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "It's a good way to ___ (度过) our spare time. (首字母提示：s)",
+    "stemZh": "这是度过业余时间的好方式。",
+    "answer": "spend",
+    "explanation": "根据汉语提示“度过”及首字母 s 可知填 spend。spend time 意为“度过时间”，a good way to do sth. 中 to 后接动词原形。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U2",
+    "points": [
+      "动词",
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "We should eat more ___ (新鲜的) vegetables and fruit.",
+    "stemZh": "我们应该多吃新鲜蔬菜和水果。",
+    "answer": "fresh",
+    "explanation": "根据汉语提示“新鲜的”可知填 fresh。fresh 作形容词修饰 vegetables and fruit，意为“新鲜的”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "It's necessary to take exercise ___ (有规律地).",
+    "stemZh": "有规律地锻炼是有必要的。",
+    "answer": "regularly",
+    "explanation": "根据汉语提示“有规律地”可知填 regularly。该词为副词，修饰动词 take exercise，表示频率。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U2",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Staying up late is ___ (有害的) to our health.",
+    "stemZh": "熬夜对我们的健康有害。",
+    "answer": "harmful",
+    "explanation": "根据汉语提示“有害的”可知填 harmful。be harmful to 是固定搭配，意为“对……有害”。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U2",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Good sleep can make us feel ___ (精力充沛的) the next day.",
+    "stemZh": "良好的睡眠能让我们第二天感到精力充沛。",
+    "answer": "energetic",
+    "explanation": "根据汉语提示“精力充沛的”可知填 energetic。feel 为系动词，后接形容词作表语，energetic 意为“精力充沛的”。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U1",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We should develop good living ___ (习惯).",
+    "stemZh": "我们应该养成良好的生活习惯。",
+    "answer": "habits",
+    "explanation": "根据汉语提示“习惯”可知填 habit。living habits 意为“生活习惯”，此处表示泛指，用复数形式 habits。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
   }
 ]
