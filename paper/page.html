@@ -1720,10 +1720,23 @@ function generateExam() {
       picked = shuffle(data.slice()).slice(0, want);
     }
 
-    if (picked.length < want) {
+        if (picked.length < want) {
       warnings.push(type.name + '：需要 ' + want + ' ' + type.unit +
         '，仅抽到 ' + picked.length + ' ' + type.unit);
     }
+
+    // ★ 新增：如果选了年级，但题库里完全没标这个年级的数据，给出明确提示
+    if (params.grade && type.id !== 'reading') {
+      const hasTargetGrade = data.some(function(item) { return item.grade === params.grade; });
+      const hasLowerGrade = data.some(function(item) { return item.grade && item.grade < params.grade; });
+      
+      if (!hasTargetGrade && !hasLowerGrade) {
+        warnings.push(type.name + '：题库暂无 ' + params.grade + ' 年级及更低年级数据，已全部按通用题抽取');
+      } else if (!hasTargetGrade) {
+        warnings.push(type.name + '：题库暂无 ' + params.grade + ' 年级数据，已自动回退到低年级或通用题');
+      }
+    }
+    
     selections[type.id] = picked;
   });
 
