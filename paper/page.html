@@ -1528,7 +1528,25 @@ function pullItems(data, want, grade, unit, targetPoint) {
   }
 
   // 1. 不限制年级：全量随机
+    // 1. 不限制年级
   if (!grade) {
+    // 若指定了单元，优先抽该单元的题
+    if (unit) {
+      const u = String(unit).trim().toUpperCase();
+      const inUnit = pool.filter(function (i) {
+        return i.unit && String(i.unit).trim().toUpperCase() === u;
+      });
+      const outUnit = pool.filter(function (i) {
+        return !i.unit || String(i.unit).trim().toUpperCase() !== u;
+      });
+      shuffle(inUnit); shuffle(outUnit);
+      // 该单元不足 want 时，用其它单元补齐（与你有年级时的分层补齐风格一致）
+      //const picked = inUnit.concat(outUnit).slice(0, want);
+      const picked = inUnit.slice(0, want);
+      picked.forEach(function (p) { p._used = true; });
+      return picked;
+    }
+
     shuffle(pool);
     const picked = pool.slice(0, want);
     picked.forEach(function (p) { p._used = true; });

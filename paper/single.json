@@ -8870,5 +8870,1185 @@
     "points": [
       "词汇辨析"
     ]
+  },
+  {
+    "stem": "—___ do you like English?\n—Because I think it's very useful.",
+    "stemZh": "——你为什么喜欢英语？\n——因为我认为它非常有用。",
+    "options": [
+      "What",
+      "Why",
+      "How",
+      "Where"
+    ],
+    "optionsZh": [
+      "什么",
+      "为什么",
+      "怎样",
+      "哪里"
+    ],
+    "answer": 1,
+    "answerText": "Why",
+    "explanation": "答语用 Because 说明原因，故提问用 Why。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Why do you like English?\n—___ I think it's very useful.",
+    "stemZh": "——你为什么喜欢英语？\n——因为我认为它非常有用。",
+    "options": [
+      "So",
+      "Because",
+      "But",
+      "And"
+    ],
+    "optionsZh": [
+      "所以",
+      "因为",
+      "但是",
+      "和"
+    ],
+    "answer": 1,
+    "answerText": "Because",
+    "explanation": "Why 询问原因，用 Because 引导原因状语从句作答。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "连词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—___ don't you like math?\n—Because it's difficult.",
+    "stemZh": "——你为什么不喜欢数学？\n——因为它很难。",
+    "options": [
+      "What",
+      "Why",
+      "How",
+      "Who"
+    ],
+    "optionsZh": [
+      "什么",
+      "为什么",
+      "怎样",
+      "谁"
+    ],
+    "answer": 1,
+    "answerText": "Why",
+    "explanation": "答语用 Because 说明原因，故用 Why don't you...? 提问。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "We have an art lesson ___ Friday. It's my favorite.",
+    "stemZh": "我们周五有一节美术课。那是我的最爱。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 1,
+    "answerText": "on",
+    "explanation": "表示具体的星期几用介词 on，on Friday 意为“在周五”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "—What time does your mother go to work?\n—___ 7:30 in the morning.",
+    "stemZh": "——你妈妈几点去上班？\n——早上7:30。",
+    "options": [
+      "In",
+      "On",
+      "At",
+      "To"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 2,
+    "answerText": "At",
+    "explanation": "表示具体时刻用介词 at，at 7:30 意为“在7:30”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "We have an English lesson ___ the morning.",
+    "stemZh": "我们上午有一节英语课。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 0,
+    "answerText": "in",
+    "explanation": "表示上午、下午、晚上用介词 in，in the morning 意为“在上午”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "I think maths is difficult ___ interesting.",
+    "stemZh": "我认为数学很难但很有趣。",
+    "options": [
+      "and",
+      "but",
+      "because",
+      "so"
+    ],
+    "optionsZh": [
+      "和",
+      "但是",
+      "因为",
+      "所以"
+    ],
+    "answer": 1,
+    "answerText": "but",
+    "explanation": "difficult 与 interesting 语义相对，用连词 but 表转折。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "—Why do you like history?\n—Because it's ___ (有趣的).",
+    "stemZh": "——你为什么喜欢历史？\n——因为它很有趣。",
+    "options": [
+      "interesting",
+      "interested",
+      "interest",
+      "interests"
+    ],
+    "optionsZh": [
+      "有趣的",
+      "感兴趣的",
+      "兴趣",
+      "使感兴趣"
+    ],
+    "answer": 0,
+    "answerText": "interesting",
+    "explanation": "修饰事物（历史）用 interesting，意为“有趣的”；interested 修饰人。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The story is ___, and I'm ___ in it.",
+    "stemZh": "这个故事很有趣，我对它感兴趣。",
+    "options": [
+      "interesting; interested",
+      "interested; interesting",
+      "interesting; interesting",
+      "interested; interested"
+    ],
+    "optionsZh": [
+      "有趣的；感兴趣的",
+      "感兴趣的；有趣的",
+      "有趣的；有趣的",
+      "感兴趣的；感兴趣的"
+    ],
+    "answer": 0,
+    "answerText": "interesting; interested",
+    "explanation": "interesting 修饰物（故事），interested 修饰人（be interested in 对……感兴趣）。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "—What's your favourite ___?\n—Math. It's interesting.",
+    "stemZh": "——你最喜欢的科目是什么？\n——数学。它很有趣。",
+    "options": [
+      "subject",
+      "subjects",
+      "subject's",
+      "a subject"
+    ],
+    "optionsZh": [
+      "科目",
+      "科目",
+      "科目的",
+      "一个科目"
+    ],
+    "answer": 0,
+    "answerText": "subject",
+    "explanation": "favourite 后接单数名词 subject，favourite subject 意为“最喜欢的科目”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "—What is your favourite subject?\n—___.",
+    "stemZh": "——你最喜欢的科目是什么？\n——数学。",
+    "options": [
+      "Maths",
+      "Monday",
+      "Music room",
+      "Map"
+    ],
+    "optionsZh": [
+      "数学",
+      "星期一",
+      "音乐教室",
+      "地图"
+    ],
+    "answer": 0,
+    "answerText": "Maths",
+    "explanation": "问题询问最喜欢的科目，Maths（数学）是一门学科，符合答语。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "___ is my favourite subject. I like numbers.",
+    "stemZh": "数学是我最喜欢的科目。我喜欢数字。",
+    "options": [
+      "Maths",
+      "History",
+      "Biology",
+      "Geography"
+    ],
+    "optionsZh": [
+      "数学",
+      "历史",
+      "生物",
+      "地理"
+    ],
+    "answer": 0,
+    "answerText": "Maths",
+    "explanation": "喜欢数字说明最喜欢的是数学 Maths。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "___ is my favourite subject. It is about life and living things.",
+    "stemZh": "生物是我最喜欢的科目。它是关于生命和生物的。",
+    "options": [
+      "Biology",
+      "Maths",
+      "History",
+      "Art"
+    ],
+    "optionsZh": [
+      "生物",
+      "数学",
+      "历史",
+      "美术"
+    ],
+    "answer": 0,
+    "answerText": "Biology",
+    "explanation": "关于生命和生物的学科是生物学 Biology（bio 生命 + logy 学科）。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "—Why do you like geography best?\n—Because I can learn a lot about different ___ (国家).",
+    "stemZh": "——你为什么最喜欢地理？\n——因为我可以了解很多关于不同国家的知识。",
+    "options": [
+      "country",
+      "countries",
+      "countrys",
+      "country's"
+    ],
+    "optionsZh": [
+      "国家",
+      "国家",
+      "国家",
+      "国家的"
+    ],
+    "answer": 1,
+    "answerText": "countries",
+    "explanation": "different 后接可数名词复数，country 变 y 为 i 加 -es，变为 countries。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "—Why do you like history?\n—Because I can learn about old ___ (故事).",
+    "stemZh": "——你为什么喜欢历史？\n——因为我可以了解古老的故事。",
+    "options": [
+      "story",
+      "stories",
+      "storys",
+      "story's"
+    ],
+    "optionsZh": [
+      "故事",
+      "故事",
+      "故事",
+      "故事的"
+    ],
+    "answer": 1,
+    "answerText": "stories",
+    "explanation": "表示“古老的故事”用复数，story 变 y 为 i 加 -es，变为 stories。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "Biology is hard but my teacher makes it ___ (有趣的).",
+    "stemZh": "生物很难，但我的老师把它教得很有趣。",
+    "options": [
+      "interesting",
+      "interested",
+      "interest",
+      "boring"
+    ],
+    "optionsZh": [
+      "有趣的",
+      "感兴趣的",
+      "兴趣",
+      "无聊的"
+    ],
+    "answer": 0,
+    "answerText": "interesting",
+    "explanation": "make it interesting 意为“把它变得有趣”，修饰物用 interesting。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "—What's your favourite color?\n—Blue. 句中 favourite 的正确理解是：",
+    "stemZh": "——你最喜欢的颜色是什么？\n——蓝色。句中 favourite 的正确理解是：",
+    "options": [
+      "本身已含“最”义，不加 most",
+      "需加 most 才表示“最喜欢的”",
+      "有比较级和最高级",
+      "只能修饰人"
+    ],
+    "optionsZh": [
+      "本身已含“最”义，不加 most",
+      "需加 most 才表示“最喜欢的”",
+      "有比较级和最高级",
+      "只能修饰人"
+    ],
+    "answer": 0,
+    "answerText": "本身已含“最”义，不加 most",
+    "explanation": "favourite 本身含“最”义，没有比较级和最高级，不能加 most。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "He likes music ___ it's relaxing.",
+    "stemZh": "他喜欢音乐，因为它令人放松。",
+    "options": [
+      "because",
+      "so",
+      "but",
+      "and"
+    ],
+    "optionsZh": [
+      "因为",
+      "所以",
+      "但是",
+      "和"
+    ],
+    "answer": 0,
+    "answerText": "because",
+    "explanation": "后半句说明原因，用 because 引导原因状语从句。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "I have no time to play tennis with you ___ I am very busy today.",
+    "stemZh": "我今天没时间和你打网球，因为我非常忙。",
+    "options": [
+      "because",
+      "so",
+      "but",
+      "or"
+    ],
+    "optionsZh": [
+      "因为",
+      "所以",
+      "但是",
+      "或者"
+    ],
+    "answer": 0,
+    "answerText": "because",
+    "explanation": "后半句说明没时间的原因，用 because 引导原因状语从句。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "I don't like math ___ it's difficult for me.",
+    "stemZh": "我不喜欢数学，因为它对我来说很难。",
+    "options": [
+      "because",
+      "so",
+      "but",
+      "and"
+    ],
+    "optionsZh": [
+      "因为",
+      "所以",
+      "但是",
+      "和"
+    ],
+    "answer": 0,
+    "answerText": "because",
+    "explanation": "后半句说明不喜欢数学的原因，用 because。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "English is a ___ (有用的) subject.",
+    "stemZh": "英语是一门有用的学科。",
+    "options": [
+      "useful",
+      "usefully",
+      "use",
+      "useless"
+    ],
+    "optionsZh": [
+      "有用的",
+      "有用地",
+      "使用",
+      "无用的"
+    ],
+    "answer": 0,
+    "answerText": "useful",
+    "explanation": "修饰名词 subject 用形容词 useful，意为“有用的”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "—What do you think of the English class?\n—It's very ___ (有趣的).",
+    "stemZh": "——你觉得英语课怎么样？\n——非常有趣。",
+    "options": [
+      "interesting",
+      "interested",
+      "interest",
+      "boring"
+    ],
+    "optionsZh": [
+      "有趣的",
+      "感兴趣的",
+      "兴趣",
+      "无聊的"
+    ],
+    "answer": 0,
+    "answerText": "interesting",
+    "explanation": "评价英语课（事物）用 interesting，意为“有趣的”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "—When do you have music?\n—___ Monday and Friday.",
+    "stemZh": "——你们什么时候上音乐课？\n——周一和周五。",
+    "options": [
+      "In",
+      "On",
+      "At",
+      "To"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 1,
+    "answerText": "On",
+    "explanation": "表示具体的星期几用介词 on，on Monday and Friday 意为“在周一和周五”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "Ann has English ___ 9 o'clock.",
+    "stemZh": "安在九点有英语课。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 2,
+    "answerText": "at",
+    "explanation": "表示具体时刻用介词 at，at 9 o'clock 意为“在九点”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "My mother teaches ___ in a middle school.",
+    "stemZh": "我妈妈在一所中学教数学。",
+    "options": [
+      "maths",
+      "maths's",
+      "a maths",
+      "the maths"
+    ],
+    "optionsZh": [
+      "数学",
+      "数学的",
+      "一门数学",
+      "这门数学"
+    ],
+    "answer": 0,
+    "answerText": "maths",
+    "explanation": "teach maths 意为“教数学”，学科名词作普通名词时用小写，此处直接用 maths。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "My parents say math ___ very useful.",
+    "stemZh": "我父母说数学非常有用。",
+    "options": [
+      "is",
+      "are",
+      "am",
+      "be"
+    ],
+    "optionsZh": [
+      "是",
+      "是",
+      "是",
+      "是"
+    ],
+    "answer": 0,
+    "answerText": "is",
+    "explanation": "math（maths）形式复数但意义单数，作主语时谓语用单数 is。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Science is difficult ___ interesting.",
+    "stemZh": "科学很难但很有趣。",
+    "options": [
+      "and",
+      "but",
+      "because",
+      "so"
+    ],
+    "optionsZh": [
+      "和",
+      "但是",
+      "因为",
+      "所以"
+    ],
+    "answer": 1,
+    "answerText": "but",
+    "explanation": "difficult 与 interesting 语义相对，用连词 but 表转折。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "—I think science is very interesting. ___ you?\n—I don't think so. I like geography better.",
+    "stemZh": "——我认为科学非常有趣。你呢？\n——我不这么认为。我更喜欢地理。",
+    "options": [
+      "What about",
+      "How many",
+      "How much",
+      "What time"
+    ],
+    "optionsZh": [
+      "……怎么样",
+      "多少",
+      "多少",
+      "几点"
+    ],
+    "answer": 0,
+    "answerText": "What about",
+    "explanation": "What about you? 用于反问对方意见，意为“你呢？”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "My favorite teacher is Miss Li. She ___ us English.",
+    "stemZh": "我最喜欢的老师是李老师。她教我们英语。",
+    "options": [
+      "teach",
+      "teaches",
+      "teaching",
+      "to teach"
+    ],
+    "optionsZh": [
+      "教",
+      "教",
+      "教",
+      "教"
+    ],
+    "answer": 1,
+    "answerText": "teaches",
+    "explanation": "主语 She 是第三人称单数，以 ch 结尾的 teach 加 -es 变为 teaches。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Mr. Zhang teaches ___ Chinese. We like his class very much.",
+    "stemZh": "张老师教我们语文。我们非常喜欢他的课。",
+    "options": [
+      "we",
+      "us",
+      "our",
+      "ours"
+    ],
+    "optionsZh": [
+      "我们",
+      "我们",
+      "我们的",
+      "我们的"
+    ],
+    "answer": 1,
+    "answerText": "us",
+    "explanation": "teach sb. sth. 意为“教某人某物”，动词后用宾格 us。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "代词"
+    ]
+  },
+  {
+    "stem": "—Why do you like English?\n—Because it's ___ and interesting. (容易的)",
+    "stemZh": "——你为什么喜欢英语？\n——因为它既容易又有趣。",
+    "options": [
+      "easy",
+      "easily",
+      "hard",
+      "difficult"
+    ],
+    "optionsZh": [
+      "容易的",
+      "容易地",
+      "困难的",
+      "困难的"
+    ],
+    "answer": 0,
+    "answerText": "easy",
+    "explanation": "与 interesting 并列，需用形容词 easy，意为“容易的”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "—What's your favourite subject?\n—History. It's ___ for me. (困难的)",
+    "stemZh": "——你最喜欢的科目是什么？\n——历史。它对我来说很难。",
+    "options": [
+      "difficult",
+      "easy",
+      "useful",
+      "fun"
+    ],
+    "optionsZh": [
+      "困难的",
+      "容易的",
+      "有用的",
+      "有趣的"
+    ],
+    "answer": 0,
+    "answerText": "difficult",
+    "explanation": "根据汉语提示“困难的”，用形容词 difficult，difficult for me 意为“对我来说很难”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "We are busy today. We have Chinese, maths, English ___ science.",
+    "stemZh": "我们今天很忙。我们有语文、数学、英语和科学课。",
+    "options": [
+      "and",
+      "but",
+      "because",
+      "so"
+    ],
+    "optionsZh": [
+      "和",
+      "但是",
+      "因为",
+      "所以"
+    ],
+    "answer": 0,
+    "answerText": "and",
+    "explanation": "并列列举多种学科，用连词 and 连接。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "The maths problem is difficult but Jane can ___ it out.",
+    "stemZh": "这道数学题很难，但简能解出来。",
+    "options": [
+      "work",
+      "works",
+      "working",
+      "to work"
+    ],
+    "optionsZh": [
+      "解",
+      "解",
+      "解",
+      "解"
+    ],
+    "answer": 0,
+    "answerText": "work",
+    "explanation": "情态动词 can 后接动词原形，work out 意为“解出、算出”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "The gym is my favourite place ___ I like playing sports a lot.",
+    "stemZh": "体育馆是我最喜欢的地方，因为我非常喜欢运动。",
+    "options": [
+      "because",
+      "so",
+      "but",
+      "and"
+    ],
+    "optionsZh": [
+      "因为",
+      "所以",
+      "但是",
+      "和"
+    ],
+    "answer": 0,
+    "answerText": "because",
+    "explanation": "后半句说明喜欢体育馆的原因，用 because 引导原因状语从句。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "—What is his favorite subject?\n—His favorite subject is ___ (美术).",
+    "stemZh": "——他最喜欢的科目是什么？\n——他最喜欢的科目是美术。",
+    "options": [
+      "art",
+      "arts",
+      "art's",
+      "an art"
+    ],
+    "optionsZh": [
+      "美术",
+      "美术",
+      "美术的",
+      "一门美术"
+    ],
+    "answer": 0,
+    "answerText": "art",
+    "explanation": "表示学科“美术”用 art，此处作表语用单数。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "—I like English best.\n—___? I like English, too.",
+    "stemZh": "——我最喜欢英语。\n——你呢？我也喜欢英语。",
+    "options": [
+      "What about you",
+      "How are you",
+      "What time",
+      "How many"
+    ],
+    "optionsZh": [
+      "你呢",
+      "你好吗",
+      "几点",
+      "多少"
+    ],
+    "answer": 0,
+    "answerText": "What about you",
+    "explanation": "What about you? 用于反问对方的喜好，意为“你呢？”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Why not ___ a try? You may like it.\n—Good idea!",
+    "stemZh": "——为什么不试一试呢？你可能会喜欢的。\n——好主意！",
+    "options": [
+      "have",
+      "has",
+      "having",
+      "to have"
+    ],
+    "optionsZh": [
+      "试",
+      "试",
+      "试",
+      "试"
+    ],
+    "answer": 0,
+    "answerText": "have",
+    "explanation": "Why not do sth.? 是表示建议的固定句型，后接动词原形 have。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "固定搭配",
+      "祈使句"
+    ]
+  },
+  {
+    "stem": "—Why do you like P.E.?\n—Because I like ___ sports.",
+    "stemZh": "——你为什么喜欢体育？\n——因为我喜欢做运动。",
+    "options": [
+      "play",
+      "playing",
+      "plays",
+      "to playing"
+    ],
+    "optionsZh": [
+      "做",
+      "做",
+      "做",
+      "做"
+    ],
+    "answer": 1,
+    "answerText": "playing",
+    "explanation": "like doing sth. 表示“喜欢做某事”，用动名词 playing。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "非谓语动词（动名词）"
+    ]
+  },
+  {
+    "stem": "I like history ___ of the interesting stories.",
+    "stemZh": "我因为那些有趣的故事而喜欢历史。",
+    "options": [
+      "because",
+      "because of",
+      "so",
+      "but"
+    ],
+    "optionsZh": [
+      "因为",
+      "因为",
+      "所以",
+      "但是"
+    ],
+    "answer": 1,
+    "answerText": "because of",
+    "explanation": "because of 后接名词短语，because 后接句子；此处 of the interesting stories 是名词短语，用 because of。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "连词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—What's your favourite ___?\n—It's Tuesday. I have music then.",
+    "stemZh": "——你最喜欢哪一天？\n——是星期二。那时我有音乐课。",
+    "options": [
+      "day",
+      "subject",
+      "color",
+      "food"
+    ],
+    "optionsZh": [
+      "天",
+      "科目",
+      "颜色",
+      "食物"
+    ],
+    "answer": 0,
+    "answerText": "day",
+    "explanation": "答语 Tuesday 是星期几，故提问 favourite day。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We have four ___ in the morning: Chinese, maths, English and science.",
+    "stemZh": "我们上午有四节课：语文、数学、英语和科学。",
+    "options": [
+      "class",
+      "classes",
+      "class's",
+      "a class"
+    ],
+    "optionsZh": [
+      "课",
+      "课",
+      "课的",
+      "一节课"
+    ],
+    "answer": 1,
+    "answerText": "classes",
+    "explanation": "four 后接可数名词复数，class 以 s 结尾加 -es 变为 classes。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "Mr. Li is very kind and he is good ___ his students.",
+    "stemZh": "李老师非常和善，他善于和他的学生相处。",
+    "options": [
+      "with",
+      "at",
+      "for",
+      "to"
+    ],
+    "optionsZh": [
+      "和……相处",
+      "擅长",
+      "为",
+      "到"
+    ],
+    "answer": 0,
+    "answerText": "with",
+    "explanation": "be good with sb. 是固定搭配，意为“善于与某人相处”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Jane is good ___ maths. She often helps me with it.",
+    "stemZh": "简擅长数学。她经常帮我学数学。",
+    "options": [
+      "with",
+      "at",
+      "for",
+      "to"
+    ],
+    "optionsZh": [
+      "和……相处",
+      "擅长",
+      "为",
+      "到"
+    ],
+    "answer": 1,
+    "answerText": "at",
+    "explanation": "be good at sth. 是固定搭配，意为“擅长某事”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—Do you like maths?\n—Yes, I do. ___ I think it's a little difficult.",
+    "stemZh": "——你喜欢数学吗？\n——是的，我喜欢。但是我认为它有点难。",
+    "options": [
+      "And",
+      "But",
+      "Because",
+      "So"
+    ],
+    "optionsZh": [
+      "和",
+      "但是",
+      "因为",
+      "所以"
+    ],
+    "answer": 1,
+    "answerText": "But",
+    "explanation": "前后语义转折，用连词 But。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "We have no classes ___ Sunday.",
+    "stemZh": "我们星期天没有课。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 1,
+    "answerText": "on",
+    "explanation": "表示具体的星期几用介词 on，on Sunday 意为“在星期天”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "—What's your favourite subject?\n—I like geography ___. I can learn about the world.",
+    "stemZh": "——你最喜欢的科目是什么？\n——我最喜欢地理。我可以了解世界。",
+    "options": [
+      "best",
+      "good",
+      "well",
+      "better"
+    ],
+    "optionsZh": [
+      "最",
+      "好",
+      "好",
+      "更好"
+    ],
+    "answer": 0,
+    "answerText": "best",
+    "explanation": "like sth. best 表示“最喜欢某物”，best 是 well 的最高级。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U4",
+    "points": [
+      "副词",
+      "比较级与最高级"
+    ]
   }
 ]
