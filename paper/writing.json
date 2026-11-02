@@ -3,12 +3,14 @@
     "prompt": "假如你是李华，你的英国笔友 Mike 想了解你是如何提高记忆力的。请你用英语写一封回信，内容包括：\n1. 你常用的记忆方法（至少两种）；\n2. 这些方法给你带来的帮助；\n3. 鼓励他尝试并表达祝愿。",
     "note": "（此处为书面表达答题区，约 80–100 词）",
     "sampleAnswer": "Dear Mike,\n\nI'm glad to hear from you. You asked me how to improve memory. Here are my ways. First, I often make mind maps. They help me organize information clearly. Second, I review what I learn regularly. Reviewing after class helps me forget less. Third, I link new words with pictures or old knowledge. This makes them easier to remember.\n\nThese methods have helped me a lot. I hope you will try them. I'm sure you will do better in your studies.\n\nBest wishes,\nLi Hua",
-    "explanation": "范文分三段：开头回应笔友问题；第二段列出 mind maps、regular review、link new words 三种方法并说明帮助；结尾鼓励并祝愿。语言符合书信格式，时态以一般现在时为主。"
+    "explanation": "范文分三段：开头回应笔友问题；第二段列出 mind maps、regular review、link new words 三种方法并说明帮助；结尾鼓励并祝愿。语言符合书信格式，时态以一般现在时为主。",
+    "grade": 8
   },
   {
     "prompt": "学校英语报正在征文，主题是“How to Stay Healthy”。请你写一篇短文投稿，内容包括：\n1. 健康饮食的重要性；\n2. 坚持锻炼的好处；\n3. 你的建议。",
     "note": "（此处为书面表达答题区，约 80–100 词）",
     "sampleAnswer": "How to Stay Healthy\n\nHealth is very important to everyone. First, we should eat healthy food. We need enough vegetables and fruit, and we should not eat too much junk food. Second, exercise is good for our health. We can walk, run or play ball games every day. It helps us relax and keeps us strong. Third, we should get enough sleep and stay positive.\n\nIn my opinion, if we keep a healthy diet and exercise regularly, we will be healthier and happier.",
-    "explanation": "短文按提示分三部分：健康饮食、锻炼好处、建议。使用 first, second, third, in my opinion 等衔接词，结构清晰。时态为一般现在时，最后一句用 if 条件句总结。"
+    "explanation": "短文按提示分三部分：健康饮食、锻炼好处、建议。使用 first, second, third, in my opinion 等衔接词，结构清晰。时态为一般现在时，最后一句用 if 条件句总结。",
+    "grade": 7
   }
 ]
