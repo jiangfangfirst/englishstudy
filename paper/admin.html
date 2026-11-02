@@ -37,6 +37,8 @@
   button.btn.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
   button.btn.primary:hover:not(:disabled) { background: #1d4ed8; border-color: #1d4ed8; }
   button.btn:disabled { opacity: .45; cursor: not-allowed; }
+    button.btn.danger { background: #dc2626; border-color: #dc2626; color: #fff; }
+  button.btn.danger:hover:not(:disabled) { background: #b91c1c; border-color: #b91c1c; }
   .hint { font-size: 12px; color: #64748b; margin-top: 10px; line-height: 1.7; }
   .hint code { background: #f3f4f6; padding: 1px 5px; border-radius: 3px; font-family: Consolas, Monaco, monospace; }
 
@@ -171,9 +173,10 @@
     </div>
 
     <!-- 2. 移动上来的操作按钮（加一点下边距） -->
-    <div class="actions" style="margin-top: 0; margin-bottom: 10px;">
+        <div class="actions" style="margin-top: 0; margin-bottom: 10px;">
       <button class="btn primary" id="btnMerge" disabled>下载合并后的 JSON</button>
-      <button class="btn" id="btnClear">清空输入框</button>
+      <button class="btn danger" id="btnClear">🗑 清空输入框</button>
+      <button class="btn" id="btnUndo" style="display: none; color: #b45309; border-color: #fde68a; background: #fffbeb;">↩ 撤销本次粘贴</button>
     </div>
 
     <!-- 3. 移动上来的字段说明（去掉上边距，加点下边距） -->
@@ -186,8 +189,6 @@
     <div class="summary" id="summary">等待输入…</div>
         <div class="result-actions" style="display: flex; gap: 8px;">
       <button class="btn-mini" id="btnCopyErrors" disabled>📋 复制错误提示</button>
-      <button class="btn-mini" id="btnUndo" style="display: none; color: #b45309; border-color: #fde68a; background: #fffbeb;">↩ 撤销本次粘贴</button>
-    </div>
     <div class="result" id="result"></div>
     
     <!-- 6. 预览区 (保持在下方) -->

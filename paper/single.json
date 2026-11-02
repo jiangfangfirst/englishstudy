@@ -10050,5 +10050,2037 @@
       "副词",
       "比较级与最高级"
     ]
+  },
+  {
+    "stem": "The fish can swim, but it can't ___.",
+    "stemZh": "鱼会游泳，但它不会飞。",
+    "options": [
+      "fly",
+      "flies",
+      "flying",
+      "to fly"
+    ],
+    "optionsZh": [
+      "飞",
+      "飞",
+      "飞",
+      "飞"
+    ],
+    "answer": 0,
+    "answerText": "fly",
+    "explanation": "情态动词 can't 后接动词原形，故用 fly。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "—Can you play the guitar?\n—Yes, ___.",
+    "stemZh": "——你会弹吉他吗？\n——是的，我会。",
+    "options": [
+      "I can",
+      "I can't",
+      "you can",
+      "I am"
+    ],
+    "optionsZh": [
+      "我会",
+      "我不会",
+      "你会",
+      "我是"
+    ],
+    "answer": 0,
+    "answerText": "I can",
+    "explanation": "Can you...? 的肯定回答是 Yes, I can.",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情态动词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Can you play the piano?\n—No, I ___. But I can play the violin.",
+    "stemZh": "——你会弹钢琴吗？\n——不，我不会。但我会拉小提琴。",
+    "options": [
+      "can",
+      "can't",
+      "don't",
+      "am not"
+    ],
+    "optionsZh": [
+      "会",
+      "不会",
+      "不",
+      "不是"
+    ],
+    "answer": 1,
+    "answerText": "can't",
+    "explanation": "Can you...? 的否定回答是 No, I can't.",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情态动词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "She can play ___ violin very well.",
+    "stemZh": "她小提琴拉得很好。",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "/"
+    ],
+    "optionsZh": [
+      "一个",
+      "一个",
+      "这个",
+      "不填"
+    ],
+    "answer": 2,
+    "answerText": "the",
+    "explanation": "演奏乐器时乐器前加定冠词 the，play the violin 意为“拉小提琴”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "冠词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My brother is good at playing ___ basketball.",
+    "stemZh": "我哥哥擅长打篮球。",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "/"
+    ],
+    "optionsZh": [
+      "一个",
+      "一个",
+      "这个",
+      "不填"
+    ],
+    "answer": 3,
+    "answerText": "/",
+    "explanation": "球类运动前不加冠词，play basketball 意为“打篮球”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "冠词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—What can you do?\n—I can play ___.",
+    "stemZh": "——你会做什么？\n——我会下国际象棋。",
+    "options": [
+      "the chess",
+      "chess",
+      "a chess",
+      "an chess"
+    ],
+    "optionsZh": [
+      "国际象棋",
+      "国际象棋",
+      "国际象棋",
+      "国际象棋"
+    ],
+    "answer": 1,
+    "answerText": "chess",
+    "explanation": "棋类活动前不加冠词，play chess 意为“下国际象棋”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "冠词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—Can you play the guitar or the violin?\n—I can play the violin, ___ I can't play the guitar.",
+    "stemZh": "——你会弹吉他还是会拉小提琴？\n——我会拉小提琴，但我不会弹吉他。",
+    "options": [
+      "and",
+      "but",
+      "because",
+      "so"
+    ],
+    "optionsZh": [
+      "和",
+      "但是",
+      "因为",
+      "所以"
+    ],
+    "answer": 1,
+    "answerText": "but",
+    "explanation": "前后语义转折，用连词 but。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "I want to ___ the music club. I like music.",
+    "stemZh": "我想加入音乐社团。我喜欢音乐。",
+    "options": [
+      "join",
+      "join in",
+      "take part",
+      "attend"
+    ],
+    "optionsZh": [
+      "加入",
+      "加入",
+      "参加",
+      "出席"
+    ],
+    "answer": 0,
+    "answerText": "join",
+    "explanation": "join 后直接接组织或团体，join the music club 意为“加入音乐社团”，不用 join in。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—Which club do you want to join?\n—The ___ club. I like playing chess.",
+    "stemZh": "——你想加入哪个社团？\n——国际象棋社团。我喜欢下国际象棋。",
+    "options": [
+      "chess",
+      "art",
+      "music",
+      "swimming"
+    ],
+    "optionsZh": [
+      "国际象棋",
+      "美术",
+      "音乐",
+      "游泳"
+    ],
+    "answer": 0,
+    "answerText": "chess",
+    "explanation": "由 I like playing chess 可知想加入的是国际象棋社团 chess club。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She is good at ___ (画画). She draws well.",
+    "stemZh": "她擅长画画。她画得很好。",
+    "options": [
+      "draw",
+      "drawing",
+      "draws",
+      "to draw"
+    ],
+    "optionsZh": [
+      "画",
+      "画",
+      "画",
+      "画"
+    ],
+    "answer": 1,
+    "answerText": "drawing",
+    "explanation": "be good at 后接名词或动名词，故用 drawing。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "非谓语动词（动名词）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I am very interested in the story. 句中 be interested in 后接：",
+    "stemZh": "我对这个故事非常感兴趣。句中 be interested in 后接：",
+    "options": [
+      "名词或动名词",
+      "只能接动词原形",
+      "只能接句子",
+      "只能接形容词"
+    ],
+    "optionsZh": [
+      "名词或动名词",
+      "只能接动词原形",
+      "只能接句子",
+      "只能接形容词"
+    ],
+    "answer": 0,
+    "answerText": "名词或动名词",
+    "explanation": "be interested in 表示“对……感兴趣”，in 是介词，后接名词或动名词。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—What club would you like to join?\n—I can sing and dance, so I want to be in the ___ club.",
+    "stemZh": "——你想加入哪个俱乐部？\n——我会唱歌和跳舞，所以我想加入音乐俱乐部。",
+    "options": [
+      "music",
+      "chess",
+      "swimming",
+      "science"
+    ],
+    "optionsZh": [
+      "音乐",
+      "国际象棋",
+      "游泳",
+      "科学"
+    ],
+    "answer": 0,
+    "answerText": "music",
+    "explanation": "会唱歌和跳舞，适合加入音乐俱乐部 music club。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "My brother is good at ___ (跳舞). He wants to join the dance club.",
+    "stemZh": "我哥哥擅长跳舞。他想加入舞蹈俱乐部。",
+    "options": [
+      "dance",
+      "dancing",
+      "dances",
+      "to dance"
+    ],
+    "optionsZh": [
+      "跳舞",
+      "跳舞",
+      "跳舞",
+      "跳舞"
+    ],
+    "answer": 1,
+    "answerText": "dancing",
+    "explanation": "be good at 后接动名词，故用 dancing。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "非谓语动词（动名词）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She is interested in ___ (收集) stamps, so she joins the stamp club.",
+    "stemZh": "她对集邮感兴趣，所以她加入了集邮俱乐部。",
+    "options": [
+      "collect",
+      "collecting",
+      "collects",
+      "to collect"
+    ],
+    "optionsZh": [
+      "收集",
+      "收集",
+      "收集",
+      "收集"
+    ],
+    "answer": 1,
+    "answerText": "collecting",
+    "explanation": "be interested in 中 in 是介词，后接动名词 collecting。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "非谓语动词（动名词）"
+    ]
+  },
+  {
+    "stem": "Mrs. Gao is good ___ music.",
+    "stemZh": "高老师擅长音乐。",
+    "options": [
+      "at",
+      "with",
+      "for",
+      "to"
+    ],
+    "optionsZh": [
+      "擅长",
+      "和……相处",
+      "为",
+      "到"
+    ],
+    "answer": 0,
+    "answerText": "at",
+    "explanation": "be good at sth. 是固定搭配，意为“擅长某事”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Mrs. Gao can be good ___ children in the music club.",
+    "stemZh": "高老师能在音乐俱乐部里与孩子们相处得很好。",
+    "options": [
+      "at",
+      "with",
+      "for",
+      "to"
+    ],
+    "optionsZh": [
+      "擅长",
+      "和……相处",
+      "为",
+      "到"
+    ],
+    "answer": 1,
+    "answerText": "with",
+    "explanation": "be good with sb. 是固定搭配，意为“善于与某人相处”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—What do you do in the drama club?\n—We often ___ out stories.",
+    "stemZh": "——你们在戏剧社做什么？\n——我们经常表演故事。",
+    "options": [
+      "act",
+      "acts",
+      "acting",
+      "to act"
+    ],
+    "optionsZh": [
+      "表演",
+      "表演",
+      "表演",
+      "表演"
+    ],
+    "answer": 0,
+    "answerText": "act",
+    "explanation": "主语 We 是复数，一般现在时用动词原形；act out 意为“表演、演出”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "固定搭配",
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "We're going to ___ out an English play in the next English Week.",
+    "stemZh": "我们将在下一个英语周表演一出英语剧。",
+    "options": [
+      "act",
+      "acts",
+      "acting",
+      "to act"
+    ],
+    "optionsZh": [
+      "表演",
+      "表演",
+      "表演",
+      "表演"
+    ],
+    "answer": 0,
+    "answerText": "act",
+    "explanation": "be going to 后接动词原形，act out 意为“表演、演出”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "固定搭配",
+      "一般将来时"
+    ]
+  },
+  {
+    "stem": "—Why do you want to join the dance club?\n—___ I like dancing very much.",
+    "stemZh": "——你为什么想加入舞蹈俱乐部？\n——因为我非常喜欢跳舞。",
+    "options": [
+      "So",
+      "Because",
+      "But",
+      "And"
+    ],
+    "optionsZh": [
+      "所以",
+      "因为",
+      "但是",
+      "和"
+    ],
+    "answer": 1,
+    "answerText": "Because",
+    "explanation": "Why 询问原因，用 Because 引导原因状语从句作答。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "连词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "Linda can ___ three languages.",
+    "stemZh": "琳达会说三种语言。",
+    "options": [
+      "speak",
+      "speaks",
+      "speaking",
+      "to speak"
+    ],
+    "optionsZh": [
+      "说",
+      "说",
+      "说",
+      "说"
+    ],
+    "answer": 0,
+    "answerText": "speak",
+    "explanation": "情态动词 can 后接动词原形，故用 speak。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "He can sing, but he ___ dance.",
+    "stemZh": "他会唱歌，但他不会跳舞。",
+    "options": [
+      "can",
+      "can't",
+      "doesn't",
+      "isn't"
+    ],
+    "optionsZh": [
+      "会",
+      "不会",
+      "不",
+      "不是"
+    ],
+    "answer": 1,
+    "answerText": "can't",
+    "explanation": "表示“不会做某事”用情态动词否定形式 can't，后接动词原形。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "—Can your sister play the piano?\n—Yes, she ___.",
+    "stemZh": "——你姐姐会弹钢琴吗？\n——是的，她会。",
+    "options": [
+      "can",
+      "can't",
+      "does",
+      "is"
+    ],
+    "optionsZh": [
+      "会",
+      "不会",
+      "助动词",
+      "是"
+    ],
+    "answer": 0,
+    "answerText": "can",
+    "explanation": "Can she...? 的肯定回答是 Yes, she can.",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情态动词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "She ___ the art club. She draws pictures there every week.",
+    "stemZh": "她加入了美术社团。她每周在那里画画。",
+    "options": [
+      "join",
+      "joins",
+      "joining",
+      "to join"
+    ],
+    "optionsZh": [
+      "加入",
+      "加入",
+      "加入",
+      "加入"
+    ],
+    "answer": 1,
+    "answerText": "joins",
+    "explanation": "主语 She 是第三人称单数，一般现在时动词加 -s，join 变为 joins。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "She ___ well. She wants to be a singer.",
+    "stemZh": "她唱得很好。她想成为一名歌手。",
+    "options": [
+      "sing",
+      "sings",
+      "singing",
+      "to sing"
+    ],
+    "optionsZh": [
+      "唱",
+      "唱",
+      "唱",
+      "唱"
+    ],
+    "answer": 1,
+    "answerText": "sings",
+    "explanation": "主语 She 是第三人称单数，一般现在时动词加 -s，sing 变为 sings。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "My brother can play ___ drums in the school band.",
+    "stemZh": "我哥哥会在学校乐队里打鼓。",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "/"
+    ],
+    "optionsZh": [
+      "一个",
+      "一个",
+      "这个",
+      "不填"
+    ],
+    "answer": 2,
+    "answerText": "the",
+    "explanation": "演奏乐器时乐器前加 the，play the drums 意为“打鼓”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "冠词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—What can your sister do?\n—She can play ___.",
+    "stemZh": "——你妹妹会做什么？\n——她会拉小提琴。",
+    "options": [
+      "the violin",
+      "violin",
+      "a violin",
+      "an violin"
+    ],
+    "optionsZh": [
+      "小提琴",
+      "小提琴",
+      "小提琴",
+      "小提琴"
+    ],
+    "answer": 0,
+    "answerText": "the violin",
+    "explanation": "演奏乐器时乐器前加 the，play the violin 意为“拉小提琴”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "冠词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—What instruments can your father play, Li Ting?\n—He can play ___.",
+    "stemZh": "——李婷，你爸爸会演奏什么乐器？\n——他会拉小提琴。",
+    "options": [
+      "the violin",
+      "violin",
+      "basketball",
+      "chess"
+    ],
+    "optionsZh": [
+      "小提琴",
+      "小提琴",
+      "篮球",
+      "国际象棋"
+    ],
+    "answer": 0,
+    "answerText": "the violin",
+    "explanation": "问的是乐器（instruments），回答演奏乐器用 play the violin。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "冠词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She can't ___, but she can dance well.",
+    "stemZh": "她不会游泳，但她舞跳得很好。",
+    "options": [
+      "swim",
+      "swims",
+      "swimming",
+      "to swim"
+    ],
+    "optionsZh": [
+      "游泳",
+      "游泳",
+      "游泳",
+      "游泳"
+    ],
+    "answer": 0,
+    "answerText": "swim",
+    "explanation": "情态动词 can't 后接动词原形，故用 swim。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "I want to ___ the swimming club.",
+    "stemZh": "我想加入游泳俱乐部。",
+    "options": [
+      "join",
+      "join in",
+      "take part in",
+      "attend"
+    ],
+    "optionsZh": [
+      "加入",
+      "加入",
+      "参加",
+      "出席"
+    ],
+    "answer": 0,
+    "answerText": "join",
+    "explanation": "join 后直接接组织或团体，join the swimming club 意为“加入游泳俱乐部”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—I want to join the swimming club.\n—___.",
+    "stemZh": "——我想加入游泳俱乐部。\n——听起来不错。",
+    "options": [
+      "Sounds good",
+      "You're welcome",
+      "Thank you",
+      "Goodbye"
+    ],
+    "optionsZh": [
+      "听起来不错",
+      "不客气",
+      "谢谢",
+      "再见"
+    ],
+    "answer": 0,
+    "answerText": "Sounds good",
+    "explanation": "对方提出想法，Sounds good 表示赞同，意为“听起来不错”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—What can you do?\n—___.",
+    "stemZh": "——你会做什么？\n——我会下国际象棋。",
+    "options": [
+      "I can play chess",
+      "I like chess",
+      "I am chess",
+      "I have chess"
+    ],
+    "optionsZh": [
+      "我会下国际象棋",
+      "我喜欢国际象棋",
+      "我是国际象棋",
+      "我有国际象棋"
+    ],
+    "answer": 0,
+    "answerText": "I can play chess",
+    "explanation": "What can you do? 询问能力，回答用 I can + 动词原形。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情景交际",
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "My brother can sing ___ dance.",
+    "stemZh": "我弟弟会唱歌和跳舞。",
+    "options": [
+      "and",
+      "but",
+      "or",
+      "so"
+    ],
+    "optionsZh": [
+      "和",
+      "但是",
+      "或者",
+      "所以"
+    ],
+    "answer": 0,
+    "answerText": "and",
+    "explanation": "并列两种能力用连词 and。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "—What club do you want to join?\n—I want to join the ___ club. I can draw well.",
+    "stemZh": "——你想加入哪个俱乐部？\n——我想加入美术俱乐部。我画得很好。",
+    "options": [
+      "art",
+      "music",
+      "chess",
+      "swimming"
+    ],
+    "optionsZh": [
+      "美术",
+      "音乐",
+      "国际象棋",
+      "游泳"
+    ],
+    "answer": 0,
+    "answerText": "art",
+    "explanation": "会画画（draw well）适合加入美术俱乐部 art club。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "My sister is good at ___ (绘画). She can draw beautiful pictures.",
+    "stemZh": "我妹妹擅长绘画。她能画出美丽的画。",
+    "options": [
+      "paint",
+      "painting",
+      "paints",
+      "to paint"
+    ],
+    "optionsZh": [
+      "绘画",
+      "绘画",
+      "绘画",
+      "绘画"
+    ],
+    "answer": 1,
+    "answerText": "painting",
+    "explanation": "be good at 后接动名词，故用 painting。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "非谓语动词（动名词）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My brother can ___. He wants to dance after school.",
+    "stemZh": "我弟弟会跳舞。他想放学后去跳舞。",
+    "options": [
+      "dance",
+      "dances",
+      "dancing",
+      "to dance"
+    ],
+    "optionsZh": [
+      "跳舞",
+      "跳舞",
+      "跳舞",
+      "跳舞"
+    ],
+    "answer": 0,
+    "answerText": "dance",
+    "explanation": "情态动词 can 后接动词原形，故用 dance。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "—Can he sing?\n—Yes, he can. He can sing ___.",
+    "stemZh": "——他会唱歌吗？\n——是的，他会。他唱得很好。",
+    "options": [
+      "good",
+      "well",
+      "nice",
+      "fine"
+    ],
+    "optionsZh": [
+      "好的",
+      "好",
+      "好的",
+      "好的"
+    ],
+    "answer": 1,
+    "answerText": "well",
+    "explanation": "修饰动词 sing 用副词 well。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "副词"
+    ]
+  },
+  {
+    "stem": "Let's ___ to the music club together.",
+    "stemZh": "让我们一起加入音乐社团吧。",
+    "options": [
+      "go",
+      "goes",
+      "going",
+      "to go"
+    ],
+    "optionsZh": [
+      "去",
+      "去",
+      "去",
+      "去"
+    ],
+    "answer": 0,
+    "answerText": "go",
+    "explanation": "Let's 后接动词原形，故用 go。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "祈使句"
+    ]
+  },
+  {
+    "stem": "She likes ___ (游泳). She often goes swimming on weekends.",
+    "stemZh": "她喜欢游泳。她经常在周末去游泳。",
+    "options": [
+      "swim",
+      "swimming",
+      "swims",
+      "to swimming"
+    ],
+    "optionsZh": [
+      "游泳",
+      "游泳",
+      "游泳",
+      "游泳"
+    ],
+    "answer": 1,
+    "answerText": "swimming",
+    "explanation": "like doing sth. 表示“喜欢做某事”，用动名词 swimming。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "非谓语动词（动名词）"
+    ]
+  },
+  {
+    "stem": "She can sing and dance. She wants to be in the ___ club.",
+    "stemZh": "她会唱歌和跳舞。她想加入音乐俱乐部。",
+    "options": [
+      "music",
+      "art",
+      "chess",
+      "science"
+    ],
+    "optionsZh": [
+      "音乐",
+      "美术",
+      "国际象棋",
+      "科学"
+    ],
+    "answer": 0,
+    "answerText": "music",
+    "explanation": "会唱歌和跳舞，适合加入音乐俱乐部 music club。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U5",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—What time is it now?\n—It's half ___ seven.",
+    "stemZh": "——现在几点了？\n——七点半。",
+    "options": [
+      "past",
+      "to",
+      "at",
+      "of"
+    ],
+    "optionsZh": [
+      "过",
+      "差",
+      "在",
+      "的"
+    ],
+    "answer": 0,
+    "answerText": "past",
+    "explanation": "30 分钟用 half past 表示，“七点半”即 half past seven。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "数词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—What time is it now?\n—It's a quarter ___ seven. It's 6:45.",
+    "stemZh": "——现在几点了？\n——差一刻七点。也就是6:45。",
+    "options": [
+      "past",
+      "to",
+      "at",
+      "of"
+    ],
+    "optionsZh": [
+      "过",
+      "差",
+      "在",
+      "的"
+    ],
+    "answer": 1,
+    "answerText": "to",
+    "explanation": "分钟超过 30 时用 to 表示“差……到下一整点”，6:45 即 a quarter to seven。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "数词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "It's 8:45. We can say \"a quarter ___ nine\".",
+    "stemZh": "现在是8:45。我们可以说“差一刻九点”。",
+    "options": [
+      "past",
+      "to",
+      "at",
+      "of"
+    ],
+    "optionsZh": [
+      "过",
+      "差",
+      "在",
+      "的"
+    ],
+    "answer": 1,
+    "answerText": "to",
+    "explanation": "8:45 距离九点还差一刻钟，用 a quarter to nine 表示。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "数词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—What's the time now?\n—It's a quarter ___ nine. (9:15)",
+    "stemZh": "——现在几点了？\n——九点一刻。",
+    "options": [
+      "past",
+      "to",
+      "at",
+      "of"
+    ],
+    "optionsZh": [
+      "过",
+      "差",
+      "在",
+      "的"
+    ],
+    "answer": 0,
+    "answerText": "past",
+    "explanation": "9:15 是九点过一刻，用 a quarter past nine 表示。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "数词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—___ time does your brother go to school?\n—At eight o'clock.",
+    "stemZh": "——你哥哥几点去上学？\n——八点。",
+    "options": [
+      "What",
+      "When",
+      "How",
+      "Where"
+    ],
+    "optionsZh": [
+      "什么",
+      "什么时候",
+      "怎样",
+      "哪里"
+    ],
+    "answer": 0,
+    "answerText": "What",
+    "explanation": "询问具体时刻用 What time，即 What time does...?",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—What time does your brother go to school?\n—___ eight o'clock.",
+    "stemZh": "——你哥哥几点去上学？\n——八点。",
+    "options": [
+      "In",
+      "On",
+      "At",
+      "To"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 2,
+    "answerText": "At",
+    "explanation": "表示具体时刻用介词 at，at eight o'clock 意为“在八点”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "—___ does Leo go to his club?\n—After school.",
+    "stemZh": "——利奥什么时候去俱乐部？\n——放学后。",
+    "options": [
+      "What time",
+      "When",
+      "How",
+      "Where"
+    ],
+    "optionsZh": [
+      "几点",
+      "什么时候",
+      "怎样",
+      "哪里"
+    ],
+    "answer": 1,
+    "answerText": "When",
+    "explanation": "答语 After school 不是具体时刻，询问时间范围更广用 When。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—When does Lisa do her homework?\n—___ dinner.",
+    "stemZh": "——丽莎什么时候做作业？\n——晚饭后。",
+    "options": [
+      "After",
+      "Before",
+      "At",
+      "In"
+    ],
+    "optionsZh": [
+      "在……之后",
+      "在……之前",
+      "在",
+      "在……里"
+    ],
+    "answer": 0,
+    "answerText": "After",
+    "explanation": "after dinner 意为“晚饭后”，符合 When 询问时间的答语。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "—What time does your mother cook dinner?\n—She usually ___ it at 6:00 p.m.",
+    "stemZh": "——你妈妈几点做晚饭？\n——她通常晚上六点做。",
+    "options": [
+      "cook",
+      "cooks",
+      "cooking",
+      "to cook"
+    ],
+    "optionsZh": [
+      "做",
+      "做",
+      "做",
+      "做"
+    ],
+    "answer": 1,
+    "answerText": "cooks",
+    "explanation": "主语 She 是第三人称单数，一般现在时动词加 -s，cook 变为 cooks。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "—Does your sister ___ her homework in the evening?\n—Yes, she does.",
+    "stemZh": "——你姐姐晚上做作业吗？\n——是的，她做。",
+    "options": [
+      "do",
+      "does",
+      "doing",
+      "to do"
+    ],
+    "optionsZh": [
+      "做",
+      "做",
+      "做",
+      "做"
+    ],
+    "answer": 0,
+    "answerText": "do",
+    "explanation": "Does 引导的一般现在时疑问句中，动词用原形 do。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "My sister usually ___ to bed at 10:00 p.m.",
+    "stemZh": "我姐姐通常晚上十点上床睡觉。",
+    "options": [
+      "go",
+      "goes",
+      "going",
+      "to go"
+    ],
+    "optionsZh": [
+      "去",
+      "去",
+      "去",
+      "去"
+    ],
+    "answer": 1,
+    "answerText": "goes",
+    "explanation": "主语 My sister 是第三人称单数，以 o 结尾的 go 加 -es 变为 goes。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "My sister usually goes to bed at 10:00 p.m. 句中 usually 的位置说明：",
+    "stemZh": "我姐姐通常晚上十点上床睡觉。句中 usually 的位置说明：",
+    "options": [
+      "频度副词放实义动词前",
+      "频度副词放实义动词后",
+      "频度副词放句末",
+      "频度副词放句首"
+    ],
+    "optionsZh": [
+      "频度副词放实义动词前",
+      "频度副词放实义动词后",
+      "频度副词放句末",
+      "频度副词放句首"
+    ],
+    "answer": 0,
+    "answerText": "频度副词放实义动词前",
+    "explanation": "usually 等频度副词放在实义动词之前、be 动词之后。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "副词"
+    ]
+  },
+  {
+    "stem": "He is a good student. He ___ comes to school late.",
+    "stemZh": "他是个好学生。他上学从不迟到。",
+    "options": [
+      "never",
+      "usually",
+      "often",
+      "sometimes"
+    ],
+    "optionsZh": [
+      "从不",
+      "通常",
+      "经常",
+      "有时"
+    ],
+    "answer": 0,
+    "answerText": "never",
+    "explanation": "好学生上学从不迟到，用频度副词 never 表示“从不”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "副词"
+    ]
+  },
+  {
+    "stem": "—What do you do after dinner?\n—___ I read books.",
+    "stemZh": "——你晚饭后做什么？\n——有时我读书。",
+    "options": [
+      "Never",
+      "Sometimes",
+      "Usually",
+      "Always"
+    ],
+    "optionsZh": [
+      "从不",
+      "有时",
+      "通常",
+      "总是"
+    ],
+    "answer": 1,
+    "answerText": "Sometimes",
+    "explanation": "sometimes 表示“有时”，可放句首，符合语境。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "副词"
+    ]
+  },
+  {
+    "stem": "She ___ a shower before breakfast every day.",
+    "stemZh": "她每天早饭前洗个澡。",
+    "options": [
+      "take",
+      "takes",
+      "taking",
+      "to take"
+    ],
+    "optionsZh": [
+      "洗",
+      "洗",
+      "洗",
+      "洗"
+    ],
+    "answer": 1,
+    "answerText": "takes",
+    "explanation": "主语 She 是第三人称单数，一般现在时动词加 -s，take 变为 takes；take a shower 意为“洗澡”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Tom ___ his teeth at seven every morning.",
+    "stemZh": "汤姆每天早上七点刷牙。",
+    "options": [
+      "brush",
+      "brushes",
+      "brushing",
+      "to brush"
+    ],
+    "optionsZh": [
+      "刷",
+      "刷",
+      "刷",
+      "刷"
+    ],
+    "answer": 1,
+    "answerText": "brushes",
+    "explanation": "主语 Tom 是第三人称单数，以 sh 结尾的 brush 加 -es 变为 brushes。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "We need to brush our ___ (牙齿) after eating cake to have good teeth.",
+    "stemZh": "吃完蛋糕后我们需要刷牙，才能有好牙齿。",
+    "options": [
+      "tooth",
+      "tooths",
+      "teeth",
+      "teeths"
+    ],
+    "optionsZh": [
+      "牙齿",
+      "牙齿",
+      "牙齿",
+      "牙齿"
+    ],
+    "answer": 2,
+    "answerText": "teeth",
+    "explanation": "tooth 的复数是不规则变化 teeth，brush one's teeth 意为“刷牙”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "Linda usually finishes her ___ (家庭作业) after dinner.",
+    "stemZh": "琳达通常晚饭后完成作业。",
+    "options": [
+      "homework",
+      "homeworks",
+      "a homework",
+      "homework's"
+    ],
+    "optionsZh": [
+      "家庭作业",
+      "家庭作业",
+      "一份作业",
+      "作业的"
+    ],
+    "answer": 0,
+    "answerText": "homework",
+    "explanation": "homework 是不可数名词，不加 -s，也不用 a 修饰。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "Mike usually ___ to school at 7:50.",
+    "stemZh": "迈克通常7:50去上学。",
+    "options": [
+      "go",
+      "goes",
+      "going",
+      "to go"
+    ],
+    "optionsZh": [
+      "去",
+      "去",
+      "去",
+      "去"
+    ],
+    "answer": 1,
+    "answerText": "goes",
+    "explanation": "主语 Mike 是第三人称单数，以 o 结尾的 go 加 -es 变为 goes。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "Leo's afternoon lessons start at half past twelve and end at a quarter ___ two.",
+    "stemZh": "利奥下午的课十二点半开始，两点一刻结束。",
+    "options": [
+      "past",
+      "to",
+      "at",
+      "of"
+    ],
+    "optionsZh": [
+      "过",
+      "差",
+      "在",
+      "的"
+    ],
+    "answer": 0,
+    "answerText": "past",
+    "explanation": "两点一刻是两点过一刻，用 a quarter past two 表示。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "数词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The film begins at half ___ seven.",
+    "stemZh": "电影七点半开始。",
+    "options": [
+      "past",
+      "to",
+      "at",
+      "of"
+    ],
+    "optionsZh": [
+      "过",
+      "差",
+      "在",
+      "的"
+    ],
+    "answer": 0,
+    "answerText": "past",
+    "explanation": "七点半用 half past seven 表示。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "数词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I can't get up ___ on weekdays. I think I need an alarm clock on my bedside table.",
+    "stemZh": "我在工作日无法早起。我想我需要在床头柜上放一个闹钟。",
+    "options": [
+      "early",
+      "late",
+      "quickly",
+      "slowly"
+    ],
+    "optionsZh": [
+      "早",
+      "晚",
+      "快",
+      "慢"
+    ],
+    "answer": 0,
+    "answerText": "early",
+    "explanation": "get up early 意为“早起”，符合需要闹钟的语境。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "副词"
+    ]
+  },
+  {
+    "stem": "—What time do you usually get up?\n—___ 6:30 a.m.",
+    "stemZh": "——你通常几点起床？\n——早上6:30。",
+    "options": [
+      "In",
+      "On",
+      "At",
+      "To"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 2,
+    "answerText": "At",
+    "explanation": "表示具体时刻用介词 at，at 6:30 a.m. 意为“在早上6:30”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "In the evening I usually take a shower ___ I go to bed.",
+    "stemZh": "晚上我通常在上床睡觉前洗个澡。",
+    "options": [
+      "before",
+      "after",
+      "because",
+      "so"
+    ],
+    "optionsZh": [
+      "在……之前",
+      "在……之后",
+      "因为",
+      "所以"
+    ],
+    "answer": 0,
+    "answerText": "before",
+    "explanation": "洗澡在上床睡觉之前，用连词 before 引导时间状语从句。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "连词"
+    ]
+  },
+  {
+    "stem": "—What do they usually do after dinner?\n—They usually ___ their homework.",
+    "stemZh": "——他们晚饭后通常做什么？\n——他们通常做作业。",
+    "options": [
+      "do",
+      "does",
+      "doing",
+      "to do"
+    ],
+    "optionsZh": [
+      "做",
+      "做",
+      "做",
+      "做"
+    ],
+    "answer": 0,
+    "answerText": "do",
+    "explanation": "主语 They 是复数，一般现在时用动词原形 do；do one's homework 意为“做作业”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—You are late. We must get to school at a quarter to eight, not a quarter past eight.\n—I'm ___.",
+    "stemZh": "——你迟到了。我们必须在七点四十五到校，而不是八点一刻。\n——对不起。",
+    "options": [
+      "sorry",
+      "happy",
+      "fine",
+      "welcome"
+    ],
+    "optionsZh": [
+      "对不起",
+      "高兴",
+      "好",
+      "欢迎"
+    ],
+    "answer": 0,
+    "answerText": "sorry",
+    "explanation": "因迟到而道歉用 I'm sorry，意为“对不起”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "We must get to school at a quarter to eight. 这里的 a quarter to eight 指：",
+    "stemZh": "我们必须在七点四十五到校。这里的 a quarter to eight 指：",
+    "options": [
+      "7:45",
+      "8:15",
+      "8:45",
+      "7:15"
+    ],
+    "optionsZh": [
+      "7:45",
+      "8:15",
+      "8:45",
+      "7:15"
+    ],
+    "answer": 0,
+    "answerText": "7:45",
+    "explanation": "a quarter to eight 表示“差一刻八点”，即 7:45。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "数词"
+    ]
+  },
+  {
+    "stem": "After school, he plays basketball for ___ while.",
+    "stemZh": "放学后，他打一会儿篮球。",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "/"
+    ],
+    "optionsZh": [
+      "一个",
+      "一个",
+      "这个",
+      "不填"
+    ],
+    "answer": 0,
+    "answerText": "a",
+    "explanation": "for a while 是固定搭配，意为“一会儿”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—Do they go home at 5 p.m.?\n—No, they don't. They go home ___ 5:30.",
+    "stemZh": "——他们下午五点回家吗？\n——不，他们不。他们五点半回家。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 2,
+    "answerText": "at",
+    "explanation": "表示具体时刻用介词 at，at 5:30 意为“在五点半”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "Please don't be late ___ school next time.",
+    "stemZh": "下次请不要上学迟到。",
+    "options": [
+      "for",
+      "to",
+      "at",
+      "of"
+    ],
+    "optionsZh": [
+      "为",
+      "到",
+      "在",
+      "的"
+    ],
+    "answer": 0,
+    "answerText": "for",
+    "explanation": "be late for 是固定搭配，be late for school 意为“上学迟到”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—What time does your mother get up on school days?\n—___ 6:00.",
+    "stemZh": "——你妈妈上学日几点起床？\n——六点。",
+    "options": [
+      "In",
+      "On",
+      "At",
+      "To"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 2,
+    "answerText": "At",
+    "explanation": "表示具体时刻用介词 at，at 6:00 意为“在六点”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "My sister and I do homework together ___ evening.",
+    "stemZh": "我和姐姐每天晚上一起做作业。",
+    "options": [
+      "every",
+      "each",
+      "all",
+      "both"
+    ],
+    "optionsZh": [
+      "每一",
+      "每一",
+      "全部",
+      "两者都"
+    ],
+    "answer": 0,
+    "answerText": "every",
+    "explanation": "every evening 是固定搭配，意为“每天晚上”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—What's the time now?\n—It's a quarter past nine. 这里的 a quarter past nine 指：",
+    "stemZh": "——现在几点了？\n——九点一刻。这里的 a quarter past nine 指：",
+    "options": [
+      "9:15",
+      "8:45",
+      "9:45",
+      "8:15"
+    ],
+    "optionsZh": [
+      "9:15",
+      "8:45",
+      "9:45",
+      "8:15"
+    ],
+    "answer": 0,
+    "answerText": "9:15",
+    "explanation": "a quarter past nine 表示“九点过一刻”，即 9:15。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "数词"
+    ]
+  },
+  {
+    "stem": "—What time is it now?\n—It's 7:15. We can also say \"a quarter ___ seven\".",
+    "stemZh": "——现在几点了？\n——7:15。我们也可以说“七点一刻”。",
+    "options": [
+      "past",
+      "to",
+      "at",
+      "of"
+    ],
+    "optionsZh": [
+      "过",
+      "差",
+      "在",
+      "的"
+    ],
+    "answer": 0,
+    "answerText": "past",
+    "explanation": "7:15 是七点过一刻，用 a quarter past seven 表示。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "数词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He doesn't watch TV ___ school nights.",
+    "stemZh": "他上学日的晚上不看电视。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 1,
+    "answerText": "on",
+    "explanation": "on school nights 意为“在上学日的晚上”，表示特定日期的晚上用 on。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "My sister usually gets up at half past six ___ the morning.",
+    "stemZh": "我姐姐通常早上六点半起床。",
+    "options": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 0,
+    "answerText": "in",
+    "explanation": "表示上午、下午、晚上用介词 in，in the morning 意为“在上午”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "I think I need ___ alarm clock on my bedside table.",
+    "stemZh": "我想我需要在床头柜上放一个闹钟。",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "/"
+    ],
+    "optionsZh": [
+      "一个",
+      "一个",
+      "这个",
+      "不填"
+    ],
+    "answer": 1,
+    "answerText": "an",
+    "explanation": "alarm 以元音音素开头，表示“一个闹钟”用 an alarm clock。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "冠词"
+    ]
+  },
+  {
+    "stem": "—What time does Leo go to school?\n—___ eight o'clock.",
+    "stemZh": "——利奥几点去上学？\n——八点。",
+    "options": [
+      "In",
+      "On",
+      "At",
+      "To"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 2,
+    "answerText": "At",
+    "explanation": "表示具体时刻用介词 at，at eight o'clock 意为“在八点”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "介词"
+    ]
+  },
+  {
+    "stem": "—What time is it now?\n—It's half past seven. 这里的 half past seven 指：",
+    "stemZh": "——现在几点了？\n——七点半。这里的 half past seven 指：",
+    "options": [
+      "7:30",
+      "6:30",
+      "8:30",
+      "7:00"
+    ],
+    "optionsZh": [
+      "7:30",
+      "6:30",
+      "8:30",
+      "7:00"
+    ],
+    "answer": 0,
+    "answerText": "7:30",
+    "explanation": "half past seven 表示“七点半”，即 7:30。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "数词"
+    ]
+  },
+  {
+    "stem": "—What time is it now?\n—It's 9:45. We can say \"a quarter ___ ten\".",
+    "stemZh": "——现在几点了？\n——9:45。我们可以说“差一刻十点”。",
+    "options": [
+      "past",
+      "to",
+      "at",
+      "of"
+    ],
+    "optionsZh": [
+      "过",
+      "差",
+      "在",
+      "的"
+    ],
+    "answer": 1,
+    "answerText": "to",
+    "explanation": "9:45 距离十点还差一刻钟，用 a quarter to ten 表示。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "数词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—What time do you usually get up?\n—___ 6:45 in the morning.",
+    "stemZh": "——你通常几点起床？\n——早上6:45。",
+    "options": [
+      "In",
+      "On",
+      "At",
+      "To"
+    ],
+    "optionsZh": [
+      "在……里",
+      "在",
+      "在",
+      "到"
+    ],
+    "answer": 2,
+    "answerText": "At",
+    "explanation": "表示具体时刻用介词 at，at 6:45 in the morning 意为“在早上6:45”。",
+    "grade": 7,
+    "term": 1,
+    "unit": "7A-U6",
+    "points": [
+      "介词"
+    ]
   }
 ]
