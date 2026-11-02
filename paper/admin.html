@@ -185,7 +185,7 @@
     <!-- 5. 状态提示和报错区 (保持在下方) -->
     <div class="summary" id="summary">等待输入…</div>
     <div class="result-actions">
-      <button class="btn-mini" id="btnCopyErrors" disabled>📋 复制错误交 AI 修正</button>
+      <button class="btn-mini" id="btnCopyErrors" disabled>📋 复制错误提示</button>
     </div>
     <div class="result" id="result"></div>
     
@@ -597,11 +597,11 @@
   }
 
   /* =========================================================
-     复制错误交 AI 修正
+     复制错误
      ========================================================= */
   els.btnCopyErrors.addEventListener('click', async function () {
     if (!lastInvalidText) return;
-    await copyText(lastInvalidText, this, '📋 复制错误交 AI 修正');
+    await copyText(lastInvalidText, this, '📋 复制错误提示');
   });
 
   /* =========================================================
