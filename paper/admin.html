@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>题库上传与校验</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Microsoft YaHei", sans-serif; background: #f1f5f9; color: #1e293b; padding: 24px 16px 60px; }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 6px; }
+  .sub { color: #64748b; font-size: 13px; margin-bottom: 16px; line-height: 1.6; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .tab { padding: 8px 14px; border: 1px solid #cbd5e1; background: #fff; border-radius: 6px; cursor: pointer; font-size: 13px; color: #475569; font-family: inherit; }
+  .tab:hover { border-color: #94a3b8; }
+  .tab.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+  .editor { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px; }
+  textarea { width: 100%; min-height: 260px; resize: vertical; font-family: Consolas, Monaco, monospace; font-size: 13px; line-height: 1.6; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; outline: none; }
+  textarea:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+  .summary { margin: 10px 0 0; padding: 8px 12px; border-radius: 6px; background: #f8fafc; font-size: 13px; color: #475569; }
+  .summary.ok { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+  .summary.bad { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+  .summary.warn { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+  .result { margin: 6px 0 0; font-size: 13px; line-height: 1.7; max-height: 240px; overflow-y: auto; padding: 4px 0; }
+  .result:empty { display: none; }
+  .result .row { padding: 2px 0 2px 24px; position: relative; }
+  .result .row::before { position: absolute; left: 4px; top: 2px; font-weight: bold; }
+  .result .err { color: #dc2626; }
+  .result .err::before { content: "✗"; }
+  .result .warn { color: #d97706; }
+  .result .warn::before { content: "⚠"; }
+  .result .ok { color: #059669; }
+  .result .ok::before { content: "✓"; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  button.btn { padding: 9px 16px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; color: #334155; font-size: 13px; cursor: pointer; font-weight: 600; font-family: inherit; }
+  button.btn:hover:not(:disabled) { border-color: #94a3b8; background: #f8fafc; }
+  button.btn.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+  button.btn.primary:hover:not(:disabled) { background: #1d4ed8; border-color: #1d4ed8; }
+  button.btn:disabled { opacity: .45; cursor: not-allowed; }
+  .hint { font-size: 12px; color: #64748b; margin-top: 10px; line-height: 1.7; }
+  .hint code { background: #f3f4f6; padding: 1px 5px; border-radius: 3px; font-family: Consolas, Monaco, monospace; }
+
+  /* 顶部按钮条 */
+  .example-actions-bar {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    margin: 0 0 12px; padding: 10px 12px;
+    background: #f8fbff; border: 1px solid #dbeafe; border-radius: 8px;
+  }
+  .example-actions-bar button {
+    padding: 6px 14px; border-radius: 5px; border: 1px solid #cbd5e1;
+    background: #fff; color: #334155; font-size: 12.5px; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+  }
+  .example-actions-bar button:hover { border-color: #93c5fd; color: #1d4ed8; background: #eff6ff; }
+  .example-tip { font-size: 11.5px; color: #64748b; }
+
+  /* 复制错误按钮 */
+  .result-actions { margin-top: 8px; }
+  .btn-mini {
+    padding: 4px 10px; border-radius: 5px; border: 1px solid #fecaca;
+    background: #fff; color: #b91c1c; font-size: 12px; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+  }
+  .btn-mini:hover:not(:disabled) { background: #fef2f2; border-color: #fca5a5; }
+  .btn-mini:disabled { opacity: .4; cursor: not-allowed; }
+
+  /* 结果预览 */
+  .preview {
+    margin-top: 14px;
+    border: 1px solid #e2e8f0; border-radius: 8px;
+    background: #fff; padding: 12px 14px;
+    display: none;
+  }
+  .preview.show { display: block; }
+  .preview-title {
+    font-size: 13px; font-weight: bold; color: #1f2937;
+    padding-bottom: 8px; margin-bottom: 10px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .preview-item {
+    padding: 10px 12px; margin-bottom: 10px;
+    border: 1px solid #f0f0f0; border-radius: 6px;
+    background: #fafafa;
+    font-family: "Times New Roman", "SimSun", serif;
+    font-size: 13px; line-height: 1.65; color: #000;
+  }
+  .preview-item:last-child { margin-bottom: 0; }
+  .preview-num {
+    display: inline-block;
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 11px; font-weight: 600; color: #2563eb;
+    background: #eff6ff; padding: 1px 8px; border-radius: 999px;
+    margin-bottom: 6px;
+  }
+  .preview-stem { margin-bottom: 6px; }
+  .preview-stem .blank-inline {
+    display: inline-block; min-width: 46px;
+    border-bottom: 1px solid #333;
+    margin: 0 4px; height: 13px; vertical-align: middle;
+  }
+  .preview-passage {
+    margin-bottom: 8px; text-indent: 2em; line-height: 1.7;
+    font-size: 12.5px;
+  }
+  .preview-options {
+    display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 2px 10px; margin-bottom: 6px;
+    font-size: 12.5px;
+  }
+  .preview-options.two-col { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .preview-option { word-break: break-word; }
+  .preview-option.correct {
+    color: #047857; font-weight: 600;
+    background: #ecfdf5; padding: 1px 4px; border-radius: 3px;
+  }
+  .preview-answer {
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 12px; color: #047857; margin-bottom: 3px;
+  }
+  .preview-expl {
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 11.5px; color: #2563eb; margin-bottom: 3px;
+  }
+  .preview-meta {
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 11px; color: #6b7280; margin-top: 6px;
+    padding-top: 6px; border-top: 1px dashed #e5e7eb;
+  }
+  .preview-sub {
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 12px; font-weight: 600; color: #374151;
+    margin: 6px 0 4px;
+  }
+  .preview-q {
+    padding: 6px 8px; margin-bottom: 4px;
+    background: #fff; border-radius: 4px;
+  }
+  .preview-q .preview-stem { margin-bottom: 3px; font-weight: normal; }
+  .preview-writing-box {
+    border: 1px dashed #cbd5e1; border-radius: 4px;
+    padding: 8px 10px; background: #fff; margin: 6px 0;
+    color: #64748b; font-size: 12px;
+  }
+  .preview-sample {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 4px;
+    padding: 8px 10px; margin-top: 4px;
+    white-space: pre-wrap; font-size: 12px; color: #334155;
+    font-family: "Times New Roman", serif;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+    <h1 style="margin: 0;">题库上传与校验</h1>
+    <a href="page.html" style="text-decoration: none; padding: 7px 14px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; color: #334155; font-size: 13px; font-weight: 600; transition: all 0.15s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.borderColor='#94a3b8';this.style.background='#f8fafc'" onmouseout="this.style.borderColor='#cbd5e1';this.style.background='#fff'">← 返回制卷页</a>
+  </div>
+  <p class="sub">
+    粘贴新题目 → 实时校验格式 → 修好后点「下载合并后的 JSON」→ 把下载的文件拖进 GitHub 仓库覆盖原文件即可。<br>
+    单条对象会自动包成数组；与现有题库重复的条目会被跳过。
+  </p>
+
+  <div class="tabs" id="tabs"></div>
+
+    <div class="editor">
+    <!-- 1. 复制给 AI 栏 (保持在最顶上) -->
+    <div class="example-actions-bar">
+      <button type="button" id="btnCopyPrompt">📋 复制给 AI（说明+示例）</button>
+      <button type="button" id="btnCopyExample">📋 仅复制示例 JSON</button>
+      <span class="example-tip">点击复制后粘贴给 AI，可生成同格式数据</span>
+    </div>
+
+    <!-- 2. 移动上来的操作按钮（加一点下边距） -->
+    <div class="actions" style="margin-top: 0; margin-bottom: 10px;">
+      <button class="btn primary" id="btnMerge" disabled>下载合并后的 JSON</button>
+      <button class="btn" id="btnClear">清空输入框</button>
+    </div>
+
+    <!-- 3. 移动上来的字段说明（去掉上边距，加点下边距） -->
+    <div class="hint" id="hint" style="margin-top: 0; margin-bottom: 10px;"></div>
+
+    <!-- 4. 输入框 -->
+    <textarea id="input" spellcheck="false" placeholder="在此粘贴 JSON"></textarea>
+
+    <!-- 5. 状态提示和报错区 (保持在下方) -->
+    <div class="summary" id="summary">等待输入…</div>
+    <div class="result-actions">
+      <button class="btn-mini" id="btnCopyErrors" disabled>📋 复制错误交 AI 修正</button>
+    </div>
+    <div class="result" id="result"></div>
+    
+    <!-- 6. 预览区 (保持在下方) -->
+    <div class="preview" id="preview"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  /* =========================================================
+     通用知识点词表
+     ========================================================= */
+  const POINTS_VOCAB =
+    '名词、代词、冠词、数词、形容词、副词、介词、连词、' +
+    '一般现在时、一般过去时、现在进行时、过去进行时、' +
+    '一般将来时、现在完成时、被动语态、情态动词、' +
+    '非谓语动词（不定式）、非谓语动词（动名词）、' +
+    '定语从句、宾语从句、状语从句、主谓一致、' +
+    '反义疑问句、感叹句、祈使句、比较级与最高级、' +
+    '固定搭配、情景交际、词汇辨析';
+
+  /* =========================================================
+     题型配置
+     ========================================================= */
+  const TYPES = [
+    {
+      id: 'single', file: 'single.json', name: '单项填空',
+      metaRules: [
+        '【元数据要求（单选）】',
+        '· grade：必填，7 / 8 / 9 之一，按题目语法与词汇难度判定年级。',
+        '· points：必填，非空数组，1–3 个知识点，必须从以下词表中选，不得自造：',
+        '  ' + POINTS_VOCAB,
+        '· term：可选，1 上册 / 2 下册。',
+        '· unit：可选，格式如 "8A-U1"。',
+        '· keywords：可选，1–3 个细颗粒英文关键词（如 if、whether）。'
+      ].join('\n'),
+      example: [
+        {
+          "stem": "题干英文（要填的空用 ___ 表示）",
+          "stemZh": "题干中文翻译",
+          "options": ["选项A英文", "选项B英文", "选项C英文", "选项D英文"],
+          "optionsZh": ["选项A中文", "选项B中文", "选项C中文", "选项D中文"],
+          "answer": 0,
+          "explanation": "答案解析",
+          "grade": 8,
+          "term": 2,
+          "unit": "8B-U3",
+          "points": ["宾语从句"],
+          "keywords": ["if", "whether"]
+        }
+      ],
+      validate: validateSingle
+    },
+    {
+      id: 'cloze', file: 'cloze.json', name: '完形填空',
+      metaRules: [
+        '【元数据要求（完形填空）】',
+        '· grade：可选，7 / 8 / 9；无法精确判断就留空，留空表示适合所有年级。',
+        '· points：必填，非空数组，1–3 个知识点，必须从以下词表中选：',
+        '  ' + POINTS_VOCAB,
+        '· term / unit：可选，同单选。',
+        '· keywords：可选数组。',
+        '· questions 内每题仍需 stem / options（4 个）/ optionsZh（4 个）/ answer（0–3）/ explanation。'
+      ].join('\n'),
+      example: [
+        {
+          "text": "短文完整英文，每个空格用 ___ 表示",
+          "translation": "短文完整中文翻译（可选）",
+          "grade": 8,
+          "points": ["一般过去时", "词汇辨析"],
+          "questions": [
+            {
+              "stem": "",
+              "options": ["第1空A英文", "第1空B英文", "第1空C英文", "第1空D英文"],
+              "optionsZh": ["第1空A中文", "第1空B中文", "第1空C中文", "第1空D中文"],
+              "answer": 0,
+              "explanation": "第1空解析"
+            }
+          ]
+        }
+      ],
+      validate: validateCloze
+    },
+    {
+      id: 'dialogue', file: 'dialogue.json', name: '补全对话',
+      metaRules: [
+        '【元数据要求（补全对话）】',
+        '· grade：可选，7 / 8 / 9；无法判断就留空（适合所有年级）。',
+        '· points：必填，非空数组，1–3 个，通常填 "情景交际" 或具体功能。',
+        '· options：共享选项，7 个英文选项；questions 每题 answer 为 0–6 的整数。',
+        '· keywords：可选。'
+      ].join('\n'),
+      example: [
+        {
+          "text": "对话完整英文，每个空用 ___ 表示（一般 5 个空）",
+          "translation": "对话完整中文翻译（可选）",
+          "grade": 8,
+          "points": ["情景交际"],
+          "options": [
+            "A选项英文", "B选项英文", "C选项英文", "D选项英文",
+            "E选项英文", "F选项英文", "G选项英文（多余项）"
+          ],
+          "questions": [
+            { "stem": "", "answer": 0, "explanation": "第1空解析" }
+          ]
+        }
+      ],
+      validate: validateDialogue
+    },
+    {
+      id: 'reading', file: 'reading.json', name: '阅读理解',
+      metaRules: [
+        '【元数据要求（阅读理解）】',
+        '· 阅读不参与年级筛选，不要填 grade。',
+        '· type：必填，六类之一：应用文/广告、记叙文、科普文、人文说明文、人物/故事、任务型阅读。',
+        '· points：可选，1–2 个知识点。',
+        '· keywords：可选。',
+        '· 普通篇目 questions 里每题需 stem / options（4）/ optionsZh（4）/ answer（0–3）/ explanation。',
+        '· 任务型阅读（type = "任务型阅读"）的题目用 answerText 代替 options + answer。'
+      ].join('\n'),
+      example: [
+        {
+          "type": "应用文/广告",
+          "text": "短文完整英文",
+          "translation": "短文完整中文翻译（可选）",
+          "points": ["细节理解"],
+          "questions": [
+            {
+              "stem": "问题英文",
+              "stemZh": "问题中文",
+              "options": ["A英文", "B英文", "C英文", "D英文"],
+              "optionsZh": ["A中文", "B中文", "C中文", "D中文"],
+              "answer": 0,
+              "explanation": "解析"
+            }
+          ]
+        },
+        {
+          "type": "任务型阅读",
+          "text": "短文完整英文",
+          "translation": "短文完整中文翻译（可选）",
+          "points": ["推理判断"],
+          "questions": [
+            {
+              "stem": "问题英文",
+              "stemZh": "问题中文",
+              "answerText": "参考答案英文句子",
+              "explanation": "解析"
+            }
+          ]
+        }
+      ],
+      validate: validateReading
+    },
+    {
+      id: 'spelling', file: 'spelling.json', name: '单词拼写',
+      metaRules: [
+        '【元数据要求（单词拼写）】',
+        '· grade：必填，7 / 8 / 9 之一。',
+        '· points：必填，非空数组，1–3 个，从词表中选：',
+        '  ' + POINTS_VOCAB,
+        '· term / unit：可选。',
+        '· stem 中要填的单词位置用 ___ 表示，括号内用中文提示原形或词义。',
+        '· answer 必须是最终形态（如第三人称单数、过去式），不只是原形。'
+      ].join('\n'),
+      example: [
+        {
+          "stem": "句子英文，要填的单词用 ___ 表示，括号内用中文提示",
+          "stemZh": "句子中文翻译",
+          "answer": "正确答案英文单词",
+          "explanation": "解析",
+          "grade": 8,
+          "term": 2,
+          "unit": "8B-U2",
+          "points": ["词汇辨析"]
+        }
+      ],
+      validate: validateSpelling
+    },
+    {
+      id: 'writing', file: 'writing.json', name: '书面表达',
+      metaRules: [
+        '【元数据要求（书面表达）】',
+        '· grade：可选，7 / 8 / 9；无法判断就留空（适合所有年级）。',
+        '· points：不填（写作不按知识点抽题）。',
+        '· prompt：题目要求，中文即可。',
+        '· note：可选，字数/体裁要求。',
+        '· sampleAnswer：可选，参考范文英文。',
+        '· explanation：可选，写作要点。'
+      ].join('\n'),
+      example: [
+        {
+          "prompt": "书面表达题目要求（中文或英文均可）",
+          "note": "答题说明，如字数要求（可选）",
+          "sampleAnswer": "参考范文英文",
+          "explanation": "写作要点解析（可选）",
+          "grade": 8
+        }
+      ],
+      validate: validateWriting
+    }
+  ];
+
+  /* =========================================================
+     构造可直接发给 AI 的完整 prompt
+     ========================================================= */
+  function buildAiPrompt(type) {
+    return [
+      '【AI 生成指引 - ' + type.name + '】',
+      '1. 题目可来源于各地中考真题，也可由你原创生成。',
+      '2. 若原始题目（网上搜集或已有数据）的字段结构与本示例不一致，请自动转换为本示例的字段格式，不要保留原格式。',
+      '3. 请一并补全并修正：题干翻译（stemZh）、选项翻译（optionsZh）、答案（answer 或 answerText）、解析（explanation）。',
+      '4. 输出必须是合法 JSON 数组，字段名、层级、类型与示例完全一致，不得增删字段或改变嵌套结构。',
+      '5. 字符串统一使用英文双引号；字符串内部如含双引号、反斜杠或换行，必须正确转义。',
+      '6. 中文说明字段（stemZh、optionsZh、explanation 等）请填真实中文内容，不要照抄示例中的占位说明。',
+      '7. 只输出 JSON 本身，不要输出任何解释性文字、标题或 Markdown 代码块标记。',
+      '',
+      type.metaRules,
+      '',
+      '【示例 JSON（请严格按此结构输出，数组元素数量不限）】',
+      JSON.stringify(type.example, null, 2)
+    ].join('\n');
+  }
+
+  /* =========================================================
+     DOM 与状态
+     ========================================================= */
+  let currentType = TYPES[0].id;
+  let debounceTimer = null;
+  const bankCache = {};
+  let lastInvalidText = '';
+
+  const els = {
+    tabs: document.getElementById('tabs'),
+    input: document.getElementById('input'),
+    summary: document.getElementById('summary'),
+    result: document.getElementById('result'),
+    preview: document.getElementById('preview'),
+    btnMerge: document.getElementById('btnMerge'),
+    btnClear: document.getElementById('btnClear'),
+    btnCopyErrors: document.getElementById('btnCopyErrors'),
+    hint: document.getElementById('hint')
+  };
+
+  /* ---------- 标签 ---------- */
+  TYPES.forEach(function (t, i) {
+    const b = document.createElement('button');
+    b.className = 'tab' + (i === 0 ? ' active' : '');
+    b.textContent = t.name;
+    b.dataset.id = t.id;
+    b.addEventListener('click', function () { switchType(t.id); });
+    els.tabs.appendChild(b);
+  });
+
+  function current() {
+    return TYPES.find(function (t) { return t.id === currentType; });
+  }
+
+  function switchType(id) {
+    currentType = id;
+    document.querySelectorAll('.tab').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.id === id);
+    });
+    const t = current();
+    els.input.value = '';
+    els.input.placeholder = '在此粘贴 ' + t.name + ' 的 JSON（数组或单条对象均可）';
+    els.hint.innerHTML = '字段说明：<code>stem</code> 题干 · <code>stemZh</code> 题干翻译（可选） · ' +
+      '<code>options</code> 选项数组 · <code>optionsZh</code> 选项翻译（可选，长度必须与 options 一致） · ' +
+      '<code>answer</code> 答案索引 · <code>explanation</code> 解析（可选） · ' +
+      '<code>grade</code> 年级（单选/拼写必填） · <code>points</code> 知识点（单选/拼写必填）。';
+    runValidate();
+  }
+
+  /* =========================================================
+     输入实时校验（防抖 250ms）
+     ========================================================= */
+  els.input.addEventListener('input', function () {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(runValidate, 250);
+  });
+
+  function renderRow(cls, text) {
+    const d = document.createElement('div');
+    d.className = 'row ' + cls;
+    d.textContent = text;
+    return d;
+  }
+
+  function setSummary(cls, text) {
+    els.summary.className = 'summary' + (cls ? ' ' + cls : '');
+    els.summary.textContent = text;
+  }
+
+  function runValidate() {
+    els.result.innerHTML = '';
+    els.preview.classList.remove('show');
+    els.preview.innerHTML = '';
+    els.btnMerge.disabled = true;
+    els.btnCopyErrors.disabled = true;
+    lastInvalidText = '';
+
+    const raw = els.input.value.trim();
+    if (!raw) {
+      setSummary('', '等待输入…');
+      return;
+    }
+
+    const t = current();
+
+    let data;
+    try {
+      data = JSON.parse(raw);
+    } catch (e) {
+      setSummary('bad', '✗ JSON 语法错误：' + e.message);
+      els.result.appendChild(renderRow('err', e.message));
+      lastInvalidText = '我粘贴的 JSON 解析失败，错误信息：' + e.message + '\n\n原始内容：\n' + raw;
+      els.btnCopyErrors.disabled = false;
+      return;
+    }
+
+    if (data && !Array.isArray(data) && typeof data === 'object') {
+      data = [data];
+      els.result.appendChild(renderRow('warn', '输入是单个对象，已自动按 1 条数组处理'));
+    }
+    if (!Array.isArray(data)) {
+      setSummary('bad', '✗ 根节点必须是数组或单个对象');
+      lastInvalidText = '我粘贴的 JSON 根节点既不是数组也不是对象，原始内容：\n' + raw;
+      els.btnCopyErrors.disabled = false;
+      return;
+    }
+    if (data.length === 0) {
+      setSummary('bad', '✗ 数组为空');
+      return;
+    }
+
+    const valid = [];
+    const invalid = [];
+    data.forEach(function (item, i) {
+      const errs = t.validate(item, i);
+      if (errs.length === 0) {
+        valid.push(item);
+      } else {
+        invalid.push({ idx: i, item: item, errs: errs });
+      }
+    });
+
+    invalid.forEach(function (r) {
+      r.errs.forEach(function (e) {
+        els.result.appendChild(renderRow('err', '第 ' + (r.idx + 1) + ' 条：' + e));
+      });
+    });
+
+    const existing = bankCache[currentType];
+    const duplicates = [];
+    const fresh = [];
+    if (existing && Array.isArray(existing)) {
+      const existingKeys = new Set(existing.map(fingerprint));
+      valid.forEach(function (item) {
+        const k = fingerprint(item);
+        if (existingKeys.has(k)) {
+          duplicates.push(item);
+          els.result.appendChild(renderRow('warn', '与现有题库重复，已跳过：' + (k.length > 40 ? k.slice(0, 40) + '…' : k)));
+        } else {
+          existingKeys.add(k);
+          fresh.push(item);
+        }
+      });
+    } else {
+      fresh.push.apply(fresh, valid);
+    }
+
+    const summaryParts = [
+      '共 ' + data.length + ' 条',
+      '有效 ' + valid.length + ' 条',
+      '无效 ' + invalid.length + ' 条',
+      '重复 ' + duplicates.length + ' 条'
+    ];
+
+    if (invalid.length > 0) {
+      setSummary('bad', summaryParts.join(' · ') + '　✗ 请修正上方红色项');
+      const errBlocks = invalid.map(function (r) {
+        return '第 ' + (r.idx + 1) + ' 条（原始数据）：\n' +
+          JSON.stringify(r.item, null, 2) + '\n错误：\n- ' + r.errs.join('\n- ');
+      }).join('\n\n');
+      lastInvalidText = [
+        '以下 ' + invalid.length + ' 条 ' + t.name + ' 数据校验未通过，请按之前给你的字段规则修正后，只输出完整合法的 JSON 数组：',
+        '',
+        errBlocks
+      ].join('\n');
+      els.btnCopyErrors.disabled = false;
+      if (valid.length > 0) {
+        renderPreview(valid, currentType, []);
+      }
+      return;
+    }
+
+    if (fresh.length === 0) {
+      setSummary('warn', summaryParts.join(' · ') + '　⚠ 无新增数据');
+      renderPreview(valid, currentType, duplicates);
+      return;
+    }
+
+    setSummary('ok', summaryParts.join(' · ') + '　✓ 可以下载合并文件');
+    els.btnMerge.disabled = false;
+    els.btnMerge.dataset.fresh = JSON.stringify(fresh);
+
+    renderPreview(valid, currentType, duplicates);
+  }
+
+  /* =========================================================
+     复制错误交 AI 修正
+     ========================================================= */
+  els.btnCopyErrors.addEventListener('click', async function () {
+    if (!lastInvalidText) return;
+    await copyText(lastInvalidText, this, '📋 复制错误交 AI 修正');
+  });
+
+  /* =========================================================
+     预览渲染 (已去掉大标题)
+     ========================================================= */
+  function renderPreview(items, typeId, duplicates) {
+    els.preview.innerHTML = '';
+    els.preview.classList.add('show');
+    duplicates = duplicates || [];
+
+    const dupKeys = new Set(duplicates.map(fingerprint));
+
+    items.forEach(function (item, i) {
+      const isDup = dupKeys.has(fingerprint(item));
+      let node;
+      if (typeId === 'reading' || typeId === 'cloze') {
+        node = renderPreviewArticle(item, i, typeId);
+      } else if (typeId === 'dialogue') {
+        node = renderPreviewDialogue(item, i);
+      } else if (typeId === 'writing') {
+        node = renderPreviewWriting(item, i);
+      } else {
+        node = renderPreviewChoice(item, i, typeId);
+      }
+      if (isDup) {
+        node.style.borderColor = '#fecaca';
+        node.style.background = '#fef2f2';
+        const tag = document.createElement('span');
+        tag.textContent = '（重复，不入库）';
+        tag.style.cssText = 'color:#b91c1c;font-family:"Microsoft YaHei",sans-serif;font-size:11px;margin-left:6px;';
+        const numEl = node.querySelector('.preview-num');
+        if (numEl) numEl.appendChild(tag);
+      }
+      els.preview.appendChild(node);
+    });
+  }
+
+  function metaLine(item) {
+    const parts = [];
+    if (item.grade) parts.push('年级 ' + item.grade);
+    if (item.term) parts.push(item.term === 1 ? '上册' : '下册');
+    if (item.unit) parts.push(item.unit);
+    if (Array.isArray(item.points) && item.points.length) parts.push('知识点：' + item.points.join('、'));
+    if (Array.isArray(item.keywords) && item.keywords.length) parts.push('关键词：' + item.keywords.join('、'));
+    return parts.join(' · ');
+  }
+
+  function renderOptions(opts, answer, twoCol) {
+    const wrap = document.createElement('div');
+    wrap.className = 'preview-options' + (twoCol ? ' two-col' : '');
+    (opts || []).forEach(function (o, i) {
+      const span = document.createElement('span');
+      span.className = 'preview-option' + (i === answer ? ' correct' : '');
+      span.textContent = String.fromCharCode(65 + i) + '. ' + o;
+      wrap.appendChild(span);
+    });
+    return wrap;
+  }
+
+  function renderPreviewChoice(q, qi, typeId) {
+    const box = document.createElement('div');
+    box.className = 'preview-item';
+
+    const num = document.createElement('div');
+    num.className = 'preview-num';
+    num.textContent = '第 ' + (qi + 1) + ' 条';
+    box.appendChild(num);
+
+    const stem = document.createElement('div');
+    stem.className = 'preview-stem';
+    if (typeId === 'spelling') {
+      stem.innerHTML = escapeHtml(q.stem || '').replace(/_{2,}/g, '<span class="blank-inline"></span>');
+    } else {
+      stem.innerHTML = escapeHtml(q.stem || '').replace(/\r?\n/g, '<br>');
+    }
+    box.appendChild(stem);
+
+    if (typeId === 'single' && Array.isArray(q.options)) {
+      box.appendChild(renderOptions(q.options, q.answer, false));
+    }
+
+    const ans = document.createElement('div');
+    ans.className = 'preview-answer';
+    if (typeId === 'single' && typeof q.answer === 'number' && Array.isArray(q.options)) {
+      ans.textContent = '✓ 答案：' + String.fromCharCode(65 + q.answer) + '. ' + (q.options[q.answer] || '');
+    } else {
+      ans.textContent = '✓ 答案：' + (q.answer || '');
+    }
+    box.appendChild(ans);
+
+    if (q.explanation) {
+      const expl = document.createElement('div');
+      expl.className = 'preview-expl';
+      expl.textContent = '解析：' + q.explanation;
+      box.appendChild(expl);
+    }
+
+    const meta = metaLine(q);
+    if (meta) {
+      const m = document.createElement('div');
+      m.className = 'preview-meta';
+      m.textContent = meta;
+      box.appendChild(m);
+    }
+    return box;
+  }
+
+  function renderPreviewArticle(p, pi, typeId) {
+    const box = document.createElement('div');
+    box.className = 'preview-item';
+
+    const num = document.createElement('div');
+    num.className = 'preview-num';
+    num.textContent = '第 ' + (pi + 1) + ' 篇' + (p.type ? '（' + p.type + '）' : '');
+    box.appendChild(num);
+
+    const text = document.createElement('div');
+    text.className = 'preview-passage';
+    text.innerHTML = escapeHtml(p.text || '').replace(/\r?\n/g, '<br>');
+    box.appendChild(text);
+
+    if (Array.isArray(p.questions) && p.questions.length) {
+      const sub = document.createElement('div');
+      sub.className = 'preview-sub';
+      sub.textContent = '题目（共 ' + p.questions.length + ' 题）：';
+      box.appendChild(sub);
+
+      p.questions.forEach(function (q, qi) {
+        const qbox = document.createElement('div');
+        qbox.className = 'preview-q';
+
+        const num2 = document.createElement('span');
+        num2.style.fontFamily = '"Microsoft YaHei", sans-serif';
+        num2.style.fontSize = '11px';
+        num2.style.color = '#94a3b8';
+        num2.textContent = (qi + 1) + '. ';
+        qbox.appendChild(num2);
+
+        if (q.stem) {
+          const stem = document.createElement('span');
+          stem.className = 'preview-stem';
+          stem.style.display = 'inline';
+          stem.innerHTML = escapeHtml(q.stem || '').replace(/\r?\n/g, '<br>');
+          qbox.appendChild(stem);
+        }
+        if (Array.isArray(q.options) && q.options.length) {
+          qbox.appendChild(document.createElement('div')).style.height = '4px';
+          qbox.appendChild(renderOptions(q.options, q.answer, false));
+        }
+        const ans = document.createElement('div');
+        ans.className = 'preview-answer';
+        if (typeof q.answer === 'number' && Array.isArray(q.options)) {
+          ans.textContent = '✓ ' + String.fromCharCode(65 + q.answer) + '. ' + (q.options[q.answer] || '');
+        } else if (q.answerText) {
+          ans.textContent = '✓ ' + q.answerText;
+        } else if (q.answer !== undefined) {
+          ans.textContent = '✓ ' + q.answer;
+        }
+        if (ans.textContent) qbox.appendChild(ans);
+        if (q.explanation) {
+          const expl = document.createElement('div');
+          expl.className = 'preview-expl';
+          expl.textContent = '解析：' + q.explanation;
+          qbox.appendChild(expl);
+        }
+        box.appendChild(qbox);
+      });
+    }
+
+    const meta = metaLine(p);
+    if (meta) {
+      const m = document.createElement('div');
+      m.className = 'preview-meta';
+      m.textContent = meta;
+      box.appendChild(m);
+    }
+    return box;
+  }
+
+  function renderPreviewDialogue(p, pi) {
+    const box = document.createElement('div');
+    box.className = 'preview-item';
+
+    const num = document.createElement('div');
+    num.className = 'preview-num';
+    num.textContent = '第 ' + (pi + 1) + ' 篇补全对话';
+    box.appendChild(num);
+
+    const text = document.createElement('div');
+    text.className = 'preview-passage';
+    text.style.textIndent = '0';
+    text.innerHTML = escapeHtml(p.text || '').replace(/\r?\n/g, '<br>');
+    box.appendChild(text);
+
+    if (Array.isArray(p.options) && p.options.length) {
+      const sub = document.createElement('div');
+      sub.className = 'preview-sub';
+      sub.textContent = '选项方框：';
+      box.appendChild(sub);
+
+      const bank = document.createElement('div');
+      bank.className = 'preview-options two-col';
+      p.options.forEach(function (o, i) {
+        const s = document.createElement('span');
+        s.className = 'preview-option';
+        s.textContent = String.fromCharCode(65 + i) + '. ' + o;
+        bank.appendChild(s);
+      });
+      box.appendChild(bank);
+    }
+
+    if (Array.isArray(p.questions) && p.questions.length) {
+      const sub = document.createElement('div');
+      sub.className = 'preview-sub';
+      sub.textContent = '答案：';
+      box.appendChild(sub);
+      p.questions.forEach(function (q, qi) {
+        const a = document.createElement('div');
+        a.className = 'preview-answer';
+        a.style.marginLeft = '8px';
+        const letter = typeof q.answer === 'number' ? String.fromCharCode(65 + q.answer) : q.answer;
+        a.textContent = '第 ' + (qi + 1) + ' 空 → ' + letter;
+        box.appendChild(a);
+      });
+    }
+
+    const meta = metaLine(p);
+    if (meta) {
+      const m = document.createElement('div');
+      m.className = 'preview-meta';
+      m.textContent = meta;
+      box.appendChild(m);
+    }
+    return box;
+  }
+
+  function renderPreviewWriting(p, pi) {
+    const box = document.createElement('div');
+    box.className = 'preview-item';
+
+    const num = document.createElement('div');
+    num.className = 'preview-num';
+    num.textContent = '第 ' + (pi + 1) + ' 篇书面表达';
+    box.appendChild(num);
+
+    const prompt = document.createElement('div');
+    prompt.className = 'preview-stem';
+    prompt.innerHTML = escapeHtml(p.prompt || '').replace(/\r?\n/g, '<br>');
+    box.appendChild(prompt);
+
+    if (p.note) {
+      const note = document.createElement('div');
+      note.className = 'preview-expl';
+      note.textContent = '说明：' + p.note;
+      box.appendChild(note);
+    }
+
+    const area = document.createElement('div');
+    area.className = 'preview-writing-box';
+    area.textContent = '（答题区，约 80–100 词）';
+    box.appendChild(area);
+
+    if (p.sampleAnswer) {
+      const label = document.createElement('div');
+      label.className = 'preview-answer';
+      label.textContent = '✓ 参考范文：';
+      box.appendChild(label);
+      const sample = document.createElement('div');
+      sample.className = 'preview-sample';
+      sample.textContent = p.sampleAnswer;
+      box.appendChild(sample);
+    }
+
+    if (p.explanation) {
+      const expl = document.createElement('div');
+      expl.className = 'preview-expl';
+      expl.style.marginTop = '6px';
+      expl.textContent = '写作要点：' + p.explanation;
+      box.appendChild(expl);
+    }
+
+    const meta = metaLine(p);
+    if (meta) {
+      const m = document.createElement('div');
+      m.className = 'preview-meta';
+      m.textContent = meta;
+      box.appendChild(m);
+    }
+    return box;
+  }
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  /* =========================================================
+     校验工具函数
+     ========================================================= */
+  function isNonEmptyString(v) {
+    return typeof v === 'string' && v.trim() !== '';
+  }
+
+  function validateSingle(item, idx) {
+    const e = [];
+    if (!item || typeof item !== 'object') return ['应为对象'];
+    if (!isNonEmptyString(item.stem)) e.push('stem 必须是非空字符串');
+    if (!Array.isArray(item.options) || item.options.length !== 4) {
+      e.push('options 必须恰好 4 个字符串');
+    } else if (item.options.some(function (o) { return !isNonEmptyString(o); })) {
+      e.push('options 中每一项都必须是非空字符串');
+    }
+    if (!Number.isInteger(item.answer) || item.answer < 0 || item.answer > 3) {
+      e.push('answer 必须是 0–3 的整数');
+    }
+    if (item.optionsZh !== undefined) {
+      if (!Array.isArray(item.optionsZh) || item.optionsZh.length !== 4) {
+        e.push('optionsZh 必须是 4 个元素的数组');
+      } else if (item.optionsZh.some(function (o) { return typeof o !== 'string'; })) {
+        e.push('optionsZh 中每一项都必须是字符串');
+      }
+    }
+    if (item.stemZh !== undefined && typeof item.stemZh !== 'string') e.push('stemZh 必须是字符串');
+    if (item.explanation !== undefined && typeof item.explanation !== 'string') e.push('explanation 必须是字符串');
+    if (!Number.isInteger(item.grade) || [7, 8, 9].indexOf(item.grade) === -1) {
+      e.push('grade 必须是 7、8 或 9');
+    }
+    if (!Array.isArray(item.points) || item.points.length === 0) {
+      e.push('points 必须是非空字符串数组');
+    } else if (item.points.some(function (p) { return !isNonEmptyString(p); })) {
+      e.push('points 中每一项都必须是非空字符串');
+    }
+    if (item.term !== undefined && [1, 2].indexOf(item.term) === -1) e.push('term 必须是 1 或 2（可选）');
+    if (item.unit !== undefined && typeof item.unit !== 'string') e.push('unit 必须是字符串（可选）');
+    if (item.keywords !== undefined) {
+      if (!Array.isArray(item.keywords)) e.push('keywords 必须是数组（可选）');
+      else if (item.keywords.some(function (k) { return !isNonEmptyString(k); })) e.push('keywords 中每一项都必须是非空字符串');
+    }
+    return e;
+  }
+
+  function validateArticleQuestion(q, prefix) {
+    const e = [];
+    if (!q || typeof q !== 'object') { e.push(prefix + ' 应为对象'); return e; }
+    if (!isNonEmptyString(q.stem)) e.push(prefix + ' stem 必须是非空字符串');
+    const hasOpts = Array.isArray(q.options) && q.options.length > 0;
+    if (q.options !== undefined && (!Array.isArray(q.options) || q.options.length !== 4)) {
+      e.push(prefix + ' options 必须是 4 个元素的数组');
+    }
+    if (hasOpts) {
+      if (q.options.some(function (o) { return !isNonEmptyString(o); })) {
+        e.push(prefix + ' options 中每一项都必须是非空字符串');
+      }
+      if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer > 3) {
+        e.push(prefix + ' answer 必须是 0–3 的整数');
+      }
+    } else {
+      if (q.answer === undefined && q.answerText === undefined) {
+        e.push(prefix + ' 没有 options 时必须提供 answer 或 answerText');
+      }
+    }
+    if (q.optionsZh !== undefined) {
+      if (!Array.isArray(q.optionsZh) || q.optionsZh.length !== 4) {
+        e.push(prefix + ' optionsZh 必须是 4 个元素的数组');
+      } else if (q.optionsZh.some(function (o) { return typeof o !== 'string'; })) {
+        e.push(prefix + ' optionsZh 中每一项都必须是字符串');
+      }
+    }
+    if (q.stemZh !== undefined && typeof q.stemZh !== 'string') e.push(prefix + ' stemZh 必须是字符串');
+    if (q.explanation !== undefined && typeof q.explanation !== 'string') e.push(prefix + ' explanation 必须是字符串');
+    if (q.answerText !== undefined && typeof q.answerText !== 'string') e.push(prefix + ' answerText 必须是字符串');
+    return e;
+  }
+
+  function validateOptionalMeta(item) {
+    const e = [];
+    if (item.grade !== undefined && [7, 8, 9].indexOf(item.grade) === -1) {
+      e.push('grade 若填写，必须是 7、8 或 9');
+    }
+    if (item.points !== undefined) {
+      if (!Array.isArray(item.points)) e.push('points 若填写，必须是数组');
+      else if (item.points.some(function (p) { return !isNonEmptyString(p); })) {
+        e.push('points 中每一项都必须是非空字符串');
+      }
+    }
+    if (item.term !== undefined && [1, 2].indexOf(item.term) === -1) e.push('term 若填写，必须是 1 或 2');
+    if (item.unit !== undefined && typeof item.unit !== 'string') e.push('unit 若填写，必须是字符串');
+    if (item.keywords !== undefined) {
+      if (!Array.isArray(item.keywords)) e.push('keywords 必须是数组（可选）');
+      else if (item.keywords.some(function (k) { return !isNonEmptyString(k); })) e.push('keywords 中每一项都必须是非空字符串');
+    }
+    return e;
+  }
+
+  function validateCloze(item, idx) {
+    const e = [];
+    if (!item || typeof item !== 'object') return ['应为对象'];
+    if (!isNonEmptyString(item.text)) e.push('text 必须是非空字符串');
+    if (!Array.isArray(item.questions) || item.questions.length === 0) {
+      e.push('questions 必须是非空数组');
+    } else {
+      item.questions.forEach(function (q, i) {
+        e.push.apply(e, validateArticleQuestion(q, 'questions[' + i + ']'));
+      });
+    }
+    if (!Array.isArray(item.points) || item.points.length === 0) {
+      e.push('points 必须是非空字符串数组');
+    } else if (item.points.some(function (p) { return !isNonEmptyString(p); })) {
+      e.push('points 中每一项都必须是非空字符串');
+    }
+    e.push.apply(e, validateOptionalMeta(item));
+    return e;
+  }
+
+  function validateReading(item, idx) {
+    const e = [];
+    if (!item || typeof item !== 'object') return ['应为对象'];
+    const ALLOWED = ['应用文/广告', '记叙文', '科普文', '人文说明文', '人物/故事', '任务型阅读'];
+    if (ALLOWED.indexOf(item.type) === -1) {
+      e.push('type 必须是以下之一：' + ALLOWED.join('、'));
+    }
+    if (!isNonEmptyString(item.text)) e.push('text 必须是非空字符串');
+    if (!Array.isArray(item.questions) || item.questions.length === 0) {
+      e.push('questions 必须是非空数组');
+    } else {
+      item.questions.forEach(function (q, i) {
+        e.push.apply(e, validateArticleQuestion(q, 'questions[' + i + ']'));
+      });
+    }
+    if (item.points !== undefined) {
+      if (!Array.isArray(item.points)) e.push('points 若填写，必须是数组');
+      else if (item.points.some(function (p) { return !isNonEmptyString(p); })) {
+        e.push('points 中每一项都必须是非空字符串');
+      }
+    }
+    if (item.keywords !== undefined) {
+      if (!Array.isArray(item.keywords)) e.push('keywords 必须是数组（可选）');
+      else if (item.keywords.some(function (k) { return !isNonEmptyString(k); })) e.push('keywords 中每一项都必须是非空字符串');
+    }
+    return e;
+  }
+
+  function validateDialogue(item, idx) {
+    const e = [];
+    if (!item || typeof item !== 'object') return ['应为对象'];
+    if (!isNonEmptyString(item.text)) e.push('text 必须是非空字符串');
+    if (!Array.isArray(item.options) || item.options.length < 5) {
+      e.push('options 必须是至少 5 个元素的字符串数组（通常 7 个）');
+    } else if (item.options.some(function (o) { return !isNonEmptyString(o); })) {
+      e.push('options 中每一项都必须是非空字符串');
+    }
+    if (!Array.isArray(item.questions) || item.questions.length === 0) {
+      e.push('questions 必须是非空数组');
+    } else {
+      const maxIdx = Array.isArray(item.options) ? item.options.length - 1 : 6;
+      item.questions.forEach(function (q, i) {
+        if (!q || typeof q !== 'object') { e.push('questions[' + i + '] 应为对象'); return; }
+        if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer > maxIdx) {
+          e.push('questions[' + i + '] answer 必须是 0–' + maxIdx + ' 的整数');
+        }
+      });
+    }
+    if (!Array.isArray(item.points) || item.points.length === 0) {
+      e.push('points 必须是非空字符串数组');
+    } else if (item.points.some(function (p) { return !isNonEmptyString(p); })) {
+      e.push('points 中每一项都必须是非空字符串');
+    }
+    e.push.apply(e, validateOptionalMeta(item));
+    return e;
+  }
+
+  function validateSpelling(item, idx) {
+    const e = [];
+    if (!item || typeof item !== 'object') return ['应为对象'];
+    if (!isNonEmptyString(item.stem)) e.push('stem 必须是非空字符串');
+    if (!isNonEmptyString(item.answer)) e.push('answer 必须是非空字符串');
+    if (!Number.isInteger(item.grade) || [7, 8, 9].indexOf(item.grade) === -1) {
+      e.push('grade 必须是 7、8 或 9');
+    }
+    if (!Array.isArray(item.points) || item.points.length === 0) {
+      e.push('points 必须是非空字符串数组');
+    } else if (item.points.some(function (p) { return !isNonEmptyString(p); })) {
+      e.push('points 中每一项都必须是非空字符串');
+    }
+    if (item.term !== undefined && [1, 2].indexOf(item.term) === -1) e.push('term 必须是 1 或 2（可选）');
+    if (item.unit !== undefined && typeof item.unit !== 'string') e.push('unit 必须是字符串（可选）');
+    if (item.keywords !== undefined) {
+      if (!Array.isArray(item.keywords)) e.push('keywords 必须是数组（可选）');
+      else if (item.keywords.some(function (k) { return !isNonEmptyString(k); })) e.push('keywords 中每一项都必须是非空字符串');
+    }
+    return e;
+  }
+
+  function validateWriting(item, idx) {
+    const e = [];
+    if (!item || typeof item !== 'object') return ['应为对象'];
+    if (!isNonEmptyString(item.prompt)) e.push('prompt 必须是非空字符串');
+    if (item.note !== undefined && typeof item.note !== 'string') e.push('note 若是填写，必须是字符串');
+    if (item.sampleAnswer !== undefined && typeof item.sampleAnswer !== 'string') e.push('sampleAnswer 若是填写，必须是字符串');
+    if (item.explanation !== undefined && typeof item.explanation !== 'string') e.push('explanation 若是填写，必须是字符串');
+    if (item.grade !== undefined && [7, 8, 9].indexOf(item.grade) === -1) {
+      e.push('grade 若填写，必须是 7、8 或 9');
+    }
+    return e;
+  }
+
+  /* =========================================================
+     指纹（去重）
+     ========================================================= */
+  function fingerprint(item) {
+    switch (currentType) {
+      case 'single':   return 'single|' + (item.stem || '');
+      case 'spelling': return 'spell|' + (item.stem || '');
+      case 'cloze':    return 'cloze|' + (item.text || '').slice(0, 120);
+      case 'reading':  return 'read|' + (item.type || '') + '|' + (item.text || '').slice(0, 120);
+      case 'dialogue': return 'dial|' + (item.text || '').slice(0, 120);
+      case 'writing':  return 'write|' + (item.prompt || '').slice(0, 120);
+      default:         return JSON.stringify(item);
+    }
+  }
+
+  /* =========================================================
+     加载现有题库（用于去重）
+     ========================================================= */
+  async function loadExisting(type) {
+    if (bankCache[type.id] !== undefined) return bankCache[type.id];
+    try {
+      const res = await fetch('./' + type.file, { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      bankCache[type.id] = Array.isArray(data) ? data : [];
+    } catch (e) {
+      bankCache[type.id] = null;
+    }
+    return bankCache[type.id];
+  }
+
+  async function ensureLoaded(id) {
+    const t = TYPES.find(function (x) { return x.id === id; });
+    if (!t) return;
+    if (bankCache[id] !== undefined) {
+      runValidate();
+      return;
+    }
+    setSummary('', '正在加载现有题库…');
+    await loadExisting(t);
+    if (bankCache[id] === null) {
+      setSummary('warn', '⚠ 无法读取现有 ' + t.file + '，将不进行重复检查（请确认文件在同目录）。');
+    }
+    runValidate();
+  }
+
+  /* =========================================================
+     复制工具
+     ========================================================= */
+  async function copyText(text, btn, originalLabel) {
+    if (!text) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      btn.textContent = '✓ 已复制';
+      setTimeout(function () { btn.textContent = originalLabel; }, 1500);
+    } catch (e) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); btn.textContent = '✓ 已复制'; }
+      catch (err) { alert('复制失败，请手动选中复制'); }
+      document.body.removeChild(ta);
+      setTimeout(function () { btn.textContent = originalLabel; }, 1500);
+    }
+  }
+
+  document.getElementById('btnCopyPrompt').addEventListener('click', async function () {
+    const prompt = buildAiPrompt(current());
+    await copyText(prompt, this, '📋 复制给 AI（说明+示例）');
+  });
+
+  document.getElementById('btnCopyExample').addEventListener('click', async function () {
+    const json = JSON.stringify(current().example, null, 2);
+    await copyText(json, this, '📋 仅复制示例 JSON');
+  });
+
+  /* =========================================================
+     清空 / 下载
+     ========================================================= */
+  els.btnClear.addEventListener('click', function () {
+    els.input.value = '';
+    runValidate();
+  });
+
+  els.btnMerge.addEventListener('click', async function () {
+    const fresh = JSON.parse(this.dataset.fresh || '[]');
+    if (fresh.length === 0) return;
+
+    const t = current();
+    const existing = bankCache[t.id] || [];
+    const merged = existing.concat(fresh);
+    const json = JSON.stringify(merged, null, 2);
+
+    const blob = new Blob([json], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = t.file;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    bankCache[t.id] = merged;
+
+    setSummary('ok', '✓ 已生成 ' + t.file + '（原有 ' + existing.length + ' 条 + 新增 ' + fresh.length +
+      ' 条 = 共 ' + merged.length + ' 条）。请把下载的文件上传到 GitHub 仓库覆盖原文件。');
+    els.input.value = '';
+    els.preview.classList.remove('show');
+    els.preview.innerHTML = '';
+    els.btnMerge.disabled = true;
+    els.btnMerge.dataset.fresh = '';
+  });
+
+  /* =========================================================
+     切题型时加载现有题库
+     ========================================================= */
+  const origSwitch = switchType;
+  switchType = function (id) {
+    origSwitch(id);
+    ensureLoaded(id);
+  };
+  switchType(TYPES[0].id);
+})();
+</script>
+</body>
+</html>

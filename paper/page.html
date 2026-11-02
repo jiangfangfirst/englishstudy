@@ -24,7 +24,7 @@
     border-top: 1px solid #ccc; box-sizing: border-box;
     font-family: "Microsoft YaHei", sans-serif;
   }
-  /* 测量页：提高特异性，避免被窄屏 .paper 覆盖 */
+  /* 测量页 */
   .paper.measure-paper {
     position: absolute !important; left: -9999px !important; top: 0 !important;
     visibility: hidden !important; pointer-events: none !important;
@@ -52,7 +52,7 @@
     object-fit: contain;
   }
 
-  /* ★ 全页水印（文字色，打印必出，不依赖“背景图形”） */
+  /* ★ 全页水印 */
   .paper > .watermark {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
@@ -282,6 +282,44 @@
     color: #374151; letter-spacing: .3px;
   }
 
+  /* ★ 筛选区 UI */
+  .filter-box {
+    background: #f8fafc; border: 1px solid #e5e7eb;
+    border-radius: 8px; padding: 10px 12px; margin-bottom: 14px;
+  }
+  .filter-row { display: flex; align-items: center; margin-bottom: 8px; gap: 8px; }
+  .filter-row:last-child { margin-bottom: 0; }
+  .filter-row label { width: 40px; font-size: 12px; color: #475569; font-weight: 600; }
+  .filter-row select, .filter-row input[type="text"] {
+    flex: 1; min-width: 0; padding: 6px 10px; border: 1px solid #cbd5e1;
+    border-radius: 5px; font-size: 12.5px; font-family: inherit; color: #1e293b;
+    outline: none; background: #fff;
+  }
+  .filter-row select:focus, .filter-row input[type="text"]:focus {
+    border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59,130,246,.15);
+  }
+  .points-selector { flex: 1; position: relative; }
+  .selected-points { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+  .selected-points:empty { display: none; }
+  .pt-tag {
+    display: inline-flex; align-items: center; background: #eff6ff; color: #1d4ed8;
+    border: 1px solid #bfdbfe; padding: 2px 6px; border-radius: 4px; font-size: 11.5px;
+  }
+  .pt-tag button {
+    background: none; border: none; color: #60a5fa; cursor: pointer;
+    font-size: 14px; margin-left: 4px; padding: 0; line-height: 1;
+  }
+  .pt-tag button:hover { color: #1d4ed8; }
+  .points-dropdown {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 10;
+    background: #fff; border: 1px solid #cbd5e1; border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1); max-height: 180px; overflow-y: auto;
+    display: none; margin-top: 4px;
+  }
+  .points-dropdown.show { display: block; }
+  .pt-option { padding: 6px 10px; font-size: 12.5px; cursor: pointer; color: #334155; }
+  .pt-option:hover { background: #f1f5f9; color: #2563eb; }
+
   /* ★ 六图标工具栏 + 单行状态 */
   .icon-toolbar {
     display: flex; gap: 6px; margin: 0 0 6px;
@@ -306,7 +344,7 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
 
-  /* ★ 隐藏指定按钮：DOM 保留，功能仍可被脚本调用 */
+  /* ★ 隐藏指定按钮 */
   #btnLoadAll,
   #btnGenerate { display: none !important; }
   .btn-file { display: none !important; }
@@ -462,15 +500,44 @@
     <button class="panel-close" id="panelClose" aria-label="关闭">✕</button>
   </div>
   <div class="panel-body">
+    <!-- ★ 新增：试卷筛选条件 -->
+    <div class="panel-section">
+      <h4>试卷选题筛选</h4>
+      <div class="filter-box">
+        <div class="filter-row">
+          <label>年级</label>
+          <select id="filterGrade">
+            <option value="">全量（不限年级）</option>
+            <option value="7">七年级</option>
+            <option value="8">八年级</option>
+            <option value="9">九年级</option>
+          </select>
+        </div>
+        <div class="filter-row">
+          <label>单元</label>
+          <input type="text" id="filterUnit" placeholder="如 8A-U1（留空不限）">
+        </div>
+        <div class="filter-row" style="align-items: flex-start;">
+          <label style="margin-top: 6px;">知识点</label>
+          <div class="points-selector">
+            <div id="selectedPoints" class="selected-points"></div>
+            <input type="text" id="filterPointsInput" placeholder="输入关键字筛选知识点，回车添加…" autocomplete="off">
+            <div id="pointsDropdown" class="points-dropdown"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="panel-section">
       <h4>题型题库（可只选部分题型）</h4>
-      <div class="icon-toolbar">
-        <button class="tool-btn" id="btnResetStandard" title="重置标准卷：标准题型题量，刷新试题">↺</button>
-        <button class="tool-btn" id="btnRefreshAll" title="整体刷新：按当前题型题量，重新抽题">🔄</button>
+            <div class="icon-toolbar">
+        <button class="tool-btn" id="btnResetStandard" title="重置标准卷：标准题型题量，清空筛选条件并刷新">↺</button>
+        <button class="tool-btn" id="btnRefreshAll" title="整体刷新：按当前条件重新抽题">🔄</button>
         <button class="tool-btn" id="btnLoadAll" title="一键加载全部题库">⚡</button>
         <button class="tool-btn" id="btnGenerate" disabled title="生成试卷：按设置自动排版">📝</button>
         <button class="tool-btn" id="btnToggleAnswer" title="显示全卷翻译与答案">👁</button>
         <button class="tool-btn" onclick="window.print()" title="打印或导出 PDF">🖨️</button>
+        <button class="tool-btn" onclick="window.open('admin.html', '_blank')" title="添加数据">➕</button>
       </div>
       <div class="status-line" id="panelStatus">正在初始化…</div>
       <div id="typeList"></div>
@@ -696,10 +763,6 @@ function renderBlanksWithNums(text, startNum) {
   });
 }
 
-/* 阅读/完形统一渲染：
-   auto 模式下任务型阅读强制问答；
-   choice 模式下全部按单选；
-   qa 模式下全部按问答 */
 function renderArticleGroup(items, num, forceLabels, mode) {
   mode = mode || 'auto';
   const nodes = [];
@@ -902,7 +965,6 @@ function renderWriting(items, num) {
     if (!data) return;
     const wrap = document.createElement('div');
 
-    /* 多篇时给出小标题，单篇时不显示，保持原样 */
     if (items.length > 1) {
       const label = document.createElement('div');
       label.className = 'passage-label';
@@ -995,6 +1057,20 @@ function makeHeaderBlock(meta) {
     notice = `1. 本试卷为组合练习，满分 ${meta.totalScore} 分，共 ${meta.totalQuestions} 题。<br>
               2. 请认真作答，完成后对照答案自查。`;
   }
+
+  // ★ 新增：读取筛选条件并显示在标题下方
+  let filterHtml = '';
+  if (window._examFilterParams) {
+    const p = window._examFilterParams;
+    const parts = [];
+    if (p.grade) parts.push(p.grade + '年级');
+    if (p.unit) parts.push('单元: ' + p.unit);
+    if (p.points && p.points.length > 0) parts.push('重点考查: ' + p.points.join('、'));
+    if (parts.length > 0) {
+      filterHtml = ' <span style="color:#2563eb; font-size: 11.5px; font-weight: 600; margin-left: 8px;">[' + parts.join(' | ') + ']</span>';
+    }
+  }
+
   const wrap = document.createElement('div');
   wrap.innerHTML = `
     <div class="exam-logo-wrap">
@@ -1003,7 +1079,7 @@ function makeHeaderBlock(meta) {
     </div>
     <div class="exam-header">
       <h1>${title}</h1>
-      <div class="exam-type">${subtitle}</div>
+      <div class="exam-type">${subtitle}${filterHtml}</div>
       <div class="exam-meta">${metaLine}</div>
     </div>
     <div class="notice"><strong>注意事项：</strong>${notice}</div>
@@ -1127,13 +1203,17 @@ function renderExam(selections) {
   paginate(blocks);
 }
 /* =========================================================
-   五、选题面板
+   五、选题面板与筛选条件
    ========================================================= */
 const bankData = {};
 let lastSelections = null;
 const panel = document.getElementById('panel');
 const panelToggle = document.getElementById('panelToggle');
 let panelOpen = window.innerWidth > 1100;
+
+/* 筛选状态 */
+let allAvailablePoints = new Set();
+let selectedPointsArr = []; // 用户选中的知识点数组
 
 function setPanel(open) {
   panelOpen = open;
@@ -1142,6 +1222,88 @@ function setPanel(open) {
 }
 panelToggle.addEventListener('click', function () { setPanel(true); });
 document.getElementById('panelClose').addEventListener('click', function () { setPanel(false); });
+
+/* 初始化筛选区交互 */
+(function initFilterUI() {
+  const ptInput = document.getElementById('filterPointsInput');
+  const ptDropdown = document.getElementById('pointsDropdown');
+  const selectedPointsDiv = document.getElementById('selectedPoints');
+
+  window.renderSelectedPoints = function() {
+    selectedPointsDiv.innerHTML = '';
+    selectedPointsArr.forEach(function (pt, i) {
+      const tag = document.createElement('span');
+      tag.className = 'pt-tag';
+      tag.textContent = pt;
+      const btn = document.createElement('button');
+      btn.innerHTML = '&times;';
+      btn.onclick = function () {
+        selectedPointsArr.splice(i, 1);
+        window.renderSelectedPoints();
+      };
+      tag.appendChild(btn);
+      selectedPointsDiv.appendChild(tag);
+    });
+  };
+
+  ptInput.addEventListener('input', function () {
+    const val = this.value.trim().toLowerCase();
+    ptDropdown.innerHTML = '';
+    if (!val) { ptDropdown.classList.remove('show'); return; }
+
+    const matches = Array.from(allAvailablePoints).filter(function (p) {
+      return p.toLowerCase().indexOf(val) !== -1 && selectedPointsArr.indexOf(p) === -1;
+    }).slice(0, 20);
+
+    if (matches.length === 0) {
+      ptDropdown.classList.remove('show');
+      return;
+    }
+
+    matches.forEach(function (pt) {
+      const div = document.createElement('div');
+      div.className = 'pt-option';
+      div.textContent = pt;
+      div.onclick = function () {
+        selectedPointsArr.push(pt);
+        window.renderSelectedPoints();
+        ptInput.value = '';
+        ptDropdown.classList.remove('show');
+      };
+      ptDropdown.appendChild(div);
+    });
+    ptDropdown.classList.add('show');
+  });
+
+  ptInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const first = ptDropdown.querySelector('.pt-option');
+      if (first) first.click();
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!ptInput.contains(e.target) && !ptDropdown.contains(e.target)) {
+      ptDropdown.classList.remove('show');
+    }
+  });
+})();
+
+/* 提取所有题库中的 points 并刷新下拉选项 */
+function extractAllPoints() {
+  allAvailablePoints.clear();
+  ['single', 'cloze', 'dialogue', 'reading', 'spelling'].forEach(function (typeId) {
+    const data = bankData[typeId];
+    if (Array.isArray(data)) {
+      data.forEach(function (item) {
+        if (Array.isArray(item.points)) {
+          item.points.forEach(function (p) { if (p) allAvailablePoints.add(p); });
+        }
+      });
+    }
+  });
+}
 
 function syncReadingModeBtn() {
   const modeBtn = document.querySelector('.btn-mode[data-type="reading"]');
@@ -1174,7 +1336,7 @@ function syncReadingModeBtn() {
     refreshBtn.dataset.type = type.id;
     refreshBtn.textContent = '刷新';
     refreshBtn.disabled = true;
-    refreshBtn.title = '从题库重新随机抽题并展示';
+    refreshBtn.title = '按当前筛选条件重新抽题';
     refreshBtn.addEventListener('click', function () { refreshType(type.id); });
 
     const clearBtn = document.createElement('button');
@@ -1250,6 +1412,130 @@ function syncReadingModeBtn() {
   });
 })();
 
+/* =========================================================
+   六、核心抽题逻辑
+   ========================================================= */
+function getFilterParams() {
+  const gradeVal = document.getElementById('filterGrade').value;
+  const unitVal = document.getElementById('filterUnit').value.trim();
+  return {
+    grade: gradeVal ? parseInt(gradeVal, 10) : null,
+    unit: unitVal,
+    points: selectedPointsArr.slice()
+  };
+}
+
+function clearUsedFlags() {
+  TYPES.forEach(function (t) {
+    const d = bankData[t.id];
+    if (Array.isArray(d)) d.forEach(function (i) { i._used = false; });
+  });
+}
+
+/* 层级抽题：同年级同单元 -> 同年级不同单元 -> 低年级 -> 通用 */
+function pullItems(data, want, grade, unit, targetPoint) {
+  if (!data || data.length === 0 || want <= 0) return [];
+  
+  // 过滤掉已用的
+  let pool = data.filter(function (item) { return !item._used; });
+  if (targetPoint) {
+    pool = pool.filter(function (item) {
+      return Array.isArray(item.points) && item.points.indexOf(targetPoint) !== -1;
+    });
+  }
+
+  // 1. 不限制年级：全量随机
+  if (!grade) {
+    shuffle(pool);
+    const picked = pool.slice(0, want);
+    picked.forEach(function (p) { p._used = true; });
+    return picked;
+  }
+
+  // 2. 分层
+  const l1 = pool.filter(function (i) { return i.grade === grade && unit && i.unit === unit; });
+  const l2 = pool.filter(function (i) { return i.grade === grade && (!unit || i.unit !== unit); });
+  const l3 = pool.filter(function (i) { return i.grade && i.grade < grade; });
+  const l4 = pool.filter(function (i) { return !i.grade; });
+
+  shuffle(l1); shuffle(l2); shuffle(l3); shuffle(l4);
+
+  const allTiers = [l1, l2, l3, l4];
+  const result = [];
+  
+  for (let i = 0; i < allTiers.length && result.length < want; i++) {
+    const tier = allTiers[i];
+    for (let j = 0; j < tier.length && result.length < want; j++) {
+      result.push(tier[j]);
+      tier[j]._used = true;
+    }
+  }
+  return result;
+}
+
+/* 单选/拼写：按知识点平均分配 */
+function pickByKnowledge(data, want, grade, unit, points) {
+  if (!data || data.length === 0) return [];
+  // 没选年级或没选知识点，直接走普通分层
+  if (!grade || points.length === 0) {
+    return pullItems(data, want, grade, unit, null);
+  }
+
+  clearUsedFlags();
+  const base = Math.floor(want / points.length);
+  let extra = want % points.length;
+  const quotas = {};
+  points.forEach(function (p) { quotas[p] = base; });
+  
+  const shuffledPoints = points.slice();
+  shuffle(shuffledPoints);
+  for (let i = 0; i < extra; i++) {
+    quotas[shuffledPoints[i]] += 1;
+  }
+
+  let result = [];
+  points.forEach(function (p) {
+    const picked = pullItems(data, quotas[p], grade, unit, p);
+    result = result.concat(picked);
+  });
+
+  // 缺口补充
+  if (result.length < want) {
+    const diff = want - result.length;
+    const extraPicked = pullItems(data, diff, grade, unit, null);
+    result = result.concat(extraPicked);
+  }
+
+  return result;
+}
+
+/* 整篇题型：仅按年级回退 */
+function pickByGrade(data, want, grade) {
+  if (!data || data.length === 0) return [];
+  if (!grade) {
+    return shuffle(data.slice()).slice(0, want);
+  }
+  clearUsedFlags();
+  return pullItems(data, want, grade, null, null);
+}
+
+/* =========================================================
+   七、刷新与抽题
+   ========================================================= */
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+  }
+  return arr;
+}
+function getQtyInput(typeId) {
+  const el = document.querySelector('.type-qty[data-type="' + typeId + '"]');
+  if (!el) return null;
+  const v = parseInt(el.value, 10);
+  return isNaN(v) || v < 1 ? null : v;
+}
+
 function refreshType(typeId) {
   const type = TYPES.find(function (t) { return t.id === typeId; });
   const data = bankData[typeId];
@@ -1268,9 +1554,15 @@ function refreshType(typeId) {
   }
 
   const want = getQtyInput(typeId) || type.defaultCount;
-  let picked;
-  if (typeof type.customPick === 'function') {
-    picked = type.customPick(data, want);
+  const params = getFilterParams();
+  let picked = [];
+
+  if (type.id === 'single' || type.id === 'spelling') {
+    picked = pickByKnowledge(data, want, params.grade, params.unit, params.points);
+  } else if (type.id === 'reading') {
+    picked = pickReading(data, want);
+  } else if (type.id === 'cloze' || type.id === 'dialogue' || type.id === 'writing') {
+    picked = pickByGrade(data, want, params.grade);
   } else {
     picked = shuffle(data.slice()).slice(0, want);
   }
@@ -1279,9 +1571,9 @@ function refreshType(typeId) {
   renderExam(lastSelections);
 
   const status = document.getElementById('panelStatus');
-  let msg = type.name.replace(/^[Ⅰ-Ⅹ]+\.\s*/, '') + ' 已重新抽题（' + picked.length + ' ' + type.unit + '）✓';
+  let msg = type.name.replace(/^[Ⅰ-Ⅹ]+\.\s*/, '') + ' 已按当前条件抽题（' + picked.length + ' ' + type.unit + '）✓';
   if (picked.length < want) {
-    msg += '　注意：题库仅有 ' + picked.length + ' ' + type.unit + '，不足 ' + want + ' ' + type.unit;
+    msg += '　注意：题库仅抽到 ' + picked.length + ' ' + type.unit + '，不足 ' + want + ' ' + type.unit;
   }
   status.textContent = msg;
 }
@@ -1306,7 +1598,7 @@ function updateTypeButtons(typeId) {
 
   if (refreshBtn) {
     refreshBtn.disabled = !hasData;
-    refreshBtn.title = hasData ? '从题库重新随机抽题并展示' : '请先加载题库';
+    refreshBtn.title = hasData ? '按当前筛选条件重新抽题' : '请先加载题库';
   }
 
   if (clearBtn) {
@@ -1351,6 +1643,7 @@ function pickFile(type, btn) {
       btn.textContent = '✓ ' + file.name;
       updateTypeButtons(type.id);
       checkAtLeastOne();
+      extractAllPoints();
     } catch (err) {
       alert('题库加载失败：' + (err.message || err));
     }
@@ -1364,11 +1657,9 @@ function updateTypeStatus(type, len, fileName) {
   const def = type.defaultCount;
   let text;
   if (len < def) {
-    //text = '已加载 ' + len + ' ' + type.unit + '（< 标准 ' + def + ' ' + type.unit + '） · ' + fileName;
     text = '共 ' + len + ' ' + type.unit;
     el.className = 'type-status warn';
   } else {
-    //text = '已加载 ' + len + ' ' + type.unit + ' · ' + fileName;
     text = '共 ' + len + ' ' + type.unit;
     el.className = 'type-status ok';
   }
@@ -1405,7 +1696,118 @@ function checkAtLeastOne() {
 }
 
 /* =========================================================
-   六、加载全部题库（带进度） + 自动加载
+   八、生成试卷 / 整体刷新 / 重置标准卷
+   ========================================================= */
+function generateExam() {
+  const selections = {};
+  const warnings = [];
+  const params = getFilterParams();
+
+  TYPES.forEach(function (type) {
+    const data = bankData[type.id];
+    if (!data || data.length === 0) return;
+
+    const want = getQtyInput(type.id) || type.defaultCount;
+    let picked = [];
+
+    if (type.id === 'single' || type.id === 'spelling') {
+      picked = pickByKnowledge(data, want, params.grade, params.unit, params.points);
+    } else if (type.id === 'reading') {
+      picked = pickReading(data, want);
+    } else if (type.id === 'cloze' || type.id === 'dialogue' || type.id === 'writing') {
+      picked = pickByGrade(data, want, params.grade);
+    } else {
+      picked = shuffle(data.slice()).slice(0, want);
+    }
+
+    if (picked.length < want) {
+      warnings.push(type.name + '：需要 ' + want + ' ' + type.unit +
+        '，仅抽到 ' + picked.length + ' ' + type.unit);
+    }
+    selections[type.id] = picked;
+  });
+
+  clearUsedFlags();
+
+  if (Object.keys(selections).length === 0) {
+    alert('请先加载至少一种题型的题库');
+    return false;
+  }
+
+  lastSelections = selections;
+  window._examFilterParams = params; /* 传给 makeHeaderBlock 用 */
+  renderExam(selections);
+  return warnings;
+}
+
+function setStatus(msg, warnings) {
+  const status = document.getElementById('panelStatus');
+  let text = msg;
+  if (warnings && warnings.length) text += '　' + warnings.join('；');
+  status.textContent = text;
+}
+
+document.getElementById('btnGenerate').addEventListener('click', function () {
+  const warnings = generateExam();
+  if (warnings === false) return;
+  setStatus('生成完毕 ✓', warnings);
+});
+
+document.getElementById('btnRefreshAll').addEventListener('click', function () {
+  const loaded = TYPES.some(function (t) { return bankData[t.id] && bankData[t.id].length > 0; });
+  if (!loaded) {
+    alert('请先加载至少一种题型的题库');
+    return;
+  }
+  const warnings = generateExam();
+  if (warnings === false) return;
+  setStatus('整卷已按当前条件重新乱序抽题 ✓', warnings);
+});
+
+document.getElementById('btnResetStandard').addEventListener('click', function () {
+  const loaded = TYPES.some(function (t) { return bankData[t.id] && bankData[t.id].length > 0; });
+  if (!loaded) {
+    alert('请先加载至少一种题型的题库');
+    return;
+  }
+
+  // 清空筛选条件
+  document.getElementById('filterGrade').value = '';
+  document.getElementById('filterUnit').value = '';
+  selectedPointsArr = [];
+  window.renderSelectedPoints();
+
+  readingMode = 'auto';
+  syncReadingModeBtn();
+
+  TYPES.forEach(function (type) {
+    const qty = document.querySelector('.type-qty[data-type="' + type.id + '"]');
+    if (qty) qty.value = type.defaultCount;
+    clearedTypes.delete(type.id);
+    updateTypeButtons(type.id);
+  });
+  checkAtLeastOne();
+
+  const warnings = generateExam();
+  if (warnings === false) return;
+  setStatus('已按标准题量重置并生成整卷 ✓（已清空筛选条件）', warnings);
+});
+
+/* =========================================================
+   九、显示 / 隐藏翻译与答案
+   ========================================================= */
+document.getElementById('btnToggleAnswer').addEventListener('click', function () {
+  showAnswer = !showAnswer;
+  this.textContent = showAnswer ? '🙈' : '👁';
+  this.title = showAnswer ? '隐藏全卷翻译与答案' : '显示全卷翻译与答案';
+  this.classList.toggle('on', showAnswer);
+  if (lastSelections) {
+    renderExam(lastSelections);
+  }
+});
+
+/* =========================================================
+   十、加载题库
    ========================================================= */
 async function loadAllBanks(opts) {
   opts = opts || {};
@@ -1450,12 +1852,12 @@ async function loadAllBanks(opts) {
     }
   }
 
+  extractAllPoints(); // 提取知识点供筛选
   checkAtLeastOne();
   if (btn) { btn.disabled = false; btn.title = oldTitle; }
   return { loaded: loaded, failed: failed, cancelled: false, total: total };
 }
 
-/* ⚡ 按钮虽被隐藏，但保留事件，供内部/手动调用 */
 document.getElementById('btnLoadAll').addEventListener('click', async function () {
   const r = await loadAllBanks({ silent: false });
   if (r.cancelled) return;
@@ -1468,124 +1870,7 @@ document.getElementById('btnLoadAll').addEventListener('click', async function (
 });
 
 /* =========================================================
-   七、生成试卷 / 整体刷新 / 重置标准卷
-   ========================================================= */
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const t = arr[i]; arr[i] = arr[j]; arr[j] = t;
-  }
-  return arr;
-}
-function getQtyInput(typeId) {
-  const el = document.querySelector('.type-qty[data-type="' + typeId + '"]');
-  if (!el) return null;
-  const v = parseInt(el.value, 10);
-  return isNaN(v) || v < 1 ? null : v;
-}
-
-function generateExam() {
-  const selections = {};
-  const warnings = [];
-
-  TYPES.forEach(function (type) {
-    const data = bankData[type.id];
-    if (!data || data.length === 0) return;
-
-    const want = getQtyInput(type.id) || type.defaultCount;
-    let picked;
-    if (typeof type.customPick === 'function') {
-      picked = type.customPick(data, want);
-    } else {
-      picked = shuffle(data.slice()).slice(0, want);
-    }
-
-    if (picked.length < want) {
-      warnings.push(type.name + '：需要 ' + want + ' ' + type.unit +
-        '，题库仅有 ' + picked.length + ' ' + type.unit);
-    }
-    if (type.isPerPiece) {
-      picked.forEach(function (p, i) {
-        const qLen = Array.isArray(p.questions) ? p.questions.length : 1;
-        if (qLen === 0) warnings.push(type.name + ' 第 ' + (i + 1) + ' 篇没有题目');
-      });
-    }
-    selections[type.id] = picked;
-  });
-
-  if (Object.keys(selections).length === 0) {
-    alert('请先加载至少一种题型的题库');
-    return false;
-  }
-
-  lastSelections = selections;
-  renderExam(selections);
-  return warnings;
-}
-
-function setStatus(msg, warnings) {
-  const status = document.getElementById('panelStatus');
-  let text = msg;
-  if (warnings && warnings.length) text += '　' + warnings.join('；');
-  status.textContent = text;
-}
-
-/* 📝 按钮虽被隐藏，但保留事件（内部 .click() 仍可用） */
-document.getElementById('btnGenerate').addEventListener('click', function () {
-  const warnings = generateExam();
-  if (warnings === false) return;
-  setStatus('生成完毕 ✓', warnings);
-});
-
-document.getElementById('btnRefreshAll').addEventListener('click', function () {
-  const loaded = TYPES.some(function (t) { return bankData[t.id] && bankData[t.id].length > 0; });
-  if (!loaded) {
-    alert('请先加载至少一种题型的题库');
-    return;
-  }
-  const warnings = generateExam();
-  if (warnings === false) return;
-  setStatus('整卷已按当前题量重新乱序抽题 ✓', warnings);
-});
-
-document.getElementById('btnResetStandard').addEventListener('click', function () {
-  const loaded = TYPES.some(function (t) { return bankData[t.id] && bankData[t.id].length > 0; });
-  if (!loaded) {
-    alert('请先加载至少一种题型的题库');
-    return;
-  }
-
-  readingMode = 'auto';
-  syncReadingModeBtn();
-
-  TYPES.forEach(function (type) {
-    const qty = document.querySelector('.type-qty[data-type="' + type.id + '"]');
-    if (qty) qty.value = type.defaultCount;
-    clearedTypes.delete(type.id);
-    updateTypeButtons(type.id);
-  });
-  checkAtLeastOne();
-
-  const warnings = generateExam();
-  if (warnings === false) return;
-  setStatus('已按标准题量重置并生成整卷 ✓', warnings);
-});
-
-/* =========================================================
-   八、显示 / 隐藏翻译与答案
-   ========================================================= */
-document.getElementById('btnToggleAnswer').addEventListener('click', function () {
-  showAnswer = !showAnswer;
-  this.textContent = showAnswer ? '🙈' : '👁';
-  this.title = showAnswer ? '隐藏全卷翻译与答案' : '显示全卷翻译与答案';
-  this.classList.toggle('on', showAnswer);
-  if (lastSelections) {
-    renderExam(lastSelections);
-  }
-});
-
-/* =========================================================
-   九、初始状态 + 自动加载
+   十一、初始状态 + 自动加载
    ========================================================= */
 (function init() {
   setPanel(panelOpen);
@@ -1605,16 +1890,9 @@ document.getElementById('btnToggleAnswer').addEventListener('click', function ()
         <li>是否通过 http/https 访问（<code>file://</code> 无法自动加载）。</li>
       </ol>
       <div class="guide-file-list">${fileRows}</div>
-      <p class="guide-tip">
-        可用操作：<strong>↺</strong> 重置标准卷 · <strong>🔄</strong> 整体刷新 · <strong>👁</strong> 显隐答案 · <strong>🖨️</strong> 打印 / 导出 PDF。<br>
-        每个题型右侧可单独「刷新」「清除」，也可调整题量后点 🔄 整卷重抽。<br>
-        数据结构：<code>translation</code>（短文翻译）、<code>stemZh</code>（题干翻译）、<code>optionsZh</code>（选项翻译）均可选；
-        阅读每篇需带 <code>type</code> 字段；标准卷下第 6 篇（任务型阅读）以问答形式显示。
-      </p>
     </div>
   `;
 
-  /* ★ 打开页面即自动加载全部题库；全部成功则直接生成整卷 */
   loadAllBanks({ silent: true }).then(function (r) {
     if (r.cancelled) {
       const status = document.getElementById('panelStatus');
@@ -1633,13 +1911,11 @@ document.getElementById('btnToggleAnswer').addEventListener('click', function ()
     if (r.failed.length > 0) {
       document.getElementById('panelStatus').textContent =
         '已自动加载 ' + r.loaded + '/' + r.total + ' 种题型（' + r.failed.length + ' 个失败）。';
-      /* 已成功加载的部分也先生成，至少能看到内容 */
       const warnings = generateExam();
       if (warnings !== false) setStatus('部分题库已加载并生成 ✓', warnings);
       return;
     }
 
-    /* 全部成功：直接按标准题量生成整卷 */
     document.getElementById('panelStatus').textContent = '已自动加载全部题库，正在生成试卷…';
     const warnings = generateExam();
     if (warnings !== false) {
