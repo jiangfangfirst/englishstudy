@@ -184,8 +184,9 @@
 
     <!-- 5. 状态提示和报错区 (保持在下方) -->
     <div class="summary" id="summary">等待输入…</div>
-    <div class="result-actions">
+        <div class="result-actions" style="display: flex; gap: 8px;">
       <button class="btn-mini" id="btnCopyErrors" disabled>📋 复制错误提示</button>
+      <button class="btn-mini" id="btnUndo" style="display: none; color: #b45309; border-color: #fde68a; background: #fffbeb;">↩ 撤销本次粘贴</button>
     </div>
     <div class="result" id="result"></div>
     
@@ -428,6 +429,7 @@
     btnMerge: document.getElementById('btnMerge'),
     btnClear: document.getElementById('btnClear'),
     btnCopyErrors: document.getElementById('btnCopyErrors'),
+    btnUndo: document.getElementById('btnUndo'), //返回上一步
     hint: document.getElementById('hint')
   };
 
@@ -1188,11 +1190,36 @@
     await copyText(json, this, '📋 仅复制示例 JSON');
   });
 
-  /* =========================================================
-     清空 / 下载
+    /* =========================================================
+     撤销粘贴 / 清空 / 下载
      ========================================================= */
+  let undoStack = [];
+
+  // 监听粘贴事件（在粘贴动作发生前，先保存当前框里的内容）
+  els.input.addEventListener('paste', function () {
+    undoStack.push(els.input.value);
+    if (undoStack.length > 10) undoStack.shift(); // 最多记 10 次
+    
+    els.btnUndo.style.display = 'inline-block';
+    els.btnUndo.textContent = '↩ 撤销本次粘贴';
+  });
+
+  // 点击撤销按钮
+  els.btnUndo.addEventListener('click', function () {
+    if (undoStack.length > 0) {
+      els.input.value = undoStack.pop();
+      runValidate();
+      if (undoStack.length === 0) {
+        this.style.display = 'none';
+      }
+    }
+  });
+
+  // 点击清空按钮（同时清空撤销栈）
   els.btnClear.addEventListener('click', function () {
     els.input.value = '';
+    undoStack = [];
+    els.btnUndo.style.display = 'none';
     runValidate();
   });
 
@@ -1220,6 +1247,8 @@
     setSummary('ok', '✓ 已生成 ' + t.file + '（原有 ' + existing.length + ' 条 + 新增 ' + fresh.length +
       ' 条 = 共 ' + merged.length + ' 条）。请把下载的文件上传到 GitHub 仓库覆盖原文件。');
     els.input.value = '';
+    undoStack = []; // 清空撤销栈
+    els.btnUndo.style.display = 'none';
     els.preview.classList.remove('show');
     els.preview.innerHTML = '';
     els.btnMerge.disabled = true;
