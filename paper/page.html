@@ -1362,24 +1362,22 @@ function extractAllPoints() {
   });
   
   // 渲染单元下拉框
-  const unitSelect = document.getElementById('filterUnit');
-  if (unitSelect) {
-    const currentVal = unitSelect.value; // 记住当前选中的值
-    unitSelect.innerHTML = '<option value="">不限单元</option>'; // 重置
-    
-    // 按字母顺序排序
-    Array.from(allUnits).sort().forEach(function(u) {
+    // 渲染单元下拉框（填充 datalist#unitList，input 本身只负责接收选择值）
+  const unitInput = document.getElementById('filterUnit');
+  const unitList = document.getElementById('unitList');
+  if (unitInput && unitList) {
+    const currentVal = unitInput.value; // 记住当前输入值
+    unitList.innerHTML = '';            // 清空 datalist 旧候选
+
+    Array.from(allUnits).sort().forEach(function (u) {
       const opt = document.createElement('option');
-      opt.value = u;
-      opt.textContent = u;
-      unitSelect.appendChild(opt);
+      opt.value = u;                    // datalist 只认 value
+      unitList.appendChild(opt);
     });
-    
-    // 如果之前选的值在这个年级里依然存在，就恢复它；否则重置为空（不限单元）
-    if (currentVal && allUnits.has(currentVal)) {
-      unitSelect.value = currentVal;
-    } else {
-      unitSelect.value = '';
+
+    // 当前值若在新年级的候选里就保留，否则清空（回到“不限单元”）
+    if (currentVal && !allUnits.has(currentVal)) {
+      unitInput.value = '';
     }
   }
 }
