@@ -515,7 +515,8 @@
         </div>
         <div class="filter-row">
           <label>单元</label>
-          <input type="text" id="filterUnit" placeholder="如 8A-U1（留空不限）">
+          <input type="text" id="filterUnit" list="unitList" placeholder="下拉选择或输入（留空不限）" autocomplete="off">
+          <datalist id="unitList"></datalist>
         </div>
         <div class="filter-row" style="align-items: flex-start;">
           <label style="margin-top: 6px;">知识点</label>
@@ -1325,18 +1326,38 @@ document.getElementById('panelClose').addEventListener('click', function () { se
 })();
 
 /* 提取所有题库中的 points 并刷新下拉选项 */
+/* 提取所有题库中的 points 和 unit，刷新下拉选项 */
 function extractAllPoints() {
   allAvailablePoints.clear();
+  const allUnits = new Set();
+  
   ['single', 'cloze', 'dialogue', 'reading', 'spelling'].forEach(function (typeId) {
     const data = bankData[typeId];
     if (Array.isArray(data)) {
       data.forEach(function (item) {
+        // 提取知识点
         if (Array.isArray(item.points)) {
           item.points.forEach(function (p) { if (p) allAvailablePoints.add(p); });
+        }
+        // 提取单元
+        if (item.unit && typeof item.unit === 'string' && item.unit.trim()) {
+          allUnits.add(item.unit.trim());
         }
       });
     }
   });
+  
+  // 渲染 unit 的 datalist
+  const unitList = document.getElementById('unitList');
+  if (unitList) {
+    unitList.innerHTML = '';
+    // 按字母顺序排序
+    Array.from(allUnits).sort().forEach(function(u) {
+      const opt = document.createElement('option');
+      opt.value = u;
+      unitList.appendChild(opt);
+    });
+  }
 }
 
 function syncReadingModeBtn() {
@@ -1486,8 +1507,12 @@ function pullItems(data, want, grade, unit, targetPoint) {
   }
 
   // 2. 分层（用 Number 强转，防止字符串 "9" 与数字 9 匹配失败）
-  const l1 = pool.filter(function (i) { return Number(i.grade) === Number(grade) && unit && i.unit === unit; });
-  const l2 = pool.filter(function (i) { return Number(i.grade) === Number(grade) && (!unit || i.unit !== unit); });
+    const l1 = pool.filter(function (i) { 
+    return Number(i.grade) === Number(grade) && unit && String(i.unit).toUpperCase() === String(unit).toUpperCase(); 
+  });
+  const l2 = pool.filter(function (i) { 
+    return Number(i.grade) === Number(grade) && (!unit || String(i.unit).toUpperCase() !== String(unit).toUpperCase()); 
+  });
   const l3 = pool.filter(function (i) { return i.grade && Number(i.grade) < Number(grade); });
   const l4 = pool.filter(function (i) { return !i.grade; });
 
