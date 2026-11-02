@@ -105544,5 +105544,155 @@
       "painting",
       "beautiful"
     ]
+  },
+  {
+    "stem": "—________ difficult the exam is! —But she got a high mark. ________ clever girl she is!",
+    "stemZh": "——考试多么难啊！——但她得了高分。她是个多么聪明的女孩啊！",
+    "options": [
+      "What, What",
+      "How, What",
+      "How, What a",
+      "What, How a"
+    ],
+    "optionsZh": [
+      "多么，多么",
+      "多么，多么",
+      "多么，多么一个",
+      "多么，多么一个"
+    ],
+    "answer": 2,
+    "explanation": "第一空中心词是形容词difficult，用How；第二空girl是可数名词单数，clever以辅音音素开头，用What a。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U5",
+    "points": [
+      "感叹句",
+      "冠词"
+    ],
+    "keywords": [
+      "How",
+      "What a",
+      "exam"
+    ]
+  },
+  {
+    "stem": "____difference a day makes!",
+    "stemZh": "一天能带来多么大的不同啊！",
+    "options": [
+      "What",
+      "What a",
+      "How",
+      "How a"
+    ],
+    "optionsZh": [
+      "多么",
+      "多么一个",
+      "多么",
+      "多么一个"
+    ],
+    "answer": 1,
+    "explanation": "difference是可数名词单数，用What a引导感叹句。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U5",
+    "points": [
+      "感叹句",
+      "冠词"
+    ],
+    "keywords": [
+      "What a",
+      "difference",
+      "day"
+    ]
+  },
+  {
+    "stem": "—Mum, I’m sorry. I can’t do things as well as my classmates. —Just be ________, my honey. You’ve done your best.",
+    "stemZh": "——妈妈，对不起。我不能像同学那样把事情做好。——做你自己就好，宝贝。你已经尽力了。",
+    "options": [
+      "myself",
+      "yourself",
+      "himself",
+      "themselves"
+    ],
+    "optionsZh": [
+      "我自己",
+      "你自己",
+      "他自己",
+      "他们自己"
+    ],
+    "answer": 1,
+    "explanation": "根据“Mum”和“my honey”可知，妈妈在安慰孩子，让孩子做自己，对应反身代词应用yourself。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U6",
+    "points": [
+      "代词",
+      "情景交际"
+    ],
+    "keywords": [
+      "yourself",
+      "best",
+      "classmates"
+    ]
+  },
+  {
+    "stem": "—I ________ my grandparents last weekend. They were very happy to see me. —That’s nice. I plan ________ mine next month.",
+    "stemZh": "——上周末我看望了祖父母。他们见到我很高兴。——真好。我计划下个月去看望我的。",
+    "options": [
+      "visit; visited",
+      "visited; visiting",
+      "visit; to visit",
+      "visited; to visit"
+    ],
+    "optionsZh": [
+      "看望；看望（过去式）",
+      "看望（过去式）；看望（动名词）",
+      "看望；看望（不定式）",
+      "看望（过去式）；看望（不定式）"
+    ],
+    "answer": 3,
+    "explanation": "第一空last weekend用一般过去时；第二空plan to do sth.。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U6",
+    "points": [
+      "一般过去时",
+      "非谓语动词（不定式）"
+    ],
+    "keywords": [
+      "visited",
+      "plan to visit",
+      "grandparents"
+    ]
+  },
+  {
+    "stem": "Tom ______ his grandparents very much because he hasn’t seen them for half a year.",
+    "stemZh": "汤姆非常想念他的祖父母，因为他已经半年没见过他们了。",
+    "options": [
+      "misses",
+      "hates",
+      "forgets",
+      "avoids"
+    ],
+    "optionsZh": [
+      "想念",
+      "讨厌",
+      "忘记",
+      "避免"
+    ],
+    "answer": 0,
+    "explanation": "miss表示“想念”，半年没见所以想念。",
+    "grade": 8,
+    "term": 1,
+    "unit": "8A-U6",
+    "points": [
+      "词汇辨析",
+      "主谓一致"
+    ],
+    "keywords": [
+      "misses",
+      "grandparents",
+      "half a year"
+    ]
   }
 ]
