@@ -1278,8 +1278,36 @@ document.getElementById('panelClose').addEventListener('click', function () { se
   ptInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      const first = ptDropdown.querySelector('.pt-option');
-      if (first) first.click();
+      const val = ptInput.value.trim();
+      if (!val) return;
+
+      // 1. 如果输入框里没有逗号、空格、顿号，且有模糊匹配下拉项，直接选第一个
+      const firstOpt = ptDropdown.querySelector('.pt-option');
+      if (firstOpt && !/[,，\s、]/.test(val)) {
+        firstOpt.click();
+        return;
+      }
+
+      // 2. 如果输入了分隔符，按分隔符拆分，批量添加
+      const parts = val.split(/[,，\s、]+/).filter(Boolean);
+      let addedAny = false;
+      parts.forEach(part => {
+        // 尽量匹配题库中已有的完整名称（比如搜“宾语”，库里有“宾语从句”，我们尽量用库里的全名）
+        let actualPoint = part;
+        for (let p of allAvailablePoints) {
+          if (p === part) { actualPoint = p; break; }
+        }
+        if (selectedPointsArr.indexOf(actualPoint) === -1) {
+          selectedPointsArr.push(actualPoint);
+          addedAny = true;
+        }
+      });
+
+      if (addedAny) {
+        window.renderSelectedPoints();
+        ptInput.value = '';
+        ptDropdown.classList.remove('show');
+      }
     }
   });
 
