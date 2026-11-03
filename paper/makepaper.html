@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多多好学英语试卷（无听力·100 分）</title>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #e5e7eb; padding: 30px 0 60px;
+    font-family: "Times New Roman", "SimSun", "宋体", serif; color: #000;
+    -webkit-text-size-adjust: 100%;
+  }
+  .paper {
+    width: 210mm; height: 297mm; margin: 0 auto 30px auto;
+    background: #fff; padding: 14mm 16mm 12mm 16mm;
+    box-sizing: border-box; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    display: flex; flex-direction: column; overflow: hidden; position: relative;
+  }
+  .page-content { flex: 1 1 auto; min-height: 0; overflow: hidden; position: relative; }
+  .page-footer {
+    height: 9mm; flex: 0 0 9mm; text-align: center;
+    font-size: 11px; color: #555; padding-top: 3mm;
+    border-top: 1px solid #ccc; box-sizing: border-box;
+    font-family: "Microsoft YaHei", sans-serif;
+  }
+  /* 测量页 */
+  .paper.measure-paper {
+    position: absolute !important; left: -9999px !important; top: 0 !important;
+    visibility: hidden !important; pointer-events: none !important;
+    margin: 0 !important;
+    width: 210mm !important; height: 297mm !important;
+    padding: 14mm 16mm 12mm 16mm !important;
+    box-shadow: none !important; border-radius: 0 !important;
+    overflow: hidden !important;
+  }
+  .paper.measure-paper .page-content {
+    flex: 1 1 auto !important; min-height: 0 !important;
+    height: auto !important; overflow: hidden !important;
+  }
+  .paper.measure-paper .page-footer { display: block !important; }
+
+  /* ★ 试卷 Logo */
+  .exam-logo-wrap {
+    display: flex; justify-content: center; align-items: center;
+    margin: 0 0 7px;
+  }
+  .exam-logo {
+    display: block;
+    height: 16mm;
+    max-width: 62mm;
+    object-fit: contain;
+  }
+
+  /* ★ 全页水印 */
+  .paper > .watermark {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.12em;
+    transform: rotate(-24deg);
+    pointer-events: none; user-select: none;
+    z-index: 0; overflow: hidden;
+  }
+  .paper > .watermark span {
+    font-family: "Microsoft YaHei", "黑体", sans-serif;
+    font-weight: 900;
+    font-size: 150px;
+    line-height: 1;
+    color: rgba(37, 99, 235, 0.055);
+    white-space: nowrap;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .paper > .page-content,
+  .paper > .page-footer { position: relative; z-index: 1; }
+
+  .exam-header { text-align: center; margin-bottom: 8px; }
+  .exam-header h1 {
+    font-size: 20px; margin: 0 0 2px 0;
+    font-family: "Microsoft YaHei", "黑体", sans-serif; letter-spacing: 1px;
+  }
+  .exam-header .exam-type {
+    font-size: 13px; color: #333;
+    font-family: "Microsoft YaHei", sans-serif; margin-bottom: 4px;
+  }
+  .exam-meta {
+    font-size: 12px; color: #222; display: flex; justify-content: center;
+    gap: 22px; flex-wrap: wrap; font-family: "Microsoft YaHei", sans-serif;
+    border-top: 1px solid #000; border-bottom: 1px solid #000;
+    padding: 4px 0; margin-top: 4px;
+  }
+  .notice {
+    font-size: 11px; color: #333; line-height: 1.55;
+    font-family: "Microsoft YaHei", sans-serif;
+    margin: 8px 0 10px; padding: 6px 9px;
+    background: #fafafa; border: 1px solid #e5e5e5; border-radius: 2px;
+  }
+  .section-title {
+    font-size: 13px; font-weight: bold;
+    font-family: "Microsoft YaHei", "黑体", sans-serif;
+    margin: 12px 0 4px; padding: 3px 0; border-bottom: 1.5px solid #222;
+  }
+  .sub-title {
+    font-size: 12px; font-weight: bold;
+    font-family: "Microsoft YaHei", sans-serif; margin: 8px 0 3px;
+  }
+  .section-desc {
+    font-size: 11px; color: #444; line-height: 1.5;
+    font-family: "Microsoft YaHei", sans-serif;
+    margin-bottom: 5px; font-style: italic;
+  }
+  .q-item {
+    display: flex; margin-bottom: 4px; line-height: 1.4; font-size: 12px;
+    page-break-inside: avoid;
+  }
+  .q-num { width: 24px; flex-shrink: 0; font-weight: bold; text-align: right; padding-right: 4px; }
+  .q-body { flex: 1; min-width: 0; }
+  .q-stem { margin-bottom: 1px; word-break: break-word; }
+  .stem-translation {
+    display: none;
+    margin: 1px 0 3px 0;
+    font-size: 11px; line-height: 1.5; color: #64748b;
+    font-family: "Microsoft YaHei", sans-serif;
+  }
+  .stem-translation.show { display: block; }
+  .q-options {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px 8px; margin-top: 1px;
+  }
+  .q-options.two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .q-options.three-col { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .opt { min-width: 0; word-break: break-word; font-size: 12px; }
+  .passage {
+    font-size: 11.5px; line-height: 1.55; text-indent: 2em;
+    margin: 0 0 5px; color: #222;
+    font-family: "Times New Roman", "SimSun", serif;
+  }
+  .passage.dialogue-text {
+    text-indent: 0; white-space: pre-wrap; word-break: break-word;
+    line-height: 1.6;
+  }
+  .passage-label {
+    font-size: 11px; font-weight: bold;
+    font-family: "Microsoft YaHei", sans-serif; margin: 6px 0 2px;
+  }
+  .option-bank {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 14px; margin: 4px 0 6px; padding: 6px 10px;
+    border: 1px solid #666; border-radius: 3px;
+    background: #fafafa; font-size: 12px; line-height: 1.5;
+    font-family: "Times New Roman", "SimSun", serif;
+    page-break-inside: avoid;
+  }
+  .answer-blank {
+    display: inline-block;
+    min-width: 55px;
+    border-bottom: 1px solid #999;
+    height: 13px;
+    vertical-align: middle;
+  }
+  .qa-blank-line {
+    display: block;
+    border-bottom: 1px solid #999;
+    height: 24px;
+    margin: 2px 0 6px;
+  }
+  .spell-blank {
+    display: inline-block;
+    min-width: 72px;
+    border-bottom: 1px solid #333;
+    height: 14px;
+    vertical-align: middle;
+    margin: 0 3px;
+  }
+  .cloze-blank {
+    display: inline-block; min-width: 28px; border-bottom: 1px solid #000;
+    text-align: center; font-weight: bold; color: #2563eb;
+    margin: 0 2px; line-height: 1.2;
+  }
+  .passage-translation {
+    font-size: 11px; line-height: 1.6; color: #334155;
+    background: #f8fafc; border-left: 2px solid #94a3b8;
+    padding: 6px 10px; margin: 4px 0 6px;
+    font-family: "Microsoft YaHei", sans-serif;
+    border-radius: 0 3px 3px 0;
+    page-break-inside: avoid;
+    white-space: pre-wrap;
+  }
+  .passage-translation .trans-label {
+    font-weight: 600; color: #64748b; margin-right: 4px;
+  }
+  .answer-box {
+    display: none; margin-top: 6px; padding: 8px 12px;
+    background: #f8fafc; border-left: 2px solid #94a3b8;
+    border-radius: 0 3px 3px 0;
+    font-size: 11.5px; line-height: 1.65; color: #334155;
+    font-family: "Microsoft YaHei", sans-serif;
+    page-break-inside: avoid;
+  }
+  .answer-box.show { display: block; }
+  .answer-line {
+    display: flex; align-items: flex-start; gap: 8px; margin-bottom: 5px;
+  }
+  .answer-line:last-child { margin-bottom: 0; }
+  .answer-label {
+    flex-shrink: 0; min-width: 52px; font-weight: 600;
+    color: #94a3b8; font-size: 11px; line-height: 1.65;
+  }
+  .answer-key { color: #0f172a; font-weight: 600; }
+  .answer-opts { color: #64748b; }
+  .answer-expl { color: #2563eb; }
+  .answer-sample {
+    display: block; background: #fff; padding: 6px 10px;
+    border: 1px solid #e2e8f0; border-radius: 3px;
+    color: #334155; white-space: pre-wrap;
+    font-family: "Times New Roman", serif; font-size: 11.5px;
+    line-height: 1.55; margin: 3px 0;
+  }
+  .writing-box {
+    border: 1px solid #999; min-height: 95px; margin-top: 4px; padding: 6px;
+    font-size: 11px; color: #999;
+    font-family: "Microsoft YaHei", sans-serif; line-height: 1.7;
+  }
+  .guide-card {
+    max-width: 680px; margin: 60px auto; background: #fff; border-radius: 12px;
+    padding: 30px 36px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 14px; line-height: 1.9; color: #333;
+  }
+  .guide-card h2 { margin: 0 0 12px; font-size: 19px; color: #1f2937; }
+  .guide-card ol { padding-left: 22px; }
+  .guide-card code {
+    background: #f3f4f6; padding: 1px 6px; border-radius: 4px;
+    font-family: Consolas, Monaco, monospace; font-size: 12.5px; color: #1f2937;
+  }
+  .guide-file-list {
+    margin: 8px 0 0; padding: 12px 14px;
+    background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 12px; line-height: 1.9; color: #374151;
+  }
+  .guide-file-list .file-row { display: flex; justify-content: space-between; gap: 10px; }
+  .guide-file-list .file-row span:first-child { color: #1f2937; }
+  .guide-file-list .file-row span:last-child { color: #6b7280; }
+  .guide-card .guide-tip {
+    font-size: 12.5px; color: #6b7280;
+    border-top: 1px dashed #e5e7eb; padding-top: 12px; margin-top: 16px;
+  }
+
+  .panel {
+    position: fixed; top: 0; right: 0; width: 480px; height: 100vh;
+    background: #fff; box-shadow: -6px 0 30px rgba(0,0,0,0.12);
+    z-index: 1001; display: flex; flex-direction: column;
+    font-family: "Microsoft YaHei", sans-serif; font-size: 13px;
+    transform: translateX(100%); transition: transform 0.25s ease;
+  }
+  .panel.open { transform: translateX(0); }
+  .panel-head {
+    padding: 14px 18px; border-bottom: 1px solid #e5e7eb;
+    display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+  }
+  .panel-head h3 { margin: 0; font-size: 15px; font-weight: bold; }
+  .panel-close {
+    border: none; background: #f3f4f6; width: 30px; height: 30px;
+    border-radius: 50%; cursor: pointer; font-size: 16px; line-height: 1; color: #333;
+  }
+  .panel-body { flex: 1; overflow-y: auto; padding: 14px 18px 24px; }
+  .panel-toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 1002;
+    width: 46px; height: 46px; border: none; border-radius: 50%;
+    background: #1f2937; color: #fff; font-size: 19px; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    display: none; align-items: center; justify-content: center;
+    font-family: "Microsoft YaHei", sans-serif;
+  }
+  .panel-section {
+    margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid #f0f0f0;
+  }
+  .panel-section:last-child { border-bottom: none; margin-bottom: 0; }
+  .panel-section h4 {
+    margin: 0 0 8px; font-size: 12px; font-weight: bold;
+    color: #374151; letter-spacing: .3px;
+  }
+
+  /* ★ 筛选区（按钮式） */
+  .filter-box {
+    background: #f8fafc; border: 1px solid #e5e7eb;
+    border-radius: 8px; padding: 12px;
+  }
+  .filter-group { margin-bottom: 12px; }
+  .filter-group:last-of-type { margin-bottom: 12px; }
+  .fg-label {
+    font-size: 12px; font-weight: 600; color: #475569;
+    margin-bottom: 6px;
+  }
+  .fg-label .hint { font-weight: 400; color: #94a3b8; font-size: 11px; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .points-row {
+    max-height: 140px; overflow-y: auto; padding: 2px;
+    border: 1px dashed #e2e8f0; border-radius: 6px;
+  }
+  .chip {
+    padding: 5px 12px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #374151;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all .15s;
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+  .chip:hover { border-color: #93c5fd; color: #1d4ed8; background: #eff6ff; }
+  .chip.active {
+    background: #2563eb; border-color: #2563eb; color: #fff; font-weight: 600;
+  }
+  .chip.small { padding: 3px 10px; font-size: 11.5px; border-radius: 6px; }
+  .empty-hint { font-size: 11.5px; color: #94a3b8; font-style: italic; }
+  .confirm-btn {
+    width: 100%; padding: 10px; border: none; border-radius: 8px;
+    background: #2563eb; color: #fff; font-size: 13.5px; font-weight: 600;
+    cursor: pointer; font-family: inherit; transition: background .15s;
+    letter-spacing: .5px;
+  }
+  .confirm-btn:hover { background: #1d4ed8; }
+  .confirm-btn:active { transform: translateY(1px); }
+
+  /* ★ 图标工具栏 + 单行状态 */
+  .icon-toolbar {
+    display: flex; gap: 6px; margin: 0 0 6px;
+  }
+  .icon-toolbar .tool-btn {
+    flex: 1 1 0; min-width: 0; height: 32px; padding: 0;
+    border: 1px solid #e5e7eb; background: #fff; color: #475569;
+    border-radius: 6px; font-size: 15px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .15s; font-family: inherit;
+  }
+  .icon-toolbar .tool-btn:hover:not(:disabled) {
+    border-color: #93c5fd; background: #eff6ff; color: #1d4ed8;
+  }
+  .icon-toolbar .tool-btn:disabled { opacity: .4; cursor: not-allowed; }
+  .icon-toolbar .tool-btn.on {
+    background: #2563eb; border-color: #2563eb; color: #fff;
+  }
+  .status-line {
+    font-size: 11.5px; color: #6b7280; line-height: 1.6;
+    margin: 0 0 10px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* ★ 题型列表卡片化 */
+  #typeList { display: flex; flex-direction: column; gap: 8px; }
+  .type-item {
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .type-item:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 1px 6px rgba(15,23,42,.06);
+  }
+  .type-item-head {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 8px; min-width: 0;
+  }
+  .type-name {
+    flex-shrink: 0; font-size: 13px; font-weight: 600; color: #1f2937;
+    font-family: "Microsoft YaHei", sans-serif;
+  }
+  .type-status {
+    flex: 0 1 auto; min-width: 0;
+    max-width: 200px;
+    margin-right: auto;
+    font-size: 10.5px;
+    font-family: Consolas, Monaco, monospace;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    color: #9ca3af;
+  }
+  .type-status.ok { color: #047857; background: #ecfdf5; border-color: #a7f3d0; }
+  .type-status.warn { color: #b45309; background: #fffbeb; border-color: #fde68a; }
+
+  .type-item-controls {
+    display: flex; align-items: center; gap: 8px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+    border-top: 1px dashed #f0f0f0;
+  }
+  .type-qty {
+    width: 52px; padding: 4px 6px; border: 1px solid #d1d5db;
+    border-radius: 5px; font-size: 12px; text-align: center; font-family: inherit;
+    background: #fff; color: #1f2937;
+  }
+  .type-qty:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+  .type-unit { font-size: 11px; color: #6b7280; flex-shrink: 0; }
+  .type-meta {
+    margin-left: auto;
+    font-size: 10.5px; color: #9ca3af; font-weight: normal;
+    flex-shrink: 0; white-space: nowrap;
+  }
+
+  /* ★ 大号清除按钮 */
+  .btn-clear-lg {
+    flex-shrink: 0;
+    padding: 6px 16px;
+    min-width: 68px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    color: #64748b;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .15s;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .btn-clear-lg:hover:not(:disabled) {
+    border-color: #fca5a5; color: #dc2626; background: #fef2f2;
+  }
+  .btn-clear-lg:disabled { opacity: .35; cursor: not-allowed; }
+  .btn-clear-lg.cleared {
+    background: #2563eb; border-color: #2563eb; color: #fff;
+  }
+  .btn-clear-lg.cleared:hover {
+    background: #1d4ed8; border-color: #1d4ed8; color: #fff;
+  }
+
+  /* ★ 阅读模式小按钮 */
+  .btn-mini {
+    flex-shrink: 0;
+    padding: 3px 8px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    color: #94a3b8;
+    border-radius: 4px;
+    font-size: 10.5px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .15s;
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+  .btn-mini:disabled { opacity: .4; cursor: not-allowed; }
+  .btn-mode {
+    border-color: #cbd5e1; color: #475569; background: #f8fafc;
+  }
+  .btn-mode:hover:not(:disabled) {
+    border-color: #60a5fa; color: #1d4ed8; background: #eff6ff;
+  }
+
+  @media print {
+    @page { size: A4; margin: 0; }
+    body { background: #fff; padding: 0 !important; }
+    .paper {
+      width: 210mm !important; height: 297mm !important;
+      margin: 0 !important; padding: 14mm 16mm 12mm 16mm !important;
+      box-shadow: none !important; border-radius: 0 !important;
+      overflow: hidden !important; page-break-after: always;
+    }
+    .paper:last-child { page-break-after: auto; }
+    .page-footer { display: block !important; }
+    .panel, .panel-toggle, .guide-card, .measure-paper { display: none !important; }
+    .answer-box.show { display: block; }
+    .stem-translation.show { display: block; }
+    .paper > .watermark { display: flex !important; }
+    .paper > .watermark span {
+      color: rgba(37, 99, 235, 0.09) !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    body { padding: 12px 0 40px; }
+    .paper {
+      width: 100% !important; height: auto !important; min-height: 0 !important;
+      margin-bottom: 14px !important; padding: 12px 10px 8px !important;
+      box-shadow: none !important; border-radius: 0 !important;
+    }
+    .page-content { overflow: visible !important; }
+    .page-footer { display: none !important; }
+    .exam-header h1 { font-size: 16px; }
+    .exam-meta { gap: 10px; font-size: 11px; }
+    .q-item { font-size: 13.5px; line-height: 1.6; margin-bottom: 9px; }
+    .q-options, .q-options.two-col, .q-options.three-col {
+      grid-template-columns: 1fr !important; gap: 1px 0;
+    }
+    .option-bank { grid-template-columns: 1fr !important; }
+    .section-title { font-size: 14px; }
+    .writing-box { min-height: 140px; }
+    .guide-card { margin: 20px 10px; padding: 22px 18px; }
+    .panel { width: 100%; max-width: 100vw; }
+    .answer-box { font-size: 12.5px; line-height: 1.6; padding: 8px 10px; }
+    .stem-translation { font-size: 12px; }
+    .passage-translation { font-size: 12px; line-height: 1.7; }
+    .exam-logo { height: 12mm; max-width: 50mm; }
+    .paper > .watermark span { font-size: 96px; }
+  }
+</style>
+</head>
+<body>
+
+<button class="panel-toggle" id="panelToggle" aria-label="打开选题面板">☰</button>
+
+<aside class="panel" id="panel">
+  <div class="panel-head">
+    <h3>多多好学题库选题设置</h3>
+    <button class="panel-close" id="panelClose" aria-label="关闭">✕</button>
+  </div>
+  <div class="panel-body">
+
+    <!-- ★ 试卷选题筛选（全按钮式） -->
+    <div class="panel-section">
+      <h4>试卷选题筛选</h4>
+      <div class="filter-box">
+
+        <div class="filter-group">
+          <div class="fg-label">年级</div>
+          <div class="btn-row" id="gradeRow">
+            <button class="chip" data-grade="7">七年级</button>
+            <button class="chip" data-grade="8">八年级</button>
+            <button class="chip" data-grade="9">九年级</button>
+            <button class="chip active" data-grade="">全部</button>
+          </div>
+        </div>
+
+        <div class="filter-group" id="termGroup" style="display:none;">
+          <div class="fg-label">册别</div>
+          <div class="btn-row" id="termRow">
+            <button class="chip active" data-term="">全册</button>
+            <button class="chip" data-term="up">上册</button>
+            <button class="chip" data-term="down">下册</button>
+          </div>
+        </div>
+
+        <div class="filter-group" id="unitGroup" style="display:none;">
+          <div class="fg-label">单元 <span class="hint">可多选，不选 = 全部</span></div>
+          <div class="btn-row" id="unitRow"></div>
+        </div>
+
+        <div class="filter-group">
+          <div class="fg-label">知识点 <span class="hint">可多选，不选 = 全部</span></div>
+          <div class="btn-row points-row" id="pointRow"></div>
+        </div>
+
+        <button class="confirm-btn" id="btnConfirmFilter">✓ 确认筛选并生成试卷</button>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <h4>题型题库（可只选部分题型）</h4>
+      <div class="icon-toolbar">
+        <button class="tool-btn" id="btnResetStandard" title="重置标准卷：标准题型题量，清空筛选条件并刷新">↺</button>
+        <button class="tool-btn" id="btnRefreshAll" title="整体刷新：按当前筛选条件从全部数据中重新随机抽题">🔄</button>
+        <button class="tool-btn" id="btnToggleAnswer" title="显示全卷翻译与答案">👁</button>
+        <button class="tool-btn" onclick="window.print()" title="打印或导出 PDF">🖨️</button>
+        <button class="tool-btn" onclick="window.open('admin.html', '_blank')" title="添加数据">➕</button>
+      </div>
+      <div class="status-line" id="panelStatus">正在初始化…</div>
+      <div id="typeList"></div>
+    </div>
+  </div>
+</aside>
+
+<div id="papersContainer"></div>
+
+<script>
+/* =========================================================
+   零、全局状态
+   ========================================================= */
+let showAnswer = false;
+let readingMode = 'auto';   /* auto | choice | qa */
+const clearedTypes = new Set();
+
+/* 阅读理解的六类顺序：每类优先各抽一篇 */
+const READING_TYPE_ORDER = ['应用文/广告', '记叙文', '科普文', '人文说明文', '人物/故事', '任务型阅读'];
+
+/* ★ 筛选状态：年级 / 册别 / 单元（多选）/ 知识点（多选） */
+const F = { grade: '', term: '', units: [], points: [] };
+
+/* ★ 单元索引：{ '7': { units: [...], term: { 'Unit 1': 'up'|'down' } } } */
+let unitIndex = {};
+/* ★ 全部知识点 */
+let allPoints = [];
+
+/* =========================================================
+   一、题型配置（无听力，满分 100 分）
+   ========================================================= */
+const TYPES = [
+  {
+    id: 'single', name: 'Ⅰ. 单项填空', file: 'single.json',
+    defaultCount: 10, scorePer: 1, unit: '题',
+    partTitle: '第一部分 语言知识运用（共三大题，满分 35 分）',
+    desc: '从每小题所给的 A、B、C、D 四个选项中选出一个可以填入空白处的最佳选项。',
+    render: (items, num) => items.map((it, i) => {
+      const div = makeQItem(num + i, it.stem, null);
+      const body = div.querySelector('.q-body');
+      body.appendChild(makeOptions(it.options));
+      const ans = makeAnswerBox(it, null, { showStemZh: true });
+      if (ans) body.appendChild(ans);
+      return div;
+    })
+  },
+  {
+    id: 'cloze', name: 'Ⅱ. 完形填空', file: 'cloze.json',
+    defaultCount: 2, scorePer: 1, unit: '篇', isPerPiece: true,
+    desc: '阅读下列短文，从每小题所给的 A、B、C、D 四个选项中选出一个最佳选项。',
+    render: (items, num) => renderArticleGroup(items, num, true, 'auto')
+  },
+  {
+    id: 'dialogue', name: 'Ⅲ. 补全对话', file: 'dialogue.json',
+    defaultCount: 1, scorePer: 1, unit: '篇', isPerPiece: true,
+    desc: '根据对话内容，从方框内的选项中选出能填入空白处的最佳选项，其中有两个为多余选项。',
+    render: renderDialogueGroup
+  },
+  {
+    id: 'reading', name: 'Ⅳ. 阅读理解', file: 'reading.json',
+    defaultCount: 6, scorePer: 2, unit: '篇', isPerPiece: true,
+    partTitle: '第二部分 阅读（共两节，满分 40 分）',
+    desc: '阅读下列短文，从每小题所给的 A、B、C、D 四个选项中选出一个最佳选项；第六篇为任务型阅读，请根据短文内容回答问题。',
+    render: (items, num) => renderArticleGroup(items, num, true, readingMode)
+  },
+  {
+    id: 'spelling', name: 'Ⅴ. 单词拼写', file: 'spelling.json',
+    defaultCount: 5, scorePer: 1, unit: '题',
+    partTitle: '第三部分 写（共两大题，满分 25 分）',
+    desc: '根据句意和括号内的汉语提示，用单词的正确形式填空，每空一词。',
+    render: renderSpelling
+  },
+  {
+    id: 'writing', name: 'Ⅵ. 书面表达', file: 'writing.json',
+    defaultCount: 1, scorePer: 20, unit: '题',
+    desc: '',
+    render: renderWriting
+  }
+];
+
+/* =========================================================
+   二、通用渲染工具
+   ========================================================= */
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+function formatStem(s) {
+  return escapeHtml(s).replace(/\\n/g, '<br>').replace(/\r?\n/g, '<br>').replace(/ —/g, '<br>—');
+}
+function makeQItem(num, stem, stemZh) {
+  const div = document.createElement('div');
+  div.className = 'q-item';
+  const numDiv = document.createElement('div');
+  numDiv.className = 'q-num';
+  numDiv.textContent = num + '.';
+  const body = document.createElement('div');
+  body.className = 'q-body';
+  const stemDiv = document.createElement('div');
+  stemDiv.className = 'q-stem';
+  stemDiv.innerHTML = formatStem(stem || '');
+  body.appendChild(stemDiv);
+  if (stemZh) {
+    const transDiv = document.createElement('div');
+    transDiv.className = 'stem-translation' + (showAnswer ? ' show' : '');
+    transDiv.innerHTML = escapeHtml(stemZh);
+    body.appendChild(transDiv);
+  }
+  div.appendChild(numDiv);
+  div.appendChild(body);
+  return div;
+}
+function makeOptions(options, cls) {
+  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+  const wrap = document.createElement('div');
+  wrap.className = 'q-options' + (cls ? ' ' + cls : '');
+  (options || []).forEach((opt, i) => {
+    const span = document.createElement('span');
+    span.className = 'opt';
+    span.textContent = letters[i] + '. ' + opt;
+    wrap.appendChild(span);
+  });
+  return wrap;
+}
+function makeAnswerBox(item, sharedOptions, extra) {
+  if (!item || item.answer === undefined || item.answer === null) return null;
+  extra = extra || {};
+  const answer = item.answer;
+  const explanation = item.explanation;
+  const options = Array.isArray(item.options) && item.options.length
+      ? item.options
+      : (Array.isArray(sharedOptions) ? sharedOptions : null);
+  const optionsZh = Array.isArray(item.optionsZh) ? item.optionsZh : null;
+  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+  const box = document.createElement('div');
+  box.className = 'answer-box' + (showAnswer ? ' show' : '');
+  let html = '';
+  let keyText, keyZh = '';
+  if (typeof answer === 'number' && options && options[answer] !== undefined) {
+    keyText = (letters[answer] || '—') + '. ' + (options[answer] || '');
+    if (optionsZh && optionsZh[answer]) keyZh = '（' + optionsZh[answer] + '）';
+  } else if (typeof answer === 'number') {
+    keyText = letters[answer] || String(answer);
+    if (typeof item.answerZh === 'string') keyZh = '（' + item.answerZh + '）';
+  } else {
+    keyText = String(answer);
+    if (typeof item.answerZh === 'string') keyZh = '（' + item.answerZh + '）';
+  }
+  html += '<div class="answer-line"><span class="answer-label">答案</span>' +
+          '<span class="answer-key">' + escapeHtml(keyText + keyZh) + '</span></div>';
+
+  if (extra.showStemZh && item.stemZh) {
+    html += '<div class="answer-line"><span class="answer-label">题干翻译</span>' +
+            '<span class="answer-opts">' + escapeHtml(item.stemZh) + '</span></div>';
+  }
+
+  if (typeof answer === 'number' && options && options.length && optionsZh && optionsZh.length) {
+    options.forEach(function (opt, i) {
+      const zh = optionsZh[i];
+      if (zh === undefined || zh === null || zh === '') return;
+      html += '<div class="answer-line"><span class="answer-label">' + (letters[i] || '') + '</span>' +
+              '<span class="answer-opts">' + escapeHtml(opt) + ' —— ' + escapeHtml(zh) + '</span></div>';
+    });
+  }
+
+  if (explanation) {
+    html += '<div class="answer-line"><span class="answer-label">解析</span>' +
+            '<span class="answer-expl">' + escapeHtml(explanation) + '</span></div>';
+  }
+  box.innerHTML = html;
+  return box;
+}
+function makeWritingAnswerBox(sample, explanation) {
+  if (!sample && !explanation) return null;
+  const box = document.createElement('div');
+  box.className = 'answer-box' + (showAnswer ? ' show' : '');
+  let html = '';
+  if (sample) {
+    html += '<div class="answer-line"><span class="answer-label">参考范文</span></div>' +
+            '<div class="answer-sample">' + escapeHtml(sample) + '</div>';
+  }
+  if (explanation) {
+    html += '<div class="answer-line"><span class="answer-label">解析</span>' +
+            '<span class="answer-expl">' + escapeHtml(explanation) + '</span></div>';
+  }
+  box.innerHTML = html;
+  return box;
+}
+function renderBlanksWithNums(text, startNum) {
+  let idx = 0;
+  return escapeHtml(String(text || '')).replace(/_+(\d*)_+/g, function () {
+    const n = startNum + idx;
+    idx++;
+    return '<span class="cloze-blank">' + n + '</span>';
+  });
+}
+
+function renderArticleGroup(items, num, forceLabels, mode) {
+  mode = mode || 'auto';
+  const nodes = [];
+  let qNum = num;
+  (items || []).forEach(function (passage, pIdx) {
+    const startNum = qNum;
+    const article = document.createElement('div');
+    const labelText = forceLabels ? String.fromCharCode(65 + pIdx) : passage.label;
+    if (labelText) {
+      const label = document.createElement('div');
+      label.className = 'passage-label';
+      label.textContent = labelText;
+      article.appendChild(label);
+    }
+    const p = document.createElement('p');
+    p.className = 'passage';
+    p.innerHTML = renderBlanksWithNums(passage.text, startNum);
+    article.appendChild(p);
+    if (showAnswer && passage.translation) {
+      const trans = document.createElement('div');
+      trans.className = 'passage-translation';
+      trans.innerHTML = '<span class="trans-label">短文翻译</span>' +
+                        renderBlanksWithNums(passage.translation, startNum);
+      article.appendChild(trans);
+    }
+    nodes.push(article);
+
+    const questions = passage.questions || [];
+    const isTaskReading = passage.type === '任务型阅读';
+
+    questions.forEach(function (q, j) {
+      const hasOpts = Array.isArray(q.options) && q.options.length > 0;
+      let qType;
+      if (mode === 'choice') {
+        qType = 'choice';
+      } else if (mode === 'qa') {
+        qType = 'qa';
+      } else {
+        qType = isTaskReading ? 'qa' : (hasOpts ? 'choice' : 'qa');
+      }
+
+      const div = makeQItem(startNum + j, q.stem || '', q.stemZh);
+      const body = div.querySelector('.q-body');
+      const stemEl = div.querySelector('.q-stem');
+
+      if (qType === 'choice') {
+        if (!q.stem) { if (stemEl) stemEl.remove(); }
+        if (hasOpts) {
+          body.appendChild(makeOptions(q.options));
+        } else {
+          const tip = document.createElement('div');
+          tip.className = 'section-desc';
+          tip.style.margin = '2px 0 0';
+          tip.textContent = '（本题未提供 options 字段，无法显示 A/B/C/D）';
+          body.appendChild(tip);
+        }
+        const ans = makeAnswerBox(q);
+        if (ans) body.appendChild(ans);
+      } else {
+        if (!q.stem) { if (stemEl) stemEl.remove(); }
+        if (!showAnswer) {
+          const line = document.createElement('div');
+          line.className = 'qa-blank-line';
+          body.appendChild(line);
+        }
+        const ansObj = {
+          answer: (q.answerText != null ? q.answerText : q.answer),
+          options: null,
+          explanation: q.explanation
+        };
+        const ans = makeAnswerBox(ansObj);
+        if (ans) body.appendChild(ans);
+      }
+      nodes.push(div);
+    });
+    qNum = startNum + questions.length;
+  });
+  return nodes;
+}
+
+function renderDialogueGroup(items, num) {
+  const nodes = [];
+  let qNum = num;
+
+  (items || []).forEach(function (item) {
+    const questions = Array.isArray(item.questions) ? item.questions : null;
+
+    if (!questions) {
+      const div = makeQItem(qNum, item.stem, item.stemZh);
+      const body = div.querySelector('.q-body');
+      if (Array.isArray(item.options) && item.options.length) {
+        body.appendChild(makeOptions(item.options, 'two-col'));
+      }
+      const ans = makeAnswerBox(item);
+      if (ans) body.appendChild(ans);
+      nodes.push(div);
+      qNum += 1;
+      return;
+    }
+
+    const startNum = qNum;
+    const article = document.createElement('div');
+    article.style.marginBottom = '8px';
+
+    if (item.text) {
+      const p = document.createElement('p');
+      p.className = 'passage dialogue-text';
+      p.innerHTML = renderBlanksWithNums(item.text, startNum).replace(/\\n/g, '<br>');
+      article.appendChild(p);
+    }
+
+    const sharedOptions = Array.isArray(item.options) ? item.options : null;
+    if (sharedOptions && sharedOptions.length) {
+      const bank = document.createElement('div');
+      bank.className = 'option-bank';
+      sharedOptions.forEach(function (opt, i) {
+        const span = document.createElement('span');
+        span.textContent = String.fromCharCode(65 + i) + '. ' + opt;
+        bank.appendChild(span);
+      });
+      article.appendChild(bank);
+    }
+
+    if (showAnswer && item.translation) {
+      const trans = document.createElement('div');
+      trans.className = 'passage-translation';
+      trans.innerHTML = '<span class="trans-label">对话翻译</span>' +
+        renderBlanksWithNums(item.translation, startNum).replace(/\\n/g, '<br>');
+      article.appendChild(trans);
+    }
+    nodes.push(article);
+
+    questions.forEach(function (q, j) {
+      const div = makeQItem(startNum + j, q.stem || '', q.stemZh);
+      const body = div.querySelector('.q-body');
+      const stemEl = div.querySelector('.q-stem');
+
+      if (!q.stem) {
+        if (showAnswer) {
+          if (stemEl) stemEl.remove();
+        } else {
+          if (stemEl) stemEl.innerHTML = '<span class="answer-blank"></span>';
+        }
+      }
+
+      if (Array.isArray(q.options) && q.options.length) {
+        body.appendChild(makeOptions(q.options, 'two-col'));
+      }
+
+      const ans = makeAnswerBox(q, sharedOptions);
+      if (ans) body.appendChild(ans);
+
+      nodes.push(div);
+    });
+
+    qNum = startNum + questions.length;
+  });
+  return nodes;
+}
+
+function renderSpelling(items, num) {
+  return (items || []).map(function (it, i) {
+    const qNum = num + i;
+    const div = document.createElement('div');
+    div.className = 'q-item';
+
+    const numDiv = document.createElement('div');
+    numDiv.className = 'q-num';
+    numDiv.textContent = qNum + '.';
+
+    const body = document.createElement('div');
+    body.className = 'q-body';
+
+    const stemDiv = document.createElement('div');
+    stemDiv.className = 'q-stem';
+    stemDiv.innerHTML = formatStem(it.stem || '').replace(/_{2,}/g, function () {
+      return '<span class="spell-blank"></span>';
+    });
+    body.appendChild(stemDiv);
+
+    if (it.stemZh) {
+      const transDiv = document.createElement('div');
+      transDiv.className = 'stem-translation' + (showAnswer ? ' show' : '');
+      transDiv.innerHTML = escapeHtml(it.stemZh);
+      body.appendChild(transDiv);
+    }
+
+    const ans = makeAnswerBox(it);
+    if (ans) body.appendChild(ans);
+
+    div.appendChild(numDiv);
+    div.appendChild(body);
+    return div;
+  });
+}
+
+function renderWriting(items, num) {
+  const nodes = [];
+  (items || []).forEach(function (data, idx) {
+    if (!data) return;
+    const wrap = document.createElement('div');
+
+    if (items.length > 1) {
+      const label = document.createElement('div');
+      label.className = 'passage-label';
+      label.textContent = '第 ' + (idx + 1) + ' 篇（满分 20 分）';
+      wrap.appendChild(label);
+    }
+
+    if (data.prompt) {
+      const desc = document.createElement('div');
+      desc.className = 'section-desc';
+      desc.innerHTML = formatStem(data.prompt);
+      wrap.appendChild(desc);
+    }
+    const box = document.createElement('div');
+    box.className = 'writing-box';
+    box.textContent = data.note || '（此处为书面表达答题区，约 80–100 词）';
+    wrap.appendChild(box);
+
+    const ans = makeWritingAnswerBox(data.sampleAnswer, data.explanation);
+    if (ans) wrap.appendChild(ans);
+
+    nodes.push(wrap);
+  });
+  return nodes;
+}
+
+/* =========================================================
+   三、统计与分值
+   ========================================================= */
+function getTypeStats(type, items) {
+  if (!items || items.length === 0) return { count: 0, questions: 0, score: 0 };
+  if (type.isPerPiece) {
+    const qs = items.reduce(function (s, p) {
+      if (Array.isArray(p.questions)) return s + p.questions.length;
+      return s + 1;
+    }, 0);
+    return { count: items.length, questions: qs, score: qs * type.scorePer };
+  }
+  return { count: items.length, questions: items.length, score: items.length * type.scorePer };
+}
+function computeExamMeta(selections) {
+  const activeTypes = [];
+  let totalQuestions = 0, totalScore = 0;
+  TYPES.forEach(function (type) {
+    if (clearedTypes.has(type.id)) return;
+    const items = selections[type.id];
+    if (!items || items.length === 0) return;
+    const s = getTypeStats(type, items);
+    activeTypes.push(type);
+    totalQuestions += s.questions;
+    totalScore += s.score;
+  });
+  const isFullStandard = TYPES.every(function (type) {
+    if (clearedTypes.has(type.id)) return false;
+    const items = selections[type.id];
+    return items && items.length === type.defaultCount;
+  });
+  return { activeTypes, totalQuestions, totalScore, isFullStandard };
+}
+function makeScoreText(type, stats) {
+  if (type.id === 'writing') return '共 ' + stats.count + ' 题，满分 ' + stats.score + ' 分';
+  if (type.isPerPiece) return '共 ' + stats.count + ' 篇（' + stats.questions + ' 小题）；每小题 ' + type.scorePer + ' 分，满分 ' + stats.score + ' 分';
+  return '共 ' + stats.count + ' 小题；每小题 ' + type.scorePer + ' 分，满分 ' + stats.score + ' 分';
+}
+
+/* =========================================================
+   四、试卷分页渲染（含 logo 与水印）
+   ========================================================= */
+function makeHeaderBlock(meta) {
+  let title, subtitle, metaLine, notice;
+  if (meta.isFullStandard) {
+    title = '多多好学英语试卷（无听力）';
+
+    let gradeText = '初中';
+    if (window._examFilterParams && window._examFilterParams.grade) {
+      if (window._examFilterParams.grade === 7) gradeText = '七年级';
+      else if (window._examFilterParams.grade === 8) gradeText = '八年级';
+      else if (window._examFilterParams.grade === 9) gradeText = '九年级';
+    }
+    subtitle = gradeText + '英语学业水平模拟检测';
+
+    metaLine = `<span>满分：${meta.totalScore} 分</span><span>考试时间：120 分钟</span><span>共 ${meta.activeTypes.length} 大题</span>`;
+    notice = `1. 本试卷共三部分，${meta.activeTypes.length} 大题，满分 ${meta.totalScore} 分，考试时间为 120 分钟。<br>
+              2. 全卷包括“试题卷”和“答题卡”两部分，请务必在答题卡上作答。<br>
+              3. 选择题每小题选出答案后，用 2B 铅笔把答题卡上对应题目的答案标号涂黑。`;
+  } else if (meta.activeTypes.length === 1) {
+    const t = meta.activeTypes[0];
+    const shortName = t.name.replace(/^[Ⅰ-Ⅹ]+\.\s*/, '');
+    title = '多多好学英语专项练习';
+    subtitle = shortName + ' 专项';
+    metaLine = `<span>满分：${meta.totalScore} 分</span><span>共 ${meta.totalQuestions} 题</span>`;
+    notice = `1. 本试卷为专项练习，满分 ${meta.totalScore} 分，共 ${meta.totalQuestions} 题。<br>
+              2. 请认真作答，完成后对照答案自查。`;
+  } else {
+    title = '多多好学英语组合练习';
+    subtitle = '共 ' + meta.activeTypes.length + ' 种题型';
+    metaLine = `<span>满分：${meta.totalScore} 分</span><span>共 ${meta.totalQuestions} 题</span>`;
+    notice = `1. 本试卷为组合练习，满分 ${meta.totalScore} 分，共 ${meta.totalQuestions} 题。<br>
+              2. 请认真作答，完成后对照答案自查。`;
+  }
+
+  const wrap = document.createElement('div');
+  wrap.innerHTML = `
+    <div class="exam-logo-wrap">
+      <img class="exam-logo" src="img/logo.jpg" alt="多多好学"
+           onerror="this.parentNode.style.display='none'">
+    </div>
+    <div class="exam-header">
+      <h1>${title}</h1>
+      <div class="exam-type">${subtitle}</div>
+      <div class="exam-meta">${metaLine}</div>
+    </div>
+    <div class="notice"><strong>注意事项：</strong>${notice}</div>
+  `;
+  return wrap;
+}
+function makeHeadBlock(type, firstNode, stats, partTitle) {
+  const block = document.createElement('div');
+  block.className = 'section-head';
+  if (partTitle) {
+    const pt = document.createElement('div');
+    pt.className = 'section-title';
+    pt.textContent = partTitle;
+    block.appendChild(pt);
+  }
+  const st = document.createElement('div');
+  st.className = 'sub-title';
+  st.textContent = type.name + '（' + makeScoreText(type, stats) + '）';
+  block.appendChild(st);
+  if (type.desc) {
+    const d = document.createElement('div');
+    d.className = 'section-desc';
+    d.innerHTML = type.desc;
+    block.appendChild(d);
+  }
+  if (firstNode) block.appendChild(firstNode);
+  return block;
+}
+function paginate(blocks) {
+  const container = document.getElementById('papersContainer');
+  container.innerHTML = '';
+  const measure = document.createElement('div');
+  measure.className = 'paper measure-paper';
+  const mc = document.createElement('div');
+  mc.className = 'page-content';
+  measure.appendChild(mc);
+  const mf = document.createElement('div');
+  mf.className = 'page-footer';
+  measure.appendChild(mf);
+  document.body.appendChild(measure);
+  const pages = [];
+  let pageBlocks = [];
+  blocks.forEach(function (block) {
+    mc.innerHTML = '';
+    pageBlocks.forEach(function (b) { mc.appendChild(b); });
+    mc.appendChild(block);
+    if (mc.scrollHeight > mc.clientHeight + 2) {
+      mc.removeChild(block);
+      if (pageBlocks.length === 0) {
+        pageBlocks.push(block);
+        pages.push(pageBlocks);
+        pageBlocks = [];
+      } else {
+        pages.push(pageBlocks);
+        pageBlocks = [block];
+      }
+    } else {
+      pageBlocks.push(block);
+    }
+  });
+  if (pageBlocks.length) pages.push(pageBlocks);
+  document.body.removeChild(measure);
+  const total = pages.length;
+  pages.forEach(function (pbs, i) {
+    const paper = document.createElement('div');
+    paper.className = 'paper';
+
+    /* ★ 每页水印 */
+    const wm = document.createElement('div');
+    wm.className = 'watermark';
+    wm.setAttribute('aria-hidden', 'true');
+    ['多', '多', '好', '学'].forEach(function (ch) {
+      const s = document.createElement('span');
+      s.textContent = ch;
+      wm.appendChild(s);
+    });
+    paper.appendChild(wm);
+
+    const content = document.createElement('div');
+    content.className = 'page-content';
+    pbs.forEach(function (b) { content.appendChild(b); });
+    const footer = document.createElement('div');
+    footer.className = 'page-footer';
+    footer.textContent = '第 ' + (i + 1) + ' 页  共 ' + total + ' 页';
+    paper.appendChild(content);
+    paper.appendChild(footer);
+    container.appendChild(paper);
+  });
+  window.scrollTo(0, 0);
+}
+function renderExam(selections) {
+  const meta = computeExamMeta(selections);
+  if (meta.activeTypes.length === 0) {
+    document.getElementById('papersContainer').innerHTML = `
+      <div class="guide-card">
+        <h2>当前没有可显示的题型</h2>
+        <p>所有已加载的题型都被清除了。请点击面板中的 <strong>「取消清除」</strong> 恢复至少一种题型。</p>
+      </div>
+    `;
+    window.scrollTo(0, 0);
+    return;
+  }
+  const blocks = [makeHeaderBlock(meta)];
+  let num = 1;
+  let lastPartTitle = null;
+  TYPES.forEach(function (type) {
+    if (clearedTypes.has(type.id)) return;
+    const items = selections[type.id];
+    if (!items || items.length === 0) return;
+    const stats = getTypeStats(type, items);
+    const nodes = type.render(items, num) || [];
+    let partTitle = null;
+    if (meta.isFullStandard && type.partTitle && type.partTitle !== lastPartTitle) {
+      partTitle = type.partTitle;
+      lastPartTitle = type.partTitle;
+    }
+    blocks.push(makeHeadBlock(type, nodes[0], stats, partTitle));
+    for (let i = 1; i < nodes.length; i++) blocks.push(nodes[i]);
+    num += stats.questions;
+  });
+  paginate(blocks);
+}
+
+/* =========================================================
+   五、筛选索引与按钮 UI
+   ========================================================= */
+const bankData = {};
+let lastSelections = null;
+const panel = document.getElementById('panel');
+const panelToggle = document.getElementById('panelToggle');
+let panelOpen = window.innerWidth > 1100;
+
+function setPanel(open) {
+  panelOpen = open;
+  panel.classList.toggle('open', open);
+  panelToggle.style.display = open ? 'none' : 'flex';
+}
+panelToggle.addEventListener('click', function () { setPanel(true); });
+document.getElementById('panelClose').addEventListener('click', function () { setPanel(false); });
+
+/* 数组内切换 */
+function toggleIn(arr, val) {
+  const i = arr.indexOf(val);
+  if (i === -1) arr.push(val); else arr.splice(i, 1);
+}
+
+/* ★ 重建单元索引与知识点列表 */
+function rebuildIndex() {
+  const map = {};          // grade -> Set(unit)
+  const pts = new Set();
+
+  TYPES.forEach(function (t) {
+    const arr = bankData[t.id];
+    if (!Array.isArray(arr)) return;
+    arr.forEach(function (it) {
+      if (Array.isArray(it.points)) {
+        it.points.forEach(function (p) { if (p) pts.add(String(p).trim()); });
+      }
+      if (it.grade != null && it.unit != null && String(it.unit).trim() !== '') {
+        const g = String(Number(it.grade));
+        if (!map[g]) map[g] = new Set();
+        map[g].add(String(it.unit).trim());
+      }
+    });
+  });
+
+  unitIndex = {};
+  Object.keys(map).forEach(function (g) {
+    const units = Array.from(map[g]).sort(function (a, b) {
+      const na = parseInt((String(a).match(/\d+/) || [999])[0], 10);
+      const nb = parseInt((String(b).match(/\d+/) || [999])[0], 10);
+      return na - nb || String(a).localeCompare(String(b));
+    });
+
+    /* 册别归属：
+       1) 单元名里带“上/下”的，直接按字面归属；
+       2) 否则把排序后的单元对半拆成上册 / 下册。 */
+    const term = {};
+    const hasExplicit = units.some(function (u) { return /上|下/.test(u); });
+    if (hasExplicit) {
+      units.forEach(function (u) {
+        if (/下/.test(u)) term[u] = 'down';
+        else term[u] = 'up';
+      });
+    } else {
+      const half = Math.ceil(units.length / 2);
+      units.forEach(function (u, i) { term[u] = i < half ? 'up' : 'down'; });
+    }
+
+    unitIndex[g] = { units: units, term: term };
+  });
+
+  allPoints = Array.from(pts).sort(function (a, b) { return a.localeCompare(b, 'zh'); });
+}
+
+/* ---------- 各行的渲染 ---------- */
+function renderGradeRow() {
+  document.querySelectorAll('#gradeRow .chip').forEach(function (b) {
+    b.classList.toggle('active', String(b.dataset.grade) === String(F.grade));
+  });
+}
+function renderTermRow() {
+  document.querySelectorAll('#termRow .chip').forEach(function (b) {
+    b.classList.toggle('active', String(b.dataset.term) === String(F.term));
+  });
+}
+function renderUnitRow() {
+  const row = document.getElementById('unitRow');
+  row.innerHTML = '';
+  if (!F.grade) return;
+
+  const info = unitIndex[String(F.grade)];
+  if (!info || info.units.length === 0) {
+    row.innerHTML = '<span class="empty-hint">该年级暂无单元数据</span>';
+    return;
+  }
+  let units = info.units;
+  if (F.term) {
+    units = units.filter(function (u) { return info.term[u] === F.term; });
+  }
+  if (units.length === 0) {
+    row.innerHTML = '<span class="empty-hint">该册暂无单元数据</span>';
+    return;
+  }
+  units.forEach(function (u) {
+    const b = document.createElement('button');
+    b.className = 'chip' + (F.units.indexOf(u) !== -1 ? ' active' : '');
+    b.textContent = u;
+    b.addEventListener('click', function () {
+      toggleIn(F.units, u);
+      renderUnitRow();
+    });
+    row.appendChild(b);
+  });
+}
+function renderPointRow() {
+  const row = document.getElementById('pointRow');
+  row.innerHTML = '';
+  if (allPoints.length === 0) {
+    row.innerHTML = '<span class="empty-hint">题库中暂无知识点数据（可在 JSON 中添加 points 字段）</span>';
+    return;
+  }
+  allPoints.forEach(function (p) {
+    const b = document.createElement('button');
+    b.className = 'chip small' + (F.points.indexOf(p) !== -1 ? ' active' : '');
+    b.textContent = p;
+    b.addEventListener('click', function () {
+      toggleIn(F.points, p);
+      renderPointRow();
+    });
+    row.appendChild(b);
+  });
+}
+function refreshFilterUI() {
+  renderGradeRow();
+  renderTermRow();
+  renderUnitRow();
+  renderPointRow();
+  document.getElementById('termGroup').style.display = F.grade ? '' : 'none';
+  document.getElementById('unitGroup').style.display = F.grade ? '' : 'none';
+}
+
+/* ---------- 事件绑定 ---------- */
+document.querySelectorAll('#gradeRow .chip').forEach(function (b) {
+  b.addEventListener('click', function () {
+    const g = b.dataset.grade;
+    if (String(F.grade) === String(g)) return;
+    F.grade = g;
+    F.term = '';
+    F.units = [];
+    refreshFilterUI();
+  });
+});
+document.querySelectorAll('#termRow .chip').forEach(function (b) {
+  b.addEventListener('click', function () {
+    F.term = b.dataset.term;
+    F.units = [];      /* 换册别时清空已选单元，避免跨册残留 */
+    renderTermRow();
+    renderUnitRow();
+  });
+});
+
+/* ★ 确认筛选：按当前条件重新生成整卷 */
+document.getElementById('btnConfirmFilter').addEventListener('click', function () {
+  const warnings = generateExam();
+  if (warnings === false) return;
+  setStatus('已按当前筛选条件生成 ✓', warnings);
+});
+
+/* =========================================================
+   六、筛选条件 → 抽题
+   ========================================================= */
+function getFilterParams() {
+  return {
+    grade: F.grade === '' ? null : Number(F.grade),
+    term: F.term || '',
+    units: F.units.slice(),
+    points: F.points.slice()
+  };
+}
+
+/* 单条数据是否满足筛选条件（硬过滤：不符合的绝不进入候选池） */
+function matchItem(item, p) {
+  if (!item) return false;
+
+  if (p.grade != null) {
+    if (item.grade == null || Number(item.grade) !== p.grade) return false;
+  }
+
+  if (p.units.length) {
+    const u = String(item.unit || '').trim();
+    if (p.units.indexOf(u) === -1) return false;
+  } else if (p.term && p.grade != null) {
+    const u = String(item.unit || '').trim();
+    const info = unitIndex[String(p.grade)];
+    if (!info || !u || info.term[u] !== p.term) return false;
+  }
+
+  if (p.points.length) {
+    const pts = Array.isArray(item.points) ? item.points : [];
+    if (!pts.some(function (x) { return p.points.indexOf(x) !== -1; })) return false;
+  }
+
+  return true;
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+  }
+  return arr;
+}
+
+/* 阅读：优先按六大类各抽一篇，再从剩余里补齐 */
+function pickReadingFrom(pool, want) {
+  if (!pool.length) return [];
+  const groups = {};
+  pool.forEach(function (item) {
+    const t = item.type || '其他';
+    (groups[t] = groups[t] || []).push(item);
+  });
+
+  const result = [];
+  const used = new Set();
+
+  READING_TYPE_ORDER.forEach(function (t) {
+    const list = groups[t] || [];
+    const available = list.filter(function (x) { return !used.has(x); });
+    if (available.length === 0) return;
+    const picked = available[Math.floor(Math.random() * available.length)];
+    result.push(picked);
+    used.add(picked);
+  });
+
+  if (result.length < want) {
+    const rest = shuffle(pool.filter(function (x) { return !used.has(x); }));
+    for (let i = 0; i < rest.length && result.length < want; i++) {
+      result.push(rest[i]);
+      used.add(rest[i]);
+    }
+  }
+  return result.slice(0, want);
+}
+
+/* 多知识点时轮转取题，尽量平均 */
+function pickBalanced(pool, want, points) {
+  const order = shuffle(points.slice());
+  const buckets = {};
+  order.forEach(function (p) {
+    buckets[p] = shuffle(pool.filter(function (it) {
+      return Array.isArray(it.points) && it.points.indexOf(p) !== -1;
+    }));
+  });
+  const used = new Set();
+  const out = [];
+  let guard = 0;
+  while (out.length < want && guard < 200) {
+    let advanced = false;
+    for (let i = 0; i < order.length && out.length < want; i++) {
+      const b = buckets[order[i]];
+      while (b.length) {
+        const it = b.shift();
+        if (used.has(it)) continue;
+        used.add(it);
+        out.push(it);
+        advanced = true;
+        break;
+      }
+    }
+    if (!advanced) break;
+    guard++;
+  }
+  return out;
+}
+
+/* 按题型抽题（全部基于筛选后的候选池随机） */
+function pickForType(type, want, params) {
+  const data = bankData[type.id];
+  if (!Array.isArray(data) || data.length === 0) return [];
+  const pool = data.filter(function (it) { return matchItem(it, params); });
+  if (pool.length === 0) return [];
+
+  if (type.id === 'reading') {
+    return pickReadingFrom(pool, want);
+  }
+  if ((type.id === 'single' || type.id === 'spelling') && params.points.length > 1) {
+    return pickBalanced(pool, want, params.points);
+  }
+  return shuffle(pool.slice()).slice(0, want);
+}
+
+/* =========================================================
+   七、题型列表 UI
+   ========================================================= */
+function getQtyInput(typeId) {
+  const el = document.querySelector('.type-qty[data-type="' + typeId + '"]');
+  if (!el) return null;
+  const v = parseInt(el.value, 10);
+  return isNaN(v) || v < 1 ? null : v;
+}
+
+function syncReadingModeBtn() {
+  const modeBtn = document.querySelector('.btn-mode[data-type="reading"]');
+  if (!modeBtn) return;
+  const modeLabels = { auto: '阅读：自动', choice: '阅读：全单选', qa: '阅读：全问答' };
+  modeBtn.textContent = modeLabels[readingMode];
+}
+
+(function buildTypeList() {
+  const list = document.getElementById('typeList');
+  TYPES.forEach(function (type) {
+    const item = document.createElement('div');
+    item.className = 'type-item';
+    item.dataset.type = type.id;
+
+    const head = document.createElement('div');
+    head.className = 'type-item-head';
+
+    const nameEl = document.createElement('span');
+    nameEl.className = 'type-name';
+    nameEl.textContent = type.name;
+
+    const statusEl = document.createElement('span');
+    statusEl.className = 'type-status';
+    statusEl.dataset.status = type.id;
+    statusEl.textContent = '未加载';
+
+    head.appendChild(nameEl);
+    head.appendChild(statusEl);
+
+    if (type.id === 'reading') {
+      const modeBtn = document.createElement('button');
+      modeBtn.className = 'btn-mini btn-mode';
+      modeBtn.dataset.type = type.id;
+      const modeLabels = { auto: '阅读：自动', choice: '阅读：全单选', qa: '阅读：全问答' };
+      modeBtn.textContent = modeLabels[readingMode];
+      modeBtn.title = '切换阅读理解题型显示模式：自动（前 5 篇单选、第 6 篇任务型问答）/ 全单选 / 全问答';
+      modeBtn.addEventListener('click', function () {
+        const order = ['auto', 'choice', 'qa'];
+        const idx = order.indexOf(readingMode);
+        readingMode = order[(idx + 1) % 3];
+        syncReadingModeBtn();
+        if (lastSelections) renderExam(lastSelections);
+      });
+      head.appendChild(modeBtn);
+    }
+
+    /* ★ 大号清除按钮 */
+    const clearBtn = document.createElement('button');
+    clearBtn.className = 'btn-clear-lg';
+    clearBtn.dataset.type = type.id;
+    clearBtn.textContent = '清除';
+    clearBtn.disabled = true;
+    clearBtn.title = '请先加载题库';
+    clearBtn.addEventListener('click', function () { toggleClear(type.id); });
+    head.appendChild(clearBtn);
+
+    const controls = document.createElement('div');
+    controls.className = 'type-item-controls';
+
+    const qty = document.createElement('input');
+    qty.type = 'number';
+    qty.className = 'type-qty';
+    qty.min = 1;
+    qty.value = type.defaultCount;
+    qty.dataset.type = type.id;
+    qty.title = '本题型抽题数量（' + type.unit + '）';
+    qty.addEventListener('change', function () {
+      let v = parseInt(qty.value, 10);
+      if (isNaN(v) || v < 1) v = 1;
+      qty.value = v;
+    });
+
+    const unit = document.createElement('span');
+    unit.className = 'type-unit';
+    unit.textContent = type.unit;
+
+    const meta = document.createElement('span');
+    meta.className = 'type-meta';
+    if (type.id === 'reading') {
+      meta.textContent = '标准 6 篇 · 共 20 小题 40 分';
+    } else {
+      meta.textContent = '标准 ' + type.defaultCount + ' ' + type.unit +
+        (type.isPerPiece ? ' · 每小题 ' + type.scorePer + ' 分'
+                         : ' · ' + (type.defaultCount * type.scorePer) + ' 分');
+    }
+
+    controls.appendChild(qty);
+    controls.appendChild(unit);
+    controls.appendChild(meta);
+
+    item.appendChild(head);
+    item.appendChild(controls);
+    list.appendChild(item);
+  });
+})();
+
+function toggleClear(typeId) {
+  if (clearedTypes.has(typeId)) {
+    clearedTypes.delete(typeId);
+  } else {
+    clearedTypes.add(typeId);
+  }
+  updateTypeButtons(typeId);
+  checkAtLeastOne();
+  if (lastSelections) renderExam(lastSelections);
+}
+
+function updateTypeButtons(typeId) {
+  const hasData = bankData[typeId] && bankData[typeId].length > 0;
+  const clearBtn = document.querySelector('.btn-clear-lg[data-type="' + typeId + '"]');
+  if (!clearBtn) return;
+
+  clearBtn.disabled = !hasData;
+  if (!hasData) {
+    clearBtn.textContent = '清除';
+    clearBtn.classList.remove('cleared');
+    clearBtn.title = '请先加载题库';
+  } else if (clearedTypes.has(typeId)) {
+    clearBtn.textContent = '取消清除';
+    clearBtn.classList.add('cleared');
+    clearBtn.title = '点击恢复此题型到试卷';
+  } else {
+    clearBtn.textContent = '清除';
+    clearBtn.classList.remove('cleared');
+    clearBtn.title = '点击从试卷中移除此题型';
+  }
+}
+
+function updateTypeStatus(type, len) {
+  const el = document.querySelector('.type-status[data-status="' + type.id + '"]');
+  if (!el) return;
+  const def = type.defaultCount;
+  const text = '共 ' + len + ' ' + type.unit;
+  el.className = 'type-status ' + (len < def ? 'warn' : 'ok');
+  el.textContent = text;
+  el.title = text;
+}
+
+function checkAtLeastOne() {
+  const usableTypes = TYPES.filter(function (t) {
+    return bankData[t.id] && bankData[t.id].length > 0 && !clearedTypes.has(t.id);
+  });
+  const status = document.getElementById('panelStatus');
+  if (usableTypes.length === 0) {
+    const loadedCount = TYPES.filter(function (t) {
+      return bankData[t.id] && bankData[t.id].length > 0;
+    }).length;
+    status.textContent = loadedCount === 0
+      ? '题库未加载完成，请检查 JSON 文件是否与 page.html 同目录。'
+      : '所有已加载题型都被清除了，请点击“取消清除”恢复至少一种。';
+  } else {
+    status.textContent = '可生成 ' + usableTypes.length + ' 种题型。';
+  }
+}
+
+/* =========================================================
+   八、生成试卷 / 整体刷新 / 重置标准卷
+   ========================================================= */
+function generateExam() {
+  const params = getFilterParams();
+  const selections = {};
+  const warnings = [];
+
+  TYPES.forEach(function (type) {
+    const data = bankData[type.id];
+    if (!data || data.length === 0) return;
+
+    const want = getQtyInput(type.id) || type.defaultCount;
+    const picked = pickForType(type, want, params);
+    selections[type.id] = picked;
+
+    if (!clearedTypes.has(type.id) && picked.length < want) {
+      const poolSize = data.filter(function (it) { return matchItem(it, params); }).length;
+      const shortName = type.name.replace(/^[Ⅰ-Ⅹ]+\.\s*/, '');
+      if (poolSize === 0) {
+        warnings.push(shortName + '：无符合筛选条件的题目');
+      } else {
+        warnings.push(shortName + '：符合条件 ' + poolSize + ' ' + type.unit +
+          '，需 ' + want + '，实抽 ' + picked.length);
+      }
+    }
+  });
+
+  const anySelected = Object.keys(selections).some(function (k) {
+    return selections[k] && selections[k].length > 0 && !clearedTypes.has(k);
+  });
+  if (!anySelected) {
+    alert('当前筛选条件下没有可用题目，请放宽筛选条件（年级 / 册别 / 单元 / 知识点）后重试。');
+    return false;
+  }
+
+  lastSelections = selections;
+  window._examFilterParams = params;
+  renderExam(selections);
+  return warnings;
+}
+
+function setStatus(msg, warnings) {
+  const status = document.getElementById('panelStatus');
+  let text = msg;
+  if (warnings && warnings.length) text += '　⚠ ' + warnings.join('；');
+  status.textContent = text;
+}
+
+document.getElementById('btnRefreshAll').addEventListener('click', function () {
+  const loaded = TYPES.some(function (t) { return bankData[t.id] && bankData[t.id].length > 0; });
+  if (!loaded) {
+    alert('请先加载至少一种题型的题库');
+    return;
+  }
+  const warnings = generateExam();
+  if (warnings === false) return;
+  setStatus('整卷已按当前筛选条件重新随机抽题 ✓', warnings);
+});
+
+document.getElementById('btnResetStandard').addEventListener('click', function () {
+  const loaded = TYPES.some(function (t) { return bankData[t.id] && bankData[t.id].length > 0; });
+  if (!loaded) {
+    alert('请先加载至少一种题型的题库');
+    return;
+  }
+
+  /* 清空筛选条件 */
+  F.grade = '';
+  F.term = '';
+  F.units = [];
+  F.points = [];
+  refreshFilterUI();
+
+  readingMode = 'auto';
+  syncReadingModeBtn();
+
+  TYPES.forEach(function (type) {
+    const qty = document.querySelector('.type-qty[data-type="' + type.id + '"]');
+    if (qty) qty.value = type.defaultCount;
+    clearedTypes.delete(type.id);
+    updateTypeButtons(type.id);
+  });
+  checkAtLeastOne();
+
+  const warnings = generateExam();
+  if (warnings === false) return;
+  setStatus('已按标准题量重置并生成整卷 ✓（已清空筛选条件）', warnings);
+});
+
+/* =========================================================
+   九、显示 / 隐藏翻译与答案
+   ========================================================= */
+document.getElementById('btnToggleAnswer').addEventListener('click', function () {
+  showAnswer = !showAnswer;
+  this.textContent = showAnswer ? '🙈' : '👁';
+  this.title = showAnswer ? '隐藏全卷翻译与答案' : '显示全卷翻译与答案';
+  this.classList.toggle('on', showAnswer);
+  if (lastSelections) {
+    renderExam(lastSelections);
+  }
+});
+
+/* =========================================================
+   十、加载题库
+   ========================================================= */
+async function loadAllBanks(opts) {
+  opts = opts || {};
+  const silent = !!opts.silent;
+  const status = document.getElementById('panelStatus');
+
+  if (location.protocol === 'file:') {
+    if (!silent) {
+      if (!confirm('⚠ 当前为 file:// 协议，浏览器会阻止自动读取本地 JSON。\n\n' +
+        '建议启动本地服务器（如 python -m http.server 8000）。\n\n仍要继续尝试吗？')) {
+        return { loaded: 0, failed: [], cancelled: true };
+      }
+    } else {
+      return { loaded: 0, failed: [], cancelled: true, skipped: true };
+    }
+  }
+
+  let loaded = 0;
+  const failed = [];
+  const total = TYPES.length;
+
+  for (let i = 0; i < total; i++) {
+    const type = TYPES[i];
+    status.textContent = '正在加载 ' + (i + 1) + '/' + total + '：' + type.file + ' …';
+    try {
+      const res = await fetch('./' + type.file, { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      if (!Array.isArray(data) || data.length === 0) throw new Error('数据为空');
+      bankData[type.id] = data;
+      clearedTypes.delete(type.id);
+      updateTypeStatus(type, data.length);
+      updateTypeButtons(type.id);
+      loaded++;
+    } catch (e) {
+      failed.push(type.file);
+    }
+  }
+
+  rebuildIndex();
+  refreshFilterUI();
+  checkAtLeastOne();
+  return { loaded: loaded, failed: failed, cancelled: false, total: total };
+}
+
+/* =========================================================
+   十一、初始状态 + 自动加载
+   ========================================================= */
+(function init() {
+  setPanel(panelOpen);
+  refreshFilterUI();
+
+  const fileRows = TYPES.map(function (t) {
+    return '<div class="file-row"><span>' + t.file + '</span><span>' + t.name + '</span></div>';
+  }).join('');
+
+  document.getElementById('papersContainer').innerHTML = `
+    <div class="guide-card">
+      <h2>正在准备试卷（无听力 · 满分 100 分）</h2>
+      <p>本页面为<strong>无听力版</strong>，共六大题：单选 10 + 完形 20 + 对话 5 + 阅读 40 + 拼写 5 + 写作 20 = <strong>100 分</strong>。</p>
+      <p>页面会自动加载题库并生成整卷。若长时间没有试卷，请检查：</p>
+      <ol>
+        <li>6 个 JSON 文件是否与 <code>page.html</code> 在同一目录；</li>
+        <li>文件名大小写是否与下表完全一致；</li>
+        <li>是否通过 http/https 访问（<code>file://</code> 无法自动加载）。</li>
+      </ol>
+      <div class="guide-file-list">${fileRows}</div>
+    </div>
+  `;
+
+  loadAllBanks({ silent: true }).then(function (r) {
+    if (r.cancelled) {
+      const status = document.getElementById('panelStatus');
+      if (status && r.skipped) {
+        status.textContent = '本地文件打开，自动加载不可用，请用 http/https 访问。';
+      }
+      return;
+    }
+
+    if (r.loaded === 0) {
+      document.getElementById('panelStatus').textContent =
+        '自动加载失败（文件缺失或服务器配置问题），请检查 JSON 是否与 page.html 同目录。';
+      return;
+    }
+
+    if (r.failed.length > 0) {
+      document.getElementById('panelStatus').textContent =
+        '已自动加载 ' + r.loaded + '/' + r.total + ' 种题型（' + r.failed.length + ' 个失败）。';
+      const warnings = generateExam();
+      if (warnings !== false) setStatus('部分题库已加载并生成 ✓', warnings);
+      return;
+    }
+
+    document.getElementById('panelStatus').textContent = '已自动加载全部题库，正在生成试卷…';
+    const warnings = generateExam();
+    if (warnings !== false) {
+      setStatus('已自动加载并生成整卷 ✓', warnings);
+    }
+  });
+})();
+</script>
+</body>
+</html>
