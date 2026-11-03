@@ -1472,14 +1472,15 @@ function shuffle(arr) {
 
 /* 阅读：优先按六大类各抽一篇，再从剩余里补齐 */
 /* 阅读：优先按六大类各抽一篇，再从剩余里补齐 */
+/* 阅读：优先按六大类各抽一篇，再从剩余里补齐 */
 function pickReadingFrom(pool, want) {
   if (!pool.length) return [];
   
-  // ★ 新增：分类别名兼容逻辑，只要包含关键字就自动归类
+  // 兼容分类
   function normalizeType(t) {
     if (!t) return '其他';
     const s = String(t).trim();
-    if (s.includes('说明文') || s.includes('科普')) return '说明文'; // 把“说明文/科普文”统一归入“人文说明文”池
+    if (s.includes('说明文') || s.includes('科普')) return '人文说明文';
     if (s.includes('记叙')) return '记叙文';
     if (s.includes('应用') || s.includes('广告')) return '应用文/广告';
     if (s.includes('人物') || s.includes('故事')) return '人物/故事';
@@ -1489,13 +1490,14 @@ function pickReadingFrom(pool, want) {
 
   const groups = {};
   pool.forEach(function (item) {
-    const t = normalizeType(item.type); // ★ 使用兼容映射
+    const t = normalizeType(item.type);
     (groups[t] = groups[t] || []).push(item);
   });
 
   const result = [];
   const used = new Set();
 
+  // 1. 优先按类别各抽一篇
   READING_TYPE_ORDER.forEach(function (t) {
     const list = groups[t] || [];
     const available = list.filter(function (x) { return !used.has(x); });
@@ -1505,6 +1507,7 @@ function pickReadingFrom(pool, want) {
     used.add(picked);
   });
 
+  // 2. 数量不够，从剩余池子里补齐
   if (result.length < want) {
     const rest = shuffle(pool.filter(function (x) { return !used.has(x); }));
     for (let i = 0; i < rest.length && result.length < want; i++) {
@@ -1512,7 +1515,52 @@ function pickReadingFrom(pool, want) {
       used.add(rest[i]);
     }
   }
-  return result.slice(0, want);
+
+  // 截取需要的数量
+  let finalResult = result.slice(0, want);
+
+  // ★ 3. 核心修改：在“自动模式”下，强制确保最后一篇是任务型阅读
+  if (readingMode === 'auto' && finalResult.length > 0) {
+    // 找找抽出来的有没有任务型
+    const taskIdx = finalResult.findIndex(function(item) {
+       return item.type && String(item.type).includes('任务');
+    });
+
+    if (taskIdx !== -1) {
+      // 如果有，把它挪到数组最后面
+      const taskItem = finalResult.splice(taskIdx, 1)[0];
+      finalResult.push(taskItem);
+    } else {
+      // 如果没抽到 / 题库里没有，把最后一篇强行改成任务型
+      const lastItem = finalResult[finalResult.length - 1];
+      // 深拷贝一份，避免污染原题库数据
+      const fakedTask = JSON.parse(JSON.stringify(lastItem));
+      fakedTask.type = '任务型阅读';
+      
+      // 既然改成了任务型，原选择题的 options 必须删掉，把答案转成文本
+      if (Array.isArray(fakedTask.questions)) {
+        fakedTask.questions.forEach(function(q) {
+          if (Array.isArray(q.options) && q.options.length > 0) {
+            const letters = ['A', 'B', 'C', 'D'];
+            if (typeof q.answer === 'number' && q.options[q.answer]) {
+               q.answerText = letters[q.answer] + '. ' + q.options[q.answer];
+            } else if (typeof q.answer === 'number') {
+               q.answerText = letters[q.answer] || String(q.answer);
+            } else {
+               q.answerText = q.answer || '略';
+            }
+          }
+          delete q.options;
+          delete q.optionsZh;
+          delete q.answer;
+        });
+      }
+      // 用“伪装”后的数据替换最后一篇
+      finalResult[finalResult.length - 1] = fakedTask;
+    }
+  }
+
+  return finalResult;
 }
 
 /* 多知识点时轮转取题，尽量平均 */
