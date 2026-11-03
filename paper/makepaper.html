@@ -1251,10 +1251,25 @@ function rebuildIndex() {
 
   unitIndex = {};
   Object.keys(map).forEach(function (g) {
+        // ★ 更智能的自然数排序（支持 U1, U2, U10 这种正确顺序）
     const units = Array.from(map[g]).sort(function (a, b) {
-      const na = parseInt((String(a).match(/\d+/) || [999])[0], 10);
-      const nb = parseInt((String(b).match(/\d+/) || [999])[0], 10);
-      return na - nb || String(a).localeCompare(String(b));
+      const strA = String(a);
+      const strB = String(b);
+      
+      // 提取出字符串中的所有连续数字，例如 "9A-U10" => [9, 10]
+      const numsA = (strA.match(/\d+/g) || []).map(Number);
+      const numsB = (strB.match(/\d+/g) || []).map(Number);
+      
+      // 逐个对比数字大小
+      const len = Math.max(numsA.length, numsB.length);
+      for (let i = 0; i < len; i++) {
+        const na = numsA[i] !== undefined ? numsA[i] : 0;
+        const nb = numsB[i] !== undefined ? numsB[i] : 0;
+        if (na !== nb) return na - nb; // 数字不同，直接比大小
+      }
+      
+      // 如果所有数字都完全一样，则按字符串的字母顺序排（如 9A 和 9B）
+      return strA.localeCompare(strB);
     });
 
     const term = {};
