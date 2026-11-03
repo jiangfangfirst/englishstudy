@@ -377,7 +377,8 @@
         '· prompt：题目要求，中文即可。',
         '· note：可选，字数/体裁要求。',
         '· sampleAnswer：可选，参考范文英文。',
-        '· explanation：可选，写作要点。'
+        '· explanation：可选，写作要点。',
+        '· unit：可选，A表示上册，B表示下册，U后面的数据表示所在单元。'
       ].join('\n'),
       example: [
         {
@@ -385,7 +386,8 @@
           "note": "答题说明，如字数要求（可选）",
           "sampleAnswer": "参考范文英文",
           "explanation": "写作要点解析（可选）",
-          "grade": 8
+          "grade": 8,
+          "unit":  "8A-U1"
         }
       ],
       validate: validateWriting
