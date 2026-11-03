@@ -1222,9 +1222,11 @@ function toggleIn(arr, val) {
 }
 
 /* ★ 重建单元索引与知识点列表 */
+/* ★ 重建单元索引与知识点列表 */
 function rebuildIndex() {
   const map = {};          // grade -> Set(unit)
   const pts = new Set();
+  const itemTerms = {};    // 记录题目数据里自带的 term 字段 (如果有)
 
   TYPES.forEach(function (t) {
     const arr = bankData[t.id];
@@ -1236,7 +1238,13 @@ function rebuildIndex() {
       if (it.grade != null && it.unit != null && String(it.unit).trim() !== '') {
         const g = String(Number(it.grade));
         if (!map[g]) map[g] = new Set();
-        map[g].add(String(it.unit).trim());
+        const u = String(it.unit).trim();
+        map[g].add(u);
+        
+        // 如果题目直接标了 term（如 "term": "上册" 或 "term": "down"）
+        if (it.term) {
+          itemTerms[g + '|' + u] = String(it.term).toLowerCase();
+        }
       }
     });
   });
@@ -1249,19 +1257,36 @@ function rebuildIndex() {
       return na - nb || String(a).localeCompare(String(b));
     });
 
-    /* 册别归属：
-       1) 单元名里带“上/下”的，直接按字面归属；
-       2) 否则把排序后的单元对半拆成上册 / 下册。 */
     const term = {};
-    const hasExplicit = units.some(function (u) { return /上|下/.test(u); });
-    if (hasExplicit) {
-      units.forEach(function (u) {
-        if (/下/.test(u)) term[u] = 'down';
+    
+    // 优先级 1：数据自带 term 字段
+    const hasTermField = units.some(function(u) { return itemTerms[g + '|' + u]; });
+    // 优先级 2：名字里带“上”或“下”
+    const hasCN = units.some(function(u) { return /[上下]/.test(u); });
+    // 优先级 3：名字里带字母 A 或 B（如 9A, 9B）
+    const hasAB = units.some(function(u) { return /[AB]/i.test(u); });
+
+    if (hasTermField) {
+      units.forEach(function(u) {
+        const t = itemTerms[g + '|' + u] || '';
+        if (t.includes('下') || t === '2' || t === 'second' || t === 'b' || t === 'down') term[u] = 'down';
         else term[u] = 'up';
       });
+    } else if (hasCN) {
+      units.forEach(function(u) {
+        term[u] = /下/.test(u) ? 'down' : 'up';
+      });
+    } else if (hasAB) {
+      units.forEach(function(u) {
+        const str = String(u).toUpperCase();
+        if (str.indexOf('B') !== -1) term[u] = 'down';
+        else if (str.indexOf('A') !== -1) term[u] = 'up';
+        else term[u] = 'up'; 
+      });
     } else {
+      // 都没有，只能对半切
       const half = Math.ceil(units.length / 2);
-      units.forEach(function (u, i) { term[u] = i < half ? 'up' : 'down'; });
+      units.forEach(function(u, i) { term[u] = i < half ? 'up' : 'down'; });
     }
 
     unitIndex[g] = { units: units, term: term };
@@ -1386,7 +1411,7 @@ function matchBase(item, p) {
   /* 年级：没标年级的题视为通用题，任何年级都保留 */
   if (p.grade != null && itemGrade != null && itemGrade !== p.grade) return false;
 
-  /* 册别 / 单元：只对“标了年级的题”生效；未标年级的通用题不参与册别/单元过滤 */
+  /* 册别 / 单元：只对“标了年级的题”生效 */
   if (itemGrade != null) {
     if (p.units.length) {
       const u = String(item.unit || '').trim();
@@ -1394,7 +1419,17 @@ function matchBase(item, p) {
     } else if (p.term && p.grade != null) {
       const u = String(item.unit || '').trim();
       const info = unitIndex[String(p.grade)];
-      if (!info || !u || info.term[u] !== p.term) return false;
+      if (!info || !u) return false;
+      
+      let itemTerm = info.term[u];
+      // 如果单道题自己带了 term 字段，以题目自带为准
+      if (item.term) {
+        let t = String(item.term).toLowerCase();
+        if (t.includes('下') || t === '2' || t === 'second' || t === 'b' || t === 'down') itemTerm = 'down';
+        else if (t.includes('上') || t === '1' || t === 'first' || t === 'a' || t === 'up') itemTerm = 'up';
+      }
+      
+      if (itemTerm !== p.term) return false;
     }
   }
 
