@@ -300,12 +300,11 @@
     },
     {
       id: 'reading', file: 'reading.json', name: '阅读理解',
-      metaRules: [
+            metaRules: [
         '【元数据要求（阅读理解）】',
-        '· 阅读不参与年级筛选，不要填 grade。',
-        '· grade：可选，七至九年级',
-        '· unit：可选，如果能明确判断该篇阅读属于某教材某单元（如 "9A-U1"），请填写；如果是中考真题、通用型阅读，无法归属特定单元',
-        '· type：必填，六类之一：应用文/广告、记叙文、科普文、人文说明文、人物/故事、任务型阅读。','· type：必填，六类之一：应用文/广告、记叙文、科普文、人文说明文、人物/故事、任务型阅读。',
+        '· grade：可选，7 / 8 / 9；无法判断就留空（适合所有年级）。',
+        '· unit：可选，如 "9A-U1"。通用型阅读无法归属单元的请留空。',
+        '· type：必填，六类之一：应用文/广告、记叙文、科普文、人文说明文（或说明文）、人物/故事、任务型阅读。',
         '· points：可选，1–2 个知识点。',
         '· keywords：可选。',
         '· 普通篇目 questions 里每题需 stem / options（4）/ optionsZh（4）/ answer（0–3）/ explanation。',
@@ -1031,11 +1030,20 @@
   function validateReading(item, idx) {
     const e = [];
     if (!item || typeof item !== 'object') return ['应为对象'];
-    const ALLOWED = ['应用文/广告', '记叙文', '科普文', '人文说明文', '人物/故事', '任务型阅读'];
-    if (ALLOWED.indexOf(item.type) === -1) {
-      e.push('type 必须是以下之一：' + ALLOWED.join('、'));
+    
+    // ★ 修改这里：不再使用严格的数组比对，改成只要包含关键字就放行
+    const itemType = String(item.type || '');
+    const VALID_KEYWORDS = ['应用文', '广告', '记叙', '科普', '说明', '人物', '故事', '任务'];
+    const isValidType = VALID_KEYWORDS.some(function(kw) { return itemType.includes(kw); });
+    
+    if (!isValidType) {
+      e.push('type 必须包含以下关键字之一：应用文、广告、记叙、科普、说明、人物、故事、任务');
     }
+
     if (!isNonEmptyString(item.text)) e.push('text 必须是非空字符串');
+
+
+
     if (!Array.isArray(item.questions) || item.questions.length === 0) {
       e.push('questions 必须是非空数组');
     } else {
