@@ -174,5 +174,3149 @@
         "explanation": "上文 A 说“Thanks a lot.”，B 应回答“不客气”。You're welcome. 是固定应答，故选 D。"
       }
     ]
+  },
+  {
+    "text": "A: Hi, I'm Li Ming. Are you new here? \nB: Yes, I am. My name is Jack. \nA: Welcome! ___1___ \nB: I'm from Canada. \nA: ___2___ \nB: I'm twelve years old. \nA: ___3___ \nB: I like playing basketball and reading. \nA: Great! We have a basketball club. ___4___ \nB: Yes, I'd love to. ___5___ \nA: It's on Friday afternoon.",
+    "translation": "A：你好，我是李明。你是新来的吗？ B：是的。我叫杰克。 A：欢迎！你来自哪里？ B：我来自加拿大。 A：你多大了？ B：我十二岁。 A：你喜欢做什么？ B：我喜欢打篮球和阅读。 A：太好了！我们有一个篮球俱乐部。你想加入吗？ B：是的，我很乐意。它什么时候？ A：在周五下午。",
+    "grade": 7,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际",
+      "个人信息",
+      "自我介绍"
+    ],
+    "options": [
+      "What's your name?",
+      "What do you like doing?",
+      "When is it?",
+      "Where are you from?",
+      "Can you play basketball?",
+      "How old are you?",
+      "Would you like to join us?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 3,
+        "explanation": "根据答语“I'm from Canada.”可知问句询问来自哪里，用Where are you from?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 5,
+        "explanation": "根据答语“I'm twelve years old.”可知问句询问年龄，用How old are you?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 1,
+        "explanation": "根据答语“I like playing basketball and reading.”可知问句询问喜好，用What do you like doing?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 6,
+        "explanation": "根据答语“Yes, I'd love to.”可知问句是邀请，用Would you like to join us?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 2,
+        "explanation": "根据答语“It's on Friday afternoon.”可知问句询问时间，用When is it?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Lucy. ___1___ \nB: I'm going to the library. \nA: ___2___ \nB: I want to borrow a book about animals. \nA: ___3___ \nB: Yes, I do. I like reading very much. \nA: ___4___ \nB: I read every day after school. \nA: That's a good habit. ___5___ \nB: I usually read for an hour.",
+    "translation": "A：你好，露西。你去哪里？ B：我去图书馆。 A：你想借什么？ B：我想借一本关于动物的书。 A：你喜欢阅读吗？ B：是的，我非常喜欢阅读。 A：你多久读一次？ B：我每天放学后都读。 A：那是个好习惯。你通常读多久？ B：我通常读一个小时。",
+    "grade": 7,
+    "unit": "7A-U2",
+    "points": [
+      "情景交际",
+      "日常活动",
+      "阅读习惯"
+    ],
+    "options": [
+      "How often do you read?",
+      "When do you read?",
+      "What do you want to borrow?",
+      "How long do you usually read?",
+      "Where are you going?",
+      "What are you doing?",
+      "Do you like reading?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 4,
+        "explanation": "根据答语“I'm going to the library.”可知问句询问去哪里，用Where are you going?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 2,
+        "explanation": "根据答语“I want to borrow a book about animals.”可知问句询问想借什么，用What do you want to borrow?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 6,
+        "explanation": "根据答语“Yes, I do.”结合后文“I like reading”，问是否喜欢阅读，用Do you like reading?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 0,
+        "explanation": "根据答语“I read every day after school.”可知问句询问频率，用How often do you read?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 3,
+        "explanation": "根据答语“I usually read for an hour.”可知问句询问持续时间，用How long do you usually read?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hello, Tom. ___1___ \nB: My favorite subject is science. \nA: ___2___ \nB: Because it's interesting and useful. \nA: ___3___ \nB: I have science on Monday and Wednesday. \nA: ___4___ \nB: My science teacher is Mr. Green. \nA: ___5___ \nB: He is very kind and patient.",
+    "translation": "A：你好，汤姆。你最喜欢的科目是什么？ B：我最喜欢的科目是科学。 A：为什么？ B：因为它有趣又有用。 A：你什么时候上科学课？ B：我周一和周三上科学课。 A：你的科学老师是谁？ B：我的科学老师是格林先生。 A：他怎么样？ B：他非常和蔼且有耐心。",
+    "grade": 7,
+    "unit": "7A-U3",
+    "points": [
+      "情景交际",
+      "学校生活",
+      "最喜欢的科目"
+    ],
+    "options": [
+      "When do you have science?",
+      "What is he like?",
+      "What's your favorite subject?",
+      "How do you like science?",
+      "Why do you like it?",
+      "Who is your science teacher?",
+      "Do you like science?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 2,
+        "explanation": "根据答语“My favorite subject is science.”可知问句询问最喜欢的科目，用What's your favorite subject?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 4,
+        "explanation": "根据答语“Because it's interesting and useful.”可知问句询问原因，用Why do you like it?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 0,
+        "explanation": "根据答语“I have science on Monday and Wednesday.”可知问句询问时间，用When do you have science?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 5,
+        "explanation": "根据答语“My science teacher is Mr. Green.”可知问句询问老师是谁，用Who is your science teacher?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 1,
+        "explanation": "根据答语“He is very kind and patient.”可知问句询问人物性格，用What is he like?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Eric! What's your favorite school day?\nB: ___1___ Because we have a P.E. class and a music class on that day.\nA: Really? I like Wednesday best. ___2___\nB: Oh, biology is difficult for me. I don't like it very much.\nA: What's your favorite subject then?\nB: ___3___ I think it's very useful and interesting.\nA: Who is your English teacher?\nB: Miss Li. She is very helpful. ___4___\nA: My English teacher is Mr. Zhang. He is very funny.\nB: That's nice. What time do you usually finish school on Monday?\nA: ___5___ Then I play basketball with my friends.",
+    "translation": "A：嗨，埃里克！你最喜欢学校的哪一天？ B：我最喜欢星期一。因为那天我们有体育课和音乐课。 A：真的吗？我最喜欢星期三。我们在星期三有生物课。 B：哦，生物对我来说很难。我不太喜欢它。 A：那么你最喜欢的科目是什么？ B：历史。我认为它非常有用且有趣。 A：谁是你的英语老师？ B：李老师。她非常有帮助。那你的英语老师是谁？ A：我的英语老师是张老师。他非常幽默。 B：那太好了。你周一通常几点放学？ A：我通常在下午4:30放学。然后我和我的朋友们一起打篮球。",
+    "grade": 7,
+    "unit": "7A-U4",
+    "points": [
+      "情景交际",
+      "学校课程与日程",
+      "科目与老师"
+    ],
+    "options": [
+      "History.",
+      "I usually finish school at 4:30 p.m.",
+      "Because it's boring.",
+      "I like Monday best.",
+      "How about your English teacher?",
+      "We have a biology class on Wednesday.",
+      "I don't think so."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 3,
+        "explanation": "上文询问最喜欢学校的哪一天，下文给出原因，故回答喜欢的日子，选I like Monday best。"
+      },
+      {
+        "stem": "第2空",
+        "answer": 5,
+        "explanation": "上文提到最喜欢星期三，下文说“biology is difficult for me”，说明星期三有生物课，选We have a biology class on Wednesday。"
+      },
+      {
+        "stem": "第3空",
+        "answer": 0,
+        "explanation": "上文问“What's your favorite subject then?”，直接回答科目名称，选History。"
+      },
+      {
+        "stem": "第4空",
+        "answer": 4,
+        "explanation": "上文介绍自己的英语老师后反问对方，下文回答“My English teacher is...”，选How about your English teacher?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 1,
+        "explanation": "上文问放学时间，回答具体时间，选I usually finish school at 4:30 p.m.。"
+      }
+    ]
+  },
+  {
+    "text": "A: Hey, Jack! Are you free this Friday evening?\nB: Yes, I am. ___1___\nA: My family are going to have a big dinner to celebrate my birthday.\nB: Oh, happy birthday in advance! ___2___\nA: At my house. Can you come?\nB: ___3___ I'd love to. What time does it start?\nA: At 6:30 p.m. ___4___\nB: Sure, I will be on time. Do I need to bring anything?\nA: No, just bring yourself! ___5___\nB: Thank you for inviting me. See you on Friday!",
+    "translation": "A：嘿，杰克！这周五晚上你有空吗？ B：有空。怎么了？ A：我们全家打算举行一次大餐来庆祝我的生日。 B：哦，提前祝你生日快乐！晚餐在哪里举行？ A：在我家。你能来吗？ B：当然可以。我很乐意去。几点开始？ A：下午6:30。请不要迟到。 B：好的，我会准时的。我需要带什么东西吗？ A：不用，人来就行！有很多好吃的食物和饮料。 B：谢谢你邀请我。周五见！",
+    "grade": 7,
+    "unit": "7A-U7",
+    "points": [
+      "情景交际",
+      "发出与接受邀请",
+      "生日聚会"
+    ],
+    "options": [
+      "Please don't be late.",
+      "I'm sorry, I'm busy.",
+      "What's up?",
+      "There will be a lot of delicious food and drinks.",
+      "Where are you going to have the dinner?",
+      "Sure, I'd love to.",
+      "How much does it cost?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 2,
+        "explanation": "上文询问是否有空，肯定回答后问有什么事，用What's up?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 4,
+        "explanation": "下文回答“At my house.”指出地点，问句询问地点，选Where are you going to have the dinner?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 5,
+        "explanation": "上文邀请“Can you come?”，后文说“I'd love to”，选Sure, I'd love to.。"
+      },
+      {
+        "stem": "第4空",
+        "answer": 0,
+        "explanation": "上文说时间“At 6:30 p.m.”，下文保证准时，说明空处提示不要迟到，选Please don't be late。"
+      },
+      {
+        "stem": "第5空",
+        "answer": 3,
+        "explanation": "上文说不用带东西，后文补充说明家里准备了一切，选There will be a lot of delicious food and drinks。"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Mary! I went to the countryside last weekend.\nB: Really? ___1___\nA: It was wonderful! The weather was great and the air was fresh.\nB: That sounds nice. ___2___\nA: I went there with my parents and my little brother.\nB: ___3___\nA: We visited my grandparents' farm and picked some fresh apples.\nB: Wow! Did you do anything else?\nA: Yes. ___4___ The fish tasted delicious.\nB: Did you take any photos?\nA: Yes, I took a lot. ___5___\nB: Oh, they are beautiful! I hope I can visit there someday.",
+    "translation": "A：嗨，玛丽！我上周末去乡村了。 B：真的吗？过得怎么样？ A：太棒了！天气很好，空气也很清新。 B：听起来不错。你和谁一起去的？ A：我和我的父母以及我的弟弟一起去的。 B：你们在那里做了什么？ A：我们参观了我祖父母的农场，摘了一些新鲜的苹果。 B：哇！你们还做了别的什么吗？ A：是的。我和我父亲在河边钓鱼了。那些鱼尝起来很美味。 B：你们拍照片了吗？ A：拍了，我拍了许多。看，这些是照片。 B：哦，它们太漂亮了！我希望有一天我也能去那里参观。",
+    "grade": 8,
+    "unit": "8A-U1",
+    "points": [
+      "情景交际",
+      "谈论过去的假期与活动",
+      "一般过去时"
+    ],
+    "options": [
+      "My father and I went fishing near the river.",
+      "What did you do there?",
+      "How much did you spend?",
+      "Look, here are the photos.",
+      "Who did you go with?",
+      "How was your trip?",
+      "No, I didn't like it."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 5,
+        "explanation": "下文回答“It was wonderful!”评价旅行，问句询问旅行怎么样，选How was your trip?。"
+      },
+      {
+        "stem": "第2空",
+        "answer": 4,
+        "explanation": "下文回答“I went there with my parents...”，问句询问和谁一起去，选Who did you go with?。"
+      },
+      {
+        "stem": "第3空",
+        "answer": 1,
+        "explanation": "下文回答“We visited... and picked...”，问句询问做了什么，选What did you do there?。"
+      },
+      {
+        "stem": "第4空",
+        "answer": 0,
+        "explanation": "上文问是否做了别的事，下文提到鱼，说明去钓鱼了，选My father and I went fishing near the river。"
+      },
+      {
+        "stem": "第5空",
+        "answer": 3,
+        "explanation": "上文说拍了很多照片，下文赞美照片，说明在展示照片，选Look, here are the photos。"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Linda! What do you usually do in your free time?\nB: ___1___ It's a great way to relax.\nA: I agree. ___2___\nB: About three or four times a week. I think doing exercise is good for health.\nA: That's a good habit. What's your favorite sport?\nB: ___3___ I often play it with my friends after school.\nA: Cool! Do you like watching sports shows on TV?\nB: Yes, but not very often. ___4___\nA: Me too. Reading helps us learn more about the world.\nB: ___5___ Let's go to the library this weekend.\nA: Sounds good! See you then.",
+    "translation": "A：嗨，琳达！你空闲时间通常做什么？ B：我经常做运动。这是一种放松的好方法。 A：我同意。你多长时间运动一次？ B：大约一周三到四次。我认为做运动对健康有好处。 A：那是个好习惯。你最喜欢的运动是什么？ B：羽毛球。放学后我经常和朋友们一起打羽毛球。 A：酷！你喜欢在电视上看体育节目吗？ B：喜欢，但不是很频繁。我更喜欢看书。 A：我也是。阅读帮助我们了解更多关于世界的知识。 B：你说得对。我们这周末去图书馆吧。 A：听起来不错！到时候见。",
+    "grade": 8,
+    "unit": "8A-U2",
+    "points": [
+      "情景交际",
+      "谈论生活习惯与频率",
+      "运动与阅读"
+    ],
+    "options": [
+      "Badminton.",
+      "You're right.",
+      "How often do you exercise?",
+      "No, I never watch TV.",
+      "I prefer reading books.",
+      "I often do sports.",
+      "I am very tired today."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 5,
+        "explanation": "上文问空闲时间做什么，后文说“It's a great way to relax.”，回答一种活动，选I often do sports。"
+      },
+      {
+        "stem": "第2空",
+        "answer": 2,
+        "explanation": "下文回答“About three or four times a week.”表示频率，用How often提问，选How often do you exercise?。"
+      },
+      {
+        "stem": "第3空",
+        "answer": 0,
+        "explanation": "上文问“What's your favorite sport?”，回答运动名称，选Badminton。"
+      },
+      {
+        "stem": "第4空",
+        "answer": 4,
+        "explanation": "上文说看体育节目频率不高，下文提到阅读，说明更偏好阅读，选I prefer reading books。"
+      },
+      {
+        "stem": "第5空",
+        "answer": 1,
+        "explanation": "上文说阅读的好处，此处表示赞同并提议去图书馆，选You're right。"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Tina! What are your plans for the winter holiday?\nB: ___1___ I want to visit the West Lake.\nA: Wow, Hangzhou is a beautiful city! How are you going there?\nB: ___2___ It's fast and comfortable.\nA: That's true. Who are you going with?\nB: I'm going with my parents. We also plan to taste some local food.\nA: Great! ___3___\nB: For about five days. We will come back before the Spring Festival.\nA: Sounds like a wonderful plan. ___4___\nB: Yes, I am going to buy some beautiful tea for my grandparents.\nA: That's very sweet of you. ___5___\nB: Thank you! I will send you some pictures.",
+    "translation": "A：嗨，蒂娜！你寒假有什么计划？ B：我打算去杭州旅行。我想去参观西湖。 A：哇，杭州是个美丽的城市！你打算怎么去那里？ B：我打算坐高铁去。它既快捷又舒适。 A：确实如此。你和谁一起去？ B：我和我的父母一起去。我们还计划品尝一些当地的美食。 A：太棒了！你们打算在那里待多久？ B：大约五天。我们会在春节前回来。 A：听起来是一个美妙的计划。你打算在那里买些纪念品吗？ B：是的，我打算给我的祖父母买一些漂亮的茶叶。 A：你太贴心了。祝你旅途愉快！ B：谢谢你！我会给你发一些照片的。",
+    "grade": 8,
+    "unit": "8A-U6",
+    "points": [
+      "情景交际",
+      "谈论未来计划与打算",
+      "假期计划"
+    ],
+    "options": [
+      "Are you going to buy any souvenirs there?",
+      "I'm going to take a trip to Hangzhou.",
+      "Have a good trip!",
+      "I plan to go by high-speed train.",
+      "When are you leaving?",
+      "How long are you going to stay there?",
+      "I don't think it's a good idea."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 1,
+        "explanation": "上文问假期计划，后文提到西湖（在杭州），回答去杭州旅行，选I'm going to take a trip to Hangzhou。"
+      },
+      {
+        "stem": "第2空",
+        "answer": 3,
+        "explanation": "上文问交通方式，后文描述“fast and comfortable”，选I plan to go by high-speed train。"
+      },
+      {
+        "stem": "第3空",
+        "answer": 5,
+        "explanation": "下文回答“For about five days.”表示一段时间，用How long提问，选How long are you going to stay there?。"
+      },
+      {
+        "stem": "第4空",
+        "answer": 0,
+        "explanation": "下文回答“Yes, I am going to buy some beautiful tea...”，问是否买纪念品，选Are you going to buy any souvenirs there?。"
+      },
+      {
+        "stem": "第5空",
+        "answer": 2,
+        "explanation": "对话最后表达美好祝愿，B表示感谢，选Have a good trip!。"
+      }
+    ]
+  },
+  {
+    "text": "A: Good morning! Welcome to our school. My name is Dale. ___1___\nB: Good morning! My name is Helen. Nice to meet you, Dale.\nA: Nice to meet you, too. ___2___\nB: I'm from England. I just arrived in China last week.\nA: Welcome to China! What class are you in?\nB: ___3___ We are classmates!\nA: Really? That's great! Who is our English teacher?\nB: ___4___ She is very kind.\nA: Oh, I see. What's that in your hand?\nB: ___5___ I like reading very much.",
+    "translation": "A：早上好！欢迎来到我们学校。我叫戴尔。你叫什么名字？ B：早上好！我叫海伦。很高兴见到你，戴尔。 A：我也很高兴见到你。你来自哪里？ B：我来自英国。我上周刚到中国。 A：欢迎来到中国！你在哪个班级？ B：我在七年级一班。我们是同班同学！ A：真的吗？太棒了！我们的英语老师是谁？ B：我想是高老师。她非常和蔼。 A：哦，我明白了。你手里拿的是什么？ B：它是一本新书。我非常喜欢阅读。",
+    "grade": 7,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际",
+      "自我介绍",
+      "问候与个人信息"
+    ],
+    "options": [
+      "I'm in Class 1, Grade 7.",
+      "It's a new book.",
+      "What's your name?",
+      "How do you spell it?",
+      "Where are you from?",
+      "Thank you so much.",
+      "I think it's Ms. Gao."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 2,
+        "explanation": "下文回复“My name is Helen.”，询问姓名，选What's your name?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 4,
+        "explanation": "下文回复“I'm from England.”，询问来自哪里，选Where are you from?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 0,
+        "explanation": "上文问“What class are you in?”，后文说“We are classmates!”，选I'm in Class 1, Grade 7."
+      },
+      {
+        "stem": "第4空",
+        "answer": 6,
+        "explanation": "上文问英语老师是谁，选包含人物身份的选项，选I think it's Ms. Gao."
+      },
+      {
+        "stem": "第5空",
+        "answer": 1,
+        "explanation": "上文问手里是什么，后文说喜欢阅读，选It's a new book."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Alice! You look happy today.\nB: Hi, Frank! ___1___ My parents gave it to me for my birthday.\nA: Oh, wow! It's beautiful. Is this your grandfather in the photo?\nB: Yes, it is. He is very healthy.\nA: ___2___\nB: He is seventy years old. But he still exercises every day.\nA: That's wonderful. ___3___\nB: He usually plays chess or goes for a walk in the park.\nA: Do you live with your grandparents?\nB: ___4___ They live in a beautiful countryside.\nA: Do you often visit them?\nB: Yes. ___5___ We always have a good time together.",
+    "translation": "A：嗨，爱丽丝！你今天看起来很高兴。 B：嗨，弗兰克！我看了一张我全家福的新照片。我父母把它作为生日礼物送给了我。 A：哦，哇！它真漂亮。照片里的这个人是你的爷爷吗？ B：是的，他是。他非常健康。 A：他多大岁数了？ B：他七十岁了。但他仍然每天锻炼身体。 A：那太好了。他通常做什么运动？ B：他通常在公园里下象棋或者散步。 A：你和你的祖父母住在一起吗？ B：不，我不和他们住在一起。他们住在一个美丽的乡村。 A：你经常去看望他们吗？ B：是的。我每周末都去看望他们。我们在一起总是过得很愉快。",
+    "grade": 7,
+    "unit": "7A-U2",
+    "points": [
+      "情景交际",
+      "谈论家庭",
+      "家庭成员与活动"
+    ],
+    "options": [
+      "What sports does he usually do?",
+      "No, I don't live with them.",
+      "I'm looking at a new photo of my family.",
+      "Who is the girl in red?",
+      "How old is he?",
+      "I visit them every weekend.",
+      "She likes playing tennis."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 2,
+        "explanation": "后文提到“in the photo”，说明前文提到了照片，选I'm looking at a new photo of my family."
+      },
+      {
+        "stem": "第2空",
+        "answer": 4,
+        "explanation": "下文回答“He is seventy years old.”，询问年龄，选How old is he?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 0,
+        "explanation": "下文回答“He usually plays chess or goes for a walk...”，询问活动，选What sports does he usually do?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 1,
+        "explanation": "上文是一般疑问句“Do you live with your grandparents?”，后文说明他们住在乡村，选No, I don't live with them."
+      },
+      {
+        "stem": "第5空",
+        "answer": 5,
+        "explanation": "上文问是否经常看望，答语“Yes.”后补充频率，选I visit them every weekend."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Cindy! Welcome to my home. Come in, please.\nB: Thanks, Bob. Wow, your living room is so clean and tidy!\nA: Thank you. ___1___\nB: It's beautiful. What's that on the wall?\nA: ___2___ My father bought it last month.\nB: It looks great. By the way, where is the kitchen? I want to wash my hands.\nA: ___3___ Just follow me.\nB: Okay. Is that your study next to the kitchen?\nA: Yes, it is. There are many books in it. ___4___\nB: I'd love to! I like reading science books. Do you have any?\nA: Yes, I have a lot. ___5___ Let's go and choose some.",
+    "translation": "A：嗨，辛迪！欢迎来到我家。请进。 B：谢谢，鲍勃。哇，你的客厅太干净整洁了！ A：谢谢。请在沙发上坐吧。 B：真漂亮。墙上的那个是什么？ A：它是一幅巨大的画。我父亲上个月买的。 B：它看起来棒极了。顺便问一下，厨房在哪里？我想洗手。 A：它在餐厅的后面。跟着我来就行。 B：好的。厨房旁边的那个是你的书房吗？ A：是的，它是。里面有很多书。你想进去看看吗？ B：我很乐意！我喜欢看科学类的书。你有一些吗？ A：有的，我有很多。它们都在大书架上。我们去挑几本吧。",
+    "grade": 7,
+    "unit": "7A-U3",
+    "points": [
+      "情景交际",
+      "房间与位置",
+      "家庭环境"
+    ],
+    "options": [
+      "It's a big painting.",
+      "Would you like to have a look inside?",
+      "Please sit on the sofa.",
+      "They are all on the big bookshelf.",
+      "It's behind the dining room.",
+      "Where are my keys?",
+      "The bedroom is very big."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 2,
+        "explanation": "主人招待客人的礼貌用语，后文开始环顾客厅，选Please sit on the sofa."
+      },
+      {
+        "stem": "第2空",
+        "answer": 0,
+        "explanation": "上文问“What's that on the wall?”，回答墙上物品，选It's a big painting."
+      },
+      {
+        "stem": "第3空",
+        "answer": 4,
+        "explanation": "上文问厨房在哪里，回答方位，选It's behind the dining room."
+      },
+      {
+        "stem": "第4空",
+        "answer": 1,
+        "explanation": "后文回答“I'd love to!”表示接受邀请，结合前文书房有很多书，选Would you like to have a look inside?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 3,
+        "explanation": "上文问是否有科学书，回答后说明书的位置，选They are all on the big bookshelf."
+      }
+    ]
+  },
+  {
+    "text": "A: Good morning, doctor. ___1___ \nB: I have a headache and a sore throat. \nA: ___2___ \nB: Since yesterday evening. \nA: Let me check. ___3___ \nB: Yes, I feel a little cold. \nA: You have a cold. ___4___ \nB: What should I do? \nA: You should drink hot water and rest. ___5___ \nB: Thank you, doctor.",
+    "translation": "A：早上好，医生。怎么了？ B：我头疼而且喉咙痛。 A：这样多久了？ B：从昨天晚上开始。 A：让我检查一下。你发烧了吗？ B：是的，我觉得有点冷。 A：你感冒了。你应该多喝热水并休息。 B：我该怎么办？ A：你应该喝热水并休息。一天吃三次药。 B：谢谢医生。",
+    "grade": 8,
+    "unit": "8B-U1",
+    "points": [
+      "情景交际",
+      "看病就医",
+      "健康问题与建议"
+    ],
+    "options": [
+      "What should I do?",
+      "What's the matter?",
+      "When did it start?",
+      "Do you have a fever?",
+      "How long have you been like this?",
+      "Are you feeling better?",
+      "Take this medicine three times a day."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 1,
+        "explanation": "根据答语“I have a headache and a sore throat.”询问病情，用What's the matter?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 4,
+        "explanation": "根据答语“Since yesterday evening.”询问持续时间，用How long have you been like this?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 3,
+        "explanation": "根据答语“Yes, I feel a little cold.”是一般疑问句，问是否发烧，用Do you have a fever?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 6,
+        "explanation": "后文“What should I do?”说明此处是医生给出建议，用Take this medicine three times a day."
+      },
+      {
+        "stem": "第5空",
+        "answer": 0,
+        "explanation": "根据答语“You should drink hot water and rest.”问该怎么办，用What should I do?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Mary. ___1___ \nB: I'm going to volunteer at the animal hospital this weekend. \nA: ___2___ \nB: I will help to clean the cages and feed the animals. \nA: That sounds great. ___3___ \nB: Yes, I love animals very much. \nA: ___4___ \nB: I volunteer there twice a month. \nA: ___5___ \nB: Of course! You can come with me next time.",
+    "translation": "A：你好，玛丽。你这个周末打算做什么？ B：我打算去动物医院做志愿者。 A：你会做什么？ B：我会帮忙清理笼子和喂动物。 A：听起来很棒。你喜欢动物吗？ B：是的，我非常喜欢动物。 A：你多久去那里做一次志愿者？ B：我一个月去两次。 A：我能和你一起去吗？ B：当然！下次你可以和我一起去。",
+    "grade": 8,
+    "unit": "8B-U2",
+    "points": [
+      "情景交际",
+      "志愿服务",
+      "动物保护"
+    ],
+    "options": [
+      "What will you do there?",
+      "Can I go with you?",
+      "What are you going to do this weekend?",
+      "When will you go?",
+      "Do you like animals?",
+      "Where are you going?",
+      "How often do you volunteer there?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 2,
+        "explanation": "根据答语“I'm going to volunteer at the animal hospital this weekend.”询问周末计划，用What are you going to do this weekend?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 0,
+        "explanation": "根据答语“I will help to clean the cages and feed the animals.”询问具体做什么，用What will you do there?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 4,
+        "explanation": "根据答语“Yes, I love animals very much.”是一般疑问句，问是否喜欢动物，用Do you like animals?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 6,
+        "explanation": "根据答语“I volunteer there twice a month.”询问频率，用How often do you volunteer there?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 1,
+        "explanation": "根据答语“Of course! You can come with me next time.”是请求同行，用Can I go with you?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Peter. ___1___ \nB: I'm reading a book about inventors. \nA: ___2___ \nB: It's about Thomas Edison. \nA: ___3___ \nB: He invented the light bulb. \nA: ___4___ \nB: He was born in 1847. \nA: ___5___ \nB: I think he is a great inventor.",
+    "translation": "A：你好，彼得。你在读什么？ B：我在读一本关于发明家的书。 A：它是关于谁的？ B：是关于托马斯·爱迪生的。 A：他发明了什么？ B：他发明了电灯泡。 A：他什么时候出生的？ B：他出生于1847年。 A：你认为他怎么样？ B：我认为他是一位伟大的发明家。",
+    "grade": 9,
+    "unit": "9A-U6",
+    "points": [
+      "情景交际",
+      "发明与创造",
+      "谈论发明家"
+    ],
+    "options": [
+      "When was he born?",
+      "Who is it about?",
+      "What do you think of him?",
+      "What are you reading?",
+      "Where is he from?",
+      "What did he invent?",
+      "Why do you like him?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 3,
+        "explanation": "根据答语“I'm reading a book about inventors.”询问在读什么，用What are you reading?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "根据答语“It's about Thomas Edison.”询问关于谁，用Who is it about?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 5,
+        "explanation": "根据答语“He invented the light bulb.”询问发明了什么，用What did he invent?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 0,
+        "explanation": "根据答语“He was born in 1847.”询问出生时间，用When was he born?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 2,
+        "explanation": "根据答语“I think he is a great inventor.”询问看法，用What do you think of him?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Li Rui! I hear your hometown has changed a lot. ___1___\nB: No, it isn't. Great changes have taken place in the last twenty years.\nA: Really? ___2___\nB: People used to travel by bike or on foot, because the roads were rough.\nA: ___3___\nB: Now we have a new highway, and it takes only an hour to get to the town.\nA: ___4___\nB: About fifteen minutes by bus. My school is near my home.\nA: ___5___\nB: No, there wasn't. People had to go to the city to see a doctor.",
+    "translation": "A：嗨，李瑞！我听说你的家乡变化很大。你的家乡还是和以前一样吗？ B：不，不是了。过去二十年发生了巨大的变化。 A：真的吗？过去人们怎么出行？ B：人们过去骑自行车或步行，因为道路崎岖不平。 A：现在呢？ B：现在我们有了新的公路，到镇上只需要一个小时。 A：到你学校需要多长时间？ B：坐公交车大约十五分钟。我学校离家很近。 A：过去镇上有医院吗？ B：不，没有。人们不得不去城里看病。",
+    "grade": 9,
+    "unit": "9A-U4",
+    "points": [
+      "情景交际",
+      "谈论变化",
+      "过去与现在对比"
+    ],
+    "options": [
+      "How long does it take to get to your school?",
+      "Was there a hospital in the town in the past?",
+      "Is your hometown still the same as before?",
+      "What about now?",
+      "Where do you live?",
+      "How did people travel in the past?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 2,
+        "explanation": "下文回答“No, it isn't.”，问“你的家乡还是和以前一样吗”，选Is your hometown still the same as before?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 5,
+        "explanation": "下文说“People used to travel by bike or on foot”，问过去出行方式，选How did people travel in the past?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 3,
+        "explanation": "前文描述过去交通，下文说“Now we have a new highway”，问“现在呢”，选What about now?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 0,
+        "explanation": "下文回答“About fifteen minutes by bus.”，问路程时间，选How long does it take to get to your school?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 1,
+        "explanation": "下文回答“No, there wasn't.”，问过去是否有医院，选Was there a hospital in the town in the past?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Mike! I hear you had a fight with your best friend. ___1___\nB: Yes. I borrowed his favorite book and lost it. He was very angry.\nA: I see. ___2___ You should say sorry to him.\nB: I know, but I'm afraid he won't forgive me.\nA: Don't worry. ___3___ True friends always understand each other.\nB: You're right. ___4___\nA: You can also buy him a new copy of the book.\nB: Good idea. ___5___\nA: You're welcome. I hope you can be friends again soon.",
+    "translation": "A：嗨，迈克！我听说你和最好的朋友吵架了。发生什么事了？ B：是的。我借了他最喜欢的书，然后弄丢了。他非常生气。 A：我明白了。你应该向他道歉。 B：我知道，但我怕他不会原谅我。 A：别担心。真诚的道歉会有帮助。真正的朋友总是互相理解。 B：你说得对。我该怎么做？ A：你也可以给他买一本新书。 B：好主意。谢谢你的建议。 A：不客气。我希望你们能很快和好。",
+    "grade": 8,
+    "unit": "8B-U4",
+    "points": [
+      "情景交际",
+      "人际交往",
+      "提出建议"
+    ],
+    "options": [
+      "What happened?",
+      "Thanks for your advice.",
+      "You should say sorry to him.",
+      "What should I do?",
+      "A sincere apology will help."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文描述了冲突经过，问“发生什么事了”，选What happened?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 2,
+        "explanation": "后文紧接着说“You should say sorry to him.”，此处给出道歉建议，选You should say sorry to him."
+      },
+      {
+        "stem": "第3空",
+        "answer": 4,
+        "explanation": "安慰后说明道歉的作用，与后文“True friends always understand each other.”衔接，选A sincere apology will help."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "说“You're right.”后问下一步怎么办，回答“You can also buy him a new copy”，选What should I do?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 1,
+        "explanation": "回答“You're welcome.”，说明此处表示感谢，选Thanks for your advice."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Emma! You look nervous. ___1___\nB: I'm going to a dinner party at my Chinese friend's home. But I don't know what to do.\nA: Don't worry. ___2___ For example, you should arrive on time.\nB: OK. ___3___\nA: You should bring a small gift, like some fruit or flowers.\nB: Good idea. ___4___\nA: At the dinner table, you should wait for the host to start eating first.\nB: I see. ___5___\nA: You're welcome. Enjoy the party!",
+    "translation": "A：嗨，艾玛！你看起来很紧张。怎么了？ B：我要去一个中国朋友家参加晚宴。但我不知道该怎么办。 A：别担心。这里有一些建议。例如，你应该准时到达。 B：好的。我应该带礼物吗？ A：你应该带一个小礼物，比如一些水果或花。 B：好主意。在餐桌上我该怎么做？ A：在餐桌上，你应该等主人先开始吃。 B：我明白了。谢谢你的建议。 A：不客气。祝你在聚会上玩得开心！",
+    "grade": 9,
+    "unit": "9A-U10",
+    "points": [
+      "情景交际",
+      "风俗礼仪",
+      "提出建议"
+    ],
+    "options": [
+      "Should I bring a gift?",
+      "Here are some suggestions.",
+      "What should I do at the dinner table?",
+      "What's wrong?",
+      "Thanks for your advice."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 3,
+        "explanation": "下文说“I'm going to a dinner party... But I don't know what to do.”，问“怎么了”，选What's wrong?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "安慰后开始给建议，后文“For example, you should arrive on time.”是具体例子，选Here are some suggestions."
+      },
+      {
+        "stem": "第3空",
+        "answer": 0,
+        "explanation": "下文回答“You should bring a small gift”，问是否应该带礼物，选Should I bring a gift?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 2,
+        "explanation": "下文回答“At the dinner table, you should wait for the host to start eating first.”，问餐桌上怎么做，选What should I do at the dinner table?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "回答“You're welcome.”，此处表示感谢，选Thanks for your advice."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, I'm Chris. Nice to meet you!\nB: Oh, hi, I'm Amy. ___1___\nA: So, Amy. Why are you interested in joining our group?\nB: Well, I want to do something for our environment.\nA: ___2___ We are all trying to live a low-carbon life.\nB: A low-carbon life? What is that?\nA: It's a green lifestyle. ___3___ We still buy daily things like food and drinks. But we try not to buy new clothes or shoes.\nB: Wow! ___4___\nA: Well, we eat less meat and we prefer more local food.\nB: I can do that. And I often take a bus to school.\nA: That's great. Then welcome to join us.\nB: ___5___ Thanks.",
+    "translation": "A：嗨，我是克里斯。很高兴见到你！ B：哦，嗨，我是艾米。我也很高兴见到你。 A：那么，艾米。你为什么有兴趣加入我们小组？ B：嗯，我想为环境做点事。 A：这个小组正好适合你。我们都在努力过低碳生活。 B：低碳生活？那是什么？ A：这是一种绿色生活方式。我们从减少购物开始。我们仍然买食物和饮料等日常用品，但我们尽量不买新衣服或鞋子。 B：哇！还有别的吗？ A：嗯，我们少吃肉，更喜欢当地食物。 B：我可以做到。而且我经常坐公交车上学。 A：太好了。那么欢迎加入我们。 B：我很乐意。谢谢。",
+    "grade": 9,
+    "unit": "9A-U13",
+    "points": [
+      "情景交际",
+      "环境保护",
+      "低碳生活"
+    ],
+    "options": [
+      "Anything else?",
+      "It's great to see you, too.",
+      "This group is just right for you.",
+      "I'd love to.",
+      "We start with less shopping.",
+      "Let's eat together.",
+      "Can you lend me a bike?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 1,
+        "explanation": "A说“Nice to meet you!”，回应“我也很高兴见到你”，选It's great to see you, too."
+      },
+      {
+        "stem": "第2空",
+        "answer": 2,
+        "explanation": "B说想为环境做事，A表示小组正适合她，选This group is just right for you."
+      },
+      {
+        "stem": "第3空",
+        "answer": 4,
+        "explanation": "后文围绕购物展开，说明低碳生活从减少购物开始，选We start with less shopping."
+      },
+      {
+        "stem": "第4空",
+        "answer": 0,
+        "explanation": "B发出感叹后，A继续补充，说明B在问还有没有其他做法，选Anything else?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 3,
+        "explanation": "A说“welcome to join us”，B回应“Thanks.”，表示乐意加入，选I'd love to."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Li Hua! The Spring Festival is coming. ___1___\nB: Yes, my family is very busy these days.\nA: ___2___\nB: We clean the house, buy new clothes and prepare lots of food.\nA: What food do you usually prepare?\nB: ___3___ We also make dumplings together.\nA: That sounds great. ___4___\nB: We usually have a big dinner on New Year's Eve. All the family members get together.\nA: ___5___\nB: Yes, children get red packets from their parents and grandparents.",
+    "translation": "A：嗨，李华！春节要到了。你们忙吗？ B：是的，我家这些天很忙。 A：你们在忙什么？ B：我们打扫房子、买新衣服、准备很多食物。 A：你们通常准备什么食物？ B：我们通常准备鸡、鱼和肉。我们还一起包饺子。 A：听起来很棒。你们通常怎么庆祝？ B：我们通常在除夕吃一顿大餐。所有家庭成员聚在一起。 A：孩子们能收到红包吗？ B：是的，孩子们从父母和祖父母那里收到红包。",
+    "grade": 9,
+    "unit": "9A-U2",
+    "points": [
+      "情景交际",
+      "传统文化",
+      "节日习俗"
+    ],
+    "options": [
+      "Are you busy with the Spring Festival?",
+      "What are you busy doing?",
+      "We usually prepare chicken, fish and meat.",
+      "How do you usually celebrate it?",
+      "Do children get red packets?",
+      "When is the Spring Festival?",
+      "What's your favorite festival?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B回答“Yes, my family is very busy these days.”，问是否忙着准备春节，选Are you busy with the Spring Festival?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“We clean the house, buy new clothes and prepare lots of food.”，问在忙什么，选What are you busy doing?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "A问“What food do you usually prepare?”，列举食物，选We usually prepare chicken, fish and meat."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B回答“We usually have a big dinner on New Year's Eve.”，问如何庆祝，选How do you usually celebrate it?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B回答“Yes, children get red packets...”，问孩子们是否收到红包，选Do children get red packets?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Alice! You look unhappy. ___1___\nB: I argued with my best friend. She is angry with me now.\nA: ___2___\nB: I borrowed her favorite book and lost it.\nA: I see. ___3___ You should say sorry to her.\nB: I know, but I'm afraid she won't forgive me.\nA: ___4___ True friends always understand each other.\nB: You're right. ___5___\nA: You can also buy her a new copy of the book.",
+    "translation": "A：嗨，爱丽丝！你看起来不开心。怎么了？ B：我和最好的朋友吵架了。她现在生我的气。 A：发生什么事了？ B：我借了她最喜欢的书，然后弄丢了。 A：我明白了。你应该向她道歉。 B：我知道，但我怕她不会原谅我。 A：别担心。真正的朋友总是互相理解。 B：你说得对。我还能做什么？ A：你也可以给她买一本新书。",
+    "grade": 8,
+    "unit": "8B-U4",
+    "points": [
+      "情景交际",
+      "人际交往",
+      "提出建议"
+    ],
+    "options": [
+      "What happened?",
+      "You should say sorry to her.",
+      "Don't worry.",
+      "What else can I do?",
+      "What's wrong?",
+      "Did you buy her a gift?",
+      "You should forget her."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 4,
+        "explanation": "B描述“I argued with my best friend.”，问怎么了，选What's wrong?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 0,
+        "explanation": "B解释“I borrowed her favorite book and lost it.”，问发生什么事了，选What happened?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 1,
+        "explanation": "理解情况后给出具体建议，后文“You should say sorry to her”直接衔接，选You should say sorry to her."
+      },
+      {
+        "stem": "第4空",
+        "answer": 2,
+        "explanation": "B担心朋友不原谅，A安慰别担心，选Don't worry."
+      },
+      {
+        "stem": "第5空",
+        "answer": 3,
+        "explanation": "A回答“You can also buy her a new copy of the book.”，问还能做什么，选What else can I do?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Mike! ___1___\nB: I'm going to the library. I want to borrow some books about animals.\nA: ___2___\nB: Because I'm writing a report about endangered animals.\nA: That's meaningful. ___3___\nB: I'm going to write about pandas and tigers.\nA: ___4___\nB: I plan to finish it this weekend.\nA: ___5___\nB: Thank you. I'll show it to you when it's done.",
+    "translation": "A：嗨，迈克！你要去哪里？ B：我去图书馆。我想借一些关于动物的书。 A：为什么？ B：因为我在写一篇关于濒危动物的报告。 A：很有意义。你打算写什么动物？ B：我打算写熊猫和老虎。 A：你打算什么时候完成？ B：我计划这个周末完成。 A：祝你好运。 B：谢谢。完成后我会给你看。",
+    "grade": 8,
+    "unit": "8B-U2",
+    "points": [
+      "情景交际",
+      "动物保护",
+      "谈论计划"
+    ],
+    "options": [
+      "Why do you need those books?",
+      "What animals are you going to write about?",
+      "When are you going to finish it?",
+      "Good luck with your report.",
+      "Where are you going?",
+      "How long will it take?",
+      "Who are you going with?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 4,
+        "explanation": "B回答“I'm going to the library.”，问去哪里，选Where are you going?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 0,
+        "explanation": "B回答“Because I'm writing a report...”，问为什么需要这些书，选Why do you need those books?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 1,
+        "explanation": "B回答“I'm going to write about pandas and tigers.”，问打算写什么动物，选What animals are you going to write about?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 2,
+        "explanation": "B回答“I plan to finish it this weekend.”，问什么时候完成，选When are you going to finish it?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 3,
+        "explanation": "B回答“Thank you.”，表达祝愿，选Good luck with your report."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, David! ___1___\nB: I'm going to be an engineer when I grow up.\nA: ___2___\nB: Because I like building things and solving problems.\nA: That's a great dream. ___3___\nB: I'm going to study math and science hard.\nA: ___4___\nB: I'm going to start by joining the science club at school.\nA: ___5___\nB: Thank you. I will try my best.",
+    "translation": "A：嗨，大卫！你长大后想做什么？ B：我长大后想成为一名工程师。 A：为什么？ B：因为我喜欢建造东西和解决问题。 A：那是个伟大的梦想。你打算怎么实现它？ B：我打算努力学数学和科学。 A：你打算怎么开始？ B：我打算从参加学校的科学俱乐部开始。 A：祝你好运。 B：谢谢。我会尽力的。",
+    "grade": 8,
+    "unit": "8A-U6",
+    "points": [
+      "情景交际",
+      "谈论职业理想",
+      "谈论计划"
+    ],
+    "options": [
+      "What are you going to be when you grow up?",
+      "Why do you want to be an engineer?",
+      "How are you going to do that?",
+      "How are you going to start?",
+      "Good luck to you.",
+      "Do you like building things?",
+      "When are you going to start?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B回答“I'm going to be an engineer when I grow up.”，问职业理想，选What are you going to be when you grow up?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“Because I like building things and solving problems.”，问原因，选Why do you want to be an engineer?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B回答“I'm going to study math and science hard.”，问如何实现，选How are you going to do that?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B回答“I'm going to start by joining the science club.”，问怎么开始，选How are you going to start?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B回答“Thank you.”，表达祝愿，选Good luck to you."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Emma! ___1___\nB: I'm going to visit my grandparents in the countryside this summer.\nA: ___2___\nB: I'm going there by train.\nA: ___3___\nB: I'm going to stay there for about three weeks.\nA: ___4___\nB: I'm going to help my grandparents with the farm work and enjoy the fresh air.\nA: That sounds great. ___5___\nB: Thank you! I will send you some photos.",
+    "translation": "A：嗨，艾玛！你暑假打算做什么？ B：我打算去乡下看望我的祖父母。 A：你怎么去那里？ B：我坐火车去。 A：你打算在那里待多久？ B：我打算在那里待大约三周。 A：你打算在那里做什么？ B：我打算帮祖父母干农活，享受新鲜空气。 A：听起来很棒。祝你玩得开心。 B：谢谢！我会给你发一些照片。",
+    "grade": 8,
+    "unit": "8A-U6",
+    "points": [
+      "情景交际",
+      "假期计划",
+      "询问细节"
+    ],
+    "options": [
+      "What are you going to do this summer?",
+      "How are you going there?",
+      "How long are you going to stay there?",
+      "What are you going to do there?",
+      "Have a good time.",
+      "When are you leaving?",
+      "Who are you going with?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B回答“I'm going to visit my grandparents...”，问暑假打算做什么，选What are you going to do this summer?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“I'm going there by train.”，问交通方式，选How are you going there?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B回答“I'm going to stay there for about three weeks.”，问待多久，选How long are you going to stay there?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B回答“I'm going to help my grandparents with the farm work...”，问具体活动，选What are you going to do there?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B回答“Thank you!”，表达祝愿，选Have a good time."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Peter! I hear you visited a science museum last weekend. ___1___\nB: It was amazing! I saw many cool robots.\nA: ___2___\nB: I went with my classmates.\nA: ___3___\nB: We took a bus there. It took about forty minutes.\nA: Did you learn anything new?\nB: ___4___ I learned how robots can help people in factories.\nA: That sounds cool. ___5___\nB: Yes, I did. Look, these are the photos I took.",
+    "translation": "A：嗨，彼得！我听说你上周末参观了一个科学博物馆。怎么样？ B：太棒了！我看到了很多很酷的机器人。 A：你和谁一起去的？ B：我和同学们一起去的。 A：你们怎么去那里的？ B：我们坐公交车去的。花了大约四十分钟。 A：你学到了新东西吗？ B：是的。我学到了机器人如何在工厂里帮助人们。 A：听起来很酷。你拍照了吗？ B：是的。看，这些是我拍的照片。",
+    "grade": 8,
+    "unit": "8A-U1",
+    "points": [
+      "情景交际",
+      "谈论过去经历",
+      "学校旅行"
+    ],
+    "options": [
+      "How was it?",
+      "Who did you go with?",
+      "How did you go there?",
+      "Yes, I did.",
+      "Did you take any photos?",
+      "When did you go?",
+      "What did you see?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B回答“It was amazing!”，问旅行怎么样，选How was it?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“I went with my classmates.”，问和谁一起去，选Who did you go with?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B回答“We took a bus there.”，问交通方式，选How did you go there?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "问“Did you learn anything new?”，回答“Yes, I did.”并补充所学内容，选Yes, I did."
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B回答“Yes, I did. Look, these are the photos I took.”，问是否拍照了，选Did you take any photos?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Anna! You look worried. ___1___\nB: I can't find my English notebook. I think I left it in the library.\nA: ___2___ What does it look like?\nB: It's blue. There is a name sticker on the cover.\nA: Don't worry. ___3___\nB: Really? Where is the Lost and Found?\nA: ___4___ I can go with you.\nB: That's very kind of you. ___5___",
+    "translation": "A：嗨，安娜！你看起来很着急。怎么了？ B：我找不到我的英语笔记本了。我想我把它落在图书馆了。 A：真糟糕！它长什么样？ B：是蓝色的。封面上有一个名字贴纸。 A：别担心。也许我们可以去失物招领处看看。 B：真的吗？失物招领处在哪里？ A：在图书馆旁边。我可以和你一起去。 B：你真好。谢谢你的帮助。",
+    "grade": 7,
+    "unit": "7A-U3",
+    "points": [
+      "情景交际",
+      "描述物品",
+      "失物招领与位置"
+    ],
+    "options": [
+      "What happened?",
+      "That's too bad.",
+      "Maybe we can check the Lost and Found.",
+      "It's next to the library.",
+      "Thank you for your help.",
+      "How much is your notebook?",
+      "You should buy a new one."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B描述丢笔记本的经过，问发生什么事了，选What happened?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "A对B丢东西表示同情，后文接着问它长什么样，选That's too bad."
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B问“Where is the Lost and Found?”，建议去失物招领处，选Maybe we can check the Lost and Found."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B问失物招领处在哪里，回答具体位置，选It's next to the library."
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "A主动提出一起去，B表示感谢，选Thank you for your help."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Tom! You look sleepy. ___1___\nB: I went to bed too late last night. I was doing my math homework.\nA: ___2___ You should go to bed earlier.\nB: I know. But the homework was really difficult.\nA: ___3___\nB: I started at 8:00 p.m. and finished at 11:30 p.m.\nA: That's too long. ___4___\nB: You're right. I'll ask my teacher for help next time.\nA: ___5___",
+    "translation": "A：嗨，汤姆！你看起来很困。怎么了？ B：我昨晚睡得太晚了。我在做数学作业。 A：那对健康不好。你应该早点睡。 B：我知道。但作业真的很难。 A：你什么时候开始做的？ B：晚上8点开始，11点半做完。 A：太久了。你最好下次向老师求助。 B：你说得对。下次我会向老师求助。 A：那是个好主意。",
+    "grade": 8,
+    "unit": "8B-U1",
+    "points": [
+      "情景交际",
+      "健康作息",
+      "提出建议"
+    ],
+    "options": [
+      "What's the matter?",
+      "That's bad for your health.",
+      "When did you start?",
+      "You'd better ask your teacher for help next time.",
+      "That's a good idea.",
+      "Why don't you go to bed now?",
+      "How long did it take?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B解释“I went to bed too late...”，问怎么了，选What's the matter?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "得知熬夜后给出评价，后文“You should go to bed earlier”衔接，选That's bad for your health."
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B回答“I started at 8:00 p.m. and finished at 11:30 p.m.”，问什么时候开始做的，选When did you start?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "觉得时间太久，给出建议，B回答“I'll ask my teacher for help next time.”，选You'd better ask your teacher for help next time."
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B接受了建议，A表示肯定，选That's a good idea."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Jack! ___1___\nB: I'm reading a book about the future.\nA: That sounds interesting. ___2___\nB: I think people will live longer and robots will do most of the housework.\nA: ___3___\nB: Yes, I do. I think there will be more robots in our homes.\nA: ___4___\nB: I think every family will have a robot.\nA: That would be great. ___5___\nB: I hope so too.",
+    "translation": "A：嗨，杰克！你在读什么？ B：我在读一本关于未来的书。 A：听起来很有趣。你认为未来会是什么样？ B：我认为人们会活得更长，机器人会做大部分家务。 A：你认为会有更多机器人吗？ B：是的。我认为我们家里会有更多机器人。 A：你认为每个家庭都会有机器人吗？ B：我认为每个家庭都会有一个机器人。 A：那太好了。我希望如此。 B：我也希望如此。",
+    "grade": 8,
+    "unit": "8A-U7",
+    "points": [
+      "情景交际",
+      "未来生活",
+      "谈论预测"
+    ],
+    "options": [
+      "What are you reading?",
+      "What do you think the future will be like?",
+      "Do you think there will be more robots?",
+      "What do you think every family will have?",
+      "I hope so.",
+      "When will that happen?",
+      "Do you like robots?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B回答“I'm reading a book about the future.”，问在读什么，选What are you reading?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“I think people will live longer...”，问对未来有什么看法，选What do you think the future will be like?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B回答“Yes, I do. I think there will be more robots...”，问是否认为会有更多机器人，选Do you think there will be more robots?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B回答“I think every family will have a robot.”，问每个家庭会有什么，选What do you think every family will have?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B回答“I hope so too.”，表达希望，选I hope so."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Li Bing! ___1___\nB: I'm going to watch a Yu Opera this Saturday evening.\nA: A Yu Opera? Sounds great! ___2___\nB: I read it in the newspaper.\nA: ___3___\nB: On Saturday evening, at the theater near my home.\nA: ___4___\nB: Sure! I'd love to have you with me.\nA: Great! ___5___\nB: Let's meet at the theater gate at 6:30 p.m.",
+    "translation": "A：嗨，李冰！你这个周末有什么计划？ B：我打算这个周六晚上去看豫剧。 A：豫剧？听起来很棒！你怎么知道的？ B：我在报纸上看到的。 A：你打算什么时候去看？ B：周六晚上，在我家附近的剧院。 A：你想和我一起去吗？ B：当然！我很乐意和你一起去。 A：太好了！我们什么时候在哪里见面？ B：我们下午6:30在剧院门口见吧。",
+    "grade": 8,
+    "unit": "8A-U9",
+    "points": [
+      "情景交际",
+      "周末计划",
+      "发出邀请"
+    ],
+    "options": [
+      "What are your plans for the weekend?",
+      "How did you know about it?",
+      "When are you going to watch it?",
+      "Would you like to go with me?",
+      "When and where shall we meet?",
+      "What's your favorite opera?",
+      "Who are you going with?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B回答“I'm going to watch a Yu Opera...”，问周末计划，选What are your plans for the weekend?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“I read it in the newspaper.”，问如何得知，选How did you know about it?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B回答“On Saturday evening, at the theater...”，问具体时间，选When are you going to watch it?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B回答“Sure! I'd love to have you with me.”，发出邀请，选Would you like to go with me?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B回答“Let's meet at the theater gate at 6:30 p.m.”，问见面时间和地点，选When and where shall we meet?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Wang Mei! The summer holiday is coming. ___1___\nB: I plan to visit my uncle in the countryside.\nA: ___2___\nB: For about a week. I'm going there with my parents.\nA: ___3___\nB: I'll help my uncle do some farm work and learn to ride a horse.\nA: That sounds relaxing. ___4___\nB: Yes, I think so. I can also enjoy the fresh air and quiet life there.\nA: ___5___\nB: Thank you! I'll bring you some fresh fruit.",
+    "translation": "A：嗨，王梅！暑假要到了。你有什么计划？ B：我打算去乡下看望我的叔叔。 A：你打算在那里待多久？ B：大约一周。我和父母一起去。 A：你打算在那里做什么？ B：我会帮叔叔干些农活，学骑马。 A：听起来很放松。你觉得乡村生活怎么样？ B：是的，我也这么认为。我还可以享受新鲜空气和安静的生活。 A：祝你玩得开心。 B：谢谢！我会给你带些新鲜水果。",
+    "grade": 8,
+    "unit": "8A-U6",
+    "points": [
+      "情景交际",
+      "假期计划",
+      "谈论感受"
+    ],
+    "options": [
+      "What is your plan?",
+      "How long will you stay there?",
+      "What will you do there?",
+      "What do you think of the country life?",
+      "Have a good time.",
+      "When are you leaving?",
+      "Who are you going with?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B回答“I plan to visit my uncle...”，问假期计划，选What is your plan?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“For about a week.”，问停留时长，选How long will you stay there?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B回答“I'll help my uncle do some farm work...”，问具体活动，选What will you do there?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B回答“Yes, I think so. I can also enjoy the fresh air...”，问对乡村生活的看法，选What do you think of the country life?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B回答“Thank you!”，表达祝愿，选Have a good time."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Kevin! ___1___\nB: I'm going to the sports center. I want to play badminton.\nA: ___2___\nB: About three times a week. It helps me stay fit.\nA: That's great. ___3___\nB: My favorite player is Lin Dan. He is very skillful.\nA: I like him too. ___4___\nB: Yes, I do. I watch his games whenever I have time.\nA: ___5___\nB: You can come with me next time. I can teach you some basic skills.",
+    "translation": "A：嗨，凯文！你要去哪里？ B：我要去体育中心。我想打羽毛球。 A：你多久打一次？ B：大约一周三次。它帮助我保持健康。 A：那很好。你最喜欢的球员是谁？ B：我最喜欢的球员是林丹。他技术非常好。 A：我也喜欢他。你经常看他的比赛吗？ B：是的。我一有时间就看他的比赛。 A：我也想学打羽毛球。 B：下次你可以和我一起去。我可以教你一些基本技巧。",
+    "grade": 7,
+    "unit": "7B-U3",
+    "points": [
+      "情景交际",
+      "运动与频率",
+      "谈论能力"
+    ],
+    "options": [
+      "Where are you going?",
+      "How often do you play badminton?",
+      "Who is your favorite player?",
+      "Do you often watch his games?",
+      "I want to learn to play badminton too.",
+      "What time do you usually play?",
+      "Can you teach me to swim?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B回答“I'm going to the sports center.”，问去哪里，选Where are you going?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“About three times a week.”，问频率，选How often do you play badminton?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B回答“My favorite player is Lin Dan.”，问最喜欢的球员，选Who is your favorite player?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B回答“Yes, I do. I watch his games...”，问是否经常看比赛，选Do you often watch his games?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B说“You can come with me next time. I can teach you...”，表达想学打羽毛球，选I want to learn to play badminton too."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Julia! You look excited. ___1___\nB: I just got a letter from my pen pal in Australia.\nA: That's great! ___2___\nB: She is twelve years old, and she likes playing tennis.\nA: ___3___\nB: I'm going to write back and tell her about my school life.\nA: ___4___\nB: I'm going to send her some photos of my family too.\nA: ___5___\nB: Yes, I do. I hope she can visit China one day.",
+    "translation": "A：嗨，朱莉娅！你看起来很兴奋。怎么了？ B：我刚收到澳大利亚笔友的一封信。 A：太棒了！她是什么样的人？ B：她十二岁，喜欢打网球。 A：你打算怎么做？ B：我打算回信告诉她我的学校生活。 A：你还打算做什么？ B：我还打算给她寄一些我家人的照片。 A：你希望见到她吗？ B：是的。我希望有一天她能来中国。",
+    "grade": 7,
+    "unit": "7A-U1",
+    "points": [
+      "情景交际",
+      "笔友交流",
+      "个人信息与计划"
+    ],
+    "options": [
+      "What's up?",
+      "What is she like?",
+      "What are you going to do?",
+      "What else are you going to do?",
+      "Do you hope to meet her?",
+      "Where is she from?",
+      "How old is she?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B解释收到笔友来信，问怎么了，选What's up?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“She is twelve years old, and she likes playing tennis.”，问笔友是什么样的人，选What is she like?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B回答“I'm going to write back...”，问打算怎么做，选What are you going to do?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B回答“I'm going to send her some photos... too.”，问还打算做什么，选What else are you going to do?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B回答“Yes, I do. I hope she can visit China one day.”，问是否希望见到她，选Do you hope to meet her?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Mike! You look worried. ___1___\nB: I can't find my schoolbag. I think I left it on the bus.\nA: ___2___ What color is it?\nB: It's blue. There is a science book and a water bottle in it.\nA: Don't worry. ___3___\nB: Really? Where is the Lost and Found?\nA: ___4___ I can go with you.\nB: That's very kind of you. ___5___",
+    "translation": "A：嗨，迈克！你看起来很着急。发生什么事了？ B：我找不到我的书包了。我想我把它落在公交车上了。 A：真糟糕！它是什么颜色的？ B：是蓝色的。里面有一本科学书和一个水瓶。 A：别担心。也许我们可以去失物招领处看看。 B：真的吗？失物招领处在哪里？ A：在学校门口旁边。我可以和你一起去。 B：你真好。谢谢你的帮助。",
+    "grade": 7,
+    "unit": "7A-U3",
+    "points": [
+      "情景交际",
+      "描述物品",
+      "失物招领与位置"
+    ],
+    "options": [
+      "What happened?",
+      "That's too bad.",
+      "Maybe we can check the Lost and Found.",
+      "It's next to the school gate.",
+      "Thank you for your help.",
+      "How much is your schoolbag?",
+      "You should buy a new one."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B描述丢书包的经过，问发生什么事了，选What happened?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "A对B丢东西表示同情，后文接着问颜色，选That's too bad."
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B问“Where is the Lost and Found?”，建议去失物招领处，选Maybe we can check the Lost and Found."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B问失物招领处在哪里，回答具体位置，选It's next to the school gate."
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "A主动提出一起去，B表示感谢，选Thank you for your help."
+      }
+    ]
+  },
+  {
+    "text": "A: Good morning, doctor. ___1___\nB: I have a stomachache. It started after lunch.\nA: ___2___\nB: I had some cold noodles and ice cream.\nA: I see. ___3___ You should eat warm food and take this medicine.\nB: ___4___\nA: Three times a day, after meals.\nB: OK. ___5___\nA: You're welcome. Rest well and you'll feel better soon.",
+    "translation": "A：早上好，医生。怎么了？ B：我胃疼。午饭后开始的。 A：你午饭吃了什么？ B：我吃了一些凉面和冰淇淋。 A：我知道了。你不应该吃太多冷食。你应该吃温热的食物并吃这个药。 B：一天吃几次？ A：一天三次，饭后吃。 B：好的。谢谢医生。 A：不客气。好好休息，你很快会好起来的。",
+    "grade": 8,
+    "unit": "8B-U1",
+    "points": [
+      "情景交际",
+      "看病就医",
+      "健康饮食与建议"
+    ],
+    "options": [
+      "How often should I take it?",
+      "You shouldn't eat too much cold food.",
+      "What did you eat for lunch?",
+      "Thank you, doctor.",
+      "What's wrong with you?",
+      "Do you have a fever?",
+      "You should stay in bed for a week."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 4,
+        "explanation": "医生询问病人病情，下文描述“I have a stomachache.”，选What's wrong with you?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 2,
+        "explanation": "下文回答“I had some cold noodles and ice cream.”，问午餐吃了什么，选What did you eat for lunch?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 1,
+        "explanation": "吃了冷食导致胃疼，医生针对冷食给出建议，后文“eat warm food”衔接，选You shouldn't eat too much cold food."
+      },
+      {
+        "stem": "第4空",
+        "answer": 0,
+        "explanation": "下文回答“Three times a day”，问服药频率，选How often should I take it?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 3,
+        "explanation": "A回答“You're welcome”，此处表示感谢，选Thank you, doctor."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Anna! ___1___\nB: I'm going to volunteer at the old people's home this weekend.\nA: ___2___\nB: I will clean their rooms and talk with them.\nA: That sounds meaningful. ___3___\nB: Yes, I do. I love helping others.\nA: ___4___\nB: I volunteer there once a month.\nA: ___5___\nB: Of course! You can come with me next time.",
+    "translation": "A：嗨，安娜！你这个周末打算做什么？ B：我打算去养老院做志愿者。 A：你会在那里做什么？ B：我会打扫他们的房间，和他们聊天。 A：听起来很有意义。你喜欢做志愿者吗？ B：是的。我喜欢帮助别人。 A：你多久去那里做一次志愿者？ B：我一个月去一次。 A：我能和你一起去吗？ B：当然！下次你可以和我一起去。",
+    "grade": 8,
+    "unit": "8B-U2",
+    "points": [
+      "情景交际",
+      "志愿服务",
+      "询问频率"
+    ],
+    "options": [
+      "What are you going to do this weekend?",
+      "What will you do there?",
+      "Do you like volunteering?",
+      "How often do you volunteer there?",
+      "Can I go with you?",
+      "Where is the old people's home?",
+      "Why do you volunteer?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B回答周末计划，选What are you going to do this weekend?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答具体做什么，选What will you do there?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B回答“Yes, I do.”，问是否喜欢做志愿者，选Do you like volunteering?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B回答“once a month”，问频率，选How often do you volunteer there?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B回答“Of course! You can come with me next time.”，请求同行，选Can I go with you?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Lisa! You look upset. ___1___\nB: I had a fight with my best friend. She doesn't want to talk to me.\nA: I'm sorry to hear that. ___2___\nB: Because I forgot her birthday. I feel really bad.\nA: Everyone makes mistakes. ___3___\nB: You're right. But I'm afraid she won't forgive me.\nA: ___4___ True friends always understand each other.\nB: I hope so. ___5___\nA: You can also buy her a small gift and say sorry.",
+    "translation": "A：嗨，莉萨！你看起来不开心。怎么了？ B：我和最好的朋友吵架了。她不想和我说话。 A：听到这个我很难过。你们为什么吵架？ B：因为我忘了她的生日。我感觉很糟糕。 A：每个人都会犯错。你应该向她道歉。 B：你说得对。但我怕她不会原谅我。 A：别担心。真正的朋友总是互相理解。 B：希望如此。我还能做什么？ A：你也可以给她买个小礼物并道歉。",
+    "grade": 8,
+    "unit": "8B-U3",
+    "points": [
+      "情景交际",
+      "人际交往",
+      "情绪与建议"
+    ],
+    "options": [
+      "What's wrong?",
+      "Why did you fight?",
+      "You should say sorry to her.",
+      "Don't worry.",
+      "What else can I do?",
+      "Did you buy her a gift?",
+      "You should forget her."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B描述吵架经过，问怎么了，选What's wrong?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“Because I forgot her birthday.”，问原因，选Why did you fight?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "A安慰后给出具体建议，选You should say sorry to her."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B担心朋友不原谅，A安慰别担心，选Don't worry."
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "A回答“You can also buy her a small gift...”，问还能做什么，选What else can I do?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Mike! How was your weekend?\nB: ___1___ I stayed at home and did nothing.\nA: Oh, really? That's too bad. I had a great time.\nB: What did you do?\nA: ___2___ The animals were so interesting.\nB: Nice! Who did you go with?\nA: ___3___ We went there by car.\nB: Did you see any tigers?\nA: Yes, we did. ___4___ We also fed the monkeys.\nB: That sounds like fun. Did you take any photos?\nA: ___5___ I can show them to you tomorrow.",
+    "translation": "A：嗨，迈克！你周末过得怎么样？ B：相当无聊。我待在家里什么也没做。 A：哦，真的吗？那太糟糕了。我过得很愉快。 B：你做什么了？ A：我去动物园了。那些动物太有趣了。 B：很好！你和谁一起去的？ A：我和我的父母以及我的妹妹一起去的。我们开车去那里的。 B：你们看到老虎了吗？ A：是的，我们看到了。它们在树下睡觉。我们还喂了猴子。 B：听起来很有趣。你拍照片了吗？ A：是的，我拍了很多。我明天可以拿给你看。",
+    "grade": 7,
+    "unit": "7B-U7",
+    "points": [
+      "情景交际",
+      "谈论过去的事情",
+      "一般过去时"
+    ],
+    "options": [
+      "I went to the zoo.",
+      "They were sleeping under the tree.",
+      "It was pretty boring.",
+      "How about you?",
+      "I went with my parents and my sister.",
+      "Yes, I took a lot.",
+      "I played computer games."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 2,
+        "explanation": "下文说“I stayed at home and did nothing”，评价“That's too bad”，说明过得不好，选It was pretty boring."
+      },
+      {
+        "stem": "第2空",
+        "answer": 0,
+        "explanation": "下文提到“The animals...”，说明去了和动物有关的地方，选I went to the zoo."
+      },
+      {
+        "stem": "第3空",
+        "answer": 4,
+        "explanation": "问“Who did you go with?”，后文提到“We”，交代同行人员，选I went with my parents and my sister."
+      },
+      {
+        "stem": "第4空",
+        "answer": 1,
+        "explanation": "问是否看到老虎，回答“Yes, we did”后补充老虎的动态，选They were sleeping under the tree."
+      },
+      {
+        "stem": "第5空",
+        "answer": 5,
+        "explanation": "问“Did you take any photos?”，后文说明天展示，肯定回答，选Yes, I took a lot."
+      }
+    ]
+  },
+  {
+    "text": "A: Don't run in the hallways, Tom! It's dangerous.\nB: I'm sorry, Ms. Clark. ___1___\nA: There are many rules. For example, you can't eat in class.\nB: Can we listen to music in the music room?\nA: ___2___ But you can't listen to it in the classrooms or library.\nB: I see. Can we wear hats in school?\nA: ___3___ We must wear school uniforms on school days.\nB: OK. What do we have to do after school?\nA: ___4___ Keeping the school clean is everyone's duty.\nB: Rules are everywhere. I feel a bit stressed.\nA: Don't worry. ___5___ They help to keep us safe.",
+    "translation": "A：汤姆，不要在走廊里跑步！这很危险。 B：对不起，克拉克老师。我们学校还有什么其他规则吗？ A：有很多规则。例如，你不能在课堂上吃东西。 B：我们可以在音乐室听音乐吗？ A：是的，可以。但是你不能在教室或图书馆里听。 B：我明白了。我们在学校可以戴帽子吗？ A：不，你们不能。在上学日我们必须穿校服。 B：好的。放学后我们必须做什么？ A：你们必须打扫教室。保持学校干净是每个人的职责。 B：规则无处不在。我觉得有点压力。 A：别担心。规则对我们有好处。它们能帮助我们保持安全。 B：您说得对。我会遵守它们的。",
+    "grade": 7,
+    "unit": "7B-U2",
+    "points": [
+      "情景交际",
+      "学校规则",
+      "祈使句与情态动词"
+    ],
+    "options": [
+      "No, you can't.",
+      "Rules are good for us.",
+      "Are there any other rules in our school?",
+      "You must clean the classrooms.",
+      "Yes, you can.",
+      "We can eat in the dining hall.",
+      "Why do you say that?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 2,
+        "explanation": "下文回答“There are many rules. For example...”，问学校是否有其他规则，选Are there any other rules in our school?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 4,
+        "explanation": "在音乐室听音乐是合理的，后文用But转折说不能在教室听，此处肯定回答，选Yes, you can."
+      },
+      {
+        "stem": "第3空",
+        "answer": 0,
+        "explanation": "后文解释必须穿校服，意味着不能随意戴帽子，否定回答，选No, you can't."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "问放学后必须做什么，后文提到“Keeping the school clean”，与打扫卫生有关，选You must clean the classrooms."
+      },
+      {
+        "stem": "第5空",
+        "answer": 1,
+        "explanation": "学生抱怨规则多有压力，老师安慰并指出规则的积极作用，选Rules are good for us."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Peter! Can you play the guitar?\nB: No, I can't. ___1___ I want to join the music club.\nA: Oh, the music club is great. My brother is in that club.\nB: Really? ___2___\nA: He can play the drums and the piano.\nB: Wow, he is so talented! ___3___\nA: I want to join the chess club. I think playing chess is very interesting.\nB: That sounds cool. ___4___\nA: Yes, I can play it well. My grandfather taught me.\nB: Great! ___5___\nA: Sure. Let's go and sign up now.",
+    "translation": "A：嗨，彼得！你会弹吉他吗？ B：不，我不会。但是我喜欢唱歌。我想加入音乐俱乐部。 A：哦，音乐俱乐部太棒了。我哥哥就在那个俱乐部。 B：真的吗？他会做什么？ A：他会敲鼓和弹钢琴。 B：哇，他真有天赋！你想加入什么俱乐部？ A：我想加入象棋俱乐部。我觉得下象棋很有趣。 B：听起来很酷。你会下象棋吗？ A：是的，我下得很好。我爷爷教我的。 B：太好了！我们能今天下午一起去俱乐部吗？ A：当然可以。我们现在去报名吧。",
+    "grade": 7,
+    "unit": "7B-U1",
+    "points": [
+      "情景交际",
+      "谈论能力",
+      "加入俱乐部"
+    ],
+    "options": [
+      "What club do you want to join?",
+      "Can you play chess?",
+      "But I like singing.",
+      "Can we go to the club together this afternoon?",
+      "What can he do?",
+      "Where is the club?",
+      "I don't like music."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 2,
+        "explanation": "后文说“I want to join the music club”，虽然不会弹吉他但喜欢音乐相关活动，转折连词But符合逻辑，选But I like singing."
+      },
+      {
+        "stem": "第2空",
+        "answer": 4,
+        "explanation": "下文回答“He can play the drums and the piano”，问能力，选What can he do?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 0,
+        "explanation": "下文回答“I want to join the chess club”，问俱乐部意向，选What club do you want to join?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 1,
+        "explanation": "下文肯定回答“Yes, I can play it well”，问下象棋能力，选Can you play chess?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 3,
+        "explanation": "下文答语“Sure. Let's go...”表示应允，此处发出共同前往的邀请，选Can we go to the club together this afternoon?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hello, welcome to the Noodle House! ___1___\nB: Yes, please. I'd like a bowl of noodles.\nA: What size bowl of noodles would you like?\nB: ___2___\nA: OK. And what kind of noodles would you like?\nB: ___3___\nA: Beef and tomato noodles, large size. Would you like anything to drink?\nB: ___4___ A glass of orange juice, please.\nA: No problem. Anything else?\nB: No, that's all. ___5___\nA: They are twenty-five yuan in total.",
+    "translation": "A：你好，欢迎光临面馆！你想点菜吗？ B：是的。我想来一碗面条。 A：你想要多大碗的面条？ B：我想要大碗的。 A：好的。你想要哪种面条？ B：我想要牛肉番茄面。 A：牛肉番茄面，大碗。你想喝点什么吗？ B：是的，请给我一杯橙汁。 A：没问题。还要别的吗？ B：不要了，就这些。它们总共多少钱？ A：总共25元。",
+    "grade": 7,
+    "unit": "7B-U4",
+    "points": [
+      "情景交际",
+      "点餐与就餐",
+      "询问价格"
+    ],
+    "options": [
+      "I'd like beef and tomato noodles.",
+      "How much are they?",
+      "Yes, please.",
+      "May I take your order?",
+      "It is delicious.",
+      "I'd like a large bowl.",
+      "I don't like dumplings."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 3,
+        "explanation": "服务员接待顾客的常规用语，下文回答“Yes, please. I'd like...”，询问是否点餐，选May I take your order?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 5,
+        "explanation": "上文问“What size bowl...?”，问尺寸，选I'd like a large bowl."
+      },
+      {
+        "stem": "第3空",
+        "answer": 0,
+        "explanation": "上文问“what kind of noodles...?”，后文复述“Beef and tomato noodles”，选I'd like beef and tomato noodles."
+      },
+      {
+        "stem": "第4空",
+        "answer": 2,
+        "explanation": "上文问“Would you like anything to drink?”，下文指明要橙汁，先肯定答复，选Yes, please."
+      },
+      {
+        "stem": "第5空",
+        "answer": 1,
+        "explanation": "下文回答“They are twenty-five yuan in total”，问价格，选How much are they?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Linda! What are you watching on TV?\nB: ___1___ I think it's very funny and it always makes me laugh.\nA: Oh, I like comedies too. Do you like talk shows?\nB: No, I can't stand them. ___2___\nA: I don't agree. I think they are educational. What do you think of soap operas?\nB: ___3___ The stories are too boring and never change.\nA: Well, I think some news programs are better. Do you watch the news?\nB: ___4___ My father watches the news every evening, but I prefer cartoons.\nA: I see. By the way, there is a talent show on Channel 5 tonight. Do you want to watch it?\nB: ___5___ I plan to finish my homework first, then watch it with my sister.",
+    "translation": "A：嗨，琳达！你在电视上看什么呢？ B：我正在看一部新喜剧。我觉得它非常搞笑，总是能逗我发笑。 A：哦，我也喜欢喜剧。你喜欢脱口秀吗？ B：不，我受不了脱口秀。我觉得它们很无聊。 A：我不赞同。我觉得它们很有教育意义。你觉得肥皂剧怎么样？ B：我完全不喜欢它们。故事情节太无聊了，而且千篇一律。 A：嗯，我觉得一些新闻节目更好。你看新闻吗？ B：并不经常看。我父亲每天晚上都看新闻，但我更喜欢动画片。 A：我明白了。顺便说一下，今晚5频道有一个才艺秀。你想看吗？ B：我很乐意看。我计划先做完作业，然后和我妹妹一起看。",
+    "grade": 8,
+    "unit": "8A-U5",
+    "points": [
+      "情景交际",
+      "表达对电视节目的看法",
+      "谈论打算"
+    ],
+    "options": [
+      "I don't like them at all.",
+      "I'd love to watch it.",
+      "I'm watching a new comedy.",
+      "Not very often.",
+      "News is my favorite program.",
+      "I think they are meaningless and boring.",
+      "Comedies are too scary."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 2,
+        "explanation": "后文提到“funny”并属于喜剧，说明正在看喜剧，选I'm watching a new comedy."
+      },
+      {
+        "stem": "第2空",
+        "answer": 5,
+        "explanation": "上文说受不了脱口秀，下文A反驳说“很有教育意义”，说明B认为脱口秀无聊，选I think they are meaningless and boring."
+      },
+      {
+        "stem": "第3空",
+        "answer": 0,
+        "explanation": "后文说故事太无聊，态度否定，选I don't like them at all."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "后文转折说父亲每天看而自己更喜欢动画片，说明自己不常看，选Not very often."
+      },
+      {
+        "stem": "第5空",
+        "answer": 1,
+        "explanation": "后文给出观看计划，说明想看，选I'd love to watch it."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Peter. ___1___\nB: I'm reading a book about inventors.\nA: ___2___\nB: It's about Thomas Edison.\nA: ___3___\nB: He invented the light bulb.\nA: ___4___\nB: He was born in 1847.\nA: ___5___\nB: I think he is a great inventor.",
+    "translation": "A：你好，彼得。你在读什么？ B：我在读一本关于发明家的书。 A：它是关于谁的？ B：是关于托马斯·爱迪生的。 A：他发明了什么？ B：他发明了电灯泡。 A：他什么时候出生的？ B：他出生于1847年。 A：你认为他怎么样？ B：我认为他是一位伟大的发明家。",
+    "grade": 9,
+    "unit": "9A-U6",
+    "points": [
+      "情景交际",
+      "发明与创造",
+      "谈论发明家"
+    ],
+    "options": [
+      "When was he born?",
+      "Who is it about?",
+      "What do you think of him?",
+      "What are you reading?",
+      "Where is he from?",
+      "What did he invent?",
+      "Why do you like him?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 3,
+        "explanation": "根据答语“I'm reading a book about inventors.”询问在读什么，选What are you reading?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "根据答语“It's about Thomas Edison.”询问关于谁，选Who is it about?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 5,
+        "explanation": "根据答语“He invented the light bulb.”询问发明了什么，选What did he invent?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 0,
+        "explanation": "根据答语“He was born in 1847.”询问出生时间，选When was he born?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 2,
+        "explanation": "根据答语“I think he is a great inventor.”询问看法，选What do you think of him?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Lucy! Long time no see. ___1___\nB: Great! I joined an environment protecting club. We went to all the parks in our city to collect rubbish these days.\nA: ___2___ Can I join the club to protect the environment?\nB: Of course you can. We can also protect the environment in our daily life.\nA: What should I do?\nB: ___3___ You should put the rubbish in the dustbin.\nA: What else should I do?\nB: Second, you can plant trees. ___4___\nA: That sounds easy.\nB: ___5___",
+    "translation": "A：嗨，露西！好久不见。你最近怎么样？ B：很好！我加入了一个环保俱乐部。这些天我们去了城市里所有的公园收集垃圾。 A：多么美妙的经历啊！我能加入俱乐部来保护环境吗？ B：当然可以。我们在日常生活中也可以保护环境。 A：我应该做什么？ B：首先，你不应该到处乱扔垃圾。你应该把垃圾放进垃圾桶。 A：还应该做什么？ B：第二，你可以种树。树木可以阻止风把泥土吹走。 A：听起来很容易。 B：说起来容易做起来难。",
+    "grade": 9,
+    "unit": "9A-U13",
+    "points": [
+      "情景交际",
+      "环境保护",
+      "提出建议"
+    ],
+    "options": [
+      "Trees can stop the wind from blowing the earth away.",
+      "First, you shouldn't leave rubbish here and there.",
+      "What a wonderful experience!",
+      "Easier said than done.",
+      "How is it going?",
+      "Why not join us?",
+      "I can do what I love to do."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 4,
+        "explanation": "B回答“Great!”并介绍近况，问最近怎么样，选How is it going?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 2,
+        "explanation": "B描述参与环保活动的经历，A发出赞叹，选What a wonderful experience!"
+      },
+      {
+        "stem": "第3空",
+        "answer": 1,
+        "explanation": "后文说“Second, you can plant trees.”，此处是第一条建议，选First, you shouldn't leave rubbish here and there."
+      },
+      {
+        "stem": "第4空",
+        "answer": 0,
+        "explanation": "前文说“you can plant trees”，解释种树的作用，选Trees can stop the wind from blowing the earth away."
+      },
+      {
+        "stem": "第5空",
+        "answer": 3,
+        "explanation": "A说“That sounds easy.”，B用谚语回应，表示实际做起来不容易，选Easier said than done."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Jack! You look tired. ___1___\nB: I stayed up late to finish my science project.\nA: ___2___ How long did you sleep last night?\nB: Only about four hours.\nA: ___3___ You need at least eight hours of sleep.\nB: I know. But I have to hand it in tomorrow.\nA: ___4___ You can finish the rest after a short rest.\nB: That's a good idea. ___5___\nA: You're welcome. Take care of yourself.",
+    "translation": "A：嗨，杰克！你看起来很累。怎么了？ B：我熬夜完成科学项目。 A：那对健康不好。你昨晚睡了多久？ B：只有大约四个小时。 A：你应该多睡觉。你至少需要八个小时的睡眠。 B：我知道。但我明天必须交。 A：你应该休息一下。你可以休息一会儿后再完成剩下的。 B：好主意。谢谢你的建议。 A：不客气。照顾好自己。",
+    "grade": 8,
+    "unit": "8B-U1",
+    "points": [
+      "情景交际",
+      "健康问题",
+      "提出建议"
+    ],
+    "options": [
+      "What's the matter?",
+      "That's bad for your health.",
+      "You should get more sleep.",
+      "You should take a rest.",
+      "Thanks for your advice.",
+      "Why don't you go to bed early?",
+      "How much sleep do you need?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B解释熬夜，问怎么了，选What's the matter?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "得知熬夜后给出评价，后文问睡眠时长，选That's bad for your health."
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B说只睡四小时，建议多睡觉，选You should get more sleep."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B说必须明天交，建议先休息，后文“after a short rest”呼应，选You should take a rest."
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "A回答“You're welcome.”，此处表示感谢，选Thanks for your advice."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Sam! Who is your best friend in our class?\nB: It's Tom. We often study and play games together.\nA: I know Tom. He is very outgoing. ___1___\nB: Yes, we are both into sports. But I think I am a bit more serious than him.\nA: Really? ___2___\nB: Tom is much funnier. He always tells jokes and makes everyone laugh.\nA: That's true. He is very popular. Is he as hard-working as you?\nB: No, I don't think so. ___3___\nA: I agree. You always get better grades in exams. ___4___\nB: I think a good friend should be talented and trustworthy. Also, they should bring out the best in you.\nA: Well said! ___5___\nB: Yes. Although we have some differences, we always support each other.",
+    "translation": "A：嗨，山姆！我们班你最好的朋友是谁？ B：是汤姆。我们经常一起学习、玩游戏。 A：我认识汤姆。他非常外向。你们有相似之处吗？ B：有的，我们都喜欢运动。但我认为我比他稍微严肃一点。 A：真的吗？那谁更幽默呢？ B：汤姆要幽默得多。他总是讲笑话，逗每个人发笑。 A：确实如此。他很受欢迎。他像你一样努力吗？ B：不，我不这么认为。我比他学得更努力。他经常在学习时走神。 A：我同意。你总是在考试中取得更好的成绩。你认为一个好朋友应该是什么样的？ B：我认为一个好朋友应该是有才华且值得信赖的。并且，他们应该能激发出你最好的一面。 A：说得真好！这就是你和汤姆相处得这么好的原因吗？ B：是的。尽管我们有一些不同，但我们总是互相支持。",
+    "grade": 8,
+    "unit": "8A-U3",
+    "points": [
+      "情景交际",
+      "人物对比",
+      "朋友标准"
+    ],
+    "options": [
+      "What do you think a good friend should be like?",
+      "I study harder than him.",
+      "Is that why you and Tom get along so well?",
+      "Tom is taller than me.",
+      "Do you have anything in common?",
+      "I think friends are not necessary.",
+      "Then who is funnier?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 4,
+        "explanation": "下文回答“Yes, we are both into sports”，问是否有共同点，选Do you have anything in common?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 6,
+        "explanation": "下文回答“Tom is much funnier”，问谁更幽默，选Then who is funnier?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 1,
+        "explanation": "问汤姆是否和山姆一样努力，否定后说明自己更努力，选I study harder than him."
+      },
+      {
+        "stem": "第4空",
+        "answer": 0,
+        "explanation": "下文陈述对好朋友标准的看法，问好朋友应该是什么样，选What do you think a good friend should be like?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 2,
+        "explanation": "下文回答“Yes. Although we have some differences...”，推测这是相处融洽的原因，选Is that why you and Tom get along so well?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Mary! I want to go out for dinner tonight. Do you have any suggestions?\nB: ___1___ It has the most delicious beef noodles in town.\nA: Sounds good. Is it expensive?\nB: No, the prices are very reasonable. ___2___\nA: That's perfect. How is the service there?\nB: ___3___ The waiters are always friendly and serve the food quickly.\nA: Great. How can I get there from our school?\nB: ___4___ It takes about ten minutes. It's next to the cinema.\nA: OK, I think I will walk there. By the way, what's the most popular theater nearby?\nB: Wanda Theater. ___5___ The seats are also the most comfortable.",
+    "translation": "A：嗨，玛丽！我想今晚出去吃晚饭。你有什么建议吗？ B：为什么不试试天天面馆呢？它有全镇最美味的牛肉面。 A：听起来不错。它贵吗？ B：不，价格非常合理。它是我们社区里最便宜的餐馆。 A：那太完美了。那里的服务怎么样？ B：它的服务也是最好的。服务员总是很友好，上菜也很快。 A：太棒了。从我们学校怎么去那里？ B：你可以直接步行去那里。大约需要十分钟。它就在电影院旁边。 A：好的，我想我会步行去。顺便问一下，附近最受欢迎的影院是哪家？ B：万达影院。它有全城最大的屏幕。座位也是最舒适的。",
+    "grade": 8,
+    "unit": "8A-U4",
+    "points": [
+      "情景交际",
+      "提出建议",
+      "最高级综合运用"
+    ],
+    "options": [
+      "Its service is also the best.",
+      "You can just walk there.",
+      "Why not try Tiantian Noodle House?",
+      "Wanda Theater is very small.",
+      "It has the biggest screen in the city.",
+      "I hate eating noodles.",
+      "It is the cheapest restaurant in our neighborhood."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 2,
+        "explanation": "上文要求给建议，后文提到面条，用Why not提出建议，选Why not try Tiantian Noodle House?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 6,
+        "explanation": "上文说价格合理，顺承价格话题用最高级说明最便宜，选It is the cheapest restaurant in our neighborhood."
+      },
+      {
+        "stem": "第3空",
+        "answer": 0,
+        "explanation": "上文问服务质量，后文说服务员友好、上菜快，选Its service is also the best."
+      },
+      {
+        "stem": "第4空",
+        "answer": 1,
+        "explanation": "下文A说决定步行，建议步行去，选You can just walk there."
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "后文提到座位最舒适，继续用最高级列举突出优势，选It has the biggest screen in the city."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Tony! ___1___\nB: I'm going to the sports center. I want to play basketball.\nA: ___2___\nB: About twice a week. It helps me stay fit.\nA: That's great. ___3___\nB: My favorite player is Yao Ming. He is very tall and skillful.\nA: I like him too. ___4___\nB: Yes, I do. I watch his games whenever I have time.\nA: ___5___\nB: You can come with me next time. I can teach you some basic skills.",
+    "translation": "A：嗨，托尼！你要去哪里？ B：我要去体育中心。我想打篮球。 A：你多久打一次篮球？ B：大约一周两次。它帮助我保持健康。 A：那很好。你最喜欢的球员是谁？ B：我最喜欢的球员是姚明。他非常高，技术也很好。 A：我也喜欢他。你经常看他的比赛吗？ B：是的。我一有时间就看他的比赛。 A：我也想学打篮球。 B：下次你可以和我一起去。我可以教你一些基本技巧。",
+    "grade": 7,
+    "unit": "7B-U3",
+    "points": [
+      "情景交际",
+      "运动与频率",
+      "谈论能力与喜好"
+    ],
+    "options": [
+      "Where are you going?",
+      "How often do you play basketball?",
+      "Who is your favorite player?",
+      "Do you often watch his games?",
+      "I want to learn to play basketball too.",
+      "What time do you usually play?",
+      "Can you teach me to swim?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文回答“I'm going to the sports center.”，问去哪里，选Where are you going?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文回答“About twice a week.”，问频率，选How often do you play basketball?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文回答“My favorite player is Yao Ming.”，问最喜欢的球员，选Who is your favorite player?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "下文回答“Yes, I do. I watch his games...”，问是否经常看比赛，选Do you often watch his games?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "下文说“You can come with me next time. I can teach you...”，表达想学打篮球，选I want to learn to play basketball too."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Alice! Where did you go this summer vacation?\nB: I went to Beijing.\nA: ___1___\nB: I went there with my friend, Jenny.\nA: ___2___\nB: Yes. As one of the best universities, it is really big and beautiful.\nA: How was the food there?\nB: ___3___\nA: I heard that it was too hot in Beijing, wasn't it?\nB: Yes. I tried swimming in Beidaihe. It made me kind of cool. ___4___\nA: You'd better go to a Beijing hutong next time. Maybe it has fewer visitors.\nB: Good idea. ___5___\nA: I lived there for 3 years. I love Beijing. Do you want to go there again with me?",
+    "translation": "A：嗨，爱丽丝。这个暑假你去哪儿了？ B：我去了北京。 A：你和谁一起去的？ B：我和我的朋友珍妮一起去的。 A：你参观北京大学了吗？ B：是的。作为最好的大学之一，它真的很大很美。 A：那里的食物怎么样？ B：北京烤鸭尝起来真的很美味。我甚至给父母买了一些。 A：我听说北京很热，是不是？ B：是的。我尝试了在北戴河游泳，让我凉快了些。但是人太多了。 A：下次你最好去北京的胡同。也许游客少一些。 B：好主意。你似乎对北京很了解。 A：我在那里住了三年。我爱北京。你想再和我一起去吗？",
+    "grade": 8,
+    "unit": "8A-U1",
+    "points": [
+      "情景交际",
+      "旅行经历",
+      "谈论感受与计划"
+    ],
+    "options": [
+      "Oh, really? Who did you go with?",
+      "Did you visit Peking University?",
+      "But there were so many people.",
+      "It seems that you know Beijing a lot.",
+      "Beijing duck tastes really delicious. I even bought some for my parents.",
+      "The weather in Beijing is nice.",
+      "I went to Shanghai last year."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B回答“I went there with my friend, Jenny.”，问和谁一起去的，选Oh, really? Who did you go with?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“Yes. As one of the best universities...”，问是否参观了北京大学，选Did you visit Peking University?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 4,
+        "explanation": "A问食物怎么样，B评价食物，选Beijing duck tastes really delicious. I even bought some for my parents."
+      },
+      {
+        "stem": "第4空",
+        "answer": 2,
+        "explanation": "B说完在北戴河游泳后补充了一个负面情况，与后文A建议去人少的地方衔接，选But there were so many people."
+      },
+      {
+        "stem": "第5空",
+        "answer": 3,
+        "explanation": "A回答“I lived there for 3 years.”，说明B感叹A对北京很了解，选It seems that you know Beijing a lot."
+      }
+    ]
+  },
+  {
+    "text": "A: What are you going to do for your summer vacation?\nB: I'm going to travel with my friends.\nA: ___1___\nB: To Shanghai, Hangzhou and Suzhou.\nA: ___2___\nB: By car.\nA: ___3___\nB: The day after tomorrow.\nA: ___4___\nB: For about two weeks.\nA: That sounds great. ___5___\nB: Thank you!",
+    "translation": "A：你暑假打算做什么？ B：我打算和朋友们去旅行。 A：你们要去哪里？ B：去上海、杭州和苏州。 A：你们怎么去？ B：开车去。 A：什么时候出发？ B：后天。 A：旅行会持续多久？ B：大约两周。 A：听起来很棒。祝你们玩得开心！ B：谢谢！",
+    "grade": 8,
+    "unit": "8A-U6",
+    "points": [
+      "情景交际",
+      "假期计划",
+      "询问细节"
+    ],
+    "options": [
+      "Where will you go?",
+      "How will you travel?",
+      "When are you leaving?",
+      "How long will the trip last?",
+      "Have a good trip!",
+      "Why don't you join us?",
+      "How far is it?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "B回答“To Shanghai, Hangzhou and Suzhou.”，问目的地，选Where will you go?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“By car.”，问交通方式，选How will you travel?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "B回答“The day after tomorrow.”，问出发时间，选When are you leaving?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B回答“For about two weeks.”，问持续多久，选How long will the trip last?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B回答“Thank you!”，表达祝愿，选Have a good trip!"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Tracy! How is your summer vacation going?\nB: ___1___\nA: Wow, lucky you! That sounds amazing. ___2___\nB: It's sunny and hot.\nA: What are you doing now, Tracy?\nB: ___3___\nA: Wow, playing beach volleyball sounds cool. ___4___\nB: My father is walking on the beach, and my mother is swimming.\nA: That's nice. ___5___",
+    "translation": "A：嗨，特蕾西！你的暑假过得怎么样？ B：太棒了！ A：哇，你真幸运！听起来太棒了。天气怎么样？ B：晴朗炎热。 A：特蕾西，你现在在做什么？ B：我正在打沙滩排球。 A：哇，打沙滩排球听起来很酷。你父母呢？ B：我爸爸在海滩上散步，我妈妈在游泳。 A：那真好。玩得开心！",
+    "grade": 7,
+    "unit": "7B-U5",
+    "points": [
+      "情景交际",
+      "天气与假期",
+      "现在进行时"
+    ],
+    "options": [
+      "It's wonderful!",
+      "How's the weather?",
+      "I'm playing beach volleyball.",
+      "What about your parents?",
+      "Have a great time!",
+      "I want to go home.",
+      "It's very dry today."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "问暑假过得怎么样，B回答很好，后文说“That sounds amazing.”，选It's wonderful!"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "B回答“It's sunny and hot.”，问天气，选How's the weather?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "问“What are you doing now?”，用现在进行时回答，选I'm playing beach volleyball."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B回答父母正在做什么，问B父母在做什么，选What about your parents?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "B回答“Thanks.”，表达祝愿，选Have a great time!"
+      }
+    ]
+  },
+  {
+    "text": "A: Hello? This is Anna speaking.\nB: Hi, Anna! It's Ben. ___1___\nA: Not much. I'm having lunch. What about you?\nB: ___2___ It's really interesting.\nA: Watching TV again? ___3___\nB: Yes, it's a sports show. I like watching basketball games.\nA: ___4___\nB: It's sunny and warm here in Jinan. How's the weather in your city?\nA: ___5___ I hope it will be sunny tomorrow.",
+    "translation": "A：你好？我是安娜。 B：嗨，安娜！我是本。你在做什么？ A：没什么。我在吃午饭。你呢？ B：我在看电视。真的很有趣。 A：又在看电视？你在看什么？ B：是的，是一个体育节目。我喜欢看篮球比赛。 A：你那里天气怎么样？ B：济南这里晴朗温暖。你所在的城市天气怎么样？ A：正在下雨。我希望明天会是晴天。",
+    "grade": 7,
+    "unit": "7B-U6",
+    "points": [
+      "情景交际",
+      "电话用语",
+      "天气与正在做的事"
+    ],
+    "options": [
+      "What are you doing?",
+      "What are you watching?",
+      "It's raining here.",
+      "I'm watching TV.",
+      "How's the weather there?",
+      "I'm doing my homework.",
+      "Do you like sports?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文回答“Not much. I'm having lunch.”，问对方正在做什么，选What are you doing?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 3,
+        "explanation": "下文说“Watching TV again?”，此处应回答正在看电视，选I'm watching TV."
+      },
+      {
+        "stem": "第3空",
+        "answer": 1,
+        "explanation": "下文回答“Yes, it's a sports show.”，问在看什么节目，选What are you watching?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 4,
+        "explanation": "下文回答“It's sunny and warm here in Jinan.”，问天气，选How's the weather there?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 2,
+        "explanation": "上文问“How's the weather in your city?”，回答当地天气，后文说希望明天晴天，说明现在天气不好，选It's raining here."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Yaming! How was your weekend?\nB: ___1___ I went to the science museum with my cousin.\nA: Really? ___2___\nB: We saw a robot show and tried some hands-on experiments.\nA: That sounds cool. ___3___\nB: It was about two hours. We took the subway there.\nA: ___4___\nB: Yes, we did. We took a lot of photos.\nA: Can I see them?\nB: ___5___ I'll bring them to school tomorrow.",
+    "translation": "A：嗨，亚明！你的周末怎么样？ B：很棒！我和表哥去了科学博物馆。 A：真的吗？你们在那里做了什么？ B：我们看了一场机器人表演，还尝试了一些动手实验。 A：听起来很酷。你们在那里待了多久？ B：大约两个小时。我们坐地铁去的。 A：你们拍照了吗？ B：是的，我们拍了很多。 A：我能看看吗？ B：当然。我明天带到学校来。",
+    "grade": 7,
+    "unit": "7B-U7",
+    "points": [
+      "情景交际",
+      "谈论过去经历",
+      "周末活动"
+    ],
+    "options": [
+      "It was great!",
+      "What did you do there?",
+      "How long did you stay there?",
+      "Did you take any photos?",
+      "Sure.",
+      "Where did you go?",
+      "How did you go there?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文说“I went to the science museum...”，评价周末，选It was great!"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文回答“We saw a robot show and tried...”，问在那里做了什么，选What did you do there?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文回答“It was about two hours.”，问待了多久，选How long did you stay there?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "下文回答“Yes, we did. We took a lot of photos.”，问是否拍照，选Did you take any photos?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "上文问“Can I see them?”，表示同意，选Sure."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Bill! You're reading this book again.\nB: Yes, Tom. I really can't put it down.\nA: ___1___\nB: Three times. Every time I read it, I can always learn something new.\nA: Really? ___2___\nB: Charles Dickens. I think he is a great English writer.\nA: ___3___ He is also my favorite foreign writer. What do you think of this book?\nB: ___4___ Where did you buy it?\nA: In Rose Bookshop. ___5___\nB: OK, no problem. I'll show you the way.",
+    "translation": "A：嗨，比尔！你又在读这本书。 B：是的，汤姆。我真的爱不释手。 A：你读过几遍？ B：三遍。每次读，我都能学到新东西。 A：真的吗？谁写的？ B：查尔斯·狄更斯。我认为他是一位伟大的英国作家。 A：我也这么认为。他也是我最喜欢的外国作家。你觉得这本书怎么样？ B：很精彩。你在哪里买的？ A：在玫瑰书店。你能告诉我怎么去吗？ B：好的，没问题。我给你指路。",
+    "grade": 7,
+    "unit": "7B-U8",
+    "points": [
+      "情景交际",
+      "谈论书籍与故事",
+      "文学阅读"
+    ],
+    "options": [
+      "How many times have you read it?",
+      "Who wrote it?",
+      "I think so.",
+      "It's wonderful.",
+      "Could you show me the way?",
+      "What's the book about?",
+      "When did you buy it?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文回答“Three times.”，问读过几遍，选How many times have you read it?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文回答“Charles Dickens.”，问作者，选Who wrote it?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "后文说“He is also my favorite foreign writer.”，表示赞同，选I think so."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "上文问“What do you think of this book?”，评价书，选It's wonderful."
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "下文回答“OK, no problem. I'll show you the way.”，请求指路，选Could you show me the way?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Kate! Do you like ice cream?\nB: Yes, I do. ___1___\nA: Really? How do you make it?\nB: ___2___ Then add some milk and sugar.\nA: ___3___\nB: Next, pour the mixture into a blender and turn it on.\nA: ___4___\nB: Finally, put it in the fridge for about two hours.\nA: That sounds easy. ___5___\nB: Sure! Let's make some together this weekend.",
+    "translation": "A：嗨，凯特！你喜欢冰淇淋吗？ B：是的，我喜欢。我经常在家做。 A：真的吗？你怎么做？ B：首先，把一些水果切碎。然后加一些牛奶和糖。 A：接下来做什么？ B：接下来，把混合物倒入搅拌机并打开。 A：然后呢？ B：最后，把它放进冰箱大约两个小时。 A：听起来很简单。你能教我吗？ B：当然！这周末我们一起做一些吧。",
+    "grade": 8,
+    "unit": "8A-U8",
+    "points": [
+      "情景交际",
+      "过程与步骤",
+      "询问做法"
+    ],
+    "options": [
+      "I often make it at home.",
+      "First, cut up some fruit.",
+      "What's next?",
+      "And then?",
+      "Can you teach me?",
+      "Do you like fruit?",
+      "How long does it take?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文问“How do you make it?”，说明B提到自己会做，选I often make it at home."
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文说“Then add some milk and sugar.”，此处是制作的第一步，选First, cut up some fruit."
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文说“Next, pour the mixture...”，问下一步做什么，选What's next?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "下文说“Finally, put it in the fridge...”，问然后呢，选And then?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "下文回答“Sure! Let's make some together...”，请求对方教自己，选Can you teach me?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Linda! You just came back from France. ___1___\nB: It was great, but I made a few mistakes because of the cultural differences.\nA: Really? ___2___\nB: Well, I arrived at the party on time, but the host looked a little surprised. ___3___\nA: Oh, in France, guests usually arrive a little later. What else?\nB: I brought a gift, but I opened it in front of the host. ___4___\nA: I see. In France, people often open gifts in private. ___5___\nB: Yes, I also talked about salary with a French friend. That was not polite.",
+    "translation": "A：嗨，琳达！你刚从法国回来。你的旅行怎么样？ B：很棒，但因为文化差异我犯了一些错误。 A：真的吗？发生什么事了？ B：嗯，我准时到了派对，但主人看起来有点惊讶。我做错了什么吗？ A：哦，在法国，客人通常会晚一点到。还有呢？ B：我带了礼物，但我在主人面前打开了它。那也不礼貌吗？ A：我明白了。在法国，人们通常私下打开礼物。还有其他文化差异吗？ B：是的，我还和一位法国朋友谈了工资。那是不礼貌的。",
+    "grade": 8,
+    "unit": "8B-U6",
+    "points": [
+      "情景交际",
+      "文化差异与习俗",
+      "跨文化交际"
+    ],
+    "options": [
+      "How was your trip?",
+      "What happened?",
+      "Did I do anything wrong?",
+      "Was that impolite too?",
+      "Are there any other differences?",
+      "Did you enjoy the food?",
+      "How long did you stay there?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文回答“It was great, but...”，问旅行怎么样，选How was your trip?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文描述在派对上犯的错误，问发生了什么，选What happened?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "上文说主人看起来惊讶，B询问自己是否做错了什么，选Did I do anything wrong?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "B描述在主人面前打开礼物，问这是否也不礼貌，选Was that impolite too?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "下文回答“Yes, I also talked about salary...”，问是否还有其他差异，选Are there any other differences?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Peter! I hear you went to the library yesterday. ___1___\nB: I went there with my classmate, Jack.\nA: ___2___\nB: We read a book about the world's highest mountain.\nA: Qomolangma? ___3___\nB: It's about 8,848.86 meters high. It's the highest mountain in the world.\nA: That's amazing. ___4___\nB: It's in the Himalayas, on the border between China and Nepal.\nA: ___5___\nB: Yes, but climbing it is very dangerous because of the cold weather and heavy storms.",
+    "translation": "A：嗨，彼得！我听说你昨天去图书馆了。你和谁一起去的？ B：我和我的同学杰克一起去的。 A：你们读了什么？ B：我们读了一本关于世界最高山的书。 A：珠穆朗玛峰？它有多高？ B：它大约8848.86米高。它是世界最高峰。 A：太神奇了。它在哪里？ B：它在喜马拉雅山脉，位于中国和尼泊尔的边界上。 A：很多人尝试攀登它吗？ B：是的，但由于寒冷的天气和猛烈的风暴，攀登它非常危险。",
+    "grade": 8,
+    "unit": "8B-U7",
+    "points": [
+      "情景交际",
+      "地理事实",
+      "世界知识"
+    ],
+    "options": [
+      "Who did you go with?",
+      "What did you read?",
+      "How high is it?",
+      "Where is it?",
+      "Do many people try to climb it?",
+      "When did you go?",
+      "How long did you stay there?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文回答“I went there with my classmate, Jack.”，问和谁一起去的，选Who did you go with?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文回答“We read a book about...”，问读了什么，选What did you read?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文回答“It's about 8,848.86 meters high.”，问高度，选How high is it?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "下文回答“It's in the Himalayas...”，问位置，选Where is it?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "下文回答“Yes, but climbing it is very dangerous...”，问是否有很多人尝试攀登，选Do many people try to climb it?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Emily! ___1___\nB: I'm looking at my photos from the space museum.\nA: The space museum? ___2___\nB: Yes, I have. I went there last month. It was fantastic.\nA: ___3___\nB: I saw a real rocket and learned how astronauts live in space.\nA: That sounds cool. ___4___\nB: I went with my science teacher and my classmates.\nA: ___5___\nB: Yes, we did. We took a lot of photos and bought some model rockets.",
+    "translation": "A：嗨，艾米丽！你在做什么？ B：我在看我在太空博物馆拍的照片。 A：太空博物馆？你去过那里吗？ B：是的，我去过。我上个月去的。太棒了。 A：你在那里看到了什么？ B：我看到了一枚真正的火箭，还了解了宇航员如何在太空生活。 A：听起来很酷。你和谁一起去的？ B：我和我的科学老师以及同学们一起去的。 A：你们买东西了吗？ B：是的，我们拍了很多照片，还买了一些模型火箭。",
+    "grade": 8,
+    "unit": "8B-U9",
+    "points": [
+      "情景交际",
+      "过去经历与博物馆",
+      "现在完成时"
+    ],
+    "options": [
+      "What are you doing?",
+      "Have you ever been there?",
+      "What did you see there?",
+      "Who did you go with?",
+      "Did you buy anything?",
+      "When did you go?",
+      "How did you go there?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文回答“I'm looking at my photos...”，问正在做什么，选What are you doing?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文回答“Yes, I have.”，问是否去过那里，选Have you ever been there?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文回答“I saw a real rocket...”，问看到了什么，选What did you see there?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "下文回答“I went with my science teacher...”，问和谁一起去的，选Who did you go with?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "下文回答“Yes, we did. We took a lot of photos and bought...”，问是否买东西了，选Did you buy anything?"
+      }
+    ]
+  },
+  {
+    "text": "A: Excuse me, could you please tell me where the nearest bank is?\nB: Sure. ___1___\nA: Is it far from here?\nB: ___2___ It's about ten minutes' walk.\nA: ___3___\nB: Go along this street and turn right at the second crossing. ___4___\nA: Thank you very much.\nB: ___5___",
+    "translation": "A：打扰一下，你能告诉我最近的银行在哪里吗？ B：当然。一直往前走。 A：离这里远吗？ B：不远。大约走十分钟。 A：我怎么到那里？ B：沿着这条街走，在第二个十字路口右转。银行在你的左边。 A：非常感谢。 B：不客气。",
+    "grade": 9,
+    "unit": "9A-U3",
+    "points": [
+      "情景交际",
+      "礼貌询问与问路",
+      "指路"
+    ],
+    "options": [
+      "Go straight ahead.",
+      "No, it isn't.",
+      "How can I get there?",
+      "The bank is on your left.",
+      "You're welcome.",
+      "Yes, it is very far.",
+      "Where are you from?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "开始指路，选Go straight ahead."
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文说“It's about ten minutes' walk.”，说明不远，选No, it isn't."
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文详细说明路线，问怎么到那里，选How can I get there?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "指路最后说明目的地方位，选The bank is on your left."
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "回应感谢，选You're welcome."
+      }
+    ]
+  },
+  {
+    "text": "A: What kind of music do you like, Scott?\nB: ___1___ I can sing along with it.\nA: I like music that has great lyrics. ___2___\nB: I also like movies that are funny. What about you?\nA: ___3___ I think action movies are exciting.\nB: ___4___\nA: My favorite actor is Jackie Chan. He is really funny and skillful.\nB: ___5___ I like him too.",
+    "translation": "A：斯科特，你喜欢什么类型的音乐？ B：我喜欢能跟着唱的音乐。 A：我喜欢歌词优美的音乐。你喜欢什么类型的电影？ B：我也喜欢有趣的电影。你呢？ A：我喜欢动作电影。我觉得动作电影很刺激。 B：你最喜欢的演员是谁？ A：我最喜欢的演员是成龙。他真的很幽默，也很有技巧。 B：我同意。我也喜欢他。",
+    "grade": 9,
+    "unit": "9A-U9",
+    "points": [
+      "情景交际",
+      "谈论偏好",
+      "定语从句"
+    ],
+    "options": [
+      "I like music that I can dance to.",
+      "What kind of movies do you like?",
+      "I prefer action movies.",
+      "Who is your favorite actor?",
+      "I agree.",
+      "Do you like music?",
+      "When do you watch movies?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "后文说“I can sing along with it.”，说明喜欢能跟着唱的音乐，选I like music that I can dance to."
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文回答“I also like movies that are funny.”，问对方喜欢什么电影，选What kind of movies do you like?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文说“I think action movies are exciting.”，说明喜欢动作片，选I prefer action movies."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "下文回答“My favorite actor is Jackie Chan.”，问最喜欢的演员，选Who is your favorite actor?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "后文说“I like him too.”，表示同意，选I agree."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Wendy! You're going to China as an exchange student, right?\nB: Yes. ___1___\nA: Don't worry. Let me tell you some Chinese customs.\nB: Great! ___2___\nA: When you meet someone for the first time, you're supposed to shake hands.\nB: I see. ___3___\nA: At the dinner table, you shouldn't stick your chopsticks into the rice.\nB: OK. ___4___\nA: You're supposed to let the elder start eating first.\nB: ___5___ Thank you for telling me.",
+    "translation": "A：嗨，温迪！你要作为交换生去中国，是吗？ B：是的。但我不知道中国的风俗习惯。 A：别担心。让我告诉你一些中国习俗。 B：太好了！我应该做什么？ A：当你第一次见到某人时，你应该握手。 B：我明白了。在餐桌上我该怎么做？ A：在餐桌上，你不应该把筷子插进米饭里。 B：好的。还有其他规则吗？ A：你应该让长辈先吃。 B：我知道了。谢谢你告诉我。",
+    "grade": 9,
+    "unit": "9A-U10",
+    "points": [
+      "情景交际",
+      "风俗礼仪",
+      "文化习俗"
+    ],
+    "options": [
+      "But I don't know the customs.",
+      "What am I supposed to do?",
+      "What should I do at the dinner table?",
+      "Are there any other rules?",
+      "I see.",
+      "When are you leaving?",
+      "Do you like Chinese food?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文说“Let me tell you some Chinese customs.”，说明B不了解习俗，选But I don't know the customs."
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文回答“you're supposed to shake hands.”，问应该做什么，选What am I supposed to do?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文回答“At the dinner table, you shouldn't...”，问餐桌上怎么做，选What should I do at the dinner table?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "下文回答“You're supposed to let the elder start eating first.”，问是否还有其他规则，选Are there any other rules?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "表示明白了，选I see."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Grace! How was your school trip last week?\nB: ___1___ We went to a farm.\nA: A farm? ___2___\nB: We picked apples and fed the chickens.\nA: That sounds fun. ___3___\nB: It was sunny and warm. The air was very clean.\nA: ___4___\nB: Yes, I did. I had a great time there.\nA: ___5___\nB: Sure. Here are some photos.",
+    "translation": "A：嗨，格蕾丝！你上周的学校旅行怎么样？ B：太棒了！我们去了一个农场。 A：农场？你们在那里做了什么？ B：我们摘了苹果，喂了鸡。 A：听起来很有趣。天气怎么样？ B：晴朗温暖。空气很干净。 A：你玩得开心吗？ B：是的。我在那里玩得很开心。 A：我能看看照片吗？ B：当然。这些是照片。",
+    "grade": 7,
+    "unit": "7B-U7",
+    "points": [
+      "情景交际",
+      "过去经历",
+      "学校旅行"
+    ],
+    "options": [
+      "It was great!",
+      "What did you do there?",
+      "How was the weather?",
+      "Did you have a good time?",
+      "Can I see the photos?",
+      "Where did you go?",
+      "How did you go there?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文说“We went to a farm.”，评价旅行，选It was great!"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文回答“We picked apples and fed the chickens.”，问做了什么，选What did you do there?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文回答“It was sunny and warm.”，问天气，选How was the weather?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "下文回答“Yes, I did. I had a great time there.”，问是否玩得开心，选Did you have a good time?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "下文回答“Sure. Here are some photos.”，请求看照片，选Can I see the photos?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Tom! You look unhappy. ___1___\nB: I had a fight with my cousin. He is angry with me.\nA: ___2___\nB: I broke his model plane by accident.\nA: I see. ___3___ You should say sorry to him.\nB: I know, but I'm afraid he won't forgive me.\nA: ___4___ True friends always understand each other.\nB: You're right. ___5___\nA: You can also buy him a new model plane.",
+    "translation": "A：嗨，汤姆！你看起来不开心。怎么了？ B：我和表弟吵架了。他生我的气。 A：发生什么事了？ B：我不小心弄坏了他的模型飞机。 A：我明白了。你应该向他道歉。 B：我知道，但我怕他不会原谅我。 A：别担心。真正的朋友总是互相理解。 B：你说得对。我还能做什么？ A：你也可以给他买一个新的模型飞机。",
+    "grade": 8,
+    "unit": "8B-U4",
+    "points": [
+      "情景交际",
+      "人际冲突与建议",
+      "提出建议"
+    ],
+    "options": [
+      "What's wrong?",
+      "What happened?",
+      "You should say sorry to him.",
+      "Don't worry.",
+      "What else can I do?",
+      "Did you buy him a gift?",
+      "You should forget him."
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文描述吵架，问怎么了，选What's wrong?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文解释弄坏模型飞机，问发生什么事了，选What happened?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "给出具体建议，后文说“You should say sorry to him.”，选You should say sorry to him."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "安慰对方，后文“True friends always understand each other.”衔接，选Don't worry."
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "下文回答“You can also buy him a new model plane.”，问还能做什么，选What else can I do?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Lily! ___1___\nB: I'm going to the bookstore. I want to buy a dictionary.\nA: ___2___\nB: I need it for my English study. I often forget new words.\nA: ___3___\nB: Yes, I do. I read English stories every day.\nA: That's a good habit. ___4___\nB: I usually read for about half an hour.\nA: ___5___\nB: You're right. I will keep doing it.",
+    "translation": "A：嗨，莉莉！你要去哪里？ B：我去书店。我想买一本字典。 A：你为什么需要字典？ B：我学英语需要它。我经常忘记新单词。 A：你经常读英语故事吗？ B：是的。我每天读英语故事。 A：那是个好习惯。你通常读多久？ B：我通常读大约半小时。 A：坚持住。 B：你说得对。我会继续坚持。",
+    "grade": 7,
+    "unit": "7B-U8",
+    "points": [
+      "情景交际",
+      "阅读习惯与学习",
+      "故事阅读相关"
+    ],
+    "options": [
+      "Where are you going?",
+      "Why do you need a dictionary?",
+      "Do you often read English stories?",
+      "How long do you usually read?",
+      "Keep it up.",
+      "What's your favorite book?",
+      "When do you read?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文回答“I'm going to the bookstore.”，问去哪里，选Where are you going?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文回答“I need it for my English study.”，问为什么需要字典，选Why do you need a dictionary?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文回答“Yes, I do. I read English stories every day.”，问是否经常读英语故事，选Do you often read English stories?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "下文回答“I usually read for about half an hour.”，问读多久，选How long do you usually read?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "下文回答“You're right. I will keep doing it.”，鼓励坚持，选Keep it up."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Mike! I hear you had a study trip last Saturday. ___1___\nB: We went to Wenchang and Qionghai.\nA: ___2___\nB: First, we visited Haiwen Bridge. ___3___\nA: Of course I have! It connects Haikou and Wenchang. It's very long.\nB: Yes, it's about 5.6 kilometers long. Then we went to a space museum.\nA: ___4___\nB: We saw a rocket model and learned about space travel.\nA: That sounds great. ___5___\nB: We took a lot of photos and bought some postcards.",
+    "translation": "A：嗨，迈克！我听说你上周六有一次研学旅行。你们去了哪里？ B：我们去了文昌和琼海。 A：你们在那里做了什么？ B：首先，我们参观了海文大桥。你听说过它吗？ A：当然听说过！它连接海口和文昌。它非常长。 B：是的，它大约5.6公里长。然后我们去了太空博物馆。 A：你们在那里看到了什么？ B：我们看到了一个火箭模型，还了解了太空旅行。 A：听起来很棒。你们买了什么吗？ B：我们拍了很多照片，还买了一些明信片。",
+    "grade": 8,
+    "unit": "8B-U9",
+    "points": [
+      "情景交际",
+      "过去经历与旅行",
+      "研学活动"
+    ],
+    "options": [
+      "Where did you go?",
+      "What did you do there?",
+      "Have you ever heard of it?",
+      "What did you see there?",
+      "What did you buy?",
+      "How did you go there?",
+      "Who did you go with?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文回答“We went to Wenchang and Qionghai.”，问去了哪里，选Where did you go?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文描述参观活动，问做了什么，选What did you do there?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文回答“Of course I have!”，问是否听说过海文大桥，选Have you ever heard of it?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "下文回答“We saw a rocket model...”，问看到了什么，选What did you see there?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "下文回答“We took a lot of photos and bought some postcards.”，问买了什么，选What did you buy?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Julia! You look excited. ___1___\nB: I just got a letter from my pen pal in Canada.\nA: That's great! ___2___\nB: She is thirteen years old, and she likes playing the piano.\nA: ___3___\nB: I'm going to write back and tell her about my school life.\nA: ___4___\nB: I'm going to send her some photos of my family too.\nA: ___5___\nB: Yes, I do. I hope she can visit China one day.",
+    "translation": "A：嗨，朱莉娅！你看起来很兴奋。怎么了？ B：我刚收到加拿大笔友的一封信。 A：太棒了！她是什么样的人？ B：她十三岁，喜欢弹钢琴。 A：你打算怎么做？ B：我打算回信告诉她我的学校生活。 A：你还打算做什么？ B：我还打算给她寄一些我家人的照片。 A：你希望见到她吗？ B：是的。我希望有一天她能来中国。",
+    "grade": 7,
+    "unit": "7B-U8",
+    "points": [
+      "情景交际",
+      "笔友交流与计划",
+      "个人信息"
+    ],
+    "options": [
+      "What's up?",
+      "What is she like?",
+      "What are you going to do?",
+      "What else are you going to do?",
+      "Do you hope to meet her?",
+      "Where is she from?",
+      "How old is she?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文解释收到笔友来信，问怎么了，选What's up?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文回答年龄和爱好，问笔友是什么样的人，选What is she like?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文回答“I'm going to write back...”，问打算怎么做，选What are you going to do?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "下文回答“I'm going to send her some photos... too.”，问还打算做什么，选What else are you going to do?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "下文回答“Yes, I do. I hope she can visit China one day.”，问是否希望见到她，选Do you hope to meet her?"
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Sam! You look tired. ___1___\nB: I stayed up late to finish my science project.\nA: ___2___ How long did you sleep last night?\nB: Only about four hours.\nA: ___3___ You need at least eight hours of sleep.\nB: I know. But I have to hand it in tomorrow.\nA: ___4___ You can finish the rest after a short rest.\nB: That's a good idea. ___5___\nA: You're welcome. Take care of yourself.",
+    "translation": "A：嗨，山姆！你看起来很累。怎么了？ B：我熬夜完成科学项目。 A：那对健康不好。你昨晚睡了多久？ B：只有大约四个小时。 A：你应该多睡觉。你至少需要八个小时的睡眠。 B：我知道。但我明天必须交。 A：你应该休息一下。你可以休息一会儿后再完成剩下的。 B：好主意。谢谢你的建议。 A：不客气。照顾好自己。",
+    "grade": 8,
+    "unit": "8B-U1",
+    "points": [
+      "情景交际",
+      "健康问题与建议",
+      "作息习惯"
+    ],
+    "options": [
+      "What's the matter?",
+      "That's bad for your health.",
+      "You should get more sleep.",
+      "You should take a rest.",
+      "Thanks for your advice.",
+      "Why don't you go to bed early?",
+      "How much sleep do you need?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文解释熬夜，问怎么了，选What's the matter?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "得知熬夜后给出评价，后文问睡眠时长，选That's bad for your health."
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文说只睡四小时，建议多睡觉，选You should get more sleep."
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "建议先休息，后文“after a short rest”呼应，选You should take a rest."
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "回应“You're welcome.”，表示感谢，选Thanks for your advice."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, David! The summer holiday is coming. ___1___\nB: I'm going to visit my grandparents in the countryside.\nA: ___2___\nB: I'm going there by train.\nA: ___3___\nB: I'm going to stay there for about three weeks.\nA: ___4___\nB: I'm going to help my grandparents with the farm work and enjoy the fresh air.\nA: That sounds great. ___5___\nB: Thank you! I will send you some photos.",
+    "translation": "A：嗨，大卫！暑假要到了。你打算做什么？ B：我打算去乡下看望我的祖父母。 A：你怎么去那里？ B：我坐火车去。 A：你打算在那里待多久？ B：我打算在那里待大约三周。 A：你打算在那里做什么？ B：我打算帮祖父母干农活，享受新鲜空气。 A：听起来很棒。祝你玩得开心。 B：谢谢！我会给你发一些照片。",
+    "grade": 8,
+    "unit": "8A-U1",
+    "points": [
+      "情景交际",
+      "假期计划与安排",
+      "询问细节"
+    ],
+    "options": [
+      "What are you going to do this summer?",
+      "How are you going there?",
+      "How long are you going to stay there?",
+      "What are you going to do there?",
+      "Have a good time.",
+      "When are you leaving?",
+      "Who are you going with?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文回答“I'm going to visit my grandparents...”，问暑假打算做什么，选What are you going to do this summer?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "下文回答“I'm going there by train.”，问交通方式，选How are you going there?"
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文回答“for about three weeks”，问待多久，选How long are you going to stay there?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "下文回答具体活动，问打算做什么，选What are you going to do there?"
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "下文回答“Thank you!”，表达祝愿，选Have a good time."
+      }
+    ]
+  },
+  {
+    "text": "A: Hi, Tina! You look tired. ___1___\nB: I stayed up late to watch a volleyball match last night.\nA: ___2___ You need to get enough sleep.\nB: I know. But the match was really exciting.\nA: ___3___\nB: It started at 10:30 p.m. and ended after midnight.\nA: That's too late. ___4___\nB: You're right. I'll watch the replay next time.\nA: ___5___",
+    "translation": "A：嗨，蒂娜！你看起来很累。怎么了？ B：我昨晚熬夜看排球赛了。 A：那对健康不好。你需要充足的睡眠。 B：我知道。但比赛真的很精彩。 A：比赛什么时候开始的？ B：晚上10:30开始，午夜后结束。 A：太晚了。你最好下次看回放。 B：你说得对。下次我会看回放。 A：那是个好主意。",
+    "grade": 8,
+    "unit": "8B-U1",
+    "points": [
+      "情景交际",
+      "健康作息与建议",
+      "睡眠问题"
+    ],
+    "options": [
+      "What's the matter?",
+      "That's bad for your health.",
+      "When did the match start?",
+      "You'd better watch the replay next time.",
+      "That's a good idea.",
+      "Why don't you go to bed now?",
+      "How long did the match last?"
+    ],
+    "questions": [
+      {
+        "stem": "第1空",
+        "answer": 0,
+        "explanation": "下文解释熬夜看比赛，问怎么了，选What's the matter?"
+      },
+      {
+        "stem": "第2空",
+        "answer": 1,
+        "explanation": "得知熬夜后给出评价，后文“You need to get enough sleep”衔接，选That's bad for your health."
+      },
+      {
+        "stem": "第3空",
+        "answer": 2,
+        "explanation": "下文回答“It started at 10:30 p.m.”，问比赛开始时间，选When did the match start?"
+      },
+      {
+        "stem": "第4空",
+        "answer": 3,
+        "explanation": "觉得太晚，建议看回放，选You'd better watch the replay next time."
+      },
+      {
+        "stem": "第5空",
+        "answer": 4,
+        "explanation": "接受建议，表示肯定，选That's a good idea."
+      }
+    ]
   }
 ]
