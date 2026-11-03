@@ -1377,30 +1377,41 @@ function getFilterParams() {
 }
 
 /* 单条数据是否满足筛选条件（硬过滤：不符合的绝不进入候选池） */
-function matchItem(item, p) {
+/* ---------- 筛选匹配 ---------- */
+function matchBase(item, p) {
   if (!item) return false;
 
-  if (p.grade != null) {
-    if (item.grade == null || Number(item.grade) !== p.grade) return false;
-  }
+  const itemGrade = (item.grade == null || item.grade === '') ? null : Number(item.grade);
 
-  if (p.units.length) {
-    const u = String(item.unit || '').trim();
-    if (p.units.indexOf(u) === -1) return false;
-  } else if (p.term && p.grade != null) {
-    const u = String(item.unit || '').trim();
-    const info = unitIndex[String(p.grade)];
-    if (!info || !u || info.term[u] !== p.term) return false;
-  }
+  /* 年级：没标年级的题视为通用题，任何年级都保留 */
+  if (p.grade != null && itemGrade != null && itemGrade !== p.grade) return false;
 
-  if (p.points.length) {
-    const pts = Array.isArray(item.points) ? item.points : [];
-    if (!pts.some(function (x) { return p.points.indexOf(x) !== -1; })) return false;
+  /* 册别 / 单元：只对“标了年级的题”生效；未标年级的通用题不参与册别/单元过滤 */
+  if (itemGrade != null) {
+    if (p.units.length) {
+      const u = String(item.unit || '').trim();
+      if (p.units.indexOf(u) === -1) return false;
+    } else if (p.term && p.grade != null) {
+      const u = String(item.unit || '').trim();
+      const info = unitIndex[String(p.grade)];
+      if (!info || !u || info.term[u] !== p.term) return false;
+    }
   }
 
   return true;
 }
 
+function matchPoints(item, p) {
+  if (!p.points.length) return true;
+  const pts = Array.isArray(item.points) ? item.points : null;
+  /* 未标 points → 通用题，视为匹配；只有标了 points 的题才参与知识点过滤 */
+  if (!pts) return true;
+  return pts.some(function (x) { return p.points.indexOf(x) !== -1; });
+}
+
+function matchItem(item, p) {
+  return matchBase(item, p) && matchPoints(item, p);
+}
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -1441,50 +1452,98 @@ function pickReadingFrom(pool, want) {
 }
 
 /* 多知识点时轮转取题，尽量平均 */
-function pickBalanced(pool, want, points) {
-  const order = shuffle(points.slice());
-  const buckets = {};
-  order.forEach(function (p) {
-    buckets[p] = shuffle(pool.filter(function (it) {
-      return Array.isArray(it.points) && it.points.indexOf(p) !== -1;
-    }));
-  });
+/* ---------- 抽题：知识点优先 + 补全 ----------
+   硬边界：年级 / 册别 / 单元（basePool）
+   软约束：知识点（strictPool）——不够时从 basePool 随机补
+------------------------------------------------ */
+function pickWithPointsPriority(strictPool, basePool, want, points) {
   const used = new Set();
   const out = [];
+
+  /* 1. 先按勾选知识点轮转取，尽量平均 */
+  const order = shuffle(points.slice());
+  const buckets = {};
+  order.forEach(function (pt) {
+    buckets[pt] = shuffle(strictPool.filter(function (it) {
+      return Array.isArray(it.points) && it.points.indexOf(pt) !== -1;
+    }));
+  });
+
   let guard = 0;
-  while (out.length < want && guard < 200) {
+  while (out.length < want && guard < 500) {
     let advanced = false;
     for (let i = 0; i < order.length && out.length < want; i++) {
       const b = buckets[order[i]];
       while (b.length) {
         const it = b.shift();
         if (used.has(it)) continue;
-        used.add(it);
-        out.push(it);
-        advanced = true;
-        break;
+        used.add(it); out.push(it); advanced = true; break;
       }
     }
     if (!advanced) break;
     guard++;
   }
+
+  /* 2. 严格池里剩下的（未标 points 的通用题等）随机取 */
+  if (out.length < want) {
+    const rest = shuffle(strictPool.filter(function (it) { return !used.has(it); }));
+    for (let i = 0; i < rest.length && out.length < want; i++) {
+      used.add(rest[i]); out.push(rest[i]);
+    }
+  }
+
+  /* 3. 同年级 / 同册 / 同单元范围内随机补全（不跨年级、不跨单元） */
+  if (out.length < want) {
+    const fill = shuffle(basePool.filter(function (it) { return !used.has(it); }));
+    for (let i = 0; i < fill.length && out.length < want; i++) {
+      used.add(fill[i]); out.push(fill[i]);
+    }
+  }
+
   return out;
 }
 
+function pickWithFallback(strictPool, basePool, want) {
+  const picked = shuffle(strictPool.slice()).slice(0, want);
+  if (picked.length >= want) return picked;
+
+  const used = new Set(picked);
+  const fill = shuffle(basePool.filter(function (it) { return !used.has(it); }));
+  for (let i = 0; i < fill.length && picked.length < want; i++) picked.push(fill[i]);
+  return picked;
+}
+
 /* 按题型抽题（全部基于筛选后的候选池随机） */
+/* ---------- 按题型抽题 ---------- */
 function pickForType(type, want, params) {
   const data = bankData[type.id];
   if (!Array.isArray(data) || data.length === 0) return [];
-  const pool = data.filter(function (it) { return matchItem(it, params); });
-  if (pool.length === 0) return [];
 
+  /* 硬边界池：年级 / 册别 / 单元（未标年级的通用题也在这里） */
+  const basePool = data.filter(function (it) { return matchBase(it, params); });
+  if (basePool.length === 0) return [];
+
+  /* 严格池：basePool + 知识点匹配 */
+  const strictPool = basePool.filter(function (it) { return matchPoints(it, params); });
+
+  /* 阅读理解：按类型取，不足从 basePool 补 */
   if (type.id === 'reading') {
-    return pickReadingFrom(pool, want);
+    const picked = pickReadingFrom(strictPool.length ? strictPool : basePool, want);
+    if (picked.length < want) {
+      const used = new Set(picked);
+      const fill = shuffle(basePool.filter(function (it) { return !used.has(it); }));
+      for (let i = 0; i < fill.length && picked.length < want; i++) picked.push(fill[i]);
+    }
+    return picked;
   }
-  if ((type.id === 'single' || type.id === 'spelling') && params.points.length > 1) {
-    return pickBalanced(pool, want, params.points);
+
+  /* 单选 / 拼写：勾选了知识点时，按知识点轮转 + 补全 */
+  if ((type.id === 'single' || type.id === 'spelling') && params.points.length > 0) {
+    return pickWithPointsPriority(strictPool, basePool, want, params.points);
   }
-  return shuffle(pool.slice()).slice(0, want);
+
+  /* 完形 / 对话 / 写作等：严格池随机，不足从 basePool 补 */
+  return pickWithFallback(strictPool, basePool, want);
 }
 
 /* =========================================================
@@ -1668,13 +1727,28 @@ function generateExam() {
     const picked = pickForType(type, want, params);
     selections[type.id] = picked;
 
-    if (!clearedTypes.has(type.id) && picked.length < want) {
-      const poolSize = data.filter(function (it) { return matchItem(it, params); }).length;
-      const shortName = type.name.replace(/^[Ⅰ-Ⅹ]+\.\s*/, '');
-      if (poolSize === 0) {
-        warnings.push(shortName + '：无符合筛选条件的题目');
+        if (clearedTypes.has(type.id)) return;
+
+    const shortName = type.name.replace(/^[Ⅰ-Ⅹ]+\.\s*/, '');
+    const basePool = data.filter(function (it) { return matchBase(it, params); });
+    const strictPool = basePool.filter(function (it) { return matchPoints(it, params); });
+
+    /* 补全提示：勾选了知识点，但严格匹配不足，已从同年级/同单元范围随机补 */
+    if (params.points.length && strictPool.length < picked.length) {
+      const strictPicked = picked.filter(function (it) { return matchPoints(it, params); }).length;
+      const filled = picked.length - strictPicked;
+      if (filled > 0) {
+        warnings.push(shortName + '：知识点严格匹配 ' + strictPicked + ' ' + type.unit +
+          '，已从同年级/同单元范围随机补全 ' + filled + ' ' + type.unit);
+      }
+    }
+
+    /* 数量不足：年级/单元范围内总数就不够 */
+    if (picked.length < want) {
+      if (basePool.length === 0) {
+        warnings.push(shortName + '：当前年级/单元范围内无可用题目');
       } else {
-        warnings.push(shortName + '：符合条件 ' + poolSize + ' ' + type.unit +
+        warnings.push(shortName + '：当前年级/单元范围内共 ' + basePool.length + ' ' + type.unit +
           '，需 ' + want + '，实抽 ' + picked.length);
       }
     }
