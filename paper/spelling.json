@@ -29608,5 +29608,8063 @@
       "名词",
       "词汇辨析"
     ]
+  },
+  {
+    "stem": "Why don't you ___ (和) your parents talk about your problem?",
+    "stemZh": "你为什么不和你的父母谈谈你的问题呢？",
+    "answer": "talk with",
+    "explanation": "talk with sb 意为“和某人交谈”，Why don't you 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "固定搭配",
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "You should ___ (道歉) to your friend for being rude.",
+    "stemZh": "你应该为你的粗鲁向朋友道歉。",
+    "answer": "say sorry",
+    "explanation": "say sorry to sb 意为“向某人道歉”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My parents allow me to ___ (熬夜) late on weekends.",
+    "stemZh": "我父母允许我周末熬夜。",
+    "answer": "stay up",
+    "explanation": "stay up late 意为“熬夜”，allow sb to do sth 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "固定搭配",
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "She ___ (争吵) with her brother about the TV remote yesterday.",
+    "stemZh": "她昨天和弟弟为了电视遥控器争吵了。",
+    "answer": "argued",
+    "explanation": "根据 yesterday 可知用一般过去时，argue 的过去式为 argued。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I don't want to ___ (打架) with my classmates.",
+    "stemZh": "我不想和同学打架。",
+    "answer": "fight",
+    "explanation": "fight with sb 意为“和某人打架”，want to 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "You could ___ (写) him a letter to say sorry.",
+    "stemZh": "你可以给他写封信道歉。",
+    "answer": "write",
+    "explanation": "write sb a letter 意为“给某人写信”，could 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My sister ___ (借) my clothes without asking me. It made me angry.",
+    "stemZh": "我妹妹没问我就借了我的衣服，这让我很生气。",
+    "answer": "borrowed",
+    "explanation": "根据 made 可知用一般过去时，borrow 的过去式为 borrowed。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Please ___ (归还) my book when you finish reading it.",
+    "stemZh": "你看完书后请归还给我。",
+    "answer": "return",
+    "explanation": "return 意为“归还”，祈使句用动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "祈使句",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "It is ___ (正常的) to feel nervous before an exam.",
+    "stemZh": "考试前感到紧张是正常的。",
+    "answer": "normal",
+    "explanation": "It is + adj. + to do sth 句型，normal 意为“正常的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "You should ___ (解释) to your teacher why you were late.",
+    "stemZh": "你应该向老师解释你为什么迟到。",
+    "answer": "explain",
+    "explanation": "explain to sb 意为“向某人解释”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He ___ (拒绝) to talk to me after the argument.",
+    "stemZh": "争吵之后他拒绝和我说话。",
+    "answer": "refused",
+    "explanation": "根据 after the argument 可知用一般过去时，refuse 的过去式为 refused。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时",
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "My parents often ___ (比较) me with my cousin, which makes me unhappy.",
+    "stemZh": "我父母经常拿我和表姐比较，这让我不开心。",
+    "answer": "compare",
+    "explanation": "compare sb with sb 意为“把某人和某人比较”，主语为复数，动词用原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "You should ___ (沟通) with your parents about your feelings.",
+    "stemZh": "你应该和父母沟通你的感受。",
+    "answer": "communicate",
+    "explanation": "communicate with sb 意为“和某人沟通”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The two brothers finally ___ (和解) after a long talk.",
+    "stemZh": "经过长谈，两兄弟终于和解了。",
+    "answer": "made up",
+    "explanation": "make up 意为“和解”，根据 finally 可知用一般过去时。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She felt ___ (孤独的) because she had no one to talk to.",
+    "stemZh": "她感到孤独，因为她没有可以说话的人。",
+    "answer": "lonely",
+    "explanation": "形容词作表语，lonely 意为“孤独的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "Don't ___ (争吵) with your parents. Try to understand them.",
+    "stemZh": "不要和父母争吵，试着理解他们。",
+    "answer": "argue",
+    "explanation": "argue with sb 意为“和某人争吵”，祈使句否定式 don't 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "祈使句",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "It is ___ (错误的) to copy others' homework.",
+    "stemZh": "抄别人的作业是错误的。",
+    "answer": "wrong",
+    "explanation": "It is + adj. + to do sth 句型，wrong 意为“错误的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He ___ (提供) me some good advice on how to study.",
+    "stemZh": "他给了我一些关于如何学习的好建议。",
+    "answer": "offered",
+    "explanation": "根据语境用一般过去时，offer 的过去式为 offered，offer sb sth 意为“给某人提供某物”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Could you please ___ (不要) argue with your sister?",
+    "stemZh": "请你不要和你姐姐争吵好吗？",
+    "answer": "not",
+    "explanation": "Could you please not do sth 意为“请不要做某事”，not 置于动词前。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "祈使句",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She ___ (解释) the problem to me patiently yesterday.",
+    "stemZh": "她昨天耐心地向我解释了这个问题。",
+    "answer": "explained",
+    "explanation": "根据 yesterday 可知用一般过去时，explain 的过去式为 explained。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "You should ___ (主动) offer to help your friend.",
+    "stemZh": "你应该主动提出帮助你的朋友。",
+    "answer": "offer to",
+    "explanation": "offer to do sth 意为“主动提出做某事”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "情态动词",
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "It is not ___ (允许的) to use phones in class.",
+    "stemZh": "上课使用手机是不被允许的。",
+    "answer": "allowed",
+    "explanation": "形容词 allowed 意为“被允许的”，作表语。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "形容词",
+      "被动语态"
+    ]
+  },
+  {
+    "stem": "She ___ (拒绝) my invitation politely yesterday.",
+    "stemZh": "她昨天礼貌地拒绝了我的邀请。",
+    "answer": "refused",
+    "explanation": "根据 yesterday 可知用一般过去时，refuse 的过去式为 refused。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "You could ___ (谈论) about it with your teacher.",
+    "stemZh": "你可以和老师谈谈这件事。",
+    "answer": "talk",
+    "explanation": "talk about 意为“谈论”，could 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We should ___ (避免) arguing with our parents.",
+    "stemZh": "我们应该避免和父母争吵。",
+    "answer": "avoid",
+    "explanation": "avoid doing sth 意为“避免做某事”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "情态动词",
+      "非谓语动词（动名词）"
+    ]
+  },
+  {
+    "stem": "He felt ___ (压力) because of the heavy homework.",
+    "stemZh": "因为繁重的作业他感到压力很大。",
+    "answer": "pressure",
+    "explanation": "pressure 为不可数名词，意为“压力”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "It is important to ___ (保持) calm when you have a problem.",
+    "stemZh": "遇到问题时保持冷静很重要。",
+    "answer": "keep",
+    "explanation": "keep calm 意为“保持冷静”，to 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She ___ (写) a letter to her friend to say sorry last night.",
+    "stemZh": "昨晚她给朋友写了一封信道歉。",
+    "answer": "wrote",
+    "explanation": "根据 last night 可知用一般过去时，write 的过去式为 wrote。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "Don't ___ (比较) yourself with others. Just be yourself.",
+    "stemZh": "不要拿自己和别人比较，做你自己就好。",
+    "answer": "compare",
+    "explanation": "compare...with... 意为“把……和……比较”，祈使句否定式 don't 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "祈使句",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My father ___ (同意) to let me use his computer yesterday.",
+    "stemZh": "我爸爸昨天同意让我用他的电脑。",
+    "answer": "agreed",
+    "explanation": "根据 yesterday 可知用一般过去时，agree 的过去式为 agreed。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "It is ___ (有帮助的) to talk to someone you trust.",
+    "stemZh": "和你信任的人谈谈是有帮助的。",
+    "answer": "helpful",
+    "explanation": "It is + adj. + to do sth 句型，helpful 意为“有帮助的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She ___ (争吵) with her best friend and they didn't talk for a week.",
+    "stemZh": "她和她最好的朋友吵架了，一周没说话。",
+    "answer": "argued",
+    "explanation": "根据 didn't talk 可知用一般过去时，argue 的过去式为 argued。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "You ___ (应该) say sorry to your classmate.",
+    "stemZh": "你应该向同学道歉。",
+    "answer": "should",
+    "explanation": "should 为情态动词，意为“应该”，后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "They ___ (和好) after the teacher talked to them.",
+    "stemZh": "老师和他们谈过之后他们和好了。",
+    "answer": "made up",
+    "explanation": "make up 意为“和好”，根据 talked 可知用一般过去时。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "It is not ___ (奇怪的) that he is tired after the long trip.",
+    "stemZh": "长途旅行后他累了并不奇怪。",
+    "answer": "strange",
+    "explanation": "It is + adj. + that 从句句型，strange 意为“奇怪的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "My teacher ___ (建议) me to join a club to make friends.",
+    "stemZh": "老师建议我参加一个俱乐部交朋友。",
+    "answer": "advised",
+    "explanation": "根据语境用一般过去时，advise sb to do sth 意为“建议某人做某事”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "You could ___ (打电话) her and say you are sorry.",
+    "stemZh": "你可以给她打电话说你很抱歉。",
+    "answer": "call",
+    "explanation": "call sb 意为“给某人打电话”，could 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "He ___ (解释) why he was late to the teacher.",
+    "stemZh": "他向老师解释了他为什么迟到。",
+    "answer": "explained",
+    "explanation": "根据语境用一般过去时，explain 的过去式为 explained。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "She ___ (主动提出) to help me with my English.",
+    "stemZh": "她主动提出帮我学英语。",
+    "answer": "offered",
+    "explanation": "offer to do sth 意为“主动提出做某事”，根据语境用一般过去时 offered。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时",
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "It is ___ (清楚的) that he doesn't want to talk about it.",
+    "stemZh": "很明显他不想谈这件事。",
+    "answer": "clear",
+    "explanation": "It is + adj. + that 从句句型，clear 意为“清楚的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "My parents ___ (担心) about my grades all the time.",
+    "stemZh": "我父母一直担心我的成绩。",
+    "answer": "worry",
+    "explanation": "worry about 意为“担心”，主语为复数，动词用原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She ___ (归还) the book to the library yesterday.",
+    "stemZh": "她昨天把书还给了图书馆。",
+    "answer": "returned",
+    "explanation": "根据 yesterday 可知用一般过去时，return 的过去式为 returned。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "Could you please ___ (不要) borrow my things without asking?",
+    "stemZh": "请你不要不问我就借我的东西好吗？",
+    "answer": "not",
+    "explanation": "Could you please not do sth 意为“请不要做某事”，not 置于动词前。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "祈使句",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "You should ___ (主动) talk to your parents about your problems.",
+    "stemZh": "你应该主动和父母谈谈你的问题。",
+    "answer": "offer to",
+    "explanation": "offer to do sth 意为“主动做某事”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "情态动词",
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "The boy ___ (打架) with his classmate and got hurt.",
+    "stemZh": "那个男孩和同学打架受伤了。",
+    "answer": "fought",
+    "explanation": "根据 got hurt 可知用一般过去时，fight 的过去式为 fought。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "It is ___ (正常的) for teenagers to have some worries.",
+    "stemZh": "青少年有一些烦恼是正常的。",
+    "answer": "normal",
+    "explanation": "It is + adj. + for sb to do sth 句型，normal 意为“正常的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She ___ (建议) that I should talk to my parents.",
+    "stemZh": "她建议我应该和父母谈谈。",
+    "answer": "suggested",
+    "explanation": "根据语境用一般过去时，suggest 的过去式为 suggested，suggest that 后接虚拟语气。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "一般过去时",
+      "宾语从句"
+    ]
+  },
+  {
+    "stem": "You ___ (不应该) argue with your parents.",
+    "stemZh": "你不应该和父母争吵。",
+    "answer": "shouldn't",
+    "explanation": "shouldn't 为情态动词，意为“不应该”，后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "The problem is not as ___ (严重的) as you think.",
+    "stemZh": "问题并不像你想的那么严重。",
+    "answer": "serious",
+    "explanation": "as...as 中间用形容词原级，serious 意为“严重的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U4",
+    "points": [
+      "形容词",
+      "比较级与最高级"
+    ]
+  },
+  {
+    "stem": "I ___ up at six every morning. （起床）",
+    "stemZh": "我每天早上六点起床。",
+    "answer": "get",
+    "explanation": "get up 是固定搭配，意为“起床”；主语 I 后用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "固定搭配",
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "She ___ up at seven. （起床）",
+    "stemZh": "她七点起床。",
+    "answer": "gets",
+    "explanation": "主语 she 为第三人称单数，一般现在时 get 变为 gets。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I usually get ___ at six thirty. （穿好衣服）",
+    "stemZh": "我通常六点半穿好衣服。",
+    "answer": "dressed",
+    "explanation": "get dressed 是固定搭配，意为“穿好衣服”；dressed 为过去分词作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "固定搭配",
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "I ___ my teeth after breakfast. （刷）",
+    "stemZh": "我早饭后刷牙。",
+    "answer": "brush",
+    "explanation": "brush one’s teeth 表示“刷牙”；主语 I 后用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "固定搭配",
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "He ___ his teeth twice a day. （刷）",
+    "stemZh": "他一天刷两次牙。",
+    "answer": "brushes",
+    "explanation": "主语 he 为第三人称单数，一般现在时 brush 变为 brushes。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I take a ___ every evening. （淋浴）",
+    "stemZh": "我每天晚上洗淋浴。",
+    "answer": "shower",
+    "explanation": "take a shower 是固定搭配，意为“洗淋浴”；shower 为可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I usually ___ to school at seven. （去）",
+    "stemZh": "我通常七点去上学。",
+    "answer": "go",
+    "explanation": "go to school 表示“去上学”；主语 I 后用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She ___ to school at seven thirty. （去）",
+    "stemZh": "她七点半去上学。",
+    "answer": "goes",
+    "explanation": "主语 she 为第三人称单数，一般现在时 go 变为 goes。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "We ___ breakfast at seven. （吃）",
+    "stemZh": "我们七点吃早餐。",
+    "answer": "have",
+    "explanation": "have breakfast 表示“吃早餐”；主语 we 后用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He ___ breakfast at seven. （吃）",
+    "stemZh": "他七点吃早餐。",
+    "answer": "has",
+    "explanation": "主语 he 为第三人称单数，have 变为 has。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I have six classes a ___. （一天）",
+    "stemZh": "我一天有六节课。",
+    "answer": "day",
+    "explanation": "a day 表示“一天”；作时间状语，相当于 every day。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I go to school at half ___ seven. （过）",
+    "stemZh": "我七点半去上学。",
+    "answer": "past",
+    "explanation": "half past seven 是时间表达，表示“七点半”；past 意为“过”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "介词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "School starts at ___ past seven. （一半）",
+    "stemZh": "学校七点半开始上课。",
+    "answer": "half",
+    "explanation": "half past seven 表示“七点半”；half 意为“一半”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "数词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I go to bed at a ___ past nine. （一刻钟）",
+    "stemZh": "我九点一刻上床睡觉。",
+    "answer": "quarter",
+    "explanation": "a quarter past nine 表示“九点一刻”；quarter 意为“一刻钟”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "数词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I get up at five ___. （……点钟）",
+    "stemZh": "我五点钟起床。",
+    "answer": "o’clock",
+    "explanation": "o’clock 用于表示整点；five o’clock 表示“五点整”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "数词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She gets up at six in the ___. （早上）",
+    "stemZh": "她早上六点起床。",
+    "answer": "morning",
+    "explanation": "in the morning 是固定搭配，意为“在早上”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I do my homework in the ___. （晚上）",
+    "stemZh": "我晚上做作业。",
+    "answer": "evening",
+    "explanation": "in the evening 是固定搭配，意为“在晚上”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I go to bed at ten at ___. （夜晚）",
+    "stemZh": "我晚上十点睡觉。",
+    "answer": "night",
+    "explanation": "at night 是固定搭配，意为“在夜晚”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She never ___ late for school. （是）",
+    "stemZh": "她上学从不迟到。",
+    "answer": "is",
+    "explanation": "主语 she 为第三人称单数，be 动词用 is；never 表示“从不”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I am ___ late for class. （从不）",
+    "stemZh": "我上课从不迟到。",
+    "answer": "never",
+    "explanation": "never 意为“从不”；作频度副词，置于 be 动词之后。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "副词",
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "He ___ goes to school by bike. （通常）",
+    "stemZh": "他通常骑自行车上学。",
+    "answer": "usually",
+    "explanation": "usually 意为“通常”；作频度副词，置于实义动词之前。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "副词",
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "She gets up ___ every day. （早地）",
+    "stemZh": "她每天起得很早。",
+    "answer": "early",
+    "explanation": "early 意为“早地”；作副词修饰 get up。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I don’t like to get up ___. （早地）",
+    "stemZh": "我不喜欢早起。",
+    "answer": "early",
+    "explanation": "early 意为“早地”；作副词修饰 get up。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "He works at a radio ___. （电台；车站）",
+    "stemZh": "他在广播电台工作。",
+    "answer": "station",
+    "explanation": "radio station 意为“广播电台”；station 意为“电台；车站”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My father works at a bus ___. （车站）",
+    "stemZh": "我爸爸在公交车站工作。",
+    "answer": "station",
+    "explanation": "bus station 意为“公交车站”；station 意为“车站”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He has a good ___. （工作）",
+    "stemZh": "他有一份好工作。",
+    "answer": "job",
+    "explanation": "job 意为“工作”，为可数名词；a 后接单数形式。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She ___ in a hospital. （工作）",
+    "stemZh": "她在医院工作。",
+    "answer": "works",
+    "explanation": "主语 she 为第三人称单数，一般现在时 work 变为 works。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I ___ my homework after school. （做）",
+    "stemZh": "我放学后做作业。",
+    "answer": "do",
+    "explanation": "do one’s homework 表示“做作业”；主语 I 后用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He ___ his homework in the evening. （做）",
+    "stemZh": "他晚上做作业。",
+    "answer": "does",
+    "explanation": "主语 he 为第三人称单数，do 变为 does。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I ___ for half an hour every day. （跑步）",
+    "stemZh": "我每天跑步半小时。",
+    "answer": "run",
+    "explanation": "run 意为“跑步”；主语 I 后用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She ___ for half an hour every day. （跑步）",
+    "stemZh": "她每天跑步半小时。",
+    "answer": "runs",
+    "explanation": "主语 she 为第三人称单数，一般现在时 run 变为 runs。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I ___ my room every Sunday. （打扫）",
+    "stemZh": "我每周日打扫房间。",
+    "answer": "clean",
+    "explanation": "clean 意为“打扫”；主语 I 后用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "He ___ his room on Sundays. （打扫）",
+    "stemZh": "他每周日打扫房间。",
+    "answer": "cleans",
+    "explanation": "主语 he 为第三人称单数，一般现在时 clean 变为 cleans。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "After dinner, I take a ___. （散步）",
+    "stemZh": "晚饭后，我去散步。",
+    "answer": "walk",
+    "explanation": "take a walk 是固定搭配，意为“散步”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She eats breakfast ___. （快速地）",
+    "stemZh": "她快速地吃早餐。",
+    "answer": "quickly",
+    "explanation": "quickly 意为“快速地”；作副词修饰动词 eats。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I don’t like coffee. I don’t like tea, ___. （也；而且）",
+    "stemZh": "我不喜欢咖啡。我也不喜欢茶。",
+    "answer": "either",
+    "explanation": "either 用于否定句句末，表示“也”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I have ___ of homework to do. （许多）",
+    "stemZh": "我有很多作业要做。",
+    "answer": "lots",
+    "explanation": "lots of 是固定搭配，意为“许多”；后接可数或不可数名词。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "固定搭配",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The soup ___ good. （尝起来）",
+    "stemZh": "这汤尝起来不错。",
+    "answer": "tastes",
+    "explanation": "taste 作感官动词，意为“尝起来”；主语 the soup 为单数，故用 tastes。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "He has a healthy ___. （生活）",
+    "stemZh": "他有一个健康的生活。",
+    "answer": "life",
+    "explanation": "life 意为“生活”；a 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We do morning ___ at school. （锻炼）",
+    "stemZh": "我们在学校做早操。",
+    "answer": "exercises",
+    "explanation": "morning exercises 意为“早操”；exercise 表示“操”时常用复数形式。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I like English ___ of all. （最）",
+    "stemZh": "我最喜欢英语。",
+    "answer": "best",
+    "explanation": "like sth. best 表示“最喜欢某物”；best 为副词最高级。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "副词",
+      "比较级与最高级"
+    ]
+  },
+  {
+    "stem": "The students work in ___. （组；群）",
+    "stemZh": "学生们分组工作。",
+    "answer": "groups",
+    "explanation": "group 意为“组；群”；in groups 表示“分组”，常用复数形式。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "There are ___ students in our class. （四十）",
+    "stemZh": "我们班有四十名学生。",
+    "answer": "forty",
+    "explanation": "forty 表示数量“四十”；注意不要与 four 混淆。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "数词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "There are ___ students in our class. （五十）",
+    "stemZh": "我们班有五十名学生。",
+    "answer": "fifty",
+    "explanation": "fifty 表示数量“五十”；注意不要与 five 混淆。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "数词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "That sounds ___. （好笑的；有趣的）",
+    "stemZh": "那听起来很有趣。",
+    "answer": "funny",
+    "explanation": "funny 意为“好笑的；有趣的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She does her homework ___ after school. （首先）",
+    "stemZh": "她放学后首先做作业。",
+    "answer": "first",
+    "explanation": "first 作副词，意为“首先”；修饰整个句子或动作顺序。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "He goes to bed at nine ___ ten. （或者）",
+    "stemZh": "他九点或十点睡觉。",
+    "answer": "or",
+    "explanation": "or 作连词，表示选择，意为“或者”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "连词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I ___ get up at six, but sometimes at seven. （通常）",
+    "stemZh": "我通常六点起床，但有时七点。",
+    "answer": "usually",
+    "explanation": "usually 意为“通常”；与 sometimes 形成对比。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "副词",
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "___ time do you get up? （什么）",
+    "stemZh": "你什么时候起床？",
+    "answer": "What",
+    "explanation": "What time 用于询问具体时间；句首首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U2",
+    "points": [
+      "代词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "The panda is one of the most ___ (濒危的) animals in the world.",
+    "stemZh": "熊猫是世界上最濒危的动物之一。",
+    "answer": "endangered",
+    "explanation": "形容词作定语修饰 animals，endangered 意为“濒危的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The ___ (野生的) animals need a safe place to live.",
+    "stemZh": "野生动物需要一个安全的栖息地。",
+    "answer": "wild",
+    "explanation": "形容词修饰名词 animals，wild 意为“野生的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "We should ___ (保护) the environment for the next generation.",
+    "stemZh": "我们应该为下一代保护环境。",
+    "answer": "protect",
+    "explanation": "protect 意为“保护”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "The ___ (森林) is home to many kinds of animals.",
+    "stemZh": "森林是许多种动物的家园。",
+    "answer": "forest",
+    "explanation": "名词作主语，forest 意为“森林”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The ___ (人口) of China is about 1.4 billion.",
+    "stemZh": "中国的人口大约是14亿。",
+    "answer": "population",
+    "explanation": "名词作主语，population 意为“人口”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The ___ (鲸) is the largest animal in the ocean.",
+    "stemZh": "鲸是海洋里最大的动物。",
+    "answer": "whale",
+    "explanation": "名词作主语，whale 意为“鲸”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The giant panda feeds mainly on ___ (竹子).",
+    "stemZh": "大熊猫主要以竹子为食。",
+    "answer": "bamboo",
+    "explanation": "bamboo 为不可数名词，意为“竹子”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The elephants are in ___ (危险) because people hunt them for their ivory.",
+    "stemZh": "大象处于危险之中，因为人们为了象牙猎杀它们。",
+    "answer": "danger",
+    "explanation": "in danger 意为“处于危险中”，danger 为名词。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We should ___ (拯救) the animals in danger.",
+    "stemZh": "我们应该拯救濒危动物。",
+    "answer": "save",
+    "explanation": "save 意为“拯救”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "The ___ (研究) shows that pandas are increasing in number.",
+    "stemZh": "研究表明熊猫的数量在增加。",
+    "answer": "research",
+    "explanation": "research 为不可数名词，意为“研究”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "People ___ (砍) down too many trees, so animals lose their homes.",
+    "stemZh": "人们砍了太多树，所以动物失去了家园。",
+    "answer": "cut",
+    "explanation": "cut down 意为“砍倒”，描述一般事实用一般现在时。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The ___ (熊猫) is a symbol of China.",
+    "stemZh": "熊猫是中国的象征。",
+    "answer": "panda",
+    "explanation": "名词作主语，panda 意为“熊猫”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The ___ (老虎) is becoming fewer and fewer.",
+    "stemZh": "老虎变得越来越少。",
+    "answer": "tiger",
+    "explanation": "名词作主语，tiger 意为“老虎”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "We should ___ (停止) hunting wild animals.",
+    "stemZh": "我们应该停止猎杀野生动物。",
+    "answer": "stop",
+    "explanation": "stop doing sth 意为“停止做某事”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "情态动词",
+      "非谓语动词（动名词）"
+    ]
+  },
+  {
+    "stem": "The ___ (海洋) covers most of the earth's surface.",
+    "stemZh": "海洋覆盖了地球表面的大部分。",
+    "answer": "ocean",
+    "explanation": "名词作主语，ocean 意为“海洋”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The zoo keeper ___ (喂养) the pandas three times a day.",
+    "stemZh": "动物园管理员一天喂熊猫三次。",
+    "answer": "feeds",
+    "explanation": "根据 three times a day 可知用一般现在时，主语为第三人称单数，feed 加 -s。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The ___ (政府) has made laws to protect wild animals.",
+    "stemZh": "政府已经制定法律保护野生动物。",
+    "answer": "government",
+    "explanation": "名词作主语，government 意为“政府”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The number of whales ___ (减少) in recent years.",
+    "stemZh": "近年来鲸的数量减少了。",
+    "answer": "has decreased",
+    "explanation": "in recent years 常与现在完成时连用，主语 the number 为第三人称单数。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "现在完成时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "We should ___ (回收) paper to save trees.",
+    "stemZh": "我们应该回收纸张来拯救树木。",
+    "answer": "recycle",
+    "explanation": "recycle 意为“回收”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "The ___ (熊猫) reserve is in Sichuan Province.",
+    "stemZh": "熊猫保护区在四川省。",
+    "answer": "panda",
+    "explanation": "panda 作定语修饰 reserve，意为“熊猫”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "It is ___ (违法的) to hunt endangered animals.",
+    "stemZh": "猎杀濒危动物是违法的。",
+    "answer": "illegal",
+    "explanation": "It is + adj. + to do sth 句型，illegal 意为“违法的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The ___ (犀牛) is hunted for its horn.",
+    "stemZh": "犀牛因其角而被猎杀。",
+    "answer": "rhino",
+    "explanation": "名词作主语，rhino 意为“犀牛”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "We need to ___ (减少) pollution to protect animals.",
+    "stemZh": "我们需要减少污染来保护动物。",
+    "answer": "reduce",
+    "explanation": "reduce 意为“减少”，need to 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "The ___ (幼崽) of the panda is very cute.",
+    "stemZh": "熊猫的幼崽非常可爱。",
+    "answer": "baby",
+    "explanation": "名词作主语，baby 意为“幼崽”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "We should ___ (保护) the natural habitat of wild animals.",
+    "stemZh": "我们应该保护野生动物的自然栖息地。",
+    "answer": "protect",
+    "explanation": "protect 意为“保护”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "The ___ (骨头) of the dinosaur were found in the desert.",
+    "stemZh": "恐龙的骨头在沙漠中被发现了。",
+    "answer": "bones",
+    "explanation": "根据 were 可知主语为复数，bone 的复数为 bones。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The ___ (物种) is in danger of dying out.",
+    "stemZh": "这个物种面临灭绝的危险。",
+    "answer": "species",
+    "explanation": "species 单复数同形，意为“物种”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The ___ (猎手) killed the tiger illegally.",
+    "stemZh": "猎手非法杀死了那只老虎。",
+    "answer": "hunter",
+    "explanation": "名词作主语，hunter 意为“猎手”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "We can ___ (捐) money to the wildlife protection fund.",
+    "stemZh": "我们可以向野生动物保护基金捐款。",
+    "answer": "donate",
+    "explanation": "donate 意为“捐赠”，情态动词 can 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "The ___ (水) pollution is harmful to fish.",
+    "stemZh": "水污染对鱼有害。",
+    "answer": "water",
+    "explanation": "water 作定语修饰 pollution，意为“水”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The panda is the ___ (象征) of the World Wildlife Fund.",
+    "stemZh": "熊猫是世界自然基金会的象征。",
+    "answer": "symbol",
+    "explanation": "名词作表语，symbol 意为“象征”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "It is important to ___ (保持) the balance of nature.",
+    "stemZh": "保持自然界的平衡很重要。",
+    "answer": "keep",
+    "explanation": "keep the balance 意为“保持平衡”，to 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The ___ (熊猫) are becoming fewer because of the loss of bamboo.",
+    "stemZh": "因为竹子的减少，熊猫变得越来越少。",
+    "answer": "pandas",
+    "explanation": "根据 are 可知主语为复数，panda 的复数为 pandas。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "We should ___ (种植) more trees to protect the environment.",
+    "stemZh": "我们应该种更多的树来保护环境。",
+    "answer": "plant",
+    "explanation": "plant 意为“种植”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "The ___ (老虎) is one of the strongest animals in the world.",
+    "stemZh": "老虎是世界上最强大的动物之一。",
+    "answer": "tiger",
+    "explanation": "名词作主语，tiger 意为“老虎”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The ___ (沙漠) is a difficult place for animals to live in.",
+    "stemZh": "沙漠对动物来说是一个难以生存的地方。",
+    "answer": "desert",
+    "explanation": "名词作主语，desert 意为“沙漠”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "We must ___ (采取) action to protect the environment.",
+    "stemZh": "我们必须采取行动保护环境。",
+    "answer": "take",
+    "explanation": "take action 意为“采取行动”，must 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The ___ (森林) is being destroyed by human activities.",
+    "stemZh": "森林正被人类活动破坏。",
+    "answer": "forest",
+    "explanation": "名词作主语，forest 意为“森林”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词",
+      "被动语态"
+    ]
+  },
+  {
+    "stem": "The ___ (自然) reserve protects many rare animals.",
+    "stemZh": "自然保护区保护许多珍稀动物。",
+    "answer": "nature",
+    "explanation": "nature 作定语修饰 reserve，意为“自然”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The ___ (鲸) are in danger because of water pollution.",
+    "stemZh": "由于水污染，鲸处于危险之中。",
+    "answer": "whales",
+    "explanation": "根据 are 可知主语为复数，whale 的复数为 whales。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The ___ (熊猫) is a national treasure of China.",
+    "stemZh": "熊猫是中国的国宝。",
+    "answer": "panda",
+    "explanation": "名词作主语，panda 意为“熊猫”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The ___ (动物) in the zoo are well cared for.",
+    "stemZh": "动物园里的动物得到了很好的照顾。",
+    "answer": "animals",
+    "explanation": "根据 are 可知主语为复数，animal 的复数为 animals。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "We should ___ (尊重) all living things on the earth.",
+    "stemZh": "我们应该尊重地球上所有的生物。",
+    "answer": "respect",
+    "explanation": "respect 意为“尊重”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "The ___ (政府) should make stricter laws to protect animals.",
+    "stemZh": "政府应该制定更严格的法律来保护动物。",
+    "answer": "government",
+    "explanation": "名词作主语，government 意为“政府”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The ___ (竹子) is the main food of giant pandas.",
+    "stemZh": "竹子是大熊猫的主要食物。",
+    "answer": "bamboo",
+    "explanation": "bamboo 为不可数名词，意为“竹子”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "It is our duty to ___ (保护) the earth.",
+    "stemZh": "保护地球是我们的责任。",
+    "answer": "protect",
+    "explanation": "It is our duty to do sth 句型，to 后接动词原形，protect 意为“保护”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The ___ (污染) is killing many fish in the river.",
+    "stemZh": "污染正在杀死河里许多鱼。",
+    "answer": "pollution",
+    "explanation": "pollution 为不可数名词，意为“污染”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The ___ (犀牛) is hunted for its horn, which is very sad.",
+    "stemZh": "犀牛因其角而被猎杀，这非常令人难过。",
+    "answer": "rhino",
+    "explanation": "名词作主语，rhino 意为“犀牛”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U5",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "Have you read the book ___ (叫作) Journey to the West?",
+    "stemZh": "你读过那本叫作《西游记》的书吗？",
+    "answer": "called",
+    "explanation": "called 为过去分词作定语，意为“叫作”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "非谓语动词（不定式）",
+      "被动语态"
+    ]
+  },
+  {
+    "stem": "The story is about a brave girl who ___ (与……战斗) a dragon.",
+    "stemZh": "这个故事讲的是一个勇敢的女孩与一条龙战斗。",
+    "answer": "fights",
+    "explanation": "描述故事内容用一般现在时，主语 who 指代 a brave girl，为第三人称单数。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般现在时",
+      "主谓一致",
+      "定语从句"
+    ]
+  },
+  {
+    "stem": "The old man ___ (结婚) a beautiful princess in the story.",
+    "stemZh": "故事里那个老人娶了一位美丽的公主。",
+    "answer": "married",
+    "explanation": "根据语境用一般过去时，marry 的过去式为 married，marry sb 意为“娶/嫁给某人”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The prince ___ (变) into a frog by the witch.",
+    "stemZh": "王子被女巫变成了一只青蛙。",
+    "answer": "was turned",
+    "explanation": "主语 the prince 是动作的承受者，用被动语态，根据语境用一般过去时。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "被动语态",
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The story ___ (使想起) me of my childhood.",
+    "stemZh": "这个故事让我想起了我的童年。",
+    "answer": "reminds",
+    "explanation": "remind sb of sth 意为“使某人想起某事”，主语为第三人称单数，remind 加 -s。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The brave knight ___ (杀死) the monster and saved the village.",
+    "stemZh": "勇敢的骑士杀死了怪物，拯救了村庄。",
+    "answer": "killed",
+    "explanation": "根据 saved 可知用一般过去时，kill 的过去式为 killed。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The fairy tale has a happy ___ (结局).",
+    "stemZh": "这个童话有一个幸福的结局。",
+    "answer": "ending",
+    "explanation": "名词作宾语，ending 意为“结局”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The witch ___ (欺骗) the princess and took her away.",
+    "stemZh": "女巫欺骗了公主并把她带走了。",
+    "answer": "cheated",
+    "explanation": "根据 took 可知用一般过去时，cheat 的过去式为 cheated。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The story teaches us that ___ (诚实) is the best policy.",
+    "stemZh": "这个故事告诉我们诚实是上策。",
+    "answer": "honesty",
+    "explanation": "honesty 为不可数名词，意为“诚实”，作从句主语。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "名词",
+      "宾语从句"
+    ]
+  },
+  {
+    "stem": "The hero ___ (拯救) the princess from the dragon.",
+    "stemZh": "英雄从龙手中救了公主。",
+    "answer": "saved",
+    "explanation": "根据语境用一般过去时，save 的过去式为 saved。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The story is ___ (有魔力的) and children love it.",
+    "stemZh": "这个故事很有魔力，孩子们很喜欢。",
+    "answer": "magical",
+    "explanation": "形容词作表语，magical 意为“有魔力的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The king ___ (统治) the country for many years.",
+    "stemZh": "国王统治这个国家很多年了。",
+    "answer": "ruled",
+    "explanation": "根据 for many years 可知用一般过去时，rule 的过去式为 ruled。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The ugly duckling finally ___ (变成) a beautiful swan.",
+    "stemZh": "丑小鸭最终变成了一只美丽的天鹅。",
+    "answer": "turned into",
+    "explanation": "turn into 意为“变成”，根据 finally 可知用一般过去时。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The children were ___ (兴奋的) to hear the fairy tale.",
+    "stemZh": "孩子们听到这个童话很兴奋。",
+    "answer": "excited",
+    "explanation": "excited 修饰人，表示“感到兴奋的”，作表语。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The story ___ (发生) in a small village long ago.",
+    "stemZh": "这个故事发生在很久以前的一个小村庄里。",
+    "answer": "happened",
+    "explanation": "根据 long ago 可知用一般过去时，happen 的过去式为 happened。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The giant was ___ (孤独的) until a child visited him.",
+    "stemZh": "巨人在一个孩子来访之前一直很孤独。",
+    "answer": "lonely",
+    "explanation": "形容词作表语，lonely 意为“孤独的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "形容词",
+      "状语从句"
+    ]
+  },
+  {
+    "stem": "The fairy ___ (出现) in front of the poor girl.",
+    "stemZh": "仙女出现在那个可怜的女孩面前。",
+    "answer": "appeared",
+    "explanation": "根据语境用一般过去时，appear 的过去式为 appeared。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The story is ___ (著名的) all over the world.",
+    "stemZh": "这个故事闻名全世界。",
+    "answer": "famous",
+    "explanation": "形容词作表语，famous 意为“著名的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The fox ___ (欺骗) the crow into singing.",
+    "stemZh": "狐狸骗乌鸦唱歌。",
+    "answer": "cheated",
+    "explanation": "cheat sb into doing sth 意为“骗某人做某事”，根据语境用一般过去时。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The story has been ___ (翻译) into many languages.",
+    "stemZh": "这个故事已被翻译成多种语言。",
+    "answer": "translated",
+    "explanation": "现在完成时的被动语态为 have/has been + 过去分词，translate 的过去分词为 translated。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "被动语态",
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The little girl ___ (卖) matches in the cold street.",
+    "stemZh": "小女孩在寒冷的街上卖火柴。",
+    "answer": "sold",
+    "explanation": "根据语境用一般过去时，sell 的过去式为 sold。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The story ___ (以……为基础) on a true story.",
+    "stemZh": "这个故事以一个真实故事为基础。",
+    "answer": "is based",
+    "explanation": "be based on 意为“以……为基础”，主语为第三人称单数，用 is based。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "被动语态",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The witch ___ (施魔法) on the prince and turned him into a beast.",
+    "stemZh": "女巫对王子施了魔法，把他变成了一头野兽。",
+    "answer": "cast a spell",
+    "explanation": "cast a spell on 意为“对……施魔法”，根据 turned 可知用一般过去时，cast 的过去式仍为 cast。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The children were ___ (害怕的) of the dark forest.",
+    "stemZh": "孩子们害怕那片黑暗的森林。",
+    "answer": "afraid",
+    "explanation": "be afraid of 意为“害怕……”，形容词作表语。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The hero ___ (勇敢地) fought against the enemy.",
+    "stemZh": "英雄勇敢地与敌人战斗。",
+    "answer": "bravely",
+    "explanation": "副词 bravely 修饰动词 fought，意为“勇敢地”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "副词"
+    ]
+  },
+  {
+    "stem": "The story ___ (使感兴趣) children all over the world.",
+    "stemZh": "这个故事使全世界的孩子感兴趣。",
+    "answer": "interests",
+    "explanation": "interest 作动词意为“使感兴趣”，主语为第三人称单数，interest 加 -s。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The princess was ___ (囚禁) in a tall tower.",
+    "stemZh": "公主被囚禁在一座高塔里。",
+    "answer": "kept",
+    "explanation": "此处用被动语态，keep sb in 意为“把某人关在……”，keep 的过去分词为 kept。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "被动语态",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The story ___ (结束) with the prince and princess living happily.",
+    "stemZh": "故事以王子和公主幸福地生活在一起而结束。",
+    "answer": "ends",
+    "explanation": "描述故事内容用一般现在时，主语为第三人称单数，end 加 -s。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The brave boy ___ (面对) the dangerous wolf without fear.",
+    "stemZh": "勇敢的男孩毫不畏惧地面对危险的狼。",
+    "answer": "faced",
+    "explanation": "根据语境用一般过去时，face 的过去式为 faced。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The story is full of ___ (冒险) and excitement.",
+    "stemZh": "这个故事充满了冒险和刺激。",
+    "answer": "adventure",
+    "explanation": "名词作介词宾语，adventure 意为“冒险”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The old woman was ___ (善良的) and helped the poor girl.",
+    "stemZh": "那位老妇人很善良，帮助了那个可怜的女孩。",
+    "answer": "kind",
+    "explanation": "形容词作表语，kind 意为“善良的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The story ___ (使……惊讶) everyone with its surprising ending.",
+    "stemZh": "这个故事以其出人意料的结局让所有人惊讶。",
+    "answer": "surprised",
+    "explanation": "根据语境用一般过去时，surprise 的过去式为 surprised，意为“使惊讶”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The little mermaid ___ (爱上) the prince at first sight.",
+    "stemZh": "小美人鱼对王子一见钟情。",
+    "answer": "fell in love with",
+    "explanation": "fall in love with 意为“爱上”，根据语境用一般过去时 fell。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The story ___ (教育) children to be honest and brave.",
+    "stemZh": "这个故事教育孩子们要诚实勇敢。",
+    "answer": "educates",
+    "explanation": "描述故事的作用用一般现在时，主语为第三人称单数，educate 加 -s。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The witch was ___ (惩罚) for her evil deeds.",
+    "stemZh": "女巫因她的恶行受到了惩罚。",
+    "answer": "punished",
+    "explanation": "此处用被动语态，punish 的过去分词为 punished。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "被动语态"
+    ]
+  },
+  {
+    "stem": "The golden fish ___ (给) the fisherman three wishes.",
+    "stemZh": "金鱼给了渔夫三个愿望。",
+    "answer": "gave",
+    "explanation": "根据语境用一般过去时，give 的过去式为 gave。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The story is ___ (值得) reading again and again.",
+    "stemZh": "这个故事值得反复阅读。",
+    "answer": "worth",
+    "explanation": "be worth doing 意为“值得做”，worth 为形容词。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The tailor ___ (做) a beautiful dress for the princess.",
+    "stemZh": "裁缝为公主做了一条漂亮的裙子。",
+    "answer": "made",
+    "explanation": "根据语境用一般过去时，make 的过去式为 made。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The story ___ (发生) in a magical kingdom.",
+    "stemZh": "这个故事发生在一个魔法王国里。",
+    "answer": "takes place",
+    "explanation": "take place 意为“发生”，描述故事背景用一般现在时，主语为第三人称单数。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The child was ___ (迷路) in the forest and couldn't find his way home.",
+    "stemZh": "那个孩子在森林里迷路了，找不到回家的路。",
+    "answer": "lost",
+    "explanation": "be lost 意为“迷路”，lost 为形容词。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The giant ___ (推倒) the wall and let the children play in his garden.",
+    "stemZh": "巨人推倒了墙，让孩子们在他的花园里玩。",
+    "answer": "pulled down",
+    "explanation": "pull down 意为“推倒”，根据 let 可知用一般过去时。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The story tells us that ___ (善) always beats evil.",
+    "stemZh": "这个故事告诉我们善总是战胜恶。",
+    "answer": "good",
+    "explanation": "good 在此作名词，意为“善”，作从句主语。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "名词",
+      "宾语从句"
+    ]
+  },
+  {
+    "stem": "The wolf ___ (伪装) himself as a sheep to catch the lamb.",
+    "stemZh": "狼把自己伪装成羊来抓小羊。",
+    "answer": "dressed",
+    "explanation": "dress oneself as 意为“把自己伪装成”，根据语境用一般过去时 dressed。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The fisherman was ___ (惊讶的) when the fish spoke to him.",
+    "stemZh": "当鱼对渔夫说话时，他很惊讶。",
+    "answer": "surprised",
+    "explanation": "surprised 修饰人，表示“感到惊讶的”，作表语。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The story has been ___ (喜爱) by children for generations.",
+    "stemZh": "这个故事世代受到孩子们的喜爱。",
+    "answer": "loved",
+    "explanation": "现在完成时的被动语态为 have/has been + 过去分词，love 的过去分词为 loved。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "被动语态",
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The hero ___ (克服) many difficulties and finally won.",
+    "stemZh": "英雄克服了许多困难，最终获胜了。",
+    "answer": "overcame",
+    "explanation": "根据 won 可知用一般过去时，overcome 的过去式为 overcame。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The story ___ (使快乐) both children and adults.",
+    "stemZh": "这个故事使孩子和大人都快乐。",
+    "answer": "delights",
+    "explanation": "delight 作动词意为“使快乐”，主语为第三人称单数，delight 加 -s。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The girl was ___ (奖赏) with gold for her kindness.",
+    "stemZh": "那个女孩因她的善良获得了金子的奖赏。",
+    "answer": "rewarded",
+    "explanation": "此处用被动语态，reward 的过去分词为 rewarded，意为“奖赏”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "被动语态"
+    ]
+  },
+  {
+    "stem": "The story is ___ (简单的) enough for young children to understand.",
+    "stemZh": "这个故事足够简单，小孩子能理解。",
+    "answer": "simple",
+    "explanation": "形容词作表语，simple 意为“简单的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U6",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "I go to school by ___. （自行车）",
+    "stemZh": "我骑自行车上学。",
+    "answer": "bike",
+    "explanation": "by bike 是固定搭配，意为“骑自行车”；bike 意为“自行车”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She goes to work by ___. （地铁）",
+    "stemZh": "她乘地铁上班。",
+    "answer": "subway",
+    "explanation": "by subway 是固定搭配，意为“乘地铁”；subway 意为“地铁”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He goes to school by ___. （公共汽车）",
+    "stemZh": "他乘公共汽车上学。",
+    "answer": "bus",
+    "explanation": "by bus 是固定搭配，意为“乘公共汽车”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I go to school by ___. （火车）",
+    "stemZh": "我乘火车上学。",
+    "answer": "train",
+    "explanation": "by train 是固定搭配，意为“乘火车”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "They go to Beijing by ___. （飞机）",
+    "stemZh": "他们乘飞机去北京。",
+    "answer": "plane",
+    "explanation": "by plane 是固定搭配，意为“乘飞机”；plane 意为“飞机”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We go to the park by ___. （出租车）",
+    "stemZh": "我们乘出租车去公园。",
+    "answer": "taxi",
+    "explanation": "by taxi 是固定搭配，意为“乘出租车”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I go to school by ___. （船）",
+    "stemZh": "我乘船上学。",
+    "answer": "boat",
+    "explanation": "by boat 是固定搭配，意为“乘船”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My father goes to work by ___. （小汽车）",
+    "stemZh": "我爸爸开车上班。",
+    "answer": "car",
+    "explanation": "by car 是固定搭配，意为“乘小汽车”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I ___ to school every day. （步行）",
+    "stemZh": "我每天步行上学。",
+    "answer": "walk",
+    "explanation": "walk 意为“步行”；主语 I 后用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "一般现在时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She ___ a bike to school. （骑）",
+    "stemZh": "她骑自行车上学。",
+    "answer": "rides",
+    "explanation": "主语 she 为第三人称单数，ride 变为 rides；ride a bike 表示“骑自行车”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I ___ the subway to school. （乘；坐）",
+    "stemZh": "我乘地铁上学。",
+    "answer": "take",
+    "explanation": "take the subway 表示“乘地铁”；主语 I 后用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He ___ the bus to work. （乘；坐）",
+    "stemZh": "他乘公共汽车上班。",
+    "answer": "takes",
+    "explanation": "主语 he 为第三人称单数，take 变为 takes；take the bus 表示“乘公共汽车”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "How do you ___ to school? （到达）",
+    "stemZh": "你怎么到学校？",
+    "answer": "get",
+    "explanation": "get to 表示“到达”；特殊疑问句中助动词 do 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "固定搭配",
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "How far is it ___ your home to school? （从……）",
+    "stemZh": "从你家到学校有多远？",
+    "answer": "from",
+    "explanation": "from... to... 表示“从……到……”；from 意为“从”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "介词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "It is about two ___ from my home to school. （公里）",
+    "stemZh": "从我家到学校大约两公里。",
+    "answer": "kilometers",
+    "explanation": "kilometer 意为“公里”；two 后接复数形式 kilometers。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "It takes me ten ___ to walk to school. （分钟）",
+    "stemZh": "我步行上学要十分钟。",
+    "answer": "minutes",
+    "explanation": "minute 意为“分钟”；ten 后接复数形式 minutes。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "It ___ me half an hour to get to school. （花费）",
+    "stemZh": "我到学校要花半小时。",
+    "answer": "takes",
+    "explanation": "It takes sb. some time to do sth. 表示“做某事花费某人多少时间”；主语 it 为第三人称单数，故用 takes。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "How ___ does it take you to get to school? （长）",
+    "stemZh": "你到学校要多长时间？",
+    "answer": "long",
+    "explanation": "How long 用于询问时间长度，意为“多长时间”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "副词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "How ___ is it from your home to school? （远）",
+    "stemZh": "从你家到学校有多远？",
+    "answer": "far",
+    "explanation": "How far 用于询问距离，意为“多远”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "副词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "I live ___ from school. （远地）",
+    "stemZh": "我住得离学校远。",
+    "answer": "far",
+    "explanation": "far from 表示“离……远”；far 作副词。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "副词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My home is ___ to school. （近的）",
+    "stemZh": "我家离学校很近。",
+    "answer": "close",
+    "explanation": "be close to 表示“离……近”；close 意为“近的”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "There is a bus ___ near my home. （车站）",
+    "stemZh": "我家附近有一个公交车站。",
+    "answer": "stop",
+    "explanation": "bus stop 意为“公交车站”；stop 意为“车站”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "There is a train ___ near my home. （车站）",
+    "stemZh": "我家附近有一个火车站。",
+    "answer": "station",
+    "explanation": "train station 意为“火车站”；station 意为“车站”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "There is a subway ___ near my home. （车站）",
+    "stemZh": "我家附近有一个地铁站。",
+    "answer": "station",
+    "explanation": "subway station 意为“地铁站”；station 意为“车站”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My father ___ me to school every day. （开车送）",
+    "stemZh": "我爸爸每天开车送我上学。",
+    "answer": "drives",
+    "explanation": "drive sb. to school 表示“开车送某人上学”；主语 he 为第三人称单数，drive 变为 drives。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I ride my ___ to school. （自行车）",
+    "stemZh": "我骑自行车上学。",
+    "answer": "bike",
+    "explanation": "ride a bike 表示“骑自行车”；my 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I take the ___ to school. （公共汽车）",
+    "stemZh": "我乘公共汽车上学。",
+    "answer": "bus",
+    "explanation": "take the bus 表示“乘公共汽车”；bus 意为“公共汽车”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "It takes about twenty ___ by bus. （分钟）",
+    "stemZh": "乘公共汽车大约要二十分钟。",
+    "answer": "minutes",
+    "explanation": "minute 意为“分钟”；twenty 后接复数形式 minutes。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The river is very ___. （宽的；深的）",
+    "stemZh": "这条河非常宽。",
+    "answer": "wide",
+    "explanation": "wide 意为“宽的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "There is a river ___ the two villages. （在……之间）",
+    "stemZh": "两个村子之间有一条河。",
+    "answer": "between",
+    "explanation": "between 表示“在……之间”，常用于两者之间。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "介词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The river runs ___ the city. （穿过）",
+    "stemZh": "这条河穿城而过。",
+    "answer": "through",
+    "explanation": "through 表示“穿过”，强调从内部穿过。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "介词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "There is a ___ over the river. （桥）",
+    "stemZh": "河上有一座桥。",
+    "answer": "bridge",
+    "explanation": "bridge 意为“桥”；a 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The students go to school ___ boat. （乘）",
+    "stemZh": "学生们乘船上学。",
+    "answer": "by",
+    "explanation": "by boat 是固定搭配，意为“乘船”；by 表示交通方式。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "介词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "It is easy for us to get to school by ___. （船）",
+    "stemZh": "我们乘船到学校很容易。",
+    "answer": "boat",
+    "explanation": "by boat 是固定搭配，意为“乘船”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I live in a small ___. （村庄）",
+    "stemZh": "我住在一个小村庄里。",
+    "answer": "village",
+    "explanation": "village 意为“村庄”；a 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "There are many ___ in the river. （鱼）",
+    "stemZh": "河里有很多鱼。",
+    "answer": "fish",
+    "explanation": "fish 意为“鱼”；表示鱼的数量时单复数同形，many fish 表示“很多鱼”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The boy is ___ of the dog. （害怕的）",
+    "stemZh": "这个男孩怕狗。",
+    "answer": "afraid",
+    "explanation": "be afraid of 表示“害怕……”；afraid 作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Many students in the village ___ to school by boat. （去）",
+    "stemZh": "村里的许多学生乘船上学。",
+    "answer": "go",
+    "explanation": "主语 many students 为复数，go 用原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The students in the village ___ to cross the river to school. （不得不）",
+    "stemZh": "村里的学生不得不渡河上学。",
+    "answer": "have",
+    "explanation": "have to 表示“不得不”；主语 students 为复数，故用 have。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "情态动词",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The boy ___ to cross the river to school. （不得不）",
+    "stemZh": "这个男孩不得不渡河上学。",
+    "answer": "has",
+    "explanation": "have to 表示“不得不”；主语 the boy 为第三人称单数，故用 has to。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "情态动词",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "It is difficult ___ the boy to cross the river. （对于）",
+    "stemZh": "对这个男孩来说渡河很难。",
+    "answer": "for",
+    "explanation": "It is + adj. + for sb. to do sth. 句型中，用 for 引出逻辑主语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "介词",
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "It is the students’ ___ to go to school. （梦想）",
+    "stemZh": "上学是学生们的梦想。",
+    "answer": "dream",
+    "explanation": "dream 意为“梦想”；the students’ 后接名词。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I hope their dream can come ___. （真实的）",
+    "stemZh": "我希望他们的梦想能实现。",
+    "answer": "true",
+    "explanation": "come true 是固定搭配，意为“实现”；true 作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "There is a big river ___ the school and the village. （在……之间）",
+    "stemZh": "学校和村庄之间有一条大河。",
+    "answer": "between",
+    "explanation": "between... and... 表示“在……和……之间”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "介词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The boy is not ___ of crossing the river. （害怕的）",
+    "stemZh": "这个男孩不怕渡河。",
+    "answer": "afraid",
+    "explanation": "be afraid of 表示“害怕……”；afraid 作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He ___ the river every day. （穿过）",
+    "stemZh": "他每天渡河。",
+    "answer": "crosses",
+    "explanation": "主语 he 为第三人称单数，cross 变为 crosses。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "They ___ the river by boat. （穿过）",
+    "stemZh": "他们乘船渡河。",
+    "answer": "cross",
+    "explanation": "主语 they 为复数，cross 用原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The river is too ___ for the children to cross. （快的；急的）",
+    "stemZh": "这条河水流太急，孩子们过不去。",
+    "answer": "fast",
+    "explanation": "fast 意为“快的；急的”；too... to... 结构表示“太……而不能……”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "形容词",
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "It takes them about half an hour ___ to school. （到达）",
+    "stemZh": "他们到学校大约要花半小时。",
+    "answer": "to get",
+    "explanation": "It takes sb. some time to do sth. 句型中，用不定式 to get 表示动作。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "How ___ it take you to get to school? （做；花）",
+    "stemZh": "你到学校要多长时间？",
+    "answer": "does",
+    "explanation": "特殊疑问句中主语 it 为第三人称单数，助动词用 does。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U3",
+    "points": [
+      "一般现在时",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "China is the third largest country in ___ (面积) in the world.",
+    "stemZh": "中国是世界上面积第三大的国家。",
+    "answer": "area",
+    "explanation": "名词作介词宾语，area 意为“面积”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The Great Wall is one of the greatest ___ (奇迹) in the world.",
+    "stemZh": "长城是世界上最伟大的奇迹之一。",
+    "answer": "wonders",
+    "explanation": "one of the + 形容词最高级 + 名词复数结构，wonder 的复数为 wonders。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "Qomolangma is the highest ___ (山) in the world.",
+    "stemZh": "珠穆朗玛峰是世界上最高的山。",
+    "answer": "mountain",
+    "explanation": "名词作表语，mountain 意为“山”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The Sahara is the largest ___ (沙漠) in the world.",
+    "stemZh": "撒哈拉是世界上最大的沙漠。",
+    "answer": "desert",
+    "explanation": "名词作表语，desert 意为“沙漠”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The Yangtze River is the longest river in ___ (亚洲).",
+    "stemZh": "长江是亚洲最长的河流。",
+    "answer": "Asia",
+    "explanation": "Asia 为专有名词，意为“亚洲”，首字母大写。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The Pacific is the largest ___ (海洋) in the world.",
+    "stemZh": "太平洋是世界上最大的海洋。",
+    "answer": "ocean",
+    "explanation": "名词作表语，ocean 意为“海洋”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "He wants to ___ (挑战) himself by climbing the mountain.",
+    "stemZh": "他想通过爬山来挑战自己。",
+    "answer": "challenge",
+    "explanation": "challenge 意为“挑战”，want to 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "The climbers reached the top of the mountain ___ (成功地).",
+    "stemZh": "登山者成功地到达了山顶。",
+    "answer": "successfully",
+    "explanation": "副词 successfully 修饰动词 reached，意为“成功地”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "副词"
+    ]
+  },
+  {
+    "stem": "It is ___ (危险的) to climb the mountain without a guide.",
+    "stemZh": "没有向导爬山是危险的。",
+    "answer": "dangerous",
+    "explanation": "It is + adj. + to do sth 句型，dangerous 意为“危险的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The weather on the mountain can change very ___ (快速地).",
+    "stemZh": "山上的天气变化非常快。",
+    "answer": "quickly",
+    "explanation": "副词 quickly 修饰动词 change，意为“快速地”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "副词"
+    ]
+  },
+  {
+    "stem": "The ___ (人口) of China is larger than that of Japan.",
+    "stemZh": "中国的人口比日本的多。",
+    "answer": "population",
+    "explanation": "名词作主语，population 意为“人口”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The wall is about 8,850 kilometers ___ (长).",
+    "stemZh": "这堵墙大约8850公里长。",
+    "answer": "long",
+    "explanation": "形容词作表语，表示长度，long 意为“长的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The mountain is about 8,848 meters ___ (高).",
+    "stemZh": "这座山大约8848米高。",
+    "answer": "high",
+    "explanation": "形容词作表语，表示高度，high 意为“高的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The river is about 6,300 kilometers ___ (长).",
+    "stemZh": "这条河大约6300公里长。",
+    "answer": "long",
+    "explanation": "形容词作表语，表示长度，long 意为“长的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "We should ___ (保护) the endangered animals in the wild.",
+    "stemZh": "我们应该保护野外的濒危动物。",
+    "answer": "protect",
+    "explanation": "protect 意为“保护”，should 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "The Himalayas ___ (包括) many of the highest mountains in the world.",
+    "stemZh": "喜马拉雅山脉包括世界上许多最高的山峰。",
+    "answer": "include",
+    "explanation": "include 意为“包括”，主语为复数，动词用原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The Great Wall was built to ___ (保护) the country from enemies.",
+    "stemZh": "长城是为了保护国家抵御敌人而建的。",
+    "answer": "protect",
+    "explanation": "protect...from... 意为“保护……免受……”，to 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The Amazon is the second ___ (最长的) river in the world.",
+    "stemZh": "亚马逊河是世界上第二长的河流。",
+    "answer": "longest",
+    "explanation": "the second + 形容词最高级 + 名词结构，long 的最高级为 longest。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词",
+      "比较级与最高级"
+    ]
+  },
+  {
+    "stem": "China has the largest ___ (人口) in the world.",
+    "stemZh": "中国拥有世界上最多的人口。",
+    "answer": "population",
+    "explanation": "名词作宾语，population 意为“人口”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The old man is ___ (甚至) stronger than many young people.",
+    "stemZh": "这位老人甚至比许多年轻人还强壮。",
+    "answer": "even",
+    "explanation": "even 修饰比较级 stronger，意为“甚至”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "副词",
+      "比较级与最高级"
+    ]
+  },
+  {
+    "stem": "The mountain is much ___ (更高) than any other mountain in the area.",
+    "stemZh": "这座山比该地区任何其他山都高得多。",
+    "answer": "higher",
+    "explanation": "much 修饰比较级，high 的比较级为 higher。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词",
+      "比较级与最高级"
+    ]
+  },
+  {
+    "stem": "The Nile is longer than ___ (任何) other river in the world.",
+    "stemZh": "尼罗河比世界上任何其他河流都长。",
+    "answer": "any",
+    "explanation": "any other 意为“任何其他的”，用于比较级结构。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "代词",
+      "比较级与最高级"
+    ]
+  },
+  {
+    "stem": "The climbers had to ___ (面对) many difficulties during the journey.",
+    "stemZh": "登山者在旅途中不得不面对许多困难。",
+    "answer": "face",
+    "explanation": "face 意为“面对”，have to 后接动词原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "It is ___ (令人惊讶的) that the little girl can climb so high.",
+    "stemZh": "这个小女孩能爬这么高真是令人惊讶。",
+    "answer": "surprising",
+    "explanation": "It is + adj. + that 从句句型，surprising 修饰事物，意为“令人惊讶的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The Great Wall is one of the most ___ (著名的) places in China.",
+    "stemZh": "长城是中国最著名的地方之一。",
+    "answer": "famous",
+    "explanation": "one of the most + 形容词 + 名词复数结构，famous 意为“著名的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词",
+      "比较级与最高级"
+    ]
+  },
+  {
+    "stem": "The scientists are studying the ___ (自然) of the mountain.",
+    "stemZh": "科学家们正在研究这座山的自然特征。",
+    "answer": "nature",
+    "explanation": "名词作宾语，nature 意为“自然”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The climbers were ___ (筋疲力尽的) after the long climb.",
+    "stemZh": "长途攀登后登山者们筋疲力尽。",
+    "answer": "exhausted",
+    "explanation": "形容词作表语，exhausted 意为“筋疲力尽的”，修饰人。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The view from the top of the mountain is ___ (令人惊叹的).",
+    "stemZh": "山顶的景色令人惊叹。",
+    "answer": "amazing",
+    "explanation": "形容词作表语，amazing 修饰事物，意为“令人惊叹的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The river ___ (流) through many countries before reaching the sea.",
+    "stemZh": "这条河流经许多国家后入海。",
+    "answer": "flows",
+    "explanation": "描述客观事实用一般现在时，主语为第三人称单数，flow 加 -s。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The mountain is covered with snow ___ (一直) all year round.",
+    "stemZh": "这座山终年覆盖着雪。",
+    "answer": "all",
+    "explanation": "all year round 意为“终年”，all 为副词。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The Great Wall was built ___ (手工) by ancient Chinese people.",
+    "stemZh": "长城是古代中国人手工建造的。",
+    "answer": "by hand",
+    "explanation": "by hand 意为“手工”，固定短语。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The desert is one of the ___ (最干燥的) places in the world.",
+    "stemZh": "沙漠是世界上最干燥的地方之一。",
+    "answer": "driest",
+    "explanation": "one of the + 形容词最高级 + 名词复数结构，dry 的最高级为 driest。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词",
+      "比较级与最高级"
+    ]
+  },
+  {
+    "stem": "The mountain is too ___ (陡的) for beginners to climb.",
+    "stemZh": "这座山对初学者来说太陡了，爬不上去。",
+    "answer": "steep",
+    "explanation": "形容词作表语，steep 意为“陡的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The explorers ___ (发现) a new species in the forest.",
+    "stemZh": "探险者在森林里发现了一个新物种。",
+    "answer": "discovered",
+    "explanation": "根据语境用一般过去时，discover 的过去式为 discovered。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The lake is ___ (深的) enough to hold a lot of water.",
+    "stemZh": "这个湖足够深，能容纳很多水。",
+    "answer": "deep",
+    "explanation": "形容词作表语，deep 意为“深的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The river is the longest one in ___ (欧洲).",
+    "stemZh": "这条河是欧洲最长的河。",
+    "answer": "Europe",
+    "explanation": "Europe 为专有名词，意为“欧洲”，首字母大写。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The mountain is ___ (位于) in the south of China.",
+    "stemZh": "这座山位于中国南部。",
+    "answer": "located",
+    "explanation": "be located in 意为“位于”，located 为过去分词。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "被动语态",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The climbers ___ (到达) the top after eight hours of climbing.",
+    "stemZh": "登山者爬了八个小时后到达了山顶。",
+    "answer": "reached",
+    "explanation": "根据 after eight hours 可知用一般过去时，reach 的过去式为 reached。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The weather is ___ (糟糕的) on the mountain, so be careful.",
+    "stemZh": "山上的天气很糟糕，所以要小心。",
+    "answer": "terrible",
+    "explanation": "形容词作表语，terrible 意为“糟糕的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The river ___ (提供) water for the nearby villages.",
+    "stemZh": "这条河为附近的村庄提供水源。",
+    "answer": "provides",
+    "explanation": "provide sth for sb 意为“为某人提供某物”，主语为第三人称单数，provide 加 -s。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "一般现在时",
+      "主谓一致",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The forest is ___ (覆盖) with green trees in spring.",
+    "stemZh": "春天森林覆盖着绿树。",
+    "answer": "covered",
+    "explanation": "be covered with 意为“覆盖着”，covered 为过去分词。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "被动语态",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The mountain is one of the most popular tourist ___ (景点) in China.",
+    "stemZh": "这座山是中国最受欢迎的旅游景点之一。",
+    "answer": "attractions",
+    "explanation": "one of the + 形容词最高级 + 名词复数结构，attraction 的复数为 attractions。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "It is difficult to ___ (呼吸) at the top of the mountain.",
+    "stemZh": "在山顶呼吸很困难。",
+    "answer": "breathe",
+    "explanation": "It is + adj. + to do sth 句型，breathe 意为“呼吸”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "非谓语动词（不定式）"
+    ]
+  },
+  {
+    "stem": "The group of climbers ___ (成功) in reaching the top.",
+    "stemZh": "这群登山者成功到达了山顶。",
+    "answer": "succeeded",
+    "explanation": "succeed in doing sth 意为“成功做某事”，根据语境用一般过去时 succeeded。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The lake is the ___ (最深的) in the country.",
+    "stemZh": "这个湖是该国最深的湖。",
+    "answer": "deepest",
+    "explanation": "the + 形容词最高级 + 名词结构，deep 的最高级为 deepest。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词",
+      "比较级与最高级"
+    ]
+  },
+  {
+    "stem": "The mountain ___ (吸引) thousands of visitors every year.",
+    "stemZh": "这座山每年吸引成千上万的游客。",
+    "answer": "attracts",
+    "explanation": "根据 every year 可知用一般现在时，主语为第三人称单数，attract 加 -s。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The climbers ___ (放弃) because of the bad weather.",
+    "stemZh": "由于天气恶劣，登山者们放弃了。",
+    "answer": "gave up",
+    "explanation": "give up 意为“放弃”，根据语境用一般过去时 gave。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The desert is ___ (干燥的) and hot all year round.",
+    "stemZh": "沙漠终年干燥炎热。",
+    "answer": "dry",
+    "explanation": "形容词作表语，dry 意为“干燥的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The river is ___ (宽的) enough for large ships to pass.",
+    "stemZh": "这条河足够宽，能让大船通过。",
+    "answer": "wide",
+    "explanation": "形容词作表语，wide 意为“宽的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U7",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "Don’t ___ late for class. （到达）",
+    "stemZh": "上课不要迟到。",
+    "answer": "arrive",
+    "explanation": "arrive late for class 表示“上课迟到”；祈使句否定式 Don’t 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "祈使句",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We must ___ on time for school. （到达）",
+    "stemZh": "我们必须按时到校。",
+    "answer": "arrive",
+    "explanation": "must 后接动词原形；arrive 意为“到达”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Please ___ to the teacher carefully in class. （听）",
+    "stemZh": "课堂上请认真听老师讲。",
+    "answer": "listen",
+    "explanation": "listen to sb. 表示“听某人说”；祈使句用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "祈使句",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We should ___ to the teacher in class. （听）",
+    "stemZh": "我们上课应该听老师讲。",
+    "answer": "listen",
+    "explanation": "should 后接动词原形；listen to 表示“听……”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Don’t ___ in the hallways. （跑）",
+    "stemZh": "不要在走廊里跑。",
+    "answer": "run",
+    "explanation": "祈使句否定式 Don’t 后接动词原形；run 意为“跑”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "祈使句",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Don’t ___ with your classmates. （打架）",
+    "stemZh": "不要和同学打架。",
+    "answer": "fight",
+    "explanation": "fight with sb. 表示“和某人打架”；祈使句否定式用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "祈使句",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "You must wear a school ___ every day. （制服）",
+    "stemZh": "你每天必须穿校服。",
+    "answer": "uniform",
+    "explanation": "school uniform 意为“校服”；a 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We have to ___ a uniform at school. （穿）",
+    "stemZh": "我们在学校必须穿校服。",
+    "answer": "wear",
+    "explanation": "wear 意为“穿”；have to 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Please be ___ in the library. （安静的）",
+    "stemZh": "请在图书馆里保持安静。",
+    "answer": "quiet",
+    "explanation": "be quiet 表示“保持安静”；quiet 作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "形容词",
+      "祈使句"
+    ]
+  },
+  {
+    "stem": "The students must keep ___ in the library. （安静的）",
+    "stemZh": "学生们在图书馆里必须保持安静。",
+    "answer": "quiet",
+    "explanation": "keep quiet 表示“保持安静”；quiet 作形容词补语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Don’t eat in the ___. （教室）",
+    "stemZh": "不要在教室里吃东西。",
+    "answer": "classroom",
+    "explanation": "classroom 意为“教室”；in the classroom 表示“在教室里”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "名词",
+      "祈使句"
+    ]
+  },
+  {
+    "stem": "We eat lunch in the dining ___. （大厅）",
+    "stemZh": "我们在餐厅吃午餐。",
+    "answer": "hall",
+    "explanation": "dining hall 意为“餐厅”；hall 意为“大厅”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Don’t eat in the dining ___. （大厅）",
+    "stemZh": "不要在餐厅里吃东西。",
+    "answer": "hall",
+    "explanation": "dining hall 意为“餐厅”；hall 意为“大厅”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We have many school ___. （规则）",
+    "stemZh": "我们有很多校规。",
+    "answer": "rules",
+    "explanation": "rule 意为“规则”；many 后接可数名词复数 rules。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Please follow the ___. （规则）",
+    "stemZh": "请遵守规则。",
+    "answer": "rules",
+    "explanation": "follow the rules 表示“遵守规则”；rule 用复数形式。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Don’t ___ music in the classroom. （听）",
+    "stemZh": "不要在教室里听音乐。",
+    "answer": "listen to",
+    "explanation": "listen to music 表示“听音乐”；祈使句否定式用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "祈使句",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Don’t ___ your phone in class. （带来）",
+    "stemZh": "不要把手机带到课堂上。",
+    "answer": "bring",
+    "explanation": "bring 意为“带来”；祈使句否定式 Don’t 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "祈使句",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We can’t ___ food to the classroom. （带来）",
+    "stemZh": "我们不能把食物带到教室。",
+    "answer": "bring",
+    "explanation": "can’t 后接动词原形；bring sth. to... 表示“把某物带到……”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "It is ___ to be on time. （重要的）",
+    "stemZh": "守时很重要。",
+    "answer": "important",
+    "explanation": "important 意为“重要的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "It is important to ___ the school rules. （遵守）",
+    "stemZh": "遵守校规很重要。",
+    "answer": "follow",
+    "explanation": "follow the rules 表示“遵守规则”；to 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We must ___ the rules at school. （遵守）",
+    "stemZh": "我们在学校必须遵守规则。",
+    "answer": "follow",
+    "explanation": "must 后接动词原形；follow the rules 表示“遵守规则”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Don’t go ___ at night. （外面）",
+    "stemZh": "晚上不要出去。",
+    "answer": "outside",
+    "explanation": "outside 意为“外面”；go outside 表示“出去”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "It’s cold ___. Put on your coat. （外面）",
+    "stemZh": "外面很冷。穿上你的外套。",
+    "answer": "outside",
+    "explanation": "outside 意为“外面”；作地点副词。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We can’t go ___ on school nights. （外出）",
+    "stemZh": "在上学的晚上我们不能外出。",
+    "answer": "out",
+    "explanation": "go out 表示“外出”；can’t 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I have to ___ the piano every day. （练习）",
+    "stemZh": "我每天必须练习弹钢琴。",
+    "answer": "practice",
+    "explanation": "practice the piano 表示“练习弹钢琴”；have to 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She ___ the guitar after school. （练习）",
+    "stemZh": "她放学后练习弹吉他。",
+    "answer": "practices",
+    "explanation": "主语 she 为第三人称单数，practice 变为 practices。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I have to do the ___ after dinner. （餐具）",
+    "stemZh": "晚饭后我必须洗碗。",
+    "answer": "dishes",
+    "explanation": "do the dishes 是固定搭配，意为“洗碗”；dish 用复数形式。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She has to wash the ___ after dinner. （餐具）",
+    "stemZh": "晚饭后她必须洗碗。",
+    "answer": "dishes",
+    "explanation": "wash the dishes 表示“洗碗”；dish 用复数形式。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I have to clean my room ___ dinner. （在……之前）",
+    "stemZh": "晚饭前我必须打扫房间。",
+    "answer": "before",
+    "explanation": "before 表示“在……之前”；before dinner 表示“晚饭前”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "介词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Don’t leave ___ clothes in the room. （脏的）",
+    "stemZh": "不要把脏衣服留在房间里。",
+    "answer": "dirty",
+    "explanation": "dirty 意为“脏的”；作定语修饰 clothes。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "My mother is cooking in the ___. （厨房）",
+    "stemZh": "我妈妈正在厨房做饭。",
+    "answer": "kitchen",
+    "explanation": "kitchen 意为“厨房”；in the kitchen 表示“在厨房里”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We need ___ rules at home. （更多的）",
+    "stemZh": "我们家需要更多的规矩。",
+    "answer": "more",
+    "explanation": "more 意为“更多的”；修饰可数名词复数 rules。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "形容词",
+      "比较级与最高级"
+    ]
+  },
+  {
+    "stem": "The classroom is too ___. （吵闹的）",
+    "stemZh": "教室太吵了。",
+    "answer": "noisy",
+    "explanation": "noisy 意为“吵闹的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Don’t be ___. Please be quiet. （吵闹的）",
+    "stemZh": "不要吵闹。请安静。",
+    "answer": "noisy",
+    "explanation": "noisy 意为“吵闹的”；祈使句否定式 Don’t be 后接形容词。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "形容词",
+      "祈使句"
+    ]
+  },
+  {
+    "stem": "You can ___ after you finish your homework. （放松）",
+    "stemZh": "完成作业后你可以放松。",
+    "answer": "relax",
+    "explanation": "relax 意为“放松”；can 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I like to ___ books in the evening. （阅读）",
+    "stemZh": "我喜欢晚上读书。",
+    "answer": "read",
+    "explanation": "read books 表示“读书”；like to do sth. 表示“喜欢做某事”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The rules are too ___. （糟糕的；可怕的）",
+    "stemZh": "这些规矩太糟糕了。",
+    "answer": "terrible",
+    "explanation": "terrible 意为“糟糕的；可怕的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I ___ sorry for being late. （感觉）",
+    "stemZh": "我为迟到感到抱歉。",
+    "answer": "feel",
+    "explanation": "feel sorry 表示“感到抱歉”；主语 I 后用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I am ___ for being late. （抱歉的）",
+    "stemZh": "我为迟到感到抱歉。",
+    "answer": "sorry",
+    "explanation": "be sorry for... 表示“为……感到抱歉”；sorry 作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Our teacher is ___ with us. （严格的）",
+    "stemZh": "我们老师对我们很严格。",
+    "answer": "strict",
+    "explanation": "be strict with sb. 表示“对某人严格”；strict 作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We must ___ the school rules. （记住）",
+    "stemZh": "我们必须记住校规。",
+    "answer": "remember",
+    "explanation": "remember 意为“记住”；must 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Please ___ to close the door. （记得）",
+    "stemZh": "请记得关门。",
+    "answer": "remember",
+    "explanation": "remember to do sth. 表示“记得去做某事”；祈使句用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Good ___ to you! （运气）",
+    "stemZh": "祝你好运！",
+    "answer": "luck",
+    "explanation": "Good luck! 是祝福语，意为“祝你好运”；luck 为不可数名词。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "名词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "Please ___ your room clean. （保持）",
+    "stemZh": "请保持你的房间干净。",
+    "answer": "keep",
+    "explanation": "keep sth. + adj. 表示“使某物保持某种状态”；祈使句用动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "祈使句",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We must keep our classroom ___. （干净的）",
+    "stemZh": "我们必须保持教室干净。",
+    "answer": "clean",
+    "explanation": "keep sth. clean 表示“保持某物干净”；clean 作形容词补语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Her ___ is long and black. （头发）",
+    "stemZh": "她的头发又长又黑。",
+    "answer": "hair",
+    "explanation": "hair 意为“头发”；作不可数名词使用。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We can ___ a lot from the rules. （学习）",
+    "stemZh": "我们能从规则中学到很多。",
+    "answer": "learn",
+    "explanation": "learn 意为“学习”；can 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I have to ___ my homework first. （做）",
+    "stemZh": "我必须先做作业。",
+    "answer": "do",
+    "explanation": "do homework 表示“做作业”；have to 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She has to ___ her homework first. （做）",
+    "stemZh": "她必须首先做作业。",
+    "answer": "do",
+    "explanation": "has to 后接动词原形；do homework 表示“做作业”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "We can’t ___ late for school. （到达）",
+    "stemZh": "我们不能上学迟到。",
+    "answer": "arrive",
+    "explanation": "can’t 后接动词原形；arrive late for school 表示“上学迟到”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U4",
+    "points": [
+      "情态动词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Have you finished reading the book ___ (还)?",
+    "stemZh": "这本书你读完了吗？",
+    "answer": "yet",
+    "explanation": "yet 用于疑问句句末，意为“还”，常与现在完成时连用。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "副词",
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The story takes place on a ___ (岛屿) in the Pacific Ocean.",
+    "stemZh": "这个故事发生在太平洋上的一个岛屿上。",
+    "answer": "island",
+    "explanation": "名词作介词宾语，island 意为“岛屿”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The sailor found a ___ (宝藏) in the cave.",
+    "stemZh": "水手在山洞里发现了宝藏。",
+    "answer": "treasure",
+    "explanation": "treasure 为不可数名词，意为“宝藏”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "He ___ (匆忙) to the station to catch the train.",
+    "stemZh": "他匆忙赶到车站去赶火车。",
+    "answer": "hurried",
+    "explanation": "根据语境用一般过去时，hurry 的过去式为 hurried。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The ship ___ (撞) a rock and began to sink.",
+    "stemZh": "船撞上了一块岩石，开始下沉。",
+    "answer": "hit",
+    "explanation": "根据 began 可知用一般过去时，hit 的过去式仍为 hit。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The tools ___ (属于) to the old fisherman.",
+    "stemZh": "这些工具属于那位老渔夫。",
+    "answer": "belong",
+    "explanation": "belong to 意为“属于”，主语为复数，动词用原形。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The sailor ___ (航行) across the sea alone.",
+    "stemZh": "水手独自横渡大海。",
+    "answer": "sailed",
+    "explanation": "根据语境用一般过去时，sail 的过去式为 sailed。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The island is full of ___ (沙子) and rocks.",
+    "stemZh": "岛上满是沙子和岩石。",
+    "answer": "sand",
+    "explanation": "sand 为不可数名词，意为“沙子”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "He ___ (发现) an old map in the attic.",
+    "stemZh": "他在阁楼里发现了一张旧地图。",
+    "answer": "found",
+    "explanation": "根据语境用一般过去时，find 的过去式为 found。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The ___ (海岸) was covered with white sand.",
+    "stemZh": "海岸上覆盖着白色的沙子。",
+    "answer": "coast",
+    "explanation": "名词作主语，coast 意为“海岸”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The pirates ___ (埋) the treasure on the island.",
+    "stemZh": "海盗们把宝藏埋在了岛上。",
+    "answer": "buried",
+    "explanation": "根据语境用一般过去时，bury 的过去式为 buried。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The story is about a ___ (船长) and his crew.",
+    "stemZh": "这个故事讲的是一位船长和他的船员们。",
+    "answer": "captain",
+    "explanation": "名词作介词宾语，captain 意为“船长”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The young man ___ (航行) around the world in a small boat.",
+    "stemZh": "那个年轻人乘小船环游世界。",
+    "answer": "sailed",
+    "explanation": "根据语境用一般过去时，sail 的过去式为 sailed。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The old man has ___ (卖) all his fish today.",
+    "stemZh": "老人今天把鱼都卖完了。",
+    "answer": "sold",
+    "explanation": "现在完成时中填过去分词，sell 的过去分词为 sold。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The waves ___ (拍打) against the rocks all night.",
+    "stemZh": "海浪整夜拍打着岩石。",
+    "answer": "beat",
+    "explanation": "根据 all night 可知用一般过去时，beat 的过去式仍为 beat。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The sailor has ___ (从未) seen such a big storm.",
+    "stemZh": "这个水手从未见过这么大的风暴。",
+    "answer": "never",
+    "explanation": "never 意为“从未”，常与现在完成时连用。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "副词",
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The children were ___ (兴奋的) to find the treasure.",
+    "stemZh": "孩子们找到宝藏很兴奋。",
+    "answer": "excited",
+    "explanation": "excited 修饰人，表示“感到兴奋的”，作表语。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The ship ___ (下沉) to the bottom of the sea.",
+    "stemZh": "船沉到了海底。",
+    "answer": "sank",
+    "explanation": "根据语境用一般过去时，sink 的过去式为 sank。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The ___ (工具) are used for digging and cutting.",
+    "stemZh": "这些工具用于挖掘和切割。",
+    "answer": "tools",
+    "explanation": "根据 are 可知主语为复数，tool 的复数为 tools。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "He ___ (拉) the rope hard to pull the boat to the shore.",
+    "stemZh": "他用力拉绳子把船拉向岸边。",
+    "answer": "pulled",
+    "explanation": "根据语境用一般过去时，pull 的过去式为 pulled。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The ___ (陆地) is covered with green grass in spring.",
+    "stemZh": "春天陆地上覆盖着绿草。",
+    "answer": "land",
+    "explanation": "land 为不可数名词，意为“陆地”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The pirates ___ (藏) the gold in a cave.",
+    "stemZh": "海盗们把金子藏在一个山洞里。",
+    "answer": "hid",
+    "explanation": "根据语境用一般过去时，hide 的过去式为 hid。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The story is about a journey to a ___ (遥远的) island.",
+    "stemZh": "这个故事讲的是去一座遥远岛屿的旅程。",
+    "answer": "faraway",
+    "explanation": "形容词修饰名词 island，faraway 意为“遥远的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The fisherman ___ (划) his boat to the middle of the lake.",
+    "stemZh": "渔夫把船划到湖中央。",
+    "answer": "rowed",
+    "explanation": "根据语境用一般过去时，row 的过去式为 rowed。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The storm was so ___ (可怕的) that the ship nearly sank.",
+    "stemZh": "风暴如此可怕，船差点沉了。",
+    "answer": "terrible",
+    "explanation": "形容词作表语，terrible 意为“可怕的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "形容词",
+      "状语从句"
+    ]
+  },
+  {
+    "stem": "The sailors have ___ (到达) the island safely.",
+    "stemZh": "水手们已安全到达岛上。",
+    "answer": "arrived at",
+    "explanation": "arrive at 意为“到达”，现在完成时中填过去分词 arrived。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "现在完成时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The boy ___ (假装) to be a pirate while playing.",
+    "stemZh": "男孩玩耍时假装自己是海盗。",
+    "answer": "pretended",
+    "explanation": "根据 while playing 可知用一般过去时，pretend 的过去式为 pretended。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The ___ (枪) was used by the pirate in the story.",
+    "stemZh": "故事中的海盗使用了枪。",
+    "answer": "gun",
+    "explanation": "名词作主语，gun 意为“枪”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The ship has ___ (航行) for three days on the sea.",
+    "stemZh": "船已经在海上航行三天了。",
+    "answer": "sailed",
+    "explanation": "现在完成时中填过去分词，sail 的过去分词为 sailed。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The island is ___ (无人居住的) and very quiet.",
+    "stemZh": "这个岛屿无人居住，非常安静。",
+    "answer": "uninhabited",
+    "explanation": "形容词作表语，uninhabited 意为“无人居住的”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "形容词"
+    ]
+  },
+  {
+    "stem": "The old map ___ (显示) the way to the treasure.",
+    "stemZh": "这张旧地图显示了通往宝藏的路。",
+    "answer": "showed",
+    "explanation": "根据语境用一般过去时，show 的过去式为 showed。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The sailor ___ (系) the boat to the dock before leaving.",
+    "stemZh": "水手离开前把船拴在码头上。",
+    "answer": "tied",
+    "explanation": "根据 before leaving 可知用一般过去时，tie 的过去式为 tied。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The children have ___ (听说) the story of the pirate many times.",
+    "stemZh": "孩子们已经多次听说过这个海盗的故事。",
+    "answer": "heard",
+    "explanation": "现在完成时中填过去分词，hear 的过去分词为 heard。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The ___ (金子) was hidden in a big box under the tree.",
+    "stemZh": "金子被藏在一棵树下的大箱子里。",
+    "answer": "gold",
+    "explanation": "gold 为不可数名词，意为“金子”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The sailors were ___ (迷失的) at sea for a week.",
+    "stemZh": "水手们在海上迷失了一周。",
+    "answer": "lost",
+    "explanation": "be lost 意为“迷失的”，lost 为形容词。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The captain ___ (命令) his men to lower the sails.",
+    "stemZh": "船长命令船员们降下船帆。",
+    "answer": "ordered",
+    "explanation": "根据语境用一般过去时，order 的过去式为 ordered，order sb to do sth 意为“命令某人做某事”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The boy has ___ (画) a map of the island on paper.",
+    "stemZh": "男孩已经在纸上画了一张岛的地图。",
+    "answer": "drawn",
+    "explanation": "现在完成时中填过去分词，draw 的过去分词为 drawn。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The ___ (冒险) of the sailor is known to everyone in the town.",
+    "stemZh": "这个水手的冒险故事在小镇上人尽皆知。",
+    "answer": "adventure",
+    "explanation": "名词作主语，adventure 意为“冒险”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The pirate ___ (威胁) to hurt the sailors if they didn't obey.",
+    "stemZh": "海盗威胁说如果水手们不服从就伤害他们。",
+    "answer": "threatened",
+    "explanation": "根据从句 didn't obey 可知用一般过去时，threaten 的过去式为 threatened。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时",
+      "状语从句"
+    ]
+  },
+  {
+    "stem": "The ship has ___ (到达) the port and everyone is safe.",
+    "stemZh": "船已到达港口，每个人都很安全。",
+    "answer": "reached",
+    "explanation": "现在完成时中填过去分词，reach 的过去分词为 reached。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The ___ (故事) of the treasure has been passed down for generations.",
+    "stemZh": "关于宝藏的故事已经代代相传。",
+    "answer": "story",
+    "explanation": "名词作主语，story 意为“故事”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The sailor ___ (绑) the rope to the mast quickly.",
+    "stemZh": "水手迅速地把绳子绑在桅杆上。",
+    "answer": "tied",
+    "explanation": "根据语境用一般过去时，tie 的过去式为 tied。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The children ___ (挖) a hole in the sand to look for treasure.",
+    "stemZh": "孩子们在沙子里挖了一个洞寻找宝藏。",
+    "answer": "dug",
+    "explanation": "根据语境用一般过去时，dig 的过去式为 dug。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The story is ___ (以……为背景) in the 18th century.",
+    "stemZh": "这个故事以18世纪为背景。",
+    "answer": "set",
+    "explanation": "be set in 意为“以……为背景”，set 为过去分词。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "被动语态",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The sailors ___ (欢呼) when they saw the land.",
+    "stemZh": "水手们看到陆地时欢呼起来。",
+    "answer": "cheered",
+    "explanation": "根据 saw 可知用一般过去时，cheer 的过去式为 cheered。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The ___ (日记) of the sailor describes his adventures at sea.",
+    "stemZh": "水手的日记描述了他海上的冒险。",
+    "answer": "diary",
+    "explanation": "名词作主语，diary 意为“日记”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "The boy ___ (想象) himself as a brave sailor.",
+    "stemZh": "男孩把自己想象成一个勇敢的水手。",
+    "answer": "imagined",
+    "explanation": "根据语境用一般过去时，imagine 的过去式为 imagined。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "一般过去时"
+    ]
+  },
+  {
+    "stem": "The treasure has ___ (被藏) in a secret place for years.",
+    "stemZh": "宝藏被藏在一个秘密的地方多年了。",
+    "answer": "been hidden",
+    "explanation": "现在完成时的被动语态为 have/has been + 过去分词，hide 的过去分词为 hidden。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "被动语态",
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The sailors have ___ (航行) across the ocean many times.",
+    "stemZh": "水手们多次横渡大洋。",
+    "answer": "sailed",
+    "explanation": "现在完成时中填过去分词，sail 的过去分词为 sailed。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The ___ (风暴) destroyed many ships along the coast.",
+    "stemZh": "风暴摧毁了沿海的许多船只。",
+    "answer": "storm",
+    "explanation": "名词作主语，storm 意为“风暴”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U8",
+    "points": [
+      "名词"
+    ]
+  },
+  {
+    "stem": "I like ___ because they are cute. （熊猫）",
+    "stemZh": "我喜欢熊猫，因为它们很可爱。",
+    "answer": "pandas",
+    "explanation": "panda 意为“熊猫”；由答语 they 可知用复数形式 pandas。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The ___ is a big cat. （老虎）",
+    "stemZh": "老虎是一种大型猫科动物。",
+    "answer": "tiger",
+    "explanation": "tiger 意为“老虎”；the 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "An ___ has a long nose. （大象）",
+    "stemZh": "大象有一个长鼻子。",
+    "answer": "elephant",
+    "explanation": "elephant 意为“大象”；以元音音素开头，前面用 an。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "冠词"
+    ]
+  },
+  {
+    "stem": "___ are from Australia. （考拉）",
+    "stemZh": "考拉来自澳大利亚。",
+    "answer": "Koalas",
+    "explanation": "koala 意为“考拉”；由 are 可知主语为复数 Koalas，句首首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The ___ is the king of animals. （狮子）",
+    "stemZh": "狮子是动物之王。",
+    "answer": "lion",
+    "explanation": "lion 意为“狮子”；the 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The ___ has a very long neck. （长颈鹿）",
+    "stemZh": "长颈鹿有一个非常长的脖子。",
+    "answer": "giraffe",
+    "explanation": "giraffe 意为“长颈鹿”；the 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Let’s go to the ___. （动物园）",
+    "stemZh": "我们去动物园吧。",
+    "answer": "zoo",
+    "explanation": "zoo 意为“动物园”；go to the zoo 表示“去动物园”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "There are many ___ in the zoo. （动物）",
+    "stemZh": "动物园里有很多动物。",
+    "answer": "animals",
+    "explanation": "animal 意为“动物”；many 后接可数名词复数 animals。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The baby panda is very ___. （可爱的）",
+    "stemZh": "这只熊猫宝宝非常可爱。",
+    "answer": "cute",
+    "explanation": "cute 意为“可爱的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The koala is kind of ___. （懒惰的）",
+    "stemZh": "考拉有点儿懒惰。",
+    "answer": "lazy",
+    "explanation": "lazy 意为“懒惰的”；kind of 后接形容词。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The elephant is very ___. （聪明的）",
+    "stemZh": "大象非常聪明。",
+    "answer": "smart",
+    "explanation": "smart 意为“聪明的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The peacock is ___. （美丽的）",
+    "stemZh": "孔雀很美丽。",
+    "answer": "beautiful",
+    "explanation": "beautiful 意为“美丽的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Tigers can be ___. （可怕的）",
+    "stemZh": "老虎可能很可怕。",
+    "answer": "scary",
+    "explanation": "scary 意为“可怕的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The panda is ___ shy. （有点儿）",
+    "stemZh": "熊猫有点儿害羞。",
+    "answer": "kind of",
+    "explanation": "kind of 是固定搭配，意为“有点儿”；修饰形容词 shy。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "固定搭配",
+      "副词"
+    ]
+  },
+  {
+    "stem": "Koalas are from ___. （澳大利亚）",
+    "stemZh": "考拉来自澳大利亚。",
+    "answer": "Australia",
+    "explanation": "Australia 意为“澳大利亚”；表示国家名称首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Lions are from ___. （南非）",
+    "stemZh": "狮子来自南非。",
+    "answer": "South Africa",
+    "explanation": "South Africa 意为“南非”；表示国家或地区名称首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Pandas are from ___. （中国）",
+    "stemZh": "熊猫来自中国。",
+    "answer": "China",
+    "explanation": "China 意为“中国”；表示国家名称首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Elephants in ___ are a symbol of good luck. （泰国）",
+    "stemZh": "在泰国，大象是好运的象征。",
+    "answer": "Thailand",
+    "explanation": "Thailand 意为“泰国”；表示国家名称首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The elephant is a ___ of Thailand. （象征）",
+    "stemZh": "大象是泰国的象征。",
+    "answer": "symbol",
+    "explanation": "symbol 意为“象征”；a symbol of 表示“一个……的象征”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "There is an elephant on the Thai ___. （旗帜）",
+    "stemZh": "泰国国旗上有一头大象。",
+    "answer": "flag",
+    "explanation": "flag 意为“旗帜”；the Thai flag 表示“泰国国旗”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Don’t ___ to take your umbrella. （忘记）",
+    "stemZh": "别忘了带你的雨伞。",
+    "answer": "forget",
+    "explanation": "forget to do sth. 表示“忘记去做某事”；祈使句否定式 Don’t 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "祈使句",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Elephants can ___ in the forest. （迷路）",
+    "stemZh": "大象在森林里可能会迷路。",
+    "answer": "get lost",
+    "explanation": "get lost 是固定搭配，意为“迷路”；can 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "固定搭配",
+      "情态动词"
+    ]
+  },
+  {
+    "stem": "Many animals are in ___. （危险）",
+    "stemZh": "许多动物处于危险之中。",
+    "answer": "danger",
+    "explanation": "in danger 是固定搭配，意为“处于危险中”；danger 作名词。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Tigers ___ now. （处于危险中）",
+    "stemZh": "老虎现在处于危险之中。",
+    "answer": "are in danger",
+    "explanation": "be in danger 表示“处于危险中”；主语 tigers 为复数，be 动词用 are。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "固定搭配",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "People ___ down trees. （砍）",
+    "stemZh": "人们砍倒树木。",
+    "answer": "cut",
+    "explanation": "cut down 表示“砍倒”；主语 people 为复数，动词用原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "一般现在时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Don’t cut ___ trees. （倒下；向下）",
+    "stemZh": "不要砍倒树木。",
+    "answer": "down",
+    "explanation": "cut down 是固定搭配，意为“砍倒”；down 作副词。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "副词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Many animals live in the ___. （树）",
+    "stemZh": "许多动物生活在树上。",
+    "answer": "tree",
+    "explanation": "tree 意为“树”；in the tree 表示“在树上”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "People kill elephants for their ___. （象牙）",
+    "stemZh": "人们为了象牙而杀死大象。",
+    "answer": "ivory",
+    "explanation": "ivory 意为“象牙”；作不可数名词使用。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The box is ___ wood. （由……制成）",
+    "stemZh": "这个箱子是由木头制成的。",
+    "answer": "made of",
+    "explanation": "be made of 表示“由……制成”，通常指能看出原材料；made of 为固定搭配。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "固定搭配",
+      "被动语态"
+    ]
+  },
+  {
+    "stem": "We must ___ the animals. （拯救）",
+    "stemZh": "我们必须拯救动物。",
+    "answer": "save",
+    "explanation": "save 意为“拯救”；must 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "情态动词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "People ___ elephants for ivory. （杀死）",
+    "stemZh": "人们为了象牙而杀死大象。",
+    "answer": "kill",
+    "explanation": "kill 意为“杀死”；主语 people 为复数，动词用原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "一般现在时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The cat has soft ___. （毛）",
+    "stemZh": "这只猫有柔软的毛。",
+    "answer": "fur",
+    "explanation": "fur 意为“毛”；作不可数名词使用。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "This bag is made of ___. （皮革）",
+    "stemZh": "这个包是由皮革制成的。",
+    "answer": "leather",
+    "explanation": "leather 意为“皮革”；be made of 后接原材料。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "This is a good ___ for animals to live. （地方）",
+    "stemZh": "这是一个适合动物居住的好地方。",
+    "answer": "place",
+    "explanation": "place 意为“地方”；a good place for... 表示“一个适合……的好地方”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Animals need ___ to drink. （水）",
+    "stemZh": "动物需要喝水。",
+    "answer": "water",
+    "explanation": "water 意为“水”；作不可数名词使用。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We must give animals enough ___. （食物）",
+    "stemZh": "我们必须给动物足够的食物。",
+    "answer": "food",
+    "explanation": "food 意为“食物”；作不可数名词使用。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "People should be ___ to animals. （友好的）",
+    "stemZh": "人们应该对动物友好。",
+    "answer": "friendly",
+    "explanation": "be friendly to 表示“对……友好”；friendly 作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Pandas ___ China. （生活在）",
+    "stemZh": "熊猫生活在中国。",
+    "answer": "live in",
+    "explanation": "live in 表示“生活在……”；主语 pandas 为复数，动词用原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "固定搭配",
+      "一般现在时"
+    ]
+  },
+  {
+    "stem": "The panda is ___ the most popular animals. （之一）",
+    "stemZh": "熊猫是最受欢迎的动物之一。",
+    "answer": "one of",
+    "explanation": "one of 表示“……之一”；后接复数名词。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "固定搭配",
+      "比较级与最高级"
+    ]
+  },
+  {
+    "stem": "Let’s see the pandas ___. （首先）",
+    "stemZh": "我们先去看熊猫吧。",
+    "answer": "first",
+    "explanation": "first 作副词，意为“首先”；修饰整个动作顺序。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "副词",
+      "祈使句"
+    ]
+  },
+  {
+    "stem": "___ do you like pandas? （为什么）",
+    "stemZh": "你为什么喜欢熊猫？",
+    "answer": "Why",
+    "explanation": "Why 用于询问原因；句首首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "副词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "___ they are cute. （因为）",
+    "stemZh": "因为它们很可爱。",
+    "answer": "Because",
+    "explanation": "Because 引导原因状语从句，回答 Why 的提问；句首首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "连词",
+      "状语从句"
+    ]
+  },
+  {
+    "stem": "___ are lions from? （哪里）",
+    "stemZh": "狮子来自哪里？",
+    "answer": "Where",
+    "explanation": "Where are... from? 用于询问来源；句首首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "副词",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "Lions are ___ Africa. （来自）",
+    "stemZh": "狮子来自非洲。",
+    "answer": "from",
+    "explanation": "be from 表示“来自”；from 后接地点。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "介词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I ___ like elephants. （真正地）",
+    "stemZh": "我真的很喜欢大象。",
+    "answer": "really",
+    "explanation": "really 意为“真正地”；作副词修饰动词 like。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "There are ___ 100 animals in the zoo. （超过）",
+    "stemZh": "动物园里有超过100种动物。",
+    "answer": "over",
+    "explanation": "over 意为“超过”；作介词表示数量超过。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "介词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Elephants are ___ fun. （很多）",
+    "stemZh": "大象非常有趣。",
+    "answer": "a lot of",
+    "explanation": "a lot of fun 表示“很多乐趣”；a lot of 为固定搭配。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "固定搭配",
+      "名词"
+    ]
+  },
+  {
+    "stem": "I ___ my keys yesterday. （忘记）",
+    "stemZh": "我昨天忘了带钥匙。",
+    "answer": "forgot",
+    "explanation": "由 yesterday 可知用一般过去时；forget 的过去式为 forgot。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Koalas ___ Australia. （来自）",
+    "stemZh": "考拉来自澳大利亚。",
+    "answer": "are from",
+    "explanation": "be from 表示“来自”；主语 koalas 为复数，be 动词用 are。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U5",
+    "points": [
+      "固定搭配",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I have ___ (已经) finished my homework, so I can play now.",
+    "stemZh": "我已经完成作业了，所以现在可以玩了。",
+    "answer": "already",
+    "explanation": "already 用于肯定句，意为“已经”，常与现在完成时连用。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "副词",
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The old man has ___ (拥有) this house since 1990.",
+    "stemZh": "这位老人自1990年起就拥有这栋房子。",
+    "answer": "owned",
+    "explanation": "现在完成时中填过去分词，own 的过去分词为 owned。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "I haven't seen my cousin ___ (自从) last year.",
+    "stemZh": "自去年以来我就没见过我的表弟。",
+    "answer": "since",
+    "explanation": "since 后接时间点，与现在完成时连用，意为“自从”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "介词",
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "She has lived in this city ___ (for) ten years.",
+    "stemZh": "她在这座城市住了十年了。",
+    "answer": "for",
+    "explanation": "for 后接时间段，与现在完成时连用，意为“持续”。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "介词",
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The old man has ___ (卖) his old bike for a month.",
+    "stemZh": "老人卖掉旧自行车已经一个月了。",
+    "answer": "sold",
+    "explanation": "现在完成时中填过去分词，sell 的过去分词为 sold。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "My father has ___ (工作) in this hospital since 2005.",
+    "stemZh": "我父亲自2005年起就在这家医院工作。",
+    "answer": "worked",
+    "explanation": "现在完成时中填过去分词，work 的过去分词为 worked。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The little boy has ___ (长大) a lot since last year.",
+    "stemZh": "这个小男孩自去年以来长大了很多。",
+    "answer": "grown",
+    "explanation": "现在完成时中填过去分词，grow 的过去分词为 grown。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "We have ___ (保持) in touch with each other for years.",
+    "stemZh": "我们多年来一直保持联系。",
+    "answer": "kept",
+    "explanation": "现在完成时中填过去分词，keep 的过去分词为 kept。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He has ___ (成为) a doctor for five years.",
+    "stemZh": "他当医生已经五年了。",
+    "answer": "been",
+    "explanation": "现在完成时与时间段连用，become 为短暂性动词，用 be 的过去分词 been 表示状态。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She has ___ (拥有) this car for three years.",
+    "stemZh": "她拥有这辆车已经三年了。",
+    "answer": "had",
+    "explanation": "现在完成时与时间段连用，own 可用 have 的过去分词 had 表示状态。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The old man has ___ (死) for many years.",
+    "stemZh": "那位老人已经去世多年了。",
+    "answer": "been dead",
+    "explanation": "现在完成时与时间段连用，die 为短暂性动词，用 be dead 的完成时表示状态。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We have ___ (住) here since we moved to this city.",
+    "stemZh": "自我们搬到这座城市以来就住在这里。",
+    "answer": "lived",
+    "explanation": "现在完成时中填过去分词，live 的过去分词为 lived。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "状语从句"
+    ]
+  },
+  {
+    "stem": "The boy has ___ (买) the toy for three days.",
+    "stemZh": "这个男孩买这个玩具已经三天了。",
+    "answer": "had",
+    "explanation": "现在完成时与时间段连用，buy 为短暂性动词，用 have 的过去分词 had 表示状态。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I have ___ (认识) him since we were in primary school.",
+    "stemZh": "我们上小学时就认识了。",
+    "answer": "known",
+    "explanation": "现在完成时中填过去分词，know 的过去分词为 known。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "状语从句"
+    ]
+  },
+  {
+    "stem": "She has ___ (成为) a member of the club for two years.",
+    "stemZh": "她成为俱乐部成员已经两年了。",
+    "answer": "been",
+    "explanation": "现在完成时与时间段连用，become 为短暂性动词，用 be 的过去分词 been 表示状态。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The children have ___ (学) English since they were five.",
+    "stemZh": "孩子们从五岁起就开始学英语了。",
+    "answer": "learned",
+    "explanation": "现在完成时中填过去分词，learn 的过去分词为 learned。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "状语从句"
+    ]
+  },
+  {
+    "stem": "He has ___ (教) in this school since 2010.",
+    "stemZh": "他自2010年起就在这所学校教书。",
+    "answer": "taught",
+    "explanation": "现在完成时中填过去分词，teach 的过去分词为 taught。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The old man has ___ (收集) stamps for over forty years.",
+    "stemZh": "这位老人收集邮票已经四十多年了。",
+    "answer": "collected",
+    "explanation": "现在完成时中填过去分词，collect 的过去分词为 collected。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "I have ___ (写) three letters to my pen pal this month.",
+    "stemZh": "这个月我给笔友写了三封信。",
+    "answer": "written",
+    "explanation": "现在完成时中填过去分词，write 的过去分词为 written。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "She has ___ (读) the novel twice.",
+    "stemZh": "这本小说她读了两遍。",
+    "answer": "read",
+    "explanation": "read 的过去分词与原形同形，现在完成时中填 read。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "They have ___ (建) a new library in the town.",
+    "stemZh": "他们在镇上建了一座新图书馆。",
+    "answer": "built",
+    "explanation": "现在完成时中填过去分词，build 的过去分词为 built。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "He has ___ (赢) the match three times.",
+    "stemZh": "他赢了这场比赛三次。",
+    "answer": "won",
+    "explanation": "现在完成时中填过去分词，win 的过去分词为 won。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "I have ___ (丢) my umbrella and can't find it.",
+    "stemZh": "我把伞丢了，找不到了。",
+    "answer": "lost",
+    "explanation": "现在完成时中填过去分词，lose 的过去分词为 lost。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "She has ___ (收到) many letters from her friend.",
+    "stemZh": "她收到了朋友的许多来信。",
+    "answer": "received",
+    "explanation": "现在完成时中填过去分词，receive 的过去分词为 received。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The child has ___ (画) a picture for his mother.",
+    "stemZh": "孩子给妈妈画了一幅画。",
+    "answer": "drawn",
+    "explanation": "现在完成时中填过去分词，draw 的过去分词为 drawn。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "They have ___ (种) many trees on the hill since 2018.",
+    "stemZh": "自2018年起他们在山上种了许多树。",
+    "answer": "planted",
+    "explanation": "现在完成时中填过去分词，plant 的过去分词为 planted。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "I have ___ (学) French for two years.",
+    "stemZh": "我学法语已经两年了。",
+    "answer": "learned",
+    "explanation": "现在完成时中填过去分词，learn 的过去分词为 learned。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "She has ___ (帮) her mother do housework since she was ten.",
+    "stemZh": "她自十岁起就帮妈妈做家务。",
+    "answer": "helped",
+    "explanation": "现在完成时中填过去分词，help 的过去分词为 helped。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "状语从句"
+    ]
+  },
+  {
+    "stem": "He has ___ (成为) a famous writer since then.",
+    "stemZh": "自那以后他成了一名著名作家。",
+    "answer": "become",
+    "explanation": "become 的过去分词为 become，现在完成时中填 become。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The village has ___ (改变) a lot over the years.",
+    "stemZh": "多年来这个村庄变化很大。",
+    "answer": "changed",
+    "explanation": "现在完成时中填过去分词，change 的过去分词为 changed。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "I have ___ (去) to the Great Wall twice.",
+    "stemZh": "我去过长城两次。",
+    "answer": "been",
+    "explanation": "have been to 意为“去过某地（已回来）”，填过去分词 been。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He has ___ (去) to Shanghai. He will be back next week.",
+    "stemZh": "他去上海了，下周回来。",
+    "answer": "gone",
+    "explanation": "have gone to 意为“去了某地（未回来）”，填过去分词 gone。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Have you ever ___ (品尝) Beijing duck?",
+    "stemZh": "你曾品尝过北京烤鸭吗？",
+    "answer": "tasted",
+    "explanation": "现在完成时中填过去分词，taste 的过去分词为 tasted。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "She has ___ (听说) of the story many times.",
+    "stemZh": "这个故事她听说过很多次了。",
+    "answer": "heard",
+    "explanation": "hear of 意为“听说”，现在完成时中填过去分词 heard。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He has ___ (卖) all the newspapers today.",
+    "stemZh": "他今天把报纸都卖完了。",
+    "answer": "sold",
+    "explanation": "现在完成时中填过去分词，sell 的过去分词为 sold。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "I have ___ (从未) been to a foreign country.",
+    "stemZh": "我从未去过外国。",
+    "answer": "never",
+    "explanation": "never 意为“从未”，常与现在完成时连用。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "副词",
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "Have you ___ (曾经) seen such a beautiful painting?",
+    "stemZh": "你曾见过这么美的画吗？",
+    "answer": "ever",
+    "explanation": "ever 用于疑问句，意为“曾经”，常与现在完成时连用。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "副词",
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "The children have ___ (长大) up quickly since last year.",
+    "stemZh": "孩子们自去年以来长得很快。",
+    "answer": "grown",
+    "explanation": "grow up 意为“长大”，现在完成时中填过去分词 grown。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We have ___ (认识) each other for over ten years.",
+    "stemZh": "我们认识彼此已经十多年了。",
+    "answer": "known",
+    "explanation": "现在完成时中填过去分词，know 的过去分词为 known。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时"
+    ]
+  },
+  {
+    "stem": "She has ___ (拥有) the bike for three years.",
+    "stemZh": "她拥有这辆自行车已经三年了。",
+    "answer": "had",
+    "explanation": "现在完成时与时间段连用，own 可用 have 的过去分词 had 表示状态。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The old man has ___ (保持) healthy by exercising every day.",
+    "stemZh": "老人通过每天锻炼保持健康。",
+    "answer": "kept",
+    "explanation": "keep healthy 意为“保持健康”，现在完成时中填过去分词 kept。",
+    "grade": 8,
+    "term": 2,
+    "unit": "8B-U10",
+    "points": [
+      "现在完成时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Look! The boy is ___ TV in the living room. （观看）",
+    "stemZh": "看！那个男孩正在客厅看电视。",
+    "answer": "watching",
+    "explanation": "由 Look! 可知用现在进行时；watch 的现在分词为 watching。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My mother is reading a ___ in the study. （报纸）",
+    "stemZh": "我妈妈正在书房看报纸。",
+    "answer": "newspaper",
+    "explanation": "newspaper 意为“报纸”；read a newspaper 表示“看报纸”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He is talking on the ___. （电话）",
+    "stemZh": "他正在打电话。",
+    "answer": "phone",
+    "explanation": "talk on the phone 是固定搭配，意为“打电话”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She is listening to a ___. （CD）",
+    "stemZh": "她正在听CD。",
+    "answer": "CD",
+    "explanation": "CD 意为“光盘”；listen to a CD 表示“听CD”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He is using the ___. （电脑）",
+    "stemZh": "他正在用电脑。",
+    "answer": "computer",
+    "explanation": "computer 意为“电脑”；use the computer 表示“用电脑”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My mother is making ___ in the kitchen. （汤）",
+    "stemZh": "我妈妈正在厨房做汤。",
+    "answer": "soup",
+    "explanation": "soup 意为“汤”；make soup 表示“做汤”；soup 为不可数名词。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I am washing the ___ after dinner. （餐具）",
+    "stemZh": "晚饭后我正在洗碗。",
+    "answer": "dishes",
+    "explanation": "wash the dishes 表示“洗碗”；dish 用复数形式 dishes。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He is ___ in the gym now. （锻炼）",
+    "stemZh": "他现在正在体育馆锻炼。",
+    "answer": "exercising",
+    "explanation": "由 now 可知用现在进行时；exercise 的现在分词为 exercising。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The students are ___ for the sports meeting. （比赛）",
+    "stemZh": "学生们正在为运动会比赛。",
+    "answer": "racing",
+    "explanation": "race 作动词意为“比赛”；现在进行时用 racing。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She is ___ at the library. （学习）",
+    "stemZh": "她正在图书馆学习。",
+    "answer": "studying",
+    "explanation": "study 的现在分词变 y 为 i 再加 ing，即 studying。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "My father is ___ at the table. （坐）",
+    "stemZh": "我爸爸正坐在桌旁。",
+    "answer": "sitting",
+    "explanation": "sit 的现在分词双写 t 加 ing，即 sitting。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The children are ___ in the river. （游泳）",
+    "stemZh": "孩子们正在河里游泳。",
+    "answer": "swimming",
+    "explanation": "swim 的现在分词双写 m 加 ing，即 swimming。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Look! They are ___ football on the playground. （踢）",
+    "stemZh": "看！他们正在操场上踢足球。",
+    "answer": "playing",
+    "explanation": "play 的现在分词为 playing；由 Look! 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Listen! Someone is ___ an English song. （唱）",
+    "stemZh": "听！有人正在唱英语歌。",
+    "answer": "singing",
+    "explanation": "sing 的现在分词为 singing；由 Listen! 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She is ___ a letter to her friend. （写）",
+    "stemZh": "她正在给朋友写信。",
+    "answer": "writing",
+    "explanation": "write 的现在分词去 e 加 ing，即 writing。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My grandfather is ___ a walk in the park. （散步）",
+    "stemZh": "我爷爷正在公园散步。",
+    "answer": "taking",
+    "explanation": "take a walk 表示“散步”；现在进行时用 taking。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I am ___ my homework now. （做）",
+    "stemZh": "我现在正在做作业。",
+    "answer": "doing",
+    "explanation": "do 的现在分词为 doing；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He is ___ his room now. （打扫）",
+    "stemZh": "他现在正在打扫房间。",
+    "answer": "cleaning",
+    "explanation": "clean 的现在分词为 cleaning；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "They are ___ basketball now. （打）",
+    "stemZh": "他们现在正在打篮球。",
+    "answer": "playing",
+    "explanation": "play 的现在分词为 playing；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The girl is ___ in the next room. （跳舞）",
+    "stemZh": "那个女孩正在隔壁房间跳舞。",
+    "answer": "dancing",
+    "explanation": "dance 的现在分词去 e 加 ing，即 dancing。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "Look! The cat is ___ up the tree. （爬）",
+    "stemZh": "看！猫正在往树上爬。",
+    "answer": "climbing",
+    "explanation": "climb 的现在分词为 climbing；由 Look! 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "He is ___ on the phone now. （谈话）",
+    "stemZh": "他现在正在打电话。",
+    "answer": "talking",
+    "explanation": "talk 的现在分词为 talking；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The old man is ___ a newspaper now. （读）",
+    "stemZh": "那位老人现在正在看报纸。",
+    "answer": "reading",
+    "explanation": "read 的现在分词为 reading；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The children are ___ a good time at the party. （度过）",
+    "stemZh": "孩子们正在聚会上玩得很开心。",
+    "answer": "having",
+    "explanation": "have a good time 表示“玩得开心”；现在进行时用 having。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My mother is ___ dinner in the kitchen. （做）",
+    "stemZh": "我妈妈正在厨房做晚饭。",
+    "answer": "cooking",
+    "explanation": "cook 的现在分词为 cooking；cook dinner 表示“做晚饭”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She is ___ her clothes now. （洗）",
+    "stemZh": "她现在正在洗衣服。",
+    "answer": "washing",
+    "explanation": "wash 的现在分词为 washing；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I am ___ for my English test now. （学习）",
+    "stemZh": "我现在正在为英语考试学习。",
+    "answer": "studying",
+    "explanation": "study 的现在分词变 y 为 i 再加 ing，即 studying。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "He is ___ in the pool now. （游泳）",
+    "stemZh": "他现在正在游泳池里游泳。",
+    "answer": "swimming",
+    "explanation": "swim 的现在分词双写 m 加 ing，即 swimming。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "They are ___ TV in the living room now. （观看）",
+    "stemZh": "他们现在正在客厅看电视。",
+    "answer": "watching",
+    "explanation": "watch 的现在分词为 watching；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—What are you ___? —I’m doing my homework. （做）",
+    "stemZh": "——你在做什么？——我在做作业。",
+    "answer": "doing",
+    "explanation": "现在进行时特殊疑问句中用 doing 与 are 构成进行时结构。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—What is she ___? —She is reading. （做）",
+    "stemZh": "——她在做什么？——她在读书。",
+    "answer": "doing",
+    "explanation": "现在进行时特殊疑问句中用 doing 与 is 构成进行时结构。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Is he watching TV? —Yes, he ___. （是）",
+    "stemZh": "——他在看电视吗？——是的，他在看。",
+    "answer": "is",
+    "explanation": "现在进行时一般疑问句的肯定回答用 Yes, he is.。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Are they playing soccer? —No, they ___. （不是）",
+    "stemZh": "——他们在踢足球吗？——不，他们没在踢。",
+    "answer": "aren’t",
+    "explanation": "现在进行时一般疑问句的否定回答用 No, they aren’t.。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "The boy is not ___ in the library. （跑）",
+    "stemZh": "那个男孩没在图书馆里跑。",
+    "answer": "running",
+    "explanation": "run 的现在分词双写 n 加 ing，即 running；否定句用 is not running。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "My sister is ___ her homework now. （做）",
+    "stemZh": "我姐姐现在正在做作业。",
+    "answer": "doing",
+    "explanation": "do 的现在分词为 doing；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We are ___ for the bus at the bus stop. （等待）",
+    "stemZh": "我们正在公交车站等公交车。",
+    "answer": "waiting",
+    "explanation": "wait for 表示“等待”；现在进行时用 waiting。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He is ___ his bike now. （骑）",
+    "stemZh": "他现在正在骑自行车。",
+    "answer": "riding",
+    "explanation": "ride 的现在分词去 e 加 ing，即 riding。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The teacher is ___ to the students now. （谈话）",
+    "stemZh": "老师现在正在和学生们谈话。",
+    "answer": "talking",
+    "explanation": "talk to sb. 表示“和某人谈话”；现在进行时用 talking。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The girls are ___ under the tree now. （坐）",
+    "stemZh": "女孩们现在正坐在树下。",
+    "answer": "sitting",
+    "explanation": "sit 的现在分词双写 t 加 ing，即 sitting。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I am ___ to music now. （听）",
+    "stemZh": "我现在正在听音乐。",
+    "answer": "listening",
+    "explanation": "listen to 表示“听……”；现在进行时用 listening。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "My father is ___ the car now. （洗）",
+    "stemZh": "我爸爸现在正在洗车。",
+    "answer": "washing",
+    "explanation": "wash 的现在分词为 washing；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The students are ___ English now. （读）",
+    "stemZh": "学生们现在正在读英语。",
+    "answer": "reading",
+    "explanation": "read 的现在分词为 reading；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She is ___ a beautiful picture now. （画）",
+    "stemZh": "她现在正在画一幅美丽的画。",
+    "answer": "drawing",
+    "explanation": "draw 的现在分词为 drawing；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "He is ___ his keys now. （找）",
+    "stemZh": "他现在正在找钥匙。",
+    "answer": "looking for",
+    "explanation": "look for 表示“寻找”；现在进行时用 looking for。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The baby is ___ now. （睡觉）",
+    "stemZh": "婴儿现在正在睡觉。",
+    "answer": "sleeping",
+    "explanation": "sleep 的现在分词为 sleeping；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We are ___ a party for our teacher now. （举办）",
+    "stemZh": "我们现在正在为老师举办聚会。",
+    "answer": "having",
+    "explanation": "have a party 表示“举办聚会”；现在进行时用 having。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Look! The bus is ___ at the station. （到达）",
+    "stemZh": "看！公交车正到达车站。",
+    "answer": "arriving",
+    "explanation": "arrive 的现在分词为 arriving；由 Look! 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The boy is ___ his schoolbag now. （背；携带）",
+    "stemZh": "那个男孩现在正背着书包。",
+    "answer": "carrying",
+    "explanation": "carry 的现在分词变 y 为 i 再加 ing，即 carrying。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "My mother is ___ clothes in the bathroom now. （洗）",
+    "stemZh": "我妈妈现在正在浴室洗衣服。",
+    "answer": "washing",
+    "explanation": "wash 的现在分词为 washing；由 now 可知用现在进行时。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U6",
+    "points": [
+      "现在进行时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I ___ my grandparents last weekend. （拜访）",
+    "stemZh": "上周末我拜访了我的祖父母。",
+    "answer": "visited",
+    "explanation": "由 last weekend 可知用一般过去时；visit 的过去式为 visited。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We ___ to the beach yesterday. （去）",
+    "stemZh": "昨天我们去了海滩。",
+    "answer": "went",
+    "explanation": "由 yesterday 可知用一般过去时；go 的过去式为 went。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She ___ a great time at the party last night. （度过）",
+    "stemZh": "昨晚她在聚会上玩得很开心。",
+    "answer": "had",
+    "explanation": "由 last night 可知用一般过去时；have 的过去式为 had。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He ___ some photos during the trip. （拍摄）",
+    "stemZh": "旅行期间他拍了一些照片。",
+    "answer": "took",
+    "explanation": "由 during the trip 的过去语境可知用一般过去时；take 的过去式为 took。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We ___ a mountain last Sunday. （爬）",
+    "stemZh": "上周日我们爬了一座山。",
+    "answer": "climbed",
+    "explanation": "由 last Sunday 可知用一般过去时；climb 的过去式为 climbed。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "They ___ a picnic in the park yesterday. （野餐）",
+    "stemZh": "昨天他们在公园野餐了。",
+    "answer": "had a picnic",
+    "explanation": "have a picnic 表示“野餐”；由 yesterday 可知 have 变为过去式 had。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I ___ a book about history last month. （阅读）",
+    "stemZh": "上个月我读了一本关于历史的书。",
+    "answer": "read",
+    "explanation": "由 last month 可知用一般过去时；read 的过去式与原形同形，仍拼写为 read。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She ___ her homework before dinner. （完成）",
+    "stemZh": "晚饭前她完成了作业。",
+    "answer": "finished",
+    "explanation": "由 before dinner 的过去语境可知用一般过去时；finish 的过去式为 finished。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We ___ a film at the cinema last night. （观看）",
+    "stemZh": "昨晚我们在电影院看了一部电影。",
+    "answer": "watched",
+    "explanation": "由 last night 可知用一般过去时；watch 的过去式为 watched。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He ___ his bike to school yesterday. （骑）",
+    "stemZh": "昨天他骑自行车上学了。",
+    "answer": "rode",
+    "explanation": "由 yesterday 可知用一般过去时；ride 的过去式为 rode。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The weather was ___ that day. （晴朗的）",
+    "stemZh": "那天天气晴朗。",
+    "answer": "sunny",
+    "explanation": "sunny 意为“晴朗的”；作表语描述天气。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "It was a ___ day. （多雨的）",
+    "stemZh": "那是多雨的一天。",
+    "answer": "rainy",
+    "explanation": "rainy 意为“多雨的”；作定语修饰 day。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We felt very ___ after the trip. （累的）",
+    "stemZh": "旅行后我们感到很累。",
+    "answer": "tired",
+    "explanation": "tired 意为“累的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The trip was really ___. （精彩的）",
+    "stemZh": "这次旅行真的很精彩。",
+    "answer": "wonderful",
+    "explanation": "wonderful 意为“精彩的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We had a ___ time at the zoo. （美好的）",
+    "stemZh": "我们在动物园度过了一段美好的时光。",
+    "answer": "great",
+    "explanation": "have a great time 表示“玩得很开心”；great 意为“美好的”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I ___ my keys on the bus yesterday. （丢失）",
+    "stemZh": "昨天我在公交车上丢了钥匙。",
+    "answer": "lost",
+    "explanation": "由 yesterday 可知用一般过去时；lose 的过去式为 lost。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She ___ a beautiful dress at the shop. （买）",
+    "stemZh": "她在商店买了一条漂亮的裙子。",
+    "answer": "bought",
+    "explanation": "由过去的购物语境可知用一般过去时；buy 的过去式为 bought。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We ___ at a nice restaurant last night. （吃）",
+    "stemZh": "昨晚我们在一家不错的餐厅吃饭了。",
+    "answer": "ate",
+    "explanation": "由 last night 可知用一般过去时；eat 的过去式为 ate。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "He ___ his homework and then went out. （做）",
+    "stemZh": "他做完作业后就出去了。",
+    "answer": "did",
+    "explanation": "由 then went out 的过去语境可知用一般过去时；do 的过去式为 did。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The children ___ happily in the park. （玩）",
+    "stemZh": "孩子们在公园里开心地玩耍。",
+    "answer": "played",
+    "explanation": "由过去语境可知用一般过去时；play 的过去式为 played。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "I ___ at home and watched TV last night. （停留）",
+    "stemZh": "昨晚我待在家里看电视。",
+    "answer": "stayed",
+    "explanation": "由 last night 可知用一般过去时；stay 的过去式为 stayed。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "It ___ us two hours to get there. （花费）",
+    "stemZh": "我们花了两个小时到那里。",
+    "answer": "took",
+    "explanation": "It takes sb. some time to do sth. 的过去式结构为 It took sb. some time to do sth.。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The food ___ delicious. （尝起来）",
+    "stemZh": "食物尝起来很美味。",
+    "answer": "tasted",
+    "explanation": "由过去语境可知用一般过去时；taste 的过去式为 tasted。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We ___ songs around the campfire. （唱）",
+    "stemZh": "我们围着篝火唱歌。",
+    "answer": "sang",
+    "explanation": "由过去语境可知用一般过去时；sing 的过去式为 sang。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She ___ a letter to her friend last week. （写）",
+    "stemZh": "上周她给朋友写了一封信。",
+    "answer": "wrote",
+    "explanation": "由 last week 可知用一般过去时；write 的过去式为 wrote。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We ___ for the bus for ten minutes. （等待）",
+    "stemZh": "我们等公交车等了十分钟。",
+    "answer": "waited",
+    "explanation": "由过去语境可知用一般过去时；wait 的过去式为 waited。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "They ___ to the museum by bus. （去）",
+    "stemZh": "他们乘公交车去了博物馆。",
+    "answer": "went",
+    "explanation": "由过去语境可知用一般过去时；go 的过去式为 went。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The film ___ at eight o’clock. （开始）",
+    "stemZh": "电影八点开始。",
+    "answer": "started",
+    "explanation": "由过去语境可知用一般过去时；start 的过去式为 started。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The film ___ at ten o’clock. （结束）",
+    "stemZh": "电影十点结束。",
+    "answer": "ended",
+    "explanation": "由过去语境可知用一般过去时；end 的过去式为 ended。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We ___ back home late at night. （回来）",
+    "stemZh": "我们深夜才回到家。",
+    "answer": "came",
+    "explanation": "由过去语境可知用一般过去时；come 的过去式为 came。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "—How ___ your weekend? —It was great. （是）",
+    "stemZh": "——你的周末怎么样？——很棒。",
+    "answer": "was",
+    "explanation": "主语 your weekend 为单数，一般过去时的 be 动词用 was。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—Where ___ you go last Sunday? —I went to the park. （做；助动词）",
+    "stemZh": "——上周日你去了哪里？——我去了公园。",
+    "answer": "did",
+    "explanation": "一般过去时特殊疑问句中，实义动词 go 前用助动词 did。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "—___ you have a good time? —Yes, I did. （做；助动词）",
+    "stemZh": "——你玩得开心吗？——是的，我玩得开心。",
+    "answer": "Did",
+    "explanation": "一般过去时一般疑问句用 Did 开头；句首首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "情景交际"
+    ]
+  },
+  {
+    "stem": "I didn’t ___ TV last night. （观看）",
+    "stemZh": "昨晚我没有看电视。",
+    "answer": "watch",
+    "explanation": "didn’t 后接动词原形；watch TV 表示“看电视”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She didn’t ___ to school yesterday. （去）",
+    "stemZh": "昨天她没去上学。",
+    "answer": "go",
+    "explanation": "didn’t 后接动词原形；go to school 表示“去上学”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "We didn’t ___ the film. （喜欢）",
+    "stemZh": "我们不喜欢那部电影。",
+    "answer": "like",
+    "explanation": "didn’t 后接动词原形；like 意为“喜欢”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "He didn’t ___ his homework. （完成）",
+    "stemZh": "他没有完成作业。",
+    "answer": "finish",
+    "explanation": "didn’t 后接动词原形；finish 意为“完成”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "There ___ many people at the concert. （有）",
+    "stemZh": "音乐会上有很多人。",
+    "answer": "were",
+    "explanation": "主语 many people 为复数，一般过去时的 be 动词用 were。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "There ___ a big cake on the table. （有）",
+    "stemZh": "桌上有一个大蛋糕。",
+    "answer": "was",
+    "explanation": "主语 a big cake 为单数，一般过去时的 be 动词用 was。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The students ___ very excited. （是）",
+    "stemZh": "学生们非常兴奋。",
+    "answer": "were",
+    "explanation": "主语 the students 为复数，一般过去时的 be 动词用 were。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The weather ___ cold yesterday. （是）",
+    "stemZh": "昨天天气很冷。",
+    "answer": "was",
+    "explanation": "主语 the weather 为不可数名词，一般过去时的 be 动词用 was。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "I ___ a good time at the zoo. （度过）",
+    "stemZh": "我在动物园玩得很开心。",
+    "answer": "had",
+    "explanation": "have a good time 的过去式为 had a good time。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "She ___ her grandparents every weekend. （拜访，过去式）",
+    "stemZh": "她上周末拜访了她的祖父母。",
+    "answer": "visited",
+    "explanation": "由 every weekend 的过去语境（此处指上周末）可知用一般过去时；visit 的过去式为 visited。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We ___ a lot of photos on the trip. （拍摄）",
+    "stemZh": "我们在旅行中拍了很多照片。",
+    "answer": "took",
+    "explanation": "take photos 的过去式为 took photos；take 的过去式为 took。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "He ___ a story about his trip. （讲；告诉）",
+    "stemZh": "他讲了一个关于他旅行的故事。",
+    "answer": "told",
+    "explanation": "由过去语境可知用一般过去时；tell 的过去式为 told。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I ___ my umbrella on the bus. （留下；遗忘）",
+    "stemZh": "我把雨伞落在公交车上了。",
+    "answer": "left",
+    "explanation": "由过去语境可知用一般过去时；leave 的过去式为 left。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The day was ___ from start to finish. （完美的）",
+    "stemZh": "这一天从头到尾都很完美。",
+    "answer": "perfect",
+    "explanation": "perfect 意为“完美的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "It was an ___ day. （令人惊奇的）",
+    "stemZh": "那是令人惊奇的一天。",
+    "answer": "amazing",
+    "explanation": "amazing 意为“令人惊奇的”；an 后接以元音音素开头的形容词 amazing。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "形容词",
+      "冠词"
+    ]
+  },
+  {
+    "stem": "We will never ___ that day. （忘记）",
+    "stemZh": "我们永远不会忘记那一天。",
+    "answer": "forget",
+    "explanation": "will 后接动词原形；forget 意为“忘记”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U7",
+    "points": [
+      "一般将来时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "___ upon a time, there was a beautiful princess. （从前）",
+    "stemZh": "从前，有一位美丽的公主。",
+    "answer": "Once",
+    "explanation": "once upon a time 是故事开头的固定表达，意为“从前”；句首首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "固定搭配",
+      "名词"
+    ]
+  },
+  {
+    "stem": "Long long ___, there lived a king. （以前）",
+    "stemZh": "很久以前，住着一位国王。",
+    "answer": "ago",
+    "explanation": "long long ago 是固定表达，意为“很久以前”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "固定搭配",
+      "副词"
+    ]
+  },
+  {
+    "stem": "The ___ lived in a big castle. （国王）",
+    "stemZh": "国王住在一座大城堡里。",
+    "answer": "king",
+    "explanation": "king 意为“国王”；the 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The ___ was very kind to everyone. （王后）",
+    "stemZh": "王后对每个人都非常和善。",
+    "answer": "queen",
+    "explanation": "queen 意为“王后”；the 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The prince and the ___ lived happily together. （公主）",
+    "stemZh": "王子和公主幸福地生活在一起。",
+    "answer": "princess",
+    "explanation": "princess 意为“公主”；the 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The ___ was young and brave. （王子）",
+    "stemZh": "王子年轻又勇敢。",
+    "answer": "prince",
+    "explanation": "prince 意为“王子”；the 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "They lived in a large ___. （城堡）",
+    "stemZh": "他们住在一座大城堡里。",
+    "answer": "castle",
+    "explanation": "castle 意为“城堡”；a 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The little girl got lost in the ___. （森林）",
+    "stemZh": "小女孩在森林里迷路了。",
+    "answer": "forest",
+    "explanation": "forest 意为“森林”；in the forest 表示“在森林里”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "A big bad ___ came out of the forest. （狼）",
+    "stemZh": "一只大灰狼从森林里出来了。",
+    "answer": "wolf",
+    "explanation": "wolf 意为“狼”；a 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The ___ helped the poor girl. （樵夫）",
+    "stemZh": "樵夫帮助了那个可怜的女孩。",
+    "answer": "woodcutter",
+    "explanation": "woodcutter 意为“樵夫”；the 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "A kind ___ gave the girl some magic help. （仙女）",
+    "stemZh": "一位善良的仙女给了女孩一些神奇的帮助。",
+    "answer": "fairy",
+    "explanation": "fairy 意为“仙女”；a 后接可数名词单数。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The fairy used ___ to help the girl. （魔法）",
+    "stemZh": "仙女用魔法帮助了女孩。",
+    "answer": "magic",
+    "explanation": "magic 意为“魔法”；作不可数名词使用。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The box was full of ___. （金子）",
+    "stemZh": "盒子里装满了金子。",
+    "answer": "gold",
+    "explanation": "gold 意为“金子”；作不可数名词使用。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The prince was very ___. （勇敢的）",
+    "stemZh": "王子非常勇敢。",
+    "answer": "brave",
+    "explanation": "brave 意为“勇敢的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The girl was ___ and kind. （聪明的）",
+    "stemZh": "这个女孩既聪明又善良。",
+    "answer": "clever",
+    "explanation": "clever 意为“聪明的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She was ___ to everyone. （善良的）",
+    "stemZh": "她对每个人都很善良。",
+    "answer": "kind",
+    "explanation": "kind 意为“善良的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The ___ queen hated the princess. （邪恶的）",
+    "stemZh": "邪恶的王后讨厌公主。",
+    "answer": "evil",
+    "explanation": "evil 意为“邪恶的”；作定语修饰 queen。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The family was very ___. （贫穷的）",
+    "stemZh": "这家人非常贫穷。",
+    "answer": "poor",
+    "explanation": "poor 意为“贫穷的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The king was very ___. （富有的）",
+    "stemZh": "国王非常富有。",
+    "answer": "rich",
+    "explanation": "rich 意为“富有的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "They lived ___ ever after. （幸福地）",
+    "stemZh": "从此他们幸福地生活着。",
+    "answer": "happily",
+    "explanation": "happily 意为“幸福地”；作副词修饰动词 lived。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "副词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The story has a happy ___. （结局）",
+    "stemZh": "这个故事有一个幸福的结局。",
+    "answer": "ending",
+    "explanation": "ending 意为“结局”；a happy ending 表示“幸福的结局”。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Let me ___ you a story. （讲；告诉）",
+    "stemZh": "让我给你讲个故事。",
+    "answer": "tell",
+    "explanation": "tell sb. a story 表示“给某人讲故事”；let 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "祈使句",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I like to ___ to stories before bed. （听）",
+    "stemZh": "我喜欢睡前听故事。",
+    "answer": "listen",
+    "explanation": "listen to stories 表示“听故事”；like to do sth. 后接动词原形。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "非谓语动词（不定式）",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The story ___ with “Once upon a time”. （开始）",
+    "stemZh": "故事以“从前”开头。",
+    "answer": "begins",
+    "explanation": "主语 the story 为第三人称单数，一般现在时 begin 变为 begins。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The story ___ with a happy ending. （结束）",
+    "stemZh": "故事以幸福的结局结束。",
+    "answer": "ends",
+    "explanation": "主语 the story 为第三人称单数，一般现在时 end 变为 ends。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般现在时",
+      "主谓一致"
+    ]
+  },
+  {
+    "stem": "The old man ___ in a small village. （居住）",
+    "stemZh": "那位老人住在一个小村庄里。",
+    "answer": "lived",
+    "explanation": "由故事过去语境可知用一般过去时；live 的过去式为 lived。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The prince ___ the princess from the wolf. （拯救）",
+    "stemZh": "王子从狼手中救了公主。",
+    "answer": "saved",
+    "explanation": "由故事过去语境可知用一般过去时；save 的过去式为 saved。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The prince and princess ___ a happy life. （开始）",
+    "stemZh": "王子和公主开始了幸福的生活。",
+    "answer": "began",
+    "explanation": "由故事过去语境可知用一般过去时；begin 的过去式为 began。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The girl ___ the door and went in. （打开）",
+    "stemZh": "女孩打开门走了进去。",
+    "answer": "opened",
+    "explanation": "由 and went in 的过去语境可知用一般过去时；open 的过去式为 opened。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "He ___ the box carefully. （打开）",
+    "stemZh": "他小心地打开了盒子。",
+    "answer": "opened",
+    "explanation": "由故事过去语境可知用一般过去时；open 的过去式为 opened。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "She ___ the window and looked out. （打开）",
+    "stemZh": "她打开窗户向外看。",
+    "answer": "opened",
+    "explanation": "由 and looked out 的过去语境可知用一般过去时；open 的过去式为 opened。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The boy ___ up the tree to get the apple. （爬）",
+    "stemZh": "男孩爬上树去摘苹果。",
+    "answer": "climbed",
+    "explanation": "由故事过去语境可知用一般过去时；climb 的过去式为 climbed。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The rabbit ___ into the hole. （跳）",
+    "stemZh": "兔子跳进了洞里。",
+    "answer": "jumped",
+    "explanation": "由故事过去语境可知用一般过去时；jump 的过去式为 jumped。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The girl ___ because she was lost. （哭）",
+    "stemZh": "女孩因为迷路了而哭了。",
+    "answer": "cried",
+    "explanation": "由故事过去语境可知用一般过去时；cry 变 y 为 i 再加 ed，即 cried。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The baby ___ when he saw his mother. （笑）",
+    "stemZh": "婴儿看到妈妈时笑了。",
+    "answer": "smiled",
+    "explanation": "由故事过去语境可知用一般过去时；smile 的过去式为 smiled。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The children ___ happily in the garden. （笑；大笑）",
+    "stemZh": "孩子们在花园里开心地大笑。",
+    "answer": "laughed",
+    "explanation": "由故事过去语境可知用一般过去时；laugh 的过去式为 laughed。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "“Help!” the man ___. （喊叫）",
+    "stemZh": "“救命！”那个男人喊道。",
+    "answer": "shouted",
+    "explanation": "由故事过去语境可知用一般过去时；shout 的过去式为 shouted。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The fairy ___ to help the poor girl. （承诺）",
+    "stemZh": "仙女承诺帮助那个可怜的女孩。",
+    "answer": "promised",
+    "explanation": "由故事过去语境可知用一般过去时；promise 的过去式为 promised。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "I ___ to bring you a gift. （记得）",
+    "stemZh": "我记得给你带了一件礼物。",
+    "answer": "remembered",
+    "explanation": "由故事过去语境可知用一般过去时；remember 的过去式为 remembered。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "___, a big wolf appeared. （突然）",
+    "stemZh": "突然，一只大狼出现了。",
+    "answer": "Suddenly",
+    "explanation": "suddenly 意为“突然”；作副词修饰整个句子，句首首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "___, the prince saved the princess. （最后）",
+    "stemZh": "最后，王子救了公主。",
+    "answer": "Finally",
+    "explanation": "finally 意为“最后”；作副词表示故事结局，句首首字母大写。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "副词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The princess ___ the prince at last. （嫁给）",
+    "stemZh": "公主最后嫁给了王子。",
+    "answer": "married",
+    "explanation": "由故事过去语境可知用一般过去时；marry 变 y 为 i 再加 ed，即 married。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The prince ___ a brave young man. （成为）",
+    "stemZh": "王子成为了一位勇敢的年轻人。",
+    "answer": "became",
+    "explanation": "由故事过去语境可知用一般过去时；become 的过去式为 became。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The girl ___ home after the adventure. （返回）",
+    "stemZh": "冒险之后女孩返回了家。",
+    "answer": "returned",
+    "explanation": "由故事过去语境可知用一般过去时；return 的过去式为 returned。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "The boy ___ his way in the forest. （丢失）",
+    "stemZh": "男孩在森林里迷了路。",
+    "answer": "lost",
+    "explanation": "lose one’s way 表示“迷路”；由故事过去语境可知用过去式 lost。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "They ___ a small house in the forest. （找到）",
+    "stemZh": "他们在森林里找到了一座小房子。",
+    "answer": "found",
+    "explanation": "由故事过去语境可知用一般过去时；find 的过去式为 found。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The girl ___ the magic box. （发现）",
+    "stemZh": "女孩发现了那个魔法盒子。",
+    "answer": "discovered",
+    "explanation": "由故事过去语境可知用一般过去时；discover 的过去式为 discovered。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "一般过去时",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "The story teaches us to be ___. （诚实的）",
+    "stemZh": "这个故事教导我们要诚实。",
+    "answer": "honest",
+    "explanation": "honest 意为“诚实的”；作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "形容词",
+      "词汇辨析"
+    ]
+  },
+  {
+    "stem": "We should be ___ to other people. （友好的）",
+    "stemZh": "我们应该对别人友好。",
+    "answer": "friendly",
+    "explanation": "be friendly to 表示“对……友好”；friendly 作表语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "形容词",
+      "固定搭配"
+    ]
+  },
+  {
+    "stem": "Good will always beat ___. （邪恶）",
+    "stemZh": "善良总会战胜邪恶。",
+    "answer": "evil",
+    "explanation": "evil 作名词，意为“邪恶”；作 beat 的宾语。",
+    "grade": 7,
+    "term": 2,
+    "unit": "7B-U8",
+    "points": [
+      "名词",
+      "词汇辨析"
+    ]
   }
 ]
