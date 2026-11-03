@@ -1471,11 +1471,25 @@ function shuffle(arr) {
 }
 
 /* 阅读：优先按六大类各抽一篇，再从剩余里补齐 */
+/* 阅读：优先按六大类各抽一篇，再从剩余里补齐 */
 function pickReadingFrom(pool, want) {
   if (!pool.length) return [];
+  
+  // ★ 新增：分类别名兼容逻辑，只要包含关键字就自动归类
+  function normalizeType(t) {
+    if (!t) return '其他';
+    const s = String(t).trim();
+    if (s.includes('说明文') || s.includes('科普')) return '人文说明文'; // 把“说明文/科普文”统一归入“人文说明文”池
+    if (s.includes('记叙')) return '记叙文';
+    if (s.includes('应用') || s.includes('广告')) return '应用文/广告';
+    if (s.includes('人物') || s.includes('故事')) return '人物/故事';
+    if (s.includes('任务')) return '任务型阅读';
+    return s;
+  }
+
   const groups = {};
   pool.forEach(function (item) {
-    const t = item.type || '其他';
+    const t = normalizeType(item.type); // ★ 使用兼容映射
     (groups[t] = groups[t] || []).push(item);
   });
 
